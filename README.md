@@ -1,263 +1,140 @@
-# C-RAG: Cognitive Retrieval-Augmented Generation
+# Unified Cognitive Graph-RAG (C-RAG)
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-**A hybrid question-answering system combining dense retrieval, knowledge graph traversal, neural reranking, and iterative reasoning for multi-hop question answering.**
+> **Branch:** `unified-crag-architecture` · **Phase:** Capstone Phase-2 (PW25_BJD_01)  
+> A modular, factory-based RAG laboratory where **five retrieval architectures** share one Unified Knowledge Base.
 
 ---
 
-## 🎯 Key Features
+## Overview
 
-- **Hybrid Retrieval**: Vector search (FAISS) + Knowledge graph expansion
-- **Neural Reranking**: ColBERT cross-encoder for semantic relevance
-- **Iterative Reasoning**: Multi-hop agent with Think-Act-Observe loop
-- **Modular Architecture**: Clean abstractions for LLM, retrieval, and knowledge backends
-- **Research-Ready**: Comprehensive evaluation suite with 146k+ questions
+C-RAG (Cognitive Retrieval-Augmented Generation) is a research framework that unifies several retrieval paradigms—from simple vector search to an agentic, graph-walking multi-hop reasoner—into a single, benchmarkable system. All architectures are isolated as pluggable strategies that receive identical inputs from the same knowledge base, making comparisons scientifically rigorous.
+
+```
+                  ┌─────────────────────────────────────┐
+                  │        Unified Knowledge Base        │
+                  │  ┌─────────────┐ ┌───────────────┐  │
+                  │  │  FAISS Node │ │ FAISS Centroid│  │
+                  │  │    Index    │ │     Index     │  │
+                  │  └─────────────┘ └───────────────┘  │
+                  │         ┌─────────────────┐          │
+                  │         │   PyG Graph.pt  │          │
+                  │         └─────────────────┘          │
+                  └──────────────────┬──────────────────┘
+                                     │ shared
+              ┌──────────────────────┼─────────────────────┐
+              ▼          ▼           ▼          ▼           ▼
+         VectorRAG   GraphRAG  CRAGStandard CRAGColBERT CRAGAgent
+                                                           (v4)
+```
 
 ---
 
-## 🚀 Quick Start
+## Five Retrieval Strategies
 
-### Installation
+| Strategy | File | Key Mechanism | Target Category |
+|---|---|---|---|
+| **Vector RAG** | `src/retrievers/vector_rag.py` | FAISS top-K semantic search | Broad semantic queries |
+| **Graph RAG** | `src/retrievers/graph_rag.py` | 2-hop BFS from entry node | Multi-hop entity queries |
+| **C-RAG Standard** | `src/retrievers/crag_standard.py` | Epistemic evaluator + web fallback | Unanswerable / false premise |
+| **C-RAG ColBERT** | `src/retrievers/crag_colbert.py` | ColBERT late-interaction re-rank top-50→5 | Exact lexical / jargon |
+| **C-RAG Agent v4** | `src/retrievers/crag_agent.py` | Teleport → Stitch → ColBERT Traverse | Complex hybrid routing |
+
+---
+
+## Quick Start
 
 ```bash
-# Clone repository
-git clone https://github.com/yourusername/CRAG
-cd CRAG
-
-# Install dependencies
+# 1. Install dependencies
 pip install -r requirements.txt
 
-# Set Python path
-export PYTHONPATH=src  # Linux/Mac
-$env:PYTHONPATH='src'  # Windows PowerShell
-```
+# 2. Build the Unified Knowledge Base (offline, one-time)
+python -m src.ingestion.kb_builder \
+  --squad   data/raw/squad_v2.json \
+  --webqsp  data/raw/webqsp.json \
+  --cora    data/raw/cora/ \
+  --output  data/kg_store/
 
-### Run Baselines
+# 3. Run METIS partitioning
+python -m src.ingestion.partitioner --input data/kg_store/graph.pt --n-partitions 50
 
-```bash
-# Run all 4 baseline systems
-powershell experiments/reproduce_table1.ps1
+# 4. Train InfoNCE Bi-Encoder (query → partition alignment)
+python -m src.alignment.infonce_loss --train --epochs 30
 
-# Analyze results
-python src/crag/analysis/analyze_results.py --runs_dir runs --output_dir experiments
-```
+# 5. Run any pipeline via the PipelineFactory
+python -m src.router.factory \
+  --strategy crag_agent \
+  --benchmark benchmark_400.csv \
+  --output results/crag_agent.json
 
-### Dataset Statistics
-
-```bash
-python src/crag/data/dataset_stats.py
-```
-
-**Output:**
-```
-DATASET STATISTICS
-===========================================================
-SQuAD v2 Train                :    130,319 questions
-SQuAD v2 Dev                  :     11,873 questions
-WebQSP Test                   :      1,033 questions
-WebQSP Train                  :      3,098 questions
------------------------------------------------------------
-TOTAL                         :    146,323 questions
-===========================================================
-[OK] Target reached: 146,323 >= 100,000 questions
+# 6. Evaluate results (P@1, R@10, MRR)
+python -m src.evaluation.metrics \
+  --results results/ \
+  --groundtruth data/processed/ground_truth.json
 ```
 
 ---
 
-## 📊 System Comparison
-
-| System | Accuracy | Latency | Hops | Nodes | Description |
-|--------|----------|---------|------|-------|-------------|
-| **C-RAG Full** | 100% | 1.74s | 2 | 5 | Complete system |
-| C-RAG No-Rerank | 100% | 0.07s | 2 | 5 | Without ColBERT |
-| Static Graph | 100% | 8.0s | 0 | 0 | BFS/Beam search |
-| Vector RAG | 50% | 0.08s | 0 | 0 | Dense retrieval only |
-
-*Metrics from MockLLM validation on 2-hop MetaQA samples.*
-
----
-
-## 🏗️ Architecture
+## Directory Structure
 
 ```
-Query
-  ↓
-┌─────────────────────────────────┐
-│  Hybrid Retrieval Module        │
-│  • Vector: FAISS top-k           │
-│  • Graph: KG neighbor expansion  │
-└─────────────────────────────────┘
-  ↓
-┌─────────────────────────────────┐
-│  ColBERT Reranker                │
-│  • Cross-encoder scoring         │
-│  • Top-5 selection               │
-└─────────────────────────────────┘
-  ↓
-┌─────────────────────────────────┐
-│  Cognitive Retrieval Agent       │
-│  ┌───────────────────────────┐  │
-│  │ Hop 1: THINK → ACT → OBS  │  │
-│  │ Hop 2: THINK → ACT → OBS  │  │
-│  │ Hop 3: THINK → ACT → OBS  │  │
-│  └───────────────────────────┘  │
-└─────────────────────────────────┘
-  ↓
-Final Answer
+unified-crag/
+├── data/               → Raw datasets, processed nodes/edges, serialized KB
+├── src/
+│   ├── common/         → Shared singletons: GraphEngine, VectorStore, LLMClient
+│   ├── ingestion/      → Offline KB construction: kb_builder, partitioner, embedder
+│   ├── alignment/      → InfoNCE bi-encoder: query-to-partition alignment model
+│   ├── retrievers/     → Five retrieval strategies implementing BaseRetriever
+│   ├── router/         → PipelineFactory: instantiate any strategy with one call
+│   └── evaluation/     → P@1, R@10, MRR metrics + random-walk benchmark synthesizer
+├── configs/            → unified.yaml — single config for all strategies
+├── results/            → JSON outputs from each pipeline run
+└── benchmark_400.csv   → 400-query stratified benchmark (5 categories × 80 queries)
 ```
 
 ---
 
-## 📁 Repository Structure
+## Datasets Used
 
-```
-CRAG/
-├── src/crag/
-│   ├── agent/          # Cognitive retrieval agent
-│   ├── retrieval/      # Hybrid retrieval module
-│   ├── model/          # ColBERT reranker
-│   ├── llm/            # LLM backends (Ollama, Mock)
-│   ├── evaluation/     # Experiment framework
-│   ├── analysis/       # Result analyzers
-│   └── data/           # Dataset loaders
-├── configs/            # System configurations
-│   ├── crag_full.yaml
-│   ├── crag_no_rerank.yaml
-│   ├── baseline_vector.yaml
-│   └── baseline_graph.yaml
-├── experiments/        # Generated reports
-├── runs/               # Experiment logs
-├── data/               # Downloaded datasets
-└── scripts/            # Utility scripts
-```
+| Dataset | Nodes Added | Edge Type | Purpose |
+|---|---|---|---|
+| **SQuAD v2** (142k+) | Document chunks (answerable) | `NEXT` (sequential) | Semantic & fallback categories |
+| **SQuAD v2 unanswerable** | Document chunks (unanswerable) | `NEXT` | Epistemic evaluator trigger |
+| **WebQSP** (4k+) | Wikidata entities / triples | `SUBJECT_OF`, `OBJECT_OF` | Multi-hop entity reasoning |
+| **Cora** (2.7k papers) | Academic paper nodes | `CITES` | Partition validation + graph traversal |
+| **Entity Linking** | Bridge edges | `MENTIONS` | Connects SQuAD text ↔ WebQSP entities |
 
 ---
 
-## 🧪 Experiments
+## Known Issues Fixed vs. Legacy Branches
 
-### Run Ablation Suite
+| Bug | Legacy Branch | Fix Applied |
+|---|---|---|
+| `ImportError: GraphPartitioner` | `v3`, `c-rag-colbert-query` | Replaced with `SemanticPartitioner` everywhere |
+| `MockLLMClient TypeError` | all branches | Added `**kwargs` to `__init__` |
+| ColBERT receives node dicts not strings | `c-rag-colbert-query` | Added `serialize_node_to_passage()` utility |
+| Empty bridge edges after METIS | `v4-query-graph-selection` | BFS boundary union fallback added |
+| Baselines queried different KBs | all branches | Single `SharedComponents` injected via factory |
 
-```bash
-python scripts/run_ablations.py --max_queries 100
-python src/crag/analysis/ablation_analysis.py
+---
+
+## Requirements
+
 ```
-
-**Ablations Included:**
-- No Vector Prefilter (graph-only)
-- No Graph (vector-only RAG)
-- No Agent (one-shot retrieval)
-- Hop budget sweeps (1, 2, 3, 5 hops)
-
-### Analysis Tools
-
-**Reranker Impact:**
-```bash
-python src/crag/analysis/rerank_audit.py
-```
-
-**Termination Reasons:**
-```bash
-python src/crag/analysis/termination_audit.py
-```
-
-**Aggregate Results:**
-```bash
-python src/crag/analysis/analyze_results.py
+Python >= 3.10
+torch >= 2.0
+torch-geometric
+faiss-cpu         # or faiss-gpu
+networkx
+colbert-ai
+sentence-transformers
+ragas
+scikit-learn
+pandas
+tqdm
 ```
 
 ---
 
-## 📚 Datasets
+## License
 
-The system has been validated on:
-
-- **SQuAD v2**: 142k reading comprehension questions
-- **WebQSP**: 4k Wikidata entity linking questions
-- **MetaQA**: Multi-hop movie domain questions (1/2/3-hop)
-
-All loaders support standardized schema:
-```json
-{
-  "id": "unique_qid",
-  "query": "question text",
-  "answers": ["answer1", "answer2"],
-  "context": "optional passage",
-  "gold_entities": ["Entity1"]
-}
-```
-
----
-
-## 🔧 Configuration
-
-Systems are configured via YAML. Example:
-
-```yaml
-experiment_name: "crag_full_v2"
-
-llm:
-  provider: "mock"  # or "ollama"
-  model: "llama3"
-
-retrieval:
-  k: 10
-  type: "hybrid"
-  use_reranker: true
-
-agent:
-  max_hops: 3
-  max_expansions: 5
-  reasoning: true
-```
-
----
-
-## 📖 Documentation
-
-- **[Architecture](docs/architecture.md)**: System design & components
-- **[Walkthrough](../brain/0855f694-3c69-4a0a-9165-284b0ecf3c2b/walkthrough.md)**: Development journey
-- **[Task Roadmap](../brain/0855f694-3c69-4a0a-9165-284b0ecf3c2b/task.md)**: Phase tracking
-
----
-
-## 🎓 Citation
-
-If you use C-RAG in your research, please cite:
-
-```bibtex
-@inproceedings{crag2024,
-  title={C-RAG: Cognitive Retrieval-Augmented Generation for Multi-Hop Question Answering},
-  author={Your Name},
-  booktitle={NeurIPS},
-  year={2024}
-}
-```
-
----
-
-## 📝 License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
----
-
-## 🤝 Contributing
-
-Contributions welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
-
----
-
-## 📧 Contact
-
-For questions or collaboration:
-- Email: your.email@example.com
-- GitHub Issues: [Create an issue](https://github.com/yourusername/CRAG/issues)
-
----
-
-**Status**: Phase 0-5 Complete | Ready for NeurIPS Submission
+MIT — see [LICENSE](LICENSE).
