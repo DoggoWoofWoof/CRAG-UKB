@@ -16,7 +16,7 @@ from src.router.factory import PipelineFactory
 src/
 ├── common/      → Shared singletons & utilities (load once, use everywhere)
 ├── ingestion/   → OFFLINE ONLY: KB construction, partitioning, embedding
-├── alignment/   → OFFLINE ONLY: InfoNCE bi-encoder training
+├── alignment/   → OFFLINE ONLY: KL Divergence & InfoNCE training
 ├── retrievers/  → QUERY TIME: Five retrieval strategy implementations
 ├── router/      → QUERY TIME: PipelineFactory — the single entry point
 └── evaluation/  → POST-RUN: IR metrics + benchmark synthesizer

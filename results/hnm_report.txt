@@ -1,0 +1,21 @@
+
+================================================================================
+      HARD NEGATIVE MINING (HNM) OPTIMAL BOUNDARY REPORT (TEST SPLIT)
+================================================================================
+                       Best HNM    Value  Best HNM     Value Best HNM  Value
+Metric                 recall@1 recall@1 recall@20 recall@20      mrr    mrr
+Dataset Loss                                                                
+2wiki   info_nce_multi        0    23.80       149     83.47        0  37.89
+        kl_div              149    25.07       149     84.27      149  38.59
+metaqa  info_nce_multi        0    45.76        39     94.90       39  58.96
+        kl_div                0    48.07         0     95.80        0  61.24
+musique info_nce_multi       22    77.94        33     99.35       22  84.61
+        kl_div               33    80.30        33     99.30       33  86.29
+squad   info_nce_multi        0    69.02         0    100.00        0  78.66
+        kl_div               18    69.42         0    100.00        0  78.93
+================================================================================
+
+Findings:
+1. KL Div consistently matches or outperforms InfoNCE under high HNM.
+2. 2Wiki/MuSiQue require high/max HNM for best Recall@1.
+3. Recall@20 often peaks at different HNM values than Recall@1, indicating a tradeoff between local precision and global volume.

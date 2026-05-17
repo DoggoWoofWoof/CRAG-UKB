@@ -1,83 +1,25 @@
-# `src/evaluation/` — Benchmarking & Metrics
+# Evaluation and Benchmarking Architecture
+This directory houses the logic to dynamically test and mathematically prove the efficacy of the 5 RAG Strategies. 
 
-Computes the final benchmark results comparing all 5 retrieval strategies. Uses strict Information Retrieval (IR) metrics against ground-truth node IDs — **not** LLM-as-a-judge soft metrics — ensuring reproducible, deterministic results.
+## Directory Structure & File Mechanics
 
-> Ragas (`faithfulness`, `answer_relevancy`) is also supported if an LLM endpoint is available, but IR metrics are the primary comparison basis.
+### `ground_truth.py` (Deprecated in v4)
+Originally generated synthetic multi-hop benchmarks via random graph walks. Superseded by exact native ground-truth matching from the dataloaders.
 
----
+### `benchmark_partition_selection.py`
+The definitive Evaluation Matrix Compiler for Graph/Vector routing.
+*   **Purpose**: To systematically evaluate the retrieval accuracy of GNNs vs MLPs vs dense baselines, strictly respecting identical experimental splits to prevent data leakage.
+*   **Mechanics**:
+    1.  **Deterministic Splits**: Uses the exact `70/20/10` seed logic (`get_split_pairs()`) from training to separate `Train`, `Val`, and `Test` queries.
+    2.  **Dataset Extraction**: For each dataset (SQuAD, MuSiQue, 2Wiki), it fetches the mapped `question_id → [ground_truth_document_ids]`.
+    3.  **Metric Computation**:
+        *   **Recall@10**: Did any partition containing the ground truth document appear in the top 10 partitions retrieved?
+        *   **GT@20**: (Ground Truth Coverage) What percentage of the *required* ground-truth partitions were caught in the top 20 results? Essential for multi-hop 2Wiki/MuSiQue queries.
+        *   **MRR**: Mathematically scores the position of the *first* correct partition.
+    4.  **Concurrent Execution**: Runs the benchmark across all three splits simultaneously and outputs a comprehensive tabular matrix.
 
-## Files
-
-### `metrics.py` — IR Metric Calculator
-
-```python
-def precision_at_1(retrieved: List[str], expected: List[str]) -> float:
-    """Was the top-1 returned node in the expected set? (0 or 1)"""
-
-def recall_at_k(retrieved: List[str], expected: List[str], k: int = 10) -> float:
-    """What fraction of expected nodes appeared in the top-K results?"""
-
-def mrr(retrieved: List[str], expected: List[str]) -> float:
-    """1/rank of the first expected node found in the retrieved list."""
-
-def evaluate_file(results_json: str, ground_truth_json: str) -> DataFrame:
-    """
-    Loads a results JSON from the router, computes all three metrics
-    per query, groups by category, and returns a summary DataFrame.
-    """
-```
-
-**Usage:**
-
-```bash
-python -m src.evaluation.metrics \
-  --results      results/ \
-  --groundtruth  data/processed/ground_truth.json \
-  --output       results/benchmark_comparison.csv
-```
-
-**Output format (`benchmark_comparison.csv`):**
-
-| category | strategy | P@1 | R@10 | MRR | avg_latency_s |
-|---|---|---|---|---|---|
-| Semantic | vector | 0.71 | 0.88 | 0.79 | 0.01 |
-| Multi-hop | crag_agent | 0.65 | 0.91 | 0.73 | 2.94 |
-| … | … | … | … | … | … |
-
----
-
-### `benchmark_gen.py` — Synthetic Query Generator (Routing Category Only)
-
-> **Scope:** Used **only** for the Routing/Graph-Selection category (queries 321–400). All other categories use real SQuAD v2 and WebQSP questions with their existing ground truth.
-
-```bash
-python -m src.evaluation.benchmark_gen \
-  --graph   data/kg_store/graph.pt \
-  --n-walks 80 \             # Generate 80 queries (enough for 321-400)
-  --hops    3 \              # Walk 3 hops per query
-  --llm     ollama \         # Use to synthesize question text from node content
-  --output  data/processed/routing_ground_truth.json
-```
-
-**How it works:**
-
-1. Start at a random node in the graph
-2. Traverse 2–3 hops across diverse edge types
-3. Collect the exact node IDs traversed (`expected_node_ids`)
-4. Send node text contents to the LLM: *"Write a complex question that requires reading all of these texts."*
-5. Save `{question, expected_node_ids}` pairs
-
-**Why only for the Routing category?**  
-Using synthetic questions for Semantic or Multi-hop categories would bias the benchmark — the generator trivially knows which nodes are "correct" since it started there. WebQSP and SQuAD have independently annotated ground truth that is free from this circular dependency.
-
----
-
-## Ground Truth Sources by Category
-
-| Category | Rows | Ground Truth Source |
-|---|---|---|
-| Semantic | 1–80 | SQuAD v2 (answerable) — passage chunk node IDs |
-| Multi-hop | 81–160 | WebQSP — Freebase entity node IDs |
-| Fallback/Web | 161–240 | SQuAD v2 (unanswerable) — expected signal: refusal / empty context |
-| Exact Lexical | 241–320 | Manual annotation from `benchmark_400.csv` |
-| Routing | 321–400 | `benchmark_gen.py` synthesis |
+## 📊 K-HOP Multi-Partition Recall (GT@K)
+In C-RAG, retrieval isn't just about finding *one* correct document. For multi-hop reasoning (MuSiQue, 2Wiki), the answer is often fragmented across multiple documents. If these documents are split into different partitions by METIS, the model must retrieve **ALL** those partitions. 
+- **Recall@K**: Measures if we found at least one correct partition.
+- **GT@K**: Measures the fraction of the "total puzzle pieces" found. 
+A high `GT@20` score (Target > 0.90) is the prerequisite for a successful Level-3 Agentic Traversal.
