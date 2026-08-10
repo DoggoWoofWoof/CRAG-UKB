@@ -1,0 +1,72 @@
+{
+  "encoder_subdir": "gte_qwen",
+  "K": 8,
+  "epochs": 20,
+  "tr_cap": 3000,
+  "datasets": [
+    "musique_clean",
+    "2wiki_clean",
+    "squad_clean",
+    "metaqa",
+    "hotpotqa_clean"
+  ],
+  "heads": {
+    "base": {
+      "mean_head@20": 91.69,
+      "per_dataset": {
+        "musique_clean": {
+          "dense@20": 89.47,
+          "head@20": 89.42,
+          "equal@20": 91.23,
+          "bestof@20": 91.33,
+          "gated@20": 90.63,
+          "n_test": 1995
+        },
+        "2wiki_clean": {
+          "dense@20": 93.93,
+          "head@20": 81.07,
+          "equal@20": 87.4,
+          "bestof@20": 94.47,
+          "gated@20": 94.53,
+          "n_test": 1500
+        },
+        "squad_clean": {
+          "dense@20": 94.3,
+          "head@20": 93.25,
+          "equal@20": 94.25,
+          "bestof@20": 94.55,
+          "gated@20": 94.75,
+          "n_test": 2000
+        },
+        "metaqa": {
+          "dense@20": 97.55,
+          "head@20": 97.15,
+          "equal@20": 98.75,
+          "bestof@20": 98.05,
+          "gated@20": 98.0,
+          "n_test": 2000
+        },
+        "hotpotqa_clean": {
+          "dense@20": 99.35,
+          "head@20": 97.57,
+          "equal@20": 98.87,
+          "bestof@20": 99.19,
+          "gated@20": 99.19,
+          "n_test": 617
+        }
+      },
+      "mean_equal@20": 94.1,
+      "over95_equal": "2/5",
+      "mean_bestof@20": 95.52,
+      "over95_bestof": "2/5",
+      "mean_gated@20": 95.42,
+      "over95_gated": "2/5"
+    }
+  },
+  "dense_only_mean@20": 94.92,
+  "best": {
+    "head": "base",
+    "fusion": "bestof",
+    "mean@20": 95.52
+  }
+}

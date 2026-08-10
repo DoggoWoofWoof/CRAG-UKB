@@ -1,5 +1,4 @@
 import json
-import time
 from typing import List, Dict, Any
 from tqdm import tqdm
 from src.super_model import SuperModel
@@ -61,36 +60,35 @@ if __name__ == "__main__":
     print(f"Loaded {len(benchmarks)} synthetic ground-truth queries.")
     
     results = []
-    strategies_to_test = ["vector", "graph", "crag_standard", "crag_colbert", "crag_v4_agent"]
+    strategies_to_test = [
+        "vector_rag",
+        "graph_rag",
+        "crag_faiss_faiss",
+        "crag_mlp_faiss",
+        "crag_colbert_faiss",
+    ]
     
     for i, benchmark in enumerate(tqdm(benchmarks, desc="Evaluating Benchmarks")):
         query = benchmark["query"]
         truth = benchmark["truth_nodes"]
         
+        source = benchmark.get("source", "squad")
+        try:
+            benchmark_results = super_model.run_benchmark(
+                query, truth, strategies=strategies_to_test, source=source
+            )
+        except Exception as e:
+            print(f"\n[Warning] Benchmark failed on Query {i}: {e}")
+            benchmark_results = {}
+
         for strategy_name in strategies_to_test:
-            start_time = time.time()
-            
-            # Execute the specific RAG strategy via the framework Singleton
-            try:
-                # The retrieve API returns a RetrievalResult object with a .nodes list
-                response = super_model.strategies[strategy_name].retrieve(query)
-                retrieved_ids = [n.node_id for n in response.nodes]
-            except Exception as e:
-                print(f"\n[Warning] Strategy '{strategy_name}' failed on Query {i}: {e}")
-                retrieved_ids = []
-                
-            latency = time.time() - start_time
-            
-            p_1 = MetricsCalculator.calculate_precision_at_k(retrieved_ids, truth, k=1)
-            r_10 = MetricsCalculator.calculate_recall_at_k(retrieved_ids, truth, k=10)
-            mrr = MetricsCalculator.calculate_mrr(retrieved_ids, truth)
-            
+            strategy_metrics = benchmark_results.get(strategy_name, {})
             results.append({
                 "strategy": strategy_name,
-                "p@1": p_1,
-                "r@10": r_10,
-                "mrr": mrr,
-                "latency": latency
+                "p@1": strategy_metrics.get("precision", 0.0),
+                "r@10": strategy_metrics.get("recall", 0.0),
+                "mrr": strategy_metrics.get("mrr", 0.0),
+                "latency": strategy_metrics.get("latency_s", 0.0),
             })
             
     # Compile execution results into the final comprehensive report

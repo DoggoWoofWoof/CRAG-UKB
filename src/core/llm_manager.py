@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import List, Optional, Union
 import tiktoken
 
 class LLMManager(ABC):
@@ -18,13 +18,14 @@ class LLMManager(ABC):
     def count_tokens(self, text: str) -> int:
         return len(self.tokenizer.encode(text))
 
-    def truncate_context(self, context_list: List[str], buffer: int = 500) -> str:
+    def truncate_context(self, context_list: Union[List[str], str], buffer: int = 500) -> str:
         """Truncate context strings to fit within the token limit."""
         target_limit = self.context_limit - buffer
+        contexts = [context_list] if isinstance(context_list, str) else context_list
         truncated_context = []
         current_tokens = 0
         
-        for ctx in context_list:
+        for ctx in contexts:
             ctx_tokens = self.count_tokens(ctx)
             if current_tokens + ctx_tokens <= target_limit:
                 truncated_context.append(ctx)

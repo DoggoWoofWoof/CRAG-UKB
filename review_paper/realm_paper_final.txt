@@ -1,0 +1,1504 @@
+Do Multi-Hop RAG Evaluations Measure Agentic Behavior?
+A Failure-Mode Audit
+
+Anonymous ACL submission
+
+001
+
+Abstract
+
+002
+003
+004
+005
+006
+
+Modern multi-hop retrieval-augmented generation (RAG) systems decide what to retrieve,
+when to stop, and how to recover, but their evaluations may not measure this control behavior.
+We audit a documented, purposive corpus of
+32 iterative, graph-based, and agentic multihop RAG papers across 10 outcome, process,
+and cost signals. Repeat coding of a seeded,
+stratified 22% sample gives 97.1% agreement
+(pooled Cohen’s κ = 0.93). Within this corpus, 97% report final-answer accuracy, 13%
+joint evidence completeness, and 3% retrievalcontrol quality; no iterative/agentic paper reports recovery (0/15), and no tool-agent reports
+tool-error rate (0/5). We turn recurring failure
+modes into an operational table linking trigger, observable signal, consequence, recovery,
+and detecting metric, plus a practitioner checklist. A retrieval-only illustration over all 22,398
+multi-support questions in the official 2Wiki,
+MuSiQue, and HotpotQA development splits
+shows joint evidence completeness 8–31 points
+below aggregate recall@20. Rather than another architecture survey, this is a transparent
+audit showing that systems with iterative or
+agentic components are usually scored on endpoints, not their control behavior.
+
+007
+008
+009
+010
+011
+012
+013
+014
+015
+016
+017
+018
+019
+020
+021
+022
+023
+024
+025
+026
+027
+028
+029
+
+1
+
+030
+
+Multi-hop question answering (QA) requires assembling several interdependent facts into a reasoning chain. RAG has responded with a progression of designs: dense and late-interaction retrievers, graph systems that traverse entity relations,
+iterative retrieve-then-reason loops, and tool-using
+agents that plan their own retrieval. A recurring narrative motivates this progression—a set of failure
+modes (silent retrieval failures, context fragmentation, broken graph paths, cascading errors from a
+wrong hop) that each new design claims to mitigate
+through more agentic control over retrieval.
+These failure modes are behavioral: they concern how a system retrieves, decides to stop, and
+
+031
+032
+033
+034
+035
+036
+037
+038
+039
+040
+041
+042
+043
+
+Introduction
+
+recovers, not merely whether the final answer string
+matches. If a system is agentic, its evaluation
+should expose process quality. We ask a simple, falsifiable question: do multi-hop RAG evaluations
+measure the retrieval-control behavior that iterative and agentic designs introduce?
+We answer with a quantitative audit rather than
+another narrative survey. We assemble a documented, purposive corpus of 32 iterative, graphbased, and agentic multi-hop RAG papers through
+a documented protocol and code each for whether
+it reports a set of outcome, agent-quality, and cost
+signals (§2). We then (i) recast the standard failure taxonomy as an operational table that maps
+each trigger to the observable signal and metric
+that would catch it (§3); (ii) quantify how often
+each signal is actually reported (§4); and (iii) distill
+a practitioner checklist (§6).
+Recent surveys catalog RAG methods and reasoning strategies (Gao et al., 2023; Li et al., 2025;
+Deng et al., 2026); our object is different—we audit
+evaluation practice. Our contributions are:
+
+044
+
+• A transparent coding protocol and appendix
+matrix auditing multi-hop RAG evaluation (32
+papers, 10 dimensions, with a repeat-coding
+consistency audit on 22% of the sample).
+
+066
+
+• An operational failure-mode table (trigger →
+signal → consequence → recovery → metric)
+that turns descriptive limitations into measurable quantities.
+
+070
+
+• Quantified reporting gaps showing processlevel signals are rarely reported in this sample,
+and a checklist tying task properties to the
+retrieval strategy and the metrics to report.
+• A full-split retrieval illustration (2Wiki,
+MuSiQue, HotpotQA; 22,398 questions)
+showing that the omitted evidencecompleteness metric exposes an 8–31
+point gap, with larger gaps as the number of
+1
+
+045
+046
+047
+048
+049
+050
+051
+052
+053
+054
+055
+056
+057
+058
+059
+060
+061
+062
+063
+064
+065
+
+067
+068
+069
+
+071
+072
+073
+074
+075
+076
+077
+078
+079
+080
+081
+082
+
+084
+
+085
+086
+087
+088
+089
+090
+091
+092
+093
+094
+095
+096
+097
+098
+099
+100
+101
+
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+
+120
+121
+122
+123
+124
+125
+126
+127
+128
+
+Table 1: Coding dimensions. Agent-quality signals (A)
+are the behaviors that distinguish an agent from a static
+pipeline.
+
+required passages grows.
+
+083
+
+2
+
+Method
+
+Corpus
+construction. We
+searched
+arXiv and the ACL/EMNLP/NAACL and
+NeurIPS/ICLR/SIGIR proceedings (2020–2026)
+using queries combining “multi-hop” with {RAG,
+retrieval-augmented, iterative retrieval, agentic
+retrieval, graph RAG, knowledge-graph QA}. We
+constructed a purposive sample covering four
+design families and several influential adjacent
+systems whose evaluations include retrieval-like
+tool use or multi-step control. The corpus contains
+iterative decomposition (10), tool-using agents (5),
+graph-based reasoning (15), and iterative dense
+retrieval (2). It is intended to characterize reporting
+practice across these families, not to estimate
+architecture prevalence in the full literature.
+Appendix A gives the full list, source links, and
+per-paper codes.
+
+3
+
+Coding scheme. For each paper we read the evaluation section and code, as 1/0/? (reported / not
+reported / unclear), the dimensions in Table 1: two
+outcome signals, five agent-quality signals, and
+three cost signals. We coded conservatively: a
+dimension is 1 only when the paper reports a corresponding quantitative measure. To keep judgments
+defensible we pre-specified conventions before final reconciliation, e.g.: aggregate recall@k that
+credits partial support is not evidence completeness (A1 requires a joint/all-support metric such as
+joint passage-set EM); “retrieval frequency” (fraction of steps that trigger retrieval) counts as retrieval use/calls (C1); offline indexing time alone
+does not count as latency (C3). For trajectory correctness (A4), a quantified manual error analysis
+over a stated sample counts, while isolated examples do not.
+Consistency check. With seed 20260803 we
+sampled seven papers, stratified as two iterative,
+one agentic, three graph, and one dense system. A
+source-verification pass re-coded all 70 cells before
+reconciliation. Raw agreement was 68/70 (97.1%)
+and pooled Cohen’s κ = 0.93. The two sourceresolved disagreements corrected MDR’s trajectory
+code and HippoRAG 2’s latency code. Appendix A
+reports both code matrices and the sample rule.
+2
+
+Group
+
+Dimension
+
+Outcome (S)
+
+answer EM/F1/acc; retrieval recall@k
+
+Agent (A)
+
+evidence completeness (joint support)
+retrieval-control decision quality
+failed-retrieval recovery
+trajectory / path correctness
+tool-error rate
+
+Cost (C)
+
+retrieval use/calls; tokens/cost; latency
+
+Failure Modes as Observable Signals
+
+129
+
+The literature’s failure modes are usually stated
+descriptively. Table 2 recasts them operationally:
+each trigger produces an observable signal, has a
+downstream consequence, admits a recovery action, and—critically—maps to a metric that would
+detect it. The rightmost column is what we audit
+for in §4; every row names the measurement that
+operationalizes it.
+
+130
+
+4
+
+138
+
+Findings: The Reporting Gap
+
+131
+132
+133
+134
+135
+136
+137
+
+Table 3 and Figure 1 report the fraction of the 32
+systems that measure each dimension. The pattern
+is stark. Final-answer accuracy is nearly universal
+(97%), and retrieval recall is common (44%). But
+the agent-quality signals that the failure modes in
+Table 2 call for are rarely measured: evidence completeness 13%, retrieval-control quality 3%, and
+trajectory correctness 16%. Using relevant family
+denominators, only 1/15 iterative or agentic papers
+reports control quality, none reports failed-retrieval
+recovery, and none of the five explicitly tool-using
+agents reports tool-error rate. Even the near misses
+quantify retrieval use—Toolformer’s call frequency
+and FrugalRAG’s search count/cost (Schick et al.,
+2023; Java et al., 2025)—not failure or recovery
+rates. Cost signals are reported unevenly (calls
+38%, tokens 41%, latency 41%), and disproportionately by the subset of papers whose contribution is
+efficiency.
+
+139
+
+Where the exceptions are. The few agentquality measurements are instructive. Evidence
+completeness is measured by only four systems,
+all via a joint/all-support metric: MDR’s joint twopassage recall (Xiong et al., 2021), HippoRAG’s
+All-Recall@k (Gutiérrez et al., 2024), Beam Retrieval’s joint gold-passage-set EM (Zhang et al.,
+2024), and LinearRAG’s all-necessary-information
+
+158
+
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+
+159
+160
+161
+162
+163
+164
+165
+
+Table 2: Operational failure-mode table for multi-hop RAG. Each descriptive failure becomes a measurable quantity
+(rightmost column). A/S/C refer to the coding dimensions in Table 1.
+Failure trigger
+
+Observable signal
+
+Downstream consequence
+
+Recovery action
+
+Detecting metric
+
+Embedding bottleneck (silent retrieval
+failure)
+
+gold passage ranked
+low / missed despite
+plausible top-k
+
+incomplete
+evidence; confident
+wrong answer
+
+query reformulation;
+multi-vector / late interaction
+
+evidence
+recall@k; joint
+support
+recall
+(S2/A1)
+
+Context fragmentation
+
+a required fact split
+across chunks; one
+piece absent
+
+broken
+chain
+
+reasoning
+
+semantic chunking;
+neighbor expansion
+
+evidence
+completeness (A1)
+
+Premature / late stopping (iterative)
+
+loop halts before
+all hops, or overretrieves
+
+missing evidence or
+wasted budget
+
+sufficiency check;
+adaptive stop
+
+control-decision
+quality
+(A2);
+retrieval
+calls
+(C1)
+
+Failed / wrong intermediate hop
+
+a hop returns wrong
+or empty evidence
+
+later hops condition on bad evidence (cascade)
+
+backtrack; re-query;
+verification
+
+recovery
+rate
+(A3); trajectory
+correctness (A4)
+
+Shortcut reasoning
+(right answer, wrong
+path)
+
+answer correct but
+support unused / spurious
+
+brittle,
+generalizing
+behavior
+
+non-
+
+path supervision;
+distractor stress test
+
+trajectory correctness (A4)
+
+Tool / action-call error (agentic)
+
+malformed query or
+failed tool call
+
+dropped or
+rupted step
+
+cor-
+
+error handling; retries
+
+tool-error
+(A5)
+
+Graph construction
+gaps / missing edges
+
+reasoning path halts
+at an absent edge
+
+unreachable
+dence
+
+evi-
+
+edge completion;
+hybrid fallback
+
+support recall on
+reachable golds
+(S2/A1)
+
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+
+Group
+
+Dimension
+
+Outcome
+
+answer EM/F1/acc
+retrieval recall@k
+
+31/32 (97%)
+14/32 (44%)
+
+Agent
+
+evidence completeness
+retrieval-control quality
+failed-retrieval recovery
+trajectory correctness
+tool-error rate
+
+4/32 (13%)
+1/32 (3%)
+0/32 (0%)
+5/32 (16%)
+0/32 (0%)
+
+Cost
+
+retrieval use / calls
+tokens / cost
+latency
+
+12/32 (38%)
+13/32 (41%)
+13/32 (41%)
+
+% of all 32 sampled papers reporting
+
+Table 3: Corpus-wide reporting rate per dimension
+(fixed denominator 32). Family-relevant denominators
+for control, recovery, and tool errors are reported in the
+text.
+Reported
+
+100
+
+97
+
+Outcome
+
+rate
+
+Process-level
+
+Cost
+
+80
+60
+40
+20
+0
+
+44
+
+38
+
+41
+
+41
+
+16
+
+13
+3
+
+0
+Answer Retrieval Evidence Control Recovery Trajectory
+EM/F1 recall complete decision
+
+0
+Tool
+error
+
+Retrieval Tokens
+use/calls /cost
+
+Latency
+
+Figure 1: Percentage of the 32 systems reporting each
+signal. Outcome metrics dominate; agent-quality signals (recovery, tool-error, retrieval control, evidence
+completeness) remain sparse.
+
+Evidence Recall (Zhuang et al., 2025); every other
+retrieval-reporting system uses aggregate recall@k
+that credits partial support. Retrieval-control quality is measured by exactly one—Adaptive-RAG’s
+question-complexity router (Jeong et al., 2024),
+whose ∼54.5% routing accuracy exposes a controlpolicy oracle gap. This is a query-level routing
+decision rather than a per-hop stop test, so we
+use the broader control-quality label. Five papers expose trajectory quality: Think-on-Graph
+reports path overlap with ground-truth relation
+3
+
+paths (Sun et al., 2024); Self-Ask (Press et al.,
+2023), IRCoT (Trivedi et al., 2023), ReAct (Yao
+et al., 2023), and MDR (Xiong et al., 2021) report quantified manual analyses. Two boundary cases sharpen the point: GraphRAG reports
+no answer accuracy at all (Edge et al., 2024)
+(LLM-judge win-rates on an incomparable summarization axis), and StepChain (Ni et al., 2025)
+leaves uncertainty-aware re-decomposition, backtracking, and sub-question robustness metrics to
+future work—closely matching the gaps we quantify.
+
+177
+
+Interpretation. Systems are scored on the endpoint, not the behavior. A system can obtain high
+
+189
+
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+
+190
+
+Table 4: Exact retrieval on all official multi-support development questions. ∆ is the paired aggregate-minusjoint gap; brackets give its 95% bootstrap interval.
+
+191
+192
+193
+194
+195
+196
+197
+198
+
+Dataset (n)
+
+agg.
+
+joint
+
+∆ [95% CI]
+
+2Wiki (12,576)
+MuSiQue (2,417)
+HotpotQA (7,405)
+
+73.2
+65.5
+91.0
+
+45.3
+34.6
+82.7
+
+27.9 [27.5, 28.4]
+30.9 [29.8, 32.0]
+8.3 [7.9, 8.8]
+
+answer EM while stopping at the wrong hop, failing to recover, or traversing an incorrect path—and
+these failures need not surface under endpoint-only
+reporting. This is precisely the concern REALM
+raises for agents: without process-level metrics,
+agentic control is credited or blamed on outcome
+alone, and claims of “adaptive” or “self-corrective”
+behavior go unvalidated.
+
+199
+
+5
+
+200
+
+To show that the audited gap matters, we use BGElarge-en-v1.5 (Xiao et al., 2023) on the complete
+official development splits of 2Wiki (Ho et al.,
+2020), MuSiQue (Trivedi et al., 2022), and HotpotQA (Yang et al., 2018). For each split we deduplicate the union of its provided candidate contexts,
+then perform exact dense ranking. We report aggregate recall@20 (mean gold-passage recall) versus
+joint recall@20 (all gold passages retrieved), with
+paired 95% bootstrap intervals (5,000 resamples).
+Appendix B gives the protocol and support-count
+breakdown.
+The divergence is not an artifact of mixing twoand four-support questions. On two-support subsets, the gaps remain 21.0 points (2Wiki), 22.0
+(MuSiQue), and 8.3 (HotpotQA). It then widens
+sharply with the required evidence set: for foursupport 2Wiki questions, aggregate recall is 53.4%
+while joint recall is only 0.7%; for four-support
+MuSiQue, the corresponding values are 42.8% and
+3.0%. The median weakest-link rank is 3 on HotpotQA but 48 on 2Wiki and 56 on MuSiQue.
+A fixed two-pass feedback control (query plus
+top-1 passage, fused by reciprocal-rank fusion (Cormack et al., 2009)) does not repair the gap. At @20
+it changes aggregate recall by −4.0, −4.0, and
+−0.4 points and joint recall by −2.9, −1.9, and
+−0.2 on 2Wiki, MuSiQue, and HotpotQA, respectively; the paired joint interval includes zero only
+for HotpotQA. Thus a plausible expansion can look
+only mildly harmful under aggregate recall while
+losing substantially more complete evidence sets.
+Both effects are invisible without the completeness
+
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+
+Table 5: Choosing and evaluating a retrieval strategy.
+The metric column lists what to report beyond answer
+accuracy to detect the strategy’s dominant failure mode.
+
+Empirical Illustration
+
+Task property
+
+Strategy
+
+Report also
+
+single-hop, highrecall corpus
+multi-hop,
+bounded hops,
+text
+multi-hop,
+entity/KBcentric
+open-ended,
+variable hops,
+tools
+
+static dense / hybrid top-k
+iterative retrievereason
+
+recall@k
+
+graph traversal
+
+support
+recall;
+path correctness
+
+agentic planning
+
+control/stop quality; recovery; tool
+errors; cost
+
+evidence completeness; #calls
+
+signal that only 13% of the audited sample reports.
+
+233
+
+6
+
+234
+
+A Practitioner Checklist
+
+The audit yields actionable guidance. Table 5 ties
+task properties to a retrieval strategy and the minimal metric set that would expose its characteristic
+failure mode—what to report beyond answer accuracy.
+
+7
+
+4
+
+Related Work
+
+235
+236
+237
+238
+239
+240
+
+Surveys of RAG and reasoning organize the field
+by method (Gao et al., 2023; Li et al., 2025; Deng
+et al., 2026). We are complementary and narrower: a quantitative audit of evaluation practice
+for multi-hop RAG, in the spirit of reproducibility
+and reporting-standard studies. To our knowledge,
+prior surveys have not quantified process-level metric reporting across iterative, graph, and agentic
+multi-hop RAG with a paper-level coding matrix.
+
+249
+
+8
+
+250
+
+Limitations
+
+241
+242
+243
+244
+245
+246
+247
+248
+
+The purposive, citation-skewed corpus yields descriptive rather than population estimates, and binary codes compress partial reporting. Sevenpaper repeat coding supports pooled but not stable dimension-wise κ. The illustration uses one
+encoder, split-induced corpora, and fixed feedback,
+so it diagnoses metrics rather than architectures.
+Logging actions is inexpensive, but judging control or recovery correctness requires task-specific
+supervision.
+
+251
+
+Use of AI
+
+261
+
+Generative AI assisted literature retrieval and drafting; the authors remain responsible.
+
+262
+
+252
+253
+254
+255
+256
+257
+258
+259
+260
+
+263
+
+264
+
+References
+
+265
+266
+267
+268
+269
+270
+
+Gordon V. Cormack, Charles L. A. Clarke, and Stefan
+Buettcher. 2009. Reciprocal rank fusion outperforms
+condorcet and individual rank learning methods. In
+Proceedings of the 32nd International ACM SIGIR
+Conference on Research and Development in Information Retrieval, pages 758–759.
+
+271
+272
+273
+274
+275
+276
+277
+278
+
+Jingwen Deng, Jihao Huang, Zhen Hao Wong, Hao
+Liang, Quanqing Xu, Bin Cui, and Wentao Zhang.
+2026. Data-centric perspectives on agentic retrievalaugmented generation: A survey. In Findings
+of the Association for Computational Linguistics:
+ACL 2026, pages 1570–1588, San Diego, California, United States. Association for Computational
+Linguistics.
+
+279
+280
+281
+282
+283
+
+Darren Edge, Ha Trinh, Newman Cheng, Joshua
+Bradley, Alex Chao, Apurva Mody, Steven Truitt,
+and Jonathan Larson. 2024. From local to global: A
+graph RAG approach to query-focused summarization. arXiv preprint arXiv:2404.16130.
+
+284
+285
+286
+287
+288
+
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, Meng Wang,
+and Haofen Wang. 2023. Retrieval-augmented generation for large language models: A survey. arXiv
+preprint arXiv:2312.10997.
+
+289
+290
+291
+292
+293
+
+Bernal Jiménez Gutiérrez, Yiheng Shu, Yu Gu, Michihiro Yasunaga, and Yu Su. 2024. HippoRAG: Neurobiologically inspired long-term memory for large
+language models. In Advances in Neural Information
+Processing Systems (NeurIPS).
+
+294
+295
+296
+297
+298
+299
+
+Xanh Ho, Anh-Khoa Duong Nguyen, Saku Sugawara,
+and Akiko Aizawa. 2020. Constructing a multihop QA dataset for comprehensive evaluation of
+reasoning steps. In Proceedings of the 28th International Conference on Computational Linguistics,
+pages 6609–6625.
+
+300
+301
+302
+303
+
+Abhinav Java, Srivathsan Koundinyan, Nagarajan
+Natarajan, and Amit Sharma. 2025. FrugalRAG:
+Less is more in RL finetuning for multi-hop question
+answering. arXiv preprint arXiv:2507.07634.
+
+304
+305
+306
+307
+308
+309
+310
+
+Soyeong Jeong, Jinheon Baek, Sukmin Cho, Sung Ju
+Hwang, and Jong C. Park. 2024. Adaptive-RAG:
+Learning to adapt retrieval-augmented large language
+models through question complexity. In Proceedings
+of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics
+(NAACL).
+
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+
+Yangning Li, Weizhi Zhang, Yuyao Yang, Wei-Chieh
+Huang, Yaozu Wu, Junyu Luo, Yuanchen Bei,
+Henry Peng Zou, Xiao Luo, Yusheng Zhao, Chunkit
+Chan, Yankai Chen, Zhongfen Deng, Yinghui Li, HaiTao Zheng, Dongyuan Li, Renhe Jiang, Ming Zhang,
+Yangqiu Song, and Philip S. Yu. 2025. A survey of
+RAG-reasoning systems in large language models. In
+Findings of the Association for Computational Linguistics: EMNLP 2025, pages 12120–12145, Suzhou,
+China. Association for Computational Linguistics.
+
+5
+
+Tengjun Ni, Xin Yuan, Shenghong Li, Kai Wu, Ren Ping
+Liu, Wei Ni, and Wenjie Zhang. 2025. StepChain
+GraphRAG: Reasoning over knowledge graphs for
+multi-hop question answering. arXiv preprint
+arXiv:2510.02827.
+
+321
+322
+323
+324
+325
+
+Ofir Press, Muru Zhang, Sewon Min, Ludwig Schmidt,
+Noah A. Smith, and Mike Lewis. 2023. Measuring
+and narrowing the compositionality gap in language
+models. In Findings of the Association for Computational Linguistics: EMNLP 2023.
+
+326
+327
+328
+329
+330
+
+Timo Schick, Jane Dwivedi-Yu, Roberto Dessì, Roberta
+Raileanu, Maria Lomeli, Luke Zettlemoyer, Nicola
+Cancedda, and Thomas Scialom. 2023. Toolformer:
+Language models can teach themselves to use tools.
+arXiv preprint arXiv:2302.04761.
+
+331
+332
+333
+334
+335
+
+Jiashuo Sun, Chengjin Xu, Lumingyuan Tang, Saizhuo
+Wang, Chen Lin, Yeyun Gong, Lionel M. Ni, HeungYeung Shum, and Jian Guo. 2024. Think-on-graph:
+Deep and responsible reasoning of large language
+model on knowledge graph. In International Conference on Learning Representations (ICLR).
+
+336
+337
+338
+339
+340
+341
+
+Harsh Trivedi, Niranjan Balasubramanian, Tushar Khot,
+and Ashish Sabharwal. 2022. MuSiQue: Multihop questions via single-hop question composition.
+Transactions of the Association for Computational
+Linguistics, 10:539–554.
+
+342
+343
+344
+345
+346
+
+Harsh Trivedi, Niranjan Balasubramanian, Tushar Khot,
+and Ashish Sabharwal. 2023. Interleaving retrieval
+with chain-of-thought reasoning for knowledgeintensive multi-step questions. In Proceedings of
+the 61st Annual Meeting of the Association for Computational Linguistics (ACL).
+
+347
+348
+349
+350
+351
+352
+
+Shitao Xiao, Zheng Liu, Peitian Zhang, Niklas Muennighoff, Defu Lian, and Jian-Yun Nie. 2023. C-Pack:
+Packaged resources to advance general chinese embedding. arXiv preprint arXiv:2309.07597.
+
+353
+354
+355
+356
+
+Wenhan Xiong, Xiang Lorraine Li, Srinivasan Iyer,
+Jingfei Du, Patrick Lewis, William Yang Wang,
+Yashar Mehdad, Wen-tau Yih, Sebastian Riedel,
+Douwe Kiela, and Barlas Oğuz. 2021. Answering complex open-domain questions with multi-hop
+dense retrieval. In International Conference on
+Learning Representations (ICLR).
+
+357
+358
+359
+360
+361
+362
+363
+
+Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William W. Cohen, Ruslan Salakhutdinov, and
+Christopher D. Manning. 2018. HotpotQA: A dataset
+for diverse, explainable multi-hop question answering. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing,
+pages 2369–2380.
+
+364
+365
+366
+367
+368
+369
+370
+
+Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak
+Shafran, Karthik Narasimhan, and Yuan Cao. 2023.
+ReAct: Synergizing reasoning and acting in language
+models. In International Conference on Learning
+Representations (ICLR).
+
+371
+372
+373
+374
+375
+
+376
+377
+378
+379
+380
+381
+
+Jiahao Zhang, Haiyang Zhang, Dongmei Zhang, Yong
+Liu, and Shen Huang. 2024. End-to-end beam retrieval for multi-hop question answering. In Proceedings of the 2024 Conference of the North American
+Chapter of the Association for Computational Linguistics (NAACL).
+
+382
+383
+384
+385
+386
+
+Luyao Zhuang, Shengyuan Chen, Yilin Xiao, Huachi
+Zhou, Yujing Zhang, Hao Chen, Qinggang Zhang,
+and Xiao Huang. 2025. LinearRAG: Linear graph retrieval augmented generation on large-scale corpora.
+arXiv preprint arXiv:2510.10114.
+
+387
+
+A
+
+388
+
+Table 6 reports all 32 systems and all 10 reconciled
+codes. Paper names link to the source used for
+coding. Families are I (iterative), T (tool-using
+agent), G (graph), and D (iterative dense retrieval).
+Within each bit string, positions follow Table 1; 1
+means reported and 0 means not reported.
+
+389
+390
+391
+392
+393
+
+Table 6 (continued).
+
+Corpus and Coding Sheet
+
+394
+
+F
+
+S
+
+A
+
+C
+
+Self-Ask
+IRCoT
+DSP
+Least-to-Most
+ITER-RETGEN
+FLARE
+Self-RAG
+Adaptive-RAG
+RaDeR
+Search-o1
+ReAct
+Toolformer
+FrugalRAG
+SCMRAG
+A-RAG
+GraphRAG
+
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+T
+T
+T
+T
+T
+G
+
+10
+11
+10
+10
+11
+10
+10
+10
+11
+10
+10
+10
+11
+10
+10
+00
+
+00010
+00010
+00000
+00000
+00000
+00000
+00000
+01000
+00000
+00000
+00010
+00000
+00000
+00000
+00000
+00000
+
+010
+000
+000
+000
+110
+100
+100
+101
+000
+000
+000
+100
+111
+000
+010
+010
+
+System
+
+F
+
+S
+
+A
+
+C
+
+HippoRAG
+HippoRAG2
+GNN-RAG
+Think-on-Graph
+ToG-2
+KG2RAG
+Clue-RAG
+HiRAG
+SimGRAG
+UniKGQA
+StepChain
+LinearRAG
+HopRAG
+SiReRAG
+MDR
+Beam-Retrieval
+
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G
+D
+D
+
+11
+11
+11
+10
+10
+11
+10
+10
+11
+11
+10
+11
+11
+10
+11
+11
+
+10000
+00000
+00000
+00010
+00000
+00000
+00000
+00000
+00000
+00000
+00000
+10000
+00000
+00000
+10010
+10000
+
+011
+011
+110
+100
+101
+111
+110
+011
+001
+000
+001
+011
+111
+001
+001
+000
+
+396
+
+Table 7: Paired repeat-coding matrix in S1,S2,A1–
+A5,C1–C3 order. The seeded, family-stratified sample
+has 68/70 matching cells; the two changes shown in
+bold were resolved from the cited sources before the
+corpus totals were computed.
+
+Table 6:
+Complete paper-level coding matrix.
+S={S1,S2}, A={A1,...,A5}, and C={C1,C2,C3}. Each
+linked system name opens the source version used for
+coding.
+System
+
+395
+
+System
+
+6
+
+Family
+
+Initial pass
+
+Verification pass
+
+FLARE
+iterative 1000000100
+IRCoT
+iterative 1100010000
+Toolformer tool-agent 1000000100
+SimGRAG graph
+1100000001
+HippoRAG2 graph
+1100000010
+GNN-RAG graph
+1100000110
+MDR
+dense
+1110000001
+
+1000000100
+1100010000
+1000000100
+1100000001
+1100000011
+1100000110
+1110010001
+
+397
+
+398
+
+B
+
+399
+
+We use the official 2Wiki development split (12,576
+questions), MuSiQue answerable development split
+(2,417), and HotpotQA distractor validation split
+(7,405). Every question has at least two mapped
+support passages. The split-induced corpora are the
+title–text-deduplicated unions of provided candidate contexts: 56,661, 21,099, and 66,581 passages,
+respectively. Source revisions and SHA-256 checksums are asserted before evaluation.
+BGE-large-en-v1.5 is pinned to model revision
+d4aa6901...e09; queries use its documented
+retrieval instruction. Normalized vectors are ranked
+by exact inner product. The fixed feedback query
+is the normalized sum of the original query and its
+top-1 passage; two depth-100 rankings are fused by
+RRF (k0 = 60). We evaluate @10 and @20, use
+5,000 paired bootstrap resamples (seed 20260803),
+and apply exact paired McNemar tests to jointrecall changes. Weakest-link ranks are exact to
+depth 2,000 and right-censored thereafter. We
+stored one record per query and independently reconstructed every point estimate and paired contingency cell.
+
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+
+Retrieval Illustration Protocol
+
+Table 8: Single-shot recall@20 stratified by required
+support count. The aggregate metric increasingly masks
+incomplete evidence sets as the number of required
+passages grows.
+422
+
+Dataset
+2Wiki
+2Wiki
+MuSiQue
+MuSiQue
+MuSiQue
+HotpotQA
+
+Supports
+
+n
+
+Aggregate
+
+Joint
+
+2
+4
+2
+3
+4
+2
+
+9,825
+2,751
+1,252
+760
+405
+7,405
+
+78.7
+53.4
+73.2
+64.9
+42.8
+91.0
+
+57.7
+0.7
+51.2
+24.2
+3.0
+82.7
+
+7
+
+

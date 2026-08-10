@@ -9,8 +9,11 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
-from torch_geometric.data import Data, Batch
-from torch_geometric.utils import subgraph
+try:  # torch_geometric is only needed for the GNN alignment path; keep it optional so
+    from torch_geometric.data import Data, Batch          # non-GNN importers (e.g. overlap_retrain
+    from torch_geometric.utils import subgraph            # -> train_mlp -> here) don't require it
+except ModuleNotFoundError:                               # (fresh cloud envs without torch-geometric)
+    Data = Batch = subgraph = None
 from tqdm import tqdm
 from typing import Dict, List, Tuple
 import faiss
@@ -179,9 +182,17 @@ def collate_fn(batch):
 # Loss Functions
 # ═══════════════════════════════════════════════════════════════════
 
-def partition_coverage_loss(zq, coarse_part_embs, query_coarse_ids, temperature=0.1):
+def multilabel_infonce_loss(zq, coarse_part_embs, query_coarse_ids, temperature=0.1):
     """
-    Multi-label InfoNCE (multi-positive contrastive loss).
+    Multi-label (soft-OR) InfoNCE contrastive loss.
+
+    NOTE: this is NOT a coverage loss. Its numerator is logsumexp over the
+    positive set, so it is satisfied by the single STRONGEST positive and does
+    not enforce that ALL required partitions rank highly. For a true FullCov /
+    worst-positive objective see src/alignment/coverage_losses.py
+    (partition_coverage_loss) and the coverage_* losses in train_mlp.py.
+    (Formerly named `partition_coverage_loss`, which was misleading.)
+
     zq: (B, D)
     coarse_part_embs: (num_coarse, D)
     query_coarse_ids: list of lists of coarse partition ids
@@ -267,7 +278,7 @@ def _compute_eval_loss(model, model_type, dataloader, all_partition_embs, device
                 q_proj = model(query_embs)
             else:
                 q_proj = model.project_text(query_embs, device)
-            loss = partition_coverage_loss(q_proj, all_partition_embs, query_gt_pids)
+            loss = multilabel_infonce_loss(q_proj, all_partition_embs, query_gt_pids)
             total_loss += loss.item()
             count += 1
     return total_loss / max(count, 1)
@@ -619,7 +630,7 @@ def train(
                 q_proj = model.project_text(query_embs, device)
 
             q_proj = F.normalize(q_proj, dim=-1)
-            loss = partition_coverage_loss(q_proj, all_partition_embs, query_gt_pids)
+            loss = multilabel_infonce_loss(q_proj, all_partition_embs, query_gt_pids)
 
             optimizer.zero_grad()
             loss.backward()

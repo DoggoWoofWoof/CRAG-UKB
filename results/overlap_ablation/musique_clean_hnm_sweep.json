@@ -1,0 +1,104 @@
+{
+  "dataset": "musique_clean",
+  "npart": 136,
+  "tau": 0.05,
+  "loss": "kl",
+  "config": "hard",
+  "hn_ks": [
+    8,
+    16,
+    32,
+    64,
+    135
+  ],
+  "note": "McNemar (FullCov@50) each hn_k vs all-negatives baseline",
+  "results": {
+    "hnk_8": {
+      "full_coverage@10": 66.62,
+      "full_coverage@20": 77.29,
+      "full_coverage@50": 90.23,
+      "gt_recall@20": 87.86,
+      "mrr": 81.47,
+      "weakest_positive_rank": 15.57,
+      "n_test": 1995
+    },
+    "hnk_16": {
+      "full_coverage@10": 68.77,
+      "full_coverage@20": 78.05,
+      "full_coverage@50": 90.38,
+      "gt_recall@20": 88.18,
+      "mrr": 81.91,
+      "weakest_positive_rank": 15.05,
+      "n_test": 1995
+    },
+    "hnk_32": {
+      "full_coverage@10": 68.52,
+      "full_coverage@20": 78.75,
+      "full_coverage@50": 91.13,
+      "gt_recall@20": 88.58,
+      "mrr": 81.75,
+      "weakest_positive_rank": 14.76,
+      "n_test": 1995
+    },
+    "hnk_64": {
+      "full_coverage@10": 68.57,
+      "full_coverage@20": 79.1,
+      "full_coverage@50": 91.13,
+      "gt_recall@20": 88.68,
+      "mrr": 80.94,
+      "weakest_positive_rank": 14.72,
+      "n_test": 1995
+    },
+    "hnk_all": {
+      "full_coverage@10": 69.02,
+      "full_coverage@20": 79.15,
+      "full_coverage@50": 90.98,
+      "gt_recall@20": 88.53,
+      "mrr": 81.09,
+      "weakest_positive_rank": 14.71,
+      "n_test": 1995
+    }
+  },
+  "mcnemar_vs_all": {
+    "8": {
+      "n": 1995,
+      "treatment_mean": 90.23,
+      "baseline_mean": 90.98,
+      "b_treatment_only": 51,
+      "c_baseline_only": 66,
+      "n_discordant": 117,
+      "p_value": 0.195349,
+      "significant_0.05": false
+    },
+    "16": {
+      "n": 1995,
+      "treatment_mean": 90.38,
+      "baseline_mean": 90.98,
+      "b_treatment_only": 39,
+      "c_baseline_only": 51,
+      "n_discordant": 90,
+      "p_value": 0.246106,
+      "significant_0.05": false
+    },
+    "32": {
+      "n": 1995,
+      "treatment_mean": 91.13,
+      "baseline_mean": 90.98,
+      "b_treatment_only": 36,
+      "c_baseline_only": 33,
+      "n_discordant": 69,
+      "p_value": 0.809949,
+      "significant_0.05": false
+    },
+    "64": {
+      "n": 1995,
+      "treatment_mean": 91.13,
+      "baseline_mean": 90.98,
+      "b_treatment_only": 29,
+      "c_baseline_only": 26,
+      "n_discordant": 55,
+      "p_value": 0.787706,
+      "significant_0.05": false
+    }
+  }
+}

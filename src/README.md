@@ -1,37 +1,42 @@
-# `src/` — Python Package Root
+# `src/` Package Map
 
-Top-level package containing all C-RAG source modules. Import paths start with `src.`:
+The current package root is organized around the implemented C-RAG pipeline:
 
-```python
-from src.common.vector_store import UnifiedVectorStore
-from src.retrievers.crag_agent import CRAGAgent
-from src.router.factory import PipelineFactory
-```
-
----
-
-## Module Hierarchy
-
-```
+```text
 src/
-├── common/      → Shared singletons & utilities (load once, use everywhere)
-├── ingestion/   → OFFLINE ONLY: KB construction, partitioning, embedding
-├── alignment/   → OFFLINE ONLY: KL Divergence & InfoNCE training
-├── retrievers/  → QUERY TIME: Five retrieval strategy implementations
-├── router/      → QUERY TIME: PipelineFactory — the single entry point
-└── evaluation/  → POST-RUN: IR metrics + benchmark synthesizer
+  alignment/   Offline MLP/GNN training and ablation losses
+  core/        Runtime indexes, encoders, CoreEngine, and LLM manager
+  evaluation/  Level 1, Level 2, and generation evaluation utilities
+  experiments/ Component studies and unified experiment task bodies
+  pipeline/    Dataset loaders and StandardNode normalization
+  strategies/  Runtime retrieval strategies
 ```
 
-**Dependencies flow strictly downward:**
-- `retrievers/` depends on `common/` — never on `ingestion/` or `alignment/`
-- `router/` depends on `retrievers/` and `common/`
-- `evaluation/` depends only on result JSON files — never on live pipelines
+## Dependency Direction
 
----
+- `pipeline/` creates normalized data and should not depend on retrievers.
+- `core/` loads persisted artifacts and exposes search APIs.
+- `alignment/` trains query-to-partition models from `core` artifacts.
+- `experiments/` may train direct document candidate generators and evaluate
+  graph diffusion independently of the integrated runtime.
+- `strategies/` use `core` APIs at query time.
+- `evaluation/` may use `core`, `alignment`, and `strategies` depending on the benchmark.
 
-## Key Design Invariants
+## Important Runtime Invariants
 
-1. **No circular imports.** `common/` never imports from `retrievers/`.
-2. **All retrievers are stateless at query time.** State (indices, graph) lives in `SharedComponents`.
-3. **Token budget is always enforced.** Every retriever calls `truncate_to_token_budget()` inside `_prepare_prompt()` before touching the LLM.
-4. **`data/kg_store/` is read-only at query time.** Only `ingestion/` scripts write to it.
+- `CoreEngine.nodes` contains document/entity nodes only and aligns with FAISS, BM25, graph, and partition indexes.
+- `CoreEngine.all_nodes` includes question nodes and is used for training/evaluation ground truth.
+- Question nodes are filtered out before indexing and partitioning.
+- The active research definition of Level 1 is broad candidate generation:
+  partition routing plus dense, sparse, and learned relational document
+  retrievers. Several July `l1_*` experiments rank documents directly.
+- `experiments/l1_optimize.py` is the validation-locked Level 1 runner. It
+  combines direct document signals with bounded partition-router quotas,
+  selects model/fusion settings on validation, exports an exact top-100 test
+  pool, and persists fingerprinted caches/checkpoints under each dataset UKB.
+- `src/experiments/l3_srw.py` is a full-graph component harness. It does not
+  demonstrate partition-local dynamic execution or the complete runtime.
+- Paper 2 system claims require one frozen Level 1 candidate export, a matched
+  Level 2 reranker comparison, Level 3, and real generation metrics.
+- Current structured July component results live primarily under
+  `data/ukb_storage/{dataset}/results/`, not only top-level `results/`.

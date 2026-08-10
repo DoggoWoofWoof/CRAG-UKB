@@ -81,6 +81,12 @@ def _get_split_queries(engine: CoreEngine, dataset: str):
 # ═══════════════════════════════════════════════════════════════════
 
 K_VALUES = [1, 3, 5, 10]
+BEST_HNM_CHECKPOINTS = {
+    "squad": "checkpoints/squad/hnm_ablation/alignment_mlp_kl_div_tau_0.1_hnm_18.pth",
+    "metaqa": "checkpoints/metaqa/hnm_ablation/alignment_mlp_kl_div_tau_0.01_hnm_0.pth",
+    "musique": "checkpoints/musique/hnm_ablation/alignment_mlp_kl_div_tau_0.05_hnm_33.pth",
+    "2wiki": "checkpoints/2wiki/hnm_ablation/alignment_mlp_kl_div_tau_0.07_hnm_149.pth",
+}
 
 
 def compute_chunk_metrics(retrieved_ids: List[str], gt_doc_ids: List[str]) -> Dict:
@@ -254,8 +260,14 @@ def run_level2_benchmark(
     encoder = DenseEncoder()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # Load the best MLP checkpoint
-    ckpt_path = os.path.join(checkpoints_dir, dataset, "alignment_mlp.pth")
+    # Load the same HNM-optimized checkpoint family used by Paper 2.
+    ckpt_path = BEST_HNM_CHECKPOINTS.get(dataset)
+    if ckpt_path and checkpoints_dir != "checkpoints":
+        ckpt_path = os.path.join(
+            checkpoints_dir, dataset, "hnm_ablation", os.path.basename(ckpt_path)
+        )
+    if not ckpt_path:
+        ckpt_path = os.path.join(checkpoints_dir, dataset, "alignment_mlp.pth")
     if not os.path.exists(ckpt_path):
         log.error(f"MLP checkpoint not found: {ckpt_path}")
         return {}

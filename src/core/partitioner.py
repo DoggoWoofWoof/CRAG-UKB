@@ -69,9 +69,14 @@ def run_partitioning(nodes_path: str, output_path: str):
     print(f"Partition map saved to {output_path}")
 
 if __name__ == "__main__":
-    node_file = "data/processed/master_nodes.json"
-    part_file = "data/ukb_storage/partition_map.json"
-    if os.path.exists(node_file):
-        run_partitioning(node_file, part_file)
-    else:
-        print(f"Nodes file {node_file} not found.")
+    # DEPRECATED standalone entrypoint. This wrote a source-LESS
+    # data/ukb_storage/partition_map.json, which does NOT match the per-source
+    # UKB layout (data/ukb_storage/{source}/partition_map.json) that CoreEngine
+    # reads. The canonical per-source partition map is built by
+    # src/core/indexers.build_partition_map (PyMETIS, ~1000 nodes/partition).
+    raise SystemExit(
+        "src/core/partitioner.py is deprecated and would write a mis-placed, "
+        "source-less partition_map.json. Build per-source UKB views (incl. "
+        "partition_map.json) with:\n"
+        "    python -m src.core.indexers --nodes data/processed/master_nodes.json --out data/ukb_storage"
+    )

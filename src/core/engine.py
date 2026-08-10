@@ -6,7 +6,7 @@ import torch
 import json
 import logging
 from collections import deque
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any, Optional, Tuple, Set
 from src.pipeline.standardizer import StandardNode, load_nodes
 
 log = logging.getLogger(__name__)
@@ -22,9 +22,22 @@ class CoreEngine:
 
     def __init__(self, storage_dir: str = "data/ukb_storage",
                  master_nodes_path: str = "data/processed/master_nodes.json",
-                 source: str = ""):
+                 source: str = "", index_subdir: str = ""):
         self.source = source
         self.storage_dir = storage_dir
+        # index_subdir: when set (e.g. "gte_qwen"), the graph / partition_map / centroids are read
+        # from src_dir/index_subdir — i.e. the kNN graph + METIS partitions were built in THAT
+        # encoder's space, not MiniLM's. Retrieval embeddings already come from the subdir, so this
+        # makes every operation (kNN, partitioning, centroids, retrieval) use one base encoder.
+        self.index_subdir = index_subdir
+        # Per-source master file override (non-destructive): if the caller left the
+        # default master path but a data/processed/master_nodes_{source}.json exists
+        # (e.g. the label-free "{ds}_clean" rebuild), prefer it.
+        if source and master_nodes_path == "data/processed/master_nodes.json":
+            per_source = os.path.join("data", "processed", f"master_nodes_{source}.json")
+            if os.path.exists(per_source):
+                master_nodes_path = per_source
+                log.info(f"Using per-source master file: {per_source}")
         self.master_nodes_path = master_nodes_path
 
         # Resolve the actual index directory
@@ -33,6 +46,13 @@ class CoreEngine:
         else:
             src_dir = storage_dir
         self._src_dir = src_dir
+        # Resolve where the per-encoder graph/partition/centroids live (falls back to root if absent).
+        idx_dir = os.path.join(src_dir, index_subdir) if index_subdir else src_dir
+        if index_subdir and not os.path.exists(os.path.join(idx_dir, "partition_map.json")):
+            log.warning(f"index_subdir '{index_subdir}' has no partition_map.json; "
+                        f"falling back to root substrate {src_dir}")
+            idx_dir = src_dir
+        self._idx_dir = idx_dir
 
         # Load nodes and filter to source
         all_nodes = load_nodes(master_nodes_path)
@@ -54,11 +74,12 @@ class CoreEngine:
         with open(os.path.join(src_dir, "bm25.pkl"), "rb") as f:
             self.bm25 = pickle.load(f)
 
-        self.graph = torch.load(os.path.join(src_dir, "graph.pt"), weights_only=False)
+        self.graph = torch.load(os.path.join(idx_dir, "graph.pt"), weights_only=False)
+        self._attach_synthetic_neighbor_metadata()
 
         # ── Partition Map ───────────────────────────────────────────────
         self.partition_map: Dict[str, int] = self._load_json(
-            os.path.join(src_dir, "partition_map.json"))
+            os.path.join(idx_dir, "partition_map.json"))
         # Build reverse map: partition_id → list of node indices
         self._partition_to_nodes: Dict[int, List[int]] = {}
         for nid, pid in self.partition_map.items():
@@ -70,8 +91,8 @@ class CoreEngine:
                 i for i in self._partition_to_nodes[pid] if i >= 0]
 
         # ── Centroid Index ──────────────────────────────────────────────
-        centroid_path = os.path.join(src_dir, "centroids.index")
-        centroid_pids_path = os.path.join(src_dir, "centroid_pids.json")
+        centroid_path = os.path.join(idx_dir, "centroids.index")
+        centroid_pids_path = os.path.join(idx_dir, "centroid_pids.json")
         if os.path.exists(centroid_path) and os.path.exists(centroid_pids_path):
             self.centroid_index = faiss.read_index(centroid_path)
             with open(centroid_pids_path, 'r') as f:
@@ -122,6 +143,59 @@ class CoreEngine:
                 return json.load(f)
         return {}
 
+    def _attach_synthetic_neighbor_metadata(self) -> None:
+        """Recover synthetic KNN edges from graph.pt for Level-3 pruning.
+
+        The current master_nodes.json stores original dataset graph edges in
+        node.neighbors, while graph.pt also contains index-time KNN bridges.
+        CRAG's Level 3 needs to tell those apart so ablations can exclude
+        synthetic edges without rebuilding the whole UKB.
+        """
+        edge_index = getattr(self.graph, "edge_index", None)
+        if edge_index is None:
+            return
+
+        try:
+            src_indices = edge_index[0].tolist()
+            dst_indices = edge_index[1].tolist()
+        except Exception as exc:
+            log.warning(f"Could not inspect graph edge_index for synthetic edges: {exc}")
+            return
+
+        doc_node_ids = set(self.node_id_to_idx)
+        original_neighbors: List[Set[str]] = [
+            set(node.neighbors) & doc_node_ids for node in self.nodes
+        ]
+        for src_idx, node in enumerate(self.nodes):
+            for neighbor_id in node.neighbors:
+                dst_idx = self.node_id_to_idx.get(neighbor_id)
+                if dst_idx is not None:
+                    original_neighbors[dst_idx].add(node.node_id)
+        synthetic_neighbors: Dict[int, Set[str]] = {}
+
+        for src_idx, dst_idx in zip(src_indices, dst_indices):
+            if not (0 <= src_idx < len(self.nodes) and 0 <= dst_idx < len(self.nodes)):
+                continue
+
+            dst_node_id = self.nodes[dst_idx].node_id
+            if dst_node_id not in original_neighbors[src_idx]:
+                synthetic_neighbors.setdefault(src_idx, set()).add(dst_node_id)
+
+        synthetic_edge_count = 0
+        for src_idx, neighbor_ids in synthetic_neighbors.items():
+            if not neighbor_ids:
+                continue
+            node = self.nodes[src_idx]
+            existing = set(node.metadata.get("synthetic_neighbors", []))
+            existing.update(neighbor_ids)
+            node.metadata["synthetic_neighbors"] = sorted(existing)
+            synthetic_edge_count += len(neighbor_ids)
+
+        if synthetic_edge_count:
+            log.info(
+                f"Recovered {synthetic_edge_count} synthetic graph edges for Level-3 pruning."
+            )
+
     # ═══════════════════════════════════════════════════════════════════
     # Core Search Methods
     # ═══════════════════════════════════════════════════════════════════
@@ -133,7 +207,10 @@ class CoreEngine:
 
     def search_lexical(self, query: str, k: int = 10) -> List[StandardNode]:
         """BM25 lexical search over all nodes."""
-        tokenized_query = query.split()
+        # Lowercase to match the corpus vocabulary (built with content.lower().split()
+        # in indexers). Without this, capitalized query tokens miss every idf key and
+        # contribute 0 to BM25 — silently zeroing proper-noun signal.
+        tokenized_query = query.lower().split()
         scores = self.bm25.get_scores(tokenized_query)
         top_n = np.argsort(scores)[::-1][:k]
         return [self.nodes[i] for i in top_n]

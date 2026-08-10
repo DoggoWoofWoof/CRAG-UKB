@@ -1,37 +1,41 @@
-# Retrieval Strategies Architecture
-This directory houses the execution frameworks comprising the scientific benchmark tests. Each Strategy operates off the singular `CoreEngine` (`src/core/engine.py`).
+# Retrieval Strategies
 
-## Director Structure & File Mechanics
+This directory contains the runtime retrievers used by `SuperModel` and system-level evaluation.
 
-### `base.py`
-The Strategy interface.
-*   **Purpose**: Defines a common protocol `execute(query: str) -> dict`. Forces all 5 Models to accept the same input and output metrics identically for the SuperModel routing.
+## Files
 
-### `vector_rag.py` (Baseline 1: Dense-Lexical RRF)
-The standard vector-similarity baseline.
-*   **Purpose**: Retrieves contexts globally with no structural awareness.
-*   **Mechanics**: Computes semantic similarity (Dense) and exact keyword occurrences (Lexical) simultaneously. Merges both result rankings using Reciprocal Rank Fusion (RRF). Provides a normalized, context-rich subset to the LLM generator.
+- `base.py`: common `RetrievalResult` dataclass and `BaseRetriever` interface.
+- `vector_rag.py`: dense FAISS plus BM25 Reciprocal Rank Fusion baseline.
+- `graph_rag.py`: dense seed retrieval followed by fixed-hop graph BFS.
+- `crag.py`: current C-RAG strategy with Level 1 partition routing, Level 2 partition entry/reranking, Level 3 traversal, and context formatting.
+- `query_graph_gnn.py`: experimental query-graph selector that currently falls back to centroid selection unless a GIN checkpoint is wired in.
 
-### `graph_rag.py` (Baseline 2: Static Graph Traversal)
-The standard semantic sub-graph baseline.
-*   **Purpose**: Retrieves contexts physically tied to topological boundaries.
-*   **Mechanics**: Finds an exact entry node, walks its edges using `CoreEngine.get_neighbors()`, and feeds the collected subgraph cluster into the generative prompt. Inherently structural, mathematically rigid.
+## Current CRAG Modes
 
-### `crag_standard.py` (Advanced 1: Corrective Agent)
-The base C-RAG evaluation metric variant.
-*   **Purpose**: Introduces critique-based epistemic reasoning.
-*   **Mechanics**: After a retrieval pass, it queries a secondary "Evaluator" prompt. This explicit evaluator classifies the retrieved chunk as `CORRECT`, `INCORRECT`, or `AMBIGUOUS`. If `CORRECT`, proceeds; if `INCORRECT`, actively discards the chunk; if `AMBIGUOUS`, triggers localized fallback logic (in this framework, graph expansion).
+`CRAG` supports these Level 1 selectors:
 
-### `crag_colbert.py` (Advanced 2: ColBERT Precision)
-A High-Precision variant leveraging Late Interaction.
-*   **Purpose**: Maximizes strict word-association accuracy at the cost of latency.
-*   **Mechanics**: Bypasses the FAISS Dense single-vector similarity completely. Instead, passes the query string straight to Ragatouille. It aligns query tokens computationally against individual stored document tokens (e.g., matching the literal context of "George Washington" structurally rather than a generic vector representation of "presidents").
+- `faiss_centroid`: dense query vector against partition centroids.
+- `colbert_centroid`: ColBERT search over centroid representations when the index is available.
+- `mlp`: trained `TextPartitionMLP` projection followed by centroid search.
 
-### `crag_v4_agent.py` (Advanced 3: The Unified Zenith Strategy)
-The ultimate execution framework integrating the "Multi-Modal Retrieval Engine" capabilities linearly.
-*   **Purpose**: Solves massive context bloat by teleporting between Dense and Structural dimensions.
-*   **Mechanics**:
-    1.  **Teleport (Dense -> Hierarchical)**: Uses the trained **MLP Bi-Encoder** (or FAISS Centroid Index) to project the query vector into partition space. The Engine returns ONLY the `partition_id`s that mathematically align closest to the prompt intention.
-    2.  **Stitch (Hierarchical -> Structural)**: Immediately fetches all `node_ids` belonging to the top K winning partitions mathematically.
-    3.  **Observe (Structural -> Late-Interaction)**: Because these nodes would crush the LLM context window, they are fed aggressively into a Level 2 Reranker (like ColBERT or BGE). It physically discards 95% of the graph, returning the top perfectly precise exact-match topological tokens.
-    4.  **Generate**: Feeds the aggressively scrubbed, context-perfect structural data to the generator.
+It supports these Level 2 entry modes:
+
+- `faiss`: dense cosine reranking inside selected partitions.
+- `cross_encoder`: pairwise cross-encoder scoring inside selected partitions.
+- `colbert`: legacy global ColBERT search filtered by selected partitions; prefer the Level 2 benchmark implementation in `src/evaluation/level2.py` (run via `python experiments.py run bench-level2`) for paper results.
+
+## Level 3 Traversal
+
+`CRAG` now uses deterministic priority/beam traversal rather than FIFO expansion. It keeps a scored frontier, selects nodes above `score_threshold`, expands only nodes above `expand_threshold`, caps frontier size with `beam_width`, and records traversal stats in `RetrievalResult.metadata["traversal"]`.
+
+Important Level 3 knobs:
+
+- `max_traverse_steps`: maximum graph-pop operations.
+- `max_context_nodes`: maximum nodes retained for generation.
+- `expand_top_neighbors`: number of highest-scoring neighbors queued per expansion.
+- `exclude_synthetic_edges`: whether KNN index-time edges are skipped.
+- `min_context_nodes`: fallback count from Level 2 seeds if traversal prunes too aggressively.
+
+## Paper 2 Caveat
+
+The strategy code is a runtime integration path. Publication-grade Paper 2 numbers should come from deterministic benchmark runners that export CSV/JSON with fixed splits, metrics, and checkpoint paths.

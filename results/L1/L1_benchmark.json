@@ -1,0 +1,151 @@
+{
+  "generated": "2026-07-29 13:49:07",
+  "primary_metric": "eqrrf6+bestof@20",
+  "seeds": {
+    "SPLIT_SEED": 42,
+    "INIT_SEED": 42,
+    "FT_SEED": 42
+  },
+  "datasets": [
+    "musique_clean",
+    "2wiki_clean",
+    "squad_clean",
+    "metaqa",
+    "hotpotqa_clean"
+  ],
+  "encoders": [
+    "MiniLM-L6",
+    "BGE-large",
+    "BGE-large-ft",
+    "gte-Qwen2-1.5B"
+  ],
+  "grid": {
+    "musique_clean": {
+      "MiniLM-L6": {
+        "n_test": 1995,
+        "npart": 136,
+        "encoder": null,
+        "oracle@20": 98.1,
+        "eqrrf6+bestof@20": 90.68,
+        "eqrrf6+bestof3@20": 90.48
+      },
+      "BGE-large": {
+        "n_test": 1995,
+        "npart": 136,
+        "encoder": "BAAI/bge-large-en-v1.5",
+        "oracle@20": 100.0,
+        "eqrrf6+bestof@20": 93.23,
+        "eqrrf6+bestof3@20": 93.53
+      },
+      "BGE-large-ft": {
+        "n_test": 1995,
+        "npart": 136,
+        "encoder": "BAAI/bge-large-en-v1.5",
+        "oracle@20": 100.0,
+        "eqrrf6+bestof@20": 95.89,
+        "eqrrf6+bestof3@20": 96.14
+      },
+      "gte-Qwen2-1.5B": null
+    },
+    "2wiki_clean": {
+      "MiniLM-L6": {
+        "n_test": 1500,
+        "npart": 658,
+        "encoder": "minilm-L6",
+        "oracle@20": 100.0,
+        "eqrrf6+bestof@20": 89.6,
+        "eqrrf6+bestof3@20": 90.0
+      },
+      "BGE-large": {
+        "n_test": 1500,
+        "npart": 658,
+        "encoder": "BAAI/bge-large-en-v1.5",
+        "oracle@20": 100.0,
+        "eqrrf6+bestof@20": 90.8,
+        "eqrrf6+bestof3@20": 93.4
+      },
+      "BGE-large-ft": {
+        "n_test": 1500,
+        "npart": 658,
+        "encoder": "BAAI/bge-large-en-v1.5",
+        "oracle@20": 100.0,
+        "eqrrf6+bestof@20": 96.07,
+        "eqrrf6+bestof3@20": 96.6
+      },
+      "gte-Qwen2-1.5B": null
+    },
+    "squad_clean": {
+      "MiniLM-L6": {
+        "n_test": 8000,
+        "npart": 190,
+        "encoder": null,
+        "oracle@20": 100.0,
+        "eqrrf6+bestof@20": 89.97,
+        "eqrrf6+bestof3@20": 90.16
+      },
+      "BGE-large": {
+        "n_test": 8000,
+        "npart": 190,
+        "encoder": "BAAI/bge-large-en-v1.5",
+        "oracle@20": 100.0,
+        "eqrrf6+bestof@20": 92.42,
+        "eqrrf6+bestof3@20": 92.81
+      },
+      "BGE-large-ft": null,
+      "gte-Qwen2-1.5B": null
+    },
+    "metaqa": {
+      "MiniLM-L6": {
+        "n_test": 8000,
+        "npart": 40,
+        "encoder": "minilm-L6",
+        "oracle@20": 100.0,
+        "eqrrf6+bestof@20": 99.88,
+        "eqrrf6+bestof3@20": 99.94
+      },
+      "BGE-large": {
+        "n_test": 8000,
+        "npart": 401,
+        "encoder": "BAAI/bge-large-en-v1.5",
+        "oracle@20": 100.0,
+        "eqrrf6+bestof@20": 99.53,
+        "eqrrf6+bestof3@20": 99.64
+      },
+      "BGE-large-ft": null,
+      "gte-Qwen2-1.5B": null
+    },
+    "hotpotqa_clean": {
+      "MiniLM-L6": {
+        "n_test": 617,
+        "npart": 665,
+        "encoder": null,
+        "oracle@20": 99.84,
+        "eqrrf6+bestof@20": 94.33,
+        "eqrrf6+bestof3@20": 94.0
+      },
+      "BGE-large": {
+        "n_test": 617,
+        "npart": 665,
+        "encoder": "BAAI/bge-large-en-v1.5",
+        "oracle@20": 100.0,
+        "eqrrf6+bestof@20": 97.41,
+        "eqrrf6+bestof3@20": 97.73
+      },
+      "BGE-large-ft": null,
+      "gte-Qwen2-1.5B": null
+    }
+  },
+  "missing": [
+    "musique_clean/gte-Qwen2-1.5B",
+    "2wiki_clean/gte-Qwen2-1.5B",
+    "squad_clean/BGE-large-ft",
+    "squad_clean/gte-Qwen2-1.5B",
+    "metaqa/BGE-large-ft",
+    "metaqa/gte-Qwen2-1.5B",
+    "hotpotqa_clean/BGE-large-ft",
+    "hotpotqa_clean/gte-Qwen2-1.5B"
+  ],
+  "integrity_warnings": [
+    "metaqa: npart MISMATCH across encoders {40: ['MiniLM-L6'], 401: ['BGE-large']} \u2014 not the same substrate!"
+  ]
+}

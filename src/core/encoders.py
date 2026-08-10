@@ -5,6 +5,7 @@ import numpy as np
 
 class DenseEncoder:
     def __init__(self, model_name: str = 'multi-qa-MiniLM-L6-cos-v1', device: str = None):
+        self.model_name = model_name
         self.device = device or ('cuda' if torch.cuda.is_available() else 'cpu')
         self.model = SentenceTransformer(model_name, device=self.device)
         

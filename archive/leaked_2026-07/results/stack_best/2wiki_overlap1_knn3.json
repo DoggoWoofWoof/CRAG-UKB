@@ -1,0 +1,68 @@
+{
+  "dataset": "2wiki",
+  "config": "overlap1+knn3",
+  "tau": 0.07,
+  "hn_k": 149,
+  "avg_gold_partitions": 6.956,
+  "npart": 150,
+  "router_frozen_mlp": {
+    "full_coverage@1": 36.07,
+    "full_coverage@3": 55.47,
+    "full_coverage@5": 66.8,
+    "full_coverage@10": 83.2,
+    "full_coverage@20": 94.47,
+    "full_coverage@50": 99.6
+  },
+  "router_finetuned_encoder": {
+    "full_coverage@1": 38.47,
+    "full_coverage@3": 60.33,
+    "full_coverage@5": 70.2,
+    "full_coverage@10": 84.2,
+    "full_coverage@20": 94.47,
+    "full_coverage@50": 99.67,
+    "unfreeze": 2,
+    "ft_epochs": 5
+  },
+  "adaptive_k_on_best": {
+    "better_router": "mlp",
+    "fixed20_pool": 45832.4,
+    "fixed20_cov": 94.47,
+    "sweep": [
+      {
+        "scale": 3,
+        "avg_pool": 44417.9,
+        "full_coverage": 96.53
+      },
+      {
+        "scale": 5,
+        "avg_pool": 63054.4,
+        "full_coverage": 98.93
+      },
+      {
+        "scale": 8,
+        "avg_pool": 86450.0,
+        "full_coverage": 99.67
+      },
+      {
+        "scale": 12,
+        "avg_pool": 109683.5,
+        "full_coverage": 99.87
+      },
+      {
+        "scale": 20,
+        "avg_pool": 135437.6,
+        "full_coverage": 100.0
+      },
+      {
+        "scale": 30,
+        "avg_pool": 146760.3,
+        "full_coverage": 100.0
+      }
+    ],
+    "best_at_fixed20_budget": {
+      "scale": 3,
+      "avg_pool": 44417.9,
+      "full_coverage": 96.53
+    }
+  }
+}

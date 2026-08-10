@@ -1,0 +1,104 @@
+{
+  "dataset": "hotpotqa_clean",
+  "npart": 665,
+  "tau": 0.07,
+  "loss": "kl",
+  "config": "hard",
+  "hn_ks": [
+    8,
+    16,
+    32,
+    64,
+    664
+  ],
+  "note": "McNemar (FullCov@50) each hn_k vs all-negatives baseline",
+  "results": {
+    "hnk_8": {
+      "full_coverage@10": 42.3,
+      "full_coverage@20": 52.03,
+      "full_coverage@50": 63.37,
+      "gt_recall@20": 54.54,
+      "mrr": 29.85,
+      "weakest_positive_rank": 80.84,
+      "n_test": 617
+    },
+    "hnk_16": {
+      "full_coverage@10": 43.76,
+      "full_coverage@20": 52.35,
+      "full_coverage@50": 65.96,
+      "gt_recall@20": 55.02,
+      "mrr": 30.04,
+      "weakest_positive_rank": 76.05,
+      "n_test": 617
+    },
+    "hnk_32": {
+      "full_coverage@10": 44.89,
+      "full_coverage@20": 54.13,
+      "full_coverage@50": 67.59,
+      "gt_recall@20": 57.05,
+      "mrr": 30.6,
+      "weakest_positive_rank": 72.24,
+      "n_test": 617
+    },
+    "hnk_64": {
+      "full_coverage@10": 45.87,
+      "full_coverage@20": 54.78,
+      "full_coverage@50": 67.91,
+      "gt_recall@20": 57.7,
+      "mrr": 31.19,
+      "weakest_positive_rank": 70.31,
+      "n_test": 617
+    },
+    "hnk_all": {
+      "full_coverage@10": 45.71,
+      "full_coverage@20": 56.24,
+      "full_coverage@50": 68.72,
+      "gt_recall@20": 59.32,
+      "mrr": 31.61,
+      "weakest_positive_rank": 70.74,
+      "n_test": 617
+    }
+  },
+  "mcnemar_vs_all": {
+    "8": {
+      "n": 617,
+      "treatment_mean": 63.37,
+      "baseline_mean": 68.72,
+      "b_treatment_only": 13,
+      "c_baseline_only": 46,
+      "n_discordant": 59,
+      "p_value": 1.9e-05,
+      "significant_0.05": true
+    },
+    "16": {
+      "n": 617,
+      "treatment_mean": 65.96,
+      "baseline_mean": 68.72,
+      "b_treatment_only": 14,
+      "c_baseline_only": 31,
+      "n_discordant": 45,
+      "p_value": 0.016094,
+      "significant_0.05": true
+    },
+    "32": {
+      "n": 617,
+      "treatment_mean": 67.59,
+      "baseline_mean": 68.72,
+      "b_treatment_only": 13,
+      "c_baseline_only": 20,
+      "n_discordant": 33,
+      "p_value": 0.296206,
+      "significant_0.05": false
+    },
+    "64": {
+      "n": 617,
+      "treatment_mean": 67.91,
+      "baseline_mean": 68.72,
+      "b_treatment_only": 6,
+      "c_baseline_only": 11,
+      "n_discordant": 17,
+      "p_value": 0.332306,
+      "significant_0.05": false
+    }
+  }
+}

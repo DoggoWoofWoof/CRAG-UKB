@@ -1,0 +1,91 @@
+{
+  "encoder_subdir": "bge_large",
+  "K": 8,
+  "epochs": 20,
+  "tr_cap": 3000,
+  "datasets": [
+    "musique_clean",
+    "2wiki_clean",
+    "squad_clean",
+    "metaqa",
+    "hotpotqa_clean"
+  ],
+  "heads": {
+    "base": {
+      "mean_head@20": 91.62,
+      "mean_dense+head@20": 93.74,
+      "over95_fused": "2/5",
+      "per_dataset": {
+        "musique_clean": {
+          "head@20": 86.62,
+          "dense+head@20": 88.12,
+          "dense@20": 86.17,
+          "n_test": 1995
+        },
+        "2wiki_clean": {
+          "head@20": 84.53,
+          "dense+head@20": 90.47,
+          "dense@20": 91.8,
+          "n_test": 1500
+        },
+        "squad_clean": {
+          "head@20": 90.8,
+          "dense+head@20": 92.45,
+          "dense@20": 91.65,
+          "n_test": 2000
+        },
+        "metaqa": {
+          "head@20": 99.25,
+          "dense+head@20": 99.6,
+          "dense@20": 98.75,
+          "n_test": 2000
+        },
+        "hotpotqa_clean": {
+          "head@20": 96.92,
+          "dense+head@20": 98.06,
+          "dense@20": 98.7,
+          "n_test": 617
+        }
+      }
+    },
+    "mix": {
+      "mean_head@20": 91.49,
+      "mean_dense+head@20": 93.79,
+      "over95_fused": "2/5",
+      "per_dataset": {
+        "musique_clean": {
+          "head@20": 87.62,
+          "dense+head@20": 88.52,
+          "dense@20": 86.17,
+          "n_test": 1995
+        },
+        "2wiki_clean": {
+          "head@20": 82.6,
+          "dense+head@20": 90.2,
+          "dense@20": 91.8,
+          "n_test": 1500
+        },
+        "squad_clean": {
+          "head@20": 90.65,
+          "dense+head@20": 92.45,
+          "dense@20": 91.65,
+          "n_test": 2000
+        },
+        "metaqa": {
+          "head@20": 99.15,
+          "dense+head@20": 99.7,
+          "dense@20": 98.75,
+          "n_test": 2000
+        },
+        "hotpotqa_clean": {
+          "head@20": 97.41,
+          "dense+head@20": 98.06,
+          "dense@20": 98.7,
+          "n_test": 617
+        }
+      }
+    }
+  },
+  "dense_only_mean@20": 93.41,
+  "best_head": "mix"
+}

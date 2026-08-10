@@ -1,0 +1,497 @@
+schema_version: 1
+
+suite:
+  id: sota_e2e_v1
+  audited_at: "2026-07-25"
+  output_root: data/ukb_storage/_sota/sota_e2e_v1
+  external_root: data/ukb_storage/_sota/external
+  datasets:
+    - 2wiki_clean
+    - musique_clean
+    - hotpotqa_clean
+    - squad_clean
+    - metaqa
+  retrieval_k: [2, 5, 10, 20, 50, 100]
+  context_document_budget: 20
+  context_token_budget: 4096
+  bootstrap_samples: 1000
+  bootstrap_seed: 42
+  include_synthetic_edges: false
+
+protocol:
+  native:
+    description: Run the authors' corpus, preprocessing, retriever, reader, and evaluator.
+    purpose: Verify that the pinned official repository reproduces its reported paper setting.
+  matched:
+    description: Each method ingests the complete CRAG corpus and label-free graph, then uses the same split, context budget, reader, and evaluator.
+    purpose: Support the paper claim that the complete CRAG RAG system outperforms alternative end-to-end systems.
+
+reader:
+  provider: openai_compatible
+  model: meta-llama/Llama-3.3-70B-Instruct
+  revision: 6f6073b423013f6a7d4d9f39144961bfbfbc386b
+  base_url_env: SOTA_READER_BASE_URL
+  api_key_env: SOTA_READER_API_KEY
+  temperature: 0.0
+  max_output_tokens: 64
+  seed: 42
+  system_prompt: Answer only from the supplied evidence. Return only the shortest answer span. If the evidence is insufficient, return "not available".
+  user_prompt: |-
+    Evidence:
+    {context}
+
+    Question: {question}
+    Short answer:
+  pricing_per_million_tokens:
+    prompt: 0.0
+    completion: 0.0
+
+methods:
+  crag:
+    tier: system_under_test
+    paper: CRAG Paper 2
+    venue: target SIGIR/KDD
+    repository: .
+    commit: bc2db3dd6390e298a2dae0506ee0926220fd3366
+    internal: true
+    python: current
+    matched:
+      supported_datasets: [2wiki_clean, musique_clean, squad_clean, metaqa]
+      graph_ingestion: full_corpus_partition_graph_and_persistent_dense_sparse_indexes
+      retrieve_command: >-
+        "{python}" -m src.evaluation.benchmark_generation build-context
+        --dataset "{crag_dataset}" --output "{run_dir}/retrieval.raw.jsonl"
+        --split test --top-k-partitions 20 --top-k-docs 100
+        --reranker auto --use-level3 --max-traverse-steps 20
+        --beam-width 50 --expand-top-neighbors 8 --min-context-nodes 3
+        --max-dynamic-partitions 3 --partition-admission-threshold 0.35
+        --partition-fetch-k 5
+
+  hipporag2:
+    tier: primary
+    paper: "From RAG to Memory: Non-Parametric Continual Learning for Large Language Models"
+    venue: ICML 2025
+    repository: https://github.com/OSU-NLP-Group/HippoRAG.git
+    commit: e37fba2af1a951ac340d837a7c02efb9d8c9544a
+    python: "3.10"
+    license: MIT
+    native_datasets: [2wikimultihopqa, musique, hotpotqa]
+    requirements: [OPENAI_API_KEY]
+    install:
+      - uv pip install --python .venv -e .
+    native:
+      command: '"{python}" main.py --dataset {native_dataset} --llm_name gpt-4o-mini --embedding_name nvidia/NV-Embed-v2 --save_dir "{run_dir}"'
+      retrieval_top_k: 200
+      qa_top_k: 5
+    matched:
+      input_adapter: hipporag
+      graph_ingestion: author_openie_from_full_documents
+      retrieval_top_k: 200
+      index_command: >-
+        "{python}" "{external_adapter}" hipporag-index
+        --repo "{repo}" --corpus "{hipporag_corpus}"
+        --dataset-alias "{adapter_alias}" --save-dir "{run_dir}/index"
+        --embedding-revision "3fa59658547db50a1e8e3346cf057fd0c77ed6ef"
+        --model-cache "{model_cache}"
+        --top-k 200 --output "{run_dir}/index.json"
+      retrieve_command: >-
+        "{python}" "{external_adapter}" hipporag-retrieve
+        --repo "{repo}" --corpus "{hipporag_corpus}"
+        --queries "{hipporag_queries}" --dataset-alias "{adapter_alias}"
+        --save-dir "{run_dir}/index" --top-k 200
+        --embedding-revision "3fa59658547db50a1e8e3346cf057fd0c77ed6ef"
+        --model-cache "{model_cache}"
+        --output "{run_dir}/retrieval.jsonl"
+        --partial-output "{run_dir}/retrieval.partial.jsonl"
+
+  gfmrag8m:
+    tier: primary
+    paper: "GFM-RAG: Graph Foundation Model for Retrieval Augmented Generation"
+    venue: NeurIPS 2025
+    repository: https://github.com/RManLuo/gfm-rag.git
+    commit: f38361d9c4b754e1a800763e3f9e7cb4b841aa0f
+    ref: v1.0.0
+    python: "3.12"
+    cuda: "12.6.3"
+    license: Apache-2.0
+    model: rmanluo/GFM-RAG-8M
+    model_revision: 62cf6398c5875af1c4e04bbb35e4c3b21904d4ac
+    native_datasets: [2wikimultihopqa_test, musique_test, hotpotqa_test]
+    requirements: [OPENAI_API_KEY]
+    install:
+      - uv pip install --python .venv -e .
+    native:
+      index_command: '"{python}" -m gfmrag.workflow.stage1_index_dataset dataset.root="{native_data_root}" dataset.data_name={native_dataset}'
+      qa_command: '"{python}" -m gfmrag.workflow.stage3_qa_ircot_inference dataset.root="{native_data_root}" dataset.data_name={native_dataset} graph_retriever.model_path=rmanluo/GFM-RAG-8M hydra.run.dir="{run_dir}/official_qa"'
+      qa_top_k: 5
+    matched:
+      input_adapter: gfmrag
+      graph_ingestion: both_author_index_and_crag_graph_control
+      model: rmanluo/GFM-RAG-8M
+      index_command: >-
+        "{python}" "{external_adapter}" gfmrag-index --paper-v1
+        --repo "{repo}" --source-data-root "{gfm_data_root}"
+        --working-data-root "{run_dir}/gfm_data" --data-name "{gfm_data_name}"
+        --model-cache "{model_cache}"
+        --hydra-output "{run_dir}/hydra_index"
+        --output "{run_dir}/index.json"
+      retrieve_command: >-
+        "{python}" "{external_adapter}" gfmrag-retrieve --paper-v1
+        --repo "{repo}" --source-data-root "{gfm_data_root}"
+        --working-data-root "{run_dir}/gfm_data" --data-name "{gfm_data_name}"
+        --model-cache "{model_cache}" --model "rmanluo/GFM-RAG-8M"
+        --model-revision "62cf6398c5875af1c4e04bbb35e4c3b21904d4ac"
+        --split test --top-k 100
+        --output "{run_dir}/retrieval.jsonl"
+        --partial-output "{run_dir}/retrieval.partial.jsonl"
+
+  greasoner34m:
+    tier: primary
+    paper: "G-reasoner: Foundation Models for Unified Reasoning over Graph-structured Knowledge"
+    venue: ICLR 2026
+    repository: https://github.com/RManLuo/gfm-rag.git
+    commit: 57e3e28045fffff5411e2454a4323fbe4dff9b91
+    python: "3.12"
+    cuda: "12.6.3"
+    license: Apache-2.0
+    model: rmanluo/G-reasoner-34M
+    model_revision: a3a4ed2c62281e1c3e0551bd42f2072d9204674f
+    native_datasets: [2wikimultihopqa_test, musique_test, hotpotqa_test]
+    requirements: [OPENAI_API_KEY]
+    install:
+      - uv pip install --python .venv -e .
+    matched:
+      input_adapter: gfmrag
+      graph_ingestion: both_author_index_and_crag_graph_control
+      model: rmanluo/G-reasoner-34M
+      index_command: >-
+        "{python}" "{external_adapter}" gfmrag-index
+        --repo "{repo}" --source-data-root "{gfm_data_root}"
+        --working-data-root "{run_dir}/gfm_data" --data-name "{gfm_data_name}"
+        --model-cache "{model_cache}"
+        --hydra-output "{run_dir}/hydra_index"
+        --output "{run_dir}/index.json"
+      retrieve_command: >-
+        "{python}" "{external_adapter}" gfmrag-retrieve
+        --repo "{repo}" --source-data-root "{gfm_data_root}"
+        --working-data-root "{run_dir}/gfm_data" --data-name "{gfm_data_name}"
+        --model-cache "{model_cache}" --model "rmanluo/G-reasoner-34M"
+        --model-revision "a3a4ed2c62281e1c3e0551bd42f2072d9204674f"
+        --split test --top-k 100
+        --output "{run_dir}/retrieval.jsonl"
+        --partial-output "{run_dir}/retrieval.partial.jsonl"
+
+  hoprag:
+    tier: primary
+    paper: "HopRAG: Multi-Hop Reasoning for Logic-Aware Retrieval-Augmented Generation"
+    venue: ACL Findings 2025
+    repository: https://github.com/LIU-Hao-2002/HopRAG.git
+    commit: a6e425b8f8a5d8131dd7805db40185ac76e09903
+    python: "3.10.10"
+    service: Neo4j Community 5.26.0
+    license: MIT
+    native_datasets: [2wiki, musique, hotpot]
+    requirements:
+      - NEO4J_URI
+      - NEO4J_USER
+      - NEO4J_PASSWORD
+      - HOPRAG_LLM_BASE_URL
+      - HOPRAG_LLM_MODEL
+      - HOPRAG_LLM_API_KEY
+    install:
+      - uv pip install --python .venv -r requirements.txt
+    native:
+      command: '"{python}" HopGenerator.py --model_name gpt-3.5-turbo --data_path "{native_query_file}" --save_dir "{run_dir}" --retriever_name HopRetriever --max_hop 4 --topk 20 --traversal bfs_node --mode common --label {index_name}'
+    matched:
+      supported_datasets: [2wiki_clean, musique_clean, hotpotqa_clean]
+      input_adapter: canonical_jsonl_and_label_free_edges
+      graph_ingestion: full_document_nodes_plus_author_pseudo_query_edges_scoped_by_label_free_graph_neighborhoods
+      protocol_note: >-
+        The official builder scopes edge matching with each benchmark question's
+        supplied context. That paper-faithful transductive path remains native-only.
+        The matched path replaces question-context grouping with deterministic
+        neighborhoods from the immutable label-free dataset graph; it never reads
+        test questions, answers, or gold supports while building the index.
+      max_hop: 4
+      top_k: 20
+      prepare_command: >-
+        "{python}" "{external_adapter}" hoprag-prepare
+        --corpus "{canonical_documents}" --edges "{canonical_edges}"
+        --working-dir "{run_dir}/index" --dataset-alias "{adapter_alias}"
+        --group-size 10 --output "{run_dir}/hoprag_preparation.json"
+      index_command: >-
+        "{python}" "{external_adapter}" hoprag-index
+        --repo "{repo}" --corpus "{canonical_documents}"
+        --edges "{canonical_edges}" --working-dir "{run_dir}/index"
+        --dataset-alias "{adapter_alias}" --group-size 10
+        --embedding-model "BAAI/bge-base-en-v1.5"
+        --embedding-revision "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a"
+        --embedding-dim 768 --model-cache "{model_cache}"
+        --batch-size 1000 --edge-batch-size 2000
+        --output "{run_dir}/index.json"
+      retrieve_command: >-
+        "{python}" "{external_adapter}" hoprag-retrieve
+        --repo "{repo}" --corpus "{canonical_documents}"
+        --edges "{canonical_edges}" --queries "{canonical_queries}"
+        --working-dir "{run_dir}/index" --dataset-alias "{adapter_alias}"
+        --group-size 10 --embedding-model "BAAI/bge-base-en-v1.5"
+        --embedding-revision "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a"
+        --embedding-dim 768 --model-cache "{model_cache}"
+        --batch-size 1000 --edge-batch-size 2000
+        --max-hop 4 --traversal bfs_node --top-k 20
+        --output "{run_dir}/retrieval.jsonl"
+        --partial-output "{run_dir}/retrieval.partial.jsonl"
+
+  sirerag:
+    tier: secondary
+    paper: "SiReRAG: Indexing Similar and Related Information for Multihop Reasoning"
+    venue: ICLR 2025
+    repository: https://github.com/SalesforceAIResearch/SiReRAG.git
+    commit: 70c9434776ca0eaac17590285285c26313817365
+    python: "3.10"
+    license: BSD-3-Clause
+    native_datasets: [2wiki, musique, hotpotqa]
+    requirements: [OPENAI_API_KEY]
+    install:
+      - uv pip install --python .venv llama-index llamaindex-cli llama-index-vector-stores-chroma datasets papermill
+      - .venv/bin/llamapack download RaptorPack --download-dir ./raptor_pack
+    native:
+      execution: papermill_notebook
+    matched:
+      input_adapter: hipporag
+      graph_ingestion: similarity_and_relatedness_trees_from_full_documents
+
+  kg2rag:
+    tier: secondary
+    paper: "Knowledge Graph-Guided Retrieval Augmented Generation"
+    venue: NAACL 2025
+    repository: https://github.com/nju-websoft/KG2RAG.git
+    commit: 7d626c77b7af30b55aa3f960cde755b9549a0616
+    python: "3.10"
+    license: GPL-3.0
+    native_datasets: [hotpotqa]
+    requirements: [KG2RAG_OLLAMA_BASE_URL]
+    install:
+      - >-
+        uv pip install --python .venv
+        FlagEmbedding==1.3.4 llama-index==0.12.20 networkx==3.3
+        tqdm==4.67.1 numpy==1.26.4 faiss-cpu==1.8.0.post1
+        huggingface-hub==0.34.1 transformers==4.44.2
+    native:
+      protocol_note: >-
+        The paper's fullwiki protocol indexes 66,581 pooled HotpotQA documents
+        and evaluates the author-provided split. The pinned full runner omits
+        required dataset/use_tpt constructor fields and its released MST line
+        reranks text although Eq. 8 specifies triplet representations. Native
+        reproduction must record whether those minimal paper-spec corrections
+        are applied and is never pooled with the canonical matched result.
+      command: >-
+        "{python}" code/kg_rag_full.py
+        --data_path "{native_query_file}" --kg_dir "{native_kg_dir}"
+        --persist_dir "{run_dir}/native_index"
+        --model_name "llama3:8b"
+        --embed_model_name "mxbai-embed-large:latest"
+        --reranker "{run_dir}/models/bge-reranker-large"
+        --top_k 10 --result_path "{run_dir}/prediction.json"
+    matched:
+      supported_datasets: [hotpotqa_clean]
+      input_adapter: canonical_hotpot_sentences_with_author_prefix_policy
+      graph_ingestion: llama3_fact_kg_from_all_canonical_documents
+      protocol_note: >-
+        This label-free matched adaptation ingests every canonical HotpotQA
+        document without reading questions, answers, or support labels. Source
+        double-space sentence boundaries are preserved, with a deterministic
+        punctuation fallback. It keeps the paper's Llama-3 8B extractor,
+        mxbai-embed-large semantic seeds, one-hop KG expansion, top-10 chunk
+        budget, and BGE-large reranker. The adapter supplies constructor fields
+        missing from kg_rag_full.py and restores Eq. 8 triplet-only MST reranking
+        by projecting the author postprocessor's use_tpt representation before
+        BGE scoring. Native and matched results remain separate.
+      llm_model: llama3:8b
+      llm_manifest_digest: 365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1
+      embedding_model: mxbai-embed-large:latest
+      embedding_manifest_digest: 468836162de7f81e041c43663fedbbba921dcea9b9fefea135685a39b2d83dd8
+      reranker_model: BAAI/bge-reranker-large
+      reranker_revision: 55611d7bca2a7133960a6d3b71e083071bbfc312
+      initial_chunk_top_k: 10
+      final_chunk_budget: 10
+      prepare_command: >-
+        "{python}" "{external_adapter}" kg2rag-prepare
+        --corpus "{canonical_documents}" --working-dir "{run_dir}/index"
+        --output "{run_dir}/kg2rag_preparation.json"
+      index_command: >-
+        "{python}" "{external_adapter}" kg2rag-index
+        --repo "{repo}" --corpus "{canonical_documents}"
+        --working-dir "{run_dir}/index"
+        --llm-model "llama3:8b"
+        --llm-digest "365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1"
+        --embedding-model "mxbai-embed-large:latest"
+        --embedding-digest "468836162de7f81e041c43663fedbbba921dcea9b9fefea135685a39b2d83dd8"
+        --embedding-batch-size 128 --output "{run_dir}/index.json"
+      retrieve_command: >-
+        "{python}" "{external_adapter}" kg2rag-retrieve
+        --repo "{repo}" --corpus "{canonical_documents}"
+        --queries "{canonical_queries}" --working-dir "{run_dir}/index"
+        --llm-model "llama3:8b"
+        --llm-digest "365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1"
+        --embedding-model "mxbai-embed-large:latest"
+        --embedding-digest "468836162de7f81e041c43663fedbbba921dcea9b9fefea135685a39b2d83dd8"
+        --reranker-model "BAAI/bge-reranker-large"
+        --reranker-revision "55611d7bca2a7133960a6d3b71e083071bbfc312"
+        --model-cache "{model_cache}" --initial-chunk-top-k 10
+        --top-k 10 --mst-rerank-representation paper_triplet
+        --output "{run_dir}/retrieval.jsonl"
+        --partial-output "{run_dir}/retrieval.partial.jsonl"
+
+  raptor:
+    tier: secondary
+    paper: "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval"
+    venue: ICLR 2024
+    repository: https://github.com/parthsarthi03/raptor.git
+    commit: 7da1d48a7e1d7dec61a63c9d9aae84e2dfaa5767
+    python: "3.10"
+    license: MIT
+    native_datasets: [narrativeqa, qasper, quality]
+    requirements:
+      - RAPTOR_LLM_BASE_URL
+      - RAPTOR_LLM_MODEL
+      - RAPTOR_LLM_API_KEY
+    install:
+      - uv pip install --python .venv -r requirements.txt
+      - uv pip install --python .venv huggingface-hub==0.20.3
+    native:
+      protocol_note: >-
+        The paper builds a tree for the long text associated with each question
+        and reports NarrativeQA, QASPER, and QuALITY answer metrics. Those native
+        results are not pooled with the open-domain matched-corpus comparison.
+    matched:
+      supported_datasets: [2wiki_clean, musique_clean, hotpotqa_clean, squad_clean, metaqa]
+      input_adapter: canonical_jsonl_with_per_document_leaf_chunking
+      graph_ingestion: global_cross_document_recursive_similarity_tree
+      protocol_note: >-
+        This is an explicitly labeled matched-corpus adaptation. It ingests every
+        canonical document into one global tree while invoking the official
+        sentence-aware splitter separately for each document, so no leaf crosses
+        a provenance boundary. It keeps the paper's 100-token leaves, locked
+        multi-qa-mpnet-base-cos-v1 embeddings, 0.1 soft-cluster threshold,
+        gpt-3.5-turbo summary model, and 2000-token collapsed-tree retrieval.
+        Selected summary nodes are projected to canonical documents using RRF
+        votes over descendant provenance plus a dense leaf-centroid channel.
+        This projection is part of the matched adapter, not a native paper claim.
+      embedding_model: sentence-transformers/multi-qa-mpnet-base-cos-v1
+      embedding_revision: d51b22a1dfa8184e9258074e56e2875e50612dca
+      summary_model: gpt-3.5-turbo
+      max_leaf_tokens: 100
+      max_context_tokens: 2000
+      prepare_command: >-
+        "{python}" "{external_adapter}" raptor-prepare
+        --corpus "{canonical_documents}" --working-dir "{run_dir}/index"
+        --output "{run_dir}/raptor_preparation.json"
+      index_command: >-
+        "{python}" "{external_adapter}" raptor-index
+        --repo "{repo}" --corpus "{canonical_documents}"
+        --working-dir "{run_dir}/index"
+        --embedding-model "sentence-transformers/multi-qa-mpnet-base-cos-v1"
+        --embedding-revision "d51b22a1dfa8184e9258074e56e2875e50612dca"
+        --model-cache "{model_cache}" --max-leaf-tokens 100
+        --max-layers 5 --summarization-length 100
+        --cluster-threshold 0.1 --max-cluster-tokens 3500
+        --embedding-batch-size 64 --output "{run_dir}/index.json"
+      retrieve_command: >-
+        "{python}" "{external_adapter}" raptor-retrieve
+        --repo "{repo}" --corpus "{canonical_documents}"
+        --queries "{canonical_queries}" --working-dir "{run_dir}/index"
+        --embedding-model "sentence-transformers/multi-qa-mpnet-base-cos-v1"
+        --embedding-revision "d51b22a1dfa8184e9258074e56e2875e50612dca"
+        --model-cache "{model_cache}" --top-k 100
+        --max-context-tokens 2000 --dense-projection-multiplier 10
+        --output "{run_dir}/retrieval.jsonl"
+        --partial-output "{run_dir}/retrieval.partial.jsonl"
+
+  lightrag_paper:
+    tier: secondary
+    paper: "LightRAG: Simple and Fast Retrieval-Augmented Generation"
+    venue: Findings of EMNLP 2025
+    repository: https://github.com/HKUDS/LightRAG.git
+    commit: c91f15b2a87d949bb3488934019fbc13b5f1bff5
+    revision_policy: last algorithm commit before the first arXiv v1 timestamp
+    paper_artifact: https://anonymous.4open.science/r/LightRAG-2BEE
+    python: "3.10"
+    license: MIT
+    requirements: [OPENAI_API_KEY]
+    install:
+      - uv pip install --python .venv -e .
+    native:
+      datasets: [ultradomain_agriculture, ultradomain_cs, ultradomain_legal, ultradomain_mix]
+      llm_model: gpt-4o-mini
+      embedding_model: text-embedding-3-small
+      chunk_token_size: 1200
+      entity_extract_max_gleaning: 1
+      evaluation: pairwise_gpt-4o-mini_comprehensiveness_diversity_empowerment_overall
+      status: paper_data_and_pairwise_evaluation_require_separate_native_bundle
+    matched:
+      input_adapter: canonical_jsonl
+      graph_ingestion: entity_relation_graph_from_full_documents
+      query_mode: hybird
+      retrieval_top_k: 100
+      adapter_policy: deterministic_round_robin_of_author_high_and_low_source_chunks
+      index_command: >-
+        "{python}" "{external_adapter}" lightrag-index
+        --implementation paper --repo "{repo}"
+        --corpus "{canonical_documents}" --working-dir "{run_dir}/index"
+        --batch-size 1 --output "{run_dir}/index.json"
+      retrieve_command: >-
+        "{python}" "{external_adapter}" lightrag-retrieve
+        --implementation paper --repo "{repo}"
+        --corpus "{canonical_documents}" --queries "{canonical_queries}"
+        --working-dir "{run_dir}/index" --top-k 100
+        --output "{run_dir}/retrieval.jsonl"
+        --partial-output "{run_dir}/retrieval.partial.jsonl"
+
+  lightrag_current:
+    tier: diagnostic
+    paper: "LightRAG: Simple and Fast Retrieval-Augmented Generation"
+    implementation_note: current official implementation with post-paper features
+    repository: https://github.com/HKUDS/LightRAG.git
+    commit: cb7cc70bc6b29055d9eeeccc32714679feb33704
+    python: "3.11"
+    license: MIT
+    requirements: [OPENAI_API_KEY]
+    install:
+      - uv sync --extra offline
+    matched:
+      input_adapter: canonical_jsonl
+      graph_ingestion: current_entity_relation_graph_from_full_documents
+      query_mode: mix
+      reranker: disabled_to_avoid_post_paper_reranking_gain
+      retrieval_top_k: 100
+      index_command: >-
+        "{python}" "{external_adapter}" lightrag-index
+        --implementation current --repo "{repo}"
+        --corpus "{canonical_documents}" --working-dir "{run_dir}/index"
+        --batch-size 32 --output "{run_dir}/index.json"
+      retrieve_command: >-
+        "{python}" "{external_adapter}" lightrag-retrieve
+        --implementation current --repo "{repo}"
+        --corpus "{canonical_documents}" --queries "{canonical_queries}"
+        --working-dir "{run_dir}/index" --top-k 100
+        --output "{run_dir}/retrieval.jsonl"
+        --partial-output "{run_dir}/retrieval.partial.jsonl"
+
+  graphrag:
+    tier: diagnostic
+    paper: "From Local to Global: A Graph RAG Approach to Query-Focused Summarization"
+    venue: arXiv 2024
+    repository: https://github.com/microsoft/graphrag.git
+    commit: 14a00ad88fc33cf2b52f4f113f25807556f8e25e
+    version: 3.1.1
+    implementation_note: current official implementation, not the exact 2024 paper code
+    python: "3.11"
+    license: MIT
+    requirements: [GRAPHRAG_API_KEY]
+    install:
+      - uv sync
+    matched:
+      input_adapter: text_files
+      graph_ingestion: author_entity_relation_community_pipeline
+      query_modes: [local, drift]

@@ -1,0 +1,40 @@
+# Compute account pool for the unified experiment runner (experiments.py).
+# ---------------------------------------------------------------------------
+# Copy this file to `configs/compute.local.yaml` (which is GIT-IGNORED) and fill
+# in your real accounts. List multiple accounts per backend; the runner rotates
+# to the next one when the current account runs out of credits / hits a quota
+# or auth error. Nothing here is ever committed or passed on a command line.
+#
+#   cp configs/compute.local.yaml.example configs/compute.local.yaml
+#
+# If this file is absent the runner falls back to whatever ambient auth already
+# exists (`modal token set ...`, `lightning login`, or existing env vars) with a
+# single account and no rotation.
+
+# Modal (GPU-preferred: training, ukb-build, level-2). Token from modal.com settings.
+modal:
+  - name: personal
+    token_id: ak-xxxxxxxxxxxxxxxx
+    token_secret: as-xxxxxxxxxxxxxxxx
+  - name: lab            # rotated to when 'personal' runs out of credits
+    token_id: ak-yyyyyyyyyyyyyyyy
+    token_secret: as-yyyyyyyyyyyyyyyy
+
+# Lightning AI (CPU-preferred: level-1 / level-3 benchmarks). The `studio` is a
+# persistent Studio that already contains this repo + data/ (set it up once);
+# jobs run inside it. user_id + api_key from lightning.ai user settings.
+lightning:
+  - name: personal
+    user_id: xxxxxxxxxxxxxxxx
+    api_key: xxxxxxxxxxxxxxxx
+    teamspace: my-teamspace
+    studio: crag
+    # Optional machine overrides. Defaults: CPU for cpu tasks, L4 for gpu tasks.
+    # Valid names: CPU, CPU_X_2/4/8, T4, L4, L40S, A100, H100, ... (NOT A10G).
+    machine_cpu: CPU
+    machine_gpu: L4
+  - name: backup         # rotated to when 'personal' runs out of credits
+    user_id: yyyyyyyyyyyyyyyy
+    api_key: yyyyyyyyyyyyyyyy
+    teamspace: backup-teamspace
+    studio: crag

@@ -40,3 +40,26 @@ get_kl_sweep.py
 
 # Temp directories
 metaqa_temp/
+
+# Local data backup (2.5GB, not for git)
+/crag_data_backup/
+
+# Compute-account secrets for experiments.py (NEVER commit real credentials)
+configs/compute.local.yaml
+configs/compute.local.toml
+
+# Pipeline logs (regenerable; runners write these to the repo root).
+# Historical logs are bundled under archive/logs/.
+*.log
+
+# Pre-audit corrupted substrate (leaked squad / dropped-titles musique / coarse 2wiki) — superseded by *_clean
+/archive/pre_audit_substrate_2026-08/
+
+# Session scratch + regenerable bundles (not for git)
+/tmp/
+/logs/
+*.zip
+
+# Large generated intermediates (regenerable): NER edge graphs + per-query eval dumps
+results/research/ner_edges_*.json
+**/experiment_per_query.jsonl

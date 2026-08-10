@@ -1,6 +1,7 @@
 import os
 import sys
 import csv
+import json
 import time
 import random
 import logging
@@ -19,7 +20,16 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 
 from src.core.engine import CoreEngine
 from src.core.encoders import DenseEncoder
+from src.core.selectivity import query_idf_stats, route_from_stats
+from src.core.splade_scorer import SpladeScorer
 from src.alignment.mlp_encoder import TextPartitionMLP
+
+
+def _get_splade_scorer(engine) -> SpladeScorer:
+    """Lazily build/cache a SPLADE scorer bound to the engine's dataset."""
+    if getattr(engine, "_splade_scorer", None) is None:
+        engine._splade_scorer = SpladeScorer(getattr(engine, "source", ""))
+    return engine._splade_scorer
 from src.alignment.gnn_encoders import GINAlignmentEncoder, GCNAlignmentEncoder, SAGEAlignmentEncoder
 
 
@@ -83,12 +93,38 @@ def _get_split_queries(engine: CoreEngine, dataset: str) -> Dict[str, List[Tuple
 
 K_VALUES = [1, 3, 5, 10, 20]
 
+# FullCov@K sweep (Jigsaw coverage diagnostic): a query is "covered" at K only
+# if EVERY required partition is inside the top-K. This is the number that
+# predicts end-answer correctness for multi-hop queries — recall@K (any-hit) and
+# gt_recall@K (fraction-of-gold) do not. @20 is retained for backward compat with
+# existing tables / check_hnm_best.py.
+COVERAGE_K_VALUES = [1, 3, 5, 10, 20, 50, 100, 200]   # extended: fine (100-doc) partitions need larger K for a meaningful pool
 
-def compute_multi_gt_metrics(retrieved_pids: List[int], gt_pids: List[int]) -> Dict:
-    """Compute comprehensive retrieval metrics for multiple ground-truth partitions."""
+# Deployed best KL+HNM (tau, hn_k) per dataset — used by the `mlp_best_hnm` and
+# `mlp_coverage` leaderboard methods so the routing leaderboard features the
+# actually-deployed model + the coverage model, not the stale alignment_mlp.pth.
+_BEST_HNM = {"squad": (0.1, 18), "metaqa": (0.01, 0), "musique": (0.05, 33), "2wiki": (0.07, 149)}
+
+
+def compute_multi_gt_metrics(retrieved_pids: List[int], gt_pids: List[int],
+                             num_partitions: int = None) -> Dict:
+    """Compute comprehensive retrieval metrics for multiple ground-truth partitions.
+
+    `retrieved_pids` is expected to be the FULL partition ranking (see benchmark()),
+    so mrr/first_hit_pos/weakest_positive_rank and FullCov@50 are well-defined.
+    Per-K rate metrics slice the top-k internally, so they are unaffected by depth.
+
+    `num_partitions`, when provided, sets a UNIFORM miss sentinel (num_partitions+1)
+    for the rank diagnostics (first_hit_pos, weakest_positive_rank). This is
+    essential for cross-method comparability: vote methods rank only the partitions
+    that received votes, so a per-list `len+1` sentinel would make a total miss look
+    like a shallow rank and beat a method that actually found the gold deep in a full
+    ranking. With the uniform sentinel a miss is always scored as worst-case.
+    """
     metrics = {}
     gt_set = set(gt_pids)
     num_gt = len(gt_set)
+    miss_sentinel = float(num_partitions + 1) if num_partitions else float(len(retrieved_pids) + 1)
 
     for k in K_VALUES:
         top_k = retrieved_pids[:k]
@@ -116,13 +152,37 @@ def compute_multi_gt_metrics(retrieved_pids: List[int], gt_pids: List[int]) -> D
             metrics["mrr"] = 1.0 / (i + 1)
             break
 
-    metrics["first_hit_pos"] = 0
+    # first_hit_pos: rank of the BEST gold; a total miss is scored worst-case
+    # (miss_sentinel) when num_partitions is known, else legacy 0.
+    first_hit = 0
     for i, pid in enumerate(retrieved_pids):
         if pid in gt_set:
-            metrics["first_hit_pos"] = i + 1
+            first_hit = i + 1
             break
+    if first_hit == 0 and num_partitions:
+        first_hit = miss_sentinel
+    metrics["first_hit_pos"] = first_hit
 
-    metrics["full_coverage@20"] = 1.0 if gt_set.issubset(set(retrieved_pids[:20])) else 0.0
+    # ── FullCov@K sweep: ALL required partitions inside top-K ──
+    for k in COVERAGE_K_VALUES:
+        metrics[f"full_coverage@{k}"] = (
+            1.0 if (gt_set and gt_set.issubset(set(retrieved_pids[:k]))) else 0.0
+        )
+
+    # ── Weakest-positive rank: 1-indexed rank of the WORST-ranked required
+    # partition (the depth at which full coverage is reached). This is the
+    # Jigsaw "worst-required-item rank" — the quantity a coverage loss should
+    # shrink. If any required partition is unranked, use the uniform miss
+    # sentinel so the metric stays comparable across methods. ──
+    rank_of = {}
+    for idx, pid in enumerate(retrieved_pids):
+        if pid in gt_set and pid not in rank_of:
+            rank_of[pid] = idx + 1
+    if gt_set and all(pid in rank_of for pid in gt_set):
+        metrics["weakest_positive_rank"] = float(max(rank_of[pid] for pid in gt_set))
+    else:
+        metrics["weakest_positive_rank"] = miss_sentinel
+
     metrics["num_gt"] = float(num_gt)
 
     return metrics
@@ -144,6 +204,17 @@ def benchmark(
     latencies: List[float] = []
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    # Retrieve the FULL partition ranking so FullCov@K (incl. K=50) and the
+    # weakest-positive-rank diagnostic are well-defined. Per-K rate metrics slice
+    # the top-k inside compute_multi_gt_metrics, so @1..@20 are unchanged; only
+    # the retrieval depth grows for large-partition datasets (2wiki/musique),
+    # which also makes mrr/first_hit_pos consistent across datasets.
+    n_parts = (
+        len(set(int(p) for p in engine.partition_map.values()))
+        if getattr(engine, "partition_map", None) else 0
+    )
+    k = max(k, n_parts, max(COVERAGE_K_VALUES))
+
     for i, (q_node, gt_pids) in tqdm(
         enumerate(queries),
         desc=f"Benchmarking ({method})",
@@ -151,6 +222,8 @@ def benchmark(
         leave=False
     ):
         t0 = time.time()
+        route_choice = None        # selectivity_route: 1.0 if routed to lexical arm
+        route_hybrid_choice = None  # selectivity_route: 1.0 if routed to hybrid fusion
 
         if precomputed_embs is not None:
             query_vector = precomputed_embs[i:i + 1].astype("float32")
@@ -193,11 +266,84 @@ def benchmark(
                     f"tally: {t_tally*1000:.2f}ms | nodes: {len(dense_nodes)}"
                 )
 
+        elif method.startswith("bm25_vote_"):
+            # Lexical (sparse) partition selection: BM25 top-nodes vote for partitions.
+            vote_k = int(method.split("_")[-1])
+            lex_nodes = engine.search_lexical(q_node.content, k=vote_k)
+            vote_counts = {}
+            for node in lex_nodes:
+                pid = engine.partition_map.get(node.node_id)
+                if pid is not None:
+                    vote_counts[int(pid)] = vote_counts.get(int(pid), 0) + 1
+            retrieved = sorted(vote_counts.keys(), key=lambda p: vote_counts[p], reverse=True)[:k]
+
+        elif method.startswith("splade_vote_"):
+            # Learned-sparse (SPLADE) partition selection: top SPLADE docs vote for partitions.
+            vote_k = int(method.split("_")[-1])
+            doc_ids = _get_splade_scorer(engine).top_doc_ids(q_node.content, k=vote_k)
+            vote_counts = {}
+            for nid in doc_ids:
+                pid = engine.partition_map.get(nid)
+                if pid is not None:
+                    vote_counts[int(pid)] = vote_counts.get(int(pid), 0) + 1
+            retrieved = sorted(vote_counts.keys(), key=lambda p: vote_counts[p], reverse=True)[:k]
+
+        elif method.startswith("selectivity_route"):
+            # Offline selectivity routing (Jigsaw §3.2): rare-term queries -> lexical
+            # vote; common/semantic queries -> dense centroid (MLP-projected if a
+            # checkpoint is supplied, else raw dense); mid-band ties -> RRF fusion.
+            # The lexical arm is BM25 by default, or SPLADE for the
+            # `selectivity_route_splade` variant.
+            use_splade_arm = method.endswith("_splade")
+
+            def _lex_ranking():
+                if use_splade_arm:
+                    doc_ids = _get_splade_scorer(engine).top_doc_ids(q_node.content, k=100)
+                    vc = {}
+                    for nid in doc_ids:
+                        pid = engine.partition_map.get(nid)
+                        if pid is not None:
+                            vc[int(pid)] = vc.get(int(pid), 0) + 1
+                    return sorted(vc.keys(), key=lambda p: vc[p], reverse=True)
+                lex_nodes = engine.search_lexical(q_node.content, k=100)
+                vc = {}
+                for node in lex_nodes:
+                    pid = engine.partition_map.get(node.node_id)
+                    if pid is not None:
+                        vc[int(pid)] = vc.get(int(pid), 0) + 1
+                return sorted(vc.keys(), key=lambda p: vc[p], reverse=True)
+
+            def _dense_ranking():
+                if model is not None and query_vector is not None:
+                    with torch.no_grad():
+                        qv = torch.tensor(query_vector, dtype=torch.float32).to(device)
+                        proj = model(qv).cpu().numpy()
+                    res = engine.search_centroids(proj, k=k)
+                else:
+                    res = engine.search_centroids(query_vector, k=k)
+                return [pid for pid, _ in res]
+
+            decision = route_from_stats(query_idf_stats(engine.bm25, q_node.content))
+            if decision == "lexical":
+                retrieved = _lex_ranking()[:k]
+                route_choice, route_hybrid_choice = 1.0, 0.0
+            elif decision == "hybrid":
+                # Reciprocal-rank fusion of the lexical + dense partition rankings.
+                rrf = {}
+                for rank_list in (_lex_ranking(), _dense_ranking()):
+                    for r, pid in enumerate(rank_list):
+                        rrf[pid] = rrf.get(pid, 0.0) + 1.0 / (60 + r + 1)
+                retrieved = sorted(rrf.keys(), key=lambda p: rrf[p], reverse=True)[:k]
+                route_choice, route_hybrid_choice = 0.0, 1.0
+            else:
+                retrieved = _dense_ranking()[:k]
+                route_choice, route_hybrid_choice = 0.0, 0.0
+
         elif method == "colbert_centroid":
             results = engine.search_colbert_centroid(q_node.content, k=k)
             retrieved = [pid for pid, _ in results]
 
-        elif method == "mlp" and model is not None:
+        elif method in ("mlp", "mlp_best_hnm", "mlp_coverage") and model is not None:
             with torch.no_grad():
                 qv = torch.tensor(query_vector, dtype=torch.float32).to(device)
                 projected = model(qv).cpu().numpy()
@@ -241,9 +387,13 @@ def benchmark(
         latency = time.time() - t0
         latencies.append(latency)
 
-        metrics = compute_multi_gt_metrics(retrieved, gt_pids)
+        metrics = compute_multi_gt_metrics(retrieved, gt_pids, num_partitions=n_parts)
         for key, val in metrics.items():
             all_metrics[key].append(val)
+        if route_choice is not None:
+            all_metrics["route_lexical"].append(route_choice)
+        if route_hybrid_choice is not None:
+            all_metrics["route_hybrid"].append(route_hybrid_choice)
 
     summary = {}
     for key, vals in all_metrics.items():
@@ -253,9 +403,9 @@ def benchmark(
             summary["max_gt_partitions"] = int(np.max(vals))
             summary["median_gt_partitions"] = round(float(np.median(vals)), 1)
             summary["std_gt_partitions"] = round(float(np.std(vals)), 2)
-        elif key == "first_hit_pos":
-            summary["avg_first_hit_pos"] = round(float(np.mean(vals)), 2)
-            summary["median_first_hit_pos"] = round(float(np.median(vals)), 1)
+        elif key in ("first_hit_pos", "weakest_positive_rank"):
+            summary[f"avg_{key}"] = round(float(np.mean(vals)), 2)
+            summary[f"median_{key}"] = round(float(np.median(vals)), 1)
         else:
             summary[key] = round(float(np.mean(vals)) * 100, 2)
 
@@ -279,7 +429,11 @@ CSV_COLUMNS = [
     "precision@1", "precision@3", "precision@5", "precision@10", "precision@20",
     "f1@1", "f1@3", "f1@5", "f1@10", "f1@20",
     "ndcg@1", "ndcg@3", "ndcg@5", "ndcg@10", "ndcg@20",
-    "mrr", "full_coverage@20",
+    "mrr",
+    "full_coverage@1", "full_coverage@3", "full_coverage@5",
+    "full_coverage@10", "full_coverage@20", "full_coverage@50",
+    "avg_weakest_positive_rank", "median_weakest_positive_rank",
+    "route_lexical", "route_hybrid",
     "avg_gt_partitions", "min_gt_partitions", "max_gt_partitions",
     "median_gt_partitions", "std_gt_partitions",
     "avg_first_hit_pos", "median_first_hit_pos",
@@ -310,13 +464,17 @@ def _export_csv(dataset: str, all_results: Dict[str, Dict[str, Dict]]):
 # Main Benchmark Runner
 # ═══════════════════════════════════════════════════════════════════
 
-def run_benchmark(dataset: str = "2wiki", checkpoints_dir: str = "checkpoints"):
+def run_benchmark(dataset: str = "2wiki", checkpoints_dir: str = "checkpoints", limit: int = 0,
+                  methods_override=None):
     engine = CoreEngine(source=dataset)
     encoder = DenseEncoder()
 
     split_queries = _get_split_queries(engine, dataset=dataset)
     if not any(split_queries.values()):
         return {}
+    if limit and limit > 0:
+        # Fast smoke run: cap each split.
+        split_queries = {s: q[:limit] for s, q in split_queries.items()}
 
     methods = [
         "faiss_centroid",
@@ -324,12 +482,20 @@ def run_benchmark(dataset: str = "2wiki", checkpoints_dir: str = "checkpoints"):
         "faiss_vote_50",
         "faiss_vote_100",
         "faiss_vote_200",
+        "bm25_vote_100",
+        "splade_vote_100",
+        "selectivity_route",
+        "selectivity_route_splade",
         "mlp",
+        "mlp_best_hnm",
+        "mlp_coverage",
         "mlp_topo",
         "gin",
         "gcn",
         "sage",
     ]
+    if methods_override:
+        methods = list(methods_override)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     src_dir = os.path.join("data/ukb_storage", dataset)
@@ -373,11 +539,40 @@ def run_benchmark(dataset: str = "2wiki", checkpoints_dir: str = "checkpoints"):
             precomputed_split_embs[split_name] = encoder.encode(texts)
 
     shared_part_batch = None
+    # Resume / crash-safe: load prior results; completed methods are skipped and
+    # existing results are never truncated (incremental save after each method).
+    comp_path = os.path.join("results", "level_1", f"comparison_{dataset}.json")
     all_results: Dict[str, Dict[str, Dict]] = {}
+    if os.path.exists(comp_path):
+        try:
+            all_results = json.load(open(comp_path, encoding="utf-8")) or {}
+            log.info(f"Resuming {dataset} Level-1: {len(all_results)} method(s) already on disk.")
+        except Exception as e:
+            log.warning(f"Could not read {comp_path} ({e}); starting fresh.")
+
+    def _save_l1():
+        os.makedirs(os.path.dirname(comp_path), exist_ok=True)
+        tmp = comp_path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(all_results, f, indent=2)
+        os.replace(tmp, comp_path)   # atomic
+        _export_csv(dataset, all_results)
 
     for method in methods:
         if method == "colbert_centroid" and getattr(engine, "colbert_centroid", None) is None:
             log.warning("Skipping colbert_centroid because ColBERT centroid search is unavailable.")
+            continue
+
+        if "splade" in method and not _get_splade_scorer(engine).available():
+            log.warning(
+                f"Skipping {method}: no cached SPLADE doc matrix at "
+                f"data/ukb_storage/{dataset}/splade_doc_embs.pkl "
+                f"(run the Level-2 SPLADE pre-encode for this dataset first)."
+            )
+            continue
+
+        if all_results.get(method, {}).get("test"):
+            log.info(f"Skipping {method} (already on disk; resume).")
             continue
 
         log.info(f"Benchmarking: {method}")
@@ -385,7 +580,22 @@ def run_benchmark(dataset: str = "2wiki", checkpoints_dir: str = "checkpoints"):
         partition_embs = None
         topo_partition_prototypes = None
 
-        ckpt_path = os.path.join(checkpoints_dir, dataset, f"alignment_{method}.pth")
+        # Resolve checkpoint + which weights to load per method.
+        state_key = "model_state_dict"
+        if method == "mlp_best_hnm":
+            _t, _h = _BEST_HNM.get(dataset, (0.07, 0))
+            ckpt_path = f"checkpoints/{dataset}/hnm_ablation/alignment_mlp_kl_div_tau_{_t:g}_hnm_{_h}.pth"
+        elif method == "mlp_coverage":
+            _t, _h = _BEST_HNM.get(dataset, (0.07, 0))
+            ckpt_path = f"checkpoints/{dataset}/hnm_ablation/alignment_mlp_coverage_kl_tau_{_t:g}_hnm_{_h}_lam_0.5.pth"
+            state_key = "final_state_dict"   # final > best-by-val (see coverage diagnosis)
+        else:
+            ckpt_path = os.path.join(checkpoints_dir, dataset, f"alignment_{method}.pth")
+
+        if method in ("mlp_best_hnm", "mlp_coverage") and not os.path.exists(ckpt_path):
+            log.warning(f"Skipping {method}: checkpoint not found ({ckpt_path}).")
+            continue
+
         if (
             method not in ["faiss_centroid", "colbert_centroid"]
             and not method.startswith("faiss_vote_")
@@ -406,7 +616,7 @@ def run_benchmark(dataset: str = "2wiki", checkpoints_dir: str = "checkpoints"):
 
             hidden_dim = ckpt.get("hidden_dim", 256)
 
-            if method in ["mlp", "mlp_topo"]:
+            if method in ["mlp", "mlp_topo", "mlp_best_hnm", "mlp_coverage"]:
                 state_dict = ckpt["model_state_dict"]
                 actual_in_channels = state_dict["net.0.weight"].shape[1]
                 actual_out_channels = (
@@ -451,7 +661,8 @@ def run_benchmark(dataset: str = "2wiki", checkpoints_dir: str = "checkpoints"):
                     ).to(device)
 
             if model:
-                model.load_state_dict(ckpt["model_state_dict"])
+                _sd = ckpt[state_key] if (isinstance(ckpt, dict) and state_key in ckpt) else ckpt["model_state_dict"]
+                model.load_state_dict(_sd)
                 model.eval()
 
                 if method in ["gin", "gcn", "sage"] and full_graph is not None and node_features is not None:
@@ -544,6 +755,7 @@ def run_benchmark(dataset: str = "2wiki", checkpoints_dir: str = "checkpoints"):
                     )
 
         all_results[method] = method_results
+        _save_l1()   # incremental crash-safe save after each method
 
     csv_path = _export_csv(dataset, all_results)
 

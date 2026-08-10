@@ -1,9 +1,9 @@
-# `src/alignment/` — KL Divergence & InfoNCE Query-to-Partition Alignment
+# `src/alignment/` - Query-to-Partition Alignment
 
 Trains and runs the **MLP Bi-Encoder** that maps a query embedding to its most relevant structural knowledge graph partitions. This is the "teleportation" core of the Level 1 retrieval phase.
 
-> **Update (April 2026): Phase 1 Complete.**
-> The architecture has officially locked the **Golden Configuration**: `[MLP] + [KL Divergence] + [Dataset-Locked Tau] + [Max-Quartile HNM]`. This module is trained once offline, and `crag_agent.py` runs the forward pass at query time (<0.4ms latency).
+> **Status (April-May 2026): Level 1 is the mature paper thread.**
+> The selected HNM-optimized runtime configuration is an MLP trained with KL divergence, dataset-specific temperature, and dataset-specific hard-negative count. Some pre-HNM sweeps still show InfoNCE winning raw R@1, so paper claims should frame KL as the robust HNM-stress choice rather than a universal winner.
 
 ---
 
@@ -18,8 +18,25 @@ In multi-hop graphs, partitions are "entangled." Standard negative sampling (ran
 
 ### 2. KL Divergence — "The Stable Teacher"
 Standard models use InfoNCE (rigid multi-label matching), which collapses when faced with our aggressive Hard Negative Mining.
-*   We implemented **KL Divergence** as a Teacher-Student distillation loss. The MLP (Student) is asked to match the exact probability distribution of the text embeddings (Teacher).
-*   **Result**: KL Div provides "Soft Boundaries," recognizing that a hard negative is related but incorrect, preventing gradient explosion. **KL Divergence outperformed InfoNCE in every single dataset.**
+*   We implemented **KL Divergence** as a soft multi-positive distribution-matching loss.
+*   **Result**: KL Div is the selected objective for the HNM-optimized models because it remains stable when hard negatives are aggressively injected. This is strongest as a robustness claim, not as a universal pre-HNM dominance claim.
+
+### 3. Coverage-aware loss (Jigsaw FullCov transfer) — "The Weakest-Positive Sharpener"
+KL and multi-positive InfoNCE spread probability mass over *all* golds, but they optimize the **average** positive, not the **weakest** one — so a query can look well-trained while one required partition falls out of the top-K, sinking multi-hop coverage. We port Jigsaw's coverage objective (`coverage_losses.py`): a **CVaR-over-positives** term (mean of the top-`ceil(ρp)` largest per-positive losses → pure *min-over-positives* for p≤4) plus a **FullCov@K top-K barrier** that pushes the weakest gold above the `(K−p+1)`-th highest negative. The training loss becomes `base + λ·coverage`:
+*   `coverage_kl` — **primary**: `KL(+HNM) + λ·coverage`.
+*   `coverage_infonce` — ablation: `multi-positive InfoNCE(+HNM) + λ·coverage`.
+*   `coverage` — ablation: the coverage term alone.
+
+The coverage term uses its own temperature (`cov_temperature`, default 0.05) and defaults mirroring Jigsaw's paper-final config (`target_topk=20`, `topk_weight=0.35`, `cvar_fraction=0.25`, `margin_weight=0.25`). Reference result in Jigsaw: FullCov@100 66%→82% (McNemar p=4e-10). Evaluate primarily on **2Wiki/MuSiQue** (SQuAD's ≤20 partitions make top-K routing degenerate).
+
+```bash
+# Train the primary coverage loss on top of the frozen best KL+HNM config
+python -m src.alignment.train_mlp --dataset 2wiki --loss_type coverage_kl \
+    --tau 0.07 --hn_k 149 --lambda_cov 0.5 --epochs 100
+
+# Or sweep lambda + get significance vs the KL baseline (routes to Modal by default)
+python experiments.py run train-coverage -- --datasets 2wiki musique --lambdas 0.1 0.25 0.5 1.0
+```
 
 ---
 
@@ -33,12 +50,12 @@ class MLPBiEncoder(nn.Module):
     Maps a 384-dim query embedding to a 384-dim partition-aligned space.
     
     Architecture:
-        Linear(384 → 256) → ReLU → Dropout(0.3)
-        Linear(256 → 384) → L2-normalize
+        Linear(input_dim -> hidden_dim) -> ReLU -> Dropout
+        Linear(hidden_dim -> output_dim) -> L2-normalize
     
     Used by:
         - train_mlp.py     during training
-        - crag_agent.py    at query time (encode only)
+        - src/strategies/crag.py and SuperModel at query time
     """
     def forward(self, x: Tensor) -> Tensor: ...
 ```
@@ -47,17 +64,11 @@ class MLPBiEncoder(nn.Module):
 
 ### `train_mlp.py` — The Master Training Engine
 
-The training loop handles both loss functions `(info_nce_multi`, `kl_div)` and dynamically calculates the Dataset-Locked Temperature ($\tau$) and Hard Negative count ($hn\_k$).
+The training loop dispatches all loss functions (`info_nce_single`, `info_nce_multi`, `kl_div`, `bce`, and the coverage-aware `coverage_kl` / `coverage_infonce` / `coverage`) and dynamically calculates the Dataset-Locked Temperature ($\tau$) and Hard Negative count ($hn\_k$). Coverage runs additionally accept `--lambda_cov`, `--cov_temperature`, `--target_topk`, `--topk_weight`, `--cvar_fraction`, `--positive_aggregation`. Use `--limit N` for a fast end-to-end smoke run.
 
 ```bash
 # Example Training Execution for HNM Ablation
-python -m src.alignment.train_mlp \
-  --datasets 2wiki \
-  --loss kl_div \
-  --tau 0.07 \
-  --hnm-k 149 \
-  --epochs 100 \
-  --batch-size 1024
+python -m src.alignment.train_mlp --dataset 2wiki --loss_type kl_div --epochs 100
 ```
 
 **Training Data Sources:**
@@ -82,5 +93,13 @@ To prevent models from memorizing the graph topology:
 
 ## Checkpoints
 
-Trained encoder weights are saved to `checkpoints/{dataset}/alignment_mlp.pth`.
-The system dynamically loads the specific weights based on the active index during runtime.
+Important checkpoint families:
+
+- Architecture sweep: `checkpoints/{dataset}/alignment_{method}.pth`
+- Loss sweep: `checkpoints/{dataset}/losses_ablation/alignment_mlp_{loss}.pth`
+- Temperature sweep: `checkpoints/{dataset}/temp_ablation/alignment_mlp_{loss}_tau_{tau}.pth`
+- HNM sweep: `checkpoints/{dataset}/hnm_ablation/alignment_mlp_{loss}_tau_{tau}_hnm_{k}.pth`
+- Coverage sweep: `checkpoints/{dataset}/hnm_ablation/alignment_mlp_{coverage_loss}_tau_{tau}_hnm_{k}_lam_{lambda}.pth`
+  (limited smoke runs additionally get a `_lim{N}` suffix so they never overwrite full-data checkpoints)
+
+`SuperModel` prefers `BEST_COVERAGE_CHECKPOINTS[dataset]` (when set + present on disk) over `BEST_HNM_CHECKPOINTS[dataset]`, and falls back to older checkpoints when needed. Fill in `BEST_COVERAGE_CHECKPOINTS` after the lambda sweep selects the winning coverage model per dataset.

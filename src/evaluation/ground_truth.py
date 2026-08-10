@@ -67,10 +67,12 @@ class GroundTruthGenerator:
         return benchmarks
 
 if __name__ == "__main__":
-    generator = GroundTruthGenerator("data/processed/master_nodes.json", "data/ukb_storage/graph.pt")
-    benchmarks = generator.generate_random_walk_benchmarks()
-    
-    output_path = "data/processed/synthetic_benchmark.json"
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(benchmarks, f, indent=2)
-    print(f"Benchmark saved to {output_path}")
+    # DEPRECATED standalone entrypoint. Ground truth now comes from question
+    # nodes in master_nodes.json (their graph neighbors), consumed directly by
+    # the Level-1/2/3 benchmarks. This generator also referenced a source-LESS
+    # data/ukb_storage/graph.pt, which does not exist in the per-source UKB
+    # layout (data/ukb_storage/{source}/graph.pt).
+    raise SystemExit(
+        "src/evaluation/ground_truth.py is deprecated; ground truth is derived from "
+        "question nodes in master_nodes.json by the benchmarks. Do not run this directly."
+    )

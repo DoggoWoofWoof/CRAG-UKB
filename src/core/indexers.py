@@ -117,11 +117,21 @@ def build_pyg_graph(nodes: List[StandardNode], embeddings: np.ndarray, out_dir: 
     faiss.normalize_L2(vectors)
     
     # Search for Top-4 (to get self + 3 neighbors)
-    # Using IndexFlatIP for exact search since we want quality semantic links
+    # Using IndexFlatIP for exact search since we want quality semantic links.
     knn_index = faiss.IndexFlatIP(dim)
     knn_index.add(vectors)
-    
-    distances, indices = knn_index.search(vectors, 4)
+
+    # GPU-accelerate the exact all-pairs kNN: CPU brute force is O(n^2) and intractable past ~100k
+    # docs (507k -> days). GpuIndexFlatIP returns the SAME exact neighbors, just fast (seconds on A10G),
+    # so small datasets built on CPU stay consistent with large ones built on GPU.
+    search_index = knn_index
+    try:
+        if hasattr(faiss, "get_num_gpus") and faiss.get_num_gpus() > 0:
+            search_index = faiss.index_cpu_to_gpu(faiss.StandardGpuResources(), 0, knn_index)
+            log.info(f"    kNN: exact IndexFlatIP on GPU for {len(vectors)} nodes")
+    except Exception as e:
+        log.warning(f"    kNN: faiss GPU unavailable ({e}); falling back to CPU brute force")
+    distances, indices = search_index.search(vectors, 4)
     
     G_nx = nx.Graph()
     G_nx.add_nodes_from(range(len(nodes)))
@@ -231,9 +241,10 @@ def build_pyg_graph(nodes: List[StandardNode], embeddings: np.ndarray, out_dir: 
 # 4. Partition Map  (greedy modularity, target ~200 nodes/partition)
 # ═══════════════════════════════════════════════════════════════════════════
 
-def build_partition_map(nodes: List[StandardNode], G_nx: nx.Graph, out_dir: str) -> List[int]:
+def build_partition_map(nodes: List[StandardNode], G_nx: nx.Graph, out_dir: str,
+                        target_per_partition: int = 1000) -> List[int]:
     nodes = [n for n in nodes if n.metadata.get("type") != "question"]
-    log.info(f"[4/6] Building Partition Map ({len(nodes)} nodes)…")
+    log.info(f"[4/6] Building Partition Map ({len(nodes)} nodes, ~{target_per_partition}/partition)…")
 
     n_nodes = len(nodes)
     parts: List[int] = [0] * n_nodes
@@ -241,8 +252,8 @@ def build_partition_map(nodes: List[StandardNode], G_nx: nx.Graph, out_dir: str)
     if G_nx.number_of_edges() > 0:
         try:
             import pymetis
-            log.info("    Using PyMETIS for graph partitioning (Target: ~1000 nodes/partition)…")
-            n_parts = max(1, n_nodes // 1000)
+            log.info(f"    Using PyMETIS for graph partitioning (Target: ~{target_per_partition} nodes/partition)…")
+            n_parts = max(1, n_nodes // target_per_partition)
             
             # Convert NetworkX to adjacency list for PyMETIS
             adjacency_list = [list(G_nx.neighbors(i)) for i in range(n_nodes)]
@@ -424,6 +435,7 @@ def build_all(
     skip_colbert: bool     = False,
     target_datasets: List[str] = None,
     force_rebuild: bool    = False,
+    target_per_partition: int = 1000,
 ):
     """Build separate index suites per dataset source.
 
@@ -470,7 +482,7 @@ def build_all(
         embeddings = build_faiss_node_index(nodes, encoder, src_dir)
         build_bm25_index(nodes, src_dir)
         G_nx       = build_pyg_graph(nodes, embeddings, src_dir)
-        parts      = build_partition_map(nodes, G_nx, src_dir)
+        parts      = build_partition_map(nodes, G_nx, src_dir, target_per_partition)
         build_faiss_centroid_index(nodes, parts, embeddings, src_dir)
 
         if not skip_colbert:

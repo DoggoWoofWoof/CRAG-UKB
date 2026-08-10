@@ -15,15 +15,32 @@ retrieval:
   top_k: 5
   graph_hops: 2
   max_context_tokens: 3000
-  # Strategy 3 (CRAG Agentic Partitioning) specifics
+  # Strategy 3 (CRAG partitioning/traversal) specifics
   vector_top_k: 10
   colbert_candidate_k: 50
   colbert_final_k: 5
   agent_top_partitions: 3
+  agent_top_k_entry: 10
+  agent_max_traverse_steps: 20
   agent_prune_threshold: 0.3
+  agent_expand_threshold: 0.3
+  agent_max_context_nodes: 10
+  agent_beam_width: 50
+  agent_expand_top_neighbors: 8
+  agent_min_context_nodes: 3
+  agent_dynamic_partition_expansion: true
+  agent_max_dynamic_partitions: 3
+  agent_partition_admission_threshold: 0.35
+  agent_partition_fetch_k: 5
+  agent_l2_score_weight: 0.25
+  agent_partition_prior_weight: 0.15
+  agent_path_coherence_weight: 0.10
+  agent_redundancy_penalty_weight: 0.10
+  agent_depth_penalty_weight: 0.03
+  agent_partition_balance_weight: 0.04
   
   models:
-    encoder: "all-MiniLM-L6-v2"
+    encoder: "multi-qa-MiniLM-L6-cos-v1"
     generator: "gpt-3.5-turbo" # Can switch to local SLM like 'llama3'
     colbert: "colbert-ir/colbertv2.0"
 
@@ -37,12 +54,14 @@ alignment:
   lr: 1e-4
 
 # Graph Community Partitioner
+# NOTE: informational only — the live builder (src/core/indexers.build_partition_map)
+# uses PyMETIS with ~1000 nodes/partition (n_parts = n_nodes // 1000), with a naive
+# 1000-node chunk fallback. These keys are not currently read by the builder.
 partitioning:
-  target_nodes_per_chunk: 200
-  method: "greedy_modularity"
+  target_nodes_per_partition: 1000
+  method: "pymetis"
 
 # Evaluation Output
 evaluation:
   benchmark_csv: "results/benchmark_results.csv"
   output_dir: "results/"
-

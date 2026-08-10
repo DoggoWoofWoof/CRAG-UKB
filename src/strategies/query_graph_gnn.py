@@ -7,7 +7,7 @@ embeddings for matching against partition embeddings.
 
 # EXPERIMENTAL — architecture skeleton only, no trained GNN weights.
 # This inherits directly from CRAG to ensure the exact same Level 2 (Entry)
-# and Level 3 (Agentic Traversal) loops are used, swapping ONLY the
+# and Level 3 deterministic traversal loops are used, swapping ONLY the
 # Level 1 partition selection mechanism for fair interoperability benchmarking.
 """
 
@@ -30,7 +30,7 @@ class QueryGraphGNN(CRAG):
     3. Embedding → FAISS search against partition centroids
     
     Levels 2 & 3:
-    Inherits identical CRAG FAISS/ColBERT Entry and Agentic Trajectory execution.
+    Inherits identical CRAG FAISS/ColBERT entry and deterministic traversal execution.
     """
 
     def __init__(self, engine, llm, encoder, 
@@ -39,7 +39,13 @@ class QueryGraphGNN(CRAG):
                  top_k_partitions: int = 3,
                  top_k_entry: int = 10,
                  max_traverse_steps: int = 20,
-                 score_threshold: float = 0.3):
+                 score_threshold: float = 0.3,
+                 expand_threshold: float = None,
+                 max_context_nodes: int = 10,
+                 beam_width: int = 50,
+                 expand_top_neighbors: int = 8,
+                 min_context_nodes: int = 3,
+                 **traversal_kwargs):
         
         # Initialize the underlying CRAG system, marking mode as 'gnn'
         super().__init__(engine, llm, encoder, 
@@ -48,7 +54,13 @@ class QueryGraphGNN(CRAG):
                          top_k_partitions=top_k_partitions,
                          top_k_entry=top_k_entry,
                          max_traverse_steps=max_traverse_steps,
-                         score_threshold=score_threshold)
+                         score_threshold=score_threshold,
+                         expand_threshold=expand_threshold,
+                         max_context_nodes=max_context_nodes,
+                         beam_width=beam_width,
+                         expand_top_neighbors=expand_top_neighbors,
+                         min_context_nodes=min_context_nodes,
+                         **traversal_kwargs)
 
         self.gin_encoder = None
         self.gin_checkpoint = gin_checkpoint_path

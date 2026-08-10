@@ -1,3 +1,4 @@
+import ast
 import json
 import os
 import logging
@@ -19,7 +20,7 @@ def load_squad(file_path: str) -> List[StandardNode]:
     q_id: int = 0
     for article in data['data']:
         title = article.get('title', 'Unknown')
-        prev_node_id = None
+        prev_doc_node = None                      # previous DOCUMENT node in this article (not nodes[-1], which is a q node)
         for p_idx, para in enumerate(article['paragraphs']):
             context = para['context']
             node_id = f"squad_{chunk_id}"
@@ -30,23 +31,30 @@ def load_squad(file_path: str) -> List[StandardNode]:
                 content=context,
                 metadata={"source": "squad", "type": "document", "title": title}
             )
-            if prev_node_id:
-                node.neighbors.append(prev_node_id)
-                nodes[-1].neighbors.append(node_id)
+            if prev_doc_node is not None:          # bidirectional doc<->doc chain within the article
+                node.neighbors.append(prev_doc_node.node_id)
+                prev_doc_node.neighbors.append(node_id)
 
             nodes.append(node)
-            prev_node_id = node_id
+            prev_doc_node = node
 
             for qa in para.get('qas', []):
                 question_text = qa['question']
                 q_node_id = f"squad_q_{q_id}"
                 q_id = q_id + 1
+                answers = [
+                    str(answer.get("text", ""))
+                    for answer in qa.get("answers", [])
+                    if answer.get("text")
+                ]
 
                 q_node = StandardNode(
                     node_id=q_node_id,
                     content=question_text,
                     metadata={"source": "squad", "type": "question",
-                              "is_impossible": qa.get('is_impossible', False)}
+                              "is_impossible": qa.get('is_impossible', False),
+                              "answer": answers[0] if answers else "",
+                              "answers": answers}
                 )
                 q_node.neighbors.append(node_id)
                 node.neighbors.append(q_node_id)
@@ -86,7 +94,12 @@ def load_hotpotqa(file_path: str) -> List[StandardNode]:
     for item in items:
         qid = item.get('_id', item.get('id', 'unknown'))
         question = item['question']
-        answer = item.get('answer', '')
+        answers = item.get("golden_answers") or []
+        if isinstance(answers, str):
+            answers = [answers]
+        answer = item.get("answer") or (answers[0] if answers else "")
+        answers = [answer, *answers] if answer else list(answers)
+        answers = list(dict.fromkeys(str(value) for value in answers if value))
         
         # ── Build context article nodes ─────────────────────────────
         context_map: Dict[str, str] = {}  # title → node_id
@@ -95,7 +108,9 @@ def load_hotpotqa(file_path: str) -> List[StandardNode]:
         context = meta.get('context', {})
         
         if isinstance(context, dict):
-            ctx_iterator = zip(context.get("title", []), context.get("content", []))
+            # FlashRAG uses "sentences"; older HotpotQA dumps use "content"
+            ctx_iterator = zip(context.get("title", []),
+                               context.get("content", context.get("sentences", [])))
         else:
             ctx_iterator = context
             
@@ -123,7 +138,12 @@ def load_hotpotqa(file_path: str) -> List[StandardNode]:
         q_node = StandardNode(
             node_id=q_node_id,
             content=question,
-            metadata={"source": "hotpotqa", "type": "question", "answer": answer}
+            metadata={
+                "source": "hotpotqa",
+                "type": "question",
+                "answer": answer,
+                "answers": answers,
+            }
         )
 
         # ── Link question ↔ supporting fact articles ────────────────
@@ -145,21 +165,9 @@ def load_hotpotqa(file_path: str) -> List[StandardNode]:
                 q_node.neighbors.append(doc_nid)
                 article_cache[sf_title].neighbors.append(q_node_id)
 
-        # ── Bridge edges ────────────────────────────────────────────
-        sf_list = list(supporting_titles)
-        for i in range(len(sf_list)):
-            for j in range(i + 1, len(sf_list)):
-                t1, t2 = sf_list[i], sf_list[j]
-                if t1 in context_map and t2 in context_map:
-                    nid1 = context_map[str(t1)]
-                    nid2 = context_map[str(t2)]
-                    if nid2 not in article_cache[str(t1)].neighbors:
-                        article_cache[str(t1)].neighbors.append(nid2)
-                        article_cache[str(t1)].metadata.setdefault("bridge_neighbors", []).append(nid2)
-                    if nid1 not in article_cache[str(t2)].neighbors:
-                        article_cache[str(t2)].neighbors.append(nid1)
-                        article_cache[str(t2)].metadata.setdefault("bridge_neighbors", []).append(nid1)
-
+        # BRIDGE EDGES REMOVED (label leak) — see load_2wiki note + build_clean.py.
+        # HotpotQA dedups by title (article_cache), so its label-free structure is
+        # title-mention content edges + kNN, built downstream.
         nodes.append(q_node)
 
     return nodes
@@ -185,23 +193,37 @@ def load_musique(file_path: str) -> List[StandardNode]:
                 if 'context' in meta:
                     p_dict = meta['context']
                     if isinstance(p_dict, dict):
-                        paragraphs = [{"paragraph_text": " ".join(s) if isinstance(s, list) else s} 
+                        paragraphs = [{"paragraph_text": " ".join(s) if isinstance(s, list) else s}
                                      for s in p_dict.get('content', [])]
                 elif 'question_decomposition' in meta:
-                    for d in meta['question_decomposition']:
-                        if 'support_paragraph' in d:
-                            paragraphs.append(d['support_paragraph'])
-            
+                    # FlashRAG stores each support passage as a stringified Python dict
+                    # {'idx','title','paragraph_text'} — parse it so we keep the TITLE
+                    # (dropping it left musique with 0 relational edges; L3 was inert).
+                    for step in meta['question_decomposition']:
+                        sp = step.get('support_paragraph')
+                        if not sp:
+                            continue
+                        try:
+                            pd = ast.literal_eval(sp) if isinstance(sp, str) else sp
+                        except (ValueError, SyntaxError):
+                            continue
+                        if isinstance(pd, dict):
+                            pd.setdefault('is_supporting', True)   # decomposition paras are all gold
+                            paragraphs.append(pd)
+
             # Context paragraphs
             for i, p in enumerate(paragraphs):
+                if not isinstance(p, dict):
+                    continue
                 p_text = p.get('paragraph_text', p.get('content', ''))
                 if not p_text: continue
-                
+
                 node_id = f"musique_doc_{qid}_{i}"
                 doc_nodes.append(StandardNode(
                     node_id=node_id,
                     content=p_text,
-                    metadata={"source": "musique", "type": "document", "is_supporting": p.get('is_supporting', False)}
+                    metadata={"source": "musique", "type": "document", "title": p.get('title', ''),
+                              "is_supporting": p.get('is_supporting', False)}
                 ))
             
             # Question
@@ -220,36 +242,107 @@ def load_musique(file_path: str) -> List[StandardNode]:
                     d.neighbors.append(q_node.node_id)
                     supporting_doc_ids.append(d.node_id)
             
-            # 🌉 Bridge Edges: Link co-supporting docs to each other
-            id_to_node: Dict[str, StandardNode] = {str(n.node_id): n for n in doc_nodes}
-            for i in range(len(supporting_doc_ids)):
-                for j in range(i + 1, len(supporting_doc_ids)):
-                    id1, id2 = str(supporting_doc_ids[i]), str(supporting_doc_ids[j])
-                    
-                    node1: StandardNode = id_to_node[id1]
-                    node2: StandardNode = id_to_node[id2]
-                    
-                    if id2 not in node1.neighbors:
-                        node1.neighbors.append(id2)
-                    if id1 not in node2.neighbors:
-                        node2.neighbors.append(id1)
-                        
-                    # Track for analysis/Level 3 traversal
-                    if "bridge_neighbors" not in node1.metadata:
-                        node1.metadata["bridge_neighbors"] = []
-                    if id2 not in node1.metadata["bridge_neighbors"]:
-                        node1.metadata["bridge_neighbors"].append(id2)
-                        
-                    if "bridge_neighbors" not in node2.metadata:
-                        node2.metadata["bridge_neighbors"] = []
-                    if id1 not in node2.metadata["bridge_neighbors"]:
-                        node2.metadata["bridge_neighbors"].append(id1)
-                    
+            # BRIDGE EDGES REMOVED (label leak) — see load_2wiki note + build_clean.py.
+            # musique passages have no titles, so its label-free structure is kNN-only.
             nodes.extend(doc_nodes)
             nodes.append(q_node)
-            
-    log.info(f"  MuSiQue: {len(nodes)} total nodes parsed")
+
+    log.info(f"  MuSiQue: {len(nodes)} total nodes parsed (label-free: no bridge edges)")
     return nodes
+
+
+def load_musique_ans(file_path: str) -> List[StandardNode]:
+    """Parse the ORIGINAL MuSiQue (``musique_ans``) JSONL into document + question nodes.
+
+    Standard DEV *distractor* setting. Each record carries its own 20 candidate
+    ``paragraphs`` ({idx,title,paragraph_text,is_supporting}); the corpus is the
+    UNION of every question's paragraphs, deduplicated by (title, paragraph_text)
+    so a passage shared across questions maps to ONE doc node (a passage that is a
+    gold for one question and a distractor for another therefore stays a single
+    node -> real distractors, not an all-gold pool).
+
+    Modeled on ``load_hotpotqa``: dedup docs across questions, one question node
+    per record, GOLD edges (q<->doc) added ONLY for ``is_supporting == True``
+    paragraphs, and NO doc-doc bridge edges (label leak — see load_2wiki note and
+    build_clean.py). Question answers = ``answer`` + ``answer_aliases``.
+    """
+    nodes: List[StandardNode] = []
+    items = []
+    with open(file_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            if line.strip():
+                items.append(json.loads(line))
+
+    # (title, paragraph_text) → StandardNode, deduplicated across all questions.
+    para_cache: Dict[tuple, StandardNode] = {}
+    doc_id_counter: int = 0
+
+    for item in items:
+        qid = item.get('id', 'unknown')
+        question = item.get('question', '')
+
+        # Answers: primary answer first, then aliases (deduped, order-preserving).
+        answer = str(item.get('answer', '') or '')
+        aliases = item.get('answer_aliases', []) or []
+        if isinstance(aliases, str):
+            aliases = [aliases]
+        aliases = [str(a) for a in aliases if a]
+        answers = list(dict.fromkeys([answer, *aliases] if answer else list(aliases)))
+
+        # ── Build / reuse paragraph doc nodes ───────────────────────
+        supporting_doc_nodes: List[StandardNode] = []
+        for p in item.get('paragraphs', []):
+            if not isinstance(p, dict):
+                continue
+            title = p.get('title', '')
+            p_text = p.get('paragraph_text', '')
+            if not p_text:
+                continue
+            key = (title, p_text)
+            doc_node = para_cache.get(key)
+            if doc_node is None:
+                node_id = f"musique_doc_{doc_id_counter}"
+                doc_id_counter = doc_id_counter + 1
+                doc_node = StandardNode(
+                    node_id=node_id,
+                    content=p_text,
+                    metadata={"source": "musique", "type": "document", "title": title}
+                )
+                para_cache[key] = doc_node
+                nodes.append(doc_node)
+            if p.get('is_supporting'):
+                supporting_doc_nodes.append(doc_node)
+
+        # ── Build question node ─────────────────────────────────────
+        q_node_id = f"musique_q_{qid}"
+        q_node = StandardNode(
+            node_id=q_node_id,
+            content=question,
+            metadata={
+                "source": "musique",
+                "type": "question",
+                "answer": answer,
+                "answers": answers,
+                "answer_aliases": aliases,
+            }
+        )
+
+        # ── Link question ↔ supporting (gold) paragraphs only ───────
+        for doc_node in supporting_doc_nodes:
+            if doc_node.node_id not in q_node.neighbors:
+                q_node.neighbors.append(doc_node.node_id)
+            if q_node_id not in doc_node.neighbors:
+                doc_node.neighbors.append(q_node_id)
+
+        # BRIDGE EDGES REMOVED (label leak) — same policy as load_hotpotqa/load_2wiki:
+        # doc-doc structure comes from label-free title-mention links + kNN built
+        # downstream in build_clean.py; q->gold edges above are eval labels only.
+        nodes.append(q_node)
+
+    log.info(f"  MuSiQue-ans: {doc_id_counter} unique doc nodes, "
+             f"{len(items)} questions, {len(nodes)} total nodes")
+    return nodes
+
 
 def load_2wiki(file_path: str) -> List[StandardNode]:
     """Parse 2WikiMultiHopQA JSONL into document and question nodes."""
@@ -303,34 +396,14 @@ def load_2wiki(file_path: str) -> List[StandardNode]:
                     supporting_doc_ids.append(d_node.node_id)
                 doc_nodes.append(d_node)
                 
-            # 🌉 Bridge Edges: Link co-supporting docs to each other
-            id_to_node: Dict[str, StandardNode] = {str(n.node_id): n for n in doc_nodes}
-            for i in range(len(supporting_doc_ids)):
-                for j in range(i + 1, len(supporting_doc_ids)):
-                    id1, id2 = str(supporting_doc_ids[i]), str(supporting_doc_ids[j])
-                    
-                    node1: StandardNode = id_to_node[id1]
-                    node2: StandardNode = id_to_node[id2]
-                    
-                    if id2 not in node1.neighbors:
-                        node1.neighbors.append(id2)
-                    if id1 not in node2.neighbors:
-                        node2.neighbors.append(id1)
-                        
-                    if "bridge_neighbors" not in node1.metadata:
-                        node1.metadata["bridge_neighbors"] = []
-                    if id2 not in node1.metadata["bridge_neighbors"]:
-                        node1.metadata["bridge_neighbors"].append(id2)
-                        
-                    if "bridge_neighbors" not in node2.metadata:
-                        node2.metadata["bridge_neighbors"] = []
-                    if id1 not in node2.metadata["bridge_neighbors"]:
-                        node2.metadata["bridge_neighbors"].append(id1)
-            
+            # BRIDGE EDGES REMOVED (label leak): linking co-supporting gold docs bakes
+            # test-question annotations into the doc graph. Doc-doc structure now comes
+            # ONLY from label-free content edges (title mentions) + kNN, built downstream
+            # (src/pipeline/build_clean.py). Question->gold edges above are eval labels only.
             nodes.extend(doc_nodes)
             nodes.append(q_node)
-            
-    log.info(f"  2Wiki: {len(nodes)} total nodes parsed")
+
+    log.info(f"  2Wiki: {len(nodes)} total nodes parsed (label-free: no bridge edges)")
     return nodes
 
 def _download_if_missing(url: str, dest_path: str):
@@ -619,4 +692,3 @@ if __name__ == "__main__":
     metaqa = "data/raw/metaqa"
     output = "data/processed/master_nodes.json"
     build_unified_dataset(squad, musique, twiki, metaqa, output)
-
