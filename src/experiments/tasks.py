@@ -312,6 +312,11 @@ def _l2_seed(argv):
     l2_seed.main(argv)
 
 
+def _l2_learned_fusion(argv):
+    from src.experiments import l2_learned_fusion
+    l2_learned_fusion.main(argv)
+
+
 def _l2_mem_bench(argv):
     from src.experiments import l2_mem_bench
     l2_mem_bench.main(argv)
@@ -480,6 +485,10 @@ TASKS: Dict[str, Task] = {
                     _l2_seed,
                     smoke_args=["--datasets", "metaqa", "--tr-cap", "300", "--te-cap", "200",
                                 "--epochs", "3", "--scope-topk", "50"]),
+    "l2-learned-fusion": Task("l2-learned-fusion", "gpu",
+                    "Learned per-query fusion gate vs parameter-free best-of (tests the 'why not one learned model' critique)",
+                    _l2_learned_fusion,
+                    smoke_args=["--datasets", "metaqa", "--gate-epochs", "5"]),
     "l2-mem-bench": Task("l2-mem-bench", "gpu",
                     "L2 memory microbench: measured GPU peak for full-corpus-resident vs routed-pool-gather scoring (+topk parity)",
                     _l2_mem_bench,
