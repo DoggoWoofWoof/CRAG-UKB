@@ -248,6 +248,8 @@ def result_outputs(task_name: str, argv: List[str]) -> List[str]:
     """Repo-relative output paths to pull back after the task finishes."""
     if task_name == "review-metric":
         return [parse_option(argv, "--output-dir", "results/review_metric_v2")]
+    if task_name == "train-gnn":                              # pull the GNN coverage results (not the default checkpoints)
+        return ["results/gnn_ablation"]
     if task_name == "rebuild-clean":                          # pull rebuilt substrate + clean master
         ds = parse_option(argv, "--dataset")
         clean = f"{ds}_clean"

@@ -178,6 +178,56 @@ def run_edge_ablation(datasets=None, subdir="gte_qwen", n_seed=20, budget=100, t
     return out
 
 
+def run_budget_matched(datasets=None, subdir="gte_qwen", n_seed=20, budgets=(20, 50, 100), te_cap=2000):
+    """AIRTIGHT L3 claim: at a MATCHED total budget B, does a hybrid (half dense-cosine + half
+    structural-neighbourhood, hop-then-cosine ranked) beat spending all B on dense? Answers the
+    reviewer critique that the union used a larger budget than dense. Writes graphlift_budgetmatched_{subdir}.json."""
+    import torch
+    from src.experiments.l1l3_recall import _graph
+    datasets = datasets or DEFAULT_DATASETS
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    os.makedirs("results/L2", exist_ok=True)
+    out = {}
+    for d in datasets:
+        eng, n, id2idx, qn, gold_idx, Xt = _prep(d, subdir, te_cap, device)
+        _, A, _ = _graph(eng, n, id2idx, sources=("struct", "syn")); A = A.tocsr()
+        maxB = max(budgets)
+        acc = {B: {"dense": [], "hybrid": []} for B in budgets}
+        with torch.no_grad():
+            for qi in range(len(gold_idx)):
+                g = set(gold_idx[qi])
+                if not g:
+                    continue
+                sim = (torch.tensor(qn[qi:qi + 1], device=device) @ Xt.T)[0]
+                order = torch.topk(sim, min(max(maxB, n_seed), n)).indices.cpu().numpy()
+                simc = sim.cpu().numpy()
+                seeds = [int(x) for x in order[:n_seed]]
+                h1 = _neighbors(A, seeds) - set(seeds)                # 1-hop, then 2-hop; rank each by cosine
+                h2 = _neighbors(A, h1) - h1 - set(seeds)
+                graph_ranked = sorted(h1, key=lambda x: -simc[x]) + sorted(h2, key=lambda x: -simc[x])
+                for B in budgets:
+                    dense_B = set(int(x) for x in order[:B])
+                    db = B // 2                                       # matched budget: half dense, half structural
+                    hybrid = set(int(x) for x in order[:db]) | set(graph_ranked[:B - db])
+                    acc[B]["dense"].append(len(g & dense_B) / len(g))
+                    acc[B]["hybrid"].append(len(g & hybrid) / len(g))
+        rec = {"corpus_N": int(n), "n_seed": n_seed}
+        for B in budgets:
+            dr = 100 * float(np.mean(acc[B]["dense"])); hr = 100 * float(np.mean(acc[B]["hybrid"]))
+            rec[f"B{B}"] = {"dense": round(dr, 2), "hybrid": round(hr, 2), "lift": round(hr - dr, 2)}
+        out[d] = rec
+        msg = " | ".join(f"B{B}: dense {rec[f'B{B}']['dense']:.1f} vs hybrid {rec[f'B{B}']['hybrid']:.1f} ({rec[f'B{B}']['lift']:+.1f})" for B in budgets)
+        log.info("[budget-matched/%s] N=%d | %s", d, n, msg)
+        del Xt
+        import gc; gc.collect()
+        if device == "cuda":
+            torch.cuda.empty_cache()
+    path = f"results/L2/graphlift_budgetmatched_{subdir}.json"
+    json.dump(out, open(path, "w"), indent=2)
+    log.info("-> %s", path)
+    return out
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(description="L3 graph-lift: does traversal from dense seeds recover golds dense misses?")
     p.add_argument("--datasets", nargs="+", default=None)
@@ -188,9 +238,13 @@ def main(argv=None):
     p.add_argument("--te-cap", type=int, default=2000)
     p.add_argument("--edge-ablation", action="store_true",
                    help="decompose the traversal lift by edge type (struct vs syn vs both) x hops")
+    p.add_argument("--budget-matched", action="store_true",
+                   help="airtight test: hybrid (half dense + half structural) vs all-dense at matched budget B")
     a = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", force=True)
-    if a.edge_ablation:
+    if a.budget_matched:
+        run_budget_matched(datasets=a.datasets, subdir=a.subdir, n_seed=a.n_seed, te_cap=a.te_cap)
+    elif a.edge_ablation:
         run_edge_ablation(datasets=a.datasets, subdir=a.subdir, n_seed=a.n_seed, budget=a.budget, te_cap=a.te_cap)
     else:
         run(datasets=a.datasets, subdir=a.subdir, n_seed=a.n_seed, budget=a.budget, hops=a.hops, te_cap=a.te_cap)
