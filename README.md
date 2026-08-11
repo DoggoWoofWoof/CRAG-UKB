@@ -71,6 +71,28 @@ corrected corpora. New runners: `l1_candgen`, `l1_overlap_test`, `l3_graphlift`,
 `l2_mem_bench`, `splade_encode`; standard-corpus loaders in
 `src/pipeline/loader_hipporag.py` and `build_std_masters.py`.
 
+**Standard-corpus rebuild COMPLETE — all results reproduce.** Datasets rebuilt to
+the HippoRAG-standard 1,000-question candidate corpora (`musique_hpr_clean` 11,656
+docs, `2wiki_hpr_clean` 6,119, `hotpot_hpr_clean` 9,811), plus `squad_std_clean`
+(1,204, single-hop control) and MetaQA (KB) — spanning the three retrieval
+paradigms (pure-vector / graph-from-text / KB). Every result reproduces:
+
+- **L1 unified dataset-agnostic head:** FullCov@20 mean **98.07** (2wiki 100 /
+  hotpot 99 / musique 92 / squad 100 / metaqa 99.35). One head, no per-dataset
+  parameters, across all three paradigms.
+- **L2 SPLADE hybrid:** hit@20 mean **98.63**, recall@20 91.78.
+- **Mechanism verdicts hold:** dense top-N beats the partition pool at tight
+  budgets (candgen ΔR@pool3 −4 to −28); graph traversal wins on multi-hop/KB but
+  not single-hop (graphlift lift: squad +0.0, text-graph +3..+15, **MetaQA
+  +50.7**); overlap "help" is metric bucket-inflation on the relational sets
+  (musique +4.8, metaqa +6.6). The paradigm split — pure-vector needs no graph,
+  KB depends on it — reproduces cleanly.
+
+Loaders: `src/pipeline/loader_hipporag.py` + `build_hpr_masters.py`. Substrates =
+local base (free) + Modal gte/SPLADE encode (~$3 total). Note: local gte-Qwen2
+encoding requires a transformers version with `DynamicCache.get_usable_length`;
+otherwise run encode/query steps on the GPU backend.
+
 ### Clean substrates
 
 Current July experiments use the label-free clean corpora where available:
