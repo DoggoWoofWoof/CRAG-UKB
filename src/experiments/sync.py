@@ -137,8 +137,8 @@ def required_inputs(task_name: str, argv: List[str]) -> List[str]:
         return []
     default_datasets = UNIFIED_DATASETS if task_name == "l1-unified" else ALL_DATASETS
     ds = parse_datasets(argv, default_datasets)
-    if task_name == "ukb-build":
-        return ["data/processed/master_nodes.json"]      # produces ukb_storage
+    if task_name == "ukb-build":                          # upload the specified master (per-dataset supported)
+        return [parse_option(argv, "--nodes", "data/processed/master_nodes.json")]
     if task_name == "l1-unified":
         paths = []
         limit = int(parse_option(argv, "--limit", 15000))
@@ -262,8 +262,10 @@ def result_outputs(task_name: str, argv: List[str]) -> List[str]:
         return [f"data/ukb_storage/{d}/splade_doc_embs.pkl" for d in parse_datasets(argv)]
     default_datasets = UNIFIED_DATASETS if task_name == "l1-unified" else ALL_DATASETS
     ds = parse_datasets(argv, default_datasets)
-    if task_name == "ukb-build":
-        return [f"data/ukb_storage/{d}" for d in ds]
+    if task_name == "ukb-build":                          # source inferred from the --nodes master (master_nodes_webqsp.json -> webqsp)
+        nodes = parse_option(argv, "--nodes", "data/processed/master_nodes.json")
+        src = Path(nodes).stem.replace("master_nodes_", "")
+        return [f"data/ukb_storage/{src}"] if src and src != "master_nodes" else [f"data/ukb_storage/{d}" for d in ds]
     if task_name == "l1-universal-head":                  # subdir-specific JSON at repo-root results/
         return [f"results/L1_universal_head_{parse_option(argv, '--subdir', 'bge_large')}.json"]
     if task_name in ("l2-seed", "l2-mem-bench", "l1-candgen", "l3-graphlift", "l1-overlap-test"):   # pull the whole L2 results dir

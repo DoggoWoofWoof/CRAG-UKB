@@ -93,6 +93,44 @@ local base (free) + Modal gte/SPLADE encode (~$3 total). Note: local gte-Qwen2
 encoding requires a transformers version with `DynamicCache.get_usable_length`;
 otherwise run encode/query steps on the GPU backend.
 
+### August 2026 (full-corpus + real-Freebase KB) — proper-scale ablations and WebQSP
+
+The reviewer-facing report reruns every ablation on the **full audited corpora**
+(up to 507k docs / 781k KB entities), not the HippoRAG 1,000-question candidate
+corpora (those are kept for the head-to-head HippoRAG comparison). At full scale
+the picture is sharper and more honest — the summary artifact is
+`CRAG_Progress_Report` (Word). Result files under `results/` now carry all six
+datasets per ablation.
+
+- **L1 routing: SPLADE is the lever, the relational-offset MLP is not.** One joint
+  head over all six datasets: dense mean FullCov@20 = **94.85**; `d+splade|bestof`
+  = **96.03** (helps, e.g. 2Wiki 92.7→98.5); `d+hard+mlpT` = **93.84**, *below*
+  dense (the MLP's noise hurts the two largest corpora — HotpotQA −3.3, WebQSP
+  −6.3). Partition routing is ~neutral vs dense and is not where quality is won.
+  This clarifies the small-corpus 98.07 above, which was a near-saturated,
+  membership-inflated metric on the 1,000-Q candidate corpora.
+- **L2 rerank is where quality is won:** full-corpus Recall@20 lift over dense of
+  +2.1 (SQuAD), +9.5 (2Wiki), +11.6 (MuSiQue), **+52.8 (MetaQA)**, +29.8 (WebQSP).
+- **L3 traversal is the graph's home:** mean union-recall lift **+25.7** (SQuAD
+  +2.0, HotpotQA +11.3, 2Wiki +20.5, MetaQA +50.7, **WebQSP +62.4**).
+
+**WebQSP (real Freebase KGQA) added as the sixth dataset — the KB paradigm done
+properly.** 781,485 entities / 2,277,228 triples / 1,628 questions ingested
+graph-natively (entities→nodes, triples→edge graph, **all edges kept**; Freebase
+mega-hubs — max degree 44,948 — are bounded at traversal time, not by a
+build-time degree cap that would orphan leaf entities). It is the sharpest
+confirmation of the thesis: answer entities sit at median dense rank **1,184**,
+so dense retrieval fails (Recall@20 = 14%) and every graph mechanism inverts to
+strongly positive — candidate generation +21.9, overlap +20.6, rerank +29.8,
+traversal +62.4. New loader `src/pipeline/loader_webqsp.py`; `ukb-build` sync now
+infers the source from the `--nodes` master (`src/experiments/sync.py`).
+
+**Verdict (all six datasets, full corpora):** the graph is essential exactly in
+the KB/relational regime and neutral-to-harmful in the text regime. The shippable
+pipeline is **SPLADE-routed candidate generation → relational+SPLADE rerank →
+graph traversal**, each mechanism earning its place at exactly one level. Full
+readout in the report and project-memory ledger.
+
 ### Clean substrates
 
 Current July experiments use the label-free clean corpora where available:
