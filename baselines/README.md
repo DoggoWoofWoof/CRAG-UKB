@@ -45,6 +45,18 @@ python -m venv baselines/.venv-hipporag && baselines/.venv-hipporag/bin/pip inst
 # build KG on our _hpr corpora -> run retrieval -> export per-query recall -> compare vs results/L2/_hpr_paper_backup
 ```
 
+## First comparison point (measured, no LLM) — `results/L2/hpr_headtohead.json`
+
+Our pipeline's L2 rerank on the reserved `_hpr` corpora, Recall@5 (no LLM, no Modal):
+
+| dataset | dense R@5 | our best-rerank R@5 | HippoRAG v1 (published R@5) |
+|---|---|---|---|
+| MuSiQue | 56.7 | **70.5** | 51.9 → ours **+18.6** |
+| 2Wiki | 70.3 | **80.5** | 89.1 → HippoRAG +8.6 |
+| HotpotQA | 88.5 | **91.0** | (not in hand) |
+
+Honest reading: this is our **rerank alone** (dense + offset + SPLADE best-of), **no L3 traversal composed in**, and **no LLM**. It already beats HippoRAG v1 on MuSiQue (+18.6) and trails on 2Wiki — where our L3 traversal adds +15–20 (§4.5), not yet composed here. To complete the head-to-head: (1) compose rerank → traversal for our final recall; (2) target HippoRAG **2** (current) numbers, not v1; (3) run/extract the remaining four (their metrics differ — recall vs EM/F1).
+
 ## Status
 
 - **All 5 official repos cloned and code-confirmed** (`baselines/repos/`, gitignored).

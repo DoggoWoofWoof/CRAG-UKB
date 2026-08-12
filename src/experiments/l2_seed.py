@@ -27,7 +27,7 @@ from src.experiments.l1_universal_head import _load, _train_universal, DATASETS
 from src.experiments.l1_rerank100 import _feats, _rr, MAXK
 
 log = logging.getLogger("experiments.l2_seed")
-KS = [5, 20, 50]
+KS = [2, 5, 20, 50]
 
 
 def _topP(dense_order, mem_idx, npart, scope_topk):
