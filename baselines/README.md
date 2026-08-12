@@ -45,17 +45,33 @@ python -m venv baselines/.venv-hipporag && baselines/.venv-hipporag/bin/pip inst
 # build KG on our _hpr corpora -> run retrieval -> export per-query recall -> compare vs results/L2/_hpr_paper_backup
 ```
 
-## First comparison point (measured, no LLM) — `results/L2/hpr_headtohead.json`
+## Head-to-head vs HippoRAG 2 (measured, no LLM) — `results/L2/hpr_headtohead.json`
 
-Our pipeline's L2 rerank on the reserved `_hpr` corpora, Recall@5 (no LLM, no Modal):
+Our full pipeline on the reserved `_hpr` corpora (100-query test split each), Recall@5, vs HippoRAG 2's
+**published** numbers. Ours: frozen gte-Qwen2-**1.5B** encoder, **zero LLM**. This **supersedes an earlier
+draft that compared against HippoRAG v1** (51.9 / 89.1) — those are obsolete; HippoRAG 2 is the live target.
 
-| dataset | dense R@5 | our best-rerank R@5 | HippoRAG v1 (published R@5) |
-|---|---|---|---|
-| MuSiQue | 56.7 | **70.5** | 51.9 → ours **+18.6** |
-| 2Wiki | 70.3 | **80.5** | 89.1 → HippoRAG +8.6 |
-| HotpotQA | 88.5 | **91.0** | (not in hand) |
+| R@5 | MuSiQue | 2Wiki | HotpotQA | mean | compute |
+|---|---|---|---|---|---|
+| Our dense (gte-1.5B) | 56.7 | 70.2 | 88.5 | 71.8 | 1.5B enc, no LLM |
+| **Ours: multi-task head + fusion + L3** | **68.2** | **79.2** | **91.0** | **79.5** | 1.5B enc, no LLM |
+| NV-Embed-v2 dense | 69.7 | 76.5 | 94.5 | 80.2 | **7B** enc, no LLM |
+| **HippoRAG 2** (full) | 74.7 | 90.4 | 96.3 | 87.1 | 7B enc **+ Llama-70B** |
 
-Honest reading: this is our **rerank alone** (dense + offset + SPLADE best-of), **no L3 traversal composed in**, and **no LLM**. It already beats HippoRAG v1 on MuSiQue (+18.6) and trails on 2Wiki — where our L3 traversal adds +15–20 (§4.5), not yet composed here. To complete the head-to-head: (1) compose rerank → traversal for our final recall; (2) target HippoRAG **2** (current) numbers, not v1; (3) run/extract the remaining four (their metrics differ — recall vs EM/F1).
+Honest reading (this is not a "we win" table):
+- **We do not beat HippoRAG 2** (87.1). It uses a **7B** embedder + a **70B-LLM** OpenIE knowledge graph + PPR.
+- **Most of the deficit is the encoder**, not the method: our 1.5B dense (71.8) vs their 7B dense baseline
+  (80.2) is an 8.4pt *encoder* gap. Our fusion on a 1.5B encoder (**79.5**) essentially **matches their 7B
+  dense** (80.2) and **beats it on 2Wiki** (79.2 vs 76.5).
+- **Positioning is efficiency / no-LLM:** competitive recall at ~1/5 the encoder size and **zero LLM indexing
+  cost**, ~8pt below full HippoRAG 2 — the gap their 70B-LLM graph buys.
+- **L3 traversal** is neutral at R@5 on text (golds are dense-reachable; the reranker owns the tight budget),
+  adds at R@50 (mean 94.0→95.9; 2Wiki +4.25), and is decisive on KB (WebQSP graphlift +62).
+- **Open limitation (surfaced here):** applied *zero-shot* (head trained on `_clean`, not refit), the offset
+  head is unreliable — MuSiQue drops to 55.2, **below dense**, because min-rank fusion isn't robust to a weak
+  OOD signal. The head helps in-suite; robust cross-corpus transfer is unsolved. HotpotQA zero-shot holds (90.0).
+- **Caveat:** 100-query test split (small sample). Remaining four systems (metrics differ — recall vs EM/F1)
+  still to run.
 
 ## Status
 
