@@ -45,6 +45,30 @@ def _merge_minrank(orders):
     return [d for d, _ in sorted(best.items(), key=lambda kv: kv[1])]
 
 
+def _merge_rrf(orders, k0=60):
+    """Reciprocal Rank Fusion: score(d) = Σ_signals 1/(k0 + rank). Robust to a weak signal — a lone
+    top-ranked non-gold contributes only 1/k0, while a gold ranked well by ≥2 signals accumulates more.
+    Unlike min-rank, one bad OOD signal cannot single-handedly displace a strong signal's golds."""
+    score = {}
+    for order in orders:
+        for r, doc in enumerate(order):
+            doc = int(doc)
+            if doc < 0:
+                continue
+            score[doc] = score.get(doc, 0.0) + 1.0 / (k0 + r)
+    return [d for d, _ in sorted(score.items(), key=lambda kv: -kv[1])]
+
+
+def _merge_anchored(orders, n_head=5):
+    """Dense-anchored fusion: signals[0] (dense) OWNS the top-n_head (never displaced), the rest is RRF over
+    all signals. Guarantees best-of ≥ dense at every k ≤ n_head, then lets the learned signals add recall."""
+    dense = [int(x) for x in orders[0] if int(x) >= 0]
+    head = dense[:n_head]
+    seen = set(head)
+    tail = [d for d in _merge_rrf(orders) if d not in seen]
+    return head + tail
+
+
 def _compose(l2_qi, l3_order, n_head):
     """Head-preserving fusion: L2's confident top-n_head is trusted verbatim (so tight-budget recall never
     regresses); traversal competes only in the TAIL, min-rank-fused with L2's own tail. This is where
@@ -63,8 +87,9 @@ def level1_pool(I_qi, mem_idx, npart, scope_topk):
     return set()  # scope handled by L2's topP; kept as a seam so an L1 candgen can be swapped in
 
 
-def level2_order(d, data_d, per_d, heads, scope_topk, device):
-    """L2: best-of fusion rerank (dense + rel_hard + mlpT + SPLADE). Returns per-query orders + golds."""
+def level2_order(d, data_d, per_d, heads, scope_topk, device, adapter=None):
+    """L2 signals: dense + rel_hard + mlpT + SPLADE (+ adapted-dense if an adapter is given).
+    Returns the list of per-signal orders + golds; run() does the fusion. Dense stays sigs[0] (the anchor)."""
     X_t = per_d["Xt"]; hard = data_d["hard"]; hard_t = torch.tensor(hard, device=device)
     mem_idx = data_d["mem_idx"]; npart = data_d["npart"]; qte, ste, gte = data_d["test"]
     _, I = per_d["faiss"].search(qte, MAXK)
@@ -73,12 +98,15 @@ def level2_order(d, data_d, per_d, heads, scope_topk, device):
         qt = torch.tensor(qte, device=device); sv = X_t[torch.tensor(ste, device=device)]
         pos = {"dense": qt, "rel_hard": heads["hard"](qt, sv), "mlpT": heads["mix_hard"](qt, sv)}
     orders = {m: _scoped_order(pos[m].cpu(), X_t, hard_t, topP, m == "mlpT", device)[0] for m in pos}
-    sigs = [orders["dense"], orders["rel_hard"], orders["mlpT"]]
+    sigs = [orders["dense"], orders["rel_hard"], orders["mlpT"]]     # dense MUST stay sigs[0] (anchor)
     sp = data_d.get("splade")
     if sp is not None:
         sigs.append(_splade_scoped_order(sp, data_d["test_texts"], hard, topP, dataset=d))
-    l2 = [_merge_minrank([o[qi] for o in sigs]) for qi in range(len(qte))]
-    return l2, gte
+    if adapter is not None:                                          # adapted-dense = orthogonal "help-the-weak" axis
+        with torch.no_grad():
+            aX = adapter(X_t); aq = adapter(qt)
+        sigs.append(_scoped_order(aq.cpu(), aX, hard_t, topP, False, device)[0])
+    return sigs, gte                                                 # raw per-signal orders; run() fuses
 
 
 def _transition(A):
@@ -111,7 +139,8 @@ HPR_EVAL = ["musique_hpr_clean", "2wiki_hpr_clean", "hotpot_hpr_clean"]
 HEAD_MIX = ["musique_clean", "2wiki_clean"]
 
 
-def run(datasets=None, head_datasets=None, subdir="gte_qwen", scope_topk=0, n_seed=10, epochs=15, device=None):
+def run(datasets=None, head_datasets=None, subdir="gte_qwen", scope_topk=0, n_seed=10, epochs=15,
+        device=None, use_adapter=False, adapter_epochs=40):
     import gc
     datasets = datasets or HPR_EVAL
     head_datasets = head_datasets or HEAD_MIX
@@ -130,6 +159,13 @@ def run(datasets=None, head_datasets=None, subdir="gte_qwen", scope_topk=0, n_se
     del per_tr; gc.collect()
     if device.type == "cuda":
         torch.cuda.empty_cache()
+    adapter = None
+    if use_adapter:                                                 # universal dense adapter (raises the floor)
+        from src.experiments.dense_adapter import train_or_load
+        adapter = train_or_load(head_datasets, subdir, adapter_epochs, device)
+        gc.collect()
+        if device.type == "cuda":
+            torch.cuda.empty_cache()
 
     # ---- STEP 2: apply the champion head to each _hpr eval corpus (no refitting), compose L1->L2->L3 ----
     from src.core.engine import CoreEngine
@@ -139,23 +175,27 @@ def run(datasets=None, head_datasets=None, subdir="gte_qwen", scope_topk=0, n_se
         idx = faiss.IndexFlatIP(data_d["X"].shape[1]); idx.add(data_d["X"])
         per_d = {"train": data_d["train"], "Xt": torch.tensor(data_d["X"], device=device),
                  "index": idx, "faiss": idx}
-        l2, gte = level2_order(d, data_d, per_d, heads, scope_topk, device)
+        sigs, gte = level2_order(d, data_d, per_d, heads, scope_topk, device, adapter=adapter)
+        nq = len(gte)
+        perq = lambda fuse: [fuse([s[qi] for s in sigs]) for qi in range(nq)]
+        l2_min = perq(_merge_minrank)                               # current system fusion (fragile)
+        l2_rrf = perq(_merge_rrf)                                   # robust: RRF
+        l2_anc = perq(_merge_anchored)                              # robust + dense-anchored (≥ dense guaranteed)
         eng = CoreEngine(source=d, index_subdir=subdir)
         X = data_d["X"]; n = X.shape[0]; id2idx = eng.node_id_to_idx
         _, A, _ = _graph(eng, n, id2idx, sources=("struct", "syn"))
         P = _transition(A)                                          # one-time per dataset
         Xn = X.copy(); faiss.normalize_L2(Xn)
         qn = data_d["test"][0].copy(); faiss.normalize_L2(qn)       # normalised queries for the relevance gate
-        composed = []
-        for qi in range(len(gte)):
-            l3 = level3_order(l2[qi], P, qn[qi], Xn, n_seed)
-            composed.append(_compose(l2[qi], l3, n_head=5))         # L2 head trusted; L3 augments the tail
-        zs = " [zero-shot: domain held out of head training]" if d.split("_")[0] not in \
-             {h.split("_")[0] for h in head_datasets} else ""
-        out[d] = {"L2_only": _recall(l2, gte), "L2_plus_L3": _recall(composed, gte), "zero_shot": bool(zs)}
-        r2, r3 = out[d]["L2_only"], out[d]["L2_plus_L3"]
-        log.info("[e2e/%s]%s L2 R@2=%.1f R@5=%.1f  ->  L2+L3 R@2=%.1f R@5=%.1f (Δ@5 %+.1f)",
-                 d, zs, r2.get(2, 0), r2.get(5, 0), r3.get(2, 0), r3.get(5, 0), r3.get(5, 0) - r2.get(5, 0))
+        composed = [_compose(l2_anc[qi], level3_order(l2_anc[qi], P, qn[qi], Xn, n_seed), n_head=5)
+                    for qi in range(nq)]                            # L3 on the anchored base
+        zs = " [zero-shot]" if d.split("_")[0] not in {h.split("_")[0] for h in head_datasets} else ""
+        out[d] = {"L2_minrank": _recall(l2_min, gte), "L2_rrf": _recall(l2_rrf, gte),
+                  "L2_anchored": _recall(l2_anc, gte), "L2anc_plus_L3": _recall(composed, gte),
+                  "zero_shot": bool(zs)}
+        mn, rf, an, cp = (out[d][k] for k in ("L2_minrank", "L2_rrf", "L2_anchored", "L2anc_plus_L3"))
+        log.info("[e2e/%s]%s R@5  minrank=%.1f  rrf=%.1f  anchored=%.1f  +L3=%.1f  (R@50 +L3=%.1f)",
+                 d, zs, mn.get(5, 0), rf.get(5, 0), an.get(5, 0), cp.get(5, 0), cp.get(50, 0))
         del data_d, per_d, X, Xn, A, P; gc.collect()
         if device.type == "cuda":
             torch.cuda.empty_cache()
@@ -178,10 +218,12 @@ def main(argv=None):
     p.add_argument("--scope-topk", type=int, default=0)
     p.add_argument("--n-seed", type=int, default=10)
     p.add_argument("--epochs", type=int, default=15)
+    p.add_argument("--use-adapter", action="store_true", help="add the universal dense adapter as an L2 signal")
+    p.add_argument("--adapter-epochs", type=int, default=40)
     a = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", force=True)
-    run(datasets=a.datasets, head_datasets=a.head_datasets, subdir=a.subdir,
-        scope_topk=a.scope_topk, n_seed=a.n_seed, epochs=a.epochs)
+    run(datasets=a.datasets, head_datasets=a.head_datasets, subdir=a.subdir, scope_topk=a.scope_topk,
+        n_seed=a.n_seed, epochs=a.epochs, use_adapter=a.use_adapter, adapter_epochs=a.adapter_epochs)
 
 
 if __name__ == "__main__":
