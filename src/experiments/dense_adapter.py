@@ -110,8 +110,26 @@ def _apply_adapter(A, Xnp, device, bs=16384):
 
 def _dense_order(qb, Xb, k=100):
     idx = faiss.IndexFlatIP(Xb.shape[1]); idx.add(np.ascontiguousarray(Xb))
-    _, I = idx.search(np.ascontiguousarray(qb), min(k, Xb.shape[0]))
-    return I
+    D, I = idx.search(np.ascontiguousarray(qb), min(k, Xb.shape[0]))
+    return I, D                                                      # I = doc indices, D = cosine scores
+
+
+def _combsum(sig_orders, sig_scores, weights=None):
+    """Score-based fusion: rank by the WEIGHTED SUM of each doc's cosine across signals (0 where absent).
+    weights (per signal) down-weight an unreliable signal so it can't drag the fusion — set them from each
+    signal's TRAIN recall so a corpus where raw dense fails (KB) auto-suppresses raw. weights=None => equal."""
+    w = weights if weights is not None else [1.0] * len(sig_orders)
+    out = []
+    for qi in range(len(sig_orders[0])):
+        acc = {}
+        for wi, I, D in zip(w, sig_orders, sig_scores):
+            for doc, sc in zip(I[qi], D[qi]):
+                doc = int(doc)
+                if doc < 0:
+                    continue
+                acc[doc] = acc.get(doc, 0.0) + wi * float(sc)
+        out.append([d for d, _ in sorted(acc.items(), key=lambda kv: -kv[1])])
+    return out
 
 
 def train_or_load(head_datasets, subdir, epochs, device):
@@ -146,14 +164,8 @@ def run(datasets=None, head_datasets=None, subdir="gte_qwen", epochs=30, device=
     head_datasets = head_datasets or HEAD_MIX
     device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    log.info("=== training ONE universal dense adapter on %s (frozen encoder) ===", head_datasets)
-    per_tr = {}
-    for dsn in head_datasets:
-        dd = _load(dsn, subdir, 8000, 3000, 1)
-        per_tr[dsn] = {"X": dd["X"].astype("float32"), "train": dd["train"]}
-        log.info("  [adapter-train] loaded %s X%s", dsn, dd["X"].shape)
-    A = train_adapter(per_tr, device, epochs=epochs)
-    del per_tr; gc.collect()
+    A = train_or_load(head_datasets, subdir, epochs, device)        # cached -> reused across runs
+    gc.collect()
     if device.type == "cuda":
         torch.cuda.empty_cache()
 
@@ -161,17 +173,26 @@ def run(datasets=None, head_datasets=None, subdir="gte_qwen", epochs=30, device=
     for dsn in datasets:
         dd = _load(dsn, subdir, 8000, 3000, 2000)
         X = dd["X"].astype("float32"); q = dd["test"][0].astype("float32"); gold = dd["test"][2]
-        raw = _dense_order(q, X)
+        Iraw, Draw = _dense_order(q, X)
         aX = _apply_adapter(A, X, device); aq = _apply_adapter(A, q, device)
-        adp = _dense_order(aq, aX)
-        fused = [_merge_minrank([raw[qi], adp[qi]]) for qi in range(len(gold))]   # raw ∪ adapted (both dense variants)
+        Iadp, Dadp = _dense_order(aq, aX)
+        # reliability weights from TRAIN recall@20 (train-only labels; no test leak) -> auto-suppress raw on KB
+        qtr, _, gtr = dd["train"]
+        Itr_r, _ = _dense_order(qtr.astype("float32"), X)
+        Itr_a, _ = _dense_order(_apply_adapter(A, qtr.astype("float32"), device), aX)
+        w_raw = max(_recall(Itr_r, gtr).get(20, 0) / 100, 1e-3); w_adp = max(_recall(Itr_a, gtr).get(20, 0) / 100, 1e-3)
+        minrank = [_merge_minrank([Iraw[qi], Iadp[qi]]) for qi in range(len(gold))]     # rank-based union
+        combsum = _combsum([Iraw, Iadp], [Draw, Dadp])                                  # equal-weight score fusion
+        wcombsum = _combsum([Iraw, Iadp], [Draw, Dadp], weights=[w_raw, w_adp])         # reliability-weighted
         zs = " [zero-shot]" if dsn.split("_")[0] not in {h.split("_")[0] for h in head_datasets} else ""
-        out[dsn] = {"raw_dense": _recall(raw, gold), "adapted_dense": _recall(adp, gold),
-                    "fused_raw_adapted": _recall(fused, gold), "zero_shot": bool(zs)}
-        rr, ad, fu = out[dsn]["raw_dense"], out[dsn]["adapted_dense"], out[dsn]["fused_raw_adapted"]
-        log.info("[adapter/%s]%s R@5 raw=%.1f adapted=%.1f fused=%.1f (fuse%+.1f) | R@20 raw=%.1f fused=%.1f | R@50 raw=%.1f fused=%.1f",
-                 dsn, zs, rr.get(5, 0), ad.get(5, 0), fu.get(5, 0), fu.get(5, 0) - rr.get(5, 0),
-                 rr.get(20, 0), fu.get(20, 0), rr.get(50, 0), fu.get(50, 0))
+        out[dsn] = {"raw_dense": _recall(Iraw, gold), "adapted_dense": _recall(Iadp, gold),
+                    "fused_minrank": _recall(minrank, gold), "fused_combsum": _recall(combsum, gold),
+                    "fused_wcombsum": _recall(wcombsum, gold), "w_raw": round(w_raw, 3), "w_adp": round(w_adp, 3),
+                    "zero_shot": bool(zs)}
+        rr, ad, mn, cs, wc = (out[dsn][k] for k in ("raw_dense", "adapted_dense", "fused_minrank",
+                                                    "fused_combsum", "fused_wcombsum"))
+        log.info("[adapter/%s]%s R@5 raw=%.1f adapted=%.1f | minrank=%.1f combsum=%.1f Wcombsum=%.1f (w_raw=%.2f w_adp=%.2f) | R@20 Wc=%.1f",
+                 dsn, zs, rr.get(5, 0), ad.get(5, 0), mn.get(5, 0), cs.get(5, 0), wc.get(5, 0), w_raw, w_adp, wc.get(20, 0))
         del dd, X, aX; gc.collect()
     os.makedirs("results/L2", exist_ok=True)
     json.dump(out, open(f"results/L2/dense_adapter_{subdir}.json", "w"), indent=2)
