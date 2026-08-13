@@ -116,6 +116,31 @@ def _transition(A):
     return sp.diags(1.0 / deg) @ A
 
 
+def _ppr(P, seeds, n, alpha=0.5, iters=8):
+    p = np.zeros(n, np.float32)
+    for s in seeds:
+        if 0 <= s < n:
+            p[s] = 1.0 / max(len(seeds), 1)
+    r = p.copy()
+    for _ in range(iters):
+        r = alpha * p + (1 - alpha) * (P.T @ r)
+    return r
+
+
+def _ner_compose(l2_order_qi, P, n, n_seed=10, w=0.2, pool=100):
+    """L3 over the struct+weighted-NER graph: PPR mass from L2's top-n_seed seeds, blended (weight w) with
+    the L2 rank-score over L2's top-`pool` candidates. Promotes NER-reachable bridge docs (shared-entity
+    2nd hops) into the head without the hub blow-ups the old kNN graph caused. Best-of both: L2 head + graph."""
+    seeds = [int(x) for x in l2_order_qi[:n_seed] if int(x) >= 0]
+    if not seeds:
+        return [int(x) for x in l2_order_qi]
+    mass = _ppr(P, seeds, n)
+    cands = [int(x) for x in l2_order_qi[:pool] if int(x) >= 0]
+    m = np.array([mass[c] for c in cands], dtype=np.float32); m = m / (m.max() + 1e-9)
+    rs = np.array([1.0 - r / len(cands) for r in range(len(cands))], dtype=np.float32)
+    return [cands[j] for j in np.argsort(-(rs + w * m))]
+
+
 def level3_order(l2_order_qi, P, qvec, Xn, n_seed, alpha=0.5, iters=4):
     """L3: query-GUIDED Personalized PageRank seeded by L2's top-n_seed. PPR mass flows to docs graph-central
     to the seeds; we multiply by query relevance so a doc must be BOTH reachable and on-topic to surface —
@@ -183,20 +208,19 @@ def run(datasets=None, head_datasets=None, subdir="gte_qwen", scope_topk=0, n_se
         l2_anc = perq(_merge_anchored)                              # robust + dense-anchored (≥ dense guaranteed)
         eng = CoreEngine(source=d, index_subdir=subdir)
         X = data_d["X"]; n = X.shape[0]; id2idx = eng.node_id_to_idx
-        _, A, _ = _graph(eng, n, id2idx, sources=("struct", "syn"))
-        P = _transition(A)                                          # one-time per dataset
-        Xn = X.copy(); faiss.normalize_L2(Xn)
-        qn = data_d["test"][0].copy(); faiss.normalize_L2(qn)       # normalised queries for the relevance gate
-        composed = [_compose(l2_anc[qi], level3_order(l2_anc[qi], P, qn[qi], Xn, n_seed), n_head=5)
-                    for qi in range(nq)]                            # L3 on the anchored base
+        _, A_str, _ = _graph(eng, n, id2idx, sources=("struct",))
+        from src.pipeline.ner_edges import build_ner_edges
+        A_ner = build_ner_edges(d, [eng.nodes[i].content for i in range(len(eng.nodes))], n)
+        P = _transition((A_str + A_ner).tocsr())                    # struct + weighted-NER edges (kNN dropped)
+        composed = [_ner_compose(l2_min[qi], P, n, n_seed=n_seed) for qi in range(nq)]   # NER-blend L3 on min-rank base
         zs = " [zero-shot]" if d.split("_")[0] not in {h.split("_")[0] for h in head_datasets} else ""
         out[d] = {"L2_minrank": _recall(l2_min, gte), "L2_rrf": _recall(l2_rrf, gte),
-                  "L2_anchored": _recall(l2_anc, gte), "L2anc_plus_L3": _recall(composed, gte),
+                  "L2_anchored": _recall(l2_anc, gte), "L2_plus_nerL3": _recall(composed, gte),
                   "zero_shot": bool(zs)}
-        mn, rf, an, cp = (out[d][k] for k in ("L2_minrank", "L2_rrf", "L2_anchored", "L2anc_plus_L3"))
-        log.info("[e2e/%s]%s R@5  minrank=%.1f  rrf=%.1f  anchored=%.1f  +L3=%.1f  (R@50 +L3=%.1f)",
-                 d, zs, mn.get(5, 0), rf.get(5, 0), an.get(5, 0), cp.get(5, 0), cp.get(50, 0))
-        del data_d, per_d, X, Xn, A, P; gc.collect()
+        mn, cp = out[d]["L2_minrank"], out[d]["L2_plus_nerL3"]
+        log.info("[e2e/%s]%s R@5  L2=%.1f  ->  L2+NER-L3=%.1f  (Δ %+.1f)",
+                 d, zs, mn.get(5, 0), cp.get(5, 0), cp.get(5, 0) - mn.get(5, 0))
+        del data_d, per_d, X, A_str, A_ner, P; gc.collect()
         if device.type == "cuda":
             torch.cuda.empty_cache()
     out["_meta"] = {"head_trained_on": head_datasets, "evaluated_on": datasets,

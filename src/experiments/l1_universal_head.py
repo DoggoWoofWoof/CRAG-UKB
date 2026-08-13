@@ -73,7 +73,7 @@ def _load(dataset, subdir, limit, tr_cap, te_cap):
         gold = [[id2idx[g] for g in gg if g in id2idx] for _, _, gg in qs]
         return q, seed, gold, [nd.content for nd, _, _ in qs]
 
-    qtr, str_, gtr, _ = prep("train")
+    qtr, str_, gtr, tr_texts = prep("train")
     qte, ste, gte, te_texts = prep("test")
     splade = None                                              # optional learned-lexical axis for L2 hybrid
     try:
@@ -89,7 +89,8 @@ def _load(dataset, subdir, limit, tr_cap, te_cap):
         log.warning(f"[SPLADE] unavailable for {dataset}: {_e}")
     return {"X": X, "n": n, "npart": npart, "mem_idx": mem_idx, "hard": hard, "tag": tag,
             "train": (qtr, str_, gtr), "test": (qte, ste, gte),
-            "test_texts": te_texts, "bm25": getattr(eng, "bm25", None),    # lexical signals for L2 hybrid fusion
+            "test_texts": te_texts, "train_texts": tr_texts,               # query texts for lexical (SPLADE) signals
+            "bm25": getattr(eng, "bm25", None),
             "splade": splade}
 
 

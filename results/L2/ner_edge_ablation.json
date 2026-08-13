@@ -1,0 +1,41 @@
+{
+  "what": "NER 'shares-entity' edges (spaCy, NO LLM) vs synthetic kNN edges. L3 budget-matched PPR recall@100 from dense-top-20 seeds. Edge weight = sum(1/entity_df) so rare-entity BRIDGES beat common-entity HUBS.",
+  "budget_matched_recall_at_100": {
+    "musique_hpr": {
+      "dense_seed": 70.7,
+      "kNN_only": 79.2,
+      "NER_only": 87.0,
+      "struct+kNN_CURRENT": 82.0,
+      "struct+NER_weighted": 86.2
+    },
+    "2wiki_hpr": {
+      "dense_seed": 75.8,
+      "kNN_only": 81.2,
+      "NER_only": 93.2,
+      "struct+kNN_CURRENT": 96.0,
+      "struct+NER_weighted": 98.8
+    },
+    "hotpot_hpr": {
+      "dense_seed": 95.0,
+      "kNN_only": 96.0,
+      "NER_only": 96.0,
+      "struct+kNN_CURRENT": 99.0,
+      "struct+NER_weighted": 97.5
+    },
+    "metaqa_KB": {
+      "dense_seed": 32.8,
+      "kNN_only": 34.9,
+      "NER_only": 87.8,
+      "struct+kNN_CURRENT": 93.1,
+      "struct+NER_weighted": 97.5
+    }
+  },
+  "conclusions": [
+    "NER edges >> kNN edges everywhere: text NER-only 87-93 vs kNN 79-81; KB NER 87.8 vs kNN 34.9 (kNN ~ dense on KB = useless).",
+    "DROP kNN: redundant on text (adds ~0 over struct+NER) and worthless on KB.",
+    "Specificity weighting (1/df) fixes the clique-hub dilution: 2wiki struct+NER 96.5->98.8, metaqa @100 92.8->97.5, @50 80.8->85.2.",
+    "BEST UNIVERSAL EDGE-SET = struct + weighted-NER. vs current struct+kNN @100: musique +4.2, 2wiki +2.8, metaqa +4.4 (@50 +18); hotpot -1.5 (near-ceiling).",
+    "SPLADE-redundancy (open, next phase): on MetaQA NER-traversal reaches ~the same golds SPLADE recovered (both ~87) -> plausibly redundant on KB; needs full-pipeline retrain+benchmark to confirm."
+  ],
+  "next": "Add weighted-NER as a UKB edge type, remove kNN, retrain heads/adapter, re-benchmark end-to-end; then ablate SPLADE."
+}

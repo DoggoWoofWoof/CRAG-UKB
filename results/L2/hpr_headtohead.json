@@ -66,5 +66,20 @@
     "Positioning is efficiency/no-LLM: competitive recall at ~1/5 encoder size and zero LLM indexing cost, ~8pt below full HippoRAG 2.",
     "L3 traversal: neutral at R@5 on text (dense-reachable golds), adds at R@50 (mean 94.0->95.9; 2Wiki +4.25) and is decisive on KB (WebQSP +62).",
     "Caveat: 100-query test split (small); zero-shot head transfer is an open limitation."
-  ]
+  ],
+  "UPDATE_ner_edges": {
+    "what": "L3 now uses struct + weighted-NER edges (spaCy, no LLM), kNN dropped; NER-blend composition (w=0.2). This is the first time L3 moves final Recall@5.",
+    "ours_R5": {
+      "musique": 72.2,
+      "2wiki": 82.5,
+      "hotpot": 92.5,
+      "mean": 82.4
+    },
+    "vs": {
+      "prev_L2_only_mean": 80.0,
+      "NV_Embed_v2_7B_dense_mean": 80.2,
+      "HippoRAG2_full_mean": 87.1
+    },
+    "reading": "NER edges add +2.4 mean (2Wiki +4.0, MuSiQue +1.6, Hotpot +1.5), uniformly positive. Our 1.5B/no-LLM system now BEATS NV-Embed-v2 7B dense (82.4 vs 80.2), winning MuSiQue (72.2 vs 69.7) and 2Wiki (82.5 vs 76.5). Gap to full HippoRAG 2 cut from 7.1 to 4.7 (the rest is their 70B-LLM entity graph)."
+  }
 }
