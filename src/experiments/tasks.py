@@ -312,6 +312,11 @@ def _l2_seed(argv):
     l2_seed.main(argv)
 
 
+def _e2e_ner(argv):
+    from src.experiments import e2e_pipeline
+    e2e_pipeline.main(argv)
+
+
 def _l2_learned_fusion(argv):
     from src.experiments import l2_learned_fusion
     l2_learned_fusion.main(argv)
@@ -489,6 +494,11 @@ TASKS: Dict[str, Task] = {
                     "Learned per-query fusion gate vs parameter-free best-of (tests the 'why not one learned model' critique)",
                     _l2_learned_fusion,
                     smoke_args=["--datasets", "metaqa", "--gate-epochs", "5"]),
+    "e2e-ner": Task("e2e-ner", "gpu",
+                    "End-to-end L1->L2->L3 with struct+weighted-NER edges (kNN dropped) + NER-blend L3; universal head/adapter; final Recall@5",
+                    _e2e_ner,
+                    smoke_args=["--datasets", "metaqa", "--head-datasets", "metaqa",
+                                "--epochs", "3", "--use-adapter", "--adapter-epochs", "5"]),
     "l2-mem-bench": Task("l2-mem-bench", "gpu",
                     "L2 memory microbench: measured GPU peak for full-corpus-resident vs routed-pool-gather scoring (+topk parity)",
                     _l2_mem_bench,

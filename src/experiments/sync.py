@@ -176,6 +176,7 @@ def required_inputs(task_name: str, argv: List[str]) -> List[str]:
         "l1-universal-head",
         "l2-seed",
         "l2-learned-fusion",
+        "e2e-ner",
         "l2-mem-bench",
         "l1-candgen",
         "l3-graphlift",
@@ -189,7 +190,7 @@ def required_inputs(task_name: str, argv: List[str]) -> List[str]:
         paths = []                                        # graph/index + per-source master
         for d in ds:
             paths.append(f"data/ukb_storage/{d}")
-            if task_name in ("l1-universal-head", "l2-seed", "l2-learned-fusion", "l2-mem-bench", "l1-candgen", "l3-graphlift", "l1-overlap-test", "encoder-graph"):   # dir-level skip misses this subdir on stale volumes
+            if task_name in ("l1-universal-head", "l2-seed", "l2-learned-fusion", "e2e-ner", "l2-mem-bench", "l1-candgen", "l3-graphlift", "l1-overlap-test", "encoder-graph"):   # dir-level skip misses this subdir on stale volumes
                 paths.append(f"data/ukb_storage/{d}/{parse_option(argv, '--subdir', 'bge_large')}")
             if task_name in ("l1-optimize", "sota-baselines"):
                 paths.extend(local_files(f"data/ukb_storage/{d}/cache/L1"))
@@ -227,6 +228,7 @@ def required_inputs(task_name: str, argv: List[str]) -> List[str]:
             "l1-universal-head",
             "l2-seed",
             "l2-learned-fusion",
+            "e2e-ner",
             "l2-mem-bench",
             "l1-candgen",
             "l3-graphlift",
@@ -272,7 +274,7 @@ def result_outputs(task_name: str, argv: List[str]) -> List[str]:
         return [f"data/ukb_storage/{src}"] if src and src != "master_nodes" else [f"data/ukb_storage/{d}" for d in ds]
     if task_name == "l1-universal-head":                  # subdir-specific JSON at repo-root results/
         return [f"results/L1_universal_head_{parse_option(argv, '--subdir', 'bge_large')}.json"]
-    if task_name in ("l2-seed", "l2-learned-fusion", "l2-mem-bench", "l1-candgen", "l3-graphlift", "l1-overlap-test"):   # pull the whole L2 results dir
+    if task_name in ("l2-seed", "l2-learned-fusion", "e2e-ner", "l2-mem-bench", "l1-candgen", "l3-graphlift", "l1-overlap-test"):   # pull the whole L2 results dir
         return ["results/L2"]
     if task_name == "reencode-ukb":                       # pull the re-encoded subdir (bge/e5 embeddings)
         subdir = parse_option(argv, "--subdir", "bge_base")

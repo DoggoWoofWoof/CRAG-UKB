@@ -127,6 +127,7 @@ def _modal_base_image(modal):
         # need forward-pass encodings, but its modeling file has an unconditional `import flash_attn`.
         .pip_install("https://github.com/Dao-AILab/flash-attention/releases/download/v2.5.9.post1/"
                      "flash_attn-2.5.9.post1%2Bcu122torch2.2cxx11abiFALSE-cp311-cp311-linux_x86_64.whl")
+        .run_commands("python -m spacy download en_core_web_sm")   # NER model for shares-entity edges (no LLM)
     )
 
 
