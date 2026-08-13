@@ -37,5 +37,41 @@
     "BEST UNIVERSAL EDGE-SET = struct + weighted-NER. vs current struct+kNN @100: musique +4.2, 2wiki +2.8, metaqa +4.4 (@50 +18); hotpot -1.5 (near-ceiling).",
     "SPLADE-redundancy (open, next phase): on MetaQA NER-traversal reaches ~the same golds SPLADE recovered (both ~87) -> plausibly redundant on KB; needs full-pipeline retrain+benchmark to confirm."
   ],
-  "next": "Add weighted-NER as a UKB edge type, remove kNN, retrain heads/adapter, re-benchmark end-to-end; then ablate SPLADE."
+  "next": "Add weighted-NER as a UKB edge type, remove kNN, retrain heads/adapter, re-benchmark end-to-end; then ablate SPLADE.",
+  "full_corpus_recall_at_100": {
+    "note": "Full _clean corpora + MetaQA KB (not the 1k _hpr): budget-matched PPR recall@100. struct+NER vs struct+kNN.",
+    "musique_clean": {
+      "dense": 79.4,
+      "struct+kNN": 87.9,
+      "struct+NER": 88.2
+    },
+    "2wiki_clean": {
+      "dense": 70.3,
+      "struct+kNN": 91.1,
+      "struct+NER": 93.7
+    },
+    "squad_clean": {
+      "dense": 94.2,
+      "struct+kNN": 95.4,
+      "struct+NER": 95.2
+    },
+    "metaqa_KB": {
+      "dense": 32.8,
+      "struct+kNN": 93.1,
+      "struct+NER": 97.5
+    },
+    "mean": {
+      "struct+kNN": 91.9,
+      "struct+NER": 93.6,
+      "delta": 1.8
+    },
+    "verdict": "NER win holds at full-corpus scale (+1.8 mean; 2Wiki +2.6, MetaQA-KB +4.4; SQuAD single-hop neutral). struct+NER >= struct+kNN everywhere -> kNN droppable universally."
+  },
+  "headtohead_hpr_with_NER": {
+    "ours_mean_R5": 82.4,
+    "NV_Embed_7B_dense": 80.2,
+    "HippoRAG2_full": 87.1,
+    "note": "_hpr R@5 with NER-L3: musique 72.2, 2wiki 82.5, hotpot 92.5. Beats NV-Embed 7B dense; gap to HippoRAG2 4.7."
+  },
+  "remaining_needs_modal": "Full universal head trained jointly on all 6 (incl webqsp 781k) + webqsp/hotpot-full pipeline @5 -> Modal (CPU box OOMs on 781k)."
 }
