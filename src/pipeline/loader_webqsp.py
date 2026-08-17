@@ -21,38 +21,61 @@ from src.pipeline.standardizer import StandardNode, save_nodes
 log = logging.getLogger("pipeline.loader_webqsp")
 
 
-def load_webqsp(parquet_paths, source, max_questions=None, max_rels=12, degree_cap=None):
+def load_webqsp(parquet_paths, source, max_questions=None, max_rels=15, degree_cap=None):
+    import re
     import pandas as pd
     df = pd.concat([pd.read_parquet(p) for p in parquet_paths], ignore_index=True)
     if max_questions:
         df = df.iloc[:max_questions].reset_index(drop=True)
+
+    # The GRAPH is kept exactly as-is (all nodes + all edges). We ONLY clean the encoded TEXT: raw Freebase
+    # MIDs (m.0abc / g.1xyz — unlabeled CVT/mediator plumbing) are noise the encoder can't use, so we DEDUCE
+    # each MID to a real name via the graph (its named neighbour) and replace it. Zero IDs left in any content.
+    idpat = re.compile(r'^[mg]\.[0-9a-z_]+$')
+    is_mid = lambda x: bool(idpat.match(x))
 
     triples = set()
     for g in df["graph"]:
         for t in g:
             triples.add((str(t[0]), str(t[1]), str(t[2])))
 
-    ent_rels = defaultdict(list)                               # entity -> [(relation, other)] for verbalized content
+    adj = defaultdict(list)                                    # undirected relation-adjacency for BOTH edges + deducing
     ents = set()
     for h, rel, tl in triples:
-        ent_rels[h].append((rel, tl)); ents.add(h); ents.add(tl)
-    entities = sorted(ents)
+        adj[h].append((rel, tl)); adj[tl].append((rel, h)); ents.add(h); ents.add(tl)
+    entities = sorted(ents)                                    # ALL entities kept as nodes (graph unchanged)
     ent2nid = {e: f"{source}_doc_{i}" for i, e in enumerate(entities)}
 
     def _rel(r):                                               # freebase 'a.b.official_language' -> 'official language'
         return r.split(".")[-1].replace("_", " ")
 
+    named_of = {}                                              # MID -> a named neighbour (deduced), cached
+    def deduce(x):                                             # return a NAME for x (itself if named; else a named neighbour)
+        if not is_mid(x):
+            return x
+        if x in named_of:
+            return named_of[x]
+        nm = next((o for _, o in adj.get(x, []) if not is_mid(o)), None)
+        named_of[x] = nm
+        return nm
+
     nodes = []
     for e in entities:
-        rels = ent_rels.get(e, [])[:max_rels]
-        content = e if not rels else (e + ". " + "; ".join(f"{_rel(r)} {o}" for r, o in rels))
-        nodes.append(StandardNode(ent2nid[e], content, {"source": source, "type": "document", "title": e}))
+        rels, seen = [], set()
+        for rel, o in adj.get(e, []):
+            ro = deduce(o)                                     # resolve MID targets to names
+            if ro and ro != e and ro not in seen:
+                rels.append((rel, ro)); seen.add(ro)
+            if len(rels) >= max_rels:
+                break
+        name = e if not is_mid(e) else (deduce(e) or "")       # MID node: use a deduced name, never the raw id
+        body = "; ".join(f"{_rel(r)} {o}" for r, o in rels)
+        content = (f"{name}. {body}" if name and body else (name or body)) or f"entity {ent2nid[e]}"
+        nodes.append(StandardNode(ent2nid[e], content,
+                                  {"source": source, "type": "document", "title": (e if not is_mid(e) else name)}))
     id2node = {n.node_id: n for n in nodes}
 
-    # KG edges (undirected for traversal). degree_cap=None => pull ALL triples: the graph is sparse
-    # (median deg 2) so storage is cheap and no entity is isolated. Freebase mega-hubs (max ~45k deg)
-    # are bounded at TRAVERSAL time (bounded PPR-guided best-first), not by deleting edges here — a
-    # build-time cap isolates leaf entities whose only link is a saturated hub.
+    # KG edges — UNCHANGED: every original triple, exactly as before (do not modify the graph).
     deg = Counter()
     n_edges = 0
     for h, rel, tl in triples:
