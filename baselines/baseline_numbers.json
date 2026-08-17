@@ -49,6 +49,13 @@
       "hotpot": 96.3,
       "mean": 87.1,
       "compute": "7B dense + 70B LLM"
+    },
+    "GFM-RAG": {
+      "musique": 58.2,
+      "2wiki": 95.6,
+      "hotpot": 87.1,
+      "mean": 80.3,
+      "compute": "GNN foundation model + GPT-4o extraction (LLM)"
     }
   },
   "qa_f1_paper_70B_reader": {
@@ -93,5 +100,31 @@
       "hotpot": 75.5
     }
   },
-  "winning_story": "CRAG (1.5B, no LLM) R@5 mean 82.4 BEATS Contriever/GTR/RAPTOR/HippoRAG-v1/NV-Embed-v2 \u2014 including the 70B-LLM RAPTOR & HippoRAG-v1 \u2014 at a fraction of the cost. Only full HippoRAG 2 (7B+70B-LLM) is ahead (87.1). CRAG number is NOT final (still perfecting; joint full-6 + tuning pending)."
+  "winning_story": "CRAG (1.5B, no LLM) R@5 mean 82.4 BEATS Contriever/GTR/RAPTOR/HippoRAG-v1/NV-Embed-v2 \u2014 including the 70B-LLM RAPTOR & HippoRAG-v1 \u2014 at a fraction of the cost. Only full HippoRAG 2 (7B+70B-LLM) is ahead (87.1). CRAG number is NOT final (still perfecting; joint full-6 + tuning pending).",
+  "recall_at_2_where_available": {
+    "GFM-RAG": {
+      "musique": 49.1,
+      "2wiki": 90.8,
+      "hotpot": 78.3
+    },
+    "HippoRAG_ColBERTv2": {
+      "musique": 40.9,
+      "2wiki": 70.7,
+      "hotpot": 60.5
+    }
+  },
+  "QA_READER_INCONSISTENCY": "CRITICAL: baseline QA F1 uses DIFFERENT readers per paper \u2014 HippoRAG2=Llama-3.3-70B, GFM-RAG=GPT-4o-mini. NOT comparable. MUST recreate QA with ONE fixed open reader (src/experiments/qa_reader.py) on each system's top-5 to compare consistently.",
+  "qa_f1_by_paper_reader": {
+    "GFM-RAG_gpt4o-mini": {
+      "musique": 40.4,
+      "2wiki": 77.7,
+      "hotpot": 66.9
+    },
+    "HippoRAG2_llama70b": {
+      "musique": 48.6,
+      "2wiki": 71.0,
+      "hotpot": 75.5
+    }
+  },
+  "retrieval_ranking_mean_R5": "HippoRAG2 87.1 > CRAG(cur) 82.4 > GFM-RAG 80.3 ~ NV-Embed 80.2 > HippoRAG-v1 73.6 > RAPTOR 70.3 > GTR 63.6 > Contriever 59.8. CRAG beats ALL but HippoRAG2, at 1.5B/no-LLM."
 }
