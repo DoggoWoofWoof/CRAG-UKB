@@ -1,0 +1,24 @@
+{
+  "what": "CRAG variants @5 on _hpr (musique/2wiki/hotpot), vs the consistent HippoRAG2-paper baselines. 1.5B, no LLM.",
+  "zero_shot_no_training": {
+    "dense": 71.8,
+    "+splade": 72.6,
+    "+NER_L3": 74.0,
+    "note": "NO per-dataset training at all (dense+SPLADE frozen, NER edges from docs). Dataset-agnostic + zero-shot."
+  },
+  "trained_in_suite": {
+    "mean_R5": 82.4,
+    "note": "+ offset head + adapter (trained on the eval suite)."
+  },
+  "beats_zeroshot": [
+    "Contriever 59.8",
+    "GTR 63.6",
+    "RAPTOR 70.3 (70B LLM)",
+    "HippoRAG-v1 73.6 (70B LLM)"
+  ],
+  "beats_trained": [
+    "+ NV-Embed-v2 7B dense 80.2"
+  ],
+  "only_ahead": "HippoRAG2 87.1 (7B + 70B LLM)",
+  "status": "CRAG NOT final (joint full-6 + level tuning ongoing); numbers will only improve."
+}

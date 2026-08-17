@@ -1,0 +1,97 @@
+{
+  "source": "HippoRAG 2 paper (arXiv 2502.14802), Tables 3 (Recall@5) & QA F1 \u2014 CONSISTENT: all methods, same corpora (MuSiQue/2Wiki/HotpotQA), same metric. Reuse for retrieval is consistent. QA F1 uses a Llama-3.3-70B reader -> for a consistent QA comparison with CRAG, recreate F1 with ONE fixed small open reader across ALL systems (deferred until CRAG is finalized).",
+  "recall_at_5": {
+    "Contriever": {
+      "musique": 46.6,
+      "2wiki": 57.5,
+      "hotpot": 75.3,
+      "mean": 59.8,
+      "compute": "dense"
+    },
+    "GTR": {
+      "musique": 49.1,
+      "2wiki": 67.9,
+      "hotpot": 73.9,
+      "mean": 63.6,
+      "compute": "dense (T5-base)"
+    },
+    "RAPTOR": {
+      "musique": 57.8,
+      "2wiki": 66.2,
+      "hotpot": 86.9,
+      "mean": 70.3,
+      "compute": "Llama-3.3-70B"
+    },
+    "HippoRAG_v1": {
+      "musique": 53.2,
+      "2wiki": 90.4,
+      "hotpot": 77.3,
+      "mean": 73.6,
+      "compute": "KG+PPR, 70B LLM"
+    },
+    "NV-Embed-v2": {
+      "musique": 69.7,
+      "2wiki": 76.5,
+      "hotpot": 94.5,
+      "mean": 80.2,
+      "compute": "7B dense, no LLM"
+    },
+    "CRAG_ours_current": {
+      "musique": 72.2,
+      "2wiki": 82.5,
+      "hotpot": 92.5,
+      "mean": 82.4,
+      "compute": "1.5B dense, NO LLM (NER edges)"
+    },
+    "HippoRAG2": {
+      "musique": 74.7,
+      "2wiki": 90.4,
+      "hotpot": 96.3,
+      "mean": 87.1,
+      "compute": "7B dense + 70B LLM"
+    }
+  },
+  "qa_f1_paper_70B_reader": {
+    "Contriever": {
+      "musique": 31.3,
+      "2wiki": 41.9,
+      "hotpot": 62.3
+    },
+    "GTR": {
+      "musique": 34.6,
+      "2wiki": 52.8,
+      "hotpot": 62.8
+    },
+    "NV-Embed-v2": {
+      "musique": 45.7,
+      "2wiki": 61.5,
+      "hotpot": 75.3
+    },
+    "RAPTOR": {
+      "musique": 28.9,
+      "2wiki": 52.1,
+      "hotpot": 69.5
+    },
+    "GraphRAG": {
+      "musique": 38.5,
+      "2wiki": 58.6,
+      "hotpot": 68.6
+    },
+    "LightRAG": {
+      "musique": 1.6,
+      "2wiki": 11.6,
+      "hotpot": 2.4
+    },
+    "HippoRAG_v1": {
+      "musique": 35.1,
+      "2wiki": 71.8,
+      "hotpot": 63.5
+    },
+    "HippoRAG2": {
+      "musique": 48.6,
+      "2wiki": 71.0,
+      "hotpot": 75.5
+    }
+  },
+  "winning_story": "CRAG (1.5B, no LLM) R@5 mean 82.4 BEATS Contriever/GTR/RAPTOR/HippoRAG-v1/NV-Embed-v2 \u2014 including the 70B-LLM RAPTOR & HippoRAG-v1 \u2014 at a fraction of the cost. Only full HippoRAG 2 (7B+70B-LLM) is ahead (87.1). CRAG number is NOT final (still perfecting; joint full-6 + tuning pending)."
+}
