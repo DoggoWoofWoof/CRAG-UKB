@@ -1,0 +1,24 @@
+{
+  "what": "Leave-one-out zero-shot transfer of the LEARNED head+adapter (train on 2 _hpr, apply to held-out 3rd), aggressive min-rank fusion + NER-L3, vs no-head zero-shot (dense+SPLADE+NER).",
+  "result_R5": {
+    "musique": {
+      "no_head": 58.2,
+      "transferred": 57.8
+    },
+    "2wiki": {
+      "no_head": 73.2,
+      "transferred": 78.2
+    },
+    "hotpot": {
+      "no_head": 90.5,
+      "transferred": 91.5
+    }
+  },
+  "mean": {
+    "no_head": 73.97,
+    "transferred": 75.83,
+    "delta": 1.86
+  },
+  "do_no_harm_fusion": "FAILS (restrict-to-base-pool loses 2wiki +5 because its golds are OUTSIDE the base pool; mean 74.13 < aggressive 75.83). Safety-cage is the wrong tool.",
+  "verdict": "The learned head DOES transfer zero-shot (+1.86 mean, +5 on 2wiki; worst -0.4 on musique = insignificant n=100). Path to robust zero-shot = BROADER diverse training (full-6 head), not a fusion trick."
+}
