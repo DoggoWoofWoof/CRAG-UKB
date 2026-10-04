@@ -1,0 +1,15 @@
+#!/bin/bash
+export PYTHONUTF8=1 PYTHONIOENCODING=utf-8 MODAL_PROFILE=pes1ug23cs623
+for i in $(seq 1 300); do
+  if modal volume ls crag-partition hmeta 2>&1 | grep -q "webqsp__H4_SPLIT_PRESERVE__SK.json"; then
+    echo "DONE at iter $i"
+    exit 0
+  fi
+  if ! modal app list 2>&1 | grep -q "ap-vfB8f1Ahg4PNd0WZW5xDxe.*ephemeral"; then
+    echo "APP_NO_LONGER_RUNNING at iter $i"
+    exit 2
+  fi
+  sleep 60
+done
+echo "TIMEOUT after 300 iters"
+exit 1
