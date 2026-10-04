@@ -27,7 +27,7 @@ PHASES = {
     "PHASE3": ["results/FREEBASE_SCALE/ml2", "results/FREEBASE_SCALE/h2l", "results/FREEBASE_SCALE/ivf"],
     # 2026-10-04 (user: remove what is not required, periodically): HF-verified AND not read by any running/queued job -- the Freebase NER families (HF group fbs_ner; the encode job needs names + tree, NOT ner; restore
     # ~6 min on the host at 40 MB/s) and the CALIB bundle (HF group calib incl. ford.npy; the CALIB EVAL gates are finished).  Same HF-index check as PHASE3.
-    "PHASE4": ["data/freebase_scale/ner", "work/FBX_CALIB/bundle_v1"],
+    "PHASE4": ["data/freebase_scale/ner", "work/FBX_CALIB/bundle_v1", "data/freebase_scale/pq", "data/freebase_scale/ivf_transfer"],
 }
 SKIP = [a.split("=", 1)[1] for a in sys.argv if a.startswith("--skip=")]      # directories pinned by the laptop (data/_cache/HOUSEKEEP_PINS.json): never deleted this run
 REPARSE = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
