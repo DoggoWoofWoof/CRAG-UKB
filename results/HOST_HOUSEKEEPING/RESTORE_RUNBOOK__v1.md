@@ -8,9 +8,9 @@ Nothing below needs the old host. The HF token never goes on a shared host (pres
 | piece | size | master | backup / restore source |
 |---|---|---|---|
 | code (`src/`, `scratchpad/`, `rx.toml`, docs) + result records (text/json ≤ 3 MB) | ~0.3 GB raw | laptop `C:\Users\Swastik\Desktop\CRAG` (git remote `crag-ukb` = github.com/DoggoWoofWoof/CRAG-UKB, branch `unified-crag-architecture`; pushing code there is authorised by the user, 2026-10-05; data stays out of git) | HF `CODE/crag_code_<stamp>.tar.gz` (58 MB, newest 3 kept); `tar xzf` into an empty directory |
-| Freebase tree `data/final_canonical/freebase` (CANONICAL_FREEZE `58958f33…`) | 79.2 GB | laptop only | **not on HF** (account quota) — push from the laptop (`rx push`) or copy to a second HF account first |
-| Hotpot / 2Wiki substrates `data/final_canonical/{hotpotqa,2wiki}` | 53.5 GB | laptop only | **not on HF** (relay repo deleted 2026-10-03 to free quota) — same as above |
-| other canonical substrates (squad, musique, webqsp, metaqa) | small | laptop | laptop |
+| Freebase tree `data/final_canonical/freebase` (CANONICAL_FREEZE `58958f33…`) | 79.2 GB | laptop only | **not on HF** (does not fit the free quota of either account, ~48 GB compressed) — push from the laptop (`rx push`) |
+| Hotpot / 2Wiki substrates `data/final_canonical/{hotpotqa,2wiki}` | 53.5 GB | laptop | **HF third copy** `DarKnight9895/crag-large-backup`, group `g2_text` (zstd-3, sha256 of the original bytes in `MANIFEST/HFBIG_INDEX.json`) — see §2b |
+| other canonical substrates (squad, musique, webqsp, metaqa) + top-level freeze files + `_history` | ~16 GB | laptop | laptop; also HF third copy groups `g0_meta`, `g1_small` (§2b) |
 | models: `Alibaba-NLP/gte-Qwen2-1.5B-instruct` rev `a9af15a6…` (7.1 GB), `naver/splade-cocondenser-ensembledistil` (0.9 GB) | 8 GB | public HF hub | `huggingface_hub.snapshot_download` into `<ws>/models/…` |
 | Freebase encode chunks (`data/freebase_scale/enc/…`, 1872 chunks) + codebook + train/holdout | ~16 GB at the end | host | HF groups `fbs_enc`, `fbs_enc_meta` (incremental, sync loop) |
 | Freebase names / NER / PQ / IVF-transfer | 12.6 / 15.5 / 2.2 / 0.5 GB | host | HF groups `fbs_names`, `fbs_ner`, `fbs_pq`, `fbs_ivft` |
@@ -40,6 +40,23 @@ Nothing below needs the old host. The HF token never goes on a shared host (pres
 4. From the laptop push what is laptop-only: `data/final_canonical/freebase` (needed by the encode job for node names AND by the CSR rebuild), the Hotpot/2Wiki substrates if L1 text work continues.
 5. Models: download the two public checkpoints (revision pinned in the contract: `results/FREEBASE_SCALE/enc/FBX_QWEN_ENCODING_CONTRACT__v1.json`).
 
+## 2b. Restore from the second-account repo (`DarKnight9895/crag-large-backup`, written by `scratchpad/_hf_big.py`)
+
+Groups: `g0_meta` (top-level freeze files, `_history`), `g1_small` (metaqa, musique, squad, webqsp), `g2_text` (hotpotqa, 2wiki).  The Freebase tree (`g3_tree`) is NOT uploaded (does not fit the free quota).
+Objects are zstd level 3 when the sampled ratio is < 0.88, raw otherwise; `MANIFEST/HFBIG_INDEX.json` carries the sha256 + size of the ORIGINAL bytes, so a restore is bit-identical or it fails.
+
+On the laptop (has the token; `HF_TOKEN` or `~/hf_tokens.json` — the account named DarKnight9895 is selected):
+```
+python scratchpad/_hf_big.py CHECK                                  # remote size + LFS sha256 vs the upload state
+python scratchpad/_hf_big.py RESTORE <dest> g2_text                 # on a machine you own: pulls + unpacks + verifies
+python scratchpad/_hf_big.py URLS g2_text data/_cache/hfbig_urls.json [only,csv]   # signed links (valid ~1 h) for a host that must not hold the token
+```
+On the host (no token, stdlib only; the zstandard wheel is in `data/_cache/whl/` and is unpacked into a private `_pylib` next to `--dest`):
+```
+python -u scratchpad/_hf_big_hostrestore.py --manifest data/_cache/hfbig_urls.json --work data/_cache/hfbig_work --dest <dest> [--compare data/final_canonical] [--cleanup]
+```
+`--compare` hashes every restored file against the live host copy; the 2026-10-05 test restored 3/3 files bit-identically (`HFBIG_HOST_RESTORE__test.json`).  Do not delete the host copy of a group before CHECK passes and a sample of that group has been restored and compared.
+
 ## 3. Resuming each experiment
 
 - **Freebase encode (resumable by design):** restore `fbs_enc_meta`, `fbs_enc`, the tree, models, `fbs_names`; then `rx run … python -u scratchpad/_fbx_enc_order.py RETRY 20` (the job that is running now: 1.5 cpu / 6 GB / 0.5 gpu). It skips every chunk whose record + checksum verifies and continues; 1872 chunks, ~5.7 min each on the RTX 4500 Ada (≈ 130 h for the 1416 that remained at 2026-10-03 22:00).
@@ -52,7 +69,7 @@ Nothing below needs the old host. The HF token never goes on a shared host (pres
 
 ## 5. Known gaps (be honest)
 
-- The Freebase tree (79 GB), Hotpot/2Wiki substrates (53 GB) and the 17 GB CSR have **no HF copy** (the free account holds ~100 GB; mpr's 10.6 GB mirror shares it). Laptop master + rebuild covers them; a second HF account would remove the laptop dependency.
+- The Freebase tree (79 GB) and the 17 GB CSR have **no HF copy** (the tree is ~48 GB compressed and does not fit the free quota of the second account next to the other groups; a third account would hold it).  The CSR is rebuilt from the tree.  Laptop master + rebuild covers them.  Hotpot/2Wiki and the small substrates DO have a verified third copy (§2b).
 - The laptop is the single master of the code tree beyond the HF snapshot; uncommitted work should be committed/pushed by the user.
 - The sync loop only runs while the laptop is on and the loop process is alive.
 - The HF token (`Swastik9895`, classic write) must stay valid while the loop runs; revoke at huggingface.co/settings/tokens when the encode + sync are finished (or replace by a fine-grained token scoped to `crag-host-backup`).
