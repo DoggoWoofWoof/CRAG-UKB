@@ -1,0 +1,141 @@
+{
+  "dataset": "musique",
+  "dataset_version": "canonical_v1",
+  "built_at": "2026-09-05T18:18:01",
+  "unique_node_ids": true,
+  "canonical_node_count": 117534,
+  "raw_source_records": 496194,
+  "duplicates_collapsed": 378660,
+  "dropped_records": 0,
+  "drop_reasons": {},
+  "accounting_identity": "RAW_SOURCE_RECORDS == CANONICAL_NODES + DUPLICATES_COLLAPSED + DROPPED_RECORDS (asserted)",
+  "empty_text_nodes": 0,
+  "empty_title_nodes": 0,
+  "corpus_accounting_detail": {
+    "raw_source_records": 496194,
+    "dropped_records": [],
+    "duplicates_collapsed": 378660,
+    "identity": "(title, paragraph_text) exact pair; node_id = musique:<sha256(title+US+text)[:24]>",
+    "alternative_identity_text_hash_only": {
+      "n_nodes": 117533,
+      "delta_vs_chosen": -1,
+      "texts_under_multiple_titles": {
+        "846f6d0832a1fefb0fa9815b6916195d310ad0df3fe150ed818d5905380fe5eb": [
+          "Adei Ad",
+          "Etz Efraim"
+        ]
+      }
+    },
+    "identity_normalization_diagnostics": {
+      "exact_identities": 117534,
+      "extra_collapses_if_NFC": 0,
+      "extra_collapses_if_whitespace_collapse": 6,
+      "extra_collapses_if_NFC+ws+casefold": 14
+    },
+    "note": "MuSiQue paragraphs carry no global id; a paragraph is identified by its (article title, text). Text-hash-only identity would merge paragraphs from different articles that share text."
+  },
+  "query_stats": {
+    "train": {
+      "n": 19938,
+      "n_with_gold_refs": 19938,
+      "n_all_gold_resolved": 19938,
+      "n_any_gold_resolved": 19938,
+      "gold_refs_total": 46613,
+      "gold_nodes_total": 46613,
+      "GOLD_REFS_TOTAL": 46613,
+      "GOLD_REFS_RESOLVED": 46613,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    },
+    "dev": {
+      "n": 2417,
+      "n_with_gold_refs": 2417,
+      "n_all_gold_resolved": 2417,
+      "n_any_gold_resolved": 2417,
+      "gold_refs_total": 6404,
+      "gold_nodes_total": 6404,
+      "GOLD_REFS_TOTAL": 6404,
+      "GOLD_REFS_RESOLVED": 6404,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    },
+    "test": {
+      "n": 2459,
+      "n_with_gold_refs": 0,
+      "n_all_gold_resolved": 0,
+      "n_any_gold_resolved": 0,
+      "gold_refs_total": 0,
+      "gold_nodes_total": 0,
+      "GOLD_REFS_TOTAL": 0,
+      "GOLD_REFS_RESOLVED": 0,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    },
+    "singlehop_dev_test_aux": {
+      "n": 5,
+      "file": "dev_test_singlehop_questions_v1.0.json",
+      "note": "kept as official aux file reference only; not tabled"
+    }
+  },
+  "splits_with_gold": [
+    "train",
+    "dev"
+  ],
+  "ALL_EVAL_GOLDS_PRESENT": true,
+  "GOLD_SEMANTICS": {
+    "_semantics": "gold ref -> {canonical node,...}; a ref resolves iff it maps to >=1 node; ALL_GOLD_REFS_RESOLVE = every ref in every gold-bearing split resolves; ambiguous refs are DISJUNCTIVE (retrieved & {alternatives} != {}), never conjunctive.",
+    "_supersedes": "the cardinality test len(gold_node_ids)==len(set(gold_refs)), which failed a question merely because one of its refs legitimately expanded to >1 canonical node.",
+    "ALL_GOLD_REFS_RESOLVE": true,
+    "GOLD_REFS_TOTAL": 53017,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "per_split": {
+      "train": {
+        "GOLD_REFS_TOTAL": 46613,
+        "GOLD_REFS_RESOLVED": 46613,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "dev": {
+        "GOLD_REFS_TOTAL": 6404,
+        "GOLD_REFS_RESOLVED": 6404,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      }
+    },
+    "_index_cardinality": "GoldResolver builds a 1:1 ref->node index for every dataset in this builder, so AMBIGUOUS_GOLD_REFS is 0 by construction here."
+  },
+  "ALL_GOLD_REFS_RESOLVE": true,
+  "MISSING_GOLD_REFS": 0,
+  "AMBIGUOUS_GOLD_REFS": 0,
+  "unresolved_gold_refs": {
+    "counts": {},
+    "examples": []
+  },
+  "eval_subset": {
+    "method": "legacy id musique_clean_q_train_{i} (FlashRAG train_i) = official musique_ans_v1.0_train.jsonl line i; question text verified equal",
+    "n_legacy": 2000,
+    "n_recovered": 2000,
+    "n_missed": 0,
+    "misses": [],
+    "official_split_distribution": {
+      "train": 2000
+    },
+    "file": "data/final_canonical/musique/eval_2000.jsonl",
+    "n": 2000,
+    "n_all_gold_resolved": 2000,
+    "n_with_gold_refs": 2000,
+    "GOLD_REFS_TOTAL": 4680,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "ALL_GOLD_REFS_RESOLVE": true
+  },
+  "CORPUS_HASH": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+  "NODE_ORDER_HASH": "6242bd7a69cfc17dbdebf18288c773ed621db2b89402fba9d223691a41c66fb8",
+  "nodes_jsonl_sha256": "b8fc63ce6071609312de01045b0ea0f381fe9d643b977281d7132693faebfbdf"
+}

@@ -1,0 +1,196 @@
+{
+ "_config": {
+  "datasets": [
+   "webqsp",
+   "metaqa"
+  ],
+  "epochs": 25,
+  "seeds": 3,
+  "p_drop": 0.2,
+  "bs": 8,
+  "trainer": "batched",
+  "note": "FAST ARCHITECTURE SCREENING - 25 batched epochs = overtrained regime; do not read sub-point gaps as final"
+ },
+ "references": {
+  "best_standalone": {
+   "webqsp": 39.3,
+   "metaqa": 77.08
+  },
+  "coop_maxrank_baseline": {
+   "webqsp": 35.69,
+   "metaqa": 83.04
+  },
+  "A_softmaxKL_25ep": {
+   "webqsp": 53.35,
+   "metaqa": 67.67
+  },
+  "oracle_realistic": {
+   "webqsp": 56.75,
+   "metaqa": 88.39
+  },
+  "oracle_5way": {
+   "webqsp": 60.52,
+   "metaqa": 89.98
+  }
+ },
+ "arms": {
+  "F0": {
+   "webqsp": [
+    52.92,
+    0.84
+   ],
+   "metaqa": [
+    67.68,
+    1.92
+   ]
+  },
+  "F1": {
+   "webqsp": [
+    52.2,
+    1.74
+   ],
+   "metaqa": [
+    72.75,
+    3.7
+   ]
+  },
+  "G1": {
+   "webqsp": [
+    51.99,
+    0.98
+   ],
+   "metaqa": [
+    71.5,
+    3.36
+   ]
+  },
+  "G2": {
+   "webqsp": [
+    52.61,
+    1.78
+   ],
+   "metaqa": [
+    70.05,
+    2.59
+   ]
+  },
+  "H": {
+   "webqsp": [
+    49.62,
+    0.63
+   ],
+   "metaqa": [
+    81.3,
+    1.37
+   ]
+  },
+  "I": {
+   "webqsp": [
+    53.19,
+    1.05
+   ],
+   "metaqa": [
+    79.19,
+    2.87
+   ]
+  }
+ },
+ "gates": {
+  "F0": {
+   "webqsp": {
+    "dense": 0.775,
+    "offset": 0.978,
+    "splade": 0.012,
+    "relation": 0.99,
+    "path": 0.948
+   },
+   "metaqa": {
+    "dense": 0.67,
+    "offset": 0.95,
+    "splade": 0.571,
+    "relation": 0.195,
+    "path": 0.675
+   }
+  },
+  "F1": {
+   "webqsp": {
+    "dense": 0.912,
+    "offset": 0.678,
+    "splade": 0.182,
+    "relation": 0.825,
+    "path": 0.667
+   },
+   "metaqa": {
+    "dense": 0.794,
+    "offset": 0.832,
+    "splade": 0.903,
+    "relation": 0.728,
+    "path": 0.665
+   }
+  },
+  "G1": {
+   "webqsp": {
+    "dense": 0.131,
+    "offset": 0.772,
+    "splade": 0.11,
+    "relation": 0.254,
+    "path": 0.161
+   },
+   "metaqa": {
+    "dense": 0.151,
+    "offset": 0.942,
+    "splade": 0.415,
+    "relation": 0.002,
+    "path": 0.048
+   }
+  },
+  "G2": {
+   "webqsp": {
+    "dense": 0.531,
+    "offset": 0.719,
+    "splade": 0.466,
+    "relation": 0.521,
+    "path": 0.446
+   },
+   "metaqa": {
+    "dense": 0.7,
+    "offset": 0.946,
+    "splade": 0.817,
+    "relation": 0.399,
+    "path": 0.382
+   }
+  },
+  "H": {
+   "webqsp": {
+    "dense": 0.881,
+    "offset": 0.422,
+    "splade": 0.137,
+    "relation": 0.488,
+    "path": 0.916
+   },
+   "metaqa": {
+    "dense": 0.851,
+    "offset": 0.899,
+    "splade": 0.86,
+    "relation": 0.24,
+    "path": 0.565
+   }
+  },
+  "I": {
+   "webqsp": {
+    "dense": 0.127,
+    "offset": 0.796,
+    "splade": 0.113,
+    "relation": 0.252,
+    "path": 0.165
+   },
+   "metaqa": {
+    "dense": 0.145,
+    "offset": 0.948,
+    "splade": 0.413,
+    "relation": 0.002,
+    "path": 0.049
+   }
+  }
+ }
+}

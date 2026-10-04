@@ -1,0 +1,245 @@
+{
+  "dataset": "2wiki",
+  "n_rows": 5991597,
+  "shard_size": 250000,
+  "shards": [
+    {
+      "shard": 0,
+      "file": "reuse_map/shard_000.jsonl"
+    },
+    {
+      "shard": 1,
+      "file": "reuse_map/shard_001.jsonl"
+    },
+    {
+      "shard": 2,
+      "file": "reuse_map/shard_002.jsonl"
+    },
+    {
+      "shard": 3,
+      "file": "reuse_map/shard_003.jsonl"
+    },
+    {
+      "shard": 4,
+      "file": "reuse_map/shard_004.jsonl"
+    },
+    {
+      "shard": 5,
+      "file": "reuse_map/shard_005.jsonl"
+    },
+    {
+      "shard": 6,
+      "file": "reuse_map/shard_006.jsonl"
+    },
+    {
+      "shard": 7,
+      "file": "reuse_map/shard_007.jsonl"
+    },
+    {
+      "shard": 8,
+      "file": "reuse_map/shard_008.jsonl"
+    },
+    {
+      "shard": 9,
+      "file": "reuse_map/shard_009.jsonl"
+    },
+    {
+      "shard": 10,
+      "file": "reuse_map/shard_010.jsonl"
+    },
+    {
+      "shard": 11,
+      "file": "reuse_map/shard_011.jsonl"
+    },
+    {
+      "shard": 12,
+      "file": "reuse_map/shard_012.jsonl"
+    },
+    {
+      "shard": 13,
+      "file": "reuse_map/shard_013.jsonl"
+    },
+    {
+      "shard": 14,
+      "file": "reuse_map/shard_014.jsonl"
+    },
+    {
+      "shard": 15,
+      "file": "reuse_map/shard_015.jsonl"
+    },
+    {
+      "shard": 16,
+      "file": "reuse_map/shard_016.jsonl"
+    },
+    {
+      "shard": 17,
+      "file": "reuse_map/shard_017.jsonl"
+    },
+    {
+      "shard": 18,
+      "file": "reuse_map/shard_018.jsonl"
+    },
+    {
+      "shard": 19,
+      "file": "reuse_map/shard_019.jsonl"
+    },
+    {
+      "shard": 20,
+      "file": "reuse_map/shard_020.jsonl"
+    },
+    {
+      "shard": 21,
+      "file": "reuse_map/shard_021.jsonl"
+    },
+    {
+      "shard": 22,
+      "file": "reuse_map/shard_022.jsonl"
+    },
+    {
+      "shard": 23,
+      "file": "reuse_map/shard_023.jsonl"
+    }
+  ],
+  "fields": [
+    "canonical_node_id",
+    "source_identity",
+    "canonical_text_hash",
+    "legacy_node_id",
+    "legacy_row_index",
+    "legacy_text_hash",
+    "status",
+    "dense_input_hash",
+    "splade_input_hash",
+    "dense_reusable",
+    "splade_reusable",
+    "ner_reusable"
+  ],
+  "extra_fields": [
+    "dense_reuse_source",
+    "splade_reuse_source",
+    "phase_c_row_index",
+    "legacy_dense_input_hash",
+    "legacy_splade_input_hash",
+    "ukb_row_token_identical",
+    "ner_reuse_state"
+  ],
+  "reuse_rule": "token-ID equality under the FROZEN tokenizers, not raw-text equality",
+  "memoization": {
+    "what": "each DISTINCT encoder input is tokenized once; canonical rows whose input is byte-identical to a stored encoder input share its token-ID digest",
+    "why_sound": "the tokenizer is a deterministic pure function of the input string",
+    "independently_verified": {
+      "k": 20000,
+      "mismatches": 0,
+      "PASS": true,
+      "note": "re-tokenized independently to prove that byte-identical encoder inputs yield identical token-ID digests (memoization is sound)"
+    }
+  },
+  "frozen_dense": {
+    "model": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "input": "text field verbatim (no prefix/title for docs)",
+    "max_seq_length": 32768,
+    "source": "src/experiments/canonical_encode.py:176-189 + sentence_bert_config.json"
+  },
+  "frozen_splade": {
+    "model": "naver/splade-cocondenser-ensembledistil",
+    "truncation": true,
+    "max_length": 256,
+    "source": "src/experiments/canonical_encode.py:209 + encodings/splade/docs/status/shard_*.json"
+  },
+  "already_encoded_families": {
+    "PHASE_C_UNIVERSE": {
+      "n_rows": 5989847,
+      "encodings": "data/canonical/2wiki_universe/encodings",
+      "dense_complete": true,
+      "splade_complete": true,
+      "manifests": {
+        "dense": {
+          "dataset": "2wiki_universe",
+          "kind": "docs",
+          "model": "dense",
+          "n_items": 5989847,
+          "rows_covered": 5989847,
+          "shard_size": 40000,
+          "n_shards": 150,
+          "complete": true,
+          "source_sha256": "728eff547c5e868d52e06c32cea4f059ff9d44f5723e7cc4496f25602c21bc29",
+          "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+          "dim": 1536,
+          "dtype": "float16",
+          "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: "
+        },
+        "splade": {
+          "dataset": "2wiki_universe",
+          "kind": "docs",
+          "model": "splade",
+          "n_items": 5989847,
+          "rows_covered": 5989847,
+          "shard_size": 40000,
+          "n_shards": 150,
+          "complete": true,
+          "source_sha256": "728eff547c5e868d52e06c32cea4f059ff9d44f5723e7cc4496f25602c21bc29",
+          "encoder": "naver/splade-cocondenser-ensembledistil"
+        }
+      }
+    },
+    "PHASE_C_VIEW398": {
+      "n_rows": 398354,
+      "encodings": "data/canonical/2wiki/encodings",
+      "dense_complete": true,
+      "splade_complete": true,
+      "manifests": {
+        "dense": {
+          "dataset": "2wiki",
+          "kind": "docs",
+          "model": "dense",
+          "n_items": 398354,
+          "rows_covered": 398354,
+          "shard_size": 40000,
+          "n_shards": 10,
+          "complete": true,
+          "source_sha256": "19df6b5ea28eeea0c9abd40dfc18f2bd29cdbbba90d3e3c694cf288747717638",
+          "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+          "dim": 1536,
+          "dtype": "float16",
+          "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: "
+        },
+        "splade": {
+          "dataset": "2wiki",
+          "kind": "docs",
+          "model": "splade",
+          "n_items": 398354,
+          "rows_covered": 398354,
+          "shard_size": 40000,
+          "n_shards": 10,
+          "complete": true,
+          "source_sha256": "19df6b5ea28eeea0c9abd40dfc18f2bd29cdbbba90d3e3c694cf288747717638",
+          "encoder": "naver/splade-cocondenser-ensembledistil"
+        }
+      }
+    }
+  },
+  "legacy_ukb": {
+    "docs_dump": "data/final_canonical/_work/legacy/2wiki_clean/docs.jsonl",
+    "n_legacy_docs": 65865,
+    "dump_has_content": true,
+    "embeddings": "data/ukb_storage/2wiki_clean/gte_qwen/nodes.npy",
+    "limitation": null
+  },
+  "ner": {
+    "state": "PER_DOC_ON_DISK",
+    "where": "data/canonical/2wiki_universe/_ner_work/ (full-universe per-doc entity postings)"
+  },
+  "counts": {
+    "NEW": 5925732,
+    "dense_reusable": 5902083,
+    "splade_reusable": 5902084,
+    "dense_from_PHASE_C_UNIVERSE": 5902083,
+    "splade_from_PHASE_C_UNIVERSE": 5902084,
+    "EXACT": 61576,
+    "dense_needs_encode": 87764,
+    "splade_needs_encode": 87763,
+    "TEXT_CHANGED": 2539,
+    "LEGACY_ONLY": 1750
+  },
+  "seconds": 1222.6
+}

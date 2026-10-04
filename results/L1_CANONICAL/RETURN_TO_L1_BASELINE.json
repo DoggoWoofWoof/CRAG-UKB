@@ -1,0 +1,229 @@
+{
+ "RECORD": "RETURN_TO_L1_BASELINE",
+ "utc": "2026-09-13T10:23:45Z",
+ "PURPOSE": "The read-only CANONICAL DATASET INVENTORY AUDIT of 2026-09-13, frozen as the baseline the return to L1 starts from. Nothing was built during the audit.",
+ "RULING_2026_09_13": {
+  "CANONICAL_6_OF_6_SUBSTRATES": "FROZEN",
+  "FREEBASE_V3": "TERMINAL",
+  "DATASET_CLEANING": "CLOSED",
+  "RETURN_TO_L1": {
+   "adapter": "MISSING",
+   "partitions": "MISSING",
+   "replay_caches": "MISSING"
+  },
+  "FALSE_ALARMS_REFUTED": [
+   "metaqa query embeddings (407,513 rows present in both channels)",
+   "2wiki query embeddings (192,606 rows present in both channels)"
+  ],
+  "WEBQSP_LANE": {
+   "lane": "WEBQSP_ROG_RESOLVED",
+   "conditioning": "BENCHMARK_CONDITIONED",
+   "query_independent": "FALSE / NOT CLAIMED",
+   "MID_completeness": "NOT REQUIRED FOR V1",
+   "note": "the 2.59M RoG graph is usable now for L1 comparability; full query-independent Freebase (302M) is a separate scale lane"
+  },
+  "PARTITION_CONTRACT": "unchanged: H4_SPLIT_PRESERVE over STRUCT+KNN closed neighbourhoods -> Mt-KaHyPar DETERMINISTIC_QUALITY, KM1, k ~= N/100, eps 0.03, seed 0; MetaQA/SQuAD/MuSiQue locally, WebQSP/HotpotQA/2Wiki on an external >=250 GB machine; if that compute is unavailable a NEW explicit ruling is required -- never a silent algorithm swap",
+  "LEGACY_L1_ARTEFACTS": "preserved as COMPARISON artefacts, not production inputs; archive only after canonical-layout L1 reproduces legacy L1 where the evaluation populations overlap",
+  "NO_L2_OR_L3": "until L1 BASE and SAFE succeed on the canonical substrates and the L1 manifest is re-frozen"
+ },
+ "PLAN_ORDER": [
+  "1 freeze inventory audit as baseline (this record)",
+  "2 canonical L1 adapter",
+  "3 adapter validation on all 6",
+  "4 partition metaqa/squad/musique locally",
+  "5 partition webqsp/hotpotqa/2wiki externally",
+  "6 canonical replay caches",
+  "7 L1 BASE",
+  "8 L1 SAFE",
+  "9 re-freeze L1 manifest on canonical substrates",
+  "10 resume L1 research"
+ ],
+ "PINS": {
+  "CANONICAL_FREEZE.json": {
+   "RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+   "file_sha256": "039dcf327aa71e39994cdeedc731033279d81d854d74efc29c86f197546f3dc8",
+   "frozen_utc": "2026-09-12T22:27:25Z",
+   "STATUS": "FROZEN"
+  },
+  "VERIFICATION.json": {
+   "utc": "2026-09-13T00:10:16Z",
+   "mode": "full",
+   "checks": 686,
+   "failed": 0,
+   "PASS": true,
+   "freeze_RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+   "file_sha256": "bdb81f402c03467b695da0a1ad371f4715f366086dcb06dfa6e167efc1ded466"
+  },
+  "canonical.py_sha256": "c657830b304afe861893b516726af419d35142334f866517b83221427a9016f5",
+  "audit_report": {
+   "path": "docs/CANONICAL_INVENTORY_AUDIT_2026-09-13.md",
+   "sha256": "ef647ea75803b18c4434324c15b951b2ae121db3ae54b12f8f1f0bf0969e1605"
+  },
+  "audit_data": {
+   "results/L1_CANONICAL/inventory_audit_six.json": "5fb6f2439552d26be086a5499503bea4e1cbe7b409bf4fed5cb3bb82c28ec1ec",
+   "results/L1_CANONICAL/inventory_webqsp_extra.json": "6e4eae056946a9102d765811337e614a62824afb116651b47a05634db0a8faaf"
+  },
+  "L1_LOCKED_MANIFEST_legacy": {
+   "path": "results/L1/L1_LOCKED_MANIFEST.json",
+   "sha256": "e12f341cd023ee0a392de1fd0de1c436584f619153b70e00f761479b3236348d",
+   "status": "STALE relative to the canonical package; kept as the legacy comparison baseline"
+  }
+ },
+ "DATASETS": {
+  "metaqa": {
+   "DATASET_json_RECORD_SHA256": "8ab4506933d0df8f9b8443848b9da80e49e698cf9cb40ef32523fdb4e31e2c87",
+   "frozen_utc": "2026-09-12T00:11:15Z",
+   "n_nodes": 43234,
+   "n_queries": 407513,
+   "splits_in_row_order": null,
+   "graph_families": [
+    "knn",
+    "ner",
+    "structural"
+   ],
+   "eval_split": {
+    "split": "dev",
+    "reason": "a real labelled dev split exists"
+   },
+   "PRIMARY_STATUS": "READY_FOR_L1",
+   "LEVEL_1_CANONICAL": "READY",
+   "LEVEL_2_REPRESENTATION": "READY",
+   "LEVEL_3_L1_INPUTS": "READY_INPUTS_ONLY -- adapter, partition and replay cache not yet built on canonical positions"
+  },
+  "2wiki": {
+   "DATASET_json_RECORD_SHA256": "ddb083a8f8cc0a1e5626d17ebd834c25c7b571d72c2bea58223276da8ff26a8a",
+   "frozen_utc": "2026-09-12T00:12:57Z",
+   "n_nodes": 5989847,
+   "n_queries": 192606,
+   "splits_in_row_order": null,
+   "graph_families": [
+    "knn",
+    "ner",
+    "structural"
+   ],
+   "eval_split": {
+    "split": "dev",
+    "reason": "its `test` gold is hidden"
+   },
+   "PRIMARY_STATUS": "READY_FOR_L1",
+   "LEVEL_1_CANONICAL": "READY",
+   "LEVEL_2_REPRESENTATION": "READY",
+   "LEVEL_3_L1_INPUTS": "READY_INPUTS_ONLY -- adapter, partition and replay cache not yet built on canonical positions"
+  },
+  "musique": {
+   "DATASET_json_RECORD_SHA256": "67fa637183fb02c4762fc80f6f4d2e21e14e2c665977e89adfcd6d32ed6d683f",
+   "frozen_utc": "2026-09-12T00:11:29Z",
+   "n_nodes": 117534,
+   "n_queries": 24814,
+   "splits_in_row_order": null,
+   "graph_families": [
+    "knn",
+    "ner",
+    "structural"
+   ],
+   "eval_split": {
+    "split": "dev",
+    "reason": "its `test` gold is hidden"
+   },
+   "PRIMARY_STATUS": "READY_FOR_L1",
+   "LEVEL_1_CANONICAL": "READY",
+   "LEVEL_2_REPRESENTATION": "READY",
+   "LEVEL_3_L1_INPUTS": "READY_INPUTS_ONLY -- adapter, partition and replay cache not yet built on canonical positions"
+  },
+  "hotpotqa": {
+   "DATASET_json_RECORD_SHA256": "2f778679a52f75c045615f32095c27d8217dfce0d7600319180d985e45793c6f",
+   "frozen_utc": "2026-09-12T00:12:08Z",
+   "n_nodes": 5233329,
+   "n_queries": 105257,
+   "splits_in_row_order": null,
+   "graph_families": [
+    "knn",
+    "ner",
+    "structural"
+   ],
+   "eval_split": {
+    "split": "validation",
+    "reason": "the benchmark's name for its labelled held-out split; its `test` split has empty gold arrays"
+   },
+   "PRIMARY_STATUS": "READY_FOR_L1",
+   "LEVEL_1_CANONICAL": "READY",
+   "LEVEL_2_REPRESENTATION": "READY",
+   "LEVEL_3_L1_INPUTS": "READY_INPUTS_ONLY -- adapter, partition and replay cache not yet built on canonical positions"
+  },
+  "squad": {
+   "DATASET_json_RECORD_SHA256": "29976120cf085d2f776c9eea28da6363bc6c6d0be679cca550db7f714a151a23",
+   "frozen_utc": "2026-09-12T00:11:26Z",
+   "n_nodes": 20233,
+   "n_queries": 142192,
+   "splits_in_row_order": null,
+   "graph_families": [
+    "knn",
+    "ner",
+    "structural"
+   ],
+   "eval_split": {
+    "split": "dev",
+    "reason": "squad has no test split at all"
+   },
+   "PRIMARY_STATUS": "READY_FOR_L1",
+   "LEVEL_1_CANONICAL": "READY",
+   "LEVEL_2_REPRESENTATION": "READY",
+   "LEVEL_3_L1_INPUTS": "READY_INPUTS_ONLY -- adapter, partition and replay cache not yet built on canonical positions"
+  },
+  "webqsp": {
+   "DATASET_json_RECORD_SHA256": "56c8ed2352c5f0ecdebf1a103dc0aa9913ec5067f10664f70a4b1b26412b525d",
+   "frozen_utc": "2026-09-12T00:13:18Z",
+   "n_nodes": 2592894,
+   "n_queries": 4737,
+   "splits_in_row_order": null,
+   "graph_families": [
+    "knn",
+    "ner",
+    "structural"
+   ],
+   "eval_split": {
+    "split": "train_holdout",
+    "reason": "no dev split, and its only labelled non-train split is `test`, which the standing bar on test results excludes; a seed-pinned holdout is carved from train instead. Query subsetting is allowed; the corpus is untouched."
+   },
+   "PRIMARY_STATUS": "READY_FOR_L1",
+   "LEVEL_1_CANONICAL": "READY",
+   "LEVEL_2_REPRESENTATION": "READY",
+   "LEVEL_3_L1_INPUTS": "READY_INPUTS_ONLY -- adapter, partition and replay cache not yet built on canonical positions"
+  }
+ },
+ "AUDIT_RESULT": {
+  "all_six": "DATASET.json self-hash OK; pinned files present and unmodified since VERIFICATION; nodes.jsonl lines == n_nodes; 0 duplicate node ids; 0 empty texts; split rows == recorded; 0 duplicate query ids; query_ids.json == concatenation; 0 unresolved gold/topic refs; 24 embedding channels rows == corpus/query rows (shard headers); 18 graph families n_edges == manifest, 0 missing_src, 0 missing_dst, 0 NaN weights, 0 orphan nodes; 12 caches [n_queries x 1000] ids in range, 1000 distinct per row, monotone scores",
+  "webqsp": "7,058 qualified relations 1:1 with rel ids (identity unambiguous); 23 weak components, largest 2,592,826 (99.9974%), 0 isolates, 93,692 self loops; nodes.jsonl sha256 recomputed == pinned; three pinned governance records carry pre-build (stale) wording and are never edited",
+  "freebase": "served tree + closure V2 + deletion log + R2 census confirmed; sources preserved; not reopened"
+ },
+ "BLOCKERS": {
+  "1_adapter": "no L1 script reads data/final_canonical/; every path is hard-coded to data/ukb_storage, data/processed/master_nodes_*, scratchpad/ablation_qwen/*/variant_C, scratchpad/_l1ep/parts, results/GENERALIZATION/G2_L1_PARTITION_SEARCH/runs/cache_*.npz",
+  "2_partitions": "no H4_SK hard partition over canonical positions (k ~= N/100: metaqa 432, squad 202, musique 1,175, webqsp 25,929, hotpotqa 52,333, 2wiki 59,898)",
+  "3_replay_caches": "no frozen-contract replay cache over canonical positions / EVAL_SPLITS populations"
+ },
+ "LEGACY_ARTEFACTS_PRESERVED": [
+  "results/L1/L1_LOCKED_MANIFEST.json",
+  "results/GENERALIZATION/G2_L1_PARTITION_SEARCH/runs/cache_*.npz",
+  "scratchpad/_l1hu/",
+  "scratchpad/_l1ep/",
+  "scratchpad/_l1kn/",
+  "scratchpad/ablation_qwen/",
+  "data/ukb_storage/",
+  "data/processed/master_nodes_*.json",
+  "data/l2_corpus/"
+ ],
+ "ENVIRONMENT_AT_BASELINE": {
+  "disk_free_gb": 9.9,
+  "disk_note": "99% full; the drop from 27 GB happened during the audit and was caused by other sessions' processes, not this one",
+  "ram_gb": 15.7,
+  "wsl": "Ubuntu-22.04, mtkahypar 1.6.2 (pip), python 3.10.12, 7.6 GB default ceiling",
+  "foreign_processes": [
+   "scripts/m3b_contract.py",
+   "scripts/m3b_relations.py",
+   "dry_compile.py (message-passing-retrieval session)"
+  ],
+  "modal": "dead (no accounts with credit)"
+ },
+ "RECORD_SHA256": "fb702cb7316a7ec55468f995062d303ccd0a9a78de0b53ad9be4e0d6efd4fffc",
+ "RECORD_SHA256_LF": "ce7dd3c011e6508681cb12cc14a18738c0360e88c687840966c3eda047f07d4b"
+}

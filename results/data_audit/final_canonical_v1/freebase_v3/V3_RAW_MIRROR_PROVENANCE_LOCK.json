@@ -1,0 +1,73 @@
+{
+  "schema": "V3_RAW_MIRROR_PROVENANCE_LOCK/v1",
+  "generated_utc": "2026-09-06T17:42:39Z",
+  "status": "LOCKED BEFORE TRANSFER",
+  "TARGET": {
+    "url": "https://archive.org/download/freebase-rdf-latest/freebase-rdf-latest.gz",
+    "identifier": "freebase-rdf-latest",
+    "archive_org_server": "ia803201.us.archive.org",
+    "archive_org_dir": "/28/items/freebase-rdf-latest",
+    "size_bytes": 31305093084,
+    "size_gb": 31.31,
+    "md5_expected": "38d8e9cb7a12634e46a0c52c4ee8dd52",
+    "sha1_expected": "d1950f3c966932358a79a02cd1d56ae3165b26f4",
+    "crc32_expected": "74c62738",
+    "source_mtime_epoch": 1435655545,
+    "source_mtime_utc": "2015-06-30T09:12:25Z"
+  },
+  "LIVE_HEAD_PROBE": {
+    "content-type": "application/octet-stream",
+    "accept-ranges": "bytes",
+    "content-length": "31305093084",
+    "last-modified": "Tue, 30 Jun 2015 09:12:25 GMT",
+    "etag": "\"55925d79-749edcfdc\"",
+    "content_length_matches_metadata": true,
+    "range_requests_supported": true,
+    "range_probe": "HTTP 206 for bytes 0-63; payload begins 1f8b08 (gzip, deflate). Verified before the lock was written, so the download can resume after interruption rather than restarting 31.3 GB."
+  },
+  "CUSTODY": {
+    "uploader": "admin@cryto.net",
+    "addeddate": "2015-06-30 09:12:26",
+    "chain": "Google published freebase-rdf-latest.gz; the Internet Archive item was created 2015-06-30 and has held it since. Our copy will come from the Internet Archive.",
+    "LIMITATION": "third-party custody. Google's own endpoint returns 403 AccessDenied (verified, recorded in V3_SOURCE_ASSESSMENT.json), so there is NO upstream digest to verify against. The MD5/SHA1 below attest to what the Internet Archive holds, not that it equals what Google published.",
+    "MITIGATION": "IDIR is an independent 2023 preprocessing of the same dump. Check 4 measured 99.998% exact structural agreement on retained predicates with zero reverse-only cases. If the raw build reproduces IDIR's 134,142,730 triples at that rate, the mirror is corroborated by a party that never saw our copy.",
+    "this_is_a_chain_plus_a_cross_check": "not a signature. Recorded as such so no later document can cite this lock as proof of authenticity it does not provide."
+  },
+  "OTHER_FILES_IN_THE_ITEM": {
+    "deleted_freebase.tar.gz": {
+      "size": "2227082891",
+      "md5": "3a2b903862ea9d7d79f106a3821c3b02"
+    },
+    "fb2w.nt.gz": {
+      "size": "22224745",
+      "md5": "a3b40bdfffed9064ad1412062e25433b"
+    },
+    "freebase-rdf-latest_archive.torrent": {
+      "size": "162412",
+      "md5": "7fcb31987780224a2bae68b9519e8cce"
+    },
+    "freebase-rdf-latest_files.xml": {
+      "size": null,
+      "md5": "fb2bc3dbcfa8bd92f4e75ff7cd2a49bd"
+    },
+    "freebase-rdf-latest_meta.sqlite": {
+      "size": "14336",
+      "md5": "9cef566a12f7b3df502e3a533198d278"
+    },
+    "freebase-rdf-latest_meta.xml": {
+      "size": "1346",
+      "md5": "0c0f2bd77acf568f5b0c08e59f96a88a"
+    }
+  },
+  "NOTE_ON_OTHER_FILES": "fb2w.nt.gz (22 MB) is the Freebase-to-Wikidata mapping and deleted_freebase.tar.gz (2.2 GB) covers deleted entities. Neither is needed for the contract as frozen. Recorded so a later need does not require re-discovering the item.",
+  "VERIFICATION_PLAN": {
+    "on_completion": [
+      "byte count == 31,305,093,084",
+      "md5 == 38d8e9cb7a12634e46a0c52c4ee8dd52",
+      "sha1 == d1950f3c966932358a79a02cd1d56ae3165b26f4"
+    ],
+    "if_any_fails": "do not proceed to PASS A. A digest mismatch means the delivered bytes are not the published artifact and every downstream number would inherit that. Same rule check 1 applied to the IDIR package.",
+    "gzip_integrity": "digest match proves transfer fidelity. Stream-decodability is proven separately by PASS A reaching EOF, which is the same standard FINDING_4 used on object_types.csv."
+  },
+  "DISK_POLICY": "the source is never expanded to its documented ~250 GB uncompressed form. Every pass streams from gzip. Contract clause SOURCE_EXPANSION."
+}

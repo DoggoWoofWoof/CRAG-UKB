@@ -1,0 +1,1508 @@
+{
+ "RECORD": "PHG_REPORT",
+ "version": 2,
+ "supersedes": {
+  "PHG_REPORT.json": {
+   "path": "results/L1_LOWMEM/_history/PHG_REPORT.618883c9.json",
+   "sha256": "618883c9f778821d1e2def275ee8bee2169ecb6a97a89c19d16e88fabd844aa6",
+   "bytes": 24100
+  },
+  "PHG_REPORT.md": {
+   "path": "results/L1_LOWMEM/_history/PHG_REPORT.d7dc4f8b.md",
+   "sha256": "d7dc4f8b381294e08a41b36b2e6aee3efc6d5d6d4629a331dae2f72d0440d41b",
+   "bytes": 5222
+  }
+ },
+ "arm": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4",
+ "follow_up": "PHG_NONEMPTY_REPAIR_V1",
+ "utc": "2026-09-13T18:32:01Z",
+ "preregistrations": {
+  "lane": {
+   "path": "results/L1_LOWMEM/PHG_PREREG.json",
+   "bytes": 12650,
+   "sha256": "a290ad99b3ef3394859e4653acc66d4120abd8924e7aec25568b8dd269291404"
+  },
+  "repair": {
+   "path": "results/L1_LOWMEM/PHG_REPAIR_PREREG.json",
+   "bytes": 13859,
+   "sha256": "d219fc90772e1e8604318b434c7cf773abdfea67a30970ff5a082214732189da"
+  }
+ },
+ "STATUS": "STOP_FOR_REVIEW",
+ "decisions": {
+  "squad": {
+   "phg_lane": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS",
+   "repair": "REPAIR_NOOP_IDENTICAL",
+   "final": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS"
+  },
+  "metaqa": {
+   "phg_lane": "PHG_PARTITION_INVALID",
+   "repair": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS",
+   "final": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS"
+  }
+ },
+ "terminology_amendment": {
+  "from": "PHG_L1_NONINFERIOR",
+  "to": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS",
+  "verdict_field": {
+   "from": "NONINFERIOR",
+   "to": "NO_SIGNIFICANT_PAIRED_LOSS"
+  },
+  "why": "a non-significant paired McNemar difference is not formal non-inferiority; no non-inferiority margin was preregistered in PHG_PREREG.json, so no non-inferiority claim is made (the squad point estimate is -0.003, not 'same or better')",
+  "rule_unchanged": "SIG_LOSS iff delta < 0 and p < 0.05; otherwise the renamed label -- identical to PHG_PREREG.json gate 3",
+  "applied_by": "supersession of PHG_RUNS_squad.json and PHG_REPORT.{json,md}: originals moved unchanged to results/L1_LOWMEM/_history/, superseding records carry `supersedes` pointers; PHG_PREREG.json itself is never edited",
+  "user_spellings_mapped": [
+   "PHG_L1_NO_SIGNIFICANT_LOSS",
+   "NO_SIGNIFICANT_PAIRED_LOSS"
+  ]
+ },
+ "l1_primary_SAFE": {
+  "squad": {
+   "phg_R1": {
+    "delta_phg_minus_mtk": -0.003,
+    "p": 0.23788,
+    "sig": false,
+    "phg_only": 6,
+    "mtk_only": 12,
+    "verdict": "NO_SIGNIFICANT_PAIRED_LOSS"
+   },
+   "phg_R1_repaired": null
+  },
+  "metaqa": {
+   "phg_R1": null,
+   "phg_R1_repaired": {
+    "delta_phg_minus_mtk": 0.031,
+    "p": 0.0,
+    "sig": true,
+    "phg_only": 112,
+    "mtk_only": 50,
+    "verdict": "NO_SIGNIFICANT_PAIRED_LOSS"
+   }
+  }
+ },
+ "l1_secondary_BASE": {
+  "squad": {
+   "phg_R1": {
+    "delta_phg_minus_mtk": -0.004,
+    "p": 0.20049,
+    "sig": false,
+    "phg_only": 11,
+    "mtk_only": 19,
+    "verdict": "NO_SIGNIFICANT_PAIRED_LOSS"
+   },
+   "phg_R1_repaired": null
+  },
+  "metaqa": {
+   "phg_R1": null,
+   "phg_R1_repaired": {
+    "delta_phg_minus_mtk": 0.033,
+    "p": 0.0,
+    "sig": true,
+    "phg_only": 113,
+    "mtk_only": 47,
+    "verdict": "NO_SIGNIFICANT_PAIRED_LOSS"
+   }
+  }
+ },
+ "gates": {
+  "1_structure": "EXACT: the union of what the Zoltan query functions returned on all ranks (dumped by the query functions themselves at their first invocation) must reconstruct N, M, pin count, unit vertex weights, hyperedge weights, the global node positions 0..N-1 (each exactly once), the global hyperedge ids 0..M-1 (each with >= 1 pin), the incidence multiset and the canonical H4_SK_STRUCTURE_V1 digest == ORIGINAL_STRUCTURE_SHA256 of the frozen H4_SK_STREAM_V1 manifest; weight reception: Zoltan_LB_Eval_HG's connectivity of the rank-ownership assignment (gate mode) == Python weighted KM1 of the same assignment within 1e-4 relative (float accumulation); the dumps of the partition run must be byte-identical to the gate run's.  Any mismatch = STRUCTURE_MISMATCH and STOP (no partition is used).",
+  "2_partition_validity": "length N, block ids in [0, k), no empty block, max block <= ceil(1.03 N/k) (the canonical contract bound).  Failure = PARTITION_INVALID (no downstream evaluation).  Partition ids are NOT compared with Mt-KaHyPar's.",
+  "3_L1_primary": "the PHG partition goes through the unchanged canonical L1 (replay cache -> l1_eval numerics) on the identical dev query ids as the frozen Mt-KaHyPar replay; PRIMARY = final SAFE_ALL_P50 paired exact two-sided McNemar: SIG_LOSS iff delta(PHG - MtK) < 0 and p < 0.05, otherwise NONINFERIOR.  SECONDARY (reported, same rule, not the decision): BASE_ALL_P50.  DIAGNOSTICS (no rule): hop-wise paired results, candidate coverage (ANY), SAFE additions, scope nodes, balance.",
+  "4_partition_metrics": "KM1 / connectivity, imbalance, STRUCT cut, KNN cut, block-size min/p50/p95/max, empty blocks, memory, runtime = diagnostics; no numeric acceptance threshold exists or will be added after seeing the numbers."
+ },
+ "decision_rule": "per dataset: PHG_STRUCTURE_MISMATCH | PHG_PARTITION_INVALID | PHG_L1_NONINFERIOR | PHG_L1_SIG_LOSS (from gates 1-3 in that order).  SQuAD runs first; MetaQA runs only if SQuAD is structurally valid (gate 1 PASS) -- with the identical contract.  After both: STOP_FOR_REVIEW.  No tuning, no second configuration, no other rank count, no other dataset.",
+ "repair_algorithm": [
+  "input: the frozen PHG R1 k-way vector of the dataset (assembled from data/l1_lowmem/<ds>/phg/R1/part_rank*.txt, sha-pinned in PHG_RUNS_<ds>.json) and the frozen H4_SK hypergraph (weighted nets over canonical positions)",
+  "for each empty block id b, in ascending order:",
+  "  1. candidates = nodes v whose current (donor) block a = part[v] has size >= 2",
+  "  2. delta(v) = exact change of the weighted KM1 = sum over nets e containing v of w_e * (1 - [count(e, a) == 1]) -- b is empty so every net of v gains one block; a net loses one block iff v was its only pin in a",
+  "  3. choose the candidate with the minimum delta",
+  "  4. ties: smaller canonical node position, then smaller donor block id (a node has exactly one donor block, so the third key can never decide between distinct nodes; implemented as a lexicographic sort on (delta, position, donor) for fidelity)",
+  "  5. move exactly that node: part[v] = b",
+  "  6. recompute block sizes and the per-(net, block) pin counts / connectivity before the next empty block (exact, from scratch)",
+  "moves == number of empty blocks of the input (one move per empty block); no other node changes block",
+  "postconditions: same node universe (length N, every position assigned exactly once), same k, block ids in [0, k), 0 empty blocks, max block <= ceil(1.03 N/k) (the canonical bound; a move can only shrink a donor of size >= 2 and create a singleton), exact H4_SK unchanged (npz sha + H4_SK_STRUCTURE_V1 digest == ORIGINAL), KM1_after == KM1_before + sum of the recorded deltas (full recomputation)",
+  "must NOT read: queries, answers, hop labels, BASE, SAFE, coverage, any replay/eval result; no parameter search; no minimum-block-size rule"
+ ],
+ "integrity": {
+  "frozen_records_changed": [],
+  "canonical_H4_SK_partition": {
+   "squad": {
+    "sha256_now": "a45195b825fa2f2fed58a64b08aa5471a20ad946f2b47831db3689b1348f54ce",
+    "pinned": "a45195b825fa2f2fed58a64b08aa5471a20ad946f2b47831db3689b1348f54ce",
+    "unchanged": true
+   },
+   "metaqa": {
+    "sha256_now": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062",
+    "pinned": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062",
+    "unchanged": true
+   }
+  },
+  "superseded_to_history": {
+   "PHG_RUNS_squad.json": {
+    "path": "results/L1_LOWMEM/_history/PHG_RUNS_squad.30559e1c.json",
+    "sha256": "30559e1c02891f8a9aee0dba6e10fc1ae3d52e5a6a53f9bdd75152e00821749b",
+    "bytes": 77314
+   },
+   "PHG_REPORT.json": {
+    "path": "results/L1_LOWMEM/_history/PHG_REPORT.618883c9.json",
+    "sha256": "618883c9f778821d1e2def275ee8bee2169ecb6a97a89c19d16e88fabd844aa6",
+    "bytes": 24100
+   },
+   "PHG_REPORT.md": {
+    "path": "results/L1_LOWMEM/_history/PHG_REPORT.d7dc4f8b.md",
+    "sha256": "d7dc4f8b381294e08a41b36b2e6aee3efc6d5d6d4629a331dae2f72d0440d41b",
+    "bytes": 5222
+   }
+  }
+ },
+ "repairs": {
+  "squad": {
+   "DECISION": "REPAIR_NOOP_IDENTICAL",
+   "empty_blocks": [],
+   "moves": [],
+   "before": {
+    "validity": {
+     "length_ok": true,
+     "ids_in_range": true,
+     "empty_blocks": 0,
+     "max_block": 103,
+     "contract_bound_ceil_1.03_N_over_k": 104,
+     "zoltan_tolerance_bound_1.03_x_mean": 103.168,
+     "gate": "PASS"
+    },
+    "km1_weighted": 7538754,
+    "cut_weighted": 2636391,
+    "blocks": {
+     "k": 202,
+     "used": 202,
+     "empty": 0,
+     "min": 60,
+     "p50": 102.0,
+     "p95": 103.0,
+     "max": 103,
+     "mean": 100.163,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0283,
+     "eps_actual(max/ceil(N/k)-1)": 0.0198,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 744734,
+      "cut": 691276,
+      "edge_cut_fraction": 0.9282
+     },
+     "KNN": {
+      "edges": 30609,
+      "cut": 6649,
+      "edge_cut_fraction": 0.2172
+     },
+     "NERX": {
+      "edges": 135287,
+      "cut": 111137,
+      "edge_cut_fraction": 0.8215
+     }
+    }
+   },
+   "after": {
+    "validity": {
+     "length_ok": true,
+     "ids_in_range": true,
+     "empty_blocks": 0,
+     "max_block": 103,
+     "contract_bound_ceil_1.03_N_over_k": 104,
+     "zoltan_tolerance_bound_1.03_x_mean": 103.168,
+     "gate": "PASS"
+    },
+    "km1_weighted": 7538754,
+    "cut_weighted": 2636391,
+    "blocks": {
+     "k": 202,
+     "used": 202,
+     "empty": 0,
+     "min": 60,
+     "p50": 102.0,
+     "p95": 103.0,
+     "max": 103,
+     "mean": 100.163,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0283,
+     "eps_actual(max/ceil(N/k)-1)": 0.0198,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 744734,
+      "cut": 691276,
+      "edge_cut_fraction": 0.9282
+     },
+     "KNN": {
+      "edges": 30609,
+      "cut": 6649,
+      "edge_cut_fraction": 0.2172
+     },
+     "NERX": {
+      "edges": 135287,
+      "cut": 111137,
+      "edge_cut_fraction": 0.8215
+     }
+    },
+    "delta_km1_total": 0,
+    "delta_km1_relative": 0.0,
+    "struct_cut_delta": 0.0,
+    "knn_cut_delta": 0.0,
+    "vector_sha256_out": "c37be0971cf99934cfb68ea166989ef602477c0a9b987c49815f7318defc6862",
+    "repaired_npy": {
+     "path": "data/l1_lowmem/squad/phg_repair1/repaired.npy",
+     "bytes": 161992,
+     "sha256": "1425a34d9b32f779801c09beca8ca964e614806348070f1551e6335671470413"
+    }
+   },
+   "postconditions": {
+    "same_N": true,
+    "assigned_once": true,
+    "same_k": true,
+    "empty_blocks_after": 0,
+    "max_block_after": 103,
+    "contract_bound": 104,
+    "H4_SK_unchanged": true,
+    "moves": 0,
+    "empty_blocks_before": 0,
+    "moves_equal_empties": true,
+    "nodes_changed": 0,
+    "nodes_changed_equal_moves": true,
+    "km1_consistent": true,
+    "PASS": true
+   },
+   "noop_check": {
+    "moves": 0,
+    "vector_identical_to_input": true,
+    "repaired_npy_sha256": "1425a34d9b32f779801c09beca8ca964e614806348070f1551e6335671470413",
+    "frozen_import_npy_sha256": "1425a34d9b32f779801c09beca8ca964e614806348070f1551e6335671470413",
+    "byte_identical_to_frozen_import": true
+   },
+   "km1_ratio_vs_mtkahypar": {
+    "before": 1.1552,
+    "after": 1.1552
+   }
+  },
+  "metaqa": {
+   "DECISION": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS",
+   "empty_blocks": [
+    215,
+    430
+   ],
+   "moves": [
+    {
+     "empty_block": 215,
+     "node_position": 69,
+     "donor_block": 104,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 168,
+     "incident_nets": 11,
+     "km1_before": 45623771,
+     "km1_after": 45623771,
+     "candidates": 43234
+    },
+    {
+     "empty_block": 430,
+     "node_position": 223,
+     "donor_block": 50,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 167,
+     "incident_nets": 7,
+     "km1_before": 45623771,
+     "km1_after": 45623771,
+     "candidates": 43233
+    }
+   ],
+   "before": {
+    "validity": {
+     "length_ok": true,
+     "ids_in_range": true,
+     "empty_blocks": 2,
+     "max_block": 104,
+     "contract_bound_ceil_1.03_N_over_k": 104,
+     "zoltan_tolerance_bound_1.03_x_mean": 103.081,
+     "gate": "PARTITION_INVALID"
+    },
+    "km1_weighted": 45623771,
+    "cut_weighted": 17156207,
+    "blocks": {
+     "k": 432,
+     "used": 430,
+     "empty": 2,
+     "min": 0,
+     "p50": 103.0,
+     "p95": 103.0,
+     "max": 104,
+     "mean": 100.079,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0392,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 103694,
+      "edge_cut_fraction": 0.8318
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 71327,
+      "edge_cut_fraction": 0.732
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 3802,
+      "edge_cut_fraction": 0.6534
+     }
+    }
+   },
+   "after": {
+    "validity": {
+     "length_ok": true,
+     "ids_in_range": true,
+     "empty_blocks": 0,
+     "max_block": 104,
+     "contract_bound_ceil_1.03_N_over_k": 104,
+     "zoltan_tolerance_bound_1.03_x_mean": 103.081,
+     "gate": "PASS"
+    },
+    "km1_weighted": 45623771,
+    "cut_weighted": 17156207,
+    "blocks": {
+     "k": 432,
+     "used": 432,
+     "empty": 0,
+     "min": 1,
+     "p50": 103.0,
+     "p95": 103.0,
+     "max": 104,
+     "mean": 100.079,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0392,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 103694,
+      "edge_cut_fraction": 0.8318
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 71327,
+      "edge_cut_fraction": 0.732
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 3802,
+      "edge_cut_fraction": 0.6534
+     }
+    },
+    "delta_km1_total": 0,
+    "delta_km1_relative": 0.0,
+    "struct_cut_delta": 0.0,
+    "knn_cut_delta": 0.0,
+    "vector_sha256_out": "29ccfc18b1840023140bfca26621a8e513b8c1ccfc619c0453d5973edac39308",
+    "repaired_npy": {
+     "path": "data/l1_lowmem/metaqa/phg_repair1/repaired.npy",
+     "bytes": 346000,
+     "sha256": "b06beef6f3f493a43e6a798da694dde4a94bdc1d9b3056e8906085a4bf592daf"
+    }
+   },
+   "postconditions": {
+    "same_N": true,
+    "assigned_once": true,
+    "same_k": true,
+    "empty_blocks_after": 0,
+    "max_block_after": 104,
+    "contract_bound": 104,
+    "H4_SK_unchanged": true,
+    "moves": 2,
+    "empty_blocks_before": 2,
+    "moves_equal_empties": true,
+    "nodes_changed": 2,
+    "nodes_changed_equal_moves": true,
+    "km1_consistent": true,
+    "PASS": true
+   },
+   "noop_check": null,
+   "km1_ratio_vs_mtkahypar": {
+    "before": 1.1062,
+    "after": 1.1062
+   }
+  }
+ },
+ "datasets": {
+  "squad": {
+   "DECISION": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS",
+   "metrics": {
+    "km1_weighted": 7538754,
+    "cut_weighted": 2636391,
+    "cut_nets": 29506,
+    "nets": 39146,
+    "cut_net_fraction": 0.753742,
+    "lambda_mean": 9.964,
+    "lambda_max": 75,
+    "blocks": {
+     "k": 202,
+     "used": 202,
+     "empty": 0,
+     "min": 60,
+     "p50": 102.0,
+     "p95": 103.0,
+     "max": 103,
+     "mean": 100.163,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0283,
+     "eps_actual(max/ceil(N/k)-1)": 0.0198,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "per_family_note": {
+     "STRUCT": {
+      "hyperedges_precap": 13884,
+      "pins_precap": 1503352,
+      "anchors_over_cap": 4900,
+      "hyperedges_out": 22271,
+      "pins_written": 1511739,
+      "anchor_duplication_pins": 8387,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 100
+     },
+     "KNN": {
+      "hyperedges_precap": 16875,
+      "pins_precap": 78093,
+      "anchors_over_cap": 0,
+      "hyperedges_out": 16875,
+      "pins_written": 78093,
+      "anchor_duplication_pins": 0,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 24
+     }
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 744734,
+      "cut": 691276,
+      "edge_cut_fraction": 0.9282
+     },
+     "KNN": {
+      "edges": 30609,
+      "cut": 6649,
+      "edge_cut_fraction": 0.2172
+     },
+     "NERX": {
+      "edges": 135287,
+      "cut": 111137,
+      "edge_cut_fraction": 0.8215
+     }
+    }
+   },
+   "mtkahypar_baseline": {
+    "status": "OK",
+    "km1_weighted": 6525934,
+    "cut_weighted": 2521407,
+    "blocks": {
+     "k": 202,
+     "used": 202,
+     "empty": 0,
+     "min": 49,
+     "p50": 102.0,
+     "p95": 104.0,
+     "max": 104,
+     "mean": 100.163,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0383,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 744734,
+      "cut": 671052,
+      "edge_cut_fraction": 0.9011
+     },
+     "KNN": {
+      "edges": 30609,
+      "cut": 5948,
+      "edge_cut_fraction": 0.1943
+     },
+     "NERX": {
+      "edges": 135287,
+      "cut": 107962,
+      "edge_cut_fraction": 0.798
+     }
+    },
+    "manifest": {
+     "worker_stats": {
+      "hyperedges": 39146,
+      "pins": 1589832,
+      "N": 20233,
+      "k": 202,
+      "threads": 8,
+      "ran_on": "local_wsl",
+      "edge_weighted": true,
+      "ew_min": 10,
+      "ew_max": 1000,
+      "ew_readback_exact": true,
+      "objective_km1": 6525934.0,
+      "objective_cut": 2521407.0,
+      "peak_rss_mb": 539.5,
+      "wall_seconds": 81.0
+     },
+     "guard": {
+      "rss_cap_gb": 2.333709824,
+      "host_available_gb_at_start": 3.333709824,
+      "margin_gb": 1.0,
+      "peak_rss_kb": 519692,
+      "killed": 0,
+      "rc": 0,
+      "wall_seconds": 83.9,
+      "returncode": 0
+     },
+     "post_checks": {
+      "length_ok": true,
+      "min_block": 0,
+      "max_block": 201,
+      "blocks_used": 202,
+      "k": 202,
+      "every_block_used": true,
+      "size_min": 49,
+      "size_max": 104,
+      "size_mean": 100.163,
+      "ceil_N_over_k": 101,
+      "balance_max_over_mean": 1.0383,
+      "max_over_allowed_eps003": 0.9997,
+      "balance_within_eps": true
+     },
+     "contract": {
+      "partitioner": "mtkahypar",
+      "preset": "DETERMINISTIC_QUALITY",
+      "objective": "KM1",
+      "epsilon": 0.03,
+      "seed": 0,
+      "vertex_weights": "unit",
+      "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+      "k": 202,
+      "k_rule": "max(1, N // 100)",
+      "hypergraph_rule": "H4_SPLIT_PRESERVE",
+      "families": [
+       "STRUCT",
+       "KNN"
+      ],
+      "worker": "scratchpad/_l1hu_local_worker.py",
+      "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+      "threads": 8,
+      "deterministic_preset_note": "DETERMINISTIC_QUALITY is thread-count independent; LOCAL_COMPUTE.json verified local == Modal bit-identical"
+     },
+     "output_sha256": "a45195b825fa2f2fed58a64b08aa5471a20ad946f2b47831db3689b1348f54ce"
+    }
+   },
+   "freight_one_pass_frozen": {
+    "km1_weighted": 18062025,
+    "cut_weighted": 5978555,
+    "blocks": {
+     "k": 202,
+     "used": 202,
+     "empty": 0,
+     "min": 72,
+     "p50": 104.0,
+     "p95": 104.0,
+     "max": 104,
+     "mean": 100.163,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0383,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 744734,
+      "cut": 705231,
+      "edge_cut_fraction": 0.947
+     },
+     "KNN": {
+      "edges": 30609,
+      "cut": 19868,
+      "edge_cut_fraction": 0.6491
+     },
+     "NERX": {
+      "edges": 135287,
+      "cut": 127003,
+      "edge_cut_fraction": 0.9388
+     }
+    }
+   },
+   "diagnostic_vs_mtkahypar": {
+    "km1_ratio": 1.1552,
+    "struct_cut_delta": 0.0271,
+    "knn_cut_delta": 0.0229,
+    "mtkahypar_peak_rss_mb": 539.5,
+    "mtkahypar_wall_seconds": 81.0
+   },
+   "repeat": {
+    "identical_partition": true,
+    "n_diff": 0,
+    "km1_repeat": 7538754,
+    "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+   },
+   "downstream": {
+    "status": "PAIRED",
+    "record": {
+     "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad__phg.json",
+     "bytes": 3513,
+     "sha256": "f2a2704b746400557658cbe597d682f4856d298e6c2f1b426c56e7326f7507d8"
+    },
+    "paired": {
+     "SAFE_ALL_P50": {
+      "A_only_covered": 12,
+      "B_only_covered": 6,
+      "net_B_minus_A": -6,
+      "mcnemar_p": 0.23788,
+      "sig": false,
+      "A": 0.993,
+      "B": 0.99,
+      "delta_B_minus_A": -0.003,
+      "relative_change": -0.003
+     },
+     "BASE_ALL_P50": {
+      "A_only_covered": 19,
+      "B_only_covered": 11,
+      "net_B_minus_A": -8,
+      "mcnemar_p": 0.20049,
+      "sig": false,
+      "A": 0.9885,
+      "B": 0.9845,
+      "delta_B_minus_A": -0.004,
+      "relative_change": -0.004
+     },
+     "nq": 2000
+    },
+    "B_phg": {
+     "BASE_ALL_P50": 0.9845,
+     "BASE_ANY_P50": 0.9845,
+     "BASE_SCOPE_NODES": 5089.7,
+     "SAFE_ALL_P50": 0.99,
+     "SAFE_ANY_P50": 0.99,
+     "SAFE_SCOPE_NODES": 5085.5,
+     "BND_ALL_P50": 0.9845,
+     "CORR": {
+      "dALL": 0.0055,
+      "gained": 12,
+      "lost": 1,
+      "net": 11,
+      "mcnemar_p": 0.00342,
+      "sig": true,
+      "gold_admitted": 12,
+      "gold_evicted": 1,
+      "churn_per_query": 3.826,
+      "churn_max": 6,
+      "queries_with_zero_churn": 191
+     },
+     "BALANCE": {
+      "npart": 202,
+      "blocks_used": 202,
+      "size_min": 60,
+      "size_max": 103,
+      "size_median": 102.0,
+      "size_mean": 100.16,
+      "size_p90": 103.0,
+      "size_p99": 103.0,
+      "size_cv": 0.0584,
+      "max_over_mean": 1.0283,
+      "ELIGIBLE": true
+     },
+     "CUT": {
+      "STRUCT": {
+       "edges": 744734,
+       "cut": 691276,
+       "edge_cut_fraction": 0.9282
+      },
+      "KNN": {
+       "edges": 30609,
+       "cut": 6649,
+       "edge_cut_fraction": 0.2172
+      },
+      "NERX": {
+       "edges": 135287,
+       "cut": 111137,
+       "edge_cut_fraction": 0.8215
+      }
+     }
+    },
+    "A_mtkahypar": {
+     "BASE_ALL_P50": 0.9885,
+     "BASE_ANY_P50": 0.9885,
+     "BASE_SCOPE_NODES": 5089.2,
+     "SAFE_ALL_P50": 0.993,
+     "SAFE_ANY_P50": 0.993,
+     "SAFE_SCOPE_NODES": 5085.8,
+     "BND_ALL_P50": 0.9885,
+     "CORR": {
+      "dALL": 0.0045,
+      "gained": 9,
+      "lost": 0,
+      "net": 9,
+      "mcnemar_p": 0.00391,
+      "sig": true,
+      "gold_admitted": 9,
+      "gold_evicted": 0,
+      "churn_per_query": 3.725,
+      "churn_max": 6,
+      "queries_with_zero_churn": 229
+     },
+     "BALANCE": {
+      "npart": 202,
+      "blocks_used": 202,
+      "size_min": 49,
+      "size_max": 104,
+      "size_median": 102.0,
+      "size_mean": 100.16,
+      "size_p90": 104.0,
+      "size_p99": 104.0,
+      "size_cv": 0.0648,
+      "max_over_mean": 1.0383,
+      "ELIGIBLE": true
+     },
+     "CUT": {
+      "STRUCT": {
+       "edges": 744734,
+       "cut": 671052,
+       "edge_cut_fraction": 0.9011
+      },
+      "KNN": {
+       "edges": 30609,
+       "cut": 5948,
+       "edge_cut_fraction": 0.1943
+      },
+      "NERX": {
+       "edges": 135287,
+       "cut": 107962,
+       "edge_cut_fraction": 0.798
+      }
+     }
+    },
+    "by_hop_paired": null,
+    "coverage": {
+     "BASE_ANY": {
+      "A": 0.9885,
+      "B": 0.9845
+     },
+     "SAFE_ANY": {
+      "A": 0.993,
+      "B": 0.99
+     },
+     "BASE_SCOPE_NODES": {
+      "A": 5089.2,
+      "B": 5089.7
+     },
+     "SAFE_SCOPE_NODES": {
+      "A": 5085.8,
+      "B": 5085.5
+     }
+    },
+    "safe_additions": {
+     "A": {
+      "gained": 9,
+      "lost": 0,
+      "net": 9
+     },
+     "B": {
+      "gained": 12,
+      "lost": 1,
+      "net": 11
+     }
+    },
+    "population": {
+     "eval_split": "dev",
+     "sample_rule": "EVAL_SPLITS dev",
+     "nq": 2000,
+     "row_query_ids_sha256": "9b5fe782597fd485a94793c2cdb7d2fd6c7e890ea053f123b0e415b32fadff12"
+    }
+   },
+   "l1_primary_SAFE": {
+    "delta_phg_minus_mtk": -0.003,
+    "p": 0.23788,
+    "sig": false,
+    "phg_only": 6,
+    "mtk_only": 12,
+    "verdict": "NO_SIGNIFICANT_PAIRED_LOSS"
+   },
+   "l1_secondary_BASE": {
+    "delta_phg_minus_mtk": -0.004,
+    "p": 0.20049,
+    "sig": false,
+    "phg_only": 11,
+    "mtk_only": 19,
+    "verdict": "NO_SIGNIFICANT_PAIRED_LOSS"
+   }
+  },
+  "metaqa": {
+   "DECISION": "PHG_PARTITION_INVALID",
+   "metrics": {
+    "km1_weighted": 45623771,
+    "cut_weighted": 17156207,
+    "cut_nets": 69650,
+    "nets": 86796,
+    "cut_net_fraction": 0.802456,
+    "lambda_mean": 4.2867,
+    "lambda_max": 97,
+    "blocks": {
+     "k": 432,
+     "used": 430,
+     "empty": 2,
+     "min": 0,
+     "p50": 103.0,
+     "p95": 103.0,
+     "max": 104,
+     "mean": 100.079,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0392,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "per_family_note": {
+     "STRUCT": {
+      "hyperedges_precap": 43234,
+      "pins_precap": 292572,
+      "anchors_over_cap": 104,
+      "hyperedges_out": 43564,
+      "pins_written": 292902,
+      "anchor_duplication_pins": 330,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 100
+     },
+     "KNN": {
+      "hyperedges_precap": 43232,
+      "pins_precap": 238104,
+      "anchors_over_cap": 0,
+      "hyperedges_out": 43232,
+      "pins_written": 238104,
+      "anchor_duplication_pins": 0,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 96
+     }
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 103694,
+      "edge_cut_fraction": 0.8318
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 71327,
+      "edge_cut_fraction": 0.732
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 3802,
+      "edge_cut_fraction": 0.6534
+     }
+    }
+   },
+   "mtkahypar_baseline": {
+    "status": "OK",
+    "km1_weighted": 41244100,
+    "cut_weighted": 16213783,
+    "blocks": {
+     "k": 432,
+     "used": 432,
+     "empty": 0,
+     "min": 14,
+     "p50": 102.0,
+     "p95": 104.0,
+     "max": 104,
+     "mean": 100.079,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0392,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 102098,
+      "edge_cut_fraction": 0.819
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 61467,
+      "edge_cut_fraction": 0.6308
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 3160,
+      "edge_cut_fraction": 0.543
+     }
+    },
+    "manifest": {
+     "worker_stats": {
+      "hyperedges": 86796,
+      "pins": 531006,
+      "N": 43234,
+      "k": 432,
+      "threads": 8,
+      "ran_on": "local_wsl",
+      "edge_weighted": true,
+      "ew_min": 10,
+      "ew_max": 1000,
+      "ew_readback_exact": true,
+      "objective_km1": 41244100.0,
+      "objective_cut": 16213783.0,
+      "peak_rss_mb": 966.4,
+      "wall_seconds": 185.7
+     },
+     "guard": {
+      "rss_cap_gb": 2.267723264,
+      "host_available_gb_at_start": 3.267723264,
+      "margin_gb": 1.0,
+      "peak_rss_kb": 989584,
+      "killed": 0,
+      "rc": 0,
+      "wall_seconds": 190.8,
+      "returncode": 0
+     },
+     "post_checks": {
+      "length_ok": true,
+      "min_block": 0,
+      "max_block": 431,
+      "blocks_used": 432,
+      "k": 432,
+      "every_block_used": true,
+      "size_min": 14,
+      "size_max": 104,
+      "size_mean": 100.079,
+      "ceil_N_over_k": 101,
+      "balance_max_over_mean": 1.0392,
+      "max_over_allowed_eps003": 0.9997,
+      "balance_within_eps": true
+     },
+     "contract": {
+      "partitioner": "mtkahypar",
+      "preset": "DETERMINISTIC_QUALITY",
+      "objective": "KM1",
+      "epsilon": 0.03,
+      "seed": 0,
+      "vertex_weights": "unit",
+      "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+      "k": 432,
+      "k_rule": "max(1, N // 100)",
+      "hypergraph_rule": "H4_SPLIT_PRESERVE",
+      "families": [
+       "STRUCT",
+       "KNN"
+      ],
+      "worker": "scratchpad/_l1hu_local_worker.py",
+      "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+      "threads": 8,
+      "deterministic_preset_note": "DETERMINISTIC_QUALITY is thread-count independent; LOCAL_COMPUTE.json verified local == Modal bit-identical"
+     },
+     "output_sha256": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062"
+    }
+   },
+   "freight_one_pass_frozen": {
+    "km1_weighted": 57790340,
+    "cut_weighted": 18394999,
+    "blocks": {
+     "k": 432,
+     "used": 432,
+     "empty": 0,
+     "min": 29,
+     "p50": 104.0,
+     "p95": 104.0,
+     "max": 104,
+     "mean": 100.079,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0392,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 100118,
+      "edge_cut_fraction": 0.8031
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 91329,
+      "edge_cut_fraction": 0.9373
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 4705,
+      "edge_cut_fraction": 0.8086
+     }
+    }
+   },
+   "diagnostic_vs_mtkahypar": {
+    "km1_ratio": 1.1062,
+    "struct_cut_delta": 0.0128,
+    "knn_cut_delta": 0.1012,
+    "mtkahypar_peak_rss_mb": 966.4,
+    "mtkahypar_wall_seconds": 185.7
+   },
+   "repeat": {
+    "identical_partition": true,
+    "n_diff": 0,
+    "km1_repeat": 45623771,
+    "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+   },
+   "downstream": null,
+   "l1_primary_SAFE": null,
+   "l1_secondary_BASE": null
+  }
+ },
+ "repaired_downstream": {
+  "squad": {
+   "note": "no-op: the frozen squad import parts/LOWMEM__PHG_con.npy IS the repaired partition; L1_DOWNSTREAM_squad__phg.json stands (label per the terminology amendment)",
+   "record": {
+    "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad__phg.json",
+    "bytes": 3513,
+    "sha256": "f2a2704b746400557658cbe597d682f4856d298e6c2f1b426c56e7326f7507d8"
+   }
+  },
+  "metaqa": {
+   "status": "PAIRED",
+   "record": {
+    "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa__phg_repair1.json",
+    "bytes": 5645,
+    "sha256": "e99da711d075d22e3a430cbdc35f985eb648c7575d2e7361a812f8321760a49f"
+   },
+   "paired": {
+    "SAFE_ALL_P50": {
+     "A_only_covered": 50,
+     "B_only_covered": 112,
+     "net_B_minus_A": 62,
+     "mcnemar_p": 0.0,
+     "sig": true,
+     "A": 0.6401,
+     "B": 0.6712,
+     "delta_B_minus_A": 0.031,
+     "relative_change": 0.0485
+    },
+    "BASE_ALL_P50": {
+     "A_only_covered": 47,
+     "B_only_covered": 113,
+     "net_B_minus_A": 66,
+     "mcnemar_p": 0.0,
+     "sig": true,
+     "A": 0.6376,
+     "B": 0.6707,
+     "delta_B_minus_A": 0.033,
+     "relative_change": 0.0518
+    },
+    "nq": 1998
+   },
+   "B_phg_repaired": {
+    "BASE_ALL_P50": 0.6707,
+    "BASE_ANY_P50": 0.9219,
+    "BASE_SCOPE_NODES": 5086.3,
+    "SAFE_ALL_P50": 0.6712,
+    "SAFE_ANY_P50": 0.9204,
+    "SAFE_SCOPE_NODES": 5086.1,
+    "BND_ALL_P50": 0.6707,
+    "CORR": {
+     "dALL": 0.0005,
+     "gained": 6,
+     "lost": 5,
+     "net": 1,
+     "mcnemar_p": 1.0,
+     "sig": false,
+     "gold_admitted": 124,
+     "gold_evicted": 125,
+     "churn_per_query": 4.462,
+     "churn_max": 6,
+     "queries_with_zero_churn": 0
+    },
+    "BALANCE": {
+     "npart": 432,
+     "blocks_used": 432,
+     "size_min": 1,
+     "size_max": 104,
+     "size_median": 103.0,
+     "size_mean": 100.08,
+     "size_p90": 103.0,
+     "size_p99": 103.0,
+     "size_cv": 0.1079,
+     "max_over_mean": 1.0392,
+     "ELIGIBLE": true
+    },
+    "CUT": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 103694,
+      "edge_cut_fraction": 0.8318
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 71327,
+      "edge_cut_fraction": 0.732
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 3802,
+      "edge_cut_fraction": 0.6534
+     }
+    },
+    "by_hop": {
+     "hop1": {
+      "n": 666,
+      "BASE_ALL": 0.8904,
+      "SAFE_ALL": 0.8904
+     },
+     "hop2": {
+      "n": 666,
+      "BASE_ALL": 0.5345,
+      "SAFE_ALL": 0.5315
+     },
+     "hop3": {
+      "n": 666,
+      "BASE_ALL": 0.5871,
+      "SAFE_ALL": 0.5916
+     }
+    }
+   },
+   "A_mtkahypar": {
+    "BASE_ALL_P50": 0.6376,
+    "BASE_ANY_P50": 0.9094,
+    "BASE_SCOPE_NODES": 5023.3,
+    "SAFE_ALL_P50": 0.6401,
+    "SAFE_ANY_P50": 0.9134,
+    "SAFE_SCOPE_NODES": 5023.6,
+    "BND_ALL_P50": 0.6376,
+    "CORR": {
+     "dALL": 0.0025,
+     "gained": 11,
+     "lost": 6,
+     "net": 5,
+     "mcnemar_p": 0.33231,
+     "sig": false,
+     "gold_admitted": 132,
+     "gold_evicted": 113,
+     "churn_per_query": 4.559,
+     "churn_max": 6,
+     "queries_with_zero_churn": 0
+    },
+    "BALANCE": {
+     "npart": 432,
+     "blocks_used": 432,
+     "size_min": 14,
+     "size_max": 104,
+     "size_median": 102.0,
+     "size_mean": 100.08,
+     "size_p90": 104.0,
+     "size_p99": 104.0,
+     "size_cv": 0.0617,
+     "max_over_mean": 1.0392,
+     "ELIGIBLE": true
+    },
+    "CUT": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 102098,
+      "edge_cut_fraction": 0.819
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 61467,
+      "edge_cut_fraction": 0.6308
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 3160,
+      "edge_cut_fraction": 0.543
+     }
+    },
+    "by_hop": {
+     "hop1": {
+      "n": 666,
+      "BASE_ALL": 0.8979,
+      "SAFE_ALL": 0.8979
+     },
+     "hop2": {
+      "n": 666,
+      "BASE_ALL": 0.488,
+      "SAFE_ALL": 0.5015
+     },
+     "hop3": {
+      "n": 666,
+      "BASE_ALL": 0.527,
+      "SAFE_ALL": 0.521
+     }
+    }
+   },
+   "by_hop_paired": {
+    "hop1": {
+     "n": 666,
+     "SAFE": {
+      "A_only_covered": 14,
+      "B_only_covered": 9,
+      "net_B_minus_A": -5,
+      "mcnemar_p": 0.40487,
+      "sig": false,
+      "A": 0.8979,
+      "B": 0.8904,
+      "delta_B_minus_A": -0.0075,
+      "relative_change": -0.0084
+     },
+     "BASE": {
+      "A_only_covered": 14,
+      "B_only_covered": 9,
+      "net_B_minus_A": -5,
+      "mcnemar_p": 0.40487,
+      "sig": false,
+      "A": 0.8979,
+      "B": 0.8904,
+      "delta_B_minus_A": -0.0075,
+      "relative_change": -0.0084
+     }
+    },
+    "hop2": {
+     "n": 666,
+     "SAFE": {
+      "A_only_covered": 23,
+      "B_only_covered": 43,
+      "net_B_minus_A": 20,
+      "mcnemar_p": 0.01866,
+      "sig": true,
+      "A": 0.5015,
+      "B": 0.5315,
+      "delta_B_minus_A": 0.03,
+      "relative_change": 0.0599
+     },
+     "BASE": {
+      "A_only_covered": 18,
+      "B_only_covered": 49,
+      "net_B_minus_A": 31,
+      "mcnemar_p": 0.00019,
+      "sig": true,
+      "A": 0.488,
+      "B": 0.5345,
+      "delta_B_minus_A": 0.0465,
+      "relative_change": 0.0954
+     }
+    },
+    "hop3": {
+     "n": 666,
+     "SAFE": {
+      "A_only_covered": 13,
+      "B_only_covered": 60,
+      "net_B_minus_A": 47,
+      "mcnemar_p": 0.0,
+      "sig": true,
+      "A": 0.521,
+      "B": 0.5916,
+      "delta_B_minus_A": 0.0706,
+      "relative_change": 0.1354
+     },
+     "BASE": {
+      "A_only_covered": 15,
+      "B_only_covered": 55,
+      "net_B_minus_A": 40,
+      "mcnemar_p": 0.0,
+      "sig": true,
+      "A": 0.527,
+      "B": 0.5871,
+      "delta_B_minus_A": 0.0601,
+      "relative_change": 0.114
+     }
+    }
+   },
+   "coverage": {
+    "BASE_ANY": {
+     "A": 0.9094,
+     "B": 0.9219
+    },
+    "SAFE_ANY": {
+     "A": 0.9134,
+     "B": 0.9204
+    },
+    "BASE_SCOPE_NODES": {
+     "A": 5023.3,
+     "B": 5086.3
+    },
+    "SAFE_SCOPE_NODES": {
+     "A": 5023.6,
+     "B": 5086.1
+    }
+   },
+   "safe_additions": {
+    "A": {
+     "gained": 11,
+     "lost": 6,
+     "net": 5
+    },
+    "B": {
+     "gained": 6,
+     "lost": 5,
+     "net": 1
+    }
+   },
+   "population": {
+    "eval_split": "dev",
+    "sample_rule": "EVAL_SPLITS dev, hop-balanced (identical to _ta_resid.py / _ta_comb.py)",
+    "nq": 1998,
+    "row_query_ids_sha256": "6b73b067ed91805f30bbcc5eba388694b40808635986a46c09b8b6aa68349a8f"
+   }
+  }
+ },
+ "stage3_summaries": {
+  "squad": {
+   "validity": {
+    "length_ok": true,
+    "ids_in_range": true,
+    "empty_blocks": 0,
+    "max_block": 103,
+    "contract_bound_ceil_1.03_N_over_k": 104,
+    "zoltan_tolerance_bound_1.03_x_mean": 103.168,
+    "gate": "PASS"
+   },
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     54324,
+     53568,
+     54232,
+     54248
+    ],
+    "ru_maxrss_kb_per_rank": [
+     54324,
+     53568,
+     54232,
+     54248
+    ],
+    "max_rank_peak_kb": 54324,
+    "sum_of_rank_peaks_kb": 216372,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 4.239,
+    "driver_total_seconds_rank0": 11.142,
+    "load_seconds_per_rank": [
+     6.117,
+     6.099,
+     6.197,
+     6.474
+    ],
+    "job_wall_seconds": 11.76
+   },
+   "python_km1_vs_zoltan_cutl": {
+    "python_km1": 7538754,
+    "zoltan_cutl_float": 7538754.0,
+    "relative_diff": 0.0,
+    "consistent_within_float32": true
+   }
+  },
+  "metaqa": {
+   "validity": {
+    "length_ok": true,
+    "ids_in_range": true,
+    "empty_blocks": 2,
+    "max_block": 104,
+    "contract_bound_ceil_1.03_N_over_k": 104,
+    "zoltan_tolerance_bound_1.03_x_mean": 103.081,
+    "gate": "PARTITION_INVALID"
+   },
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     35036,
+     34072,
+     34776,
+     36228
+    ],
+    "ru_maxrss_kb_per_rank": [
+     35036,
+     34072,
+     34776,
+     36228
+    ],
+    "max_rank_peak_kb": 36228,
+    "sum_of_rank_peaks_kb": 140112,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 2.615,
+    "driver_total_seconds_rank0": 5.951,
+    "load_seconds_per_rank": [
+     2.681,
+     1.728,
+     1.674,
+     2.08
+    ],
+    "job_wall_seconds": 6.52
+   },
+   "python_km1_vs_zoltan_cutl": {
+    "python_km1": 45623771,
+    "zoltan_cutl_float": 45623772.0,
+    "relative_diff": 2e-08,
+    "consistent_within_float32": true
+   }
+  }
+ },
+ "structure_gates": {
+  "squad": {
+   "gate": "PASS",
+   "N_returned": 20233,
+   "M_with_pins": 39146,
+   "P_returned": 1589832,
+   "weight_sum": 6879755,
+   "digest_from_queries": "4fd825932a3ae75800c0e736a751367d728daac5457b7daaa479ee29f08e56f3",
+   "ORIGINAL_STRUCTURE_SHA256": "4fd825932a3ae75800c0e736a751367d728daac5457b7daaa479ee29f08e56f3",
+   "partition_run_dumps_identical": true,
+   "zoltan_removed_or_warning_lines": [],
+   "weight_reception": {
+    "python_weighted_km1_of_rank_ownership": 10979715,
+    "zoltan_cutl_gate_mode": 10979715.0,
+    "relative_diff": 0.0,
+    "tolerance_relative": 0.0001
+   }
+  },
+  "metaqa": {
+   "gate": "PASS",
+   "N_returned": 43234,
+   "M_with_pins": 86796,
+   "P_returned": 531006,
+   "weight_sum": 32317710,
+   "digest_from_queries": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "ORIGINAL_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "partition_run_dumps_identical": true,
+   "zoltan_removed_or_warning_lines": [],
+   "weight_reception": {
+    "python_weighted_km1_of_rank_ownership": 28458387,
+    "zoltan_cutl_gate_mode": 28458388.0,
+    "relative_diff": 3.5e-08,
+    "tolerance_relative": 0.0001
+   }
+  }
+ },
+ "table_markdown": "| Dataset | Arm | KM1 | KM1 / MtK | STRUCT cut | KNN cut | blocks min/p50/max (bound) | empty | SAFE (paired, dev) | BASE (paired, dev) | Decision |\n|---|---|---|---|---|---|---|---|---|---|---|\n| squad | PHG R1 (NP=4) | 7538754 | 1.1552 | 0.9282 | 0.2172 | 60/102/103 (104) | 0 | 0.9930 -> 0.9900 (-0.0030, p=0.23788, +6/-12) | 0.9885 -> 0.9845 (-0.0040, p=0.20049, +11/-19) | PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS |\n| squad | PHG R1 + PHG_NONEMPTY_REPAIR_V1 | (no-op: 0 moves, vector byte-identical) | | | | | | | | REPAIR_NOOP_IDENTICAL |\n| squad | Mt-KaHyPar (canonical, frozen) | 6525934 | 1.0 | 0.9011 | 0.1943 | 49/102/104 | 0 | (reference) | (reference) | |\n| squad | FREIGHT 1-pass (frozen, CLOSED) | 18062025 | 2.7677 | 0.9470 | 0.6491 | 72/104/104 | 0 | (frozen record) | (frozen record) | FREIGHT_CLOSED |\n| metaqa | PHG R1 (NP=4) | 45623771 | 1.1062 | 0.8318 | 0.7320 | 0/103/104 (104) | 2 | - | - | PHG_PARTITION_INVALID |\n| metaqa | PHG R1 + PHG_NONEMPTY_REPAIR_V1 (2 moves) | 45623771 | 1.1062 | 0.8318 | 0.7320 | 1/103/104 (104) | 0 | 0.6401 -> 0.6712 (+0.0310, p=0.0, +112/-50) | 0.6376 -> 0.6707 (+0.0330, p=0.0, +113/-47) | PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS |\n| metaqa | Mt-KaHyPar (canonical, frozen) | 41244100 | 1.0 | 0.8190 | 0.6308 | 14/102/104 | 0 | (reference) | (reference) | |\n| metaqa | FREIGHT 1-pass (frozen, CLOSED) | 57790340 | 1.4012 | 0.8031 | 0.9373 | 29/104/104 | 0 | (frozen record) | (frozen record) | FREIGHT_CLOSED |",
+ "comparison_markdown": "| Arm | Dataset | Objective gap (KM1 / Mt-KaHyPar) | Paired L1 vs Mt-KaHyPar (same dev ids) | Outcome |\n|---|---|---|---|---|\n| FREIGHT 1-pass | squad | 2.768x | SAFE -0.0210 (p=0.0, sig), BASE -0.0395 (p=0.0, sig) | significant loss (LOW_MEMORY_BUT_QUALITY_FAIL) |\n| PHG R1 | squad | 1.155x | SAFE -0.0030 (p=0.23788), BASE -0.0040 (p=0.20049) | PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS |\n| FREIGHT 1-pass | metaqa | 1.401x | SAFE -0.0030 (p=0.69808), BASE -0.0020 (p=0.82017) | n.s. overall (hop1 sig loss) |\n| FREIGHT 2-pass restream | metaqa | 1.343x | SAFE -0.0275 (p=0.00011, sig), BASE -0.0245 (p=0.00063, sig) | significant loss (FREIGHT_CLOSED) |\n| PHG R1 | metaqa | 1.106x | not evaluated (2 empty blocks) | PHG_PARTITION_INVALID |\n| PHG R1 + PHG_NONEMPTY_REPAIR_V1 | metaqa | 1.106x | SAFE +0.0310 (p=0.0, sig), BASE +0.0330 (p=0.0, sig) | PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS |",
+ "repair_table_markdown": "| Dataset | empty blocks | moves | moved node -> block (from donor, donor size) | delta KM1 per move | KM1 before -> after | STRUCT cut before -> after | KNN cut before -> after | vector sha in -> out | postconditions | decision |\n|---|---|---|---|---|---|---|---|---|---|---|\n| squad | [] | 0 | - | - | 7538754 -> 7538754 (+0, +0.00e+00 rel) | 0.9282 -> 0.9282 | 0.2172 -> 0.2172 | c37be0971cf9 -> c37be0971cf9 | PASS | REPAIR_NOOP_IDENTICAL |\n| metaqa | [215, 430] | 2 | 69 -> 215 (from 104, size 103); 223 -> 430 (from 50, size 103) | +0, +0 | 45623771 -> 45623771 (+0, +0.00e+00 rel) | 0.8318 -> 0.8318 | 0.7320 -> 0.7320 | b516fbbab59b -> 29ccfc18b184 | PASS | PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS |",
+ "hop_table_markdown": "| Dataset | Arm | hop | n | SAFE MtK -> PHG | BASE MtK -> PHG |\n|---|---|---|---|---|---|\n| metaqa | PHG R1 + repair | hop1 | 666 | 0.8979 -> 0.8904 (-0.0075, p=0.40487) | 0.8979 -> 0.8904 (-0.0075, p=0.40487) |\n| metaqa | PHG R1 + repair | hop2 | 666 | 0.5015 -> 0.5315 (+0.0300, p=0.01866) | 0.4880 -> 0.5345 (+0.0465, p=0.00019) |\n| metaqa | PHG R1 + repair | hop3 | 666 | 0.5210 -> 0.5916 (+0.0706, p=0.0) | 0.5270 -> 0.5871 (+0.0601, p=0.0) |",
+ "coverage_table_markdown": "| Dataset | Arm | SAFE_ANY MtK / PHG | BASE_ANY MtK / PHG | SAFE scope nodes MtK / PHG | SAFE additions MtK / PHG (gained/lost) | balance max/mean MtK / PHG |\n|---|---|---|---|---|---|---|\n| squad | PHG R1 | 0.9930 / 0.9900 | 0.9885 / 0.9845 | 5085.8 / 5085.5 | 9/0 / 12/1 | 1.0383 / 1.0283 |\n| metaqa | PHG R1 + repair | 0.9134 / 0.9204 | 0.9094 / 0.9219 | 5023.6 / 5086.1 | 11/6 / 6/5 | 1.0392 / 1.0392 |",
+ "not_done": "MuSiQue / WebQSP / HotpotQA / 2Wiki not run; no promotion; no tuning; PHG not rerun; FREIGHT stays FREIGHT_CLOSED"
+}

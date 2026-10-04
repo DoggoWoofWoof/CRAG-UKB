@@ -1,0 +1,124 @@
+{
+  "schema": "V3_SOURCE_STRUCTURE_PROBE/v1",
+  "generated_utc": "2026-09-06T18:24:35Z",
+  "status": "MEASURED ON THE DOWNLOADED PREFIX, NOT THE WHOLE FILE",
+  "why_now": "the transfer is the gate, not the analysis. The prefix already on disk is a valid gzip stream from byte 0, so the source's structure can be established while the rest arrives. Every number here is re-asserted globally by the passes that consume it.",
+  "sample": {
+    "uncompressed_bytes_scanned": 3000000000,
+    "lines": 22346110,
+    "distinct_subjects": 859492
+  },
+  "FORMAT": {
+    "serialisation": "N-Triples, tab-separated, terminated by a tab and a period",
+    "fields": "subject TAB predicate TAB object TAB . NEWLINE",
+    "namespaces_seen": [
+      "http://rdf.freebase.com/ns/ (entities, CVTs, schema, properties)",
+      "http://rdf.freebase.com/key/ (external identifier predicates)",
+      "http://www.w3.org/2000/01/rdf-schema# (label, domain, range)",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns# (rdf:type)",
+      "http://www.w3.org/2002/07/owl# (FunctionalProperty, in object position)"
+    ]
+  },
+  "SUBJECT_CONTIGUITY": {
+    "subject_blocks": 859492,
+    "distinct_subjects": 859492,
+    "blocks_reopened_after_closing": 0,
+    "VERDICT": "CONTIGUOUS. Every subject's triples appear in one unbroken run.",
+    "why_it_matters": "the frozen contract planned PASS B as external-sort edge shards. Contiguity means the SUBJECT side needs no sort at all -- a subject's complete fact set can be assembled in O(1) memory as the stream passes. Only the OBJECT side still needs an external join, because objects arrive in arbitrary order. This halves the sort work the contract budgeted for.",
+    "SORTED_BUT_NOT_BYTEWISE": {
+      "naive_check_said": "not sorted",
+      "actual_cause": "the comparison included the closing '>' of the URI. '>' is 0x3E and digits start at 0x30, so 'm.010l_>' compares greater than 'm.010l_0k1>' even though 'm.010l_' precedes 'm.010l_0k1' on the identifier itself.",
+      "corrected_rule": "compare the identifier between '<...ns/' and '>', never the bracketed URI.",
+      "consequence": "a global sortedness assertion is a valid O(1)-memory proxy for contiguity, and PASS B asserts it -- but only under the corrected comparison. The naive one would have raised a false alarm on every prefix pair in the file.",
+      "superseded_by": "CORRECTION_THE_FILE_IS_SHARDED. The '>' comparison fix is still necessary -- it removes false violations on every prefix pair -- but it is not sufficient, and the conclusion drawn from it (that the file is sorted) was wrong."
+    },
+    "CORRECTION_THE_FILE_IS_SHARDED": {
+      "what_was_reported_earlier": "that the apparent sort violations were purely an artifact of comparing the bracketed URI, and that the source is sorted on the identifier.",
+      "why_that_was_wrong": "the 3 GB sample happened to contain no shard boundary, so fixing the '>' comparison removed every violation it could see. Over 8 GB there are 4 violations that survive the corrected comparison.",
+      "what_they_actually_are": "wrap-arounds, not disorder. Each violation jumps from late in the alphabet back to the start: venture_capital->astronomy, zoos->american_football, wine->architecture, visual_art->architecture.",
+      "the_real_structure": {
+        "sorted_runs_in_8GB": 5,
+        "openers_per_run": [
+          607633,
+          607373,
+          607711,
+          607862,
+          "75592 (truncated by the sample window)"
+        ],
+        "composition_per_run": "near-identical: ~440k m.MIDs, ~166k g.MIDs, ~100 schema properties, each run spanning the whole alphabet",
+        "reading": "a subject-partitioned sharded export, concatenated. Roughly 143 such runs across the full source if the rate holds."
+      },
+      "why_this_matters_more_than_it_looks": "global sortedness is the WRONG invariant to test. The file is not globally sorted and never will be. The right invariant is whether any subject appears in more than one run -- if the export partitioned BY SUBJECT, every subject lands in exactly one run and contiguity holds despite the file being unsorted; if it partitioned by triple, subjects split and the subject side needs the same external sort the object side needs.",
+      "so_the_scan_measures_duplicates_directly": "v3_contiguity_scan.py hashes every block opener and counts true duplicates, resolving any hash collision exactly against the real strings. It does not infer contiguity from order, because order cannot carry that inference in a sharded file.",
+      "evidence_so_far": {
+        "openers_scanned": 751977,
+        "shard_boundaries_crossed": 1,
+        "REOPENED_SUBJECT_BLOCKS_N": 0,
+        "status": "encouraging but PROVISIONAL. One boundary is not 143."
+      }
+    }
+  },
+  "PREDICATE_REDUNDANCY_MEASURED": {
+    "rdfs:label_vs_type.object.name": {
+      "subjects_carrying_both": 507837,
+      "identical": 507837,
+      "differing": 0,
+      "method": "exact per-subject set comparison over the prefix, enabled by contiguity",
+      "verdict": "rdfs:label carries nothing beyond type.object.name on this evidence. PASS A keeps type.object.name and re-runs this comparison over the whole file rather than assuming the prefix generalises."
+    },
+    "rdf:type_vs_type.object.type": {
+      "verdict": "NOT redundant, and the difference is systematic, not noise.",
+      "overlap": "1,299,686 vs 1,299,687 assertions on a 2 GB slice, 832/833 unshared",
+      "the_rule": "inside the freebase ns/ namespace rdf:type duplicates type.object.type; outside it, it carries the RDF/OWL vocabulary layer (rdfs:Property, owl:FunctionalProperty) that type.object.type cannot express.",
+      "what_pass_a_does": "keeps rdf:type only where the object is outside ns/. A general namespace-level rule, not a list of special cases."
+    }
+  },
+  "WHAT_THE_SOURCE_HAS_THAT_IDIR_DID_NOT": {
+    "type.property.reverse_property": {
+      "present": true,
+      "pairs_in_prefix": 147,
+      "example": "automotive.engine.engine_type <-> automotive.engine_type.used_in",
+      "closes": "FINDING_1. The IDIR archive had no reverse-property mapping, which is why INVARIANT_2 could only be BOUNDED at 25 predicates / 17,930 triples instead of computed. PASS D can now canonicalise orientation from the source schema rather than from an inference about IDIR's anti-join."
+    },
+    "freebase.type_hints.mediator": {
+      "present": true,
+      "declared_true_in_prefix": 18,
+      "closes": "the CVT classification question check 6 left open. Types were measured NOT separable by exclusivity -- 68.081% of CVT type mass sits on types entities also carry, against a 5% pre-registered threshold. The dump declares mediator status directly, so V3 reads the classification instead of inferring it.",
+      "consequence_for_the_pre_registration": "the ratio-threshold classifier hypothesis registered as pending is now MOOT for V3 as long as the declaration covers the population. Whether it does is itself a measurement PASS A reports; the fallback classifier is only needed for whatever it misses."
+    },
+    "type.property.master_property": {
+      "present": true,
+      "pairs_in_prefix": 70,
+      "note": "Freebase's own notion of which half of a property pair is canonical. Independent of, and cross-checkable against, reverse_property."
+    }
+  },
+  "THROUGHPUT": {
+    "gzip_dc_plus_grep_MB_per_s": 120,
+    "implied_full_pass_minutes": 35,
+    "reading": "two source passes cost about 70 minutes total, not the many hours a pure-Python line loop would. grep -F prefilters at decompression speed and only matching lines are parsed. This is why the staged design stays affordable."
+  },
+  "PASS_A_VALIDATION_RUN": {
+    "tag": "probe",
+    "elapsed_s": 63.1,
+    "counts": {
+      "name": 682537,
+      "alias": 48070,
+      "description": 199401,
+      "type": 2647793,
+      "rdf_type": 1502,
+      "key": 1423300,
+      "property_schema": 4107,
+      "reverse_property": 147,
+      "master_property": 70,
+      "type_hints": 468
+    },
+    "note": "written to pass_a_probe/ so it cannot be mistaken for the real PASS A output. The real run happens only after the mirror passes digest verification."
+  },
+  "MACHINE_CONSTRAINTS_MEASURED": {
+    "logical_cores": 12,
+    "ram_total_gb": 16.8,
+    "ram_available_gb": 5.1,
+    "disk_free_gib_during_download": 59,
+    "reading": "RAM, not disk, is the binding constraint for PASS C. A 60M+ node universe cannot be held as an in-memory dictionary in 5 GB, so the external union/dedup the contract specifies is mandatory rather than merely preferred."
+  }
+}

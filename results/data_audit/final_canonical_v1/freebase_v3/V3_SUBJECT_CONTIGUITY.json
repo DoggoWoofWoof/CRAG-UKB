@@ -1,0 +1,36 @@
+{
+  "schema": "V3_SUBJECT_CONTIGUITY/v2",
+  "generated_utc": "2026-09-06T23:07:19Z",
+  "contract": "V3_CANONICAL_CONTRACT_V2.json SUBJECT_CONTIGUITY_IS_PROVISIONAL",
+  "derived_from": "per-member opener shards emitted by v3_pass_a_par.py (one pass over the source, shared with PASS A)",
+  "members": 200,
+  "elapsed_s": 231.6,
+  "SUBJECT_BLOCKS_N": 121616633,
+  "DISTINCT_SUBJECTS_N": 121616633,
+  "REOPENED_SUBJECT_BLOCKS_N": 0,
+  "SOURCE_SUBJECT_CONTIGUOUS": true,
+  "SEAMS": {
+    "member_boundaries": 199,
+    "blocks_merged_across_seams": 0,
+    "blocks_before_seam_merge": 121616633,
+    "examples": [],
+    "why": "a subject straddling a member boundary is opened once by each of two workers. Those are one block; without this correction each such seam would be reported as a reopening and the source would look non-contiguous purely because of how it was read."
+  },
+  "DUPLICATE_RESOLUTION": {
+    "hash_duplicate_groups": 0,
+    "distinct_by_hash": 121616633,
+    "confirmed_true_duplicates": null,
+    "hash_collisions_found": 0,
+    "examples": [],
+    "method": "64-bit hash, then an exact second read of the opener shards for every colliding hash. A collision inflates the count rather than hiding a reopening, and is removed by comparing the real strings."
+  },
+  "ORDER": {
+    "nonbracketed_subjects": 0,
+    "note": "order is deliberately NOT the test. The source is 200 internally sorted members, so it is globally unsorted by construction; contiguity is decided by duplicate openers alone."
+  },
+  "GATE": {
+    "rule": "PASS B may skip subject-side external sorting only if REOPENED_SUBJECT_BLOCKS_N == 0 over the whole verified source.",
+    "verdict": "SUBJECT-SIDE SORT NOT REQUIRED",
+    "if_required": "the build still works; it costs what contract v1 budgeted. Only the amount of external sorting changes, never correctness."
+  }
+}

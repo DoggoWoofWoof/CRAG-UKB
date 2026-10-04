@@ -1,0 +1,381 @@
+{
+  "_config": {
+    "kind": "pseudo_ood_validation",
+    "source": [
+      "webqsp",
+      "metaqa"
+    ],
+    "ood": [
+      "2wiki_clean"
+    ],
+    "max_steps": 80,
+    "val_every": 20,
+    "p_drop": 0.2,
+    "seed": 0,
+    "ood_cap": 500,
+    "split_seed": 1234,
+    "note": "OOD=held-out domain train split, source-only, no dataset-ID, model never trains on it; source TEST used ONLY for retrospective Spearman"
+  },
+  "arms": {
+    "A": {
+      "steps": [
+        20,
+        40,
+        60,
+        80
+      ],
+      "iid_val": {
+        "webqsp": [
+          68.24,
+          70.8,
+          71.44,
+          72.41
+        ],
+        "metaqa": [
+          94.03,
+          94.28,
+          94.28,
+          94.28
+        ]
+      },
+      "source_test": {
+        "webqsp": [
+          23.01,
+          27.0,
+          29.03,
+          29.79
+        ],
+        "metaqa": [
+          71.9,
+          73.58,
+          73.73,
+          74.68
+        ]
+      },
+      "ood": {
+        "2wiki_clean": [
+          90.6,
+          92.9,
+          93.15,
+          93.8
+        ]
+      },
+      "ood_min": [
+        90.6,
+        92.9,
+        93.15,
+        93.8
+      ],
+      "ood_mean": [
+        90.6,
+        92.9,
+        93.15,
+        93.8
+      ],
+      "spearman_signal_vs_sourcetest": {
+        "iid_webqsp": {
+          "test_webqsp": 1.0,
+          "test_metaqa": 1.0
+        },
+        "iid_metaqa": {
+          "test_webqsp": 1.0,
+          "test_metaqa": 1.0
+        },
+        "ood_2wiki_clean": {
+          "test_webqsp": 1.0,
+          "test_metaqa": 1.0
+        },
+        "ood_min": {
+          "test_webqsp": 1.0,
+          "test_metaqa": 1.0
+        },
+        "ood_mean": {
+          "test_webqsp": 1.0,
+          "test_metaqa": 1.0
+        }
+      },
+      "best_step": 80,
+      "test_final_selected": {
+        "webqsp": {
+          "R@5": 29.79,
+          "R@20": 43.16,
+          "R@50": 53.46,
+          "Hit@5": 41.5,
+          "Hit@50": 70.07
+        },
+        "metaqa": {
+          "R@5": 74.68,
+          "R@20": 87.6,
+          "R@50": 92.07,
+          "Hit@5": 88.34,
+          "Hit@50": 97.0
+        }
+      },
+      "meta": {
+        "best_step": 80,
+        "best_robust": 0.0734,
+        "best_val_R5": {
+          "webqsp": 72.41,
+          "metaqa": 94.28
+        },
+        "total_steps": 80,
+        "val_checkpoints": 4,
+        "runtime_s": 14.4,
+        "best_ckpt_gates": null,
+        "test_diagnostics": null
+      }
+    },
+    "H": {
+      "steps": [
+        20,
+        40,
+        60,
+        80
+      ],
+      "iid_val": {
+        "webqsp": [
+          67.99,
+          73.42,
+          75.82,
+          77.81
+        ],
+        "metaqa": [
+          94.41,
+          94.69,
+          94.69,
+          94.89
+        ]
+      },
+      "source_test": {
+        "webqsp": [
+          29.39,
+          39.0,
+          40.75,
+          42.76
+        ],
+        "metaqa": [
+          75.49,
+          78.42,
+          78.57,
+          75.3
+        ]
+      },
+      "ood": {
+        "2wiki_clean": [
+          93.8,
+          94.95,
+          95.0,
+          95.1
+        ]
+      },
+      "ood_min": [
+        93.8,
+        94.95,
+        95.0,
+        95.1
+      ],
+      "ood_mean": [
+        93.8,
+        94.95,
+        95.0,
+        95.1
+      ],
+      "spearman_signal_vs_sourcetest": {
+        "iid_webqsp": {
+          "test_webqsp": 1.0,
+          "test_metaqa": -0.2
+        },
+        "iid_metaqa": {
+          "test_webqsp": 1.0,
+          "test_metaqa": -0.2
+        },
+        "ood_2wiki_clean": {
+          "test_webqsp": 1.0,
+          "test_metaqa": -0.2
+        },
+        "ood_min": {
+          "test_webqsp": 1.0,
+          "test_metaqa": -0.2
+        },
+        "ood_mean": {
+          "test_webqsp": 1.0,
+          "test_metaqa": -0.2
+        }
+      },
+      "best_step": 80,
+      "test_final_selected": {
+        "webqsp": {
+          "R@5": 42.76,
+          "R@20": 58.84,
+          "R@50": 67.92,
+          "Hit@5": 61.22,
+          "Hit@50": 85.03
+        },
+        "metaqa": {
+          "R@5": 75.3,
+          "R@20": 93.33,
+          "R@50": 98.56,
+          "Hit@5": 89.64,
+          "Hit@50": 99.55
+        }
+      },
+      "meta": {
+        "best_step": 80,
+        "best_robust": 0.5093,
+        "best_val_R5": {
+          "webqsp": 77.81,
+          "metaqa": 94.89
+        },
+        "total_steps": 80,
+        "val_checkpoints": 4,
+        "runtime_s": 50.0,
+        "best_ckpt_gates": null,
+        "test_diagnostics": null
+      }
+    },
+    "I": {
+      "steps": [
+        20,
+        40,
+        60,
+        80
+      ],
+      "iid_val": {
+        "webqsp": [
+          52.29,
+          63.53,
+          76.39,
+          80.55
+        ],
+        "metaqa": [
+          92.34,
+          93.98,
+          95.57,
+          95.64
+        ]
+      },
+      "source_test": {
+        "webqsp": [
+          28.59,
+          32.07,
+          37.93,
+          40.0
+        ],
+        "metaqa": [
+          78.64,
+          79.63,
+          64.15,
+          62.38
+        ]
+      },
+      "ood": {
+        "2wiki_clean": [
+          92.45,
+          94.05,
+          95.4,
+          95.2
+        ]
+      },
+      "ood_min": [
+        92.45,
+        94.05,
+        95.4,
+        95.2
+      ],
+      "ood_mean": [
+        92.45,
+        94.05,
+        95.4,
+        95.2
+      ],
+      "spearman_signal_vs_sourcetest": {
+        "iid_webqsp": {
+          "test_webqsp": 1.0,
+          "test_metaqa": -0.8
+        },
+        "iid_metaqa": {
+          "test_webqsp": 1.0,
+          "test_metaqa": -0.8
+        },
+        "ood_2wiki_clean": {
+          "test_webqsp": 0.8,
+          "test_metaqa": -0.6
+        },
+        "ood_min": {
+          "test_webqsp": 0.8,
+          "test_metaqa": -0.6
+        },
+        "ood_mean": {
+          "test_webqsp": 0.8,
+          "test_metaqa": -0.6
+        }
+      },
+      "best_step": 80,
+      "test_final_selected": {
+        "webqsp": {
+          "R@5": 40.0,
+          "R@20": 55.61,
+          "R@50": 66.63,
+          "Hit@5": 60.54,
+          "Hit@50": 84.35
+        },
+        "metaqa": {
+          "R@5": 62.38,
+          "R@20": 72.81,
+          "R@50": 80.55,
+          "Hit@5": 74.47,
+          "Hit@50": 88.24
+        }
+      },
+      "meta": {
+        "best_step": 80,
+        "best_robust": 0.7304,
+        "best_val_R5": {
+          "webqsp": 80.55,
+          "metaqa": 95.64
+        },
+        "total_steps": 80,
+        "val_checkpoints": 4,
+        "runtime_s": 17.2,
+        "best_ckpt_gates": {
+          "webqsp": {
+            "dense": 0.279,
+            "offset": 0.876,
+            "splade": 0.314,
+            "relation": 0.293,
+            "path": 0.351
+          },
+          "metaqa": {
+            "dense": 0.245,
+            "offset": 0.877,
+            "splade": 0.314,
+            "relation": 0.239,
+            "path": 0.316
+          }
+        },
+        "test_diagnostics": {
+          "webqsp": {
+            "mean_cand_gate": {
+              "dense": 0.52,
+              "offset": 0.875,
+              "splade": 0.482,
+              "relation": 0.73,
+              "path": 0.654
+            },
+            "gold_rank_lift_vs_coop": 7.12
+          },
+          "metaqa": {
+            "mean_cand_gate": {
+              "dense": 0.524,
+              "offset": 0.869,
+              "splade": 0.484,
+              "relation": 0.709,
+              "path": 0.632
+            },
+            "gold_rank_lift_vs_coop": -61.39
+          }
+        }
+      }
+    }
+  }
+}

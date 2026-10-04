@@ -1,0 +1,264 @@
+{
+  "_config": {
+    "datasets": [
+      "webqsp",
+      "metaqa"
+    ],
+    "arms": [
+      "F0",
+      "G2",
+      "H"
+    ],
+    "epochs": 25,
+    "seeds": 3,
+    "p_drop": 0.2,
+    "metric": "recall@k = golds_in_topk/ng"
+  },
+  "anchors_oracles": {
+    "webqsp": {
+      "dense": 9.46,
+      "splade": 10.48,
+      "offset": 39.3,
+      "coop_maxrank": 36.63,
+      "oracle_dense_splade_offset": 43.46,
+      "klmlp": 53.35,
+      "oracle_coop_vs_klmlp": 56.75,
+      "oracle_5way": 60.52
+    },
+    "metaqa": {
+      "dense": 19.43,
+      "splade": 77.08,
+      "offset": 59.32,
+      "coop_maxrank": 82.6,
+      "oracle_dense_splade_offset": 81.17,
+      "klmlp": 67.67,
+      "oracle_coop_vs_klmlp": 88.39,
+      "oracle_5way": 89.98
+    }
+  },
+  "results": {
+    "A_softmaxKL": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": 53.35,
+          "R@20": 72.58,
+          "R@50": 81.31,
+          "Hit@5": 71.43,
+          "Hit@50": 92.52
+        },
+        "metaqa": {
+          "R@5": 67.67,
+          "R@20": 78.53,
+          "R@50": 86.12,
+          "Hit@5": 75.73,
+          "Hit@50": 91.99
+        }
+      },
+      "seeds": 1
+    },
+    "F0": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            52.92,
+            0.84
+          ],
+          "R@20": [
+            69.28,
+            0.67
+          ],
+          "R@50": [
+            80.42,
+            0.33
+          ],
+          "Hit@5": [
+            70.75,
+            1.67
+          ],
+          "Hit@50": [
+            91.61,
+            0.32
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            67.68,
+            1.92
+          ],
+          "R@20": [
+            79.14,
+            5.14
+          ],
+          "R@50": [
+            84.02,
+            6.33
+          ],
+          "Hit@5": [
+            75.33,
+            2.87
+          ],
+          "Hit@50": [
+            88.46,
+            6.95
+          ]
+        }
+      },
+      "seeds": 3
+    },
+    "G2": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            52.61,
+            1.78
+          ],
+          "R@20": [
+            70.37,
+            0.94
+          ],
+          "R@50": [
+            80.51,
+            1.43
+          ],
+          "Hit@5": [
+            70.98,
+            2.5
+          ],
+          "Hit@50": [
+            91.84,
+            0.96
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            70.05,
+            2.59
+          ],
+          "R@20": [
+            83.35,
+            3.07
+          ],
+          "R@50": [
+            89.48,
+            2.13
+          ],
+          "Hit@5": [
+            78.98,
+            3.27
+          ],
+          "Hit@50": [
+            94.31,
+            1.18
+          ]
+        }
+      },
+      "seeds": 3
+    },
+    "H": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            49.62,
+            0.63
+          ],
+          "R@20": [
+            63.82,
+            2.71
+          ],
+          "R@50": [
+            71.1,
+            2.12
+          ],
+          "Hit@5": [
+            69.39,
+            0.56
+          ],
+          "Hit@50": [
+            87.3,
+            0.65
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            81.3,
+            1.37
+          ],
+          "R@20": [
+            97.23,
+            0.17
+          ],
+          "R@50": [
+            98.9,
+            0.04
+          ],
+          "Hit@5": [
+            94.73,
+            1.28
+          ],
+          "Hit@50": [
+            99.6,
+            0.0
+          ]
+        }
+      },
+      "seeds": 3
+    }
+  },
+  "mean_query_gates": {
+    "F0": {
+      "webqsp": {
+        "dense": 0.775,
+        "offset": 0.978,
+        "splade": 0.012,
+        "relation": 0.99,
+        "path": 0.948
+      },
+      "metaqa": {
+        "dense": 0.67,
+        "offset": 0.95,
+        "splade": 0.571,
+        "relation": 0.195,
+        "path": 0.675
+      }
+    },
+    "G2": {
+      "webqsp": {
+        "dense": 0.531,
+        "offset": 0.719,
+        "splade": 0.466,
+        "relation": 0.521,
+        "path": 0.446
+      },
+      "metaqa": {
+        "dense": 0.7,
+        "offset": 0.946,
+        "splade": 0.817,
+        "relation": 0.399,
+        "path": 0.382
+      }
+    },
+    "H": {
+      "webqsp": {
+        "dense": 0.881,
+        "offset": 0.422,
+        "splade": 0.137,
+        "relation": 0.488,
+        "path": 0.916
+      },
+      "metaqa": {
+        "dense": 0.851,
+        "offset": 0.899,
+        "splade": 0.86,
+        "relation": 0.24,
+        "path": 0.565
+      }
+    }
+  },
+  "coop_maxrank_baseline_R@5": {
+    "webqsp": 35.69,
+    "metaqa": 83.04,
+    "2wiki_clean": 89.63,
+    "musique_clean": 75.81,
+    "hotpotqa_clean": 77.05
+  }
+}

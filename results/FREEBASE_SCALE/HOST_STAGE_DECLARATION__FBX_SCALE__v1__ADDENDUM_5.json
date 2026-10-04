@@ -1,0 +1,2780 @@
+{
+ "stage": "FBX_SCALE / addendum 5: SK-arm partitioner laboratory on WebQSP (Track B), declared before any SK-arm candidate is scored",
+ "declared": "2026-09-30T17:42:33+05:30",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_3.json": "23b186b9c631541af5fa45e7236c20937209cd7d2aa8971aeaaaccff31a883a3",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_4.json": "6dd584733ea134dba79b8d9a7f9b45097363ae0dd3a0c3bfc807821b7f1b9920"
+ },
+ "status": "DEVELOPMENT (calibration of a systems substrate); nothing here selects a retrieval mechanism",
+ "user_ruling_2026-09-30": {
+  "tracks": "A = finish the complete Freebase substrate (query-independent: STRUCT, KNN, NER as separate families, WebQSP/RoG bridge, per-family statistics); B = use WebQSP as a partitioner laboratory and decide which SCALABLE algorithm preserves PHG recall best.  Both run in parallel; neither waits for the other; no candidate runs on full Freebase before WebQSP shows a compression level that preserves PHG recall",
+  "B_comparison": "SK to SK only: the same nodes, the same STRUCT and KNN families, balance 1.03, the same K, the same frozen routing and evaluation.  M0 = the frozen PHG_SK (the recall target); no S-only candidate and no PHG_S in any verdict of this addendum",
+  "B_candidates": {
+   "M0": "frozen PHG_SK (Zoltan PHG, NP 4) -- the reference",
+   "M1": "heavy-connectivity multilevel: exact twins + heavy-connectivity agglomeration + weighted coarse vertices + vertex-weighted PHG + projection",
+   "M2": "closed-neighbourhood-aware coarsening (the SPAN rating: the weighted net-span reduction of merging a vertex into a cluster)",
+   "M3": "repeated modest contraction (caps 2, 4, 8, ..., Wmax; one modest pass per level) with the heavy-connectivity rating",
+   "M4": "hybrid: exact twins, then closed-neighbourhood (SPAN) merges on the same modest schedule, projection through the shared refinement; deterministic, non-learning"
+  },
+  "B_candidate_implementation_notes": "M2 and M4 use the SPAN rating as their closed-neighbourhood-aware rule; M4 has no SEPARATE 'heavy-connectivity fill' stage (its SPAN merges continue to the cap, the geometric schedule playing the role of the fill); the 'optional boundary refinement' is applied to EVERY candidate (and to M0 as M0R), so it never distinguishes one candidate from another.  These are the definitions scored; they are not adjusted after scoring",
+  "B_gates": [
+   "(1) recall: delta ALL-gold recall vs PHG_SK at matched (B_P, B_N) cells -- the primary gate",
+   "(2) compression: pin reduction r_pins = fine pins / coarse pins (Freebase needs about 7.7x; stage 4A reached about 2.5x)",
+   "(3) systems cost among the recall-equivalent methods: peak RAM, disk, runtime, temporary storage, number of passes -- the cheapest recall-preserving method is chosen"
+  ],
+  "B_compression_sweep": "several compression levels per algorithm; ALL-gold recall against pin compression with the predicted Freebase RAM",
+  "B_finish_line": "a WebQSP point with r_pins >= the Freebase-required compression, |delta ALL| within the PHG envelope, balance <= 1.03; then Freebase is an engineering job",
+  "OOC_engine": "in parallel and separable from the scoring rule: stream pins -> merge proposals -> external sort -> resolve clusters -> rewrite pins -> deduplicate -> checkpoint"
+ },
+ "disclosure_of_what_was_read_first": {
+  "stage_4A_gate_result": "ML_S (H4_S, the STRUCT-only hypergraph) FAILED the gate against PHG on H4_SK (max loss 48 rows), was BORDERLINE against PHG_S (12), pins reduced only 2.52-2.59x; PHG_S itself FAILED against PHG_SK (59).  That comparison mixed graph and algorithm, which is why every candidate here is SK to SK (record results/FREEBASE_SCALE/CALIB_EVAL_WEBQSP__ml_v1.json)",
+  "coarsening_structure": "all 16 clustering runs (method x Wmax in [32, 128, 512, 2048]) were built and their STRUCTURE read (cluster counts, cluster weights, pins after every level) before this addendum; no gold label and no recall was read.  Per-level results are in the COARSEN records pinned below",
+  "structural_ceiling_finding": "the pin reduction of an exact quotient is governed by the NUMBER of clusters V, not by how the clustering was found: the frozen PHG_SK maps read as clusterings (the best locality-aware clusterings the lane owns) give 500 clusters -> 5.492x; 1000 clusters -> 4.528x; 2000 clusters -> 3.835x; 5000 clusters -> 3.288x; 25928 clusters -> 2.715x (record results/FREEBASE_SCALE/ml2/ORACLE_PIN_REDUCTION__v1.json).  The balance constraint (1.03) bounds a cluster's weight to a few percent of a block, i.e. V >= tens of thousands at K 100-500, so the compression the cluster-and-quotient family can reach here is about 2-3.5x; the finish-line compression is NOT expected to be reachable by this family, and the sweep below is run to MEASURE the recall-vs-compression curve, not to hit the finish line",
+  "M0R_structure": "the shared refinement applied to the frozen PHG_SK maps (KM1 only, no recall): {\"100\": {\"km1_weighted_before\": 994832221, \"km1_weighted_after\": 977626234, \"blocks_per_net_before\": 1.931, \"blocks_per_net_after\": 1.9148, \"record_sha256\": \"321bc0bcd402a3e5f6f1f507a6b610d018cb8ee3ee06e13fc75d4809b9f81de2\"}, \"250\": {\"km1_weighted_before\": 1127785600, \"km1_weighted_after\": 1107813802, \"blocks_per_net_before\": 2.077, \"blocks_per_net_after\": 2.0597, \"record_sha256\": \"ed349d7bafcc2092c9965fcf4f8745a0533846355f300a104ea10a9d95460526\"}, \"500\": {\"km1_weighted_before\": 1253818477, \"km1_weighted_after\": 1229430686, \"blocks_per_net_before\": 2.2168, \"blocks_per_net_after\": 2.1966, \"record_sha256\": \"3041eb6b6f0307cb8b3822ff37e30700b8ba597d67ff3ac8b5e3db3675d22331\"}}",
+  "variant_count": "the SK-arm scoring adds the candidates of the grid below to the partitioners already scored on the same 786 split-A rows (hash, LDG_S, LP_S, CN_S, ML_S; PHG_S as a control): every one is counted and reported, none hidden.  No held-out row is read (split B sealed, TEST unread)"
+ },
+ "candidates": {
+  "clustering": {
+   "builder": "scratchpad/_ml2_run.py COARSEN (C pass scratchpad/_ml2_agg.c, coarsener scratchpad/_ml2_coarsen.py)",
+   "params": {
+    "Lmax": 200,
+    "R": 1000000000.0,
+    "MAXLEVELS": 12,
+    "MIN_GAIN": 0.05,
+    "twins": "open, both families"
+   },
+   "input": "the frozen H4_SK nets: one net per anchor per family (anchor + its neighbours), weight max(1, rint(1000 / (|e| - 1))); the clustering is K-independent and built on the unsplit nets, the quotient is applied to each K's own frozen fine hypergraph (rebuilt and digest-checked against its frozen record), so weighted KM1 of the coarse partition equals weighted KM1 of the projected fine partition (asserted in every cell)",
+   "rating_and_schedule": {
+    "M1": "heavy / flat",
+    "M2": "span / flat",
+    "M3": "heavy / geometric",
+    "M4": "span / geometric"
+   },
+   "twins": "exact open-twin contraction in BOTH families first, in chunks of at most Wmax"
+  },
+  "cell": "clusters -> exact quotient -> frozen Zoltan PHG driver with vertex weights (phg_driver_vw, NP 4, the 25 frozen parameters) -> projection -> empty-block repair of the frozen contract -> the SHARED refinement -> validity gate (balance 1.03, every block used)",
+  "shared_refinement": {
+   "code": "scratchpad/_ml2_cn.c / _ml2_cn.py (tested: TEST PASS)",
+   "layers": "STRUCT and KNN as two layers",
+   "objective": "the frozen H4 objective: anchor weight max(1, rint(1000 / deg_family(u)))",
+   "balance_repair": "cheapest-first out of every block above ceil(1.03 N / K) before the sweeps",
+   "sweeps": 10,
+   "T": 4,
+   "dmax": 5000,
+   "same_for_every_candidate": true,
+   "control": "M0R = the frozen PHG_SK map put through the same refinement (no clustering, no coarse PHG): separates the effect of the refinement from the effect of the coarsening"
+  },
+  "grid_rule": "(a) the FINAL map of every (method, Wmax) with method in ['M1', 'M2', 'M3', 'M4'] and Wmax in [32, 128, 512, 2048] (16 candidates); (b) for Wmax = 512, every non-final level L >= 2 with unsplit pin reduction >= 1.9 (the compression ladder); (c) M0R.  Complete: a further variant needs its own addendum",
+  "attempt_rule": "a cluster candidate is built at K only if its declared Wmax <= 0.10 N / K (K 100: <= 2592, K 250: <= 1037, K 500: <= 518); otherwise SKIPPED_BY_RULE and it is not scored at K.  A cell whose validity gate fails is PARTITION_INVALID and is reported as such (not repaired, not retried)",
+  "grid": [
+   {
+    "candidate": "M1_W32_L4",
+    "method": "M1",
+    "Wmax": 32,
+    "level": 4,
+    "final_level": true,
+    "clusters": 92918,
+    "cluster_size": {
+     "max": 32,
+     "mean": 27.905,
+     "p50": 29.0,
+     "singletons": 5
+    },
+    "unsplit_pin_reduction": 2.361,
+    "map_sha256": "bc5b795a489f5be49101f5eca95e9a4c1a87e25ac2e4a6ce407b5e407fdc4508",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M1_W128_L5",
+    "method": "M1",
+    "Wmax": 128,
+    "level": 5,
+    "final_level": true,
+    "clusters": 23359,
+    "cluster_size": {
+     "max": 128,
+     "mean": 111.002,
+     "p50": 116.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.763,
+    "map_sha256": "fe8542d88829908a24763b02fc05d1281ecbeaf75e3390cf41c0b30ee8e71b98",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M1_W512_L2",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 2,
+    "final_level": false,
+    "clusters": 360470,
+    "cluster_size": {
+     "max": 512,
+     "mean": 7.193,
+     "p50": 3.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.983,
+    "map_sha256": "4ac8b459298d08f302ca46e12e3b7ea4f17d76e64dea8691265c7c73ba6f0a40",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M1_W512_L3",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 3,
+    "final_level": false,
+    "clusters": 95217,
+    "cluster_size": {
+     "max": 512,
+     "mean": 27.231,
+     "p50": 13.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.494,
+    "map_sha256": "6f84872a8a935f442483cf3c44c5ebc1592742512bf958a3d1e6467165968ce8",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M1_W512_L4",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 4,
+    "final_level": false,
+    "clusters": 28118,
+    "cluster_size": {
+     "max": 512,
+     "mean": 92.215,
+     "p50": 53.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.861,
+    "map_sha256": "ce8dfe218b8a194373d1e63e024c277e3c457dae93d7e4420433e37b0a5815a8",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M1_W512_L5",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 5,
+    "final_level": false,
+    "clusters": 9421,
+    "cluster_size": {
+     "max": 512,
+     "mean": 275.225,
+     "p50": 257.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.099,
+    "map_sha256": "69142e7c2ade915063fc0e9c606518897c0e7646b00f204502e4566e03297ff2",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M1_W512_L6",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 6,
+    "final_level": true,
+    "clusters": 5879,
+    "cluster_size": {
+     "max": 512,
+     "mean": 441.043,
+     "p50": 458.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.175,
+    "map_sha256": "091976d45f8ad3cb8ae22e8d1b5028bd8e131e2385ac88cf95b3b91b9695c9b1",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M1_W2048_L7",
+    "method": "M1",
+    "Wmax": 2048,
+    "level": 7,
+    "final_level": true,
+    "clusters": 1463,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 1772.313,
+     "p50": 1843.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.682,
+    "map_sha256": "699889b2b81cafa5a86997c55e4c28c8dab4f01349516b797b90bd362ceb8f6d",
+    "attempted_at_K": [
+     100
+    ],
+    "skipped_by_rule_at_K": [
+     250,
+     500
+    ]
+   },
+   {
+    "candidate": "M2_W32_L4",
+    "method": "M2",
+    "Wmax": 32,
+    "level": 4,
+    "final_level": true,
+    "clusters": 94309,
+    "cluster_size": {
+     "max": 32,
+     "mean": 27.494,
+     "p50": 29.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.425,
+    "map_sha256": "48192edbdf30c2fb7c683b44fb42602f415fdae2315ba0d5234bc63863f1b25a",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M2_W128_L5",
+    "method": "M2",
+    "Wmax": 128,
+    "level": 5,
+    "final_level": true,
+    "clusters": 23702,
+    "cluster_size": {
+     "max": 128,
+     "mean": 109.396,
+     "p50": 115.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.852,
+    "map_sha256": "f4465b8546a10ea96fdbada314bb8c0fa35b3578514be6408215f7787fd61b3c",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M2_W512_L2",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 2,
+    "final_level": false,
+    "clusters": 455513,
+    "cluster_size": {
+     "max": 512,
+     "mean": 5.692,
+     "p50": 3.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.928,
+    "map_sha256": "745edfcd7a4b4003781abf984c04200d51ac6655e583a05db708d551e055ce87",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M2_W512_L3",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 3,
+    "final_level": false,
+    "clusters": 131547,
+    "cluster_size": {
+     "max": 512,
+     "mean": 19.711,
+     "p50": 10.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.448,
+    "map_sha256": "2b1936e4cbef46200836c658c1f4f7fd9fd2af30e4371a0942abfe382d8a7bb2",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M2_W512_L4",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 4,
+    "final_level": false,
+    "clusters": 37560,
+    "cluster_size": {
+     "max": 512,
+     "mean": 69.033,
+     "p50": 38.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.873,
+    "map_sha256": "48fa96263d6fb04ebcea4844b21c62589e1a124e124773e3f734054f956c37e5",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M2_W512_L5",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 5,
+    "final_level": false,
+    "clusters": 11639,
+    "cluster_size": {
+     "max": 512,
+     "mean": 222.776,
+     "p50": 172.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.174,
+    "map_sha256": "3dc8cc422d5533f8bcc90b810c9d8b629a3c4c1fb2c6d3fd6738d7b0b005dbc7",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M2_W512_L6",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 6,
+    "final_level": true,
+    "clusters": 5913,
+    "cluster_size": {
+     "max": 512,
+     "mean": 438.507,
+     "p50": 458.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.297,
+    "map_sha256": "fbce856bdfb1723a9e6afc633c350682e88e737089e885b93d83df2cec8f4d03",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M2_W2048_L7",
+    "method": "M2",
+    "Wmax": 2048,
+    "level": 7,
+    "final_level": true,
+    "clusters": 1467,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 1767.481,
+     "p50": 1852.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.899,
+    "map_sha256": "e30b76348e3d7cc0ba567b90c149141d63a3735d39f5d233b301a62b1c023046",
+    "attempted_at_K": [
+     100
+    ],
+    "skipped_by_rule_at_K": [
+     250,
+     500
+    ]
+   },
+   {
+    "candidate": "M3_W32_L6",
+    "method": "M3",
+    "Wmax": 32,
+    "level": 6,
+    "final_level": true,
+    "clusters": 86677,
+    "cluster_size": {
+     "max": 32,
+     "mean": 29.914,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.253,
+    "map_sha256": "29cacd682bbbe74ec954c604c929e021b8a9a5a1f1861a77dd4667e30360470a",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M3_W128_L8",
+    "method": "M3",
+    "Wmax": 128,
+    "level": 8,
+    "final_level": true,
+    "clusters": 22157,
+    "cluster_size": {
+     "max": 128,
+     "mean": 117.024,
+     "p50": 122.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.531,
+    "map_sha256": "1e145165ea5a467a6f21564675b9761f2d73283bb1ddd2abeedafaa7f0f8fb0c",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M3_W512_L4",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 4,
+    "final_level": false,
+    "clusters": 282409,
+    "cluster_size": {
+     "max": 512,
+     "mean": 9.181,
+     "p50": 8.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.928,
+    "map_sha256": "055f7a3ff2fb70cf4133dafd65c57f051e6b7cd75857a35d6fea4ebf4be30bcb",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M3_W512_L5",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 5,
+    "final_level": false,
+    "clusters": 152430,
+    "cluster_size": {
+     "max": 512,
+     "mean": 17.01,
+     "p50": 16.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.102,
+    "map_sha256": "1312cbea177b5fafc09e024e74c80cbe4f492f9db22ccffa457bebdadc2eb6d0",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M3_W512_L6",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 6,
+    "final_level": false,
+    "clusters": 82696,
+    "cluster_size": {
+     "max": 512,
+     "mean": 31.355,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.261,
+    "map_sha256": "629b9472cd306a5ea6c7fe3e567dda974e3c146672ff39b5a47714b370d2b31d",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M3_W512_L7",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 7,
+    "final_level": false,
+    "clusters": 43779,
+    "cluster_size": {
+     "max": 512,
+     "mean": 59.227,
+     "p50": 62.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.404,
+    "map_sha256": "b1b7005e867d51ba3cf300ef3b111ca93ee8a8e87479b5314fcac6b2f94c38ea",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M3_W512_L8",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 8,
+    "final_level": false,
+    "clusters": 22093,
+    "cluster_size": {
+     "max": 512,
+     "mean": 117.363,
+     "p50": 122.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.547,
+    "map_sha256": "35e3473968f4d46db40b0c4708272c07187c3eab5e8204cb48e079ce0d8da66c",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M3_W512_L9",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 9,
+    "final_level": false,
+    "clusters": 11057,
+    "cluster_size": {
+     "max": 512,
+     "mean": 234.502,
+     "p50": 242.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.67,
+    "map_sha256": "243327283b7a5e4d8a19eab5d91d8db5da77c37f42c45fea6b1e90e51629becd",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M3_W512_L10",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 10,
+    "final_level": true,
+    "clusters": 5534,
+    "cluster_size": {
+     "max": 512,
+     "mean": 468.539,
+     "p50": 480.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.789,
+    "map_sha256": "dada8f6bbafc22b819695cc1ef7ca143dd7c94d4b0056b8d64e842c8e5015174",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M3_W2048_L12",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 12,
+    "final_level": true,
+    "clusters": 1384,
+    "cluster_size": {
+     "max": 2032,
+     "mean": 1873.478,
+     "p50": 1902.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.153,
+    "map_sha256": "bc6422d6bc260ab530747c0280ab834e73d60ca338b243d418024f26e23f70ea",
+    "attempted_at_K": [
+     100
+    ],
+    "skipped_by_rule_at_K": [
+     250,
+     500
+    ]
+   },
+   {
+    "candidate": "M4_W32_L6",
+    "method": "M4",
+    "Wmax": 32,
+    "level": 6,
+    "final_level": true,
+    "clusters": 86654,
+    "cluster_size": {
+     "max": 32,
+     "mean": 29.922,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.297,
+    "map_sha256": "eadbbbc1d7f9ff3b473f4e72003ddcfeebabd6fba113c62221877c9f2d166386",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M4_W128_L8",
+    "method": "M4",
+    "Wmax": 128,
+    "level": 8,
+    "final_level": true,
+    "clusters": 22163,
+    "cluster_size": {
+     "max": 128,
+     "mean": 116.992,
+     "p50": 122.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.614,
+    "map_sha256": "fe6e89a93142cb97bc69900b1b536f22e57d0c571b069b34f48f3f23918e28ff",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M4_W512_L4",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 4,
+    "final_level": false,
+    "clusters": 282360,
+    "cluster_size": {
+     "max": 512,
+     "mean": 9.183,
+     "p50": 8.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.956,
+    "map_sha256": "1584068981b99f9966a7acbbe545e9ce144961eb9af1a413f058a9b7d7b66faf",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M4_W512_L5",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 5,
+    "final_level": false,
+    "clusters": 152404,
+    "cluster_size": {
+     "max": 512,
+     "mean": 17.013,
+     "p50": 16.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.139,
+    "map_sha256": "f0f61856091c73f0adf73cd6c56cfd955d5c110cf35a9a4b345a0a5bc96b8adb",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M4_W512_L6",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 6,
+    "final_level": false,
+    "clusters": 82682,
+    "cluster_size": {
+     "max": 512,
+     "mean": 31.36,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.308,
+    "map_sha256": "7c6027803ac0f3d5685adb687e7ad9fca38d33ad65f7bbbc63e4df6f8449e3a6",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M4_W512_L7",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 7,
+    "final_level": false,
+    "clusters": 43775,
+    "cluster_size": {
+     "max": 512,
+     "mean": 59.232,
+     "p50": 62.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.466,
+    "map_sha256": "c1f39cf95e08948d8c3fe6949a2781e84a0a099b8eea7d7f5ebc956fe836970f",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M4_W512_L8",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 8,
+    "final_level": false,
+    "clusters": 22109,
+    "cluster_size": {
+     "max": 512,
+     "mean": 117.278,
+     "p50": 122.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.621,
+    "map_sha256": "caa866819929f13a6f4947b35f79cef5a9b9c745841fa3fd6ec70fc2bcc96052",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M4_W512_L9",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 9,
+    "final_level": false,
+    "clusters": 11057,
+    "cluster_size": {
+     "max": 512,
+     "mean": 234.502,
+     "p50": 242.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.766,
+    "map_sha256": "9ab0475f5c659a20894715d4a4201204d9a6a0294615021e1555c9af7222dea9",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M4_W512_L10",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 10,
+    "final_level": true,
+    "clusters": 5533,
+    "cluster_size": {
+     "max": 512,
+     "mean": 468.624,
+     "p50": 481.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.925,
+    "map_sha256": "ff048ff5aabf7c963e87d13c78848f570efbb777fd3d2d079aeb89db3c6c22e3",
+    "attempted_at_K": [
+     100,
+     250,
+     500
+    ],
+    "skipped_by_rule_at_K": []
+   },
+   {
+    "candidate": "M4_W2048_L12",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 12,
+    "final_level": true,
+    "clusters": 1382,
+    "cluster_size": {
+     "max": 2030,
+     "mean": 1876.19,
+     "p50": 1908.5,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.395,
+    "map_sha256": "9ef409f197f81fc32923fce289aed241a3f174da08137347edd093e6736de056",
+    "attempted_at_K": [
+     100
+    ],
+    "skipped_by_rule_at_K": [
+     250,
+     500
+    ]
+   }
+  ],
+  "all_levels_read": [
+   {
+    "candidate": "M1_W32_L1",
+    "method": "M1",
+    "Wmax": 32,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1932762,
+    "cluster_size": {
+     "max": 32,
+     "mean": 1.342,
+     "p50": 1.0,
+     "singletons": 1850926
+    },
+    "unsplit_pin_reduction": 1.313,
+    "map_sha256": "ec10db74a6c4ee995dcda5684061de7830f34d861099d6bde1fb727c8a1b3754"
+   },
+   {
+    "candidate": "M1_W32_L2",
+    "method": "M1",
+    "Wmax": 32,
+    "level": 2,
+    "final_level": false,
+    "clusters": 405058,
+    "cluster_size": {
+     "max": 32,
+     "mean": 6.401,
+     "p50": 3.0,
+     "singletons": 29
+    },
+    "unsplit_pin_reduction": 1.919,
+    "map_sha256": "8a489423323477d3685bfa10be19bcdc349ec343939a3c2ef2ab06fd9e712e6c"
+   },
+   {
+    "candidate": "M1_W32_L3",
+    "method": "M1",
+    "Wmax": 32,
+    "level": 3,
+    "final_level": false,
+    "clusters": 140566,
+    "cluster_size": {
+     "max": 32,
+     "mean": 18.446,
+     "p50": 17.0,
+     "singletons": 5
+    },
+    "unsplit_pin_reduction": 2.272,
+    "map_sha256": "41a677512968dcf3a9ab45b0565f93e228c4428f144482637a2552a1432a3066"
+   },
+   {
+    "candidate": "M1_W32_L4",
+    "method": "M1",
+    "Wmax": 32,
+    "level": 4,
+    "final_level": true,
+    "clusters": 92918,
+    "cluster_size": {
+     "max": 32,
+     "mean": 27.905,
+     "p50": 29.0,
+     "singletons": 5
+    },
+    "unsplit_pin_reduction": 2.361,
+    "map_sha256": "bc5b795a489f5be49101f5eca95e9a4c1a87e25ac2e4a6ce407b5e407fdc4508"
+   },
+   {
+    "candidate": "M1_W128_L1",
+    "method": "M1",
+    "Wmax": 128,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926266,
+    "cluster_size": {
+     "max": 128,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850656
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "f80a18c71c2cf8fd7ad0e77bd3adfaf475072d5e5d1a3ba16c4fd90f629afe38"
+   },
+   {
+    "candidate": "M1_W128_L2",
+    "method": "M1",
+    "Wmax": 128,
+    "level": 2,
+    "final_level": false,
+    "clusters": 362552,
+    "cluster_size": {
+     "max": 128,
+     "mean": 7.152,
+     "p50": 3.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.975,
+    "map_sha256": "c90def59cc54730b1d06a84444c23c1ea787b6c285a04191d92a0717ffdaba4c"
+   },
+   {
+    "candidate": "M1_W128_L3",
+    "method": "M1",
+    "Wmax": 128,
+    "level": 3,
+    "final_level": false,
+    "clusters": 100007,
+    "cluster_size": {
+     "max": 128,
+     "mean": 25.927,
+     "p50": 13.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.448,
+    "map_sha256": "8876193d90143494fa1ccbf3d94e140a00e7fd849f00effc281a0530c6040eef"
+   },
+   {
+    "candidate": "M1_W128_L4",
+    "method": "M1",
+    "Wmax": 128,
+    "level": 4,
+    "final_level": false,
+    "clusters": 35010,
+    "cluster_size": {
+     "max": 128,
+     "mean": 74.062,
+     "p50": 73.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.701,
+    "map_sha256": "4421f3606b2380bf8e6f944cfdbb3d2a1560d1aa1fbfc4d7df0014fdf1812021"
+   },
+   {
+    "candidate": "M1_W128_L5",
+    "method": "M1",
+    "Wmax": 128,
+    "level": 5,
+    "final_level": true,
+    "clusters": 23359,
+    "cluster_size": {
+     "max": 128,
+     "mean": 111.002,
+     "p50": 116.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.763,
+    "map_sha256": "fe8542d88829908a24763b02fc05d1281ecbeaf75e3390cf41c0b30ee8e71b98"
+   },
+   {
+    "candidate": "M1_W512_L1",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926185,
+    "cluster_size": {
+     "max": 512,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850655
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "a3aa48c0b533ccf5f8e07c7ea969beadd25b3f2d0b2c3e09e7bd333ab5e2da4b"
+   },
+   {
+    "candidate": "M1_W512_L2",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 2,
+    "final_level": false,
+    "clusters": 360470,
+    "cluster_size": {
+     "max": 512,
+     "mean": 7.193,
+     "p50": 3.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.983,
+    "map_sha256": "4ac8b459298d08f302ca46e12e3b7ea4f17d76e64dea8691265c7c73ba6f0a40"
+   },
+   {
+    "candidate": "M1_W512_L3",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 3,
+    "final_level": false,
+    "clusters": 95217,
+    "cluster_size": {
+     "max": 512,
+     "mean": 27.231,
+     "p50": 13.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.494,
+    "map_sha256": "6f84872a8a935f442483cf3c44c5ebc1592742512bf958a3d1e6467165968ce8"
+   },
+   {
+    "candidate": "M1_W512_L4",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 4,
+    "final_level": false,
+    "clusters": 28118,
+    "cluster_size": {
+     "max": 512,
+     "mean": 92.215,
+     "p50": 53.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.861,
+    "map_sha256": "ce8dfe218b8a194373d1e63e024c277e3c457dae93d7e4420433e37b0a5815a8"
+   },
+   {
+    "candidate": "M1_W512_L5",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 5,
+    "final_level": false,
+    "clusters": 9421,
+    "cluster_size": {
+     "max": 512,
+     "mean": 275.225,
+     "p50": 257.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.099,
+    "map_sha256": "69142e7c2ade915063fc0e9c606518897c0e7646b00f204502e4566e03297ff2"
+   },
+   {
+    "candidate": "M1_W512_L6",
+    "method": "M1",
+    "Wmax": 512,
+    "level": 6,
+    "final_level": true,
+    "clusters": 5879,
+    "cluster_size": {
+     "max": 512,
+     "mean": 441.043,
+     "p50": 458.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.175,
+    "map_sha256": "091976d45f8ad3cb8ae22e8d1b5028bd8e131e2385ac88cf95b3b91b9695c9b1"
+   },
+   {
+    "candidate": "M1_W2048_L1",
+    "method": "M1",
+    "Wmax": 2048,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926179,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850655
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "4e11656dd4785fc582c8455eb3ce8e28a700bf7ee9e68b9ff011a13d8e3ef5f1"
+   },
+   {
+    "candidate": "M1_W2048_L2",
+    "method": "M1",
+    "Wmax": 2048,
+    "level": 2,
+    "final_level": false,
+    "clusters": 358359,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 7.235,
+     "p50": 3.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.992,
+    "map_sha256": "a1c336bc55e63c7653a7e65a2441ec13679f09638f5624215d98bef95c2dc5cc"
+   },
+   {
+    "candidate": "M1_W2048_L3",
+    "method": "M1",
+    "Wmax": 2048,
+    "level": 3,
+    "final_level": false,
+    "clusters": 92678,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 27.977,
+     "p50": 13.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.524,
+    "map_sha256": "4a94f3f0065af4a252618d1842d0cdaf304106a79b9f2e45e3351e14911eab32"
+   },
+   {
+    "candidate": "M1_W2048_L4",
+    "method": "M1",
+    "Wmax": 2048,
+    "level": 4,
+    "final_level": false,
+    "clusters": 26289,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 98.63,
+     "p50": 52.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.929,
+    "map_sha256": "509949bfdcdf63653e347682dfe5367f733e36ab8512ab1f5f785c6e71b814c9"
+   },
+   {
+    "candidate": "M1_W2048_L5",
+    "method": "M1",
+    "Wmax": 2048,
+    "level": 5,
+    "final_level": false,
+    "clusters": 7849,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 330.347,
+     "p50": 210.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.267,
+    "map_sha256": "1553de90f81ca0d5b550293d8b90be132255aaee378c2bbfebce99c5729813c9"
+   },
+   {
+    "candidate": "M1_W2048_L6",
+    "method": "M1",
+    "Wmax": 2048,
+    "level": 6,
+    "final_level": false,
+    "clusters": 2612,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 992.685,
+     "p50": 829.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.554,
+    "map_sha256": "3dd33f797264b1f92bf4190bf18b85fd51a35282d3367c8f55c90bc32b3d47ae"
+   },
+   {
+    "candidate": "M1_W2048_L7",
+    "method": "M1",
+    "Wmax": 2048,
+    "level": 7,
+    "final_level": true,
+    "clusters": 1463,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 1772.313,
+     "p50": 1843.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.682,
+    "map_sha256": "699889b2b81cafa5a86997c55e4c28c8dab4f01349516b797b90bd362ceb8f6d"
+   },
+   {
+    "candidate": "M2_W32_L1",
+    "method": "M2",
+    "Wmax": 32,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1932762,
+    "cluster_size": {
+     "max": 32,
+     "mean": 1.342,
+     "p50": 1.0,
+     "singletons": 1850926
+    },
+    "unsplit_pin_reduction": 1.313,
+    "map_sha256": "ec10db74a6c4ee995dcda5684061de7830f34d861099d6bde1fb727c8a1b3754"
+   },
+   {
+    "candidate": "M2_W32_L2",
+    "method": "M2",
+    "Wmax": 32,
+    "level": 2,
+    "final_level": false,
+    "clusters": 489161,
+    "cluster_size": {
+     "max": 32,
+     "mean": 5.301,
+     "p50": 3.0,
+     "singletons": 3
+    },
+    "unsplit_pin_reduction": 1.884,
+    "map_sha256": "ade0fe82ed4d9bd081a12d4225074159272e320574fbfef3a1e88f0e63c3435b"
+   },
+   {
+    "candidate": "M2_W32_L3",
+    "method": "M2",
+    "Wmax": 32,
+    "level": 3,
+    "final_level": false,
+    "clusters": 170209,
+    "cluster_size": {
+     "max": 32,
+     "mean": 15.234,
+     "p50": 12.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.278,
+    "map_sha256": "7820b76c42aee3b93acc8a44215932217d6189b2aad145d6b15a805ddde864f3"
+   },
+   {
+    "candidate": "M2_W32_L4",
+    "method": "M2",
+    "Wmax": 32,
+    "level": 4,
+    "final_level": true,
+    "clusters": 94309,
+    "cluster_size": {
+     "max": 32,
+     "mean": 27.494,
+     "p50": 29.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.425,
+    "map_sha256": "48192edbdf30c2fb7c683b44fb42602f415fdae2315ba0d5234bc63863f1b25a"
+   },
+   {
+    "candidate": "M2_W128_L1",
+    "method": "M2",
+    "Wmax": 128,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926266,
+    "cluster_size": {
+     "max": 128,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850656
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "f80a18c71c2cf8fd7ad0e77bd3adfaf475072d5e5d1a3ba16c4fd90f629afe38"
+   },
+   {
+    "candidate": "M2_W128_L2",
+    "method": "M2",
+    "Wmax": 128,
+    "level": 2,
+    "final_level": false,
+    "clusters": 456746,
+    "cluster_size": {
+     "max": 128,
+     "mean": 5.677,
+     "p50": 3.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.923,
+    "map_sha256": "78b0de19e4f84d62590febd8da6a788e02fd330cdcada081f11e555d15b11fba"
+   },
+   {
+    "candidate": "M2_W128_L3",
+    "method": "M2",
+    "Wmax": 128,
+    "level": 3,
+    "final_level": false,
+    "clusters": 135591,
+    "cluster_size": {
+     "max": 128,
+     "mean": 19.123,
+     "p50": 10.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.412,
+    "map_sha256": "295a01bd537f233e51f7bbe20018f3b4ff6fca798382c99d8399a659ca741ecc"
+   },
+   {
+    "candidate": "M2_W128_L4",
+    "method": "M2",
+    "Wmax": 128,
+    "level": 4,
+    "final_level": false,
+    "clusters": 44153,
+    "cluster_size": {
+     "max": 128,
+     "mean": 58.725,
+     "p50": 45.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.737,
+    "map_sha256": "21bf5612dc3727f0bb3dd65bc5c3bcf3a94c7dd90007fd0310d108f1d5ae60c7"
+   },
+   {
+    "candidate": "M2_W128_L5",
+    "method": "M2",
+    "Wmax": 128,
+    "level": 5,
+    "final_level": true,
+    "clusters": 23702,
+    "cluster_size": {
+     "max": 128,
+     "mean": 109.396,
+     "p50": 115.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.852,
+    "map_sha256": "f4465b8546a10ea96fdbada314bb8c0fa35b3578514be6408215f7787fd61b3c"
+   },
+   {
+    "candidate": "M2_W512_L1",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926185,
+    "cluster_size": {
+     "max": 512,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850655
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "a3aa48c0b533ccf5f8e07c7ea969beadd25b3f2d0b2c3e09e7bd333ab5e2da4b"
+   },
+   {
+    "candidate": "M2_W512_L2",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 2,
+    "final_level": false,
+    "clusters": 455513,
+    "cluster_size": {
+     "max": 512,
+     "mean": 5.692,
+     "p50": 3.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.928,
+    "map_sha256": "745edfcd7a4b4003781abf984c04200d51ac6655e583a05db708d551e055ce87"
+   },
+   {
+    "candidate": "M2_W512_L3",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 3,
+    "final_level": false,
+    "clusters": 131547,
+    "cluster_size": {
+     "max": 512,
+     "mean": 19.711,
+     "p50": 10.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.448,
+    "map_sha256": "2b1936e4cbef46200836c658c1f4f7fd9fd2af30e4371a0942abfe382d8a7bb2"
+   },
+   {
+    "candidate": "M2_W512_L4",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 4,
+    "final_level": false,
+    "clusters": 37560,
+    "cluster_size": {
+     "max": 512,
+     "mean": 69.033,
+     "p50": 38.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.873,
+    "map_sha256": "48fa96263d6fb04ebcea4844b21c62589e1a124e124773e3f734054f956c37e5"
+   },
+   {
+    "candidate": "M2_W512_L5",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 5,
+    "final_level": false,
+    "clusters": 11639,
+    "cluster_size": {
+     "max": 512,
+     "mean": 222.776,
+     "p50": 172.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.174,
+    "map_sha256": "3dc8cc422d5533f8bcc90b810c9d8b629a3c4c1fb2c6d3fd6738d7b0b005dbc7"
+   },
+   {
+    "candidate": "M2_W512_L6",
+    "method": "M2",
+    "Wmax": 512,
+    "level": 6,
+    "final_level": true,
+    "clusters": 5913,
+    "cluster_size": {
+     "max": 512,
+     "mean": 438.507,
+     "p50": 458.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.297,
+    "map_sha256": "fbce856bdfb1723a9e6afc633c350682e88e737089e885b93d83df2cec8f4d03"
+   },
+   {
+    "candidate": "M2_W2048_L1",
+    "method": "M2",
+    "Wmax": 2048,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926179,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850655
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "4e11656dd4785fc582c8455eb3ce8e28a700bf7ee9e68b9ff011a13d8e3ef5f1"
+   },
+   {
+    "candidate": "M2_W2048_L2",
+    "method": "M2",
+    "Wmax": 2048,
+    "level": 2,
+    "final_level": false,
+    "clusters": 454269,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 5.708,
+     "p50": 3.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.933,
+    "map_sha256": "1c0fc563ea8ab2879c7da8c07ea7f6b8920af62be6305a38f6829b4da328509f"
+   },
+   {
+    "candidate": "M2_W2048_L3",
+    "method": "M2",
+    "Wmax": 2048,
+    "level": 3,
+    "final_level": false,
+    "clusters": 128824,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 20.127,
+     "p50": 9.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.48,
+    "map_sha256": "69a45ed6ef2f30f7725ce5e561333089e610de9d04ea88818ceeb7f24395a0c4"
+   },
+   {
+    "candidate": "M2_W2048_L4",
+    "method": "M2",
+    "Wmax": 2048,
+    "level": 4,
+    "final_level": false,
+    "clusters": 35206,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 73.649,
+     "p50": 38.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.955,
+    "map_sha256": "c2f7b03d4b1de20b6220f4d5fa02c52f22979dc7855b2a04fdd572c70ea599e1"
+   },
+   {
+    "candidate": "M2_W2048_L5",
+    "method": "M2",
+    "Wmax": 2048,
+    "level": 5,
+    "final_level": false,
+    "clusters": 9815,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 264.177,
+     "p50": 153.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.369,
+    "map_sha256": "ff82889b271873f6eb324bccb918e5f1cda250997955b85aa6095383a8f2eba7"
+   },
+   {
+    "candidate": "M2_W2048_L6",
+    "method": "M2",
+    "Wmax": 2048,
+    "level": 6,
+    "final_level": false,
+    "clusters": 3064,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 846.245,
+     "p50": 643.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.71,
+    "map_sha256": "58c4733177ab8eb108d492a27550e45455ba51d7d09d435a7287dc71fb280bff"
+   },
+   {
+    "candidate": "M2_W2048_L7",
+    "method": "M2",
+    "Wmax": 2048,
+    "level": 7,
+    "final_level": true,
+    "clusters": 1467,
+    "cluster_size": {
+     "max": 2048,
+     "mean": 1767.481,
+     "p50": 1852.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.899,
+    "map_sha256": "e30b76348e3d7cc0ba567b90c149141d63a3735d39f5d233b301a62b1c023046"
+   },
+   {
+    "candidate": "M3_W32_L1",
+    "method": "M3",
+    "Wmax": 32,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1932762,
+    "cluster_size": {
+     "max": 32,
+     "mean": 1.342,
+     "p50": 1.0,
+     "singletons": 1850926
+    },
+    "unsplit_pin_reduction": 1.313,
+    "map_sha256": "ec10db74a6c4ee995dcda5684061de7830f34d861099d6bde1fb727c8a1b3754"
+   },
+   {
+    "candidate": "M3_W32_L2",
+    "method": "M3",
+    "Wmax": 32,
+    "level": 2,
+    "final_level": false,
+    "clusters": 1015677,
+    "cluster_size": {
+     "max": 32,
+     "mean": 2.553,
+     "p50": 2.0,
+     "singletons": 16756
+    },
+    "unsplit_pin_reduction": 1.529,
+    "map_sha256": "04d079e18af4828d974041ac235f45a456f6d5862aee3d53d7ac5bbeccae34b0"
+   },
+   {
+    "candidate": "M3_W32_L3",
+    "method": "M3",
+    "Wmax": 32,
+    "level": 3,
+    "final_level": false,
+    "clusters": 537011,
+    "cluster_size": {
+     "max": 32,
+     "mean": 4.828,
+     "p50": 4.0,
+     "singletons": 2
+    },
+    "unsplit_pin_reduction": 1.733,
+    "map_sha256": "15dc2a82396adf7da841626ebae5e029d050039e3673bda5de4ddf582bca4b1b"
+   },
+   {
+    "candidate": "M3_W32_L4",
+    "method": "M3",
+    "Wmax": 32,
+    "level": 4,
+    "final_level": false,
+    "clusters": 288345,
+    "cluster_size": {
+     "max": 32,
+     "mean": 8.992,
+     "p50": 8.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.921,
+    "map_sha256": "6e687d5742feb8c73c4b37bfae9e6a01f59547870138a5b183591992a0fa9193"
+   },
+   {
+    "candidate": "M3_W32_L5",
+    "method": "M3",
+    "Wmax": 32,
+    "level": 5,
+    "final_level": false,
+    "clusters": 157664,
+    "cluster_size": {
+     "max": 32,
+     "mean": 16.446,
+     "p50": 16.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.093,
+    "map_sha256": "c6ab3df7c4f53780de0a0f5c14eb31516d8b02e20513e381b5de68567704ff2b"
+   },
+   {
+    "candidate": "M3_W32_L6",
+    "method": "M3",
+    "Wmax": 32,
+    "level": 6,
+    "final_level": true,
+    "clusters": 86677,
+    "cluster_size": {
+     "max": 32,
+     "mean": 29.914,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.253,
+    "map_sha256": "29cacd682bbbe74ec954c604c929e021b8a9a5a1f1861a77dd4667e30360470a"
+   },
+   {
+    "candidate": "M3_W128_L1",
+    "method": "M3",
+    "Wmax": 128,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926266,
+    "cluster_size": {
+     "max": 128,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850656
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "f80a18c71c2cf8fd7ad0e77bd3adfaf475072d5e5d1a3ba16c4fd90f629afe38"
+   },
+   {
+    "candidate": "M3_W128_L2",
+    "method": "M3",
+    "Wmax": 128,
+    "level": 2,
+    "final_level": false,
+    "clusters": 1009312,
+    "cluster_size": {
+     "max": 128,
+     "mean": 2.569,
+     "p50": 2.0,
+     "singletons": 16748
+    },
+    "unsplit_pin_reduction": 1.534,
+    "map_sha256": "3a622ed37b22d53d21f70af48d7b57bfb1ef0bd749f7dd86518734c2cee7cac7"
+   },
+   {
+    "candidate": "M3_W128_L3",
+    "method": "M3",
+    "Wmax": 128,
+    "level": 3,
+    "final_level": false,
+    "clusters": 530803,
+    "cluster_size": {
+     "max": 128,
+     "mean": 4.885,
+     "p50": 4.0,
+     "singletons": 2
+    },
+    "unsplit_pin_reduction": 1.739,
+    "map_sha256": "ae2c324a33e92f1d3bb1110406444c320cada9a2e4f13772fadff8556772fbc4"
+   },
+   {
+    "candidate": "M3_W128_L4",
+    "method": "M3",
+    "Wmax": 128,
+    "level": 4,
+    "final_level": false,
+    "clusters": 282487,
+    "cluster_size": {
+     "max": 128,
+     "mean": 9.179,
+     "p50": 8.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.928,
+    "map_sha256": "b73dcba9e65dc35696be69a3d35cba2bbe7a7070dc12276c7b2e73982932b532"
+   },
+   {
+    "candidate": "M3_W128_L5",
+    "method": "M3",
+    "Wmax": 128,
+    "level": 5,
+    "final_level": false,
+    "clusters": 152510,
+    "cluster_size": {
+     "max": 128,
+     "mean": 17.001,
+     "p50": 16.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.102,
+    "map_sha256": "b3e2217daf59ad8a38eecc98a34cd223ca8e4d5a5694833ac692a4ba78c00c28"
+   },
+   {
+    "candidate": "M3_W128_L6",
+    "method": "M3",
+    "Wmax": 128,
+    "level": 6,
+    "final_level": false,
+    "clusters": 82774,
+    "cluster_size": {
+     "max": 128,
+     "mean": 31.325,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.261,
+    "map_sha256": "6a56e82b1aa909d34d99b1650a99e6156956679d454422e2cdfa60137bd2a8bf"
+   },
+   {
+    "candidate": "M3_W128_L7",
+    "method": "M3",
+    "Wmax": 128,
+    "level": 7,
+    "final_level": false,
+    "clusters": 43847,
+    "cluster_size": {
+     "max": 128,
+     "mean": 59.135,
+     "p50": 62.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.405,
+    "map_sha256": "b6b3f44767d034561796ac2f1b0ac162725b86c33d82f7da24bf056b4b8b3ac0"
+   },
+   {
+    "candidate": "M3_W128_L8",
+    "method": "M3",
+    "Wmax": 128,
+    "level": 8,
+    "final_level": true,
+    "clusters": 22157,
+    "cluster_size": {
+     "max": 128,
+     "mean": 117.024,
+     "p50": 122.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.531,
+    "map_sha256": "1e145165ea5a467a6f21564675b9761f2d73283bb1ddd2abeedafaa7f0f8fb0c"
+   },
+   {
+    "candidate": "M3_W512_L1",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926185,
+    "cluster_size": {
+     "max": 512,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850655
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "a3aa48c0b533ccf5f8e07c7ea969beadd25b3f2d0b2c3e09e7bd333ab5e2da4b"
+   },
+   {
+    "candidate": "M3_W512_L2",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 2,
+    "final_level": false,
+    "clusters": 1009231,
+    "cluster_size": {
+     "max": 512,
+     "mean": 2.569,
+     "p50": 2.0,
+     "singletons": 16747
+    },
+    "unsplit_pin_reduction": 1.534,
+    "map_sha256": "db7ebebe701348d9d8d11a715ad8daeeb61e379bdaa51746876981798d1df198"
+   },
+   {
+    "candidate": "M3_W512_L3",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 3,
+    "final_level": false,
+    "clusters": 530723,
+    "cluster_size": {
+     "max": 512,
+     "mean": 4.886,
+     "p50": 4.0,
+     "singletons": 2
+    },
+    "unsplit_pin_reduction": 1.739,
+    "map_sha256": "45176e19b7cf4c595d2ffd7d971f88bf0a8320b26787e1d770f088df2ff65ce9"
+   },
+   {
+    "candidate": "M3_W512_L4",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 4,
+    "final_level": false,
+    "clusters": 282409,
+    "cluster_size": {
+     "max": 512,
+     "mean": 9.181,
+     "p50": 8.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.928,
+    "map_sha256": "055f7a3ff2fb70cf4133dafd65c57f051e6b7cd75857a35d6fea4ebf4be30bcb"
+   },
+   {
+    "candidate": "M3_W512_L5",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 5,
+    "final_level": false,
+    "clusters": 152430,
+    "cluster_size": {
+     "max": 512,
+     "mean": 17.01,
+     "p50": 16.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.102,
+    "map_sha256": "1312cbea177b5fafc09e024e74c80cbe4f492f9db22ccffa457bebdadc2eb6d0"
+   },
+   {
+    "candidate": "M3_W512_L6",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 6,
+    "final_level": false,
+    "clusters": 82696,
+    "cluster_size": {
+     "max": 512,
+     "mean": 31.355,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.261,
+    "map_sha256": "629b9472cd306a5ea6c7fe3e567dda974e3c146672ff39b5a47714b370d2b31d"
+   },
+   {
+    "candidate": "M3_W512_L7",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 7,
+    "final_level": false,
+    "clusters": 43779,
+    "cluster_size": {
+     "max": 512,
+     "mean": 59.227,
+     "p50": 62.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.404,
+    "map_sha256": "b1b7005e867d51ba3cf300ef3b111ca93ee8a8e87479b5314fcac6b2f94c38ea"
+   },
+   {
+    "candidate": "M3_W512_L8",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 8,
+    "final_level": false,
+    "clusters": 22093,
+    "cluster_size": {
+     "max": 512,
+     "mean": 117.363,
+     "p50": 122.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.547,
+    "map_sha256": "35e3473968f4d46db40b0c4708272c07187c3eab5e8204cb48e079ce0d8da66c"
+   },
+   {
+    "candidate": "M3_W512_L9",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 9,
+    "final_level": false,
+    "clusters": 11057,
+    "cluster_size": {
+     "max": 512,
+     "mean": 234.502,
+     "p50": 242.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.67,
+    "map_sha256": "243327283b7a5e4d8a19eab5d91d8db5da77c37f42c45fea6b1e90e51629becd"
+   },
+   {
+    "candidate": "M3_W512_L10",
+    "method": "M3",
+    "Wmax": 512,
+    "level": 10,
+    "final_level": true,
+    "clusters": 5534,
+    "cluster_size": {
+     "max": 512,
+     "mean": 468.539,
+     "p50": 480.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.789,
+    "map_sha256": "dada8f6bbafc22b819695cc1ef7ca143dd7c94d4b0056b8d64e842c8e5015174"
+   },
+   {
+    "candidate": "M3_W2048_L1",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926179,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850655
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "4e11656dd4785fc582c8455eb3ce8e28a700bf7ee9e68b9ff011a13d8e3ef5f1"
+   },
+   {
+    "candidate": "M3_W2048_L2",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 2,
+    "final_level": false,
+    "clusters": 1009225,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 2.569,
+     "p50": 2.0,
+     "singletons": 16747
+    },
+    "unsplit_pin_reduction": 1.534,
+    "map_sha256": "ab244916181c575cd97519ffefa50cc791b93dba501a01be21b511d584e94425"
+   },
+   {
+    "candidate": "M3_W2048_L3",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 3,
+    "final_level": false,
+    "clusters": 530717,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 4.886,
+     "p50": 4.0,
+     "singletons": 2
+    },
+    "unsplit_pin_reduction": 1.739,
+    "map_sha256": "53c4f6d6eceec45c0c11be83f9dbfccf6a75f2eefd773c6e0136232b773cf333"
+   },
+   {
+    "candidate": "M3_W2048_L4",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 4,
+    "final_level": false,
+    "clusters": 282403,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 9.182,
+     "p50": 8.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.928,
+    "map_sha256": "70a37ddf941fff7450f4e360caac1192f2e5709bbb70a5f7f963269af287d0f6"
+   },
+   {
+    "candidate": "M3_W2048_L5",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 5,
+    "final_level": false,
+    "clusters": 152425,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 17.011,
+     "p50": 16.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.102,
+    "map_sha256": "badedf8c513ed9a9bcd47b9411e6d8d158a7a9c215d0472aacfe91d004d1da64"
+   },
+   {
+    "candidate": "M3_W2048_L6",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 6,
+    "final_level": false,
+    "clusters": 82692,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 31.356,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.261,
+    "map_sha256": "a419348c5df18f425e23e9d452109511420724443ad3d544fef9aa1a6e626363"
+   },
+   {
+    "candidate": "M3_W2048_L7",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 7,
+    "final_level": false,
+    "clusters": 43773,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 59.235,
+     "p50": 62.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.404,
+    "map_sha256": "22a172c7236dce0e7fa88eea02ba78f6201aec5f4c40898f0247c0fa69adb027"
+   },
+   {
+    "candidate": "M3_W2048_L8",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 8,
+    "final_level": false,
+    "clusters": 22090,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 117.379,
+     "p50": 122.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.547,
+    "map_sha256": "24521d6bb634bacf0f65809a590f92fc1d3b60ee182a984ad7384b9590df6835"
+   },
+   {
+    "candidate": "M3_W2048_L9",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 9,
+    "final_level": false,
+    "clusters": 11055,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 234.545,
+     "p50": 242.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.67,
+    "map_sha256": "b1cf2ff0ecae0ea0dc26f3e22b7d2f0dc72f08153102eb08f6472db5039cdeb1"
+   },
+   {
+    "candidate": "M3_W2048_L10",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 10,
+    "final_level": false,
+    "clusters": 5531,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 468.793,
+     "p50": 480.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.789,
+    "map_sha256": "e74e02a6b0d01102964f071e631bedd20d98cea2999e07b89162e74e0c7a0b14"
+   },
+   {
+    "candidate": "M3_W2048_L11",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 11,
+    "final_level": false,
+    "clusters": 2766,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 937.416,
+     "p50": 954.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.954,
+    "map_sha256": "d5daab5ee5276e3e788ff1c34be5db74b10f755a370303a391c73167e2c275ed"
+   },
+   {
+    "candidate": "M3_W2048_L12",
+    "method": "M3",
+    "Wmax": 2048,
+    "level": 12,
+    "final_level": true,
+    "clusters": 1384,
+    "cluster_size": {
+     "max": 2032,
+     "mean": 1873.478,
+     "p50": 1902.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.153,
+    "map_sha256": "bc6422d6bc260ab530747c0280ab834e73d60ca338b243d418024f26e23f70ea"
+   },
+   {
+    "candidate": "M4_W32_L1",
+    "method": "M4",
+    "Wmax": 32,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1932762,
+    "cluster_size": {
+     "max": 32,
+     "mean": 1.342,
+     "p50": 1.0,
+     "singletons": 1850926
+    },
+    "unsplit_pin_reduction": 1.313,
+    "map_sha256": "ec10db74a6c4ee995dcda5684061de7830f34d861099d6bde1fb727c8a1b3754"
+   },
+   {
+    "candidate": "M4_W32_L2",
+    "method": "M4",
+    "Wmax": 32,
+    "level": 2,
+    "final_level": false,
+    "clusters": 1015595,
+    "cluster_size": {
+     "max": 32,
+     "mean": 2.553,
+     "p50": 2.0,
+     "singletons": 16592
+    },
+    "unsplit_pin_reduction": 1.537,
+    "map_sha256": "9d1c0d61861c93ea3ff5e0880af3cb23e5ca8198bbe74c0bf4e9247af56609fb"
+   },
+   {
+    "candidate": "M4_W32_L3",
+    "method": "M4",
+    "Wmax": 32,
+    "level": 3,
+    "final_level": false,
+    "clusters": 536955,
+    "cluster_size": {
+     "max": 32,
+     "mean": 4.829,
+     "p50": 4.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.749,
+    "map_sha256": "32d595a3c5c1eab66190be6cb75d39e96c865c3bea9ca101fec61e3911cc8b22"
+   },
+   {
+    "candidate": "M4_W32_L4",
+    "method": "M4",
+    "Wmax": 32,
+    "level": 4,
+    "final_level": false,
+    "clusters": 288310,
+    "cluster_size": {
+     "max": 32,
+     "mean": 8.993,
+     "p50": 8.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.949,
+    "map_sha256": "9afb82bc98f0c84cf809c113c630f66cccf767f8f6386e4fe066d460aa72f8d3"
+   },
+   {
+    "candidate": "M4_W32_L5",
+    "method": "M4",
+    "Wmax": 32,
+    "level": 5,
+    "final_level": false,
+    "clusters": 157666,
+    "cluster_size": {
+     "max": 32,
+     "mean": 16.445,
+     "p50": 16.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.132,
+    "map_sha256": "5725a96962b336f74df15819d5bea36d9b686f09105400719d8b295e96b20af8"
+   },
+   {
+    "candidate": "M4_W32_L6",
+    "method": "M4",
+    "Wmax": 32,
+    "level": 6,
+    "final_level": true,
+    "clusters": 86654,
+    "cluster_size": {
+     "max": 32,
+     "mean": 29.922,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.297,
+    "map_sha256": "eadbbbc1d7f9ff3b473f4e72003ddcfeebabd6fba113c62221877c9f2d166386"
+   },
+   {
+    "candidate": "M4_W128_L1",
+    "method": "M4",
+    "Wmax": 128,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926266,
+    "cluster_size": {
+     "max": 128,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850656
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "f80a18c71c2cf8fd7ad0e77bd3adfaf475072d5e5d1a3ba16c4fd90f629afe38"
+   },
+   {
+    "candidate": "M4_W128_L2",
+    "method": "M4",
+    "Wmax": 128,
+    "level": 2,
+    "final_level": false,
+    "clusters": 1009230,
+    "cluster_size": {
+     "max": 128,
+     "mean": 2.569,
+     "p50": 2.0,
+     "singletons": 16584
+    },
+    "unsplit_pin_reduction": 1.542,
+    "map_sha256": "719a78d2397c0d3e0420d769fba28eed200ad4c6e22f01f009d15a374e20fdb3"
+   },
+   {
+    "candidate": "M4_W128_L3",
+    "method": "M4",
+    "Wmax": 128,
+    "level": 3,
+    "final_level": false,
+    "clusters": 530774,
+    "cluster_size": {
+     "max": 128,
+     "mean": 4.885,
+     "p50": 4.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.756,
+    "map_sha256": "2aaed8d86dc2a89f422ba48c0177b828c64399e417d2ea7f44493d865dcd1c68"
+   },
+   {
+    "candidate": "M4_W128_L4",
+    "method": "M4",
+    "Wmax": 128,
+    "level": 4,
+    "final_level": false,
+    "clusters": 282436,
+    "cluster_size": {
+     "max": 128,
+     "mean": 9.18,
+     "p50": 8.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.956,
+    "map_sha256": "4de30d93007a23d43d66419712f74465934c805d239dabe10ae21f7d05d30430"
+   },
+   {
+    "candidate": "M4_W128_L5",
+    "method": "M4",
+    "Wmax": 128,
+    "level": 5,
+    "final_level": false,
+    "clusters": 152484,
+    "cluster_size": {
+     "max": 128,
+     "mean": 17.004,
+     "p50": 16.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.139,
+    "map_sha256": "4d10ad0e02b29d046c35f233f132e9984b91541388819c4943b3d6504d5608e0"
+   },
+   {
+    "candidate": "M4_W128_L6",
+    "method": "M4",
+    "Wmax": 128,
+    "level": 6,
+    "final_level": false,
+    "clusters": 82752,
+    "cluster_size": {
+     "max": 128,
+     "mean": 31.333,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.308,
+    "map_sha256": "caa8573ebd7092f3547b07f0c4613116002ad6b3a700fb403eed12760bed5886"
+   },
+   {
+    "candidate": "M4_W128_L7",
+    "method": "M4",
+    "Wmax": 128,
+    "level": 7,
+    "final_level": false,
+    "clusters": 43837,
+    "cluster_size": {
+     "max": 128,
+     "mean": 59.149,
+     "p50": 62.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.467,
+    "map_sha256": "a276638eca3b4d343f0e9a31a21fe1a6a33410d23da617ac6e2088dd9faf8065"
+   },
+   {
+    "candidate": "M4_W128_L8",
+    "method": "M4",
+    "Wmax": 128,
+    "level": 8,
+    "final_level": true,
+    "clusters": 22163,
+    "cluster_size": {
+     "max": 128,
+     "mean": 116.992,
+     "p50": 122.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.614,
+    "map_sha256": "fe6e89a93142cb97bc69900b1b536f22e57d0c571b069b34f48f3f23918e28ff"
+   },
+   {
+    "candidate": "M4_W512_L1",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926185,
+    "cluster_size": {
+     "max": 512,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850655
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "a3aa48c0b533ccf5f8e07c7ea969beadd25b3f2d0b2c3e09e7bd333ab5e2da4b"
+   },
+   {
+    "candidate": "M4_W512_L2",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 2,
+    "final_level": false,
+    "clusters": 1009150,
+    "cluster_size": {
+     "max": 512,
+     "mean": 2.569,
+     "p50": 2.0,
+     "singletons": 16585
+    },
+    "unsplit_pin_reduction": 1.542,
+    "map_sha256": "ef7cd0d883771881396fd95beeafb81ad196e236984ea41933fc11b8f593ce53"
+   },
+   {
+    "candidate": "M4_W512_L3",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 3,
+    "final_level": false,
+    "clusters": 530695,
+    "cluster_size": {
+     "max": 512,
+     "mean": 4.886,
+     "p50": 4.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.756,
+    "map_sha256": "dfc7a8c89829ac4c769d45e7ca107108d433fbb4fdd7b17b860beb367040a4b3"
+   },
+   {
+    "candidate": "M4_W512_L4",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 4,
+    "final_level": false,
+    "clusters": 282360,
+    "cluster_size": {
+     "max": 512,
+     "mean": 9.183,
+     "p50": 8.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.956,
+    "map_sha256": "1584068981b99f9966a7acbbe545e9ce144961eb9af1a413f058a9b7d7b66faf"
+   },
+   {
+    "candidate": "M4_W512_L5",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 5,
+    "final_level": false,
+    "clusters": 152404,
+    "cluster_size": {
+     "max": 512,
+     "mean": 17.013,
+     "p50": 16.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.139,
+    "map_sha256": "f0f61856091c73f0adf73cd6c56cfd955d5c110cf35a9a4b345a0a5bc96b8adb"
+   },
+   {
+    "candidate": "M4_W512_L6",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 6,
+    "final_level": false,
+    "clusters": 82682,
+    "cluster_size": {
+     "max": 512,
+     "mean": 31.36,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.308,
+    "map_sha256": "7c6027803ac0f3d5685adb687e7ad9fca38d33ad65f7bbbc63e4df6f8449e3a6"
+   },
+   {
+    "candidate": "M4_W512_L7",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 7,
+    "final_level": false,
+    "clusters": 43775,
+    "cluster_size": {
+     "max": 512,
+     "mean": 59.232,
+     "p50": 62.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.466,
+    "map_sha256": "c1f39cf95e08948d8c3fe6949a2781e84a0a099b8eea7d7f5ebc956fe836970f"
+   },
+   {
+    "candidate": "M4_W512_L8",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 8,
+    "final_level": false,
+    "clusters": 22109,
+    "cluster_size": {
+     "max": 512,
+     "mean": 117.278,
+     "p50": 122.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.621,
+    "map_sha256": "caa866819929f13a6f4947b35f79cef5a9b9c745841fa3fd6ec70fc2bcc96052"
+   },
+   {
+    "candidate": "M4_W512_L9",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 9,
+    "final_level": false,
+    "clusters": 11057,
+    "cluster_size": {
+     "max": 512,
+     "mean": 234.502,
+     "p50": 242.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.766,
+    "map_sha256": "9ab0475f5c659a20894715d4a4201204d9a6a0294615021e1555c9af7222dea9"
+   },
+   {
+    "candidate": "M4_W512_L10",
+    "method": "M4",
+    "Wmax": 512,
+    "level": 10,
+    "final_level": true,
+    "clusters": 5533,
+    "cluster_size": {
+     "max": 512,
+     "mean": 468.624,
+     "p50": 481.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.925,
+    "map_sha256": "ff048ff5aabf7c963e87d13c78848f570efbb777fd3d2d079aeb89db3c6c22e3"
+   },
+   {
+    "candidate": "M4_W2048_L1",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 1,
+    "final_level": false,
+    "clusters": 1926179,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 1.346,
+     "p50": 1.0,
+     "singletons": 1850655
+    },
+    "unsplit_pin_reduction": 1.317,
+    "map_sha256": "4e11656dd4785fc582c8455eb3ce8e28a700bf7ee9e68b9ff011a13d8e3ef5f1"
+   },
+   {
+    "candidate": "M4_W2048_L2",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 2,
+    "final_level": false,
+    "clusters": 1009144,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 2.569,
+     "p50": 2.0,
+     "singletons": 16585
+    },
+    "unsplit_pin_reduction": 1.542,
+    "map_sha256": "dffeed95216012e48cdca01c91e2243c4e65c995ac3c5bab6ec1f9fbd60d4412"
+   },
+   {
+    "candidate": "M4_W2048_L3",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 3,
+    "final_level": false,
+    "clusters": 530689,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 4.886,
+     "p50": 4.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.756,
+    "map_sha256": "415f28db63a98cb459b92a4174882c06ca31eeab15b52be0c3cf66de20135034"
+   },
+   {
+    "candidate": "M4_W2048_L4",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 4,
+    "final_level": false,
+    "clusters": 282354,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 9.183,
+     "p50": 8.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 1.956,
+    "map_sha256": "990b0864af150f2d4bd46f7b8a9b9a1122d60b1924775b91bd709ddd8e519430"
+   },
+   {
+    "candidate": "M4_W2048_L5",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 5,
+    "final_level": false,
+    "clusters": 152399,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 17.014,
+     "p50": 16.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.139,
+    "map_sha256": "28c1cb1f6ee9fcb567e83aeafc2a8922710c00e74e07ec24b09f9544b4985ff3"
+   },
+   {
+    "candidate": "M4_W2048_L6",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 6,
+    "final_level": false,
+    "clusters": 82678,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 31.361,
+     "p50": 32.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.308,
+    "map_sha256": "17ad051bac748cf0b75144b2010e41eac13983a1fefeeaa4027d1afc59a5b133"
+   },
+   {
+    "candidate": "M4_W2048_L7",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 7,
+    "final_level": false,
+    "clusters": 43770,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 59.239,
+     "p50": 62.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.466,
+    "map_sha256": "fae2ed509b47938ba8f3ae594cca657615aa30b1ae04adf5b13f11f743338d7e"
+   },
+   {
+    "candidate": "M4_W2048_L8",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 8,
+    "final_level": false,
+    "clusters": 22103,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 117.31,
+     "p50": 122.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.621,
+    "map_sha256": "9dca3a7ca18e3f7d0b101f1989d4904248d6ac4441662b2404a05daf2eccfefd"
+   },
+   {
+    "candidate": "M4_W2048_L9",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 9,
+    "final_level": false,
+    "clusters": 11052,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 234.609,
+     "p50": 242.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.766,
+    "map_sha256": "2b16ad8ccd23c7d470ecfa8ac40772acb78520392694c28f69d5f5572dbe98aa"
+   },
+   {
+    "candidate": "M4_W2048_L10",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 10,
+    "final_level": false,
+    "clusters": 5529,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 468.963,
+     "p50": 481.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 2.924,
+    "map_sha256": "2d65818088c68d624eb46966245149bb6eeffe047f163d683e29515e3bbe07c3"
+   },
+   {
+    "candidate": "M4_W2048_L11",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 11,
+    "final_level": false,
+    "clusters": 2765,
+    "cluster_size": {
+     "max": 1955,
+     "mean": 937.756,
+     "p50": 957.0,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.108,
+    "map_sha256": "77ead53c38750c6253dd5e3be54dce9d3706b7a24478025b0c3503ea889ec377"
+   },
+   {
+    "candidate": "M4_W2048_L12",
+    "method": "M4",
+    "Wmax": 2048,
+    "level": 12,
+    "final_level": true,
+    "clusters": 1382,
+    "cluster_size": {
+     "max": 2030,
+     "mean": 1876.19,
+     "p50": 1908.5,
+     "singletons": 0
+    },
+    "unsplit_pin_reduction": 3.395,
+    "map_sha256": "9ef409f197f81fc32923fce289aed241a3f174da08137347edd093e6736de056"
+   }
+  ]
+ },
+ "gate_recall (addendum 1, unchanged)": "gate cells K in {100, 250, 500}, every B_N in {100, 250, 500, 1000, 2000, 5000}; rows below PHG_SK's ALL count at matched B_P: <= 7 of 786 RECALL_PRESERVING, >= 24 FAILED (or B_P = K on more than half the rows), else BORDERLINE (reported to the user).  A candidate's verdict is the worst over the gate cells it was built at; a candidate built at K 100 only (Wmax 2048) is labelled PARTIAL",
+ "compression_and_cost_readout": {
+  "r_pins": "per cell: fine H4_SK pins / coarse pins (RUN.json coarse_hypergraph.pin_reduction)",
+  "predicted_freebase_ram": "Freebase STRUCT pins 4253534391 / r_pins x bytes per coarse pin measured in the cell (sum of the four ranks' peak RSS / coarse pins; stage 4A measured 133.4/132.1/130.7 B per pin at K 100/250/500), compared with 0.9 x 81.6 GB = 73.4 GB.  The Freebase pin count is the STRUCT one (KNN does not exist for Freebase, see Track A); with KNN the requirement would be higher",
+  "required_compression_r_star": 7.73,
+  "systems_cost": "coarsener peak RSS and seconds (COARSEN record), levels (passes), coarse-PHG memory and wall seconds, refinement seconds, disk of the maps"
+ },
+ "decision_table": {
+  "FINISH_LINE (a candidate is RECALL_PRESERVING at all its gate cells AND r_pins >= r_star AND balance <= 1.03)": "reported; Freebase becomes an engineering job: the OOC engine is built for that candidate's scoring rule, validated against the WebQSP in-memory result, then progressively K = 1k, 2k, 5k, 10k, 20k plus the hash control",
+  "no candidate reaches r_star (recall-preserving or not)": "the curve is reported as the result: 'Freebase recall-preserving PHG through cluster-and-quotient = infeasible at the compression this family can reach', with the RAM prediction per point.  Options for the user (NOT run here): a hierarchical two-level PHG (super-blocks, then per-block PHG with net splitting), or the systems-only route with a degraded partitioner (recall stated as degraded)",
+  "a candidate reaches r_star but is BORDERLINE or FAILED": "reported to the user with both tables; no Freebase run",
+  "M0R": "if the refinement alone changes ALL recall by more than the gate's 7 rows it is reported as a confound and the candidates are read against M0R as well as against M0"
+ },
+ "not_done": [
+  "no candidate runs on the full Freebase graph",
+  "no re-parameterisation after scoring",
+  "no S-only candidate or PHG_S verdict",
+  "no held-out row is read (split B sealed, TEST unread)"
+ ],
+ "scoring_run": "ONE EVAL (scratchpad/_ml2_eval.py EVAL) on the v1 bundle: PHG (the reference), M0R and every cell built by the grid; modes own / matched (B_P = PHG's own B_P: THE GATE); the PHG cells must reproduce the earlier EVAL record bit for bit or the run aborts",
+ "code_pinned": {
+  "scratchpad/_ml2_agg.c": "e1196a2dfd7c965000da844bcf2fe17f64f33389d87b3469c824eb9ec7a8deb7",
+  "scratchpad/_ml2_coarsen.py": "33561ca386667bb3053389ba902d87e067aac08985b6839dd17a243ff05b7b05",
+  "scratchpad/_ml2_run.py": "6c06034cb0d055c43b35b5c0774ef056da7240502190033d8849ae720169dfea",
+  "scratchpad/_ml2_cn.c": "dcdc99a5ea140410393edcf5a8904565582e36a3bb4c60a910b0bb7f9b99d1a1",
+  "scratchpad/_ml2_cn.py": "3421e6ad69f263a8e935389ef588dd0436b28f2538187564deb154b5cece8206",
+  "scratchpad/_ml2_cell.py": "f63d5ed5b29f9c9b3a9247ac56ef7100ef5cd5d902b36237e843f59d2f331521",
+  "scratchpad/_ml2_eval.py": "318c7b416985d1a301fda733186d735ca071f1499a727778b3554c0aeecfe263",
+  "scratchpad/_ml2_oracle.py": "abe526f9fd9ec4db19f949d17572f43341d74bb007d24d3336a1d7a7363c35dc",
+  "scratchpad/_ml_run.py": "7f98670670d437712d1f6c81863752d3eef841ac02aa576441ff490372766e26",
+  "scratchpad/_ml_coarsen.py": "19ad42f5ac74dcfe6384c1d34d2d9821fec6b75cc1202c8d5fd9723f31ee3978",
+  "src/l1_lowmem/phg_driver/phg_driver_vw.c": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4"
+ },
+ "records_pinned": {
+  "results/FREEBASE_SCALE/ml2/ORACLE_PIN_REDUCTION__v1.json": "46d515e058b7ce42cec1878d166d301abeb059b82c422e8a64e95f629d805af9",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M1_W32.json": "a282210e9a158f3f81fa918d2c40cceef61a11a2d38466802140ea1ec1db88a6",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M1_W128.json": "9958ef4461fbfd2411f2bec1b3fe886d9fd532f34539d9f38e0bd724f717614f",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M1_W512.json": "c29e520a426632dce5f27e93ac0fab024e9afc74c0ec681e3f5be8813e6da955",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M1_W2048.json": "a276cb52120c3dd2a08a1753923f0c1dab637b4893fc5454e5f6668ecb788658",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M2_W32.json": "02977b370ce04c1c9462ffe24ad4de93e5d1b5417c410434d453c57bceed6c33",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M2_W128.json": "eef4ce6221250e2080eea050abbfac4d862818a86c0d642d252dacfd59b28666",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M2_W512.json": "6bfda0d5e490562bbb84afdb82c0d8d68eb4200f4cf60a0893017499bc0fff01",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M2_W2048.json": "415cb43d51cbd3f11aca7ae52447de943e31af90dfb11c6d25363b490349431e",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M3_W32.json": "50971c07c03523585ef63409a4018ea68c585836e2b3e5a28bbf9c6483d1921d",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M3_W128.json": "e585282400d91d07aff1ac391a3db86bc0600c0947f2d81e1e03f709551065be",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M3_W512.json": "62023d44a947ca3783d5ee8f033eaec0cc42f5d4b25da7789203ed78116d413b",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M3_W2048.json": "90d61065f5743808739317a4f220ed3a74e9bd7a5000f1599205dea20cee8281",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M4_W32.json": "1272c0141bd3beafe7711363ec114cb70be5264a776ba13b55225a6de9700b23",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M4_W128.json": "14f9aa8dc8402af65a55177bb881b4a9388e247a2b8efae9a9d7e2c6ce35a161",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M4_W512.json": "637223c858af4c783132e220e07b64def3c64184a00705f770d3b266086b4062",
+  "results/FREEBASE_SCALE/ml2/COARSEN__M4_W2048.json": "551fcdcc7a3239ffade1eca3333dd958e31d5a452647a932e222088c7c909ea7"
+ }
+}

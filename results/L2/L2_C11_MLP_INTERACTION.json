@@ -1,0 +1,312 @@
+{
+ "phase": "C11 \u2014 learned query-candidate interaction MLP (residual on C8c); C9_DEV select, DEV_INNER confirm; NO VAL/TEST",
+ "NEW_ENCODER_FORWARD_PASSES": 0,
+ "NEW_LLM_COMPONENTS": 0,
+ "representation": "frozen gte_qwen query+node embeddings (exact dense encoder; qmap-recovered), unit-norm",
+ "C11A_SIMPLE_MLP": {
+  "C9_DEV": {
+   "ndcg5": 0.9685,
+   "recall5_macro": 0.9799,
+   "any5": 0.9997,
+   "all5_feas": 0.9425,
+   "mrr": 0.9894,
+   "ndcg50": 0.9761,
+   "all10": 0.9791,
+   "all50": 0.9897
+  },
+  "params": 1387778,
+  "train_sec": 815.6
+ },
+ "C11B_MULTI_OFFSET_MLP": {
+  "C9_DEV": {
+   "ndcg5": 0.9679,
+   "recall5_macro": 0.9792,
+   "any5": 0.9997,
+   "all5_feas": 0.9413,
+   "mrr": 0.9887,
+   "ndcg50": 0.9757,
+   "all10": 0.9785,
+   "all50": 0.9897
+  },
+  "params": 1754502,
+  "train_sec": 1076.9,
+  "K": 4
+ },
+ "C8c_C9_DEV": {
+  "ndcg5": 0.9658,
+  "recall5_macro": 0.9762,
+  "any5": 1.0,
+  "all5_feas": 0.9331,
+  "mrr": 0.9893,
+  "ndcg50": 0.9748,
+  "all10": 0.9749,
+  "all50": 0.9897
+ },
+ "OFFSET_ANALYSIS": {
+  "mean_pairwise_offset_cos": 0.2248,
+  "MULTI_OFFSET_COLLAPSE": "NO"
+ },
+ "SELECTED_ON_C9DEV": "C11a",
+ "DEV_INNER_CONFIRM": {
+  "C8c": {
+   "ndcg5": 0.9637,
+   "recall5_macro": 0.9748,
+   "any5": 0.9992,
+   "all5_feas": 0.9312,
+   "mrr": 0.9884,
+   "ndcg50": 0.9725,
+   "all10": 0.9717,
+   "all50": 0.9836
+  },
+  "C11a": {
+   "ndcg5": 0.9672,
+   "recall5_macro": 0.9795,
+   "any5": 0.9988,
+   "all5_feas": 0.9419,
+   "mrr": 0.9888,
+   "ndcg50": 0.974,
+   "all10": 0.9754,
+   "all50": 0.9836
+  },
+  "C11b": {
+   "ndcg5": 0.9693,
+   "recall5_macro": 0.98,
+   "any5": 0.9992,
+   "all5_feas": 0.9447,
+   "mrr": 0.991,
+   "ndcg50": 0.9757,
+   "all10": 0.9738,
+   "all50": 0.9836
+  }
+ },
+ "DIAGNOSTICS": {
+  "C11a": {
+   "gold_rescue": {
+    "rescued_by_bin": {
+     "5-9": 73,
+     "10-19": 11,
+     "20-49": 0
+    },
+    "TOP5_RESCUE": 84,
+    "TOP5_HURT": 52,
+    "NET_TOP5_GAIN": 32
+   },
+   "gold_rescue_by_multigold": {
+    "1": {
+     "rescued": 6,
+     "hurt": 3,
+     "net": 3
+    },
+    "2": {
+     "rescued": 48,
+     "hurt": 27,
+     "net": 21
+    },
+    "3+": {
+     "rescued": 30,
+     "hurt": 22,
+     "net": 8
+    }
+   },
+   "bootstrap_vs_C8c": {
+    "ndcg5": {
+     "delta": 0.0027,
+     "ci95": [
+      0.0007,
+      0.0047
+     ],
+     "significant": true
+    },
+    "recall5": {
+     "delta": 0.0037,
+     "ci95": [
+      0.0013,
+      0.0063
+     ],
+     "significant": true
+    },
+    "ndcg50": {
+     "delta": 0.0013,
+     "ci95": [
+      -0.0001,
+      0.0027
+     ],
+     "significant": false
+    },
+    "all50": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "significant": false
+    }
+   },
+   "multigold": {
+    "1": {
+     "n": 79,
+     "recall5": 1.0,
+     "all5": 1.0,
+     "ndcg5": 0.9766
+    },
+    "2": {
+     "n": 2448,
+     "recall5": 0.9904,
+     "all5": 0.9812,
+     "ndcg5": 0.975
+    },
+    "3+": {
+     "n": 776,
+     "recall5": 0.9447,
+     "all5": 0.8144,
+     "ndcg5": 0.9472
+    }
+   },
+   "single_gold": {
+    "n": 79,
+    "mrr": 0.9684,
+    "ndcg5": 0.9766,
+    "any5": 1.0
+   },
+   "specialist_and_fp": {
+    "rescued_gold_strongest_expert": {
+     "splade": 15,
+     "dense": 14,
+     "relation": 25,
+     "mixture": 23,
+     "offset": 7
+    },
+    "mean_delta_rescued_gold": -7.4049,
+    "mean_delta_removed_fp": -19.4325,
+    "n_rescued": 84,
+    "n_removed_fp": 17
+   }
+  },
+  "C11b": {
+   "gold_rescue": {
+    "rescued_by_bin": {
+     "5-9": 73,
+     "10-19": 9,
+     "20-49": 0
+    },
+    "TOP5_RESCUE": 82,
+    "TOP5_HURT": 54,
+    "NET_TOP5_GAIN": 28
+   },
+   "gold_rescue_by_multigold": {
+    "1": {
+     "rescued": 3,
+     "hurt": 1,
+     "net": 2
+    },
+    "2": {
+     "rescued": 44,
+     "hurt": 29,
+     "net": 15
+    },
+    "3+": {
+     "rescued": 35,
+     "hurt": 24,
+     "net": 11
+    }
+   },
+   "bootstrap_vs_C8c": {
+    "ndcg5": {
+     "delta": 0.0021,
+     "ci95": [
+      0.0,
+      0.004
+     ],
+     "significant": true
+    },
+    "recall5": {
+     "delta": 0.0031,
+     "ci95": [
+      0.0004,
+      0.0056
+     ],
+     "significant": true
+    },
+    "ndcg50": {
+     "delta": 0.0008,
+     "ci95": [
+      -0.0006,
+      0.0022
+     ],
+     "significant": false
+    },
+    "all50": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "significant": false
+    }
+   },
+   "multigold": {
+    "1": {
+     "n": 79,
+     "recall5": 1.0,
+     "all5": 1.0,
+     "ndcg5": 0.9673
+    },
+    "2": {
+     "n": 2448,
+     "recall5": 0.9888,
+     "all5": 0.9779,
+     "ndcg5": 0.9743
+    },
+    "3+": {
+     "n": 776,
+     "recall5": 0.9471,
+     "all5": 0.8196,
+     "ndcg5": 0.9479
+    }
+   },
+   "single_gold": {
+    "n": 79,
+    "mrr": 0.9557,
+    "ndcg5": 0.9673,
+    "any5": 1.0
+   },
+   "specialist_and_fp": {
+    "rescued_gold_strongest_expert": {
+     "dense": 9,
+     "relation": 24,
+     "splade": 13,
+     "mixture": 25,
+     "offset": 11
+    },
+    "mean_delta_rescued_gold": -7.7539,
+    "mean_delta_removed_fp": -19.3506,
+    "n_rescued": 82,
+    "n_removed_fp": 19
+   }
+  }
+ },
+ "multipos_unit_test": {
+  "all_positives_have_grad": true,
+  "n_pos": 3,
+  "grad_pos_mean": -0.6667
+ },
+ "RUNTIME_COST": {
+  "C11a_params": 1387778,
+  "C11b_params": 1754502,
+  "cap": 20,
+  "cand_evals_per_query": 20,
+  "device": "cpu"
+ },
+ "GATES": {
+  "MLP_INTERACTION_ADDS_VALUE": "YES",
+  "MULTI_OFFSET_ADDS_VALUE": "NO",
+  "MULTI_OFFSET_COLLAPSE": "NO",
+  "C11_BEATS_C8C": "YES",
+  "MULTIGOLD_RECALL_IMPROVES": "YES",
+  "SPECIALIST_RESCUE_VALIDATION_LEARNED": "NO",
+  "DEEP_RECALL_PRESERVED": "YES",
+  "NO_NEW_LLM_COMPONENT": "PASS",
+  "SAFE_TO_RUN_OFFICIAL_VAL": "YES",
+  "SAFE_TO_FREEZE_L2": "NO"
+ }
+}

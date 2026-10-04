@@ -1,0 +1,270 @@
+{
+ "stage": "L3_HOST",
+ "addendum": 5,
+ "amends": {
+  "declaration": {
+   "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1.json",
+   "sha256": "37ff06f7bb0ae203923e0956ec767df9e8fc2f20753a3ecf945d6d714e2cd9a9"
+  },
+  "addenda": [
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_1.json",
+    "sha256": "12642119363d99e1851eefe3b43d92414cb3d53be3ea0a32e8a0361116f75b9c"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_2.json",
+    "sha256": "c12815c69a5372337a755512f8a590e843241d0252a923244eb35539676cfcd9"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_3.json",
+    "sha256": "78e0644b88048ed33c6e166fb315bcaaca6d091fb4b7e8ad79d5719d23b0702d"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_4.json",
+    "sha256": "854a483a9f44a281ee100dfa3da662f53a9cfd9e2c57a5793f9f3c277198aed0"
+   }
+  ],
+  "authorization": {
+   "path": "results/L3_HOST/HOST_STAGE_AUTHORIZATION__L3_HOST__2026-09-29.json",
+   "sha256": "cb94b481eeb282a120794376b9ff9438d58516ff55162353658f3836d6cdbb7e"
+  }
+ },
+ "declared": "2026-09-29T19:40:00+05:30",
+ "user_direction": [
+  "wtf then just download the model there why are you prefering the slow laptop when you have a fast cpu and gpu",
+  "you have the second highest priority for cpu and gpu you should never wait unless mpr and finish everything as fast as possible",
+  "gpu should be free if you need"
+ ],
+ "purpose": "E2 (REPORT section 40.15) scores relation names with the canonical encoders (gte-Qwen2 dense, SPLADE). The laptop cannot hold the 1.5B model beside mpr's running jobs (1,075 MB free of 16,069 MB at 19:25 local), so the encoders are downloaded onto the host, as the user directed. This addendum declares the download only; the encoder setup, its reproduction test and any encoding run are declared in a later addendum and need their own authorization.",
+ "download": {
+  "source": "https://huggingface.co (public repositories, anonymous: token=False, HF_HUB_DISABLE_IMPLICIT_TOKEN=1; no credential of any kind)",
+  "repositories": {
+   "Alibaba-NLP/gte-Qwen2-1.5B-instruct": {
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "why": "the revision of the laptop cache (refs/main) the canonical dense encoder names"
+   },
+   "naver/splade-cocondenser-ensembledistil": {
+    "revisions": [
+     "49cf4c7b0db5b870a401ddf5e2669993ef3699c7",
+     "83f6dbef1346b4685ff94ab120a5b8e9a7bf7234"
+    ],
+    "why": "the laptop cache holds refs/main 49cf4c7b (pytorch_model.bin) and 83f6dbef (model.safetensors only, the safetensors conversion); both are fetched so the later test can assert the two weight files hold identical tensors"
+   }
+  },
+  "files": [
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "README.md",
+    "bytes": 146265,
+    "hash_kind": "git_sha1",
+    "hash": "32a627975eec20f3f15d547c5f878ae711d8ebf3"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "added_tokens.json",
+    "bytes": 80,
+    "hash_kind": "git_sha1",
+    "hash": "409be9f93d4810d569098a16c4bf30c977edf44a"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "config.json",
+    "bytes": 901,
+    "hash_kind": "git_sha1",
+    "hash": "cac2560dd0fe9eac4e36dd2f33b83364b3c83dc3"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "config_sentence_transformers.json",
+    "bytes": 284,
+    "hash_kind": "git_sha1",
+    "hash": "48db36c0419aaf25de374105e28d4317bdafb58d"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "merges.txt",
+    "bytes": 1671853,
+    "hash_kind": "git_sha1",
+    "hash": "31349551d90c7606f325fe0f11bbb8bd5fa0d7c7"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "model-00001-of-00002.safetensors",
+    "bytes": 4994888704,
+    "hash_kind": "sha256",
+    "hash": "0842014813f9ecd814eac671e2577d84281cd02d74f70436583c044fac724072"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "model-00002-of-00002.safetensors",
+    "bytes": 2109938216,
+    "hash_kind": "sha256",
+    "hash": "661830fd8d0426f38747a747ec37cbdc05466331790dcf7b83e12a0e000ce0cc"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "model.safetensors.index.json",
+    "bytes": 27751,
+    "hash_kind": "git_sha1",
+    "hash": "e321035bd75b431a8291291bbc73b2fe636d8728"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "modeling_qwen.py",
+    "bytes": 65203,
+    "hash_kind": "git_sha1",
+    "hash": "2d2045522f422e6b306f1c29a4836aea1f9d3a15"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "modules.json",
+    "bytes": 349,
+    "hash_kind": "git_sha1",
+    "hash": "952a9b81c0bfd99800fabf352f69c7ccd46c5e43"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "sentence_bert_config.json",
+    "bytes": 55,
+    "hash_kind": "git_sha1",
+    "hash": "62244604e6bde5bb9ad3d244bfb0505e770d4d7a"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "special_tokens_map.json",
+    "bytes": 370,
+    "hash_kind": "git_sha1",
+    "hash": "63fbc67881d34146bdf06dc3b24107a394ae9a7a"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "tokenization_qwen.py",
+    "bytes": 10811,
+    "hash_kind": "git_sha1",
+    "hash": "db342039f7789058e18cca82e6e83bfe96fe6a6d"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "tokenizer.json",
+    "bytes": 7028015,
+    "hash_kind": "git_sha1",
+    "hash": "33ea6c72ebb92a237fa2bdf26c5ff16592efcdae"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "tokenizer_config.json",
+    "bytes": 1312,
+    "hash_kind": "git_sha1",
+    "hash": "a7172ae01cf8da9b14ec5725c2b74a14388c8b1a"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "vocab.json",
+    "bytes": 2776833,
+    "hash_kind": "git_sha1",
+    "hash": "4783fe10ac3adce15ac8f358ef5462739852c569"
+   },
+   {
+    "repo": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+    "file": "1_Pooling/config.json",
+    "bytes": 297,
+    "hash_kind": "git_sha1",
+    "hash": "060f7e278e966b4eda939281c3fa9e6686e0d7de"
+   },
+   {
+    "repo": "naver/splade-cocondenser-ensembledistil",
+    "revision": "49cf4c7b0db5b870a401ddf5e2669993ef3699c7",
+    "file": "config.json",
+    "bytes": 670,
+    "hash_kind": "git_sha1",
+    "hash": "a2a1a1f5ca7866152b7da52ba160605d4e519ce4"
+   },
+   {
+    "repo": "naver/splade-cocondenser-ensembledistil",
+    "revision": "49cf4c7b0db5b870a401ddf5e2669993ef3699c7",
+    "file": "pytorch_model.bin",
+    "bytes": 438141995,
+    "hash_kind": "sha256",
+    "hash": "c16fced81589f81555499208ff7626ee28870c6dc7d4d053c552ff20f3363b0c"
+   },
+   {
+    "repo": "naver/splade-cocondenser-ensembledistil",
+    "revision": "49cf4c7b0db5b870a401ddf5e2669993ef3699c7",
+    "file": "special_tokens_map.json",
+    "bytes": 112,
+    "hash_kind": "git_sha1",
+    "hash": "e7b0375001f109a6b8873d756ad4f7bbb15fbaa5"
+   },
+   {
+    "repo": "naver/splade-cocondenser-ensembledistil",
+    "revision": "49cf4c7b0db5b870a401ddf5e2669993ef3699c7",
+    "file": "tokenizer.json",
+    "bytes": 466081,
+    "hash_kind": "git_sha1",
+    "hash": "40c4a0f6c414c8218190234bbce9bf4cc04fa3ac"
+   },
+   {
+    "repo": "naver/splade-cocondenser-ensembledistil",
+    "revision": "49cf4c7b0db5b870a401ddf5e2669993ef3699c7",
+    "file": "tokenizer_config.json",
+    "bytes": 466,
+    "hash_kind": "git_sha1",
+    "hash": "33e298a7a6d1be145f9ce4c9c70b9b8abda768bd"
+   },
+   {
+    "repo": "naver/splade-cocondenser-ensembledistil",
+    "revision": "49cf4c7b0db5b870a401ddf5e2669993ef3699c7",
+    "file": "vocab.txt",
+    "bytes": 231508,
+    "hash_kind": "git_sha1",
+    "hash": "fb140275c155a9c7c5a3b3e0e77a9e839594a938"
+   },
+   {
+    "repo": "naver/splade-cocondenser-ensembledistil",
+    "revision": "83f6dbef1346b4685ff94ab120a5b8e9a7bf7234",
+    "file": "model.safetensors",
+    "bytes": 438085208,
+    "hash_kind": "sha256",
+    "hash": "bfb137abcf95bb0267aebef97b631109a07e4ae5e95f490c69b72d3778c54307"
+   }
+  ],
+  "n_files": 24,
+  "bytes_total": 7993483339,
+  "verification": "every file against the laptop cache's blob name: sha256 for LFS files, git blob sha1 for the small files",
+  "cache_dir": "C:/Users/Student2/rx/projects/crag/models/hf",
+  "cache_dir_why": "outside the workspace ws/ and outside every fetch glob; nothing is ever fetched back from it",
+  "script": {
+   "path": "scratchpad/_enc_hfdl.py",
+   "sha256": "b490b3cf8f38b8ab4e2c124ce0e64b8ea864acf257039b2b272334af5246d67c"
+  },
+  "job": "rx run -n crag-hfdl --cpus 2 --mem 4 --timeout 7200 -- python -u scratchpad/_enc_hfdl.py",
+  "env": "mpr-cpu (read-only by name; huggingface-hub 0.36.0)",
+  "record": "results/L3_HOST/HF_DOWNLOAD__v1.json (write-once; status VERIFIED or MISMATCH)"
+ },
+ "pushed_in_addition": [
+  {
+   "path": "scratchpad/_enc_hfdl.py",
+   "bytes": 3101,
+   "sha256": "b490b3cf8f38b8ab4e2c124ce0e64b8ea864acf257039b2b272334af5246d67c"
+  }
+ ],
+ "not_scientific": "a download is not a scientific run; nothing is encoded or evaluated under this addendum",
+ "unchanged": "the bundle, the runner, the BLAS setting of addendum 2, the authorization's pins and every 'never' of the declaration"
+}

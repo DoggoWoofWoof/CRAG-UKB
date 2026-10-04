@@ -1,0 +1,225 @@
+{
+ "RECORD": "BOUNDED_VERTEXCUT_R2_WHY_METAQA",
+ "STATUS": "POSTHOC_DIAGNOSTIC (written after the pre-registered cells were seen; reach only; no new coverage cell; nothing promoted)",
+ "utc": "2026-09-15T18:17:45Z",
+ "DEV": "A",
+ "cache": "metaqa",
+ "n_DEV_A": 1002,
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_BOUNDED_VERTEXCUT_R2.json",
+  "sha256": "10dbcfcd2585067232b37bfaf0c06e90494a82416e2dfc6b0b9ad1e601dbaeec",
+  "bytes": 29945
+ },
+ "records_read": {
+  "br2_replay_A_metaqa.json": {
+   "path": "results/L1_COVPART/br2_replay_A_metaqa.json",
+   "sha256": "cff7f0999d6e1b96a42355eab1e06d403abe480561481e726252a44b179f28cc",
+   "bytes": 23725
+  },
+  "br2_SUMMARY.json": {
+   "path": "results/L1_COVPART/br2_SUMMARY.json",
+   "sha256": "e62b2ebf1806d11fa7fdeafcf49b311efa475bf444558f94a540d710f3f3164a",
+   "bytes": 7027
+  },
+  "r2_substrate": {
+   "path": "results/L1_COVPART/parts/metaqa__BR2_k864__R2.npz",
+   "sha256": "827b41fc6544d40f556c9c9c5d14a2f09e836545cd93381e439635edc9b7af28",
+   "bytes": 114264
+  },
+  "v1_substrate_CAP": {
+   "path": "results/L1_COVPART/parts/metaqa__STRUCT_VCUT_V1_k1004__PHG_con__CAP100.npy",
+   "sha256": "9a331cf8969d07d37880a1495aca224a6632325f0ad4ae5dbd67b429b477ffbf",
+   "bytes": 997480
+  }
+ },
+ "code": {
+  "path": "scratchpad/_l1c_br2_why.py",
+  "sha256": "1b029133e54fe55e758920daaf221d1a9f6d096c567189264c14611505773358",
+  "bytes": 8507
+ },
+ "definition": {
+  "votes_per_hit": "mean number of distinct blocks a top-100 hit node of the channel votes for under the table (DEV_A)",
+  "reached_all_gold_rate": "share of queries whose gold nodes ALL lie in at least one block that received at least one vote from the top-100 hits of either channel (the section-19 evidence); coverage at any budget cannot exceed it",
+  "gold_1hop_ceiling": "share of queries whose gold nodes are all either a top-100 hit or an undirected STRUCT neighbour of one (what any static 1-hop spread can reach at most through the hits)"
+ },
+ "gold_1hop_ceiling": {
+  "all": 0.5379,
+  "hop1": 1.0,
+  "hop2": 0.3343,
+  "hop3": 0.2952,
+  "hop2+3": 0.3151
+ },
+ "tables": {
+  "HARD_LEGACY (served BASE: own block + directed out-neighbour blocks; k 432)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 2.544,
+    "splade_top100": 3.371
+   },
+   "table_entries": 109790,
+   "lambda_mean_all_nodes": 2.539,
+   "blocks_with_evidence_per_query_mean": 219.2,
+   "reached_all_gold_rate": {
+    "all": 0.7934,
+    "hop1": 1.0,
+    "hop2": 0.7733,
+    "hop3": 0.6114,
+    "hop2+3": 0.6938
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.9064,
+    "hop1": 1.0,
+    "hop2": 0.8712,
+    "hop3": 0.8511,
+    "hop2+3": 0.8613
+   }
+  },
+  "HARD_OWN (own block only; k 432)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 1.0,
+    "splade_top100": 1.0
+   },
+   "table_entries": 43234,
+   "lambda_mean_all_nodes": 1.0,
+   "blocks_with_evidence_per_query_mean": 116.2,
+   "reached_all_gold_rate": {
+    "all": 0.2625,
+    "hop1": 0.5092,
+    "hop2": 0.1919,
+    "hop3": 0.0934,
+    "hop2+3": 0.1435
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.4018,
+    "hop1": 0.5867,
+    "hop2": 0.347,
+    "hop3": 0.2772,
+    "hop2+3": 0.3127
+   }
+  },
+  "V1_k1004 (section 19 vertex-cut: blocks of all incident edges; hub -> home only)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 3.203,
+    "splade_top100": 2.28
+   },
+   "table_entries": 90055,
+   "lambda_mean_all_nodes": 2.083,
+   "blocks_with_evidence_per_query_mean": 377.7,
+   "reached_all_gold_rate": {
+    "all": 0.48,
+    "hop1": 0.8006,
+    "hop2": 0.4622,
+    "hop3": 0.1837,
+    "hop2+3": 0.3254
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.686,
+    "hop1": 0.8171,
+    "hop2": 0.6618,
+    "hop3": 0.5824,
+    "hop2+3": 0.6228
+   }
+  },
+  "R2_k864 (this ruling: home + one alternate; hub -> home only)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 1.717,
+    "splade_top100": 1.668
+   },
+   "table_entries": 65990,
+   "lambda_mean_all_nodes": 1.526,
+   "blocks_with_evidence_per_query_mean": 237.3,
+   "reached_all_gold_rate": {
+    "all": 0.478,
+    "hop1": 0.8037,
+    "hop2": 0.4564,
+    "hop3": 0.1807,
+    "hop2+3": 0.321
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.6951,
+    "hop1": 0.8383,
+    "hop2": 0.6719,
+    "hop3": 0.5785,
+    "hop2+3": 0.6261
+   }
+  },
+  "OWNERS_ONLY_k864 (R = 1 control)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 1.0,
+    "splade_top100": 1.0
+   },
+   "table_entries": 43234,
+   "lambda_mean_all_nodes": 1.0,
+   "blocks_with_evidence_per_query_mean": 156.7,
+   "reached_all_gold_rate": {
+    "all": 0.3054,
+    "hop1": 0.5491,
+    "hop2": 0.2616,
+    "hop3": 0.1114,
+    "hop2+3": 0.1879
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.473,
+    "hop1": 0.6321,
+    "hop2": 0.4546,
+    "hop3": 0.3358,
+    "hop2+3": 0.3963
+   }
+  },
+  "R2_k864 + legacy out-neighbour spread (REACH ONLY; not a cell; the natural follow-up, not evaluated)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 4.375,
+    "splade_top100": 5.552
+   },
+   "table_entries": 174625,
+   "lambda_mean_all_nodes": 4.039,
+   "blocks_with_evidence_per_query_mean": 423.1,
+   "reached_all_gold_rate": {
+    "all": 0.7994,
+    "hop1": 1.0,
+    "hop2": 0.8779,
+    "hop3": 0.5211,
+    "hop2+3": 0.7027
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.9532,
+    "hop1": 1.0,
+    "hop2": 0.9576,
+    "hop3": 0.9027,
+    "hop2+3": 0.9306
+   }
+  },
+  "OWNERS_ONLY_k864 + legacy out-neighbour spread (REACH ONLY; not a cell)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 2.777,
+    "splade_top100": 3.835
+   },
+   "table_entries": 118818,
+   "lambda_mean_all_nodes": 2.748,
+   "blocks_with_evidence_per_query_mean": 309.9,
+   "reached_all_gold_rate": {
+    "all": 0.7186,
+    "hop1": 1.0,
+    "hop2": 0.75,
+    "hop3": 0.4096,
+    "hop2+3": 0.5828
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.8749,
+    "hop1": 1.0,
+    "hop2": 0.8643,
+    "hop3": 0.763,
+    "hop2+3": 0.8146
+   }
+  }
+ },
+ "coverage_seen (from the pre-registered records, for the ladder; ALL DEV_A)": {
+  "HARD_OWN_BLOCK_VOTE": 0.1786,
+  "OWNERS_ONLY_P50": 0.2265,
+  "R2_P50": 0.3333,
+  "R2_MATCHED_LE": 0.3473,
+  "HARD_MTK_BASE (legacy spread)": 0.6397,
+  "V1_P50": 0.6776,
+  "V1_MATCHED_LE": 0.6876
+ },
+ "seconds": 9.3
+}

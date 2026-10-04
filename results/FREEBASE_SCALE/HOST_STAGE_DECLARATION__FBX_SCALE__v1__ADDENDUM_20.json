@@ -1,0 +1,222 @@
+{
+ "stage": "FBX_SCALE / addendum 20: QUESTION-LEVEL Freebase measurement -- DEFINITION ONLY (not scored; not a host stage)",
+ "declared": "2026-10-04T15:09:01+0530",
+ "status": "DEFINITION_FROZEN_UNSCORED",
+ "rulings_implemented": {
+  "official_dev": "evaluation-eligible for the new sources (FreebaseQA dev, GrailQA dev; CWQ dev and WebQSP dev/DEV_L3W keep their existing eligibility)",
+  "C": 400,
+  "leak_clean": "kept: leak_clean (user rule, FBQ_SET v2 builder) is REQUIRED for every evaluation row; leak_clean_strict is reported as the sensitivity view",
+  "grailqa_unusable": "a measured substrate-coverage fact: report raw population, usable population, unusable fraction and reasons; every metric is conditional on usable questions; an unusable question is NEVER a retrieval failure",
+  "cwq_train": "pool-only, never evaluation (asserted by this script on the pinned pool)",
+  "scoring": "NOT scored here; the definition is frozen before the final partition exists so it cannot drift after the partition is seen"
+ },
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_17.json": "d4ba0a54f217d01c4b3c72d2ea3b095af8db06c7943a4439d1a3f3cab0bc00a0",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_18.json": "6ddd2d1c933f67bfc8745890208170932acfe77c96bae63fc709b3ed133a95f6",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_19.json": "71c4980cc45416509af3f51e8bec8b1fb043611d68146305b54cb1936b4ed824"
+ },
+ "pinned_inputs": {
+  "pool": {
+   "path": "results/FREEBASE_SCALE/FBQ_SET__v2__POOL.parquet",
+   "sha256": "bbf6fcf522911b143df1e3f7dcdacd9036b2dcde6ab59dcbf0e3aa2e1bc6a7f7"
+  },
+  "balanced_C400_set": {
+   "path": "results/FREEBASE_SCALE/FBQ_SET__v2__BALANCED.parquet",
+   "sha256": "1449a88a7a940fa97d5b7dfb565851ce71b02baf2214d1a86ac7664a8bf29ac0"
+  },
+  "dedupe_audit": {
+   "path": "results/FREEBASE_SCALE/FBQ_SET__v2__DEDUPE_AUDIT.parquet",
+   "sha256": "864ef459e597d8492a99e2516247fc6d26257f9a1b6a5f7165173c2f6929d002"
+  },
+  "set_record_json": {
+   "path": "results/FREEBASE_SCALE/FBQ_SET__v2.json",
+   "sha256": "3682b4e4ac765d361b5718a5d70fb22ac3e0f1e1d40c61bf6549bccf2809d822"
+  },
+  "set_record_md": {
+   "path": "results/FREEBASE_SCALE/FBQ_SET__v2.md",
+   "sha256": "4232d0a267e472d9d5c90aeffa12b755a406ae1b7f0e2ce1b98843cc8831e517"
+  },
+  "download_provenance": {
+   "path": "results/FREEBASE_SCALE/FBQ_DOWNLOAD_PROVENANCE__v1.json",
+   "sha256": "0d7131f31e91bff39e7a2680d9b01ff5f23d189e57d64c225be630d8a05ce13f"
+  },
+  "builder_seed": "20261004",
+  "builder_family_cap": 2,
+  "builder_min_cell_for_merge": 50
+ },
+ "populations_at_declaration": {
+  "pool": 85999,
+  "balanced_C400_rows": 3538,
+  "E_evaluation_population": {
+   "rule": "(eval_eligible OR eval_flag == NEWSRC_DEV_UNRULED) AND fully_mappable AND leak_clean",
+   "rows": 10111,
+   "by_source_split": {
+    "('freebaseqa', 'dev')": 3854,
+    "('grailqa', 'dev')": 3559,
+    "('nsm_cwq', 'dev')": 1800,
+    "('nsm_webqsp', 'dev')": 219,
+    "('nsm_webqsp', 'train')": 679
+   },
+   "by_hop_bucket": {
+    "1": 6176,
+    "2": 3380,
+    "3": 423,
+    "4+": 129,
+    "unk": 3
+   },
+   "by_qtype": {
+    "chain": 2925,
+    "comparative": 103,
+    "conjunction": 1245,
+    "other": 46,
+    "simple": 5631,
+    "superlative": 158,
+    "unknown": 3
+   },
+   "by_source_hop_bucket": {
+    "('freebaseqa', '1')": 2743,
+    "('freebaseqa', '2')": 1111,
+    "('grailqa', '1')": 2673,
+    "('grailqa', '2')": 847,
+    "('grailqa', '3')": 39,
+    "('nsm_cwq', '1')": 219,
+    "('nsm_cwq', '2')": 1068,
+    "('nsm_cwq', '3')": 384,
+    "('nsm_cwq', '4+')": 129,
+    "('nsm_webqsp', '1')": 541,
+    "('nsm_webqsp', '2')": 354,
+    "('nsm_webqsp', 'unk')": 3
+   },
+   "after_family_cap_2": {
+    "rows": 8652,
+    "by_source": {
+     "freebaseqa": 3854,
+     "grailqa": 3559,
+     "nsm_cwq": 350,
+     "nsm_webqsp": 889
+    },
+    "by_hop_bucket": {
+     "1": 5999,
+     "2": 2474,
+     "3": 135,
+     "4+": 41,
+     "unk": 3
+    }
+   },
+   "leak_clean_strict_sensitivity_rows": 9923
+  },
+  "pool_only_not_evaluation": {
+   "rows": 75888,
+   "by_source_split": {
+    "('freebaseqa', 'dev')": 4,
+    "('freebaseqa', 'train')": 16985,
+    "('grailqa', 'dev')": 1780,
+    "('grailqa', 'train')": 35505,
+    "('nsm_cwq', 'dev')": 1244,
+    "('nsm_cwq', 'train')": 18780,
+    "('nsm_webqsp', 'dev')": 14,
+    "('nsm_webqsp', 'train')": 1576
+   },
+   "label": "POOL_ONLY (training / calibration / diagnostics; never evaluation)"
+  },
+  "eligible_but_unusable_in_pool": {
+   "rows": 1877,
+   "by_source": {
+    "freebaseqa": 4,
+    "grailqa": 1780,
+    "nsm_cwq": 66,
+    "nsm_webqsp": 27
+   },
+   "note": "reported, never scored as failures"
+  },
+  "balanced_C400_rows_that_are_also_in_E": 544,
+  "note": "E is the evaluation population; the balanced C=400 set is the hop x type balanced POOL (it mixes train-pool rows) and is not itself an evaluation set; the macro-average below re-balances E over the same hop x type cells"
+ },
+ "grailqa_substrate_coverage_raw": {
+  "grailqa/train": {
+   "questions": 44337,
+   "topic_mid_occurrences": 40147,
+   "topic_resolved_rate": 0.993748,
+   "answer_mid_occurrences": 483262,
+   "answer_mid_resolved_rate": 0.980023,
+   "questions_zero_topics": 7383,
+   "questions_any_literal_answer": 2318,
+   "questions_fully_mappable": 33771,
+   "fully_mappable_rate": 0.761689
+  },
+  "grailqa/dev": {
+   "questions": 6763,
+   "topic_mid_occurrences": 5978,
+   "topic_resolved_rate": 0.980261,
+   "answer_mid_occurrences": 57994,
+   "answer_mid_resolved_rate": 0.986757,
+   "questions_zero_topics": 1154,
+   "questions_any_literal_answer": 440,
+   "questions_fully_mappable": 4794,
+   "fully_mappable_rate": 0.708857
+  },
+  "grailqa/ALL": {
+   "questions": 51100,
+   "topic_mid_occurrences": 46125,
+   "topic_resolved_rate": 0.992,
+   "answer_mid_occurrences": 541256,
+   "answer_mid_resolved_rate": 0.980745,
+   "questions_zero_topics": 8537,
+   "questions_any_literal_answer": 2758,
+   "questions_fully_mappable": 38565,
+   "fully_mappable_rate": 0.754697
+  }
+ },
+ "grailqa_note": "unusable = not fully mappable: questions with zero topic entities, with a literal answer, or with an unresolved MID (the categories overlap); counts above are the builder's measured census (raw source rows, before dedupe)",
+ "measurement": {
+  "name": "ORACLE-TOPIC CO-LOCATION CURVE of a partition (front-end-free; a property of the partition on real questions, NOT a retrieval recall)",
+  "unit": "one question q in E; T_q = the topic positions and A_q = the answer positions in the frozen 302M-node tree (pool columns topic_pos / answer_pos; fully_mappable => every MID resolved and no literal answer)",
+  "inputs_fixed_at_scoring": {
+   "partition_map": "a Freebase map M over all N nodes with K in {100, 250, 500} from the frozen multilevel out-of-core pipeline, validity gate PASS (max block <= ceil(1.03 N / K)); its hash is pinned in the scoring addendum, NOT here",
+   "adjacency": "the frozen tree's STRUCT CSR, both directions, all relations, uncapped (degree appears only as the 1/deg normaliser below)"
+  },
+  "block_mass": "mass_q(P) = sum over t in T_q of [ 1{M(t) = P} + |{v in N(t) : M(v) = P}| / max(1, deg(t)) ]  (the topic's own block plus the share of its neighbours in P; one propagation step, no walk)",
+  "block_rank": "blocks ordered by mass_q desc, ties by block id asc; rank_q(P) in 0..K-1",
+  "curve": "for b in {1, 2, 4, 8, 16, 32, 64} (b <= K; the x axis is also reported as b / K): ALL_q(b) = 1 iff every block of every answer has rank < b; ANY_q(b) = 1 iff at least one does; per-answer share = mean over a in A_q of 1{rank_q(M(a)) < b}",
+  "feasibility_ceiling": "n_ans_blocks_q = |{M(a) : a in A_q}|; ALL_q(b) <= 1{n_ans_blocks_q <= b}",
+  "null": "N0 = size-matched random relabelling (a seeded permutation of the label vector, which preserves every block size), seeds 1, 2, 3, mean; uplift = observed minus N0 on the same questions",
+  "reference_on_the_known_substrate": "the identical definition on the WebQSP evaluation rows (the 786-row population) over the seven frozen WebQSP PHG_SK maps (K 100 / 250 / 500), so the Freebase curve is read against a known one at equal b / K",
+  "what_it_is_not": "no dense / SPLADE front end exists at Freebase scale until the encode is finished and verified; this measures how well the PARTITION co-locates gold answers with a gold-topic seed's one-step neighbourhood, and says nothing about FLAT retrieval or end-to-end recall",
+  "gold_labels_read_at_scoring": "gold topic and answer positions of the dev rows of E only; no test split anywhere; pool-only rows are never scored"
+ },
+ "reporting": {
+  "strata": [
+   "source",
+   "hop_bucket {1, 2, 3, 4+}",
+   "qtype (v2 merged cells)",
+   "ans_bucket",
+   "leak_clean_strict (sensitivity)"
+  ],
+  "macro_average": "equal weight over the v2 hop x type cells with at least min_cell_for_merge (50) rows in E after the v2 merging rule; cells below 50 are listed with their n and excluded from the macro",
+  "coverage_on_every_line": "raw N, usable N, unusable fraction and reasons next to every number; metrics are conditional on usable questions",
+  "uncertainty": "bootstrap resampling whole FAMILIES (pool column family_id; CWQ children share a parent), 2,000 resamples, seed 20261004, percentile 95 % intervals; paired differences against N0 use the same resamples",
+  "claims_allowed": "descriptive co-location of gold answers in the partition; no recall claim at Freebase scale; no comparison with an end-to-end system"
+ },
+ "prerequisites_before_scoring": [
+  "E6 level-0 V-cycle done and the E7 report validity PASS (addendum 19 job)",
+  "the K in {100, 250, 500} Freebase maps built and validity-gated (their own addendum; hashes pinned in the scoring addendum)",
+  "the user's explicit go",
+  "a scoring-stage addendum with a MEASURED reservation (host, RAM <= 70 GB, disk <= 55 GB, under scratchpad/_host_yield.py)"
+ ],
+ "stop_rules": [
+  "any change to E, the quantities, the null or the strata after a partition map is seen requires a new addendum (supersession), never an edit",
+  "a question that is unusable is dropped with a reason, never scored; no row of POOL_ONLY is scored",
+  "RAM > 70 GB or disk > 55 GB in the scoring stage: stop and report"
+ ],
+ "not_done_here": [
+  "scoring of any kind",
+  "building the K maps",
+  "any claim",
+  "the dense / SPLADE front end at Freebase scale"
+ ],
+ "code_pinned": {
+  "scratchpad/_fbq_build_set_v2.py": "109adfb334008c26dec0d6f2f8eca79a2ff5b929e99ba893a6132c6a1c681297",
+  "scratchpad/_fbq_download_v2.py": "40171fd51407cd3abda4761cf54c829abd0f575d92340f9a85fe3dcf994ef156",
+  "scratchpad/_fbq_q_addendum20.py": "ccf96dc63162bf728fc9b8ed15a2ef44733ed48b8a8969ae2f935b675cd1273e"
+ }
+}

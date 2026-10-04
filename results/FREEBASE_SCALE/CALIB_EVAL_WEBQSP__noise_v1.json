@@ -1,0 +1,1375 @@
+{
+ "stage": "FBX_SCALE Track B addendum 8: run-to-run noise floor of the addendum-1 gate (flat PHG recipe with one declared change vs the frozen flat PHG_SK)",
+ "tag": "noise_v1",
+ "status": "DEVELOPMENT (calibration of a systems substrate)",
+ "definitions": "FBX_SCALE Track B, addendum 8 -- score the noise-floor replicates of the flat PHG against the frozen flat PHG_SK under the addendum-1 gate, K in {100, 250, 500}.\n\nThe per-row arithmetic, the population (786 rows), the matched-B_P comparison and the verdict rule are _ml2_eval.py's, imported and run unchanged (as _h2l_eval.py did for addendum 7);\nonly the map source changes.  Methods: PHG = the frozen flat PHG_SK maps (the reference); SKR1 / SKN3 = the same recipe with one declared change (scratchpad/_h2lm_noise.py).\n\n  python scratchpad/_h2lm_eval.py EVAL <tag> <bundle_tag> <control_tag> SKR1[,SKN3]          # control_tag = an earlier EVAL whose PHG cells must be reproduced bit for bit\n",
+ "N": 2592894,
+ "n_rows": 786,
+ "M_curve": [
+  100,
+  250,
+  500,
+  1000,
+  2000,
+  5000
+ ],
+ "K_grid": [
+  100,
+  250,
+  500
+ ],
+ "gate_K": [
+  100,
+  250,
+  500
+ ],
+ "loss_pass_rows": 7,
+ "loss_fail_rows": 24,
+ "block_rule": 0.1,
+ "candidates_declared": [
+  "SKR1",
+  "SKN3"
+ ],
+ "candidates_scored": [
+  "SKR1",
+  "SKN3"
+ ],
+ "candidates_without_K100_map": [],
+ "regression_vs_earlier_eval": {
+  "eval_npz_sha256": "786412f410695a96f9ec026c31eb38c840d47e2cb79e787cc9f3ff82f0b6033c",
+  "cells": {
+   "PHG|K100|own": "equal",
+   "PHG|K100|matched": "equal",
+   "PHG|K250|own": "equal",
+   "PHG|K250|matched": "equal",
+   "PHG|K500|own": "equal",
+   "PHG|K500|matched": "equal"
+  }
+ },
+ "results": {
+  "PHG|K100|own": {
+   "ALL": [
+    368,
+    470,
+    524,
+    561,
+    575,
+    586
+   ],
+   "ANY": [
+    565,
+    665,
+    707,
+    727,
+    734,
+    735
+   ],
+   "gold_served": [
+    1379,
+    2462,
+    3250,
+    3727,
+    3941,
+    4195
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 570865.0,
+    "median": 527448.0
+   },
+   "contacted_mass_over_N_mean": 0.2202,
+   "lost_to_reach (B_P < LO)": 192,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "PHG|K100|matched": {
+   "ALL": [
+    368,
+    470,
+    524,
+    561,
+    575,
+    586
+   ],
+   "ANY": [
+    565,
+    665,
+    707,
+    727,
+    734,
+    735
+   ],
+   "gold_served": [
+    1379,
+    2462,
+    3250,
+    3727,
+    3941,
+    4195
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 570865.0,
+    "median": 527448.0
+   },
+   "contacted_mass_over_N_mean": 0.2202,
+   "lost_to_reach (B_P < LO)": 192,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "SKR1|K100|own": {
+   "ALL": [
+    367,
+    462,
+    520,
+    562,
+    574,
+    584
+   ],
+   "ANY": [
+    567,
+    662,
+    706,
+    727,
+    731,
+    736
+   ],
+   "gold_served": [
+    1377,
+    2479,
+    3331,
+    3749,
+    3920,
+    4165
+   ],
+   "B_P": {
+    "mean": 21.9,
+    "median": 20.0,
+    "min": 3,
+    "max": 74
+   },
+   "B_P_over_K_mean": 0.2195,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 573131.0,
+    "median": 525724.0
+   },
+   "contacted_mass_over_N_mean": 0.221,
+   "lost_to_reach (B_P < LO)": 189,
+   "vs_PHG_gained": [
+    5,
+    11,
+    22,
+    31,
+    36,
+    40
+   ],
+   "vs_PHG_lost": [
+    6,
+    19,
+    26,
+    30,
+    37,
+    42
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.2,
+    0.665,
+    1.0,
+    1.0,
+    0.912
+   ]
+  },
+  "SKR1|K100|matched": {
+   "ALL": [
+    368,
+    465,
+    522,
+    561,
+    575,
+    585
+   ],
+   "ANY": [
+    565,
+    662,
+    705,
+    725,
+    729,
+    734
+   ],
+   "gold_served": [
+    1374,
+    2475,
+    3311,
+    3731,
+    3901,
+    4146
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 568560.0,
+    "median": 528622.5
+   },
+   "contacted_mass_over_N_mean": 0.2193,
+   "lost_to_reach (B_P < LO)": 187,
+   "vs_PHG_gained": [
+    5,
+    13,
+    23,
+    29,
+    35,
+    39
+   ],
+   "vs_PHG_lost": [
+    5,
+    18,
+    25,
+    29,
+    35,
+    40
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.473,
+    0.885,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "SKN3|K100|own": {
+   "ALL": [
+    364,
+    462,
+    525,
+    559,
+    571,
+    578
+   ],
+   "ANY": [
+    566,
+    664,
+    709,
+    727,
+    733,
+    737
+   ],
+   "gold_served": [
+    1367,
+    2413,
+    3227,
+    3677,
+    3856,
+    4075
+   ],
+   "B_P": {
+    "mean": 21.4,
+    "median": 20.0,
+    "min": 2,
+    "max": 71
+   },
+   "B_P_over_K_mean": 0.2141,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 562522.0,
+    "median": 523402.5
+   },
+   "contacted_mass_over_N_mean": 0.2169,
+   "lost_to_reach (B_P < LO)": 200,
+   "vs_PHG_gained": [
+    4,
+    15,
+    29,
+    35,
+    38,
+    40
+   ],
+   "vs_PHG_lost": [
+    8,
+    23,
+    28,
+    37,
+    42,
+    48
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.388,
+    0.256,
+    1.0,
+    0.906,
+    0.738,
+    0.456
+   ]
+  },
+  "SKN3|K100|matched": {
+   "ALL": [
+    367,
+    468,
+    529,
+    564,
+    577,
+    586
+   ],
+   "ANY": [
+    566,
+    666,
+    709,
+    728,
+    732,
+    736
+   ],
+   "gold_served": [
+    1367,
+    2419,
+    3252,
+    3737,
+    3914,
+    4137
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 571773.0,
+    "median": 529046.0
+   },
+   "contacted_mass_over_N_mean": 0.2205,
+   "lost_to_reach (B_P < LO)": 193,
+   "vs_PHG_gained": [
+    4,
+    15,
+    29,
+    35,
+    38,
+    40
+   ],
+   "vs_PHG_lost": [
+    5,
+    17,
+    24,
+    32,
+    36,
+    40
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.86,
+    0.583,
+    0.807,
+    0.908,
+    1.0
+   ]
+  },
+  "PHG|K250|own": {
+   "ALL": [
+    370,
+    498,
+    573,
+    612,
+    628,
+    634
+   ],
+   "ANY": [
+    566,
+    674,
+    726,
+    745,
+    749,
+    753
+   ],
+   "gold_served": [
+    1376,
+    2558,
+    3449,
+    3924,
+    4101,
+    4352
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 456004.0,
+    "median": 421210.5
+   },
+   "contacted_mass_over_N_mean": 0.1759,
+   "lost_to_reach (B_P < LO)": 140,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "PHG|K250|matched": {
+   "ALL": [
+    370,
+    498,
+    573,
+    612,
+    628,
+    634
+   ],
+   "ANY": [
+    566,
+    674,
+    726,
+    745,
+    749,
+    753
+   ],
+   "gold_served": [
+    1376,
+    2558,
+    3449,
+    3924,
+    4101,
+    4352
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 456004.0,
+    "median": 421210.5
+   },
+   "contacted_mass_over_N_mean": 0.1759,
+   "lost_to_reach (B_P < LO)": 140,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "SKR1|K250|own": {
+   "ALL": [
+    369,
+    498,
+    573,
+    612,
+    624,
+    630
+   ],
+   "ANY": [
+    566,
+    679,
+    732,
+    754,
+    759,
+    762
+   ],
+   "gold_served": [
+    1373,
+    2537,
+    3424,
+    3911,
+    4089,
+    4350
+   ],
+   "B_P": {
+    "mean": 43.9,
+    "median": 40.0,
+    "min": 6,
+    "max": 148
+   },
+   "B_P_over_K_mean": 0.1756,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 458730.0,
+    "median": 419070.5
+   },
+   "contacted_mass_over_N_mean": 0.1769,
+   "lost_to_reach (B_P < LO)": 145,
+   "vs_PHG_gained": [
+    0,
+    5,
+    12,
+    21,
+    24,
+    25
+   ],
+   "vs_PHG_lost": [
+    1,
+    5,
+    12,
+    21,
+    28,
+    29
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.678,
+    0.683
+   ]
+  },
+  "SKR1|K250|matched": {
+   "ALL": [
+    369,
+    497,
+    571,
+    608,
+    620,
+    626
+   ],
+   "ANY": [
+    566,
+    679,
+    730,
+    751,
+    756,
+    759
+   ],
+   "gold_served": [
+    1375,
+    2529,
+    3415,
+    3908,
+    4090,
+    4353
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 454914.0,
+    "median": 420487.5
+   },
+   "contacted_mass_over_N_mean": 0.1754,
+   "lost_to_reach (B_P < LO)": 149,
+   "vs_PHG_gained": [
+    0,
+    5,
+    11,
+    17,
+    18,
+    19
+   ],
+   "vs_PHG_lost": [
+    1,
+    6,
+    13,
+    21,
+    26,
+    27
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    0.839,
+    0.627,
+    0.291,
+    0.302
+   ]
+  },
+  "SKN3|K250|own": {
+   "ALL": [
+    370,
+    493,
+    569,
+    609,
+    620,
+    627
+   ],
+   "ANY": [
+    567,
+    674,
+    725,
+    744,
+    748,
+    753
+   ],
+   "gold_served": [
+    1376,
+    2530,
+    3392,
+    3833,
+    4003,
+    4233
+   ],
+   "B_P": {
+    "mean": 42.8,
+    "median": 40.0,
+    "min": 4,
+    "max": 142
+   },
+   "B_P_over_K_mean": 0.1713,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 449558.0,
+    "median": 418243.0
+   },
+   "contacted_mass_over_N_mean": 0.1734,
+   "lost_to_reach (B_P < LO)": 152,
+   "vs_PHG_gained": [
+    2,
+    6,
+    13,
+    20,
+    21,
+    23
+   ],
+   "vs_PHG_lost": [
+    2,
+    11,
+    17,
+    23,
+    29,
+    30
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.332,
+    0.585,
+    0.761,
+    0.322,
+    0.41
+   ]
+  },
+  "SKN3|K250|matched": {
+   "ALL": [
+    371,
+    495,
+    571,
+    612,
+    622,
+    630
+   ],
+   "ANY": [
+    568,
+    678,
+    726,
+    746,
+    749,
+    754
+   ],
+   "gold_served": [
+    1376,
+    2533,
+    3397,
+    3874,
+    4048,
+    4281
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 456972.0,
+    "median": 424028.0
+   },
+   "contacted_mass_over_N_mean": 0.1762,
+   "lost_to_reach (B_P < LO)": 150,
+   "vs_PHG_gained": [
+    2,
+    5,
+    12,
+    20,
+    20,
+    23
+   ],
+   "vs_PHG_lost": [
+    1,
+    8,
+    14,
+    20,
+    26,
+    27
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.581,
+    0.845,
+    1.0,
+    0.461,
+    0.672
+   ]
+  },
+  "PHG|K500|own": {
+   "ALL": [
+    370,
+    506,
+    593,
+    638,
+    652,
+    660
+   ],
+   "ANY": [
+    567,
+    678,
+    729,
+    755,
+    759,
+    762
+   ],
+   "gold_served": [
+    1376,
+    2575,
+    3541,
+    4022,
+    4191,
+    4449
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 384149.0,
+    "median": 352950.5
+   },
+   "contacted_mass_over_N_mean": 0.1482,
+   "lost_to_reach (B_P < LO)": 118,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "PHG|K500|matched": {
+   "ALL": [
+    370,
+    506,
+    593,
+    638,
+    652,
+    660
+   ],
+   "ANY": [
+    567,
+    678,
+    729,
+    755,
+    759,
+    762
+   ],
+   "gold_served": [
+    1376,
+    2575,
+    3541,
+    4022,
+    4191,
+    4449
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 384149.0,
+    "median": 352950.5
+   },
+   "contacted_mass_over_N_mean": 0.1482,
+   "lost_to_reach (B_P < LO)": 118,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "SKR1|K500|own": {
+   "ALL": [
+    370,
+    506,
+    592,
+    636,
+    650,
+    657
+   ],
+   "ANY": [
+    567,
+    679,
+    733,
+    755,
+    759,
+    761
+   ],
+   "gold_served": [
+    1376,
+    2567,
+    3522,
+    4053,
+    4238,
+    4479
+   ],
+   "B_P": {
+    "mean": 73.8,
+    "median": 67.0,
+    "min": 11,
+    "max": 248
+   },
+   "B_P_over_K_mean": 0.1477,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 386923.0,
+    "median": 352643.5
+   },
+   "contacted_mass_over_N_mean": 0.1492,
+   "lost_to_reach (B_P < LO)": 123,
+   "vs_PHG_gained": [
+    0,
+    3,
+    8,
+    14,
+    18,
+    21
+   ],
+   "vs_PHG_lost": [
+    0,
+    3,
+    9,
+    16,
+    20,
+    24
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    0.856,
+    0.871,
+    0.766
+   ]
+  },
+  "SKR1|K500|matched": {
+   "ALL": [
+    370,
+    506,
+    589,
+    636,
+    650,
+    655
+   ],
+   "ANY": [
+    567,
+    679,
+    731,
+    756,
+    760,
+    761
+   ],
+   "gold_served": [
+    1376,
+    2576,
+    3533,
+    4047,
+    4239,
+    4476
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 383922.0,
+    "median": 352878.5
+   },
+   "contacted_mass_over_N_mean": 0.1481,
+   "lost_to_reach (B_P < LO)": 124,
+   "vs_PHG_gained": [
+    0,
+    2,
+    4,
+    11,
+    15,
+    16
+   ],
+   "vs_PHG_lost": [
+    0,
+    2,
+    8,
+    13,
+    17,
+    21
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    0.388,
+    0.839,
+    0.86,
+    0.511
+   ]
+  },
+  "SKN3|K500|own": {
+   "ALL": [
+    370,
+    507,
+    596,
+    635,
+    650,
+    654
+   ],
+   "ANY": [
+    567,
+    681,
+    735,
+    755,
+    760,
+    762
+   ],
+   "gold_served": [
+    1376,
+    2576,
+    3516,
+    3985,
+    4163,
+    4379
+   ],
+   "B_P": {
+    "mean": 72.1,
+    "median": 67.0,
+    "min": 7,
+    "max": 238
+   },
+   "B_P_over_K_mean": 0.1441,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 377989.0,
+    "median": 350422.5
+   },
+   "contacted_mass_over_N_mean": 0.1458,
+   "lost_to_reach (B_P < LO)": 124,
+   "vs_PHG_gained": [
+    0,
+    2,
+    8,
+    12,
+    16,
+    16
+   ],
+   "vs_PHG_lost": [
+    0,
+    1,
+    5,
+    15,
+    18,
+    22
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    0.581,
+    0.701,
+    0.864,
+    0.418
+   ]
+  },
+  "SKN3|K500|matched": {
+   "ALL": [
+    370,
+    507,
+    593,
+    635,
+    652,
+    656
+   ],
+   "ANY": [
+    567,
+    680,
+    731,
+    753,
+    758,
+    760
+   ],
+   "gold_served": [
+    1376,
+    2581,
+    3537,
+    4035,
+    4223,
+    4434
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 384362.0,
+    "median": 353555.0
+   },
+   "contacted_mass_over_N_mean": 0.1482,
+   "lost_to_reach (B_P < LO)": 121,
+   "vs_PHG_gained": [
+    0,
+    1,
+    4,
+    9,
+    14,
+    14
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    4,
+    12,
+    14,
+    18
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    0.664,
+    1.0,
+    0.597
+   ]
+  }
+ },
+ "verdicts": {
+  "SKR1": {
+   "verdict": "BORDERLINE",
+   "gate_cells_scored": [
+    100,
+    250,
+    500
+   ],
+   "gate_cells_not_scored": {},
+   "max_loss_rows_vs_PHG_matched_over_scored_gate_cells": 8,
+   "loss_rows_by_cell_and_B_N": {
+    "SKR1 K100": [
+     0,
+     5,
+     2,
+     0,
+     0,
+     1
+    ],
+    "SKR1 K250": [
+     1,
+     1,
+     2,
+     4,
+     8,
+     8
+    ],
+    "SKR1 K500": [
+     0,
+     0,
+     4,
+     2,
+     2,
+     5
+    ]
+   }
+  },
+  "SKN3": {
+   "verdict": "RECALL_PRESERVING",
+   "gate_cells_scored": [
+    100,
+    250,
+    500
+   ],
+   "gate_cells_not_scored": {},
+   "max_loss_rows_vs_PHG_matched_over_scored_gate_cells": 6,
+   "loss_rows_by_cell_and_B_N": {
+    "SKN3 K100": [
+     1,
+     2,
+     -5,
+     -3,
+     -2,
+     0
+    ],
+    "SKN3 K250": [
+     -1,
+     3,
+     2,
+     0,
+     6,
+     4
+    ],
+    "SKN3 K500": [
+     0,
+     -1,
+     0,
+     3,
+     0,
+     4
+    ]
+   }
+  }
+ },
+ "seconds_loop": 582.1,
+ "inputs": {
+  "bundle_meta": {
+   "path": "work/FBX_CALIB/bundle_v1/meta.json",
+   "sha256": "2b33beff8441fc62fcacf377a49281b4475dc9d392816f925320ccba3e20d6d4"
+  },
+  "maps": {
+   "PHG|100": {
+    "STATUS": "OK",
+    "sha256": "36d69391735d13fee50cc6a605102f3fd60746568549e2e3b3faccb5eb94a7de",
+    "file": "results/L1_HOST/parts/webqsp__H4_SK_k100__PHG_con.npy"
+   },
+   "PHG|250": {
+    "STATUS": "OK",
+    "sha256": "fbe79aaf509943550fdc4ac562e2f5161158ccec3ead9dff3da0835f55e01ce3",
+    "file": "results/L1_HOST/parts/webqsp__H4_SK_k250__PHG_con.npy"
+   },
+   "PHG|500": {
+    "STATUS": "OK",
+    "sha256": "a6ae7e068134a8cb7139b1fe9911fde96a029fa4f2ca4beb649b4a972cc4e08f",
+    "file": "results/L1_HOST/parts/webqsp__H4_SK_k500__PHG_con.npy"
+   },
+   "SKR1|100": {
+    "STATUS": "OK",
+    "sha256": "81da279fb5349ce3a02db4ce24b186dc97f19882a1dff996bb87d4cb88f4dbbb",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_SKR1_k100__PHG_con.npy",
+    "run_json_sha256": "80cae368ecf8f4e95c5cafcbe0bacb68c6f8623df5a62ec6543a81a2e7797d07"
+   },
+   "SKN3|100": {
+    "STATUS": "OK",
+    "sha256": "5c70ac2d30ff49296a3bf01b6af93fd9790e5c5e3e28a4f944294532a94503a3",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_SKN3_k100__PHG_con.npy",
+    "run_json_sha256": "f787b25011985613bc98800fa4848a79930a486c1cf1e4ea178eccdd5453ac3e"
+   },
+   "SKR1|250": {
+    "STATUS": "OK",
+    "sha256": "f2bf9c4c3d1524ca056e0ae297bab46a7bd4a810d192c49596a0de3318d30b58",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_SKR1_k250__PHG_con.npy",
+    "run_json_sha256": "a27d14aea4d4a1de68178340c7509000bb23174e48fb2b999af4baf767056f50"
+   },
+   "SKN3|250": {
+    "STATUS": "OK",
+    "sha256": "2dfa5e86fcf84612dda8f165863a55faf109bd7feae599ca5e94cc30861716ae",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_SKN3_k250__PHG_con.npy",
+    "run_json_sha256": "ba132d79b396e28ac4e643127eea75ce78cbc490d882d9788e63df00cf0049d9"
+   },
+   "SKR1|500": {
+    "STATUS": "OK",
+    "sha256": "8b1f2616bfe3380abea6bd8014caccf1b9547ef7ab46f4c9942100ba6e51f5af",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_SKR1_k500__PHG_con.npy",
+    "run_json_sha256": "7da76699f862ed027f54e6216e375468200581ee9ede4753ba287f2733784ca6"
+   },
+   "SKN3|500": {
+    "STATUS": "OK",
+    "sha256": "87ed2638913f32f15e6a677883e9ade45d6d49cfd654878780c527ad491b25d4",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_SKN3_k500__PHG_con.npy",
+    "run_json_sha256": "f0a5185230ada314793f2153222792afd6bb8c867da10d4c1e6e7a48746b6938"
+   }
+  },
+  "population": {
+   "path": "results/L3_DEV/l3w_population_webqsp__v1.json",
+   "sha256": "7e67c9b116b2921cc243e2e664951984d985127191a320a4bfe70594a9016009"
+  },
+  "addendum": {
+   "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+   "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+   "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_8.json": "47838cec49fa417ce27d1bfed6cc900f7bdcadb98e000034d8601e1a57bf0bed"
+  }
+ },
+ "code": {
+  "scratchpad/_ml2_eval.py": "318c7b416985d1a301fda733186d735ca071f1499a727778b3554c0aeecfe263",
+  "scratchpad/_fbx_calib.py": "a46001f57ac56e725723a77c8eecaacc067aedf883a39ba29b1f236e9828ed7f",
+  "scratchpad/_h2lm_eval.py": "aaecd6bc2d9a2970676dfcf47ec1d3e7dd8194fbce5caba2e72cd7dc6f597c63",
+  "scratchpad/_h2lm_noise.py": "d2ab8a1f06d19e587c27efc531a92474442747e02ccf0b7056c11efcf9adde6e"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "pinned_repo": {
+  "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+  "data/final_canonical/canonical.py": "c657830b304afe861893b516726af419d35142334f866517b83221427a9016f5"
+ },
+ "platform": {
+  "python": "3.13.5",
+  "numpy": "2.3.2"
+ },
+ "process_peak_rss_mb": 8141.9,
+ "utc": "2026-10-01T00:38:26Z",
+ "npz": {
+  "path": "CALIB_EVAL_WEBQSP__noise_v1.npz",
+  "sha256": "782b28239479ed02fb1aabc77862f327b2240bd8d15e42a89de4c0dd62e0c221"
+ },
+ "addendum_8_sha256": "47838cec49fa417ce27d1bfed6cc900f7bdcadb98e000034d8601e1a57bf0bed"
+}

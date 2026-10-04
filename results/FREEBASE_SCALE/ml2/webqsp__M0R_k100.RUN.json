@@ -1,0 +1,139 @@
+{
+ "RECORD": "ML2_M0R",
+ "dataset": "webqsp",
+ "candidate": "M0R",
+ "K": 100,
+ "utc": "2026-09-30T12:03:11Z",
+ "refine_params": {
+  "sweeps": 10,
+  "T": 4,
+  "dmax": 5000,
+  "layers": [
+   "STRUCT",
+   "KNN"
+  ],
+  "anchor_weights": "max(1, rint(1000 / deg_family(u))) = the frozen H4 net weight of the anchor's closed neighbourhood",
+  "repair": "cheapest-first out of every block above ceil(1.03 N / K) before the sweeps"
+ },
+ "input_map": {
+  "file": "results/L1_HOST/parts/webqsp__H4_SK_k100__PHG_con.npy",
+  "sha256": "36d69391735d13fee50cc6a605102f3fd60746568549e2e3b3faccb5eb94a7de"
+ },
+ "fine_hypergraph": {
+  "file": "results/L1_HOST/parts/webqsp__H4_SK_k100.npz",
+  "content_digest": "ae11bd0dde39f1df2132d4af0719aa89282fe579ce91970e75512b0dbe489981",
+  "M": 5181621,
+  "P": 29574371
+ },
+ "km1_weighted_before": 994832221,
+ "km1_weighted_after": 977626234,
+ "lambda_mean_before": 1.931,
+ "lambda_mean_after": 1.9148,
+ "blocks_per_net_unweighted_before": 1.931,
+ "blocks_per_net_unweighted_after": 1.9148,
+ "refinement": {
+  "cn_info": {
+   "mode": "ml2_cn",
+   "layers": 2,
+   "weighted": 1,
+   "N": 2592894,
+   "K": 100,
+   "cap": 26707,
+   "lo": 25151,
+   "T": 4,
+   "dmax": 5000,
+   "hubs_skipped": 86,
+   "sweeps_run": 3,
+   "seconds": 6.569,
+   "size_min": 961,
+   "size_max": 26707,
+   "km1_before": 994829851,
+   "km1_after_repair": 994829851,
+   "km1_after": 977623860,
+   "km1_bookkeeping_consistent": 1,
+   "repair": {
+    "overfull_blocks_before": 0,
+    "max_load_before": 26706,
+    "moves": 0,
+    "km1_delta": 0,
+    "passes": 0,
+    "overfull_blocks_after": 0,
+    "stuck": 0,
+    "seconds": 0.0
+   },
+   "moved_per_sweep": [
+    61635,
+    10527,
+    2449
+   ],
+   "km1_delta_per_sweep": [
+    -14200475,
+    -2474329,
+    -531187
+   ],
+   "seconds_per_sweep": [
+    2.316,
+    2.158,
+    2.092
+   ],
+   "pool_bytes": 203784760,
+   "peak_rss_kb": 437004,
+   "c_source_sha12": "dcdc99a5ea14"
+  },
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 26707,
+   "contract_bound_ceil_1.03_N_over_k": 26707,
+   "zoltan_tolerance_bound_1.03_x_mean": 26706.808,
+   "gate": "PASS"
+  }
+ },
+ "balance": {
+  "length_ok": true,
+  "ids_in_range": true,
+  "blocks_used": 100,
+  "every_block_used": true,
+  "size_min": 961,
+  "size_max": 26707,
+  "size_mean": 25928.94,
+  "ceil_N_over_K": 25929,
+  "within_ceil_1.03_N_over_K": true
+ },
+ "wall_seconds": 67.4,
+ "STATUS": "OK",
+ "output": {
+  "file": "results/FREEBASE_SCALE/ml2/webqsp__M0R_k100.npy",
+  "sha256": "5c79e83ebdd5e22cf4ec2417cceee8ded0d404a951ae7aa176086913e698ec12",
+  "n": 2592894
+ },
+ "placement": {
+  "machine": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "cpu_count_os": 32,
+  "python": "3.13.5",
+  "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+  "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+  "numpy": "2.3.2",
+  "wsl_distro": "Ubuntu-24.04",
+  "rx_job": "260930-172821-fbx-ml2-m0r-baef",
+  "rx_cpus": "4",
+  "PYTHONHASHSEED": "0"
+ },
+ "code": {
+  "scratchpad/_ml2_cell.py": "f63d5ed5b29f9c9b3a9247ac56ef7100ef5cd5d902b36237e843f59d2f331521",
+  "scratchpad/_ml2_cn.py": "3421e6ad69f263a8e935389ef588dd0436b28f2538187564deb154b5cece8206",
+  "scratchpad/_ml2_cn.c": "dcdc99a5ea140410393edcf5a8904565582e36a3bb4c60a910b0bb7f9b99d1a1",
+  "scratchpad/_ml2_run.py": "6c06034cb0d055c43b35b5c0774ef056da7240502190033d8849ae720169dfea",
+  "scratchpad/_ml2_coarsen.py": "33561ca386667bb3053389ba902d87e067aac08985b6839dd17a243ff05b7b05",
+  "scratchpad/_ml_run.py": "7f98670670d437712d1f6c81863752d3eef841ac02aa576441ff490372766e26",
+  "scratchpad/_ml_coarsen.py": "19ad42f5ac74dcfe6384c1d34d2d9821fec6b75cc1202c8d5fd9723f31ee3978",
+  "scratchpad/_fbx_part.py": "6e3113645af5de676f9221a0b0591e898ca373c29a25d4ef2cf676b5aff85d61",
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_lowmem/phg_driver/phg_driver_vw.c": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262"
+ }
+}

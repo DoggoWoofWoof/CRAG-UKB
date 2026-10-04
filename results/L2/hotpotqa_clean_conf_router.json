@@ -1,0 +1,646 @@
+{
+  "_config": {
+    "kind": "confidence_router_leave_one_out_transfer",
+    "train_datasets": [
+      "webqsp",
+      "metaqa",
+      "2wiki_clean",
+      "musique_clean"
+    ],
+    "eval_dataset": "hotpotqa_clean",
+    "arms": [
+      "conf_only",
+      "conf_easy",
+      "conf_plausible"
+    ],
+    "epochs": 12,
+    "seeds": 5,
+    "router_input": "dataset-independent: per-query standardized margin/entropy + cross-expert agreement + avail",
+    "corruption": {
+      "corrupt_p": 0.3,
+      "sharpen": 2.0,
+      "n_swap": 3,
+      "note": "fixed a priori, NOT tuned on Hotpot"
+    },
+    "selection": "corruption fixed a priori; fallback beta chosen on train datasets only; Hotpot labels untouched",
+    "norm": "FROZEN mu/sd from train_datasets"
+  },
+  "dense_baseline": {
+    "hotpotqa_clean": {
+      "R@5": [
+        70.43,
+        0.0
+      ],
+      "R@20": [
+        80.13,
+        0.0
+      ],
+      "R@50": [
+        84.58,
+        0.0
+      ],
+      "Hit@5": [
+        93.95,
+        0.0
+      ],
+      "Hit@50": [
+        98.34,
+        0.0
+      ]
+    }
+  },
+  "conf_only": {
+    "zero_shot": {
+      "hotpotqa_clean": {
+        "R@5": [
+          62.18,
+          1.1
+        ],
+        "R@20": [
+          75.09,
+          1.02
+        ],
+        "R@50": [
+          83.01,
+          0.93
+        ],
+        "Hit@5": [
+          85.23,
+          1.35
+        ],
+        "Hit@50": [
+          95.67,
+          0.41
+        ]
+      }
+    },
+    "train_ref": {
+      "webqsp": {
+        "R@5": [
+          52.3,
+          0.62
+        ],
+        "R@20": [
+          74.36,
+          0.72
+        ],
+        "R@50": [
+          81.97,
+          0.75
+        ],
+        "Hit@5": [
+          70.2,
+          0.51
+        ],
+        "Hit@50": [
+          93.47,
+          0.82
+        ]
+      },
+      "metaqa": {
+        "R@5": [
+          78.01,
+          2.99
+        ],
+        "R@20": [
+          93.8,
+          1.31
+        ],
+        "R@50": [
+          97.82,
+          0.28
+        ],
+        "Hit@5": [
+          90.12,
+          2.86
+        ],
+        "Hit@50": [
+          99.39,
+          0.07
+        ]
+      },
+      "2wiki_clean": {
+        "R@5": [
+          86.85,
+          0.4
+        ],
+        "R@20": [
+          92.85,
+          0.45
+        ],
+        "R@50": [
+          94.48,
+          0.19
+        ],
+        "Hit@5": [
+          99.87,
+          0.16
+        ],
+        "Hit@50": [
+          100.0,
+          0.0
+        ]
+      },
+      "musique_clean": {
+        "R@5": [
+          69.11,
+          0.45
+        ],
+        "R@20": [
+          82.39,
+          0.25
+        ],
+        "R@50": [
+          88.57,
+          0.2
+        ],
+        "Hit@5": [
+          95.53,
+          0.25
+        ],
+        "Hit@50": [
+          99.5,
+          0.03
+        ]
+      }
+    },
+    "router_mean_alpha": {
+      "hotpotqa_clean": {
+        "dense": 0.2353,
+        "offset": 0.4675,
+        "splade": 0.1534,
+        "relation": 0.1159,
+        "path": 0.0279
+      }
+    },
+    "low_conf_dense_fallback": {
+      "hotpotqa_clean": {
+        "beta_grid": [
+          0.0,
+          0.25,
+          0.5,
+          1.0,
+          2.0,
+          4.0,
+          8.0
+        ],
+        "beta_star": 0.25,
+        "selection": "argmax mean train-dataset R@5 (held-out never used)",
+        "sweep": {
+          "0.0": {
+            "train_mean_R@5": 71.57,
+            "held_out_R@5": 62.18
+          },
+          "0.25": {
+            "train_mean_R@5": 71.99,
+            "held_out_R@5": 69.74
+          },
+          "0.5": {
+            "train_mean_R@5": 67.96,
+            "held_out_R@5": 70.94
+          },
+          "1.0": {
+            "train_mean_R@5": 60.79,
+            "held_out_R@5": 71.59
+          },
+          "2.0": {
+            "train_mean_R@5": 52.11,
+            "held_out_R@5": 71.41
+          },
+          "4.0": {
+            "train_mean_R@5": 46.21,
+            "held_out_R@5": 71.16
+          },
+          "8.0": {
+            "train_mean_R@5": 43.01,
+            "held_out_R@5": 70.79
+          }
+        },
+        "held_out_at_beta_star": {
+          "R@5": [
+            69.74,
+            0.66
+          ],
+          "R@20": [
+            79.9,
+            0.58
+          ],
+          "R@50": [
+            85.24,
+            0.48
+          ],
+          "Hit@5": [
+            91.93,
+            0.27
+          ],
+          "Hit@50": [
+            97.17,
+            0.09
+          ]
+        },
+        "train_R@5_at_beta_star": {
+          "webqsp": 54.74,
+          "metaqa": 78.66,
+          "2wiki_clean": 82.1,
+          "musique_clean": 72.47
+        }
+      }
+    }
+  },
+  "conf_easy": {
+    "zero_shot": {
+      "hotpotqa_clean": {
+        "R@5": [
+          68.72,
+          2.48
+        ],
+        "R@20": [
+          80.65,
+          2.01
+        ],
+        "R@50": [
+          86.57,
+          1.32
+        ],
+        "Hit@5": [
+          90.74,
+          1.23
+        ],
+        "Hit@50": [
+          97.55,
+          0.44
+        ]
+      }
+    },
+    "train_ref": {
+      "webqsp": {
+        "R@5": [
+          50.24,
+          1.44
+        ],
+        "R@20": [
+          67.7,
+          1.88
+        ],
+        "R@50": [
+          77.34,
+          1.02
+        ],
+        "Hit@5": [
+          68.44,
+          2.13
+        ],
+        "Hit@50": [
+          90.34,
+          1.0
+        ]
+      },
+      "metaqa": {
+        "R@5": [
+          83.8,
+          4.62
+        ],
+        "R@20": [
+          96.41,
+          1.88
+        ],
+        "R@50": [
+          98.77,
+          0.52
+        ],
+        "Hit@5": [
+          94.28,
+          3.89
+        ],
+        "Hit@50": [
+          99.6,
+          0.16
+        ]
+      },
+      "2wiki_clean": {
+        "R@5": [
+          87.12,
+          1.06
+        ],
+        "R@20": [
+          93.52,
+          0.37
+        ],
+        "R@50": [
+          95.1,
+          0.18
+        ],
+        "Hit@5": [
+          100.0,
+          0.0
+        ],
+        "Hit@50": [
+          100.0,
+          0.0
+        ]
+      },
+      "musique_clean": {
+        "R@5": [
+          71.79,
+          0.75
+        ],
+        "R@20": [
+          84.06,
+          0.45
+        ],
+        "R@50": [
+          89.85,
+          0.25
+        ],
+        "Hit@5": [
+          96.37,
+          0.27
+        ],
+        "Hit@50": [
+          99.8,
+          0.07
+        ]
+      }
+    },
+    "router_mean_alpha": {
+      "hotpotqa_clean": {
+        "dense": 0.2321,
+        "offset": 0.4432,
+        "splade": 0.1651,
+        "relation": 0.133,
+        "path": 0.0265
+      }
+    },
+    "low_conf_dense_fallback": {
+      "hotpotqa_clean": {
+        "beta_grid": [
+          0.0,
+          0.25,
+          0.5,
+          1.0,
+          2.0,
+          4.0,
+          8.0
+        ],
+        "beta_star": 0.0,
+        "selection": "argmax mean train-dataset R@5 (held-out never used)",
+        "sweep": {
+          "0.0": {
+            "train_mean_R@5": 73.24,
+            "held_out_R@5": 68.72
+          },
+          "0.25": {
+            "train_mean_R@5": 72.56,
+            "held_out_R@5": 71.47
+          },
+          "0.5": {
+            "train_mean_R@5": 70.41,
+            "held_out_R@5": 72.08
+          },
+          "1.0": {
+            "train_mean_R@5": 65.62,
+            "held_out_R@5": 72.26
+          },
+          "2.0": {
+            "train_mean_R@5": 57.01,
+            "held_out_R@5": 72.0
+          },
+          "4.0": {
+            "train_mean_R@5": 49.29,
+            "held_out_R@5": 71.31
+          },
+          "8.0": {
+            "train_mean_R@5": 44.74,
+            "held_out_R@5": 70.93
+          }
+        },
+        "held_out_at_beta_star": {
+          "R@5": [
+            68.72,
+            2.48
+          ],
+          "R@20": [
+            80.65,
+            2.01
+          ],
+          "R@50": [
+            86.57,
+            1.32
+          ],
+          "Hit@5": [
+            90.74,
+            1.23
+          ],
+          "Hit@50": [
+            97.55,
+            0.44
+          ]
+        },
+        "train_R@5_at_beta_star": {
+          "webqsp": 50.24,
+          "metaqa": 83.8,
+          "2wiki_clean": 87.12,
+          "musique_clean": 71.79
+        }
+      }
+    }
+  },
+  "conf_plausible": {
+    "zero_shot": {
+      "hotpotqa_clean": {
+        "R@5": [
+          60.86,
+          1.66
+        ],
+        "R@20": [
+          74.2,
+          1.01
+        ],
+        "R@50": [
+          82.47,
+          0.63
+        ],
+        "Hit@5": [
+          84.32,
+          1.26
+        ],
+        "Hit@50": [
+          95.43,
+          0.29
+        ]
+      }
+    },
+    "train_ref": {
+      "webqsp": {
+        "R@5": [
+          54.0,
+          1.37
+        ],
+        "R@20": [
+          73.94,
+          1.37
+        ],
+        "R@50": [
+          81.1,
+          1.04
+        ],
+        "Hit@5": [
+          71.7,
+          1.26
+        ],
+        "Hit@50": [
+          93.33,
+          1.25
+        ]
+      },
+      "metaqa": {
+        "R@5": [
+          75.46,
+          2.85
+        ],
+        "R@20": [
+          92.43,
+          2.33
+        ],
+        "R@50": [
+          97.13,
+          0.79
+        ],
+        "Hit@5": [
+          87.87,
+          3.22
+        ],
+        "Hit@50": [
+          99.25,
+          0.16
+        ]
+      },
+      "2wiki_clean": {
+        "R@5": [
+          86.43,
+          0.88
+        ],
+        "R@20": [
+          92.95,
+          0.46
+        ],
+        "R@50": [
+          94.6,
+          0.37
+        ],
+        "Hit@5": [
+          100.0,
+          0.0
+        ],
+        "Hit@50": [
+          100.0,
+          0.0
+        ]
+      },
+      "musique_clean": {
+        "R@5": [
+          68.98,
+          0.32
+        ],
+        "R@20": [
+          82.25,
+          0.32
+        ],
+        "R@50": [
+          88.66,
+          0.25
+        ],
+        "Hit@5": [
+          95.35,
+          0.12
+        ],
+        "Hit@50": [
+          99.52,
+          0.02
+        ]
+      }
+    },
+    "router_mean_alpha": {
+      "hotpotqa_clean": {
+        "dense": 0.2164,
+        "offset": 0.5182,
+        "splade": 0.1526,
+        "relation": 0.0905,
+        "path": 0.0223
+      }
+    },
+    "low_conf_dense_fallback": {
+      "hotpotqa_clean": {
+        "beta_grid": [
+          0.0,
+          0.25,
+          0.5,
+          1.0,
+          2.0,
+          4.0,
+          8.0
+        ],
+        "beta_star": 0.0,
+        "selection": "argmax mean train-dataset R@5 (held-out never used)",
+        "sweep": {
+          "0.0": {
+            "train_mean_R@5": 71.22,
+            "held_out_R@5": 60.86
+          },
+          "0.25": {
+            "train_mean_R@5": 70.67,
+            "held_out_R@5": 69.21
+          },
+          "0.5": {
+            "train_mean_R@5": 67.46,
+            "held_out_R@5": 70.69
+          },
+          "1.0": {
+            "train_mean_R@5": 60.69,
+            "held_out_R@5": 71.39
+          },
+          "2.0": {
+            "train_mean_R@5": 51.87,
+            "held_out_R@5": 71.31
+          },
+          "4.0": {
+            "train_mean_R@5": 46.19,
+            "held_out_R@5": 71.07
+          },
+          "8.0": {
+            "train_mean_R@5": 42.87,
+            "held_out_R@5": 70.78
+          }
+        },
+        "held_out_at_beta_star": {
+          "R@5": [
+            60.86,
+            1.66
+          ],
+          "R@20": [
+            74.2,
+            1.01
+          ],
+          "R@50": [
+            82.47,
+            0.63
+          ],
+          "Hit@5": [
+            84.32,
+            1.26
+          ],
+          "Hit@50": [
+            95.43,
+            0.29
+          ]
+        },
+        "train_R@5_at_beta_star": {
+          "webqsp": 54.0,
+          "metaqa": 75.46,
+          "2wiki_clean": 86.43,
+          "musique_clean": 68.98
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+ "stage": "L3_HOST",
+ "probe": "BLAS thread dependence of the FLAT dense product",
+ "label": "host_t12",
+ "when": "2026-09-29T18:13:54+05:30",
+ "blas": [
+  {
+   "user_api": "blas",
+   "internal_api": "openblas",
+   "num_threads": 12,
+   "prefix": "libscipy_openblas",
+   "filepath": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\Lib\\site-packages\\numpy.libs\\libscipy_openblas64_-860d95b1c38e637ce4509f5fa24fbf2a.dll",
+   "version": "0.3.30",
+   "threading_layer": "pthreads",
+   "architecture": "Haswell"
+  }
+ ],
+ "env": {
+  "MKL_NUM_THREADS": "2",
+  "NUMBA_NUM_THREADS": "2",
+  "NUMEXPR_MAX_THREADS": "2",
+  "NUMEXPR_NUM_THREADS": "2",
+  "OMP_NUM_THREADS": "2",
+  "OPENBLAS_NUM_THREADS": "12",
+  "RAYON_NUM_THREADS": "2",
+  "VECLIB_MAXIMUM_THREADS": "2"
+ },
+ "numpy": "2.3.2",
+ "platform": {
+  "python": "3.13.5",
+  "numpy": "2.3.2"
+ },
+ "host": {
+  "utc": "2026-09-29T12:43:54Z",
+  "host_total_gib": 127.69,
+  "host_available_gib": 33.23,
+  "swap_used_gib": 2.3,
+  "other_python_processes_over_500_MB (untouched)": [
+   {
+    "pid": 11408,
+    "rss_mb": 2196
+   },
+   {
+    "pid": 13796,
+    "rss_mb": 3271
+   },
+   {
+    "pid": 14592,
+    "rss_mb": 4076
+   }
+  ]
+ },
+ "inputs": {
+  "rows": "the first 200 rows of the L1_DEV population",
+  "Qu_sha256": "2d89f7ce5c4e3e831ec0d60ab822599dc3221a78930824984c8b9848121774f2",
+  "node_block": [
+   0,
+   40000
+  ],
+  "Ec_sha256": "95947298bf34822bd64505e658f81762f13cb527c3a1c485c41f98325e968870"
+ },
+ "product_default": {
+  "shape": [
+   200,
+   40000
+  ],
+  "sha256": "5db3e5817cbfc68374a65d3b7c781fd573b74987b8c8ac323573aeea93f0d71e"
+ },
+ "code": {
+  "path": "scratchpad/_l3h_blasprobe.py",
+  "sha256": "3ed95dd6e74aea5812fa77ffcdbd5abf58a56c6d77466468a2437b78f0a6f065"
+ },
+ "product_per_thread_count": {
+  "1": {
+   "sha256": "a1ed0ccc4f5696068eba3fbb1713a49565ef4670cfbe344c557b7d0ccca9ca18",
+   "equals_default": false,
+   "n_diff_vs_default": 191844,
+   "max_abs_diff_vs_default": 2.384185791015625e-07
+  },
+  "2": {
+   "sha256": "120a9e7bd6effb85a7a281fe9f36661ec81c05675d460ecdf81367aaa0ef2e5b",
+   "equals_default": false,
+   "n_diff_vs_default": 190921,
+   "max_abs_diff_vs_default": 2.384185791015625e-07
+  },
+  "4": {
+   "sha256": "9de6f497881db2657e58e5c37dfaadc9f288c056296c7a8b91020747b03dcb70",
+   "equals_default": false,
+   "n_diff_vs_default": 193192,
+   "max_abs_diff_vs_default": 2.384185791015625e-07
+  },
+  "8": {
+   "sha256": "1b58327e34b4ca1fd1dcb8d30da20d54570e1d8f5b3968f7592674f165a837b3",
+   "equals_default": false,
+   "n_diff_vs_default": 193317,
+   "max_abs_diff_vs_default": 2.980232238769531e-07
+  },
+  "12": {
+   "sha256": "5db3e5817cbfc68374a65d3b7c781fd573b74987b8c8ac323573aeea93f0d71e",
+   "equals_default": true,
+   "n_diff_vs_default": 0,
+   "max_abs_diff_vs_default": 0.0
+  },
+  "16": {
+   "sha256": "da3742c2fed088b9b16654b04e190caac877968871cd0d1860ebce8427a6caec",
+   "equals_default": false,
+   "n_diff_vs_default": 3866291,
+   "max_abs_diff_vs_default": 2.980232238769531e-07
+  },
+  "32": {
+   "sha256": "4385ec1ea5e96c0de3e07d4386ec9482036bc2c70e9d586357838969dc20ef86",
+   "equals_default": false,
+   "n_diff_vs_default": 5776133,
+   "max_abs_diff_vs_default": 2.980232238769531e-07
+  }
+ }
+}

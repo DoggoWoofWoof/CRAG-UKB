@@ -1,0 +1,846 @@
+{
+ "RECORD": "L1_CANONICAL_MANIFEST",
+ "utc": "2026-09-13T13:00:30Z",
+ "PURPOSE": "L1 re-frozen on the canonical substrates (data/final_canonical/), canonical position space, zero-copy adapter; every artefact pinned to the DATASET.json record it was built from and to the L1 contract hash",
+ "L1_CONTRACT": {
+  "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+  "files": {
+   "scratchpad/_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+   "scratchpad/_l1ps_cache.py": "ab81e214def8eb8e56bf04543475971e7cbdf4dfcf026111922817e38bfa176e",
+   "scratchpad/_l1ps_router.py": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9",
+   "scratchpad/_l1hu_build.py": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79",
+   "scratchpad/_l1hu_local_worker.py": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+   "scratchpad/_l1ep_part.py": "a7adda6a85f55ad2d740a495002dac1bbaa5758b0758ec5a3e48db48ef8d7706",
+   "scratchpad/_l1ep_c.py": "6a34073181944baba5b8d5d0fdc683299fbb42eb6c15a33fb406047eaa46d848",
+   "scratchpad/_l1ep_pu.py": "8dd1e0a6818f1ce99733fd6b6c7e513cdf3bfbfafe0340bec09828e60bd215f7",
+   "scratchpad/_l1kn_sub.py": "3cb85dfd6698bc01fe52ae8a75c5b0629558204204ab2a60eba1a386e10046f3",
+   "scratchpad/_l1ov_core.py": "b689c1983bf4d920990e7610369b151f9aead97d39c39a1e5807b5595b8d750d",
+   "scratchpad/_l1ov_eval.py": "0fee96e0106f9b886b759b337cfcea1ff3a8fd75cb4a8f1f92b1c3bcacf08b28",
+   "scratchpad/_l1hu_s.py": "66a86494beb4fefca9d772a88e224e0f91a470f50abb8ecc761c625cdbf13649",
+   "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+   "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+   "src/l1_canonical/partition.py": "45be47b5dd5d432af6b7339133e9cb4d5acf38d9ee5661368af0db3e5f175257",
+   "src/l1_canonical/replay_cache.py": "1fc5411c9f12f25d81586aabdb1af0da371752f20be5d4d09d8d17529a89f0d1",
+   "src/l1_canonical/l1_eval.py": "01266b0609bceb7a0aa33f0d73d35939e3a1abf54983b6efa9c8dce15de06ee7"
+  },
+  "constants": {
+   "K0": 60,
+   "K": 100,
+   "P_MAIN": 50,
+   "SEED_K": 5,
+   "BEAM": 64,
+   "MAX_HOPS": 3,
+   "DEG_CAP": 300,
+   "SMAX": 256,
+   "TOPP": 200,
+   "EVAL_CAP": 2000,
+   "MIN_VAL": 1000,
+   "PARTITION": {
+    "rule": "H4_SPLIT_PRESERVE",
+    "families": [
+     "STRUCT",
+     "KNN"
+    ],
+    "target_block_size": 100,
+    "partitioner": "mtkahypar",
+    "preset": "DETERMINISTIC_QUALITY",
+    "objective": "KM1",
+    "epsilon": 0.03,
+    "seed": 0
+   }
+  }
+ },
+ "PINS": {
+  "CANONICAL_FREEZE.json": {
+   "path": "data/final_canonical/CANONICAL_FREEZE.json",
+   "bytes": 67583,
+   "sha256": "039dcf327aa71e39994cdeedc731033279d81d854d74efc29c86f197546f3dc8"
+  },
+  "RETURN_TO_L1_BASELINE.json": {
+   "RECORD_SHA256": "fb702cb7316a7ec55468f995062d303ccd0a9a78de0b53ad9be4e0d6efd4fffc",
+   "path": "results/L1_CANONICAL/RETURN_TO_L1_BASELINE.json",
+   "bytes": 9909,
+   "sha256": "c822e68cb76bc602177537616f679c693a935e54a7eb68e34ee4a9d0061f65db"
+  },
+  "ADAPTER_VALIDATION.json": {
+   "ALL_PASS": true,
+   "path": "results/L1_CANONICAL/ADAPTER_VALIDATION.json",
+   "bytes": 53002,
+   "sha256": "0ec24e6a544b91f56077b3c0340c1b8cd58bf1959ebae0d8db982d17aee0d889"
+  },
+  "HYPERGRAPH_PARITY.json": {
+   "ALL_IDENTICAL": true,
+   "path": "results/L1_CANONICAL/HYPERGRAPH_PARITY.json",
+   "bytes": 3744,
+   "sha256": "49734f1152fa3635ed2c747eb3d93212c939e23e794c23a2512493b2744aa3c2"
+  },
+  "REPLAY_CACHE_PARITY.json": {
+   "ALL_IDENTICAL": true,
+   "datasets": {
+    "metaqa": "IDENTICAL",
+    "musique_clean": "IDENTICAL",
+    "squad_clean": "IDENTICAL",
+    "2wiki_clean": "IDENTICAL"
+   },
+   "path": "results/L1_CANONICAL/REPLAY_CACHE_PARITY.json",
+   "bytes": 6512,
+   "sha256": "0b748f26d166454cb90d9c6f15b3686f22e2b08410b420a55c1722b7df8a1701"
+  },
+  "legacy_L1_LOCKED_MANIFEST": {
+   "path": "results/L1/L1_LOCKED_MANIFEST.json",
+   "bytes": 27436,
+   "sha256": "e12f341cd023ee0a392de1fd0de1c436584f619153b70e00f761479b3236348d",
+   "status": "comparison baseline (legacy universes); never edited"
+  },
+  "EXTERNAL_LANE_MEMORY_EXPECTATION.json": {
+   "path": "results/L1_CANONICAL/EXTERNAL_LANE_MEMORY_EXPECTATION.json",
+   "bytes": 10205,
+   "sha256": "c86ba8a5e10ba67cd9d017d6bcc02558baeb83b82fbf74839b0e979862ec35f7"
+  },
+  "METAQA_ENCODING_DIAGNOSIS.json": {
+   "path": "results/L1_CANONICAL/METAQA_ENCODING_DIAGNOSIS.json",
+   "bytes": 7339,
+   "sha256": "1ed548fa2f48aeebff5cdb26dc68492745a0e90b9e4cc537ae4f51797f9d7455"
+  }
+ },
+ "RULINGS_PENDING": [
+  "EXTERNAL_LANE_MEMORY: the frozen recipe extrapolates to 382/799/1184 GB (linear in pins) or 1.3/5.4/9.1 TB (pins*k) for webqsp/hotpotqa/2wiki; the >=250 GB lane cannot run it -- procure more, pin the model first, or rule a new partitioning; never a silent algorithm swap",
+  "KB_CORPUS_ENCODING: canonical metaqa/webqsp encodings are NAME_ONLY (legacy: name + verbalised triples); legacy KB-corpus L1 cells are not reproducible on the canonical layout (metaqa paired BASE 0.6898 -> 0.5168); KEEP NAME_ONLY or re-encode NAME_PLUS_FACTS (supersedes the freeze channels)"
+ ],
+ "CONTRACT_SUMMARY": {
+  "router": "Dense[:100] + SPLADE[:100] -> partition RRF (K0 60) -> P50",
+  "partition": "H4_SPLIT_PRESERVE over STRUCT+KNN closed neighbourhoods, k = N // 100, Mt-KaHyPar DETERMINISTIC_QUALITY / KM1 / eps 0.03 / seed 0",
+  "selector": "SAFE = B6_S4_F6_Ms64_Mr32 (frozen)",
+  "population": "EVAL_SPLITS of CANONICAL_FREEZE (webqsp: train_holdout carve); EVAL_CAP 2000 seed-0 sample (metaqa hop-balanced); TEST never read",
+  "webqsp_lane": "WEBQSP_ROG_RESOLVED / BENCHMARK_CONDITIONED / query_independent NOT CLAIMED / MID completeness NOT REQUIRED FOR V1"
+ },
+ "DATASETS": {
+  "metaqa": {
+   "DATASET_json_RECORD_SHA256": "8ab4506933d0df8f9b8443848b9da80e49e698cf9cb40ef32523fdb4e31e2c87",
+   "n_nodes": 43234,
+   "n_queries": 407513,
+   "eval_split": "dev",
+   "k_frozen_rule": 432,
+   "stages": {
+    "adapter_validation": {
+     "PASS": true,
+     "n_checks": 48,
+     "keysets": {
+      "N": 43234,
+      "STRUCT": 124669,
+      "KNN": 97436,
+      "NERX": 5819,
+      "NER_RAW": 5949
+     }
+    },
+    "hypergraph": {
+     "file": {
+      "path": "data/l1_canonical/metaqa/hypergraph/H4_SK.npz",
+      "bytes": 1404637,
+      "sha256": "edd0cb51683df14973cbb4021518455b97c827ab3aad577d238ae07227f84743"
+     },
+     "content_digest": "bebdd65c305a1f565c3127a8ef91207db03a7e27af487062d8bbc548a2347fcc",
+     "hyperedges": 86796,
+     "pins": 531006,
+     "k": 432,
+     "cap": 100,
+     "record_matches": true
+    },
+    "partition": {
+     "STATUS": "OK",
+     "file": {
+      "path": "data/l1_canonical/metaqa/parts/H4_SK.npy",
+      "bytes": 346000,
+      "sha256": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062"
+     },
+     "ran_on": "local_wsl",
+     "threads": 8,
+     "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+     "km1": 41244100.0,
+     "imbalance": null,
+     "peak_rss_mb": 966.4,
+     "wall_seconds": 185.7,
+     "post_checks": {
+      "length_ok": true,
+      "min_block": 0,
+      "max_block": 431,
+      "blocks_used": 432,
+      "k": 432,
+      "every_block_used": true,
+      "size_min": 14,
+      "size_max": 104,
+      "size_mean": 100.079,
+      "ceil_N_over_k": 101,
+      "balance_max_over_mean": 1.0392,
+      "max_over_allowed_eps003": 0.9997,
+      "balance_within_eps": true
+     },
+     "hypergraph_content_digest": "bebdd65c305a1f565c3127a8ef91207db03a7e27af487062d8bbc548a2347fcc",
+     "record_matches": true
+    },
+    "replay_cache": {
+     "file": {
+      "path": "data/l1_canonical/metaqa/replay_cache.npz",
+      "bytes": 5390599,
+      "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b"
+     },
+     "n_dev_queries": 1998,
+     "sample_rule": "EVAL_SPLITS dev, hop-balanced (identical to _ta_resid.py / _ta_comb.py)",
+     "FROZEN_AGAINST": {
+      "dataset_hash": "8ab4506933d0df8f9b8443848b9da80e49e698cf9cb40ef32523fdb4e31e2c87",
+      "nodes_jsonl_sha256(node_order)": "a2441a83961a3426be2650a05513fd5b85862c4e98ea13755ede1bced951f3eb",
+      "query_hash": {
+       "query_ids_sha256": "c0d328208563d295cf3e702605f8d8a2bb930160f1be6978666d85465bc2bfbe",
+       "split_files_sha256": {
+        "train": "cfc4ec8314501c9ad743f450d741f91b58cd5af425bfb245d7530e7df4f29dbc",
+        "dev": "d60ece410a392cc08ee8782a99969054847f6a82b7f649dc73e805710567f63d",
+        "test": "4a73fe0267599787095c6d80af4b9da66bee62ff3300c987d182c9c0033a8949"
+       }
+      },
+      "partition_hash": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062",
+      "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+      "retrieval_cache_sha256": {
+       "dense": "1424fb93f34ad2b34d2eb4d7858f91a82d8425c43276131ae19104f2ab61e2bf",
+       "splade": "04c2e321f1151d5cf79e83abb8654eb38641893104fa8de0479734613ec0233c"
+      }
+     },
+     "row_query_ids_sha256": "6b73b067ed91805f30bbcc5eba388694b40808635986a46c09b8b6aa68349a8f",
+     "BASE_ALL_P50": 0.6376,
+     "BASE_ANY_P50": 0.9094,
+     "node_embedding_path": "fp32 exact",
+     "digest_ok": true
+    },
+    "l1_replay": {
+     "BASE_ALL_P50": 0.6376,
+     "BASE_ANY_P50": 0.9094,
+     "BASE_SCOPE_NODES": 5023.3,
+     "SAFE_ALL_P50": 0.6401,
+     "SAFE_ANY_P50": 0.9134,
+     "SAFE_SCOPE_NODES": 5023.6,
+     "BND_ALL_P50": 0.6376,
+     "CORR": {
+      "dALL": 0.0025,
+      "gained": 11,
+      "lost": 6,
+      "net": 5,
+      "mcnemar_p": 0.33231,
+      "sig": false,
+      "gold_admitted": 132,
+      "gold_evicted": 113,
+      "churn_per_query": 4.559,
+      "churn_max": 6,
+      "queries_with_zero_churn": 0
+     },
+     "BALANCE": {
+      "npart": 432,
+      "blocks_used": 432,
+      "size_min": 14,
+      "size_max": 104,
+      "size_median": 102.0,
+      "size_mean": 100.08,
+      "size_p90": 104.0,
+      "size_p99": 104.0,
+      "size_cv": 0.0617,
+      "max_over_mean": 1.0392,
+      "ELIGIBLE": true
+     },
+     "CUT": {
+      "STRUCT": {
+       "edges": 124669,
+       "cut": 102098,
+       "edge_cut_fraction": 0.819
+      },
+      "KNN": {
+       "edges": 97436,
+       "cut": 61467,
+       "edge_cut_fraction": 0.6308
+      },
+      "NERX": {
+       "edges": 5819,
+       "cut": 3160,
+       "edge_cut_fraction": 0.543
+      }
+     },
+     "npart": 432,
+     "utc": "2026-09-13T11:53:08Z",
+     "nq": 1998,
+     "by_hop": {
+      "hop1": {
+       "n": 666,
+       "BASE_ALL": 0.8979,
+       "SAFE_ALL": 0.8979
+      },
+      "hop2": {
+       "n": 666,
+       "BASE_ALL": 0.488,
+       "SAFE_ALL": 0.5015
+      },
+      "hop3": {
+       "n": 666,
+       "BASE_ALL": 0.527,
+       "SAFE_ALL": 0.521
+      }
+     },
+     "file": {
+      "path": "results/L1_CANONICAL/L1_REPLAY_metaqa.json",
+      "bytes": 23067,
+      "sha256": "7e5ef35b549791d9b6e790615a80ad7558f4626a07e0aaccca987f1834bc0972"
+     },
+     "contract_matches": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824"
+    }
+   },
+   "legacy_vs_canonical": {
+    "status": "COMPARED",
+    "overlap": 1370,
+    "BASE": {
+     "legacy_ALL_on_overlap": 0.6898,
+     "canonical_ALL_on_overlap": 0.5168,
+     "legacy_only_covered": 254,
+     "canonical_only_covered": 17,
+     "net_canonical_minus_legacy": -237,
+     "mcnemar_p": 0.0,
+     "sig": true
+    },
+    "SAFE": {
+     "legacy_ALL_on_overlap": 0.6934,
+     "canonical_ALL_on_overlap": 0.5204,
+     "legacy_only_covered": 252,
+     "canonical_only_covered": 15,
+     "net_canonical_minus_legacy": -237,
+     "mcnemar_p": 0.0,
+     "sig": true
+    },
+    "legacy_cell": "H4_SPLIT_PRESERVE__SK",
+    "file": {
+     "path": "results/L1_CANONICAL/LEGACY_VS_CANONICAL_metaqa.json",
+     "bytes": 1379,
+     "sha256": "4cb74bb9ea72bdd03e03eb070055f26eb969d22286323fbbee48abbbfdc2022b"
+    }
+   },
+   "CHAIN_STATUS": "COMPLETE",
+   "parity": {
+    "hypergraph_builder_vs_legacy": "IDENTICAL",
+    "replay_cache_builder_vs_legacy": "IDENTICAL"
+   }
+  },
+  "squad": {
+   "DATASET_json_RECORD_SHA256": "29976120cf085d2f776c9eea28da6363bc6c6d0be679cca550db7f714a151a23",
+   "n_nodes": 20233,
+   "n_queries": 142192,
+   "eval_split": "dev",
+   "k_frozen_rule": 202,
+   "stages": {
+    "adapter_validation": {
+     "PASS": true,
+     "n_checks": 44,
+     "keysets": {
+      "N": 20233,
+      "STRUCT": 744734,
+      "KNN": 30609,
+      "NERX": 135287,
+      "NER_RAW": 156130
+     }
+    },
+    "hypergraph": {
+     "file": {
+      "path": "data/l1_canonical/squad/hypergraph/H4_SK.npz",
+      "bytes": 2788239,
+      "sha256": "ed6b8336adb44fd868ef715f81401c5a06b7bbc19a91eafb9ada39c59c59b1a6"
+     },
+     "content_digest": "3a170cd70d0a77aa810b6107d59c5230f26b6642af21a9d6c31cd56545b8d1c5",
+     "hyperedges": 39146,
+     "pins": 1589832,
+     "k": 202,
+     "cap": 100,
+     "record_matches": true
+    },
+    "partition": {
+     "STATUS": "OK",
+     "file": {
+      "path": "data/l1_canonical/squad/parts/H4_SK.npy",
+      "bytes": 161992,
+      "sha256": "a45195b825fa2f2fed58a64b08aa5471a20ad946f2b47831db3689b1348f54ce"
+     },
+     "ran_on": "local_wsl",
+     "threads": 8,
+     "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+     "km1": 6525934.0,
+     "imbalance": null,
+     "peak_rss_mb": 539.5,
+     "wall_seconds": 81.0,
+     "post_checks": {
+      "length_ok": true,
+      "min_block": 0,
+      "max_block": 201,
+      "blocks_used": 202,
+      "k": 202,
+      "every_block_used": true,
+      "size_min": 49,
+      "size_max": 104,
+      "size_mean": 100.163,
+      "ceil_N_over_k": 101,
+      "balance_max_over_mean": 1.0383,
+      "max_over_allowed_eps003": 0.9997,
+      "balance_within_eps": true
+     },
+     "hypergraph_content_digest": "3a170cd70d0a77aa810b6107d59c5230f26b6642af21a9d6c31cd56545b8d1c5",
+     "record_matches": true
+    },
+    "replay_cache": {
+     "file": {
+      "path": "data/l1_canonical/squad/replay_cache.npz",
+      "bytes": 5320148,
+      "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6"
+     },
+     "n_dev_queries": 2000,
+     "sample_rule": "EVAL_SPLITS dev",
+     "FROZEN_AGAINST": {
+      "dataset_hash": "29976120cf085d2f776c9eea28da6363bc6c6d0be679cca550db7f714a151a23",
+      "nodes_jsonl_sha256(node_order)": "34ac47757e0080f0e2eb6c679009a6090ca97be39d576307ba7281db730c1a8b",
+      "query_hash": {
+       "query_ids_sha256": "219f76d7bedd7073d8232701a5d891e9ecaebf7583e04e108642a35431d182e9",
+       "split_files_sha256": {
+        "train": "5edd6aef0a41adee4b172d9f5ed79a239c9eea5118a1107ffc59153c11b37f07",
+        "dev": "4e55af21d22314f9e549aed4b01c4b9383526558c9f9bbdbd6173f3f480f1f98"
+       }
+      },
+      "partition_hash": "a45195b825fa2f2fed58a64b08aa5471a20ad946f2b47831db3689b1348f54ce",
+      "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+      "retrieval_cache_sha256": {
+       "dense": "cbba968d2d472909e885fce978c48738740eaed3c086e5a49f1cd065f9b21509",
+       "splade": "965061812110f4bf9c61575566e4dd0cc59778f4c65ae35f922e4837f5bea775"
+      }
+     },
+     "row_query_ids_sha256": "9b5fe782597fd485a94793c2cdb7d2fd6c7e890ea053f123b0e415b32fadff12",
+     "BASE_ALL_P50": 0.9885,
+     "BASE_ANY_P50": 0.9885,
+     "node_embedding_path": "fp32 exact",
+     "digest_ok": true
+    },
+    "l1_replay": {
+     "BASE_ALL_P50": 0.9885,
+     "BASE_ANY_P50": 0.9885,
+     "BASE_SCOPE_NODES": 5089.2,
+     "SAFE_ALL_P50": 0.993,
+     "SAFE_ANY_P50": 0.993,
+     "SAFE_SCOPE_NODES": 5085.8,
+     "BND_ALL_P50": 0.9885,
+     "CORR": {
+      "dALL": 0.0045,
+      "gained": 9,
+      "lost": 0,
+      "net": 9,
+      "mcnemar_p": 0.00391,
+      "sig": true,
+      "gold_admitted": 9,
+      "gold_evicted": 0,
+      "churn_per_query": 3.725,
+      "churn_max": 6,
+      "queries_with_zero_churn": 229
+     },
+     "BALANCE": {
+      "npart": 202,
+      "blocks_used": 202,
+      "size_min": 49,
+      "size_max": 104,
+      "size_median": 102.0,
+      "size_mean": 100.16,
+      "size_p90": 104.0,
+      "size_p99": 104.0,
+      "size_cv": 0.0648,
+      "max_over_mean": 1.0383,
+      "ELIGIBLE": true
+     },
+     "CUT": {
+      "STRUCT": {
+       "edges": 744734,
+       "cut": 671052,
+       "edge_cut_fraction": 0.9011
+      },
+      "KNN": {
+       "edges": 30609,
+       "cut": 5948,
+       "edge_cut_fraction": 0.1943
+      },
+      "NERX": {
+       "edges": 135287,
+       "cut": 107962,
+       "edge_cut_fraction": 0.798
+      }
+     },
+     "npart": 202,
+     "utc": "2026-09-13T12:41:27Z",
+     "nq": 2000,
+     "by_hop": null,
+     "file": {
+      "path": "results/L1_CANONICAL/L1_REPLAY_squad.json",
+      "bytes": 22709,
+      "sha256": "c39aa79836c0296fafa957c01f5004f81968df3e7f5baee873687d1061e09d58"
+     },
+     "contract_matches": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824"
+    }
+   },
+   "legacy_vs_canonical": {
+    "status": "NO_OVERLAP",
+    "overlap": null,
+    "BASE": null,
+    "SAFE": null,
+    "legacy_cell": null,
+    "file": {
+     "path": "results/L1_CANONICAL/LEGACY_VS_CANONICAL_squad.json",
+     "bytes": 795,
+     "sha256": "c4ae3cd38bac96cc881b67b11cfe9a1c0f351d23d5e772d797896a8127d20633"
+    }
+   },
+   "CHAIN_STATUS": "COMPLETE",
+   "parity": {
+    "hypergraph_builder_vs_legacy": "IDENTICAL",
+    "replay_cache_builder_vs_legacy": "IDENTICAL"
+   }
+  },
+  "musique": {
+   "DATASET_json_RECORD_SHA256": "67fa637183fb02c4762fc80f6f4d2e21e14e2c665977e89adfcd6d32ed6d683f",
+   "n_nodes": 117534,
+   "n_queries": 24814,
+   "eval_split": "dev",
+   "k_frozen_rule": 1175,
+   "stages": {
+    "adapter_validation": {
+     "PASS": true,
+     "n_checks": 47,
+     "keysets": {
+      "N": 117534,
+      "STRUCT": 2651280,
+      "KNN": 230823,
+      "NERX": 733541,
+      "NER_RAW": 800278
+     }
+    },
+    "hypergraph": {
+     "file": {
+      "path": "data/l1_canonical/musique/hypergraph/H4_SK.npz",
+      "bytes": 14668169,
+      "sha256": "2b1edc6dfcb045b7799459c4582bb2fbbe6d591825a48db45366597a97c1cd72"
+     },
+     "content_digest": "b19fd504bad7997cd254876ed7294128ab1724a95ccc52a18aed3b2a3e5d27bc",
+     "hyperedges": 250732,
+     "pins": 6014938,
+     "k": 1175,
+     "cap": 100,
+     "record_matches": true
+    },
+    "partition": {
+     "STATUS": "FAILED_MEMORY_CAP",
+     "guard": {
+      "rss_cap_gb": 3.5904035839999997,
+      "host_available_gb_at_start": 4.590403584,
+      "margin_gb": 1.0,
+      "peak_rss_kb": 3597980,
+      "killed": 1,
+      "rc": 137,
+      "wall_seconds": 613.6,
+      "returncode": 0
+     },
+     "note": "the frozen partitioner needs more than 3.59 GB RSS on this host for this corpus; this corpus moves to the external >=250 GB lane or to a new explicit partitioning ruling -- the algorithm is not swapped"
+    },
+    "replay_cache": null,
+    "l1_replay": null
+   },
+   "legacy_vs_canonical": null,
+   "CHAIN_STATUS": "BLOCKED_AT_PARTITION",
+   "parity": {
+    "hypergraph_builder_vs_legacy": "IDENTICAL",
+    "replay_cache_builder_vs_legacy": "IDENTICAL"
+   }
+  },
+  "hotpotqa": {
+   "DATASET_json_RECORD_SHA256": "2f778679a52f75c045615f32095c27d8217dfce0d7600319180d985e45793c6f",
+   "n_nodes": 5233329,
+   "n_queries": 105257,
+   "eval_split": "validation",
+   "k_frozen_rule": 52333,
+   "stages": {
+    "adapter_validation": {
+     "PASS": true,
+     "n_checks": 46,
+     "keysets": {
+      "N": 5233329,
+      "STRUCT": 15095287,
+      "KNN": 10646884,
+      "NERX": 18326674,
+      "NER_RAW": 20369074
+     }
+    },
+    "hypergraph": null,
+    "partition": null,
+    "replay_cache": null,
+    "l1_replay": null
+   },
+   "legacy_vs_canonical": null,
+   "CHAIN_STATUS": "BLOCKED_AT_HYPERGRAPH",
+   "parity": {
+    "hypergraph_builder_vs_legacy": "IDENTICAL",
+    "replay_cache_builder_vs_legacy": null
+   }
+  },
+  "2wiki": {
+   "DATASET_json_RECORD_SHA256": "ddb083a8f8cc0a1e5626d17ebd834c25c7b571d72c2bea58223276da8ff26a8a",
+   "n_nodes": 5989847,
+   "n_queries": 192606,
+   "eval_split": "dev",
+   "k_frozen_rule": 59898,
+   "stages": {
+    "adapter_validation": {
+     "PASS": true,
+     "n_checks": 45,
+     "keysets": {
+      "N": 5989847,
+      "STRUCT": 28208857,
+      "KNN": 11698178,
+      "NERX": 30562985,
+      "NER_RAW": 34067241
+     }
+    },
+    "hypergraph": null,
+    "partition": null,
+    "replay_cache": null,
+    "l1_replay": null
+   },
+   "legacy_vs_canonical": null,
+   "CHAIN_STATUS": "BLOCKED_AT_HYPERGRAPH",
+   "parity": {
+    "hypergraph_builder_vs_legacy": "IDENTICAL",
+    "replay_cache_builder_vs_legacy": "IDENTICAL"
+   }
+  },
+  "webqsp": {
+   "DATASET_json_RECORD_SHA256": "56c8ed2352c5f0ecdebf1a103dc0aa9913ec5067f10664f70a4b1b26412b525d",
+   "n_nodes": 2592894,
+   "n_queries": 4737,
+   "eval_split": "train_holdout",
+   "k_frozen_rule": 25928,
+   "stages": {
+    "adapter_validation": {
+     "PASS": true,
+     "n_checks": 43,
+     "keysets": {
+      "N": 2592894,
+      "STRUCT": 5882501,
+      "KNN": 6313874,
+      "NERX": 2473809,
+      "NER_RAW": 2994802
+     }
+    },
+    "hypergraph": null,
+    "partition": null,
+    "replay_cache": null,
+    "l1_replay": null
+   },
+   "legacy_vs_canonical": null,
+   "CHAIN_STATUS": "BLOCKED_AT_HYPERGRAPH",
+   "parity": {
+    "hypergraph_builder_vs_legacy": "IDENTICAL",
+    "replay_cache_builder_vs_legacy": null
+   }
+  }
+ },
+ "EXTERNAL_LANE": {
+  "kits": {
+   "2wiki": {
+    "kit": {
+     "path": "data/l1_canonical/_external/l1_partition_kit_2wiki.tar.gz",
+     "bytes": 372912818,
+     "sha256": "dd2e47621c026fc9c9237569e3c64e60ec52467824b7c36b3dc4f9ed5a6dc3fe"
+    },
+    "summary": {
+     "dataset": "2wiki",
+     "N": 5989847,
+     "k": 59898,
+     "STRUCT": 28208857,
+     "KNN": 11698178,
+     "expected_pins_upper_bound": 91793764,
+     "keys_npz_sha256": "ef9e12706a196d1d4d6580fdcd0849e8d3530e751d49332e20b0d206f19c9677",
+     "memory_expectation": {
+      "pins_estimate": 91793764,
+      "k": 59898,
+      "linear_in_pins_GB": 1184,
+      "pins_times_k_GB": 9076,
+      "legacy_points": {
+       "hotpotqa_clean__H4_SPLIT_PRESERVE__SKN": {
+        "pins": 19345663,
+        "hyperedges": 1473739,
+        "k": 5074,
+        "peak_rss_gb": 262.8
+       },
+       "webqsp__H4_SPLIT_PRESERVE__SKN": {
+        "pins": 10900573,
+        "hyperedges": 1846019,
+        "k": 7814,
+        "peak_rss_gb": 140.6
+       }
+      },
+      "threads_measured": 16,
+      "note": "both models put every canonical big corpus above the 250 GB lane; memory may also scale with threads -- start at 16"
+     },
+     "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+     "DATASET_json_RECORD_SHA256": "ddb083a8f8cc0a1e5626d17ebd834c25c7b571d72c2bea58223276da8ff26a8a",
+     "packed_utc": "2026-09-13T12:08:19Z"
+    },
+    "result_imported": false
+   },
+   "hotpotqa": {
+    "kit": {
+     "path": "data/l1_canonical/_external/l1_partition_kit_hotpotqa.tar.gz",
+     "bytes": 230509814,
+     "sha256": "45369ea965bfeedc73dd3bbf6f58fc2cda5eb08beab3e6339209465dcccf5783"
+    },
+    "summary": {
+     "dataset": "hotpotqa",
+     "N": 5233329,
+     "k": 52333,
+     "STRUCT": 15095287,
+     "KNN": 10646884,
+     "expected_pins_upper_bound": 61951000,
+     "keys_npz_sha256": "dea82ccfde91516dea77986a519efd9931d014b3806a4ce07b46829cbd9d5998",
+     "memory_expectation": {
+      "pins_estimate": 61951000,
+      "k": 52333,
+      "linear_in_pins_GB": 799,
+      "pins_times_k_GB": 5352,
+      "legacy_points": {
+       "hotpotqa_clean__H4_SPLIT_PRESERVE__SKN": {
+        "pins": 19345663,
+        "hyperedges": 1473739,
+        "k": 5074,
+        "peak_rss_gb": 262.8
+       },
+       "webqsp__H4_SPLIT_PRESERVE__SKN": {
+        "pins": 10900573,
+        "hyperedges": 1846019,
+        "k": 7814,
+        "peak_rss_gb": 140.6
+       }
+      },
+      "threads_measured": 16,
+      "note": "both models put every canonical big corpus above the 250 GB lane; memory may also scale with threads -- start at 16"
+     },
+     "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+     "DATASET_json_RECORD_SHA256": "2f778679a52f75c045615f32095c27d8217dfce0d7600319180d985e45793c6f",
+     "packed_utc": "2026-09-13T11:59:06Z"
+    },
+    "result_imported": false
+   },
+   "musique": {
+    "kit": {
+     "path": "data/l1_canonical/_external/l1_partition_kit_musique.tar.gz",
+     "bytes": 11933376,
+     "sha256": "0c8719c70b840ff8a77d04124fa9b4052c207416a822dab1b82e781e61a2999f"
+    },
+    "summary": {
+     "dataset": "musique",
+     "N": 117534,
+     "k": 1175,
+     "STRUCT": 2651280,
+     "KNN": 230823,
+     "expected_pins_upper_bound": 5999274,
+     "keys_npz_sha256": "c44c3cd4326555b46fbb9aa990c4eaaf14e33b18721848befa421f3b024f55b2",
+     "memory_expectation": {
+      "pins_estimate": 5999274,
+      "k": 1175,
+      "linear_in_pins_GB": 77,
+      "pins_times_k_GB": 12,
+      "legacy_points": {
+       "hotpotqa_clean__H4_SPLIT_PRESERVE__SKN": {
+        "pins": 19345663,
+        "hyperedges": 1473739,
+        "k": 5074,
+        "peak_rss_gb": 262.8
+       },
+       "webqsp__H4_SPLIT_PRESERVE__SKN": {
+        "pins": 10900573,
+        "hyperedges": 1846019,
+        "k": 7814,
+        "peak_rss_gb": 140.6
+       }
+      },
+      "threads_measured": 16,
+      "note": "both models put every canonical big corpus above the 250 GB lane; memory may also scale with threads -- start at 16"
+     },
+     "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+     "DATASET_json_RECORD_SHA256": "67fa637183fb02c4762fc80f6f4d2e21e14e2c665977e89adfcd6d32ed6d683f",
+     "packed_utc": "2026-09-13T12:58:09Z"
+    },
+    "result_imported": false
+   },
+   "webqsp": {
+    "kit": {
+     "path": "data/l1_canonical/_external/l1_partition_kit_webqsp.tar.gz",
+     "bytes": 54848182,
+     "sha256": "021cfbd2d407443075d03473731c85fe0ed429b84d1b144d3be598684f63bef4"
+    },
+    "summary": {
+     "dataset": "webqsp",
+     "N": 2592894,
+     "k": 25928,
+     "STRUCT": 5882501,
+     "KNN": 6313874,
+     "expected_pins_upper_bound": 29578538,
+     "keys_npz_sha256": "081c3fa4b27f56de9a91a3b5ece10f77182c6a072caf35aa3691adcb41043c5e",
+     "memory_expectation": {
+      "pins_estimate": 29578538,
+      "k": 25928,
+      "linear_in_pins_GB": 382,
+      "pins_times_k_GB": 1266,
+      "legacy_points": {
+       "hotpotqa_clean__H4_SPLIT_PRESERVE__SKN": {
+        "pins": 19345663,
+        "hyperedges": 1473739,
+        "k": 5074,
+        "peak_rss_gb": 262.8
+       },
+       "webqsp__H4_SPLIT_PRESERVE__SKN": {
+        "pins": 10900573,
+        "hyperedges": 1846019,
+        "k": 7814,
+        "peak_rss_gb": 140.6
+       }
+      },
+      "threads_measured": 16,
+      "note": "both models put every canonical big corpus above the 250 GB lane; memory may also scale with threads -- start at 16"
+     },
+     "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+     "DATASET_json_RECORD_SHA256": "56c8ed2352c5f0ecdebf1a103dc0aa9913ec5067f10664f70a4b1b26412b525d",
+     "packed_utc": "2026-09-13T11:43:37Z"
+    },
+    "result_imported": false
+   }
+  },
+  "note": "corpora the local host cannot partition under the frozen recipe (RSS guard, HARD_CAP 6 GB): the kit ships the contract code + byte-identical keys.npz; external_kit.py import verifies digests, counts and k before the partition enters the chain. musique failed locally at the 3.59 GB cap (FAILED_MEMORY_CAP); a retry at the 6 GB cap is queued -- if that fails too, musique goes through the same lane"
+ },
+ "CHAIN_STATUS": {
+  "metaqa": "COMPLETE",
+  "squad": "COMPLETE",
+  "musique": "BLOCKED_AT_PARTITION",
+  "hotpotqa": "BLOCKED_AT_HYPERGRAPH",
+  "2wiki": "BLOCKED_AT_HYPERGRAPH",
+  "webqsp": "BLOCKED_AT_HYPERGRAPH"
+ },
+ "COMPLETE_ON": [
+  "metaqa",
+  "squad"
+ ],
+ "SUPERSEDES": {
+  "file": "results/L1_CANONICAL/_history/L1_CANONICAL_MANIFEST_20260913T120303Z_69872d29.json",
+  "RECORD_SHA256": "69872d298488cd8c6e5207ad51ac5b50a32096feb27aaeb81210627449ebc71a",
+  "CHAIN_STATUS": {
+   "metaqa": "COMPLETE",
+   "squad": "BLOCKED_AT_PARTITION",
+   "musique": "BLOCKED_AT_PARTITION",
+   "hotpotqa": "BLOCKED_AT_HYPERGRAPH",
+   "2wiki": "BLOCKED_AT_HYPERGRAPH",
+   "webqsp": "BLOCKED_AT_HYPERGRAPH"
+  }
+ },
+ "RECORD_SHA256": "fad0b327bdc0bf7fa4aa23ebe84b91f0d121ad3b753fad7dd896db7f0f54b1f6",
+ "RECORD_SHA256_LF": "b467d6d9c973004188adf330fc3a62a83a1e0a1101f976a2dd131356a9c9de2c"
+}

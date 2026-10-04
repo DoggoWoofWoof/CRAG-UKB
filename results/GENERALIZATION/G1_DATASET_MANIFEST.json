@@ -1,0 +1,114 @@
+{
+ "phase": "G1 cross-dataset generalization — dataset & expert-availability manifest (AUDIT ONLY; no builds/training performed)",
+ "date": "2026-08-27",
+ "locked_text_pilot_architecture": {
+  "L1_master_topology": "C",
+  "L1": {"retrieval": "Dense + SPLADE partition-RRF", "K0": 60, "K": 100, "P": 50},
+  "L2_frozen_experts": ["Dense", "SPLADE", "Offset", "Mixture", "Masked-Relation"],
+  "query_fusion": "C7b soft-archetype distillation",
+  "candidate_ranking": "C8c XGBRanker residual reranker (top-50 pool)",
+  "learned_verifier": "C11a query-candidate interaction MLP (zero-init residual on C8c, top-20 window)",
+  "no_dataset_id": true, "no_llm": true, "no_cross_encoder": true, "no_transformer": true,
+  "no_attention": true, "no_gnn": true,
+  "backbone_training_data": "2wiki_clean + musique_clean TRAIN only; dataset-agnostic (no dataset ID); directly applicable to any assembled target substrate for ZERO_SHOT",
+  "DO_NOT_MODIFY_DURING_G1": true
+ },
+ "corpus_sizes": {
+  "2wiki_clean": {"nodes": 65865, "queries": 15000, "family": "TEXT", "role": "DEV/source"},
+  "musique_clean": {"nodes": 13672, "queries": 19938, "family": "TEXT", "role": "DEV/source"},
+  "squad_clean": {"nodes": 19029, "queries": 130319, "family": "TEXT", "role": "G1 target 1"},
+  "hotpotqa_clean": {"nodes": 507494, "queries": 97852, "family": "TEXT", "role": "G1 target 2"},
+  "webqsp": {"nodes": 781485, "queries": 1578, "family": "KB", "role": "G1 target 3"},
+  "metaqa": {"nodes": 40151, "queries": 407513, "family": "KB", "role": "G1 target 4 (hop breakdown 1/2/3)"}
+ },
+ "l2_corpus_c11a_substrate_present": {
+  "note": "The exact C7b/C8c/C11a input format (data/l2_corpus/<ds>/<split>/ with the 5 aligned expert score arrays + expert_meta.npz) exists ONLY for the DEV pair. Targets have raw ingredients (cached reps, top200, graph, NER) but NO assembled substrate yet.",
+  "2wiki_clean": "AVAILABLE (train/val/test)",
+  "musique_clean": "AVAILABLE (train/val/test)",
+  "squad_clean": "ABSENT (must assemble)",
+  "hotpotqa_clean": "ABSENT (must assemble)",
+  "webqsp": "ABSENT (must assemble)",
+  "metaqa": "ABSENT (must assemble)"
+ },
+ "splits": {
+  "_legend": "counts from ukb_storage/<ds>/gte_qwen/query_ids_all.json split_indices. TEST is LOCKED for every dataset incl. the DEV pair and is never inspected in G1.",
+  "squad_clean": {"train": 91223, "val": 26063, "test": 13033, "val_cache_materialized": false, "val_source": "queries_all.npy[val_idx] (legitimate split; no synthetic dev needed)"},
+  "hotpotqa_clean": {"train": 68496, "val": 19570, "test": 9786, "val_cache_materialized": true},
+  "webqsp": {"train": 1104, "val": 315, "test": 159, "val_cache_materialized": true, "note": "tiny; build_l2_corpus currently special-cases webqsp to split=all — must be switched to the train/val/test indices for G1"},
+  "metaqa": {"train": 329282, "val": 39138, "test": 39093, "val_cache_materialized": false, "val_source": "queries_all.npy[val_idx]", "hops": "per-query hop label present (hops in query_ids_all + canonical metaqa_{1,2,3}hop dirs) — enables 1/2/3-hop breakdown"}
+ },
+ "expert_availability_manifest": {
+  "_legend": {
+   "AVAILABLE": "assembled expert arrays already on disk (l2_corpus)",
+   "REBUILDABLE_WITH_FROZEN_METHOD": "a frozen, dataset-agnostic method + all required inputs exist; only a build step is needed (no new learning on the target)",
+   "REBUILDABLE_PENDING_UNIVERSAL_HEAD": "frozen TRAINER exists and a universal checkpoint could be produced by the SAME frozen method used for the universal offset head, but NO universal checkpoint is on disk yet; a per-dataset head would be target-specific fitting (forbidden for a frozen upstream expert) — DECISION REQUIRED",
+   "NOT_MEANINGFUL": "expert semantics invalid for this dataset",
+   "MEANINGFUL_DIFFERENT_SUBSTRATE": "expert is meaningful but its underlying substrate differs from text (flagged, not forced)"
+  },
+  "Dense": {
+   "method": "cosine over cached gte_qwen nodes vs query; build_l2_corpus.py; needs dense_top200_all.npy + nodes.npy + alignment gate",
+   "2wiki_clean": "AVAILABLE", "musique_clean": "AVAILABLE",
+   "squad_clean": "REBUILDABLE_WITH_FROZEN_METHOD", "hotpotqa_clean": "REBUILDABLE_WITH_FROZEN_METHOD",
+   "webqsp": "REBUILDABLE_WITH_FROZEN_METHOD", "metaqa": "REBUILDABLE_WITH_FROZEN_METHOD",
+   "cost": "local, minutes"
+  },
+  "SPLADE": {
+   "method": "cached splade_top200_all.npy + l2_splade_cache.py splade_scope_score/rank",
+   "2wiki_clean": "AVAILABLE", "musique_clean": "AVAILABLE",
+   "squad_clean": "REBUILDABLE_WITH_FROZEN_METHOD", "hotpotqa_clean": "REBUILDABLE_WITH_FROZEN_METHOD",
+   "webqsp": "REBUILDABLE_WITH_FROZEN_METHOD", "metaqa": "REBUILDABLE_WITH_FROZEN_METHOD",
+   "cost": "local, minutes"
+  },
+  "Offset": {
+   "method": "UNIVERSAL offset head (src/experiments/l1_universal_head; OffsetHead in the shared frozen space) — ONE head trained on the broad-6 mix, applied to each corpus WITHOUT refit (already evaluated on all 6 in results/L2/e2e_full6_universal_gte_qwen.json)",
+   "2wiki_clean": "AVAILABLE (dev substrate used the PER-DATASET offset head _heads/2wiki_clean_offset_cp50.pt)",
+   "musique_clean": "AVAILABLE (per-dataset head)",
+   "squad_clean": "REBUILDABLE_WITH_FROZEN_METHOD", "hotpotqa_clean": "REBUILDABLE_WITH_FROZEN_METHOD",
+   "webqsp": "REBUILDABLE_WITH_FROZEN_METHOD", "metaqa": "REBUILDABLE_WITH_FROZEN_METHOD",
+   "CAVEAT": "The C11a DEV substrate used PER-DATASET offset heads; targets must use the UNIVERSAL offset head (per-dataset heads absent, and training one would be target-specific fitting). This is a legitimate frozen method but introduces an offset-feature DISTRIBUTION SHIFT that the ZERO-SHOT FEATURE COMPATIBILITY step must measure and report."
+  },
+  "Mixture": {
+   "method": "MixtureHead (mlpT, K directions) — same l1_universal_head trainer as offset (kind='mix')",
+   "2wiki_clean": "AVAILABLE (per-dataset _heads/2wiki_clean_mixture_cp50.pt)",
+   "musique_clean": "AVAILABLE (per-dataset head)",
+   "squad_clean": "REBUILDABLE_PENDING_UNIVERSAL_HEAD", "hotpotqa_clean": "REBUILDABLE_PENDING_UNIVERSAL_HEAD",
+   "webqsp": "REBUILDABLE_PENDING_UNIVERSAL_HEAD", "metaqa": "REBUILDABLE_PENDING_UNIVERSAL_HEAD",
+   "GAP": "Only PER-DATASET mixture heads (2wiki/musique) exist. No universal mixture checkpoint on disk. A universal mixture head IS producible by the identical frozen method that made the universal offset head (train once on the broad-6 mix, apply without refit) — mirror of Offset. That is the consistent, non-inventing path but requires ONE training run and is a substrate-defining choice. DECISION REQUIRED before assembling any target substrate (this feature is part of the C11a input interface and cannot be dropped without changing the interface)."
+  },
+  "Masked-Relation": {
+   "method": "mask = title-mention topology from graph.pt / ner_edges_w_df25.pkl (encoder-independent, present all targets); relation_qwen_score = cos(gte-Qwen2(query), gte-Qwen2(connecting-sentence)) — requires a gte-Qwen2 sentence ENCODE (Modal GPU) of the connecting sentences",
+   "2wiki_clean": "AVAILABLE", "musique_clean": "AVAILABLE",
+   "squad_clean": "REBUILDABLE_WITH_FROZEN_METHOD (graph+NER present; needs Qwen sentence encode; relsig_feats_squad_clean.pt exists but may be capped/stale — validate before reuse)",
+   "hotpotqa_clean": "REBUILDABLE_WITH_FROZEN_METHOD (same; large corpus 507k)",
+   "webqsp": "MEANINGFUL_DIFFERENT_SUBSTRATE (KB: relation is native typed graph edges, not NL connecting sentences — mask trivially rich, but the Qwen-sentence score semantics differ from text; report as substrate difference, do not force text semantics)",
+   "metaqa": "MEANINGFUL_DIFFERENT_SUBSTRATE (KB movie graph; same caveat)",
+   "cost": "Modal gte-Qwen2 encode of connecting sentences (heavy for hotpot/metaqa); relsig_feats_*.pt may shortcut but need validation"
+  }
+ },
+ "kb_path_graph_signal": {
+  "note": "Per spec: report availability but DO NOT add Path/graph to C11a in G1. Reserved. If KB transfer fails specifically because the expert substrate lacks relation/path structure, that is the reported failure mechanism (MISSING_RELATIONAL_STRUCTURE) — not patched during G1.",
+  "webqsp": {"graph.pt": "PRESENT", "ner_edges_w_df25.pkl": "PRESENT", "path_signal": "AVAILABLE from frozen infra (graph traversal / relsig)"},
+  "metaqa": {"graph.pt": "PRESENT", "ner_edges_w_df25.pkl": "PRESENT", "path_signal": "AVAILABLE from frozen infra"}
+ },
+ "backbone_status": {
+  "C7b": "frozen soft-archetype fusion, fit on 2wiki+musique; dataset-agnostic; applied unchanged",
+  "C8c": "frozen XGBRanker reranker (C8c_reranker_fulltrain.joblib + refit-on-full-train path); dataset-agnostic",
+  "C11a": "frozen interaction MLP _ctrl/C11_models.joblib (VAL-validated final text policy); ZERO_SHOT applies these exact weights + ORIGINAL train E-standardization (emean/estd) + original top-20 policy; REFIT_C11a retrains SAME arch/hparams on target TRAIN only, selecting on target VAL",
+  "E_standardization_rule": "ZERO_SHOT must standardize the 18 compact evidence features with the ORIGINAL 2wiki+musique TRAIN emean/estd (saved in the model joblib) — never target VAL/TEST statistics"
+ },
+ "build_plan_order": [
+  "0. DECISION: universal mixture head (close the Mixture gap the same frozen way as the universal offset head) OR alternative — required before any target substrate assembly",
+  "1. TEXT targets (squad, hotpot): build_l2_corpus (Dense+SPLADE scope) -> splade_scope cache -> universal offset+mixture scores -> relation mask + Qwen sentence encode -> expert_meta.npz",
+  "2. ZERO-SHOT FEATURE COMPATIBILITY: compare target vs 2wiki/musique distributions (query/candidate emb norms, expert ranks, RRF contribs, C8c scores, C11 evidence) BEFORE applying zero-shot C11a; original-train standardization only",
+  "3. ZERO_SHOT_C11A + REFIT_C11A per target with baselines (frozen dataset baseline, C8c, zero-shot C11a, refit C11a)",
+  "4. KB targets (webqsp, metaqa): audit representation mismatch first (candidate = entity/relation/path/node vs passage); same interface; MetaQA hop breakdown + conditional-on-coverage ceiling",
+  "5. G1_MATRIX + interpretation categories + gates"
+ ],
+ "gating_decisions_surfaced": [
+  "MIXTURE_UNIVERSAL_HEAD: build a single universal mixture head (mirror of universal offset) to keep the C11a 5-expert interface intact on targets? (recommended; alternative = interface change, disallowed).",
+  "RELATION_ENCODE: reuse relsig_feats_*.pt (fast, may be capped/stale) vs fresh gte-Qwen2 connecting-sentence encode on Modal (canonical, heavy).",
+  "KB_RELATION_SEMANTICS: how to define the Masked-Relation feature on KB where edges are typed (not NL sentences) — keep text-Qwen semantics (measures transfer honestly) vs native-edge score (changes the expert)."
+ ],
+ "no_test_leakage": "2wiki/musique TEST NOT inspected. Targets use TRAIN/VAL (legitimate split_indices) only. All TEST splits remain locked.",
+ "AUDIT_ONLY": "No substrate was built, no head trained, no C11a run in this step. This manifest is the gating deliverable before any build."
+}

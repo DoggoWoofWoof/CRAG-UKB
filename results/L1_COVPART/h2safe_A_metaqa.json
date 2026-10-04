@@ -1,0 +1,302 @@
+{
+ "cache": "metaqa",
+ "partition": "MTKAHYPAR",
+ "n_DEV_A": 1002,
+ "status": "POSTHOC_MECHANISM_TEST",
+ "beam_module_sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+ "selector": {
+  "cfg": {
+   "B": 6,
+   "M_struct": 64,
+   "M_ret": 32,
+   "agg": "S4",
+   "fusion": "F6",
+   "T": 1,
+   "tag": "F6"
+  },
+  "code": "_l1ps_router.build_cache + _l1kb_core.contexts / f6_select (unchanged)"
+ },
+ "SAFE_record": "results/L1_CANONICAL/L1_REPLAY_metaqa.json",
+ "identical_beam_check": {
+  "MICRO_L3_H2_rebuilt": 0.6886,
+  "gained": 51,
+  "lost": 2
+ },
+ "H2_source": "own blocks of the beam's visited nodes in first-visit order (hop-1 beam then hop-2 beam, seeds excluded); spos'[b] = min(static structural rank, H2 block rank); no fourth channel",
+ "H2_blocks_per_query_mean": 82.7,
+ "static_structural_blocks_per_query_mean": 49.3,
+ "retrieval_challenger_blocks_per_query_mean": 24.2,
+ "arms": {
+  "L1": {
+   "arm": "L1",
+   "BASE_ALL": 0.6397,
+   "ANY": 0.9132,
+   "churn_per_query_mean": 0.0,
+   "queries_with_zero_churn": 1002,
+   "gold_blocks_admitted_vs_base50": 0,
+   "gold_blocks_evicted_vs_base50": 0,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "BASE_ALL": 0.9172
+    },
+    "hop2": {
+     "n": 344,
+     "BASE_ALL": 0.4855
+    },
+    "hop3": {
+     "n": 332,
+     "BASE_ALL": 0.5271
+    }
+   }
+  },
+  "SAFE": {
+   "arm": "SAFE",
+   "BASE_ALL": 0.6407,
+   "ANY": 0.9152,
+   "churn_per_query_mean": 4.59,
+   "queries_with_zero_churn": 0,
+   "gold_blocks_admitted_vs_base50": 63,
+   "gold_blocks_evicted_vs_base50": 66,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "BASE_ALL": 0.9172,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "BASE_ALL": 0.4942,
+     "vs_L1": {
+      "gained": 3,
+      "lost": 0,
+      "p": 0.25
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "BASE_ALL": 0.5211,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 2,
+      "p": 0.5
+     }
+    }
+   },
+   "BASE_ALL_vs_L1": {
+    "gained": 3,
+    "lost": 2,
+    "p": 1.0
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 3,
+    "lost": 2,
+    "p": 1.0,
+    "pooled_L1": 0.5059,
+    "pooled": 0.5074
+   }
+  },
+  "SAFE_H2": {
+   "arm": "SAFE_H2",
+   "BASE_ALL": 0.6427,
+   "ANY": 0.9251,
+   "churn_per_query_mean": 4.57,
+   "queries_with_zero_churn": 0,
+   "gold_blocks_admitted_vs_base50": 79,
+   "gold_blocks_evicted_vs_base50": 68,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "BASE_ALL": 0.9202,
+     "vs_L1": {
+      "gained": 1,
+      "lost": 0,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 1,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "BASE_ALL": 0.4971,
+     "vs_L1": {
+      "gained": 4,
+      "lost": 0,
+      "p": 0.125
+     },
+     "vs_SAFE": {
+      "gained": 2,
+      "lost": 1,
+      "p": 1.0
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "BASE_ALL": 0.5211,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 2,
+      "p": 0.5
+     },
+     "vs_SAFE": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    }
+   },
+   "H2_credited_admissions_per_query_mean": 1.85,
+   "queries_with_any_H2_credited_admission": 852,
+   "H2_only_admissions_per_query_mean": 0.44,
+   "BASE_ALL_vs_L1": {
+    "gained": 5,
+    "lost": 2,
+    "p": 0.453125
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 4,
+    "lost": 2,
+    "p": 0.6875,
+    "pooled_L1": 0.5059,
+    "pooled": 0.5089
+   },
+   "BASE_ALL_vs_SAFE": {
+    "gained": 3,
+    "lost": 1,
+    "p": 0.625
+   },
+   "significant_loss_vs_SAFE": false,
+   "hop2_hop3_pooled_vs_SAFE": {
+    "n": 676,
+    "gained": 2,
+    "lost": 1,
+    "p": 1.0,
+    "pooled_SAFE": 0.5074,
+    "pooled": 0.5089
+   },
+   "recovery_of_section14_gain": {
+    "overall": {
+     "H2_RRF_minus_L1_pts": 4.9,
+     "SAFE_H2_minus_SAFE_pts": 0.2,
+     "fraction": 0.041
+    },
+    "hop1": {
+     "H2_RRF_minus_L1_pts": 2.8,
+     "SAFE_H2_minus_SAFE_pts": 0.3,
+     "fraction": 0.111
+    },
+    "hop2": {
+     "H2_RRF_minus_L1_pts": 10.2,
+     "SAFE_H2_minus_SAFE_pts": 0.3,
+     "fraction": 0.029
+    },
+    "hop3": {
+     "H2_RRF_minus_L1_pts": 1.5,
+     "SAFE_H2_minus_SAFE_pts": 0.0,
+     "fraction": 0.0
+    },
+    "hop2_hop3_pooled": {
+     "H2_RRF_minus_L1_pts": 5.9,
+     "SAFE_H2_minus_SAFE_pts": 0.1,
+     "fraction": 0.025
+    }
+   }
+  }
+ },
+ "attribution_flips": {
+  "newly_covered_vs_SAFE": {
+   "n": 3,
+   "gold_blocks_entering": {
+    "H2_credited": 3,
+    "static_structural": 0,
+    "retrieval": 0,
+    "boundary_reorder": 0
+   }
+  },
+  "newly_lost_vs_SAFE": {
+   "n": 1,
+   "gold_blocks_evicted": 1,
+   "displacing_blocks": {
+    "H2_credited": 1,
+    "static_or_retrieval": 0
+   }
+  }
+ },
+ "candidate_generator_recall": {
+  "hop1": {
+   "n_queries_with_gold_outside_P50": 27,
+   "worst_missing_gold_block": {
+    "proposed_by_static_structural": 7,
+    "proposed_by_retrieval": 0,
+    "proposed_by_H2": 26,
+    "proposed_by_none": 1,
+    "H2_position": {
+     "0-5": 8,
+     "6-24": 15,
+     "25-49": 1,
+     "50+": 2
+    }
+   },
+   "all_missing_gold_blocks_proposed_by_H2": 25,
+   "static_structural_rank_of_worst_missing": {
+    "0-5": 0,
+    "6-24": 1,
+    "25-49": 6,
+    "50+": 0
+   }
+  },
+  "hop2": {
+   "n_queries_with_gold_outside_P50": 177,
+   "worst_missing_gold_block": {
+    "proposed_by_static_structural": 21,
+    "proposed_by_retrieval": 2,
+    "proposed_by_H2": 100,
+    "proposed_by_none": 73,
+    "H2_position": {
+     "0-5": 3,
+     "6-24": 39,
+     "25-49": 31,
+     "50+": 27
+    }
+   },
+   "all_missing_gold_blocks_proposed_by_H2": 96,
+   "static_structural_rank_of_worst_missing": {
+    "0-5": 1,
+    "6-24": 8,
+    "25-49": 9,
+    "50+": 3
+   }
+  },
+  "hop3": {
+   "n_queries_with_gold_outside_P50": 157,
+   "worst_missing_gold_block": {
+    "proposed_by_static_structural": 5,
+    "proposed_by_retrieval": 1,
+    "proposed_by_H2": 11,
+    "proposed_by_none": 142,
+    "H2_position": {
+     "0-5": 0,
+     "6-24": 1,
+     "25-49": 7,
+     "50+": 3
+    }
+   },
+   "all_missing_gold_blocks_proposed_by_H2": 11,
+   "static_structural_rank_of_worst_missing": {
+    "0-5": 0,
+    "6-24": 0,
+    "25-49": 4,
+    "50+": 1
+   }
+  }
+ }
+}

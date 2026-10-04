@@ -1,0 +1,235 @@
+{
+  "schema": "V3_PASS_D_CANONICAL_EDGES/v2",
+  "generated_utc": "2026-09-07T01:35:12Z",
+  "elapsed_min": 20.06,
+  "at_risk_parts": 64,
+  "freeze_hash": "c6cd9454b9cc38048675989fde88523dcde052952fbc37add6acd4f15f2cbf27",
+  "PREREGISTERED_CHECKS": {
+    "REVERSE_PAIR_ASSERTIONS_N": 5780,
+    "SUBJECT_SIDE_PREDICATES_N": 4731,
+    "OBJECT_SIDE_PREDICATES_N": 4731,
+    "BOTH_SIDES_PRESENT_N": 4728,
+    "NEITHER_SIDE_PRESENT_N": 1046,
+    "AMBIGUOUS_CYCLES_N": 0,
+    "self_paired": [],
+    "long_cycles": [],
+    "pairs_with_only_master_edges": 3,
+    "pairs_with_only_reverse_edges": 3,
+    "reverse_relations_mapped_to_a_master_uid": 4728,
+    "master_relations_at_risk_of_collision": 4728,
+    "reverse_relations_with_edges_but_no_master_uid": [
+      [
+        "type.object.type",
+        "type.type.instance",
+        254882143
+      ],
+      [
+        "type.property.expected_type",
+        "type.type.expected_by",
+        35621
+      ],
+      [
+        "type.property.schema",
+        "type.type.properties",
+        35693
+      ]
+    ],
+    "reverse_relations_with_edges_but_no_master_uid_n": 3,
+    "examples_both_sides": [
+      [
+        "american_football.football_division.conference",
+        9,
+        "american_football.football_conference.divisions",
+        9
+      ],
+      [
+        "american_football.football_game.away_team",
+        537,
+        "american_football.football_team.away_games",
+        537
+      ],
+      [
+        "american_football.football_game.home_team",
+        538,
+        "american_football.football_team.home_games",
+        538
+      ],
+      [
+        "american_football.football_game.passing",
+        1329,
+        "american_football.game_passing_statistics.game",
+        1329
+      ],
+      [
+        "american_football.football_game.receiving",
+        7324,
+        "american_football.game_receiving_statistics.game",
+        7324
+      ],
+      [
+        "american_football.football_game.rushing",
+        4213,
+        "american_football.game_rushing_statistics.game",
+        4213
+      ],
+      [
+        "american_football.football_game_score.game",
+        2,
+        "american_football.football_game.game_scores",
+        2
+      ],
+      [
+        "american_football.football_historical_coach_position.coach",
+        616,
+        "american_football.football_coach.coaching_history",
+        616
+      ],
+      [
+        "american_football.football_historical_coach_position.position",
+        368,
+        "american_football.football_coach_position.coaches_holding_this_position",
+        368
+      ],
+      [
+        "american_football.football_historical_coach_position.team",
+        614,
+        "american_football.football_team.historical_coaching_staff",
+        614
+      ]
+    ],
+    "examples_neither_side": [
+      [
+        "automotive.model_year.body_style",
+        "automotive.body_style.examples"
+      ],
+      [
+        "automotive.option_package.options",
+        "automotive.option.option_packages"
+      ],
+      [
+        "automotive.privately_owned_vehicle.model_year",
+        "automotive.model_year.examples"
+      ],
+      [
+        "automotive.trim_level.driveline",
+        "automotive.driveline.trim_levels"
+      ],
+      [
+        "automotive.trim_level.engine",
+        "automotive.engine.trim_levels"
+      ],
+      [
+        "automotive.trim_level.option_packages",
+        "automotive.option_package.trim_levels"
+      ],
+      [
+        "automotive.trim_level.options",
+        "automotive.opt_trim_relationship.trim_levels"
+      ],
+      [
+        "automotive.trim_level.transmission",
+        "automotive.transmission.trim_levels"
+      ],
+      [
+        "automotive.trim_level.us_fuel_economy",
+        "automotive.us_fuel_economy.trim_level"
+      ],
+      [
+        "base.abcbirds.conservation_plan.associated_projects",
+        "base.abcbirds.conservation_project.conservation_plan_s"
+      ]
+    ],
+    "READING": {
+      "on_the_raw_source": "NEITHER_SIDE here means Freebase declared the pair but asserted no edge on either side. That is a schema-only pair, not fact loss, and it is the prior question the pre-registration could not distinguish from the outside.",
+      "on_an_anti_joined_variant": "NEITHER_SIDE there means the variant annihilated a pair the source did assert. That is the fact-loss alarm INVARIANT_2 was written for, and it is checked against IDIR separately.",
+      "INVARIANT_1_here": "BOTH_SIDES_PRESENT_N is EXPECTED to be large on the raw source: it measures the redundancy this pass removes. It is an alarm only AFTER canonicalisation, where it must be zero."
+    }
+  },
+  "CANONICALISATION": {
+    "edges_in": 2192405853,
+    "at_risk_edges": 253989130,
+    "at_risk_scattered": 253989130,
+    "scatter_balances": true,
+    "unchanged_edges_kept": 1935435507,
+    "edges_flipped_to_master_side": 126994565,
+    "reverse_side_edges_with_literal_object_left_unflipped": 0,
+    "literal_note": "a literal cannot be a subject, so these keep their original orientation. They are counted rather than dropped or coerced.",
+    "CANONICAL_EDGES": 2062430072,
+    "duplicate_rows_removed": 129975781,
+    "duplicates_in_at_risk_path": 126994565,
+    "duplicates_in_unchanged_path": 2981216,
+    "duplicates_where_both_directions_were_asserted": 126994565,
+    "redundancy_removed_pct": 5.9285,
+    "arithmetic_balances": true,
+    "method": {
+      "at_risk": "hash-partitioned on a 64-bit fingerprint of (src, rel, dst), then deduplicated on the FULL TRIPLE inside the part. The fingerprint places rows; it never decides equality, so a collision cannot merge two distinct edges.",
+      "unchanged": "deduplicated in place within subject runs. Exact, because two identical triples share a subject and every triple of a subject lies in one contiguous run that does not straddle a member seam -- the same contiguity result that removed the source-side external sort."
+    }
+  },
+  "TOP_FLIPPED_RELATIONS": [
+    [
+      "music.release_track.recording",
+      15702023
+    ],
+    [
+      "music.release.track_list",
+      15692138
+    ],
+    [
+      "music.artist.track",
+      12181588
+    ],
+    [
+      "music.recording.releases",
+      9403507
+    ],
+    [
+      "type.permission.controls",
+      8057073
+    ],
+    [
+      "music.recording.canonical_version",
+      2903174
+    ],
+    [
+      "music.performance_role.track_performances",
+      2004232
+    ],
+    [
+      "music.recording.song",
+      1981734
+    ],
+    [
+      "book.written_work.author",
+      1866565
+    ],
+    [
+      "people.profession.people_with_this_profession",
+      1774786
+    ],
+    [
+      "music.artist.track_contributions",
+      1698377
+    ],
+    [
+      "music.recording.contributions",
+      1696360
+    ],
+    [
+      "base.schemastaging.food_concept.nutrition_information",
+      1650578
+    ],
+    [
+      "base.schemastaging.nutrient_extra.food_concepts",
+      1650366
+    ],
+    [
+      "location.location.containedby",
+      1621576
+    ]
+  ],
+  "OUTPUT": {
+    "edges": "data/final_canonical/freebase_v3/pass_d/edges/part_*.parquet + data/final_canonical/freebase_v3/pass_d/edges/direct_*.parquet",
+    "relations": "data/final_canonical/freebase_v3/pass_d/relations.parquet"
+  }
+}

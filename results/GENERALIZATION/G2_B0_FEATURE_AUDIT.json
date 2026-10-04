@@ -1,0 +1,54 @@
+{
+  "audit": "G2_B0_UNIVERSAL_FEATURE_AVAILABILITY",
+  "date": "2026-08-30",
+  "datasets": ["2wiki", "hotpotqa", "musique", "squad", "webqsp", "metaqa"],
+  "legend": {"AVAILABLE": "present + same inference meaning", "MISSING": "not present", "DEGENERATE": "present but near-constant or very low coverage -> weak/unsafe", "DISTRIBUTION": "present but distribution differs materially across datasets"},
+  "node_model": {
+    "2wiki": "document (Wikipedia page)", "hotpotqa": "document (Wikipedia abstract)",
+    "musique": "document", "squad": "document",
+    "webqsp": "document titled by Freebase entity name", "metaqa": "KB entity"
+  },
+  "graph": {
+    "provenance": {"2wiki": "hyperlink (native, untyped)", "hotpotqa": "hyperlink (native, untyped)",
+      "musique": "title_mention (derived, untyped)", "squad": "title_mention (derived, untyped)",
+      "webqsp": "freebase relations (typed, 6094)", "metaqa": "KB triples (typed, 9)"},
+    "n_edges": {"2wiki": 359549, "hotpotqa": 15367541, "musique": 2744076, "squad": 874190, "webqsp": 3791303, "metaqa": 133582},
+    "n_relations": {"2wiki": 1, "hotpotqa": 1, "musique": 1, "squad": 1, "webqsp": 6094, "metaqa": 9},
+    "row_space_interface": "master_nodes.neighbors gives row-space adjacency for ALL datasets (uniform interface used by l2_relation); canonical graph_*.tsv are in hash/curid id-space and would need a title/curid crosswalk -> avoid by using master_nodes.neighbors",
+    "knn_graph_available": {"2wiki": true, "hotpotqa": false, "musique": true, "squad": true, "webqsp": true, "metaqa": true, "note": "ablation only"},
+    "ner_graph_available": {"2wiki": true, "hotpotqa": true, "musique": true, "squad": true, "webqsp": false, "metaqa": false, "note": "not in mainline"}
+  },
+  "anchor_coverage_val": {
+    "measure": "fraction of val queries (n~=315-400) with an anchor resolving to a graph node",
+    "bracketed_entity": {"2wiki": 0.0, "hotpotqa": 0.0, "musique": 0.0, "squad": 0.0, "webqsp": 0.0, "metaqa": 1.0},
+    "title_match_deterministic": {"2wiki": 1.0, "hotpotqa": 0.932, "musique": 0.672, "squad": 0.235, "webqsp": 0.994, "metaqa": 1.0},
+    "retrieval_seed": {"2wiki": 1.0, "hotpotqa": 1.0, "musique": 1.0, "squad": 1.0, "webqsp": 1.0, "metaqa": 1.0, "note": "dense/splade top-k present for every query by construction"}
+  },
+  "feature_availability": {
+    "S0_retrieval_relative": {"2wiki": "AVAILABLE", "hotpotqa": "AVAILABLE", "musique": "AVAILABLE", "squad": "AVAILABLE", "webqsp": "AVAILABLE", "metaqa": "AVAILABLE", "note": "dense/splade scores present for all; percentile-normalized -> corpus-scale-free"},
+    "retrieval_seed_anchor": {"2wiki": "AVAILABLE", "hotpotqa": "AVAILABLE", "musique": "AVAILABLE", "squad": "AVAILABLE", "webqsp": "AVAILABLE", "metaqa": "AVAILABLE"},
+    "query_entity_anchor_bracket": {"2wiki": "MISSING", "hotpotqa": "MISSING", "musique": "MISSING", "squad": "MISSING", "webqsp": "MISSING", "metaqa": "AVAILABLE", "verdict": "EXCLUDED FROM CONTRACT — present only for metaqa, so its presence trivially reveals dataset identity"},
+    "query_anchor_title_match": {"2wiki": "AVAILABLE", "hotpotqa": "AVAILABLE", "musique": "DISTRIBUTION", "squad": "DEGENERATE", "webqsp": "AVAILABLE", "metaqa": "AVAILABLE", "verdict": "NOT a safe STANDALONE anchor — coverage (1.0/0.93/0.67/0.24) is dataset-correlated; use ONLY as a refinement on top of retrieval-seeded anchors"},
+    "structural_graph_rowspace": {"2wiki": "AVAILABLE", "hotpotqa": "AVAILABLE", "musique": "AVAILABLE", "squad": "AVAILABLE", "webqsp": "AVAILABLE", "metaqa": "AVAILABLE", "note": "uniform row-space interface; provenance/typing varies but only untyped adjacency + node embeddings are consumed"},
+    "seed_distance": {"2wiki": "AVAILABLE", "hotpotqa": "AVAILABLE", "musique": "AVAILABLE", "squad": "AVAILABLE", "webqsp": "AVAILABLE", "metaqa": "AVAILABLE", "note": "conditional on anchor; retrieval-seeded -> ~1.0 coverage; ABSTAIN sentinel + flag otherwise"},
+    "seed_connectivity": {"2wiki": "AVAILABLE", "hotpotqa": "AVAILABLE", "musique": "AVAILABLE", "squad": "AVAILABLE", "webqsp": "AVAILABLE", "metaqa": "AVAILABLE"},
+    "PPR": {"2wiki": "AVAILABLE", "hotpotqa": "AVAILABLE", "musique": "AVAILABLE", "squad": "AVAILABLE", "webqsp": "AVAILABLE", "metaqa": "AVAILABLE", "note": "row-space graph + seed restart set; percentile-normalized within query-local scope"},
+    "degree_pct": {"2wiki": "AVAILABLE", "hotpotqa": "AVAILABLE", "musique": "AVAILABLE", "squad": "AVAILABLE", "webqsp": "AVAILABLE", "metaqa": "AVAILABLE", "note": "anchor-free"},
+    "directional_geometry_s_dir": {"2wiki": "AVAILABLE", "hotpotqa": "AVAILABLE", "musique": "AVAILABLE", "squad": "AVAILABLE", "webqsp": "AVAILABLE", "metaqa": "AVAILABLE", "DEMONSTRATED_VALUE": "metaqa ONLY (Track-A/Q2, entity-anchored); text/webqsp efficacy via retrieval-seed anchors is UNTESTED and is an explicit B1/Track-A-extension question"},
+    "expansion_provenance": {"2wiki": "AVAILABLE", "hotpotqa": "AVAILABLE", "musique": "AVAILABLE", "squad": "AVAILABLE", "webqsp": "AVAILABLE", "metaqa": "AVAILABLE", "note": "P50 membership + geometry hop; expansion_hop DEGENERATE on pure-P50 (no-expansion) scopes"}
+  },
+  "missingness_reveals_identity": {
+    "bracketed_entity": "YES, perfectly (metaqa=1, all others=0) -> EXCLUDED from the contract",
+    "title_match_alone": "YES, partially (squad 0.24, musique 0.67 vs ~1.0 elsewhere) -> NOT used as sole anchor; retrieval-seeded base makes anchor_present ~1.0 uniformly and non-revealing",
+    "relation_type_count": "YES (metaqa 9 / webqsp 6094 / others 1) -> relation TYPE EXCLUDED; only displacement direction (s_dir) used",
+    "graph_scale_degree_hop_ppr_absolute": "YES if used as absolute values (hotpot graph 15M edges vs metaqa 133k) -> neutralized by per-query percentile normalization; contract mandates percentile/bounded features, never raw scale",
+    "ner_knn_graph_presence": "would reveal identity (metaqa/webqsp lack ner; hotpot lacks knn) -> both EXCLUDED from mainline"
+  },
+  "data_availability_caveats": {
+    "L2_corpus_local": ["2wiki_clean", "musique_clean", "squad_clean"],
+    "L2_corpus_modal_only": ["metaqa (197M-row P50 val corpus)", "hotpotqa_clean (507k docs)", "webqsp (781k docs)"],
+    "implication": "a LOCAL B1 LODO smoke can run 3-way on {2wiki, musique, squad}; full 6-way LODO needs Modal for metaqa/hotpot/webqsp"
+  },
+  "Q2_population_caveat": "Q2 full results and this audit's anchor coverage refer to the valid-query population of the frozen G1/C6 path (>=1 in-scope gold). Do NOT silently generalize to completely L1-failed queries until that population is separately measured.",
+  "conclusion": "All S0/S1/S2 features are AVAILABLE across all 6 datasets under a UNIFORM interface IF (a) anchors are retrieval-seeded (not bracket, not title-match-alone), (b) all graph-derived features are per-query percentile-normalized, (c) relation TYPE, bracket indicator, and ner/knn-presence are excluded. Under those rules feature missingness does not reveal dataset identity. Open risk: directional-geometry DISCRIMINATIVE value is demonstrated on metaqa only; squad is the weakest structural/directional regime (title-match 0.24, title-mention graph)."
+}

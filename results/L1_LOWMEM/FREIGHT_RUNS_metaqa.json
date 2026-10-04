@@ -1,0 +1,1248 @@
+{
+ "RECORD": "FREIGHT_RUNS",
+ "dataset": "metaqa",
+ "utc": "2026-09-13T15:30:19Z",
+ "inputs": {
+  "N": 43234,
+  "M": 86796,
+  "P": 531006,
+  "k": 432,
+  "ORIGINAL_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+  "reconstruction_gate": {
+   "RECORD": "H4_SK_STREAM_V1_RECONSTRUCTION_GATE",
+   "dataset": "metaqa",
+   "utc": "2026-09-13T15:20:26Z",
+   "STREAM_MANIFEST_SHA256": "3cc092dd821ae88bc8bf032a90e72bf1d5ba8267d39ed8020493b2a1add77553",
+   "ORIGINAL_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "STREAM_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "counts_from_shards": {
+    "N": 43234,
+    "M": 86796,
+    "P": 531006,
+    "weight_sum": 32317710,
+    "weight_min": 10,
+    "weight_max": 1000
+   },
+   "gate_digest": "PASS",
+   "counts_exact": true,
+   "official_netl": {
+    "path": "data/l1_lowmem/metaqa/H4_SK.official.netl",
+    "bytes": 5038254,
+    "sha256": "9dd470ca2bd2fda5e49f6dc813c3d7a8951dc37178a8b9373e8ca0dd7384d811"
+   },
+   "header_plus_shards_sha256": "9dd470ca2bd2fda5e49f6dc813c3d7a8951dc37178a8b9373e8ca0dd7384d811",
+   "gate_bytes": "PASS",
+   "seconds": 3.8
+  },
+  "official_netl": {
+   "path": "data/l1_lowmem/metaqa/H4_SK.official.netl",
+   "bytes": 5038254,
+   "sha256": "9dd470ca2bd2fda5e49f6dc813c3d7a8951dc37178a8b9373e8ca0dd7384d811"
+  },
+  "stream_manifest": {
+   "path": "data/l1_lowmem/metaqa/freight/stream_manifest.txt",
+   "sha256": "c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7",
+   "H4_SK_STREAM_V1_manifest_sha256": "3cc092dd821ae88bc8bf032a90e72bf1d5ba8267d39ed8020493b2a1add77553",
+   "shards": 9,
+   "shard_nodes": 5000
+  },
+  "input_bytes": {
+   "official_netl": 5038254,
+   "shards_total": 5038240
+  }
+ },
+ "contract": {
+  "objective": "connectivity (weighted KM1)",
+  "imbalance_percent": 3,
+  "seed": 0,
+  "num_streams_passes": 1,
+  "k": 432,
+  "binaries": {
+   "stock": {
+    "path": "/home/swastik/FREIGHT/build/freight_con",
+    "sha256": "38db10f36123f23ee4b3f032f347d31a861c1f4aa83c551029a6930da2f33561",
+    "bytes": 952904
+   },
+   "fork": {
+    "path": "/home/swastik/FREIGHT_ckpt/build/freight_con_ckpt",
+    "sha256": "421159f896a7ceaf8eee052e83dc264a93141c034769aa1fddaf07cdabbffde4",
+    "bytes": 1058896
+   }
+  },
+  "upstream_commit": "6a35c647b8e9b254e4c5c42c043457b5316369f0"
+ },
+ "runs": {
+  "A": {
+   "name": "A",
+   "command": "/usr/bin/time -v -o /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/A/time.txt /home/swastik/FREIGHT/build/freight_con /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/H4_SK.official.netl --k=432 --imbalance=3 --seed=0 --num_streams_passes=1 --output_filename=/mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/A/partition.txt > /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/A/stdout.txt 2> /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/A/stderr.txt",
+   "rc": 0,
+   "time": {
+    "user_seconds": 0.21,
+    "wall_seconds": 1.49,
+    "peak_rss_kb": 10528,
+    "exit_status": 0
+   },
+   "stdout": {
+    "checkpoints": [],
+    "nodes": 43234,
+    "nets": 86796,
+    "processing_seconds": 0.545933,
+    "io_seconds": 0.494624,
+    "pin_count": 531006,
+    "connectivity": 57790300.0,
+    "cut": 18395000.0,
+    "balance": 1.0297
+   },
+   "wall_seconds_outer": 1.86,
+   "stderr_tail": [
+    ""
+   ]
+  },
+  "A_forklib": {
+   "name": "A_forklib",
+   "command": "/usr/bin/time -v -o /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/A_forklib/time.txt /home/swastik/FREIGHT_ckpt/build/freight_con /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/H4_SK.official.netl --k=432 --imbalance=3 --seed=0 --num_streams_passes=1 --output_filename=/mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/A_forklib/partition.txt > /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/A_forklib/stdout.txt 2> /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/A_forklib/stderr.txt",
+   "rc": 0,
+   "time": {
+    "user_seconds": 0.26,
+    "wall_seconds": 1.35,
+    "peak_rss_kb": 10588,
+    "exit_status": 0
+   },
+   "stdout": {
+    "checkpoints": [],
+    "nodes": 43234,
+    "nets": 86796,
+    "processing_seconds": 0.531646,
+    "io_seconds": 0.475279,
+    "pin_count": 531006,
+    "connectivity": 57790300.0,
+    "cut": 18395000.0,
+    "balance": 1.0297
+   },
+   "wall_seconds_outer": 1.74,
+   "stderr_tail": [
+    ""
+   ]
+  },
+  "B": {
+   "name": "B",
+   "command": "/usr/bin/time -v -o /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/B/time.txt /home/swastik/FREIGHT_ckpt/build/freight_con_ckpt /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/stream_manifest.txt --k=432 --imbalance=3 --seed=0 --num_streams_passes=1 --output_filename=/mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/B/partition.txt --ckpt_manifest --ckpt_dir=/home/swastik/l1_lowmem_ckpt/metaqa/B --ckpt_every_shards=0 --ckpt_meta=dataset=metaqa --ckpt_meta=binary_sha256=421159f896a7ceaf8eee052e83dc264a93141c034769aa1fddaf07cdabbffde4 --ckpt_meta=stream_manifest_sha256=c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7 --ckpt_meta=structure_sha256=fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35 --ckpt_meta=upstream_commit=6a35c647b8e9b254e4c5c42c043457b5316369f0 > /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/B/stdout.txt 2> /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/B/stderr.txt",
+   "rc": 0,
+   "time": {
+    "user_seconds": 0.24,
+    "wall_seconds": 1.75,
+    "peak_rss_kb": 10724,
+    "exit_status": 0
+   },
+   "stdout": {
+    "checkpoints": [],
+    "nodes": 43234,
+    "nets": 86796,
+    "processing_seconds": 0.510565,
+    "io_seconds": 0.465345,
+    "pin_count": 531006,
+    "connectivity": 57790300.0,
+    "cut": 18395000.0,
+    "balance": 1.0297,
+    "partition_sha256": "770aa1057adc5f3d097248acdf9ee430bb7485717f393230b02bf16f9cdc37b3",
+    "processed_pins": 531006
+   },
+   "wall_seconds_outer": 2.0,
+   "stderr_tail": [
+    ""
+   ],
+   "arm": "sharded stream (H4_SK_STREAM_V1 shards), same persistent process/state, no checkpoints written",
+   "ckpt_dir": {
+    "files": [],
+    "LATEST": null
+   }
+  },
+  "B0": {
+   "name": "B0",
+   "command": "/usr/bin/time -v -o /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/B0/time.txt /home/swastik/FREIGHT_ckpt/build/freight_con_ckpt /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/stream_manifest.txt --k=432 --imbalance=3 --seed=0 --num_streams_passes=1 --output_filename=/mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/B0/partition.txt --ckpt_manifest --ckpt_dir=/home/swastik/l1_lowmem_ckpt/metaqa/B0 --ckpt_every_shards=1 --ckpt_meta=dataset=metaqa --ckpt_meta=binary_sha256=421159f896a7ceaf8eee052e83dc264a93141c034769aa1fddaf07cdabbffde4 --ckpt_meta=stream_manifest_sha256=c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7 --ckpt_meta=structure_sha256=fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35 --ckpt_meta=upstream_commit=6a35c647b8e9b254e4c5c42c043457b5316369f0 > /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/B0/stdout.txt 2> /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/B0/stderr.txt",
+   "rc": 0,
+   "time": {
+    "user_seconds": 0.47,
+    "wall_seconds": 2.27,
+    "peak_rss_kb": 11792,
+    "exit_status": 0
+   },
+   "stdout": {
+    "checkpoints": [
+     {
+      "name": "checkpoint_0_00001.bin",
+      "sha256": "5be205b099bb3164f207817d9dfeaca092dbca5d48fc1374c7cd881d74b6d291",
+      "next_node": 5000,
+      "next_shard": 1
+     },
+     {
+      "name": "checkpoint_0_00002.bin",
+      "sha256": "5736d3b151a23f5503dd91da9a916202b7fa5b687e2961e306336f30630e672b",
+      "next_node": 10000,
+      "next_shard": 2
+     },
+     {
+      "name": "checkpoint_0_00003.bin",
+      "sha256": "5db60d6325b0784e3ab470bd5d316fe6d0740611ba4a7625dff19a2cfa587de3",
+      "next_node": 15000,
+      "next_shard": 3
+     },
+     {
+      "name": "checkpoint_0_00004.bin",
+      "sha256": "f37ecef9dd4bae7ca26e346611a1e032cf1c7c6c54512fe229b1d4f0e010f28c",
+      "next_node": 20000,
+      "next_shard": 4
+     },
+     {
+      "name": "checkpoint_0_00005.bin",
+      "sha256": "da2721d5f1eb69178511996c77a7d3bf55bda3337e1d3af4a48655dc3e70a6b5",
+      "next_node": 25000,
+      "next_shard": 5
+     },
+     {
+      "name": "checkpoint_0_00006.bin",
+      "sha256": "b040d1bd644d6372f489e07228ee61da3dbd9bdb032e8cfb45230238fc2b1fc3",
+      "next_node": 30000,
+      "next_shard": 6
+     },
+     {
+      "name": "checkpoint_0_00007.bin",
+      "sha256": "d2f32ee99be3d0d51a4f11bc523c8aae56652b189fda123776d4e965879b52c3",
+      "next_node": 35000,
+      "next_shard": 7
+     },
+     {
+      "name": "checkpoint_0_00008.bin",
+      "sha256": "761c020961486af2e665056bf1542f4cf578ce1a18ffbdbc71d594d010c6652d",
+      "next_node": 40000,
+      "next_shard": 8
+     }
+    ],
+    "nodes": 43234,
+    "nets": 86796,
+    "processing_seconds": 1.48135,
+    "io_seconds": 0.75293,
+    "pin_count": 531006,
+    "connectivity": 57790300.0,
+    "cut": 18395000.0,
+    "balance": 1.0297,
+    "partition_sha256": "770aa1057adc5f3d097248acdf9ee430bb7485717f393230b02bf16f9cdc37b3",
+    "processed_pins": 531006
+   },
+   "wall_seconds_outer": 2.61,
+   "stderr_tail": [
+    ""
+   ],
+   "arm": "sharded stream, checkpoint after every shard (CHECKPOINT_EVERY_SHARDS=1), uninterrupted",
+   "ckpt_dir": {
+    "files": [
+     {
+      "name": "LATEST",
+      "bytes": 88
+     },
+     {
+      "name": "checkpoint_0_00001.bin",
+      "bytes": 557041
+     },
+     {
+      "name": "checkpoint_0_00002.bin",
+      "bytes": 557156
+     },
+     {
+      "name": "checkpoint_0_00003.bin",
+      "bytes": 557013
+     },
+     {
+      "name": "checkpoint_0_00004.bin",
+      "bytes": 556997
+     },
+     {
+      "name": "checkpoint_0_00005.bin",
+      "bytes": 557013
+     },
+     {
+      "name": "checkpoint_0_00006.bin",
+      "bytes": 556997
+     },
+     {
+      "name": "checkpoint_0_00007.bin",
+      "bytes": 557141
+     },
+     {
+      "name": "checkpoint_0_00008.bin",
+      "bytes": 556997
+     }
+    ],
+    "LATEST": "checkpoint_0_00008.bin 761c020961486af2e665056bf1542f4cf578ce1a18ffbdbc71d594d010c6652d"
+   }
+  },
+  "C_kill": {
+   "name": "C_kill",
+   "watcher_result": "wrapper_rc=137 killed=1 last_seen=4",
+   "killed": true,
+   "killed_stdout": {
+    "checkpoints": [
+     {
+      "name": "checkpoint_0_00001.bin",
+      "sha256": "5be205b099bb3164f207817d9dfeaca092dbca5d48fc1374c7cd881d74b6d291",
+      "next_node": 5000,
+      "next_shard": 1
+     },
+     {
+      "name": "checkpoint_0_00002.bin",
+      "sha256": "5736d3b151a23f5503dd91da9a916202b7fa5b687e2961e306336f30630e672b",
+      "next_node": 10000,
+      "next_shard": 2
+     },
+     {
+      "name": "checkpoint_0_00003.bin",
+      "sha256": "5db60d6325b0784e3ab470bd5d316fe6d0740611ba4a7625dff19a2cfa587de3",
+      "next_node": 15000,
+      "next_shard": 3
+     }
+    ]
+   },
+   "ckpt_dir_after_kill": {
+    "files": [
+     {
+      "name": "LATEST",
+      "bytes": 88
+     },
+     {
+      "name": "checkpoint_0_00001.bin",
+      "bytes": 557041
+     },
+     {
+      "name": "checkpoint_0_00002.bin",
+      "bytes": 557156
+     },
+     {
+      "name": "checkpoint_0_00003.bin",
+      "bytes": 557013
+     },
+     {
+      "name": "checkpoint_0_00004.bin",
+      "bytes": 556997
+     }
+    ],
+    "LATEST": "checkpoint_0_00004.bin f37ecef9dd4bae7ca26e346611a1e032cf1c7c6c54512fe229b1d4f0e010f28c"
+   },
+   "resume": {
+    "name": "C_kill",
+    "command": "/usr/bin/time -v -o /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_kill/time.txt /home/swastik/FREIGHT_ckpt/build/freight_con_ckpt /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/stream_manifest.txt --k=432 --imbalance=3 --seed=0 --num_streams_passes=1 --output_filename=/mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_kill/partition.txt --ckpt_manifest --ckpt_dir=/home/swastik/l1_lowmem_ckpt/metaqa/C_kill --ckpt_every_shards=1 --ckpt_resume --ckpt_meta=dataset=metaqa --ckpt_meta=binary_sha256=421159f896a7ceaf8eee052e83dc264a93141c034769aa1fddaf07cdabbffde4 --ckpt_meta=stream_manifest_sha256=c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7 --ckpt_meta=structure_sha256=fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35 --ckpt_meta=upstream_commit=6a35c647b8e9b254e4c5c42c043457b5316369f0 > /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_kill/stdout.txt 2> /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_kill/stderr.txt",
+    "rc": 0,
+    "time": {
+     "user_seconds": 0.22,
+     "wall_seconds": 1.79,
+     "peak_rss_kb": 12728,
+     "exit_status": 0
+    },
+    "stdout": {
+     "checkpoints": [
+      {
+       "name": "checkpoint_0_00005.bin",
+       "sha256": "da2721d5f1eb69178511996c77a7d3bf55bda3337e1d3af4a48655dc3e70a6b5",
+       "next_node": 25000,
+       "next_shard": 5
+      },
+      {
+       "name": "checkpoint_0_00006.bin",
+       "sha256": "b040d1bd644d6372f489e07228ee61da3dbd9bdb032e8cfb45230238fc2b1fc3",
+       "next_node": 30000,
+       "next_shard": 6
+      },
+      {
+       "name": "checkpoint_0_00007.bin",
+       "sha256": "d2f32ee99be3d0d51a4f11bc523c8aae56652b189fda123776d4e965879b52c3",
+       "next_node": 35000,
+       "next_shard": 7
+      },
+      {
+       "name": "checkpoint_0_00008.bin",
+       "sha256": "761c020961486af2e665056bf1542f4cf578ce1a18ffbdbc71d594d010c6652d",
+       "next_node": 40000,
+       "next_shard": 8
+      }
+     ],
+     "resumed_from": "resuming from checkpoint_0_00004.bin (pass 0, next_node 20000, next_shard 4)",
+     "nodes": 43234,
+     "nets": 86796,
+     "processing_seconds": 1.10258,
+     "io_seconds": 0.596508,
+     "pin_count": 531006,
+     "connectivity": 57790300.0,
+     "cut": 18395000.0,
+     "balance": 1.0297,
+     "partition_sha256": "770aa1057adc5f3d097248acdf9ee430bb7485717f393230b02bf16f9cdc37b3",
+     "processed_pins": 531006
+    },
+    "wall_seconds_outer": 2.12,
+    "stderr_tail": [
+     ""
+    ]
+   },
+   "ckpt_dir_after_resume": {
+    "files": [
+     {
+      "name": "LATEST",
+      "bytes": 88
+     },
+     {
+      "name": "checkpoint_0_00001.bin",
+      "bytes": 557041
+     },
+     {
+      "name": "checkpoint_0_00002.bin",
+      "bytes": 557156
+     },
+     {
+      "name": "checkpoint_0_00003.bin",
+      "bytes": 557013
+     },
+     {
+      "name": "checkpoint_0_00004.bin",
+      "bytes": 556997
+     },
+     {
+      "name": "checkpoint_0_00005.bin",
+      "bytes": 557013
+     },
+     {
+      "name": "checkpoint_0_00006.bin",
+      "bytes": 556997
+     },
+     {
+      "name": "checkpoint_0_00007.bin",
+      "bytes": 557141
+     },
+     {
+      "name": "checkpoint_0_00008.bin",
+      "bytes": 556997
+     }
+    ],
+    "LATEST": "checkpoint_0_00008.bin 761c020961486af2e665056bf1542f4cf578ce1a18ffbdbc71d594d010c6652d"
+   }
+  },
+  "C_abort": {
+   "name": "C_abort",
+   "aborted": {
+    "name": "C_abort~",
+    "command": "/usr/bin/time -v -o /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_abort/aborted/time.txt /home/swastik/FREIGHT_ckpt/build/freight_con_ckpt /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/stream_manifest.txt --k=432 --imbalance=3 --seed=0 --num_streams_passes=1 --output_filename=/mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_abort/partition.txt --ckpt_manifest --ckpt_dir=/home/swastik/l1_lowmem_ckpt/metaqa/C_abort --ckpt_every_shards=1 --ckpt_abort_after_node=22500 --ckpt_meta=dataset=metaqa --ckpt_meta=binary_sha256=421159f896a7ceaf8eee052e83dc264a93141c034769aa1fddaf07cdabbffde4 --ckpt_meta=stream_manifest_sha256=c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7 --ckpt_meta=structure_sha256=fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35 --ckpt_meta=upstream_commit=6a35c647b8e9b254e4c5c42c043457b5316369f0 > /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_abort/aborted/stdout.txt 2> /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_abort/aborted/stderr.txt",
+    "rc": 137,
+    "time": {
+     "user_seconds": 0.14,
+     "wall_seconds": 0.8,
+     "peak_rss_kb": 7348,
+     "exit_status": 137
+    },
+    "stdout": {
+     "checkpoints": [
+      {
+       "name": "checkpoint_0_00001.bin",
+       "sha256": "5be205b099bb3164f207817d9dfeaca092dbca5d48fc1374c7cd881d74b6d291",
+       "next_node": 5000,
+       "next_shard": 1
+      },
+      {
+       "name": "checkpoint_0_00002.bin",
+       "sha256": "5736d3b151a23f5503dd91da9a916202b7fa5b687e2961e306336f30630e672b",
+       "next_node": 10000,
+       "next_shard": 2
+      },
+      {
+       "name": "checkpoint_0_00003.bin",
+       "sha256": "5db60d6325b0784e3ab470bd5d316fe6d0740611ba4a7625dff19a2cfa587de3",
+       "next_node": 15000,
+       "next_shard": 3
+      },
+      {
+       "name": "checkpoint_0_00004.bin",
+       "sha256": "f37ecef9dd4bae7ca26e346611a1e032cf1c7c6c54512fe229b1d4f0e010f28c",
+       "next_node": 20000,
+       "next_shard": 4
+      }
+     ],
+     "abort_line": "ABORT (crash test) after node 22500"
+    },
+    "wall_seconds_outer": 1.18,
+    "stderr_tail": [
+     ""
+    ]
+   },
+   "ckpt_dir_after_abort": {
+    "files": [
+     {
+      "name": "LATEST",
+      "bytes": 88
+     },
+     {
+      "name": "checkpoint_0_00001.bin",
+      "bytes": 557041
+     },
+     {
+      "name": "checkpoint_0_00002.bin",
+      "bytes": 557156
+     },
+     {
+      "name": "checkpoint_0_00003.bin",
+      "bytes": 557013
+     },
+     {
+      "name": "checkpoint_0_00004.bin",
+      "bytes": 556997
+     }
+    ],
+    "LATEST": "checkpoint_0_00004.bin f37ecef9dd4bae7ca26e346611a1e032cf1c7c6c54512fe229b1d4f0e010f28c"
+   },
+   "partition_written_by_aborted_run": false,
+   "resume": {
+    "name": "C_abort",
+    "command": "/usr/bin/time -v -o /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_abort/time.txt /home/swastik/FREIGHT_ckpt/build/freight_con_ckpt /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/stream_manifest.txt --k=432 --imbalance=3 --seed=0 --num_streams_passes=1 --output_filename=/mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_abort/partition.txt --ckpt_manifest --ckpt_dir=/home/swastik/l1_lowmem_ckpt/metaqa/C_abort --ckpt_every_shards=1 --ckpt_resume --ckpt_meta=dataset=metaqa --ckpt_meta=binary_sha256=421159f896a7ceaf8eee052e83dc264a93141c034769aa1fddaf07cdabbffde4 --ckpt_meta=stream_manifest_sha256=c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7 --ckpt_meta=structure_sha256=fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35 --ckpt_meta=upstream_commit=6a35c647b8e9b254e4c5c42c043457b5316369f0 > /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_abort/stdout.txt 2> /mnt/c/Users/Swastik/Desktop/CRAG/data/l1_lowmem/metaqa/freight/C_abort/stderr.txt",
+    "rc": 0,
+    "time": {
+     "user_seconds": 0.25,
+     "wall_seconds": 1.39,
+     "peak_rss_kb": 12456,
+     "exit_status": 0
+    },
+    "stdout": {
+     "checkpoints": [
+      {
+       "name": "checkpoint_0_00005.bin",
+       "sha256": "da2721d5f1eb69178511996c77a7d3bf55bda3337e1d3af4a48655dc3e70a6b5",
+       "next_node": 25000,
+       "next_shard": 5
+      },
+      {
+       "name": "checkpoint_0_00006.bin",
+       "sha256": "b040d1bd644d6372f489e07228ee61da3dbd9bdb032e8cfb45230238fc2b1fc3",
+       "next_node": 30000,
+       "next_shard": 6
+      },
+      {
+       "name": "checkpoint_0_00007.bin",
+       "sha256": "d2f32ee99be3d0d51a4f11bc523c8aae56652b189fda123776d4e965879b52c3",
+       "next_node": 35000,
+       "next_shard": 7
+      },
+      {
+       "name": "checkpoint_0_00008.bin",
+       "sha256": "761c020961486af2e665056bf1542f4cf578ce1a18ffbdbc71d594d010c6652d",
+       "next_node": 40000,
+       "next_shard": 8
+      }
+     ],
+     "resumed_from": "resuming from checkpoint_0_00004.bin (pass 0, next_node 20000, next_shard 4)",
+     "nodes": 43234,
+     "nets": 86796,
+     "processing_seconds": 0.699607,
+     "io_seconds": 0.426075,
+     "pin_count": 531006,
+     "connectivity": 57790300.0,
+     "cut": 18395000.0,
+     "balance": 1.0297,
+     "partition_sha256": "770aa1057adc5f3d097248acdf9ee430bb7485717f393230b02bf16f9cdc37b3",
+     "processed_pins": 531006
+    },
+    "wall_seconds_outer": 1.75,
+    "stderr_tail": [
+     ""
+    ]
+   },
+   "ckpt_dir_after_resume": {
+    "files": [
+     {
+      "name": "LATEST",
+      "bytes": 88
+     },
+     {
+      "name": "checkpoint_0_00001.bin",
+      "bytes": 557041
+     },
+     {
+      "name": "checkpoint_0_00002.bin",
+      "bytes": 557156
+     },
+     {
+      "name": "checkpoint_0_00003.bin",
+      "bytes": 557013
+     },
+     {
+      "name": "checkpoint_0_00004.bin",
+      "bytes": 556997
+     },
+     {
+      "name": "checkpoint_0_00005.bin",
+      "bytes": 557013
+     },
+     {
+      "name": "checkpoint_0_00006.bin",
+      "bytes": 556997
+     },
+     {
+      "name": "checkpoint_0_00007.bin",
+      "bytes": 557141
+     },
+     {
+      "name": "checkpoint_0_00008.bin",
+      "bytes": 556997
+     }
+    ],
+    "LATEST": "checkpoint_0_00008.bin 761c020961486af2e665056bf1542f4cf578ce1a18ffbdbc71d594d010c6652d"
+   }
+  }
+ },
+ "crash": {
+  "target_shard": 4,
+  "abort_after_node": 22500
+ },
+ "refusals": {
+  "tests": {
+   "corrupt_checkpoint_byte": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "checkpoint checkpoint_0_00008.bin unusable: hash mismatch (33ea175ee37eda94a63c4fe40ee02dd27d47cc06fd7cb6d84fb08499287918bf != 761c020961486af2e665056bf1542f4cf578ce1a18ffbdbc71d594d010c6652d)"
+    ],
+    "REFUSED": true
+   },
+   "tmp_only_no_latest": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "no LATEST checkpoint in /home/swastik/l1_lowmem_ckpt/metaqa/C_abort_tmp_only_no_latest"
+    ],
+    "REFUSED": true
+   },
+   "latest_hash_mismatch": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "LATEST hash disagrees with the checkpoint trailer"
+    ],
+    "REFUSED": true
+   },
+   "truncated_checkpoint": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "checkpoint checkpoint_0_00008.bin unusable: missing trailer"
+    ],
+    "REFUSED": true
+   },
+   "foreign_meta_binary": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "REFUSING TO RESUME: META meta.binary_sha256 = 421159f896a7ceaf8eee052e83dc264a93141c034769aa1fddaf07cdabbffde4 but the run has deadbeef"
+    ],
+    "REFUSED": true
+   },
+   "wrong_k": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "REFUSING TO RESUME: META k = 432 but the run has 433"
+    ],
+    "REFUSED": true
+   },
+   "wrong_structure_hash": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "REFUSING TO RESUME: META meta.structure_sha256 = fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35 but the run has deadbeef"
+    ],
+    "REFUSED": true
+   },
+   "wrong_stream_manifest_hash": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "REFUSING TO RESUME: META meta.stream_manifest_sha256 = c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7 but the run has deadbeef"
+    ],
+    "REFUSED": true
+   },
+   "wrong_upstream_commit": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "REFUSING TO RESUME: META meta.upstream_commit = 6a35c647b8e9b254e4c5c42c043457b5316369f0 but the run has deadbeef"
+    ],
+    "REFUSED": true
+   },
+   "wrong_objective_binary": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "REFUSING TO RESUME: META objective = connectivity but the run has cut"
+    ],
+    "REFUSED": true
+   },
+   "wrong_imbalance": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "REFUSING TO RESUME: META imbalance = 3 but the run has 4"
+    ],
+    "REFUSED": true
+   },
+   "wrong_seed": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "REFUSING TO RESUME: META seed = 0 but the run has 1"
+    ],
+    "REFUSED": true
+   },
+   "wrong_num_passes": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "REFUSING TO RESUME: META num_streams_passes = 1 but the run has 2"
+    ],
+    "REFUSED": true
+   },
+   "shard_manifest_shard_count": {
+    "rc": 1,
+    "partition_written": false,
+    "stderr_tail": [
+     "REFUSING TO RESUME: META shard_count = 9 but the run has 8"
+    ],
+    "REFUSED": true
+   }
+  },
+  "ALL_REFUSED": true
+ },
+ "EQUIVALENCE": {
+  "reference": "A",
+  "compared": {
+   "A": {
+    "identical_to_A": true,
+    "first_diff_position": null,
+    "n_diff": 0,
+    "km1_weighted": 57790340,
+    "cut_weighted": 18394999,
+    "block_max": 104,
+    "block_weights_identical": true,
+    "partition_sha256_stdout": null,
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 100118,
+      "edge_cut_fraction": 0.8031
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 91329,
+      "edge_cut_fraction": 0.9373
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 4705,
+      "edge_cut_fraction": 0.8086
+     }
+    },
+    "eps_actual": 0.0297,
+    "exact_metrics_equal_to_A": {
+     "objective_km1": true,
+     "cut": true,
+     "block_weights": true,
+     "imbalance": true,
+     "STRUCT_cut": true,
+     "KNN_cut": true
+    },
+    "ALL_EXACT": true
+   },
+   "A_forklib": {
+    "identical_to_A": true,
+    "first_diff_position": null,
+    "n_diff": 0,
+    "km1_weighted": 57790340,
+    "cut_weighted": 18394999,
+    "block_max": 104,
+    "block_weights_identical": true,
+    "partition_sha256_stdout": null,
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 100118,
+      "edge_cut_fraction": 0.8031
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 91329,
+      "edge_cut_fraction": 0.9373
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 4705,
+      "edge_cut_fraction": 0.8086
+     }
+    },
+    "eps_actual": 0.0297,
+    "exact_metrics_equal_to_A": {
+     "objective_km1": true,
+     "cut": true,
+     "block_weights": true,
+     "imbalance": true,
+     "STRUCT_cut": true,
+     "KNN_cut": true
+    },
+    "ALL_EXACT": true
+   },
+   "B": {
+    "identical_to_A": true,
+    "first_diff_position": null,
+    "n_diff": 0,
+    "km1_weighted": 57790340,
+    "cut_weighted": 18394999,
+    "block_max": 104,
+    "block_weights_identical": true,
+    "partition_sha256_stdout": "770aa1057adc5f3d097248acdf9ee430bb7485717f393230b02bf16f9cdc37b3",
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 100118,
+      "edge_cut_fraction": 0.8031
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 91329,
+      "edge_cut_fraction": 0.9373
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 4705,
+      "edge_cut_fraction": 0.8086
+     }
+    },
+    "eps_actual": 0.0297,
+    "exact_metrics_equal_to_A": {
+     "objective_km1": true,
+     "cut": true,
+     "block_weights": true,
+     "imbalance": true,
+     "STRUCT_cut": true,
+     "KNN_cut": true
+    },
+    "ALL_EXACT": true
+   },
+   "B0": {
+    "identical_to_A": true,
+    "first_diff_position": null,
+    "n_diff": 0,
+    "km1_weighted": 57790340,
+    "cut_weighted": 18394999,
+    "block_max": 104,
+    "block_weights_identical": true,
+    "partition_sha256_stdout": "770aa1057adc5f3d097248acdf9ee430bb7485717f393230b02bf16f9cdc37b3",
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 100118,
+      "edge_cut_fraction": 0.8031
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 91329,
+      "edge_cut_fraction": 0.9373
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 4705,
+      "edge_cut_fraction": 0.8086
+     }
+    },
+    "eps_actual": 0.0297,
+    "exact_metrics_equal_to_A": {
+     "objective_km1": true,
+     "cut": true,
+     "block_weights": true,
+     "imbalance": true,
+     "STRUCT_cut": true,
+     "KNN_cut": true
+    },
+    "ALL_EXACT": true
+   },
+   "C_kill": {
+    "identical_to_A": true,
+    "first_diff_position": null,
+    "n_diff": 0,
+    "km1_weighted": 57790340,
+    "cut_weighted": 18394999,
+    "block_max": 104,
+    "block_weights_identical": true,
+    "partition_sha256_stdout": "770aa1057adc5f3d097248acdf9ee430bb7485717f393230b02bf16f9cdc37b3",
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 100118,
+      "edge_cut_fraction": 0.8031
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 91329,
+      "edge_cut_fraction": 0.9373
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 4705,
+      "edge_cut_fraction": 0.8086
+     }
+    },
+    "eps_actual": 0.0297,
+    "exact_metrics_equal_to_A": {
+     "objective_km1": true,
+     "cut": true,
+     "block_weights": true,
+     "imbalance": true,
+     "STRUCT_cut": true,
+     "KNN_cut": true
+    },
+    "ALL_EXACT": true
+   },
+   "C_abort": {
+    "identical_to_A": true,
+    "first_diff_position": null,
+    "n_diff": 0,
+    "km1_weighted": 57790340,
+    "cut_weighted": 18394999,
+    "block_max": 104,
+    "block_weights_identical": true,
+    "partition_sha256_stdout": "770aa1057adc5f3d097248acdf9ee430bb7485717f393230b02bf16f9cdc37b3",
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 100118,
+      "edge_cut_fraction": 0.8031
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 91329,
+      "edge_cut_fraction": 0.9373
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 4705,
+      "edge_cut_fraction": 0.8086
+     }
+    },
+    "eps_actual": 0.0297,
+    "exact_metrics_equal_to_A": {
+     "objective_km1": true,
+     "cut": true,
+     "block_weights": true,
+     "imbalance": true,
+     "STRUCT_cut": true,
+     "KNN_cut": true
+    },
+    "ALL_EXACT": true
+   }
+  },
+  "ALL_IDENTICAL": true,
+  "A_eq_A_forklib": true,
+  "forklib_eq_B_B0_Ckill_Cabort": true,
+  "freight_reported_connectivity_A": 57790300.0,
+  "freight_connectivity_evaluator_skipped": false,
+  "freight_printed_precision": "6 significant digits (std::cout default)",
+  "python_km1_consistent_with_freight_printed": true,
+  "python_cut_consistent_with_freight_printed": true,
+  "python_km1_equals_freight_connectivity": true
+ },
+ "metrics_B": {
+  "km1_weighted": 57790340,
+  "cut_weighted": 18394999,
+  "cut_nets": 72688,
+  "nets": 86796,
+  "cut_net_fraction": 0.837458,
+  "lambda_mean": 4.8389,
+  "lambda_max": 91,
+  "blocks": {
+   "k": 432,
+   "used": 432,
+   "empty": 0,
+   "min": 29,
+   "p50": 104.0,
+   "p95": 104.0,
+   "max": 104,
+   "mean": 100.079,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0392,
+   "eps_actual(max/ceil(N/k)-1)": 0.0297,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "per_family_note": {
+   "STRUCT": {
+    "hyperedges_precap": 43234,
+    "pins_precap": 292572,
+    "anchors_over_cap": 104,
+    "hyperedges_out": 43564,
+    "pins_written": 292902,
+    "anchor_duplication_pins": 330,
+    "pins_discarded": 0,
+    "pin_retention": 1.0,
+    "size_max_out": 100
+   },
+   "KNN": {
+    "hyperedges_precap": 43232,
+    "pins_precap": 238104,
+    "anchors_over_cap": 0,
+    "hyperedges_out": 43232,
+    "pins_written": 238104,
+    "anchor_duplication_pins": 0,
+    "pins_discarded": 0,
+    "pin_retention": 1.0,
+    "size_max_out": 96
+   }
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 124669,
+    "cut": 100118,
+    "edge_cut_fraction": 0.8031
+   },
+   "KNN": {
+    "edges": 97436,
+    "cut": 91329,
+    "edge_cut_fraction": 0.9373
+   },
+   "NERX": {
+    "edges": 5819,
+    "cut": 4705,
+    "edge_cut_fraction": 0.8086
+   }
+  }
+ },
+ "VERDICT_EXPERIMENT_1": "EXACT_RESTART_EQUIVALENCE",
+ "baseline_mtkahypar": {
+  "km1_weighted": 41244100,
+  "cut_weighted": 16213783,
+  "cut_nets": 67160,
+  "nets": 86796,
+  "cut_net_fraction": 0.773768,
+  "lambda_mean": 4.0324,
+  "lambda_max": 94,
+  "blocks": {
+   "k": 432,
+   "used": 432,
+   "empty": 0,
+   "min": 14,
+   "p50": 102.0,
+   "p95": 104.0,
+   "max": 104,
+   "mean": 100.079,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0392,
+   "eps_actual(max/ceil(N/k)-1)": 0.0297,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "per_family_note": {
+   "STRUCT": {
+    "hyperedges_precap": 43234,
+    "pins_precap": 292572,
+    "anchors_over_cap": 104,
+    "hyperedges_out": 43564,
+    "pins_written": 292902,
+    "anchor_duplication_pins": 330,
+    "pins_discarded": 0,
+    "pin_retention": 1.0,
+    "size_max_out": 100
+   },
+   "KNN": {
+    "hyperedges_precap": 43232,
+    "pins_precap": 238104,
+    "anchors_over_cap": 0,
+    "hyperedges_out": 43232,
+    "pins_written": 238104,
+    "anchor_duplication_pins": 0,
+    "pins_discarded": 0,
+    "pin_retention": 1.0,
+    "size_max_out": 96
+   }
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 124669,
+    "cut": 102098,
+    "edge_cut_fraction": 0.819
+   },
+   "KNN": {
+    "edges": 97436,
+    "cut": 61467,
+    "edge_cut_fraction": 0.6308
+   },
+   "NERX": {
+    "edges": 5819,
+    "cut": 3160,
+    "edge_cut_fraction": 0.543
+   }
+  },
+  "manifest": {
+   "worker_stats": {
+    "hyperedges": 86796,
+    "pins": 531006,
+    "N": 43234,
+    "k": 432,
+    "threads": 8,
+    "ran_on": "local_wsl",
+    "edge_weighted": true,
+    "ew_min": 10,
+    "ew_max": 1000,
+    "ew_readback_exact": true,
+    "objective_km1": 41244100.0,
+    "objective_cut": 16213783.0,
+    "peak_rss_mb": 966.4,
+    "wall_seconds": 185.7
+   },
+   "guard": {
+    "rss_cap_gb": 2.267723264,
+    "host_available_gb_at_start": 3.267723264,
+    "margin_gb": 1.0,
+    "peak_rss_kb": 989584,
+    "killed": 0,
+    "rc": 0,
+    "wall_seconds": 190.8,
+    "returncode": 0
+   },
+   "post_checks": {
+    "length_ok": true,
+    "min_block": 0,
+    "max_block": 431,
+    "blocks_used": 432,
+    "k": 432,
+    "every_block_used": true,
+    "size_min": 14,
+    "size_max": 104,
+    "size_mean": 100.079,
+    "ceil_N_over_k": 101,
+    "balance_max_over_mean": 1.0392,
+    "max_over_allowed_eps003": 0.9997,
+    "balance_within_eps": true
+   },
+   "contract": {
+    "partitioner": "mtkahypar",
+    "preset": "DETERMINISTIC_QUALITY",
+    "objective": "KM1",
+    "epsilon": 0.03,
+    "seed": 0,
+    "vertex_weights": "unit",
+    "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+    "k": 432,
+    "k_rule": "max(1, N // 100)",
+    "hypergraph_rule": "H4_SPLIT_PRESERVE",
+    "families": [
+     "STRUCT",
+     "KNN"
+    ],
+    "worker": "scratchpad/_l1hu_local_worker.py",
+    "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+    "threads": 8,
+    "deterministic_preset_note": "DETERMINISTIC_QUALITY is thread-count independent; LOCAL_COMPUTE.json verified local == Modal bit-identical"
+   },
+   "output_sha256": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062"
+  },
+  "python_km1_equals_mtkahypar_objective": true,
+  "status": "OK"
+ },
+ "import": {
+  "dataset": "metaqa",
+  "utc": "2026-09-13T16:17:28Z",
+  "EXPERIMENTAL": true,
+  "not_canonical": "L1_LOWMEM validation arm (FREIGHT); the canonical partition is parts/H4_SK.*; nothing canonical was modified",
+  "contract": {
+   "partitioner": "FREIGHT (KaHIP, official repository)",
+   "upstream_commit": "6a35c647b8e9b254e4c5c42c043457b5316369f0",
+   "binary": {
+    "path": "/home/swastik/FREIGHT_ckpt/build/freight_con_ckpt",
+    "sha256": "421159f896a7ceaf8eee052e83dc264a93141c034769aa1fddaf07cdabbffde4",
+    "bytes": 1058896
+   },
+   "algorithm": "one-pass streaming FREIGHT (fennel_approx_sqrt score, self-sorting block vector)",
+   "worker": "/home/swastik/FREIGHT_ckpt/build/freight_con_ckpt",
+   "worker_sha256": "421159f896a7ceaf8eee052e83dc264a93141c034769aa1fddaf07cdabbffde4",
+   "worker_note": "fork binary (freight_con_ckpt) driven by src/l1_lowmem/freight.py; A == A_forklib == B position-for-position",
+   "objective": "connectivity = weighted KM1 (freight_con, MODE_CONNECTIVITY)",
+   "epsilon": 0.03,
+   "imbalance_percent": 3,
+   "seed": 0,
+   "num_streams_passes": 1,
+   "vertex_weights": "unit",
+   "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+   "k": 432,
+   "k_rule": "max(1, N // 100)",
+   "hypergraph_rule": "H4_SPLIT_PRESERVE",
+   "families": [
+    "STRUCT",
+    "KNN"
+   ],
+   "node_stream_order": "canonical node-position order (H4_SK_STREAM_V1 shards)",
+   "random_shuffle": false
+  },
+  "inputs": {
+   "DATASET_json_RECORD_SHA256": "8ab4506933d0df8f9b8443848b9da80e49e698cf9cb40ef32523fdb4e31e2c87",
+   "hypergraph_file": "data/l1_canonical/metaqa/hypergraph/H4_SK.npz",
+   "hypergraph_sha256": "edd0cb51683df14973cbb4021518455b97c827ab3aad577d238ae07227f84743",
+   "hypergraph_content_digest": "bebdd65c305a1f565c3127a8ef91207db03a7e27af487062d8bbc548a2347fcc",
+   "ORIGINAL_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "official_netl_sha256": "9dd470ca2bd2fda5e49f6dc813c3d7a8951dc37178a8b9373e8ca0dd7384d811",
+   "stream_manifest_sha256": "c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7",
+   "hyperedges": 86796,
+   "pins": 531006,
+   "N": 43234
+  },
+  "STATUS": "OK",
+  "worker_stats": {
+   "N": 43234,
+   "k": 432,
+   "hyperedges": 86796,
+   "pins": 531006,
+   "objective_km1": 57790340,
+   "objective_cut": 18394999,
+   "peak_rss_mb": 10.5,
+   "wall_seconds": 1.75,
+   "peak_rss_mb_stock_monolithic": 10.3,
+   "wall_seconds_stock_monolithic": 1.49,
+   "ran_on": "local_wsl"
+  },
+  "post_checks": {
+   "length_ok": true,
+   "min_block": 0,
+   "max_block": 431,
+   "blocks_used": 432,
+   "k": 432,
+   "every_block_used": true,
+   "size_min": 29,
+   "size_max": 104,
+   "size_mean": 100.079,
+   "ceil_N_over_k": 101,
+   "balance_max_over_mean": 1.0392,
+   "balance_within_eps": true
+  },
+  "EQUIVALENCE": {
+   "experiment_1": "EXACT_RESTART_EQUIVALENCE",
+   "runs_identical_to_A": {
+    "A": true,
+    "A_forklib": true,
+    "B": true,
+    "B0": true,
+    "C_kill": true,
+    "C_abort": true
+   }
+  },
+  "output": {
+   "file": "data/l1_canonical/metaqa/parts/LOWMEM__FREIGHT_con.npy",
+   "bytes": 346000,
+   "sha256": "004bdb6c88d302c43457e51085e8fdbc267680c45abd39be794f525c4e42e5a7",
+   "dtype": "int64",
+   "n": 43234
+  },
+  "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+  "reimport": {
+   "utc": "2026-09-13T16:17:28Z",
+   "reason": "manifest shape: contract.worker / worker_sha256 added for the canonical replay reader; vector unchanged",
+   "previous_import_utc": "2026-09-13T15:30:54Z"
+  }
+ }
+}

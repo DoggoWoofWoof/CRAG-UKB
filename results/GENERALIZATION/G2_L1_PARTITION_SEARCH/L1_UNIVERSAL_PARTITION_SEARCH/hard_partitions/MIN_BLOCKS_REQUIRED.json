@@ -1,0 +1,471 @@
+{
+ "NOTE": "reported per the program and deliberately NOT used as the winning objective.  On this matrix the association with utility is real (see PREDICTIVENESS) but not sufficient: it cannot vary at all on a one-gold-node corpus whose utility does vary, and the previous program has a standing counter-example where every containment statistic worsened while F6 ALL@50 gained significantly",
+ "DEFINITION": "min_blocks = number of DISTINCT partitions the required nodes of one query fall into; the fewest blocks any selector would have to pick",
+ "PER_CORPUS": {
+  "metaqa": {
+   "CURRENT": {
+    "queries": 1998,
+    "required_nodes_mean": 7.446,
+    "min_blocks_mean": 5.784,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 15.0,
+    "min_blocks_max": 104,
+    "frac_single_block": 0.462,
+    "colocation_ratio": 0.7767,
+    "npart": 401
+   },
+   "H1_KAHIP_STRONG__G0_TOPOLOGY_C": {
+    "queries": 1998,
+    "required_nodes_mean": 7.446,
+    "min_blocks_mean": 5.815,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 15.0,
+    "min_blocks_max": 110,
+    "frac_single_block": 0.455,
+    "colocation_ratio": 0.7809,
+    "npart": 401
+   },
+   "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C": {
+    "queries": 1998,
+    "required_nodes_mean": 7.446,
+    "min_blocks_mean": 5.816,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 15.0,
+    "min_blocks_max": 108,
+    "frac_single_block": 0.459,
+    "colocation_ratio": 0.781,
+    "npart": 401
+   },
+   "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE": {
+    "queries": 1998,
+    "required_nodes_mean": 7.446,
+    "min_blocks_mean": 4.67,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 11.0,
+    "min_blocks_max": 92,
+    "frac_single_block": 0.6061,
+    "colocation_ratio": 0.6271,
+    "npart": 401
+   },
+   "H4_MTKAHYPAR_TRUE_HYPERGRAPH__G2_TRUE_HYPERGRAPH": {
+    "queries": 1998,
+    "required_nodes_mean": 7.446,
+    "min_blocks_mean": 4.569,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 10.299999999999955,
+    "min_blocks_max": 100,
+    "frac_single_block": 0.6101,
+    "colocation_ratio": 0.6135,
+    "npart": 401
+   }
+  },
+  "webqsp": {
+   "CURRENT": {
+    "queries": 1419,
+    "required_nodes_mean": 5.965,
+    "min_blocks_mean": 3.664,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 7.0,
+    "min_blocks_max": 69,
+    "frac_single_block": 0.5208,
+    "colocation_ratio": 0.6142,
+    "npart": 7814
+   },
+   "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C": {
+    "queries": 1419,
+    "required_nodes_mean": 5.965,
+    "min_blocks_mean": 3.574,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 7.0,
+    "min_blocks_max": 70,
+    "frac_single_block": 0.53,
+    "colocation_ratio": 0.5991,
+    "npart": 7814
+   },
+   "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE": {
+    "queries": 1419,
+    "required_nodes_mean": 5.965,
+    "min_blocks_mean": 3.264,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 6.0,
+    "min_blocks_max": 68,
+    "frac_single_block": 0.5539,
+    "colocation_ratio": 0.5473,
+    "npart": 7814
+   },
+   "H4_MTKAHYPAR_TRUE_HYPERGRAPH__G2_TRUE_HYPERGRAPH": {
+    "queries": 1419,
+    "required_nodes_mean": 5.965,
+    "min_blocks_mean": 3.08,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 6.0,
+    "min_blocks_max": 68,
+    "frac_single_block": 0.5631,
+    "colocation_ratio": 0.5163,
+    "npart": 7814
+   }
+  },
+  "2wiki_clean": {
+   "CURRENT": {
+    "queries": 2000,
+    "required_nodes_mean": 2.417,
+    "min_blocks_mean": 1.98,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 3.0,
+    "min_blocks_max": 4,
+    "frac_single_block": 0.2365,
+    "colocation_ratio": 0.8192,
+    "npart": 658
+   },
+   "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C": {
+    "queries": 2000,
+    "required_nodes_mean": 2.417,
+    "min_blocks_mean": 1.974,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 3.0,
+    "min_blocks_max": 4,
+    "frac_single_block": 0.241,
+    "colocation_ratio": 0.8169,
+    "npart": 658
+   },
+   "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE": {
+    "queries": 2000,
+    "required_nodes_mean": 2.417,
+    "min_blocks_mean": 2.09,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 4.0,
+    "min_blocks_max": 4,
+    "frac_single_block": 0.2035,
+    "colocation_ratio": 0.8645,
+    "npart": 658
+   },
+   "H4_MTKAHYPAR_TRUE_HYPERGRAPH__G2_TRUE_HYPERGRAPH": {
+    "queries": 2000,
+    "required_nodes_mean": 2.417,
+    "min_blocks_mean": 1.954,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 3.0,
+    "min_blocks_max": 4,
+    "frac_single_block": 0.267,
+    "colocation_ratio": 0.8082,
+    "npart": 658
+   }
+  },
+  "musique_clean": {
+   "CURRENT": {
+    "queries": 2000,
+    "required_nodes_mean": 2.34,
+    "min_blocks_mean": 1.775,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 3.0,
+    "min_blocks_max": 4,
+    "frac_single_block": 0.3725,
+    "colocation_ratio": 0.7585,
+    "npart": 136
+   },
+   "H1_KAHIP_STRONG__G0_TOPOLOGY_C": {
+    "queries": 2000,
+    "required_nodes_mean": 2.34,
+    "min_blocks_mean": 1.758,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 3.0,
+    "min_blocks_max": 4,
+    "frac_single_block": 0.39,
+    "colocation_ratio": 0.7513,
+    "npart": 136
+   },
+   "H2_KAHIP_CONNECTED__G0_TOPOLOGY_C": {
+    "queries": 2000,
+    "required_nodes_mean": 2.34,
+    "min_blocks_mean": 1.768,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 3.0,
+    "min_blocks_max": 4,
+    "frac_single_block": 0.371,
+    "colocation_ratio": 0.7556,
+    "npart": 136
+   },
+   "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C": {
+    "queries": 2000,
+    "required_nodes_mean": 2.34,
+    "min_blocks_mean": 1.736,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 3.0,
+    "min_blocks_max": 4,
+    "frac_single_block": 0.406,
+    "colocation_ratio": 0.7417,
+    "npart": 136
+   },
+   "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE": {
+    "queries": 2000,
+    "required_nodes_mean": 2.34,
+    "min_blocks_mean": 1.858,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 3.0,
+    "min_blocks_max": 4,
+    "frac_single_block": 0.2985,
+    "colocation_ratio": 0.794,
+    "npart": 136
+   },
+   "H4_MTKAHYPAR_TRUE_HYPERGRAPH__G2_TRUE_HYPERGRAPH": {
+    "queries": 2000,
+    "required_nodes_mean": 2.34,
+    "min_blocks_mean": 1.881,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 3.0,
+    "min_blocks_max": 4,
+    "frac_single_block": 0.29,
+    "colocation_ratio": 0.8038,
+    "npart": 136
+   }
+  },
+  "squad_clean": {
+   "CURRENT": {
+    "queries": 2000,
+    "required_nodes_mean": 1.0,
+    "min_blocks_mean": 1.0,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 1.0,
+    "min_blocks_max": 1,
+    "frac_single_block": 1.0,
+    "colocation_ratio": 1.0,
+    "npart": 190
+   },
+   "H1_KAHIP_STRONG__G0_TOPOLOGY_C": {
+    "queries": 2000,
+    "required_nodes_mean": 1.0,
+    "min_blocks_mean": 1.0,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 1.0,
+    "min_blocks_max": 1,
+    "frac_single_block": 1.0,
+    "colocation_ratio": 1.0,
+    "npart": 190
+   },
+   "H2_KAHIP_CONNECTED__G0_TOPOLOGY_C": {
+    "queries": 2000,
+    "required_nodes_mean": 1.0,
+    "min_blocks_mean": 1.0,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 1.0,
+    "min_blocks_max": 1,
+    "frac_single_block": 1.0,
+    "colocation_ratio": 1.0,
+    "npart": 190
+   },
+   "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C": {
+    "queries": 2000,
+    "required_nodes_mean": 1.0,
+    "min_blocks_mean": 1.0,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 1.0,
+    "min_blocks_max": 1,
+    "frac_single_block": 1.0,
+    "colocation_ratio": 1.0,
+    "npart": 190
+   },
+   "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE": {
+    "queries": 2000,
+    "required_nodes_mean": 1.0,
+    "min_blocks_mean": 1.0,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 1.0,
+    "min_blocks_max": 1,
+    "frac_single_block": 1.0,
+    "colocation_ratio": 1.0,
+    "npart": 190
+   },
+   "H4_MTKAHYPAR_TRUE_HYPERGRAPH__G2_TRUE_HYPERGRAPH": {
+    "queries": 2000,
+    "required_nodes_mean": 1.0,
+    "min_blocks_mean": 1.0,
+    "min_blocks_median": 1.0,
+    "min_blocks_p90": 1.0,
+    "min_blocks_max": 1,
+    "frac_single_block": 1.0,
+    "colocation_ratio": 1.0,
+    "npart": 190
+   }
+  },
+  "hotpotqa_clean": {
+   "CURRENT": {
+    "queries": 2000,
+    "required_nodes_mean": 2.0,
+    "min_blocks_mean": 1.664,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 2.0,
+    "min_blocks_max": 2,
+    "frac_single_block": 0.336,
+    "colocation_ratio": 0.832,
+    "npart": 5074
+   },
+   "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C": {
+    "queries": 2000,
+    "required_nodes_mean": 2.0,
+    "min_blocks_mean": 1.66,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 2.0,
+    "min_blocks_max": 2,
+    "frac_single_block": 0.34,
+    "colocation_ratio": 0.83,
+    "npart": 5074
+   },
+   "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE": {
+    "queries": 2000,
+    "required_nodes_mean": 2.0,
+    "min_blocks_mean": 1.718,
+    "min_blocks_median": 2.0,
+    "min_blocks_p90": 2.0,
+    "min_blocks_max": 2,
+    "frac_single_block": 0.282,
+    "colocation_ratio": 0.859,
+    "npart": 5074
+   }
+  }
+ },
+ "PREDICTIVENESS": {
+  "n_cells": 22,
+  "pearson_r": -0.9803,
+  "spearman_rho": -0.4903,
+  "spearman_p": 0.0205,
+  "PEARSON_CAVEAT": "Pearson is dominated by two MetaQA cells at d_min_blocks ~ -1.2; Spearman is the honest summary",
+  "DEGENERATE_CORPORA": [
+   "squad_clean"
+  ],
+  "DEGENERATE_NOTE": "these corpora have exactly one required node per query, so min_blocks == 1 for EVERY partition and containment cannot vary -- yet their utility does, which is why containment is reported and not optimised",
+  "CELLS": [
+   {
+    "ds": "2wiki_clean",
+    "tag": "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C",
+    "d_min_blocks": -0.006,
+    "d_F6_ALL_P50": 0.0015
+   },
+   {
+    "ds": "2wiki_clean",
+    "tag": "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE",
+    "d_min_blocks": 0.11,
+    "d_F6_ALL_P50": -0.0045
+   },
+   {
+    "ds": "2wiki_clean",
+    "tag": "H4_MTKAHYPAR_TRUE_HYPERGRAPH__G2_TRUE_HYPERGRAPH",
+    "d_min_blocks": -0.026,
+    "d_F6_ALL_P50": -0.002
+   },
+   {
+    "ds": "hotpotqa_clean",
+    "tag": "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C",
+    "d_min_blocks": -0.004,
+    "d_F6_ALL_P50": 0.0005
+   },
+   {
+    "ds": "hotpotqa_clean",
+    "tag": "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE",
+    "d_min_blocks": 0.054,
+    "d_F6_ALL_P50": 0.014
+   },
+   {
+    "ds": "metaqa",
+    "tag": "H1_KAHIP_STRONG__G0_TOPOLOGY_C",
+    "d_min_blocks": 0.031,
+    "d_F6_ALL_P50": -0.002
+   },
+   {
+    "ds": "metaqa",
+    "tag": "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C",
+    "d_min_blocks": 0.032,
+    "d_F6_ALL_P50": 0.003
+   },
+   {
+    "ds": "metaqa",
+    "tag": "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE",
+    "d_min_blocks": -1.114,
+    "d_F6_ALL_P50": 0.1201
+   },
+   {
+    "ds": "metaqa",
+    "tag": "H4_MTKAHYPAR_TRUE_HYPERGRAPH__G2_TRUE_HYPERGRAPH",
+    "d_min_blocks": -1.215,
+    "d_F6_ALL_P50": 0.1286
+   },
+   {
+    "ds": "musique_clean",
+    "tag": "H1_KAHIP_STRONG__G0_TOPOLOGY_C",
+    "d_min_blocks": -0.017,
+    "d_F6_ALL_P50": 0.0005
+   },
+   {
+    "ds": "musique_clean",
+    "tag": "H2_KAHIP_CONNECTED__G0_TOPOLOGY_C",
+    "d_min_blocks": -0.007,
+    "d_F6_ALL_P50": -0.0005
+   },
+   {
+    "ds": "musique_clean",
+    "tag": "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C",
+    "d_min_blocks": -0.039,
+    "d_F6_ALL_P50": -0.005
+   },
+   {
+    "ds": "musique_clean",
+    "tag": "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE",
+    "d_min_blocks": 0.083,
+    "d_F6_ALL_P50": -0.0005
+   },
+   {
+    "ds": "musique_clean",
+    "tag": "H4_MTKAHYPAR_TRUE_HYPERGRAPH__G2_TRUE_HYPERGRAPH",
+    "d_min_blocks": 0.106,
+    "d_F6_ALL_P50": -0.001
+   },
+   {
+    "ds": "squad_clean",
+    "tag": "H1_KAHIP_STRONG__G0_TOPOLOGY_C",
+    "d_min_blocks": 0.0,
+    "d_F6_ALL_P50": 0.001
+   },
+   {
+    "ds": "squad_clean",
+    "tag": "H2_KAHIP_CONNECTED__G0_TOPOLOGY_C",
+    "d_min_blocks": 0.0,
+    "d_F6_ALL_P50": -0.0015
+   },
+   {
+    "ds": "squad_clean",
+    "tag": "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C",
+    "d_min_blocks": 0.0,
+    "d_F6_ALL_P50": 0.0005
+   },
+   {
+    "ds": "squad_clean",
+    "tag": "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE",
+    "d_min_blocks": 0.0,
+    "d_F6_ALL_P50": -0.012
+   },
+   {
+    "ds": "squad_clean",
+    "tag": "H4_MTKAHYPAR_TRUE_HYPERGRAPH__G2_TRUE_HYPERGRAPH",
+    "d_min_blocks": 0.0,
+    "d_F6_ALL_P50": -0.013
+   },
+   {
+    "ds": "webqsp",
+    "tag": "H3_MTKAHYPAR_GRAPH__G0_TOPOLOGY_C",
+    "d_min_blocks": -0.09,
+    "d_F6_ALL_P50": 0.0078
+   },
+   {
+    "ds": "webqsp",
+    "tag": "H3_MTKAHYPAR_GRAPH__G1_LOCAL_HYPER_CLIQUE",
+    "d_min_blocks": -0.4,
+    "d_F6_ALL_P50": 0.0571
+   },
+   {
+    "ds": "webqsp",
+    "tag": "H4_MTKAHYPAR_TRUE_HYPERGRAPH__G2_TRUE_HYPERGRAPH",
+    "d_min_blocks": -0.584,
+    "d_F6_ALL_P50": 0.0599
+   }
+  ]
+ }
+}

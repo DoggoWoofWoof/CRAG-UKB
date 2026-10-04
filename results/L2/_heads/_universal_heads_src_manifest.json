@@ -1,0 +1,52 @@
+{
+ "source": [
+  "2wiki_clean",
+  "musique_clean"
+ ],
+ "subdir": "gte_qwen",
+ "device": "cpu",
+ "K": 8,
+ "trained_on": "SOURCE TRAIN only (2wiki+musique); NO target data; NO test eval",
+ "heads": {
+  "offset": {
+   "kind": "hard",
+   "ckpt": "results/L2/_heads/universal_offset_src_gteqwen.pt",
+   "params": 1574912,
+   "train_sec": 8.7,
+   "source_train_probe_fullcov20": {
+    "2wiki_clean": {
+     "dense@20": 90.7,
+     "head@20": 95.87,
+     "equal@20": 96.25,
+     "n_probe": 1333
+    },
+    "musique_clean": {
+     "dense@20": 91.9,
+     "head@20": 97.37,
+     "equal@20": 95.95,
+     "n_probe": 1333
+    }
+   }
+  },
+  "mixture": {
+   "kind": "mix_hard",
+   "ckpt": "results/L2/_heads/universal_mixture_src_gteqwen.pt",
+   "params": 7090688,
+   "train_sec": 58.0,
+   "source_train_probe_fullcov20": {
+    "2wiki_clean": {
+     "dense@20": 90.7,
+     "head@20": 94.45,
+     "equal@20": 95.27,
+     "n_probe": 1333
+    },
+    "musique_clean": {
+     "dense@20": 91.9,
+     "head@20": 97.0,
+     "equal@20": 95.65,
+     "n_probe": 1333
+    }
+   }
+  }
+ }
+}

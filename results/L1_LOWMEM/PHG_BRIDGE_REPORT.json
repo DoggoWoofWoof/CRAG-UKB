@@ -1,0 +1,639 @@
+{
+ "RECORD": "PHG_BRIDGE_REPORT",
+ "classification": "PHG_SCALE_BRIDGE",
+ "dataset": "musique",
+ "arm": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4 + PHG_NONEMPTY_REPAIR_V1",
+ "utc": "2026-09-13T19:16:20Z",
+ "supersedes": null,
+ "preregistration": {
+  "path": "results/L1_LOWMEM/PHG_BRIDGE_PREREG.json",
+  "bytes": 20761,
+  "sha256": "7cb6cbe2fc29c7497849e1391ff9751bad848354d84cebb2ced2c80bf7bea95b"
+ },
+ "ruling": {
+  "path": "results/L1_LOWMEM/PHG_SMALL_DATASET_VALIDATION_RULING.json",
+  "bytes": 17869,
+  "sha256": "f7cc6337f009ecd4ac889a19d7ef2397aacc6e1f504be116331fc0d357e2a182"
+ },
+ "run_record": {
+  "path": "results/L1_LOWMEM/PHG_BRIDGE_RUNS_musique.json",
+  "bytes": 93008,
+  "sha256": "704a4126e508b9cc2fb594d4956d04481450ce1447dbb40de57d821c8bd4a26d"
+ },
+ "STATUS": "STOP_FOR_REVIEW",
+ "DECISION": "PHG_SCALE_BRIDGE_COMPLETE",
+ "claim": "feasibility only: the chain completed locally under the frozen experimental PHG contract; absolute L1 numbers recorded; no comparative quality claim against Mt-KaHyPar (no reference exists for this corpus)",
+ "question": "does exact H4_SK -> PHG -> NONEMPTY_REPAIR_V1 if needed -> P50 -> canonical L1 complete locally with sane partition / L1 behaviour?",
+ "sanity_checks": {
+  "S1_downstream_executed": {
+   "status": "BASELINE_ABSENT",
+   "pass": true,
+   "expected": "BASELINE_ABSENT"
+  },
+  "S2_population": {
+   "nq": 2000,
+   "row_query_ids_sha256": "f3cffcf9050279448d2eef8aeccc1cc53d07f341ca4edb134e78b7fec378afbb",
+   "expected_nq": 2000,
+   "expected_sha256": "f3cffcf9050279448d2eef8aeccc1cc53d07f341ca4edb134e78b7fec378afbb",
+   "pass": true
+  },
+  "S3_canonical_eligibility": {
+   "ELIGIBLE": true,
+   "max_over_mean": 1.0397,
+   "blocks_used": 1175,
+   "npart": 1175,
+   "pass": true
+  },
+  "S4_definitional_consistency": {
+   "n_docs": 117534,
+   "N": 117534,
+   "npart": 1175,
+   "k": 1175,
+   "finite": true,
+   "BASE_ALL_le_ANY": true,
+   "SAFE_ALL_le_ANY": true,
+   "scope_positive": true,
+   "CORR_present": true,
+   "pass": true
+  },
+  "S5_no_numeric_retrieval_threshold": {
+   "pass": true,
+   "note": "no threshold exists; numbers recorded as they come"
+  },
+  "ALL_PASS": true
+ },
+ "timing_seconds": {
+  "1_input_verified": 5.4,
+  "2_structure_gate": 53.7,
+  "3_partition_R1_and_repeat": 167.6,
+  "3b_repair": 43.7,
+  "4_5_import_replay_cache_L1": 468.2
+ },
+ "structure_gate": {
+  "gate": "PASS",
+  "N_returned": 117534,
+  "M_with_pins": 250732,
+  "P_returned": 6014938,
+  "weight_sum": 57430819,
+  "digest_from_queries": "27628d1c0319dcbbdf3fa932b647ce2a9b21859cea716402b11da3067e281a75",
+  "ORIGINAL_STRUCTURE_SHA256": "27628d1c0319dcbbdf3fa932b647ce2a9b21859cea716402b11da3067e281a75",
+  "partition_run_dumps_identical": true,
+  "zoltan_removed_or_warning_lines": [],
+  "weight_reception": {
+   "python_weighted_km1_of_rank_ownership": 93620462,
+   "zoltan_cutl_gate_mode": 93620464.0,
+   "relative_diff": 2.1e-08,
+   "tolerance_relative": 0.0001
+  },
+  "problems": []
+ },
+ "partition": {
+  "metrics_final": {
+   "km1_weighted": 85311179,
+   "cut_weighted": 38563215,
+   "cut_nets": 211235,
+   "nets": 250732,
+   "cut_net_fraction": 0.842473,
+   "lambda_mean": 8.9773,
+   "lambda_max": 97,
+   "blocks": {
+    "k": 1175,
+    "used": 1175,
+    "empty": 0,
+    "min": 1,
+    "p50": 103.0,
+    "p95": 103.0,
+    "max": 104,
+    "mean": 100.029,
+    "ceil_N_over_k": 101,
+    "max_over_mean": 1.0397,
+    "eps_actual(max/ceil(N/k)-1)": 0.0297,
+    "freight_upper_bound": 104,
+    "within_eps_0.03": true
+   },
+   "per_family_note": {
+    "STRUCT": {
+     "hyperedges_precap": 107676,
+     "pins_precap": 5410236,
+     "anchors_over_cap": 9727,
+     "hyperedges_out": 136125,
+     "pins_written": 5438685,
+     "anchor_duplication_pins": 28449,
+     "pins_discarded": 0,
+     "pin_retention": 1.0,
+     "size_max_out": 100
+    },
+    "KNN": {
+     "hyperedges_precap": 114607,
+     "pins_precap": 576253,
+     "anchors_over_cap": 0,
+     "hyperedges_out": 114607,
+     "pins_written": 576253,
+     "anchor_duplication_pins": 0,
+     "pins_discarded": 0,
+     "pin_retention": 1.0,
+     "size_max_out": 41
+    }
+   },
+   "family_cuts": {
+    "STRUCT": {
+     "edges": 2651280,
+     "cut": 2561853,
+     "edge_cut_fraction": 0.9663
+    },
+    "KNN": {
+     "edges": 230823,
+     "cut": 95983,
+     "edge_cut_fraction": 0.4158
+    },
+    "NERX": {
+     "edges": 733541,
+     "cut": 647845,
+     "edge_cut_fraction": 0.8832
+    }
+   }
+  },
+  "raw_validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 9,
+   "max_block": 104,
+   "contract_bound_ceil_1.03_N_over_k": 104,
+   "zoltan_tolerance_bound_1.03_x_mean": 103.03,
+   "gate": "PARTITION_INVALID"
+  },
+  "repair": {
+   "noop": false,
+   "empty_blocks": [
+    330,
+    358,
+    365,
+    366,
+    367,
+    1164,
+    1165,
+    1171,
+    1173
+   ],
+   "moves": [
+    {
+     "empty_block": 330,
+     "node_position": 663,
+     "donor_block": 866,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 396,
+     "incident_nets": 68,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117534
+    },
+    {
+     "empty_block": 358,
+     "node_position": 692,
+     "donor_block": 1041,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 395,
+     "incident_nets": 12,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117533
+    },
+    {
+     "empty_block": 365,
+     "node_position": 800,
+     "donor_block": 684,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 394,
+     "incident_nets": 22,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117532
+    },
+    {
+     "empty_block": 366,
+     "node_position": 823,
+     "donor_block": 2,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 393,
+     "incident_nets": 10,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117531
+    },
+    {
+     "empty_block": 367,
+     "node_position": 1205,
+     "donor_block": 189,
+     "donor_size_before": 104,
+     "donor_size_after": 103,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 392,
+     "incident_nets": 4,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117530
+    },
+    {
+     "empty_block": 1164,
+     "node_position": 1225,
+     "donor_block": 411,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 391,
+     "incident_nets": 5,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117529
+    },
+    {
+     "empty_block": 1165,
+     "node_position": 1391,
+     "donor_block": 68,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 390,
+     "incident_nets": 9,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117528
+    },
+    {
+     "empty_block": 1171,
+     "node_position": 1713,
+     "donor_block": 412,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 389,
+     "incident_nets": 4,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117527
+    },
+    {
+     "empty_block": 1173,
+     "node_position": 2051,
+     "donor_block": 593,
+     "donor_size_before": 104,
+     "donor_size_after": 103,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 388,
+     "incident_nets": 12,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117526
+    }
+   ],
+   "postconditions": {
+    "same_N": true,
+    "assigned_once": true,
+    "same_k": true,
+    "empty_blocks_after": 0,
+    "max_block_after": 104,
+    "contract_bound": 104,
+    "H4_SK_unchanged": true,
+    "moves": 9,
+    "empty_blocks_before": 9,
+    "moves_equal_empties": true,
+    "nodes_changed": 9,
+    "nodes_changed_equal_moves": true,
+    "km1_consistent": true,
+    "PASS": true
+   },
+   "after": {
+    "validity": {
+     "length_ok": true,
+     "ids_in_range": true,
+     "empty_blocks": 0,
+     "max_block": 104,
+     "contract_bound_ceil_1.03_N_over_k": 104,
+     "zoltan_tolerance_bound_1.03_x_mean": 103.03,
+     "gate": "PASS"
+    },
+    "km1_weighted": 85311179,
+    "cut_weighted": 38563215,
+    "blocks": {
+     "k": 1175,
+     "used": 1175,
+     "empty": 0,
+     "min": 1,
+     "p50": 103.0,
+     "p95": 103.0,
+     "max": 104,
+     "mean": 100.029,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0397,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 2651280,
+      "cut": 2561853,
+      "edge_cut_fraction": 0.9663
+     },
+     "KNN": {
+      "edges": 230823,
+      "cut": 95983,
+      "edge_cut_fraction": 0.4158
+     },
+     "NERX": {
+      "edges": 733541,
+      "cut": 647845,
+      "edge_cut_fraction": 0.8832
+     }
+    },
+    "vector_sha256": "a62d040d2d60412765fba065ac9b630b58e60de79fa9a69c1ff586eff82637c8",
+    "delta_km1_total": 0,
+    "struct_cut_delta": 0.0,
+    "knn_cut_delta": 0.0,
+    "repaired_npy": {
+     "path": "data/l1_lowmem/musique/phg_repair1/repaired.npy",
+     "bytes": 940400,
+     "sha256": "5886ddb62c0eba6b841b9f429444c51782f1bb9413feab4041c01d14e69a51c7"
+    }
+   }
+  },
+  "memory": {
+   "peak_rss_kb_per_rank_time_v": [
+    182152,
+    167036,
+    169744,
+    168088
+   ],
+   "ru_maxrss_kb_per_rank": [
+    182152,
+    167036,
+    169744,
+    168088
+   ],
+   "max_rank_peak_kb": 182152,
+   "sum_of_rank_peaks_kb": 687020,
+   "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+  },
+  "timing": {
+   "partition_wall_seconds": 34.824,
+   "driver_total_seconds_rank0": 65.71,
+   "load_seconds_per_rank": [
+    26.981,
+    26.69,
+    27.501,
+    26.441
+   ],
+   "job_wall_seconds": 76.87
+  },
+  "repeat": {
+   "identical_partition": true,
+   "n_diff": 0,
+   "km1_repeat": 85311179,
+   "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+  },
+  "python_km1_vs_zoltan_cutl": {
+   "python_km1": 85311179,
+   "zoltan_cutl_float": 85311176.0,
+   "relative_diff": 4e-08,
+   "consistent_within_float32": true
+  }
+ },
+ "l1_absolute": {
+  "BASE_ALL_P50": 0.6415,
+  "BASE_ANY_P50": 0.9905,
+  "BASE_SCOPE_NODES": 5115.5,
+  "SAFE_ALL_P50": 0.6965,
+  "SAFE_ANY_P50": 0.992,
+  "SAFE_SCOPE_NODES": 5112.8,
+  "BND_ALL_P50": 0.6415,
+  "CORR": {
+   "dALL": 0.055,
+   "gained": 121,
+   "lost": 11,
+   "net": 110,
+   "mcnemar_p": 0.0,
+   "sig": true,
+   "gold_admitted": 185,
+   "gold_evicted": 26,
+   "churn_per_query": 4.707,
+   "churn_max": 6,
+   "queries_with_zero_churn": 5
+  },
+  "BALANCE": {
+   "npart": 1175,
+   "blocks_used": 1175,
+   "size_min": 1,
+   "size_max": 104,
+   "size_median": 103.0,
+   "size_mean": 100.03,
+   "size_p90": 103.0,
+   "size_p99": 103.0,
+   "size_cv": 0.1146,
+   "max_over_mean": 1.0397,
+   "ELIGIBLE": true
+  },
+  "CUT": {
+   "STRUCT": {
+    "edges": 2651280,
+    "cut": 2561853,
+    "edge_cut_fraction": 0.9663
+   },
+   "KNN": {
+    "edges": 230823,
+    "cut": 95983,
+    "edge_cut_fraction": 0.4158
+   },
+   "NERX": {
+    "edges": 733541,
+    "cut": 647845,
+    "edge_cut_fraction": 0.8832
+   }
+  }
+ },
+ "population": {
+  "eval_split": "dev",
+  "sample_rule": "EVAL_SPLITS dev",
+  "nq": 2000,
+  "row_query_ids_sha256": "f3cffcf9050279448d2eef8aeccc1cc53d07f341ca4edb134e78b7fec378afbb"
+ },
+ "by_hop": null,
+ "downstream_status": "BASELINE_ABSENT",
+ "context_not_claims": {
+  "freight_one_pass_frozen": {
+   "km1_weighted": 167482101,
+   "cut_weighted": 53050984,
+   "blocks": {
+    "k": 1175,
+    "used": 1175,
+    "empty": 0,
+    "min": 57,
+    "p50": 104.0,
+    "p95": 104.0,
+    "max": 104,
+    "mean": 100.029,
+    "ceil_N_over_k": 101,
+    "max_over_mean": 1.0397,
+    "eps_actual(max/ceil(N/k)-1)": 0.0297,
+    "freight_upper_bound": 104,
+    "within_eps_0.03": true
+   },
+   "family_cuts": {
+    "STRUCT": {
+     "edges": 2651280,
+     "cut": 2593202,
+     "edge_cut_fraction": 0.9781
+    },
+    "KNN": {
+     "edges": 230823,
+     "cut": 175042,
+     "edge_cut_fraction": 0.7583
+    },
+    "NERX": {
+     "edges": 733541,
+     "cut": 706337,
+     "edge_cut_fraction": 0.9629
+    }
+   },
+   "status": "FREIGHT_CLOSED; context only, not a reference partitioner"
+  },
+  "mtkahypar_blocker": {
+   "status": "RESOURCE_INFEASIBLE_LOCAL",
+   "record": {
+    "path": "data/l1_canonical/musique/parts/H4_SK.FAILED.json",
+    "bytes": 1838,
+    "sha256": "e57b84b033980b4afe8cebeda91a69a598a86bb564b7c9a7d9c6b77bde3b017e"
+   },
+   "peak_rss_kb_at_kill": 6002748,
+   "rss_cap_gb": 6.0,
+   "wall_seconds_at_kill": 1132.0,
+   "threads": 4,
+   "km1_weighted": null,
+   "note": "no partition exists; nothing to compare against; resources only"
+  },
+  "diagnostic_context": {
+   "km1_ratio_vs_freight_one_pass": 0.5094,
+   "blocker_resources": {
+    "mtkahypar_retry_peak_rss_mb_at_kill": 5862.1,
+    "mtkahypar_retry_wall_seconds_at_kill": 1132.0,
+    "phg_peak_rss_mb_max_rank": 177.9,
+    "phg_peak_rss_mb_sum_ranks_upper_bound": 670.9,
+    "phg_partition_wall_seconds": 34.824,
+    "phg_job_wall_seconds": 76.87
+   }
+  },
+  "diagnostic_vs_freight_closed_arm": {
+   "note": "diagnostic only: FREIGHT is a closed arm (FREIGHT_CLOSED), not a reference partitioner; no decision depends on this; no claim is made",
+   "nq": 2000,
+   "SAFE_ALL_P50": {
+    "FREIGHT": 0.473,
+    "PHG": 0.6965,
+    "delta_PHG_minus_FREIGHT": 0.2235,
+    "PHG_only_covered": 487,
+    "FREIGHT_only_covered": 40,
+    "mcnemar_p_reporter": 0.0,
+    "exact_p": 9.921380551204892e-99
+   },
+   "BASE_ALL_P50": {
+    "FREIGHT": 0.371,
+    "PHG": 0.6415,
+    "delta_PHG_minus_FREIGHT": 0.2705,
+    "PHG_only_covered": 581,
+    "FREIGHT_only_covered": 40,
+    "mcnemar_p_reporter": 0.0,
+    "exact_p": 4.434490698790262e-124
+   },
+   "freight_absolute": {
+    "BASE_ALL_P50": 0.371,
+    "BASE_ANY_P50": 0.9045,
+    "BASE_SCOPE_NODES": 5176.0,
+    "SAFE_ALL_P50": 0.473,
+    "SAFE_ANY_P50": 0.96,
+    "SAFE_SCOPE_NODES": 5169.1,
+    "BND_ALL_P50": 0.371
+   },
+   "freight_CORR": {
+    "dALL": 0.102,
+    "gained": 217,
+    "lost": 13,
+    "net": 204,
+    "mcnemar_p": 0.0,
+    "sig": true,
+    "gold_admitted": 557,
+    "gold_evicted": 46,
+    "churn_per_query": 5.188,
+    "churn_max": 6,
+    "queries_with_zero_churn": 1
+   },
+   "freight_BALANCE": {
+    "npart": 1175,
+    "blocks_used": 1175,
+    "size_min": 57,
+    "size_max": 104,
+    "size_median": 104.0,
+    "size_mean": 100.03,
+    "size_p90": 104.0,
+    "size_p99": 104.0,
+    "size_cv": 0.111,
+    "max_over_mean": 1.0397,
+    "ELIGIBLE": true
+   }
+  }
+ },
+ "host": {
+  "before": {
+   "utc": "2026-09-13T19:03:45Z",
+   "host_total_mb": 16069,
+   "host_available_mb": 1759,
+   "foreign_python_processes_over_1GB_rss_untouched": [
+    {
+     "pid": 8628,
+     "name": "python.exe",
+     "rss_mb": 4374,
+     "started": "2026-09-13T20:29:08"
+    }
+   ]
+  },
+  "after": {
+   "utc": "2026-09-13T19:16:06Z",
+   "host_total_mb": 16069,
+   "host_available_mb": 1451,
+   "foreign_python_processes_over_1GB_rss_untouched": [
+    {
+     "pid": 8628,
+     "name": "python.exe",
+     "rss_mb": 6080,
+     "started": "2026-09-13T20:29:08"
+    }
+   ]
+  }
+ },
+ "integrity": {
+  "frozen_records_changed": [],
+  "data_pins_changed": [],
+  "canonical_musique_partition_still_absent": true,
+  "experimental_files_written": [
+   "data/l1_canonical/musique/parts/LOWMEM__PHG_C1_con.json",
+   "data/l1_canonical/musique/parts/LOWMEM__PHG_C1_con.npy",
+   "data/l1_lowmem/musique/phg_repair1/repaired.npy",
+   "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.json",
+   "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+   "data/l1_lowmem/musique/phg/{G,R1,R1_repeat,STAGE*.json}"
+  ],
+  "superseded_to_history": {}
+ },
+ "error": null,
+ "stopped_at_stage": null,
+ "stage_table_markdown": "| Stage | Completed | Wall s | Memory | Note |\n|---|---|---|---|---|\n| 1 H4_SK input verified | True | 5.4 | py peak 317.3 MB | N 117534 M 250732 P 6014938 k 1175; digest recomputed == ORIGINAL |\n| 2 structure gate (gate-mode PHG run) | PASS | 53.7 | peak RSS/rank max 145 MB | PASS; weight reception rel diff 2.1e-08; removal/warning lines none |\n| 3 PHG partition R1 (+ repeat) | True | 167.6 (partition 34.82, job 76.87) | peak RSS/rank [177.9, 163.1, 165.8, 164.1] MB (max 178, sum 671) | raw validity PARTITION_INVALID: max 104 (bound 104), empty 9; repeat identical True; Python KM1 vs Zoltan cutl rel diff 4e-08 |\n| 3b PHG_NONEMPTY_REPAIR_V1 | PASS | 43.7 | py peak 591.9 MB | empty blocks [330, 358, 365, 366, 367, 1164, 1165, 1171, 1173] -> 9 move(s) node 663: 866 -> 330 (delta +0, incident nets 68, ties 396); node 692: 1041 -> 358 (delta +0, incident nets 12, ties 395); node 800: 684 -> 365 (delta +0, incident nets 22, ties 394); node 823: 2 -> 366 (delta +0, incident nets 10, ties 393); node 1205: 189 -> 367 (delta +0, incident nets 4, ties 392); node 1225: 411 -> 1164 (delta +0, incident nets 5, ties 391); node 1391: 68 -> 1165 (delta +0, incident nets 9, ties 390); node 1713: 412 -> 1171 (delta +0, incident nets 4, ties 389); node 2051: 593 -> 1173 (delta +0, incident nets 12, ties 388); KM1 85311179 -> 85311179 (+0); STRUCT cut delta 0.0; KNN cut delta 0.0; postconditions PASS; validity after PASS |\n| 4/5 import + P50 replay cache + canonical L1 | BASELINE_ABSENT | 468.2 (eval 4.0) | builder predicted peak 0.75 GB; py peak 1498.8 MB | cache 6183023 bytes; BASE 22.5 s / STRUCT 415.1 s; status BASELINE_ABSENT |",
+ "partition_table_markdown": "| Arm | KM1 | STRUCT cut | KNN cut | blocks min/p50/p95/max (bound) | empty | peak RSS | wall | status |\n|---|---|---|---|---|---|---|---|---|\n| PHG C1 (R1 + PHG_NONEMPTY_REPAIR_V1, NP=4) | 85311179 | 0.9663 | 0.4158 | 1/103/103/104 (104) | 0 | 178 MB max rank / 671 MB sum | 34.82 s partition / 76.87 s job | PHG_SCALE_BRIDGE_COMPLETE |\n| FREIGHT 1-pass (frozen, CLOSED; context) | 167482101 | 0.9781 | 0.7583 | 57/104/104/104 | 0 | (frozen record) | (frozen record) | FREIGHT_CLOSED |\n| Mt-KaHyPar (frozen recipe, local) | - | - | - | - | - | 5862 MB at kill (cap 6.0 GB) | 1132.0 s at kill | RESOURCE_INFEASIBLE_LOCAL |",
+ "l1_table_markdown": "| Arm | nq | BASE_ALL | SAFE_ALL | BASE_ANY | SAFE_ANY | scope BASE / SAFE | SAFE additions (+/-) | BND_ALL | balance max/mean | ELIGIBLE |\n|---|---|---|---|---|---|---|---|---|---|---|\n| PHG C1 (absolute) | 2000 | 0.6415 | 0.6965 | 0.9905 | 0.9920 | 5115.5 / 5112.8 | +121/-11 | 0.6415 | 1.0397 | True |\n| FREIGHT 1-pass (frozen, CLOSED; context) | 2000 | 0.3710 | 0.4730 | 0.9045 | 0.9600 | 5176.0 / 5169.1 | +217/-13 | 0.3710 | 1.0397 | True |",
+ "hop_table_markdown": "| hop | n | BASE_ALL | SAFE_ALL |\n|---|---|---|---|",
+ "not_done": "WebQSP / HotpotQA / 2Wiki not run (separate authorization required); no promotion; no tuning; PHG not rerun; FREIGHT stays FREIGHT_CLOSED; squad / metaqa PHG records untouched"
+}

@@ -1,0 +1,150 @@
+{
+  "schema": "V3_CANONICAL_CONTRACT/v2",
+  "name": "CRAG_FREEBASE_CANONICAL",
+  "generated_utc": "2026-09-06T19:01:59Z",
+  "status": "AMENDMENT. Supersedes the PIPELINE section of v1; every other v1 clause stands.",
+  "amends": {
+    "record": "V3_CANONICAL_CONTRACT.json",
+    "v1_contract_hash": "761003db05e3fbbdafd930c2842a53be6169d3f655579ebada024f618f36f4c8",
+    "v1_rule_being_honoured": "sha256 over the contract with this field absent. Any later change to the contract must appear as a new record with its own hash, never as an edit that leaves this one looking prescient.",
+    "v1_is_unmodified": true
+  },
+  "WHY_AMENDED": {
+    "trigger": "the source contains type.property.reverse_property and freebase.type_hints.mediator, both verified present in the downloaded prefix.",
+    "effect": "orientation and CVT classification move from inference to reading. V1 planned five passes partly because reverse orientation had to be reconstructed from IDIR's observed anti-join behaviour and CVT status from a structural classifier. Neither reconstruction is now necessary.",
+    "what_did_not_change": [
+      "identity rules",
+      "KEEP list",
+      "DO_NOT_DO list",
+      "literal identity principle",
+      "SOURCE_EXPANSION",
+      "ADMIN_MEDIATORS_ABLATION_PREREGISTERED",
+      "IDIR's role",
+      "provenance and verification gates"
+    ]
+  },
+  "PIPELINE_V2": {
+    "shape": "four logical passes, streaming from gzip throughout",
+    "supersedes": "v1 PIPELINE PASS_A..PASS_E",
+    "PASS_A": {
+      "does": "schema + metadata, without constructing the graph",
+      "emits": [
+        "names",
+        "aliases",
+        "types",
+        "mediator declarations",
+        "reverse_property pairs",
+        "master_property pairs",
+        "property/schema metadata",
+        "language/datatype metadata",
+        "external keys"
+      ],
+      "REDUNDANCY_IS_MEASURED_NOT_ASSUMED": {
+        "rdfs:label": "dropped only where it is identical to type.object.name FOR THAT SUBJECT. Any differing label is written to label_residue.parquet, and the identical/differing counts are recorded. That is the provenance proving why one was discarded -- not an assumption carried from a prefix sample.",
+        "rdf:type": "NOT collapsed into type.object.type. They were measured non-equivalent. Every rdf:type row with an object outside the freebase ns/ namespace is kept unconditionally (the RDF/OWL vocabulary layer). An ns/-object row is dropped ONLY when that exact assertion is also present as type.object.type for the same subject; anything unmatched is kept as residue and counted.",
+        "why_per_subject_comparison_is_exact": "subject contiguity lets both predicates for a subject be compared in O(1) memory as the stream passes. This is a global comparison, not a sampled one."
+      }
+    },
+    "PASS_B": {
+      "does": "canonical graph stream. For every subject block, classify each RDF term and emit canonical graph candidates.",
+      "term_classes": [
+        "ENTITY_MID",
+        "CVT_MID",
+        "LITERAL",
+        "SCHEMA_OBJECT"
+      ],
+      "classification_inputs": "PASS A's mediator declarations and property schema. PASS B reads a label, it does not invent one."
+    },
+    "PASS_C": {
+      "does": "resolve the object/node universe",
+      "why_it_exists": "subject discovery can stream because the source is subject-grouped, but objects arrive in arbitrary order and many nodes may appear ONLY as objects.",
+      "method": "external union/dedup of (subjects seen) + (objects seen) + (literal ids) -> canonical node universe",
+      "EXPLICIT_PROHIBITION": {
+        "must_not_assume": "'every object eventually appears as a subject'",
+        "why": "V1's g.* finding already showed object-only populations are real. An assumption of eventual subject-appearance would silently delete exactly the node class that finding identified."
+      }
+    },
+    "PASS_D": {
+      "does": "reverse canonicalisation from the source's own reverse-property map, not from IDIR's derived behaviour",
+      "rule": "for each reverse pair P <-> Q, choose one canonical stored orientation and store the fact ONCE, retaining both predicate identities as metadata: canonical_relation and reverse_relation.",
+      "consequence": "A --P--> B is stored physically once, while traversal may read both A --P--> B and B --Q--> A. Bidirectional traversal without duplicate semantic facts.",
+      "what_this_avoids": "storing the ~45% reverse duplication IDIR measured, without inheriting the anti-join annihilation edge case where BOTH halves of a pair are removed. Check 5 bounded that case at 25 predicates / 17,930 triples precisely because the reverse map was unavailable; PASS D no longer has to bound it."
+    }
+  },
+  "LITERAL_IDENTITY_V2": {
+    "restates": "v1 LITERAL_UID, unchanged in principle",
+    "uid": "literal_uid = hash(lexical_form, datatype, language)",
+    "ENCODING_RULE": "the three components are length-prefixed before hashing, not concatenated with a separator. A separator can be forged by a literal containing that separator, which would be an identity collapse of exactly the class this rule exists to prevent.",
+    "stored_alongside": {
+      "raw_rdf_term": "the original N-Triples term, escapes intact",
+      "normalized_value": "the parsed lexical form",
+      "display_text": "the human-readable surface used for textualisation"
+    },
+    "why_three_fields": "the display surface must never become the identity. Keeping the raw term means the identity is auditable back to the source byte string."
+  },
+  "NODE_KIND_PROVENANCE": {
+    "new_field": "node_kind_source, carried beside node_kind",
+    "values": {
+      "SOURCE_MEDIATOR_DECLARATION": "freebase.type_hints.mediator asserted in the dump",
+      "SOURCE_PROPERTY_SCHEMA": "derived from expected_type / property schema",
+      "STRUCTURAL_CLASSIFIER_<tau>": "fallback only, for nodes the source does not label"
+    },
+    "why": "V1 had to infer CVT_MEDIATOR structurally. V3 reads it. Recording the SOURCE of a classification makes the two distinguishable in every downstream analysis instead of blending inferred and declared labels into one column.",
+    "THE_OLD_CLASSIFIER_BECOMES_AN_INSTRUMENT": {
+      "question": "how accurately does our structural classifier reproduce actual Freebase mediator declarations?",
+      "status": "an experiment, not a dependency. It now has ground truth to be scored against, which it never had in V1.",
+      "supersedes": "the pending ratio-threshold classifier pre-registration, which was written when no source label was known to exist. It remains live only for whatever population the declaration does not cover -- itself a quantity PASS A reports."
+    }
+  },
+  "SUBJECT_CONTIGUITY_IS_PROVISIONAL": {
+    "SOURCE_SUBJECT_CONTIGUOUS": "PROVISIONAL",
+    "evidence_so_far": "859,492 subject blocks == 859,492 distinct subjects, 0 reopened, over a 3 GB prefix sample",
+    "must_record_globally_before_relied_on": [
+      "SUBJECT_BLOCKS_N",
+      "DISTINCT_SUBJECTS_N",
+      "REOPENED_SUBJECT_BLOCKS_N"
+    ],
+    "gate": "only if REOPENED_SUBJECT_BLOCKS_N == 0 over the whole verified source may PASS B skip subject-side external sorting.",
+    "if_nonzero": "the subject side needs the same external sort the object side needs. The build still works; it just costs what v1 budgeted.",
+    "COMPARISON_RULE": "sortedness must be evaluated on the identifier between '<...ns/' and '>', never on the bracketed URI. '>' is 0x3E and digits begin at 0x30, so the bracketed form reports a false violation on every prefix pair (m.010l_ vs m.010l_0k1). A strictly increasing opener sequence proves contiguity in O(1) memory; the exact-duplicate fallback is only needed if that fails."
+  },
+  "IDIR_AS_CONTINUOUS_PARSER_ORACLE": {
+    "premise": "IDIR's retained structural portion agreed with the NSM backbone at 99.998% on covered predicates, with zero reverse-only cases. That makes it a parser oracle, and it became MORE useful after being rejected as the canonical graph.",
+    "procedure": "after PASS B, project our graph to the slice IDIR retained -- MID->MID edges only, IDIR's predicate set, IDIR's orientation -- and compare against oracle/backbone_triples.parquet (134,142,730 triples).",
+    "method_fixed_in_advance": "map our MIDs through oracle/backbone_entity2id.parquet and our predicates through oracle/backbone_relation2id.parquet, then bit-pack (subject_id, relation_id, object_id) into int64 keys and compare as sorted arrays. Same packing checks 2 and 4 used, so the numbers are comparable to those already recorded.",
+    "PRE_REGISTERED_DECISION_RULE": {
+      "written_before": "any raw-derived triple exists",
+      "REPRODUCTION_RATE": "share of IDIR's 134,142,730 triples our projection reproduces",
+      "PASS": ">= 99.9%  -- proceed",
+      "INVESTIGATE": "99.0% to 99.9% -- do NOT proceed. A discrepancy this size is real and must be explained and recorded before any downstream pass runs.",
+      "STOP": "< 99.0% -- the parser, reverse treatment, filtering or identity construction is wrong. Fix the cause; do not tune the comparison.",
+      "ALSO_MEASURED": "excess rate -- edges we emit inside IDIR's own node and predicate universe that IDIR does not have. Some excess is expected and legitimate, because IDIR dropped literal-valued facts and we do not. Excess restricted to MID->MID edges over IDIR's retained predicates is NOT expected and is treated as a defect signal.",
+      "anti_gaming_clause": "these thresholds are fixed now precisely so a disappointing number cannot be met by redefining the projection afterwards."
+    }
+  },
+  "DISK_DISCIPLINE": {
+    "budget": "~81 GB free before the mirror, ~50 GB after it lands.",
+    "PROHIBITED": "holding a raw edge serialisation, a sorted serialisation and a Parquet serialisation of the same data at the same time.",
+    "REQUIRED_SHAPE": "gzip source -> stream -> compressed shards -> external merge -> final Parquet",
+    "DELETION_GATE": "merge inputs are deleted only after the merged output passes ALL of: row count, content hash, schema check, endpoint integrity (every edge endpoint resolves in the node universe).",
+    "why_this_gate_is_strict": "the IDIR archive is the standing warning. A ZIP that opened cleanly still had three fields corrupted by the same 32-bit overflow, and only CRC verification caught it. Treat every artifact as invalid until counts and checksums say otherwise."
+  },
+  "ACQUISITION_GATE": {
+    "all_four_must_match": [
+      "bytes == 31,305,093,084",
+      "md5 == 38d8e9cb7a12634e46a0c52c4ee8dd52",
+      "sha1 == d1950f3c966932358a79a02cd1d56ae3165b26f4",
+      "crc32 == 74c62738"
+    ],
+    "note": "v1's plan named size/md5/sha1. crc32 is published by the Internet Archive too and is now also enforced, so the gate uses everything the source metadata offers.",
+    "rename_rule": "freebase-rdf-latest.gz.part -> freebase-rdf-latest.gz ONLY on a full pass. No pass may read the source before the rename."
+  },
+  "NEXT_CHECKPOINT": [
+    "mirror assembled",
+    "checksums pass",
+    "full PASS A succeeds",
+    "global subject-contiguity result recorded"
+  ],
+  "CONTRACT_HASH": "ed7281df27d3e2f7e44cb5c227012645dcf8e840b31b8f44c094dbcd01f952b0",
+  "CONTRACT_HASH_NOTE": "sha256 over this amendment with this field absent. The v1 hash is recorded under 'amends' and v1's file is unmodified, so the two records can be diffed by anyone later."
+}

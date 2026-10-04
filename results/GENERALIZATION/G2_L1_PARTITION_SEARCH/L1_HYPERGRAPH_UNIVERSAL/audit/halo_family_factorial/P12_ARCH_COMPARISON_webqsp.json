@@ -1,0 +1,22 @@
+{
+ "ds": "webqsp",
+ "question": "does richer OFFLINE partitioning (SKN) allow simpler STRUCT-only ONLINE serving (E3) to match the shipped SK+FULL_C online mechanism (E2)?",
+ "SKN_E3_vs_SK_E2": {
+  "SK_E2_ALL_REQUIRED": 0.9626,
+  "SKN_E3_ALL_REQUIRED": 0.9577,
+  "delta": -0.0049,
+  "gained": 5,
+  "lost": 12,
+  "p": 0.143,
+  "floor": 0.0077,
+  "sig": false,
+  "sig_regression": false
+ },
+ "cost_at_those_two_cells": {
+  "SK_E2_latency_ms_per_query": 1051.139,
+  "SKN_E3_latency_ms_per_query": 516.797,
+  "SK_E2_mean_candidates_per_query": 207841.75,
+  "SKN_E3_mean_candidates_per_query": 195077.96
+ },
+ "NOTE": "latency figures measured on a shared, resource-constrained local machine (other processes competing for CPU/RAM concurrently) -- treat as directional (E3 consistently ~2x cheaper than E2 for both SK and SKN), not as precise absolute timings."
+}

@@ -1,0 +1,39 @@
+{
+ "armed_utc": "2026-09-13T20:43:40Z",
+ "armed_epoch": 1789332220.0229962,
+ "wait_budget_hours": 24.0,
+ "deadline_epoch": 1789418620.0229962,
+ "deadline_utc": "2026-09-14T20:43:40Z",
+ "criterion": {
+  "host_available_gb_min": 6.0,
+  "pages_input_per_sec_max": 300.0,
+  "pages_samples": 5,
+  "wsl_available_mb_min": 5000,
+  "disk_free_gb_min": 8.0,
+  "swap_growth_gb_max_between_samples": 0.1,
+  "consecutive_clean_samples": 3,
+  "sample_spacing_seconds_wait_loop": 60,
+  "sample_spacing_seconds_in_run": 20,
+  "wait_budget_hours": 24.0,
+  "what_is_recorded_immediately_before_every_launch": [
+   "host total / available memory",
+   "WSL total / available memory",
+   "swap usage (host and WSL)",
+   "foreign-process RSS (pid 8628 and every python process over 1 GB RSS)",
+   "number of MPI ranks",
+   "disk free space",
+   "Pages Input/sec (typeperf, 5 x 1 s)"
+  ],
+  "derivation": {
+   "host_available_gb_min": "6.0 >= 1.7 x the predicted summed PHG rank footprint (~ 3.5 GB, see wsl_available_mb_min) and ~ the predicted peak of the largest host-Python stage: the semantic gate (freight.semantic_gate, pinned) parses the official net-list and the shards independently -- per-node-line numpy objects plus three O(P) int64 arrays, concatenated, sorted, then CSR -- at P ~ 29.6M that is ~ 4-6 GB with the canonical CSR and the digest temporaries; the repair / KM1 recomputation ~ 2 GB; the L1 replay-cache builder streams the 8.0 GB fp16 shards memory-mapped (page cache, not RSS) plus ~ 1.5 GB of arrays.  A MemoryError in the host-Python input chain is a harness retry after a new clean preflight, never evidence about PHG",
+   "wsl_available_mb_min": "5000 >= 1.4 x the predicted summed rank peak: musique R1 peaked at 177.9 MB on the largest rank at 6,014,938 pins; webqsp has ~ 29.6M pins (x 4.92) -> ~ 0.9 GB per rank, <= 3.5 GB summed over 4 ranks inside the 7.8 GB WSL VM, plus the page cache of the ~ 0.3 GB shard files",
+   "pages_input_per_sec_max": "300: the contended host measured 26,000-64,000 hard-fault pages/s (2026-09-14 01:39-01:47 local, ~ 0.5-0.7 GB available, swap 6.9-7.8 GB); an idle host reads under ~ 100; 300 sits two orders of magnitude under the contended readings and above idle noise -- it operationalises 'actively paging'",
+   "disk_free_gb_min": "8.0 = the canonical replay-cache builder's 5 GB free-space floor + ~ 1.8 GB of new webqsp artefacts (hgr, shards, net-list, PHG dumps, replay cache) + margin",
+   "swap_growth": "a host whose available memory reads high only while it is paging out is not clean: swap use may not grow by more than 0.1 GB between consecutive samples",
+   "consecutive_samples": "3 consecutive clean samples (60 s apart in the wait loop; 20 s apart immediately before each launch inside the run) so a transient dip of the foreign process's working set does not trigger a launch",
+   "wait_budget": "24 h from arming; if the host is never clean for that long, WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED is recorded and nothing is launched; the foreign process is never signalled",
+   "status": "set before any WebQSP artefact exists; gates execution hygiene only -- no PHG parameter, rank count, objective or representation depends on it"
+  },
+  "user_requirement_verbatim": "Do NOT start the PHG partition while the host is actively paging or while only ~1.45 GB host memory is available. The unrelated foreign process must remain untouched. Wait until the unrelated process naturally releases enough memory for a clean attempt, then record immediately before launch: host total / available memory; WSL total / available memory; swap usage; foreign-process RSS; number of MPI ranks; disk free space. This is not a PHG parameter change; it is an execution hygiene requirement so a host-starvation failure is not misclassified as an algorithmic resource failure. If adequate clean memory never becomes available, record: WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED rather than killing unrelated work."
+ }
+}

@@ -1,0 +1,443 @@
+{
+ "RECORD": "PREREGISTRATION",
+ "name": "R2_LEGACY_ROUTER",
+ "STATUS": "POSTHOC_PARTITION_ROUTING_MECHANISM_TEST_DEV_A",
+ "written_before_any_run": true,
+ "written_before": [
+  "any fused ranking through the router table on any dataset",
+  "any coverage (ALL / ANY) number of this arm",
+  "any exposure or matched-budget number of this arm",
+  "any number of any kind for this arm on squad or musique"
+ ],
+ "what_was_run_before_this_record": {
+  "seen_metaqa_reach_only (br2_why_A_metaqa.json, written after section 22's cells)": {
+   "R2 + legacy out-neighbour spread (the router table of this arm)": {
+    "reached_all_gold_rate": {
+     "all": 0.8074,
+     "hop1": 0.9969,
+     "hop2": 0.8227,
+     "hop3": 0.6054,
+     "hop2+3": 0.716
+    },
+    "hub_gold_reached": 0.9799,
+    "non_hub_gold_reached": 0.8667,
+    "votes_per_hit": {
+     "dense_top100": 4.375,
+     "splade_top100": 5.552
+    },
+    "blocks_with_evidence_per_query": 423.1
+   },
+   "OWNERS_ONLY + legacy spread (the R = 1 control of this arm)": {
+    "reached_all_gold_rate": {
+     "all": 0.6337,
+     "hop1": 0.9448,
+     "hop2": 0.5727,
+     "hop3": 0.3916,
+     "hop2+3": 0.4837
+    },
+    "hub_gold_reached": 0.9196,
+    "non_hub_gold_reached": 0.6002,
+    "votes_per_hit": {
+     "dense_top100": 2.777,
+     "splade_top100": 3.835
+    }
+   },
+   "HARD_LEGACY (gate)": {
+    "reached_all_gold_rate": {
+     "all": 0.7126,
+     "hop1": 0.9448,
+     "hop2": 0.5901,
+     "hop3": 0.6114,
+     "hop2+3": 0.6006
+    },
+    "hub_gold_reached": 1.0,
+    "non_hub_gold_reached": 0.6457,
+    "votes_per_hit": {
+     "dense_top100": 2.544,
+     "splade_top100": 3.371
+    }
+   },
+   "R2 membership-only vote (section 22)": {
+    "reached_all_gold_rate": {
+     "all": 0.5349,
+     "hop1": 0.8558,
+     "hop2": 0.5174,
+     "hop3": 0.238,
+     "hop2+3": 0.3802
+    },
+    "hub_gold_reached": 0.6273,
+    "non_hub_gold_reached": 0.6801
+   },
+   "V1 (section 19)": {
+    "reached_all_gold_rate": {
+     "all": 0.8014,
+     "hop1": 1.0,
+     "hop2": 0.7558,
+     "hop3": 0.6536,
+     "hop2+3": 0.7056
+    },
+    "lambda_mean_gold_nodes_A": 43.744
+   },
+   "coverage_seen_for_the_ladder (ALL DEV_A, metaqa)": {
+    "HARD_OWN_BLOCK_VOTE": 0.1786,
+    "OWNERS_ONLY_P50": 0.2265,
+    "R2_P50": 0.3333,
+    "R2_MATCHED_LE": 0.3473,
+    "HARD_MTK_BASE (legacy spread)": 0.6397,
+    "V1_P50": 0.6776,
+    "V1_MATCHED_LE": 0.6876
+   }
+  },
+  "dry_run_before_this_record": "python -u scratchpad/_l1c_r2router.py metaqa --dry: built the tables, asserted that the spread rule applied to the hard own-block table reproduces the served legacy vote table exactly (109,790 entries), asserted that the four reach tables reproduce the seen br2_why numbers above; no ranking, no coverage, no text-set number, no record",
+  "coverage_of_this_arm": "NEVER computed anywhere before this record (reach only; coverage <= reach)"
+ },
+ "utc": "2026-09-15T19:11:03Z",
+ "ruling_2026-09-16_thirteenth_verbatim_essentials": "Yes -- one bounded-substrate + frozen 1-hop-routing experiment is worth running. BOUNDED_VERTEXCUT_R2 failed for a very specific reason: you removed the mechanism that gives hub answers enough routing reach. The post-hoc reach diagnostic is strong enough to justify exactly one new preregistered arm: R2 geometry / memberships stay frozen + the canonical frozen own + directed-out-neighbour vote spread + same P50 / same RRF. Call it something like R2_LEGACY_ROUTER. The hypothesis is not 'R2 itself is better.' It is: Can bounded overlap reduce replication/exposure while the existing universal router supplies the hub reach that R2 cannot encode with lambda <= 2? That is scientifically clean because partitioning and routing are separate mechanisms. The important comparisons should be: hard canonical BASE vs R2_LEGACY_ROUTER on MetaQA, SQuAD and MuSiQue, with: ALL-gold@P50, actual unique-node exposure, matched-exposure secondary, hub-gold reach, non-hub reach, votes/hit. The gate should require no significant text regression and a significant MetaQA gain or exposure-efficiency improvement. Run no R3/R4 or alternate routing if it fails. The post-hoc fact that R2 + legacy spread has reach 0.807, above both hard 0.713 and V1 0.801, is enough to justify that single test. It does not justify claiming it will improve ALL-gold ranking. ... Do not replace frozen H2_PATCH1 with BALANCED_H2_PATCH1 for the WebQSP primary transfer. ... WEBQSP PRIMARY: frozen H2_PATCH1 exactly as section 16; BALANCED_H2_PATCH1 remains: LEADING SUCCESSOR / MECHANISM_CONFIRMED_ON_DEV_A_POSTHOC / NOT YET TRANSFER-CONFIRMED. ... I would therefore freeze these roles now: H2_PATCH1 = transfer reference; BALANCED_H2_PATCH1 = current best experimental successor; H3_PATCH1 = closed; depth not current bottleneck; BOUNDED_VERTEXCUT_R2 = partition-only hypothesis rejected; R2 + canonical router = one justified new partition/routing hypothesis. And crucially, don't combine BALANCED + R2-router yet. We finally have individually interpretable mechanisms; keep them separate until each earns transfer evidence.",
+ "roles_frozen_by_the_thirteenth_ruling": {
+  "H2_PATCH1": "transfer reference (section 16, frozen; the WebQSP PRIMARY transfer runs it exactly as section 16 -- not BALANCED)",
+  "BALANCED_H2_PATCH1": "current best experimental successor: LEADING SUCCESSOR / MECHANISM_CONFIRMED_ON_DEV_A_POSTHOC / NOT YET TRANSFER-CONFIRMED; not run on WebQSP in the same confirmation pass; to be tested later on another untouched, ideally KB-like, population",
+  "H3_PATCH1": "closed; depth is not the current bottleneck",
+  "BOUNDED_VERTEXCUT_R2": "partition-only hypothesis rejected (section 22)",
+  "R2 + canonical router (this arm)": "the one justified new partition / routing hypothesis",
+  "composition": "BALANCED + R2-router NOT combined; every mechanism stays separate until it earns transfer evidence"
+ },
+ "question": "Can bounded overlap (the frozen R = 2 substrate: every node in <= 2 blocks, cap 100, RF 1.53 / 1.61 / 1.53) reduce replication / unique-node exposure while the existing universal router (the canonical own + directed-out-neighbour vote spread) supplies the hub reach that a lambda <= 2 membership rule cannot encode? Partitioning and routing are separate mechanisms: section 22 removed both the unbounded replication and the router; this arm restores the router on the bounded substrate.",
+ "hypothesis_is_not": "'R2 itself is better'; and the seen reach 0.807 (> hard 0.713, > V1 0.801) justifies this single test, NOT a claim that ALL-gold ranking improves (reach is an upper bound on coverage; the router also spreads votes to unrelated blocks: 423 blocks with evidence per query out of 864)",
+ "relation_to_earlier_sections": {
+  "section_19": "V1's metaqa gain (0.640 -> 0.678) was MEMBERSHIP replication concentrated on hub gold (mean gold node in 43.7 blocks); V1 frozen 'MetaQA mechanism positive / universal replacement NOT_SUPPORTED', never composed, untouched here",
+  "section_22": "R2 (membership-only vote, hub -> home) = NOT_SUPPORTED: text SAFE + EFFICIENT (69-75 % of the hard exposure) but metaqa 0.640 -> 0.333 because it has neither spread (reach 0.535; hub gold 0.627; 1.7 votes/hit); its substrate, membership rule, serving rule, exposure and matched-budget contracts are reused VERBATIM; its R2_P50 cell is recomputed here and asserted equal to the record",
+  "the_served_hard_BASE": "reaches every hub gold through its VOTE spread (2.5-3.4 votes/hit; own-block-only vote gives 0.18 coverage on metaqa): the router IS the hard BASE's mechanism; this arm applies exactly that router to the bounded memberships",
+  "what_is_new": "ONLY the vote table: spread_table(mem_vc) = own vote set (hub -> H(v), non-hub -> M(v)) union the vote sets of the directed STRUCT out-neighbours (deduped) -- _l1c_br2_why.spread_table, the function whose reach was seen; asserted at run time to reproduce _l1s_core.Data.legacy_mem exactly when applied to a hard partition"
+ },
+ "what_this_is": "a post-hoc partition / routing mechanism test on DEV_A of metaqa, squad and musique: does the bounded substrate under the canonical router match or beat each dataset's served canonical hard BASE in ALL-gold at P50, at what unique-node exposure, and at the matched budget. DEV_A has been read many times in this lane; DEV_B and TEST are never read; nothing is promoted; the served L1 is unchanged; nothing is composed with BALANCED_H2_PATCH1 / H2_PATCH1 / SAFE.",
+ "constants": {
+  "R": 2,
+  "C": 100,
+  "k_per_dataset": {
+   "metaqa": 864,
+   "squad": 404,
+   "musique": 2350
+  },
+  "K0": 60,
+  "K_LOCK": 100,
+  "P_MAIN": 50,
+  "alpha": 0.01,
+  "hub": "deg + 1 > C (frozen definition; a hub's own vote set is {H(v)}, as in sections 19 / 22; the rule is applied to the hit and to each of its out-neighbours alike)",
+  "no_new_constant": "no weight, no per-dataset constant, no local K; the router has no parameter (it is the served BASE's static node -> blocks map applied to a multi-membership table)"
+ },
+ "substrate_frozen": "parts/<ds>__BR2_k<k>__R2.npz of section 22 (home, alt): read verbatim, sha-pinned below, asserted at run time; the owner PHG partitions, degree-0 placements and alternates are NOT rebuilt or changed",
+ "router_verbatim": {
+  "vote_set_per_node": "V(v) = {H(v)} if hub(v) else M(v)   (section 22's mem_vc; M(v) = {H(v)} or {H(v), alt(v)})",
+  "router_table": "T(h) = V(h) union  U_{t in N_out(h)} V(t)   over the directed STRUCT out-neighbours N_out(h) of the canonical adapter's struct_csr(directed=True); deduped; static; query-free",
+  "identity_on_a_hard_partition": "with V(v) = {hard(v)} the table T equals _l1s_core.Data.legacy_mem (the served BASE's map) entry for entry -- asserted at run time on the gate partition",
+  "routing": "PR_d / PR_s = _ta_prepartition.partition_ranking of the served dense / SPLADE top-K_LOCK ids through T, _l1s_core.rrf_ranks fusion, P50 = the first P_MAIN fused blocks (via _l1c_vcut_replay.fused_rank, imported unchanged)",
+  "serving": "gold g served iff M(g) meets the selection (mem_all; _l1c_vcut_replay.served); node-level ALL / ANY",
+  "exposure": "unique exposure = |union of the selected blocks' node sets| (_l1c_vcut_replay.unique_exposure); matched prefixes vs the gate's per-query P50 exposure (_l1c_vcut_replay.matched_prefixes)",
+  "control_R1": "the same router on the owners-only partition (k = 2 k_f, degree-0 placed, no alternates): V(v) = {H(v)} for every node, home serving, owner blocks for exposure -- isolates the alternates' value under the router"
+ },
+ "population": {
+  "metaqa": "served metaqa cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "squad": "served squad cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "musique": "served musique cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "DEV_B": "never read",
+  "TEST": "never read",
+  "WebQSP": "not used (its primary transfer is frozen H2_PATCH1 exactly as section 16)"
+ },
+ "baselines_gate": {
+  "metaqa": {
+   "HARD_MTK_BASE (GATE)": "served `metaqa` cache = canonical H4_SK Mt-KaHyPar partition (k_f = 432), served P50 through the frozen legacy vote table",
+   "HARD_PHG_BASE (contrast only)": "served `metaqa_phg` cache; reported, no verdict"
+  },
+  "squad": {
+   "HARD_MTK_BASE (GATE)": "served `squad` cache (k_f = 202)",
+   "HARD_PHG_BASE (contrast only)": "served `squad_phg` cache"
+  },
+  "musique": {
+   "HARD_PHG_BASE (GATE)": "served `musique` cache = LOWMEM PHG_C1 partition (k_f = 1,175), the dataset's only served hard BASE"
+  },
+  "matched_budget_target": "per query, the GATE baseline's P50 exposure (sum of its selected hard block sizes = unique nodes)",
+  "node_level_check": "the node-level ALL through each served hard partition's own-block table must equal the served block-level base_all (asserted)"
+ },
+ "cells_per_dataset": {
+  "R2ROUTER_P50 (PRIMARY)": "50 fused blocks per query through the router table; ALL / ANY (per hop where labelled); unique and nominal exposure; McNemar vs the GATE (and vs the contrast, no verdict); exposure flag EXPOSURE_BELOW_HARD iff the DEV_A mean unique exposure < the gate's DEV_A mean P50 exposure; unique / hard ratio reported",
+  "R2ROUTER_MATCHED_LE (SECONDARY)": "per query, the largest fused prefix whose unique exposure <= the GATE's P50 exposure of the same query; McNemar vs the GATE",
+  "R2ROUTER_MATCHED_GE (informational)": "the smallest prefix with unique exposure >= the hard exposure; overshoot reported",
+  "R2_MEMBERSHIP_VOTE_P50 (section 22 reproduced)": "section 22's R2_P50 recomputed (membership-only vote), asserted equal to br2_replay_A_<ds>.json; R2ROUTER_P50 vs it = the router's value on the same substrate (informational)",
+  "OWNERS_LEGACY_P50 / OWNERS_LEGACY_MATCHED_LE (R = 1 control)": "the owners-only partition under the same router; R2ROUTER vs it = the alternates' value under the router (informational)",
+  "reach diagnostics": "for the gate table, the section-22 table, the router table and the control: reached-all-gold rate (per hop), hub-gold and non-hub-gold reached rates, votes per hit per channel, blocks with evidence per query (the seen metaqa numbers are asserted reproduced; squad / musique are new)",
+  "reach decomposition of the primary cell's failures": "UNREACHED (some gold node in no block with evidence) vs REACHED_WEAK (reached but not selected), worst gold block position, hub / degree-0 gold among the failures; failure overlap with the gate for the primary and the secondary cell",
+  "ladder": "read-only numbers from the frozen records (section 22 cells; section 19 V1 on metaqa) beside this record's cells; no recompute of V1"
+ },
+ "statistics": {
+  "test": "exact two-sided McNemar on paired DEV_A 0/1 ALL vectors (_l1x90_core.mcnemar): gained / lost / p",
+  "alpha": 0.01,
+  "labels": {
+   "GAIN": "gained > lost and p < 0.01",
+   "LOSS": "lost > gained and p < 0.01",
+   "NEUTRAL": "otherwise"
+  },
+  "multiplicity_note": "five decision comparisons in total: metaqa R2ROUTER_P50 vs gate (the gain / efficiency clause) and, for each text dataset, R2ROUTER_P50 and R2ROUTER_MATCHED_LE vs gate (the safety clause); everything else is descriptive"
+ },
+ "decision_rule_pre_registered": {
+  "TEXT_SAFE(ds)": "R2ROUTER_P50 vs the GATE != LOSS AND R2ROUTER_MATCHED_LE vs the GATE != LOSS (squad and musique must both be SAFE: 'no significant text regression' at P50 and at the matched budget)",
+  "METAQA_GAIN": "R2ROUTER_P50 vs HARD_MTK_BASE = GAIN ('a significant MetaQA gain')",
+  "METAQA_EFFICIENT": "R2ROUTER_P50 vs HARD_MTK_BASE != LOSS AND DEV_A mean unique exposure < the hard DEV_A mean P50 exposure ('exposure-efficiency improvement': the same ALL-gold at fewer unique nodes; the lane's EFFICIENT label of sections 20 / 22). Stated now: the exposure inequality is expected by construction (|B_p| <= 100, so 50 blocks expose <= 5,000 unique nodes vs 5,023 / 5,089 / 5,117 for the hard P50; section 22 measured 81 % on metaqa), so this clause is decided by the coverage side -- the router has to recover the whole 30.6-pt P50 deficit of section 22 on the same substrate for it to fire",
+  "METAQA_MATCHED_GAIN (informational sub-label, not a clause)": "R2ROUTER_MATCHED_LE vs HARD_MTK_BASE = GAIN (a significant gain at the equal budget)",
+  "OUTCOME": {
+   "PASS_GAIN": "TEXT_SAFE(squad) AND TEXT_SAFE(musique) AND METAQA_GAIN",
+   "PASS_EFFICIENCY": "TEXT_SAFE(squad) AND TEXT_SAFE(musique) AND not METAQA_GAIN AND METAQA_EFFICIENT",
+   "FAIL": "otherwise (a text LOSS in either cell of either text dataset, or metaqa LOSS at P50, or metaqa not below the hard exposure)"
+  },
+  "what_follows": {
+   "PASS_GAIN": "post-hoc DEV_A evidence that the bounded substrate under the canonical router beats the served hard BASE in ALL-gold ranking at lower exposure with the text sets safe; status MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC), not promoted; no composition with BALANCED_H2_PATCH1 / H2_PATCH1 / SAFE (the ruling keeps the mechanisms separate until each earns transfer evidence); any transfer test needs its own ruling and an untouched population",
+   "PASS_EFFICIENCY": "post-hoc DEV_A evidence for the hypothesis as stated -- bounded overlap reduces exposure while the router supplies the reach -- WITHOUT a ranking gain; status MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC; efficiency only), not promoted; the same no-composition rule; the ranking claim is explicitly NOT made",
+   "FAIL": "the ruling's letter: 'Run no R3/R4 or alternate routing if it fails' -- no R = 3 / 4, no second alternate, no undirected / 2-hop / weighted / hub-rule-changed spread, no other router on the bounded substrate; the bounded-substrate line closes in this lane with sections 22 + 23 as its record; V1 stays frozen as ruled"
+  },
+  "no_promotion": "nothing here changes the served L1 or any frozen record; sections 16-22 are unchanged; the WebQSP primary transfer remains frozen H2_PATCH1 exactly as section 16"
+ },
+ "forbidden": [
+  "reading DEV_B or TEST; using WebQSP",
+  "rebuilding or changing the R2 substrate (owners, degree-0 placement, alternates), R, C, the k rule, K0 / K_LOCK / P_MAIN, the RRF, the hub definition, the serving rule, the exposure or matched-budget rule",
+  "any other router: undirected spread, 2-hop spread, weighted votes, hub rule changed, own-vote-only, KNN spread; any R = 3 / 4; any second alternate",
+  "selecting more than 50 blocks except in the labelled matched-budget cells",
+  "any SAFE / H2_PATCH1 / BALANCED_H2_PATCH1 / H3 / V1 composition (the ruling: keep the mechanisms separate until each earns transfer evidence)",
+  "editing any CONTRACT_FILE or pinned module; editing _l1c_vcut_replay.py, _l1c_vcut_lib.py, _l1c_br2_lib.py, _l1c_br2_why.py; editing the two new modules after this record (their shas are pinned below and asserted at run time)",
+  "signalling the foreign process; touching the WebQSP watcher; writing under data/",
+  "tuning after seeing numbers; changing a label, cell, clause or threshold after a number is seen; re-running a dataset after seeing its number"
+ ],
+ "code": {
+  "new_modules": {
+   "_l1c_r2router.py": {
+    "path": "scratchpad/_l1c_r2router.py",
+    "sha256": "6dc257c890ae05386369ade1c4de5e539085408addf04500ffb0f073ce4735cb",
+    "bytes": 24691
+   },
+   "_l1c_r2router_summary.py": {
+    "path": "scratchpad/_l1c_r2router_summary.py",
+    "sha256": "f13f280504442e822be243443424b0e06d7d1646965c0aa771205548a3a9e8a0",
+    "bytes": 6462
+   }
+  },
+  "usage": [
+   "python -u scratchpad/_l1c_r2router.py metaqa",
+   "python -u scratchpad/_l1c_r2router.py squad",
+   "python -u scratchpad/_l1c_r2router.py musique",
+   "python -u scratchpad/_l1c_r2router_summary.py"
+  ],
+  "imports_unchanged": {
+   "_l1s_core.py": {
+    "path": "scratchpad/_l1s_core.py",
+    "sha256": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+    "bytes": 15099
+   },
+   "_l1x90_core.py": {
+    "path": "scratchpad/_l1x90_core.py",
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+    "bytes": 12081
+   },
+   "_ta_prepartition.py": {
+    "path": "scratchpad/_ta_prepartition.py",
+    "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+    "bytes": 11737
+   },
+   "_l1g_core.py": {
+    "path": "scratchpad/_l1g_core.py",
+    "sha256": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+    "bytes": 11419
+   },
+   "_l1c_vcut_lib.py": {
+    "path": "scratchpad/_l1c_vcut_lib.py",
+    "sha256": "6700f04282eb2d6ce144bd7f4b2fc7c452dafac9f7bd1c9f3a0cac1e83273cc3",
+    "bytes": 18209
+   },
+   "_l1c_vcut_replay.py": {
+    "path": "scratchpad/_l1c_vcut_replay.py",
+    "sha256": "717473f022f6107e31d5b488a141c8fe02d329fa092b811cc2b1c17d4fb6ce74",
+    "bytes": 19581
+   },
+   "_l1c_br2_lib.py": {
+    "path": "scratchpad/_l1c_br2_lib.py",
+    "sha256": "909b7109d233a894516cc1c1620272bb395bbff6e53629600e993838484b426d",
+    "bytes": 11101
+   },
+   "_l1c_br2_why.py": {
+    "path": "scratchpad/_l1c_br2_why.py",
+    "sha256": "4912b60d34fe6fef8b04365983d16021e74ed95c01a00a61d283a52fed9c89b1",
+    "bytes": 11130
+   },
+   "src/l1_canonical/adapter.py": {
+    "path": "src/l1_canonical/adapter.py",
+    "sha256": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+    "bytes": 26015
+   },
+   "src/l1_canonical/hypergraph.py": {
+    "path": "src/l1_canonical/hypergraph.py",
+    "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+    "bytes": 12200
+   }
+  }
+ },
+ "graphs_frozen": {
+  "metaqa": {
+   "N": 43234,
+   "struct_edges": 124669,
+   "k_f": 432,
+   "C": 100,
+   "k_R2": 864,
+   "hubs": 104,
+   "degree_0": 0,
+   "mean_struct_degree": 5.77,
+   "struct_keys_sha256": "92bfb08acb6fd7a647fe781cdd64b3bfc67ada2174fbc65a7299caea4d50389d"
+  },
+  "squad": {
+   "N": 20233,
+   "struct_edges": 744734,
+   "k_f": 202,
+   "C": 100,
+   "k_R2": 404,
+   "hubs": 4900,
+   "degree_0": 6349,
+   "mean_struct_degree": 73.62,
+   "struct_keys_sha256": "a1ac0cd372a31a249dd7c86bf23729a003341882dc88b05eb51c0bc82c5f92cc"
+  },
+  "musique": {
+   "N": 117534,
+   "struct_edges": 2651280,
+   "k_f": 1175,
+   "C": 100,
+   "k_R2": 2350,
+   "hubs": 9727,
+   "degree_0": 9858,
+   "mean_struct_degree": 45.12,
+   "struct_keys_sha256": "b57175c03a726e530796304b11ddb5ce3c7e3b32d910f8bb889a0c9641d5cf08"
+  }
+ },
+ "substrates_frozen": {
+  "metaqa": {
+   "path": "results/L1_COVPART/parts/metaqa__BR2_k864__R2.npz",
+   "sha256": "827b41fc6544d40f556c9c9c5d14a2f09e836545cd93381e439635edc9b7af28",
+   "bytes": 114264,
+   "record": {
+    "path": "results/L1_COVPART/parts/metaqa__BR2_k864__R2.json",
+    "sha256": "69b1417d109d11916b87a777b3423388093631c7a4feef3f9a582708044ed395",
+    "bytes": 8513
+   },
+   "k": 864,
+   "RF": 1.5288,
+   "read_only": "memberships (home, alt) read verbatim; nothing rebuilt, no alternate re-assigned"
+  },
+  "squad": {
+   "path": "results/L1_COVPART/parts/squad__BR2_k404__R2.npz",
+   "sha256": "ee1531416212fc6ecf99588c6b87f3093994966644443e4d96032399055c355b",
+   "bytes": 63317,
+   "record": {
+    "path": "results/L1_COVPART/parts/squad__BR2_k404__R2.json",
+    "sha256": "b9c59b785246cb441a981f0b2108602ddead3b8401e360e24afb5f9c6f628385",
+    "bytes": 6997
+   },
+   "k": 404,
+   "RF": 1.6098,
+   "read_only": "memberships (home, alt) read verbatim; nothing rebuilt, no alternate re-assigned"
+  },
+  "musique": {
+   "path": "results/L1_COVPART/parts/musique__BR2_k2350__R2.npz",
+   "sha256": "7b7c1304374f076115d7d632aa42efcf7bfee4da0ad8bfeec38dde1acc58871d",
+   "bytes": 405103,
+   "record": {
+    "path": "results/L1_COVPART/parts/musique__BR2_k2350__R2.json",
+    "sha256": "28536d2d021cb8cdeb4c7c6f86ab6d7a93fb80ebdd6693c39c92c75bbd1a7919",
+    "bytes": 6908
+   },
+   "k": 2350,
+   "RF": 1.5299,
+   "read_only": "memberships (home, alt) read verbatim; nothing rebuilt, no alternate re-assigned"
+  }
+ },
+ "records_read_only": {
+  "br2_replay_A_metaqa.json": {
+   "path": "results/L1_COVPART/br2_replay_A_metaqa.json",
+   "sha256": "cff7f0999d6e1b96a42355eab1e06d403abe480561481e726252a44b179f28cc",
+   "bytes": 23725
+  },
+  "br2_replay_A_squad.json": {
+   "path": "results/L1_COVPART/br2_replay_A_squad.json",
+   "sha256": "337c083c7cecb1c2fd57f3d40511f7d3ccb4013757c49a29b4186389a03b371e",
+   "bytes": 10054
+  },
+  "br2_replay_A_musique.json": {
+   "path": "results/L1_COVPART/br2_replay_A_musique.json",
+   "sha256": "1ceca4fa2d54bd904a7d8bb43297987136e53a56cb15cf194c5657733ca2eab4",
+   "bytes": 9474
+  },
+  "br2_SUMMARY.json": {
+   "path": "results/L1_COVPART/br2_SUMMARY.json",
+   "sha256": "e62b2ebf1806d11fa7fdeafcf49b311efa475bf444558f94a540d710f3f3164a",
+   "bytes": 7027
+  },
+  "br2_why_A_metaqa.json": {
+   "path": "results/L1_COVPART/br2_why_A_metaqa.json",
+   "sha256": "983eaa392daee54d762d468409c281d7d06f9a68107d4ef762acf02cdca1cb33",
+   "bytes": 10102
+  },
+  "vcut_replay_A_metaqa.json": {
+   "path": "results/L1_COVPART/vcut_replay_A_metaqa.json",
+   "sha256": "89428a3c21bffa7c675006c63f59ecb0a5a7cd8b92c6edbd4238ef18374ce051",
+   "bytes": 13124
+  },
+  "PREREGISTRATION_BOUNDED_VERTEXCUT_R2.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_BOUNDED_VERTEXCUT_R2.json",
+   "sha256": "10dbcfcd2585067232b37bfaf0c06e90494a82416e2dfc6b0b9ad1e601dbaeec",
+   "bytes": 29945
+  }
+ },
+ "section22_outcome_read": {
+  "OUTCOME": "NOT_SUPPORTED",
+  "per_dataset_VERDICT": {
+   "metaqa": "LOSS_EXPOSURE_LE_HARD|MATCHED_LOSS",
+   "squad": "NEUTRAL_EXPOSURE_LE_HARD|MATCHED_NEUTRAL",
+   "musique": "NEUTRAL_EXPOSURE_LE_HARD|MATCHED_NEUTRAL"
+  },
+  "R2_P50_ALL": {
+   "metaqa": 0.3333,
+   "squad": 0.9899,
+   "musique": 0.6647
+  },
+  "gate_ALL": {
+   "metaqa": 0.6397,
+   "squad": 0.9859,
+   "musique": 0.6596
+  },
+  "R2_P50_unique_over_hard": {
+   "metaqa": 0.8099,
+   "squad": 0.6853,
+   "musique": 0.7453
+  }
+ },
+ "caches_read_only": {
+  "metaqa": {
+   "path": "data/l1_canonical/metaqa/replay_cache.npz",
+   "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b",
+   "bytes": 5390599
+  },
+  "metaqa_phg": {
+   "path": "data/l1_lowmem/metaqa/replay_cache__LOWMEM__PHG_REPAIR1_con.npz",
+   "sha256": "584e17dec26d0408d5253a3f79e471bc7ec128f6dde744581bb6e502da5b4e5b",
+   "bytes": 5386215
+  },
+  "squad": {
+   "path": "data/l1_canonical/squad/replay_cache.npz",
+   "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6",
+   "bytes": 5320148
+  },
+  "squad_phg": {
+   "path": "data/l1_lowmem/squad/replay_cache__LOWMEM__PHG_con.npz",
+   "sha256": "edd9b36bb4ba45ff0579c0591f19dc263ae84296f7f9299684974530845f20ab",
+   "bytes": 5312713
+  },
+  "musique": {
+   "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+   "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5",
+   "bytes": 6183023
+  }
+ }
+}

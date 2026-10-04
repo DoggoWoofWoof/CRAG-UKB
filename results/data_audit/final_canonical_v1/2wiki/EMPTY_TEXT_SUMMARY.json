@@ -1,0 +1,325 @@
+{
+  "dataset": "2wiki",
+  "scan": {
+    "zip": "C:\\Users\\Swastik\\Desktop\\CRAG\\data/original/2wiki/v1.0_ids_april2021/para_with_hyperlink.zip",
+    "member": "para_with_hyperlink.jsonl",
+    "raw_json_lines": 5989847,
+    "records_with_identity": 5989847,
+    "seconds": 385.2,
+    "rule": "build_kb.py:269-271 -- sents=r.get('sentences') or []; body=' '.join(sents); empty iff not body.strip()  (NO .strip() on body)"
+  },
+  "assertions": {
+    "identified_empty_text_nodes": 87765,
+    "expected_empty_text_nodes": 87765,
+    "EMPTY_COUNT_MATCHES": true,
+    "records_scanned": 5989847,
+    "expected_records": 5989847,
+    "RECORD_COUNT_MATCHES": true,
+    "n_records_where_strip_changes_text": 0,
+    "strip_examples": []
+  },
+  "corpus_totals": {
+    "total_sentences": 23245689,
+    "total_hyperlink_mentions": 35724975
+  },
+  "counts": {
+    "sentences_empty": 87765,
+    "title_nonempty": 87765,
+    "mentions_empty": 87765,
+    "other_source_text_empty": 87765,
+    "exact_empty_string": 87765,
+    "title_needs_new_dense_encode": 87764,
+    "title_needs_new_splade_encode": 87764,
+    "title_reusable_dense_byte_identical": 1,
+    "title_reusable_splade_wsnorm_lower": 1
+  },
+  "distinct_combinations": {
+    "sentences_empty + title_present + mentions_empty + other_absent": 87765
+  },
+  "sentences_field_shape_over_hits": {
+    "n_sentences=0 (all-empty-strings)": 87765
+  },
+  "source_key_inventory_over_hits": {
+    "id": 87765,
+    "title": 87765,
+    "sentences": 87765,
+    "mentions": 87765
+  },
+  "categories": {
+    "list_page": 6173,
+    "ordinary_article": 81236,
+    "index_outline_timeline": 154,
+    "disambiguation": 202
+  },
+  "titles": {
+    "unique_titles": 87765,
+    "empty_titles": 0,
+    "duplicate_title_groups": 0,
+    "records_in_duplicate_title_groups": 0,
+    "top_duplicate_titles": [
+      [
+        "Meirinkan",
+        1
+      ],
+      [
+        "2008–09 South China AA season",
+        1
+      ],
+      [
+        "2006–07 South China AA season",
+        1
+      ],
+      [
+        "New Chitose Airport Station",
+        1
+      ],
+      [
+        "2000 England rugby union tour of South Africa",
+        1
+      ],
+      [
+        "Tó Neinilii",
+        1
+      ],
+      [
+        "1989 FIFA U-16 World Championship squads",
+        1
+      ],
+      [
+        "Torawakamaru the Koga Ninja",
+        1
+      ],
+      [
+        "Dokapon Kingdom",
+        1
+      ],
+      [
+        "2009 Australia national soccer team season",
+        1
+      ],
+      [
+        "Sri Lankan independence activist",
+        1
+      ],
+      [
+        "Japanese destroyer Tachikaze (1921)",
+        1
+      ],
+      [
+        "Taro Sekiguchi",
+        1
+      ],
+      [
+        "Yotsugana",
+        1
+      ],
+      [
+        "Devi Singh Bhati",
+        1
+      ]
+    ],
+    "title_len_min": 1,
+    "title_len_max": 141,
+    "title_len_mean": 18.93,
+    "hits_whose_title_also_titles_a_NONEMPTY_record": 0
+  },
+  "duplicate_curids": {},
+  "feature_bill_projection": {
+    "rule": "reuse_map_kb.py: a row is reusable IFF its frozen-tokenizer token-ID sequence equals an already-encoded row's. Byte-identical input => identical token IDs (sufficient, verified k=20000 mismatches=0). MEASURED here = byte-identity membership; no tokenizer/encoder was run.",
+    "already_encoded_input_pool": {
+      "PHASE_C_UNIVERSE": 5989847,
+      "PHASE_C_VIEW398": 398354,
+      "distinct_exact": 5894962,
+      "distinct_wsnorm": 5894959,
+      "distinct_wsnorm_lower": 5894728
+    },
+    "derived_vs_stored_universe_input_check": {
+      "checked": 40000,
+      "present": 40000
+    },
+    "dense_rows_currently_reusable_measured_by_reuse_map": 5989847,
+    "dense_rows_newly_required_upper_bound": 87764,
+    "dense_distinct_new_forward_passes_upper_bound": 87764,
+    "splade_rows_newly_required_upper_bound": 87764,
+    "splade_distinct_new_forward_passes_upper_bound": 87748
+  },
+  "tokenizer_evidence_MEASURED": {
+    "gte_qwen2_dense_bpe": {
+      "''": [],
+      "' '": [
+        220
+      ],
+      "'  '": [
+        256
+      ],
+      "'Masaki Kobayashi'": [
+        43649,
+        14624,
+        59148,
+        352,
+        30378
+      ],
+      "' Masaki Kobayashi '": [
+        19868,
+        14624,
+        59148,
+        352,
+        30378,
+        220
+      ],
+      "'Masaki  Kobayashi'": [
+        43649,
+        14624,
+        220,
+        59148,
+        352,
+        30378
+      ],
+      "'masaki kobayashi'": [
+        6899,
+        14624,
+        72251,
+        352,
+        30378
+      ],
+      "'Tó Neinilii'": [
+        51,
+        1794,
+        4182,
+        258,
+        321,
+        3808
+      ],
+      "'To Neinilii'": [
+        1249,
+        4182,
+        258,
+        321,
+        3808
+      ]
+    },
+    "splade_wordpiece": {
+      "''": [
+        101,
+        102
+      ],
+      "' '": [
+        101,
+        102
+      ],
+      "'  '": [
+        101,
+        102
+      ],
+      "'Masaki Kobayashi'": [
+        101,
+        16137,
+        8978,
+        28930,
+        102
+      ],
+      "' Masaki Kobayashi '": [
+        101,
+        16137,
+        8978,
+        28930,
+        102
+      ],
+      "'Masaki  Kobayashi'": [
+        101,
+        16137,
+        8978,
+        28930,
+        102
+      ],
+      "'masaki kobayashi'": [
+        101,
+        16137,
+        8978,
+        28930,
+        102
+      ],
+      "'Tó Neinilii'": [
+        101,
+        2000,
+        11265,
+        5498,
+        3669,
+        2072,
+        102
+      ],
+      "'To Neinilii'": [
+        101,
+        2000,
+        11265,
+        5498,
+        3669,
+        2072,
+        102
+      ]
+    },
+    "splade_do_lower_case": true,
+    "reading": "gte BPE is whitespace- and case-preserving and maps '' to the ZERO-LENGTH sequence []; SPLADE WordPiece maps '', ' ' and '  ' all to [CLS][SEP] and is whitespace-, case- and accent-insensitive, so its equivalence classes are strictly coarser than gte's."
+  },
+  "inlink_structure_MEASURED": {
+    "records_scanned": 5989847,
+    "empty_nodes_with_at_least_one_incoming_hyperlink": 20524,
+    "empty_nodes_with_zero_incoming_hyperlinks": 67241,
+    "total_incoming_mentions": 98077,
+    "distinct_linking_articles_total": 96482,
+    "max_incoming_mentions": 2685,
+    "median_incoming_mentions": 0.0,
+    "outgoing_edges": "0 by construction -- a record with no sentences carries no mentions (measured: mentions_empty == EMPTY_BEFORE in counts)",
+    "official_query_reference_counts": {
+      "gold_by_split": {},
+      "context_by_split": {},
+      "distinct_empty_nodes_referenced": 0
+    },
+    "seconds": 452.8
+  },
+  "artifacts": {
+    "report": "results/data_audit/final_canonical_v1/2wiki/EMPTY_TEXT_AUDIT.md",
+    "summary": "results/data_audit/final_canonical_v1/2wiki/EMPTY_TEXT_SUMMARY.json",
+    "per_record_full": "data/final_canonical/2wiki/EMPTY_TEXT_AUDIT.jsonl (87,765 rows, 32 cols, 106.7 MB, gitignored)",
+    "per_record_compact": "results/data_audit/final_canonical_v1/2wiki/EMPTY_TEXT_AUDIT.jsonl (87,765 rows, cols id/title/cat/inlinks, 8.6 MB)",
+    "script": "scratchpad/final_canonical_build/twowiki_empty_forensics.py",
+    "why_split": "full table 106.7 MB vs largest tracked file under results/ = 2.85 MB and GitHub 100 MB cap; mirror_audit.py rule: bulky tables stay only under data/final_canonical/"
+  },
+  "constant_over_all_rows": {
+    "canonical_text_current": "\"\" (exactly empty) for all 87,765",
+    "canonical_text_is_whitespace_only": false,
+    "raw_sentences_field": "[] for all 87,765",
+    "raw_mentions_n": 0,
+    "all_source_keys": [
+      "id",
+      "mentions",
+      "sentences",
+      "title"
+    ],
+    "other_source_fields": "{} (no other key exists in the schema)",
+    "n_corpus_records_with_this_title": 1,
+    "n_empty_records_with_this_title": 1,
+    "official_query_roles": "[] for all 87,765 (never gold, never context)",
+    "title_is_already_encoded_input_exact": "false for 87,764; true for exactly 1 (2wiki:c320778, title \"Kagawa\", matches stored input 2wu:28138851)"
+  },
+  "NOT_APPLIED": "Report only. No builder, encoder, KNN, H4, SAFE, halo or SP1 was run; nodes.jsonl, CORPUS_HASH 81fa7d1a5d4bbb24... and all gold mappings are unchanged.",
+  "STATUS_UPDATE_2026_09_06": {
+    "supersedes_the_NOT_APPLIED_field_above": true,
+    "NOT_APPLIED_is_preserved_verbatim_as_history": "the NOT_APPLIED string was true when this file was written (2026-09-05) and is kept unedited; it is no longer the current state of the corpus",
+    "what_happened": "the user approved the revision on 2026-09-06 and TEXTUALIZATION_REV 2 was built and installed for 2wiki: all 87,765 records in this report were retextualized to their source-native title by the same general rule hotpotqa received on 2026-09-05",
+    "TEXTUALIZATION_REV": 2,
+    "CORPUS_HASH_before": "81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4",
+    "CORPUS_HASH_after": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+    "NODE_ORDER_HASH_unchanged": "57dd809af573b6b531256b2a65e4b4efd1e26794c4fea81e0b43311fdcb24c86",
+    "canonical_node_count_unchanged": 5989847,
+    "CHANGED_NODE_COUNT": 87765,
+    "empty_text_nodes_after": 0,
+    "membership_identity_order_change": "NONE",
+    "rev1_preserved_at": "data/final_canonical/_superseded_textualization_rev1/2wiki/",
+    "evidence": [
+      "results/data_audit/final_canonical_v1/2wiki/REV2_DIFF_AUDIT.json",
+      "results/data_audit/final_canonical_v1/2wiki/REV2_VERIFY.json",
+      "data/final_canonical/_superseded_textualization_rev1/SUPERSEDED.md"
+    ]
+  }
+}

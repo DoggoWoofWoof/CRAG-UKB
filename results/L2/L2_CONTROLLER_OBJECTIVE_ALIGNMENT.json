@@ -1,0 +1,486 @@
+{
+ "level": "VAL_ONLY",
+ "primary_metric": "NDCG@50",
+ "no_test_inspected": true,
+ "phase": "C6 \u2014 FULL-SCOPE-AWARE CONTROLLER TRAINING (query-only gate; frozen 5 experts)",
+ "frozen_note": "CURRENT_CONTROLLER_TRAINING_BEATS_EQUAL_RRF was NO (C0-C5); C6 tests objective alignment.",
+ "C0_equal_rrf": {
+  "MRR": 0.9064,
+  "NDCG@50": 0.84,
+  "R@5": 0.7933,
+  "R@10": 0.8813,
+  "ALL@10": 0.7396,
+  "ALL@50": 0.9283
+ },
+ "task1_negative_depth_distribution": {
+  "2wiki_clean": {
+   "r0-10": 0.0453,
+   "r11-20": 0.0377,
+   "r21-50": 0.0932,
+   "r51-100": 0.1157,
+   "r101-500": 0.1625,
+   "r>500": 0.5456
+  },
+  "musique_clean": {
+   "r0-10": 0.0553,
+   "r11-20": 0.0478,
+   "r21-50": 0.1145,
+   "r51-100": 0.1421,
+   "r101-500": 0.2276,
+   "r>500": 0.4127
+  }
+ },
+ "task1_neg_depth_by_provenance": {
+  "2wiki_clean": {
+   "r0-10": {
+    "DENSE_HARD": 44409,
+    "DENSE_SPLADE_DISAGREEMENT": 2963,
+    "SPLADE_HARD": 12296,
+    "RANDOM": 191,
+    "SAME_PARTITION": 999,
+    "HIGH_PARTITION_VOTE": 41
+   },
+   "r11-20": {
+    "DENSE_HARD": 32187,
+    "SPLADE_HARD": 13047,
+    "RANDOM": 344,
+    "DENSE_SPLADE_DISAGREEMENT": 3746,
+    "SAME_PARTITION": 1216,
+    "HIGH_PARTITION_VOTE": 85
+   },
+   "r21-50": {
+    "DENSE_HARD": 58169,
+    "SPLADE_HARD": 47171,
+    "DENSE_SPLADE_DISAGREEMENT": 14943,
+    "RANDOM": 1240,
+    "SAME_PARTITION": 3373,
+    "HIGH_PARTITION_VOTE": 388
+   },
+   "r51-100": {
+    "DENSE_HARD": 49263,
+    "SPLADE_HARD": 65846,
+    "DENSE_SPLADE_DISAGREEMENT": 31931,
+    "SAME_PARTITION": 5044,
+    "RANDOM": 2566,
+    "HIGH_PARTITION_VOTE": 775
+   },
+   "r101-500": {
+    "DENSE_HARD": 36409,
+    "SPLADE_HARD": 81977,
+    "DENSE_SPLADE_DISAGREEMENT": 30575,
+    "SAME_PARTITION": 33937,
+    "RANDOM": 29191,
+    "HIGH_PARTITION_VOTE": 6254
+   },
+   "r>500": {
+    "HIGH_PARTITION_VOTE": 212894,
+    "SAME_PARTITION": 175868,
+    "RANDOM": 344178,
+    "SPLADE_HARD": 100
+   }
+  },
+  "musique_clean": {
+   "r0-10": {
+    "DENSE_HARD": 75220,
+    "SPLADE_HARD": 14017,
+    "DENSE_SPLADE_DISAGREEMENT": 6578,
+    "SAME_PARTITION": 2017,
+    "HIGH_PARTITION_VOTE": 862,
+    "RANDOM": 102
+   },
+   "r11-20": {
+    "DENSE_HARD": 51054,
+    "SPLADE_HARD": 17883,
+    "DENSE_SPLADE_DISAGREEMENT": 10203,
+    "HIGH_PARTITION_VOTE": 2019,
+    "SAME_PARTITION": 3853,
+    "RANDOM": 262
+   },
+   "r21-50": {
+    "DENSE_HARD": 84496,
+    "SPLADE_HARD": 65847,
+    "DENSE_SPLADE_DISAGREEMENT": 35197,
+    "RANDOM": 978,
+    "HIGH_PARTITION_VOTE": 7018,
+    "SAME_PARTITION": 10893
+   },
+   "r51-100": {
+    "DENSE_HARD": 55926,
+    "SPLADE_HARD": 95196,
+    "DENSE_SPLADE_DISAGREEMENT": 77099,
+    "HIGH_PARTITION_VOTE": 10668,
+    "SAME_PARTITION": 12723,
+    "RANDOM": 2075
+   },
+   "r101-500": {
+    "DENSE_HARD": 26212,
+    "SPLADE_HARD": 99965,
+    "DENSE_SPLADE_DISAGREEMENT": 141250,
+    "HIGH_PARTITION_VOTE": 58670,
+    "SAME_PARTITION": 54790,
+    "RANDOM": 25410
+   },
+   "r>500": {
+    "HIGH_PARTITION_VOTE": 213671,
+    "SAME_PARTITION": 208632,
+    "RANDOM": 314558
+   }
+  }
+ },
+ "task3_oracle_ceiling": {
+  "POOLED": {
+   "train": {
+    "equal_ndcg50": 0.9001,
+    "oracle_ndcg50": 0.9308,
+    "oracle_gain": 0.0307,
+    "n_queries_valid": 24445
+   },
+   "val": {
+    "equal_ndcg50": 0.8401,
+    "oracle_ndcg50": 0.8796,
+    "oracle_gain": 0.0395,
+    "n_queries_valid": 6985
+   }
+  },
+  "2wiki_clean": {
+   "train": {
+    "equal_ndcg50": 0.8878,
+    "oracle_ndcg50": 0.9228,
+    "oracle_gain": 0.035,
+    "oracle_choice_counts": {
+     "equal": 6157,
+     "up_dense": 380,
+     "up_splade": 1170,
+     "up_relation": 1427,
+     "up_offmix": 1059,
+     "down_relation": 304
+    }
+   },
+   "val": {
+    "equal_ndcg50": 0.8199,
+    "oracle_ndcg50": 0.8742,
+    "oracle_gain": 0.0542,
+    "oracle_choice_counts": {
+     "up_relation": 677,
+     "up_offmix": 207,
+     "equal": 1227,
+     "up_splade": 633,
+     "down_relation": 62,
+     "up_dense": 194
+    }
+   }
+  },
+  "musique_clean": {
+   "train": {
+    "equal_ndcg50": 0.9094,
+    "oracle_ndcg50": 0.9368,
+    "oracle_gain": 0.0275,
+    "oracle_choice_counts": {
+     "up_offmix": 4399,
+     "equal": 8636,
+     "up_relation": 135,
+     "down_relation": 452,
+     "up_splade": 242,
+     "up_dense": 84
+    }
+   },
+   "val": {
+    "equal_ndcg50": 0.8553,
+    "oracle_ndcg50": 0.8836,
+    "oracle_gain": 0.0283,
+    "oracle_choice_counts": {
+     "equal": 2192,
+     "up_splade": 400,
+     "up_dense": 146,
+     "up_offmix": 1027,
+     "down_relation": 152,
+     "up_relation": 68
+    }
+   }
+  }
+ },
+ "task4_oracle_predictability": {
+  "features": "query_emb(1536)+qdiag(5:[disagree,relany,relfrac,log1p_relnc,log1p_n])+expert_stats(15:mean/max/win)",
+  "classifier": "class-balanced multinomial logistic (single linear layer), trained on TRAIN",
+  "n_train": 24445,
+  "n_val": 6985,
+  "classification": {
+   "accuracy": 0.4139,
+   "macro_f1": 0.3397,
+   "balanced_accuracy": 0.3854
+  },
+  "retrieval_ndcg50": {
+   "equal_C0": 0.8401,
+   "predicted_archetype": 0.8497,
+   "oracle_ceiling": 0.8796,
+   "predicted_minus_equal": 0.0096,
+   "frac_of_oracle_headroom_captured": 0.2444
+  },
+  "val_pred_distribution": {
+   "equal": 2191,
+   "up_relation": 929,
+   "up_offmix": 1868,
+   "up_splade": 993,
+   "up_dense": 458,
+   "down_relation": 546
+  },
+  "val_true_oracle_distribution": {
+   "equal": 3419,
+   "up_relation": 745,
+   "up_offmix": 1234,
+   "up_splade": 1033,
+   "up_dense": 340,
+   "down_relation": 214
+  }
+ },
+ "OLD_C2_sampled_ranknet": {
+  "selected_ndcg50": 0.84,
+  "selected_is_init": true,
+  "trained_best_ndcg50": 0.7884,
+  "trained_worst_ndcg50": 0.7814,
+  "history_ndcg50": [
+   0.84,
+   0.7815,
+   0.7814,
+   0.7814,
+   0.7816,
+   0.7858,
+   0.7878,
+   0.7873,
+   0.7866,
+   0.7884,
+   0.787
+  ]
+ },
+ "C6a_depth_ranknet": {
+  "selected_ndcg50": 0.84,
+  "selected_is_init": true,
+  "trained_best_epoch": 3,
+  "best_trained": {
+   "MRR": 0.941,
+   "NDCG@50": 0.8342,
+   "R@5": 0.7885,
+   "R@10": 0.8286,
+   "ALL@10": 0.6756,
+   "ALL@50": 0.7928
+  },
+  "best_trained_gate_mean_weight": {
+   "dense": 0.00902742438206482,
+   "splade": 0.15076636190706327,
+   "offset": 0.0002504118423783851,
+   "mixture": 0.8399461629916997,
+   "relation": 9.638658100946149e-06
+  },
+  "history_ndcg50": [
+   0.84,
+   0.7817,
+   0.7837,
+   0.8331,
+   0.8342,
+   0.8307,
+   0.8322,
+   0.8302,
+   0.8311,
+   0.8312,
+   0.8312
+  ]
+ },
+ "C6b_depth_lambdarank_sampledlist": {
+  "selected_ndcg50": 0.84,
+  "selected_is_init": true,
+  "trained_best_epoch": 0,
+  "best_trained": {
+   "MRR": 0.9305,
+   "NDCG@50": 0.7814,
+   "R@5": 0.7196,
+   "R@10": 0.7584,
+   "ALL@10": 0.5515,
+   "ALL@50": 0.6766
+  },
+  "best_trained_gate_mean_weight": {
+   "dense": 0.00030849655953001304,
+   "splade": 0.00031987614003593003,
+   "offset": 0.003386002630708671,
+   "mixture": 0.9958870911734737,
+   "relation": 9.853518096897538e-05
+  },
+  "history_ndcg50": [
+   0.84,
+   0.7814,
+   0.7814,
+   0.7814,
+   0.7814,
+   0.7814,
+   0.7814,
+   0.7814,
+   0.7814,
+   0.7814,
+   0.7814
+  ]
+ },
+ "C6c_fullscope_lambdarank": {
+  "selected_ndcg50": 0.84,
+  "selected_is_init": true,
+  "trained_best_epoch": 7,
+  "best_trained": {
+   "MRR": 0.9306,
+   "NDCG@50": 0.8287,
+   "R@5": 0.7619,
+   "R@10": 0.8547,
+   "ALL@10": 0.6919,
+   "ALL@50": 0.8723
+  },
+  "best_trained_gate_mean_weight": {
+   "dense": 0.1672050928516992,
+   "splade": 0.33865281477005205,
+   "offset": 0.19507496923144238,
+   "mixture": 0.2989763267226277,
+   "relation": 9.079760756030112e-05
+  },
+  "history_ndcg50": [
+   0.84,
+   0.8228,
+   0.8227,
+   0.8255,
+   0.8268,
+   0.8273,
+   0.8279,
+   0.8286,
+   0.8287
+  ]
+ },
+ "bootstrap_trained_vs_C0": {
+  "C6a_trained_vs_C0": {
+   "ndcg": {
+    "delta": -0.0059,
+    "ci95": [
+     -0.0098,
+     -0.0019
+    ],
+    "frac_boot>0": 0.002,
+    "significant": true
+   },
+   "all10": {
+    "delta": -0.064,
+    "ci95": [
+     -0.0753,
+     -0.0534
+    ],
+    "frac_boot>0": 0.0,
+    "significant": true
+   },
+   "all50": {
+    "delta": -0.1354,
+    "ci95": [
+     -0.144,
+     -0.127
+    ],
+    "frac_boot>0": 0.0,
+    "significant": true
+   },
+   "mrr": {
+    "delta": 0.0346,
+    "ci95": [
+     0.0302,
+     0.0393
+    ],
+    "frac_boot>0": 1.0,
+    "significant": true
+   }
+  },
+  "C6b_trained_vs_C0": {
+   "ndcg": {
+    "delta": -0.0586,
+    "ci95": [
+     -0.0627,
+     -0.0543
+    ],
+    "frac_boot>0": 0.0,
+    "significant": true
+   },
+   "all10": {
+    "delta": -0.1881,
+    "ci95": [
+     -0.2,
+     -0.177
+    ],
+    "frac_boot>0": 0.0,
+    "significant": true
+   },
+   "all50": {
+    "delta": -0.2517,
+    "ci95": [
+     -0.2623,
+     -0.2408
+    ],
+    "frac_boot>0": 0.0,
+    "significant": true
+   },
+   "mrr": {
+    "delta": 0.0241,
+    "ci95": [
+     0.0197,
+     0.0289
+    ],
+    "frac_boot>0": 1.0,
+    "significant": true
+   }
+  },
+  "C6c_trained_vs_C0": {
+   "ndcg": {
+    "delta": -0.0113,
+    "ci95": [
+     -0.0134,
+     -0.0089
+    ],
+    "frac_boot>0": 0.0,
+    "significant": true
+   },
+   "all10": {
+    "delta": -0.0477,
+    "ci95": [
+     -0.0558,
+     -0.0394
+    ],
+    "frac_boot>0": 0.0,
+    "significant": true
+   },
+   "all50": {
+    "delta": -0.056,
+    "ci95": [
+     -0.0623,
+     -0.0505
+    ],
+    "frac_boot>0": 0.0,
+    "significant": true
+   },
+   "mrr": {
+    "delta": 0.0242,
+    "ci95": [
+     0.0213,
+     0.0273
+    ],
+    "frac_boot>0": 1.0,
+    "significant": true
+   }
+  }
+ },
+ "gates": {
+  "TRAIN_EVAL_MISMATCH_CONFIRMED": "YES",
+  "DEPTH_AWARE_SAMPLING_HELPS": "MIXED (lifts RankNet collapse 0.7815->0.834 best-trained; does NOT beat equal, does NOT fix deep-recall alone)",
+  "NDCG_AWARE_LOSS_HELPS": "MIXED (HURTS on sampled list: C6b collapses to 0.781 onto a single expert; only with FULL-SCOPE ranks (C6c) does it preserve deep-recall ALL@50 0.872, still <equal)",
+  "ORACLE_REGIME_PREDICTABLE_FROM_INFERENCE_FEATURES": "MIXED (partially: classifier captures +0.0096 retrieval NDCG = 24% of headroom, refuting earlier 'unlearnable'; but acc only 0.41 and a soft gate does not monetize it)",
+  "QUERY_GATE_BEATS_EQUAL_RRF": "NO (all C6 variants select the equal init; best-trained C6c -0.0113 sig below C0)",
+  "ADAPTIVE_CONTROLLER_RETAINED": "NO"
+ },
+ "failure_analysis": {
+  "1_no_predictable_oracle_regime": "NO \u2014 regime IS partially predictable (+0.0096, Task4)",
+  "2_insufficient_inference_features": "PLAUSIBLE contributor (classifier acc only 0.41)",
+  "3_optimization_collapse": "was the cause for sampled-list (C6a/C6b collapse onto mixture); FIXED by full-scope C6c",
+  "4_train_val_regime_shift": "LIKELY contributor (TRAIN equal NDCG 0.90 >> VAL 0.84; learned reweighting does not transfer as a net gain)",
+  "5_objective_mismatch_remaining": "RESOLVED by C6c (deep-recall restored, ALL@50 0.872); NOT the residual cause",
+  "PRIMARY_RESIDUAL_MECHANISM": "jointly-trained query-only gate CHOSE to zero relation (~9e-5), losing equals flat-0.2 relation contribution (+0.019 NDCG/+0.056 ALL@50). WORDING CORRECTED: w_R(q) already affects ONLY mask=1 candidates; the true limitation is it cannot distinguish BETWEEN eligible candidates within a query (needs candidate-aware w_R(q,d)). Representational-vs-optimization is isolated in C7c (C7c1 query-only scalar with base4 frozen; C7c2 candidate-aware)."
+ },
+ "L2_CONTROLLER_CANDIDATE": "C0 (fixed 5-expert equal RRF fusion) \u2014 unchanged; no adaptive controller retained; TEST not inspected",
+ "recommended_next_experiment": "If pursued later: CANDIDATE-aware relation gating under the full-scope objective (C6c-style true-rank LambdaRank), so the gate can raise relation weight only on mask=1 candidates. This is the one representational gap the query-only gate cannot close. Out of this phase's scope."
+}

@@ -1,0 +1,866 @@
+{
+ "phase": "G2 B1.4 source-selected two-channel admission; 3-target pilot; TEST untouched; STOP before six-way",
+ "datasets": [
+  "metaqa",
+  "2wiki_clean",
+  "squad_clean"
+ ],
+ "channels": [
+  "BASE_FUSED",
+  "S0",
+  "S1_PRIME"
+ ],
+ "R_grid": [
+  0,
+  4,
+  8,
+  16
+ ],
+ "structural_reserve_orderer": "s_dir (frozen)",
+ "RET_MIN": 0.95,
+ "SELECTION_RULE": "For held-out D, SOURCE = other two datasets. Fit verification channels (logreg w + train-only mu/sd; beta selected on SOURCE single-channel NET) FROZEN. Grid = {BASE_FUSED,S0,S1_PRIME} x R{0,4,8,16}. FEASIBLE = configs with RETRIEVAL_VISIBLE_GOLD_RETENTION@50 >= 0.95 on BOTH source datasets (strong retention constraint: may not buy graph-only golds by destroying retrieval-visible golds). Among FEASIBLE choose max mean-over-source NET_GOLD_GAIN@50; tie-break (eps 1e-9) -> smaller R -> simpler channel (BASE_FUSED<S0<S1_PRIME). If FEASIBLE empty -> fallback (BASE_FUSED, R=0). D never used to select channel/R/beta/threshold/normalization.",
+ "leakage_checks": {
+  "target_excluded_from_selection": true,
+  "beta_and_norm_source_trained": true,
+  "no_gold_in_pool_construction": true,
+  "no_dataset_id": true,
+  "no_learned_directional_verifier": true,
+  "structural_orderer_is_frozen_s_dir": true
+ },
+ "FOLDS": {
+  "metaqa": {
+   "train": [
+    "2wiki_clean",
+    "squad_clean"
+   ],
+   "beta_source": {
+    "S0": 0.05,
+    "S1_PRIME": 0.02
+   },
+   "SELECTED": {
+    "channel": "BASE_FUSED",
+    "R": 16,
+    "fallback_used": false,
+    "mean_source_NET": 67.5,
+    "source_retention": {
+     "2wiki_clean": 0.9873,
+     "squad_clean": 0.999
+    },
+    "satisfies_target_retention_floor": false
+   },
+   "TARGET_METRICS": {
+    "nq": 1166,
+    "GOLD_RECALL@50": 0.4201,
+    "ALL@50": 0.5429,
+    "ANY@50": 0.7719,
+    "GRAPH_ONLY_GOLD_ADMISSION@50": 0.2103,
+    "graph_only_gold_available": 2906,
+    "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.8974,
+    "retrieval_visible_gold_base": 1267,
+    "retrieval_visible_gold_retained": 1137,
+    "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 611,
+    "NEW_GOLDS_ADMITTED": 765,
+    "OLD_GOLDS_EVICTED": 130,
+    "NET_GOLD_GAIN@50": 635,
+    "POOL_CHURN_mean": 0.3197,
+    "CHANNEL_COMPOSITION": {
+     "nominal_R_unique_inserted": {
+      "mean": 15.985,
+      "median": 16.0,
+      "p95": 16.0
+     },
+     "structural_overlap_with_verification": {
+      "mean": 0.0,
+      "median": 0.0,
+      "p95": 0.0
+     },
+     "unused_structural_slots_to_verification": {
+      "mean": 0.015,
+      "median": 0.0,
+      "p95": 0.0
+     },
+     "fraction_final_pool_structural": {
+      "mean": 0.32,
+      "median": 0.32,
+      "p95": 0.32
+     }
+    },
+    "PER_HOP": {
+     "1": {
+      "nq": 490,
+      "GOLD_RECALL@50": 0.9321,
+      "GRAPH_ONLY_GOLD_ADMISSION@50": 0.5714,
+      "graph_only_gold_available": 7,
+      "NET_GOLD_GAIN@50": -37
+     },
+     "2": {
+      "nq": 219,
+      "GOLD_RECALL@50": 0.38,
+      "GRAPH_ONLY_GOLD_ADMISSION@50": 0.2263,
+      "graph_only_gold_available": 243,
+      "NET_GOLD_GAIN@50": 51
+     },
+     "3": {
+      "nq": 457,
+      "GOLD_RECALL@50": 0.2731,
+      "GRAPH_ONLY_GOLD_ADMISSION@50": 0.2078,
+      "graph_only_gold_available": 2656,
+      "NET_GOLD_GAIN@50": 621
+     }
+    }
+   },
+   "TARGET_ORACLE_DIAGNOSTIC_NOT_VALID_SELECTION": {
+    "MAXNET_ceiling": {
+     "channel": "BASE_FUSED",
+     "R": 16,
+     "target_NET": 635,
+     "target_retention": 0.8974,
+     "ORACLE_GAP_NET_left_on_table": 0
+    },
+    "CONSTRAINED_same_objective": {
+     "channel": "BASE_FUSED",
+     "R": 8,
+     "target_NET": 378,
+     "target_retention": 0.9526
+    }
+   },
+   "SOURCE_CONFIG_TABLE": {
+    "BASE_FUSED|R0": {
+     "2wiki_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "BASE_FUSED|R4": {
+     "2wiki_clean": {
+      "NET": 84,
+      "RVret": 0.9971
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "BASE_FUSED|R8": {
+     "2wiki_clean": {
+      "NET": 116,
+      "RVret": 0.9945
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "BASE_FUSED|R16": {
+     "2wiki_clean": {
+      "NET": 135,
+      "RVret": 0.9873
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 0.999
+     }
+    },
+    "S0|R0": {
+     "2wiki_clean": {
+      "NET": 35,
+      "RVret": 0.9971
+     },
+     "squad_clean": {
+      "NET": 1,
+      "RVret": 0.999
+     }
+    },
+    "S0|R4": {
+     "2wiki_clean": {
+      "NET": 101,
+      "RVret": 0.9951
+     },
+     "squad_clean": {
+      "NET": 1,
+      "RVret": 0.999
+     }
+    },
+    "S0|R8": {
+     "2wiki_clean": {
+      "NET": 113,
+      "RVret": 0.9905
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 0.999
+     }
+    },
+    "S0|R16": {
+     "2wiki_clean": {
+      "NET": 83,
+      "RVret": 0.9706
+     },
+     "squad_clean": {
+      "NET": -10,
+      "RVret": 0.9888
+     }
+    },
+    "S1_PRIME|R0": {
+     "2wiki_clean": {
+      "NET": 16,
+      "RVret": 0.9954
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "S1_PRIME|R4": {
+     "2wiki_clean": {
+      "NET": 78,
+      "RVret": 0.9919
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "S1_PRIME|R8": {
+     "2wiki_clean": {
+      "NET": 106,
+      "RVret": 0.9905
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "S1_PRIME|R16": {
+     "2wiki_clean": {
+      "NET": 117,
+      "RVret": 0.9822
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 0.999
+     }
+    }
+   },
+   "TARGET_GRID_NET": {
+    "BASE_FUSED|R0": {
+     "NET": 0,
+     "RVret": 1.0,
+     "GO_adm": 0.0
+    },
+    "BASE_FUSED|R4": {
+     "NET": 223,
+     "RVret": 0.9708,
+     "GO_adm": 0.0664
+    },
+    "BASE_FUSED|R8": {
+     "NET": 378,
+     "RVret": 0.9526,
+     "GO_adm": 0.1167
+    },
+    "BASE_FUSED|R16": {
+     "NET": 635,
+     "RVret": 0.8974,
+     "GO_adm": 0.2103
+    },
+    "S0|R0": {
+     "NET": 122,
+     "RVret": 0.9684,
+     "GO_adm": 0.0
+    },
+    "S0|R4": {
+     "NET": 298,
+     "RVret": 0.9495,
+     "GO_adm": 0.0705
+    },
+    "S0|R8": {
+     "NET": 411,
+     "RVret": 0.9266,
+     "GO_adm": 0.1204
+    },
+    "S0|R16": {
+     "NET": 554,
+     "RVret": 0.8129,
+     "GO_adm": 0.213
+    },
+    "S1_PRIME|R0": {
+     "NET": -13,
+     "RVret": 0.9637,
+     "GO_adm": 0.0
+    },
+    "S1_PRIME|R4": {
+     "NET": 206,
+     "RVret": 0.9479,
+     "GO_adm": 0.0671
+    },
+    "S1_PRIME|R8": {
+     "NET": 338,
+     "RVret": 0.9155,
+     "GO_adm": 0.1177
+    },
+    "S1_PRIME|R16": {
+     "NET": 552,
+     "RVret": 0.8311,
+     "GO_adm": 0.2103
+    }
+   }
+  },
+  "2wiki_clean": {
+   "train": [
+    "metaqa",
+    "squad_clean"
+   ],
+   "beta_source": {
+    "S0": 0.02,
+    "S1_PRIME": 0.02
+   },
+   "SELECTED": {
+    "channel": "BASE_FUSED",
+    "R": 8,
+    "fallback_used": false,
+    "mean_source_NET": 189.0,
+    "source_retention": {
+     "metaqa": 0.9526,
+     "squad_clean": 1.0
+    },
+    "satisfies_target_retention_floor": true
+   },
+   "TARGET_METRICS": {
+    "nq": 2000,
+    "GOLD_RECALL@50": 0.9262,
+    "ALL@50": 0.867,
+    "ANY@50": 1.0,
+    "GRAPH_ONLY_GOLD_ADMISSION@50": 0.3133,
+    "graph_only_gold_available": 316,
+    "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.9945,
+    "retrieval_visible_gold_base": 3474,
+    "retrieval_visible_gold_retained": 3455,
+    "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 99,
+    "NEW_GOLDS_ADMITTED": 135,
+    "OLD_GOLDS_EVICTED": 19,
+    "NET_GOLD_GAIN@50": 116,
+    "POOL_CHURN_mean": 0.1444,
+    "CHANNEL_COMPOSITION": {
+     "nominal_R_unique_inserted": {
+      "mean": 7.22,
+      "median": 8.0,
+      "p95": 8.0
+     },
+     "structural_overlap_with_verification": {
+      "mean": 0.0,
+      "median": 0.0,
+      "p95": 0.0
+     },
+     "unused_structural_slots_to_verification": {
+      "mean": 0.78,
+      "median": 0.0,
+      "p95": 8.0
+     },
+     "fraction_final_pool_structural": {
+      "mean": 0.144,
+      "median": 0.16,
+      "p95": 0.16
+     }
+    },
+    "PER_HOP": {
+     "1": {
+      "nq": 2000,
+      "GOLD_RECALL@50": 0.9262,
+      "GRAPH_ONLY_GOLD_ADMISSION@50": 0.3133,
+      "graph_only_gold_available": 316,
+      "NET_GOLD_GAIN@50": 116
+     }
+    }
+   },
+   "TARGET_ORACLE_DIAGNOSTIC_NOT_VALID_SELECTION": {
+    "MAXNET_ceiling": {
+     "channel": "S0",
+     "R": 16,
+     "target_NET": 137,
+     "target_retention": 0.9868,
+     "ORACLE_GAP_NET_left_on_table": 21
+    },
+    "CONSTRAINED_same_objective": {
+     "channel": "S0",
+     "R": 16,
+     "target_NET": 137,
+     "target_retention": 0.9868
+    }
+   },
+   "SOURCE_CONFIG_TABLE": {
+    "BASE_FUSED|R0": {
+     "metaqa": {
+      "NET": 0,
+      "RVret": 1.0
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "BASE_FUSED|R4": {
+     "metaqa": {
+      "NET": 223,
+      "RVret": 0.9708
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "BASE_FUSED|R8": {
+     "metaqa": {
+      "NET": 378,
+      "RVret": 0.9526
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "BASE_FUSED|R16": {
+     "metaqa": {
+      "NET": 635,
+      "RVret": 0.8974
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 0.999
+     }
+    },
+    "S0|R0": {
+     "metaqa": {
+      "NET": 80,
+      "RVret": 0.9708
+     },
+     "squad_clean": {
+      "NET": 1,
+      "RVret": 1.0
+     }
+    },
+    "S0|R4": {
+     "metaqa": {
+      "NET": 276,
+      "RVret": 0.9597
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "S0|R8": {
+     "metaqa": {
+      "NET": 397,
+      "RVret": 0.94
+     },
+     "squad_clean": {
+      "NET": 1,
+      "RVret": 1.0
+     }
+    },
+    "S0|R16": {
+     "metaqa": {
+      "NET": 640,
+      "RVret": 0.895
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 0.999
+     }
+    },
+    "S1_PRIME|R0": {
+     "metaqa": {
+      "NET": 32,
+      "RVret": 0.9795
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "S1_PRIME|R4": {
+     "metaqa": {
+      "NET": 237,
+      "RVret": 0.9629
+     },
+     "squad_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "S1_PRIME|R8": {
+     "metaqa": {
+      "NET": 372,
+      "RVret": 0.9424
+     },
+     "squad_clean": {
+      "NET": -1,
+      "RVret": 0.999
+     }
+    },
+    "S1_PRIME|R16": {
+     "metaqa": {
+      "NET": 608,
+      "RVret": 0.8753
+     },
+     "squad_clean": {
+      "NET": -3,
+      "RVret": 0.9959
+     }
+    }
+   },
+   "TARGET_GRID_NET": {
+    "BASE_FUSED|R0": {
+     "NET": 0,
+     "RVret": 1.0,
+     "GO_adm": 0.0
+    },
+    "BASE_FUSED|R4": {
+     "NET": 84,
+     "RVret": 0.9971,
+     "GO_adm": 0.2278
+    },
+    "BASE_FUSED|R8": {
+     "NET": 116,
+     "RVret": 0.9945,
+     "GO_adm": 0.3133
+    },
+    "BASE_FUSED|R16": {
+     "NET": 135,
+     "RVret": 0.9873,
+     "GO_adm": 0.4272
+    },
+    "S0|R0": {
+     "NET": 31,
+     "RVret": 0.998,
+     "GO_adm": 0.0
+    },
+    "S0|R4": {
+     "NET": 104,
+     "RVret": 0.9963,
+     "GO_adm": 0.2342
+    },
+    "S0|R8": {
+     "NET": 118,
+     "RVret": 0.9922,
+     "GO_adm": 0.3165
+    },
+    "S0|R16": {
+     "NET": 137,
+     "RVret": 0.9868,
+     "GO_adm": 0.4304
+    },
+    "S1_PRIME|R0": {
+     "NET": 18,
+     "RVret": 0.9963,
+     "GO_adm": 0.0
+    },
+    "S1_PRIME|R4": {
+     "NET": 90,
+     "RVret": 0.9942,
+     "GO_adm": 0.2342
+    },
+    "S1_PRIME|R8": {
+     "NET": 113,
+     "RVret": 0.9928,
+     "GO_adm": 0.3133
+    },
+    "S1_PRIME|R16": {
+     "NET": 128,
+     "RVret": 0.9853,
+     "GO_adm": 0.4272
+    }
+   }
+  },
+  "squad_clean": {
+   "train": [
+    "metaqa",
+    "2wiki_clean"
+   ],
+   "beta_source": {
+    "S0": 0.1,
+    "S1_PRIME": 0.05
+   },
+   "SELECTED": {
+    "channel": "S1_PRIME",
+    "R": 8,
+    "fallback_used": false,
+    "mean_source_NET": 300.0,
+    "source_retention": {
+     "metaqa": 0.959,
+     "2wiki_clean": 0.9706
+    },
+    "satisfies_target_retention_floor": true
+   },
+   "TARGET_METRICS": {
+    "nq": 984,
+    "GOLD_RECALL@50": 0.9756,
+    "ALL@50": 0.9756,
+    "ANY@50": 0.9756,
+    "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+    "graph_only_gold_available": 0,
+    "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.9776,
+    "retrieval_visible_gold_base": 980,
+    "retrieval_visible_gold_retained": 958,
+    "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 0,
+    "NEW_GOLDS_ADMITTED": 2,
+    "OLD_GOLDS_EVICTED": 22,
+    "NET_GOLD_GAIN@50": -20,
+    "POOL_CHURN_mean": 0.2452,
+    "CHANNEL_COMPOSITION": {
+     "nominal_R_unique_inserted": {
+      "mean": 6.805,
+      "median": 8.0,
+      "p95": 8.0
+     },
+     "structural_overlap_with_verification": {
+      "mean": 0.801,
+      "median": 0.0,
+      "p95": 3.0
+     },
+     "unused_structural_slots_to_verification": {
+      "mean": 1.195,
+      "median": 0.0,
+      "p95": 8.0
+     },
+     "fraction_final_pool_structural": {
+      "mean": 0.136,
+      "median": 0.16,
+      "p95": 0.16
+     }
+    },
+    "PER_HOP": {
+     "1": {
+      "nq": 984,
+      "GOLD_RECALL@50": 0.9756,
+      "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+      "graph_only_gold_available": 0,
+      "NET_GOLD_GAIN@50": -20
+     }
+    }
+   },
+   "TARGET_ORACLE_DIAGNOSTIC_NOT_VALID_SELECTION": {
+    "MAXNET_ceiling": {
+     "channel": "BASE_FUSED",
+     "R": 0,
+     "target_NET": 0,
+     "target_retention": 1.0,
+     "ORACLE_GAP_NET_left_on_table": 20
+    },
+    "CONSTRAINED_same_objective": {
+     "channel": "BASE_FUSED",
+     "R": 0,
+     "target_NET": 0,
+     "target_retention": 1.0
+    }
+   },
+   "SOURCE_CONFIG_TABLE": {
+    "BASE_FUSED|R0": {
+     "metaqa": {
+      "NET": 0,
+      "RVret": 1.0
+     },
+     "2wiki_clean": {
+      "NET": 0,
+      "RVret": 1.0
+     }
+    },
+    "BASE_FUSED|R4": {
+     "metaqa": {
+      "NET": 223,
+      "RVret": 0.9708
+     },
+     "2wiki_clean": {
+      "NET": 84,
+      "RVret": 0.9971
+     }
+    },
+    "BASE_FUSED|R8": {
+     "metaqa": {
+      "NET": 378,
+      "RVret": 0.9526
+     },
+     "2wiki_clean": {
+      "NET": 116,
+      "RVret": 0.9945
+     }
+    },
+    "BASE_FUSED|R16": {
+     "metaqa": {
+      "NET": 635,
+      "RVret": 0.8974
+     },
+     "2wiki_clean": {
+      "NET": 135,
+      "RVret": 0.9873
+     }
+    },
+    "S0|R0": {
+     "metaqa": {
+      "NET": 0,
+      "RVret": 0.9905
+     },
+     "2wiki_clean": {
+      "NET": 14,
+      "RVret": 0.9997
+     }
+    },
+    "S0|R4": {
+     "metaqa": {
+      "NET": 205,
+      "RVret": 0.9534
+     },
+     "2wiki_clean": {
+      "NET": 86,
+      "RVret": 0.994
+     }
+    },
+    "S0|R8": {
+     "metaqa": {
+      "NET": 336,
+      "RVret": 0.9155
+     },
+     "2wiki_clean": {
+      "NET": 113,
+      "RVret": 0.9908
+     }
+    },
+    "S0|R16": {
+     "metaqa": {
+      "NET": 547,
+      "RVret": 0.8272
+     },
+     "2wiki_clean": {
+      "NET": 124,
+      "RVret": 0.983
+     }
+    },
+    "S1_PRIME|R0": {
+     "metaqa": {
+      "NET": 225,
+      "RVret": 0.9834
+     },
+     "2wiki_clean": {
+      "NET": 22,
+      "RVret": 0.9917
+     }
+    },
+    "S1_PRIME|R4": {
+     "metaqa": {
+      "NET": 416,
+      "RVret": 0.9716
+     },
+     "2wiki_clean": {
+      "NET": 65,
+      "RVret": 0.9827
+     }
+    },
+    "S1_PRIME|R8": {
+     "metaqa": {
+      "NET": 555,
+      "RVret": 0.959
+     },
+     "2wiki_clean": {
+      "NET": 45,
+      "RVret": 0.9706
+     }
+    },
+    "S1_PRIME|R16": {
+     "metaqa": {
+      "NET": 759,
+      "RVret": 0.9195
+     },
+     "2wiki_clean": {
+      "NET": -105,
+      "RVret": 0.9162
+     }
+    }
+   },
+   "TARGET_GRID_NET": {
+    "BASE_FUSED|R0": {
+     "NET": 0,
+     "RVret": 1.0,
+     "GO_adm": 0.0
+    },
+    "BASE_FUSED|R4": {
+     "NET": 0,
+     "RVret": 1.0,
+     "GO_adm": 0.0
+    },
+    "BASE_FUSED|R8": {
+     "NET": 0,
+     "RVret": 1.0,
+     "GO_adm": 0.0
+    },
+    "BASE_FUSED|R16": {
+     "NET": 0,
+     "RVret": 0.999,
+     "GO_adm": 0.0
+    },
+    "S0|R0": {
+     "NET": 0,
+     "RVret": 1.0,
+     "GO_adm": 0.0
+    },
+    "S0|R4": {
+     "NET": -1,
+     "RVret": 0.999,
+     "GO_adm": 0.0
+    },
+    "S0|R8": {
+     "NET": -4,
+     "RVret": 0.9959,
+     "GO_adm": 0.0
+    },
+    "S0|R16": {
+     "NET": -8,
+     "RVret": 0.9908,
+     "GO_adm": 0.0
+    },
+    "S1_PRIME|R0": {
+     "NET": -6,
+     "RVret": 0.9898,
+     "GO_adm": 0.0
+    },
+    "S1_PRIME|R4": {
+     "NET": -12,
+     "RVret": 0.9847,
+     "GO_adm": 0.0
+    },
+    "S1_PRIME|R8": {
+     "NET": -20,
+     "RVret": 0.9776,
+     "GO_adm": 0.0
+    },
+    "S1_PRIME|R16": {
+     "NET": -55,
+     "RVret": 0.9418,
+     "GO_adm": 0.0
+    }
+   }
+  }
+ },
+ "VERDICT": {
+  "success_conditions_source_selected": {
+   "metaqa": true,
+   "2wiki_clean": true,
+   "squad_clean": false
+  },
+  "PASS": false,
+  "target_oracle_would_pass_all": true,
+  "oracle_conditions": {
+   "metaqa": true,
+   "2wiki_clean": true,
+   "squad_clean": true
+  },
+  "INTERPRETATION": "RESERVE_POLICY_GENERALIZATION=NO \u2014 target-oracle pairs satisfy all conditions but the SOURCE-SELECTED policy does not; the open problem is POLICY SELECTION (choosing channel/R without target), not candidate scoring. Per directive: do NOT enlarge the MLP; do NOT proceed to six-way.",
+  "reference_success_condition": "MetaQA: GO_adm>0 & NET>0 | 2Wiki: NET>=0 & RVret>=0.95 | SQuAD: NET>=-5 & RVret>=0.99 \u2014 all WITHOUT target-specific R / dataset-ID / target calibration / learned directional verifier."
+ },
+ "NEW_ENCODER_FORWARD_PASSES": 0,
+ "TARGET_TEST_TOUCHED": "NO",
+ "SIX_WAY_LODO_LAUNCHED": "NO"
+}

@@ -1,0 +1,276 @@
+{
+ "RECORD": "PREREGISTRATION",
+ "name": "BALANCED_H2_PATCH1_DEV_A",
+ "STATUS": "POSTHOC_MECHANISM_TEST",
+ "written_before_any_run": false,
+ "written_before": [
+  "any balanced beam on any cache",
+  "any BALANCED_H2_PATCH1 number",
+  "any h2balanced_A_*.json"
+ ],
+ "what_was_run_before_this_record": "the module was compiled and its compression function unit-tested on a synthetic 3-parent example (no cache, no graph, no gold read)",
+ "utc": "2026-09-15T17:54:28Z",
+ "ruling_2026-09-15_twelfth_verbatim_essentials_beam_side": "On the beam side ... the missing gold nodes are already in the candidate set before Top-100 pruning (173/174 MtK failures, 160/162 PHG failures) ... we do not actually need to traverse more. We need a better vectorized compression of ~215 H2 candidates into the 100-node patch ... per-parent segmented Top-K before global packing ... However, do not choose k_local from MetaQA now. That creates another constant. There's an even cleaner parameter-free version: Round-robin by within-parent rank ... A1 B1 C1 ... A2 B2 C2 ... until the global budget is filled. No local K. No learned weights. No dataset parameter. The only existing constant remains the global beam/patch capacity ... B. BALANCED_H2_PATCH1: Keep the exact H2 graph expansion and 100-node patch, but replace global candidate truncation with a parameter-free per-parent rank interleave before patch packing. Question: Can we recover the already-present missing hop-2 candidates without increasing traversal depth, candidate generation, or patch exposure? This is the pseudo-L3/L1-booster workstream. And I would still leave frozen H2_PATCH1 untouched for WebQSP transfer. These are new exploratory arms, not modifications to the current candidate ... I would not execute either on MetaQA immediately without a clean preregistration.",
+ "question": "Can the already-present missing hop-2 candidates (section 17: 630 / 624 missing gold nodes of the failing hop-2 queries are scored candidates cut by the global top-100) be recovered without increasing traversal depth, candidate generation or patch exposure, by replacing the global truncation with a parameter-free per-parent rank interleave?",
+ "why_posthoc": "DEV_A has been read by sections 2-20 of this lane; this is a mechanism test on an already-read population. Promotion requires an untouched population (WebQSP or DEV_B by ruling). The frozen H2_PATCH1 is untouched and remains the WebQSP transfer candidate.",
+ "frozen_and_reused_verbatim": {
+  "canonical_L1": "served base_rank of each replay cache; unchanged",
+  "canonical_SAFE": "the frozen B6_S4_F6_Ms64_Mr32 selector through its own code (_l1ps_router.build_cache + _l1kb_core.contexts / f6_select); its recomputed indicator must equal the frozen replay records' _ind_SAFE on every DEV_A row (asserted, else the run is invalid)",
+  "H2_beam_candidate_generation": "the pinned MICRO_L3_H2 beam of scratchpad/_l1c_microl3.py (sha256 19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5, asserted): frozen 5 seeds, actual STRUCT adjacency under the frozen hub policy (out-edges always, in-edges only for non-hub sources), depth exactly 2, BEAM = 100 per hop, frozen transition geometry S_dst / S_dir / S_mid and frozen RRF (K0 = 60) fused transition order -- the module's own head is executed unchanged (import-by-exec, name substituted), so the pinned beams are produced by the pinned code and are asserted equal to a re-run that additionally records the candidates",
+  "H2_PATCH1": "section 16 verbatim (scratchpad/_l1c_h2patch.py sha256 a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d, asserted; copied patch machinery): SAFE minus its weakest admitted block (the sixth block of the F6 competition order) + one query-local virtual block of the same size = the beam's visited nodes not exposed by the 49 kept blocks in first-visit order (hop-1 beam then hop-2 beam, seeds excluded), topped up from the removed block (ret_rrf position ascending, then node id); |served| matched per query (asserted). The rebuilt H2_PATCH1 arm must reproduce h2patch_A_<cache>.json exactly (ALL, ANY, vs SAFE, per hop, novel-node counts, truncated queries) -- asserted, else the run is invalid",
+  "partition": "the served hard partition of each cache (hard[v], part_sizes); blocks are disjoint and served whole"
+ },
+ "the_one_change_frontier_compression": {
+  "pinned": "B(h) = the first BEAM = 100 distinct unvisited targets of the frozen fused transition order over the union of all parents' transitions (a global top-100)",
+  "balanced": "(1) (parent, target) pairs in the frozen fused order, a pair reached twice keeping its FIRST occurrence; (2) within-parent rank r(m, u) = position of the pair among parent m's pairs in that order (the restriction of the frozen fused order to one parent; 0-based); (3) sequence = all pairs sorted by (r, position of the parent in the frontier order) = A1 B1 C1 ... A2 B2 C2 ...; (4) B(h) = the first BEAM distinct unvisited targets of that sequence, a target already taken by an earlier pair of the sequence being skipped; visited marks exactly as the pinned beam",
+  "applied_at_every_hop": "hop 1: parents = the frozen seeds in their frozen order; hop 2: parents = the balanced hop-1 beam in its sequence order (a parent with no admissible transition contributes nothing)",
+  "constants": "none new: BEAM = 100, DEPTH = 2, K0 = 60 and the patch budget (= the removed block's size) are the frozen constants of sections 14 / 16; no local K, no learned weight, no dataset parameter, no tie-break constant (ties in the fused order are resolved by the frozen fused order itself)",
+  "unchanged": "admissibility, transition geometry, fused order, width, depth, seeds, patch rule, capacity, fill order, SAFE, L1, the metric",
+  "code_verbatim": "def rr_compress(v_idx, u_idx, order, frontier, visited, budget):\n    \"\"\"parameter-free per-parent rank round-robin over the frozen fused transition order; marks visited exactly like the pinned beam.\n    returns (kept targets in sequence order, parent of each kept target, stats).\"\"\"\n    pos = np.full(N, -1, np.int64)\n    pos[np.asarray(frontier, np.int64)] = np.arange(len(frontier))\n    v_o, u_o = v_idx[order], u_idx[order]\n    pp = pos[v_o]\n    assert (pp >= 0).all()\n    key = pp.astype(np.int64) * N + u_o\n    _, first = np.unique(key, return_index=True)             # (parent, target) pairs: keep the first occurrence in fused order\n    first.sort()\n    pp, uu = pp[first], u_o[first]\n    o = np.argsort(pp, kind=\"stable\")                        # within-parent rank = position among the parent's pairs in fused order\n    ps = pp[o]\n    start = np.r_[0, np.flatnonzero(np.diff(ps)) + 1]\n    grp = np.repeat(np.arange(len(start)), np.diff(np.r_[start, len(ps)]))\n    r = np.empty(len(pp), np.int64)\n    r[o] = np.arange(len(ps)) - start[grp]\n    seq = np.lexsort((pp, r))                                # A1 B1 C1 ... A2 B2 C2 ...\n    nb, par, last_r = [], {}, -1\n    for j in seq:\n        u = int(uu[j])\n        if not visited[u]:\n            visited[u] = True\n            nb.append(u)\n            par[u] = int(v_o[first[j]])\n            last_r = int(r[j])\n            if len(nb) >= budget:\n                break\n    st = {\"parents\": int(len(frontier)), \"parents_with_candidates\": int(len(start)), \"candidates_unique\": int(len(np.unique(uu))), \"pairs\": int(len(uu)),\n          \"kept\": len(nb), \"truncated\": int(len(np.unique(uu)) > budget), \"rounds_used\": last_r + 1,\n          \"largest_parent_candidate_list\": int(np.bincount(pp).max()) if len(pp) else 0}\n    return nb, par, st\n\n\n",
+  "unit_test": "synthetic: frontier [A, B, C] with fused pairs (A,a1) (B,b1=a1) (A,a2) (C,c1) (B,b2) (A,a3) (A,a2 dup) -> budget 4 keeps [a1, c1, a2, b2] (B1 duplicate skipped, rounds 2); budget 100 keeps [a1, c1, a2, b2, a3] (rounds 3); frontier [B, A, C] with c1 visited and budget 3 keeps [a1, b2, a2]"
+ },
+ "pre_stated_risk_no_threshold": "a hop-2 question whose several answer nodes hang under ONE hop-1 parent (multi-answer branches) can lose slots to the round-robin that the global order would have given it; the balanced beam therefore trades within-branch depth for cross-branch coverage. This is reported (per-query flips vs H2_PATCH1 with their cause: gold cut by the balanced beam vs recovered by it), not thresholded; no hybrid, no k_local and no mixed order will be run after seeing it.",
+ "arms": {
+  "L1": "served P50 (reference only)",
+  "SAFE": "canonical SAFE (reference)",
+  "H2_PATCH1": "the frozen section-16 arm rebuilt in-process (must equal the frozen record)",
+  "BALANCED_H2_PATCH1": "the new arm: the same patch rule over the balanced beam's visited nodes"
+ },
+ "population": "DEV_A of the five caches metaqa (Mt-KaHyPar), metaqa_phg, squad (Mt-KaHyPar), squad_phg, musique (PHG); DEV_B and TEST never read",
+ "metric": "ALL-gold under matched unique-node exposure (node level; == block level for L1 / SAFE, asserted); ANY-gold reported; per hop on metaqa; McNemar exact two-sided on paired DEV_A 0/1 vectors (_l1x90_core.mcnemar)",
+ "decision_rule": {
+  "primary_comparison": "BALANCED_H2_PATCH1 vs H2_PATCH1 (the frozen arm), not vs SAFE: the question is whether the compression recovers what the global cut loses",
+  "metaqa_required": "hop-2 ALL-gold BALANCED_H2_PATCH1 vs H2_PATCH1: gained > lost and p < 0.01 on BOTH metaqa caches",
+  "no_regression_required": "hop-1 and hop-3 ALL-gold vs H2_PATCH1 on either metaqa cache: NOT (lost > gained and p < 0.05)",
+  "text_safety_required": "on each of squad, squad_phg, musique: NOT (lost > gained and p < 0.05) for BALANCED_H2_PATCH1 vs H2_PATCH1 AND vs SAFE",
+  "PASS": "MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC; not promoted): the parameter-free compression recovers hop-2 candidates the global cut loses; the frozen H2_PATCH1 stays the WebQSP transfer candidate; no promotion, no composition",
+  "FAIL": "NOT_CONFIRMED with the failing clause named (no hop-2 gain / text safety / hop-1-or-3 regression); reported with the flip attribution; no second compression rule is run",
+  "magnitude_is_reported_not_thresholded": "hop-2 points vs H2_PATCH1, vs SAFE and vs L1; pooled hop 2+3; beam diversity (distinct parents represented, largest parent share, candidate-set overlap with the pinned beam); the section-17 within-depth-2 missing-gold population and how many of those nodes the balanced beam visits",
+  "alpha": 0.01
+ },
+ "also_recorded": [
+  "per query: candidates unique / pairs / kept / truncated / rounds used per hop; same-set fraction and Jaccard between the pinned and balanced beams",
+  "flips vs H2_PATCH1 with causes (gold node newly visited by the balanced beam / gold node no longer visited / patch-capacity displacement)",
+  "the section-17 population reproduced against h3patch_why_A_<cache>.json (metaqa caches) and the coverage of its missing gold nodes by the balanced beam",
+  "wall time per query of the balanced beam (vectorised numpy; no Python per-candidate loop except the final sequential take)"
+ ],
+ "forbidden": [
+  "reading DEV_B or TEST",
+  "any change to BEAM / DEPTH / K0 / seeds / admissibility / transition geometry / the fused order / the patch rule / the capacity / the fill order",
+  "a local K, a learned weight, a dataset parameter, a hybrid of the two orders, a second compression rule after seeing numbers",
+  "editing scratchpad/_l1c_microl3.py, scratchpad/_l1c_h2patch.py or any CONTRACT_FILE / pinned module; editing scratchpad/_l1c_h2balanced.py after this record (its sha is pinned below and asserted at run time)",
+  "composing with SAFE variants, H3, VCUT / R2 or any other arm",
+  "tuning after seeing numbers; changing a label or threshold after a number is seen",
+  "writing under data/",
+  "touching the WebQSP watcher or the foreign process"
+ ],
+ "code": {
+  "this_module": {
+   "path": "scratchpad/_l1c_h2balanced.py",
+   "sha256": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe",
+   "bytes": 36015
+  },
+  "usage": "python -u scratchpad/_l1c_h2balanced.py <cache> -> results/L1_COVPART/h2balanced_A_<cache>.json; --summary -> h2balanced_A_SUMMARY.json",
+  "pinned_modules": {
+   "_l1c_microl3.py": {
+    "path": "scratchpad/_l1c_microl3.py",
+    "sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+    "bytes": 15145
+   },
+   "_l1c_h2patch.py": {
+    "path": "scratchpad/_l1c_h2patch.py",
+    "sha256": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d",
+    "bytes": 21581
+   },
+   "_l1kb_core.py": {
+    "path": "scratchpad/_l1kb_core.py",
+    "sha256": "f804f92d3ddead9ffdfd2a69981a3470f49346f9163f6f4a5ee3c546275cf8da",
+    "bytes": 5770
+   },
+   "_l1ps_router.py": {
+    "path": "scratchpad/_l1ps_router.py",
+    "sha256": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9",
+    "bytes": 19503
+   },
+   "_l1g_core.py": {
+    "path": "scratchpad/_l1g_core.py",
+    "sha256": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+    "bytes": 11419
+   },
+   "_l1s_core.py": {
+    "path": "scratchpad/_l1s_core.py",
+    "sha256": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+    "bytes": 15099
+   },
+   "_l1x90_core.py": {
+    "path": "scratchpad/_l1x90_core.py",
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+    "bytes": 12081
+   },
+   "_ta_prepartition.py": {
+    "path": "scratchpad/_ta_prepartition.py",
+    "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+    "bytes": 11737
+   }
+  }
+ },
+ "records_read_only": {
+  "h2patch_A_metaqa.json": {
+   "path": "results/L1_COVPART/h2patch_A_metaqa.json",
+   "sha256": "f5b5a91cba8d906b4189e4caf023cbab445ae3dbab15786a9abee236f3297438",
+   "bytes": 8845
+  },
+  "h2patch_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/h2patch_A_metaqa_phg.json",
+   "sha256": "b2e2b57f16a3e724644e44f329b3fc0181bac4ccd6b787d444c003987e0d2cef",
+   "bytes": 8876
+  },
+  "h2patch_A_squad.json": {
+   "path": "results/L1_COVPART/h2patch_A_squad.json",
+   "sha256": "cfb66bc7aa2ca53c4c0447b03d7b272e69c45e73589e50812ee099d7b886fe7b",
+   "bytes": 3944
+  },
+  "h2patch_A_squad_phg.json": {
+   "path": "results/L1_COVPART/h2patch_A_squad_phg.json",
+   "sha256": "e745473a47cb5552bf5d1559c0d1153f8dcaf49a2a7c30e704e5dee964844c45",
+   "bytes": 3894
+  },
+  "h2patch_A_musique.json": {
+   "path": "results/L1_COVPART/h2patch_A_musique.json",
+   "sha256": "8cdc85482ada7e131cec09ac38377365822180ab7b044f9d3f0124f33e2c197d",
+   "bytes": 4021
+  },
+  "microl3_A_metaqa.json": {
+   "path": "results/L1_COVPART/microl3_A_metaqa.json",
+   "sha256": "42d0a6247fcee2ebda2595a47fcbf165cd4361483140877a02ea04aed0f90856",
+   "bytes": 5366
+  },
+  "microl3_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/microl3_A_metaqa_phg.json",
+   "sha256": "449644cdc32450a6b89e31a91a9769769d7ac9bdc1bfd1518febb8db9cbe0a2d",
+   "bytes": 5351
+  },
+  "microl3_A_squad.json": {
+   "path": "results/L1_COVPART/microl3_A_squad.json",
+   "sha256": "de0c766669889268b68a6a7a600e21eee3a589d0c3ec9bffee27d233fe0aaaa1",
+   "bytes": 2227
+  },
+  "microl3_A_squad_phg.json": {
+   "path": "results/L1_COVPART/microl3_A_squad_phg.json",
+   "sha256": "705236ff33bfe7766f510d2e494fc977a6b76407594f9cd5e0456b161dd74acf",
+   "bytes": 2226
+  },
+  "microl3_A_musique.json": {
+   "path": "results/L1_COVPART/microl3_A_musique.json",
+   "sha256": "df90b7a7cc27e42824b28de03c0dd41162f5578422a94af3438a56d94e01f65d",
+   "bytes": 2266
+  },
+  "h3patch_why_A_metaqa.json": {
+   "path": "results/L1_COVPART/h3patch_why_A_metaqa.json",
+   "sha256": "7551a689179c8a8d8e0a7a5e01f41b417ab933771e3c93287bd7b61213853778",
+   "bytes": 2907
+  },
+  "h3patch_why_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/h3patch_why_A_metaqa_phg.json",
+   "sha256": "e195d15f6d877295b8447055e3445e9b732005ba6dfcf786d5390e87f7558ce6",
+   "bytes": 2917
+  },
+  "PREREGISTRATION_H2_PATCH1_DEV_A.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_H2_PATCH1_DEV_A.json",
+   "sha256": "c092a56b955784424f9e9050cc9777e3c57e0fd0b30ec5f61d1596d5fcb11f3e",
+   "bytes": 9367
+  },
+  "PREREGISTRATION_MICROL3_DEV_A.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_MICROL3_DEV_A.json",
+   "sha256": "d9a8755153d8446ab649a3a4c19de2e4b5553c6800d86e0738686fbf69fe9efd",
+   "bytes": 7287
+  },
+  "PREREGISTRATION_H3_PATCH1_DEV_A.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_H3_PATCH1_DEV_A.json",
+   "sha256": "3eec36ecc72e8f48ec61977539aa492a5fa0a500e1e94687bb7898a2147b62e2",
+   "bytes": 10955
+  }
+ },
+ "SAFE_records_read_only": {
+  "metaqa": {
+   "path": "results/L1_CANONICAL/L1_REPLAY_metaqa.json",
+   "sha256": "7e5ef35b549791d9b6e790615a80ad7558f4626a07e0aaccca987f1834bc0972",
+   "bytes": 23067
+  },
+  "squad": {
+   "path": "results/L1_CANONICAL/L1_REPLAY_squad.json",
+   "sha256": "c39aa79836c0296fafa957c01f5004f81968df3e7f5baee873687d1061e09d58",
+   "bytes": 22709
+  },
+  "metaqa_phg": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json",
+   "sha256": "d4ff6870236303c4b88fbcdd4c421d33719eb19dba2829d87a53cc09f5032c17",
+   "bytes": 33356
+  },
+  "squad_phg": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_squad__LOWMEM__PHG_con.json",
+   "sha256": "dc14ab54ea656f2f4f495c59365b84836b70cd3c27a22c646a210e4d9d5d8846",
+   "bytes": 34987
+  },
+  "musique": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json",
+   "sha256": "207ad4bb3b292f7930bafba94551881896d54e80edc89974bc28c6bad71dac76",
+   "bytes": 35090
+  }
+ },
+ "caches_read_only": {
+  "metaqa": {
+   "path": "data/l1_canonical/metaqa/replay_cache.npz",
+   "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b",
+   "bytes": 5390599
+  },
+  "metaqa_phg": {
+   "path": "data/l1_lowmem/metaqa/replay_cache__LOWMEM__PHG_REPAIR1_con.npz",
+   "sha256": "584e17dec26d0408d5253a3f79e471bc7ec128f6dde744581bb6e502da5b4e5b",
+   "bytes": 5386215
+  },
+  "squad": {
+   "path": "data/l1_canonical/squad/replay_cache.npz",
+   "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6",
+   "bytes": 5320148
+  },
+  "squad_phg": {
+   "path": "data/l1_lowmem/squad/replay_cache__LOWMEM__PHG_con.npz",
+   "sha256": "edd9b36bb4ba45ff0579c0591f19dc263ae84296f7f9299684974530845f20ab",
+   "bytes": 5312713
+  },
+  "musique": {
+   "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+   "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5",
+   "bytes": 6183023
+  }
+ },
+ "supersedes": {
+  "v1": {
+   "path": "results/L1_COVPART/_history/PREREGISTRATION_BALANCED_H2_PATCH1_DEV_A__v1_2026-09-15T17-50-31Z.json",
+   "sha256": "a440c76d52431a4ac86eb763d6913e8bb6aff43598740614c32df2f2224bffd6",
+   "utc": "2026-09-15T17:50:31Z",
+   "module_sha256_v1": "bbe79c1c1a16d604043baa16e6df09e35cfa318051572d0c680b9e03b5625527"
+  },
+  "why": "the first metaqa run (log: results/L1_COVPART/h2balanced_A_metaqa__run1_failed_at_the_section17_crosscheck.log) computed every arm number and then died at the diagnostic cross-check of the section-17 population against h3patch_why_A_metaqa.json (172 vs 173 for hop2): the recomputation classified a missing gold node that is one of the frozen seeds as 'never scored', while _l1c_h3patch_why.py skips a seed gold node (neither scored nor visited by a hop). No result JSON was written.",
+  "what_changed_in_the_module": "only the diagnostic loop (the section-17 population and node-level availability): a missing gold node that is a frozen seed is now counted in a 'missing_is_seed (skipped exactly as in section 17)' bucket and skipped, exactly as section 17 does. The compression function (asserted byte-identical above), the beam, the patch machinery, the arms, the metric, the decision rule, the thresholds and the summary are unchanged.",
+  "numbers_seen_before_the_fix (metaqa DEV_A, from the failed run's log; stated so that nothing can be tuned to them)": {
+   "L1": 0.6397,
+   "SAFE": 0.6407,
+   "H2_PATCH1": 0.7515,
+   "BALANCED_H2_PATCH1": 0.7764,
+   "BALANCED_vs_H2_PATCH1_hop2": {
+    "n": 344,
+    "H2_PATCH1": 0.7413,
+    "BALANCED": 0.814,
+    "gained": 30,
+    "lost": 5,
+    "p": 2.24e-05
+   },
+   "hop1_and_hop3_vs_H2_PATCH1": "0 / 0 on both",
+   "beam_diversity": "hop-2 same kept set on 138 / 1002 queries, Jaccard 0.595, distinct parents 19.1 -> 24.0, largest parent share 0.234 -> 0.105, wall-clock 24.3 -> 20.0 ms",
+   "flips": "30 newly covered (58 gold nodes newly visited by the balanced beam), 5 newly lost (8 gold nodes no longer visited)"
+  },
+  "consequence_for_the_status": "the metaqa (Mt-KaHyPar cache) numbers were seen before this record; the rule was fixed in v1 before any run and is unchanged here, so the decision is still the pre-registered one, but the record honestly states that the v2 re-run of metaqa is a reproduction of already-seen numbers; metaqa_phg, squad, squad_phg and musique had not been run."
+ }
+}

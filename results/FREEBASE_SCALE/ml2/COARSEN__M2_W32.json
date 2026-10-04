@@ -1,0 +1,231 @@
+{
+ "RECORD": "ML2_COARSEN",
+ "dataset": "webqsp",
+ "method": "M2",
+ "rating": "span",
+ "schedule": "flat",
+ "Wmax": 32,
+ "params": {
+  "Lmax": 200,
+  "R": 1000000000.0,
+  "MAXLEVELS": 12,
+  "MIN_GAIN": 0.05,
+  "twins": "open, both families"
+ },
+ "utc": "2026-09-30T11:20:13Z",
+ "N": 2592894,
+ "pairs": {
+  "STRUCT": 5882501,
+  "KNN": 6313874
+ },
+ "fine_unsplit": {
+  "M": 5181598,
+  "P": 29574348
+ },
+ "levels": [
+  {
+   "level": 0,
+   "kind": "fine",
+   "V": 2592894,
+   "M": 5181598,
+   "P": 29574348
+  },
+  {
+   "level": 1,
+   "kind": "T_open_twins",
+   "seconds": 43.6,
+   "twin_classes": 1926179,
+   "vertices_in_nontrivial_classes": 742239,
+   "clusters": 1932762,
+   "max_cluster": 32,
+   "V": 1932762,
+   "M_in": 5181598,
+   "P_in": 29574348,
+   "nets_dropped_singleton": 0,
+   "nets_merged_identical": 1364619,
+   "M": 3816979,
+   "P": 22522662,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 2,
+   "kind": "A_span_cap32",
+   "seconds": 36.6,
+   "agg": {
+    "mode": 1,
+    "V": 1932762,
+    "clusters": 489161,
+    "joined": 1443601,
+    "max_cluster_weight": 32,
+    "scanned_pins": 153280865,
+    "seconds": 3.675,
+    "c_source_sha12": "e1196a2dfd7c"
+   },
+   "V": 489161,
+   "M_in": 3816979,
+   "P_in": 22522662,
+   "nets_dropped_singleton": 796383,
+   "nets_merged_identical": 214382,
+   "M": 2806214,
+   "P": 15701670,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 3,
+   "kind": "A_span_cap32",
+   "seconds": 26.6,
+   "agg": {
+    "mode": 1,
+    "V": 489161,
+    "clusters": 170209,
+    "joined": 318952,
+    "max_cluster_weight": 32,
+    "scanned_pins": 100921733,
+    "seconds": 2.027,
+    "c_source_sha12": "e1196a2dfd7c"
+   },
+   "V": 170209,
+   "M_in": 2806214,
+   "P_in": 15701670,
+   "nets_dropped_singleton": 160779,
+   "nets_merged_identical": 216753,
+   "M": 2428682,
+   "P": 12981990,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 4,
+   "kind": "A_span_cap32",
+   "seconds": 22.4,
+   "agg": {
+    "mode": 1,
+    "V": 170209,
+    "clusters": 94309,
+    "joined": 75900,
+    "max_cluster_weight": 32,
+    "scanned_pins": 114090189,
+    "seconds": 1.846,
+    "c_source_sha12": "e1196a2dfd7c"
+   },
+   "V": 94309,
+   "M_in": 2428682,
+   "P_in": 12981990,
+   "nets_dropped_singleton": 41743,
+   "nets_merged_identical": 85098,
+   "M": 2301841,
+   "P": 12195027,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 5,
+   "kind": "A_span_cap32",
+   "skipped": "gain 0.014 < 0.05",
+   "mode": 1,
+   "V": 94309,
+   "clusters": 92986,
+   "joined": 1323,
+   "max_cluster_weight": 32,
+   "scanned_pins": 151059240,
+   "seconds": 2.067,
+   "c_source_sha12": "e1196a2dfd7c"
+  }
+ ],
+ "maps": [
+  {
+   "level": 1,
+   "kind": "T_open_twins",
+   "clusters": 1932762,
+   "cluster_size": {
+    "max": 32,
+    "mean": 1.342,
+    "p50": 1.0,
+    "singletons": 1850926
+   },
+   "unsplit_pins": 22522662,
+   "unsplit_nets": 3816979,
+   "pin_reduction": 1.313,
+   "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W32_L1.npy",
+   "sha256": "ec10db74a6c4ee995dcda5684061de7830f34d861099d6bde1fb727c8a1b3754"
+  },
+  {
+   "level": 2,
+   "kind": "A_span_cap32",
+   "clusters": 489161,
+   "cluster_size": {
+    "max": 32,
+    "mean": 5.301,
+    "p50": 3.0,
+    "singletons": 3
+   },
+   "unsplit_pins": 15701670,
+   "unsplit_nets": 2806214,
+   "pin_reduction": 1.884,
+   "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W32_L2.npy",
+   "sha256": "ade0fe82ed4d9bd081a12d4225074159272e320574fbfef3a1e88f0e63c3435b"
+  },
+  {
+   "level": 3,
+   "kind": "A_span_cap32",
+   "clusters": 170209,
+   "cluster_size": {
+    "max": 32,
+    "mean": 15.234,
+    "p50": 12.0,
+    "singletons": 0
+   },
+   "unsplit_pins": 12981990,
+   "unsplit_nets": 2428682,
+   "pin_reduction": 2.278,
+   "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W32_L3.npy",
+   "sha256": "7820b76c42aee3b93acc8a44215932217d6189b2aad145d6b15a805ddde864f3"
+  },
+  {
+   "level": 4,
+   "kind": "A_span_cap32",
+   "clusters": 94309,
+   "cluster_size": {
+    "max": 32,
+    "mean": 27.494,
+    "p50": 29.0,
+    "singletons": 0
+   },
+   "unsplit_pins": 12195027,
+   "unsplit_nets": 2301841,
+   "pin_reduction": 2.425,
+   "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W32_L4.npy",
+   "sha256": "48192edbdf30c2fb7c683b44fb42602f415fdae2315ba0d5234bc63863f1b25a"
+  }
+ ],
+ "final": {
+  "V": 94309,
+  "M": 2301841,
+  "P": 12195027,
+  "pin_reduction": 2.425,
+  "max_vertex_weight": 32
+ },
+ "seconds": 138.0,
+ "peak_rss_mb": 2763.1,
+ "placement": {
+  "machine": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "cpu_count_os": 32,
+  "python": "3.13.5",
+  "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+  "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+  "numpy": "2.3.2",
+  "wsl_distro": "Ubuntu-24.04",
+  "rx_job": "260930-164708-fbx-ml2-co-M2-073a",
+  "rx_cpus": "3",
+  "PYTHONHASHSEED": "0"
+ },
+ "code": {
+  "scratchpad/_ml2_run.py": "6c06034cb0d055c43b35b5c0774ef056da7240502190033d8849ae720169dfea",
+  "scratchpad/_ml2_coarsen.py": "33561ca386667bb3053389ba902d87e067aac08985b6839dd17a243ff05b7b05",
+  "scratchpad/_ml2_agg.c": "e1196a2dfd7c965000da844bcf2fe17f64f33389d87b3469c824eb9ec7a8deb7",
+  "scratchpad/_ml_coarsen.py": "19ad42f5ac74dcfe6384c1d34d2d9821fec6b75cc1202c8d5fd9723f31ee3978",
+  "scratchpad/_fbx_part.py": "6e3113645af5de676f9221a0b0591e898ca373c29a25d4ef2cf676b5aff85d61",
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262"
+ }
+}

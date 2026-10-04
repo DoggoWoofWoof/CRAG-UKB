@@ -1,0 +1,755 @@
+{
+ "phase": "G2 B1.7 marginal-utility reserve policy; 3-target source-only pilot; TEST untouched; STOP before six-way",
+ "datasets": [
+  "metaqa",
+  "2wiki_clean",
+  "squad_clean"
+ ],
+ "R_values": [
+  0,
+  4,
+  8,
+  16
+ ],
+ "verification_channel_fixed": "BASE_FUSED",
+ "utility_equation": "U(R)=#golds(two_channel_pool(fused,s_dir,added,R)) - #golds(fused_top50); U0=0; eviction of retrieval-visible golds subtracted 1:1 (retention penalty built in)",
+ "supervision": "three linear marginal-gain regressors g4,g8,g16: P0->D_block; NO class balancing; dataset-balanced query weights only; natural +/0/- prevalence preserved",
+ "inference": "sequential ladder R=0 default; spend block k iff predicted D_k > tau_k; taus source-TRAIN selected (maximize source realized utility, conservative tie-break toward larger tau); near-tie epsilon=0.05",
+ "P0_features": [
+  "rc_agree",
+  "rc_support",
+  "rc_peaked",
+  "rc_coredepth",
+  "rc_pool_agree",
+  "rc_pool_invis",
+  "sn_unique_out",
+  "sn_novel_frac",
+  "sn_overlap_frac",
+  "sn_univ_frac",
+  "sc_dirmargin_max",
+  "sc_dirmargin_topk",
+  "sc_seed_supp",
+  "sc_multiseed",
+  "sc_dirvsret",
+  "sc_weak_support",
+  "sc_anchor"
+ ],
+ "tau_grid": [
+  0.05,
+  0.1,
+  0.2,
+  0.35,
+  0.5,
+  0.75
+ ],
+ "leakage_checks": {
+  "target_excluded_from_training_and_threshold_selection": true,
+  "features_norm_regressors_taus_source_train_only": true,
+  "gold_only_for_TRAIN_utility_labels_and_eval_oracle": true,
+  "no_gold_in_pool_construction": true,
+  "no_class_balancing": true,
+  "no_dataset_id_or_hop_or_metadata_feature": true,
+  "verification_channel_frozen": true,
+  "structural_orderer_frozen_s_dir": true,
+  "no_new_feature_arch_scorer_encoder_mlp": true,
+  "coverage_audit_is_analysis_only_no_target_info_in_policy": true
+ },
+ "FOLDS": {
+  "metaqa": {
+   "selected_taus": {
+    "tau4": 0.05,
+    "tau8": 0.05,
+    "tau16": 0.05
+   },
+   "metrics": {
+    "nq": 1166,
+    "GOLD_RECALL@50": 0.2805,
+    "ALL@50": 0.4957,
+    "ANY@50": 0.5995,
+    "GRAPH_ONLY_GOLD_ADMISSION@50": 0.001,
+    "graph_only_gold_available": 2906,
+    "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 1.0,
+    "retrieval_visible_gold_base": 1267,
+    "retrieval_visible_gold_retained": 1267,
+    "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 3,
+    "NEW_GOLDS_ADMITTED": 3,
+    "OLD_GOLDS_EVICTED": 0,
+    "NET_GOLD_GAIN@50": 3,
+    "POOL_CHURN_mean": 0.0023,
+    "CHANNEL_COMPOSITION": {
+     "nominal_R_unique_inserted": {
+      "mean": 0.117,
+      "median": 0.0,
+      "p95": 0.0
+     },
+     "structural_overlap_with_verification": {
+      "mean": 0.0,
+      "median": 0.0,
+      "p95": 0.0
+     },
+     "unused_structural_slots_to_verification": {
+      "mean": 0.0,
+      "median": 0.0,
+      "p95": 0.0
+     },
+     "fraction_final_pool_structural": {
+      "mean": 0.002,
+      "median": 0.0,
+      "p95": 0.0
+     }
+    },
+    "PER_HOP": {
+     "1": {
+      "nq": 490,
+      "GOLD_RECALL@50": 0.9713,
+      "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+      "graph_only_gold_available": 7,
+      "NET_GOLD_GAIN@50": 0
+     },
+     "2": {
+      "nq": 219,
+      "GOLD_RECALL@50": 0.2637,
+      "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0082,
+      "graph_only_gold_available": 243,
+      "NET_GOLD_GAIN@50": 2
+     },
+     "3": {
+      "nq": 457,
+      "GOLD_RECALL@50": 0.0771,
+      "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0004,
+      "graph_only_gold_available": 2656,
+      "NET_GOLD_GAIN@50": 1
+     }
+    }
+   },
+   "R_distribution": {
+    "0": 0.978,
+    "4": 0.0165,
+    "8": 0.0025,
+    "16": 0.003
+   },
+   "policy_vs_oracle_discrete": {
+    "R_accuracy": 0.8348,
+    "mean_abs_reserve_error": 1.812,
+    "OVER_RESERVE_RATE": 0.02,
+    "UNDER_RESERVE_RATE": 0.1451,
+    "mean_chosen_R": 0.134,
+    "mean_oracle_R": 1.694
+   },
+   "policy_utility_metrics": {
+    "UTILITY_REGRET_mean": 0.3689,
+    "UTILITY_REGRET_sum": 737.0,
+    "RESERVE_WASTE_mean": 0.126,
+    "UNDER_RESERVE_COST_mean": 0.3689,
+    "UNDER_RESERVE_COST_sum": 737.0,
+    "OVER_RESERVE_COST_mean": 0.0,
+    "OVER_RESERVE_COST_sum": 0.0,
+    "mean_chosen_R": 0.134,
+    "mean_oracle_R": 1.694,
+    "mean_nearopt_R": 1.694,
+    "frac_R0": 0.978
+   },
+   "coverage_audit": {
+    "src_self_kNN_p95": 1.664,
+    "tgt_frac_out_of_support": 0.039,
+    "regime_bins": {
+     "retrieval_confidence": {
+      "src_frac_by_bin": [
+       0.117,
+       0.198,
+       0.212,
+       0.223,
+       0.25
+      ],
+      "tgt_frac_by_bin": [
+       0.325,
+       0.202,
+       0.182,
+       0.166,
+       0.125
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     },
+     "structural_redundancy": {
+      "src_frac_by_bin": [
+       0.0,
+       0.22,
+       0.318,
+       0.158,
+       0.304
+      ],
+      "tgt_frac_by_bin": [
+       0.0,
+       0.245,
+       0.448,
+       0.179,
+       0.128
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     },
+     "structural_novelty": {
+      "src_frac_by_bin": [
+       0.092,
+       0.0,
+       0.0,
+       0.0,
+       0.908
+      ],
+      "tgt_frac_by_bin": [
+       0.001,
+       0.0,
+       0.0,
+       0.0,
+       0.999
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     },
+     "seed_support": {
+      "src_frac_by_bin": [
+       0.0,
+       0.484,
+       0.119,
+       0.121,
+       0.276
+      ],
+      "tgt_frac_by_bin": [
+       0.0,
+       0.205,
+       0.297,
+       0.372,
+       0.127
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     }
+    }
+   },
+   "failure_by_support": {
+    "in_support": {
+     "n": 1920,
+     "reserve_waste_mean": 0.106,
+     "utility_regret_mean": 0.3786,
+     "mean_R": 0.115
+    },
+    "out_of_support": {
+     "n": 78,
+     "reserve_waste_mean": 0.615,
+     "utility_regret_mean": 0.1282,
+     "mean_R": 0.615
+    }
+   },
+   "regressor_bias_(intercept)": [
+    0.027,
+    0.01,
+    0.007
+   ],
+   "pred_D_target_mean": [
+    0.02,
+    0.003,
+    0.002
+   ],
+   "true_D_target_mean": [
+    0.112,
+    0.078,
+    0.129
+   ]
+  },
+  "2wiki_clean": {
+   "selected_taus": {
+    "tau4": 0.05,
+    "tau8": 0.05,
+    "tau16": 0.05
+   },
+   "metrics": {
+    "nq": 2000,
+    "GOLD_RECALL@50": 0.9151,
+    "ALL@50": 0.8505,
+    "ANY@50": 1.0,
+    "GRAPH_ONLY_GOLD_ADMISSION@50": 0.2278,
+    "graph_only_gold_available": 316,
+    "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.9948,
+    "retrieval_visible_gold_base": 3474,
+    "retrieval_visible_gold_retained": 3456,
+    "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 72,
+    "NEW_GOLDS_ADMITTED": 91,
+    "OLD_GOLDS_EVICTED": 18,
+    "NET_GOLD_GAIN@50": 73,
+    "POOL_CHURN_mean": 0.1621,
+    "CHANNEL_COMPOSITION": {
+     "nominal_R_unique_inserted": {
+      "mean": 8.107,
+      "median": 4.0,
+      "p95": 16.0
+     },
+     "structural_overlap_with_verification": {
+      "mean": 0.0,
+      "median": 0.0,
+      "p95": 0.0
+     },
+     "unused_structural_slots_to_verification": {
+      "mean": 0.943,
+      "median": 0.0,
+      "p95": 12.0
+     },
+     "fraction_final_pool_structural": {
+      "mean": 0.162,
+      "median": 0.08,
+      "p95": 0.32
+     }
+    },
+    "PER_HOP": {
+     "1": {
+      "nq": 2000,
+      "GOLD_RECALL@50": 0.9151,
+      "GRAPH_ONLY_GOLD_ADMISSION@50": 0.2278,
+      "graph_only_gold_available": 316,
+      "NET_GOLD_GAIN@50": 73
+     }
+    }
+   },
+   "R_distribution": {
+    "0": 0.278,
+    "4": 0.2035,
+    "8": 0.0075,
+    "16": 0.511
+   },
+   "policy_vs_oracle_discrete": {
+    "R_accuracy": 0.263,
+    "mean_abs_reserve_error": 9.022,
+    "OVER_RESERVE_RATE": 0.6955,
+    "UNDER_RESERVE_RATE": 0.0415,
+    "mean_chosen_R": 9.05,
+    "mean_oracle_R": 0.664
+   },
+   "policy_utility_metrics": {
+    "UTILITY_REGRET_mean": 0.053,
+    "UTILITY_REGRET_sum": 106.0,
+    "RESERVE_WASTE_mean": 8.704,
+    "UNDER_RESERVE_COST_mean": 0.044,
+    "UNDER_RESERVE_COST_sum": 88.0,
+    "OVER_RESERVE_COST_mean": 0.009,
+    "OVER_RESERVE_COST_sum": 18.0,
+    "mean_chosen_R": 9.05,
+    "mean_oracle_R": 0.664,
+    "mean_nearopt_R": 0.664,
+    "frac_R0": 0.278
+   },
+   "coverage_audit": {
+    "src_self_kNN_p95": 1.53,
+    "tgt_frac_out_of_support": 0.25,
+    "regime_bins": {
+     "retrieval_confidence": {
+      "src_frac_by_bin": [
+       0.226,
+       0.154,
+       0.153,
+       0.186,
+       0.282
+      ],
+      "tgt_frac_by_bin": [
+       0.162,
+       0.269,
+       0.271,
+       0.221,
+       0.078
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     },
+     "structural_redundancy": {
+      "src_frac_by_bin": [
+       0.0,
+       0.176,
+       0.354,
+       0.174,
+       0.296
+      ],
+      "tgt_frac_by_bin": [
+       0.0,
+       0.311,
+       0.394,
+       0.153,
+       0.141
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     },
+     "structural_novelty": {
+      "src_frac_by_bin": [
+       0.049,
+       0.0,
+       0.0,
+       0.0,
+       0.951
+      ],
+      "tgt_frac_by_bin": [
+       0.065,
+       0.0,
+       0.0,
+       0.0,
+       0.935
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     },
+     "seed_support": {
+      "src_frac_by_bin": [
+       0.0,
+       0.248,
+       0.203,
+       0.267,
+       0.281
+      ],
+      "tgt_frac_by_bin": [
+       0.0,
+       0.558,
+       0.17,
+       0.153,
+       0.119
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     }
+    }
+   },
+   "failure_by_support": {
+    "in_support": {
+     "n": 1500,
+     "reserve_waste_mean": 9.515,
+     "utility_regret_mean": 0.0307,
+     "mean_R": 9.837
+    },
+    "out_of_support": {
+     "n": 500,
+     "reserve_waste_mean": 6.272,
+     "utility_regret_mean": 0.12,
+     "mean_R": 6.688
+    }
+   },
+   "regressor_bias_(intercept)": [
+    0.063,
+    0.044,
+    0.071
+   ],
+   "pred_D_target_mean": [
+    0.099,
+    0.054,
+    0.094
+   ],
+   "true_D_target_mean": [
+    0.042,
+    0.016,
+    0.009
+   ]
+  },
+  "squad_clean": {
+   "selected_taus": {
+    "tau4": 0.05,
+    "tau8": 0.05,
+    "tau16": 0.05
+   },
+   "metrics": {
+    "nq": 984,
+    "GOLD_RECALL@50": 0.9959,
+    "ALL@50": 0.9959,
+    "ANY@50": 0.9959,
+    "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+    "graph_only_gold_available": 0,
+    "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.999,
+    "retrieval_visible_gold_base": 980,
+    "retrieval_visible_gold_retained": 979,
+    "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 0,
+    "NEW_GOLDS_ADMITTED": 1,
+    "OLD_GOLDS_EVICTED": 1,
+    "NET_GOLD_GAIN@50": 0,
+    "POOL_CHURN_mean": 0.2022,
+    "CHANNEL_COMPOSITION": {
+     "nominal_R_unique_inserted": {
+      "mean": 10.11,
+      "median": 16.0,
+      "p95": 16.0
+     },
+     "structural_overlap_with_verification": {
+      "mean": 0.0,
+      "median": 0.0,
+      "p95": 0.0
+     },
+     "unused_structural_slots_to_verification": {
+      "mean": 0.0,
+      "median": 0.0,
+      "p95": 0.0
+     },
+     "fraction_final_pool_structural": {
+      "mean": 0.202,
+      "median": 0.32,
+      "p95": 0.32
+     }
+    },
+    "PER_HOP": {
+     "1": {
+      "nq": 984,
+      "GOLD_RECALL@50": 0.9959,
+      "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+      "graph_only_gold_available": 0,
+      "NET_GOLD_GAIN@50": 0
+     }
+    }
+   },
+   "R_distribution": {
+    "0": 0.322,
+    "4": 0.055,
+    "8": 0.008,
+    "16": 0.615
+   },
+   "policy_vs_oracle_discrete": {
+    "R_accuracy": 0.323,
+    "mean_abs_reserve_error": 10.108,
+    "OVER_RESERVE_RATE": 0.677,
+    "UNDER_RESERVE_RATE": 0.0,
+    "mean_chosen_R": 10.124,
+    "mean_oracle_R": 0.016
+   },
+   "policy_utility_metrics": {
+    "UTILITY_REGRET_mean": 0.001,
+    "UTILITY_REGRET_sum": 1.0,
+    "RESERVE_WASTE_mean": 10.108,
+    "UNDER_RESERVE_COST_mean": 0.0,
+    "UNDER_RESERVE_COST_sum": 0.0,
+    "OVER_RESERVE_COST_mean": 0.001,
+    "OVER_RESERVE_COST_sum": 1.0,
+    "mean_chosen_R": 10.124,
+    "mean_oracle_R": 0.016,
+    "mean_nearopt_R": 0.016,
+    "frac_R0": 0.322
+   },
+   "coverage_audit": {
+    "src_self_kNN_p95": 1.867,
+    "tgt_frac_out_of_support": 0.438,
+    "regime_bins": {
+     "retrieval_confidence": {
+      "src_frac_by_bin": [
+       0.243,
+       0.236,
+       0.226,
+       0.193,
+       0.102
+      ],
+      "tgt_frac_by_bin": [
+       0.028,
+       0.057,
+       0.095,
+       0.226,
+       0.594
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     },
+     "structural_redundancy": {
+      "src_frac_by_bin": [
+       0.0,
+       0.278,
+       0.421,
+       0.166,
+       0.135
+      ],
+      "tgt_frac_by_bin": [
+       0.0,
+       0.037,
+       0.166,
+       0.166,
+       0.631
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     },
+     "structural_novelty": {
+      "src_frac_by_bin": [
+       0.033,
+       0.0,
+       0.0,
+       0.0,
+       0.967
+      ],
+      "tgt_frac_by_bin": [
+       0.147,
+       0.0,
+       0.0,
+       0.0,
+       0.853
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     },
+     "seed_support": {
+      "src_frac_by_bin": [
+       0.0,
+       0.381,
+       0.233,
+       0.262,
+       0.123
+      ],
+      "tgt_frac_by_bin": [
+       0.0,
+       0.336,
+       0.017,
+       0.057,
+       0.59
+      ],
+      "tgt_mass_in_<2%_source_bins": 0.0
+     }
+    }
+   },
+   "failure_by_support": {
+    "in_support": {
+     "n": 562,
+     "reserve_waste_mean": 6.662,
+     "utility_regret_mean": 0.0,
+     "mean_R": 6.662
+    },
+    "out_of_support": {
+     "n": 438,
+     "reserve_waste_mean": 14.53,
+     "utility_regret_mean": 0.0023,
+     "mean_R": 14.566
+    }
+   },
+   "regressor_bias_(intercept)": [
+    0.077,
+    0.047,
+    0.069
+   ],
+   "pred_D_target_mean": [
+    0.246,
+    0.148,
+    0.324
+   ],
+   "true_D_target_mean": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "VERDICT": {
+  "B17": {
+   "metaqa": {
+    "NET": 3,
+    "GO_adm": 0.001,
+    "RV_ret": 1.0,
+    "GOLD_RECALL@50": 0.2805,
+    "ALL@50": 0.4957,
+    "POOL_CHURN": 0.0023,
+    "mean_R": 0.134,
+    "frac_R0": 0.978,
+    "reserve_waste": 0.126,
+    "utility_regret": 0.3689
+   },
+   "2wiki_clean": {
+    "NET": 73,
+    "GO_adm": 0.2278,
+    "RV_ret": 0.9948,
+    "GOLD_RECALL@50": 0.9151,
+    "ALL@50": 0.8505,
+    "POOL_CHURN": 0.1621,
+    "mean_R": 9.05,
+    "frac_R0": 0.278,
+    "reserve_waste": 8.704,
+    "utility_regret": 0.053
+   },
+   "squad_clean": {
+    "NET": 0,
+    "GO_adm": 0.0,
+    "RV_ret": 0.999,
+    "GOLD_RECALL@50": 0.9959,
+    "ALL@50": 0.9959,
+    "POOL_CHURN": 0.2022,
+    "mean_R": 10.124,
+    "frac_R0": 0.322,
+    "reserve_waste": 10.108,
+    "utility_regret": 0.001
+   }
+  },
+  "baselines": {
+   "metaqa": {
+    "FIXED_R0": {
+     "NET": 0,
+     "note": "reserve nothing (verification-only base)"
+    },
+    "B15_P0_CLASSIFIER": {
+     "NET": 51,
+     "GO_adm": 0.0145,
+     "RV_ret": 0.9961,
+     "mean_R": 0.963,
+     "over_reserve": 0.1421
+    }
+   },
+   "2wiki_clean": {
+    "FIXED_R0": {
+     "NET": 0,
+     "note": "reserve nothing (verification-only base)"
+    },
+    "B15_P0_CLASSIFIER": {
+     "NET": 69,
+     "GO_adm": 0.1741,
+     "RV_ret": 0.9974,
+     "mean_R": 4.48,
+     "over_reserve": 0.6195
+    }
+   },
+   "squad_clean": {
+    "FIXED_R0": {
+     "NET": 0,
+     "note": "reserve nothing (verification-only base)"
+    },
+    "B15_P0_CLASSIFIER": {
+     "NET": 0,
+     "GO_adm": 0.0,
+     "RV_ret": 0.999,
+     "mean_R": 8.72,
+     "over_reserve": 0.614
+    }
+   }
+  },
+  "squad_diag": {
+   "b15_mean_R": 8.72,
+   "b15_over_reserve": 0.614,
+   "b17_mean_R": 10.124,
+   "b17_frac_R0": 0.322,
+   "b17_reserve_waste": 10.108,
+   "b17_RV_ret": 0.999,
+   "b17_NET": 0,
+   "waste_reduced": false,
+   "relevance_ok": true
+  },
+  "metaqa_diag": {
+   "b15_NET": 51,
+   "b17_NET": 3,
+   "b15_GO": 0.0145,
+   "b17_GO": 0.001,
+   "b17_utility_regret": 0.3689,
+   "b17_3hop": {
+    "nq": 457,
+    "GOLD_RECALL@50": 0.0771,
+    "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0004,
+    "graph_only_gold_available": 2656,
+    "NET_GOLD_GAIN@50": 1
+   },
+   "better_than_b15": false
+  },
+  "support_split_squad": {
+   "in_support": {
+    "n": 562,
+    "reserve_waste_mean": 6.662,
+    "utility_regret_mean": 0.0,
+    "mean_R": 6.662
+   },
+   "out_of_support": {
+    "n": 438,
+    "reserve_waste_mean": 14.53,
+    "utility_regret_mean": 0.0023,
+    "mean_R": 14.566
+   }
+  },
+  "CASE_A_objective_was_bottleneck": false,
+  "REMAINING_FAILURE_CLASS": "FEATURE INSUFFICIENCY",
+  "FLAG": "CURRENT_QUERY_LOCAL_FEATURES_ARE_INSUFFICIENT=YES",
+  "INTERPRETATION": "Policy still over-reserves SQuAD even on target queries WITH good source support -> the deficiency is not objective and not coverage but the P0 feature representation. Do NOT proceed to six-way blindly; features cannot separate redundant-but-anchored from useful-novel even where the source covers the region.",
+  "B1_marked_solved": false,
+  "six_way_launched": false
+ },
+ "NEW_ENCODER_FORWARD_PASSES": 0,
+ "TARGET_TEST_TOUCHED": "NO",
+ "SIX_WAY_LODO_LAUNCHED": "NO"
+}

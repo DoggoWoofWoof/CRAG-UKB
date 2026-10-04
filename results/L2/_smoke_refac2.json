@@ -1,0 +1,85 @@
+{
+  "_config": {
+    "datasets": [
+      "webqsp"
+    ],
+    "arms": [
+      "F0"
+    ],
+    "epochs": 1,
+    "seeds": 1,
+    "p_drop": 0.2,
+    "metric": "recall@k = golds_in_topk/ng"
+  },
+  "anchors_oracles": {
+    "webqsp": {
+      "dense": 9.46,
+      "splade": 10.48,
+      "offset": 39.3,
+      "coop_maxrank": 35.69,
+      "oracle_dense_splade_offset": 43.46,
+      "klmlp": 53.97,
+      "oracle_coop_vs_klmlp": 55.01,
+      "oracle_5way": 56.97
+    }
+  },
+  "results": {
+    "A_softmaxKL": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": 53.97,
+          "R@20": 63.47,
+          "R@50": 73.94,
+          "Hit@5": 71.43,
+          "Hit@50": 89.8
+        }
+      },
+      "seeds": 1
+    },
+    "F0": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            56.28,
+            0.0
+          ],
+          "R@20": [
+            71.62,
+            0.0
+          ],
+          "R@50": [
+            80.37,
+            0.0
+          ],
+          "Hit@5": [
+            74.15,
+            0.0
+          ],
+          "Hit@50": [
+            91.84,
+            0.0
+          ]
+        }
+      },
+      "seeds": 1
+    }
+  },
+  "mean_query_gates": {
+    "F0": {
+      "webqsp": {
+        "dense": 0.645,
+        "offset": 0.895,
+        "splade": 0.217,
+        "relation": 0.584,
+        "path": 0.706
+      }
+    }
+  },
+  "coop_maxrank_baseline_R@5": {
+    "webqsp": 37.0,
+    "metaqa": 76.06,
+    "2wiki_clean": 86.62,
+    "musique_clean": 71.33,
+    "hotpotqa_clean": 76.15
+  }
+}

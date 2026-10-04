@@ -1,0 +1,94 @@
+{
+  "schema": "NSM_PROJECTION_DIAGNOSTIC/v1",
+  "generated_utc": "2026-09-06T06:11:55Z",
+  "graph": "WEBQSP_NSM_MID (sibling extraction; NOT the RoG corpus, NOT a V1 input)",
+  "naming_resource": {
+    "file": "entities_names.json",
+    "entries": 560012,
+    "sha256": "93ce094acccb06b1906db8a4534175481efe55bb9fa8ed711fedd1f8b37d2f98"
+  },
+  "projection_rule": "endpoint with a known name -> that name; endpoint without one -> itself. Models RoG leaving unresolved MIDs visible, so every merge measured is a real name collision and never an artefact of dropping nodes.",
+  "HARD_RULE": "Evidence about how destructive name-keying is. NOT a recipe. V1 identities are not modified and V1 does not read this file.",
+  "totals": {
+    "MID_ENDPOINTS_BEFORE": 2817968,
+    "NAME_COVERED_MID_N": 560012,
+    "NAME_UNCOVERED_MID_N": 2257956,
+    "COVERAGE_PCT": 19.8729,
+    "DISTINCT_NAMES": 462455,
+    "COLLISION_GROUP_N": 36944,
+    "MIDS_IN_COLLISION_GROUPS": 134501,
+    "MAX_COLLISION_GROUP": 124,
+    "ENDPOINTS_AFTER_PROJECTION": 2720411,
+    "ENDPOINT_SHRINK_N": 97557,
+    "ENDPOINT_SHRINK_PCT": 3.462,
+    "TRIPLES_BEFORE": 8558346,
+    "TRIPLES_AFTER_PROJECTION": 8424744,
+    "TRIPLE_COLLAPSE_N": 133602,
+    "TRIPLE_COLLAPSE_PCT": 1.5611
+  },
+  "by_endpoint_class": {
+    "m": {
+      "MID_ENDPOINTS_BEFORE": 2412298,
+      "NAME_COVERED_MID_N": 560012,
+      "NAME_UNCOVERED_MID_N": 1852286,
+      "COVERAGE_PCT": 23.2149,
+      "DISTINCT_SURFACES_REACHED": 2314741,
+      "ENDPOINT_SHRINK_N": 97557,
+      "ENDPOINT_SHRINK_PCT": 4.0442
+    },
+    "g": {
+      "MID_ENDPOINTS_BEFORE": 405670,
+      "NAME_COVERED_MID_N": 0,
+      "NAME_UNCOVERED_MID_N": 405670,
+      "COVERAGE_PCT": 0.0,
+      "DISTINCT_SURFACES_REACHED": 405670,
+      "ENDPOINT_SHRINK_N": 0,
+      "ENDPOINT_SHRINK_PCT": 0.0
+    },
+    "other": {
+      "MID_ENDPOINTS_BEFORE": 0,
+      "NAME_COVERED_MID_N": 0,
+      "NAME_UNCOVERED_MID_N": 0,
+      "COVERAGE_PCT": null,
+      "DISTINCT_SURFACES_REACHED": 0,
+      "ENDPOINT_SHRINK_N": 0,
+      "ENDPOINT_SHRINK_PCT": null
+    }
+  },
+  "class_note": "entities_names.json contains zero g. entries, so g. coverage is 0 BY CONSTRUCTION. That is a property of the resource, not evidence that g. objects lack Freebase names.",
+  "largest_collision_groups": [
+    {
+      "surface": "New York Times",
+      "endpoints_merged": 124
+    },
+    {
+      "surface": "Greatest Hits",
+      "endpoints_merged": 117
+    },
+    {
+      "surface": "Pilot",
+      "endpoints_merged": 109
+    },
+    {
+      "surface": "Mercy",
+      "endpoints_merged": 95
+    },
+    {
+      "surface": "Home",
+      "endpoints_merged": 91
+    },
+    {
+      "surface": "Fuel",
+      "endpoints_merged": 86
+    },
+    {
+      "surface": "What If",
+      "endpoints_merged": 84
+    },
+    {
+      "surface": "Dream Lover",
+      "endpoints_merged": 80
+    }
+  ],
+  "elapsed_s": 226.4
+}

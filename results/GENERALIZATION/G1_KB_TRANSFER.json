@@ -1,0 +1,280 @@
+{
+ "phase": "G1 KB transfer (WebQSP -> MetaQA). Same FROZEN architecture as text pilots. VAL only; TARGET TEST NEVER TOUCHED.",
+ "source_backbone": [
+  "2wiki_clean",
+  "musique_clean"
+ ],
+ "integrity": {
+  "TARGET_TEST_TOUCHED": "NO",
+  "NEW_ENCODER_FORWARD_PASSES": 0,
+  "NEW_LLM_COMPONENTS": 0,
+  "PATH_OR_GRAPH_ADDED": "NO",
+  "ARCHITECTURE_CHANGED": "NO"
+ },
+ "WEBQSP": {
+  "n_val": 301,
+  "MAIN_TABLE": {
+   "C7b_fusion": {
+    "ndcg5": 0.0893,
+    "recall5_macro": 0.0937,
+    "any5": 0.1528,
+    "all5": 0.0598,
+    "all5_feas": 0.0709,
+    "mrr": 0.1212,
+    "ndcg50": 0.1593,
+    "all10": 0.0864,
+    "all50": 0.2525,
+    "n": 301
+   },
+   "C8c": {
+    "ndcg5": 0.0847,
+    "recall5_macro": 0.0924,
+    "any5": 0.1462,
+    "all5": 0.0598,
+    "all5_feas": 0.0709,
+    "mrr": 0.119,
+    "ndcg50": 0.1609,
+    "all10": 0.1096,
+    "all50": 0.2525,
+    "n": 301
+   },
+   "ZERO_SHOT_C11A": {
+    "ndcg5": 0.0863,
+    "recall5_macro": 0.0949,
+    "any5": 0.1528,
+    "all5": 0.0598,
+    "all5_feas": 0.0709,
+    "mrr": 0.1194,
+    "ndcg50": 0.1611,
+    "all10": 0.1096,
+    "all50": 0.2525,
+    "n": 301
+   },
+   "REFIT_C11A": {
+    "ndcg5": 0.1924,
+    "recall5_macro": 0.197,
+    "any5": 0.289,
+    "all5": 0.1362,
+    "all5_feas": 0.1614,
+    "mrr": 0.2317,
+    "ndcg50": 0.225,
+    "all10": 0.1528,
+    "all50": 0.2525,
+    "n": 301
+   }
+  },
+  "FAILURE_DECOMPOSITION": {
+   "C7b_fusion": {
+    "in_scope_golds": 1367,
+    "top5": 75,
+    "top5_20": 124,
+    "top20_50": 163,
+    "below50": 1005,
+    "FAIL_below_top20": 1168,
+    "FAIL_top20_below_top5": 124,
+    "COND_ON_P50_gold_recall5_micro": 0.0549,
+    "COND_ON_P50_gold_recall20_micro": 0.1456
+   },
+   "C8c": {
+    "in_scope_golds": 1367,
+    "top5": 67,
+    "top5_20": 138,
+    "top20_50": 157,
+    "below50": 1005,
+    "FAIL_below_top20": 1162,
+    "FAIL_top20_below_top5": 138,
+    "COND_ON_P50_gold_recall5_micro": 0.049,
+    "COND_ON_P50_gold_recall20_micro": 0.15
+   },
+   "ZERO_SHOT_C11A": {
+    "in_scope_golds": 1367,
+    "top5": 71,
+    "top5_20": 134,
+    "top20_50": 157,
+    "below50": 1005,
+    "FAIL_below_top20": 1162,
+    "FAIL_top20_below_top5": 134,
+    "COND_ON_P50_gold_recall5_micro": 0.0519,
+    "COND_ON_P50_gold_recall20_micro": 0.15
+   },
+   "REFIT_C11A": {
+    "in_scope_golds": 1367,
+    "top5": 143,
+    "top5_20": 62,
+    "top20_50": 157,
+    "below50": 1005,
+    "FAIL_below_top20": 1162,
+    "FAIL_top20_below_top5": 62,
+    "COND_ON_P50_gold_recall5_micro": 0.1046,
+    "COND_ON_P50_gold_recall20_micro": 0.15
+   }
+  },
+  "INTERPRETATION": "ARCHITECTURE_GENERALIZES",
+  "DIAGNOSIS": "Golds are IN the P50 scope but L2 deep-recall is the bottleneck: 1005/1367 (73.5%) in-scope golds never enter the top-50. REFIT_C11A roughly doubles top-5 golds vs C8c (143 vs 67) => ARCHITECTURE_GENERALIZES, but the absolute ceiling (ALL@50=0.2525) is fixed upstream by the dense+splade experts' inability to surface KB-entity golds into the deep list. This is a REPRESENTATION_SHIFT at the expert level, not an L2 fusion/ranking failure.",
+  "FAILURE_SPLIT": {
+   "candidate_absent_from_P50": "not separable from decomp (webqsp query_meta lacks RAW/mapped keys); _goldranks covers in-scope only",
+   "present_but_below_top20": 1162,
+   "top20_but_below_top5": 62,
+   "top5": 143
+  }
+ },
+ "METAQA": {
+  "n_val": 37814,
+  "MAIN_TABLE_pooled": {
+   "C7b_fusion": {
+    "ndcg5": 0.1403,
+    "recall5_macro": 0.1519,
+    "any5": 0.2033,
+    "all5": 0.1229,
+    "all5_feas": 0.1562,
+    "mrr": 0.1715,
+    "ndcg50": 0.1797,
+    "all10": 0.1485,
+    "all50": 0.2389,
+    "n": 37814
+   },
+   "C8c": {
+    "ndcg5": 0.1103,
+    "recall5_macro": 0.1617,
+    "any5": 0.2229,
+    "all5": 0.1286,
+    "all5_feas": 0.1635,
+    "mrr": 0.1211,
+    "ndcg50": 0.1526,
+    "all10": 0.1827,
+    "all50": 0.2389,
+    "n": 37814
+   },
+   "ZERO_SHOT_C11A": {
+    "ndcg5": 0.1145,
+    "recall5_macro": 0.1609,
+    "any5": 0.2222,
+    "all5": 0.1284,
+    "all5_feas": 0.1633,
+    "mrr": 0.1271,
+    "ndcg50": 0.1552,
+    "all10": 0.1646,
+    "all50": 0.2389,
+    "n": 37814
+   },
+   "REFIT_C11A": {
+    "ndcg5": 0.2573,
+    "recall5_macro": 0.2461,
+    "any5": 0.3333,
+    "all5": 0.2036,
+    "all5_feas": 0.2588,
+    "mrr": 0.3078,
+    "ndcg50": 0.2625,
+    "all10": 0.2108,
+    "all50": 0.2389,
+    "n": 37814
+   }
+  },
+  "POOLED_INTERPRETATION": "PARAMETERS_GENERALIZE",
+  "POOLED_INTERPRETATION_CAVEAT": "Pooled INTERPRETATION=PARAMETERS_GENERALIZE is an ARTIFACT of hop-mixing: ZERO_SHOT beats C8c only marginally (NDCG@5 +0.0041) because 2-/3-hop are near-floor for every system so source weights cannot hurt, while 1-hop shares the source offset structure. The genuine, large, consistent lever everywhere is REFIT (architecture), not parameter reuse. Read PER-HOP, not pooled.",
+  "PER_HOP": {
+   "1": {
+    "P50_ANY_coverage": 0.9985,
+    "P50_ALL_coverage": 0.9959,
+    "golds_expected_in_corpus": 18985,
+    "golds_in_P50_scope": 18908,
+    "L1_MISSING_golds": 77,
+    "REFIT_UNCONDITIONAL": {
+     "ndcg5": 0.694,
+     "ndcg50": 0.7042,
+     "recall5_macro": 0.6939,
+     "any5": 0.7578,
+     "all5": 0.6256,
+     "all10": 0.6434,
+     "all50": 0.6929,
+     "mrr": 0.7235
+    },
+    "REFIT_CONDITIONAL_ON_P50": {
+     "ndcg5": 0.695,
+     "ndcg50": 0.7053,
+     "recall5_macro": 0.6949,
+     "any5": 0.7589,
+     "all5": 0.6265,
+     "all10": 0.6444,
+     "all50": 0.6939,
+     "mrr": 0.7246
+    },
+    "REFIT_FAILURE_DECOMP": {
+     "L1_MISSING": 77,
+     "in_scope_below_top20": 5367,
+     "in_scope_top20_below_top5": 1348,
+     "in_scope_top5": 12193
+    }
+   },
+   "2": {
+    "P50_ANY_coverage": 0.9631,
+    "P50_ALL_coverage": 0.7138,
+    "golds_expected_in_corpus": 93898,
+    "golds_in_P50_scope": 68026,
+    "L1_MISSING_golds": 25872,
+    "REFIT_UNCONDITIONAL": {
+     "ndcg5": 0.0861,
+     "ndcg50": 0.098,
+     "recall5_macro": 0.0788,
+     "any5": 0.1516,
+     "all5": 0.0515,
+     "all10": 0.0562,
+     "all50": 0.0902,
+     "mrr": 0.1264
+    },
+    "REFIT_CONDITIONAL_ON_P50": {
+     "ndcg5": 0.0894,
+     "ndcg50": 0.1018,
+     "recall5_macro": 0.0819,
+     "any5": 0.1574,
+     "all5": 0.0535,
+     "all10": 0.0584,
+     "all50": 0.0937,
+     "mrr": 0.1313
+    },
+    "REFIT_FAILURE_DECOMP": {
+     "L1_MISSING": 25872,
+     "in_scope_below_top20": 64429,
+     "in_scope_top20_below_top5": 676,
+     "in_scope_top5": 2921
+    }
+   },
+   "3": {
+    "P50_ANY_coverage": 0.9468,
+    "P50_ALL_coverage": 0.2701,
+    "golds_expected_in_corpus": 188097,
+    "golds_in_P50_scope": 76699,
+    "L1_MISSING_golds": 111398,
+    "REFIT_UNCONDITIONAL": {
+     "ndcg5": 0.1061,
+     "ndcg50": 0.1003,
+     "recall5_macro": 0.084,
+     "any5": 0.1946,
+     "all5": 0.0477,
+     "all10": 0.0494,
+     "all50": 0.0537,
+     "mrr": 0.1772
+    },
+    "REFIT_CONDITIONAL_ON_P50": {
+     "ndcg5": 0.112,
+     "ndcg50": 0.106,
+     "recall5_macro": 0.0887,
+     "any5": 0.2056,
+     "all5": 0.0504,
+     "all10": 0.0522,
+     "all50": 0.0568,
+     "mrr": 0.1872
+    },
+    "REFIT_FAILURE_DECOMP": {
+     "L1_MISSING": 111398,
+     "in_scope_below_top20": 73216,
+     "in_scope_top20_below_top5": 210,
+     "in_scope_top5": 3273
+    }
+   }
+  },
+  "DIAGNOSIS": "1-hop is a clean architecture win (REFIT NDCG@5 0.694, ANY@5 0.758, ALL@5 0.626; P50 ANY/ALL cov 99.85/99.59). 2-hop and 3-hop COLLAPSE, and the mechanism is UPSTREAM SCOPE, not L2 ranking: P50 ANY coverage stays high (96.3/94.7%) but P50 ALL coverage falls to 71.4/27.0% \u2014 the multi-hop chain endpoints are each individually reachable yet not CO-SCOPED into the same ~5k P50 window, so ALL@k is unattainable at any rerank depth (3-hop ALL@50 is only 0.0537). The REFIT failure decomp confirms the residual is not ranking: at 3-hop only 210 golds are top20-but-below-top5 vs 73216 in-scope-below-top20 and 111398 L1-missing.",
+  "MISSING_RELATIONAL_STRUCTURE": "LIKELY (2-hop and 3-hop): evidence present-but-not-co-scoped; recorded, NOT repaired (no path/graph added, per authorization)."
+ },
+ "CROSS_CUTTING_CONCLUSION": "PARAMETER transfer does not hold as a real effect on KB (WebQSP neutral; MetaQA pooled +0.0041 is a hop-mixing artifact). ARCHITECTURE transfer (REFIT_C11A) is the consistent lever across BOTH KB targets exactly as on text: it significantly beats C8c on WebQSP (NDCG@5 0.0847->0.1924) and on MetaQA-1hop (0.323->0.694). The KB ceiling is set UPSTREAM (L1/P50 scope + expert representation), not by the L2 reranker: WebQSP 73.5% of in-scope golds never reach top-50, and MetaQA multi-hop ALL-coverage collapses with hop-count. G1 verdict matches the text pilots: the C11a interaction-MLP ARCHITECTURE is a transferable retrieval principle; its PARAMETERS are distribution-specific."
+}

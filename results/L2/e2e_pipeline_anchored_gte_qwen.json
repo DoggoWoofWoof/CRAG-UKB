@@ -1,0 +1,60 @@
+{
+  "webqsp": {
+    "L2_minrank": {
+      "2": 11.58,
+      "5": 28.4,
+      "20": 51.25,
+      "50": 64.77,
+      "hit2": 18.24,
+      "hit5": 41.51,
+      "hit20": 67.92,
+      "hit50": 80.5
+    },
+    "L2_rrf": {
+      "2": 9.75,
+      "5": 19.72,
+      "20": 44.3,
+      "50": 59.58,
+      "hit2": 18.24,
+      "hit5": 28.3,
+      "hit20": 57.86,
+      "hit50": 74.21
+    },
+    "L2_anchored": {
+      "2": 5.41,
+      "5": 10.12,
+      "20": 43.28,
+      "50": 59.44,
+      "hit2": 8.81,
+      "hit5": 13.84,
+      "hit20": 57.23,
+      "hit50": 74.21
+    },
+    "L2_plus_nerL3": {
+      "2": 18.25,
+      "5": 31.09,
+      "20": 52.26,
+      "50": 64.77,
+      "hit2": 28.3,
+      "hit5": 46.54,
+      "hit20": 68.55,
+      "hit50": 80.5
+    },
+    "zero_shot": false
+  },
+  "_meta": {
+    "head_trained_on": [
+      "musique_clean",
+      "2wiki_clean",
+      "squad_clean",
+      "metaqa",
+      "hotpotqa_clean",
+      "webqsp"
+    ],
+    "evaluated_on": [
+      "webqsp"
+    ],
+    "note": "ONE universal offset head trained on the broad mix, applied to each eval corpus without refitting; hotpot held out of training (zero-shot).",
+    "metric": "ANCHORED Entity-Recall: candidate pool = each question's topic-entity subgraph; all L2 signals + NER-L3 rank within it. Comparable to KGQA subgraph retrievers (SubgraphRAG Entity-Recall@100triples 86.5, GNN-RAG 40.5, RoG 38.8)."
+  }
+}

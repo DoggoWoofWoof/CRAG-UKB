@@ -1,0 +1,176 @@
+{
+ "RECORD": "PHG_REPAIR_RUNS",
+ "adapter": "PHG_NONEMPTY_REPAIR_V1",
+ "dataset": "squad",
+ "utc": "2026-09-13T18:26:23Z",
+ "preregistration": {
+  "path": "results/L1_LOWMEM/PHG_REPAIR_PREREG.json",
+  "bytes": 13859,
+  "sha256": "d219fc90772e1e8604318b434c7cf773abdfea67a30970ff5a082214732189da"
+ },
+ "program": {
+  "path": "src/l1_lowmem/phg_repair.py",
+  "bytes": 44834,
+  "sha256": "eeac930729e777940a5fe30cf042202171524d51c73a574957b5b228efa40000"
+ },
+ "inputs": {
+  "PHG_RUNS_record": {
+   "path": "results/L1_LOWMEM/PHG_RUNS_squad.json",
+   "bytes": 78420,
+   "sha256": "f70362d853fe1185377c0790dd630fb5c9e5e06327cee0a5f9f415364f02f400"
+  },
+  "R1_part_rank_txt_sha256": {
+   "0": "0ad0e43a6ae50fd65401a76f831150c483817af016bf5b2b6d8a236991ddd50a",
+   "1": "a452f8b1fc8c6f1208f5438283c4e5f03da6fd0c1f415e6a5b0a09ca55f94aa9",
+   "2": "8bdef572a0c89677311c08507401c8b1de6027017ee927a5b38d010f209f574a",
+   "3": "b062c1650460abceee073d2d37299f16f84e432668e8cbcae1648d8d6e2fadef"
+  },
+  "vector_sha256_in": "c37be0971cf99934cfb68ea166989ef602477c0a9b987c49815f7318defc6862",
+  "H4_SK_npz_sha256": "ed6b8336adb44fd868ef715f81401c5a06b7bbc19a91eafb9ada39c59c59b1a6",
+  "structure_digest": "4fd825932a3ae75800c0e736a751367d728daac5457b7daaa479ee29f08e56f3",
+  "N": 20233,
+  "k": 202,
+  "M": 39146,
+  "P": 1589832
+ },
+ "before": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 103,
+   "contract_bound_ceil_1.03_N_over_k": 104,
+   "zoltan_tolerance_bound_1.03_x_mean": 103.168,
+   "gate": "PASS"
+  },
+  "km1_weighted": 7538754,
+  "cut_weighted": 2636391,
+  "blocks": {
+   "k": 202,
+   "used": 202,
+   "empty": 0,
+   "min": 60,
+   "p50": 102.0,
+   "p95": 103.0,
+   "max": 103,
+   "mean": 100.163,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0283,
+   "eps_actual(max/ceil(N/k)-1)": 0.0198,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 744734,
+    "cut": 691276,
+    "edge_cut_fraction": 0.9282
+   },
+   "KNN": {
+    "edges": 30609,
+    "cut": 6649,
+    "edge_cut_fraction": 0.2172
+   },
+   "NERX": {
+    "edges": 135287,
+    "cut": 111137,
+    "edge_cut_fraction": 0.8215
+   }
+  }
+ },
+ "empty_blocks": [],
+ "moves": [],
+ "repair_seconds": 0.0,
+ "after": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 103,
+   "contract_bound_ceil_1.03_N_over_k": 104,
+   "zoltan_tolerance_bound_1.03_x_mean": 103.168,
+   "gate": "PASS"
+  },
+  "km1_weighted": 7538754,
+  "cut_weighted": 2636391,
+  "blocks": {
+   "k": 202,
+   "used": 202,
+   "empty": 0,
+   "min": 60,
+   "p50": 102.0,
+   "p95": 103.0,
+   "max": 103,
+   "mean": 100.163,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0283,
+   "eps_actual(max/ceil(N/k)-1)": 0.0198,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 744734,
+    "cut": 691276,
+    "edge_cut_fraction": 0.9282
+   },
+   "KNN": {
+    "edges": 30609,
+    "cut": 6649,
+    "edge_cut_fraction": 0.2172
+   },
+   "NERX": {
+    "edges": 135287,
+    "cut": 111137,
+    "edge_cut_fraction": 0.8215
+   }
+  },
+  "delta_km1_total": 0,
+  "delta_km1_relative": 0.0,
+  "struct_cut_delta": 0.0,
+  "knn_cut_delta": 0.0,
+  "vector_sha256_out": "c37be0971cf99934cfb68ea166989ef602477c0a9b987c49815f7318defc6862",
+  "repaired_npy": {
+   "path": "data/l1_lowmem/squad/phg_repair1/repaired.npy",
+   "bytes": 161992,
+   "sha256": "1425a34d9b32f779801c09beca8ca964e614806348070f1551e6335671470413"
+  }
+ },
+ "postconditions": {
+  "same_N": true,
+  "assigned_once": true,
+  "same_k": true,
+  "empty_blocks_after": 0,
+  "max_block_after": 103,
+  "contract_bound": 104,
+  "H4_SK_unchanged": true,
+  "moves": 0,
+  "empty_blocks_before": 0,
+  "moves_equal_empties": true,
+  "nodes_changed": 0,
+  "nodes_changed_equal_moves": true,
+  "km1_consistent": true,
+  "PASS": true
+ },
+ "mtkahypar_km1": 6525934,
+ "km1_ratio_vs_mtkahypar": {
+  "before": 1.1552,
+  "after": 1.1552
+ },
+ "noop_check": {
+  "moves": 0,
+  "vector_identical_to_input": true,
+  "repaired_npy_sha256": "1425a34d9b32f779801c09beca8ca964e614806348070f1551e6335671470413",
+  "frozen_import_npy_sha256": "1425a34d9b32f779801c09beca8ca964e614806348070f1551e6335671470413",
+  "byte_identical_to_frozen_import": true
+ },
+ "DECISION": "REPAIR_NOOP_IDENTICAL",
+ "downstream": {
+  "note": "no-op: the frozen squad import parts/LOWMEM__PHG_con.npy IS the repaired partition; L1_DOWNSTREAM_squad__phg.json stands (label per the terminology amendment)",
+  "record": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad__phg.json",
+   "bytes": 3513,
+   "sha256": "f2a2704b746400557658cbe597d682f4856d298e6c2f1b426c56e7326f7507d8"
+  }
+ }
+}

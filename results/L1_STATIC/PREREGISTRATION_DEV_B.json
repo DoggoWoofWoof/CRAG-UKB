@@ -1,0 +1,133 @@
+{
+ "record": "PREREGISTRATION_DEV_B",
+ "lane": "L1_STATIC",
+ "utc": "2026-09-14T10:22:14Z",
+ "research_question": "How much of the gap between the frozen static L1 router (BASE, P50) and the dynamic-reasoning ceiling can a purely static, parameter-free L1 router recover, uniformly across datasets?",
+ "candidate": {
+  "module": "_l1s_candidate.py",
+  "definition": "The frozen static candidate of the L1_STATIC lane: multi-radius static node -> blocks tables.\n\nTables (all query independent, computed once from the partition and the structural family only):\n  R0  own block\n  RL  own block + blocks of the DIRECTED structural out-neighbours       (= the frozen BASE table)\n  R1  own block + blocks of the UNDIRECTED structural neighbours\n  R2  R1 plus, for every undirected neighbour v whose own R1 span is <= P_MAIN (=50) blocks, the R1 table of v\n      (budget rule: an intermediate whose neighbourhood already spans more than the P50 budget cannot be\n      followed, so it is not passed through; no threshold was fitted -- P_MAIN is the frozen budget)\nChannels: the served dense top-K_LOCK (=100) hits and the served SPLADE top-100 hits, each voted through each\ntable with the frozen partition_ranking numerics (rank votes 1/(K0+r), rr(sum)+rr(max)).\nFusion: the frozen rrf_partitions over the channel rankings (RL-dense first: the frozen tie-break channel).\n  PRIMARY    RL+R0+R1+R2   (8 channels)\n  SECONDARY  RL+R0+R1      (6 channels; fallback if the primary fails the confirmation rule)\nNo graph is walked at query time; no parameter is introduced; the block budget stays P50.",
+  "arms": {
+   "PRIMARY": [
+    "RL",
+    "R0",
+    "R1",
+    "R2"
+   ],
+   "SECONDARY": [
+    "RL",
+    "R0",
+    "R1"
+   ]
+  },
+  "frozen_numerics": {
+   "K0": 60,
+   "K_LOCK": 100,
+   "P_MAIN": 50,
+   "partition_ranking": "_ta_prepartition.partition_ranking (imported, unchanged)",
+   "rrf": "_ta_prepartition.rrf_partitions (imported, unchanged)"
+  },
+  "inputs": "served dense top-100 and served SPLADE top-100 node hits (replay caches), the frozen H4_SK partition, the structural family of the canonical adapter (directed and undirected CSR); nothing is walked at query time, no parameter is fitted, no dataset-specific rule"
+ },
+ "populations": {
+  "exploration": "DEV_A = replay-cache dev rows with sha1(query_id)[:8] & 1 == 0 (all exploration read DEV_A only)",
+  "confirmation": "DEV_B = the complementary rows (sha1(query_id)[:8] & 1 == 1); never read for any candidate arm before this record",
+  "caches": {
+   "metaqa": {
+    "path": "data\\l1_canonical\\metaqa\\replay_cache.npz",
+    "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b"
+   },
+   "squad": {
+    "path": "data\\l1_canonical\\squad\\replay_cache.npz",
+    "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6"
+   },
+   "musique": {
+    "path": "data\\l1_lowmem\\musique\\replay_cache__LOWMEM__PHG_C1_con.npz",
+    "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5"
+   }
+  },
+  "test_split": "never read"
+ },
+ "recorded_DEV_A": {
+  "metaqa": {
+   "BASE": 0.6397,
+   "PRIMARY": {
+    "ALL": 0.6766,
+    "gained": 43,
+    "lost": 6,
+    "p": 5.7277652842913085e-08,
+    "per_hop": {
+     "hop1": 0.9601,
+     "hop2": 0.561,
+     "hop3": 0.5181
+    }
+   },
+   "SECONDARY": {
+    "ALL": 0.6387,
+    "gained": 15,
+    "lost": 16,
+    "p": 1.0,
+    "per_hop": {
+     "hop1": 0.9417,
+     "hop2": 0.4709,
+     "hop3": 0.5151
+    }
+   }
+  },
+  "squad": {
+   "BASE": 0.9859,
+   "PRIMARY": {
+    "ALL": 0.9889,
+    "gained": 4,
+    "lost": 1,
+    "p": 0.375,
+    "per_hop": {}
+   },
+   "SECONDARY": {
+    "ALL": 0.9929,
+    "gained": 8,
+    "lost": 1,
+    "p": 0.0390625,
+    "per_hop": {}
+   }
+  },
+  "musique": {
+   "BASE": 0.6596,
+   "PRIMARY": {
+    "ALL": 0.7239,
+    "gained": 71,
+    "lost": 7,
+    "p": 1.933200757632093e-14,
+    "per_hop": {}
+   },
+   "SECONDARY": {
+    "ALL": 0.738,
+    "gained": 84,
+    "lost": 6,
+    "p": 1.081216606236162e-18,
+    "per_hop": {}
+   }
+  }
+ },
+ "decision_rule": {
+  "primary_passes_iff": [
+   "on EACH of metaqa, squad, musique DEV_B: NOT (lost > gained and exact McNemar p < 0.05)   [no significant loss anywhere]",
+   "on AT LEAST ONE of the three DEV_B populations: gained > lost and exact McNemar p < 0.01     [a significant gain]"
+  ],
+  "secondary": "evaluated in the same run under the same rule; adopted only if the PRIMARY fails; reported regardless",
+  "reproduction_guard": "the confirmation run must reproduce the recorded DEV_A ALL / gained / lost of both arms exactly, else it aborts",
+  "per_hop": "reported, never used for the decision",
+  "full_dev": "A u B numbers reported after the DEV_B decision, for the record only",
+  "no_other_arm": "no other arm, table subset, weight kernel or partition variant is evaluated on DEV_B",
+  "one_shot": "the confirmation script refuses to run if DEV_B_CONFIRMATION.json exists"
+ },
+ "code_sha256": {
+  "_l1s_candidate.py": "c2708dc88550090ac33e11dc99ff687a665f6c1b01138c787d49ec5c8dd9d78c",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1s_devB_confirm.py": "d490f0bddfcc34dbbd87154d730695f8770656ed1a6313307d703462e3b158cd",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "code_snapshot_dir": "results\\L1_STATIC\\code_snapshot",
+ "canonical_freeze_sha256": "039dcf327aa71e39994cdeedc731033279d81d854d74efc29c86f197546f3dc8",
+ "adoption_note": "a PASS is a lane result on the canonical replay caches; adopting the candidate as the served L1 selector changes the L1 contract (new selector module) and needs a ruling -- no cache is rebuilt (the candidate reads only served caches + the structural family)"
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "V3_TYPE_MIRROR_FINDING/v1",
+  "generated_utc": "2026-09-07T01:38:01Z",
+  "STATUS": "MEASURED_AND_RECORDED. Disposition is OPEN and is NOT decided by this record.",
+  "WHAT_WAS_FOUND": "Freebase asserts type membership in both directions with two different predicates, and the two directions were routed to two different layers of this build. type.object.type was classified as schema metadata by PASS A and extracted to the metadata table; its declared inverse type.type.instance carries no such classification and remained in the structural edge stream. PASS D could not collapse the pair because collapsing requires flipping into a relation the edge stream contains, and type.object.type occurs zero times as a structural predicate. It reported the pair instead of inventing the relation.",
+  "MEASUREMENTS": {
+    "type_object_type_rows_in_metadata_layer": 254946431,
+    "type_type_instance_edges_in_structural_layer": 254882143,
+    "difference": 64288,
+    "share_of_canonical_edges_pct": 12.3583,
+    "canonical_edges_total": 2062430072,
+    "relation_role_assigned": "UNPAIRED",
+    "other_pairs_in_the_same_situation": [
+      {
+        "master": "type.property.expected_type",
+        "reverse": "type.type.expected_by",
+        "reverse_edges": 35621
+      },
+      {
+        "master": "type.property.schema",
+        "reverse": "type.type.properties",
+        "reverse_edges": 35693
+      }
+    ],
+    "relation_roles": {
+      "MASTER": 4731,
+      "REVERSE_CANONICALISED_AWAY": 4728,
+      "UNPAIRED": 775469,
+      "TOTAL": 784928
+    },
+    "relation_table_reconciles_to_pass_b": true,
+    "raw_structural_edges_summed_over_relations": 2192405853
+  },
+  "WHY_THE_DIFFERENCE_IS_NOT_AN_ERROR": "The two counts are not required to match. They are two independent sets of RDF statements in the dump, not two views of one set, so the source is free to assert one direction for a subject and not the other. 64,288 is the number of assertions where it did exactly that.",
+  "WHAT_IS_NOT_CLAIMED": "No claim is made here that the two layers hold the same facts pairwise. Establishing that would require joining 254.9M metadata rows against 254.9M edges, which this record does not do. What is established is that the two predicates are declared inverses of each other by type.property.reverse_property, which is a schema fact read from the source.",
+  "CONSEQUENCE_FOR_THE_FROZEN_GRAPH": "Nothing is lost and nothing is duplicated within a layer: the metadata table holds one direction, the edge table holds the other, and each is deduplicated. But type membership is reachable twice by different routes, and 12.36% of all canonical edges belong to this single relation. Any consumer that reads both layers sees type membership at roughly double weight.",
+  "DISPOSITION": {
+    "decided": false,
+    "what_was_done": "Both layers are retained exactly as built. Nothing was removed, merged or reweighted, consistent with the standing rule that the 460K metadata CVTs are retained and become an ablation rather than a deletion.",
+    "candidate_for_the_user": "The same treatment the ADMIN_MEDIATORS decision received would apply naturally here: keep both and pre-register ALL_NODE vs ALL_NODE - TYPE_MIRROR_EDGES as an ablation. That is a contract-level commitment and is NOT taken here.",
+    "reversible": true,
+    "why_reversible": "type.type.instance edges are identified by a single relation UID, so the ablation is a filter on one relation and needs no rebuild."
+  },
+  "RECORD_HASH": "31daadfb7600ef84fefbc91d949efc0e128de3766ab713075f72bd0a281c097c"
+}

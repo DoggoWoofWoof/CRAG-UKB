@@ -1,0 +1,34 @@
+{
+ "features": "query_emb(1536)+qdiag(5:[disagree,relany,relfrac,log1p_relnc,log1p_n])+expert_stats(15:mean/max/win)",
+ "classifier": "class-balanced multinomial logistic (single linear layer), trained on TRAIN",
+ "n_train": 24445,
+ "n_val": 6985,
+ "classification": {
+  "accuracy": 0.4139,
+  "macro_f1": 0.3397,
+  "balanced_accuracy": 0.3854
+ },
+ "retrieval_ndcg50": {
+  "equal_C0": 0.8401,
+  "predicted_archetype": 0.8497,
+  "oracle_ceiling": 0.8796,
+  "predicted_minus_equal": 0.0096,
+  "frac_of_oracle_headroom_captured": 0.2444
+ },
+ "val_pred_distribution": {
+  "equal": 2191,
+  "up_relation": 929,
+  "up_offmix": 1868,
+  "up_splade": 993,
+  "up_dense": 458,
+  "down_relation": 546
+ },
+ "val_true_oracle_distribution": {
+  "equal": 3419,
+  "up_relation": 745,
+  "up_offmix": 1234,
+  "up_splade": 1033,
+  "up_dense": 340,
+  "down_relation": 214
+ }
+}

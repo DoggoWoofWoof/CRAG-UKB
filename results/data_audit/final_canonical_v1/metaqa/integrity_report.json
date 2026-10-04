@@ -1,0 +1,144 @@
+{
+  "dataset": "metaqa",
+  "dataset_version": "canonical_v1",
+  "built_at": "2026-09-05T18:16:12",
+  "unique_node_ids": true,
+  "canonical_node_count": 43234,
+  "raw_source_records": 43234,
+  "duplicates_collapsed": 0,
+  "dropped_records": 0,
+  "drop_reasons": {},
+  "accounting_identity": "RAW_SOURCE_RECORDS == CANONICAL_NODES + DUPLICATES_COLLAPSED + DROPPED_RECORDS (asserted)",
+  "empty_text_nodes": 0,
+  "empty_title_nodes": 0,
+  "corpus_accounting_detail": {
+    "raw_source_records": 43234,
+    "dropped_records": [],
+    "duplicates_collapsed": 0,
+    "identity": "official kb_entity_dict.txt entity index (name exact); node_id = metaqa:e<idx zero-padded 5>",
+    "kb_txt_cross_check": {
+      "triples": 134741,
+      "malformed_lines": 0,
+      "kb_unique_entities": 43234,
+      "kb_entities_missing_from_dict": [],
+      "n_kb_entities_missing_from_dict": 0,
+      "dict_entities_absent_from_kb": [],
+      "n_dict_entities_absent_from_kb": 0
+    },
+    "identity_normalization_diagnostics": {
+      "exact_identities": 43234,
+      "extra_collapses_if_NFC": 0,
+      "extra_collapses_if_whitespace_collapse": 0,
+      "extra_collapses_if_NFC+ws+casefold": 3083
+    },
+    "note": "text = official entity name (verbalization with kb.txt triples is a downstream encoding choice, not corpus identity)"
+  },
+  "query_stats": {
+    "train": {
+      "n": 329282,
+      "n_with_gold_refs": 329282,
+      "n_all_gold_resolved": 329282,
+      "n_any_gold_resolved": 329282,
+      "gold_refs_total": 2446161,
+      "gold_nodes_total": 2446161,
+      "GOLD_REFS_TOTAL": 2446161,
+      "GOLD_REFS_RESOLVED": 2446161,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    },
+    "dev": {
+      "n": 39138,
+      "n_with_gold_refs": 39138,
+      "n_all_gold_resolved": 39138,
+      "n_any_gold_resolved": 39138,
+      "gold_refs_total": 300980,
+      "gold_nodes_total": 300980,
+      "GOLD_REFS_TOTAL": 300980,
+      "GOLD_REFS_RESOLVED": 300980,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    },
+    "test": {
+      "n": 39093,
+      "n_with_gold_refs": 39093,
+      "n_all_gold_resolved": 39093,
+      "n_any_gold_resolved": 39093,
+      "gold_refs_total": 302779,
+      "gold_nodes_total": 302779,
+      "GOLD_REFS_TOTAL": 302779,
+      "GOLD_REFS_RESOLVED": 302779,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    },
+    "_answers_unresolved_exact_but_case_insensitive_match": 0
+  },
+  "splits_with_gold": [
+    "train",
+    "dev",
+    "test"
+  ],
+  "ALL_EVAL_GOLDS_PRESENT": true,
+  "GOLD_SEMANTICS": {
+    "_semantics": "gold ref -> {canonical node,...}; a ref resolves iff it maps to >=1 node; ALL_GOLD_REFS_RESOLVE = every ref in every gold-bearing split resolves; ambiguous refs are DISJUNCTIVE (retrieved & {alternatives} != {}), never conjunctive.",
+    "_supersedes": "the cardinality test len(gold_node_ids)==len(set(gold_refs)), which failed a question merely because one of its refs legitimately expanded to >1 canonical node.",
+    "ALL_GOLD_REFS_RESOLVE": true,
+    "GOLD_REFS_TOTAL": 3049920,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "per_split": {
+      "train": {
+        "GOLD_REFS_TOTAL": 2446161,
+        "GOLD_REFS_RESOLVED": 2446161,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "dev": {
+        "GOLD_REFS_TOTAL": 300980,
+        "GOLD_REFS_RESOLVED": 300980,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "test": {
+        "GOLD_REFS_TOTAL": 302779,
+        "GOLD_REFS_RESOLVED": 302779,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      }
+    },
+    "_index_cardinality": "GoldResolver builds a 1:1 ref->node index for every dataset in this builder, so AMBIGUOUS_GOLD_REFS is 0 by construction here."
+  },
+  "ALL_GOLD_REFS_RESOLVE": true,
+  "MISSING_GOLD_REFS": 0,
+  "AMBIGUOUS_GOLD_REFS": 0,
+  "unresolved_gold_refs": {
+    "counts": {},
+    "examples": []
+  },
+  "eval_subset": {
+    "method": "legacy id metaqa_q_{hop}hop_{split}_{global_counter}; counter reproduced over vanilla qa files in (hop 1..3) x (train,dev,test) order, skipping blank/no-tab lines; question text verified equal",
+    "n_legacy": 1998,
+    "n_recovered": 1998,
+    "n_missed": 0,
+    "misses": [],
+    "official_split_distribution": {
+      "dev": 1998
+    },
+    "file": "data/final_canonical/metaqa/eval_1998.jsonl",
+    "n": 1998,
+    "n_all_gold_resolved": 1998,
+    "n_with_gold_refs": 1998,
+    "GOLD_REFS_TOTAL": 14878,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "ALL_GOLD_REFS_RESOLVE": true
+  },
+  "CORPUS_HASH": "5f55719a08c10e54593cf1420e04cd6a9b52b8ea13ac100cb0ee8fffb3e60f9a",
+  "NODE_ORDER_HASH": "9172a4ba08fb3c3de93c55e5d336a476c8f54e1e567b79c673e69b2b01dcb968",
+  "nodes_jsonl_sha256": "a2441a83961a3426be2650a05513fd5b85862c4e98ea13755ede1bced951f3eb"
+}

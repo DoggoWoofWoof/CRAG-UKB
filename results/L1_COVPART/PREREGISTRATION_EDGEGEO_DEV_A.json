@@ -1,0 +1,58 @@
+{
+ "lane": "L1_COVPART",
+ "record": "PREREGISTRATION_EDGEGEO_DEV_A",
+ "written_utc": "2026-09-14T15:52:00Z",
+ "written_before": "any edgegeo number existed (no edgegeo_A_*.json present at write time; the module has not been executed)",
+ "ruling_2026-09-14": "TRIPLET / EDGE GEOMETRY VOTING, version 2 of the user's ruling: retrieve graph facts themselves as the unit and let each retrieved fact vote for {P(s), P(o)}; the node channel stays NAME_ONLY (no embedding change); one algorithm, one mathematical rule, no dataset switches, no training, no relation-specific parameters, no relation text, no query-time walk, no hand-tuned thresholds; consume only q, e_v, STRUCT edges, P(v), the served Dense/SPLADE ranks; tiny controlled experiment on DEV_A first; single-shot independent triplet scoring only (no result-conditioned second stage). If MetaQA does not improve materially -> close; if it does -> build the scalable global implementation.",
+ "research_question": "Can valid graph facts themselves serve as a parameter-free retrieval unit, using only frozen node geometry, without relation embeddings, training, or traversal?",
+ "module": {
+  "path": "scratchpad/_l1c_edgegeo.py",
+  "sha256": "746f63ee9dce4d6b81b745f46d79d6fc97b62994195e0b0fdef4b268f3a2fb82"
+ },
+ "design": {
+  "unit": "undirected STRUCT edge t = {s, o} from the frozen expansion key set (CanonicalDataset.keysets(): deduped, self-loops dropped); the relation label r is never read; direction is not read (the unit is the pair)",
+  "scores": {
+   "inputs": "a_s = q.e_s, a_o = q.e_o (unit node vectors, unit query vector), c = e_s.e_o (query-independent, precomputed once per edge)",
+   "S_mid": "cos(q, norm(e_s + e_o)) = (a_s + a_o) / sqrt(2 + 2c)",
+   "S_dir": "max over the two orientations of cos(q - e_s, e_o - e_s) = (a_o - a_s - c + 1) / (sqrt(2 - 2a_s) sqrt(2 - 2c)); the max is the parameter-free symmetric reading for an unordered pair; an edge with identical endpoint vectors (2 - 2c < 1e-6) has no direction and scores -1",
+   "S_src_S_dst": "endpoint similarities under the better orientation; used only inside the information arm T3b",
+   "numerical_guards": "1e-12 inside square roots, 1e-9 on node norms -- guards, not parameters"
+  },
+  "candidate_sets": {
+   "C1000 (primary, the controlled set of the ruling)": "edges with at least one endpoint in the query's existing served node top-1000 pool (dense top-1000 u SPLADE top-1000)",
+   "ALL (secondary)": "every STRUCT edge, brute force -- the preview of the global static index; reported, not the decision arm"
+  },
+  "voting": "per edge channel the top K_LOCK = 100 edges by score; the edge at rank r adds w_r = 1/(K0 + r) to each endpoint block {P(s), P(o)} (set semantics: a within-block edge adds once); frozen per-channel rule votes = rr(S) + rr(M) with float32 S and M exactly as _ta_prepartition.partition_ranking; channels fused by the frozen RRF (K0 = 60, dense tie-break); P50 core blocks; no halo; SAFE swaps untouched",
+  "arms": {
+   "T0": "canonical BASE = frozen RRF(node dense, node SPLADE) -- asserted equal to the served BASE_ALL on DEV_A",
+   "T1_<set>": "mid-edge channel alone -> P50",
+   "T2_<set>": "dir-edge channel alone -> P50",
+   "T3_<set>": "frozen RRF(node dense, node SPLADE, mid-edge, dir-edge) -> P50   [the decision arm, set = C1000]",
+   "T3b_<set>": "frozen RRF(node dense, node SPLADE, triplet) with triplet rank = frozen RRF(src, dst, dir, mid) over the candidate edges -> one channel   [information: the ruling's four-view fusion as a single channel]"
+  },
+  "constants": "K0 = 60, K_LOCK = 100, P50, the served top-1000 pool depth -- all frozen before this lane; nothing else",
+  "universality": "the same code path runs on metaqa, metaqa_phg, squad, squad_phg, musique; no typed-graph test, no dataset branch"
+ },
+ "population": "DEV_A only (metaqa MtK and metaqa_phg decide; squad, squad_phg, musique = universality / non-regression). DEV_B NOT read (spent twice). Transfer population for a surviving candidate = WebQSP once the PHG lane runs.",
+ "metrics": [
+  "BASE_ALL @P50",
+  "per hop",
+  "reach / UNREACHED / reached-weak / fusion-fixable",
+  "median worst gold block rank (reached-failed, all-reached)",
+  "blocks voted per query",
+  "scope nodes",
+  "exact McNemar vs T0 (BASE_ALL, reach, per hop, hop2+hop3 pooled)",
+  "candidate-set sizes and the share of top-100 edges with no endpoint among the node top-100 hits (does the edge unit retrieve anything the node unit did not?)"
+ ],
+ "decision_rule": {
+  "CANDIDATE": "on BOTH metaqa (MtK) and metaqa_phg DEV_A: T3_C1000 vs T0 BASE_ALL gained > lost with exact McNemar p < 0.01 AND an absolute gain of at least +2.0 points (material), AND hop2+hop3 pooled T3_C1000 vs T0 gained > lost with p < 0.05, AND no text cache (squad, squad_phg, musique) with a significant regression (p < 0.05 with lost > gained)",
+  "if_CANDIDATE": "freeze the module (this sha); build the scalable global implementation (ALL-edge static index) as the next step; no DEV_B read; WebQSP is the transfer population; no variant tuning",
+  "else": "EDGE_GEOMETRY_VOTE = CLOSED (NOT_CONFIRMED on DEV_A); T1/T2/T3b/ALL are reported as information only and do not rescue the decision; no kernel / weighting / candidate-set variants"
+ },
+ "secondary_expectations_not_gating": [
+  "T1/T2 alone below T0 (an edge channel is a complement, not a replacement)",
+  "T3 gain, if any, concentrated on hop-1 (the edge unit exposes the answer block of a fact whose subject is the retrieved anchor); hop-2/3 gain would be the material signal",
+  "top-100 edges mostly incident to node top-100 hits (the geometry of an edge is dominated by its better endpoint)"
+ ],
+ "no_parameters": "no learned weights, no per-relation or per-dataset constants, no thresholds; the candidate set is the served pool; the only arms run are the ones listed above"
+}

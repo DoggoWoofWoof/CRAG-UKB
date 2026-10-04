@@ -1,0 +1,39 @@
+{
+ "schema": "RESOLUTION_OVERLAY_CONTRACT/v2",
+ "name": "CRAG_FREEBASE_RESOLUTION_OVERLAY_V1",
+ "generated_utc": "2026-09-07T07:53:30Z",
+ "status": "AMENDMENT",
+ "amends": "V3_RESOLUTION_OVERLAY_CONTRACT.json (v1)",
+ "amendment_rule": "v1 is NOT edited. Contract changes are recorded as a new document so the superseded text stays readable, per the standing rule that an amendment never overwrites the record it amends.",
+ "WHAT_CHANGED": {
+  "COLUMNS": "v1 named the text column display_text and its provenance resolution_source. The finished node schema uses display_name and display_name_source (same enum, renamed), and adds is_original_name so a reader can separate a real Freebase name from a generated description without consulting the enum.",
+  "columns_v2": {
+   "node_uid": "int64, joins to canonical/nodes/*.parquet",
+   "display_name": "string, NEVER null or empty and NEVER a bare MID",
+   "display_name_source": "string, one of RESOLUTION_SOURCE in v1",
+   "is_original_name": "bool. TRUE only for LITERAL_SELF, FREEBASE_CURRENT_EXACT and FREEBASE_DELETED_EXACT -- the tiers where the string is an actual Freebase name (or the literal itself). A readable key is an identifier, not a name, so FREEBASE_KEY_EXACT is FALSE.",
+   "resolution_confidence": "float, the v1 scale unchanged",
+   "source_reference": "string, the v1 meaning unchanged"
+  },
+  "deferred_to_the_semantic_pass": [
+   "types",
+   "semantic_text"
+  ],
+  "why_deferred": "display_name completeness must not depend on the 2.06B-edge pass. Every tier in the build is a lookup or a pure function of the identifier, so the zero-opaque invariant is reached first and an interrupted edge pass still leaves a clean graph."
+ },
+ "TIER_PRECEDENCE": [
+  "FREEBASE_CURRENT_EXACT / LITERAL_SELF (already in the frozen node table)",
+  "URI_DERIVED (EXTERNAL_URI only)",
+  "FREEBASE_DELETED_EXACT",
+  "FREEBASE_KEY_EXACT",
+  "STRUCTURAL_INFERRED",
+  "STRUCTURAL_FALLBACK"
+ ],
+ "PRECEDENCE_NOTE": "FREEBASE_DELETED_EXACT (confidence 0.9) is preferred over FREEBASE_KEY_EXACT (1.0). The confidence scale measures TEMPORAL certainty, while this column is a display name: an actual historical type.object.name is a better name than a current non-name identifier. Both confidences are still reported at their v1 values, so nothing is relabelled to justify the ordering.",
+ "CORRECTION_TO_TIER_SIZING": {
+  "v1_said": "FREEBASE_KEY_EXACT recovers 3,064,237 of the 19,387,189 unnamed entities (15.8%).",
+  "measured": "that counted nodes that HAVE a key, not nodes whose key is a NAME. 75% of them are /dataworld/freeq/job_<uuid> load artifacts and 6.9% are WordNet sense keys; only 369,104 (12.05% of key-bearing nodes, 1.90% of the unnamed population) yield readable text.",
+  "record": "V3_KEY_READABILITY.json",
+  "consequence": "the AUTHORITATIVE_SOURCE_RESOLUTION figure is materially lower than the v1 sizing implied, and the structural share correspondingly higher."
+ }
+}

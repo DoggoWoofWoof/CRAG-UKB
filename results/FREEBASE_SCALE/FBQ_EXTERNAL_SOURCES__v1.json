@@ -1,0 +1,296 @@
+{
+ "RECORD": "FBQ_EXTERNAL_SOURCES",
+ "version": "v1",
+ "utc": "2026-10-03T21:46:50Z",
+ "scope": "Freebase-MID-keyed KBQA datasets that could add questions to the FBQ_SET (see FBQ_SET__v1.json). READ-ONLY web survey: NOTHING was downloaded (WebFetch/WebSearch metadata only).",
+ "legend": {
+  "V": "verified this session from the host page / GitHub API / HF API",
+  "S": "secondary summary (search result or summarised page); confirm before relying on it",
+  "U": "unverified: could not be read this session"
+ },
+ "local_evidence": {
+  "tree": "freebase_v3 (301,977,131 nodes) built from the IDIR-lab Zenodo Freebase release (record 7909511, data/final_canonical/freebase_v3/V3_ACQUISITION_RECORD.json); WebQSP's own FreebaseVersion field = 2015-08-09",
+  "measured_resolution_in_our_tree": {
+   "nsm_webqsp (3,098 train+dev q)": "topic MID occurrences 100.0% (2,915/2,915 train + 254/254 dev), answer MID occurrences 99.10% (34,409/34,721 = train 31,450/31,731 + dev 2,959/2,990; plus 115 literal answers), questions fully mappable 95.03% (2,944/3,098)",
+   "nsm_cwq (31,158 train+dev q)": "topic MID occurrences 98.97% (47,079/47,568), answer MID occurrences 99.85% (69,636/69,741), questions fully mappable 98.13% (30,575/31,158)",
+   "unresolved ids": "overwhelmingly g.* guids (WebQSP answers 207/296 unique unresolved are g.*, CWQ topics 196/212, CWQ answers 18/26): the cleaned tree lacks most g.* guids, so a source with many g.* ids resolves worse"
+  },
+  "source": "results/FREEBASE_SCALE/FBQ_SET__v1.json"
+ },
+ "usable_candidates": [
+  {
+   "id": "WebQSP_original",
+   "name": "WebQSP (Microsoft original, v1.0)",
+   "freebase_mid_keyed": "YES (TopicEntityMid, Answers.AnswerArgument, SPARQL, InferentialChain)",
+   "official": "https://www.microsoft.com/en-us/download/details.aspx?id=52763",
+   "license": "not stated on the download page (V)",
+   "counts": "4,737 fully parsed questions (train 3,098 [local WebQSP.train.json] + test 1,639 [NSM test_simple newline count]) + 1,073 'partial' (page V); local WebQSP.train.partial.json = 680 questions, 660 Partial (topic MID, NO answers), only 20 Complete with answers, none overlapping train.json",
+   "answer_format": "Freebase MIDs + names + SPARQL + chain",
+   "files": [
+    {
+     "name": "WebQSP.zip",
+     "bytes": null,
+     "size_reported": "4.2 MB (download page V); local copy data/original/webqsp/WebQSP.zip = 4,383,010 bytes (V, ls)",
+     "status": "ALREADY LOCAL"
+    }
+   ],
+   "freebase_snapshot": "2015-08-09 (FreebaseVersion field of the local WebQSP.train.json, V)",
+   "expected_resolution": "measured 100% topic / 99.10% answer (via NSM, same MIDs)",
+   "overlap": "this IS WebQSP (NSM/RoG are re-packagings)",
+   "recommendation": "ALREADY USED. Nothing to download. Optional (not done in v1): the 20 Complete rows in the local train.partial file are the only extra answered questions; test.partial is sealed."
+  },
+  {
+   "id": "CWQ_original",
+   "name": "ComplexWebQuestions (Talmor & Berant 2018), original release",
+   "freebase_mid_keyed": "YES (answers[].answer_id = MID; sparql)",
+   "official": "https://www.tau-nlp.org/compwebq (HTTP 404 at fetch time, V); project page tau-nlp.sites.tau.ac.il/compwebq (404 at fetch); code https://github.com/alontalmor/WebAsKB; HF loader https://huggingface.co/datasets/drt/complex_web_questions (data files are Dropbox shared links)",
+   "license": "Apache-2.0 on the HF card (V); the HF card 'Licensing Information: Not specified' for the data itself",
+   "counts": "34,689 total. HF card: train 27,734 / dev 3,480 / test 3,475. Our local NSM/RoG CWQ: 27,639 / 3,519 / 3,531 (same total 34,689; the splits differ -> NSM/RoG follow a different (repartitioned) split; we observe 0 WebQSP parents shared by NSM-train and NSM-dev)",
+   "answer_format": "MIDs + names + aliases; fields ID, webqsp_ID (explicit parent id), webqsp_question, machine_question, question, sparql, compositionality_type (composition|conjunction|comparative|superlative), composition_answer, created",
+   "files": [
+    {
+     "name": "ComplexWebQuestions_train.json",
+     "bytes": null,
+     "size_reported": "unverified",
+     "url": "https://www.dropbox.com/sh/7pkwkrfnwqhsnpo/AAAIHeWX0cPpbpwK6w06BCxva/ComplexWebQuestions_train.json?dl=1",
+     "status": "V (URL in the HF loader script), U (size)"
+    },
+    {
+     "name": "ComplexWebQuestions_dev.json",
+     "bytes": null,
+     "size_reported": "unverified",
+     "url": "https://www.dropbox.com/sh/7pkwkrfnwqhsnpo/AADH8beLbOUWxwvY_K38E3ADa/ComplexWebQuestions_dev.json?dl=1",
+     "status": "U (size)"
+    },
+    {
+     "name": "ComplexWebQuestions_test.json",
+     "bytes": null,
+     "size_reported": "unverified",
+     "status": "DO NOT DOWNLOAD (sealed test; URL exists in the HF loader)"
+    }
+   ],
+   "freebase_snapshot": "not stated by the paper; inherits WebQSP (2015-08-09)",
+   "expected_resolution": "measured on the same questions via NSM: topics 98.97%, answers 99.85%, fully mappable 98.13%",
+   "overlap": "the SAME 34,689 questions as the local NSM CWQ (no new questions); CWQ is built from WebQSP seeds: 100% of the local CWQ train/dev rows with a WebQTrn parent share a MID with it vs 0.8% for a random parent (FBQ_SET__v1__PARENT_CHECK.json)",
+   "recommendation": "WORTH ADDING AS METADATA ONLY (no new questions): compositionality_type, SPARQL, explicit webqsp_ID, answer aliases for stratifying/auditing CWQ. Fetch train + dev only; size unverified (JSON of ~31k questions)."
+  },
+  {
+   "id": "GrailQA",
+   "name": "GrailQA (Gu et al., WWW 2021)",
+   "freebase_mid_keyed": "YES (answer.answer_argument = MID for Entity answers, a literal value for Value answers; SPARQL; s-expression)",
+   "official": "https://dki-lab.github.io/GrailQA/ (download: https://dl.orangedox.com/WyaCpL/); code https://github.com/dki-lab/GrailQA; HF loader https://huggingface.co/datasets/dki-lab/grail_qa",
+   "license": "CC BY-SA 4.0 (homepage, V); Apache-2.0 for the code repo; 'unknown' on the HF card",
+   "counts": "64,331 total: train 44,337 / dev 6,763 / test 13,231 (HF card + API, V). The public test split has all fields except the question text MASKED (labels not released) -> not usable. Usable with answers: 51,100 (train+dev). Dev/test are stratified i.i.d./compositional/zero-shot (the 'level' field).",
+   "answer_format": "MID (Entity) or value (Value); SPARQL; S-expression; graph_query",
+   "files": [
+    {
+     "name": "GrailQA dataset archive (inner file names unverified)",
+     "bytes": null,
+     "size_reported": "120 MB (homepage text, V)",
+     "url": "https://dl.orangedox.com/WyaCpL/",
+     "status": "V (size), U (inner names)"
+    }
+   ],
+   "freebase_snapshot": "S: built on 'Freebase Commons' of the latest Freebase (86 domains, ~45M entities per the paper summary); exact dump date not stated on the pages read (2015-08-09 is the date of the last official Freebase dump but is NOT confirmed for GrailQA)",
+   "expected_resolution": "U: probably high (same final-dump lineage, our tree is the full 302M-node universe) but g.* guids would be missing; measure on a 1,000-row sample before committing",
+   "overlap": "crowdsourced from graph queries; documented as independent of WebQSP/CWQ but no overlap audit is published -> dedupe by normalised question after download",
+   "recommendation": "WORTH ADDING: largest MID-keyed set with answers (+51,100 train+dev questions, multi-relation, with generalisation levels). Use dev (6,763) as the eval-eligible part; treat the test questions as sealed."
+  },
+  {
+   "id": "GraphQuestions",
+   "name": "GraphQuestions (Su et al., EMNLP 2016) + the fb15 update",
+   "freebase_mid_keyed": "PARTIAL: original answers are canonical NAMES (spec.), grounded nodes carry MIDs, SPARQL returns ids; the fb15 update is GrailQA-style (answers likely MIDs, U)",
+   "official": "https://github.com/ysu1989/GraphQuestions ; fb15 update inside https://github.com/dki-lab/GrailQA/tree/main/data",
+   "license": "LICENSE.txt present in the GitHub repo (1,081 bytes, V via GitHub listing); terms not read -> unverified",
+   "counts": "5,166 questions derived from 500 unique graph queries (heavy paraphrasing) (S); per-split counts unverified",
+   "answer_format": "original: names (+MIDs of grounded nodes, SPARQL); fb15: unverified",
+   "files": [
+    {
+     "name": "freebase13/graphquestions.training.json",
+     "bytes": 5474828,
+     "status": "V (GitHub API)"
+    },
+    {
+     "name": "freebase13/graphquestions.testing.json",
+     "bytes": 5430961,
+     "status": "V (GitHub API)"
+    },
+    {
+     "name": "data/graphquestions_v1_fb15_training_091420.json",
+     "bytes": 17995362,
+     "status": "V (GitHub API, dki-lab/GrailQA)"
+    },
+    {
+     "name": "data/graphquestions_v1_fb15_test_091420.json",
+     "bytes": 10390906,
+     "status": "V (GitHub API; test = sealed, do not download)"
+    }
+   ],
+   "freebase_snapshot": "original = 'freebase13' directory (a 2013 snapshot, S); fb15 = the 2015 dump (name, S)",
+   "expected_resolution": "U (original: names only -> not directly mappable; fb15: likely high)",
+   "overlap": "partly built on the same Freebase subset family as WebQSP; paraphrases of one graph query sit in the same file -> near-duplicate answer sets (leakage inside train/test)",
+   "recommendation": "LOW PRIORITY. Only the fb15 training file (17,995,362 bytes), after GrailQA, and only if its answers are MIDs; skip the original (names only)."
+  },
+  {
+   "id": "FreebaseQA",
+   "name": "FreebaseQA (Jiang, Wu, Jiang; NAACL 2019)",
+   "freebase_mid_keyed": "YES (Parses[].TopicEntityMid, Answers[].AnswersMid, InferentialChain)",
+   "official": "https://github.com/kelvin-jiang/FreebaseQA ; HF mirror https://huggingface.co/datasets/KelvinJiang/freebase_qa",
+   "license": "CC-BY-4.0 (GitHub README, V); 'unknown' on the HF card",
+   "counts": "28,348 trivia-style questions: train 20,358 / dev 3,994 / eval 3,996 (V, README + HF API)",
+   "answer_format": "MIDs + answer strings + topic MID + predicate chain",
+   "files": [
+    {
+     "name": "FreebaseQA-train.json",
+     "bytes": 23888089,
+     "url": "https://raw.githubusercontent.com/kelvin-jiang/FreebaseQA/master/FreebaseQA-train.json",
+     "status": "V (GitHub API)"
+    },
+    {
+     "name": "FreebaseQA-dev.json",
+     "bytes": 4656349,
+     "url": "https://raw.githubusercontent.com/kelvin-jiang/FreebaseQA/master/FreebaseQA-dev.json",
+     "status": "V (GitHub API)"
+    },
+    {
+     "name": "FreebaseQA-eval.json",
+     "bytes": 4660561,
+     "status": "V; DO NOT DOWNLOAD (the benchmark's test split = sealed)"
+    },
+    {
+     "name": "FreebaseQA-partial.json",
+     "bytes": 15950670,
+     "status": "V; not needed"
+    }
+   ],
+   "freebase_snapshot": "U: not stated in the README / HF card (matched against Freebase; the authors also point to a ~2.2 GB compressed Freebase extract, not needed here)",
+   "expected_resolution": "U: unknown until sampled (trivia answers are popular entities, so m.* MIDs probably resolve)",
+   "overlap": "sources are TriviaQA + quiz sites; no documented overlap with WebQSP/CWQ (not audited)",
+   "recommendation": "WORTH ADDING (cheap): train + dev = 28,545,438 bytes (~27.2 MiB), +24,352 questions with MID answers; skip eval and partial."
+  },
+  {
+   "id": "SimpleQuestions",
+   "name": "SimpleQuestions v2 (Bordes et al. 2015)",
+   "freebase_mid_keyed": "YES (subject MID, relation, object MID; ids appear as www.freebase.com/m/<id>)",
+   "official": "Facebook/Meta bAbI downloads (SimpleQuestions_v2.tgz on Dropbox, e.g. https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz) [the research.facebook.com page redirects to ai.meta.com/resources and lists nothing readable]; alt: https://figshare.com/articles/dataset/SimpleQuestions/5812818",
+   "license": "figshare record: CC BY 4.0 (V); original tgz license unverified (U)",
+   "counts": "108,442 single-hop questions: train 75,910 / valid 10,845 / test 21,687 (S)",
+   "answer_format": "object MID (a single (subject, relation) can have several objects -> documented answer ambiguity, Petrochuk & Zettlemoyer 2018)",
+   "files": [
+    {
+     "name": "SimpleQuestions_v2.tgz",
+     "bytes": null,
+     "size_reported": "~423 MB (S: from a downloader progress bar; host size unverified)",
+     "status": "S"
+    },
+    {
+     "name": "figshare 'SimpleQuestions' linked-data version, SimpleQuestions_v2.zip",
+     "bytes": 539411811,
+     "md5_prefix_only": "7c80dbba...",
+     "status": "V (size from figshare listing); article https://figshare.com/articles/dataset/SimpleQuestions/5812818"
+    }
+   ],
+   "freebase_snapshot": "U: FB2M / FB5M subsets of an early Freebase dump (older than the 2015 one); not confirmed",
+   "expected_resolution": "U: unmeasured (older MIDs; deleted/merged MIDs possible)",
+   "overlap": "independent of WebQSP/CWQ; single-hop only",
+   "recommendation": "OPTIONAL scale/probe set: 1-hop only (no multi-hop signal), ambiguous gold. Skip for now; if the user wants a single-hop volume probe, approve the tgz and resolve 1,000 rows first."
+  }
+ ],
+ "not_usable_or_skip": [
+  {
+   "id": "CFQ",
+   "name": "CFQ (Keysers et al. 2020)",
+   "reason": "239,357 synthetic questions with SPARQL only; the HF version uses entity placeholders (M0, M1, ...) instead of MIDs and ships SPARQL only, no gold answers (S). No gold answers -> skip.",
+   "official": "https://github.com/google-research/google-research/tree/master/cfq ; https://huggingface.co/datasets/google-research-datasets/cfq (CC-BY-4.0; the HF parquet files total ~2.14 GB)"
+  },
+  {
+   "id": "WebQuestions",
+   "name": "WebQuestions (Berant et al. 2013)",
+   "reason": "5,810 questions; answers are names (not MIDs) and the entity is a Freebase url slug (en.<key>) -> not MID-keyed; 4,737 of the 5,810 are exactly WebQSP (the page says 4,737 full + 1,073 partial = 5,810). The 1,073 'partial' (no answers) cannot be scored. Host/size: SEMPRE page (U). Skip."
+  },
+  {
+   "id": "Free917",
+   "name": "Free917 (Cai & Yates 2013)",
+   "reason": "917 questions with lambda-calculus over fb:en.<key> (not MIDs, S); a key->MID step would be needed; host via the SEMPRE page, file/size U. Too small. Skip."
+  },
+  {
+   "id": "ComplexQuestions",
+   "name": "ComplexQuestions (Bao et al. 2016)",
+   "reason": "2,100 questions built by augmenting a subset of WebQSP (S) -> overlap/leak with WebQSP; no official download host found (U). Skip."
+  },
+  {
+   "id": "TempQuestions",
+   "name": "TempQuestions (Jia et al. 2018)",
+   "reason": "1,271 temporal questions drawn from Free917 / WebQuestions / ComplexQuestions (S; ACM page returned 403) -> overlap; release format/host unverified. Skip."
+  },
+  {
+   "id": "30M_Factoid_QA",
+   "name": "30M Factoid QA corpus (Serban et al. 2016)",
+   "reason": "30M machine-generated questions over Freebase (subject, relation, object MIDs) (S); Academic Torrents 529.34 MB (30MQA_1.tar.gz 315.96 MB + 30MQA_2.tar.gz 213.39 MB), BitTorrent only (S); synthetic single-hop, older Freebase. Skip unless a synthetic volume probe is wanted.",
+   "official": "Academic Torrents (search '30M Factoid Question-Answer Corpus'; info-hash not recorded)"
+  },
+  {
+   "id": "PathQuestion",
+   "name": "PathQuestion PQ/PQL (Zhou et al. 2018)",
+   "reason": "template-generated 2/3-hop questions over two Freebase subsets (S); id format (names vs MIDs) not verified. Skip."
+  },
+  {
+   "id": "WebQSP_CWQ_derivatives",
+   "name": "RoG-webqsp / RoG-cwq, GNN-RAG, SR (SubgraphRetrievalKBQA), ReKnoS, KG-TRACES, UniK-QA, YF0808/*, camazlucas/Freebase-WebQSP-CWQ-Subgraph",
+   "reason": "all re-package the SAME WebQSP / CWQ questions: RoG-webqsp and RoG-cwq are already local (names only, no MIDs; RoG-cwq HF API: train ~2.76 GB, validation ~360.9 MB, test ~372.8 MB); SR/NSM ship the MID-keyed WebQSP/CWQ that we already use; HF 'camazlucas/Freebase-WebQSP-CWQ-Subgraph' (webqsp_subgraph.tsv 260,208,520 B, cwq_subgraph.tsv 471,465,645 B, unified_graph.tsv 542,254,271 B) is a RoG-derived subgraph dump. None adds a new question or a new MID (HF file listings V; the per-method statements for GNN-RAG/ReKnoS/UniK-QA/KG-TRACES are S/U). Skip."
+  },
+  {
+   "id": "WIKIDATA_DBPEDIA_KEYED",
+   "name": "KQA Pro, Mintaka, LC-QuAD 1.0/2.0, QALD, MetaQA",
+   "reason": "NOT usable as shipped: they are keyed to Wikidata QIDs (KQA Pro 117,970 QA on a Wikidata subset seeded from FB15k-237 entities; Mintaka 20,000 EN questions 14,000/2,000/4,000 with Wikidata entities; LC-QuAD 2.0 30,000 Wikidata+DBpedia; LC-QuAD 1.0 5,000 DBpedia; QALD-10 Wikidata/DBpedia) or to DBpedia / the WikiMovies KB (MetaQA, already a separate local substrate); none ships Freebase MIDs (S). A bridge exists only via a Freebase<->Wikidata id mapping: HF kdm-daiict/freebase-wikidata-mapping, fb_wiki_mapping.tsv 76,176,160 bytes, 2,076,868 rows, Apache-2.0 (V) -> would cover only entities with a Freebase link and needs a second download plus a resolution probe; not recommended now."
+  }
+ ],
+ "recommended_downloads_for_user_approval": [
+  {
+   "priority": 1,
+   "download": "FreebaseQA-train.json + FreebaseQA-dev.json",
+   "source": "https://raw.githubusercontent.com/kelvin-jiang/FreebaseQA/master/ (GitHub)",
+   "bytes": 28544438,
+   "note": "23,888,089 + 4,656,349 bytes; do NOT take FreebaseQA-eval.json (4,660,561) or FreebaseQA-partial.json (15,950,670); CC-BY-4.0; +24,352 q"
+  },
+  {
+   "priority": 2,
+   "download": "GrailQA dataset archive",
+   "source": "https://dl.orangedox.com/WyaCpL/ (GrailQA homepage)",
+   "bytes": 120000000,
+   "size_text": "~120 MB (stated, exact bytes unverified)",
+   "note": "'120 MB' as stated on the homepage (exact bytes unverified); use train+dev only (+51,100 q); the test questions in the archive are label-masked and stay sealed; CC BY-SA 4.0"
+  },
+  {
+   "priority": 3,
+   "download": "ComplexWebQuestions_train.json + ComplexWebQuestions_dev.json (original release)",
+   "source": "Dropbox links in the HF loader https://huggingface.co/datasets/drt/complex_web_questions/blob/main/complex_web_questions.py",
+   "bytes": null,
+   "note": "sizes unverified; metadata enrichment only (compositionality_type, SPARQL, webqsp_ID, aliases); NOT the test file"
+  },
+  {
+   "priority": 4,
+   "download": "graphquestions_v1_fb15_training_091420.json (optional)",
+   "source": "https://github.com/dki-lab/GrailQA/tree/main/data",
+   "bytes": 17995362,
+   "note": "only if its answers turn out to be MIDs; skip the test file (10,390,906 bytes)"
+  },
+  {
+   "priority": 5,
+   "download": "SimpleQuestions_v2.tgz (optional probe)",
+   "source": "Meta bAbI Dropbox link / figshare 5812818 (539,411,811 bytes, V)",
+   "bytes": null,
+   "note": "~423 MB (S) for the tgz; only for a single-hop volume probe; resolve 1,000 rows first"
+  }
+ ],
+ "recommended_firm_bytes_priority_1_2": 148544438,
+ "sealed_rule_applied": "the test/eval files of every candidate (CWQ test, FreebaseQA-eval, GrailQA test, GraphQuestions test) are listed but marked DO NOT DOWNLOAD",
+ "caveats": [
+  "WebFetch summaries are produced by a small model and were wrong at least once (GrailQA split counts in one arXiv summary); counts quoted here come from the HF API/card or GitHub API wherever possible, otherwise flagged S/U",
+  "No resolution rate for any external source has been measured: nothing was downloaded; the only measured rates are the NSM WebQSP/CWQ ones",
+  "WebFetch of a PDF (N19-1028) was stored by the tool harness at C:/Users/Swastik/.claude/projects/C--Users-Swastik-Desktop-CRAG/348e519a-c28c-4463-a7fc-3fb109605d7e/tool-results/webfetch-1791063452124-1439z1.pdf (479.6 KB): a harness-side cache of a fetched page, outside the repo, not requested by this task"
+ ],
+ "code": {
+  "scratchpad/_fbq_external_sources.py": "31b93ce3187a5ded5212392d0c627368cd500b42b3e13013eba9ed6aa8abf82a"
+ }
+}

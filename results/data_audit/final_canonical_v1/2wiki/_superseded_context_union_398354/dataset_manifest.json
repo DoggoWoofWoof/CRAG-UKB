@@ -1,0 +1,302 @@
+{
+  "dataset_name": "2wiki",
+  "dataset_version": "canonical_v1",
+  "legacy_substrate_name": "2wiki_clean",
+  "canonical_corpus_definition": "CANONICAL_CORPUS_DEFINITION (benchmark-contract corpus): the complete union of official 2WikiMultiHopQA v1.0 (ids_april2021) context paragraphs over train + dev + test, one node per distinct paragraph TITLE (exact string); text = ' '.join(sentences). Independent of which queries are evaluated. The separate full-universe corpus (para_with_hyperlink, 5,989,847 articles; data/canonical/2wiki_universe) is a different, out-of-scope corpus.",
+  "source_files": [
+    "data/original/2wiki/v1.0_ids_april2021/dev.json",
+    "data/original/2wiki/v1.0_ids_april2021/test.json",
+    "data/original/2wiki/v1.0_ids_april2021/train.json"
+  ],
+  "source_hashes": {
+    "data/original/2wiki/v1.0_ids_april2021/train.json": {
+      "sha256": "b318dbafbfed51a8029718fa59be8b616600cbff675a3b587694b28c5eedfc13",
+      "bytes": 707810660
+    },
+    "data/original/2wiki/v1.0_ids_april2021/dev.json": {
+      "sha256": "79f77ae104088ea8e25b1a65dbece768d45771194663bc5660ec9a98070dadf5",
+      "bytes": 57614142
+    },
+    "data/original/2wiki/v1.0_ids_april2021/test.json": {
+      "sha256": "48b196d4ba8557343abb9bd1ad03566bc02762ecd734617ff910027c33821b04",
+      "bytes": 53838398
+    }
+  },
+  "raw_node_count": 1926060,
+  "deduplicated_node_count": 398354,
+  "canonical_node_count": 398354,
+  "duplicates_removed": 1527706,
+  "dropped_records": 0,
+  "drop_reasons": {},
+  "query_counts": {
+    "train": 167454,
+    "dev": 12576,
+    "test": 12576,
+    "eval_subset": 2000
+  },
+  "eval_subset": {
+    "file": "eval_2000.jsonl",
+    "n": 2000,
+    "recovery_method": "legacy 2wiki_clean questions came from the FlashRAG 15k train sample (raw file no longer present); matched to official train/dev/test by EXACT question text; ambiguities resolved by supporting-fact title set == legacy gold title set",
+    "n_legacy": 2000,
+    "n_recovered": 2000,
+    "n_missed": 0,
+    "official_split_distribution": {
+      "train": 2000
+    }
+  },
+  "corpus_depends_on_eval_subset": false,
+  "node_id_scheme": "2wiki:<sha256(title)[:24]> (title = exact official string); file order = lexicographic node_id",
+  "node_id_stable": true,
+  "normalization_rules": {
+    "stored_text": "EXACT official string; no NFC/NFKC, no case-folding, no whitespace collapsing, no stripping",
+    "identity_keys": "EXACT strings (see dedup_policy); lossy alternatives are only quantified in integrity_report.corpus_accounting_detail.identity_normalization_diagnostics, never applied",
+    "construction_steps": {
+      "2wiki": "text = ' '.join(sentences) -- the official file stores a sentence list",
+      "metaqa": "text = entity name (no verbalization at corpus level)"
+    },
+    "encoding": "UTF-8, JSON with ensure_ascii=False, sort_keys=True, LF line endings"
+  },
+  "dedup_policy": "identity = exact title; first occurrence (train->dev->test, file order) fixes the text; 0 titles carry conflicting text across their 1,926,060 occurrences. 86 distinct titles share an identical text -- kept as distinct nodes (text-hash identity would merge unrelated articles).",
+  "identity_normalization_diagnostics": {
+    "exact_identities": 398354,
+    "extra_collapses_if_NFC": 0,
+    "extra_collapses_if_whitespace_collapse": 0,
+    "extra_collapses_if_NFC+ws+casefold": 113
+  },
+  "all_eval_gold_nodes_present": true,
+  "missing_eval_gold_nodes": {
+    "counts": {},
+    "examples": []
+  },
+  "gold_resolution_per_split": {
+    "train": {
+      "n": 167454,
+      "n_with_gold_refs": 167454,
+      "n_all_gold_resolved": 167454,
+      "gold_refs_total": 404170,
+      "gold_nodes_total": 404170
+    },
+    "dev": {
+      "n": 12576,
+      "n_with_gold_refs": 12576,
+      "n_all_gold_resolved": 12576,
+      "gold_refs_total": 30654,
+      "gold_nodes_total": 30654
+    },
+    "test": {
+      "n": 12576,
+      "n_with_gold_refs": 0,
+      "n_all_gold_resolved": 0,
+      "gold_refs_total": 0,
+      "gold_nodes_total": 0
+    }
+  },
+  "corpus_hash": "ec7fbbe8cd7830402932135cd82c9b87f0b87a96175c914b3b02bc1b37d1f2c3",
+  "ordered_node_id_hash": "246d9c445174fe733310f7cc8d7c156ba9112905b2b59ee9ac52d317645abfd4",
+  "nodes_jsonl_sha256": "5971b61bcd6e7c09af7cdf5d51e3425a709a16d8a3c01edcf1675cfd245df97a",
+  "CORPUS_QUERY_INDEPENDENT": true,
+  "DETERMINISTIC_REBUILD": true,
+  "query_independence_test": {
+    "runs": {
+      "FINAL": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH": "ec7fbbe8cd783040",
+        "n": 398354
+      },
+      "A": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH": "ec7fbbe8cd783040",
+        "n": 398354
+      },
+      "B": {
+        "eval_subset": "random_dev:7",
+        "CORPUS_HASH": "ec7fbbe8cd783040",
+        "n": 398354
+      },
+      "none": {
+        "eval_subset": "none",
+        "CORPUS_HASH": "ec7fbbe8cd783040",
+        "n": 398354
+      }
+    },
+    "eval_subsets_A_vs_B": {
+      "n_A": 2000,
+      "n_B": 2000,
+      "overlap": 0,
+      "differ": true
+    }
+  },
+  "legacy_comparison": {
+    "classification": "SAMPLE_CONDITIONED",
+    "evidence": "legacy corpus = union of the 10 context paragraphs of the 15,000 FlashRAG-sampled official TRAIN questions (data/raw/2wiki.jsonl -> loaders.load_2wiki -> build_clean), 150,000 records -> 65,865 (title, md5) nodes. The eval subset (2,000) is a random 20% 'val' cut of those same 15,000 questions, so the corpus is a function of the query sample. 398,354 - 65,865 = 332,489 official paragraphs are absent. All sampled-query golds being present does NOT make this benign: distractor mass, partition structure and reachability all depend on the sample.",
+    "legacy_count": 65865,
+    "canonical_count": 398354,
+    "legacy_nodes_mapped": 65865,
+    "missing_in_canonical": 0,
+    "ambiguous_legacy_nodes": 0,
+    "extra_canonical_nodes": 334239,
+    "extra_by_split_provenance": {
+      "train": 262175,
+      "dev": 13913,
+      "train+test": 17598,
+      "test": 13497,
+      "train+dev": 17596,
+      "dev+test": 1566,
+      "train+dev+test": 7894
+    },
+    "changed_text": {
+      "real_text_diff": 3575,
+      "exact_equal": 62137,
+      "whitespace_only_diff": 153
+    },
+    "id_mapping_coverage": 1.0,
+    "eval_subset_gold_consistency": {
+      "file": "eval_2000.jsonl",
+      "n": 2000,
+      "legacy_golds_equal_canonical": 2000,
+      "legacy_golds_strict_subset_of_canonical": 0,
+      "differ": 0,
+      "queries_with_unmapped_legacy_gold": 0,
+      "examples": []
+    },
+    "files": [
+      "legacy_comparison.json",
+      "node_id_map_legacy.json"
+    ]
+  },
+  "builder": {
+    "path": "scratchpad/final_canonical_build/build.py",
+    "builder_sha256": "0879e428a41e636bb4089ef10c8ca217030331e22d54ca1d9dc87ba38988dcd9",
+    "jsonstream_sha256": "c3d170107f99e6fdd33eee2278c192447a7b1a460a958d189bf76ece2adfde58",
+    "command": "python scratchpad/final_canonical_build/build.py 2wiki --eval-subset legacy",
+    "git_commit": "ba6bd71bcc9f367dc28d3e4cde777a3931501406",
+    "build_started": "2026-09-05T06:17:45",
+    "build_finished": "2026-09-05T06:18:24",
+    "seconds": 38.5,
+    "peak_rss_mb": 1154.1
+  },
+  "files": {
+    "nodes": "nodes.jsonl",
+    "queries": [
+      "dev.jsonl",
+      "lanes",
+      "test.jsonl",
+      "train.jsonl"
+    ],
+    "eval_subset": "eval_2000.jsonl",
+    "reports": [
+      "SOURCE_CONTRACT.json",
+      "build_info.json",
+      "dataset_manifest.json",
+      "integrity_report.json",
+      "legacy_comparison.json",
+      "node_id_map_legacy.json",
+      "query_independence_test.json"
+    ]
+  },
+  "downstream_artifacts_built": "NONE (no embeddings / SPLADE / graphs / partitions / indexes) -- by design of this track",
+  "READY_FOR_INDEX_BUILD": true,
+  "manifest_written": "2026-09-05T08:06:25",
+  "query_lanes": {
+    "LEGACY_CONTINUITY": {
+      "n": 2000,
+      "file": "queries/lanes/LEGACY_CONTINUITY.jsonl",
+      "official_split_distribution": {
+        "train": 2000
+      },
+      "provenance": "the frozen legacy evaluation subset of substrate '2wiki_clean', recovered onto canonical query ids. Rows = data/ukb_storage/2wiki_clean/gte_qwen/query_ids_all.json indexed by split_indices['val'] (scratchpad/_ta_comb.py:75-92, _ta_resid.py:63-76); the 'val' cut itself comes from src/experiments/overlap_retrain.py:171-206 _splits(). Recovery method: legacy 2wiki_clean questions came from the FlashRAG 15k train sample (raw file no longer present); matched to official train/dev/test by EXACT question text; ambiguities resolved by supporting-fact title set == legacy gold title set. Recovered 2000/2000, missed 0.",
+      "VALID_HELD_OUT_EVAL_SET": false,
+      "labelling": "TRAIN-DERIVED -- NOT A VALID HELD-OUT EVAL SET. These are a seeded 20% cut of OFFICIAL TRAIN (random.Random(42), 70/20/10 split in src/experiments/overlap_retrain.py::_splits, used because these questions carry no official split metadata). Use ONLY for paired legacy->canonical continuity analysis; never quote as accuracy."
+    },
+    "QUALITY_LOCKED": {
+      "n": 12576,
+      "file": "queries/lanes/QUALITY_LOCKED.jsonl",
+      "official_split_distribution": {
+        "dev": 12576
+      },
+      "provenance": "the complete official 2wiki DEV split, taken verbatim from the official source files; official 2wiki TEST answers are HIDDEN, so dev (12,576) is the only proper held-out labelled split.",
+      "VALID_HELD_OUT_EVAL_SET": true,
+      "n_with_gold_node_ids": 12576,
+      "n_with_gold_refs": 12576,
+      "n_all_gold_resolved": 12576,
+      "labelling": "OFFICIAL HELD-OUT LABELLED -- the lane for final accuracy and significance testing. Disjoint from LEGACY_CONTINUITY unless noted."
+    },
+    "SCALE_ALL": {
+      "n": 192606,
+      "file": "queries/lanes/SCALE_ALL.ids.jsonl",
+      "record_source": "queries/<split>.jsonl (already materialized in full; the lane file is the ordered id+split index, so no query record is duplicated on disk)",
+      "official_split_distribution": {
+        "dev": 12576,
+        "test": 12576,
+        "train": 167454
+      },
+      "n_with_gold_node_ids_per_split": {
+        "dev": 12576,
+        "train": 167454
+      },
+      "provenance": "every official query of every released split of the dataset, as parsed by scratchpad/final_canonical_build/build.py's query stage from the official source files.",
+      "VALID_HELD_OUT_EVAL_SET": false,
+      "labelling": "MIXED SPLITS -- scale / latency / robustness only. Contains train questions and (where the official test labels are hidden) unlabelled questions; never quote as accuracy."
+    }
+  },
+  "query_lane_overlaps": {
+    "LEGACY_CONTINUITY_n_in_QUALITY_LOCKED": 0
+  },
+  "corpus_hash_equality_assertion": {
+    "statement": "corpus_hash(LEGACY_CONTINUITY) == corpus_hash(QUALITY_LOCKED) == corpus_hash(SCALE_ALL)",
+    "per_lane_corpus_hash": {
+      "LEGACY_CONTINUITY": "ec7fbbe8cd7830402932135cd82c9b87f0b87a96175c914b3b02bc1b37d1f2c3",
+      "QUALITY_LOCKED": "ec7fbbe8cd7830402932135cd82c9b87f0b87a96175c914b3b02bc1b37d1f2c3",
+      "SCALE_ALL": "ec7fbbe8cd7830402932135cd82c9b87f0b87a96175c914b3b02bc1b37d1f2c3"
+    },
+    "RESULT": "PASS",
+    "how_bookkeeping": "one nodes.jsonl serves every lane; CORPUS_HASH recomputed from nodes.jsonl in this script and compared against dataset_manifest / integrity_report / build_info",
+    "recomputed_from_nodes_jsonl": {
+      "n": 398354,
+      "CORPUS_HASH": "ec7fbbe8cd7830402932135cd82c9b87f0b87a96175c914b3b02bc1b37d1f2c3",
+      "ordered_node_id_hash": "246d9c445174fe733310f7cc8d7c156ba9112905b2b59ee9ac52d317645abfd4",
+      "file_order_is_lexicographic_node_id": true
+    },
+    "stored_corpus_hashes": {
+      "manifest": "ec7fbbe8cd7830402932135cd82c9b87f0b87a96175c914b3b02bc1b37d1f2c3",
+      "integrity": "ec7fbbe8cd7830402932135cd82c9b87f0b87a96175c914b3b02bc1b37d1f2c3",
+      "build_info": "ec7fbbe8cd7830402932135cd82c9b87f0b87a96175c914b3b02bc1b37d1f2c3"
+    },
+    "how_constructive": "the corpus was rebuilt from the official sources under three DIFFERENT --eval-subset arguments (legacy / random_dev:7 / none) and produced an identical CORPUS_HASH each time",
+    "constructive_evidence": {
+      "FINAL": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH_prefix": "ec7fbbe8cd783040",
+        "n": 398354
+      },
+      "A": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH_prefix": "ec7fbbe8cd783040",
+        "n": 398354
+      },
+      "B": {
+        "eval_subset": "random_dev:7",
+        "CORPUS_HASH_prefix": "ec7fbbe8cd783040",
+        "n": 398354
+      },
+      "none": {
+        "eval_subset": "none",
+        "CORPUS_HASH_prefix": "ec7fbbe8cd783040",
+        "n": 398354
+      },
+      "LANE_QUALITY_LOCKED_REBUILD": {
+        "RESULT": "PASS",
+        "eval_subset": "QUALITY_LOCKED lane file",
+        "CORPUS_HASH": "ec7fbbe8cd7830402932135cd82c9b87f0b87a96175c914b3b02bc1b37d1f2c3",
+        "ordered_node_id_hash": "246d9c445174fe733310f7cc8d7c156ba9112905b2b59ee9ac52d317645abfd4",
+        "n": 398354,
+        "out_dir": "data/final_canonical/_work/lanecheck/2wiki"
+      }
+    }
+  },
+  "legacy_substrate_aliases": [
+    "2wiki",
+    "2wiki_clean"
+  ]
+}

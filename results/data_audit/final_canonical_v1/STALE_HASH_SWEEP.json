@@ -1,0 +1,1537 @@
+{
+  "files_scanned": 241,
+  "roots": [
+    "data/final_canonical",
+    "results/data_audit/final_canonical_v1",
+    "scratchpad/final_canonical_build"
+  ],
+  "hashes_searched": {
+    "81fa7d1a5d4bbb24": "2wiki REV1 CORPUS_HASH",
+    "2653f6f35690ba31": "2wiki REV1 nodes_jsonl_sha256",
+    "862e0b3c284fd12a": "REV1 build_kb.py builder_sha256",
+    "fe139de9c7c2a14f": "hotpotqa REV1 CORPUS_HASH"
+  },
+  "TOTAL_HITS": 200,
+  "STALE_HITS": 0,
+  "HISTORICAL_HITS": 200,
+  "REGENERATED_HITS": 0,
+  "hits_by_class": {
+    "HISTORICAL_DIR": 153,
+    "HISTORICAL_FIELD": 12,
+    "HISTORICAL_REVIEWED": 10,
+    "HISTORICAL_RUNLOG": 2,
+    "HISTORICAL_TRANSITION": 23
+  },
+  "REVIEWED_EXEMPTIONS": [
+    {
+      "path_suffix": "_WEBQSP_ACCEPTANCE_GATE.json",
+      "line": "\"new\": \"862e0b3c",
+      "reason": "the 'new' sha of the 2026-09-05 gold-semantics patch, i.e. a correct record of THAT event. The sibling key _NOT_THE_LIVE_SHAS_2026_09_06 in the same object states the current sha and the transition. Rewriting 'new' would falsify the patch record."
+    },
+    {
+      "path_suffix": "webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "line": "`862e0b3c284fd12a\u2026` above is the",
+      "reason": "part of the 2026-09-06 SECOND CORRECTION block that exists precisely to mark the value above as superseded; it quotes the old sha in order to retire it."
+    },
+    {
+      "path_suffix": "_audit/gold_semantics.json",
+      "line": "\"2wiki\": \"81fa7d1a",
+      "reason": "the CORPUS_HASH_BEFORE / CORPUS_HASH_AFTER pair of the gold-semantics audit, whose finding was that that fix did NOT move the hash. Both values are correct for that audit. _STATUS_2026_09_06 in the same file scopes them and gives the live value."
+    },
+    {
+      "path_suffix": "_audit/gold_semantics.json",
+      "line": "\"hotpotqa\": \"fe139de9",
+      "reason": "same CORPUS_HASH_BEFORE / CORPUS_HASH_AFTER pair for hotpotqa, superseded by its own rev2 re-pin on 2026-09-05; scoped by the same _STATUS_2026_09_06 block."
+    },
+    {
+      "path_suffix": "webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "line": "**before and after** \u2014 unchanged",
+      "reason": "a finding of the 2026-09-05 gold-semantics audit that was TRUE when written -- that fix ran --queries-only and did not move the hash. The 'SECOND CORRECTION 2026-09-06' block immediately below retires the quoted value. Rewriting the finding would falsify a dated audit result."
+    },
+    {
+      "path_suffix": "webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "line": "`81fa7d1a5d4bbb24\u2026`.**]**",
+      "reason": "the closing line of the 2026-09-05 CORRECTION block, retired by the 'SECOND CORRECTION 2026-09-06' block that directly follows it and names the value that replaced it."
+    }
+  ],
+  "reviewed_exemption_hits": [
+    {
+      "path": "data/final_canonical/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"new\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "data/final_canonical/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "**Invariant held:** 2wiki `CORPUS_HASH` asserted `81fa7d1a5d4bbb24\u2026` **before and after** \u2014 unchanged. This is",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "data/final_canonical/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "`81fa7d1a5d4bbb24\u2026`.**]**",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"new\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "**Invariant held:** 2wiki `CORPUS_HASH` asserted `81fa7d1a5d4bbb24\u2026` **before and after** \u2014 unchanged. This is",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "`81fa7d1a5d4bbb24\u2026`.**]**",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\"",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\"",
+      "class": "HISTORICAL_REVIEWED"
+    }
+  ],
+  "STALE_HASH_REFERENCES_REMAINING": 0,
+  "REGENERATED_FILES_PENDING": [],
+  "_regenerated_note": "not hand-edited: manifest.py + mirror_audit.py rewrite these from the live upstream build_info/integrity_report. Re-run this sweep after the re-pin; REGENERATED_HITS must then be 0.",
+  "stale": [],
+  "regenerated": [],
+  "historical": [
+    {
+      "path": "data/final_canonical/2wiki/EMPTY_TEXT_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "> `81fa7d1a5d4bbb24\u2026 \u2192 94fe68b8d5f291f1\u2026`, `NODE_ORDER_HASH` and membership did **not** move, and",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/2wiki/EMPTY_TEXT_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "> in the future tense and still cites `81fa7d1a5d4bbb24\u2026` as current. On 2026-09-06 the user approved the",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/2wiki/EMPTY_TEXT_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "node table, corpus hash or gold mapping was touched. `CORPUS_HASH` is still `81fa7d1a5d4bbb24\u2026`.",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/2wiki/EMPTY_TEXT_SUMMARY.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_before\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/2wiki/EMPTY_TEXT_SUMMARY.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"NOT_APPLIED\": \"Report only. No builder, encoder, KNN, H4, SAFE, halo or SP1 was run; nodes.jsonl, CORPUS_HASH 81fa7d1a5d4bbb24... and all gold mappings are unchanged.\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/2wiki/_superseded_context_union_398354/SUPERSESSION.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"build_kb.py\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/CANONICALIZATION_AUDIT.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki TEXTUALIZATION_REV 2 (2026-09-06): 87,765 of 5,989,847 nodes -- 1.47% of the corpus -- carried EMPTY canonical text, because their source record's sentence list is empty. They now carry their s",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/CANONICALIZATION_AUDIT.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"HARNESS BUG FOUND AND FIXED during finalization: query_lanes.py's BUILDER map still routed 2wiki to build.py after 2wiki's corpus moved to the streaming builder, so the constructive lane rebuild-chec",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/CANONICALIZATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "- 2wiki TEXTUALIZATION_REV 2 (2026-09-06): 87,765 of 5,989,847 nodes -- 1.47% of the corpus -- carried EMPTY canonical text, because their source record's sentence list is empty. They now carry their ",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/CANONICALIZATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "- HARNESS BUG FOUND AND FIXED during finalization: query_lanes.py's BUILDER map still routed 2wiki to build.py after 2wiki's corpus moved to the streaming builder, so the constructive lane rebuild-che",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/DOWNSTREAM_REBUILD_POLICY.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "**5,989,847 nodes**, `corpus_hash 81fa7d1a5d4bbb24\u2026`, node ids `2wiki:c<curid>` instead of",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/DOWNSTREAM_REBUILD_POLICY.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "> `corpus_hash 81fa7d1a5d4bbb24\u2026 \u2192 94fe68b8d5f291f1\u2026`. **Membership, node ids and node order did not change**,",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185 (2026-09-06)\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f... -> 1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f (2026-09-05)\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/build_info.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/build_info.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/build_info.json",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "\"nodes_jsonl_sha256\": \"2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_prefix\": \"81fa7d1a5d4bbb24\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_prefix\": \"81fa7d1a5d4bbb24\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_prefix\": \"81fa7d1a5d4bbb24\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_prefix\": \"81fa7d1a5d4bbb24\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"LEGACY_CONTINUITY\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"QUALITY_LOCKED\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"SCALE_ALL\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"build_info\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"corpus_hash\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"integrity\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"manifest\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/dataset_manifest.json",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "\"nodes_jsonl_sha256\": \"2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/integrity_report.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/integrity_report.json",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "\"nodes_jsonl_sha256\": \"2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "\"nodes_jsonl_sha256\": \"2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "\"nodes_jsonl_sha256\": \"2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "\"nodes_jsonl_sha256\": \"2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/2wiki/query_independence_test.json",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "\"nodes_jsonl_sha256\": \"2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/SUPERSEDED.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "| `CORPUS_HASH` | `81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4` | `94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185` | **yes** |",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/SUPERSEDED.md",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "| `CORPUS_HASH` | `fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac` | `1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f` | **yes** |",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/SUPERSEDED.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "| `builder_sha256` | `862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1` | `a46d745af5e77331d424ae06cd73fc721b046d59c66332d331c4b1794237ec72` | **yes** |",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/SUPERSEDED.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "| `builder_sha256` | `862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1` | `e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6` | **yes** |",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/SUPERSEDED.md",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "| `nodes_jsonl_sha256` | `2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118` | `73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a` | **yes** |",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/hotpotqa/A/build_info.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/hotpotqa/A/build_info.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/hotpotqa/A/integrity_report.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/hotpotqa/B/build_info.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/hotpotqa/B/build_info.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/hotpotqa/B/integrity_report.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/hotpotqa/none/build_info.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/hotpotqa/none/build_info.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/hotpotqa/none/integrity_report.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/query_independence_test.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/query_independence_test.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/query_independence_test.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/query_independence_test.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/_qi_rev1/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/build_info.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/build_info.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_prefix\": \"fe139de9c7c2a14f\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_prefix\": \"fe139de9c7c2a14f\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_prefix\": \"fe139de9c7c2a14f\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_prefix\": \"fe139de9c7c2a14f\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"LEGACY_CONTINUITY\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"QUALITY_LOCKED\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"SCALE_ALL\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"build_info\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"corpus_hash\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"integrity\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/dataset_manifest.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"manifest\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/integrity_report.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/query_independence_test.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/query_independence_test.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/query_independence_test.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/query_independence_test.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/_superseded_textualization_rev1/hotpotqa/query_independence_test.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/hotpotqa/TEXTUALIZATION_REV2_REPORT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "* *\"`CORPUS_HASH 81fa7d1a5d4bbb24\u2026` stands\"* \u2014 no longer true. The user approved applying the identical",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/hotpotqa/TEXTUALIZATION_REV2_REPORT.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "**Builder identity:** `build_kb.py` `862e0b3c284fd12a\u2026` \u2192 `a46d745af5e77331\u2026`. 2wiki's table was built by the",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/hotpotqa/TEXTUALIZATION_REV2_REPORT.md",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "CORPUS_HASH       : fe139de9c7c2a14f... -> 1b7eeac2bfbd7100...      (moved, as it must)",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/hotpotqa/TEXTUALIZATION_REV2_REPORT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "`81fa7d1a5d4bbb24\u2026 \u2192 94fe68b8d5f291f1\u2026`, with `NODE_ORDER_HASH`, membership, node ids and node order",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/hotpotqa/TEXTUALIZATION_REV2_REPORT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "earlier sha and its `build_corpus_2wiki` path is untouched, so `CORPUS_HASH 81fa7d1a5d4bbb24\u2026` stands.",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/2wiki/EMPTY_TEXT_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "> `81fa7d1a5d4bbb24\u2026 \u2192 94fe68b8d5f291f1\u2026`, `NODE_ORDER_HASH` and membership did **not** move, and",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/2wiki/EMPTY_TEXT_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "> in the future tense and still cites `81fa7d1a5d4bbb24\u2026` as current. On 2026-09-06 the user approved the",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/2wiki/EMPTY_TEXT_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "node table, corpus hash or gold mapping was touched. `CORPUS_HASH` is still `81fa7d1a5d4bbb24\u2026`.",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/2wiki/EMPTY_TEXT_SUMMARY.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_before\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/2wiki/EMPTY_TEXT_SUMMARY.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"NOT_APPLIED\": \"Report only. No builder, encoder, KNN, H4, SAFE, halo or SP1 was run; nodes.jsonl, CORPUS_HASH 81fa7d1a5d4bbb24... and all gold mappings are unchanged.\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/2wiki/_superseded_context_union_398354/SUPERSESSION.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"build_kb.py\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/CANONICALIZATION_AUDIT.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki TEXTUALIZATION_REV 2 (2026-09-06): 87,765 of 5,989,847 nodes -- 1.47% of the corpus -- carried EMPTY canonical text, because their source record's sentence list is empty. They now carry their s",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/CANONICALIZATION_AUDIT.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"HARNESS BUG FOUND AND FIXED during finalization: query_lanes.py's BUILDER map still routed 2wiki to build.py after 2wiki's corpus moved to the streaming builder, so the constructive lane rebuild-chec",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/CANONICALIZATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "- 2wiki TEXTUALIZATION_REV 2 (2026-09-06): 87,765 of 5,989,847 nodes -- 1.47% of the corpus -- carried EMPTY canonical text, because their source record's sentence list is empty. They now carry their ",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/CANONICALIZATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "- HARNESS BUG FOUND AND FIXED during finalization: query_lanes.py's BUILDER map still routed 2wiki to build.py after 2wiki's corpus moved to the streaming builder, so the constructive lane rebuild-che",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/DOWNSTREAM_REBUILD_POLICY.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "**5,989,847 nodes**, `corpus_hash 81fa7d1a5d4bbb24\u2026`, node ids `2wiki:c<curid>` instead of",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/DOWNSTREAM_REBUILD_POLICY.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "> `corpus_hash 81fa7d1a5d4bbb24\u2026 \u2192 94fe68b8d5f291f1\u2026`. **Membership, node ids and node order did not change**,",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185 (2026-09-06)\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f... -> 1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f (2026-09-05)\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_sidecars/GOLD_SEMANTICS_preSourceFix.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/2wiki/build_info.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/2wiki/build_info.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/2wiki/build_info.json",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "\"nodes_jsonl_sha256\": \"2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/2wiki/integrity_report.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/2wiki/integrity_report.json",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "\"nodes_jsonl_sha256\": \"2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118\"",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/SUPERSEDED.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "| `CORPUS_HASH` | `81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4` | `94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185` | **yes** |",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/SUPERSEDED.md",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "| `CORPUS_HASH` | `fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac` | `1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f` | **yes** |",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/SUPERSEDED.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "| `builder_sha256` | `862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1` | `a46d745af5e77331d424ae06cd73fc721b046d59c66332d331c4b1794237ec72` | **yes** |",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/SUPERSEDED.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "| `builder_sha256` | `862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1` | `e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6` | **yes** |",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/SUPERSEDED.md",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "| `nodes_jsonl_sha256` | `2653f6f35690ba31eeab5ea105ada6a85bad27a0ba07d4d3f943ed36e6185118` | `73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a` | **yes** |",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/hotpotqa/build_info.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/hotpotqa/build_info.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"builder_sha256\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_superseded_textualization_rev1/hotpotqa/integrity_report.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/hotpotqa/TEXTUALIZATION_REV2_REPORT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "* *\"`CORPUS_HASH 81fa7d1a5d4bbb24\u2026` stands\"* \u2014 no longer true. The user approved applying the identical",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/hotpotqa/TEXTUALIZATION_REV2_REPORT.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "**Builder identity:** `build_kb.py` `862e0b3c284fd12a\u2026` \u2192 `a46d745af5e77331\u2026`. 2wiki's table was built by the",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/hotpotqa/TEXTUALIZATION_REV2_REPORT.md",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "CORPUS_HASH       : fe139de9c7c2a14f... -> 1b7eeac2bfbd7100...      (moved, as it must)",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/hotpotqa/TEXTUALIZATION_REV2_REPORT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "`81fa7d1a5d4bbb24\u2026 \u2192 94fe68b8d5f291f1\u2026`, with `NODE_ORDER_HASH`, membership, node ids and node order",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/hotpotqa/TEXTUALIZATION_REV2_REPORT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "earlier sha and its `build_corpus_2wiki` path is untouched, so `CORPUS_HASH 81fa7d1a5d4bbb24\u2026` stands.",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_analysis/stale_hash_sweep.py",
+      "hash": "2653f6f35690ba31",
+      "what": "2wiki REV1 nodes_jsonl_sha256",
+      "line": "\"2653f6f35690ba31\": \"2wiki REV1 nodes_jsonl_sha256\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_analysis/stale_hash_sweep.py",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"81fa7d1a5d4bbb24\": \"2wiki REV1 CORPUS_HASH\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_analysis/stale_hash_sweep.py",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"862e0b3c284fd12a\": \"REV1 build_kb.py builder_sha256\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_analysis/stale_hash_sweep.py",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"fe139de9c7c2a14f\": \"hotpotqa REV1 CORPUS_HASH\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_analysis/stale_hash_sweep.py",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "# json records carry the full digest, prose and tables carry `81fa7d1a5d4bbb24\u2026` -- and a full-digest search",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_analysis/stale_hash_sweep.py",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "(\"webqsp/WEBQSP_REPRESENTATION_AUDIT.md\", \"`81fa7d1a5d4bbb24\u2026`.**]**\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_analysis/stale_hash_sweep.py",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "(\"webqsp/WEBQSP_REPRESENTATION_AUDIT.md\", \"`862e0b3c284fd12a\u2026` above is the\",",
+      "class": "HISTORICAL_DIR"
+    },
+    {
+      "path": "data/final_canonical/SOURCE_CONTRACTS_FOR_REVIEW.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "> the superseded rev1 `81fa7d1a5d4bbb24\u2026` corpus, and the test would have failed. Record:",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "data/final_canonical/SOURCE_CONTRACTS_FOR_REVIEW.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "| `build_kb.py` **as 2wiki's rev1 table was built** | \u2014 superseded \u2014 | `862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1` |",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "data/final_canonical/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_before\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "data/final_canonical/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"_INVARIANT_superseded_value\": \"2wiki CORPUS_HASH must remain 81fa7d1a5d4bbb24... -- this is evaluation semantics, not corpus membership.\",",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "data/final_canonical/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"_assert_superseded_CORPUS_HASH\": \"81fa7d1a5d4bbb24... unchanged\",",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/SOURCE_CONTRACTS_FOR_REVIEW.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "> the superseded rev1 `81fa7d1a5d4bbb24\u2026` corpus, and the test would have failed. Record:",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/SOURCE_CONTRACTS_FOR_REVIEW.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "| `build_kb.py` **as 2wiki's rev1 table was built** | \u2014 superseded \u2014 | `862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1` |",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH_before\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"_INVARIANT_superseded_value\": \"2wiki CORPUS_HASH must remain 81fa7d1a5d4bbb24... -- this is evaluation semantics, not corpus membership.\",",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"_assert_superseded_CORPUS_HASH\": \"81fa7d1a5d4bbb24... unchanged\",",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_analysis/audit_2wiki_gold.py",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "EXPECT_2WIKI_CORPUS_HASH = \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\"   # rev1 (pre-REV2)",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/audit_report.py",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"81fa7d1a5d4bbb24 (the rev1 hash -- TEXTUALIZATION_REV 2 deliberately moved it on 2026-09-06; the live value is in \"",
+      "class": "HISTORICAL_FIELD"
+    },
+    {
+      "path": "data/final_canonical/2wiki/SOURCE_CONTRACT.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"NORMALIZATION_RULE\": \"Stored text = ' '.join(official 'sentences' list), because the official file stores the article as a sentence list. The OFFICIAL string is then kept verbatim including its token",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "data/final_canonical/SOURCE_CONTRACTS_FOR_REVIEW.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "2wiki's table was rebuilt by `e723192e\u2026` and its `CORPUS_HASH` moved `81fa7d1a5d4bbb24\u2026 \u2192 94fe68b8d5f291f1\u2026`",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "data/final_canonical/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"_ASSERT_REPINNED_2026_09_06\": \"2wiki CORPUS_HASH was re-pinned 81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1... on 2026-09-06 by TEXTUALIZATION_REV 2 (87,765 empty-text records retextualized to their sourc",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "data/final_canonical/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"_INVARIANT_REPINNED_2026_09_06\": \"2wiki CORPUS_HASH was re-pinned 81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1... on 2026-09-06 by TEXTUALIZATION_REV 2 (87,765 empty-text records retextualized to their so",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "data/final_canonical/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"_NOT_THE_LIVE_SHAS_2026_09_06\": \"The 'new' values in this block are the shas AS OF THIS 2026-09-05 gold-semantics patch, and are preserved as the historical record of that event -- they are NOT a cla",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "data/final_canonical/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "`CORPUS_HASH 81fa7d1a5d4bbb24\u2026 \u2192 94fe68b8d5f291f1\u2026` while leaving `NODE_ORDER_HASH`, membership, node ids and",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "data/final_canonical/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "`CORPUS_HASH` `81fa7d1a5d4bbb24\u2026` \u2192 `94fe68b8d5f291f1\u2026` while leaving `NODE_ORDER_HASH`, N, the node-id",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "data/final_canonical/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "`build_kb.py` \u2192 `862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1` *\u2014 itself superseded 2026-09-06, see next block*.",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "data/final_canonical/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "`e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6`; `862e0b3c284fd12a\u2026` above is the",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/2wiki/SOURCE_CONTRACT.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"NORMALIZATION_RULE\": \"Stored text = ' '.join(official 'sentences' list), because the official file stores the article as a sentence list. The OFFICIAL string is then kept verbatim including its token",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/SOURCE_CONTRACTS_FOR_REVIEW.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "2wiki's table was rebuilt by `e723192e\u2026` and its `CORPUS_HASH` moved `81fa7d1a5d4bbb24\u2026 \u2192 94fe68b8d5f291f1\u2026`",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"_ASSERT_REPINNED_2026_09_06\": \"2wiki CORPUS_HASH was re-pinned 81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1... on 2026-09-06 by TEXTUALIZATION_REV 2 (87,765 empty-text records retextualized to their sourc",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"_INVARIANT_REPINNED_2026_09_06\": \"2wiki CORPUS_HASH was re-pinned 81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1... on 2026-09-06 by TEXTUALIZATION_REV 2 (87,765 empty-text records retextualized to their so",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"_NOT_THE_LIVE_SHAS_2026_09_06\": \"The 'new' values in this block are the shas AS OF THIS 2026-09-05 gold-semantics patch, and are preserved as the historical record of that event -- they are NOT a cla",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "`CORPUS_HASH 81fa7d1a5d4bbb24\u2026 \u2192 94fe68b8d5f291f1\u2026` while leaving `NODE_ORDER_HASH`, membership, node ids and",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "`CORPUS_HASH` `81fa7d1a5d4bbb24\u2026` \u2192 `94fe68b8d5f291f1\u2026` while leaving `NODE_ORDER_HASH`, N, the node-id",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "`build_kb.py` \u2192 `862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1` *\u2014 itself superseded 2026-09-06, see next block*.",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "`e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6`; `862e0b3c284fd12a\u2026` above is the",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185 (2026-09-06)\"",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f... -> 1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f (2026-09-05)\",",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/audit_report.py",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"CORPUS_HASH moved 81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1..., while NODE_ORDER_HASH, node count, node ids and node order are \"",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/build_kb.py",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "this corpus.  This changes CORPUS_HASH (81fa7d1a5d4bbb24 -> see build_info) but NOT membership, node",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/source_contracts.py",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"(rev1 81fa7d1a5d4bbb24...; the live value is build_info.json -> CORPUS_HASH) but leaves membership, \"",
+      "class": "HISTORICAL_TRANSITION"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.log",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "[assert] 2wiki CORPUS_HASH AFTER = 81fa7d1a5d4bbb24... OK (unchanged)",
+      "class": "HISTORICAL_RUNLOG"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.log",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "[assert] 2wiki CORPUS_HASH BEFORE = 81fa7d1a5d4bbb24... OK",
+      "class": "HISTORICAL_RUNLOG"
+    },
+    {
+      "path": "data/final_canonical/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"new\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "data/final_canonical/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "**Invariant held:** 2wiki `CORPUS_HASH` asserted `81fa7d1a5d4bbb24\u2026` **before and after** \u2014 unchanged. This is",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "data/final_canonical/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "`81fa7d1a5d4bbb24\u2026`.**]**",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/_WEBQSP_ACCEPTANCE_GATE.json",
+      "hash": "862e0b3c284fd12a",
+      "what": "REV1 build_kb.py builder_sha256",
+      "line": "\"new\": \"862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1\",",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "**Invariant held:** 2wiki `CORPUS_HASH` asserted `81fa7d1a5d4bbb24\u2026` **before and after** \u2014 unchanged. This is",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "results/data_audit/final_canonical_v1/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "`81fa7d1a5d4bbb24\u2026`.**]**",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.json",
+      "hash": "81fa7d1a5d4bbb24",
+      "what": "2wiki REV1 CORPUS_HASH",
+      "line": "\"2wiki\": \"81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4\",",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\"",
+      "class": "HISTORICAL_REVIEWED"
+    },
+    {
+      "path": "scratchpad/final_canonical_build/_audit/gold_semantics.json",
+      "hash": "fe139de9c7c2a14f",
+      "what": "hotpotqa REV1 CORPUS_HASH",
+      "line": "\"hotpotqa\": \"fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac\"",
+      "class": "HISTORICAL_REVIEWED"
+    }
+  ],
+  "seconds": 1.3
+}

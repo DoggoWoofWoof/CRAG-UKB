@@ -1,0 +1,51 @@
+{
+  "schema": "ROG_ATTRIBUTABLE_COLLAPSE/v1",
+  "generated_utc": "2026-09-06T06:17:19Z",
+  "measured_on": "released RoG nodes.parquet (2,592,894) x entities_names.json (560,012)",
+  "HARD_RULE": "Evidence about how destructive name-keying is. NOT a recipe. V1 identities are not modified and V1 does not read this file.",
+  "enabling_facts": {
+    "NAME_MAPPING_PRESENT_N": 0,
+    "meaning": "no MID this file names survives as a bare MID in RoG",
+    "file_names_appearing_as_rog_surfaces": 461597,
+    "file_distinct_names": 462455,
+    "pct": 99.8144
+  },
+  "collision_names_that_are_rog_surfaces": 36927,
+  "singleton_names_that_are_rog_surfaces": 424670,
+  "MERGES_UPPER_all_members_assumed_present": 97538,
+  "MERGES_NSM_presence_weighted": 97538,
+  "MERGES_LOWER_groups_fully_present_in_nsm": 97538,
+  "groups_fully_present_in_nsm": 36927,
+  "max_collision_group_on_a_rog_surface": {
+    "name": "New York Times",
+    "mids": 124
+  },
+  "group_size_histogram_capped_at_10": {
+    "2": 21887,
+    "3": 5834,
+    "4": 2863,
+    "5": 1646,
+    "6": 1102,
+    "7": 802,
+    "8": 509,
+    "9": 395,
+    "10": 1889
+  },
+  "rog_nodes_total": 2592894,
+  "collapse_as_pct_of_rog_nodes": {
+    "upper": 3.7617,
+    "nsm_weighted": 3.7617,
+    "lower": 3.7617
+  },
+  "interpretation": "Bounds the identity loss inside the ~19.9% of the MID population this third-party file can see. See BOUND_DEGENERACY_CORRECTION for what the number does and does not bound.",
+  "still_not_claimed": "That these are RoG's exact merges. RoG's MID->name projection is unreleased; presence of a group member in RoG's graph is inferred from the NSM sibling vocabulary, not observed.",
+  "elapsed_s": 7.6,
+  "BOUND_DEGENERACY_CORRECTION": {
+    "observed": "MERGES_UPPER, MERGES_NSM_presence_weighted and MERGES_LOWER all returned 97,538.",
+    "cause": "entities_names.json ships with the NSM data, so every MID it names is in the NSM vocabulary BY CONSTRUCTION. The NSM-presence conditioning is therefore vacuous.",
+    "consequence": "Three identical numbers are ONE measurement, not three independent confirmations. The NSM check provides no evidence about presence in RoG.",
+    "corrected_status_of_97538": "An UPPER bound on the identities RoG merged across the 36,927 surfaces this file can see -- it assumes every group member is in RoG's extraction. It is NOT a bound on RoG's total collapse, because the ~80% of the MID population the file cannot see is unmeasured in either direction.",
+    "independent_evidence_that_merging_really_occurred": "data/final_canonical/webqsp/COLLISION_DEGREE_TEST.json -- collision surfaces carry 4.25x the median degree of singleton-named controls and degree rises with group size, which is what edge union under merging predicts and what non-extraction does not."
+  },
+  "superseded_claim": "An earlier draft of this file said 'every number here is a floor' for RoG's full collapse. That was wrong and is retracted: 97,538 is an upper bound WITHIN the visible subpopulation, and the unseen remainder is not bounded by this measurement at all."
+}

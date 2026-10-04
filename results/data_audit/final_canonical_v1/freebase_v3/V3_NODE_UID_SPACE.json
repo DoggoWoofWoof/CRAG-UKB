@@ -1,0 +1,29 @@
+{
+  "schema": "V3_NODE_UID_SPACE/v1",
+  "generated_utc": "2026-09-07T00:00:55Z",
+  "elapsed_s": 232.9,
+  "UID_SCHEME": {
+    "function": "CPython hash() over the namespace-stripped identifier, as UTF-8 bytes",
+    "width_bits": 64,
+    "PYTHONHASHSEED": "0",
+    "python": "3.13.5",
+    "note": "siphash is an interpreter detail, so the interpreter version is part of the build provenance. PASS C re-checks UID -> string injectivity across the whole node universe, so a changed hash surfaces as a mismatch, never as silent drift."
+  },
+  "SUBJECTS": {
+    "distinct_subjects_expected": 121616633,
+    "subjects_hashed": 121616633,
+    "distinct_uids": 121616633,
+    "colliding_uid_groups": 0,
+    "COLLISION_FREE": true,
+    "nonbracketed_openers": 0,
+    "examples": [],
+    "reading": "distinct_uids == subjects_hashed means the 64-bit UID space separates every subject in Freebase exactly. It is a measurement over all 121.6M of them, not a birthday-bound argument."
+  },
+  "ARTIFACT": {
+    "path": "data\\final_canonical\\freebase_v3\\pass_b\\subject_uids.npy",
+    "dtype": "int64",
+    "sorted": true,
+    "bytes": 972933192,
+    "purpose": "PASS B memory-maps this to test, per batch, which object UIDs are not subjects anywhere; only those need their strings emitted."
+  }
+}

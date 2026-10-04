@@ -1,0 +1,122 @@
+{
+ "stage": "L3_HOST",
+ "what": "population bundle: the L1_DEV population rows of both top-1000 retrieval caches, exactly as stored",
+ "dataset": "metaqa",
+ "n_rows": 1998,
+ "n_queries_in_cache": 407513,
+ "population": {
+  "file": {
+   "path": "results/L1_DEV/loc_population.json",
+   "sha256": "c7f7080639d66f1e8f5c2fb90aff7da49dfda5f63a5fe558fe8c266bd5fef47e"
+  },
+  "n": 1998,
+  "first_rows_only": null,
+  "query_ids_sha256": "07ec3d7a46ee975c05197768ae792499f7ab51aef3ca75579b926f5ca5fe85b6",
+  "label": "development population (historically exposed; not held-out; freely reusable)"
+ },
+ "rows_sha256": "3f38d2dd8fbda974bf2e60ee6f140f70274cf179d2e254874b933491f5f2fb36",
+ "sources": {
+  "dense": {
+   "path": "data/final_canonical/metaqa/retrieval_cache/dense_top1000.npz",
+   "bytes": 2445078580,
+   "sha256": "1424fb93f34ad2b34d2eb4d7858f91a82d8425c43276131ae19104f2ab61e2bf",
+   "manifest_sha256": "1424fb93f34ad2b34d2eb4d7858f91a82d8425c43276131ae19104f2ab61e2bf",
+   "members": {
+    "ids": {
+     "per_row": true,
+     "dtype": "int32",
+     "shape_full": [
+      407513,
+      1000
+     ]
+    },
+    "scores": {
+     "per_row": true,
+     "dtype": "float16",
+     "shape_full": [
+      407513,
+      1000
+     ]
+    }
+   }
+  },
+  "splade": {
+   "path": "data/final_canonical/metaqa/retrieval_cache/splade_top1000.npz",
+   "bytes": 2445078580,
+   "sha256": "04c2e321f1151d5cf79e83abb8654eb38641893104fa8de0479734613ec0233c",
+   "manifest_sha256": "04c2e321f1151d5cf79e83abb8654eb38641893104fa8de0479734613ec0233c",
+   "members": {
+    "ids": {
+     "per_row": true,
+     "dtype": "int32",
+     "shape_full": [
+      407513,
+      1000
+     ]
+    },
+    "scores": {
+     "per_row": true,
+     "dtype": "float16",
+     "shape_full": [
+      407513,
+      1000
+     ]
+    }
+   }
+  }
+ },
+ "code": {
+  "path": "scratchpad/_l3h_bundle.py",
+  "sha256": "ec720a407703bae89443fe56aa9b3b5b9495d35182933ce4f1ab40c73f42ade2",
+  "lib": {
+   "path": "scratchpad/_l1d_lib.py",
+   "sha256": "dafe39b2a0d77c23ae7eed2c8d8ccf93c88dfc02ebbceaefe143ce0a9a6c275a"
+  }
+ },
+ "npz": {
+  "path": "results/L3_HOST/bundle_metaqa__L1DEV.npz",
+  "bytes": 11559507,
+  "sha256": "8479d7a2a8a697fac609f6b44b164ba0d9be38741ea3155153af256f5d047127",
+  "arrays": {
+   "rows": [
+    "int64",
+    [
+     1998
+    ]
+   ],
+   "dense__ids": [
+    "int32",
+    [
+     1998,
+     1000
+    ]
+   ],
+   "dense__scores": [
+    "float16",
+    [
+     1998,
+     1000
+    ]
+   ],
+   "splade__ids": [
+    "int32",
+    [
+     1998,
+     1000
+    ]
+   ],
+   "splade__scores": [
+    "float16",
+    [
+     1998,
+     1000
+    ]
+   ]
+  }
+ },
+ "platform": {
+  "python": "3.13.5",
+  "numpy": "2.3.2"
+ },
+ "seconds": 11.0
+}

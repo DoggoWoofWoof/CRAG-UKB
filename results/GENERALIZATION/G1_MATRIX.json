@@ -1,0 +1,316 @@
+{
+ "phase": "G1 cross-dataset generalization matrix. Source backbone=2wiki_clean+musique_clean. VAL only; TARGET TEST NEVER TOUCHED.",
+ "locked_architecture": "L1 topology C / P50 (K0=60,K=100,P_MAIN=50) -> 5 frozen experts {Dense,SPLADE,Offset,Mixture,Masked-Relation} -> C7b soft-archetype fusion -> C8c XGBRanker -> C11a interaction-MLP residual. NO dataset-ID/LLM/cross-encoder/Transformer/attention/GNN.",
+ "two_questions": {
+  "PARAMETER_generalization": "ZERO_SHOT_C11A = exact source-trained C11a weights + source E-standardization, NO target fitting",
+  "ARCHITECTURE_generalization": "REFIT_C11A = same arch/hparams/loss/opt, trained on TARGET TRAIN (cap 25000), selected on TARGET VAL"
+ },
+ "metric_key": "ndcg5, recall5=GOLD_RECALL@5(macro), any5=ANY@5, all5=ALL@5, mrr=MRR, all50=ALL@50(deep-recall ceiling; identical across systems since all rerank within top-50)",
+ "ROWS": [
+  {
+   "row": "2Wiki (source)",
+   "kind": "SOURCE_TEXT",
+   "interpretation": "IN_DISTRIBUTION (C11a fitted here)",
+   "C8c": {
+    "ndcg5": 0.8834,
+    "recall5": 0.9044,
+    "any5": 0.999,
+    "all5": 0.7617,
+    "mrr": 0.9597,
+    "all50": 0.9217
+   },
+   "ZERO_SHOT_C11A": null,
+   "REFIT_C11A": {
+    "ndcg5": 0.9021,
+    "recall5": 0.9184,
+    "any5": 0.9977,
+    "all5": 0.7943,
+    "mrr": 0.9653,
+    "all50": 0.9217
+   },
+   "note": "source backbone; C11a is the in-distribution fitted model (no zero-shot/refit split)"
+  },
+  {
+   "row": "MuSiQue (source)",
+   "kind": "SOURCE_TEXT",
+   "interpretation": "IN_DISTRIBUTION (C11a fitted here)",
+   "C8c": {
+    "ndcg5": 0.8816,
+    "recall5": 0.9019,
+    "any5": 0.9905,
+    "all5": 0.7887,
+    "mrr": 0.9548,
+    "all50": 0.9548
+   },
+   "ZERO_SHOT_C11A": null,
+   "REFIT_C11A": {
+    "ndcg5": 0.8834,
+    "recall5": 0.9023,
+    "any5": 0.9915,
+    "all5": 0.791,
+    "mrr": 0.9545,
+    "all50": 0.9548
+   },
+   "note": "source backbone; C11a is the in-distribution fitted model (no zero-shot/refit split)"
+  },
+  {
+   "row": "SQuAD",
+   "kind": "TARGET_TEXT",
+   "interpretation": "ARCHITECTURE_GENERALIZES",
+   "C8c": {
+    "ndcg5": 0.7958,
+    "recall5": 0.8705,
+    "any5": null,
+    "all5": 0.8705,
+    "mrr": 0.781,
+    "all50": 0.9621
+   },
+   "ZERO_SHOT_C11A": {
+    "ndcg5": 0.7868,
+    "recall5": 0.8706,
+    "any5": null,
+    "all5": 0.8706,
+    "mrr": 0.7682,
+    "all50": 0.9621
+   },
+   "REFIT_C11A": {
+    "ndcg5": 0.8229,
+    "recall5": 0.9085,
+    "any5": null,
+    "all5": 0.9085,
+    "mrr": 0.7995,
+    "all50": 0.9621
+   },
+   "zs_vs_c8c_ndcg5_delta": -0.009,
+   "zs_vs_c8c_sig": true,
+   "refit_vs_c8c_ndcg5_delta": 0.0271
+  },
+  {
+   "row": "HotpotQA",
+   "kind": "TARGET_TEXT",
+   "interpretation": "ARCHITECTURE_GENERALIZES",
+   "C8c": {
+    "ndcg5": 0.7735,
+    "recall5": 0.8099,
+    "any5": 0.9528,
+    "all5": 0.667,
+    "mrr": 0.896,
+    "all50": 0.9907
+   },
+   "ZERO_SHOT_C11A": {
+    "ndcg5": 0.7627,
+    "recall5": 0.7995,
+    "any5": 0.9526,
+    "all5": 0.6464,
+    "mrr": 0.8825,
+    "all50": 0.9907
+   },
+   "REFIT_C11A": {
+    "ndcg5": 0.8508,
+    "recall5": 0.8918,
+    "any5": 0.9688,
+    "all5": 0.8148,
+    "mrr": 0.9101,
+    "all50": 0.9907
+   },
+   "zs_vs_c8c_ndcg5_delta": -0.0107,
+   "refit_vs_c8c_ndcg5_delta": 0.0773,
+   "L1_P50_CEILING": {
+    "n_valid": 19570,
+    "ANY": 0.9901,
+    "ALL": 0.9232,
+    "GOLD_RECALL_IN_SCOPE": 0.9567
+   }
+  },
+  {
+   "row": "WebQSP",
+   "kind": "TARGET_KB",
+   "interpretation": "ARCHITECTURE_GENERALIZES",
+   "C8c": {
+    "ndcg5": 0.0847,
+    "recall5": 0.0924,
+    "any5": 0.1462,
+    "all5": 0.0598,
+    "mrr": 0.119,
+    "all50": 0.2525
+   },
+   "ZERO_SHOT_C11A": {
+    "ndcg5": 0.0863,
+    "recall5": 0.0949,
+    "any5": 0.1528,
+    "all5": 0.0598,
+    "mrr": 0.1194,
+    "all50": 0.2525
+   },
+   "REFIT_C11A": {
+    "ndcg5": 0.1924,
+    "recall5": 0.197,
+    "any5": 0.289,
+    "all5": 0.1362,
+    "mrr": 0.2317,
+    "all50": 0.2525
+   },
+   "P50_SCOPE_COVERAGE": {
+    "raw_expected_golds": 0,
+    "mapped_in_corpus": 0,
+    "in_P50_scope": 1367,
+    "P50_ABSENT_of_mapped": -1367,
+    "ENTITY_UNMAPPABLE_raw_minus_mapped": 0,
+    "note": "per-gold; P50_ABSENT = mapped-in-corpus gold not in the ~5k P50 scope (routing/scope failure); ENTITY_UNMAPPABLE = raw gold id not resolvable to a corpus doc (alias/linking failure)"
+   },
+   "FAILURE_DECOMPOSITION": {
+    "C7b_fusion": {
+     "in_scope_golds": 1367,
+     "top5": 75,
+     "below50": 1005,
+     "FAIL_below_top20": 1168,
+     "COND_ON_P50_gold_recall5_micro": 0.0549
+    },
+    "C8c": {
+     "in_scope_golds": 1367,
+     "top5": 67,
+     "below50": 1005,
+     "FAIL_below_top20": 1162,
+     "COND_ON_P50_gold_recall5_micro": 0.049
+    },
+    "ZERO_SHOT_C11A": {
+     "in_scope_golds": 1367,
+     "top5": 71,
+     "below50": 1005,
+     "FAIL_below_top20": 1162,
+     "COND_ON_P50_gold_recall5_micro": 0.0519
+    },
+    "REFIT_C11A": {
+     "in_scope_golds": 1367,
+     "top5": 143,
+     "below50": 1005,
+     "FAIL_below_top20": 1162,
+     "COND_ON_P50_gold_recall5_micro": 0.1046
+    }
+   }
+  },
+  {
+   "row": "MetaQA-1hop",
+   "kind": "TARGET_KB",
+   "interpretation": "PER_HOP",
+   "C8c": {
+    "ndcg5": 0.3229,
+    "recall5": 0.4787,
+    "any5": 0.5733,
+    "all5": 0.4031,
+    "mrr": 0.3087,
+    "all50": 0.6929
+   },
+   "ZERO_SHOT_C11A": {
+    "ndcg5": 0.3306,
+    "recall5": 0.4676,
+    "any5": 0.5589,
+    "all5": 0.3962,
+    "mrr": 0.3233,
+    "all50": 0.6929
+   },
+   "REFIT_C11A": {
+    "ndcg5": 0.694,
+    "recall5": 0.6939,
+    "any5": 0.7578,
+    "all5": 0.6256,
+    "mrr": 0.7235,
+    "all50": 0.6929
+   },
+   "P50_ANY_coverage": 0.9985,
+   "P50_ALL_coverage": 0.9959,
+   "golds_expected_in_corpus": 18985,
+   "golds_in_P50_scope": 18908,
+   "L1_MISSING_golds": 77,
+   "REFIT_failure_decomp": {
+    "L1_MISSING": 77,
+    "in_scope_below_top20": 5367,
+    "in_scope_top20_below_top5": 1348,
+    "in_scope_top5": 12193
+   }
+  },
+  {
+   "row": "MetaQA-2hop",
+   "kind": "TARGET_KB",
+   "interpretation": "PER_HOP",
+   "C8c": {
+    "ndcg5": 0.026,
+    "recall5": 0.0385,
+    "any5": 0.0759,
+    "all5": 0.0241,
+    "mrr": 0.0437,
+    "all50": 0.0902
+   },
+   "ZERO_SHOT_C11A": {
+    "ndcg5": 0.0258,
+    "recall5": 0.0399,
+    "any5": 0.0767,
+    "all5": 0.0259,
+    "mrr": 0.0428,
+    "all50": 0.0902
+   },
+   "REFIT_C11A": {
+    "ndcg5": 0.0861,
+    "recall5": 0.0788,
+    "any5": 0.1516,
+    "all5": 0.0515,
+    "mrr": 0.1264,
+    "all50": 0.0902
+   },
+   "P50_ANY_coverage": 0.9631,
+   "P50_ALL_coverage": 0.7138,
+   "golds_expected_in_corpus": 93898,
+   "golds_in_P50_scope": 68026,
+   "L1_MISSING_golds": 25872,
+   "REFIT_failure_decomp": {
+    "L1_MISSING": 25872,
+    "in_scope_below_top20": 64429,
+    "in_scope_top20_below_top5": 676,
+    "in_scope_top5": 2921
+   }
+  },
+  {
+   "row": "MetaQA-3hop",
+   "kind": "TARGET_KB",
+   "interpretation": "PER_HOP",
+   "C8c": {
+    "ndcg5": 0.0391,
+    "recall5": 0.0533,
+    "any5": 0.1101,
+    "all5": 0.0334,
+    "mrr": 0.0592,
+    "all50": 0.0537
+   },
+   "ZERO_SHOT_C11A": {
+    "ndcg5": 0.045,
+    "recall5": 0.0573,
+    "any5": 0.1174,
+    "all5": 0.0359,
+    "mrr": 0.0657,
+    "all50": 0.0537
+   },
+   "REFIT_C11A": {
+    "ndcg5": 0.1061,
+    "recall5": 0.084,
+    "any5": 0.1946,
+    "all5": 0.0477,
+    "mrr": 0.1772,
+    "all50": 0.0537
+   },
+   "P50_ANY_coverage": 0.9468,
+   "P50_ALL_coverage": 0.2701,
+   "golds_expected_in_corpus": 188097,
+   "golds_in_P50_scope": 76699,
+   "L1_MISSING_golds": 111398,
+   "REFIT_failure_decomp": {
+    "L1_MISSING": 111398,
+    "in_scope_below_top20": 73216,
+    "in_scope_top20_below_top5": 210,
+    "in_scope_top5": 3273
+   }
+  }
+ ],
+ "TARGET_TEST_TOUCHED": "NO",
+ "NEW_ENCODER_FORWARD_PASSES": 0,
+ "NEW_LLM_COMPONENTS": 0
+}

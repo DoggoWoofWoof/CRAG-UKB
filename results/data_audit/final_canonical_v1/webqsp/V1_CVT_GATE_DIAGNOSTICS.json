@@ -1,0 +1,65 @@
+{
+  "schema": "V1_CVT_GATE_DIAGNOSTICS/v1",
+  "generated_utc": "2026-09-06T07:47:47Z",
+  "does_not_modify": "data/final_canonical/webqsp/V1_CVT_GATE_RESULT.json",
+  "gate_value_stands_as_measured": 20,
+  "DIAGNOSIS_1_cvt_only_golds": {
+    "n_recorded_examples": 15,
+    "ending_in_a_period": 15,
+    "would_match_entity_text_if_the_period_were_dropped": 14,
+    "mechanism": "The CVT grammar emits '<role>: <value>.' with a terminal period, while NAME_ONLY entity text is the bare surface with no punctuation. A gold string that itself ends in '.' therefore matches inside CVT text and not inside entity text.",
+    "reading": "These are artifacts of the rendering punctuation, NOT evidence that CVTs expose gold the entity text cannot. The substantive CVT-only count is effectively zero.",
+    "NOT_corrected_in_the_gate": "The pre-registration explicitly forbids punctuation stripping added after the fact. The gate value stands at 20 as measured and this diagnosis is reported beside it, which is exactly what the EXACT/NORMALIZED audit companion pair exists to surface."
+  },
+  "DIAGNOSIS_2_gold_in_neither": {
+    "gold_in_neither_n": 15947,
+    "pct_of_distinct_gold": 47.38,
+    "pct_occurrence_weighted": 14.16,
+    "answer_in_own_subgraph": {
+      "questions": 39389,
+      "answer_strings": 127901,
+      "present": 80167,
+      "presence_pct": 62.679,
+      "questions_with_all_answers_present": 31060,
+      "questions_with_no_answer_present": 7094,
+      "per_dataset": {
+        "webqsp": {
+          "questions": 4700,
+          "answer_strings": 51438,
+          "answers_present_in_own_subgraph": 27324,
+          "answer_presence_pct": 53.12,
+          "questions_with_all_answers_present": 4340,
+          "questions_with_no_answer_present": 192,
+          "pct_questions_with_no_answer_present": 4.085
+        },
+        "cwq": {
+          "questions": 34689,
+          "answer_strings": 76463,
+          "answers_present_in_own_subgraph": 52843,
+          "answer_presence_pct": 69.109,
+          "questions_with_all_answers_present": 26720,
+          "questions_with_no_answer_present": 6902,
+          "pct_questions_with_no_answer_present": 19.897
+        }
+      }
+    },
+    "punctuation_recoverable_misses": 51,
+    "reading": "If answer-in-own-subgraph presence is far below 100%, the gold strings that match nothing were never in the released extraction, and their absence is a property of the RoG artifact rather than of this rendering. If presence is high, the cause is instead that the answer entity survives only as a bare MID whose name RoG destroyed."
+  },
+  "IMPACT_ON_THE_GATE": "Both diagnoses push the same way: the CVT-only count is at most 20 and substantively 0. Neither raises it. The pre-registered interpretation matrix cell is low/low.",
+  "elapsed_s": 802.0,
+  "DIAGNOSIS_3_STRUCTURAL_LIMIT_OF_THE_METRIC": {
+    "claim": "GOLD_ONLY_IN_CVT_TEXT_N is near-zero BY CONSTRUCTION in this graph, so the gate could not have returned a large number whatever the value of CVT records.",
+    "why": "A CVT record's argument values are the display surfaces of its neighbours. Every non-CVT neighbour's display surface IS its NAME_ONLY entity text. So any gold string appearing as a CVT argument necessarily also appears in some entity text. The only strings a CVT record can hold exclusively are its schema-derived header words, the structural labels of CVT-to-CVT neighbours, and punctuation-span artifacts.",
+    "verified_not_assumed": {
+      "noncvt_display_surfaces_equal_name_only_texts": true,
+      "distinct_noncvt_display_surfaces": 941149,
+      "distinct_name_only_texts": 941149
+    },
+    "and_the_measured_20_are_exactly_that": "all recorded CVT-only examples end in '.', matching the terminal period of the '<role>: <value>.' grammar",
+    "what_this_means_for_the_gate": "The pre-registered question -- does CVT text expose gold evidence unavailable from entity identity text -- is answered honestly and in the negative. But the answer is structural, not empirical: in the released RoG graph every value is itself a node with its own text, including literals like a year. The motivating scenario, where a marriage year lives only inside a mediator and nowhere else, does not occur here.",
+    "what_the_metric_therefore_does_NOT_measure": "Whether CVT records are useful RETRIEVAL UNITS. A CVT's value is COMPOSITION -- binding nominee, award, ceremony and year into one retrievable object so a multi-constraint query can match all of them at once. A string-containment metric cannot see composition, because it asks only whether a string appears somewhere, never whether the co-occurrence is retrievable in one unit.",
+    "recommendation": "Do NOT flip retrieval_role off UNDECIDED on the strength of this gate alone. The gate was pre-registered to decide CVT encoding, and it has returned cleanly in the low/low cell; but the structural blind spot above was not known when it was registered, and it is the assistant's obligation to surface that rather than let the number decide by default. The composition question needs a different instrument -- a multi-constraint retrieval test comparing short entity text + CVT records against enriched entity text with no CVT index, scored on coverage, token cost, pool composition and P50 exposure, which is the comparison the interpretation matrix already anticipates for the high/low cell.",
+    "gate_result_not_altered": true
+  }
+}

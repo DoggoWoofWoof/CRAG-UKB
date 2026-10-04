@@ -1,0 +1,316 @@
+{
+ "phase": "G1 TEXT transfer conclusion (SQuAD + HotpotQA). Source backbone = 2wiki_clean + musique_clean. VAL only; TARGET TEST NEVER TOUCHED.",
+ "locked_architecture": "L1 topology C / P50 (K0=60,K=100,P_MAIN=50) -> 5 frozen experts {Dense,SPLADE,universal Offset,universal Mixture,Masked-Relation} -> C7b soft-archetype fusion -> C8c XGBRanker -> C11a interaction-MLP residual. NO dataset-ID / LLM / cross-encoder / Transformer / attention / GNN.",
+ "two_questions": {
+  "PARAMETER_generalization": "ZERO_SHOT_C11A = exact source-trained C11a weights + source E-standardization, NO target fitting",
+  "ARCHITECTURE_generalization": "REFIT_C11A = same arch/hparams/loss/opt, trained on TARGET TRAIN (cap 25000), selected on TARGET VAL"
+ },
+ "datasets": {
+  "squad_clean": {
+   "n_val": 25489,
+   "n_train_refit": 24456,
+   "source": [
+    "2wiki_clean",
+    "musique_clean"
+   ],
+   "MAIN_TABLE": {
+    "C7b_fusion": {
+     "ndcg5": 0.7941,
+     "recall5_macro": 0.8645,
+     "all5_feas": 0.8645,
+     "mrr": 0.7793,
+     "all50": 0.9621
+    },
+    "C8c": {
+     "ndcg5": 0.7958,
+     "recall5_macro": 0.8705,
+     "all5_feas": 0.8705,
+     "mrr": 0.781,
+     "all50": 0.9621
+    },
+    "ZERO_SHOT_C11A": {
+     "ndcg5": 0.7868,
+     "recall5_macro": 0.8706,
+     "all5_feas": 0.8706,
+     "mrr": 0.7682,
+     "all50": 0.9621
+    },
+    "REFIT_C11A": {
+     "ndcg5": 0.8229,
+     "recall5_macro": 0.9085,
+     "all5_feas": 0.9085,
+     "mrr": 0.7995,
+     "all50": 0.9621
+    }
+   },
+   "ZERO_SHOT_vs_C8c": {
+    "ndcg5": {
+     "delta": -0.009,
+     "ci95": [
+      -0.0103,
+      -0.0078
+     ],
+     "significant": true
+    },
+    "recall5_macro": {
+     "delta": 0.0001,
+     "ci95": [
+      -0.0015,
+      0.0016
+     ],
+     "significant": false
+    },
+    "all5": {
+     "delta": 0.0001,
+     "ci95": [
+      -0.0015,
+      0.0016
+     ],
+     "significant": false
+    },
+    "mrr": {
+     "delta": -0.0127,
+     "ci95": [
+      -0.0142,
+      -0.0113
+     ],
+     "significant": true
+    }
+   },
+   "REFIT_vs_C8c": {
+    "ndcg5": {
+     "delta": 0.0271,
+     "ci95": [
+      0.0243,
+      0.0297
+     ],
+     "significant": true
+    },
+    "recall5_macro": {
+     "delta": 0.038,
+     "ci95": [
+      0.0349,
+      0.0412
+     ],
+     "significant": true
+    },
+    "all5": {
+     "delta": 0.038,
+     "ci95": [
+      0.0349,
+      0.0412
+     ],
+     "significant": true
+    },
+    "mrr": {
+     "delta": 0.0186,
+     "ci95": [
+      0.0157,
+      0.0212
+     ],
+     "significant": true
+    }
+   },
+   "deep_recall_all50": {
+    "C7b_fusion": 0.962141,
+    "C8c": 0.962141,
+    "ZERO_SHOT_C11A": 0.962141,
+    "REFIT_C11A": 0.962141
+   },
+   "GATES": {
+    "DEEP_RECALL_PRESERVED": "YES",
+    "C8C_BEATS_FUSION": "YES",
+    "ZERO_SHOT_C11A_BEATS_C8C": "NO",
+    "ZERO_SHOT_C11A_HURTS_C8C": "YES",
+    "REFIT_C11A_BEATS_C8C": "YES",
+    "REFIT_BEATS_ZERO_SHOT": "YES",
+    "INTERPRETATION": "ARCHITECTURE_GENERALIZES"
+   }
+  },
+  "hotpotqa_clean": {
+   "n_val": 19376,
+   "n_train_refit": 24751,
+   "source": [
+    "2wiki_clean",
+    "musique_clean"
+   ],
+   "MAIN_TABLE": {
+    "C7b_FUSION": {
+     "NDCG@5": 0.7368,
+     "GOLD_RECALL@5": 0.7792,
+     "ANY@5": 0.9472,
+     "ALL@5": 0.6112,
+     "ALL@5_FEASIBLE": 0.6112,
+     "MRR": 0.8414,
+     "NDCG@50": 0.8039,
+     "GOLD_RECALL@50": 0.9907,
+     "ANY@50": 0.9907,
+     "ALL@50": 0.9907,
+     "GOLD_RECALL@5_vs_total": 0.712,
+     "CONDITIONAL_GOLD_RECALL@5": 0.7768,
+     "CONDITIONAL_ALL@5": 0.5966,
+     "n": 19376,
+     "n_all_gold_present": 18068
+    },
+    "C8c_ZERO_SHOT": {
+     "NDCG@5": 0.7735,
+     "GOLD_RECALL@5": 0.8099,
+     "ANY@5": 0.9528,
+     "ALL@5": 0.667,
+     "ALL@5_FEASIBLE": 0.667,
+     "MRR": 0.896,
+     "NDCG@50": 0.8357,
+     "GOLD_RECALL@50": 0.9907,
+     "ANY@50": 0.9907,
+     "ALL@50": 0.9907,
+     "GOLD_RECALL@5_vs_total": 0.7411,
+     "CONDITIONAL_GOLD_RECALL@5": 0.808,
+     "CONDITIONAL_ALL@5": 0.6547,
+     "n": 19376,
+     "n_all_gold_present": 18068
+    },
+    "ZERO_SHOT_C11A": {
+     "NDCG@5": 0.7627,
+     "GOLD_RECALL@5": 0.7995,
+     "ANY@5": 0.9526,
+     "ALL@5": 0.6464,
+     "ALL@5_FEASIBLE": 0.6464,
+     "MRR": 0.8825,
+     "NDCG@50": 0.8275,
+     "GOLD_RECALL@50": 0.9907,
+     "ANY@50": 0.9907,
+     "ALL@50": 0.9907,
+     "GOLD_RECALL@5_vs_total": 0.7307,
+     "CONDITIONAL_GOLD_RECALL@5": 0.7974,
+     "CONDITIONAL_ALL@5": 0.6332,
+     "n": 19376,
+     "n_all_gold_present": 18068
+    },
+    "REFIT_25K_C11A": {
+     "NDCG@5": 0.8508,
+     "GOLD_RECALL@5": 0.8918,
+     "ANY@5": 0.9688,
+     "ALL@5": 0.8148,
+     "ALL@5_FEASIBLE": 0.8148,
+     "MRR": 0.9101,
+     "NDCG@50": 0.8828,
+     "GOLD_RECALL@50": 0.9907,
+     "ANY@50": 0.9907,
+     "ALL@50": 0.9907,
+     "GOLD_RECALL@5_vs_total": 0.8193,
+     "CONDITIONAL_GOLD_RECALL@5": 0.8932,
+     "CONDITIONAL_ALL@5": 0.8107,
+     "n": 19376,
+     "n_all_gold_present": 18068
+    }
+   },
+   "ZERO_SHOT_vs_C8c": {
+    "ndcg5": {
+     "delta": -0.0107,
+     "ci95": [
+      -0.0122,
+      -0.0092
+     ],
+     "significant": true
+    },
+    "recall5": {
+     "delta": -0.0104,
+     "ci95": [
+      -0.0126,
+      -0.0081
+     ],
+     "significant": true
+    },
+    "all5": {
+     "delta": -0.0205,
+     "ci95": [
+      -0.0244,
+      -0.0164
+     ],
+     "significant": true
+    },
+    "mrr": {
+     "delta": -0.0135,
+     "ci95": [
+      -0.0152,
+      -0.0119
+     ],
+     "significant": true
+    }
+   },
+   "REFIT_vs_C8c": {
+    "ndcg5": {
+     "delta": 0.0773,
+     "ci95": [
+      0.0746,
+      0.0801
+     ],
+     "significant": true
+    },
+    "recall5": {
+     "delta": 0.0819,
+     "ci95": [
+      0.0784,
+      0.0853
+     ],
+     "significant": true
+    },
+    "all5": {
+     "delta": 0.1478,
+     "ci95": [
+      0.1418,
+      0.1539
+     ],
+     "significant": true
+    },
+    "mrr": {
+     "delta": 0.0142,
+     "ci95": [
+      0.0115,
+      0.0167
+     ],
+     "significant": true
+    }
+   },
+   "L1_P50_CEILING_val": {
+    "n_valid": 19570,
+    "ANY": 0.9901,
+    "ALL": 0.9232,
+    "GOLD_RECALL_IN_SCOPE": 0.9567
+   },
+   "relation_diagnostics_val": {
+    "frac_queries_with_relation_signal": 0.84681,
+    "frac_queries_relation_touches_gold": 0.32718,
+    "frac_gold_candidates_relation_eligible": 0.17485
+   },
+   "deep_recall_all50": {
+    "all50_by_system": {
+     "C7b_FUSION": 0.9907,
+     "C8c_ZERO_SHOT": 0.9907,
+     "ZERO_SHOT_C11A": 0.9907,
+     "REFIT_25K_C11A": 0.9907
+    },
+    "preserved": true
+   },
+   "GATES": {
+    "DEEP_RECALL_PRESERVED": "YES",
+    "C8C_BEATS_FUSION": "YES",
+    "ZERO_SHOT_C11A_BEATS_C8C": "NO",
+    "ZERO_SHOT_C11A_HURTS_C8C": "YES",
+    "REFIT_25K_C11A_BEATS_C8C": "YES",
+    "REFIT_BEATS_ZERO_SHOT": "YES",
+    "RELATIONAL_STRUCTURE_HELPFUL": "YES",
+    "INTERPRETATION": "ARCHITECTURE_GENERALIZES"
+   }
+  }
+ },
+ "CONCLUSION": {
+  "PARAMETER_TRANSFER": "FAILS on both text targets \u2014 ZERO_SHOT_C11A is significantly WORSE than the C8c baseline (SQuAD NDCG@5 -0.009 / MRR -0.0127; HotpotQA NDCG@5 -0.0107 / R@5 -0.0104 / ALL@5 -0.0205 / MRR -0.0135; all sig). Source-trained C11a WEIGHTS do not transfer.",
+  "ARCHITECTURE_TRANSFER": "GENERALIZES on both \u2014 REFIT_C11A (same arch, target-trained) significantly BEATS C8c (SQuAD NDCG@5 +0.0271 / R@5 +0.038; HotpotQA NDCG@5 +0.0773 / R@5 +0.0819 / ALL@5 +0.1478; all sig, larger on Hotpot).",
+  "DEEP_RECALL": "preserved identically across all systems both datasets (reranking within top-50; SQuAD ALL@50 0.9621, Hotpot ALL@50 0.9907).",
+  "INTEGRITY": "TARGET TEST untouched; 0 new encoder forward passes; 0 new LLM components; both datasets INTERPRETATION=ARCHITECTURE_GENERALIZES.",
+  "VERDICT": "The C11a interaction-MLP ARCHITECTURE is a transferable retrieval PRINCIPLE across text distributions; its learned PARAMETERS are distribution-specific and must be refit per target."
+ },
+ "TARGET_TEST_TOUCHED": "NO",
+ "NEXT": "STOP for user review of TEXT conclusion before KB targets (WebQSP -> MetaQA)."
+}

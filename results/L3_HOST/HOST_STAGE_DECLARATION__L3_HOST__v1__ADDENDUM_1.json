@@ -1,0 +1,33 @@
+{
+ "stage": "L3_HOST",
+ "addendum": 1,
+ "amends": {
+  "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1.json",
+  "sha256": "37ff06f7bb0ae203923e0956ec767df9e8fc2f20753a3ecf945d6d714e2cd9a9"
+ },
+ "declared": "2026-09-29T17:54:33+05:30",
+ "why": [
+  "the v1 push set is the traced input set of a 200-row typed smoke; the full L1_DEV population (1,998 rows, cache rows 329,282 .. 368,395) reads the query embeddings of shards 8 AND 9 of both channels (shard size 40,000), the smoke only shard 8",
+  "the placement run (rx job 260929-175057-l3h-typed-h1-e77c: scratchpad/_l3h_run.py scratchpad/_l3d_typed.py RUN metaqa h1) stopped at 1.1 s with FileNotFoundError on data/final_canonical/metaqa/embeddings/dense/queries/shard_00009.npy, in D.unit_queries, before any computation; it wrote no output (the tag h1 is unused) except the runner's sidecar results/L3_HOST/runs/_l3d_typed__RUN__metaqa__h1.run.json (rc 1)"
+ ],
+ "pushed_in_addition (exact files, read-only; the same frozen query embeddings the laptop reads)": [
+  {
+   "path": "data/final_canonical/metaqa/embeddings/dense/queries/shard_00009.npy",
+   "bytes": 122880128,
+   "sha256": "686a5ca1f98f6f27cd0117f84391bb0d6069fd887e97d8020a131f2a466a1eab"
+  },
+  {
+   "path": "data/final_canonical/metaqa/embeddings/splade/queries/shard_00009.npz",
+   "bytes": 13591493,
+   "sha256": "14f85075b335d234f828e94a451fd1cb323cabcd28162565495fc91ca8e1392e"
+  }
+ ],
+ "pushed_total_bytes": 136471621,
+ "derivation": "np.unique(population rows // shard_size) per channel through the adapter (the population record and the embedding manifests only; no embedding row read to decide)",
+ "unchanged": [
+  "the placement-test gate of v1 (the full typed run on the host must be BIT_IDENTICAL to results/L3_DEV/l3typed_metaqa__v1 before anything else of this stage runs)",
+  "the priority policy and the never list of v1",
+  "the refusals of v1",
+  "the retrieval caches stay on the laptop (the population bundle serves them)"
+ ]
+}

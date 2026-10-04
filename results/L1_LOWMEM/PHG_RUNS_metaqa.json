@@ -1,0 +1,2211 @@
+{
+ "RECORD": "PHG_RUNS",
+ "arm": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4",
+ "dataset": "metaqa",
+ "utc": "2026-09-13T17:57:22Z",
+ "preregistration": {
+  "path": "results/L1_LOWMEM/PHG_PREREG.json",
+  "bytes": 12650,
+  "sha256": "a290ad99b3ef3394859e4653acc66d4120abd8924e7aec25568b8dd269291404"
+ },
+ "inputs": {
+  "N": 43234,
+  "M": 86796,
+  "P": 531006,
+  "k": 432,
+  "ORIGINAL_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+  "official_netl": {
+   "path": "data/l1_lowmem/metaqa/H4_SK.official.netl",
+   "bytes": 5038254,
+   "sha256": "9dd470ca2bd2fda5e49f6dc813c3d7a8951dc37178a8b9373e8ca0dd7384d811"
+  },
+  "stream_manifest": {
+   "path": "data/l1_lowmem/metaqa/freight/stream_manifest.txt",
+   "sha256": "c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7",
+   "H4_SK_STREAM_V1_manifest_sha256": "3cc092dd821ae88bc8bf032a90e72bf1d5ba8267d39ed8020493b2a1add77553",
+   "shards": 9,
+   "shard_nodes": 5000
+  }
+ },
+ "contract": {
+  "parameters": [
+   [
+    "DEBUG_LEVEL",
+    "0"
+   ],
+   [
+    "NUM_GID_ENTRIES",
+    "1"
+   ],
+   [
+    "NUM_LID_ENTRIES",
+    "1"
+   ],
+   [
+    "OBJ_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "EDGE_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "DETERMINISTIC",
+    "1"
+   ],
+   [
+    "RETURN_LISTS",
+    "PARTS"
+   ],
+   [
+    "REMAP",
+    "0"
+   ],
+   [
+    "LB_METHOD",
+    "HYPERGRAPH"
+   ],
+   [
+    "HYPERGRAPH_PACKAGE",
+    "PHG"
+   ],
+   [
+    "LB_APPROACH",
+    "PARTITION"
+   ],
+   [
+    "IMBALANCE_TOL",
+    "1.03"
+   ],
+   [
+    "PHG_CUT_OBJECTIVE",
+    "CONNECTIVITY"
+   ],
+   [
+    "PHG_EDGE_SIZE_THRESHOLD",
+    "1.0"
+   ],
+   [
+    "PHG_RANDOMIZE_INPUT",
+    "0"
+   ],
+   [
+    "PHG_MULTILEVEL",
+    "1"
+   ],
+   [
+    "PHG_COARSENING_METHOD",
+    "AGG"
+   ],
+   [
+    "PHG_COARSEPARTITION_METHOD",
+    "AUTO"
+   ],
+   [
+    "PHG_REFINEMENT_METHOD",
+    "FM"
+   ],
+   [
+    "PHG_REFINEMENT_QUALITY",
+    "1"
+   ],
+   [
+    "PHG_EDGE_WEIGHT_OPERATION",
+    "ERROR"
+   ],
+   [
+    "PHG_PROCESSOR_REDUCTION_LIMIT",
+    "0.5"
+   ],
+   [
+    "PHG_REPART_MULTIPLIER",
+    "100"
+   ],
+   [
+    "CHECK_HYPERGRAPH",
+    "1"
+   ],
+   [
+    "PHG_OUTPUT_LEVEL",
+    "1"
+   ]
+  ],
+  "NUM_GLOBAL_PARTS": 432,
+  "mpi_ranks": 4,
+  "driver": {
+   "path": "/home/swastik/phg_build/phg_driver",
+   "sha256": "a36e1b3dbcef2cf5f20c09cc6ab014ab13ce2dcfeb3ec7c1041aa00d14d7ccb9"
+  },
+  "driver_source": {
+   "path": "src/l1_lowmem/phg_driver/phg_driver.c",
+   "bytes": 18529,
+   "sha256": "cf5099851282444d0b6c87b399210ae3dd6bc09f8fe2a5f7b49d315ce4b133b4"
+  },
+  "packages": {
+   "libopenmpi-dev:amd64": "4.1.2-2ubuntu1",
+   "libtrilinos-zoltan-13.2:amd64": "13.2.0-1ubuntu1",
+   "libtrilinos-zoltan-dev:amd64": "13.2.0-1ubuntu1",
+   "openmpi-bin": "4.1.2-2ubuntu1"
+  }
+ },
+ "stages": {
+  "1_input_verified": {
+   "stage": "1_H4_SK_input_verified",
+   "utc": "2026-09-13T17:57:22Z",
+   "N": 43234,
+   "M": 86796,
+   "P": 531006,
+   "k": 432,
+   "ORIGINAL_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "hypergraph_content_digest": "bebdd65c305a1f565c3127a8ef91207db03a7e27af487062d8bbc548a2347fcc",
+   "H4_SK_npz_sha256": "edd0cb51683df14973cbb4021518455b97c827ab3aad577d238ae07227f84743",
+   "reconstruction_gate": {
+    "gate_digest": "PASS",
+    "gate_bytes": "PASS"
+   },
+   "shards": [
+    {
+     "index": 0,
+     "sha256": "ccd4935a73bcf9ec7ced76cea6a16264b293137d04772cdaeec42cc423b898ef",
+     "nodes": 5000,
+     "pins": 112797
+    },
+    {
+     "index": 1,
+     "sha256": "a6187141ee5d073629d122b4384566d5574f2a2d00a38deaaa37ccb435cac681",
+     "nodes": 5000,
+     "pins": 60711
+    },
+    {
+     "index": 2,
+     "sha256": "4f606a2a9151f7e14c5c9ec2a97da338b6a7112ebce6d877f7eddf83db309c9e",
+     "nodes": 5000,
+     "pins": 55611
+    },
+    {
+     "index": 3,
+     "sha256": "e58801fb04852826949d691b140bbb865eb1aac92ecaac2ce7271e15f05fd363",
+     "nodes": 5000,
+     "pins": 54006
+    },
+    {
+     "index": 4,
+     "sha256": "6dd712f6c87a11e307236aaa956e20385af537b4616b4f51e23bab1786e64496",
+     "nodes": 5000,
+     "pins": 53325
+    },
+    {
+     "index": 5,
+     "sha256": "75cbcf9bc7badc88cd7f28cc52207f1015b6791c26663057241c593b5e1f8b31",
+     "nodes": 5000,
+     "pins": 53044
+    },
+    {
+     "index": 6,
+     "sha256": "f433ff076da297c8d35c9a64c9042848df3882994d216679198981e3c23904b0",
+     "nodes": 5000,
+     "pins": 53314
+    },
+    {
+     "index": 7,
+     "sha256": "8823ff04a040b3d78ed319a779a90f43a47ffa320c56d5591ed6998453f4ec2a",
+     "nodes": 5000,
+     "pins": 53289
+    },
+    {
+     "index": 8,
+     "sha256": "eba424a34f4b8ad32bb115604aa1afa802f3b658fc345fea8240e29ed08f2086",
+     "nodes": 3234,
+     "pins": 34909
+    }
+   ],
+   "stream_manifest": {
+    "path": "data/l1_lowmem/metaqa/freight/stream_manifest.txt",
+    "sha256": "c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7",
+    "H4_SK_STREAM_V1_manifest_sha256": "3cc092dd821ae88bc8bf032a90e72bf1d5ba8267d39ed8020493b2a1add77553",
+    "shards": 9,
+    "shard_nodes": 5000
+   },
+   "official_netl_sha256": "9dd470ca2bd2fda5e49f6dc813c3d7a8951dc37178a8b9373e8ca0dd7384d811"
+  },
+  "2_structure_gate": {
+   "gate": "PASS",
+   "problems": [],
+   "per_rank": [
+    {
+     "rank": 0,
+     "objects": 10000,
+     "pins": 173508,
+     "edge_weight_entries": 54604
+    },
+    {
+     "rank": 1,
+     "objects": 10000,
+     "pins": 109617,
+     "edge_weight_entries": 51086
+    },
+    {
+     "rank": 2,
+     "objects": 10000,
+     "pins": 106369,
+     "edge_weight_entries": 49712
+    },
+    {
+     "rank": 3,
+     "objects": 13234,
+     "pins": 141512,
+     "edge_weight_entries": 57331
+    }
+   ],
+   "weight_reception": {
+    "python_weighted_km1_of_rank_ownership": 28458387,
+    "zoltan_cutl_gate_mode": 28458388.0,
+    "relative_diff": 3.5e-08,
+    "tolerance_relative": 0.0001
+   },
+   "N_returned": 43234,
+   "M_with_pins": 86796,
+   "P_returned": 531006,
+   "weight_sum": 32317710,
+   "weight_min": 10,
+   "weight_max": 1000,
+   "vertex_weights": "unit",
+   "digest_from_queries": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "ORIGINAL_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "expected": {
+    "N": 43234,
+    "M": 86796,
+    "P": 531006
+   },
+   "stage": "2_PHG_input_callback_manifest",
+   "run": "G",
+   "dump_sha256": {
+    "cs_rank0.bin": "6ddde550dfacf8996fac71de0c6713d4482e685e61be4ecbe661f568be485053",
+    "cs_rank1.bin": "05cbf14232e7a464886fc85746f4bbab6d4df5d5f8f9f41679b4ac8421badcb2",
+    "cs_rank2.bin": "c78bf731f97b19c34ab07ceaf98adc3dbfb087d573bfcc8dbfaf0f9edf00a637",
+    "cs_rank3.bin": "3775d8f6f4bb6ff5fd79dd3a1ec782bef37aa742ca525b9043aedff653171bd0",
+    "ewts_rank0.bin": "f88017da6380f297d1d5b47554456f4f7d86a5abab76d1ceb60b423538236a5f",
+    "ewts_rank1.bin": "4814cb2fbae689d8b341125dec74929cf43b7c94b488ab3027687f6c2790f995",
+    "ewts_rank2.bin": "135ac6df17a2793518b3cbe80475b7163fa9b1c69fa24add930023ad72369c76",
+    "ewts_rank3.bin": "717f29326b05389736f83250ef02915063feb8dfbbf9eeaefd1a8943d846f12c",
+    "objs_rank0.bin": "f552bd2dc6c5909806bfb145cfa8663b240301d122783a87eec6dae37a197b1a",
+    "objs_rank1.bin": "4367e4126d337c8e057a4e9d50b37c92ff71a97b58cfa9b4b717e8fa07c06c57",
+    "objs_rank2.bin": "cc975b4fba5fe2e5e40e14d9900c11331b9f6ae2f187bf143e8a798a54e77a50",
+    "objs_rank3.bin": "6055729e5864e118ed8506ce0399129dd00ac1e14f626302f41bcfb914ea64e1"
+   },
+   "global_from_queries": {
+    "objects": 43234,
+    "pins": 531006,
+    "edge_weight_entries": 212733
+   },
+   "zoltan_removed_or_warning_lines": [],
+   "partition_run_dumps_identical": true
+  },
+  "3_partition": {
+   "stage": "3_completed_PHG_partition",
+   "run": "R1",
+   "validity": {
+    "length_ok": true,
+    "ids_in_range": true,
+    "empty_blocks": 2,
+    "max_block": 104,
+    "contract_bound_ceil_1.03_N_over_k": 104,
+    "zoltan_tolerance_bound_1.03_x_mean": 103.081,
+    "gate": "PARTITION_INVALID"
+   },
+   "metrics": {
+    "km1_weighted": 45623771,
+    "cut_weighted": 17156207,
+    "cut_nets": 69650,
+    "nets": 86796,
+    "cut_net_fraction": 0.802456,
+    "lambda_mean": 4.2867,
+    "lambda_max": 97,
+    "blocks": {
+     "k": 432,
+     "used": 430,
+     "empty": 2,
+     "min": 0,
+     "p50": 103.0,
+     "p95": 103.0,
+     "max": 104,
+     "mean": 100.079,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0392,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "per_family_note": {
+     "STRUCT": {
+      "hyperedges_precap": 43234,
+      "pins_precap": 292572,
+      "anchors_over_cap": 104,
+      "hyperedges_out": 43564,
+      "pins_written": 292902,
+      "anchor_duplication_pins": 330,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 100
+     },
+     "KNN": {
+      "hyperedges_precap": 43232,
+      "pins_precap": 238104,
+      "anchors_over_cap": 0,
+      "hyperedges_out": 43232,
+      "pins_written": 238104,
+      "anchor_duplication_pins": 0,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 96
+     }
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 103694,
+      "edge_cut_fraction": 0.8318
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 71327,
+      "edge_cut_fraction": 0.732
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 3802,
+      "edge_cut_fraction": 0.6534
+     }
+    }
+   },
+   "partition_sha256_txt": {
+    "0": "c0f251677b2af720fb294555df07772c3cdfdecc777264c266d67797a5d39171",
+    "1": "2038b3e6f966982e8a4cdfc96fe508216f7186ebd26f17299c3e382e22e1391b",
+    "2": "8595bb4935e452f3d3ce094214a3af563376eb8ca9ef2db89537373ae6cad266",
+    "3": "27cd5cfad7b47b3fecb39577e389040661b7550e5f2280da00579ea5f0ef3d3a"
+   },
+   "zoltan_eval": {
+    "cutl_global": 45623772.0,
+    "cutn_global": 17156208.0,
+    "imbalance": 1.039182,
+    "obj_imbalance": 1.039182,
+    "nobj_min": 0.0,
+    "nobj_max": 104.0,
+    "nobj_sum": 43234.0
+   },
+   "python_km1_vs_zoltan_cutl": {
+    "python_km1": 45623771,
+    "zoltan_cutl_float": 45623772.0,
+    "relative_diff": 2e-08,
+    "consistent_within_float32": true
+   },
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     35036,
+     34072,
+     34776,
+     36228
+    ],
+    "ru_maxrss_kb_per_rank": [
+     35036,
+     34072,
+     34776,
+     36228
+    ],
+    "max_rank_peak_kb": 36228,
+    "sum_of_rank_peaks_kb": 140112,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 2.615,
+    "driver_total_seconds_rank0": 5.951,
+    "load_seconds_per_rank": [
+     2.681,
+     1.728,
+     1.674,
+     2.08
+    ],
+    "job_wall_seconds": 6.52
+   },
+   "repeat": {
+    "identical_partition": true,
+    "n_diff": 0,
+    "km1_repeat": 45623771,
+    "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+   },
+   "mpi_ranks": 4
+  }
+ },
+ "runs": {
+  "G": {
+   "name": "G",
+   "mode": "gate",
+   "np": 4,
+   "rc": 0,
+   "wall_seconds_outer": 13.95,
+   "job_time_v": {
+    "user_seconds": 3.9,
+    "wall_seconds": 13.39,
+    "peak_rss_kb": 31460,
+    "exit_status": 0
+   },
+   "dir": "data/l1_lowmem/metaqa/phg/G",
+   "ranks": [
+    {
+     "rank": 0,
+     "json": {
+      "rank": 0,
+      "nprocs": 4,
+      "mode": "gate",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       0,
+       2
+      ],
+      "shard_count": 9,
+      "first_gid": 0,
+      "nloc": 10000,
+      "npins_loc": 173508,
+      "nedge_loc": 54604,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 2.962,
+       "partition_wall": 0.0,
+       "total": 3.402
+      },
+      "partition_rc": 0,
+      "changes": 0,
+      "num_export": 0,
+      "num_import": 0,
+      "ru_maxrss_kb": 31460,
+      "calls": {
+       "num_obj": 1,
+       "obj_list": 1,
+       "hg_size_cs": 1,
+       "hg_cs": 1,
+       "hg_size_edge_wts": 1,
+       "hg_edge_wts": 1,
+       "part_multi": 1
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 28458388.0,
+       "cutn_global": 16787592.0,
+       "imbalance": 132.235931,
+       "obj_imbalance": 132.235931,
+       "nobj_min": 10000.0,
+       "nobj_max": 13234.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 0.5,
+      "wall_seconds": 3.93,
+      "peak_rss_kb": 31460,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 1,
+     "json": {
+      "rank": 1,
+      "nprocs": 4,
+      "mode": "gate",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       2,
+       4
+      ],
+      "shard_count": 9,
+      "first_gid": 10000,
+      "nloc": 10000,
+      "npins_loc": 109617,
+      "nedge_loc": 51086,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 2.214,
+       "partition_wall": 0.0,
+       "total": 3.401
+      },
+      "partition_rc": 0,
+      "changes": 0,
+      "num_export": 0,
+      "num_import": 0,
+      "ru_maxrss_kb": 30636,
+      "calls": {
+       "num_obj": 1,
+       "obj_list": 1,
+       "hg_size_cs": 1,
+       "hg_cs": 1,
+       "hg_size_edge_wts": 1,
+       "hg_edge_wts": 1,
+       "part_multi": 1
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 28458388.0,
+       "cutn_global": 16787592.0,
+       "imbalance": 132.235931,
+       "obj_imbalance": 132.235931,
+       "nobj_min": 10000.0,
+       "nobj_max": 13234.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 1.14,
+      "wall_seconds": 3.93,
+      "peak_rss_kb": 30636,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 2,
+     "json": {
+      "rank": 2,
+      "nprocs": 4,
+      "mode": "gate",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       4,
+       6
+      ],
+      "shard_count": 9,
+      "first_gid": 20000,
+      "nloc": 10000,
+      "npins_loc": 106369,
+      "nedge_loc": 49712,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 2.141,
+       "partition_wall": 0.0,
+       "total": 3.401
+      },
+      "partition_rc": 0,
+      "changes": 0,
+      "num_export": 0,
+      "num_import": 0,
+      "ru_maxrss_kb": 30652,
+      "calls": {
+       "num_obj": 1,
+       "obj_list": 1,
+       "hg_size_cs": 1,
+       "hg_cs": 1,
+       "hg_size_edge_wts": 1,
+       "hg_edge_wts": 1,
+       "part_multi": 1
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 28458388.0,
+       "cutn_global": 16787592.0,
+       "imbalance": 132.235931,
+       "obj_imbalance": 132.235931,
+       "nobj_min": 10000.0,
+       "nobj_max": 13234.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 1.22,
+      "wall_seconds": 3.92,
+      "peak_rss_kb": 30652,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 3,
+     "json": {
+      "rank": 3,
+      "nprocs": 4,
+      "mode": "gate",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       6,
+       9
+      ],
+      "shard_count": 9,
+      "first_gid": 30000,
+      "nloc": 13234,
+      "npins_loc": 141512,
+      "nedge_loc": 57331,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 2.549,
+       "partition_wall": 0.0,
+       "total": 3.401
+      },
+      "partition_rc": 0,
+      "changes": 0,
+      "num_export": 0,
+      "num_import": 0,
+      "ru_maxrss_kb": 31204,
+      "calls": {
+       "num_obj": 1,
+       "obj_list": 1,
+       "hg_size_cs": 1,
+       "hg_cs": 1,
+       "hg_size_edge_wts": 1,
+       "hg_edge_wts": 1,
+       "part_multi": 1
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 28458388.0,
+       "cutn_global": 16787592.0,
+       "imbalance": 132.235931,
+       "obj_imbalance": 132.235931,
+       "nobj_min": 10000.0,
+       "nobj_max": 13234.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 0.9,
+      "wall_seconds": 3.89,
+      "peak_rss_kb": 31204,
+      "exit_status": 0
+     }
+    }
+   ],
+   "zoltan_stdout_lines": [
+    "phg_driver gate: nprocs 4 k 432 N 43234 M 86796 | queries returned objects 43234 pins 531006 edge-weight entries 212733 | partition_wall 0.000s total 3.402s | eval cutl 28458388.0 cutn 16787592.0 imbalance 132.2359"
+   ],
+   "stderr_tail": [],
+   "zoltan_removed_or_warning_lines": [],
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     31460,
+     30636,
+     30652,
+     31204
+    ],
+    "ru_maxrss_kb_per_rank": [
+     31460,
+     30636,
+     30652,
+     31204
+    ],
+    "max_rank_peak_kb": 31460,
+    "sum_of_rank_peaks_kb": 123952,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 0.0,
+    "driver_total_seconds_rank0": 3.402,
+    "load_seconds_per_rank": [
+     2.962,
+     2.214,
+     2.141,
+     2.549
+    ],
+    "job_wall_seconds": 13.39
+   },
+   "global_from_queries": {
+    "objects": 43234,
+    "pins": 531006,
+    "edge_weight_entries": 212733
+   },
+   "params_applied_rank0": {
+    "DEBUG_LEVEL": "0",
+    "NUM_GID_ENTRIES": "1",
+    "NUM_LID_ENTRIES": "1",
+    "OBJ_WEIGHT_DIM": "1",
+    "EDGE_WEIGHT_DIM": "1",
+    "DETERMINISTIC": "1",
+    "RETURN_LISTS": "PARTS",
+    "REMAP": "0",
+    "LB_METHOD": "HYPERGRAPH",
+    "HYPERGRAPH_PACKAGE": "PHG",
+    "LB_APPROACH": "PARTITION",
+    "IMBALANCE_TOL": "1.03",
+    "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+    "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+    "PHG_RANDOMIZE_INPUT": "0",
+    "PHG_MULTILEVEL": "1",
+    "PHG_COARSENING_METHOD": "AGG",
+    "PHG_COARSEPARTITION_METHOD": "AUTO",
+    "PHG_REFINEMENT_METHOD": "FM",
+    "PHG_REFINEMENT_QUALITY": "1",
+    "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+    "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+    "PHG_REPART_MULTIPLIER": "100",
+    "CHECK_HYPERGRAPH": "1",
+    "PHG_OUTPUT_LEVEL": "1",
+    "NUM_GLOBAL_PARTS": "432"
+   },
+   "zoltan_eval": {
+    "cutl_global": 28458388.0,
+    "cutn_global": 16787592.0,
+    "imbalance": 132.235931,
+    "obj_imbalance": 132.235931,
+    "nobj_min": 10000.0,
+    "nobj_max": 13234.0,
+    "nobj_sum": 43234.0
+   },
+   "dump_sha256": {
+    "cs_rank0.bin": "6ddde550dfacf8996fac71de0c6713d4482e685e61be4ecbe661f568be485053",
+    "cs_rank1.bin": "05cbf14232e7a464886fc85746f4bbab6d4df5d5f8f9f41679b4ac8421badcb2",
+    "cs_rank2.bin": "c78bf731f97b19c34ab07ceaf98adc3dbfb087d573bfcc8dbfaf0f9edf00a637",
+    "cs_rank3.bin": "3775d8f6f4bb6ff5fd79dd3a1ec782bef37aa742ca525b9043aedff653171bd0",
+    "ewts_rank0.bin": "f88017da6380f297d1d5b47554456f4f7d86a5abab76d1ceb60b423538236a5f",
+    "ewts_rank1.bin": "4814cb2fbae689d8b341125dec74929cf43b7c94b488ab3027687f6c2790f995",
+    "ewts_rank2.bin": "135ac6df17a2793518b3cbe80475b7163fa9b1c69fa24add930023ad72369c76",
+    "ewts_rank3.bin": "717f29326b05389736f83250ef02915063feb8dfbbf9eeaefd1a8943d846f12c",
+    "objs_rank0.bin": "f552bd2dc6c5909806bfb145cfa8663b240301d122783a87eec6dae37a197b1a",
+    "objs_rank1.bin": "4367e4126d337c8e057a4e9d50b37c92ff71a97b58cfa9b4b717e8fa07c06c57",
+    "objs_rank2.bin": "cc975b4fba5fe2e5e40e14d9900c11331b9f6ae2f187bf143e8a798a54e77a50",
+    "objs_rank3.bin": "6055729e5864e118ed8506ce0399129dd00ac1e14f626302f41bcfb914ea64e1"
+   }
+  },
+  "R1": {
+   "name": "R1",
+   "mode": "partition",
+   "np": 4,
+   "rc": 0,
+   "wall_seconds_outer": 6.82,
+   "job_time_v": {
+    "user_seconds": 14.35,
+    "wall_seconds": 6.52,
+    "peak_rss_kb": 36228,
+    "exit_status": 0
+   },
+   "dir": "data/l1_lowmem/metaqa/phg/R1",
+   "ranks": [
+    {
+     "rank": 0,
+     "json": {
+      "rank": 0,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       0,
+       2
+      ],
+      "shard_count": 9,
+      "first_gid": 0,
+      "nloc": 10000,
+      "npins_loc": 173508,
+      "nedge_loc": 54604,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 2.681,
+       "partition_wall": 2.615,
+       "total": 5.951
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 10000,
+      "num_import": -1,
+      "ru_maxrss_kb": 35036,
+      "calls": {
+       "num_obj": 4,
+       "obj_list": 3,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 3
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 45623772.0,
+       "cutn_global": 17156208.0,
+       "imbalance": 1.039182,
+       "obj_imbalance": 1.039182,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 3.03,
+      "wall_seconds": 6.39,
+      "peak_rss_kb": 35036,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 1,
+     "json": {
+      "rank": 1,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       2,
+       4
+      ],
+      "shard_count": 9,
+      "first_gid": 10000,
+      "nloc": 10000,
+      "npins_loc": 109617,
+      "nedge_loc": 51086,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 1.728,
+       "partition_wall": 2.615,
+       "total": 5.947
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 10000,
+      "num_import": -1,
+      "ru_maxrss_kb": 34072,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 45623772.0,
+       "cutn_global": 17156208.0,
+       "imbalance": 1.039182,
+       "obj_imbalance": 1.039182,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 4.02,
+      "wall_seconds": 6.38,
+      "peak_rss_kb": 34072,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 2,
+     "json": {
+      "rank": 2,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       4,
+       6
+      ],
+      "shard_count": 9,
+      "first_gid": 20000,
+      "nloc": 10000,
+      "npins_loc": 106369,
+      "nedge_loc": 49712,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 1.674,
+       "partition_wall": 2.615,
+       "total": 5.947
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 10000,
+      "num_import": -1,
+      "ru_maxrss_kb": 34776,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 45623772.0,
+       "cutn_global": 17156208.0,
+       "imbalance": 1.039182,
+       "obj_imbalance": 1.039182,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 3.94,
+      "wall_seconds": 6.38,
+      "peak_rss_kb": 34776,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 3,
+     "json": {
+      "rank": 3,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       6,
+       9
+      ],
+      "shard_count": 9,
+      "first_gid": 30000,
+      "nloc": 13234,
+      "npins_loc": 141512,
+      "nedge_loc": 57331,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 2.08,
+       "partition_wall": 2.615,
+       "total": 5.951
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 13234,
+      "num_import": -1,
+      "ru_maxrss_kb": 36228,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 45623772.0,
+       "cutn_global": 17156208.0,
+       "imbalance": 1.039182,
+       "obj_imbalance": 1.039182,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 3.28,
+      "wall_seconds": 6.38,
+      "peak_rss_kb": 36228,
+      "exit_status": 0
+     }
+    }
+   ],
+   "zoltan_stdout_lines": [
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   0 |V|= 21617 |E|= 43398 #pins=150513 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   0 |V|= 21617 |E|= 43398 #pins=115504 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   0 |V|= 21617 |E|= 43398 #pins=149823 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   0 |V|= 21617 |E|= 43398 #pins=115166 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   1 |V|=  9334 |E|= 37205 #pins=121226 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   1 |V|=  9417 |E|= 37205 #pins= 97514 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   1 |V|=  9334 |E|= 38937 #pins=121215 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   1 |V|=  9417 |E|= 38937 #pins= 97945 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   2 |V|=  4155 |E|= 36070 #pins=109431 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   2 |V|=  4155 |E|= 35772 #pins=110026 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   2 |V|=  4164 |E|= 35772 #pins= 88473 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   2 |V|=  4164 |E|= 36070 #pins= 88594 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   3 |V|=  1852 |E|= 34650 #pins=102934 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   3 |V|=  1856 |E|= 34507 #pins= 83467 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   3 |V|=  1856 |E|= 34650 #pins= 82937 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   3 |V|=  1852 |E|= 34507 #pins=103899 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   4 |V|=   799 |E|= 33787 #pins= 79899 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   4 |V|=   805 |E|= 33626 #pins= 99939 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   4 |V|=   799 |E|= 33626 #pins= 79359 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   4 |V|=   805 |E|= 33787 #pins= 99435 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   5 |V|=   326 |E|= 32507 #pins= 94625 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   5 |V|=   308 |E|= 32148 #pins= 72163 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   5 |V|=   308 |E|= 32507 #pins= 72978 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   5 |V|=   326 |E|= 32148 #pins= 94212 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Local Ratio Cut= 11541918.00   Global Ratio Cut= 11377275.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Local Ratio Cut= 11543261.00   Global Ratio Cut= 11377275.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Local Ratio Cut= 11377275.00   Global Ratio Cut= 11377275.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Local Ratio Cut= 11377275.00   Global Ratio Cut= 11377275.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   5 |V|=   326 |E|= 32148 #pins= 94212 864/AGG/AUTO/FM p=2 bal=1.02 cutl=11139024.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   5 |V|=   308 |E|= 32148 #pins= 72163 864/AGG/AUTO/FM p=2 bal=1.02 cutl=11139024.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   5 |V|=   326 |E|= 32507 #pins= 94625 864/AGG/AUTO/FM p=2 bal=1.02 cutl=11139024.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   5 |V|=   308 |E|= 32507 #pins= 72978 864/AGG/AUTO/FM p=2 bal=1.02 cutl=11139024.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   4 |V|=   805 |E|= 33787 #pins= 99435 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10764456.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   4 |V|=   799 |E|= 33787 #pins= 79899 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10764456.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   4 |V|=   799 |E|= 33626 #pins= 79359 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10764456.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   4 |V|=   805 |E|= 33626 #pins= 99939 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10764456.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   3 |V|=  1856 |E|= 34507 #pins= 83467 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10288596.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   3 |V|=  1856 |E|= 34650 #pins= 82937 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10288596.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   3 |V|=  1852 |E|= 34650 #pins=102934 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10288596.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   3 |V|=  1852 |E|= 34507 #pins=103899 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10288596.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   2 |V|=  4164 |E|= 36070 #pins= 88594 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9756236.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   2 |V|=  4164 |E|= 35772 #pins= 88473 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9756236.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   2 |V|=  4155 |E|= 36070 #pins=109431 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9756236.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   2 |V|=  4155 |E|= 35772 #pins=110026 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9756236.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   1 |V|=  9417 |E|= 38937 #pins= 97945 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9255023.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   1 |V|=  9334 |E|= 37205 #pins=121226 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9255023.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   1 |V|=  9334 |E|= 38937 #pins=121215 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9255023.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   1 |V|=  9417 |E|= 37205 #pins= 97514 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9255023.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   0 |V|= 21617 |E|= 43398 #pins=150513 864/AGG/AUTO/FM p=2 bal=1.01 cutl=8842474.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   0 |V|= 21617 |E|= 43398 #pins=149823 864/AGG/AUTO/FM p=2 bal=1.01 cutl=8842474.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   0 |V|= 21617 |E|= 43398 #pins=115166 864/AGG/AUTO/FM p=2 bal=1.01 cutl=8842474.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   0 |V|= 21617 |E|= 43398 #pins=115504 864/AGG/AUTO/FM p=2 bal=1.01 cutl=8842474.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Rdivide(0, 431): 8842474.0",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Rdivide(0, 431): 8842474.0",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Rdivide(0, 431): 8842474.0",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Rdivide(0, 431): 8842474.0",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Left: H(10395, 29593, 52422) ----> H(0, 0, 0) Weights=(21734.00, 21500.00)",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Left: H(11339, 29593, 88267) ----> H(0, 0, 0) Weights=(21734.00, 21500.00)",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Left: H(11339, 29713, 88959) ----> H(21734, 29654, 141034) Weights=(21734.00, 21500.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Left: H(10395, 29713, 52456) ----> H(21734, 29652, 141070) Weights=(21734.00, 21500.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Right: H(11222, 27260, 59316) ----> H(0, 0, 0) Weights=(21734.00, 21500.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Left: H(21734, 29652, 141070) OldI: 1.03 NewI: 1.02",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   0 |V|= 21734 |E|= 29652 #pins=141070 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Right: H(10278, 27260, 57786) ----> H(0, 0, 0) Weights=(21734.00, 21500.00)",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Left: H(21734, 29654, 141034) OldI: 1.03 NewI: 1.02",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   0 |V|= 21734 |E|= 29654 #pins=141034 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Right: H(11222, 27387, 59121) ----> H(21500, 27323, 116765) Weights=(21734.00, 21500.00)",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Right: H(21500, 27323, 116765) OldI: 1.03 NewI: 1.04",
+    "| 3/ 4|: ( 0, 1)/[ 1, 2] ->START   0 |V|= 21500 |E|= 27323 #pins=116765 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Right: H(10278, 27387, 57683) ----> H(21500, 27324, 117141) Weights=(21734.00, 21500.00)",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Right: H(21500, 27324, 117141) OldI: 1.03 NewI: 1.04",
+    "| 2/ 4|: ( 0, 0)/[ 1, 2] ->START   0 |V|= 21500 |E|= 27324 #pins=117141 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 0, 1)/[ 1, 2] ->START   1 |V|=  9107 |E|= 23170 #pins= 94110 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 0)/[ 1, 2] ->START   1 |V|=  9107 |E|= 21932 #pins= 91262 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   1 |V|=  9232 |E|= 25685 #pins=113315 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   1 |V|=  9232 |E|= 24728 #pins=112604 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 0, 1)/[ 1, 2] ->START   2 |V|=  3961 |E|= 20854 #pins= 82726 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 0)/[ 1, 2] ->START   2 |V|=  3961 |E|= 20348 #pins= 82087 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   2 |V|=  4018 |E|= 23160 #pins=101300 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   2 |V|=  4018 |E|= 23483 #pins=100250 864/AGG/AUTO/FM p=2..."
+   ],
+   "stderr_tail": [],
+   "zoltan_removed_or_warning_lines": [],
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     35036,
+     34072,
+     34776,
+     36228
+    ],
+    "ru_maxrss_kb_per_rank": [
+     35036,
+     34072,
+     34776,
+     36228
+    ],
+    "max_rank_peak_kb": 36228,
+    "sum_of_rank_peaks_kb": 140112,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 2.615,
+    "driver_total_seconds_rank0": 5.951,
+    "load_seconds_per_rank": [
+     2.681,
+     1.728,
+     1.674,
+     2.08
+    ],
+    "job_wall_seconds": 6.52
+   },
+   "global_from_queries": {
+    "objects": 43234,
+    "pins": 531006,
+    "edge_weight_entries": 212733
+   },
+   "params_applied_rank0": {
+    "DEBUG_LEVEL": "0",
+    "NUM_GID_ENTRIES": "1",
+    "NUM_LID_ENTRIES": "1",
+    "OBJ_WEIGHT_DIM": "1",
+    "EDGE_WEIGHT_DIM": "1",
+    "DETERMINISTIC": "1",
+    "RETURN_LISTS": "PARTS",
+    "REMAP": "0",
+    "LB_METHOD": "HYPERGRAPH",
+    "HYPERGRAPH_PACKAGE": "PHG",
+    "LB_APPROACH": "PARTITION",
+    "IMBALANCE_TOL": "1.03",
+    "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+    "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+    "PHG_RANDOMIZE_INPUT": "0",
+    "PHG_MULTILEVEL": "1",
+    "PHG_COARSENING_METHOD": "AGG",
+    "PHG_COARSEPARTITION_METHOD": "AUTO",
+    "PHG_REFINEMENT_METHOD": "FM",
+    "PHG_REFINEMENT_QUALITY": "1",
+    "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+    "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+    "PHG_REPART_MULTIPLIER": "100",
+    "CHECK_HYPERGRAPH": "1",
+    "PHG_OUTPUT_LEVEL": "1",
+    "NUM_GLOBAL_PARTS": "432"
+   },
+   "zoltan_eval": {
+    "cutl_global": 45623772.0,
+    "cutn_global": 17156208.0,
+    "imbalance": 1.039182,
+    "obj_imbalance": 1.039182,
+    "nobj_min": 0.0,
+    "nobj_max": 104.0,
+    "nobj_sum": 43234.0
+   },
+   "dump_sha256": {
+    "cs_rank0.bin": "6ddde550dfacf8996fac71de0c6713d4482e685e61be4ecbe661f568be485053",
+    "cs_rank1.bin": "05cbf14232e7a464886fc85746f4bbab6d4df5d5f8f9f41679b4ac8421badcb2",
+    "cs_rank2.bin": "c78bf731f97b19c34ab07ceaf98adc3dbfb087d573bfcc8dbfaf0f9edf00a637",
+    "cs_rank3.bin": "3775d8f6f4bb6ff5fd79dd3a1ec782bef37aa742ca525b9043aedff653171bd0",
+    "ewts_rank0.bin": "f88017da6380f297d1d5b47554456f4f7d86a5abab76d1ceb60b423538236a5f",
+    "ewts_rank1.bin": "4814cb2fbae689d8b341125dec74929cf43b7c94b488ab3027687f6c2790f995",
+    "ewts_rank2.bin": "135ac6df17a2793518b3cbe80475b7163fa9b1c69fa24add930023ad72369c76",
+    "ewts_rank3.bin": "717f29326b05389736f83250ef02915063feb8dfbbf9eeaefd1a8943d846f12c",
+    "objs_rank0.bin": "f552bd2dc6c5909806bfb145cfa8663b240301d122783a87eec6dae37a197b1a",
+    "objs_rank1.bin": "4367e4126d337c8e057a4e9d50b37c92ff71a97b58cfa9b4b717e8fa07c06c57",
+    "objs_rank2.bin": "cc975b4fba5fe2e5e40e14d9900c11331b9f6ae2f187bf143e8a798a54e77a50",
+    "objs_rank3.bin": "6055729e5864e118ed8506ce0399129dd00ac1e14f626302f41bcfb914ea64e1"
+   },
+   "dumps_identical_to_gate_run": true
+  },
+  "R1_repeat": {
+   "name": "R1_repeat",
+   "mode": "partition",
+   "np": 4,
+   "rc": 0,
+   "wall_seconds_outer": 7.25,
+   "job_time_v": {
+    "user_seconds": 15.05,
+    "wall_seconds": 6.9,
+    "peak_rss_kb": 37396,
+    "exit_status": 0
+   },
+   "dir": "data/l1_lowmem/metaqa/phg/R1_repeat",
+   "ranks": [
+    {
+     "rank": 0,
+     "json": {
+      "rank": 0,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       0,
+       2
+      ],
+      "shard_count": 9,
+      "first_gid": 0,
+      "nloc": 10000,
+      "npins_loc": 173508,
+      "nedge_loc": 54604,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 2.952,
+       "partition_wall": 2.9,
+       "total": 6.415
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 10000,
+      "num_import": -1,
+      "ru_maxrss_kb": 37396,
+      "calls": {
+       "num_obj": 4,
+       "obj_list": 3,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 3
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 45623772.0,
+       "cutn_global": 17156208.0,
+       "imbalance": 1.039182,
+       "obj_imbalance": 1.039182,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 3.19,
+      "wall_seconds": 6.79,
+      "peak_rss_kb": 37396,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 1,
+     "json": {
+      "rank": 1,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       2,
+       4
+      ],
+      "shard_count": 9,
+      "first_gid": 10000,
+      "nloc": 10000,
+      "npins_loc": 109617,
+      "nedge_loc": 51086,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 2.113,
+       "partition_wall": 2.9,
+       "total": 6.415
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 10000,
+      "num_import": -1,
+      "ru_maxrss_kb": 34924,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 45623772.0,
+       "cutn_global": 17156208.0,
+       "imbalance": 1.039182,
+       "obj_imbalance": 1.039182,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 4.11,
+      "wall_seconds": 6.78,
+      "peak_rss_kb": 34924,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 2,
+     "json": {
+      "rank": 2,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       4,
+       6
+      ],
+      "shard_count": 9,
+      "first_gid": 20000,
+      "nloc": 10000,
+      "npins_loc": 106369,
+      "nedge_loc": 49712,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 2.041,
+       "partition_wall": 2.9,
+       "total": 6.415
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 10000,
+      "num_import": -1,
+      "ru_maxrss_kb": 35648,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 45623772.0,
+       "cutn_global": 17156208.0,
+       "imbalance": 1.039182,
+       "obj_imbalance": 1.039182,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 4.06,
+      "wall_seconds": 6.77,
+      "peak_rss_kb": 35648,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 3,
+     "json": {
+      "rank": 3,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 432,
+      "N": 43234,
+      "M": 86796,
+      "shards": [
+       6,
+       9
+      ],
+      "shard_count": 9,
+      "first_gid": 30000,
+      "nloc": 13234,
+      "npins_loc": 141512,
+      "nedge_loc": 57331,
+      "global_from_queries": {
+       "objects": 43234,
+       "pins": 531006,
+       "edge_weight_entries": 212733
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "432"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 2.556,
+       "partition_wall": 2.9,
+       "total": 6.415
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 13234,
+      "num_import": -1,
+      "ru_maxrss_kb": 34680,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 45623772.0,
+       "cutn_global": 17156208.0,
+       "imbalance": 1.039182,
+       "obj_imbalance": 1.039182,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 43234.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 3.56,
+      "wall_seconds": 6.76,
+      "peak_rss_kb": 34680,
+      "exit_status": 0
+     }
+    }
+   ],
+   "zoltan_stdout_lines": [
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   0 |V|= 21617 |E|= 43398 #pins=149823 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   0 |V|= 21617 |E|= 43398 #pins=115166 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   0 |V|= 21617 |E|= 43398 #pins=150513 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   0 |V|= 21617 |E|= 43398 #pins=115504 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   1 |V|=  9417 |E|= 38937 #pins= 97945 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   1 |V|=  9334 |E|= 37205 #pins=121226 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   1 |V|=  9334 |E|= 38937 #pins=121215 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   1 |V|=  9417 |E|= 37205 #pins= 97514 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   2 |V|=  4155 |E|= 36070 #pins=109431 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   2 |V|=  4164 |E|= 36070 #pins= 88594 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   2 |V|=  4155 |E|= 35772 #pins=110026 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   2 |V|=  4164 |E|= 35772 #pins= 88473 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   3 |V|=  1852 |E|= 34507 #pins=103899 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   3 |V|=  1856 |E|= 34507 #pins= 83467 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   3 |V|=  1856 |E|= 34650 #pins= 82937 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   3 |V|=  1852 |E|= 34650 #pins=102934 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   4 |V|=   799 |E|= 33787 #pins= 79899 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   4 |V|=   799 |E|= 33626 #pins= 79359 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   4 |V|=   805 |E|= 33626 #pins= 99939 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   4 |V|=   805 |E|= 33787 #pins= 99435 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   5 |V|=   326 |E|= 32148 #pins= 94212 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   5 |V|=   326 |E|= 32507 #pins= 94625 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   5 |V|=   308 |E|= 32148 #pins= 72163 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   5 |V|=   308 |E|= 32507 #pins= 72978 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Local Ratio Cut= 11541918.00   Global Ratio Cut= 11377275.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Local Ratio Cut= 11543261.00   Global Ratio Cut= 11377275.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Local Ratio Cut= 11377275.00   Global Ratio Cut= 11377275.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Local Ratio Cut= 11377275.00   Global Ratio Cut= 11377275.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   5 |V|=   326 |E|= 32507 #pins= 94625 864/AGG/AUTO/FM p=2 bal=1.02 cutl=11139024.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   5 |V|=   326 |E|= 32148 #pins= 94212 864/AGG/AUTO/FM p=2 bal=1.02 cutl=11139024.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   5 |V|=   308 |E|= 32507 #pins= 72978 864/AGG/AUTO/FM p=2 bal=1.02 cutl=11139024.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   5 |V|=   308 |E|= 32148 #pins= 72163 864/AGG/AUTO/FM p=2 bal=1.02 cutl=11139024.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   4 |V|=   805 |E|= 33626 #pins= 99939 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10764456.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   4 |V|=   799 |E|= 33787 #pins= 79899 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10764456.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   4 |V|=   805 |E|= 33787 #pins= 99435 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10764456.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   4 |V|=   799 |E|= 33626 #pins= 79359 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10764456.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   3 |V|=  1852 |E|= 34650 #pins=102934 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10288596.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   3 |V|=  1852 |E|= 34507 #pins=103899 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10288596.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   3 |V|=  1856 |E|= 34507 #pins= 83467 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10288596.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   3 |V|=  1856 |E|= 34650 #pins= 82937 864/AGG/AUTO/FM p=2 bal=1.02 cutl=10288596.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   2 |V|=  4164 |E|= 35772 #pins= 88473 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9756236.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   2 |V|=  4164 |E|= 36070 #pins= 88594 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9756236.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   2 |V|=  4155 |E|= 36070 #pins=109431 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9756236.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   2 |V|=  4155 |E|= 35772 #pins=110026 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9756236.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   1 |V|=  9417 |E|= 37205 #pins= 97514 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9255023.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   1 |V|=  9417 |E|= 38937 #pins= 97945 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9255023.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   1 |V|=  9334 |E|= 38937 #pins=121215 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9255023.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   1 |V|=  9334 |E|= 37205 #pins=121226 864/AGG/AUTO/FM p=2 bal=1.02 cutl=9255023.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   0 |V|= 21617 |E|= 43398 #pins=115166 864/AGG/AUTO/FM p=2 bal=1.01 cutl=8842474.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   0 |V|= 21617 |E|= 43398 #pins=150513 864/AGG/AUTO/FM p=2 bal=1.01 cutl=8842474.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   0 |V|= 21617 |E|= 43398 #pins=149823 864/AGG/AUTO/FM p=2 bal=1.01 cutl=8842474.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   0 |V|= 21617 |E|= 43398 #pins=115504 864/AGG/AUTO/FM p=2 bal=1.01 cutl=8842474.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Rdivide(0, 431): 8842474.0",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Rdivide(0, 431): 8842474.0",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Rdivide(0, 431): 8842474.0",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Rdivide(0, 431): 8842474.0",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Left: H(10395, 29593, 52422) ----> H(0, 0, 0) Weights=(21734.00, 21500.00)",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Left: H(11339, 29593, 88267) ----> H(0, 0, 0) Weights=(21734.00, 21500.00)",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Left: H(11339, 29713, 88959) ----> H(21734, 29654, 141034) Weights=(21734.00, 21500.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Left: H(10395, 29713, 52456) ----> H(21734, 29652, 141070) Weights=(21734.00, 21500.00)",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Right: H(10278, 27260, 57786) ----> H(0, 0, 0) Weights=(21734.00, 21500.00)",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Left: H(21734, 29654, 141034) OldI: 1.03 NewI: 1.02",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Right: H(11222, 27260, 59316) ----> H(0, 0, 0) Weights=(21734.00, 21500.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Left: H(21734, 29652, 141070) OldI: 1.03 NewI: 1.02",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   0 |V|= 21734 |E|= 29652 #pins=141070 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   0 |V|= 21734 |E|= 29654 #pins=141034 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Right: H(11222, 27387, 59121) ----> H(21500, 27323, 116765) Weights=(21734.00, 21500.00)",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Right: H(21500, 27323, 116765) OldI: 1.03 NewI: 1.04",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Right: H(10278, 27387, 57683) ----> H(21500, 27324, 117141) Weights=(21734.00, 21500.00)",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Right: H(21500, 27324, 117141) OldI: 1.03 NewI: 1.04",
+    "| 2/ 4|: ( 0, 0)/[ 1, 2] ->START   0 |V|= 21500 |E|= 27324 #pins=117141 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 0, 1)/[ 1, 2] ->START   0 |V|= 21500 |E|= 27323 #pins=116765 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   1 |V|=  9232 |E|= 25685 #pins=113315 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   1 |V|=  9232 |E|= 24728 #pins=112604 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 0, 1)/[ 1, 2] ->START   1 |V|=  9107 |E|= 23170 #pins= 94110 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 0)/[ 1, 2] ->START   1 |V|=  9107 |E|= 21932 #pins= 91262 864/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   2 |V|=  4018 |E|= 23160 #pins=101300 864/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   2 |V|=  4018 |E|= 23483 #pins=100250 864/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 0, 1)/[ 1, 2] ->START   2 |V|=  3961 |E|= 20854 #pins= 82726 864/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 0)/[ 1, 2] ->START   2 |V|=  3961 |E|= 20348 #pins= 82087 864/AGG/AUTO/FM p=2..."
+   ],
+   "stderr_tail": [],
+   "zoltan_removed_or_warning_lines": [],
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     37396,
+     34924,
+     35648,
+     34680
+    ],
+    "ru_maxrss_kb_per_rank": [
+     37396,
+     34924,
+     35648,
+     34680
+    ],
+    "max_rank_peak_kb": 37396,
+    "sum_of_rank_peaks_kb": 142648,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 2.9,
+    "driver_total_seconds_rank0": 6.415,
+    "load_seconds_per_rank": [
+     2.952,
+     2.113,
+     2.041,
+     2.556
+    ],
+    "job_wall_seconds": 6.9
+   },
+   "global_from_queries": {
+    "objects": 43234,
+    "pins": 531006,
+    "edge_weight_entries": 212733
+   },
+   "params_applied_rank0": {
+    "DEBUG_LEVEL": "0",
+    "NUM_GID_ENTRIES": "1",
+    "NUM_LID_ENTRIES": "1",
+    "OBJ_WEIGHT_DIM": "1",
+    "EDGE_WEIGHT_DIM": "1",
+    "DETERMINISTIC": "1",
+    "RETURN_LISTS": "PARTS",
+    "REMAP": "0",
+    "LB_METHOD": "HYPERGRAPH",
+    "HYPERGRAPH_PACKAGE": "PHG",
+    "LB_APPROACH": "PARTITION",
+    "IMBALANCE_TOL": "1.03",
+    "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+    "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+    "PHG_RANDOMIZE_INPUT": "0",
+    "PHG_MULTILEVEL": "1",
+    "PHG_COARSENING_METHOD": "AGG",
+    "PHG_COARSEPARTITION_METHOD": "AUTO",
+    "PHG_REFINEMENT_METHOD": "FM",
+    "PHG_REFINEMENT_QUALITY": "1",
+    "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+    "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+    "PHG_REPART_MULTIPLIER": "100",
+    "CHECK_HYPERGRAPH": "1",
+    "PHG_OUTPUT_LEVEL": "1",
+    "NUM_GLOBAL_PARTS": "432"
+   },
+   "zoltan_eval": {
+    "cutl_global": 45623772.0,
+    "cutn_global": 17156208.0,
+    "imbalance": 1.039182,
+    "obj_imbalance": 1.039182,
+    "nobj_min": 0.0,
+    "nobj_max": 104.0,
+    "nobj_sum": 43234.0
+   },
+   "dump_sha256": {
+    "cs_rank0.bin": "6ddde550dfacf8996fac71de0c6713d4482e685e61be4ecbe661f568be485053",
+    "cs_rank1.bin": "05cbf14232e7a464886fc85746f4bbab6d4df5d5f8f9f41679b4ac8421badcb2",
+    "cs_rank2.bin": "c78bf731f97b19c34ab07ceaf98adc3dbfb087d573bfcc8dbfaf0f9edf00a637",
+    "cs_rank3.bin": "3775d8f6f4bb6ff5fd79dd3a1ec782bef37aa742ca525b9043aedff653171bd0",
+    "ewts_rank0.bin": "f88017da6380f297d1d5b47554456f4f7d86a5abab76d1ceb60b423538236a5f",
+    "ewts_rank1.bin": "4814cb2fbae689d8b341125dec74929cf43b7c94b488ab3027687f6c2790f995",
+    "ewts_rank2.bin": "135ac6df17a2793518b3cbe80475b7163fa9b1c69fa24add930023ad72369c76",
+    "ewts_rank3.bin": "717f29326b05389736f83250ef02915063feb8dfbbf9eeaefd1a8943d846f12c",
+    "objs_rank0.bin": "f552bd2dc6c5909806bfb145cfa8663b240301d122783a87eec6dae37a197b1a",
+    "objs_rank1.bin": "4367e4126d337c8e057a4e9d50b37c92ff71a97b58cfa9b4b717e8fa07c06c57",
+    "objs_rank2.bin": "cc975b4fba5fe2e5e40e14d9900c11331b9f6ae2f187bf143e8a798a54e77a50",
+    "objs_rank3.bin": "6055729e5864e118ed8506ce0399129dd00ac1e14f626302f41bcfb914ea64e1"
+   }
+  }
+ },
+ "metrics": {
+  "km1_weighted": 45623771,
+  "cut_weighted": 17156207,
+  "cut_nets": 69650,
+  "nets": 86796,
+  "cut_net_fraction": 0.802456,
+  "lambda_mean": 4.2867,
+  "lambda_max": 97,
+  "blocks": {
+   "k": 432,
+   "used": 430,
+   "empty": 2,
+   "min": 0,
+   "p50": 103.0,
+   "p95": 103.0,
+   "max": 104,
+   "mean": 100.079,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0392,
+   "eps_actual(max/ceil(N/k)-1)": 0.0297,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "per_family_note": {
+   "STRUCT": {
+    "hyperedges_precap": 43234,
+    "pins_precap": 292572,
+    "anchors_over_cap": 104,
+    "hyperedges_out": 43564,
+    "pins_written": 292902,
+    "anchor_duplication_pins": 330,
+    "pins_discarded": 0,
+    "pin_retention": 1.0,
+    "size_max_out": 100
+   },
+   "KNN": {
+    "hyperedges_precap": 43232,
+    "pins_precap": 238104,
+    "anchors_over_cap": 0,
+    "hyperedges_out": 43232,
+    "pins_written": 238104,
+    "anchor_duplication_pins": 0,
+    "pins_discarded": 0,
+    "pin_retention": 1.0,
+    "size_max_out": 96
+   }
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 124669,
+    "cut": 103694,
+    "edge_cut_fraction": 0.8318
+   },
+   "KNN": {
+    "edges": 97436,
+    "cut": 71327,
+    "edge_cut_fraction": 0.732
+   },
+   "NERX": {
+    "edges": 5819,
+    "cut": 3802,
+    "edge_cut_fraction": 0.6534
+   }
+  }
+ },
+ "repeat": {
+  "identical_partition": true,
+  "n_diff": 0,
+  "km1_repeat": 45623771,
+  "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+ },
+ "mtkahypar_baseline": {
+  "status": "OK",
+  "km1_weighted": 41244100,
+  "cut_weighted": 16213783,
+  "blocks": {
+   "k": 432,
+   "used": 432,
+   "empty": 0,
+   "min": 14,
+   "p50": 102.0,
+   "p95": 104.0,
+   "max": 104,
+   "mean": 100.079,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0392,
+   "eps_actual(max/ceil(N/k)-1)": 0.0297,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 124669,
+    "cut": 102098,
+    "edge_cut_fraction": 0.819
+   },
+   "KNN": {
+    "edges": 97436,
+    "cut": 61467,
+    "edge_cut_fraction": 0.6308
+   },
+   "NERX": {
+    "edges": 5819,
+    "cut": 3160,
+    "edge_cut_fraction": 0.543
+   }
+  },
+  "manifest": {
+   "worker_stats": {
+    "hyperedges": 86796,
+    "pins": 531006,
+    "N": 43234,
+    "k": 432,
+    "threads": 8,
+    "ran_on": "local_wsl",
+    "edge_weighted": true,
+    "ew_min": 10,
+    "ew_max": 1000,
+    "ew_readback_exact": true,
+    "objective_km1": 41244100.0,
+    "objective_cut": 16213783.0,
+    "peak_rss_mb": 966.4,
+    "wall_seconds": 185.7
+   },
+   "guard": {
+    "rss_cap_gb": 2.267723264,
+    "host_available_gb_at_start": 3.267723264,
+    "margin_gb": 1.0,
+    "peak_rss_kb": 989584,
+    "killed": 0,
+    "rc": 0,
+    "wall_seconds": 190.8,
+    "returncode": 0
+   },
+   "post_checks": {
+    "length_ok": true,
+    "min_block": 0,
+    "max_block": 431,
+    "blocks_used": 432,
+    "k": 432,
+    "every_block_used": true,
+    "size_min": 14,
+    "size_max": 104,
+    "size_mean": 100.079,
+    "ceil_N_over_k": 101,
+    "balance_max_over_mean": 1.0392,
+    "max_over_allowed_eps003": 0.9997,
+    "balance_within_eps": true
+   },
+   "contract": {
+    "partitioner": "mtkahypar",
+    "preset": "DETERMINISTIC_QUALITY",
+    "objective": "KM1",
+    "epsilon": 0.03,
+    "seed": 0,
+    "vertex_weights": "unit",
+    "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+    "k": 432,
+    "k_rule": "max(1, N // 100)",
+    "hypergraph_rule": "H4_SPLIT_PRESERVE",
+    "families": [
+     "STRUCT",
+     "KNN"
+    ],
+    "worker": "scratchpad/_l1hu_local_worker.py",
+    "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+    "threads": 8,
+    "deterministic_preset_note": "DETERMINISTIC_QUALITY is thread-count independent; LOCAL_COMPUTE.json verified local == Modal bit-identical"
+   },
+   "output_sha256": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062"
+  }
+ },
+ "freight_one_pass_frozen": {
+  "km1_weighted": 57790340,
+  "cut_weighted": 18394999,
+  "blocks": {
+   "k": 432,
+   "used": 432,
+   "empty": 0,
+   "min": 29,
+   "p50": 104.0,
+   "p95": 104.0,
+   "max": 104,
+   "mean": 100.079,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0392,
+   "eps_actual(max/ceil(N/k)-1)": 0.0297,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 124669,
+    "cut": 100118,
+    "edge_cut_fraction": 0.8031
+   },
+   "KNN": {
+    "edges": 97436,
+    "cut": 91329,
+    "edge_cut_fraction": 0.9373
+   },
+   "NERX": {
+    "edges": 5819,
+    "cut": 4705,
+    "edge_cut_fraction": 0.8086
+   }
+  }
+ },
+ "diagnostic_vs_mtkahypar": {
+  "km1_ratio": 1.1062,
+  "struct_cut_delta": 0.0128,
+  "knn_cut_delta": 0.1012,
+  "mtkahypar_peak_rss_mb": 966.4,
+  "mtkahypar_wall_seconds": 185.7
+ },
+ "DECISION": "PHG_PARTITION_INVALID"
+}

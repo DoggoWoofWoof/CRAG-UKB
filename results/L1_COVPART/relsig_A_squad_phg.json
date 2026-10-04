@@ -1,0 +1,131 @@
+{
+ "cache": "squad_phg",
+ "partition": "PHG",
+ "n_DEV_A": 992,
+ "cap": 100,
+ "hubs": 4900,
+ "typed_graph": false,
+ "relation_vocabulary": [
+  "title_mention"
+ ],
+ "query_relation_source": "results/L1_P90_EXPLOIT/_uni_squad_phg.npz orders (frozen typed-path rule; set, order ignored)",
+ "definitions": {
+  "A0": "served: own + directed out-neighbour blocks, w_r each",
+  "A1": "UND_NONHUB: served + in-neighbour blocks of non-hub hits, w_r each (union)",
+  "R1": "served + relation-compatible typed 1-hop memberships {b : (b, rho) in TM(v), rho in R(q)}, w_r each (additive: base+compat = 2 w_r)"
+ },
+ "frozen": "rr(S)+rr(M) per channel, RRF K0=60 over dense+splade, P50, exposure = 50 core blocks",
+ "arms": {
+  "A0": {
+   "arm": "A0",
+   "BASE_ALL": 0.9829,
+   "reach_all": 0.999,
+   "feasible": 1.0,
+   "fail_pts": 1.7,
+   "fail_infeasible_pts": 0.0,
+   "fail_UNREACHED_pts": 0.1,
+   "fail_reached_weak_pts": 0.7,
+   "fail_fusion_fixable_pts": 0.9,
+   "worst_gold_block_rank_median_failed": 74,
+   "worst_gold_block_rank_median_reached_failed": 71,
+   "worst_gold_block_rank_median_all_reached": 1,
+   "blocks_voted_per_query_mean": 133.3,
+   "extra_blocks_per_query_mean_dense_splade": [
+    0.0,
+    0.0
+   ],
+   "scope_nodes_P50": 5089.2,
+   "per_hop": {},
+   "D2d_ALL": 0.9879
+  },
+  "A1": {
+   "arm": "A1",
+   "BASE_ALL": 0.9798,
+   "reach_all": 0.999,
+   "feasible": 1.0,
+   "fail_pts": 2.0,
+   "fail_infeasible_pts": 0.0,
+   "fail_UNREACHED_pts": 0.1,
+   "fail_reached_weak_pts": 1.1,
+   "fail_fusion_fixable_pts": 0.8,
+   "worst_gold_block_rank_median_failed": 71,
+   "worst_gold_block_rank_median_reached_failed": 71,
+   "worst_gold_block_rank_median_all_reached": 1,
+   "blocks_voted_per_query_mean": 145.3,
+   "extra_blocks_per_query_mean_dense_splade": [
+    223.6,
+    200.0
+   ],
+   "scope_nodes_P50": 5087.7,
+   "per_hop": {},
+   "D2d_ALL": 0.9879,
+   "BASE_ALL_vs_A0": {
+    "gained": 0,
+    "lost": 3,
+    "p": 0.25
+   },
+   "reach_all_vs_A0": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "D2d_ALL_vs_A0": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   }
+  },
+  "R1": {
+   "arm": "R1",
+   "BASE_ALL": 0.9829,
+   "reach_all": 0.999,
+   "feasible": 1.0,
+   "fail_pts": 1.7,
+   "fail_infeasible_pts": 0.0,
+   "fail_UNREACHED_pts": 0.1,
+   "fail_reached_weak_pts": 0.7,
+   "fail_fusion_fixable_pts": 0.9,
+   "worst_gold_block_rank_median_failed": 74,
+   "worst_gold_block_rank_median_reached_failed": 71,
+   "worst_gold_block_rank_median_all_reached": 1,
+   "blocks_voted_per_query_mean": 133.3,
+   "extra_blocks_per_query_mean_dense_splade": [
+    0.0,
+    0.0
+   ],
+   "scope_nodes_P50": 5089.2,
+   "per_hop": {},
+   "D2d_ALL": 0.9879,
+   "BASE_ALL_vs_A0": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "reach_all_vs_A0": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "D2d_ALL_vs_A0": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "BASE_ALL_vs_A1": {
+    "gained": 3,
+    "lost": 0,
+    "p": 0.25
+   },
+   "reach_all_vs_A1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "D2d_ALL_vs_A1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   }
+  }
+ }
+}

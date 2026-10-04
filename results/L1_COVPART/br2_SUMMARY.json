@@ -1,0 +1,188 @@
+{
+ "RECORD": "BOUNDED_VERTEXCUT_R2_SUMMARY",
+ "utc": "2026-09-15T18:14:48Z",
+ "DEV": "A",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_BOUNDED_VERTEXCUT_R2.json",
+  "sha256": "10dbcfcd2585067232b37bfaf0c06e90494a82416e2dfc6b0b9ad1e601dbaeec",
+  "bytes": 29945
+ },
+ "records": {
+  "metaqa": {
+   "path": "results/L1_COVPART/br2_replay_A_metaqa.json",
+   "sha256": "cff7f0999d6e1b96a42355eab1e06d403abe480561481e726252a44b179f28cc",
+   "bytes": 23725
+  },
+  "squad": {
+   "path": "results/L1_COVPART/br2_replay_A_squad.json",
+   "sha256": "337c083c7cecb1c2fd57f3d40511f7d3ccb4013757c49a29b4186389a03b371e",
+   "bytes": 10054
+  },
+  "musique": {
+   "path": "results/L1_COVPART/br2_replay_A_musique.json",
+   "sha256": "1ceca4fa2d54bd904a7d8bb43297987136e53a56cb15cf194c5657733ca2eab4",
+   "bytes": 9474
+  }
+ },
+ "question": "Can a bounded-overlap static substrate (every node in <= 2 blocks, cap C = 100, the same construction on every graph) retain MetaQA's vertex-cut locality gain (section 19: 0.640 -> 0.678 at P50, 0.688 at the matched budget) while preventing the replication explosion that made the unbounded vertex-cut a budget cut on the dense text graphs (section 20: RF 10.35 / 9.25, P50 = 43-63 % of the hard unique exposure, musique LOSS at P50)?",
+ "decision_rule": {
+  "metaqa": {
+   "RETAINED": "R2_MATCHED_LE vs HARD_MTK_BASE = GAIN (the section-19 locality gain survives the R = 2 bound at the equal budget)",
+   "EFFICIENT": "R2_P50 vs HARD_MTK_BASE != LOSS AND EXPOSURE_LE_HARD"
+  },
+  "text (squad, musique)": {
+   "SAFE": "R2_MATCHED_LE vs the GATE != LOSS (no significant ALL-gold loss at the equal budget)",
+   "EFFICIENT": "R2_P50 vs the GATE != LOSS AND EXPOSURE_LE_HARD (the 50-block protocol cell is not a budget cut that costs gold)"
+  },
+  "universal_outcome": {
+   "SUPPORTED": "metaqa RETAINED AND squad SAFE AND musique SAFE AND squad EFFICIENT AND musique EFFICIENT",
+   "PARTIALLY_SUPPORTED": "metaqa RETAINED AND both text SAFE, but at least one text dataset not EFFICIENT",
+   "NOT_SUPPORTED": "otherwise (metaqa not RETAINED, or a text LOSS at the matched budget)"
+  },
+  "difference_from_section_20_stated": "section 20 labelled the P50 cell primary and the matched cell secondary; here the matched cell is the signal because the bounded construction is a statement about the representation at a fixed replication budget, and section 20 showed the P50 comparison mixes representation with budget; the P50 cell keeps its exposure flag as the efficiency clause",
+  "what_follows": "SUPPORTED / PARTIALLY_SUPPORTED = post-hoc DEV_A evidence that a bounded-overlap substrate retains the sparse-graph locality gain without the text budget cut; composition with SAFE / H2_PATCH1 / BALANCED_H2_PATCH1 needs a further ruling and is NOT run here. NOT_SUPPORTED = the R = 2 construction as specified does not carry the gain (the owners-only control and the containment / wedge numbers say whether the alternates were inert or the owners too small); no rule change, no R = 3, no second alternate without a ruling",
+  "no_promotion": "nothing here changes the served L1 or any frozen record; sections 18-20 are unchanged"
+ },
+ "per_dataset": {
+  "metaqa": {
+   "gate": "HARD_MTK_BASE",
+   "gate_ALL": 0.6397,
+   "gate_exposure": 5022.97,
+   "R2_P50_ALL": 0.3333,
+   "R2_P50_unique": 4067.95,
+   "R2_P50_vs_gate": {
+    "n": 1002,
+    "base_ALL": 0.6397,
+    "cell_ALL": 0.3333,
+    "delta_pts": -30.64,
+    "gained": 65,
+    "lost": 372,
+    "p": 2.3530583498363157e-53
+   },
+   "R2_MATCHED_LE_ALL": 0.3473,
+   "R2_MATCHED_LE_blocks": 62.05,
+   "R2_MATCHED_LE_vs_gate": {
+    "n": 1002,
+    "base_ALL": 0.6397,
+    "cell_ALL": 0.3473,
+    "delta_pts": -29.24,
+    "gained": 69,
+    "lost": 362,
+    "p": 4.9396642496652335e-49
+   },
+   "OWNERS_ONLY_MATCHED_LE_ALL": 0.2525,
+   "alternates_value_at_matched": "GAIN",
+   "RF": 1.5288,
+   "share_lambda_2": 0.5288,
+   "block_max": 100,
+   "containment_1hop": 0.5471,
+   "containment_1hop_owners_only": 0.3286,
+   "VERDICT": "LOSS_EXPOSURE_LE_HARD|MATCHED_LOSS",
+   "R2_vs_V1_P50": {
+    "n": 1002,
+    "base_ALL": 0.6776,
+    "cell_ALL": 0.3333,
+    "delta_pts": -34.43,
+    "gained": 39,
+    "lost": 384,
+    "p": 2.209446569697194e-72
+   },
+   "R2_vs_V1_MATCHED_LE": {
+    "n": 1002,
+    "base_ALL": 0.6876,
+    "cell_ALL": 0.3473,
+    "delta_pts": -34.03,
+    "gained": 43,
+    "lost": 384,
+    "p": 1.5460473044564208e-69
+   }
+  },
+  "squad": {
+   "gate": "HARD_MTK_BASE",
+   "gate_ALL": 0.9859,
+   "gate_exposure": 5089.32,
+   "R2_P50_ALL": 0.9899,
+   "R2_P50_unique": 3487.93,
+   "R2_P50_vs_gate": {
+    "n": 992,
+    "base_ALL": 0.9859,
+    "cell_ALL": 0.9899,
+    "delta_pts": 0.4,
+    "gained": 12,
+    "lost": 8,
+    "p": 0.5034446716308594
+   },
+   "R2_MATCHED_LE_ALL": 0.9929,
+   "R2_MATCHED_LE_blocks": 74.77,
+   "R2_MATCHED_LE_vs_gate": {
+    "n": 992,
+    "base_ALL": 0.9859,
+    "cell_ALL": 0.9929,
+    "delta_pts": 0.71,
+    "gained": 13,
+    "lost": 6,
+    "p": 0.1670684814453125
+   },
+   "OWNERS_ONLY_MATCHED_LE_ALL": 0.9919,
+   "alternates_value_at_matched": "NEUTRAL",
+   "RF": 1.6098,
+   "share_lambda_2": 0.6098,
+   "block_max": 100,
+   "containment_1hop": 0.5271,
+   "containment_1hop_owners_only": 0.1798,
+   "VERDICT": "NEUTRAL_EXPOSURE_LE_HARD|MATCHED_NEUTRAL"
+  },
+  "musique": {
+   "gate": "HARD_PHG_BASE",
+   "gate_ALL": 0.6596,
+   "gate_exposure": 5116.84,
+   "R2_P50_ALL": 0.6647,
+   "R2_P50_unique": 3813.59,
+   "R2_P50_vs_gate": {
+    "n": 996,
+    "base_ALL": 0.6596,
+    "cell_ALL": 0.6647,
+    "delta_pts": 0.5,
+    "gained": 116,
+    "lost": 111,
+    "p": 0.7907027887267079
+   },
+   "R2_MATCHED_LE_ALL": 0.6978,
+   "R2_MATCHED_LE_blocks": 68.12,
+   "R2_MATCHED_LE_vs_gate": {
+    "n": 996,
+    "base_ALL": 0.6596,
+    "cell_ALL": 0.6978,
+    "delta_pts": 3.82,
+    "gained": 131,
+    "lost": 93,
+    "p": 0.013252477974958857
+   },
+   "OWNERS_ONLY_MATCHED_LE_ALL": 0.6516,
+   "alternates_value_at_matched": "GAIN",
+   "RF": 1.5299,
+   "share_lambda_2": 0.5299,
+   "block_max": 100,
+   "containment_1hop": 0.3114,
+   "containment_1hop_owners_only": 0.1184,
+   "VERDICT": "NEUTRAL_EXPOSURE_LE_HARD|MATCHED_NEUTRAL"
+  }
+ },
+ "metaqa_RETAINED": false,
+ "text_SAFE": {
+  "squad": true,
+  "musique": true
+ },
+ "EFFICIENT": {
+  "metaqa": false,
+  "squad": true,
+  "musique": true
+ },
+ "OUTCOME": "NOT_SUPPORTED",
+ "why": [
+  "metaqa locality gain NOT retained at the matched budget (R2_MATCHED_LE vs HARD_MTK_BASE LOSS: +69/-362 p=4.94e-49)",
+  "squad SAFE at the matched budget (NEUTRAL: +13/-6 p=0.167), P50 NEUTRAL at 69% of the hard unique exposure -> EFFICIENT",
+  "musique SAFE at the matched budget (NEUTRAL: +131/-93 p=0.0133), P50 NEUTRAL at 75% of the hard unique exposure -> EFFICIENT"
+ ],
+ "status": "post-hoc DEV_A structural-mechanism result; nothing promoted; no composition; served L1 unchanged"
+}

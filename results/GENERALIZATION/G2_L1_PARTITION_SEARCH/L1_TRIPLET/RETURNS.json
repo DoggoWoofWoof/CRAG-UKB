@@ -1,0 +1,101 @@
+{
+ "PHASE": "L1 PARAMETER-FREE STRUCTURAL-OFFSET TRIPLET PHASE",
+ "SCOPE": {
+  "L1_only": true,
+  "parameter_free": true,
+  "no_LLM": true,
+  "no_MLP": true,
+  "no_learned_router": true,
+  "no_new_encoder": true,
+  "no_new_partitioning": true,
+  "final_output": "EXACT P = 50 existing C partitions",
+  "B": 6,
+  "M_ret": 32,
+  "L2_L3_touched": false,
+  "TEST_touched": false
+ },
+ "PARITY": {
+  "metaqa": "EXACT",
+  "musique_clean": "EXACT",
+  "2wiki_clean": "EXACT",
+  "squad_clean": "EXACT"
+ },
+ "TRIPLET_OFFSET_INFORMATIVE": "YES",
+ "TRIPLET_OFFSET_INFORMATIVE_NOTE": "T0_OFFSET is the best of the four triplet signals and separates needed partitions well above the reach controls (MetaQA hop3 AUC 0.6481 vs 0.5133 arrival / 0.5909 count).  But it is NOT triplet-specific: the frozen node collapse preserves it exactly (see MAX_COLLAPSE_IS_LOSSLESS).",
+ "PARTITION_TRANSITION_INFORMATIVE": "NO",
+ "COMPOSABLE_CHAIN_INFORMATIVE": "NO",
+ "BEST_TRIPLET_SIGNAL": "T0_OFFSET",
+ "MARGINAL_PARTITION_R64_NODE_BASE": 0.3506,
+ "MARGINAL_PARTITION_R64_TRIPLET": 0.3427,
+ "MARGINAL_PARTITION_R64_BY_BLOCK": {
+  "ALL": {
+   "NODE_BASE": 0.3506,
+   "TRIPLET": 0.3427,
+   "NODE_FROZEN_ARRIVAL": 0.3504
+  },
+  "hop1": {
+   "NODE_BASE": 0.3333,
+   "TRIPLET": 0.3333,
+   "NODE_FROZEN_ARRIVAL": 0.3333
+  },
+  "hop2": {
+   "NODE_BASE": 0.3892,
+   "TRIPLET": 0.3837,
+   "NODE_FROZEN_ARRIVAL": 0.3896
+  },
+  "hop3": {
+   "NODE_BASE": 0.3355,
+   "TRIPLET": 0.3266,
+   "NODE_FROZEN_ARRIVAL": 0.3351
+  }
+ },
+ "EXACT_P50_METAQA_HOP2": 0.7312,
+ "EXACT_P50_METAQA_HOP3": 0.2613,
+ "EXACT_P50_METAQA_FROZEN": {
+  "ALL": 0.6612,
+  "hop1": 0.9955,
+  "hop2": 0.7297,
+  "hop3": 0.2583
+ },
+ "EXACT_P50_BEST_ORDERING": "FUSE_NODE_S4_X_CORE_EXIT",
+ "EXACT_P50_BEST_SIGNIFICANCE": {
+  "gained": 5,
+  "lost": 2,
+  "net": 3,
+  "mcnemar_p": 0.45312,
+  "sig": false
+ },
+ "MAX_COLLAPSE_IS_LOSSLESS": {
+  "metaqa": {
+   "queries": 1998,
+   "identical_partition_score_vectors": 1998,
+   "identical_partition_orderings": 1998,
+   "frac_identical": 1.0
+  },
+  "musique_clean": {
+   "queries": 2000,
+   "identical_partition_score_vectors": 1981,
+   "identical_partition_orderings": 1981,
+   "frac_identical": 0.9905
+  },
+  "2wiki_clean": {
+   "queries": 2000,
+   "identical_partition_score_vectors": 1914,
+   "identical_partition_orderings": 1914,
+   "frac_identical": 0.957
+  },
+  "squad_clean": {
+   "queries": 2000,
+   "identical_partition_score_vectors": 1705,
+   "identical_partition_orderings": 1705,
+   "frac_identical": 0.8525
+  }
+ },
+ "SOURCE_CONDITIONED_FILTER_REQUIRES_TRANSITION_UNIT": true,
+ "SOURCE_CONDITIONED_FILTER_NOTE": "CORE_EXIT_OFFSET -- the max offset over transitions whose SOURCE partition is inside the protected core -- is the one quantity here that the node collapse genuinely destroys, since np.maximum.at maxes over incoming edges without regard to their source.  It is also the only ordering with real complementarity against the frozen node ordering (solves 10 MetaQA queries it misses, misses 11 it solves), and its depth-matched exact-P50 lift is +0.0010 ALL / +0.0015 hop3, not significant.  Not promoted.",
+ "PROMOTED": "NONE",
+ "L1_FROZEN": "NO",
+ "STEP10_TARGET_GATE_MET": false,
+ "STEP10_TARGET_GATE_NOTE": "STEP 10 gates WebQSP / 2Wiki exact-P50 on MetaQA materially improving.  The best depth-matched ordering moves MetaQA ALL 0.6612 -> 0.6627 (net +3, p = 0.45312), which is not material and not significant, so the gated corpora were not run through the exact-P50 mechanism.",
+ "TRIPLET_L1_VERDICT": "C. NODE_COLLAPSE_IS_LOSSLESS -- THE TRIPLET UNIT ADDS NO SEPARABLE EVIDENCE OVER THE NODE UNIT"
+}

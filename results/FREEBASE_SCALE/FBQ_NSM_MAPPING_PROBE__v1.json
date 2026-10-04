@@ -1,0 +1,49 @@
+{
+ "RECORD": "FBQ_NSM_MAPPING_PROBE",
+ "utc": "2026-10-03T20:52:14Z",
+ "question": "Does the frozen Freebase canonical (302M nodes) have questions, and can WebQSP questions be mapped onto its positions?",
+ "answer": "Freebase carries no queries (DATASET.json n_queries = 0). The NSM sibling release keys WebQSP questions/answers by Freebase MID; uid = hash(mid utf-8) under PYTHONHASHSEED=0 -> searchsorted(node_uid) resolves them. The legacy bridge/webqsp_positions.npy cannot (gold answers there are name-only RoG nodes, 0/5,606 resolve).",
+ "nsm_dev_simple_250_questions": {
+  "split": "dev_simple",
+  "questions": 250,
+  "topic_entities": 254,
+  "topic_resolved": 254,
+  "answers": 2990,
+  "answers_resolved": 2959,
+  "answers_non_mid_values": 5,
+  "questions_all_topic_resolved": 249,
+  "questions_any_topic_resolved": 249,
+  "questions_all_answers_resolved": 237,
+  "questions_any_answer_resolved": 241,
+  "questions_topic_and_answers_all_resolved": 236,
+  "kind_of_resolved_topic": {
+   "ENTITY_MID": 250,
+   "CVT_MEDIATOR": 4
+  },
+  "kind_of_resolved_answers": {
+   "ENTITY_MID": 2959
+  }
+ },
+ "l3w_development_population_786_rows_joined_by_WebQTrn_id": {
+  "population_rows": 786,
+  "joined_to_NSM_by_id": 786,
+  "topic_entities": 806,
+  "topic_resolved": 806,
+  "answer_mids": 8263,
+  "answer_mids_resolved": 8195,
+  "questions_all_topic_resolved": 786,
+  "questions_all_answers_resolved(no literal answers)": 773,
+  "questions_any_answer_resolved": 783,
+  "questions_fully_mappable": 773
+ },
+ "reads": "NSM dev_simple + train_simple lines whose id is in the 786-row development population only; no TEST file, no split-B id; counts only, nothing written to a served artifact",
+ "caveats": [
+  "NSM answer sets differ from the RoG gold-node sets of the 786 rows (8,263 NSM answer MIDs vs 5,606 RoG gold nodes): the retrieval target would be defined by the NSM answers",
+  "26/31 unresolved dev answers are MIDs absent from the cleaned freebase_v3; 5 are literal values (dates)",
+  "retrieval on Freebase needs the 245M-row dense encode (not complete) or a name-sharded surrogate; this record is a mapping check only"
+ ],
+ "code": {
+  "scratchpad/_fbq_nsm_probe.py": "9a3a82975c0d95179c9d2dfb091896e3f67d891bca3c10f82903cf5ab267d49d",
+  "scratchpad/_fbq_nsm_join786.py": "05fde14595ef5fa078df91e826f747af4e9bf0cd4ac937eb33f0431305567f21"
+ }
+}

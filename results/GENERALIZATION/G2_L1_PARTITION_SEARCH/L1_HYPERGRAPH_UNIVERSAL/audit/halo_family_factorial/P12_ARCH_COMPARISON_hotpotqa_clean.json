@@ -1,0 +1,22 @@
+{
+ "ds": "hotpotqa_clean",
+ "question": "does richer OFFLINE partitioning (SKN) allow simpler STRUCT-only ONLINE serving (E3) to match the shipped SK+FULL_C online mechanism (E2)?",
+ "SKN_E3_vs_SK_E2": {
+  "SK_E2_ALL_REQUIRED": 0.985,
+  "SKN_E3_ALL_REQUIRED": 0.984,
+  "delta": -0.001,
+  "gained": 5,
+  "lost": 7,
+  "p": 0.774,
+  "floor": 0.0025,
+  "sig": false,
+  "sig_regression": false
+ },
+ "cost_at_those_two_cells": {
+  "SK_E2_latency_ms_per_query": 2214.66,
+  "SKN_E3_latency_ms_per_query": 3288.619,
+  "SK_E2_mean_candidates_per_query": 453008.55,
+  "SKN_E3_mean_candidates_per_query": 455680.25
+ },
+ "NOTE": "Accuracy ties within noise (same as webqsp), but the COST direction is OPPOSITE of webqsp's finding: on hotpot SKN's STRUCT-only online path is somewhat MORE expensive than SK's shipped FULL_C path (~48% higher latency, slightly more candidates), not cheaper. hotpot's SKN hypergraph carries far more NER-driven structure (raw NER mentions 4.34M vs webqsp's 1.22M) which likely explains why STRUCT-only no longer shrinks the online candidate set here. Measured on a shared, resource-constrained local machine over a multi-hour run -- treat magnitude as directional, but the SIGN FLIP vs webqsp (cheaper there, costlier here) is a real cross-corpus finding, not just noise: a uniform 'always serve STRUCT-only under SKN' policy is NOT free everywhere."
+}

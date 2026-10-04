@@ -1,0 +1,144 @@
+{
+ "dataset": "squad",
+ "utc": "2026-09-29T04:44:25Z",
+ "K": 5000,
+ "native_K": 202,
+ "contract": {
+  "partitioner": "mtkahypar",
+  "preset": "DETERMINISTIC_QUALITY",
+  "objective": "KM1",
+  "epsilon": 0.03,
+  "seed": 0,
+  "vertex_weights": "unit",
+  "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+  "k": 5000,
+  "k_rule": "scale grid K (the frozen contract's k = N // 100 at the native K)",
+  "hypergraph_rule": "H4_SPLIT_PRESERVE",
+  "families": [
+   "STRUCT",
+   "KNN"
+  ],
+  "worker": "scratchpad/_l1hu_local_worker.py",
+  "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+  "threads": 8
+ },
+ "wsl": {
+  "distro": "Ubuntu-22.04",
+  "raw": [
+   "dev",
+   "1.26.4",
+   "3.10.12",
+   "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+   "Version: 1.6.2",
+   "12",
+   "7789"
+  ],
+  "returncode": 0
+ },
+ "guard": {
+  "peak_rss_kb": 5144856,
+  "killed": 0,
+  "rc": 0,
+  "wall_seconds": 88.9,
+  "returncode": 0,
+  "guard_script": {
+   "file": "results/L1_COVPART/parts/_scale_mtk_guard.sh",
+   "sha256": "96d0c91ce8d4e4c8f649f108945ac0b4f086092c7f97c9685df95390aa8b7693",
+   "text_equals_partition_py_GUARD_SH": true
+  },
+  "rss_cap_gb": 5.388375552,
+  "host_available_gb_at_start": 6.388375552,
+  "margin_gb": 1.0
+ },
+ "inputs": {
+  "hypergraph_file": "results/L1_COVPART/parts/squad__H4_SK_k5000.npz",
+  "hypergraph_sha256": "1c5463d8ace0bc38aa74f3d8b4ac6ff169c4841e6bf2467d197053e3639c9a86",
+  "hypergraph_content_digest": "e7ba361d8f4698aa7c6c61de1369913d97eeadd31a99035db18d802a20bc2953",
+  "hyperedges": 526539,
+  "pins": 2077225,
+  "N": 20233
+ },
+ "code": {
+  "harness": {
+   "path": "scratchpad/_l1d_scale_parts.py",
+   "sha256": "906a41c2a8b7f023d56e28ba0ab09b03e66c5051b31bac2ee328085a2e79d5ec"
+  },
+  "hypergraph_builder": {
+   "path": "src/l1_canonical/hypergraph.py",
+   "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262"
+  },
+  "frozen_rule_module": {
+   "path": "scratchpad/_l1hu_build.py",
+   "sha256": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79"
+  },
+  "partition_driver_reused": {
+   "path": "src/l1_canonical/partition.py",
+   "sha256": "45be47b5dd5d432af6b7339133e9cb4d5acf38d9ee5661368af0db3e5f175257"
+  },
+  "phg_script": {
+   "path": "scratchpad/_l1c_phg.py",
+   "sha256": "7f2a416c0a74bf79cd7a57a829b1f86b4c0997d4470e9be21333bc486f33bfe3"
+  },
+  "mtk_worker": {
+   "path": "scratchpad/_l1hu_local_worker.py",
+   "sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb"
+  }
+ },
+ "previous_attempts": [
+  {
+   "attempt": 1,
+   "STATUS": "FAILED_MEMORY_CAP",
+   "utc": "2026-09-29T04:23:32Z",
+   "rss_cap_gb": 3.5394575359999996,
+   "host_available_gb_at_start": 4.539457536,
+   "peak_rss_kb": 4625544,
+   "wall_seconds": 45.5,
+   "files_moved_to_history": {
+    "results/L1_COVPART/_history/squad__H4_SK_k5000__MTK__attempt1.FAILED.json": "32fdd5f75fcfd87120979d21288b26b9eb2d0c15a139fc054a61908ebc37afdb",
+    "results/L1_COVPART/_history/squad__H4_SK_k5000__MTK__attempt1.worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  }
+ ],
+ "retry_rule": "--retry-memory-cap: a cell whose FAILED record is FAILED_MEMORY_CAP at a host-limited cap (rss_cap_gb below the contract's HARD_CAP_GB 6.0) is run again, unchanged, only when the same cap rule min(6.0, available - 1.0) now gives a larger cap. The earlier FAILED record, worker log and stats move to results/L1_COVPART/_history/ as <ds>__H4_SK_k<K>__MTK__attempt<n>.* (sha256 recorded here). Mt-KaHyPar DETERMINISTIC_QUALITY with seed 0 and fixed threads is deterministic (the native-K rebuilds reproduce the frozen H4_SK exactly), so a retry can change only whether the run finishes, not which partition it returns. A cell killed at the contract cap itself is never retried.",
+ "STATUS": "OK",
+ "worker_stats": {
+  "hyperedges": 526539,
+  "pins": 2077225,
+  "N": 20233,
+  "k": 5000,
+  "threads": 8,
+  "ran_on": "local_wsl",
+  "edge_weighted": true,
+  "ew_min": 333,
+  "ew_max": 1000,
+  "ew_readback_exact": true,
+  "objective_km1": 288175344.0,
+  "objective_cut": 180553467.0,
+  "peak_rss_mb": 5025.0,
+  "wall_seconds": 87.0
+ },
+ "post_checks": {
+  "length_ok": true,
+  "min_block": 0,
+  "max_block": 4999,
+  "blocks_used": 5000,
+  "k": 5000,
+  "every_block_used": true,
+  "size_min": 1,
+  "size_max": 5,
+  "size_mean": 4.047,
+  "ceil_N_over_k": 5,
+  "balance_max_over_mean": 1.2356,
+  "max_over_allowed_eps003": 0.9709,
+  "balance_within_eps": true
+ },
+ "equals_frozen_H4_SK": null,
+ "output": {
+  "file": "results/L1_COVPART/parts/squad__H4_SK_k5000__MTK.npy",
+  "bytes": 161992,
+  "sha256": "1bad32460c5d9758928986d73e46e8fa8c0038743a3d1d0c8f2b30d2b007fad2",
+  "dtype": "int64",
+  "n": 20233
+ },
+ "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824"
+}

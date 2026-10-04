@@ -1,0 +1,537 @@
+{
+ "RECORD": "PREREGISTRATION",
+ "name": "TRANSFER_QMAX_BALANCED_H2_PATCH1_2WIKI_HOTPOTQA",
+ "STATUS": "PREREGISTERED_TRANSFER_SPLIT_A_ONE_SHOT",
+ "utc": "2026-09-15T23:13:14Z",
+ "written_before_any_run": true,
+ "written_before": [
+  "any replay cache, H4_SK hypergraph or PHG partition of hotpotqa or 2wiki exists (asserted at write time: none under data/l1_lowmem/<ds>/ or data/l1_canonical/<ds>/replay_cache*)",
+  "any number of any arm on hotpotqa or 2wiki",
+  "any record of the streamed-stage-2 identity test (transfer_repro_<cache>.json: none exists; only the gold-free metaqa dry run was executed, see what_was_run_before_this_record)"
+ ],
+ "what_was_run_before_this_record": {
+  "resource_survey": "TRANSFER_RESOURCE_SURVEY_2WIKI_HOTPOTQA.json (pinned below): PHG NP = 4 predicted INFEASIBLE_UNDER_PINNED_HYGIENE_CRITERION (hotpotqa, summed 6427-6854 MB vs a 7789 MB WSL VM; needs >= 9596 MB available) and INFEASIBLE_EXCEEDS_WSL_VM (2wiki, 9534-10192 MB; needs >= 14268 MB); the pinned fp32 stage 2 needs 32.2 / 36.8 GB (impossible here) -> the streamed stage 2 below",
+  "blas_measurement (gold-free, metaqa 200 rows)": "chunked Q @ E[a:b].T != whole Q @ E.T bit-for-bit on scipy-openblas 0.3.30 (DYNAMIC_ARCH Haswell, 12 threads): ~1 % of entries differ by <= 2.4e-7 multithreaded, ~0.1 % single-threaded; the difference depends on the chunk start, the chunk length (groups of 8 / 16 columns at a call's tail) and the thread count; query batches m >= 199 equal m = 200. Conclusion: bitwise identity of a streamed stage 2 is not attainable on this BLAS, and the pinned output is itself a function of N and the thread count",
+  "dry_run": "python -u scratchpad/_l1c_transfer_composite.py metaqa --reproduce --dry (171 s, no record): asserted F0(Cd, Cs) == the served base_rank; the QMAX chain under the PINNED stage 2 reproduces the L1_GEOM record (QMAX_F0 split A 0.6327, +3/-10 vs BASE 0.6397); the balanced beam reproduces every deterministic figure of h2balanced_A_metaqa.json; canonical SAFE == L1_REPLAY_metaqa.json (0.6407 / 0.6397); |QMAX_SAFE| = 50 on every split-A row; the composed-chain identities of the streamed and the pinned chain are equal to each other and to qmaxbal_A_metaqa.json (36.45 / 0 / 38.68 / 57 / 2.19 / [4.59, 4.92] / [5023.0, 5023.1, 5028.3, 5027.3]). Streamed vs pinned stage 2 on metaqa (gold-free): 11,993 of 863,136 block maxima differ, max 9 fp32 ulp; 2 of 1,998 rows have a different stage-2 order, 0 rows a different first-200 fused QMAX_F0 order, 0 rows a different fused P50 set; the streamed QMAX_F0 split-A number equals the record (0.6327, +3/-10). No coverage number of any composed arm under the streamed path was computed",
+  "coverage_of_the_streamed_composite_chain": "NEVER computed anywhere before this record (the dry run exits before it)"
+ },
+ "ruling_2026-09-16_fifteenth (verbatim essentials; full text embedded in the freeze record)": {
+  "freeze": "Freeze QMAX_BALANCED_H2_PATCH1 as the leading universal candidate. Stop selecting mechanisms on DEV_A. Finish the frozen WebQSP transfer, authorize 2Wiki + Hotpot replay/transfer for the composite, and use those results to decide whether any further scoring refinement is justified.",
+  "transfer_matrix": {
+   "WebQSP": "does real-edge H2 patching generalize to another KB? (H2_PATCH1 section 16, the frozen transfer reference, one shot -- NOT this record)",
+   "2Wiki": "does QMAX + BALANCED patch generalize to multi-hop text?",
+   "HotpotQA": "same under a second text topology",
+   "SQuAD": "easy / near-ceiling safety (already seen: 0.995)"
+  },
+  "order": "Freeze the exact composite before building their replay infrastructure (done: FREEZE_QMAX_BALANCED_H2_PATCH1.json); this record fixes the transfer before any cache is built",
+  "if_it_transfers": "consider the retrieval architecture essentially settled and move the research effort to L2 and selective full-L3",
+  "verbatim_file_sha256_prefix": "ae5eabd0acba"
+ },
+ "question": "Does the frozen composite -- QMAX_F0 ranking (served dense / SPLADE block channels + exhaustive dense block max, frozen RRF) -> canonical SAFE (frozen F6 swap) -> BALANCED_H2_PATCH1 (pinned depth-2 real-edge beam, section-21 round-robin compression, section-16 one-block patch, matched exposure) -- beat the canonical SAFE and L1 (P50) contexts on multi-hop TEXT corpora it has never seen (2Wiki, HotpotQA), at the same block budget, under the same exact test that produced its DEV_A evidence?",
+ "the_frozen_composite": {
+  "record": "FREEZE_QMAX_BALANCED_H2_PATCH1.json what_is_frozen (stages 1-7 verbatim, constants K0 60 / K_LOCK 100 / P_MAIN 50 / TOPP 200 / SEED_K 5 / B 6 / BEAM 100 / DEPTH 2 / cq 200)",
+  "one_line": "QMAX_F0 block ranking (served dense / SPLADE block channels + exhaustive dense block max, frozen RRF)  ->  canonical SAFE (frozen six-slot F6 swap over that ranking)  ->  BALANCED_H2_PATCH1 (the pinned depth-2 real-edge beam with the section-21 per-parent round-robin compression, the section-16 one-block patch in first-visit order, matched exposure)  ->  the final P50-equivalent context (50 blocks: 44 protected + 5 admitted + 1 patch)",
+  "the_one_implementation_deviation": "stage 2 (Cmax) is computed by scratchpad/_l1c_transfer_blockmax.py blockmax_scores_streamed: the same quantity (max_{v in B} q . e_v over ALL nodes, fp16 rows -> fp32, unit query, stable descending argsort, ties by block id) read from the fp16 shards in position order in chunks of 40,000 rows (one canonical shard), never holding the fp32 corpus. It is NOT a different mechanism, NOT a different constant, NOT a subset: every node of the corpus is scored exactly as in the pinned path. It is accepted for the transfer only through the gate below",
+  "everything_else": "the runner scratchpad/_l1c_transfer_composite.py copies the section-24 runner _l1c_qmaxbal.py verbatim (exec of the pinned uL3 head; block_channel / F0 / build_cache / contexts / f6_select / rr_compress / build_patches / served_by / evaluate / flip_table / cell rule); no dataset branch, no new constant; transfer caches are registered at run time by name (X.CACHES / X.DS_OF) without editing any pinned module"
+ },
+ "streamed_stage2_identity_test (runs BEFORE any transfer number; results/L1_COVPART/transfer_repro_<cache>.json, write-once)": {
+  "caches": [
+   "metaqa",
+   "metaqa_phg",
+   "squad",
+   "squad_phg",
+   "musique"
+  ],
+  "what_is_asserted (the run aborts otherwise)": [
+   "the BASE chain L1 / SAFE / H2_PATCH1 / BALANCED_H2_PATCH1 reproduces h2patch_A / h2balanced_A / qmaxbal_A exactly (ALL, ANY, paired comparisons, per hop, novel counts, patch size, gold accounting)",
+   "the QMAX chain under the PINNED stage 2 (fp32 whole-corpus matrix, _l1g_candidate.dense_blockmax_rank) reproduces qmaxbal_A_<cache>.json exactly (QMAX_F0, QMAX_SAFE, PRIMARY; the section-24 cell)",
+   "the balanced beam reproduces h2balanced_A_<cache>.json beam_diversity_DEV_A; canonical SAFE reproduces the L1_REPLAY record"
+  ],
+  "what_is_reported_descriptively": [
+   "(i) whether the streamed stage-2 ranking is bitwise identical to the pinned one",
+   "(ii) the number of block maxima that differ, the max absolute difference, the number differing by more than 1e-6 and the max difference in fp32 ulps",
+   "(iii) rows whose stage-2 order / first-200 fused QMAX_F0 order / fused P50 set differ",
+   "(iv) per arm (QMAX_F0, QMAX_SAFE, PRIMARY) the split-A rows whose coverage flips between the streamed and the pinned chain, and the served-set identity counts",
+   "the OpenBLAS thread count is left at the default and recorded"
+  ],
+  "acceptance_gate (fixed now; per cache)": {
+   "g1": "max absolute difference of the block maxima <= 1e-5 (a logic bug -- a wrong block assignment, a missed shard -- gives >= 1e-3; summation-order noise of a 1536-term fp32 dot product is ~1e-7)",
+   "g2": "on split A, the rows whose PRIMARY coverage flips between the streamed and the pinned chain <= max(2, round(0.5 % of n_A)) AND the same for QMAX_F0",
+   "g3": "the pinned chain reproduces the records (asserted)",
+   "STREAMED_STAGE2_ACCEPTED": "g1 AND g2 AND g3 on ALL five DEV_A caches; otherwise STREAMED_STAGE2_NOT_ACCEPTED and the transfer is NOT run under this record (a new ruling would be needed; nothing is tuned)"
+  },
+  "prediction": "accepted on all five: 0 flipped rows on every cache (metaqa dry run: 0 rows with a different first-200 fused order), max absolute difference ~1e-7 (a few ulps), rankings not bitwise identical on most caches",
+  "why_this_is_a_reproduction_and_not_a_selection": "the DEV_A coverage of the composite is already recorded (section 24); the identity test re-derives it under the only feasible stage-2 memory path and reports the deviation; no arm, constant or rule is chosen on these numbers",
+  "supersedes_one_clause_of_the_survey": "TRANSFER_RESOURCE_SURVEY ... composite_stage2_Cmax.streamed_reimplementation.must said 'reproduce ... bit-for-bit': shown unattainable on this BLAS by the measurement above; this record replaces that clause by the gate g1-g3 (the survey record itself is not edited)"
+ },
+ "population": {
+  "hotpotqa": {
+   "eval_split": "validation",
+   "rows_in_split": 7405,
+   "cache_rows": 2000,
+   "row_query_ids_sha256 (the cache builder must reproduce this)": "e68f50610d35992806ae13359634770c98fe9b2c99fd1073156f70787e7d8e33",
+   "rows_sha256": "8f4bea60cd622414f7cdd85d7e5780c87ffbd834ff7f134159876f1f7b0c4175",
+   "split_A_rows (evaluated, one shot)": 1031,
+   "split_B_rows (SEALED: never evaluated, never written)": 969,
+   "gold_nodes_per_query_hist": {
+    "2": 2000
+   },
+   "hop_labels": "none (hop -1 for every row): no per-hop table; per-type (comparison / bridge) and per-level (easy / medium / hard) tables are DESCRIPTIVE only",
+   "dataset_pins": {
+    "dataset": "hotpotqa",
+    "DATASET_json_RECORD_SHA256": "2f778679a52f75c045615f32095c27d8217dfce0d7600319180d985e45793c6f",
+    "CANONICAL_FREEZE_RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+    "nodes_jsonl_sha256": "c777ab4b7a64eaaa5af852265daf6ba9f9debb4658a67f0c96595662e43f182a",
+    "query_ids_sha256": "de95c4165f68dd9bfbc576fd3a464edeb775bb515bced05e45fe94a7cc5db2f2",
+    "split_files_sha256": {
+     "train": "a89d7718e117f23693e3ddbfa18f69bfe392c0445d2959f0afeef12524102932",
+     "validation": "0ca770fa9794bb60a7cc7a057bd0797cbfe4f497fcf08cdcea22b41fef624a1d",
+     "test": "cad3e111f55201dab8b80d53f92e81f729b8de433dd559fec462fbff62113592"
+    },
+    "graph_files_sha256": {
+     "structural": "bc27173133e69cc821a14733a2f3dfe9d56442aeb867cf2cdcdcc4fff9c17608",
+     "ner": "744da64a5f356b89241b2539085c9a0bf673750abd0b1822891c26f069a37137",
+     "knn": "a82ee3d96ff6943678444f12279fe666ff5e03465b818bc229844597488222ae"
+    },
+    "embedding_manifests_sha256": {
+     "dense": {
+      "docs": "8ddcda493b3fb448ff2ba225e6e4d8edb934d7ecb5a4b5185d7d670f49468c3d",
+      "queries": "879b29f957aba06cc933d352389287c552e1a3b1dcf3bd98cbb685821fa8ab64"
+     },
+     "splade": {
+      "docs": "242787448a0f411e44a3257d51b78967d98fe0c6fd2db2c3b6dbc1e86e1c81a3",
+      "queries": "c34c34dee3372efd17c0ad403402af54a04caebb60aae3723bc117dd5eb9193a"
+     }
+    },
+    "retrieval_cache_sha256": {
+     "dense": "cc48b94aa079460247b1d9f770df642f27287286335131e4e449ec6505f88b90",
+     "splade": "c6b4fe40d853593d81feaf5c8ca0a0cc1e5fc14d97d8503050cfea260f912e12"
+    },
+    "eval_split": "validation"
+   }
+  },
+  "2wiki": {
+   "eval_split": "dev",
+   "rows_in_split": 12576,
+   "cache_rows": 2000,
+   "row_query_ids_sha256 (the cache builder must reproduce this)": "1781c90d0c2cdd3ee40988081791575f3426cc3b2541cff8470e6dcc0eb7282c",
+   "rows_sha256": "9c29d7f6c978e005f6c823284b0fb28d2fb8301bc25dfe59cc27fe5b0db8d6f5",
+   "split_A_rows (evaluated, one shot)": 1004,
+   "split_B_rows (SEALED: never evaluated, never written)": 996,
+   "gold_nodes_per_query_hist": {
+    "2": 1556,
+    "4": 444
+   },
+   "hop_labels": "none (hop -1 for every row): no per-hop table; per-type (comparison / compositional / inference / bridge_comparison) tables are DESCRIPTIVE only",
+   "dataset_pins": {
+    "dataset": "2wiki",
+    "DATASET_json_RECORD_SHA256": "ddb083a8f8cc0a1e5626d17ebd834c25c7b571d72c2bea58223276da8ff26a8a",
+    "CANONICAL_FREEZE_RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+    "nodes_jsonl_sha256": "73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a",
+    "query_ids_sha256": "a350511621e260b6d7e115c8439d5cbeddf1171d42678478955096688f1793f4",
+    "split_files_sha256": {
+     "train": "fb0806780206d2ca0b35160f41883d82cb79b91c1113cb39009f1b19224be339",
+     "dev": "cf9bedff1050679157712d87f2e1b79ce424fdf34d659ff1326426deb5abb5a0",
+     "test": "18e2d1606e4f73485c9b108c94b3b2e23a03260c735cf595232e71b0d98a68f3"
+    },
+    "graph_files_sha256": {
+     "structural": "1e380eaaa62b21eaf24f6dec8302d81482bf35695bfa6cdda2421fa90cfe9c85",
+     "ner": "fd462a9c08740d57af79855efe37c1d77f30dc593ca6ad6242681c99b51a008a",
+     "knn": "a7151f6bbebdb13d7e817abcc199fd5feae17585a955f781b0690d7ee1897f99"
+    },
+    "embedding_manifests_sha256": {
+     "dense": {
+      "docs": "83f9da7acd0327744ffef30faff8c363b0f13ebc375f7af825a5142f702ad1b9",
+      "queries": "61380003e5dc6f2b45dd93cd21e6c44c4415c55661a0d551a9dd27b4c2ae3884"
+     },
+     "splade": {
+      "docs": "555100438ba7c01b7c21adfb0a73945d3be5ed976f637b15b7c6990572d7f1d4",
+      "queries": "8b78b73b50f4a73b2d3abd57f54ad044c85242bcd2dfc823f54493e7aedd37a4"
+     }
+    },
+    "retrieval_cache_sha256": {
+     "dense": "78aa39a3138cbb1d5949d6d087b6a680a53469f016581aac6a07ebed010499e1",
+     "splade": "69044b478b52c2e10cb41ee6ba44ff412b6bb826b182c43dd5fd8a0637859aeb"
+    },
+    "eval_split": "dev"
+   }
+  },
+  "rule": "src/l1_canonical/replay_cache.py build(): np.random.seed(0); shuffle(eval rows); sorted(rows[:EVAL_CAP = 2000]); drop rows without gold; A/B = sha1(query_id)[:8] & 1 (_l1x90_core.Cache)",
+  "TEST": "never read (hotpotqa test.jsonl / 2wiki test.jsonl are not opened by any stage)",
+  "DEV_A_caches": "the five section-24 caches, split A, for the identity test only (their composite numbers are already recorded)",
+  "corpus": "the full canonical corpus of each dataset (hotpotqa N 5,233,329; 2wiki N 11,539,902 nodes): QUERY SUBSETTING (the 2,000-row cache) IS ALLOWED, CORPUS SUBSETTING BY QUERY IS FORBIDDEN"
+ },
+ "arms (all at the same 50-block budget; the patch arms at matched unique-node exposure to their chain's SAFE, asserted)": {
+  "PRIMARY": "QMAX_BALANCED_H2_PATCH1 (the frozen composite; decision arm)",
+  "SAFE": "canonical SAFE of the served BASE ranking (the frozen replay contract's context; reference 1)",
+  "L1": "the served P50 of the BASE ranking (reference 2)",
+  "attribution_stages (descriptive)": [
+   "QMAX_F0 (stage 1-2 alone)",
+   "QMAX_SAFE (stage 3)",
+   "H2_PATCH1 and BALANCED_H2_PATCH1 on the BASE chain (the section-16 / 21 mechanisms without the QMAX ranking: successor evidence, per the ruling 'not retroactively the original confirmation')"
+  ],
+  "section24_cell (secondary, reported, not decided on)": "PRIMARY vs BALANCED_H2_PATCH1 and vs QMAX_F0 -> STACKS / CARRIES / CONFLICT / NEUTRAL by the section-24 rule"
+ },
+ "statistics": {
+  "test": "exact two-sided McNemar on paired split-A 0/1 ALL vectors (_l1x90_core.mcnemar): gained / lost / p",
+  "alpha": 0.01,
+  "labels": {
+   "GAIN": "gained > lost and p < 0.01",
+   "LOSS": "lost > gained and p < 0.01",
+   "NEUTRAL": "otherwise"
+  },
+  "significant_loss": "lost > gained and p < 0.05 (vs SAFE)",
+  "decision_comparisons": "four in total: PRIMARY vs SAFE and PRIMARY vs L1 on each of the two corpora; everything else (attribution stages, per type / level, flips, exposure, the section-24 cell) is descriptive",
+  "ANY": "reported, never decided on"
+ },
+ "decision_rule_pre_registered": {
+  "per_corpus": {
+   "TRANSFER_PASS": "PRIMARY vs SAFE = GAIN AND PRIMARY vs L1 = GAIN AND no significant loss vs SAFE",
+   "TRANSFER_FAIL": "PRIMARY vs SAFE = LOSS OR a significant loss vs SAFE",
+   "TRANSFER_NEUTRAL": "otherwise"
+  },
+  "cross_corpus": {
+   "TRANSFERS": "TRANSFER_PASS on both corpora",
+   "PARTIAL": "exactly one TRANSFER_PASS and no TRANSFER_FAIL",
+   "DOES_NOT_TRANSFER": "any TRANSFER_FAIL, or no TRANSFER_PASS"
+  },
+  "what_each_outcome_means_for_the_ruling": {
+   "TRANSFERS (with WebQSP)": "the retrieval architecture is essentially settled; L2 and selective full-L3 next; the MuSiQue query-conditioned rescoring line becomes eligible (its own ruling + pre-registration)",
+   "PARTIAL / DOES_NOT_TRANSFER": "the composite is a DEV_A mechanism, not a universal one; no refinement on DEV_A; what follows is the user's ruling"
+  },
+  "one_shot": "each corpus is evaluated once on split A; no re-run after a number is seen; split B stays sealed for a later ruling"
+ },
+ "predictions_stated_now": {
+  "basis": "musique (the nearest population: multi-hop text, PHG partition, 2,000 cache rows, DEV_A) -- PRIMARY 0.760 vs SAFE 0.712 (+49/-1) vs L1 0.660 (+101/-1); QMAX_F0 0.732 (+77/-5 vs L1); BALANCED_H2_PATCH1 0.727 (+15/0 vs SAFE); the section-24 cell STACKS",
+  "hotpotqa": "TRANSFER_PASS: PRIMARY GAIN vs SAFE and vs L1. Two gold paragraphs per query and a dense-reachable bridge topology: absolute ALL higher than musique (0.75-0.90 for L1 already); the QMAX ranking gain (+5-7 pts vs L1 on musique) should show, the structural patch smaller (+1-3 pts) because HotpotQA's second paragraph is usually retrieved directly",
+  "2wiki": "TRANSFER_PASS, weaker: 22 % of queries need all 4 gold paragraphs, so absolute ALL is lower and the SAFE swap / patch have more to recover; PRIMARY vs SAFE GAIN (+3-6 pts), vs L1 GAIN; comparison-type queries near L1's level, compositional / inference types carry the gain",
+  "section24_cell": "STACKS on hotpotqa; STACKS or CARRIES on 2wiki",
+  "if_wrong": "a LOSS vs SAFE on either corpus would mean the QMAX ranking's protected set drops paragraphs that the served BASE ranking kept (text topology where the exhaustive block max is not the right node -> block aggregation); the flip table attributes it"
+ },
+ "resource_gate (nothing is launched unless every clause holds; the PHG stage is the binding one)": {
+  "partition_stage": "PHG, NP = 4 (never changed silently: if 4 ranks do not fit, record the resource failure and get a separate explicit rank-count ruling), src/l1_lowmem/phg*.py pinned, inside the WSL VM; the pinned hygiene criterion of PHG_WEBQSP_AUTHORIZATION_RULING.json resource_preflight_requirement applies verbatim (host available >= 6.0 GB, pages input/s <= 300 over 5 samples, WSL available >= 1.4 x the predicted summed rank peak, disk >= 8 GB, swap growth <= 0.1 GB between samples, 3 consecutive clean samples; everything recorded immediately before a launch)",
+  "predicted_requirements (survey, PREDICTION)": {
+   "hotpotqa": "WSL available >= 9596 MB (summed NP = 4 peak 6427-6854 MB) -- INFEASIBLE on the 7789 MB VM under the criterion",
+   "2wiki": "WSL available >= 14268 MB (summed 9534-10192 MB) -- INFEASIBLE_EXCEEDS_WSL_VM",
+   "host_python": "the pinned semantic gate 8.3-12.5 GB (hotpotqa) / 12.3-18.5 GB (2wiki) on a 15.69 GB host; the replay-cache builder BIG path ~1 GB + memmapped fp16 shards; the composite runner: streamed stage 2 reads 16.1 / 18.4 GB of fp16 shards once, holds a 2000 x k fp32 matrix (0.42 / 0.48 GB), 3.2e13 / 3.7e13 FLOP"
+  },
+  "what_is_not_a_lever": [
+   "NP",
+   "a cheaper partitioner (no silent swap of the pinned PHG contract; Mt-KaHyPar is the frozen contract, PHG the validated substitute)",
+   "subsetting the corpus",
+   "signalling the foreign process (pid 22760 m3b_run.py or any successor)",
+   "raising the WSL memory cap myself (.wslconfig is a system setting: the user's decision)"
+  ],
+  "labels_if_not_run": {
+   "hotpotqa": "HOTPOTQA_TRANSFER_NOT_RUN_RESOURCE_INFEASIBLE_ON_THIS_HOST",
+   "2wiki": "2WIKI_TRANSFER_NOT_RUN_RESOURCE_INFEASIBLE_ON_THIS_HOST",
+   "if_feasible_but_never_clean": "<DS>_TRANSFER_NOT_RUN_HOST_RESOURCE_CONTENDED"
+  },
+  "host_at_this_record": {
+   "utc_of_sample": "2026-09-15T23:12:00Z",
+   "host_total_gb": 15.69,
+   "host_available_gb": 1.03,
+   "swap_used_gb": 5.32,
+   "pages_input_per_sec_mean": 21532.9,
+   "wsl": {
+    "wsl_total_mb": 7789,
+    "wsl_used_mb": 382,
+    "wsl_free_mb": 7098,
+    "wsl_buff_cache_mb": 308,
+    "wsl_available_mb": 7176,
+    "wsl_swap_total_mb": 2048,
+    "wsl_swap_used_mb": 0,
+    "wsl_loadavg_1_5_15": [
+     0.72,
+     0.72,
+     0.83
+    ]
+   },
+   "disk_free_gb": 21.49,
+   "foreign_processes": [
+    {
+     "pid": 22760,
+     "name": "python.exe",
+     "rss_mb": 6126,
+     "private_mb": 7710,
+     "started": "2026-09-15T20:11:29"
+    }
+   ],
+   "CLEAN": false,
+   "watcher_deadline_utc": "2026-09-16T11:38:18Z"
+  }
+ },
+ "build_chain_when_a_resource_decision_exists (unchanged contract)": [
+  "H4_SK hypergraph (src/l1_canonical/hypergraph.py; STRUCT + KNN; H4_SPLIT_PRESERVE; pins as counted in the survey: hotpotqa P 61,440,325 / 2wiki P 91,353,972)",
+  "PHG NP = 4 partition + pinned semantic gate + repair (src/l1_lowmem, the musique PHG_C1_con recipe)",
+  "canonical replay cache (src/l1_canonical/replay_cache.py, CONTRACT) on the frozen population above; the builder's row_query_ids_sha256 must equal the pinned value",
+  "the canonical L1 replay (L1_REPLAY_<ds>__LOWMEM__PHG_..._con.json: BASE + SAFE) -> the composite runner in transfer mode"
+ ],
+ "outputs": {
+  "identity_test": "results/L1_COVPART/transfer_repro_<cache>.{json,log} for the five DEV_A caches (write-once)",
+  "transfer": "results/L1_COVPART/transfer_A_<name>.{json,log}, name = hotpotqa_phg / 2wiki_phg (the partition tag is recorded at run time from the cache meta input_provider); split A only",
+  "summary": "results/L1_COVPART/transfer_SUMMARY.json (write-once): per-corpus outcome + cross-corpus verdict by the rule above"
+ },
+ "forbidden": [
+  "reading split B or TEST of hotpotqa / 2wiki; reading DEV_B of any DEV_A cache",
+  "any change to the composite (compression rule, patch rule, beam, F6 admission, TOPP, K0 / K_LOCK / P_MAIN, B, M_struct, M_ret, the RRF, the hub definition, cq / BLOCK of the streamed stage 2) after this record",
+  "editing any CONTRACT_FILE or pinned module; editing the two new modules after this record (their shas are pinned below and asserted at run time)",
+  "selecting anything on the identity-test numbers; changing the gate after a number is seen",
+  "signalling the foreign process; touching the WebQSP watcher; changing NP; modifying .wslconfig; writing outside data/l1_lowmem/<ds>/ and results/L1_COVPART/ (data/final_canonical/ is never written)",
+  "tuning after seeing numbers; changing a label, rule or threshold after a number is seen; re-running a corpus after seeing its number"
+ ],
+ "code": {
+  "new_modules": {
+   "_l1c_transfer_composite.py": {
+    "path": "scratchpad/_l1c_transfer_composite.py",
+    "sha256": "1241ec58e759ab99e77ff17936b6edc6b072344ea1d47a76a79f940a1047cc5b",
+    "bytes": 48979
+   },
+   "_l1c_transfer_blockmax.py": {
+    "path": "scratchpad/_l1c_transfer_blockmax.py",
+    "sha256": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+    "bytes": 5731
+   }
+  },
+  "usage": [
+   "python -u scratchpad/_l1c_transfer_composite.py <cache> --reproduce   (metaqa, metaqa_phg, squad, squad_phg, musique)",
+   "python -u scratchpad/_l1c_transfer_composite.py <name> --cache <replay_cache.npz> --safe-record <L1_REPLAY json>   (hotpotqa_phg, 2wiki_phg)"
+  ],
+  "imports_unchanged": {
+   "_l1c_microl3.py": {
+    "path": "scratchpad/_l1c_microl3.py",
+    "sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+    "bytes": 15145
+   },
+   "_l1c_h2patch.py": {
+    "path": "scratchpad/_l1c_h2patch.py",
+    "sha256": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d",
+    "bytes": 21581
+   },
+   "_l1c_h2balanced.py": {
+    "path": "scratchpad/_l1c_h2balanced.py",
+    "sha256": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe",
+    "bytes": 36015
+   },
+   "_l1c_qmaxbal.py": {
+    "path": "scratchpad/_l1c_qmaxbal.py",
+    "sha256": "cae88fa64a0516a4f55c99a4a3b464afd39e467dca42e4380a546ebbd545b1c8",
+    "bytes": 38926
+   },
+   "_l1g_candidate.py": {
+    "path": "scratchpad/_l1g_candidate.py",
+    "sha256": "b01c27a6e64b18756db1ca1d8910e8db4bb54fa019d9809698cb1369206169e0",
+    "bytes": 5630
+   },
+   "_l1g_core.py": {
+    "path": "scratchpad/_l1g_core.py",
+    "sha256": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+    "bytes": 11419
+   },
+   "_l1s_core.py": {
+    "path": "scratchpad/_l1s_core.py",
+    "sha256": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+    "bytes": 15099
+   },
+   "_l1x90_core.py": {
+    "path": "scratchpad/_l1x90_core.py",
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+    "bytes": 12081
+   },
+   "_ta_prepartition.py": {
+    "path": "scratchpad/_ta_prepartition.py",
+    "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+    "bytes": 11737
+   },
+   "_l1ps_router.py": {
+    "path": "scratchpad/_l1ps_router.py",
+    "sha256": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9",
+    "bytes": 19503
+   },
+   "_l1kb_core.py": {
+    "path": "scratchpad/_l1kb_core.py",
+    "sha256": "f804f92d3ddead9ffdfd2a69981a3470f49346f9163f6f4a5ee3c546275cf8da",
+    "bytes": 5770
+   },
+   "src/l1_canonical/adapter.py": {
+    "path": "src/l1_canonical/adapter.py",
+    "sha256": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+    "bytes": 26015
+   },
+   "src/l1_canonical/replay_cache.py": {
+    "path": "src/l1_canonical/replay_cache.py",
+    "sha256": "1fc5411c9f12f25d81586aabdb1af0da371752f20be5d4d09d8d17529a89f0d1",
+    "bytes": 22928
+   },
+   "src/l1_canonical/hypergraph.py": {
+    "path": "src/l1_canonical/hypergraph.py",
+    "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+    "bytes": 12200
+   }
+  },
+  "contract_hash_L1": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824"
+ },
+ "records_read_only": {
+  "h2patch_A_metaqa.json": {
+   "path": "results/L1_COVPART/h2patch_A_metaqa.json",
+   "sha256": "f5b5a91cba8d906b4189e4caf023cbab445ae3dbab15786a9abee236f3297438",
+   "bytes": 8845
+  },
+  "h2balanced_A_metaqa.json": {
+   "path": "results/L1_COVPART/h2balanced_A_metaqa.json",
+   "sha256": "761f4b952aae04441b99708bfa9ca6400038975542d3f957f35f758c1778a557",
+   "bytes": 15085
+  },
+  "qmaxbal_A_metaqa.json": {
+   "path": "results/L1_COVPART/qmaxbal_A_metaqa.json",
+   "sha256": "10dbb5c59ee3a795a974234d5bcbc935c31c4246be39e1683f2e516feefb7cf3",
+   "bytes": 24792
+  },
+  "h2patch_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/h2patch_A_metaqa_phg.json",
+   "sha256": "b2e2b57f16a3e724644e44f329b3fc0181bac4ccd6b787d444c003987e0d2cef",
+   "bytes": 8876
+  },
+  "h2balanced_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/h2balanced_A_metaqa_phg.json",
+   "sha256": "b34469047f0ba0c2e8855ed220d2b0b64b289d5386509cb51405ab24877498a6",
+   "bytes": 15123
+  },
+  "qmaxbal_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/qmaxbal_A_metaqa_phg.json",
+   "sha256": "5bb55780ee212bf88883d3805672a4a8d610dd97eac2ac769c1c802ca3265235",
+   "bytes": 24902
+  },
+  "h2patch_A_squad.json": {
+   "path": "results/L1_COVPART/h2patch_A_squad.json",
+   "sha256": "cfb66bc7aa2ca53c4c0447b03d7b272e69c45e73589e50812ee099d7b886fe7b",
+   "bytes": 3944
+  },
+  "h2balanced_A_squad.json": {
+   "path": "results/L1_COVPART/h2balanced_A_squad.json",
+   "sha256": "512e21083734265f5bbb57190f94271b87f1e93add24cca98aa6574ed864180e",
+   "bytes": 8110
+  },
+  "qmaxbal_A_squad.json": {
+   "path": "results/L1_COVPART/qmaxbal_A_squad.json",
+   "sha256": "6c4b54b7f6b37f0558cece43ddba9a9842f419a4e71e24912f81b279ac3f073c",
+   "bytes": 14799
+  },
+  "h2patch_A_squad_phg.json": {
+   "path": "results/L1_COVPART/h2patch_A_squad_phg.json",
+   "sha256": "e745473a47cb5552bf5d1559c0d1153f8dcaf49a2a7c30e704e5dee964844c45",
+   "bytes": 3894
+  },
+  "h2balanced_A_squad_phg.json": {
+   "path": "results/L1_COVPART/h2balanced_A_squad_phg.json",
+   "sha256": "178887d12488c278320d062244012dbdb9ce3c90b5c819b9d94b296e633a9511",
+   "bytes": 8131
+  },
+  "qmaxbal_A_squad_phg.json": {
+   "path": "results/L1_COVPART/qmaxbal_A_squad_phg.json",
+   "sha256": "09877f5461a18abffcc63f2e84da4ae2b6f0a1f997d515a9c05859ede97f82b7",
+   "bytes": 14807
+  },
+  "h2patch_A_musique.json": {
+   "path": "results/L1_COVPART/h2patch_A_musique.json",
+   "sha256": "8cdc85482ada7e131cec09ac38377365822180ab7b044f9d3f0124f33e2c197d",
+   "bytes": 4021
+  },
+  "h2balanced_A_musique.json": {
+   "path": "results/L1_COVPART/h2balanced_A_musique.json",
+   "sha256": "a092cb28e68de1fc0de1f5ce6a6e6f85fa8dbd0674bf7db37a52c35cd15c20d1",
+   "bytes": 8226
+  },
+  "qmaxbal_A_musique.json": {
+   "path": "results/L1_COVPART/qmaxbal_A_musique.json",
+   "sha256": "50590f7ebbb10f5e554ec7451154a8456f034245bc61a17b6257e0bd6ef4e103",
+   "bytes": 15085
+  },
+  "qmaxbal_SUMMARY.json": {
+   "path": "results/L1_COVPART/qmaxbal_SUMMARY.json",
+   "sha256": "b8c1544fc3dd2f9ff263d7c4fa57157d9c4651463dcad081434f1333ce4b045b",
+   "bytes": 26782
+  },
+  "FREEZE_QMAX_BALANCED_H2_PATCH1.json": {
+   "path": "results/L1_COVPART/FREEZE_QMAX_BALANCED_H2_PATCH1.json",
+   "sha256": "f81ebb84b3c4a98c8c0b16337fb0febabc360ee51dd8eedbc9a99410c1f3b152",
+   "bytes": 47590
+  },
+  "TRANSFER_RESOURCE_SURVEY_2WIKI_HOTPOTQA.json": {
+   "path": "results/L1_COVPART/TRANSFER_RESOURCE_SURVEY_2WIKI_HOTPOTQA.json",
+   "sha256": "6f01efa7dde2596522765309a47b67d260c4928d35e722db45be821dc6dab1f0",
+   "bytes": 29455
+  },
+  "PREREGISTRATION_QMAX_BALANCED_H2_PATCH1.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_QMAX_BALANCED_H2_PATCH1.json",
+   "sha256": "4230b2610f680381e4ec4dcedfb5454909d33a7ee526cad0b566866598a20209",
+   "bytes": 28065
+  },
+  "PHG_WEBQSP_AUTHORIZATION_RULING.json": {
+   "path": "results/L1_LOWMEM/PHG_WEBQSP_AUTHORIZATION_RULING.json",
+   "sha256": "b1266fcc19500d797b876aaadef2f4b5fd7d3730f2dd844d6e6680d4d953b36b",
+   "bytes": 22387
+  },
+  "L1_REPLAY_metaqa.json": {
+   "path": "results/L1_CANONICAL/L1_REPLAY_metaqa.json",
+   "sha256": "7e5ef35b549791d9b6e790615a80ad7558f4626a07e0aaccca987f1834bc0972",
+   "bytes": 23067
+  },
+  "L1_REPLAY_squad.json": {
+   "path": "results/L1_CANONICAL/L1_REPLAY_squad.json",
+   "sha256": "c39aa79836c0296fafa957c01f5004f81968df3e7f5baee873687d1061e09d58",
+   "bytes": 22709
+  },
+  "L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json",
+   "sha256": "d4ff6870236303c4b88fbcdd4c421d33719eb19dba2829d87a53cc09f5032c17",
+   "bytes": 33356
+  },
+  "L1_REPLAY_squad__LOWMEM__PHG_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_squad__LOWMEM__PHG_con.json",
+   "sha256": "dc14ab54ea656f2f4f495c59365b84836b70cd3c27a22c646a210e4d9d5d8846",
+   "bytes": 34987
+  },
+  "L1_REPLAY_musique__LOWMEM__PHG_C1_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json",
+   "sha256": "207ad4bb3b292f7930bafba94551881896d54e80edc89974bc28c6bad71dac76",
+   "bytes": 35090
+  }
+ },
+ "caches_read_only": {
+  "metaqa": {
+   "path": "data/l1_canonical/metaqa/replay_cache.npz",
+   "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b",
+   "bytes": 5390599
+  },
+  "metaqa_phg": {
+   "path": "data/l1_lowmem/metaqa/replay_cache__LOWMEM__PHG_REPAIR1_con.npz",
+   "sha256": "584e17dec26d0408d5253a3f79e471bc7ec128f6dde744581bb6e502da5b4e5b",
+   "bytes": 5386215
+  },
+  "squad": {
+   "path": "data/l1_canonical/squad/replay_cache.npz",
+   "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6",
+   "bytes": 5320148
+  },
+  "squad_phg": {
+   "path": "data/l1_lowmem/squad/replay_cache__LOWMEM__PHG_con.npz",
+   "sha256": "edd9b36bb4ba45ff0579c0591f19dc263ae84296f7f9299684974530845f20ab",
+   "bytes": 5312713
+  },
+  "musique": {
+   "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+   "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5",
+   "bytes": 6183023
+  }
+ },
+ "keys_npz_read_only": {
+  "hotpotqa": null,
+  "2wiki": null
+ },
+ "platform": {
+  "python": "3.13.5",
+  "machine": "AMD64",
+  "system": "Windows-11-10.0.26200-SP0"
+ }
+}

@@ -1,0 +1,4810 @@
+{
+ "mode": "L1_DEVELOPMENT_BLOCK_CEILING (gold-aware diagnostic; never a candidate)",
+ "definitions": "L1 DEVELOPMENT diagnostic (gold-aware, never a candidate): the block ceiling of static partition localization.\n\nEvery step-1..4 variant scores a node through its block (L(u) = score of P(u)), so within the LOC arm a query's gold set\nis complete at budget M only if every gold block has been served; with the blocks served in the best possible order (the\ngold blocks first, smallest total first) the query is complete at M iff  sum over the distinct gold blocks B of |B| <= M.\n    BLOCK_CEILING@M = share of queries whose distinct gold blocks hold <= M nodes in total\nThe same at the step-3 region levels (regions of level l instead of blocks), and the number of distinct gold blocks per\nquery by stratum.  Reads only the population's gold nodes and the frozen partitions; no query embedding, no product.\n\nUsage: python scratchpad/_l1d_ceiling.py <tag>  ->  results/L1_DEV/ceiling_blocks__<tag>.json (write-once) + a markdown table.",
+ "code": {
+  "path": "scratchpad/_l1d_ceiling.py",
+  "sha256": "e0f2cc6a5bc7bc2ae4b8e5e0fe199bfca4a523d755b93d9bb6865d5d9d45cff3",
+  "hier": {
+   "path": "scratchpad/_l1d_hier.py",
+   "sha256": "6a6b707e6ef3255aa56558f9a49321e876a462ba2a17a622c3df87789738f67a"
+  },
+  "lib": {
+   "path": "scratchpad/_l1d_lib.py",
+   "sha256": "dafe39b2a0d77c23ae7eed2c8d8ccf93c88dfc02ebbceaefe143ce0a9a6c275a"
+  }
+ },
+ "datasets": {
+  "metaqa": {
+   "n_rows": 1998,
+   "population": {
+    "file": {
+     "path": "results/L1_DEV/loc_population.json",
+     "sha256": "c7f7080639d66f1e8f5c2fb90aff7da49dfda5f63a5fe558fe8c266bd5fef47e"
+    },
+    "n": 1998,
+    "first_rows_only": null,
+    "query_ids_sha256": "07ec3d7a46ee975c05197768ae792499f7ab51aef3ca75579b926f5ca5fe85b6",
+    "label": "development population (historically exposed; not held-out; freely reusable)"
+   },
+   "cells": {
+    "metaqa": {
+     "partition": "H4_SK",
+     "levels": {
+      "0": {
+       "regions": 432,
+       "region_nodes_median": 102.0,
+       "ceiling": {
+        "100": 0.0806,
+        "250": 0.6967,
+        "500": 0.8128,
+        "1000": 0.8809,
+        "2000": 0.9294,
+        "5000": 0.985
+       },
+       "distinct_gold_regions": {
+        "mean": 5.15,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 120.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 518.14,
+        "median": 104.0,
+        "min": 14.0,
+        "max": 12046.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.982,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.82,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 28.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.8589,
+          "ceiling@5000": 0.982,
+          "distinct_gold_regions": {
+           "mean": 5.84,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 90.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.8018,
+          "ceiling@5000": 0.973,
+          "distinct_gold_regions": {
+           "mean": 7.79,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 120.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.56,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.17,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.9,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.9861,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 4.06,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 10.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.3097,
+          "ceiling@5000": 0.9115,
+          "distinct_gold_regions": {
+           "mean": 21.28,
+           "median": 16.0,
+           "min": 1.0,
+           "max": 120.0
+          }
+         }
+        }
+       }
+      },
+      "1": {
+       "regions": 216,
+       "region_nodes_median": 202.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.5706,
+        "500": 0.7067,
+        "1000": 0.8168,
+        "2000": 0.8834,
+        "5000": 0.9444
+       },
+       "distinct_gold_regions": {
+        "mean": 4.96,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 100.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 959.67,
+        "median": 205.0,
+        "min": 118.0,
+        "max": 20011.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.9444,
+          "ceiling@5000": 0.9985,
+          "distinct_gold_regions": {
+           "mean": 1.8,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 25.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.7883,
+          "ceiling@5000": 0.9369,
+          "distinct_gold_regions": {
+           "mean": 5.61,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 79.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.7177,
+          "ceiling@5000": 0.8979,
+          "distinct_gold_regions": {
+           "mean": 7.46,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 100.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.55,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.17,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.86,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.5923,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 4.0,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 10.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.2655,
+          "ceiling@5000": 0.6726,
+          "distinct_gold_regions": {
+           "mean": 20.23,
+           "median": 15.0,
+           "min": 1.0,
+           "max": 100.0
+          }
+         }
+        }
+       }
+      },
+      "2": {
+       "regions": 108,
+       "region_nodes_median": 403.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.5721,
+        "1000": 0.7007,
+        "2000": 0.8188,
+        "5000": 0.9029
+       },
+       "distinct_gold_regions": {
+        "mean": 4.64,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 75.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 1824.27,
+        "median": 407.0,
+        "min": 322.0,
+        "max": 29886.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.8544,
+          "ceiling@5000": 0.991,
+          "distinct_gold_regions": {
+           "mean": 1.78,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 25.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.6471,
+          "ceiling@5000": 0.8814,
+          "distinct_gold_regions": {
+           "mean": 5.26,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 66.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.6006,
+          "ceiling@5000": 0.8363,
+          "distinct_gold_regions": {
+           "mean": 6.89,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 75.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.54,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.5333,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.15,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.3678,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.83,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.3833,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 3.93,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 10.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.1681,
+          "ceiling@5000": 0.4277,
+          "distinct_gold_regions": {
+           "mean": 18.45,
+           "median": 15.0,
+           "min": 1.0,
+           "max": 75.0
+          }
+         }
+        }
+       }
+      },
+      "3": {
+       "regions": 54,
+       "region_nodes_median": 804.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.5746,
+        "2000": 0.7112,
+        "5000": 0.8544
+       },
+       "distinct_gold_regions": {
+        "mean": 4.14,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 48.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 3281.78,
+        "median": 810.0,
+        "min": 728.0,
+        "max": 38384.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.7372,
+          "ceiling@5000": 0.9685,
+          "distinct_gold_regions": {
+           "mean": 1.74,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 21.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.5255,
+          "ceiling@5000": 0.8288,
+          "distinct_gold_regions": {
+           "mean": 4.68,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 46.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.461,
+          "ceiling@5000": 0.7658,
+          "distinct_gold_regions": {
+           "mean": 6.0,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 48.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.4685,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.53,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.3167,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.12,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.2414,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.76,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.2997,
+          "ceiling@5000": 0.8537,
+          "distinct_gold_regions": {
+           "mean": 3.81,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 10.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0914,
+          "ceiling@5000": 0.2655,
+          "distinct_gold_regions": {
+           "mean": 15.63,
+           "median": 13.0,
+           "min": 1.0,
+           "max": 48.0
+          }
+         }
+        }
+       }
+      },
+      "4": {
+       "regions": 27,
+       "region_nodes_median": 1608.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.5941,
+        "5000": 0.7868
+       },
+       "distinct_gold_regions": {
+        "mean": 3.48,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 27.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 5508.06,
+        "median": 1613.0,
+        "min": 1460.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.9219,
+          "distinct_gold_regions": {
+           "mean": 1.69,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 17.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.7447,
+          "distinct_gold_regions": {
+           "mean": 3.91,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 27.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.6937,
+          "distinct_gold_regions": {
+           "mean": 4.83,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 27.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.51,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.06,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.6667,
+          "distinct_gold_regions": {
+           "mean": 2.64,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.4878,
+          "distinct_gold_regions": {
+           "mean": 3.59,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 10.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.2625,
+          "distinct_gold_regions": {
+           "mean": 11.99,
+           "median": 12.0,
+           "min": 1.0,
+           "max": 27.0
+          }
+         }
+        }
+       }
+      },
+      "5": {
+       "regions": 14,
+       "region_nodes_median": 3209.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.01,
+        "5000": 0.6111
+       },
+       "distinct_gold_regions": {
+        "mean": 2.79,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 14.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 8709.34,
+        "median": 3211.0,
+        "min": 1621.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.7568,
+          "distinct_gold_regions": {
+           "mean": 1.6,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 14.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.5586,
+          "distinct_gold_regions": {
+           "mean": 3.11,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 14.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.518,
+          "distinct_gold_regions": {
+           "mean": 3.66,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 14.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.5664,
+          "distinct_gold_regions": {
+           "mean": 1.49,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3833,
+          "distinct_gold_regions": {
+           "mean": 2.0,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3103,
+          "distinct_gold_regions": {
+           "mean": 2.49,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3345,
+          "distinct_gold_regions": {
+           "mean": 3.33,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 9.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.1416,
+          "distinct_gold_regions": {
+           "mean": 8.24,
+           "median": 9.0,
+           "min": 1.0,
+           "max": 14.0
+          }
+         }
+        }
+       }
+      },
+      "6": {
+       "regions": 7,
+       "region_nodes_median": 6433.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.3809
+       },
+       "distinct_gold_regions": {
+        "mean": 2.18,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 7.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 12923.54,
+        "median": 6439.0,
+        "min": 4695.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3408,
+          "distinct_gold_regions": {
+           "mean": 1.5,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 7.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3453,
+          "distinct_gold_regions": {
+           "mean": 2.38,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 7.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.4565,
+          "distinct_gold_regions": {
+           "mean": 2.66,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 7.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.5189,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3951,
+          "distinct_gold_regions": {
+           "mean": 1.46,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3111,
+          "distinct_gold_regions": {
+           "mean": 1.92,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.2874,
+          "distinct_gold_regions": {
+           "mean": 2.34,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3275,
+          "distinct_gold_regions": {
+           "mean": 2.88,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 7.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.1416,
+          "distinct_gold_regions": {
+           "mean": 5.13,
+           "median": 6.0,
+           "min": 1.0,
+           "max": 7.0
+          }
+         }
+        }
+       }
+      },
+      "7": {
+       "regions": 4,
+       "region_nodes_median": 11928.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.73,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 19241.1,
+        "median": 12830.0,
+        "min": 6491.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.36,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.86,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.96,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.4,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.75,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.99,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.29,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 3.2,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "8": {
+       "regions": 2,
+       "region_nodes_median": 21617.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.32,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 2.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 27317.59,
+        "median": 25717.0,
+        "min": 17517.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.19,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.37,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.41,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.26,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.47,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.56,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.59,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.79,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         }
+        }
+       }
+      },
+      "9": {
+       "regions": 1,
+       "region_nodes_median": 43234.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 43234.0,
+        "median": 43234.0,
+        "min": 43234.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "metaqa_phg": {
+     "partition": "LOWMEM__PHG_REPAIR1_con",
+     "levels": {
+      "0": {
+       "regions": 432,
+       "region_nodes_median": 103.0,
+       "ceiling": {
+        "100": 0.0255,
+        "250": 0.7032,
+        "500": 0.8083,
+        "1000": 0.8779,
+        "2000": 0.9309,
+        "5000": 0.9845
+       },
+       "distinct_gold_regions": {
+        "mean": 5.11,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 117.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 518.25,
+        "median": 103.0,
+        "min": 1.0,
+        "max": 11931.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.9805,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.84,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 29.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.8559,
+          "ceiling@5000": 0.9805,
+          "distinct_gold_regions": {
+           "mean": 5.88,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 89.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.7973,
+          "ceiling@5000": 0.973,
+          "distinct_gold_regions": {
+           "mean": 7.62,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 117.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.56,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.24,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.9,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.9861,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 4.13,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 10.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.292,
+          "ceiling@5000": 0.9086,
+          "distinct_gold_regions": {
+           "mean": 20.98,
+           "median": 15.0,
+           "min": 1.0,
+           "max": 117.0
+          }
+         }
+        }
+       }
+      },
+      "1": {
+       "regions": 217,
+       "region_nodes_median": 205.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.5546,
+        "500": 0.7167,
+        "1000": 0.8198,
+        "2000": 0.8829,
+        "5000": 0.9469
+       },
+       "distinct_gold_regions": {
+        "mean": 4.94,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 106.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 942.86,
+        "median": 206.0,
+        "min": 103.0,
+        "max": 21080.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.9444,
+          "ceiling@5000": 0.9985,
+          "distinct_gold_regions": {
+           "mean": 1.82,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 29.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.7883,
+          "ceiling@5000": 0.9414,
+          "distinct_gold_regions": {
+           "mean": 5.65,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 82.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.7267,
+          "ceiling@5000": 0.9009,
+          "distinct_gold_regions": {
+           "mean": 7.35,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 106.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.56,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.22,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.85,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.6132,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 4.08,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 10.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.2655,
+          "ceiling@5000": 0.6873,
+          "distinct_gold_regions": {
+           "mean": 20.01,
+           "median": 15.0,
+           "min": 1.0,
+           "max": 106.0
+          }
+         }
+        }
+       }
+      },
+      "2": {
+       "regions": 109,
+       "region_nodes_median": 408.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.2943,
+        "500": 0.5576,
+        "1000": 0.7192,
+        "2000": 0.8223,
+        "5000": 0.9049
+       },
+       "distinct_gold_regions": {
+        "mean": 4.58,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 78.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 1736.93,
+        "median": 411.0,
+        "min": 206.0,
+        "max": 31127.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.8514,
+          "ceiling@5000": 0.9925,
+          "distinct_gold_regions": {
+           "mean": 1.79,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 26.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.6562,
+          "ceiling@5000": 0.8859,
+          "distinct_gold_regions": {
+           "mean": 5.23,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 68.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.6502,
+          "ceiling@5000": 0.8363,
+          "distinct_gold_regions": {
+           "mean": 6.7,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 78.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.55,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.5333,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.21,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.3563,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.79,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.4146,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 3.94,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 10.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.2537,
+          "ceiling@5000": 0.4395,
+          "distinct_gold_regions": {
+           "mean": 18.02,
+           "median": 14.0,
+           "min": 1.0,
+           "max": 78.0
+          }
+         }
+        }
+       }
+      },
+      "3": {
+       "regions": 55,
+       "region_nodes_median": 814.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.2963,
+        "1000": 0.5626,
+        "2000": 0.7262,
+        "5000": 0.8549
+       },
+       "distinct_gold_regions": {
+        "mean": 4.08,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 51.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 3062.98,
+        "median": 819.0,
+        "min": 412.0,
+        "max": 40364.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.7402,
+          "ceiling@5000": 0.9655,
+          "distinct_gold_regions": {
+           "mean": 1.74,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 22.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.5285,
+          "ceiling@5000": 0.8318,
+          "distinct_gold_regions": {
+           "mean": 4.64,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 46.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.4189,
+          "ceiling@5000": 0.7673,
+          "distinct_gold_regions": {
+           "mean": 5.88,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 51.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.4685,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.53,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.2944,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.14,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.2644,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.75,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.2544,
+          "ceiling@5000": 0.8571,
+          "distinct_gold_regions": {
+           "mean": 3.79,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 9.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0649,
+          "ceiling@5000": 0.2655,
+          "distinct_gold_regions": {
+           "mean": 15.31,
+           "median": 13.0,
+           "min": 1.0,
+           "max": 51.0
+          }
+         }
+        }
+       }
+      },
+      "4": {
+       "regions": 28,
+       "region_nodes_median": 1626.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.3048,
+        "2000": 0.5671,
+        "5000": 0.7858
+       },
+       "distinct_gold_regions": {
+        "mean": 3.45,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 28.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 5107.06,
+        "median": 1634.0,
+        "min": 823.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.2838,
+          "ceiling@5000": 0.9174,
+          "distinct_gold_regions": {
+           "mean": 1.69,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 19.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.2838,
+          "ceiling@5000": 0.7447,
+          "distinct_gold_regions": {
+           "mean": 3.86,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 28.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.3468,
+          "ceiling@5000": 0.6952,
+          "distinct_gold_regions": {
+           "mean": 4.79,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 28.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.4286,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.3462,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.52,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.2389,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.12,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.2529,
+          "ceiling@5000": 0.6782,
+          "distinct_gold_regions": {
+           "mean": 2.63,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.2509,
+          "ceiling@5000": 0.4808,
+          "distinct_gold_regions": {
+           "mean": 3.59,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 9.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0649,
+          "ceiling@5000": 0.2596,
+          "distinct_gold_regions": {
+           "mean": 11.78,
+           "median": 11.0,
+           "min": 1.0,
+           "max": 28.0
+          }
+         }
+        }
+       }
+      },
+      "5": {
+       "regions": 14,
+       "region_nodes_median": 3243.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.3058,
+        "5000": 0.6507
+       },
+       "distinct_gold_regions": {
+        "mean": 2.78,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 14.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 8096.24,
+        "median": 3262.0,
+        "min": 1651.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.7673,
+          "distinct_gold_regions": {
+           "mean": 1.58,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 14.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.5751,
+          "distinct_gold_regions": {
+           "mean": 3.07,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 14.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.6096,
+          "distinct_gold_regions": {
+           "mean": 3.68,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 14.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.6154,
+          "distinct_gold_regions": {
+           "mean": 1.51,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.4389,
+          "distinct_gold_regions": {
+           "mean": 2.01,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3448,
+          "distinct_gold_regions": {
+           "mean": 2.52,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.4146,
+          "distinct_gold_regions": {
+           "mean": 3.26,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 8.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.2271,
+          "distinct_gold_regions": {
+           "mean": 8.21,
+           "median": 9.0,
+           "min": 1.0,
+           "max": 14.0
+          }
+         }
+        }
+       }
+      },
+      "6": {
+       "regions": 7,
+       "region_nodes_median": 6408.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.3278
+       },
+       "distinct_gold_regions": {
+        "mean": 2.17,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 7.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 12947.4,
+        "median": 6519.0,
+        "min": 4928.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3198,
+          "distinct_gold_regions": {
+           "mean": 1.47,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 7.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3033,
+          "distinct_gold_regions": {
+           "mean": 2.35,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 7.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3604,
+          "distinct_gold_regions": {
+           "mean": 2.68,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 7.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.4701,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3706,
+          "distinct_gold_regions": {
+           "mean": 1.46,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.25,
+          "distinct_gold_regions": {
+           "mean": 1.93,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.2644,
+          "distinct_gold_regions": {
+           "mean": 2.38,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.2578,
+          "distinct_gold_regions": {
+           "mean": 2.8,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 6.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0649,
+          "distinct_gold_regions": {
+           "mean": 5.11,
+           "median": 6.0,
+           "min": 1.0,
+           "max": 7.0
+          }
+         }
+        }
+       }
+      },
+      "7": {
+       "regions": 4,
+       "region_nodes_median": 11981.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.74,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 19704.09,
+        "median": 12547.0,
+        "min": 6542.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.33,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.85,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.04,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.39,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.74,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.99,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.3,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 3.28,
+           "median": 4.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "8": {
+       "regions": 2,
+       "region_nodes_median": 21617.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.37,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 2.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 30408.02,
+        "median": 24145.0,
+        "min": 19089.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.18,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.41,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.53,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.31,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.52,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.59,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.68,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.93,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         }
+        }
+       }
+      },
+      "9": {
+       "regions": 1,
+       "region_nodes_median": 43234.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 43234.0,
+        "median": 43234.0,
+        "min": 43234.0,
+        "max": 43234.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop1": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "hop2": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "hop3": {
+          "n": 666,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "1": {
+          "n": 819,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "2": {
+          "n": 286,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "3": {
+          "n": 180,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "4": {
+          "n": 87,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "5-10": {
+          "n": 287,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "11+": {
+          "n": 339,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "musique": {
+   "n_rows": 2000,
+   "population": {
+    "file": {
+     "path": "results/L1_DEV/loc_population.json",
+     "sha256": "c7f7080639d66f1e8f5c2fb90aff7da49dfda5f63a5fe558fe8c266bd5fef47e"
+    },
+    "n": 2000,
+    "first_rows_only": null,
+    "query_ids_sha256": "34766656c837236f5a748f8276e65bcfc287211af6e58eac3c16ff5a40421380",
+    "label": "development population (historically exposed; not held-out; freely reusable)"
+   },
+   "cells": {
+    "musique": {
+     "partition": "LOWMEM__PHG_C1_con",
+     "levels": {
+      "0": {
+       "regions": 1175,
+       "region_nodes_median": 103.0,
+       "ceiling": {
+        "100": 0.003,
+        "250": 0.731,
+        "500": 1.0,
+        "1000": 1.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 2.27,
+        "median": 2.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 230.87,
+        "median": 206.0,
+        "min": 90.0,
+        "max": 413.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.9,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.79,
+           "median": 3.0,
+           "min": 2.0,
+           "max": 3.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 3.66,
+           "median": 4.0,
+           "min": 2.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.9,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.79,
+           "median": 3.0,
+           "min": 2.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 3.66,
+           "median": 4.0,
+           "min": 2.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.52,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.2,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "1": {
+       "regions": 589,
+       "region_nodes_median": 205.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0885,
+        "500": 0.7415,
+        "1000": 1.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 2.24,
+        "median": 2.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 445.61,
+        "median": 410.0,
+        "min": 104.0,
+        "max": 824.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.87,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.76,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 3.63,
+           "median": 4.0,
+           "min": 2.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.87,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.76,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 3.63,
+           "median": 4.0,
+           "min": 2.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.49,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.17,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "2": {
+       "regions": 295,
+       "region_nodes_median": 409.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.104,
+        "1000": 0.7525,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 2.21,
+        "median": 2.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 878.65,
+        "median": 817.0,
+        "min": 291.0,
+        "max": 1645.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.85,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 0.2896,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.71,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 0.067,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 3.56,
+           "median": 4.0,
+           "min": 2.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.85,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 0.2896,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.71,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 0.067,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 3.56,
+           "median": 4.0,
+           "min": 2.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 0.5995,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.44,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 0.7928,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.14,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "3": {
+       "regions": 148,
+       "region_nodes_median": 816.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.1265,
+        "2000": 0.76,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 2.17,
+        "median": 2.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 1725.33,
+        "median": 1630.0,
+        "min": 615.0,
+        "max": 3289.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 0.1804,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.82,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 0.0158,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.67,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 3.48,
+           "median": 4.0,
+           "min": 2.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 0.1804,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.82,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 0.0158,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.67,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 3.48,
+           "median": 4.0,
+           "min": 2.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 0.1127,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.41,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 0.1301,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.11,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "4": {
+       "regions": 74,
+       "region_nodes_median": 1629.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0025,
+        "2000": 0.15,
+        "5000": 0.9475
+       },
+       "distinct_gold_regions": {
+        "mean": 2.13,
+        "median": 2.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 3390.43,
+        "median": 3252.0,
+        "min": 861.0,
+        "max": 6565.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 0.0037,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.79,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.63,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.4588,
+          "distinct_gold_regions": {
+           "mean": 3.44,
+           "median": 4.0,
+           "min": 2.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 0.0037,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.79,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 2.63,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.4588,
+          "distinct_gold_regions": {
+           "mean": 3.44,
+           "median": 4.0,
+           "min": 2.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.8657,
+          "distinct_gold_regions": {
+           "mean": 2.37,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 0.0032,
+          "ceiling@5000": 0.969,
+          "distinct_gold_regions": {
+           "mean": 2.07,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "5": {
+       "regions": 37,
+       "region_nodes_median": 3255.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.1875
+       },
+       "distinct_gold_regions": {
+        "mean": 2.07,
+        "median": 2.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 6576.94,
+        "median": 6410.0,
+        "min": 2484.0,
+        "max": 13132.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.261,
+          "distinct_gold_regions": {
+           "mean": 1.74,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0407,
+          "distinct_gold_regions": {
+           "mean": 2.56,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0052,
+          "distinct_gold_regions": {
+           "mean": 3.29,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.261,
+          "distinct_gold_regions": {
+           "mean": 1.74,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0407,
+          "distinct_gold_regions": {
+           "mean": 2.56,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0052,
+          "distinct_gold_regions": {
+           "mean": 3.29,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.1751,
+          "distinct_gold_regions": {
+           "mean": 2.28,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.1908,
+          "distinct_gold_regions": {
+           "mean": 2.02,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "6": {
+       "regions": 19,
+       "region_nodes_median": 6392.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.01
+       },
+       "distinct_gold_regions": {
+        "mean": 2.0,
+        "median": 2.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 12471.37,
+        "median": 12683.0,
+        "min": 3291.0,
+        "max": 26180.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0139,
+          "distinct_gold_regions": {
+           "mean": 1.7,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0023,
+          "distinct_gold_regions": {
+           "mean": 2.48,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 3.03,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0139,
+          "distinct_gold_regions": {
+           "mean": 1.7,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0023,
+          "distinct_gold_regions": {
+           "mean": 2.48,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 3.03,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0096,
+          "distinct_gold_regions": {
+           "mean": 2.15,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0101,
+          "distinct_gold_regions": {
+           "mean": 1.96,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "7": {
+       "regions": 10,
+       "region_nodes_median": 12646.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.91,
+        "median": 2.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 22909.47,
+        "median": 24700.0,
+        "min": 6558.0,
+        "max": 51257.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.63,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.36,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.84,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.63,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.36,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.84,
+           "median": 3.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.05,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.87,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "8": {
+       "regions": 5,
+       "region_nodes_median": 25292.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.76,
+        "median": 2.0,
+        "min": 1.0,
+        "max": 4.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 41736.57,
+        "median": 44652.0,
+        "min": 18443.0,
+        "max": 95884.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.53,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.17,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.48,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.53,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.17,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.48,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.88,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.73,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 4.0
+          }
+         }
+        }
+       }
+      },
+      "9": {
+       "regions": 3,
+       "region_nodes_median": 40093.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.55,
+        "median": 2.0,
+        "min": 1.0,
+        "max": 3.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 64991.09,
+        "median": 66302.0,
+        "min": 26209.0,
+        "max": 117534.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.38,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.84,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.02,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.38,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.84,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 2.02,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.6,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.53,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 3.0
+          }
+         }
+        }
+       }
+      },
+      "10": {
+       "regions": 2,
+       "region_nodes_median": 58767.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.41,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 2.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 83251.81,
+        "median": 66302.0,
+        "min": 51232.0,
+        "max": 117534.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.29,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.61,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.74,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.29,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.61,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.74,
+           "median": 2.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.4,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.41,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 2.0
+          }
+         }
+        }
+       }
+      },
+      "11": {
+       "regions": 1,
+       "region_nodes_median": 117534.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 117534.0,
+        "median": 117534.0,
+        "min": 117534.0,
+        "max": 117534.0
+       },
+       "strata": {
+        "per_hop": {
+         "hop2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "hop3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "hop4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        },
+        "per_n_gold": {
+         "2": {
+          "n": 1364,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "3": {
+          "n": 442,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "4": {
+          "n": 194,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        },
+        "per_source": {
+         "dev": {
+          "n": 417,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         },
+         "train": {
+          "n": 1583,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "squad": {
+   "n_rows": 2000,
+   "population": {
+    "file": {
+     "path": "results/L1_DEV/loc_population.json",
+     "sha256": "c7f7080639d66f1e8f5c2fb90aff7da49dfda5f63a5fe558fe8c266bd5fef47e"
+    },
+    "n": 2000,
+    "first_rows_only": null,
+    "query_ids_sha256": "d4af1c738ae42c73e94963b3316b4b4c6a93d61d53f4430d81f0a56b89730cbd",
+    "label": "development population (historically exposed; not held-out; freely reusable)"
+   },
+   "cells": {
+    "squad": {
+     "partition": "H4_SK",
+     "levels": {
+      "0": {
+       "regions": 202,
+       "region_nodes_median": 102.0,
+       "ceiling": {
+        "100": 0.267,
+        "250": 1.0,
+        "500": 1.0,
+        "1000": 1.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 101.07,
+        "median": 102.0,
+        "min": 49.0,
+        "max": 104.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "1": {
+       "regions": 103,
+       "region_nodes_median": 203.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 1.0,
+        "500": 1.0,
+        "1000": 1.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 200.31,
+        "median": 204.0,
+        "min": 104.0,
+        "max": 208.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "2": {
+       "regions": 52,
+       "region_nodes_median": 402.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0005,
+        "500": 1.0,
+        "1000": 1.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 398.41,
+        "median": 405.0,
+        "min": 207.0,
+        "max": 415.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "3": {
+       "regions": 26,
+       "region_nodes_median": 801.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0005,
+        "1000": 1.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 798.14,
+        "median": 809.0,
+        "min": 474.0,
+        "max": 827.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "4": {
+       "regions": 13,
+       "region_nodes_median": 1596.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 1586.62,
+        "median": 1602.0,
+        "min": 1174.0,
+        "max": 1649.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "5": {
+       "regions": 7,
+       "region_nodes_median": 3176.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.044,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 3055.68,
+        "median": 3176.0,
+        "min": 1596.0,
+        "max": 3212.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "6": {
+       "regions": 4,
+       "region_nodes_median": 5319.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.325
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 5542.61,
+        "median": 5856.0,
+        "min": 3206.0,
+        "max": 6388.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.325,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "7": {
+       "regions": 2,
+       "region_nodes_median": 10116.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 10343.22,
+        "median": 11171.0,
+        "min": 9062.0,
+        "max": 11171.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "8": {
+       "regions": 1,
+       "region_nodes_median": 20233.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 20233.0,
+        "median": 20233.0,
+        "min": 20233.0,
+        "max": 20233.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "squad_phg": {
+     "partition": "LOWMEM__PHG_con",
+     "levels": {
+      "0": {
+       "regions": 202,
+       "region_nodes_median": 102.0,
+       "ceiling": {
+        "100": 0.2395,
+        "250": 1.0,
+        "500": 1.0,
+        "1000": 1.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 100.21,
+        "median": 102.0,
+        "min": 76.0,
+        "max": 103.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "1": {
+       "regions": 102,
+       "region_nodes_median": 204.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 1.0,
+        "500": 1.0,
+        "1000": 1.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 200.46,
+        "median": 204.0,
+        "min": 103.0,
+        "max": 206.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "2": {
+       "regions": 52,
+       "region_nodes_median": 403.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0185,
+        "500": 1.0,
+        "1000": 1.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 397.07,
+        "median": 404.0,
+        "min": 206.0,
+        "max": 412.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "3": {
+       "regions": 26,
+       "region_nodes_median": 802.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0145,
+        "1000": 1.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 794.12,
+        "median": 807.0,
+        "min": 488.0,
+        "max": 824.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 1.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "4": {
+       "regions": 13,
+       "region_nodes_median": 1616.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 1.0,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 1565.74,
+        "median": 1616.0,
+        "min": 1277.0,
+        "max": 1646.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "5": {
+       "regions": 7,
+       "region_nodes_median": 3073.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0895,
+        "5000": 1.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 2971.26,
+        "median": 3073.0,
+        "min": 1632.0,
+        "max": 3262.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 1.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "6": {
+       "regions": 4,
+       "region_nodes_median": 5303.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.3975
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 5351.47,
+        "median": 6079.0,
+        "min": 3262.0,
+        "max": 6364.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.3975,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "7": {
+       "regions": 2,
+       "region_nodes_median": 10116.5,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 10204.91,
+        "median": 10892.0,
+        "min": 9341.0,
+        "max": 10892.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      },
+      "8": {
+       "regions": 1,
+       "region_nodes_median": 20233.0,
+       "ceiling": {
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "2000": 0.0,
+        "5000": 0.0
+       },
+       "distinct_gold_regions": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+       },
+       "gold_region_nodes_total": {
+        "mean": 20233.0,
+        "median": 20233.0,
+        "min": 20233.0,
+        "max": 20233.0
+       },
+       "strata": {
+        "per_n_gold": {
+         "1": {
+          "n": 2000,
+          "ceiling@1000": 0.0,
+          "ceiling@5000": 0.0,
+          "distinct_gold_regions": {
+           "mean": 1.0,
+           "median": 1.0,
+           "min": 1.0,
+           "max": 1.0
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

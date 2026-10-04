@@ -1,0 +1,593 @@
+{
+ "CONSTRUCTION": {
+  "method": "deterministic graph-Voronoi (multi-source BFS) regions; descriptors use FULL adjacency and FULL-corpus semantic neighbourhood (regions partition the sample, not the graph -- no edge is cut)",
+  "uses_labels": "NO (U_E(R) uses TRAIN labels afterward as supervision only)",
+  "uses_target_queries": "NO for z_E",
+  "encoder_passes": 0,
+  "query_to_env": "seeds = dense_top200[:5] (label-free, = _b12_build definition)"
+ },
+ "ENVIRONMENTS": {
+  "metaqa": [
+   {
+    "n_sampled": 300,
+    "mean_degree": 8.86,
+    "log_mean_degree": 2.288486168614544,
+    "StructSemOverlap@10": 0.5019535039154918,
+    "StructSemOverlap@50": 0.5941060631225531,
+    "neighbor_jaccard_redundancy": 9.356500023344998e-05,
+    "hop2_over_hop1": 13.480237822941977,
+    "edge_semantic_lift": 0.8711626094254037,
+    "env": 0,
+    "n_queries": 645,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 62.0,
+     "8": 109.0,
+     "16": 165.0
+    },
+    "best_R": 16,
+    "NET_per_query_at_best_R": 0.2558139534883721,
+    "NET_per_query_at_R16": 0.2558139534883721
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 6.673333333333333,
+    "log_mean_degree": 2.037751114625627,
+    "StructSemOverlap@10": 0.5416227280917684,
+    "StructSemOverlap@50": 0.6374882775678055,
+    "neighbor_jaccard_redundancy": 0.00019172838486336544,
+    "hop2_over_hop1": 15.276672193267665,
+    "edge_semantic_lift": 0.9124414684681077,
+    "env": 1,
+    "n_queries": 93,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 10.0,
+     "8": 22.0,
+     "16": 40.0
+    },
+    "best_R": 16,
+    "NET_per_query_at_best_R": 0.43010752688172044,
+    "NET_per_query_at_R16": 0.43010752688172044
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 4.443333333333333,
+    "log_mean_degree": 1.694391618314264,
+    "StructSemOverlap@10": 0.594472762858057,
+    "StructSemOverlap@50": 0.66185119180928,
+    "neighbor_jaccard_redundancy": 0.00011365399090338848,
+    "hop2_over_hop1": 12.283580475332487,
+    "edge_semantic_lift": 0.9336524191689866,
+    "env": 4,
+    "n_queries": 604,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 70.0,
+     "8": 116.0,
+     "16": 204.0
+    },
+    "best_R": 16,
+    "NET_per_query_at_best_R": 0.33774834437086093,
+    "NET_per_query_at_R16": 0.33774834437086093
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 4.253333333333333,
+    "log_mean_degree": 1.6588627957616233,
+    "StructSemOverlap@10": 0.5988691632441633,
+    "StructSemOverlap@50": 0.6606770313020313,
+    "neighbor_jaccard_redundancy": 0.0002478819733812938,
+    "hop2_over_hop1": 14.440917496171018,
+    "edge_semantic_lift": 0.9283326756314296,
+    "env": 6,
+    "n_queries": 422,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 52.0,
+     "8": 82.0,
+     "16": 151.0
+    },
+    "best_R": 16,
+    "NET_per_query_at_best_R": 0.3578199052132701,
+    "NET_per_query_at_R16": 0.3578199052132701
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 3.4466666666666668,
+    "log_mean_degree": 1.492154751819368,
+    "StructSemOverlap@10": 0.6762842670401494,
+    "StructSemOverlap@50": 0.7184788048552755,
+    "neighbor_jaccard_redundancy": 0.00021237693507697181,
+    "hop2_over_hop1": 15.18624013383131,
+    "edge_semantic_lift": 1.1137436059399723,
+    "env": 9,
+    "n_queries": 33,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 3.0,
+     "8": 7.0,
+     "16": 11.0
+    },
+    "best_R": 16,
+    "NET_per_query_at_best_R": 0.3333333333333333,
+    "NET_per_query_at_R16": 0.3333333333333333
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 4.08,
+    "log_mean_degree": 1.6253112615903906,
+    "StructSemOverlap@10": 0.617650606603006,
+    "StructSemOverlap@50": 0.6669976614945655,
+    "neighbor_jaccard_redundancy": 0.000500384361335348,
+    "hop2_over_hop1": 12.367229058895466,
+    "edge_semantic_lift": 0.9392815413667844,
+    "env": 15,
+    "n_queries": 57,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 5.0,
+     "8": 7.0,
+     "16": 11.0
+    },
+    "best_R": 16,
+    "NET_per_query_at_best_R": 0.19298245614035087,
+    "NET_per_query_at_R16": 0.19298245614035087
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 7.68,
+    "log_mean_degree": 2.1610215286722587,
+    "StructSemOverlap@10": 0.5754595737830764,
+    "StructSemOverlap@50": 0.6637387633036453,
+    "neighbor_jaccard_redundancy": 0.0010692860468895385,
+    "hop2_over_hop1": 14.563346158904006,
+    "edge_semantic_lift": 0.8955114274672468,
+    "env": 20,
+    "n_queries": 37,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 8.0,
+     "8": 15.0,
+     "16": 24.0
+    },
+    "best_R": 16,
+    "NET_per_query_at_best_R": 0.6486486486486487,
+    "NET_per_query_at_R16": 0.6486486486486487
+   }
+  ],
+  "2wiki_clean": [
+   {
+    "n_sampled": 300,
+    "mean_degree": 3.6233333333333335,
+    "log_mean_degree": 1.5311159456586305,
+    "StructSemOverlap@10": 0.17414130783074283,
+    "StructSemOverlap@50": 0.23204416632415856,
+    "neighbor_jaccard_redundancy": 0.04588629882599921,
+    "hop2_over_hop1": 9.993333532681056,
+    "edge_semantic_lift": 0.3249598950716105,
+    "env": 0,
+    "n_queries": 1933,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 83.0,
+     "8": 115.0,
+     "16": 132.0
+    },
+    "best_R": 16,
+    "NET_per_query_at_best_R": 0.06828763579927574,
+    "NET_per_query_at_R16": 0.06828763579927574
+   }
+  ],
+  "squad_clean": [
+   {
+    "n_sampled": 300,
+    "mean_degree": 99.06,
+    "log_mean_degree": 4.605770006060059,
+    "StructSemOverlap@10": 0.0299958531678861,
+    "StructSemOverlap@50": 0.1044684494830158,
+    "neighbor_jaccard_redundancy": 0.17850878616250399,
+    "hop2_over_hop1": 4.769880660191093,
+    "edge_semantic_lift": 0.23609173848363396,
+    "env": 0,
+    "n_queries": 274,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 152.53333333333333,
+    "log_mean_degree": 5.033917698718475,
+    "StructSemOverlap@10": 0.04580938697318007,
+    "StructSemOverlap@50": 0.13052753831417624,
+    "neighbor_jaccard_redundancy": 0.33528347375548395,
+    "hop2_over_hop1": 7.3528044818033305,
+    "edge_semantic_lift": 0.3867237538750038,
+    "env": 1,
+    "n_queries": 86,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 140.65333333333334,
+    "log_mean_degree": 4.953382758179905,
+    "StructSemOverlap@10": 0.041041666666666664,
+    "StructSemOverlap@50": 0.13927083333333334,
+    "neighbor_jaccard_redundancy": 0.2435914282607771,
+    "hop2_over_hop1": 3.814080453634885,
+    "edge_semantic_lift": 0.34854543782520014,
+    "env": 2,
+    "n_queries": 54,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 82.39333333333333,
+    "log_mean_degree": 4.423568370118486,
+    "StructSemOverlap@10": 0.0635777952624217,
+    "StructSemOverlap@50": 0.22621024144012647,
+    "neighbor_jaccard_redundancy": 0.30939073012401236,
+    "hop2_over_hop1": 6.597201464548026,
+    "edge_semantic_lift": 0.4627463653415159,
+    "env": 8,
+    "n_queries": 43,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 119.35,
+    "log_mean_degree": 4.790404164229081,
+    "StructSemOverlap@10": 0.04064429012345679,
+    "StructSemOverlap@50": 0.1443672839506173,
+    "neighbor_jaccard_redundancy": 0.28736065161700036,
+    "hop2_over_hop1": 5.242673445689722,
+    "edge_semantic_lift": 0.37095525952965164,
+    "env": 9,
+    "n_queries": 57,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   },
+   {
+    "n_sampled": 97,
+    "mean_degree": 53.28865979381443,
+    "log_mean_degree": 3.994315361552872,
+    "StructSemOverlap@10": 0.17907455890143023,
+    "StructSemOverlap@50": 0.5322899263817014,
+    "neighbor_jaccard_redundancy": 0.5656306867099052,
+    "hop2_over_hop1": 9.175932619483342,
+    "edge_semantic_lift": 0.602852898531645,
+    "env": 10,
+    "n_queries": 25,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 82.35333333333334,
+    "log_mean_degree": 4.423088600398744,
+    "StructSemOverlap@10": 0.041324074074074076,
+    "StructSemOverlap@50": 0.12650385802469136,
+    "neighbor_jaccard_redundancy": 0.30202016095722806,
+    "hop2_over_hop1": 5.392490929382525,
+    "edge_semantic_lift": 0.2998166658383748,
+    "env": 12,
+    "n_queries": 73,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 70.12,
+    "log_mean_degree": 4.264368591205649,
+    "StructSemOverlap@10": 0.1072213504088504,
+    "StructSemOverlap@50": 0.32015031265031263,
+    "neighbor_jaccard_redundancy": 0.3482197027395561,
+    "hop2_over_hop1": 10.779312543983982,
+    "edge_semantic_lift": 0.5254204598436366,
+    "env": 13,
+    "n_queries": 33,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 69.83333333333333,
+    "log_mean_degree": 4.260329699696362,
+    "StructSemOverlap@10": 0.08699664636546195,
+    "StructSemOverlap@50": 0.2580935832907722,
+    "neighbor_jaccard_redundancy": 0.3575459424858883,
+    "hop2_over_hop1": 12.744072737809786,
+    "edge_semantic_lift": 0.4768848348792042,
+    "env": 16,
+    "n_queries": 26,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 135.92666666666668,
+    "log_mean_degree": 4.919445502709393,
+    "StructSemOverlap@10": 0.07322916666666666,
+    "StructSemOverlap@50": 0.22183333333333333,
+    "neighbor_jaccard_redundancy": 0.4497103848642399,
+    "hop2_over_hop1": 5.734908055202539,
+    "edge_semantic_lift": 0.39039540262993405,
+    "env": 17,
+    "n_queries": 29,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   },
+   {
+    "n_sampled": 300,
+    "mean_degree": 74.78666666666666,
+    "log_mean_degree": 4.32792237568068,
+    "StructSemOverlap@10": 0.05080996472663139,
+    "StructSemOverlap@50": 0.17046923536439665,
+    "neighbor_jaccard_redundancy": 0.31230486256950174,
+    "hop2_over_hop1": 7.0124403622937495,
+    "edge_semantic_lift": 0.3596469068685636,
+    "env": 21,
+    "n_queries": 73,
+    "NET_by_R": {
+     "0": 0.0,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.0
+    },
+    "best_R": 0,
+    "NET_per_query_at_best_R": 0.0,
+    "NET_per_query_at_R16": 0.0
+   }
+  ]
+ },
+ "FEASIBILITY_VARIANCE": {
+  "log_mean_degree": {
+   "between_corpus_std": 1.35172,
+   "mean_within_corpus_std": 0.20234,
+   "within_over_between": 0.1497,
+   "per_corpus_mean": {
+    "metaqa": 1.85114,
+    "2wiki_clean": 1.53112,
+    "squad_clean": 4.54514
+   },
+   "per_corpus_std": {
+    "metaqa": 0.28373,
+    "2wiki_clean": 0.0,
+    "squad_clean": 0.3233
+   }
+  },
+  "neighbor_jaccard_redundancy": {
+   "between_corpus_std": 0.14839,
+   "mean_within_corpus_std": 0.03258,
+   "within_over_between": 0.2196,
+   "per_corpus_mean": {
+    "metaqa": 0.00035,
+    "2wiki_clean": 0.04589,
+    "squad_clean": 0.33542
+   },
+   "per_corpus_std": {
+    "metaqa": 0.00032,
+    "2wiki_clean": 0.0,
+    "squad_clean": 0.09742
+   }
+  },
+  "StructSemOverlap@10": {
+   "between_corpus_std": 0.22337,
+   "mean_within_corpus_std": 0.03089,
+   "within_over_between": 0.1383,
+   "per_corpus_mean": {
+    "metaqa": 0.58662,
+    "2wiki_clean": 0.17414,
+    "squad_clean": 0.06907
+   },
+   "per_corpus_std": {
+    "metaqa": 0.05145,
+    "2wiki_clean": 0.0,
+    "squad_clean": 0.04122
+   }
+  },
+  "StructSemOverlap@50": {
+   "between_corpus_std": 0.20455,
+   "mean_within_corpus_std": 0.05087,
+   "within_over_between": 0.2487,
+   "per_corpus_mean": {
+    "metaqa": 0.65762,
+    "2wiki_clean": 0.23204,
+    "squad_clean": 0.21583
+   },
+   "per_corpus_std": {
+    "metaqa": 0.03443,
+    "2wiki_clean": 0.0,
+    "squad_clean": 0.11818
+   }
+  },
+  "edge_semantic_lift": {
+   "between_corpus_std": 0.27389,
+   "mean_within_corpus_std": 0.05763,
+   "within_over_between": 0.2104,
+   "per_corpus_mean": {
+    "metaqa": 0.94202,
+    "2wiki_clean": 0.32496,
+    "squad_clean": 0.40546
+   },
+   "per_corpus_std": {
+    "metaqa": 0.0735,
+    "2wiki_clean": 0.0,
+    "squad_clean": 0.0994
+   }
+  },
+  "hop2_over_hop1": {
+   "between_corpus_std": 2.78649,
+   "mean_within_corpus_std": 1.25367,
+   "within_over_between": 0.4499,
+   "per_corpus_mean": {
+    "metaqa": 13.9426,
+    "2wiki_clean": 9.99333,
+    "squad_clean": 7.14689
+   },
+   "per_corpus_std": {
+    "metaqa": 1.15931,
+    "2wiki_clean": 0.0,
+    "squad_clean": 2.60171
+   }
+  }
+ },
+ "FEASIBILITY_UTILITY": {
+  "metaqa": {
+   "n_env": 7,
+   "mean": 0.36521,
+   "std": 0.13523,
+   "min": 0.19298,
+   "max": 0.64865
+  },
+  "2wiki_clean": {
+   "n_env": 1,
+   "mean": 0.06829,
+   "std": 0.0,
+   "min": 0.06829,
+   "max": 0.06829
+  },
+  "squad_clean": {
+   "n_env": 11,
+   "mean": 0.0,
+   "std": 0.0,
+   "min": 0.0,
+   "max": 0.0
+  }
+ },
+ "STEP4_MONOTONICITY": {
+  "log_mean_degree": {
+   "within_corpus_spearman": {
+    "metaqa": 0.3571,
+    "2wiki_clean": null,
+    "squad_clean": null
+   },
+   "pooled_spearman": -0.6649,
+   "sign_stable_within": false,
+   "n_corpora_with_signal": 1
+  },
+  "neighbor_jaccard_redundancy": {
+   "within_corpus_spearman": {
+    "metaqa": 0.2857,
+    "2wiki_clean": null,
+    "squad_clean": null
+   },
+   "pooled_spearman": -0.7298,
+   "sign_stable_within": false,
+   "n_corpora_with_signal": 1
+  },
+  "StructSemOverlap@10": {
+   "within_corpus_spearman": {
+    "metaqa": -0.3214,
+    "2wiki_clean": null,
+    "squad_clean": null
+   },
+   "pooled_spearman": 0.7088,
+   "sign_stable_within": false,
+   "n_corpora_with_signal": 1
+  },
+  "StructSemOverlap@50": {
+   "within_corpus_spearman": {
+    "metaqa": -0.1786,
+    "2wiki_clean": null,
+    "squad_clean": null
+   },
+   "pooled_spearman": 0.6877,
+   "sign_stable_within": false,
+   "n_corpora_with_signal": 1
+  },
+  "edge_semantic_lift": {
+   "within_corpus_spearman": {
+    "metaqa": -0.3929,
+    "2wiki_clean": null,
+    "squad_clean": null
+   },
+   "pooled_spearman": 0.614,
+   "sign_stable_within": false,
+   "n_corpora_with_signal": 1
+  },
+  "hop2_over_hop1": {
+   "within_corpus_spearman": {
+    "metaqa": 0.5357,
+    "2wiki_clean": null,
+    "squad_clean": null
+   },
+   "pooled_spearman": 0.7596,
+   "sign_stable_within": false,
+   "n_corpora_with_signal": 1
+  }
+ }
+}

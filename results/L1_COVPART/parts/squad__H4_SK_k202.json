@@ -1,0 +1,106 @@
+{
+ "rule": "H4_SPLIT_PRESERVE",
+ "famset": "SK",
+ "families": [
+  "STRUCT",
+  "KNN"
+ ],
+ "N": 20233,
+ "k": 202,
+ "k_rule": "max(1, N // 100)",
+ "target_block_size": 100,
+ "cap": 100,
+ "cap_rule": [
+  "blk",
+  1.0
+ ],
+ "mode": "split",
+ "weighted": true,
+ "weight_scale": 1000,
+ "hyperedges": 39146,
+ "pins": 1589832,
+ "pins_precap_total": 1581445,
+ "anchor_duplication_pins": 8387,
+ "pin_retention_total": 1.0,
+ "size_min": 2,
+ "size_max": 100,
+ "size_mean": 40.61,
+ "weight_min": 10,
+ "weight_max": 1000,
+ "weight_sum": 6879755,
+ "per_family": {
+  "STRUCT": {
+   "hyperedges_precap": 13884,
+   "pins_precap": 1503352,
+   "anchors_over_cap": 4900,
+   "hyperedges_out": 22271,
+   "pins_written": 1511739,
+   "anchor_duplication_pins": 8387,
+   "pins_discarded": 0,
+   "pin_retention": 1.0,
+   "size_max_out": 100
+  },
+  "KNN": {
+   "hyperedges_precap": 16875,
+   "pins_precap": 78093,
+   "anchors_over_cap": 0,
+   "hyperedges_out": 16875,
+   "pins_written": 78093,
+   "anchor_duplication_pins": 0,
+   "pins_discarded": 0,
+   "pin_retention": 1.0,
+   "size_max_out": 24
+  }
+ },
+ "dataset": "squad",
+ "file": "results/L1_COVPART/parts/squad__H4_SK_k202.npz",
+ "bytes": 2788239,
+ "file_sha256": "ed6b8336adb44fd868ef715f81401c5a06b7bbc19a91eafb9ada39c59c59b1a6",
+ "content_digest": "3a170cd70d0a77aa810b6107d59c5230f26b6642af21a9d6c31cd56545b8d1c5",
+ "built_utc": "2026-09-29T03:45:53Z",
+ "seconds": 16.6,
+ "inputs": {
+  "DATASET_json_RECORD_SHA256": "29976120cf085d2f776c9eea28da6363bc6c6d0be679cca550db7f714a151a23",
+  "keys_npz_sha256": "1a92c96f38341966f6430facf2d28e8d77e077e40f77a206c5171771b6566491",
+  "STRUCT": 744734,
+  "KNN": 30609
+ },
+ "scale": {
+  "K": 202,
+  "native_K": 202,
+  "block_size_round_N_over_K": 100,
+  "frozen_H4_SK": {
+   "file": "data/l1_canonical/squad/hypergraph/H4_SK.npz",
+   "sha256": "ed6b8336adb44fd868ef715f81401c5a06b7bbc19a91eafb9ada39c59c59b1a6",
+   "content_digest": "3a170cd70d0a77aa810b6107d59c5230f26b6642af21a9d6c31cd56545b8d1c5"
+  },
+  "content_equals_frozen_H4_SK": true,
+  "rule": "the frozen H4_SK rule with k = K (cap = round(N / K)); nothing else changed"
+ },
+ "code": {
+  "harness": {
+   "path": "scratchpad/_l1d_scale_parts.py",
+   "sha256": "2090b01eb29c9ad9e59f4778c89fc98752673fcd5fecb4480fd3c788b2f70e13"
+  },
+  "hypergraph_builder": {
+   "path": "src/l1_canonical/hypergraph.py",
+   "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262"
+  },
+  "frozen_rule_module": {
+   "path": "scratchpad/_l1hu_build.py",
+   "sha256": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79"
+  },
+  "partition_driver_reused": {
+   "path": "src/l1_canonical/partition.py",
+   "sha256": "45be47b5dd5d432af6b7339133e9cb4d5acf38d9ee5661368af0db3e5f175257"
+  },
+  "phg_script": {
+   "path": "scratchpad/_l1c_phg.py",
+   "sha256": "7f2a416c0a74bf79cd7a57a829b1f86b4c0997d4470e9be21333bc486f33bfe3"
+  },
+  "mtk_worker": {
+   "path": "scratchpad/_l1hu_local_worker.py",
+   "sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb"
+  }
+ }
+}

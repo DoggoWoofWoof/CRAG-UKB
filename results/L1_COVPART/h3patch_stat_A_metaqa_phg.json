@@ -1,0 +1,234 @@
+{
+ "cache": "metaqa_phg",
+ "n_DEV_A": 1002,
+ "B": 6,
+ "gold_read": false,
+ "depth": 3,
+ "beam_module_sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+ "head_substitutions": [
+  [
+   "name = sys.argv[1]",
+   "name = 'metaqa_phg'"
+  ],
+  [
+   "LATENT = \"--latent\" in sys.argv",
+   "LATENT = False"
+  ],
+  [
+   "DEPTH = 2",
+   "DEPTH = 3"
+  ],
+  [
+   "beams1, beams2 = [[] for _ in range(nq)], [[] for _ in range(nq)]",
+   "beams1, beams2, beams3 = [[] for _ in range(nq)], [[] for _ in range(nq)], [[] for _ in range(nq)]"
+  ],
+  [
+   "beams1[qi], beams2[qi] = beams[0], beams[1]",
+   "beams1[qi], beams2[qi], beams3[qi] = beams[0], beams[1], beams[2]"
+  ]
+ ],
+ "definition": {
+  "kept": "canonical SAFE final 50 minus its weakest admitted block (sixth of the F6 competition)",
+  "novel": "pinned-beam visited node (seeds excluded) whose own block is not among the 49 kept blocks; the beam is the pinned code with DEPTH = 3",
+  "capacity": "size of the removed block",
+  "order_a": "frozen first-visit order (hop-1, hop-2, hop-3 beams)",
+  "order_b": "deepest hop first (hop-3, hop-2, hop-1 novel), frozen within-hop order"
+ },
+ "cost": {
+  "transitions_scored_per_query_mean (hop1 / hop2 / hop3)": [
+   37.8,
+   334.9,
+   1020.2
+  ],
+  "transitions_scored_per_query_p95_total": 2112,
+  "beam_wall_clock_ms_mean": 68.4,
+  "beam_wall_clock_ms_p95": 229.8,
+  "nodes_visited_per_query_mean_depth3": 228.0
+ },
+ "groups": {
+  "all": {
+   "n": 1002,
+   "visited_per_hop_mean (hop1 / hop2 / hop3)": [
+    32.5,
+    95.6,
+    100.0
+   ],
+   "novel_per_hop_mean (hop1 / hop2 / hop3)": [
+    8.3,
+    69.7,
+    62.6
+   ],
+   "novel_total_per_query_mean_depth3": 140.6,
+   "novel_total_per_query_mean_depth2": 78.0,
+   "novel_fraction_of_visited (hop1 / hop2 / hop3)": [
+    0.256,
+    0.73,
+    0.626
+   ],
+   "distinct_blocks_of_novel_nodes_mean": 99.1,
+   "removed_block_size_mean": 101.2,
+   "queries_truncated_depth3 (novel > capacity)": 964,
+   "truncated_fraction_depth3": 0.962,
+   "queries_truncated_depth2": 47,
+   "fill_from_removed_block_mean_depth3": 0.8,
+   "fill_from_removed_block_mean_depth2": 23.8,
+   "patch_composition_order_a_first_visit (hop1 / hop2 / hop3 share of novel positions)": [
+    0.083,
+    0.689,
+    0.229
+   ],
+   "patch_composition_order_b_deepest_first (hop1 / hop2 / hop3 share)": [
+    0.001,
+    0.376,
+    0.623
+   ],
+   "hop3_novel_nodes_admitted_per_query_order_a_mean": 22.9,
+   "hop3_novel_nodes_cut_by_order_a_mean": 39.65,
+   "hop2_novel_nodes_cut_by_order_a_mean": 0.63,
+   "hop2_novel_nodes_cut_by_order_b_mean": 31.95,
+   "hop1_novel_nodes_cut_by_order_b_mean": 8.21,
+   "queries_where_order_b_cuts_a_hop2_novel_node": 955,
+   "queries_where_order_a_admits_no_hop3_node_although_some_exist": 49,
+   "hop3_visited_nodes_inside_removed_block_mean": 0.41,
+   "hop3_transitions_scored_mean": 1020.2
+  },
+  "hop1": {
+   "n": 326,
+   "visited_per_hop_mean (hop1 / hop2 / hop3)": [
+    32.1,
+    95.7,
+    100.0
+   ],
+   "novel_per_hop_mean (hop1 / hop2 / hop3)": [
+    6.1,
+    72.5,
+    60.7
+   ],
+   "novel_total_per_query_mean_depth3": 139.3,
+   "novel_total_per_query_mean_depth2": 78.6,
+   "novel_fraction_of_visited (hop1 / hop2 / hop3)": [
+    0.189,
+    0.758,
+    0.607
+   ],
+   "distinct_blocks_of_novel_nodes_mean": 98.3,
+   "removed_block_size_mean": 101.0,
+   "queries_truncated_depth3 (novel > capacity)": 311,
+   "truncated_fraction_depth3": 0.954,
+   "queries_truncated_depth2": 16,
+   "fill_from_removed_block_mean_depth3": 0.8,
+   "fill_from_removed_block_mean_depth2": 22.9,
+   "patch_composition_order_a_first_visit (hop1 / hop2 / hop3 share of novel positions)": [
+    0.061,
+    0.718,
+    0.221
+   ],
+   "patch_composition_order_b_deepest_first (hop1 / hop2 / hop3 share)": [
+    0.001,
+    0.393,
+    0.605
+   ],
+   "hop3_novel_nodes_admitted_per_query_order_a_mean": 22.1,
+   "hop3_novel_nodes_cut_by_order_a_mean": 38.58,
+   "hop2_novel_nodes_cut_by_order_a_mean": 0.58,
+   "hop2_novel_nodes_cut_by_order_b_mean": 33.13,
+   "hop1_novel_nodes_cut_by_order_b_mean": 5.94,
+   "queries_where_order_b_cuts_a_hop2_novel_node": 308,
+   "queries_where_order_a_admits_no_hop3_node_although_some_exist": 16,
+   "hop3_visited_nodes_inside_removed_block_mean": 0.37,
+   "hop3_transitions_scored_mean": 990.9
+  },
+  "hop2": {
+   "n": 344,
+   "visited_per_hop_mean (hop1 / hop2 / hop3)": [
+    27.3,
+    92.3,
+    99.9
+   ],
+   "novel_per_hop_mean (hop1 / hop2 / hop3)": [
+    11.7,
+    59.7,
+    73.9
+   ],
+   "novel_total_per_query_mean_depth3": 145.2,
+   "novel_total_per_query_mean_depth2": 71.3,
+   "novel_fraction_of_visited (hop1 / hop2 / hop3)": [
+    0.428,
+    0.646,
+    0.739
+   ],
+   "distinct_blocks_of_novel_nodes_mean": 101.1,
+   "removed_block_size_mean": 101.7,
+   "queries_truncated_depth3 (novel > capacity)": 325,
+   "truncated_fraction_depth3": 0.945,
+   "queries_truncated_depth2": 10,
+   "fill_from_removed_block_mean_depth3": 1.0,
+   "fill_from_removed_block_mean_depth2": 30.6,
+   "patch_composition_order_a_first_visit (hop1 / hop2 / hop3 share of novel positions)": [
+    0.116,
+    0.59,
+    0.294
+   ],
+   "patch_composition_order_b_deepest_first (hop1 / hop2 / hop3 share)": [
+    0.001,
+    0.266,
+    0.732
+   ],
+   "hop3_novel_nodes_admitted_per_query_order_a_mean": 29.6,
+   "hop3_novel_nodes_cut_by_order_a_mean": 44.33,
+   "hop2_novel_nodes_cut_by_order_a_mean": 0.21,
+   "hop2_novel_nodes_cut_by_order_b_mean": 32.83,
+   "hop1_novel_nodes_cut_by_order_b_mean": 11.57,
+   "queries_where_order_b_cuts_a_hop2_novel_node": 323,
+   "queries_where_order_a_admits_no_hop3_node_although_some_exist": 12,
+   "hop3_visited_nodes_inside_removed_block_mean": 0.42,
+   "hop3_transitions_scored_mean": 1022.3
+  },
+  "hop3": {
+   "n": 332,
+   "visited_per_hop_mean (hop1 / hop2 / hop3)": [
+    38.2,
+    98.8,
+    100.0
+   ],
+   "novel_per_hop_mean (hop1 / hop2 / hop3)": [
+    7.0,
+    77.4,
+    52.8
+   ],
+   "novel_total_per_query_mean_depth3": 137.2,
+   "novel_total_per_query_mean_depth2": 84.4,
+   "novel_fraction_of_visited (hop1 / hop2 / hop3)": [
+    0.183,
+    0.783,
+    0.528
+   ],
+   "distinct_blocks_of_novel_nodes_mean": 97.8,
+   "removed_block_size_mean": 100.8,
+   "queries_truncated_depth3 (novel > capacity)": 328,
+   "truncated_fraction_depth3": 0.988,
+   "queries_truncated_depth2": 21,
+   "fill_from_removed_block_mean_depth3": 0.6,
+   "fill_from_removed_block_mean_depth2": 17.5,
+   "patch_composition_order_a_first_visit (hop1 / hop2 / hop3 share of novel positions)": [
+    0.07,
+    0.761,
+    0.169
+   ],
+   "patch_composition_order_b_deepest_first (hop1 / hop2 / hop3 share)": [
+    0.0,
+    0.474,
+    0.525
+   ],
+   "hop3_novel_nodes_admitted_per_query_order_a_mean": 16.9,
+   "hop3_novel_nodes_cut_by_order_a_mean": 35.86,
+   "hop2_novel_nodes_cut_by_order_a_mean": 1.13,
+   "hop2_novel_nodes_cut_by_order_b_mean": 29.89,
+   "hop1_novel_nodes_cut_by_order_b_mean": 6.97,
+   "queries_where_order_b_cuts_a_hop2_novel_node": 324,
+   "queries_where_order_a_admits_no_hop3_node_although_some_exist": 21,
+   "hop3_visited_nodes_inside_removed_block_mean": 0.43,
+   "hop3_transitions_scored_mean": 1046.6
+  }
+ }
+}

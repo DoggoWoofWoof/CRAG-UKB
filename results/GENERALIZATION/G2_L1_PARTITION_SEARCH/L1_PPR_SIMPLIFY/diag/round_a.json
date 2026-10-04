@@ -1,0 +1,415 @@
+{
+ "PPR_CONTRACT": {
+  "alpha": 0.85,
+  "iters": 20,
+  "audit": "l3_methods._ppr / l3_solvers select alpha per run from a small grid BY GOLD RECALL (ppr_best_alpha) and LEVEL3_README marks it exploratory, so no canonical alpha could be inherited; 0.85 is the only non-gold-selected alpha in the codebase (_qppr_ball default) and the standard PageRank damping. iters=20 and P=D^-1 A are inherited unchanged."
+ },
+ "STEP0_AUDIT": {
+  "metaqa": {
+   "base_rank_provenance": {
+    "claim": "base_rank == rrf_partitions([PR_dense, PR_splade])",
+    "status": "EXACT"
+   },
+   "ret_rrf_provenance": {
+    "claim": "ret_rrf == node_rrf(dense200, splade200)",
+    "status": "EXACT",
+    "checked": 200,
+    "bad": 0
+   },
+   "channel_redundancy": {
+    "frac_retrieval_challengers_already_canonically_ranked": 0.9534,
+    "mean_spearman_canonical_vs_retrieval_on_shared": 0.2488,
+    "n_queries_with_ge5_shared": 1795
+   },
+   "absent_channel_semantics": {
+    "claim": "a channel with no evidence for a candidate contributes exactly 0.0",
+    "status": "VERIFIED_BY_CONSTRUCTION",
+    "candidates_with_no_channel_at_all": 0
+   },
+   "symmetric_scoring": {
+    "claim": "incumbent-blind rescoring reproduces the selection",
+    "mismatches": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "deterministic_ties": {
+    "claim": "output invariant to challenger input order",
+    "differences": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "exact_P50": {
+    "violations": 0,
+    "checked": 1998,
+    "status": "EXACT"
+   },
+   "no_gold_in_ranking": {
+    "claim": "the selector signature is sel(context, qi, extra); the context carries only prot/bnd/chal/cpos/spos/rpos/sagg/ragg/base50 and gold is passed ONLY to the scorer after selection",
+    "status": "VERIFIED_BY_CONSTRUCTION"
+   }
+  },
+  "webqsp": {
+   "base_rank_provenance": {
+    "claim": "base_rank == rrf_partitions([PR_dense, PR_splade])",
+    "status": "EXACT"
+   },
+   "ret_rrf_provenance": {
+    "claim": "ret_rrf == node_rrf(dense200, splade200)",
+    "status": "EXACT",
+    "checked": 200,
+    "bad": 0
+   },
+   "channel_redundancy": {
+    "frac_retrieval_challengers_already_canonically_ranked": 0.9378,
+    "mean_spearman_canonical_vs_retrieval_on_shared": 0.3154,
+    "n_queries_with_ge5_shared": 233
+   },
+   "absent_channel_semantics": {
+    "claim": "a channel with no evidence for a candidate contributes exactly 0.0",
+    "status": "VERIFIED_BY_CONSTRUCTION",
+    "candidates_with_no_channel_at_all": 0
+   },
+   "symmetric_scoring": {
+    "claim": "incumbent-blind rescoring reproduces the selection",
+    "mismatches": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "deterministic_ties": {
+    "claim": "output invariant to challenger input order",
+    "differences": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "exact_P50": {
+    "violations": 0,
+    "checked": 1419,
+    "status": "EXACT"
+   },
+   "no_gold_in_ranking": {
+    "claim": "the selector signature is sel(context, qi, extra); the context carries only prot/bnd/chal/cpos/spos/rpos/sagg/ragg/base50 and gold is passed ONLY to the scorer after selection",
+    "status": "VERIFIED_BY_CONSTRUCTION"
+   }
+  },
+  "2wiki_clean": {
+   "base_rank_provenance": {
+    "claim": "base_rank == rrf_partitions([PR_dense, PR_splade])",
+    "status": "EXACT"
+   },
+   "ret_rrf_provenance": {
+    "claim": "ret_rrf == node_rrf(dense200, splade200)",
+    "status": "EXACT",
+    "checked": 200,
+    "bad": 0
+   },
+   "channel_redundancy": {
+    "frac_retrieval_challengers_already_canonically_ranked": 0.9986,
+    "mean_spearman_canonical_vs_retrieval_on_shared": 0.3442,
+    "n_queries_with_ge5_shared": 1331
+   },
+   "absent_channel_semantics": {
+    "claim": "a channel with no evidence for a candidate contributes exactly 0.0",
+    "status": "VERIFIED_BY_CONSTRUCTION",
+    "candidates_with_no_channel_at_all": 0
+   },
+   "symmetric_scoring": {
+    "claim": "incumbent-blind rescoring reproduces the selection",
+    "mismatches": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "deterministic_ties": {
+    "claim": "output invariant to challenger input order",
+    "differences": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "exact_P50": {
+    "violations": 0,
+    "checked": 2000,
+    "status": "EXACT"
+   },
+   "no_gold_in_ranking": {
+    "claim": "the selector signature is sel(context, qi, extra); the context carries only prot/bnd/chal/cpos/spos/rpos/sagg/ragg/base50 and gold is passed ONLY to the scorer after selection",
+    "status": "VERIFIED_BY_CONSTRUCTION"
+   }
+  },
+  "musique_clean": {
+   "base_rank_provenance": {
+    "claim": "base_rank == rrf_partitions([PR_dense, PR_splade])",
+    "status": "EXACT"
+   },
+   "ret_rrf_provenance": {
+    "claim": "ret_rrf == node_rrf(dense200, splade200)",
+    "status": "EXACT",
+    "checked": 200,
+    "bad": 0
+   },
+   "channel_redundancy": {
+    "frac_retrieval_challengers_already_canonically_ranked": 1.0,
+    "mean_spearman_canonical_vs_retrieval_on_shared": 0.158,
+    "n_queries_with_ge5_shared": 221
+   },
+   "absent_channel_semantics": {
+    "claim": "a channel with no evidence for a candidate contributes exactly 0.0",
+    "status": "VERIFIED_BY_CONSTRUCTION",
+    "candidates_with_no_channel_at_all": 0
+   },
+   "symmetric_scoring": {
+    "claim": "incumbent-blind rescoring reproduces the selection",
+    "mismatches": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "deterministic_ties": {
+    "claim": "output invariant to challenger input order",
+    "differences": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "exact_P50": {
+    "violations": 0,
+    "checked": 2000,
+    "status": "EXACT"
+   },
+   "no_gold_in_ranking": {
+    "claim": "the selector signature is sel(context, qi, extra); the context carries only prot/bnd/chal/cpos/spos/rpos/sagg/ragg/base50 and gold is passed ONLY to the scorer after selection",
+    "status": "VERIFIED_BY_CONSTRUCTION"
+   }
+  },
+  "hotpotqa_clean": {
+   "base_rank_provenance": {
+    "claim": "base_rank == rrf_partitions([PR_dense, PR_splade])",
+    "status": "EXACT"
+   },
+   "ret_rrf_provenance": {
+    "claim": "ret_rrf == node_rrf(dense200, splade200)",
+    "status": "EXACT",
+    "checked": 200,
+    "bad": 0
+   },
+   "channel_redundancy": {
+    "frac_retrieval_challengers_already_canonically_ranked": 0.8148,
+    "mean_spearman_canonical_vs_retrieval_on_shared": 0.3243,
+    "n_queries_with_ge5_shared": 1618
+   },
+   "absent_channel_semantics": {
+    "claim": "a channel with no evidence for a candidate contributes exactly 0.0",
+    "status": "VERIFIED_BY_CONSTRUCTION",
+    "candidates_with_no_channel_at_all": 0
+   },
+   "symmetric_scoring": {
+    "claim": "incumbent-blind rescoring reproduces the selection",
+    "mismatches": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "deterministic_ties": {
+    "claim": "output invariant to challenger input order",
+    "differences": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "exact_P50": {
+    "violations": 0,
+    "checked": 2000,
+    "status": "EXACT"
+   },
+   "no_gold_in_ranking": {
+    "claim": "the selector signature is sel(context, qi, extra); the context carries only prot/bnd/chal/cpos/spos/rpos/sagg/ragg/base50 and gold is passed ONLY to the scorer after selection",
+    "status": "VERIFIED_BY_CONSTRUCTION"
+   }
+  },
+  "squad_clean": {
+   "base_rank_provenance": {
+    "claim": "base_rank == rrf_partitions([PR_dense, PR_splade])",
+    "status": "EXACT"
+   },
+   "ret_rrf_provenance": {
+    "claim": "ret_rrf == node_rrf(dense200, splade200)",
+    "status": "EXACT",
+    "checked": 200,
+    "bad": 0
+   },
+   "channel_redundancy": {
+    "frac_retrieval_challengers_already_canonically_ranked": 1.0,
+    "mean_spearman_canonical_vs_retrieval_on_shared": 0.2378,
+    "n_queries_with_ge5_shared": 672
+   },
+   "absent_channel_semantics": {
+    "claim": "a channel with no evidence for a candidate contributes exactly 0.0",
+    "status": "VERIFIED_BY_CONSTRUCTION",
+    "candidates_with_no_channel_at_all": 0
+   },
+   "symmetric_scoring": {
+    "claim": "incumbent-blind rescoring reproduces the selection",
+    "mismatches": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "deterministic_ties": {
+    "claim": "output invariant to challenger input order",
+    "differences": 0,
+    "checked": 300,
+    "status": "EXACT"
+   },
+   "exact_P50": {
+    "violations": 0,
+    "checked": 2000,
+    "status": "EXACT"
+   },
+   "no_gold_in_ranking": {
+    "claim": "the selector signature is sel(context, qi, extra); the context carries only prot/bnd/chal/cpos/spos/rpos/sagg/ragg/base50 and gold is passed ONLY to the scorer after selection",
+    "status": "VERIFIED_BY_CONSTRUCTION"
+   }
+  }
+ },
+ "STEP1_CHANNELS": {
+  "metaqa": {
+   "npart": 401,
+   "BASE_RANK_PARITY": "EXACT",
+   "mean_spearman_DENSE_vs_SPLADE_partition_rank": 0.3451,
+   "mean_spearman_DENSE_vs_BASE": 0.7713,
+   "mean_spearman_SPLADE_vs_BASE": 0.7985
+  },
+  "webqsp": {
+   "npart": 7814,
+   "BASE_RANK_PARITY": "EXACT",
+   "mean_spearman_DENSE_vs_SPLADE_partition_rank": 0.9069,
+   "mean_spearman_DENSE_vs_BASE": 0.9519,
+   "mean_spearman_SPLADE_vs_BASE": 0.9626
+  },
+  "2wiki_clean": {
+   "npart": 658,
+   "BASE_RANK_PARITY": "EXACT",
+   "mean_spearman_DENSE_vs_SPLADE_partition_rank": 0.6862,
+   "mean_spearman_DENSE_vs_BASE": 0.885,
+   "mean_spearman_SPLADE_vs_BASE": 0.889
+  },
+  "musique_clean": {
+   "npart": 136,
+   "BASE_RANK_PARITY": "EXACT",
+   "mean_spearman_DENSE_vs_SPLADE_partition_rank": 0.5805,
+   "mean_spearman_DENSE_vs_BASE": 0.8774,
+   "mean_spearman_SPLADE_vs_BASE": 0.8757
+  },
+  "hotpotqa_clean": {
+   "npart": 5074,
+   "BASE_RANK_PARITY": "EXACT",
+   "mean_spearman_DENSE_vs_SPLADE_partition_rank": 0.7617,
+   "mean_spearman_DENSE_vs_BASE": 0.8935,
+   "mean_spearman_SPLADE_vs_BASE": 0.9042
+  },
+  "squad_clean": {
+   "npart": 190,
+   "BASE_RANK_PARITY": "EXACT",
+   "mean_spearman_DENSE_vs_SPLADE_partition_rank": 0.6975,
+   "mean_spearman_DENSE_vs_BASE": 0.9104,
+   "mean_spearman_SPLADE_vs_BASE": 0.9133
+  }
+ },
+ "STEP2_PARTITION_GRAPH": {
+  "metaqa": {
+   "npart": 401,
+   "n_nodes": 40151,
+   "inter_partition_edges": 63388,
+   "inter_partition_edge_mass": 151250,
+   "internal_self_mass": 67710,
+   "frac_mass_internal": 0.3092,
+   "density": 0.394202,
+   "outdeg_mean": 158.07,
+   "outdeg_median": 150,
+   "outdeg_max": 398,
+   "isolated_partitions": 0,
+   "edge_w_mean": 2.39,
+   "edge_w_max": 49,
+   "cache_bytes": 84681,
+   "build_sec": 0.1
+  },
+  "webqsp": {
+   "npart": 7814,
+   "n_nodes": 781485,
+   "inter_partition_edges": 1008926,
+   "inter_partition_edge_mass": 2397320,
+   "internal_self_mass": 878812,
+   "frac_mass_internal": 0.2682,
+   "density": 0.016524,
+   "outdeg_mean": 129.12,
+   "outdeg_median": 99,
+   "outdeg_max": 4966,
+   "isolated_partitions": 0,
+   "edge_w_mean": 2.38,
+   "edge_w_max": 478,
+   "cache_bytes": 2110755,
+   "build_sec": 0.9
+  },
+  "2wiki_clean": {
+   "npart": 658,
+   "n_nodes": 65865,
+   "inter_partition_edges": 56140,
+   "inter_partition_edge_mass": 202066,
+   "internal_self_mass": 50074,
+   "frac_mass_internal": 0.1986,
+   "density": 0.129664,
+   "outdeg_mean": 85.32,
+   "outdeg_median": 69,
+   "outdeg_max": 657,
+   "isolated_partitions": 0,
+   "edge_w_mean": 3.6,
+   "edge_w_max": 103,
+   "cache_bytes": 95827,
+   "build_sec": 0.1
+  },
+  "musique_clean": {
+   "npart": 136,
+   "n_nodes": 13672,
+   "inter_partition_edges": 7596,
+   "inter_partition_edge_mass": 47812,
+   "internal_self_mass": 55274,
+   "frac_mass_internal": 0.5362,
+   "density": 0.410683,
+   "outdeg_mean": 55.85,
+   "outdeg_median": 51,
+   "outdeg_max": 131,
+   "isolated_partitions": 0,
+   "edge_w_mean": 6.29,
+   "edge_w_max": 239,
+   "cache_bytes": 13880,
+   "build_sec": 0.0
+  },
+  "hotpotqa_clean": {
+   "npart": 5074,
+   "n_nodes": 507494,
+   "inter_partition_edges": 2389756,
+   "inter_partition_edge_mass": 6036970,
+   "internal_self_mass": 816920,
+   "frac_mass_internal": 0.1192,
+   "density": 0.092822,
+   "outdeg_mean": 470.98,
+   "outdeg_median": 355,
+   "outdeg_max": 4986,
+   "isolated_partitions": 0,
+   "edge_w_mean": 2.53,
+   "edge_w_max": 269,
+   "cache_bytes": 4931073,
+   "build_sec": 2.0
+  },
+  "squad_clean": {
+   "npart": 190,
+   "n_nodes": 19029,
+   "inter_partition_edges": 12808,
+   "inter_partition_edge_mass": 798134,
+   "internal_self_mass": 591026,
+   "frac_mass_internal": 0.4255,
+   "density": 0.354792,
+   "outdeg_mean": 67.41,
+   "outdeg_median": 61,
+   "outdeg_max": 189,
+   "isolated_partitions": 0,
+   "edge_w_mean": 62.32,
+   "edge_w_max": 7567,
+   "cache_bytes": 26548,
+   "build_sec": 0.1
+  }
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "RECORD": "ML2_ORACLE_PIN_REDUCTION",
+ "utc": "2026-09-30T12:08:52Z",
+ "N": 2592894,
+ "fine_unsplit_pins": 29574348,
+ "fine_unsplit_nets": 5181598,
+ "definition": "FBX_SCALE stage 4C -- structure-only record: how far can ANY clustering of the frozen H4_SK vertices reduce the pins, as a function of the number of clusters?  (No gold label, no recall.)\n\n  python -u scratchpad/_ml2_oracle.py            # write-once results/FREEBASE_SCALE/ml2/ORACLE_PIN_REDUCTION__v1.json\n\nThe clusterings measured are (i) the seven frozen PHG_SK maps read as clusterings (V = K clusters of ~N/K vertices, the best locality-aware clusterings the lane owns), (the maps of the COARSEN records of\n_ml2_run.py already carry their own cluster counts and pin reductions).  For each: the exact quotient of the unsplit H4_SK nets (pins mapped to clusters, duplicate pins removed, single-pin nets dropped, identical nets merged),\nits pin count and the pin reduction fine_pins / coarse_pins.  The point is structural: the reduction is governed by the number of clusters V, not by how the clustering was found.\n",
+ "rows": [
+  {
+   "clustering": "PHG_SK map K=100 (as clusters)",
+   "clusters": 100,
+   "mean_cluster_weight": 25928.9,
+   "coarse_nets": 468644,
+   "coarse_pins": 2814086,
+   "pin_reduction_unsplit": 10.5094,
+   "file_sha256": "36d69391735d13fee50cc6a605102f3fd60746568549e2e3b3faccb5eb94a7de"
+  },
+  {
+   "clustering": "PHG_SK map K=250 (as clusters)",
+   "clusters": 250,
+   "mean_cluster_weight": 10371.6,
+   "coarse_nets": 790409,
+   "coarse_pins": 4239397,
+   "pin_reduction_unsplit": 6.9761,
+   "file_sha256": "fbe79aaf509943550fdc4ac562e2f5161158ccec3ead9dff3da0835f55e01ce3"
+  },
+  {
+   "clustering": "PHG_SK map K=500 (as clusters)",
+   "clusters": 500,
+   "mean_cluster_weight": 5185.8,
+   "coarse_nets": 1053647,
+   "coarse_pins": 5384587,
+   "pin_reduction_unsplit": 5.4924,
+   "file_sha256": "a6ae7e068134a8cb7139b1fe9911fde96a029fa4f2ca4beb649b4a972cc4e08f"
+  },
+  {
+   "clustering": "PHG_SK map K=1000 (as clusters)",
+   "clusters": 1000,
+   "mean_cluster_weight": 2592.9,
+   "coarse_nets": 1321843,
+   "coarse_pins": 6531297,
+   "pin_reduction_unsplit": 4.5281,
+   "file_sha256": "3ea097861ab452e266d71448651657ee780a115da9064b15ae35071e6579e092"
+  },
+  {
+   "clustering": "PHG_SK map K=2000 (as clusters)",
+   "clusters": 2000,
+   "mean_cluster_weight": 1296.4,
+   "coarse_nets": 1587157,
+   "coarse_pins": 7710934,
+   "pin_reduction_unsplit": 3.8354,
+   "file_sha256": "3267a7fddcd158f44dfe583d9f7ff6adbc4f9e484592e314c37879925278b2f4"
+  },
+  {
+   "clustering": "PHG_SK map K=5000 (as clusters)",
+   "clusters": 5000,
+   "mean_cluster_weight": 518.6,
+   "coarse_nets": 1873024,
+   "coarse_pins": 8995805,
+   "pin_reduction_unsplit": 3.2876,
+   "file_sha256": "2591cfa3fb48ae02666da20bc2ef03e85e065e0ee0d0a6f39021427c94f6fd6a"
+  },
+  {
+   "clustering": "PHG_SK map K=25928 (as clusters)",
+   "clusters": 25928,
+   "mean_cluster_weight": 100.0,
+   "coarse_nets": 2249580,
+   "coarse_pins": 10892386,
+   "pin_reduction_unsplit": 2.7151,
+   "file_sha256": "a7656ea1671b986ec81e49f695e0dc652a78377dc7192a894bff21e2767c42e7"
+  }
+ ]
+}

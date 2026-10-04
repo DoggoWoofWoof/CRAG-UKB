@@ -1,0 +1,280 @@
+{
+  "track": "B -- FINAL dataset canonicalization",
+  "dataset_version": "canonical_v1",
+  "git_commit": "ba6bd71bcc9f367dc28d3e4cde777a3931501406",
+  "invariant": "QUERY SUBSETTING IS ALLOWED. CORPUS SUBSETTING BY QUERY IS FORBIDDEN. Canonical corpus = fixed once per dataset, independent of which queries are evaluated. Changing the query subset must not change nodes, ids, graph, embeddings, partitions, index.",
+  "datasets": {
+    "metaqa": {
+      "dir": "data/final_canonical/metaqa",
+      "legacy_substrate_name": "metaqa",
+      "canonical_node_count": 43234,
+      "corpus_hash": "5f55719a08c10e54593cf1420e04cd6a9b52b8ea13ac100cb0ee8fffb3e60f9a",
+      "ordered_node_id_hash": "9172a4ba08fb3c3de93c55e5d336a476c8f54e1e567b79c673e69b2b01dcb968",
+      "nodes_jsonl_sha256": "a2441a83961a3426be2650a05513fd5b85862c4e98ea13755ede1bced951f3eb",
+      "CORPUS_QUERY_INDEPENDENT": true,
+      "all_eval_gold_nodes_present": true,
+      "legacy_classification": "OTHER: LOSSY_IDENTITY_COLLAPSE (not sample-conditioned)",
+      "READY_FOR_INDEX_BUILD": true,
+      "manifest": "data/final_canonical/metaqa/dataset_manifest.json"
+    },
+    "2wiki": {
+      "dir": "data/final_canonical/2wiki",
+      "legacy_substrate_name": "2wiki_clean",
+      "canonical_node_count": 5989847,
+      "corpus_hash": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+      "ordered_node_id_hash": "57dd809af573b6b531256b2a65e4b4efd1e26794c4fea81e0b43311fdcb24c86",
+      "nodes_jsonl_sha256": "73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a",
+      "CORPUS_QUERY_INDEPENDENT": true,
+      "all_eval_gold_nodes_present": true,
+      "legacy_classification": "SAMPLE_CONDITIONED",
+      "READY_FOR_INDEX_BUILD": true,
+      "manifest": "data/final_canonical/2wiki/dataset_manifest.json"
+    },
+    "musique": {
+      "dir": "data/final_canonical/musique",
+      "legacy_substrate_name": "musique_clean",
+      "canonical_node_count": 117534,
+      "corpus_hash": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+      "ordered_node_id_hash": "6242bd7a69cfc17dbdebf18288c773ed621db2b89402fba9d223691a41c66fb8",
+      "nodes_jsonl_sha256": "b8fc63ce6071609312de01045b0ea0f381fe9d643b977281d7132693faebfbdf",
+      "CORPUS_QUERY_INDEPENDENT": true,
+      "all_eval_gold_nodes_present": true,
+      "legacy_classification": "SAMPLE_CONDITIONED + GOLD_CONDITIONED (all-gold pool)",
+      "READY_FOR_INDEX_BUILD": true,
+      "manifest": "data/final_canonical/musique/dataset_manifest.json"
+    },
+    "squad": {
+      "dir": "data/final_canonical/squad",
+      "legacy_substrate_name": "squad_clean",
+      "canonical_node_count": 20233,
+      "corpus_hash": "f592d4ab61956c1b8f4b46a0eeabdc73d2369549dec6151b2c8e976b4bafbe29",
+      "ordered_node_id_hash": "76e816641fba320c383ec2e163c126ce80ba105de65cf23ea6ddf038315c7d7f",
+      "nodes_jsonl_sha256": "34ac47757e0080f0e2eb6c679009a6090ca97be39d576307ba7281db730c1a8b",
+      "CORPUS_QUERY_INDEPENDENT": true,
+      "all_eval_gold_nodes_present": true,
+      "legacy_classification": "OTHER: SPLIT_CONDITIONED_TRAIN_ONLY (not eval-sample conditioned)",
+      "READY_FOR_INDEX_BUILD": true,
+      "manifest": "data/final_canonical/squad/dataset_manifest.json"
+    },
+    "hotpotqa": {
+      "dir": "data/final_canonical/hotpotqa",
+      "legacy_substrate_name": "hotpotqa_clean",
+      "canonical_node_count": 5233329,
+      "corpus_hash": "1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f",
+      "ordered_node_id_hash": "8f043c35cbf629a23e6acf2c2708b33124e3aa1a0044a7a9c179de18da3a823a",
+      "nodes_jsonl_sha256": "c777ab4b7a64eaaa5af852265daf6ba9f9debb4658a67f0c96595662e43f182a",
+      "CORPUS_QUERY_INDEPENDENT": true,
+      "all_eval_gold_nodes_present": true,
+      "legacy_classification": "SETTING_CONDITIONED (distractor contexts, not fullwiki) + SAMPLE_CONDITIONED",
+      "READY_FOR_INDEX_BUILD": true,
+      "manifest": "data/final_canonical/hotpotqa/dataset_manifest.json"
+    }
+  },
+  "FULL_CANONICAL_V1_STATUS": "READY_5_OF_6_SOURCE_CONTRACTS",
+  "WEBQSP_STATUS": "WEBQSP_BLOCKED_ON_FREEBASE_SOURCE",
+  "approval_source": "data/final_canonical/_APPROVALS.json",
+  "approval_gate_note": "Per-dataset approval, read from _APPROVALS.json at build time and recorded in each build_info.json 'gates' block. The all-or-nothing file _APPROVED_SOURCE_CONTRACTS is OBSOLETE, is never consulted, and was deliberately NOT created. LOCKED_6_OF_6 must not be written while webqsp is BLOCKED_PENDING_FREEBASE_SOURCE.",
+  "blocked": {
+    "webqsp": {
+      "dataset": "webqsp",
+      "status": "BLOCKED_PENDING_FREEBASE_SOURCE",
+      "WEBQSP_STATUS": "WEBQSP_BLOCKED_ON_FREEBASE_SOURCE",
+      "dataset_version": null,
+      "current_substrate_is_final_canonical": false,
+      "statement": "The current webqsp experimental substrate (781,485 nodes) is NOT a final canonical corpus. No canonical_v1 build was attempted in this track. As of 2026-09-05 webqsp is BLOCKED: scratchpad/final_canonical_build/build_kb.py hard-codes NEVER_BUILD={'webqsp'} and refuses unconditionally -- no flag, environment variable or argument can make it build. The RoG all-question subgraph union (1,316,466 rows) is REJECTED as the canonical corpus because its membership is query-derived; the 1,316,466 figure additionally came from scratchpad/c1c2_webqsp.py:30-33 injecting answer and topic entities, which canonical_v1 forbids (corpus <- source graph only; gold coverage <- measured afterwards).",
+      "proposal": "data/final_canonical/webqsp/FREEBASE_SOURCE_PROPOSAL.md",
+      "freebase_dump_present_on_machine": false,
+      "freebase_search_scope": "full recursive scan of the repo + C:\\Users\\Swastik to depth 4 for *freebase*, *fb15k*, *FB2M*, *FB5M*, *mid2name*, *mid2title*, *entity_names*, *fb_entity*, *simplequestions*, *graftnet*, *embedkgqa*, *.nt, *.nt.gz, *.ttl, *virtuoso*, *.mid; plus HuggingFace cache listing and a >800 MB file sweep of data/. C: is the only drive. 0 hits.",
+      "phase_c_bare_mid_fraction": {
+        "n_bare_mid_rows": 776788,
+        "n_rows": 1316466,
+        "fraction": 0.5901,
+        "rule": "^[mg]\\.[0-9a-z_]+$ matching the ENTIRE text field",
+        "method": "exact, full streaming pass over data/canonical/webqsp/documents.jsonl",
+        "note": "the task brief quoted 55.3%; the measured exact value is 59.01%. A 20,000-row byte-offset sample gave 57.56% but is length-biased against short lines. Conclusion unchanged: bare-MID text is not a retrieval representation and must not be preserved for embedding-reuse reasons."
+      },
+      "legacy_substrate": {
+        "cache": "results/GENERALIZATION/G2_L1_PARTITION_SEARCH/runs/cache_webqsp.npz",
+        "n_docs_from_cache": 781485,
+        "meta_n_docs": 781485,
+        "n_eval_queries": 1419,
+        "sample_rule": "val+train (val<1000; TEST never touched)",
+        "master": "data/processed/master_nodes_webqsp.json",
+        "what_it_actually_is": "Freebase entity nodes of the RoG-webqsp per-question subgraphs of the RoG TEST split ONLY. Verified: src/pipeline/loader_webqsp.py builds master_nodes_webqsp.json from --paths defaulting to data/raw/full/kb/webqsp_test0.parquet + webqsp_test1.parquet (lines 118-123); those two files are sha256-identical to data/original/webqsp/rog_webqsp/test-0000{0,1}-of-00002.parquet (VERIFIED IDENTICAL); recounting the unique triple endpoints of the RoG test parquets gives 781485 entities over 1628 questions (legacy n_docs = 781485); and every legacy question id is WebQTest-* ({'webqsp_q_WebQTest': 1578}). The 'val+train' in sample_rule refers to the substrate's INTERNAL seeded 70/20/10 re-split of those RoG test questions (src/experiments/overlap_retrain._splits fallback), not to official WebQSP train. 'TEST never touched' therefore means the internal 10% cut.",
+        "legacy_question_ids": {
+          "n_question_ids": 1578,
+          "split_sizes": {
+            "train": 1104,
+            "val": 315,
+            "test": 159,
+            "all": 1578
+          },
+          "id_prefixes": {
+            "webqsp_q_WebQTest": 1578
+          }
+        },
+        "classification": "SAMPLE_CONDITIONED (corpus = union of the evaluated questions' own subgraphs; also STALE vs the RoG train+val+test entity union)",
+        "brief_lead_correction": "The brief's lead ('RoG train+val subgraph nodes only, built before the RoG test parquet') is NOT what the code shows: the legacy master is built from the RoG TEST parquets; it predates the acquisition of the RoG train/validation parquets (2026-08-23).",
+        "verify_file": "data/final_canonical/_work/webqsp_legacy_verify.json"
+      },
+      "official_or_canonical_reference": {
+        "phase_c_canonical": "data/canonical/webqsp/documents.jsonl",
+        "phase_c_n_docs": 1316466,
+        "phase_c_definition": "Freebase entity (RoG subgraph node) -- structural_derived_from_freebase — RoG-webqsp subgraphs, NOT official Microsoft WebQSP graph",
+        "official_questions": "Microsoft WebQSP.train.json (3098) / WebQSP.test.json (1639); RoG parquet = subgraph layer (train 2826 / dev 246 / test 1628)",
+        "open_decision": "canonical corpus definition for a KB dataset (RoG subgraph-union entities vs. a fixed Freebase slice) is a user decision; the RoG union (1,316,466) is itself a union of per-question subgraphs (question-conditioned by construction of RoG)."
+      },
+      "resolution_2026_09_05": {
+        "decision": "REJECTED as the canonical corpus. The RoG union stays available as a SEPARATE, benchmark-specific experiment (WEBQSP_ROG_UNION) and must never be presented as the webqsp member of the six-dataset full-corpus result.",
+        "what_would_lift_the_block": "see FREEBASE_SOURCE_PROPOSAL.md section 7 (dump on disk with measured sha256; a query-independent scope rule S1/S2/S3; a chosen deterministic textualization; ~124-179 GB of dense storage arranged -- only ~124 GB free on this machine; a user change to _APPROVALS.json; and removal of NEVER_BUILD in a separate task).",
+        "nodes_built_in_this_task": 0,
+        "encoder_runs_in_this_task": 0
+      },
+      "written": "2026-09-05T06:25:06",
+      "updated": "2026-09-06T00:41:04",
+      "lane_status_2026_09_06": {
+        "_note": "Lane-level status board. SUPERSEDES the single 'status'/'WEBQSP_STATUS' strings above for lane questions; the historical blocks are retained verbatim as the record of how each decision was reached. RECORD ONLY -- nothing was built, downloaded or encoded when this block was written.",
+        "source_of_evidence": [
+          "data/final_canonical/webqsp/WEBQSP_SOURCE_LINEAGE_MATRIX.md",
+          "data/final_canonical/webqsp/WEBQSP_SOURCE_MATRIX.json",
+          "data/final_canonical/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+          "data/final_canonical/webqsp/WEBQSP_FREEBASE_PIPELINE_AUDIT.md"
+        ],
+        "lanes": {
+          "WEBQSP_ROG_MID": {
+            "status": "UNRESOLVED_SOURCE",
+            "what_it_is": "the RoG-scale benchmark graph (WebQSP + CWQ) reconstructed in MID space, MIDs preserved as identity",
+            "targets": {
+              "entities_paper": 2566291,
+              "relations": 7058,
+              "triples": 8309195
+            },
+            "query_independent": false,
+            "query_independence_note": "benchmark-conditioned by construction (subgraphs extracted around question entities). It is the accepted CORPUS_TYPE = STANDARD_BENCHMARK_KG_SUBGRAPH lane, not a query-independent full retrieval universe. Never describe it as full Freebase.",
+            "why_unresolved": "the released RoG artifacts substituted human-readable surfaces for MIDs on named endpoints (63.74% bare MID / 35.70% surface / 0.56% literal, measured), and no released file restores the discarded MIDs. A MID-level preimage must come from upstream, not from the RoG strings.",
+            "next_falsifiable_lead": {
+              "artifact": "NSM (RichardHGL/WSDM2021_NSM) Google-Drive release: webqsp.tgz 136 MB + CWQ.tgz 872 MB (~1.0 GB total)",
+              "why": "MID-keyed per-question subgraphs produced by the exact preprocessing recipe RoG's README says it followed ('We extract the subgraphs from the Freebase following previous studies' -> NSM/Freebase). A CANDIDATE PREIMAGE, not a proven one: RoG says it re-ran the recipe, not that it consumed these tarballs.",
+              "falsification_test": "reproduce relations = 7,058 and triples = 8,309,195 from the union while retaining MIDs. Exact match => WEBQSP_ROG_MID. Mismatch => report the discrepancy; do NOT normalize until it fits.",
+              "status": "NOT ACQUIRED -- acquisition is an external download and needs explicit user approval"
+            },
+            "forbidden": [
+              "substituting the released mixed RoG endpoint strings for real graph identity",
+              "the WebQSP-only union (~1.30M ent / ~3.79M triples) -- that is the rejected object",
+              "the legacy 781,485-node RoG TEST-split union",
+              "the gold/topic-injected 1,316,466-row Phase-C corpus"
+            ]
+          },
+          "WEBQSP_KBQA_24M": {
+            "status": "PAPER_COMPARABLE_BENCHMARK_CONDITIONED_SUBSTRATE",
+            "what_it_is": "PullNet's intermediate filtered Freebase KB, the backend scale reused by the GraftNet/NSM/ReaRev/GNN-RAG line",
+            "targets": {
+              "entities": 24900000,
+              "facts": 164600000
+            },
+            "query_independent": false,
+            "query_independence_note": "MUST NOT be marked query-independent. PullNet defines it as 'a subset of Freebase which contains all facts that are within 2-hops of any entity mentioned in the questions of WebQuestionsSP' (arXiv:1904.09537 s4.1, read from the PDF). That is CORPUS SUBSETTING BY QUERY -- the exact construction canonical_v1's core invariant forbids -- and it fails FREEBASE_SOURCE_PROPOSAL.md s3 test S4. Acquiring it would close a PAPER-COMPARABILITY target, never the corpus-independence requirement, so it may not be used to support the core L1 query-independent-corpus claim.",
+            "citation_correction": "the 24.9M/164.6M figures are PullNet's (Sun, Bedrax-Weiss, Cohen, EMNLP-IJCNLP 2019, arXiv:1904.09537 s4.1), NOT GraftNet's. GraftNet pages 5-7 were read and do not contain them (it reports 528,617 entity nodes / 513 edge types over retrieved subgraphs).",
+            "acquirability": "no downloadable artifact exists. PullNet released no repo (GitHub search 'pullnet kbqa' -> 0 results) and described the KB in prose only; GraftNet's nearest relative freebase_prepro.tgz (2.8 GB) sits on a host that no longer answers TCP and was never archived; NSM/ReaRev/GNN-RAG/RoG all ship per-question subgraphs. Any rebuild's relation filter would be OURS (PullNet's was never published) and the result must be named WEBQSP_KBQA_24M_RECONSTRUCTED with measured N/E/R printed beside the paper's.",
+            "action_now": "DO NOT ACQUIRE. Deferred to a later, separately approved phase."
+          },
+          "WEBQSP_FREEBASE_SCALE": {
+            "status": "FUTURE_LANE_NOT_DEFINED",
+            "what_it_is": "the only lane that could carry a genuinely QUERY-INDEPENDENT large-scale claim: a Freebase-derived graph whose membership rule never reads the question set",
+            "query_independent": true,
+            "query_independence_note": "aspirational -- the property this lane exists to provide, not yet measured on any artifact",
+            "naming_rule": "a graph built from an idirlab/freebases variant (46.07M-59.90M ent / 125.1M-244.1M triples) MUST be named WEBQSP_FREEBASE_60M_SCALE (or _46M_SCALE) and never compared head-to-head against PullNet/GraftNet/NSM/ReaRev numbers.",
+            "action_now": "NOT STARTED. No source chosen, no cost approved."
+          }
+        },
+        "next_approved_phase": {
+          "name": "WEBQSP_ROG_RESOLVED",
+          "scope": "GRAPH + ENTITY RESOLUTION ONLY -- a human-readable NODE + EDGE table over the RoG WebQSP+CWQ graph scope",
+          "explicitly_excluded": [
+            "Dense",
+            "SPLADE",
+            "encoder",
+            "ANN",
+            "KNN",
+            "H4",
+            "SAFE",
+            "halo",
+            "SP1"
+          ],
+          "status": "APPROVED BY THE USER (2026-09-06), NOT STARTED -- sequenced behind the 2wiki TEXTUALIZATION_REV 2 gate",
+          "hard_blocker_to_disclose": "the resolver's stated target (ORDINARY_UNRESOLVED = 0, a readable display_name for every ordinary entity) is NOT reachable from artifacts currently on this machine: the released RoG graph discarded the MIDs for named endpoints, and no MID->name dictionary exists anywhere in the project (verified 2026-09-05). Reaching it requires acquiring at least a metadata source (GNN-RAG's entities_names.json, 23,377,816 B, is a real MID->name file) and, for MID-level identity, the NSM tarballs above. Both are external downloads needing explicit approval.",
+          "reusability_requirement": "the resolver must be written so the SAME code can later process WEBQSP_KBQA_24M and WEBQSP_FREEBASE_SCALE -- no logic specific to the ~2.5M graph"
+        },
+        "written": "2026-09-06T00:41:04"
+      }
+    }
+  },
+  "reports": {
+    "audit": [
+      "data/final_canonical/CANONICALIZATION_AUDIT.json",
+      "data/final_canonical/CANONICALIZATION_AUDIT.md"
+    ],
+    "source_contracts": "data/final_canonical/SOURCE_CONTRACTS_FOR_REVIEW.md",
+    "artifact_reuse": "data/final_canonical/ARTIFACT_REUSE_REPORT.md",
+    "downstream_policy": "data/final_canonical/DOWNSTREAM_REBUILD_POLICY.md",
+    "build_log": "data/final_canonical/_build.log"
+  },
+  "builder_dir": "scratchpad/final_canonical_build/",
+  "builder_files_sha256": {
+    "audit_report.py": "8a4ad236ff1f66be7c2d9ff0c53bcae13333eed3744dddc1cfb3a2f0132f5f1f",
+    "build.py": "26455c9f72191dd46281d0d107d2236d8beec3168552ec67ddecd13832311e93",
+    "build_kb.py": "e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6",
+    "deferred.py": "78dc7cb2117796ee613ffb235522f33060bae71af56b95664bdbefc23d96be40",
+    "hotpot_empty_forensics.py": "405fe45590ef798a85ad8fb797b4d179ae43bcfbf9d38bc47890dc318cf300e9",
+    "hotpot_rev2_diff.py": "cbdf2be2d520ad311464f7e337300b4adb4c325e23e26aa2d3a39677adeaa35a",
+    "hotpot_rev2_verify.py": "1e8f5e04b1372a0fff0b7459bab1ae8cb06db43c3a82b73d2def01728da5588f",
+    "jsonstream.py": "c3d170107f99e6fdd33eee2278c192447a7b1a460a958d189bf76ece2adfde58",
+    "legacy_compare.py": "3e035a3bfd19f056bd471fdc1ec073e703f8aeef71cc4ba5a2a466e8af3e55ae",
+    "legacy_compare_kb.py": "18b11c675f98746872f1efb77b09b7ff123c7376e27c38ae3a5ef4a8b59a7d67",
+    "legacy_dump.py": "b9536f5180923528610c4aadddc0eeab594486b3cf3246a4f50ef617c758de9d",
+    "manifest.py": "99b8fd3b285d65235483e784d3c391b6dc647dcb5ef4015d53336457f577a60c",
+    "mirror_audit.py": "7d18c8784d256d0154f30a562162ef619ecc9b67c8bc1807565d7e6870b229ea",
+    "phase0_stats.py": "4e2ff1c0ce93fe151bdffe177d702172d134a35af2e0383b4a7ece49e2d478a3",
+    "prewarm_reuse_shards.py": "979e86df2c5739a890a9f14a7d2b0cd8ca1ad68e69e72edbb3cd9817ab165a91",
+    "qi_test.py": "a0b7fc990e4c8ef23ac44c1b196602958cb05b65221d761b6b2a823915d06bb9",
+    "query_lanes.py": "511ba486c5beaae5859c743872f3f18bb0b1e0fd9ac23d26cbc15891194c9ba0",
+    "reuse_map.py": "1da0e3c805018768191e3ee39c65f30eed164182569ce2f5cbc619ffa2f49e1a",
+    "reuse_map_kb.py": "4de7e23fa498750fee3292c1b95d08f10d38cee9e16699249a1fa3faa54c5041",
+    "rev2_diff.py": "4e610ea672da62b155079690f4f0f89866cf0402d529757a349f7672b5eb675e",
+    "rev2_install.py": "fec7778c33dc5ad5623ee77bb505c10557f9074bafc59a3865ba4350948c87d8",
+    "rev2_verify.py": "2813cebb21086767af104c7a4ecf40d02b53b5e22a9651ec3f8986e8a8bfab23",
+    "source_contracts.py": "bfe5f51672e648db4ebe54046451530c94f24917117c5cbd8a53e98704b87cac",
+    "test_build_kb.py": "0ff7a1765d8dab003c4fe29787aff3aa2c9c6a07f41e8b559c11f7f123f9bb2d",
+    "twowiki_empty_forensics.py": "27acd4decce886a4c37f1052c3d2728434049cdf071c5d5558ac6defb97981fc"
+  },
+  "written": "2026-09-06T03:13:54",
+  "READY": [
+    "2wiki",
+    "hotpotqa",
+    "metaqa",
+    "musique",
+    "squad"
+  ],
+  "PENDING_FULL_CANONICAL": [
+    "webqsp"
+  ],
+  "status_note": "2026-09-05 user sign-off: four datasets accepted (exact-case metaqa, (title,text) musique, verbatim 2wiki, train+dev squad). DEFERRED status for webqsp/hotpotqa is SUPERSEDED: complete canonical corpora are required for all six before canonical_v1 is LOCKED_6_OF_6. Query lanes to add: LEGACY_CONTINUITY / QUALITY_LOCKED / SCALE_ALL. No downstream builds until LOCKED_6_OF_6. | 2026-09-05 Track-B session 2: SOURCE_CONTRACTs written for all six; three query lanes materialized + corpus-hash-equality asserted (PASS, incl. a constructive rebuild under the QUALITY_LOCKED lane) for the four built datasets; token-ID-level artifact reuse map complete for the four (0 dense/SPLADE rows need encoding -- Phase-C encodings cover all six at full canonical scale). webqsp/hotpotqa builds are BLOCKED awaiting source-contract approval.\n\n2026-09-05: source-contract approval gate TIMED OUT. FULL_CANONICAL_V1 remains PARTIAL_4_OF_6. webqsp + hotpotqa are NOT built and nothing downstream (KNN / H4 / SAFE / halo / SP1 / encoders) may be built until this locks 6 of 6.\n\n2026-09-05 (Track-B session 3, POST-BUILD -- SUPERSEDES the 'TIMED OUT / PARTIAL_4_OF_6' entry immediately above): the approval gate did not time out, it was REPLACED. The user issued per-dataset decisions recorded in _APPROVALS.json; the all-or-nothing _APPROVED_SOURCE_CONTRACTS file is obsolete and was deliberately never created. 2wiki's 398,354 context-union contract was REJECTED and rebuilt at the full para_with_hyperlink universe (5,989,847). hotpotqa was BUILT (5,233,329) from the introductory-paragraph/abstracts corpus. FULL_CANONICAL_V1_STATUS is now READY_5_OF_6_SOURCE_CONTRACTS / CANONICAL_V1_STATUS BUILT_5_OF_6. Only webqsp remains unbuilt. The sentences above claiming 'PARTIAL_4_OF_6' and 'webqsp + hotpotqa are NOT built' are STALE and retained only as history.",
+  "status_updated": "2026-09-06T03:13:54",
+  "phase_status": {
+    "PHASE_1_SOURCE_CONTRACTS": "COMPLETE (6/6) -- data/final_canonical/<ds>/SOURCE_CONTRACT.json + SOURCE_CONTRACTS_FOR_REVIEW.md",
+    "PHASE_2_QUERY_LANES": "COMPLETE for all 5 built datasets (LEGACY_CONTINUITY / QUALITY_LOCKED / SCALE_ALL materialized; corpus-hash equality asserted PASS on all five). webqsp lanes not materialized -- no corpus.",
+    "PHASE_3_ARTIFACT_REUSE": "COMPLETE for all 5 built datasets (per-node token-ID maps + ARTIFACT_REUSE_REPORT.md). webqsp: no map -- existing 1,316,466 rows are not reusable under the proposed Freebase textualization.",
+    "PHASE_4_WEBQSP_HOTPOT_BUILD": "hotpotqa BUILT (5,233,329, hotpotqa:c<curid>, data/final_canonical/hotpotqa/). 2wiki REBUILT at full universe scale (5,989,847) after the 398,354 context-union contract was rejected. webqsp NOT BUILT -- build_kb.py hard-codes NEVER_BUILD={'webqsp'} and refuses unconditionally (re-probed live: refuses, writes nothing).",
+    "PHASE_5_INTEGRITY_AND_LOCK": "INTEGRITY COMPLETE for 5/6 (query-independence executed not asserted: legacy / random_held:7 / none all produce identical CORPUS_HASH, NODE_ORDER_HASH, nodes.jsonl sha256 and node count). LOCK NOT DONE and must not be done: LOCKED_6_OF_6 is forbidden while webqsp is BLOCKED_PENDING_FREEBASE_SOURCE."
+  },
+  "CANONICAL_V1_STATUS": "BUILT_5_OF_6 (webqsp BLOCKED_PENDING_FREEBASE_SOURCE)",
+  "corpus_totals": {
+    "metaqa": 43234,
+    "2wiki": 5989847,
+    "musique": 117534,
+    "squad": 20233,
+    "hotpotqa": 5233329,
+    "_subtotal_excluding_webqsp": 11404177,
+    "webqsp": "BLOCKED -- no corpus"
+  }
+}

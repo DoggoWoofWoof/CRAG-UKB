@@ -1,0 +1,74 @@
+{
+ "stage": "FBX_SCALE / addendum 12: re-rank depth diagnostic on the T1 indexes (Track C step 3b), declared before any recall at R > 512 exists on Freebase codes",
+ "declared": "2026-10-01T18:02:41+0530",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_3.json": "23b186b9c631541af5fa45e7236c20937209cd7d2aa8971aeaaaccff31a883a3",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_4.json": "6dd584733ea134dba79b8d9a7f9b45097363ae0dd3a0c3bfc807821b7f1b9920",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_5.json": "ddff074cc11de999c8d70e720880271d67af47ef4b7ba65c9c4d875f48c0f4e2",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6.json": "5ca94fa0ca8b07dd94fe69236a8f902ef269ee8a4d7fc66463a01ce8487eea10",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6A.json": "f2ada7fc164e6ce54e83e3066498133a5a5ef1132aab53ea71c157eb538c7c52",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_7.json": "a386758079a1aa128a7d06264af3911f189cab6e1d2e1905c6bde3ea92e93549",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_8.json": "47838cec49fa417ce27d1bfed6cc900f7bdcadb98e000034d8601e1a57bf0bed",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_9.json": "572a62c51f5a80840bab9731ef7b36ec1b566191115702c15078814c41dd0ea8",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_10.json": "decf737e177259d62521940d0d559dcd599129f7e583dd75e72ac13615199b0f",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_11.json": "00a5558a57c393209dae0693586758617a2755b84df8437071b2a38e1293e264"
+ },
+ "basis": {
+  "results/FREEBASE_SCALE/ivf/FBX_IVF_TRANSFER_T1__v1.json": "1df3ca46150deff4b67308d9026d02ce63eb915c6f8a2031c712654c98fb0d25",
+  "results/FREEBASE_SCALE/ivf/WEBQSP_IVF_SAMPLE__v1.json": "8b21c8720e2395e46108d26bd3c53cc793343c40ac1f9567c498569e0696f84a",
+  "results/FREEBASE_SCALE/enc/FBX_QWEN_ENCODING_CONTRACT__v1.json": "aef5fb581aab93390bea0ebaa1b64e6fb9dd64285da606f19890cafb5f217f97"
+ },
+ "status": "DEVELOPMENT (a systems measurement); a diagnostic that isolates a cause; it selects no lever, builds no KNN family and changes no gate or contract",
+ "observed_before_declaring (T1, section 54, read)": {
+  "R1": "L437 at 32 chunks (4,194,304 rows, 9,589 lists): tie-tolerant recall@3 0.9337 / 0.9493 / 0.9582 at nprobe 32 / 64 / 128 vs the WebQSP baseline 0.9456 / 0.9672 / 0.9838: D = -0.012 / -0.018 / -0.026 (rule: holds if D >= -0.010) => DEGRADES",
+  "R2": "L437 slope per doubling of n over c in {4, 8, 16, 32}: -0.0125 / -0.0110 / -0.0095 / -0.0087 / -0.0078 at nprobe 32 / 64 / 128 / 256 / 512 (rule: falling if < -0.005) => FALLING",
+  "other": "at high probe counts the recall saturates: c = 32 L437 nprobe 256 -> 512 gains 0.0036 for twice the scan, reaching 0.9663 (WebQSP 0.9979); F4096 c = 32 nprobe 512 0.9680; self_in_top4 (the query row inside its own returned top 4) falls 0.99925 / 0.9975 / 0.99475 / 0.98825 / 0.9825 / 0.98125 over c = 1 ... 32"
+ },
+ "hypothesis_declared": "ADC ranks the candidates of the probed lists by <q, x_hat> = ||x_hat|| cos(q, x_hat), and the cosine is only applied to the best R = 512 of them.  The decoded norms spread 0.689-1.018 (addendum 10), so a true neighbour with a small decoded norm can be pushed out of the best 512 by rows of larger norm that lie farther in angle; the larger the database, the more such rows are scanned.  If this is the cause, recall at the same probe counts rises with R, the saturation at high nprobe lifts, and a full probe (every list) with a large R recovers the truth.  If it is not, recall does not move with R and the loss is in the probing (cluster structure of the real codes, k-means quality at this nlist).  The hypothesis is NOT established by T1; this addendum measures it.",
+ "question": "At c = 32 (and 8) chunks of the real Freebase PQ64 codes, how much of the recall gap to the WebQSP baseline is the re-rank depth R and how much is the number of lists probed?",
+ "not_claimed": [
+  "no end-to-end claim and no KNN family; no change to R = 512 as addendum 10's frozen WebQSP operating point; R > 512 here is a diagnostic cell, not a candidate operating point",
+  "no claim about 245 M rows; the cost of a larger R at that scale is not extrapolated from these cells",
+  "no claim that the prefix is representative (addendum 11, section on the node-order prefix); T2 (strided chunks) remains pending"
+ ],
+ "design": {
+  "indexes": "the T1 indexes, re-built from the T1 caches (the coarse quantiser and the row assignment files under data/freebase_scale/ivf_transfer/t1/c<NN>/) of addendum 11; a missing cache aborts (a re-trained quantiser is a different index); the same 4,000 queries (RandomState(1)) and the same exact truth file",
+  "cells": {
+   "c = 32, L437 (nlist 9,589)": "nprobe {32, 128, 512, 9,589 = EVERY list} x R {512, 2048, 8192}",
+   "c = 32, F4096 (nlist 4,096)": "nprobe {32, 512} x R {512, 2048, 8192}",
+   "c = 8, L437 (nlist 2,397)": "nprobe {32, 128} x R {512, 2048, 8192}"
+  },
+  "scoring": "addendum 10's: faiss IndexIVFPQ, by_residual = False, inner product with the accepted centroids; the best R by ADC re-ranked by cosine from the stored decoded norms; ONLY R (and the probe count of the full-probe wiring cell) differ from T1",
+  "metrics": [
+   "tie-tolerant recall@3 (PRIMARY), ids recall@3, nearest recall, self_in_top4, four-fold SE",
+   "scan fraction, seconds and queries per second per cell (the cost of R)",
+   "norm_diag (descriptive): at c = 32 L437 nprobe 128 R 512, the median decoded norm of the true non-self top-3 neighbours that the search missed (by id) vs those it returned, and of all rows"
+  ],
+  "execution": "one host job, 6 threads, resumable per cell; record results/FREEBASE_SCALE/ivf/FBX_IVF_TRANSFER_T1R__v1.json written once at the end"
+ },
+ "reading_rules_declared_before_any_recall_at_R_gt_512_is_read": {
+  "Q1_R_limited": "G = recall(R = 8192) - recall(R = 512), tie-tolerant, same cell.  At c = 32 L437 and F4096 nprobe 512: G >= 0.010 => 'R-limited at high probe'; G < 0.003 => 'not R-limited'; between => 'partly'.  Likewise at nprobe 32 and 128 (reported, same labels).  The intermediate R = 2048 gives the shape (reported, not used for a label)",
+  "Q2_wiring": "full probe (nprobe = nlist 9,589) at c = 32 L437: recall at R = 8192 >= 0.995 => the ADC + cosine re-rank path recovers the truth when R is large and every list is probed ('R explains the full-probe ceiling'); < 0.995 => something other than R or probing limits the ceiling (reported with the R curve)",
+  "Q3_transfer_with_larger_R": "D8192 = recall(c = 32, L437, R = 8192) - WebQSP baseline (R = 512) at nprobe 32 and 128 (the declared cells): 'holds' if D8192 >= -0.010 (addendum 11's R1 threshold), else 'degrades'.  The WebQSP baseline is the frozen R = 512 operating point, not a re-measurement at R = 8192 on WebQSP",
+  "Q4_R_needed_vs_n": "at nprobe 128 L437: the smallest R in {512, 2048, 8192} whose recall is within 0.003 of the R = 8192 recall, at c = 8 and c = 32 ('not reached' if none); a larger R at c = 32 than at c = 8 is reported as R growing with n (two points: no functional form is fitted)",
+  "Q5_cost": "queries per second per R at each cell (the cost of the larger R at fixed nprobe)"
+ },
+ "decision_table": {
+  "Q1 R-limited AND Q3 holds": "the loss is the re-rank depth; the candidate lever for the Freebase index is 'R grows with n' (at the 245 M scale the cost of R is measured next, not extrapolated); the decision to adopt a larger R or an alternative (normalised-code scoring, GPU exact re-score of a candidate set) is the user's, because the frozen WebQSP operating point has R = 512",
+  "Q1 R-limited AND Q3 degrades": "R explains part of the gap, probing the rest; report both parts; the next lever (more lists probed, a hierarchical coarse quantiser, GPU exact scoring) is the user's call",
+  "Q1 not R-limited": "the loss is in the probing / the cluster structure of the real codes (T2 strided sample would show whether it is node-order specific); R is ruled out as the lever and the user chooses the next",
+  "Q2 fails": "the full-probe ceiling is not explained by R: report the R curve; investigate ties / duplicate codes in the exact truth before any further lever"
+ },
+ "next_declared": [
+  "T2: strided chunk sample (after the encode), same sizes",
+  "T3: the full 245.35 M database (GPU coarse quantiser), after the user chooses the lever"
+ ],
+ "code_pinned": {
+  "scratchpad/_ivf_rdiag.py": "0a94068f1d068a67683d589975e3c5c8e7924f065c4e49ed2bd38674208bd9c5",
+  "scratchpad/_ivf_transfer.py": "905e81377273396e6c2fed7cc4d5f73eb39a6921d961108aa4b0af08d38ac93c",
+  "scratchpad/_ivf_knn.py": "b2e573ffbe1d6c22be6583431342acbd78698c33faa6f6f76bc113901c499e65",
+  "scratchpad/_fbx_encode.py": "de66c9399fa7f08677356054a871b1f1fd6464f1b820189db618796b1c858d17"
+ }
+}

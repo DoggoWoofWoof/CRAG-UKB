@@ -1,0 +1,160 @@
+{
+ "mode": "L1X_TXT_SCOREBOARD (development; descriptive; nothing chosen)",
+ "definitions": "L1X -- the 90+ scoreboard for HotpotQA and 2Wiki: the shipped L1 (IR_L1, ES router, KNEE_SDIV count with alpha .75) on the development population of TXT_DEV_POPULATION__v1.json.  (development only)\n(User 2026-10-02: \"try to get 90+ for all datasets\".  These two text datasets had no development measurement of the routed L1 at node budgets.)\n\nPer row: FLAT = RRF(dense, SPLADE) full order; hits = top-200 FLAT, weight 1/(rank+1) * g; LOC = one-hop localisation over STRUCT_out u STRUCT_in u KNN u NER; served order O = RRF(FLAT, LOC), K0 = 60;\nrouter: ES order = partitions by first appearance in O' = RRF(H_q, LOC) over V_q = hits u LOC; count B_P(q,K) = min(K, ceil(B_100(q) (K/100)^0.75)), B_100 = KNEE_SDIV on the K = 100 hit curve (the shipped rule).\nserved = the first B_N nodes of O inside the contacted partitions; ALL = every gold served.  Exact arithmetic of _l1x_actserve.py (identity-checked there against the stored MetaQA records); no pool cap: the served rank of a gold is its rank\namong ALL contacted nodes sorted by (-f, FLAT rank).  Also reported: UNROUTED (rank of the gold in O) and FLAT alone, for the same B_N.   Partition maps: results/L1_HOST/parts/<ds>__H4_SK_k<K>__PHG_con.npy (sha verified against their RUN.json).\n\n  python -u scratchpad/_l1x_txt_score.py RUN <hotpotqa|2wiki> <tag> [--rows=N] [--cq=C]      -> results/L1_X/txtscore_<ds>__<tag>.{json,npz}   (write-once; --rows = smoke, writes nothing)\n  python -u scratchpad/_l1x_txt_score.py SHOW <ds> <tag>\n",
+ "dataset": "2wiki",
+ "tag": "dev_v1",
+ "N": 5989847,
+ "n_rows": 2000,
+ "population": {
+  "file": "results/L1_X/TXT_DEV_POPULATION__v1.json",
+  "sha256": "57c64f49387413c2b41abbbde3e6a075dff3af33ce2630b0055cd4705914f0c4",
+  "n": 2000
+ },
+ "cells": [
+  "100",
+  "250",
+  "500",
+  "1000",
+  "2000"
+ ],
+ "budgets": [
+  100,
+  250,
+  500,
+  1000,
+  2000,
+  5000
+ ],
+ "mean_B_P": {
+  "100": 22.86,
+  "250": 45.72,
+  "500": 76.89,
+  "1000": 129.04,
+  "2000": 216.69
+ },
+ "mean_LOC_size": 5640.8,
+ "ALL": {
+  "unrouted_O": [
+   0.833,
+   0.9045,
+   0.9435,
+   0.9615,
+   0.9725,
+   0.976
+  ],
+  "flat_only": [
+   0.3955,
+   0.4305,
+   0.4535,
+   0.487,
+   0.5295,
+   0.608
+  ]
+ },
+ "routed_ALL": {
+  "100": [
+   0.832,
+   0.9005,
+   0.9385,
+   0.9545,
+   0.964,
+   0.9675
+  ],
+  "250": [
+   0.833,
+   0.904,
+   0.9435,
+   0.9585,
+   0.969,
+   0.9725
+  ],
+  "500": [
+   0.833,
+   0.904,
+   0.9435,
+   0.9595,
+   0.9695,
+   0.9735
+  ],
+  "1000": [
+   0.833,
+   0.904,
+   0.943,
+   0.9595,
+   0.9695,
+   0.974
+  ],
+  "2000": [
+   0.833,
+   0.9045,
+   0.9435,
+   0.9605,
+   0.97,
+   0.9745
+  ]
+ },
+ "routed_gold_partition_lost_share": {
+  "100": 0.0115,
+  "250": 0.009,
+  "500": 0.0065,
+  "1000": 0.0075,
+  "2000": 0.0065
+ },
+ "by_n_gold": {
+  "2": {
+   "n": 1578,
+   "unrouted_O": [
+    0.9379,
+    0.9651,
+    0.9753,
+    0.9791,
+    0.9848,
+    0.9861
+   ],
+   "routed_K500": [
+    0.9379,
+    0.9645,
+    0.9753,
+    0.9766,
+    0.981,
+    0.9835
+   ]
+  },
+  "4": {
+   "n": 422,
+   "unrouted_O": [
+    0.4408,
+    0.6777,
+    0.8246,
+    0.8957,
+    0.9265,
+    0.9384
+   ],
+   "routed_K500": [
+    0.4408,
+    0.6777,
+    0.8246,
+    0.8957,
+    0.9265,
+    0.936
+   ]
+  }
+ },
+ "seconds": 16534.4,
+ "code": {
+  "path": "scratchpad/_l1x_txt_score.py",
+  "sha256": "b78a61f5555095af585d77ea851d64d3e1afb8cc2b838edd081fe9eca1c03f99"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "npz": {
+  "path": "txtscore_2wiki__dev_v1.npz",
+  "sha256": "79a8bbec79795a9f7100fc763d3f46158064366475cea12032f66f7219120afc"
+ }
+}

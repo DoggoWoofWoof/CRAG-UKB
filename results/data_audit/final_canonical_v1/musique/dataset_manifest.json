@@ -1,0 +1,308 @@
+{
+  "dataset_name": "musique",
+  "dataset_version": "canonical_v1",
+  "legacy_substrate_name": "musique_clean",
+  "canonical_corpus_definition": "CANONICAL_CORPUS_DEFINITION: the complete union of official MuSiQue-Ans v1.0 candidate paragraphs (all 20 per question, supporting AND distractor) over train + dev + test, one node per distinct (article title, paragraph_text) exact pair. Independent of selected queries and of is_supporting labels.",
+  "source_files": [
+    "data/original/musique/v1.0/dev_test_singlehop_questions_v1.0.json",
+    "data/original/musique/v1.0/musique_ans_v1.0_dev.jsonl",
+    "data/original/musique/v1.0/musique_ans_v1.0_test.jsonl",
+    "data/original/musique/v1.0/musique_ans_v1.0_train.jsonl"
+  ],
+  "source_hashes": {
+    "data/original/musique/v1.0/musique_ans_v1.0_train.jsonl": {
+      "sha256": "83a75b1e11e4e9bb8f8308e72ac40ca617ae4431b3a0d955b61cab259248490a",
+      "bytes": 241046755
+    },
+    "data/original/musique/v1.0/musique_ans_v1.0_dev.jsonl": {
+      "sha256": "15fa63794d18a94ce12411aca6e2327e65b6e83b0b1490efab3f1962e48abf3b",
+      "bytes": 30439728
+    },
+    "data/original/musique/v1.0/musique_ans_v1.0_test.jsonl": {
+      "sha256": "92ee3067957b8ebce885baa71156a7c0c29f3bc72cca04510aef506911dd768f",
+      "bytes": 28366572
+    },
+    "data/original/musique/v1.0/dev_test_singlehop_questions_v1.0.json": {
+      "sha256": "013be00ab914799891e5ae40de6cdc1baf03aaffd1f3ce4bf0de796020069613",
+      "bytes": 915921
+    }
+  },
+  "raw_node_count": 496194,
+  "deduplicated_node_count": 117534,
+  "canonical_node_count": 117534,
+  "duplicates_removed": 378660,
+  "dropped_records": 0,
+  "drop_reasons": {},
+  "query_counts": {
+    "train": 19938,
+    "dev": 2417,
+    "test": 2459,
+    "eval_subset": 2000
+  },
+  "eval_subset": {
+    "file": "eval_2000.jsonl",
+    "n": 2000,
+    "recovery_method": "legacy id musique_clean_q_train_{i} (FlashRAG train_i) = official musique_ans_v1.0_train.jsonl line i; question text verified equal",
+    "n_legacy": 2000,
+    "n_recovered": 2000,
+    "n_missed": 0,
+    "official_split_distribution": {
+      "train": 2000
+    }
+  },
+  "corpus_depends_on_eval_subset": false,
+  "node_id_scheme": "musique:<sha256(title + U+001F + paragraph_text)[:24]>; file order = lexicographic node_id",
+  "node_id_stable": true,
+  "normalization_rules": {
+    "stored_text": "EXACT official string; no NFC/NFKC, no case-folding, no whitespace collapsing, no stripping",
+    "identity_keys": "EXACT strings (see dedup_policy); lossy alternatives are only quantified in integrity_report.corpus_accounting_detail.identity_normalization_diagnostics, never applied",
+    "construction_steps": {
+      "2wiki": "text = ' '.join(official 'sentences' list) -- the official file stores a sentence list; no .strip() (the pre-existing full-universe encode applied one; the divergence is COUNTED, not assumed -- see corpus_accounting_detail.phase_c_divergence)",
+      "hotpotqa": "text = ' '.join(non-empty elements of the official 'text' sentence list); plain 'text', never the 'text_with_links' fallback; no .strip(); empty abstracts kept as nodes",
+      "metaqa": "text = entity name (no verbalization at corpus level)"
+    },
+    "encoding": "UTF-8, JSON with ensure_ascii=False, sort_keys=True, LF line endings"
+  },
+  "dedup_policy": "identity = (title, paragraph_text) exact. Alternative text-hash-only identity gives 117,533 (one paragraph text appears under two article titles: 'Adei Ad' and 'Etz Efraim'); chosen identity keeps them distinct (117,534).",
+  "identity_normalization_diagnostics": {
+    "exact_identities": 117534,
+    "extra_collapses_if_NFC": 0,
+    "extra_collapses_if_whitespace_collapse": 6,
+    "extra_collapses_if_NFC+ws+casefold": 14
+  },
+  "all_eval_gold_nodes_present": true,
+  "gold_shortfall_diagnostic": null,
+  "missing_eval_gold_nodes": {
+    "counts": {},
+    "examples": []
+  },
+  "gold_resolution_per_split": {
+    "train": {
+      "n": 19938,
+      "n_with_gold_refs": 19938,
+      "n_all_gold_resolved": 19938,
+      "gold_refs_total": 46613,
+      "gold_nodes_total": 46613
+    },
+    "dev": {
+      "n": 2417,
+      "n_with_gold_refs": 2417,
+      "n_all_gold_resolved": 2417,
+      "gold_refs_total": 6404,
+      "gold_nodes_total": 6404
+    },
+    "test": {
+      "n": 2459,
+      "n_with_gold_refs": 0,
+      "n_all_gold_resolved": 0,
+      "gold_refs_total": 0,
+      "gold_nodes_total": 0
+    }
+  },
+  "corpus_hash": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+  "ordered_node_id_hash": "6242bd7a69cfc17dbdebf18288c773ed621db2b89402fba9d223691a41c66fb8",
+  "nodes_jsonl_sha256": "b8fc63ce6071609312de01045b0ea0f381fe9d643b977281d7132693faebfbdf",
+  "CORPUS_QUERY_INDEPENDENT": true,
+  "DETERMINISTIC_REBUILD": true,
+  "query_independence_test": {
+    "runs": {
+      "FINAL": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH": "dc00da21ea8a0fd5",
+        "n": 117534
+      },
+      "A": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH": "dc00da21ea8a0fd5",
+        "n": 117534
+      },
+      "B": {
+        "eval_subset": "random_dev:7",
+        "CORPUS_HASH": "dc00da21ea8a0fd5",
+        "n": 117534
+      },
+      "none": {
+        "eval_subset": "none",
+        "CORPUS_HASH": "dc00da21ea8a0fd5",
+        "n": 117534
+      }
+    },
+    "eval_subsets_A_vs_B": {
+      "n_A": 2000,
+      "n_B": 2000,
+      "overlap": 0,
+      "differ": true,
+      "B_executed": true
+    }
+  },
+  "legacy_comparison": {
+    "classification": "SAMPLE_CONDITIONED + GOLD_CONDITIONED (all-gold pool)",
+    "evidence": "legacy corpus = union of ONLY the gold supporting paragraphs (question_decomposition.support_paragraph) of the 19,938 official TRAIN questions (FlashRAG train.jsonl -> loaders.load_musique lines 198-212 -> build_clean): 13,672 nodes; no distractor paragraphs, no dev/test paragraphs (117,534 - 13,672 = 103,862 absent). The corpus is literally the gold set of the query pool.",
+    "legacy_count": 13672,
+    "canonical_count": 117534,
+    "legacy_nodes_mapped": 13672,
+    "missing_in_canonical": 0,
+    "ambiguous_legacy_nodes": 0,
+    "extra_canonical_nodes": 103862,
+    "extra_by_split_provenance": {
+      "train": 65694,
+      "test": 15572,
+      "train+test": 2461,
+      "dev": 11757,
+      "dev+test": 5646,
+      "train+dev": 1828,
+      "train+dev+test": 904
+    },
+    "changed_text": {
+      "exact_equal": 13672
+    },
+    "id_mapping_coverage": 1.0,
+    "eval_subset_gold_consistency": {
+      "file": "eval_2000.jsonl",
+      "n": 2000,
+      "legacy_golds_equal_canonical": 2000,
+      "legacy_golds_strict_subset_of_canonical": 0,
+      "differ": 0,
+      "queries_with_unmapped_legacy_gold": 0,
+      "examples": []
+    },
+    "files": [
+      "legacy_comparison.json",
+      "node_id_map_legacy.json"
+    ]
+  },
+  "builder": {
+    "path": "scratchpad/final_canonical_build/build.py",
+    "builder_sha256": "26455c9f72191dd46281d0d107d2236d8beec3168552ec67ddecd13832311e93",
+    "jsonstream_sha256": "c3d170107f99e6fdd33eee2278c192447a7b1a460a958d189bf76ece2adfde58",
+    "command": "python scratchpad/final_canonical_build/build.py musique --eval-subset legacy --queries-only",
+    "git_commit": "ba6bd71bcc9f367dc28d3e4cde777a3931501406",
+    "build_started": "2026-09-05T18:18:01",
+    "build_finished": "2026-09-05T18:18:27",
+    "seconds": 26.9,
+    "peak_rss_mb": 492.8
+  },
+  "files": {
+    "nodes": "nodes.jsonl",
+    "queries": [
+      "dev.jsonl",
+      "lanes",
+      "test.jsonl",
+      "train.jsonl"
+    ],
+    "eval_subset": "eval_2000.jsonl",
+    "reports": [
+      "SOURCE_CONTRACT.json",
+      "build_info.json",
+      "dataset_manifest.json",
+      "integrity_report.json",
+      "legacy_comparison.json",
+      "node_id_map_legacy.json",
+      "query_independence_test.json"
+    ]
+  },
+  "downstream_artifacts_built": "NONE (no embeddings / SPLADE / graphs / partitions / indexes) -- by design of this track",
+  "READY_FOR_INDEX_BUILD": true,
+  "manifest_written": "2026-09-06T03:13:53",
+  "query_lanes": {
+    "LEGACY_CONTINUITY": {
+      "n": 2000,
+      "file": "queries/lanes/LEGACY_CONTINUITY.jsonl",
+      "official_split_distribution": {
+        "train": 2000
+      },
+      "provenance": "the frozen legacy evaluation subset of substrate 'musique_clean', recovered onto canonical query ids. Rows = data/ukb_storage/musique_clean/gte_qwen/query_ids_all.json indexed by split_indices['val'] (scratchpad/_ta_comb.py:75-92, _ta_resid.py:63-76); the 'val' cut itself comes from src/experiments/overlap_retrain.py:171-206 _splits(). Recovery method: legacy id musique_clean_q_train_{i} (FlashRAG train_i) = official musique_ans_v1.0_train.jsonl line i; question text verified equal. Recovered 2000/2000, missed 0.",
+      "VALID_HELD_OUT_EVAL_SET": false,
+      "labelling": "TRAIN-DERIVED -- NOT A VALID HELD-OUT EVAL SET. These are a seeded 20% cut of OFFICIAL TRAIN (random.Random(42), 70/20/10 split in src/experiments/overlap_retrain.py::_splits, used because these questions carry no official split metadata). Use ONLY for paired legacy->canonical continuity analysis; never quote as accuracy."
+    },
+    "QUALITY_LOCKED": {
+      "n": 2417,
+      "file": "queries/lanes/QUALITY_LOCKED.jsonl",
+      "official_split_distribution": {
+        "dev": 2417
+      },
+      "provenance": "the complete official musique DEV split, taken verbatim from the official source files; official MuSiQue-Ans TEST labels are HIDDEN (0/2,459 test records carry gold refs), so dev (2,417) is the only proper held-out labelled split.",
+      "VALID_HELD_OUT_EVAL_SET": true,
+      "n_with_gold_node_ids": 2417,
+      "n_with_gold_refs": 2417,
+      "n_all_gold_resolved": 2417,
+      "labelling": "OFFICIAL HELD-OUT LABELLED -- the lane for final accuracy and significance testing. Disjoint from LEGACY_CONTINUITY unless noted."
+    },
+    "SCALE_ALL": {
+      "n": 24814,
+      "file": "queries/lanes/SCALE_ALL.ids.jsonl",
+      "record_source": "queries/<split>.jsonl (already materialized in full; the lane file is the ordered id+split index, so no query record is duplicated on disk)",
+      "official_split_distribution": {
+        "dev": 2417,
+        "test": 2459,
+        "train": 19938
+      },
+      "n_with_gold_node_ids_per_split": {
+        "dev": 2417,
+        "train": 19938
+      },
+      "provenance": "every official query of every released split of the dataset, as parsed by scratchpad/final_canonical_build/build.py's query stage from the official source files.",
+      "VALID_HELD_OUT_EVAL_SET": false,
+      "labelling": "MIXED SPLITS -- scale / latency / robustness only. Contains train questions and (where the official test labels are hidden) unlabelled questions; never quote as accuracy."
+    }
+  },
+  "query_lane_overlaps": {
+    "LEGACY_CONTINUITY_n_in_QUALITY_LOCKED": 0
+  },
+  "corpus_hash_equality_assertion": {
+    "statement": "corpus_hash(LEGACY_CONTINUITY) == corpus_hash(QUALITY_LOCKED) == corpus_hash(SCALE_ALL)",
+    "per_lane_corpus_hash": {
+      "LEGACY_CONTINUITY": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+      "QUALITY_LOCKED": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+      "SCALE_ALL": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f"
+    },
+    "RESULT": "PASS",
+    "how_bookkeeping": "one nodes.jsonl serves every lane; CORPUS_HASH recomputed from nodes.jsonl in this script and compared against dataset_manifest / integrity_report / build_info",
+    "recomputed_from_nodes_jsonl": {
+      "n": 117534,
+      "CORPUS_HASH": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+      "ordered_node_id_hash": "6242bd7a69cfc17dbdebf18288c773ed621db2b89402fba9d223691a41c66fb8",
+      "file_order_is_lexicographic_node_id": true
+    },
+    "stored_corpus_hashes": {
+      "manifest": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+      "integrity": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+      "build_info": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f"
+    },
+    "how_constructive": "the corpus was rebuilt from the official sources under three DIFFERENT --eval-subset arguments (legacy / random_dev:7 / none) and produced an identical CORPUS_HASH each time",
+    "constructive_evidence": {
+      "FINAL": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH_prefix": "dc00da21ea8a0fd5",
+        "n": 117534
+      },
+      "A": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH_prefix": "dc00da21ea8a0fd5",
+        "n": 117534
+      },
+      "B": {
+        "eval_subset": "random_dev:7",
+        "CORPUS_HASH_prefix": "dc00da21ea8a0fd5",
+        "n": 117534
+      },
+      "none": {
+        "eval_subset": "none",
+        "CORPUS_HASH_prefix": "dc00da21ea8a0fd5",
+        "n": 117534
+      },
+      "LANE_QUALITY_LOCKED_REBUILD": {
+        "RESULT": "PASS",
+        "eval_subset": "QUALITY_LOCKED lane file",
+        "CORPUS_HASH": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+        "ordered_node_id_hash": "6242bd7a69cfc17dbdebf18288c773ed621db2b89402fba9d223691a41c66fb8",
+        "n": 117534,
+        "out_dir": "data/final_canonical/_work/lanecheck/musique"
+      }
+    }
+  },
+  "legacy_substrate_aliases": [
+    "musique",
+    "musique_clean"
+  ]
+}

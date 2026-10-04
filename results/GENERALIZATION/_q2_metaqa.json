@@ -1,0 +1,318 @@
+{
+ "phase": "Q2 \u2014 frozen C11a (ZERO_SHOT) on P50 vs P50-union-geometry; MetaQA VAL; TEST untouched",
+ "M_values": [
+  0,
+  64,
+  256
+ ],
+ "subset_per_hop": 0,
+ "n_eval_queries": 37814,
+ "APPROXIMATIONS": {
+  "splade_added": "per-query MIN-1 (conservative bottom-rank); genuine approx",
+  "relation_added": "ABSTAIN mask=False (correct default, no connecting-sentence edge)",
+  "dense_added": "exact cosine",
+  "offset_added": "exact frozen universal head",
+  "mixture_added": "exact frozen universal head",
+  "M0_exactness": "M=0 uses ONLY on-disk scores -> reproduces frozen G1 path exactly"
+ },
+ "RESULTS": {
+  "M0": {
+   "M": 0,
+   "AGG": {
+    "ndcg5": 0.1145,
+    "recall5_macro": 0.1609,
+    "all5": 0.1284,
+    "all50": 0.2389,
+    "mrr": 0.1271,
+    "n": 37814,
+    "added_total": 0,
+    "gold_added_total": 0
+   },
+   "PER_HOP": {
+    "1": {
+     "n_val_queries": 9977,
+     "cand_count_mean": 5037.1,
+     "added_mean": 0.0,
+     "ANY_coverage": 1.0,
+     "ALL_coverage": 0.9974,
+     "R@5": 0.4018,
+     "R@20": 0.714,
+     "NDCG@5": 0.3311,
+     "FullCov@5": 0.3968,
+     "FullCov@20": 0.649,
+     "expected_golds": 18966,
+     "in_scope_golds": 18908,
+     "A_L1_MISSING_golds": 58,
+     "B_L2_RANKFAIL@5_golds": 11288,
+     "B_L2_RANKFAIL@20_golds": 5367
+    },
+    "2": {
+     "n_val_queries": 14323,
+     "cand_count_mean": 5037.7,
+     "added_mean": 0.0,
+     "ANY_coverage": 1.0,
+     "ALL_coverage": 0.7412,
+     "R@5": 0.0138,
+     "R@20": 0.0386,
+     "NDCG@5": 0.0263,
+     "FullCov@5": 0.026,
+     "FullCov@20": 0.0566,
+     "expected_golds": 93137,
+     "in_scope_golds": 68026,
+     "A_L1_MISSING_golds": 25111,
+     "B_L2_RANKFAIL@5_golds": 66744,
+     "B_L2_RANKFAIL@20_golds": 64429
+    },
+    "3": {
+     "n_val_queries": 13514,
+     "cand_count_mean": 5038.2,
+     "added_mean": 0.0,
+     "ANY_coverage": 1.0,
+     "ALL_coverage": 0.2853,
+     "R@5": 0.0097,
+     "R@20": 0.0187,
+     "NDCG@5": 0.0426,
+     "FullCov@5": 0.028,
+     "FullCov@20": 0.0385,
+     "expected_golds": 186602,
+     "in_scope_golds": 76699,
+     "A_L1_MISSING_golds": 109903,
+     "B_L2_RANKFAIL@5_golds": 74885,
+     "B_L2_RANKFAIL@20_golds": 73216
+    }
+   },
+   "RECOVERED_GOLD_DIAG": {}
+  },
+  "M64": {
+   "M": 64,
+   "AGG": {
+    "ndcg5": 0.1142,
+    "recall5_macro": 0.16,
+    "all5": 0.1276,
+    "all50": 0.2345,
+    "mrr": 0.1272,
+    "n": 37814,
+    "added_total": 2741200,
+    "gold_added_total": 25427
+   },
+   "PER_HOP": {
+    "1": {
+     "n_val_queries": 9977,
+     "cand_count_mean": 5113.5,
+     "added_mean": 76.4,
+     "ANY_coverage": 1.0,
+     "ALL_coverage": 0.9997,
+     "R@5": 0.4012,
+     "R@20": 0.7123,
+     "NDCG@5": 0.3308,
+     "FullCov@5": 0.3961,
+     "FullCov@20": 0.6472,
+     "expected_golds": 18966,
+     "in_scope_golds": 18954,
+     "A_L1_MISSING_golds": 12,
+     "B_L2_RANKFAIL@5_golds": 11344,
+     "B_L2_RANKFAIL@20_golds": 5444
+    },
+    "2": {
+     "n_val_queries": 14323,
+     "cand_count_mean": 5095.2,
+     "added_mean": 57.5,
+     "ANY_coverage": 1.0,
+     "ALL_coverage": 0.888,
+     "R@5": 0.0139,
+     "R@20": 0.0394,
+     "NDCG@5": 0.0266,
+     "FullCov@5": 0.026,
+     "FullCov@20": 0.0566,
+     "expected_golds": 93137,
+     "in_scope_golds": 75448,
+     "A_L1_MISSING_golds": 17689,
+     "B_L2_RANKFAIL@5_golds": 74150,
+     "B_L2_RANKFAIL@20_golds": 71782
+    },
+    "3": {
+     "n_val_queries": 13514,
+     "cand_count_mean": 5123.7,
+     "added_mean": 85.5,
+     "ANY_coverage": 1.0,
+     "ALL_coverage": 0.3409,
+     "R@5": 0.0097,
+     "R@20": 0.0186,
+     "NDCG@5": 0.0426,
+     "FullCov@5": 0.028,
+     "FullCov@20": 0.0383,
+     "expected_golds": 186602,
+     "in_scope_golds": 94658,
+     "A_L1_MISSING_golds": 91944,
+     "B_L2_RANKFAIL@5_golds": 92844,
+     "B_L2_RANKFAIL@20_golds": 91182
+    }
+   },
+   "RECOVERED_GOLD_DIAG": {
+    "1": {
+     "n_recovered_golds": 46,
+     "frac_in_pool50": 0.1522,
+     "best_expert_rank_median": 190,
+     "median": {
+      "base_rank": 513,
+      "dense_rank": 243,
+      "offset_rank": 567,
+      "mixture_rank": 433
+     }
+    },
+    "2": {
+     "n_recovered_golds": 7422,
+     "frac_in_pool50": 0.0507,
+     "best_expert_rank_median": 353,
+     "median": {
+      "base_rank": 963,
+      "dense_rank": 770,
+      "offset_rank": 1041,
+      "mixture_rank": 1048
+     }
+    },
+    "3": {
+     "n_recovered_golds": 17959,
+     "frac_in_pool50": 0.0031,
+     "best_expert_rank_median": 410,
+     "median": {
+      "base_rank": 1472,
+      "dense_rank": 430,
+      "offset_rank": 2903,
+      "mixture_rank": 2851
+     }
+    }
+   }
+  },
+  "M256": {
+   "M": 256,
+   "AGG": {
+    "ndcg5": 0.1139,
+    "recall5_macro": 0.1592,
+    "all5": 0.127,
+    "all50": 0.2323,
+    "mrr": 0.1271,
+    "n": 37814,
+    "added_total": 10853848,
+    "gold_added_total": 47517
+   },
+   "PER_HOP": {
+    "1": {
+     "n_val_queries": 9977,
+     "cand_count_mean": 5338.9,
+     "added_mean": 301.8,
+     "ANY_coverage": 1.0,
+     "ALL_coverage": 0.9997,
+     "R@5": 0.4009,
+     "R@20": 0.711,
+     "NDCG@5": 0.3307,
+     "FullCov@5": 0.3956,
+     "FullCov@20": 0.6455,
+     "expected_golds": 18966,
+     "in_scope_golds": 18960,
+     "A_L1_MISSING_golds": 6,
+     "B_L2_RANKFAIL@5_golds": 11356,
+     "B_L2_RANKFAIL@20_golds": 5475
+    },
+    "2": {
+     "n_val_queries": 14323,
+     "cand_count_mean": 5267.0,
+     "added_mean": 229.3,
+     "ANY_coverage": 1.0,
+     "ALL_coverage": 0.914,
+     "R@5": 0.014,
+     "R@20": 0.0395,
+     "NDCG@5": 0.0266,
+     "FullCov@5": 0.0262,
+     "FullCov@20": 0.0566,
+     "expected_golds": 93137,
+     "in_scope_golds": 79510,
+     "A_L1_MISSING_golds": 13627,
+     "B_L2_RANKFAIL@5_golds": 78208,
+     "B_L2_RANKFAIL@20_golds": 75833
+    },
+    "3": {
+     "n_val_queries": 13514,
+     "cand_count_mean": 5375.5,
+     "added_mean": 337.3,
+     "ANY_coverage": 1.0,
+     "ALL_coverage": 0.4167,
+     "R@5": 0.0097,
+     "R@20": 0.0184,
+     "NDCG@5": 0.0425,
+     "FullCov@5": 0.028,
+     "FullCov@20": 0.038,
+     "expected_golds": 186602,
+     "in_scope_golds": 112680,
+     "A_L1_MISSING_golds": 73922,
+     "B_L2_RANKFAIL@5_golds": 110878,
+     "B_L2_RANKFAIL@20_golds": 109243
+    }
+   },
+   "RECOVERED_GOLD_DIAG": {
+    "1": {
+     "n_recovered_golds": 52,
+     "frac_in_pool50": 0.1346,
+     "best_expert_rank_median": 220,
+     "median": {
+      "base_rank": 589,
+      "dense_rank": 287,
+      "offset_rank": 685,
+      "mixture_rank": 530
+     }
+    },
+    "2": {
+     "n_recovered_golds": 11484,
+     "frac_in_pool50": 0.0436,
+     "best_expert_rank_median": 437,
+     "median": {
+      "base_rank": 1128,
+      "dense_rank": 1086,
+      "offset_rank": 950,
+      "mixture_rank": 952
+     }
+    },
+    "3": {
+     "n_recovered_golds": 35981,
+     "frac_in_pool50": 0.0031,
+     "best_expert_rank_median": 612,
+     "median": {
+      "base_rank": 1897,
+      "dense_rank": 665,
+      "offset_rank": 3049,
+      "mixture_rank": 3002
+     }
+    }
+   }
+  }
+ },
+ "M0_GATE_vs_G1": {
+  "1": {
+   "g1_zs_cond_ndcg5": 0.3311,
+   "g1_zs_cond_all5": 0.3968,
+   "q2_M0_ndcg5": 0.3311,
+   "q2_M0_R@5": 0.4018,
+   "note": "q2 M0 uses expected-gold denominator (end-to-end); g1 CONDITIONAL_ON_P50 uses feasible denom \u2014 compare trend not identity unless subset=0"
+  },
+  "2": {
+   "g1_zs_cond_ndcg5": 0.0268,
+   "g1_zs_cond_all5": 0.0269,
+   "q2_M0_ndcg5": 0.0263,
+   "q2_M0_R@5": 0.0138,
+   "note": "q2 M0 uses expected-gold denominator (end-to-end); g1 CONDITIONAL_ON_P50 uses feasible denom \u2014 compare trend not identity unless subset=0"
+  },
+  "3": {
+   "g1_zs_cond_ndcg5": 0.0475,
+   "g1_zs_cond_all5": 0.038,
+   "q2_M0_ndcg5": 0.0426,
+   "q2_M0_R@5": 0.0097,
+   "note": "q2 M0 uses expected-gold denominator (end-to-end); g1 CONDITIONAL_ON_P50 uses feasible denom \u2014 compare trend not identity unless subset=0"
+  }
+ },
+ "DECOMPOSITION_LEGEND": {
+  "A_L1_MISSING": "expected in-corpus gold NOT in augmented scope",
+  "B_L2_RANKFAIL@K": "gold present in augmented scope but final rank >= K (C11a fails to promote)"
+ },
+ "NEW_ENCODER_FORWARD_PASSES": 0,
+ "TARGET_TEST_TOUCHED": "NO"
+}

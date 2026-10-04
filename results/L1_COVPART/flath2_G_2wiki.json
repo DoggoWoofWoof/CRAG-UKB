@@ -1,0 +1,362 @@
+{
+ "dataset": "2wiki",
+ "stage": "G (gold-free)",
+ "dry": false,
+ "eval_split": "dev",
+ "N": 5989847,
+ "npart_equivalent (N // 100)": 59898,
+ "mode": "PREREGISTERED_FLAT_BALANCED_H2_FRESH_SPLIT_A",
+ "population": {
+  "row_query_ids_sha256": "1781c90d0c2cdd3ee40988081791575f3426cc3b2541cff8470e6dcc0eb7282c",
+  "rows_sha256": "9c29d7f6c978e005f6c823284b0fb28d2fb8301bc25dfe59cc27fe5b0db8d6f5",
+  "n": 2000,
+  "n_A": 1004,
+  "n_B": 996,
+  "rows_A_sha256": "91146bcb18b0e83cbe926613cf283db7bdd4897411fd9aa6f6e71d38f0e18f0d"
+ },
+ "n_split_A_rows_run": 1004,
+ "DATASET_json_RECORD_SHA256": "ddb083a8f8cc0a1e5626d17ebd834c25c7b571d72c2bea58223276da8ff26a8a",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_FLAT_BALANCED_H2.json",
+  "sha256": "f5f6741e899919534537ccb91aaefdfbf5dced8f7e4f91ae522b832cbd146901"
+ },
+ "code": {
+  "path": "scratchpad/_l1c_flath2.py",
+  "sha256": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b"
+ },
+ "pinned": {
+  "_l1c_microl3.py": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+  "_l1c_transfer_composite.py": "1241ec58e759ab99e77ff17936b6edc6b072344ea1d47a76a79f940a1047cc5b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1c_flat.py": "27aafbfc9d24e39e92154cd6d3ebe8364c07e32af5a8ced51a88e766bc6b3c95",
+  "_l1c_h2patch.py": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d",
+  "_l1c_h2balanced.py": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe",
+  "_l1c_qmaxbal.py": "cae88fa64a0516a4f55c99a4a3b464afd39e467dca42e4380a546ebbd545b1c8",
+  "_l1g_candidate.py": "b01c27a6e64b18756db1ca1d8910e8db4bb54fa019d9809698cb1369206169e0",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "pinned_repo": {
+  "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+  "src/l1_canonical/replay_cache.py": "1fc5411c9f12f25d81586aabdb1af0da371752f20be5d4d09d8d17529a89f0d1",
+  "data/final_canonical/canonical.py": "c657830b304afe861893b516726af419d35142334f866517b83221427a9016f5"
+ },
+ "function_sources_sha256": {
+  "admissible": "9ef196212452f0d97ecf091afc331d27e2f04f61b334e26de8684e1a0a0c0763",
+  "beam_balanced": "90c1fff3c69362feb5010b58998a44e6771f597d2ba09d839da7b3417788ee6d",
+  "expand_real": "c366e8e8cad9bb5091df83aa5fe8353929386837dab7a688362bcbcc136e8cf0",
+  "fused_order": "6491f4b6898d7936639b2282e0b4b1511066cfa550da3bf4987fb6d8f71e5e01",
+  "rows": "27daec3e884016d80382bf57c81917c443751093047022933b4b6ad4b3d7cafa",
+  "rr_compress": "3c30f62cb306e6bdfa581f7e12f29d23d0169058eea16e0a4d595da1bc13d418",
+  "rr_rank": "8dc7793aec7cdd08ebc97841bcfcaa14eb6e7021c3fa74559e70386da2f66d04",
+  "transition_scores": "ebbd13d2b7e5f5cd8df7278c715c196e10f29f3fd0c3f178c0d6193b957437c1"
+ },
+ "constants": {
+  "K0": 60,
+  "C_PATCH": 100,
+  "BEAM": 100,
+  "DEPTH": 2,
+  "M_MAIN": 5000,
+  "M_CURVE": [
+   500,
+   1000,
+   2000,
+   5000
+  ],
+  "K_TOP": 12000,
+  "CQ": 200,
+  "BLOCK": 40000,
+  "ALPHA": 0.01,
+  "EVAL_CAP": 2000,
+  "SEED_K": 5,
+  "TOP200": 200,
+  "N_AGREE": 100,
+  "AGREE_MIN": 0.9,
+  "NG_BUCKETS": [
+   [
+    "1",
+    1,
+    1
+   ],
+   [
+    "2",
+    2,
+    2
+   ],
+   [
+    "3",
+    3,
+    3
+   ],
+   [
+    "4",
+    4,
+    4
+   ],
+   [
+    "5-10",
+    5,
+    10
+   ],
+   [
+    "11+",
+    11,
+    1099511627776
+   ]
+  ]
+ },
+ "platform": {
+  "python": "3.13.5",
+  "numpy": "2.3.2"
+ },
+ "host_at_start": {
+  "utc": "2026-09-26T07:17:49Z",
+  "host_total_gib": 15.69,
+  "host_available_gib": 0.49,
+  "swap_used_gib": 9.72,
+  "other_python_processes_over_500_MB (untouched)": [
+   {
+    "pid": 12096,
+    "rss_mb": 7876
+   }
+  ]
+ },
+ "struct": {
+  "directed_edges": 28963600,
+  "undirected_edges": 28208857,
+  "hubs (deg_u + 1 > cap)": 36240,
+  "cap": 100,
+  "seeds_all_hubs (queries)": 0
+ },
+ "balanced_beam (split A)": {
+  "transitions_scored_per_query_mean (hop1 / hop2)": [
+   43.4,
+   824.7
+  ],
+  "beam_size_mean (hop1 / hop2)": [
+   37.9,
+   99.9
+  ],
+  "queries_with_an_empty_hop (hop1 / hop2)": [
+   0,
+   0
+  ],
+  "queries_truncated_at_hop (hop1 / hop2)": [
+   22,
+   999
+  ],
+  "wall_clock_ms_per_query": {
+   "mean": 299.6,
+   "p95": 572.1
+  },
+  "seconds": 302.0
+ },
+ "bounded_flat": {
+  "union": {
+   "mean": 21424.9,
+   "median": 21577.5,
+   "min": 17265.0,
+   "max": 23777.0
+  },
+  "contenders": {
+   "mean": 6052.05,
+   "median": 6071.5,
+   "min": 5361.0,
+   "max": 6424.0
+  },
+  "dense_targets": {
+   "mean": 2114.54,
+   "median": 2174.0,
+   "min": 498.0,
+   "max": 3024.0
+  },
+  "splade_targets": {
+   "mean": 2125.79,
+   "median": 2189.0,
+   "min": 461.0,
+   "max": 3145.0
+  },
+  "seconds": {
+   "sweep1": 1246.4,
+   "sweep2": 1675.4
+  },
+  "nodes_covered": 5989847
+ },
+ "served_list_agreement": {
+  "dense_top100_set_overlap_with_served_mean": 1.0,
+  "dense_top100_set_overlap_min": 1.0,
+  "splade_top100_set_overlap_with_served_mean": 1.0,
+  "splade_top100_set_overlap_min": 1.0,
+  "rows_dense_top200_order_identical_to_served": 927,
+  "rows_splade_top200_order_identical_to_served": 1004,
+  "rows_where_both_are_identical (seeds from the exhaustive lists == served seeds, asserted)": 927,
+  "served_lists": "the frozen H100 retrieval caches (TF32 products); the exhaustive lists here are fp32",
+  "splade_positive_nodes_per_query": {
+   "mean": 5603919.99,
+   "median": 5716392.5,
+   "min": 3907799.0,
+   "max": 5974901.0
+  }
+ },
+ "patch_gold_free (per M)": {
+  "500": {
+   "patch_nodes (novel beam nodes served)": {
+    "mean": 98.93,
+    "median": 100.0,
+    "min": 47.0,
+    "max": 100.0
+   },
+   "patch_nodes_from_hop1": {
+    "mean": 31.97,
+    "median": 29.0,
+    "min": 4.0,
+    "max": 99.0
+   },
+   "fill_nodes": {
+    "mean": 1.07,
+    "median": 0.0,
+    "min": 0.0,
+    "max": 53.0
+   },
+   "beam_nodes (bal1 + bal2)": {
+    "mean": 137.82,
+    "median": 133.0,
+    "min": 89.0,
+    "max": 200.0
+   },
+   "beam_nodes_already_in_the_semantic_base": {
+    "mean": 13.87,
+    "median": 8.0,
+    "min": 0.0,
+    "max": 94.0
+   },
+   "rows_with_a_full_patch (C novel nodes)": 904,
+   "rows_with_an_empty_patch": 0
+  },
+  "1000": {
+   "patch_nodes (novel beam nodes served)": {
+    "mean": 97.77,
+    "median": 100.0,
+    "min": 45.0,
+    "max": 100.0
+   },
+   "patch_nodes_from_hop1": {
+    "mean": 30.39,
+    "median": 27.0,
+    "min": 3.0,
+    "max": 97.0
+   },
+   "fill_nodes": {
+    "mean": 2.23,
+    "median": 0.0,
+    "min": 0.0,
+    "max": 55.0
+   },
+   "beam_nodes (bal1 + bal2)": {
+    "mean": 137.82,
+    "median": 133.0,
+    "min": 89.0,
+    "max": 200.0
+   },
+   "beam_nodes_already_in_the_semantic_base": {
+    "mean": 18.85,
+    "median": 12.0,
+    "min": 0.0,
+    "max": 116.0
+   },
+   "rows_with_a_full_patch (C novel nodes)": 856,
+   "rows_with_an_empty_patch": 0
+  },
+  "2000": {
+   "patch_nodes (novel beam nodes served)": {
+    "mean": 96.03,
+    "median": 100.0,
+    "min": 29.0,
+    "max": 100.0
+   },
+   "patch_nodes_from_hop1": {
+    "mean": 28.81,
+    "median": 26.0,
+    "min": 1.0,
+    "max": 92.0
+   },
+   "fill_nodes": {
+    "mean": 3.97,
+    "median": 0.0,
+    "min": 0.0,
+    "max": 71.0
+   },
+   "beam_nodes (bal1 + bal2)": {
+    "mean": 137.82,
+    "median": 133.0,
+    "min": 89.0,
+    "max": 200.0
+   },
+   "beam_nodes_already_in_the_semantic_base": {
+    "mean": 24.58,
+    "median": 17.0,
+    "min": 0.0,
+    "max": 131.0
+   },
+   "rows_with_a_full_patch (C novel nodes)": 780,
+   "rows_with_an_empty_patch": 0
+  },
+  "5000": {
+   "patch_nodes (novel beam nodes served)": {
+    "mean": 92.35,
+    "median": 100.0,
+    "min": 21.0,
+    "max": 100.0
+   },
+   "patch_nodes_from_hop1": {
+    "mean": 26.56,
+    "median": 24.0,
+    "min": 1.0,
+    "max": 84.0
+   },
+   "fill_nodes": {
+    "mean": 7.65,
+    "median": 0.0,
+    "min": 0.0,
+    "max": 79.0
+   },
+   "beam_nodes (bal1 + bal2)": {
+    "mean": 137.82,
+    "median": 133.0,
+    "min": 89.0,
+    "max": 200.0
+   },
+   "beam_nodes_already_in_the_semantic_base": {
+    "mean": 33.78,
+    "median": 27.0,
+    "min": 0.0,
+    "max": 147.0
+   },
+   "rows_with_a_full_patch (C novel nodes)": 639,
+   "rows_with_an_empty_patch": 0
+  }
+ },
+ "npz": {
+  "path": "results/L1_COVPART/flath2_G_2wiki.npz",
+  "arrays": [
+   "bal",
+   "bal_len",
+   "flat_top",
+   "npos",
+   "rows",
+   "seeds",
+   "top200_dense",
+   "top200_splade"
+  ],
+  "sha256": "7447205cfebceee695b48f0d8504e0d1d0b78721512c8dae2238c9c7e529e422"
+ },
+ "seconds_by_stage": {
+  "queries_seeds_struct": 120.9,
+  "balanced_beam": 302.0,
+  "bounded_flat": 2941.1
+ },
+ "seconds": 3368.4,
+ "process_rss_mb_at_end": 1112.1
+}

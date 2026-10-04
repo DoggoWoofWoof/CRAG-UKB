@@ -1,0 +1,39 @@
+{
+ "mode": "L1X_RELATION_ORACLE (development; gold-aware diagnostic, never a candidate)",
+ "definitions": "L1X -- SELECT lane, step 4: the RELATION-ORACLE ceiling of a one-hop relation-conditioned weight (development only; gold-aware DIAGNOSTIC, never a candidate).\n(User ruling 2026-10-01: L1 = parameter-free routing and SELECTION only -- no traversal.  A relation-conditioned weight on the single edge from a hit to a\ncandidate is still ONE application of A^T; this script asks only how much such a weight could ever add, by giving it the right relations for free.)\n\nFor every population row of _l1x_feat.py (same hits H_q = FLAT_RRF[:200], same weights x = 1/(hit+1) g(s), same pool P_q = O[:5000], asserted equal to the\nfeature dump through the fpos / frank columns) it re-scores the pool nodes with the STRUCT_out edges KEPT PER RELATION (the shipped CSR keeps one edge per\nnode pair):\n    Sdup   sum over (hit, relation) STRUCT_out edges hit -> u of x                          (the shipped S_out up to pairs carried by several relations)\n    Sorc   the same sum restricted to the relations R*_q = {relation of an edge hit -> gold node, over the hits and all gold nodes of the row}  (ORACLE)\n    Nrel   the number of distinct relations on edges hit -> u (a label-free relation-diversity count)\nThe oracle knows the gold nodes: it bounds a perfect question-relation matcher on the one-hop evidence; it is not a rule.\n\nUsage: python -u scratchpad/_l1x_relorc.py RUN <dataset> <tag> [--rows=K]  -> results/L1_X/relorc_<ds>__<tag>.{json,npz} (write-once)\n",
+ "dataset": "metaqa",
+ "tag": "v1",
+ "N": 43234,
+ "n_rows": 1998,
+ "n_relations": 9,
+ "pool": 5000,
+ "columns": [
+  "frank",
+  "Ssum",
+  "S_out",
+  "Sdup",
+  "Sorc",
+  "Nrel",
+  "gold"
+ ],
+ "identity_check": "gold positions in the pool == results/L1_DEV/kscale_metaqa__v1.npz (clipped at 5000) on every row",
+ "rows_with_oracle_relations": 1265,
+ "mean_oracle_relations": 0.7642642642642643,
+ "seconds": 43.8,
+ "code": {
+  "path": "scratchpad/_l1x_relorc.py",
+  "sha256": "c8222a0b6231d8c753ea1429aa313add969809bd4224be867555172b19801589"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "npz": {
+  "path": "relorc_metaqa__v1.npz",
+  "sha256": "44d793a29cdba25147a32ae8e7db3ec06dde36aa24381270642b4e34a129aafc"
+ }
+}

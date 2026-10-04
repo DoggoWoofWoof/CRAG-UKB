@@ -1,0 +1,322 @@
+{
+ "flags": {
+  "AUX_FAMILY_SCORING_SIGNAL_REQUIRED": true,
+  "AUX_FAMILY_MEMBERSHIP_REQUIRED": true,
+  "STRUCT_ONLY_ONLINE_SAFE": false,
+  "NERX_MEMBERSHIP_REQUIRED": "UNRESOLVED",
+  "KNN_MEMBERSHIP_REQUIRED": "UNRESOLVED",
+  "METAQA_NERX_REMOVAL_EFFECT": "SIGNIFICANT",
+  "METAQA_KNN_REMOVAL_EFFECT": "SIGNIFICANT",
+  "_scope": "LEGACY_SAMPLE_SUBSTRATE (cache_{ds}.npz) only -- NOT canonical_v1",
+  "METAQA_LEGACY_NERX_MEMBERSHIP_EFFECT": "SIGNIFICANT (-0.0085, 2 gained/19 lost, p=2.21e-04, floor 0.0021)",
+  "METAQA_LEGACY_KNN_MEMBERSHIP_EFFECT": "NOT_SIGNIFICANT (-0.0030, 1/7, p=0.0703)",
+  "_perfamily_note": "Measured on the LEGACY metaqa substrate only (40,151-node lossy lower() identity space). Per user instruction the program-level NERX_MEMBERSHIP_REQUIRED / KNN_MEMBERSHIP_REQUIRED flags stay UNRESOLVED: the authoritative per-family decomposition is to be rerun on canonical_v1 metaqa (43,234 exact-case entities), and no further legacy sweeps are to be launched."
+ },
+ "per_corpus": {
+  "H1_MINUS_NERX": {
+   "metaqa": {
+    "H0_ALL": 0.8669,
+    "ALL": 0.8604,
+    "delta": -0.0065,
+    "gained": 2,
+    "lost": 15,
+    "p": 0.00235,
+    "floor": 0.0021,
+    "sig_regression": true
+   },
+   "2wiki_clean": {
+    "H0_ALL": 0.9775,
+    "ALL": 0.9775,
+    "delta": 0.0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "floor": 0.0025,
+    "sig_regression": false
+   },
+   "musique_clean": {
+    "H0_ALL": 0.981,
+    "ALL": 0.9815,
+    "delta": 0.0005,
+    "gained": 3,
+    "lost": 2,
+    "p": 1.0,
+    "floor": 0.0029,
+    "sig_regression": false
+   },
+   "squad_clean": {
+    "H0_ALL": 0.9955,
+    "ALL": 0.9955,
+    "delta": 0.0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "floor": 0.0013,
+    "sig_regression": false
+   },
+   "hotpotqa_clean": {
+    "H0_ALL": 0.985,
+    "ALL": 0.986,
+    "delta": 0.001,
+    "gained": 2,
+    "lost": 0,
+    "p": 0.5,
+    "floor": 0.0025,
+    "sig_regression": false
+   },
+   "webqsp": {
+    "H0_ALL": 0.9626,
+    "ALL": 0.9612,
+    "delta": -0.0014,
+    "gained": 0,
+    "lost": 2,
+    "p": 0.5,
+    "floor": 0.0077,
+    "sig_regression": false
+   }
+  },
+  "H2_MINUS_KNN": {
+   "metaqa": {
+    "H0_ALL": 0.8669,
+    "ALL": 0.8634,
+    "delta": -0.0035,
+    "gained": 1,
+    "lost": 8,
+    "p": 0.0391,
+    "floor": 0.0021,
+    "sig_regression": true
+   },
+   "2wiki_clean": {
+    "H0_ALL": 0.9775,
+    "ALL": 0.9775,
+    "delta": 0.0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "floor": 0.0025,
+    "sig_regression": false
+   },
+   "musique_clean": {
+    "H0_ALL": 0.981,
+    "ALL": 0.981,
+    "delta": 0.0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "floor": 0.0029,
+    "sig_regression": false
+   },
+   "squad_clean": {
+    "H0_ALL": 0.9955,
+    "ALL": 0.9955,
+    "delta": 0.0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "floor": 0.0013,
+    "sig_regression": false
+   },
+   "hotpotqa_clean": {
+    "H0_ALL": 0.985,
+    "ALL": 0.985,
+    "delta": 0.0,
+    "gained": 1,
+    "lost": 1,
+    "p": 1.0,
+    "floor": 0.0025,
+    "sig_regression": false
+   },
+   "webqsp": {
+    "H0_ALL": 0.9626,
+    "ALL": 0.9605,
+    "delta": -0.0021,
+    "gained": 0,
+    "lost": 3,
+    "p": 0.25,
+    "floor": 0.0077,
+    "sig_regression": false
+   }
+  }
+ },
+ "ranker": "SP1",
+ "reference": "H0_FULL_C",
+ "gate": "p<0.05 and |delta|>FLOOR and delta<0",
+ "_NOTE": "Relabelled 2026-09-05 on user instruction: the Phase-4 H1_MINUS_NERX / H2_MINUS_KNN cells remove a family from candidate MEMBERSHIP while the family-dependent scoring stack (G1/G3 substrate) was not held fixed -- the same admission/scoring confound found in H3_STRUCT_ONLY. A significant metaqa regression on removal is therefore an established REMOVAL EFFECT on the legacy substrate, not proof of unique membership contribution. Resolve only after Part A M0/M1/M2 + clean per-family membership cells (membership varied, scoring fixed). Legacy substrate caveat: metaqa corpus here is the lossy lower()-collapsed 40,151-node KB, not canonical_v1. | UPDATE: the clean fixed-scoring membership test (CLEAN_MEMBERSHIP_TEST_M1_VS_M2) has now been run and de-confounds the M0->M2 loss; per-family flags remain UNRESOLVED pending a per-family fixed-scoring cell.",
+ "other_corpora": "all five non-metaqa corpora: no significant effect either direction (three show 0/0 flips)",
+ "CLEAN_MEMBERSHIP_TEST_M1_VS_M2": {
+  "what": "M2_STRUCT_STRUCT vs M1_FULL_STRUCT_SCORE -- membership (STRUCT-only vs FULL) varied while the SCORING substrate is held STRUCT-only in BOTH arms. This removes the Phase-4 H1/H2 confound (which changed membership AND the family-dependent G1/G3 score mass together).",
+  "result_per_corpus": {
+   "metaqa": {
+    "delta": -0.012,
+    "gained": 1,
+    "lost": 25,
+    "p": 8.05e-07,
+    "sig_regression": true
+   },
+   "2wiki_clean": {
+    "delta": -0.0005,
+    "gained": 0,
+    "lost": 1,
+    "p": 1.0,
+    "sig_regression": false
+   },
+   "musique_clean": {
+    "delta": -0.0005,
+    "gained": 3,
+    "lost": 4,
+    "p": 1.0,
+    "sig_regression": false
+   },
+   "squad_clean": {
+    "delta": 0.0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "sig_regression": false
+   },
+   "hotpotqa_clean": {
+    "delta": -0.0005,
+    "gained": 0,
+    "lost": 1,
+    "p": 1.0,
+    "sig_regression": false
+   },
+   "webqsp": {
+    "delta": -0.0035,
+    "gained": 0,
+    "lost": 5,
+    "p": 0.0625,
+    "sig_regression": false
+   }
+  },
+  "COMBINED_AUX_MEMBERSHIP_REQUIRED": {
+   "metaqa": true,
+   "2wiki_clean": false,
+   "musique_clean": false,
+   "squad_clean": false,
+   "hotpotqa_clean": false,
+   "webqsp": false
+  },
+  "interpretation": "Only metaqa has a real COMBINED NERX+KNN unique-membership effect under fixed scoring (-0.0120, 25 queries lost, p=8.05e-07). On the other five corpora the membership component is <=0.0035 and never significant -- i.e. on 5/6 corpora essentially ALL of the STRUCT-only regression measured in M0->M2 is loss of aux-family SCORE MASS, not loss of unique candidate admission.",
+  "still_unresolved": "Per-family attribution (NERX alone vs KNN alone with scoring held fixed) was NOT run. NERX_UNIQUE_MEMBERSHIP_REQUIRED and KNN_UNIQUE_MEMBERSHIP_REQUIRED therefore stay UNRESOLVED; only the COMBINED flag above is established."
+ },
+ "_label_history": {
+  "AUX_FAMILY_SCORE_MASS_REQUIRED": "SUPERSEDED_LABEL -- too narrow. M0->M1 swaps the family substrate used by SEVERAL scoring pieces (G1 neighbour substrate, G3 hyperedge substrate, struct-support), so it establishes the BROAD claim 'aux-family scoring signal is required', not specifically 'corroboration/support mass'. Corroboration mass remains the leading mechanism hypothesis, unproven.",
+  "AUX_FAMILY_SCORING_REQUIRED": "ACCEPTED_SHORT_ALIAS of AUX_FAMILY_SCORING_SIGNAL_REQUIRED",
+  "NERX_UNIQUE_MEMBERSHIP_REQUIRED": "RENAMED -> NERX_MEMBERSHIP_REQUIRED",
+  "KNN_UNIQUE_MEMBERSHIP_REQUIRED": "RENAMED -> KNN_MEMBERSHIP_REQUIRED"
+ },
+ "causal_decomposition": {
+  "M0->M1": "value of auxiliary-family SCORING SIGNAL (membership held FULL)",
+  "M1->M2": "value of auxiliary-family MEMBERSHIP (scoring held STRUCT-only)"
+ },
+ "architectural_summary": {
+  "legend": "YES = significant regression when removed; ~NO = measured but not significant; NO = exactly zero effect",
+  "table": {
+   "metaqa": {
+    "AUX_SCORING": "YES",
+    "AUX_MEMBERSHIP": "YES"
+   },
+   "2wiki_clean": {
+    "AUX_SCORING": "YES",
+    "AUX_MEMBERSHIP": "~NO"
+   },
+   "musique_clean": {
+    "AUX_SCORING": "~NO",
+    "AUX_MEMBERSHIP": "~NO"
+   },
+   "squad_clean": {
+    "AUX_SCORING": "NO",
+    "AUX_MEMBERSHIP": "NO"
+   },
+   "webqsp": {
+    "AUX_SCORING": "~NO",
+    "AUX_MEMBERSHIP": "weak/ns"
+   },
+   "hotpotqa_clean": {
+    "AUX_SCORING": "YES",
+    "AUX_MEMBERSHIP": "~NO"
+   }
+  },
+  "REFUTED_MENTAL_MODEL": "'FULL_C helps because NERX/KNN discover otherwise-unreachable useful nodes' is MOSTLY WRONG. For 2wiki_clean and hotpotqa_clean practically all of the benefit is auxiliary structure RE-RANKING nodes already reachable through STRUCT; their unique admission contribution is ~zero. MetaQA is the sole corpus that genuinely uses both channels.",
+  "AUX_FAMILY_MEMBERSHIP_REQUIRED_is_TRUE_only_because": "MetaQA. The other five effectively do not need joint auxiliary membership."
+ },
+ "M3_interpretation_guard": {
+  "claim": "M3_FULL_SIMPLE_STRUCT regressions are NOT evidence that STRUCT itself is bad, and NOT evidence about the auxiliary family.",
+  "decisive_case": "webqsp: M1 ~= M0 (.9619 vs .9626, ns) but M3 << M0 (.8816, -0.0810, p=4.8e-35). WebQSP barely cares about the auxiliary-family substrate yet cares enormously about the richer NON-family-specific ranking computation that M3 removes. Different mechanisms.",
+  "conclusion": "Do not over-simplify the SP1 scoring stack. M3 refuted universally (sig on all 6)."
+ },
+ "next_experiments": {
+  "DO_NOT": "another six-corpus legacy sweep separating NERX vs KNN",
+  "OPTIONAL_CHEAP_LEGACY": "MetaQA-only per-family membership decomposition under fixed STRUCT scoring: FULL/STRUCT, -NERX/STRUCT, -KNN/STRUCT, STRUCT/STRUCT",
+  "PREFERRED": "rerun the per-family decomposition on canonical_v1 MetaQA (43,234 exact entities) rather than the lossy 40,151-node legacy identity space",
+  "CANONICAL_REPLAY_PLAN": [
+   "FULL/FULL",
+   "FULL/STRUCT-score",
+   "STRUCT/STRUCT",
+   "MetaQA-only clean -NERX / -KNN if the joint membership effect survives"
+  ]
+ },
+ "METAQA_PERFAMILY_MEMBERSHIP_DIAGNOSTIC": {
+  "ds": "metaqa",
+  "design": "per-family MEMBERSHIP decomposition with SCORING held STRUCT-only in every arm",
+  "reference": "M1_FULL_STRUCT_SCORE",
+  "floor": 0.0021,
+  "cells": {
+   "M1_FULL_STRUCT_SCORE": {
+    "ALL_REQUIRED_FETCHED": 0.8554,
+    "delta_vs_M1": 0.0,
+    "gained": 0,
+    "lost": 0,
+    "p_vs_M1": 1.0,
+    "sig_regression_vs_M1": false,
+    "mean_candidates_per_query": 22700.14,
+    "runtime_ms_per_query": 139.762
+   },
+   "M1a_MINUS_NERX_STRUCT_SCORE": {
+    "ALL_REQUIRED_FETCHED": 0.8468,
+    "delta_vs_M1": -0.0085,
+    "gained": 2,
+    "lost": 19,
+    "p_vs_M1": 0.000221,
+    "sig_regression_vs_M1": true,
+    "mean_candidates_per_query": 18204.9,
+    "runtime_ms_per_query": 98.702
+   },
+   "M1b_MINUS_KNN_STRUCT_SCORE": {
+    "ALL_REQUIRED_FETCHED": 0.8524,
+    "delta_vs_M1": -0.003,
+    "gained": 1,
+    "lost": 7,
+    "p_vs_M1": 0.0703,
+    "sig_regression_vs_M1": false,
+    "mean_candidates_per_query": 21563.85,
+    "runtime_ms_per_query": 85.407
+   },
+   "M2_STRUCT_STRUCT": {
+    "ALL_REQUIRED_FETCHED": 0.8433,
+    "delta_vs_M1": -0.012,
+    "gained": 1,
+    "lost": 25,
+    "p_vs_M1": 8.05e-07,
+    "sig_regression_vs_M1": true,
+    "mean_candidates_per_query": 16477.65,
+    "runtime_ms_per_query": 95.216
+   }
+  },
+  "_scope": "LEGACY_SAMPLE_SUBSTRATE (cache_metaqa.npz, 40,151-node lossy lower() identity space) -- NOT canonical_v1 (43,234 exact-case entities). Recorded as a diagnostic; the authoritative per-family answer is to be recomputed on canonical_v1 per user instruction.",
+  "_no_further_legacy_work": "User instruction 2026-09-05: Track B is primary; do NOT launch another six-corpus legacy sweep or extend this diagnostic."
+ },
+ "H_METAQA_CANONICAL_HYPOTHESIS": {
+  "status": "HYPOTHESIS, not an architectural rule",
+  "statement": "NERX probably owns most of the auxiliary-MEMBERSHIP benefit on metaqa; KNN may contribute primarily scoring/corroboration rather than unique admission.",
+  "evidence_basis": "legacy 40,151-node metaqa substrate, per-family ladder under fixed STRUCT-only scoring: -NERX -0.0085 (p=2.21e-04, SIG), -KNN -0.0030 (p=0.0703, ns), -both -0.0120 (p=8.05e-07, SIG).",
+  "why_only_a_hypothesis": "the canonical metaqa identity space changes from the lossy lower()-collapsed 40,151 nodes to 43,234 exact-case entities, so per-family attribution must be re-measured there.",
+  "test_on_canonical": "rerun the four-arm ladder (FULL / -NERX / -KNN / STRUCT membership, all under fixed STRUCT-only scoring) on canonical_v1 metaqa, only if the joint membership effect survives.",
+  "legacy_evidence_says": {
+   "NERX_unique_membership": "clearly useful",
+   "KNN_unique_membership": "not individually established",
+   "NERX_plus_KNN_joint_membership": "useful"
+  }
+ }
+}

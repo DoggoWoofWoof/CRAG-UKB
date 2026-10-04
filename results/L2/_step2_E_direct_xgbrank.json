@@ -1,0 +1,112 @@
+{
+  "_config": {
+    "datasets": [
+      "webqsp",
+      "metaqa"
+    ],
+    "heldout": null,
+    "arms": [
+      "E_direct_xgbrank"
+    ],
+    "epochs": 12,
+    "seeds": 3,
+    "p_drop": 0.2,
+    "lam": 1.0,
+    "neg_cap": 150,
+    "note": "in-dist (target in training) + optional transfer sanity on heldout (never trained)."
+  },
+  "oracle": {
+    "webqsp": {
+      "standalone_R@5": {
+        "dense": 9.48,
+        "offset": 43.07,
+        "splade": 10.61,
+        "relation": 24.39,
+        "path": 8.39
+      },
+      "semantic_anchor_R@5": 9.93,
+      "per_query_expert_oracle_R@5": 59.38,
+      "n": 147
+    },
+    "metaqa": {
+      "standalone_R@5": {
+        "dense": 19.43,
+        "offset": 59.34,
+        "splade": 77.11,
+        "relation": 27.16
+      },
+      "semantic_anchor_R@5": 62.84,
+      "per_query_expert_oracle_R@5": 91.47,
+      "n": 1998
+    }
+  },
+  "results": {
+    "E_direct_xgbrank": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            52.04,
+            0.37
+          ],
+          "R@20": [
+            68.76,
+            0.47
+          ],
+          "R@50": [
+            75.93,
+            0.72
+          ],
+          "Hit@5": [
+            71.43,
+            0.56
+          ],
+          "Hit@50": [
+            88.66,
+            0.85
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            66.71,
+            0.16
+          ],
+          "R@20": [
+            78.04,
+            0.47
+          ],
+          "R@50": [
+            83.37,
+            0.43
+          ],
+          "Hit@5": [
+            78.75,
+            0.62
+          ],
+          "Hit@50": [
+            91.27,
+            0.38
+          ]
+        }
+      }
+    }
+  },
+  "importance": {
+    "E_direct_xgbrank": {
+      "top5[offset]": 807.5,
+      "pct[offset]": 112.0,
+      "score[offset]": 17.9,
+      "q_avail[path]": 16.4,
+      "q_margin[offset]": 10.7,
+      "score[relation]": 9.0,
+      "avail[relation]": 7.4,
+      "avail[path]": 7.0,
+      "q_pmax[offset]": 6.8,
+      "pct[path]": 5.4,
+      "q_validfrac[relation]": 5.1,
+      "pct[relation]": 4.5,
+      "offset_evidence_adv": 4.4,
+      "relation_coverage": 4.3,
+      "pct[splade]": 4.2
+    }
+  }
+}

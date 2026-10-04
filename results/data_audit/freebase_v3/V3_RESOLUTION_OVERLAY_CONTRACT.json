@@ -1,0 +1,55 @@
+{
+ "schema": "V3_RESOLUTION_OVERLAY_CONTRACT/v1",
+ "name": "CRAG_FREEBASE_RESOLUTION_OVERLAY_V1",
+ "generated_utc": "2026-09-07T12:38:00Z",
+ "status": "CONTRACT_LOCKED_BEFORE_BUILD",
+ "RELATION_TO_FROZEN_GRAPH": {
+  "rule": "the overlay is a SIDECAR keyed by node_uid. CRAG_FREEBASE_CANONICAL is not modified, not rewritten and not re-hashed. Its manifest hash 6672dab172cf5dde79c56685153d4e257be3527b5ee93b07514ad2f40425c5fb remains valid.",
+  "node_universe_unchanged": 301977131,
+  "edge_universe_unchanged": 2062430072,
+  "join_key": "node_uid (int64), unique in the frozen node table by the node_uid_unique check",
+  "why_a_sidecar": "resolution is a progressive, source-dependent process that will be revised as sources are added. Baking it into a frozen table would make every revision a re-freeze and would destroy the one property that makes the frozen artifact citable."
+ },
+ "COLUMNS": {
+  "node_uid": "int64, joins to canonical/nodes/*.parquet",
+  "display_text": "string, NEVER null in the finished overlay and NEVER a bare MID",
+  "resolution_source": "string, one of RESOLUTION_SOURCE below",
+  "resolution_confidence": "float, defined by RESOLUTION_CONFIDENCE below -- a documented scale, not a free-floating score",
+  "source_reference": "string or null. For an authoritative tier, the exact evidence: the metadata table and field, the deleted-triples file and line, the archival URL and capture date. For a structural tier, the rule id that generated the text."
+ },
+ "RESOLUTION_SOURCE": {
+  "LITERAL_SELF": "the node IS a literal; its lexical form is its text. Authoritative by construction.",
+  "FREEBASE_CURRENT_EXACT": "type.object.name in the frozen metadata. The strongest tier.",
+  "FREEBASE_KEY_EXACT": "no name, but a /type/object/key in the frozen metadata yields a human-readable path. Authoritative, from the source of record.",
+  "FREEBASE_DELETED_EXACT": "recovered from deleted_freebase.tar.gz, Google's one-time dump of triples deleted through March 2013. Authoritative but HISTORICAL: the fact was true of Freebase at some point and was later deleted, which is not the same as being true of the final snapshot.",
+  "WIKIDATA_MAPPING_EXACT": "fb2w.nt.gz gives an owl:sameAs Wikidata Q-id. NOTE this yields an identifier, not text, so it is never sufficient on its own.",
+  "WIKIDATA_LABEL_EXACT": "a Wikidata label resolved through the mapping above. MEASURED CEILING: only 20,024 unnamed nodes appear in fb2w at all, so this tier cannot exceed 0.1033% of the unnamed population regardless of how much Wikidata is acquired.",
+  "ARCHIVE_EXACT": "recovered from an archived Freebase page or other historical capture. Requires a per-hit archival URL and capture date in source_reference; never accepted in bulk without one.",
+  "URI_DERIVED": "the node is an EXTERNAL_URI and its text is derived deterministically from the URI itself. Not a recovery: the URI was always readable.",
+  "STRUCTURAL_INFERRED": "no historical text survives, but the node's type and incident schema determine a description. Deterministic and reproducible; NOT a claim about what the node was called.",
+  "STRUCTURAL_FALLBACK": "as above with the type itself unrecovered, so the description is built from role signatures only. The weakest tier and the one that guarantees the opaque count reaches zero."
+ },
+ "RESOLUTION_CONFIDENCE": {
+  "1.0": "LITERAL_SELF, FREEBASE_CURRENT_EXACT, FREEBASE_KEY_EXACT, URI_DERIVED -- present in the frozen source of record or derivable from the identifier itself.",
+  "0.9": "FREEBASE_DELETED_EXACT, WIKIDATA_LABEL_EXACT, ARCHIVE_EXACT -- exact string evidence, but from outside the final snapshot, so temporally weaker.",
+  "0.5": "STRUCTURAL_INFERRED -- the type is authoritative, the phrasing is generated.",
+  "0.0": "STRUCTURAL_FALLBACK -- carries NO identity claim. A zero here means the text exists for retrieval and embedding only.",
+  "rule": "confidence is a property of the SOURCE CLASS, not a per-node judgement. It is assigned by tier and never tuned per node."
+ },
+ "TARGETS": {
+  "OPERATIONALLY_UNRESOLVED": 0,
+  "NAKED_MID_DISPLAY": 0,
+  "DISPLAY_TEXT_MISSING": 0,
+  "and_separately_reported": ["AUTHORITATIVE_SOURCE_RESOLUTION_PCT", "STRUCTURAL_FALLBACK_PCT"],
+  "honesty_rule": "reaching zero opaque nodes is an OPERATIONAL claim about CRAG never seeing a bare MID. It is not a claim that every node's original name was recovered. The two must be reported side by side, and a summary that gives the first without the second is a misreport."
+ },
+ "POPULATION_SIZING_MEASURED_BEFORE_BUILD": {
+  "LITERAL": {"n": 105351616, "tier": "LITERAL_SELF", "already_complete": true},
+  "EXTERNAL_URI": {"n": 74454117, "tier": "URI_DERIVED", "note": "0% carry display_text today, but the URI is self-describing; this is a display rule, not a recovery problem."},
+  "CVT_MEDIATOR": {"n": 52272634, "named": 303789, "tier": "STRUCTURAL_INFERRED / STRUCTURAL_FALLBACK", "note": "anonymous by design. Freebase never named mediators; 99.42% having no name is the expected state, not a defect."},
+  "ENTITY_MID_UNNAMED": {"n": 19387189, "tier": "the real historical-recovery problem", "fb2w_reachable": 20024},
+  "SCHEMA_RESIDUE": {"n": 34, "tier": "trivial"}
+ },
+ "COST_FLAG_MEDIATOR_ROLES": "MEDIATOR[type.path] needs only a metadata join and is cheap. The role-filled form (actor -> ..., film -> ...) needs each mediator's incident edges, which is a pass over all 2,062,430,072 canonical edges. Both are deterministic; only the second is expensive. Decide the form before building, not during.",
+ "SUPERSEDES_NOTHING": "this contract adds an artifact. It does not amend V3_CANONICAL_CONTRACT_V4 or any frozen record; per standing discipline a change to those requires a new record with its own hash, never an edit."
+}

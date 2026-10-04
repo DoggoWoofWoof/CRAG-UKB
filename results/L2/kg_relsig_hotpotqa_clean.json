@@ -1,0 +1,608 @@
+{
+  "dataset": "hotpotqa_clean",
+  "ner_edges": false,
+  "hops": 2,
+  "path_cap": 8,
+  "reranker_R@5": {
+    "none": [
+      63.42,
+      1.92
+    ],
+    "+relation": [
+      59.36,
+      0.29
+    ],
+    "+relation+path": [
+      60.45,
+      4.15
+    ],
+    "gated_rescue": [
+      59.62,
+      0.64
+    ],
+    "gated_rescue_supervised": [
+      61.53,
+      0.27
+    ],
+    "gated_rescue_subset": {
+      "rescued": 129,
+      "rescuable": 270
+    },
+    "kl_router": [
+      65.13,
+      4.49
+    ]
+  },
+  "per_signal_R@5": {
+    "dense": 69.9,
+    "offset": 57.95,
+    "prototype": 69.9,
+    "splade": 70.45,
+    "graph": 2.05,
+    "relation_raw": 14.75,
+    "relation_trained": 12.2,
+    "path_raw": 0.25,
+    "relation_pair_raw": 14.55,
+    "relation_masked_raw": 14.68,
+    "relation_shuf_raw": 12.45
+  },
+  "oracle_R@5": {
+    "old": 79.03,
+    "+relation": 79.15,
+    "+relation+path": 79.15,
+    "+edge_pair": 79.12
+  },
+  "oracle_R@20": {
+    "old": 88.25,
+    "+relation": 88.33,
+    "+relation+path": 88.33,
+    "+edge_pair": 88.33
+  },
+  "oracle_R@5_by_hop": {
+    "1hop": {
+      "old": 80.0,
+      "+relation": 80.37,
+      "+relation+path": 80.37,
+      "+edge_pair": 80.3
+    },
+    "2hop": {
+      "old": 91.67,
+      "+relation": 91.67,
+      "+relation+path": 91.67,
+      "+edge_pair": 91.67
+    },
+    "unreach": {
+      "old": 78.47,
+      "+relation": 78.47,
+      "+relation+path": 78.47,
+      "+edge_pair": 78.47
+    }
+  },
+  "n_by_hop": {
+    "1hop": 675,
+    "2hop": 6,
+    "unreach": 1319
+  },
+  "rank_movement": {
+    "into_top5": 173,
+    "stayed_top5": 315
+  },
+  "n_golds_with_relation": 683,
+  "reference": {
+    "prev_reranker_R@5": 38.8,
+    "prev_oracle_R@5": 39.1,
+    "benchmark": 29.7
+  },
+  "per_signal_R@1": {
+    "dense": 41.82,
+    "offset": 33.58,
+    "prototype": 41.82,
+    "splade": 42.5,
+    "graph": 0.3,
+    "relation_raw": 5.03,
+    "relation_trained": 3.25,
+    "path_raw": 0.12,
+    "relation_pair_raw": 5.9,
+    "relation_masked_raw": 5.4,
+    "relation_shuf_raw": 3.42
+  },
+  "oracle_R@1": {
+    "old": 46.35,
+    "+relation": 46.5,
+    "+relation+path": 46.5,
+    "+edge_pair": 46.48
+  },
+  "subset_R@5": {
+    "topic": {
+      "dense": 94.12,
+      "offset": 93.26,
+      "splade": 92.63,
+      "prototype": 94.12,
+      "relation_raw": 3.43,
+      "path_raw": 0.0,
+      "relation_pair_raw": 3.47,
+      "relation_masked_raw": 2.84,
+      "relation_shuf_raw": 2.18
+    },
+    "bridge": {
+      "dense": 51.02,
+      "offset": 33.63,
+      "splade": 53.02,
+      "prototype": 51.02,
+      "relation_raw": 30.55,
+      "path_raw": 0.31,
+      "relation_pair_raw": 29.9,
+      "relation_masked_raw": 31.13,
+      "relation_shuf_raw": 26.66
+    },
+    "all": {
+      "dense": 69.9,
+      "offset": 57.95,
+      "splade": 70.45,
+      "prototype": 69.9,
+      "relation_raw": 14.75,
+      "path_raw": 0.25,
+      "relation_pair_raw": 14.55,
+      "relation_masked_raw": 14.68,
+      "relation_shuf_raw": 12.45
+    }
+  },
+  "oracle_subset_R@5": {
+    "topic": {
+      "old": 98.32,
+      "+relation": 98.32,
+      "+relation+path": 98.32,
+      "+edge_pair": 98.32
+    },
+    "bridge": {
+      "old": 65.01,
+      "+relation": 76.91,
+      "+relation+path": 76.91,
+      "+edge_pair": 76.66
+    },
+    "all": {
+      "old": 79.03,
+      "+relation": 79.15,
+      "+relation+path": 79.15,
+      "+edge_pair": 79.12
+    }
+  },
+  "n_subset": {
+    "topic": 1283,
+    "bridge": 1622,
+    "all": 2000
+  },
+  "debug_examples_2wiki": [
+    {
+      "question": "Satan's Mistress stars the stage and film director also known for his part on what crime drama?",
+      "topics": [
+        "Satan's Mistress",
+        "The Stage"
+      ],
+      "source": "Satan's Mistress",
+      "target": "Octopussy",
+      "edge_sentence": "It is about a sexually frustrated housewife, Lisa (played by actress Lana Wood), who having been distanced from her husband (Don Galloway as Carl) begins having nightly trysts with an apparition that gradually takes on the form of a tall, dark stranger (played by Kabir Bedi of \"Octopussy\") who turns out to be a ghost from the other side.",
+      "edge_pair": "Satan's Mistress \u2014 Octopussy",
+      "edge_masked": "It is about a sexually frustrated housewife, Lisa (played by actress Lana Wood), who having been distanced from her husband (Don Galloway as Carl) begins having nightly trysts with an apparition that gradually takes on the form of a tall, dark stranger (played by Kabir Bedi of \"[TGT]\") who turns out to be a ghost from the other side.",
+      "is_gold": false
+    },
+    {
+      "question": "Which breed of dog is extinct, the Bracco Italiano or the St. John's water dog?",
+      "topics": [
+        "St. John's water dog",
+        "Bracco Italiano"
+      ],
+      "source": "St. John's water dog",
+      "target": "Little",
+      "edge_sentence": "Little is known of the types that went into its genetic makeup, although it was probably a random-bred mix of old English, Irish and Portuguese working dogs.",
+      "edge_pair": "St. John's water dog \u2014 Little",
+      "edge_masked": "[TGT] is known of the types that went into its genetic makeup, although it was probably a random-bred mix of old English, Irish and Portuguese working dogs.",
+      "is_gold": false
+    },
+    {
+      "question": "Are Magnapop and The Psychedelic Furs both from England?",
+      "topics": [
+        "The Psychedelic Furs",
+        "Magnapop",
+        "England"
+      ],
+      "source": "The Psychedelic Furs",
+      "target": "London",
+      "edge_sentence": "The Psychedelic Furs are an English rock band founded in London in February 1977.",
+      "edge_pair": "The Psychedelic Furs \u2014 London",
+      "edge_masked": "[SRC] are an English rock band founded in [TGT] in February 1977.",
+      "is_gold": false
+    },
+    {
+      "question": "What was the common abbreviation for the railroad by which the Cricket Tunnel and Crest Tunnel were built?",
+      "topics": [
+        "The Railroad"
+      ],
+      "source": "The Railroad",
+      "target": "Torino Film Festival",
+      "edge_sentence": "\"The Railroad\" won the FIPRESCI award and Best Actor for Kim Kang-woo at the 25th Torino Film Festival.",
+      "edge_pair": "The Railroad \u2014 Torino Film Festival",
+      "edge_masked": "\"[SRC]\" won the FIPRESCI award and Best Actor for Kim Kang-woo at the 25th [TGT].",
+      "is_gold": false
+    },
+    {
+      "question": "G3 is a concert tour organized by guitarist Joe Satriani featuring him alongside two other guitarists, include which English musician guitarist, best known as the lead guitarist of the rock band Queen?",
+      "topics": [
+        "Joe Satriani"
+      ],
+      "source": "Joe Satriani",
+      "target": "Kevin Cadogan",
+      "edge_sentence": "Early in his career, Satriani worked as a guitar instructor, with many of his former students achieving fame, such as Steve Vai, Larry LaLonde, Rick Hunolt, Kirk Hammett, Andy Timmons, Charlie Hunter, Kevin Cadogan, and Alex Skolnick; he then went on to have a successful solo music career.",
+      "edge_pair": "Joe Satriani \u2014 Kevin Cadogan",
+      "edge_masked": "Early in his career, Satriani worked as a guitar instructor, with many of his former students achieving fame, such as Steve Vai, Larry LaLonde, Rick Hunolt, Kirk Hammett, Andy Timmons, Charlie Hunter, [TGT], and Alex Skolnick; he then went on to have a successful solo music career.",
+      "is_gold": false
+    },
+    {
+      "question": "Which family occupied the place where the Robert Burns World Federation literary society met?",
+      "topics": [
+        "Robert Burns World Federation",
+        "Society",
+        "Family"
+      ],
+      "source": "Robert Burns World Federation",
+      "target": "Kilmarnock",
+      "edge_sentence": "The Robert Burns World Federation is a literary society based at the Dower House, Dean Castle Country Park, Kilmarnock, Ayrshire, Scotland.",
+      "edge_pair": "Robert Burns World Federation \u2014 Kilmarnock",
+      "edge_masked": "The [SRC] is a literary society based at the Dower House, Dean Castle Country Park, [TGT], Ayrshire, Scotland.",
+      "is_gold": false
+    },
+    {
+      "question": "Walker County was named after which member of the US Senate from Mississippi?",
+      "topics": [
+        "Mississippi"
+      ],
+      "source": "Mississippi",
+      "target": "United States",
+      "edge_sentence": "Mississippi is a state in the southern region of the United States, with part of its southern border formed by the Gulf of Mexico.",
+      "edge_pair": "Mississippi \u2014 United States",
+      "edge_masked": "[SRC] is a state in the southern region of the [TGT], with part of its southern border formed by the Gulf of Mexico.",
+      "is_gold": false
+    },
+    {
+      "question": "When was the winner of the ladies' title of The 1988 Prize of Moscow News banned for life by the U.S. Figure Skating Association?",
+      "topics": [
+        "1988 Prize of Moscow News",
+        "U.S. Figure Skating"
+      ],
+      "source": "1988 Prize of Moscow News",
+      "target": "Sergei Ponomarenko",
+      "edge_sentence": "Olympic silver medalists Marina Klimova / Sergei Ponomarenko won the ice dancing title for the third consecutive year.",
+      "edge_pair": "1988 Prize of Moscow News \u2014 Sergei Ponomarenko",
+      "edge_masked": "Olympic silver medalists Marina Klimova / [TGT] won the ice dancing title for the third consecutive year.",
+      "is_gold": false
+    },
+    {
+      "question": "Are both Empire of the Sun and Black Grape based in the same country?",
+      "topics": [
+        "Black Grape",
+        "Country"
+      ],
+      "source": "Black Grape",
+      "target": "Ruthless Rap Assassins",
+      "edge_sentence": "Black Grape are a rock band from England, featuring former members of Happy Mondays and Ruthless Rap Assassins.",
+      "edge_pair": "Black Grape \u2014 Ruthless Rap Assassins",
+      "edge_masked": "[SRC] are a rock band from England, featuring former members of Happy Mondays and [TGT].",
+      "is_gold": false
+    },
+    {
+      "question": "What was the pen named used for the series Wheel of Time, which includes the book Winter's Heart?",
+      "topics": [
+        "Winter's Heart",
+        "Book"
+      ],
+      "source": "Winter's Heart",
+      "target": "Robert Jordan",
+      "edge_sentence": "Winter's Heart a fantasy novel by American author Robert Jordan, the ninth book of his series \"Wheel of Time\".",
+      "edge_pair": "Winter's Heart \u2014 Robert Jordan",
+      "edge_masked": "[SRC] a fantasy novel by American author [TGT], the ninth book of his series \"Wheel of Time\".",
+      "is_gold": false
+    },
+    {
+      "question": "Where are both Doris Lake Aerodrome and Nunavut territory located?",
+      "topics": [
+        "Doris Lake Aerodrome",
+        "Territory",
+        "Nunavut"
+      ],
+      "source": "Doris Lake Aerodrome",
+      "target": "Canada",
+      "edge_sentence": "Doris Lake Aerodrome (IATA: JOJ, TC LID: CDL7) is a privately owned ice runway located on Doris Lake, Nunavut, Canada.",
+      "edge_pair": "Doris Lake Aerodrome \u2014 Canada",
+      "edge_masked": "[SRC] (IATA: JOJ, TC LID: CDL7) is a privately owned ice runway located on Doris Lake, Nunavut, [TGT].",
+      "is_gold": false
+    },
+    {
+      "question": "What Indian singer has recorded Hindi, Bengali, Marathi, Kannada, Nepali, Bhojpuri and Gujarati songs an was given a break by Datta Davjekar?",
+      "topics": [
+        "Datta Davjekar",
+        "Kannada",
+        "Hindi"
+      ],
+      "source": "Datta Davjekar",
+      "target": "Lata Mangeshkar",
+      "edge_sentence": "He is credited for giving a break to many singers who became extremely popular over a period of time, including the Mangeshkar siblings, Lata Mangeshkar, Asha Bhosale and Usha Mangeshkar as well as others such as Anuradha Paudwal.",
+      "edge_pair": "Datta Davjekar \u2014 Lata Mangeshkar",
+      "edge_masked": "He is credited for giving a break to many singers who became extremely popular over a period of time, including the Mangeshkar siblings, [TGT], Asha Bhosale and Usha Mangeshkar as well as others such as Anuradha Paudwal.",
+      "is_gold": false
+    },
+    {
+      "question": "Who is the producer of the film which released on June 4, 2010 and Jake Johnson has an appearance in that film?",
+      "topics": [
+        "Jake Johnson",
+        "The Film",
+        "June"
+      ],
+      "source": "Jake Johnson",
+      "target": "Paper",
+      "edge_sentence": "Johnson also co-starred in the 2009 film \"Paper Heart\" and the 2012 film \"Safety Not Guaranteed\", as well as appearing in \"Get Him to the Greek\", \"21 Jump Street\", and \"Jurassic World\".",
+      "edge_pair": "Jake Johnson \u2014 Paper",
+      "edge_masked": "Johnson also co-starred in the 2009 film \"[TGT] Heart\" and the 2012 film \"Safety Not Guaranteed\", as well as appearing in \"Get Him to the Greek\", \"21 Jump Street\", and \"Jurassic World\".",
+      "is_gold": false
+    },
+    {
+      "question": "Both Chat and New England Offering are magazines aimed at females?",
+      "topics": [
+        "New England Offering"
+      ],
+      "source": "New England Offering",
+      "target": "Anthony Trollope",
+      "edge_sentence": "It was read by famous writers such as Charles Dickens, Anthony Trollope, and George Sand.",
+      "edge_pair": "New England Offering \u2014 Anthony Trollope",
+      "edge_masked": "It was read by famous writers such as Charles Dickens, [TGT], and George Sand.",
+      "is_gold": false
+    },
+    {
+      "question": "Ella Mikhaylovna Polyakova, is a Russian human rights activist, a member of which current President of Russia, holding the office since 7 May 2012?",
+      "topics": [
+        "Human rights",
+        "Russia"
+      ],
+      "source": "Human rights",
+      "target": "They",
+      "edge_sentence": "They are commonly understood as inalienable fundamental rights \"to which a person is inherently entitled simply because she or he is a human being\", and which are \"inherent in all human beings\" regardless of their nation, location, language, religion, ethnic origin or any other status.",
+      "edge_pair": "Human rights \u2014 They",
+      "edge_masked": "[TGT] are commonly understood as inalienable fundamental rights \"to which a person is inherently entitled simply because she or he is a human being\", and which are \"inherent in all human beings\" regardless of their nation, location, language, religion, ethnic origin or any other status.",
+      "is_gold": false
+    },
+    {
+      "question": "What American actor born in 1987 stared in a film with Adam Scott, Brittany Snow, and J.K. Simmons?",
+      "topics": [
+        "Brittany Snow",
+        "Actor"
+      ],
+      "source": "Brittany Snow",
+      "target": "March",
+      "edge_sentence": "Brittany Anne Snow (born March 9, 1986) is an American actress, producer, and singer.",
+      "edge_pair": "Brittany Snow \u2014 March",
+      "edge_masked": "Brittany Anne Snow (born [TGT] 9, 1986) is an American actress, producer, and singer.",
+      "is_gold": false
+    },
+    {
+      "question": "For what type of work is the production company for The Year Without a Santa Claus best known?",
+      "topics": [
+        "The Year Without a Santa Claus"
+      ],
+      "source": "The Year Without a Santa Claus",
+      "target": "Santa Claus",
+      "edge_sentence": "The Year Without a Santa Claus is a 1974 Christmas stop motion animated television special produced by Rankin/Bass Productions.",
+      "edge_pair": "The Year Without a Santa Claus \u2014 Santa Claus",
+      "edge_masked": "The Year Without a [TGT] is a 1974 Christmas stop motion animated television special produced by Rankin/Bass Productions.",
+      "is_gold": false
+    },
+    {
+      "question": "Between David Vincent and Eddie Vedder, who had a more diverse musical career?",
+      "topics": [
+        "David Vincent",
+        "Eddie Vedder"
+      ],
+      "source": "David Vincent",
+      "target": "Morbid Angel",
+      "edge_sentence": "David Justin Vincent (born April 22, 1965), also known as Evil D, is an American musician who is best known as the former lead vocalist and bassist for the death metal band Morbid Angel as well as the bassist for Genitorturers.",
+      "edge_pair": "David Vincent \u2014 Morbid Angel",
+      "edge_masked": "David Justin Vincent (born April 22, 1965), also known as Evil D, is an American musician who is best known as the former lead vocalist and bassist for the death metal band [TGT] as well as the bassist for Genitorturers.",
+      "is_gold": false
+    },
+    {
+      "question": "What was a movement of High Church members of the Church of England which eventually developed into Anglo-Catholicism, that influenced an Irish-born Church of England priest of the late nineteenth century?",
+      "topics": [
+        "Church of England"
+      ],
+      "source": "Church of England",
+      "target": "Augustine of Canterbury",
+      "edge_sentence": "It traces its history to the Christian church recorded as existing in the Roman province of Britain by the third century, and to the 6th-century Gregorian mission to Kent led by Augustine of Canterbury.",
+      "edge_pair": "Church of England \u2014 Augustine of Canterbury",
+      "edge_masked": "It traces its history to the Christian church recorded as existing in the Roman province of Britain by the third century, and to the 6th-century Gregorian mission to Kent led by [TGT].",
+      "is_gold": false
+    },
+    {
+      "question": "What sports club based in Hamburg Germany had a Persian born football player who played for eight seasons?",
+      "topics": [
+        "Football",
+        "Germany"
+      ],
+      "source": "Football",
+      "target": "American football",
+      "edge_sentence": "Sports commonly called 'football' in certain places include: association football (known as soccer in some countries); gridiron football (specifically American football or Canadian football); Australian rules football; rugby football (either rugby league or rugby union); and Gaelic football.",
+      "edge_pair": "Football \u2014 American football",
+      "edge_masked": "Sports commonly called 'football' in certain places include: association football (known as soccer in some countries); gridiron football (specifically [TGT] or Canadian football); Australian rules football; rugby football (either rugby league or rugby union); and Gaelic football.",
+      "is_gold": false
+    }
+  ],
+  "debug_edges_gold": [
+    {
+      "question": "Satan's Mistress stars the stage and film director also known for his part on what crime drama?",
+      "target": "Don Galloway",
+      "rel_score": 0.437,
+      "is_gold": true,
+      "edge_sentence": "It is about a sexually frustrated housewife, Lisa (played by actress Lana Wood), who having been distanced from her husband (Don Galloway as Carl) begins having"
+    },
+    {
+      "question": "Which family occupied the place where the Robert Burns World Federation literary society met?",
+      "target": "Dean Castle",
+      "rel_score": 0.785,
+      "is_gold": true,
+      "edge_sentence": "The Robert Burns World Federation is a literary society based at the Dower House, Dean Castle Country Park, Kilmarnock, Ayrshire, Scotland."
+    },
+    {
+      "question": "When was the winner of the ladies' title of The 1988 Prize of Moscow News banned for life by the U.S",
+      "target": "Tonya Harding",
+      "rel_score": 0.641,
+      "is_gold": true,
+      "edge_sentence": "American Tonya Harding won the ladies' title ahead of Natalia Lebedeva from the Soviet Union."
+    },
+    {
+      "question": "Where are both Doris Lake Aerodrome and Nunavut territory located?",
+      "target": "Nunavut",
+      "rel_score": 0.855,
+      "is_gold": true,
+      "edge_sentence": "Doris Lake Aerodrome (IATA: JOJ, TC LID: CDL7) is a privately owned ice runway located on Doris Lake, Nunavut, Canada."
+    },
+    {
+      "question": "What Indian singer has recorded Hindi, Bengali, Marathi, Kannada, Nepali, Bhojpuri and Gujarati song",
+      "target": "Usha Mangeshkar",
+      "rel_score": 0.721,
+      "is_gold": true,
+      "edge_sentence": "He is credited for giving a break to many singers who became extremely popular over a period of time, including the Mangeshkar siblings, Lata Mangeshkar, Asha B"
+    },
+    {
+      "question": "Who is the producer of the film which released on June 4, 2010 and Jake Johnson has an appearance in",
+      "target": "Get Him to the Greek",
+      "rel_score": 0.56,
+      "is_gold": true,
+      "edge_sentence": "Johnson also co-starred in the 2009 film \"Paper Heart\" and the 2012 film \"Safety Not Guaranteed\", as well as appearing in \"Get Him to the Greek\", \"21 Jump Stree"
+    },
+    {
+      "question": "Which K283BV artist is from Columbus, Ohio?",
+      "target": "Twenty One Pilots",
+      "rel_score": 0.553,
+      "is_gold": true,
+      "edge_sentence": "K283BV (104.5) is an alternative radio station serving the quad cities that blends new music with alternative such as Mumford & sons, Twenty One Pilots etc."
+    },
+    {
+      "question": "Suite alg\u00e9rienne was composed by the conductor who was active during what era?",
+      "target": "Camille Saint-Sa\u00ebns",
+      "rel_score": 0.438,
+      "is_gold": true,
+      "edge_sentence": "60 is a composition by Camille Saint-Sa\u00ebns in four movements."
+    },
+    {
+      "question": "What is the fourth most populous urban area in the Republic of Ireland and has the housing estate Co",
+      "target": "Galway",
+      "rel_score": 0.82,
+      "is_gold": true,
+      "edge_sentence": "Corrib Park is a housing estate in the Westside suburb of Galway, Ireland."
+    },
+    {
+      "question": "The first person to interpret Relational quantum mechanics has worked in what countries? ",
+      "target": "Carlo Rovelli",
+      "rel_score": 0.528,
+      "is_gold": true,
+      "edge_sentence": "This interpretation was first delineated by Carlo Rovelli in a 1994 preprint, and has since been expanded upon by a number of theorists."
+    },
+    {
+      "question": "Frederick W. Barrett trained race horses for a British Monarch who abdicated his throne in what year",
+      "target": "Edward VIII",
+      "rel_score": 0.752,
+      "is_gold": true,
+      "edge_sentence": "He trained race horses for three British Monarchs George V, Edward VIII and George VI."
+    },
+    {
+      "question": "Who is the father of Aage Bohr and son of Christian Bohr?",
+      "target": "Aage Bohr",
+      "rel_score": 0.806,
+      "is_gold": true,
+      "edge_sentence": "Christian Harald Lauritz Peter Emil Bohr (1855\u20131911) was a Danish physician, father of the physicist and Nobel laureate Niels Bohr, as well as the mathematician"
+    }
+  ],
+  "debug_edges_fp": [
+    {
+      "question": "Harold L. Martin was chancellor of which historically black public research university?",
+      "target": "University",
+      "rel_score": 0.544,
+      "is_gold": false,
+      "edge_sentence": "(born October 22, 1951) is an American engineer, educator and former, and current Chancellor of Winston-Salem State and North Carolina Agricultural and Technica"
+    },
+    {
+      "question": "Harold L. Martin was chancellor of which historically black public research university?",
+      "target": "October",
+      "rel_score": 0.544,
+      "is_gold": false,
+      "edge_sentence": "(born October 22, 1951) is an American engineer, educator and former, and current Chancellor of Winston-Salem State and North Carolina Agricultural and Technica"
+    },
+    {
+      "question": "Harold L. Martin was chancellor of which historically black public research university?",
+      "target": "North Carolina",
+      "rel_score": 0.544,
+      "is_gold": false,
+      "edge_sentence": "(born October 22, 1951) is an American engineer, educator and former, and current Chancellor of Winston-Salem State and North Carolina Agricultural and Technica"
+    },
+    {
+      "question": "Satan's Mistress stars the stage and film director also known for his part on what crime drama?",
+      "target": "Demon Seed",
+      "rel_score": 0.593,
+      "is_gold": false,
+      "edge_sentence": "Satan's Mistress (also known as Demon Rage, Demon Seed, Fury of the Succubus and Dark Eyes) is a 1980 horror movie that was theatrically released in 1982."
+    },
+    {
+      "question": "Satan's Mistress stars the stage and film director also known for his part on what crime drama?",
+      "target": "Octopussy",
+      "rel_score": 0.437,
+      "is_gold": false,
+      "edge_sentence": "It is about a sexually frustrated housewife, Lisa (played by actress Lana Wood), who having been distanced from her husband (Don Galloway as Carl) begins having"
+    },
+    {
+      "question": "Satan's Mistress stars the stage and film director also known for his part on what crime drama?",
+      "target": "Kabir",
+      "rel_score": 0.437,
+      "is_gold": false,
+      "edge_sentence": "It is about a sexually frustrated housewife, Lisa (played by actress Lana Wood), who having been distanced from her husband (Don Galloway as Carl) begins having"
+    },
+    {
+      "question": "Which breed of dog is extinct, the Bracco Italiano or the St. John's water dog?",
+      "target": "Italy",
+      "rel_score": 0.655,
+      "is_gold": false,
+      "edge_sentence": "The Bracco Italiano ] is a breed of dog developed in Italy as a versatile gun dog."
+    },
+    {
+      "question": "Which breed of dog is extinct, the Bracco Italiano or the St. John's water dog?",
+      "target": "Little",
+      "rel_score": 0.423,
+      "is_gold": false,
+      "edge_sentence": "Little is known of the types that went into its genetic makeup, although it was probably a random-bred mix of old English, Irish and Portuguese working dogs."
+    },
+    {
+      "question": "Are Magnapop and The Psychedelic Furs both from England?",
+      "target": "London",
+      "rel_score": 0.674,
+      "is_gold": false,
+      "edge_sentence": "The Psychedelic Furs are an English rock band founded in London in February 1977."
+    },
+    {
+      "question": "Are Magnapop and The Psychedelic Furs both from England?",
+      "target": "Atlanta",
+      "rel_score": 0.667,
+      "is_gold": false,
+      "edge_sentence": "Magnapop is an American rock band based in Atlanta, Georgia."
+    },
+    {
+      "question": "Are Magnapop and The Psychedelic Furs both from England?",
+      "target": "Europe",
+      "rel_score": 0.618,
+      "is_gold": false,
+      "edge_sentence": "Magnapop first achieved recognition in the Benelux countries of Belgium, the Netherlands and Luxembourg through the festival circuit and have remained popular i"
+    },
+    {
+      "question": "Are Magnapop and The Psychedelic Furs both from England?",
+      "target": "Luxembourg",
+      "rel_score": 0.618,
+      "is_gold": false,
+      "edge_sentence": "Magnapop first achieved recognition in the Benelux countries of Belgium, the Netherlands and Luxembourg through the festival circuit and have remained popular i"
+    }
+  ]
+}

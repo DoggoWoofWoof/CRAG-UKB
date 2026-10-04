@@ -1,0 +1,266 @@
+{
+ "RECORD": "TRANSFER_REPRO_SUMMARY",
+ "STATUS": "STREAMED_STAGE2_ACCEPTED",
+ "utc": "2026-09-15T23:29:10Z",
+ "rule": {
+  "g1": "max absolute difference of the block maxima <= 1e-5 (a logic bug -- a wrong block assignment, a missed shard -- gives >= 1e-3; summation-order noise of a 1536-term fp32 dot product is ~1e-7)",
+  "g2": "on split A, the rows whose PRIMARY coverage flips between the streamed and the pinned chain <= max(2, round(0.5 % of n_A)) AND the same for QMAX_F0",
+  "g3": "the pinned chain reproduces the records (asserted)",
+  "STREAMED_STAGE2_ACCEPTED": "g1 AND g2 AND g3 on ALL five DEV_A caches; otherwise STREAMED_STAGE2_NOT_ACCEPTED and the transfer is NOT run under this record (a new ruling would be needed; nothing is tuned)"
+ },
+ "prediction_stated_in_the_preregistration": "accepted on all five: 0 flipped rows on every cache (metaqa dry run: 0 rows with a different first-200 fused order), max absolute difference ~1e-7 (a few ulps), rankings not bitwise identical on most caches",
+ "per_cache": {
+  "metaqa": {
+   "n_split_A": 1002,
+   "stage2_ranking_bitwise_identical": false,
+   "score_entries_differing / total": [
+    11993,
+    863136
+   ],
+   "max_abs_score_difference": 2.682209014892578e-07,
+   "max_ulp": 9.0,
+   "rows_with_a_different_stage2_order": 2,
+   "rows_first_200_fused_differ": 0,
+   "rows_P50_set_differs (all / A)": [
+    0,
+    0
+   ],
+   "split_A_rows_flipped QMAX_F0 / QMAX_SAFE / PRIMARY": [
+    0,
+    0,
+    0
+   ],
+   "rows_with_identical_PRIMARY_served_set": 1002,
+   "ALL PRIMARY streamed / pinned": [
+    0.7754,
+    0.7754
+   ],
+   "section24_cell streamed / record": [
+    "CARRIES",
+    "CARRIES"
+   ],
+   "gate": {
+    "g1_max_abs_score_difference_le_1e-5": true,
+    "g2_split_A_rows_flipped_le_5 (0.5 % of 1002, min 2): QMAX_F0 / QMAX_SAFE / PRIMARY": [
+     0,
+     0,
+     0
+    ],
+    "g2_pass": true,
+    "g3_pinned_chain_reproduces_the_records": true,
+    "STREAMED_STAGE2_ACCEPTED_ON_THIS_CACHE": true
+   },
+   "seconds": 171.6,
+   "streamed_stage2_seconds": 32.1,
+   "pinned_stage2_seconds": 34.2,
+   "reference_reproduced": "BASE chain L1 / SAFE / H2_PATCH1 / BALANCED_H2_PATCH1 == h2patch_A / h2balanced_A / qmaxbal_A records; QMAX chain with the PINNED stage 2 == qmaxbal_A_metaqa.json (QMAX_F0, QMAX_SAFE, PRIMARY: ALL, ANY, every paired comparison, per hop, novel counts, patch size, gold accounting, the section-24 cell)"
+  },
+  "metaqa_phg": {
+   "n_split_A": 1002,
+   "stage2_ranking_bitwise_identical": false,
+   "score_entries_differing / total": [
+    12034,
+    863136
+   ],
+   "max_abs_score_difference": 2.682209014892578e-07,
+   "max_ulp": 9.0,
+   "rows_with_a_different_stage2_order": 4,
+   "rows_first_200_fused_differ": 1,
+   "rows_P50_set_differs (all / A)": [
+    0,
+    0
+   ],
+   "split_A_rows_flipped QMAX_F0 / QMAX_SAFE / PRIMARY": [
+    0,
+    0,
+    0
+   ],
+   "rows_with_identical_PRIMARY_served_set": 1002,
+   "ALL PRIMARY streamed / pinned": [
+    0.7964,
+    0.7964
+   ],
+   "section24_cell streamed / record": [
+    "CARRIES",
+    "CARRIES"
+   ],
+   "gate": {
+    "g1_max_abs_score_difference_le_1e-5": true,
+    "g2_split_A_rows_flipped_le_5 (0.5 % of 1002, min 2): QMAX_F0 / QMAX_SAFE / PRIMARY": [
+     0,
+     0,
+     0
+    ],
+    "g2_pass": true,
+    "g3_pinned_chain_reproduces_the_records": true,
+    "STREAMED_STAGE2_ACCEPTED_ON_THIS_CACHE": true
+   },
+   "seconds": 62.8,
+   "streamed_stage2_seconds": 11.5,
+   "pinned_stage2_seconds": 10.7,
+   "reference_reproduced": "BASE chain L1 / SAFE / H2_PATCH1 / BALANCED_H2_PATCH1 == h2patch_A / h2balanced_A / qmaxbal_A records; QMAX chain with the PINNED stage 2 == qmaxbal_A_metaqa_phg.json (QMAX_F0, QMAX_SAFE, PRIMARY: ALL, ANY, every paired comparison, per hop, novel counts, patch size, gold accounting, the section-24 cell)"
+  },
+  "squad": {
+   "n_split_A": 992,
+   "stage2_ranking_bitwise_identical": true,
+   "score_entries_differing / total": [
+    0,
+    404000
+   ],
+   "max_abs_score_difference": 0.0,
+   "max_ulp": 0.0,
+   "rows_with_a_different_stage2_order": 0,
+   "rows_first_200_fused_differ": 0,
+   "rows_P50_set_differs (all / A)": [
+    0,
+    0
+   ],
+   "split_A_rows_flipped QMAX_F0 / QMAX_SAFE / PRIMARY": [
+    0,
+    0,
+    0
+   ],
+   "rows_with_identical_PRIMARY_served_set": 992,
+   "ALL PRIMARY streamed / pinned": [
+    0.995,
+    0.995
+   ],
+   "section24_cell streamed / record": [
+    "NEUTRAL",
+    "NEUTRAL"
+   ],
+   "gate": {
+    "g1_max_abs_score_difference_le_1e-5": true,
+    "g2_split_A_rows_flipped_le_5 (0.5 % of 992, min 2): QMAX_F0 / QMAX_SAFE / PRIMARY": [
+     0,
+     0,
+     0
+    ],
+    "g2_pass": true,
+    "g3_pinned_chain_reproduces_the_records": true,
+    "STREAMED_STAGE2_ACCEPTED_ON_THIS_CACHE": true
+   },
+   "seconds": 176.2,
+   "streamed_stage2_seconds": 6.4,
+   "pinned_stage2_seconds": 6.0,
+   "reference_reproduced": "BASE chain L1 / SAFE / H2_PATCH1 / BALANCED_H2_PATCH1 == h2patch_A / h2balanced_A / qmaxbal_A records; QMAX chain with the PINNED stage 2 == qmaxbal_A_squad.json (QMAX_F0, QMAX_SAFE, PRIMARY: ALL, ANY, every paired comparison, per hop, novel counts, patch size, gold accounting, the section-24 cell)"
+  },
+  "squad_phg": {
+   "n_split_A": 992,
+   "stage2_ranking_bitwise_identical": true,
+   "score_entries_differing / total": [
+    0,
+    404000
+   ],
+   "max_abs_score_difference": 0.0,
+   "max_ulp": 0.0,
+   "rows_with_a_different_stage2_order": 0,
+   "rows_first_200_fused_differ": 0,
+   "rows_P50_set_differs (all / A)": [
+    0,
+    0
+   ],
+   "split_A_rows_flipped QMAX_F0 / QMAX_SAFE / PRIMARY": [
+    0,
+    0,
+    0
+   ],
+   "rows_with_identical_PRIMARY_served_set": 992,
+   "ALL PRIMARY streamed / pinned": [
+    0.9899,
+    0.9899
+   ],
+   "section24_cell streamed / record": [
+    "NEUTRAL",
+    "NEUTRAL"
+   ],
+   "gate": {
+    "g1_max_abs_score_difference_le_1e-5": true,
+    "g2_split_A_rows_flipped_le_5 (0.5 % of 992, min 2): QMAX_F0 / QMAX_SAFE / PRIMARY": [
+     0,
+     0,
+     0
+    ],
+    "g2_pass": true,
+    "g3_pinned_chain_reproduces_the_records": true,
+    "STREAMED_STAGE2_ACCEPTED_ON_THIS_CACHE": true
+   },
+   "seconds": 178.7,
+   "streamed_stage2_seconds": 6.8,
+   "pinned_stage2_seconds": 5.6,
+   "reference_reproduced": "BASE chain L1 / SAFE / H2_PATCH1 / BALANCED_H2_PATCH1 == h2patch_A / h2balanced_A / qmaxbal_A records; QMAX chain with the PINNED stage 2 == qmaxbal_A_squad_phg.json (QMAX_F0, QMAX_SAFE, PRIMARY: ALL, ANY, every paired comparison, per hop, novel counts, patch size, gold accounting, the section-24 cell)"
+  },
+  "musique": {
+   "n_split_A": 996,
+   "stage2_ranking_bitwise_identical": false,
+   "score_entries_differing / total": [
+    17260,
+    2350000
+   ],
+   "max_abs_score_difference": 2.384185791015625e-07,
+   "max_ulp": 9.0,
+   "rows_with_a_different_stage2_order": 3,
+   "rows_first_200_fused_differ": 0,
+   "rows_P50_set_differs (all / A)": [
+    0,
+    0
+   ],
+   "split_A_rows_flipped QMAX_F0 / QMAX_SAFE / PRIMARY": [
+    0,
+    0,
+    0
+   ],
+   "rows_with_identical_PRIMARY_served_set": 996,
+   "ALL PRIMARY streamed / pinned": [
+    0.76,
+    0.76
+   ],
+   "section24_cell streamed / record": [
+    "STACKS",
+    "STACKS"
+   ],
+   "gate": {
+    "g1_max_abs_score_difference_le_1e-5": true,
+    "g2_split_A_rows_flipped_le_5 (0.5 % of 996, min 2): QMAX_F0 / QMAX_SAFE / PRIMARY": [
+     0,
+     0,
+     0
+    ],
+    "g2_pass": true,
+    "g3_pinned_chain_reproduces_the_records": true,
+    "STREAMED_STAGE2_ACCEPTED_ON_THIS_CACHE": true
+   },
+   "seconds": 299.7,
+   "streamed_stage2_seconds": 26.9,
+   "pinned_stage2_seconds": 38.9,
+   "reference_reproduced": "BASE chain L1 / SAFE / H2_PATCH1 / BALANCED_H2_PATCH1 == h2patch_A / h2balanced_A / qmaxbal_A records; QMAX chain with the PINNED stage 2 == qmaxbal_A_musique.json (QMAX_F0, QMAX_SAFE, PRIMARY: ALL, ANY, every paired comparison, per hop, novel counts, patch size, gold accounting, the section-24 cell)"
+  }
+ },
+ "records": {
+  "metaqa": {
+   "path": "results/L1_COVPART/transfer_repro_metaqa.json",
+   "sha256": "4c66f776ac156733bbdc52236a89a1e9519b4730c6299fdc7c2024d89cfeb3c3"
+  },
+  "metaqa_phg": {
+   "path": "results/L1_COVPART/transfer_repro_metaqa_phg.json",
+   "sha256": "240f8f55611fd529c76305964398499a3a857f19640681e292cf53c77d182cf2"
+  },
+  "squad": {
+   "path": "results/L1_COVPART/transfer_repro_squad.json",
+   "sha256": "17f3d714e6651a3e1abc94457294c707a3c8a13ec3f50acd6044549e768eb007"
+  },
+  "squad_phg": {
+   "path": "results/L1_COVPART/transfer_repro_squad_phg.json",
+   "sha256": "764cdbc989803a738d3dc777f3b68ac90fa4aa390dcc444e7db67ebcbbaf7298"
+  },
+  "musique": {
+   "path": "results/L1_COVPART/transfer_repro_musique.json",
+   "sha256": "6806c0c5956d6c9a002c112c3327877bb3f8d09193f79265643f98b772130d8d"
+  }
+ },
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_TRANSFER_2WIKI_HOTPOTQA.json",
+  "sha256": "3af9ad9b23a02c60708a0b395a99a76f660dc78084a8606c8bcca8de58f7882e"
+ },
+ "what_follows": "the streamed stage 2 is the transfer's stage 2 (accepted on all five DEV_A caches by the pre-registered gate); the transfer itself waits for a resource decision (TRANSFER_RESOURCE_SURVEY_2WIKI_HOTPOTQA.json: PHG NP = 4 infeasible on this host for both corpora)"
+}

@@ -1,0 +1,286 @@
+{
+ "phase": "C10 Task1/2/5 \u2014 set-redundancy audit (GATE), multigold breakdown, set oracles",
+ "SET_REDUNDANCY_AUDIT": {
+  "C9_DEV": {
+   "n_missed_golds": 207,
+   "n_top5_false_positives": 9128,
+   "qwen_sim_to_selected_top5": {
+    "missed_gold_MAX": {
+     "n": 207,
+     "mean": 0.4766,
+     "median": 0.4621,
+     "p25": 0.3822,
+     "p75": 0.5311,
+     "std": 0.1712
+    },
+    "fp_MAX": {
+     "n": 9128,
+     "mean": 0.5687,
+     "median": 0.5367,
+     "p25": 0.4428,
+     "p75": 0.6539,
+     "std": 0.1774
+    },
+    "missed_gold_MEAN": {
+     "n": 207,
+     "mean": 0.3333,
+     "median": 0.3271,
+     "p25": 0.2716,
+     "p75": 0.3728,
+     "std": 0.0937
+    },
+    "fp_MEAN": {
+     "n": 9128,
+     "mean": 0.4137,
+     "median": 0.4,
+     "p25": 0.3283,
+     "p75": 0.4882,
+     "std": 0.1164
+    },
+    "missed_gold_MIN": {
+     "n": 207,
+     "mean": 0.2344,
+     "median": 0.2225,
+     "p25": 0.166,
+     "p75": 0.2775,
+     "std": 0.0922
+    },
+    "fp_MIN": {
+     "n": 9128,
+     "mean": 0.2809,
+     "median": 0.2658,
+     "p25": 0.1968,
+     "p75": 0.3495,
+     "std": 0.1177
+    }
+   },
+   "expert_support_cos_to_selected_top5": {
+    "missed_gold_MAX": {
+     "n": 207,
+     "mean": 0.8949,
+     "median": 0.9371,
+     "p25": 0.8223,
+     "p75": 0.9839,
+     "std": 0.1173
+    },
+    "fp_MAX": {
+     "n": 9128,
+     "mean": 0.9514,
+     "median": 0.9868,
+     "p25": 0.9409,
+     "p75": 0.9981,
+     "std": 0.0836
+    },
+    "missed_gold_MEAN": {
+     "n": 207,
+     "mean": 0.6653,
+     "median": 0.6606,
+     "p25": 0.5517,
+     "p75": 0.8123,
+     "std": 0.1789
+    },
+    "fp_MEAN": {
+     "n": 9128,
+     "mean": 0.8417,
+     "median": 0.8797,
+     "p25": 0.7786,
+     "p75": 0.9408,
+     "std": 0.1367
+    }
+   },
+   "argmax_expert_overlap": {
+    "missed_gold": {
+     "n": 207,
+     "mean": 0.1913,
+     "median": 0.2,
+     "p25": 0.0,
+     "p75": 0.2,
+     "std": 0.174
+    },
+    "fp": {
+     "n": 9128,
+     "mean": 0.3685,
+     "median": 0.4,
+     "p25": 0.2,
+     "p75": 0.4,
+     "std": 0.1537
+    }
+   },
+   "effect_sizes_cohend_mg_minus_fp": {
+    "qwen_MAX_sim": -0.5197,
+    "support_MAX_cos": -0.6685
+   },
+   "query_conditioned_paired": {
+    "n_queries_with_both": 189,
+    "mean_missedgold_qmax": 0.4787,
+    "mean_fp_qmax": 0.6729,
+    "mean_paired_diff_mg_minus_fp": -0.1942,
+    "frac_queries_missedgold_more_novel": 0.8042,
+    "paired_diff_ci95": [
+     -0.227,
+     -0.1612
+    ],
+    "paired_diff_significant": true
+   },
+   "_hyp": "missed golds MORE novel than FPs => lower qwen_MAX_sim => NEGATIVE cohend & paired diff"
+  },
+  "DEV_INNER": {
+   "n_missed_golds": 148,
+   "n_top5_false_positives": 6743,
+   "qwen_sim_to_selected_top5": {
+    "missed_gold_MAX": {
+     "n": 148,
+     "mean": 0.4796,
+     "median": 0.4686,
+     "p25": 0.3704,
+     "p75": 0.5651,
+     "std": 0.1619
+    },
+    "fp_MAX": {
+     "n": 6743,
+     "mean": 0.5698,
+     "median": 0.5373,
+     "p25": 0.4436,
+     "p75": 0.6548,
+     "std": 0.1782
+    },
+    "missed_gold_MEAN": {
+     "n": 148,
+     "mean": 0.3346,
+     "median": 0.3194,
+     "p25": 0.2636,
+     "p75": 0.3936,
+     "std": 0.1028
+    },
+    "fp_MEAN": {
+     "n": 6743,
+     "mean": 0.4144,
+     "median": 0.4009,
+     "p25": 0.3294,
+     "p75": 0.4874,
+     "std": 0.1171
+    },
+    "missed_gold_MIN": {
+     "n": 148,
+     "mean": 0.2288,
+     "median": 0.2209,
+     "p25": 0.1611,
+     "p75": 0.2788,
+     "std": 0.1036
+    },
+    "fp_MIN": {
+     "n": 6743,
+     "mean": 0.2815,
+     "median": 0.2656,
+     "p25": 0.1965,
+     "p75": 0.3511,
+     "std": 0.1179
+    }
+   },
+   "expert_support_cos_to_selected_top5": {
+    "missed_gold_MAX": {
+     "n": 148,
+     "mean": 0.9115,
+     "median": 0.945,
+     "p25": 0.8475,
+     "p75": 0.9854,
+     "std": 0.0908
+    },
+    "fp_MAX": {
+     "n": 6743,
+     "mean": 0.9508,
+     "median": 0.9875,
+     "p25": 0.9426,
+     "p75": 0.9983,
+     "std": 0.0868
+    },
+    "missed_gold_MEAN": {
+     "n": 148,
+     "mean": 0.696,
+     "median": 0.6959,
+     "p25": 0.5725,
+     "p75": 0.8517,
+     "std": 0.1727
+    },
+    "fp_MEAN": {
+     "n": 6743,
+     "mean": 0.836,
+     "median": 0.8745,
+     "p25": 0.7703,
+     "p75": 0.9384,
+     "std": 0.1395
+    }
+   },
+   "argmax_expert_overlap": {
+    "missed_gold": {
+     "n": 148,
+     "mean": 0.2027,
+     "median": 0.2,
+     "p25": 0.0,
+     "p75": 0.4,
+     "std": 0.1692
+    },
+    "fp": {
+     "n": 6743,
+     "mean": 0.3672,
+     "median": 0.4,
+     "p25": 0.2,
+     "p75": 0.4,
+     "std": 0.1555
+    }
+   },
+   "effect_sizes_cohend_mg_minus_fp": {
+    "qwen_MAX_sim": -0.5074,
+    "support_MAX_cos": -0.4527
+   },
+   "query_conditioned_paired": {
+    "n_queries_with_both": 134,
+    "mean_missedgold_qmax": 0.4869,
+    "mean_fp_qmax": 0.6581,
+    "mean_paired_diff_mg_minus_fp": -0.1712,
+    "frac_queries_missedgold_more_novel": 0.7836,
+    "paired_diff_ci95": [
+     -0.2073,
+     -0.1355
+    ],
+    "paired_diff_significant": true
+   },
+   "_hyp": "missed golds MORE novel than FPs => lower qwen_MAX_sim => NEGATIVE cohend & paired diff"
+  }
+ },
+ "MULTIGOLD_BREAKDOWN_C8c_C9DEV": {
+  "1": {
+   "n": 79,
+   "recall5": 1.0,
+   "all5": 1.0,
+   "ndcg5": 0.9656
+  },
+  "2": {
+   "n": 2448,
+   "recall5": 0.9867,
+   "all5": 0.9734,
+   "ndcg5": 0.9728
+  },
+  "3+": {
+   "n": 776,
+   "recall5": 0.9404,
+   "all5": 0.799,
+   "ndcg5": 0.944
+  }
+ },
+ "SET_ORACLE_C9DEV": {
+  "C8c_top50_recall5": null,
+  "top20_set_oracle": {
+   "recall5": 0.9956,
+   "all5_feasible": 0.9861,
+   "ndcg5": 0.9969
+  },
+  "top50_set_oracle": {
+   "recall5": 0.9969,
+   "all5_feasible": 0.9897,
+   "ndcg5": 0.9979
+  }
+ },
+ "GATE_SET_AWARE_SIGNAL_PRESENT": "YES",
+ "gate_reasoning": "missed golds significantly MORE novel (lower max Qwen sim) than top5 FPs on the query-conditioned paired test and/or |cohend|>=0.15"
+}

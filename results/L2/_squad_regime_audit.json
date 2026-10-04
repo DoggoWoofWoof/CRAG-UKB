@@ -1,0 +1,473 @@
+{
+  "_config": {
+    "split": "test",
+    "note": "parameter-free; canonical test split; NO training/tuning"
+  },
+  "datasets": {
+    "webqsp": {
+      "audit": {
+        "n_queries": 147,
+        "pool_size": {
+          "mean": 1184.9,
+          "median": 1108.0,
+          "p95": 2028.1
+        },
+        "golds_per_query": 10.98,
+        "candidate_pool_gold_recall": 0.882,
+        "coop_baseline": {
+          "R@1": 11.86,
+          "R@5": 35.69,
+          "R@20": 54.53
+        },
+        "per_expert": {
+          "dense": {
+            "avail_pct": 1.0,
+            "R@1": 2.82,
+            "R@5": 9.46,
+            "R@20": 21.11,
+            "mean_gold_rank": 219.94,
+            "median_gold_rank": 196.5,
+            "top1_nongold": 0.946
+          },
+          "offset": {
+            "avail_pct": 1.0,
+            "R@1": 18.85,
+            "R@5": 39.3,
+            "R@20": 54.34,
+            "mean_gold_rank": 68.18,
+            "median_gold_rank": 9.0,
+            "top1_nongold": 0.66
+          },
+          "splade": {
+            "avail_pct": 1.0,
+            "R@1": 4.85,
+            "R@5": 10.48,
+            "R@20": 19.36,
+            "mean_gold_rank": 269.09,
+            "median_gold_rank": 168.0,
+            "top1_nongold": 0.925
+          },
+          "relation": {
+            "avail_pct": 1.0,
+            "R@1": 12.78,
+            "R@5": 26.37,
+            "R@20": 38.96,
+            "mean_gold_rank": 35.9,
+            "median_gold_rank": 9.5,
+            "top1_nongold": 0.844
+          },
+          "path": {
+            "avail_pct": 1.0,
+            "R@1": 3.65,
+            "R@5": 9.76,
+            "R@20": 18.09,
+            "mean_gold_rank": 38.2,
+            "median_gold_rank": 19.0,
+            "top1_nongold": 0.939
+          }
+        },
+        "dense_vs_splade": {
+          "disagree_top1": 0.81,
+          "both_correct": 0.034,
+          "dense_only_correct": 0.02,
+          "splade_only_correct": 0.041,
+          "both_wrong": 0.905
+        }
+      },
+      "shapley": {
+        "rank": {
+          "per_expert": {
+            "dense": {
+              "shapley": 0.1573,
+              "cond_pos": 0.225,
+              "cond_neg": 0.602
+            },
+            "offset": {
+              "shapley": 0.2491,
+              "cond_pos": 0.646,
+              "cond_neg": 0.216
+            },
+            "splade": {
+              "shapley": 0.1542,
+              "cond_pos": 0.264,
+              "cond_neg": 0.568
+            },
+            "relation": {
+              "shapley": 0.2121,
+              "cond_pos": 0.41,
+              "cond_neg": 0.432
+            },
+            "path": {
+              "shapley": 0.1784,
+              "cond_pos": 0.285,
+              "cond_neg": 0.546
+            }
+          },
+          "interaction": {
+            "dense+offset": -0.211,
+            "dense+splade": -0.1885,
+            "dense+relation": -0.2034,
+            "dense+path": -0.1888,
+            "offset+splade": -0.1981,
+            "offset+relation": -0.2688,
+            "offset+path": -0.2271,
+            "splade+relation": -0.2077,
+            "splade+path": -0.1724,
+            "relation+path": -0.1711
+          }
+        },
+        "R5": {
+          "per_expert": {
+            "dense": {
+              "shapley": 0.0049,
+              "cond_pos": 0.046,
+              "cond_neg": 0.085
+            },
+            "offset": {
+              "shapley": 0.1958,
+              "cond_pos": 0.337,
+              "cond_neg": 0.021
+            },
+            "splade": {
+              "shapley": 0.0152,
+              "cond_pos": 0.057,
+              "cond_neg": 0.079
+            },
+            "relation": {
+              "shapley": 0.1178,
+              "cond_pos": 0.146,
+              "cond_neg": 0.067
+            },
+            "path": {
+              "shapley": 0.0141,
+              "cond_pos": 0.058,
+              "cond_neg": 0.082
+            }
+          },
+          "interaction": {
+            "dense+offset": -0.059,
+            "dense+splade": -0.0166,
+            "dense+relation": -0.0258,
+            "dense+path": -0.0094,
+            "offset+splade": -0.0588,
+            "offset+relation": -0.1054,
+            "offset+path": -0.0673,
+            "splade+relation": -0.0284,
+            "splade+path": -0.0084,
+            "relation+path": -0.0303
+          }
+        }
+      }
+    },
+    "metaqa": {
+      "audit": {
+        "n_queries": 1998,
+        "pool_size": {
+          "mean": 1288.4,
+          "median": 1182.5,
+          "p95": 2366.899999999999
+        },
+        "golds_per_query": 2.82,
+        "candidate_pool_gold_recall": 0.999,
+        "coop_baseline": {
+          "R@1": 12.36,
+          "R@5": 83.04,
+          "R@20": 96.65
+        },
+        "per_expert": {
+          "dense": {
+            "avail_pct": 1.0,
+            "R@1": 2.79,
+            "R@5": 19.43,
+            "R@20": 32.87,
+            "mean_gold_rank": 177.78,
+            "median_gold_rank": 121.5,
+            "top1_nongold": 0.941
+          },
+          "offset": {
+            "avail_pct": 1.0,
+            "R@1": 22.91,
+            "R@5": 59.32,
+            "R@20": 70.87,
+            "mean_gold_rank": 74.09,
+            "median_gold_rank": 2.5,
+            "top1_nongold": 0.717
+          },
+          "splade": {
+            "avail_pct": 1.0,
+            "R@1": 8.22,
+            "R@5": 77.08,
+            "R@20": 88.19,
+            "mean_gold_rank": 65.38,
+            "median_gold_rank": 2.0,
+            "top1_nongold": 0.848
+          },
+          "relation": {
+            "avail_pct": 1.0,
+            "R@1": 13.35,
+            "R@5": 27.13,
+            "R@20": 27.27,
+            "mean_gold_rank": 0.84,
+            "median_gold_rank": 1.0,
+            "top1_nongold": 0.733
+          },
+          "path": {
+            "avail_pct": 0.0,
+            "R@1": 0.0,
+            "R@5": 0.0,
+            "R@20": 0.0,
+            "mean_gold_rank": null,
+            "median_gold_rank": null,
+            "top1_nongold": 0.0
+          }
+        },
+        "dense_vs_splade": {
+          "disagree_top1": 0.225,
+          "both_correct": 0.024,
+          "dense_only_correct": 0.035,
+          "splade_only_correct": 0.128,
+          "both_wrong": 0.813
+        }
+      },
+      "shapley": {
+        "rank": {
+          "per_expert": {
+            "dense": {
+              "shapley": 0.1657,
+              "cond_pos": 0.207,
+              "cond_neg": 0.397
+            },
+            "offset": {
+              "shapley": 0.2328,
+              "cond_pos": 0.469,
+              "cond_neg": 0.133
+            },
+            "splade": {
+              "shapley": 0.2332,
+              "cond_pos": 0.551,
+              "cond_neg": 0.081
+            },
+            "relation": {
+              "shapley": 0.1943,
+              "cond_pos": 0.256,
+              "cond_neg": 0.027
+            },
+            "path": {
+              "shapley": 0.1685,
+              "cond_pos": 0.062,
+              "cond_neg": 0.0
+            }
+          },
+          "interaction": {
+            "dense+offset": -0.204,
+            "dense+splade": -0.2078,
+            "dense+relation": -0.2117,
+            "dense+path": -0.2107,
+            "offset+splade": -0.3182,
+            "offset+relation": -0.2136,
+            "offset+path": -0.2107,
+            "splade+relation": -0.213,
+            "splade+path": -0.2107,
+            "relation+path": -0.2107
+          }
+        },
+        "R5": {
+          "per_expert": {
+            "dense": {
+              "shapley": 0.0229,
+              "cond_pos": 0.092,
+              "cond_neg": 0.142
+            },
+            "offset": {
+              "shapley": 0.2647,
+              "cond_pos": 0.353,
+              "cond_neg": 0.094
+            },
+            "splade": {
+              "shapley": 0.3569,
+              "cond_pos": 0.479,
+              "cond_neg": 0.022
+            },
+            "relation": {
+              "shapley": 0.1561,
+              "cond_pos": 0.208,
+              "cond_neg": 0.003
+            },
+            "path": {
+              "shapley": 0.0036,
+              "cond_pos": 0.003,
+              "cond_neg": 0.0
+            }
+          },
+          "interaction": {
+            "dense+offset": -0.0535,
+            "dense+splade": -0.1281,
+            "dense+relation": -0.0566,
+            "dense+path": -0.0045,
+            "offset+splade": -0.4903,
+            "offset+relation": -0.0252,
+            "offset+path": -0.0045,
+            "splade+relation": -0.0999,
+            "splade+path": -0.0045,
+            "relation+path": -0.0045
+          }
+        }
+      }
+    },
+    "squad_clean": {
+      "audit": {
+        "n_queries": 1982,
+        "pool_size": {
+          "mean": 2112.4,
+          "median": 1990.0,
+          "p95": 3871.6499999999987
+        },
+        "golds_per_query": 1.0,
+        "candidate_pool_gold_recall": 1.0,
+        "coop_baseline": {
+          "R@1": 70.74,
+          "R@5": 91.68,
+          "R@20": 97.02
+        },
+        "per_expert": {
+          "dense": {
+            "avail_pct": 1.0,
+            "R@1": 71.39,
+            "R@5": 88.65,
+            "R@20": 95.11,
+            "mean_gold_rank": 45.61,
+            "median_gold_rank": 0.0,
+            "top1_nongold": 0.286
+          },
+          "offset": {
+            "avail_pct": 1.0,
+            "R@1": 70.43,
+            "R@5": 80.17,
+            "R@20": 87.03,
+            "mean_gold_rank": 40.32,
+            "median_gold_rank": 0.0,
+            "top1_nongold": 0.296
+          },
+          "splade": {
+            "avail_pct": 1.0,
+            "R@1": 72.15,
+            "R@5": 88.65,
+            "R@20": 94.8,
+            "mean_gold_rank": 5.53,
+            "median_gold_rank": 0.0,
+            "top1_nongold": 0.279
+          },
+          "relation": {
+            "avail_pct": 0.0,
+            "R@1": 0.0,
+            "R@5": 0.0,
+            "R@20": 0.0,
+            "mean_gold_rank": null,
+            "median_gold_rank": null,
+            "top1_nongold": 0.0
+          },
+          "path": {
+            "avail_pct": 0.0,
+            "R@1": 0.0,
+            "R@5": 0.0,
+            "R@20": 0.0,
+            "mean_gold_rank": null,
+            "median_gold_rank": null,
+            "top1_nongold": 0.0
+          }
+        },
+        "dense_vs_splade": {
+          "disagree_top1": 0.304,
+          "both_correct": 0.62,
+          "dense_only_correct": 0.094,
+          "splade_only_correct": 0.101,
+          "both_wrong": 0.185
+        }
+      },
+      "shapley": {
+        "rank": {
+          "per_expert": {
+            "dense": {
+              "shapley": 0.2041,
+              "cond_pos": 0.316,
+              "cond_neg": 0.036
+            },
+            "offset": {
+              "shapley": 0.2048,
+              "cond_pos": 0.26,
+              "cond_neg": 0.075
+            },
+            "splade": {
+              "shapley": 0.2162,
+              "cond_pos": 0.332,
+              "cond_neg": 0.039
+            },
+            "relation": {
+              "shapley": 0.1868,
+              "cond_pos": 0.062,
+              "cond_neg": 0.0
+            },
+            "path": {
+              "shapley": 0.1868,
+              "cond_pos": 0.062,
+              "cond_neg": 0.0
+            }
+          },
+          "interaction": {
+            "dense+offset": -0.2552,
+            "dense+splade": -0.2595,
+            "dense+relation": -0.2335,
+            "dense+path": -0.2335,
+            "offset+splade": -0.2621,
+            "offset+relation": -0.2335,
+            "offset+path": -0.2335,
+            "splade+relation": -0.2335,
+            "splade+path": -0.2335,
+            "relation+path": -0.2335
+          }
+        },
+        "R5": {
+          "per_expert": {
+            "dense": {
+              "shapley": 0.3145,
+              "cond_pos": 0.253,
+              "cond_neg": 0.006
+            },
+            "offset": {
+              "shapley": 0.2615,
+              "cond_pos": 0.208,
+              "cond_neg": 0.014
+            },
+            "splade": {
+              "shapley": 0.3301,
+              "cond_pos": 0.272,
+              "cond_neg": 0.009
+            },
+            "relation": {
+              "shapley": 0.0043,
+              "cond_pos": 0.001,
+              "cond_neg": 0.0
+            },
+            "path": {
+              "shapley": 0.0043,
+              "cond_pos": 0.001,
+              "cond_neg": 0.0
+            }
+          },
+          "interaction": {
+            "dense+offset": -0.4159,
+            "dense+splade": -0.4482,
+            "dense+relation": -0.0054,
+            "dense+path": -0.0054,
+            "offset+splade": -0.3846,
+            "offset+relation": -0.0054,
+            "offset+path": -0.0054,
+            "splade+relation": -0.0054,
+            "splade+path": -0.0054,
+            "relation+path": -0.0054
+          }
+        }
+      }
+    }
+  }
+}

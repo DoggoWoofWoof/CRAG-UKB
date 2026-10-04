@@ -1,0 +1,191 @@
+{
+ "stage": "FBX_SCALE / addendum 4: rung 4 (hypergraph-aware multilevel partitioner ML_S), stage 4A on WebQSP, declared and built before it is scored",
+ "declared": "2026-09-30T15:26:06+05:30",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_3.json": "23b186b9c631541af5fa45e7236c20937209cd7d2aa8971aeaaaccff31a883a3"
+ },
+ "status": "DEVELOPMENT (calibration of a systems substrate); nothing here selects a retrieval mechanism",
+ "user_ruling_2026-09-30": {
+  "decision": "\"Proceed to rung 4 as the final recall-preservation attempt.\" (option B), with a tight scope: NOT \"days of PHG at every Freebase K\"",
+  "sequence": [
+   "4A: a hypergraph-aware multilevel prototype on WebQSP only; compare it against canonical PHG under the exact existing gate; do not touch Freebase",
+   "4A passes -> 4B: build Freebase K = 1000 first (RAM, build time, disk, balance, cut and neighbourhood spread), and only if feasible continue progressively to 2k / 5k / 10k / 20k",
+   "4A fails -> \"Freebase recall-preserving low-memory partitioning = unresolved\": the lane is closed as a measured negative.  \"No rung 5. No more heuristic search.\""
+  ],
+  "input_graph": "the canonical structural input exactly as the lane defines it; the two relations carrying 68 % of the edges are NOT removed or down-weighted: \"same graph semantics, different scalable partitioning algorithm\"",
+  "method_requirement": "NOT a cheap-LP coarse layer followed by a per-part PHG: the coarse level itself must be hypergraph-aware (hypergraph-aware coarsening -> a much smaller hypergraph -> PHG / balanced partition -> uncoarsen + refinement)",
+  "threshold_wording": "the ruling states the target as loss <= 24 / 786 rows at every gate cell; addendum 1's rule (PASS <= 7, BORDERLINE 8-23 reported to the user, FAIL >= 24) is kept unchanged: the FAIL boundary coincides, and 8-23 is reported to the user with its numbers instead of being counted as a pass"
+ },
+ "disclosure_of_what_was_read_first": {
+  "addendum_3_verdict": "the four cheap rungs FAILED the gate (hash 411, LDG_S 181, LP_S 156, CN_S 128 rows; records results/FREEBASE_SCALE/CALIB_EVAL_WEBQSP__v1.json, results/FREEBASE_SCALE/CALIB_EVAL_WEBQSP__cn_v1.json)",
+  "coarsening_probe": "before this addendum, a STRUCTURE-ONLY probe of the coarsener (laptop, no gold row, no recall) was run with the parameters below: open-twin contraction 2,592,894 -> 1,136,091 vertices (pins 14,357,896 -> 9,347,505, 1.54x); three agglomeration passes -> 115,105 vertices, 5,438,199 unsplit pins (2.64x of the fine pins); the pass stack stopped because a pass removed 0.9 % (< 5 %) of the vertices, not because the pin target was reached.  The parameters were fixed before this probe and were not changed after it.",
+  "control_PHG_S_full_EVAL": "the frozen PHG on the STRUCT-only hypergraph (H4_S, NP 4, four K) was scored under the gate BEFORE this addendum: record results/FREEBASE_SCALE/CALIB_EVAL_WEBQSP__phgs_v1.json (sha256 20f50346bd502f6ddd929ee6a4433f723675519675de4b6bbb4fd2ca3b3ffa40).  PHG_S FAILS the addendum-1 gate against PHG on H4_SK: max loss 59 rows (rows below PHG at matched B_P, by B_N 100/250/500/1000/2000/5000: K100 [17, 29, 33, 46, 55, 59], K250 [0, 12, 17, 28, 33, 31], K500 [1, 7, 13, 21, 26, 26]).  The gate compares graph-S maps with maps built on S u KNN; the frozen partitioner on S alone does not pass it, so a graph-S method can pass it only by beating PHG on S.",
+  "cluster_map": "the K-independent cluster map was built before scoring (record results/FREEBASE_SCALE/ml/webqsp__ML_S__clusters.RUN.json, sha256 f22033f5c74060d5c8f8a91d3901e4b1f04f188f1eca19cb7912c07f160f36b8): structure only",
+  "cells_structure_read": "the ML_S cells (K 100 250 500 1000) were built before this addendum; their STRUCTURE was read (coarse sizes, KM1, blocks per net, sizes, seconds, RSS; below), recall was not.  K = 1000 came out PARTITION_INVALID (see cost_read); the gate cells K 100 / 250 / 500 are valid.",
+  "driver_regression": "phg_driver_vw on a unit-weight manifest reproduces the frozen driver's partition exactly (results/FREEBASE_SCALE/ml/ML_DRIVER_REGRESSION.json, PASS)",
+  "variant_count": "ML_S is the fifth partitioner scored on the same 786 split-A rows (hash, LDG, LP, CN, ML_S) and is counted, not hidden.  No held-out row is read (split B sealed, TEST unread).  Its parameters were fixed before it was built and are not tuned afterwards; per the ruling there is no re-parameterisation and no rung 5."
+ },
+ "ML_S_definition": {
+  "graph": "S = the STRUCT family of the canonical webqsp substrate (unchanged; all relations kept; no down-weighting).  Freebase would use the same (it has no KNN family)",
+  "fine_hypergraph": "H4_S = the frozen builder (src/l1_canonical/hypergraph.py, H4_SPLIT_PRESERVE, cap = round(N / K), weight max(1, rint(1000 / (|e| - 1)))) on STRUCT only: the SAME hypergraph semantics as the frozen PHG_SK, without the KNN nets",
+  "coarsening": {
+   "description": "a vertex clustering; the coarse hypergraph is the exact quotient of the fine one (pins mapped to clusters, duplicate pins removed, single-pin nets dropped, identical nets merged with their weights summed, vertex weight = cluster size).  For any partition of the clusters the weighted KM1 of the quotient equals the weighted KM1 of the fine hypergraph under the projected partition (TESTML checks it; every cell asserts it against the Python recomputation)",
+   "operators": [
+    "T: open-twin contraction (vertices with identical open neighbourhoods; verified by comparing the neighbour lists, not only hashes), chunks of at most Wmax",
+    "A: agglomerative heavy-connectivity clustering (_ml_agg.c): a free vertex, visited in ascending (weight, id), joins the cluster with the largest sum over shared nets (2 <= |e| <= Lmax) of w_e / (|e| - 1) among clusters with weight + its weight <= Wmax; repeated on the quotient"
+   ],
+   "parameters": {
+    "Wmax": 32,
+    "Lmax": 200,
+    "R": 10.0,
+    "MAXLEVELS": 8,
+    "MIN_GAIN": 0.05,
+    "twins": "open"
+   },
+   "stop": "pins <= fine pins / R, or a pass removes < MIN_GAIN of the vertices, or MAXLEVELS passes",
+   "verification": "scratchpad/_ml_coarsen.py TESTML: the C pass equals the plain-Python reference bit for bit on four random hypergraphs with uneven vertex weights; the quotient identity holds; open-twin classes are exact",
+   "result": {
+    "clusters": 115105,
+    "cluster_size": {
+     "max": 32,
+     "mean": 22.526,
+     "p50": 29.0,
+     "singletons": 139
+    },
+    "pin_reduction_unsplit": 2.64,
+    "seconds": 57.4,
+    "peak_rss_mb": 1434.0
+   }
+  },
+  "coarse_partition": "the frozen Zoltan PHG driver with vertex weights (src/l1_lowmem/phg_driver/phg_driver_vw.c: the same Zoltan calls, the same 25 parameters, NP = 4; the only change is the vertex-weight input under manifest header 'N M 3'); the balance constraint is on cluster weights (= fine vertex counts)",
+  "uncoarsening": "projection to the fine vertices (an empty block would be repaired by the frozen repair rule, as PHG_S), then the R3b closed-neighbourhood KM1 label propagation on the fine graph, its parameters unchanged from addendum 3 (T = 4, DMAX = 5000, <= 10 sweeps, balance 1.03 / 0.97)",
+  "cost_read": {
+   "100": {
+    "coarse_V": 115105,
+    "coarse_M": 729478,
+    "coarse_P": 5539079,
+    "pin_reduction": 2.592,
+    "phg_coarse_sum_of_rank_peaks_MB": 739.0,
+    "phg_coarse_bytes_per_coarse_pin": 133.4,
+    "phg_S_fine_sum_of_rank_peaks_MB": 2034.1,
+    "phg_S_fine_bytes_per_pin": 148.6,
+    "km1_weighted": {
+     "PHG_S": 263496586,
+     "ML_projection": 277269204,
+     "ML_refined": 276951362
+    },
+    "blocks_per_net_unweighted": {
+     "ML_projection": 1.6676,
+     "ML_refined": 1.6428
+    },
+    "status": "OK"
+   },
+   "250": {
+    "coarse_V": 115105,
+    "coarse_M": 729535,
+    "coarse_P": 5625413,
+    "pin_reduction": 2.552,
+    "phg_coarse_sum_of_rank_peaks_MB": 743.0,
+    "phg_coarse_bytes_per_coarse_pin": 132.1,
+    "phg_S_fine_sum_of_rank_peaks_MB": 1921.9,
+    "phg_S_fine_bytes_per_pin": 140.4,
+    "km1_weighted": {
+     "PHG_S": 299528103,
+     "ML_projection": 311226114,
+     "ML_refined": 312365571
+    },
+    "blocks_per_net_unweighted": {
+     "ML_projection": 1.7966,
+     "ML_refined": 1.7691
+    },
+    "status": "OK"
+   },
+   "500": {
+    "coarse_V": 115105,
+    "coarse_M": 729671,
+    "coarse_P": 5704402,
+    "pin_reduction": 2.517,
+    "phg_coarse_sum_of_rank_peaks_MB": 745.7,
+    "phg_coarse_bytes_per_coarse_pin": 130.7,
+    "phg_S_fine_sum_of_rank_peaks_MB": 1981.8,
+    "phg_S_fine_bytes_per_pin": 144.7,
+    "km1_weighted": {
+     "PHG_S": 330759543,
+     "ML_projection": 366070158,
+     "ML_refined": 367008684
+    },
+    "blocks_per_net_unweighted": {
+     "ML_projection": 1.9637,
+     "ML_refined": 1.9338
+    },
+    "status": "OK"
+   },
+   "1000": {
+    "coarse_V": 115105,
+    "coarse_M": 730007,
+    "coarse_P": 5790018,
+    "pin_reduction": 2.48,
+    "phg_coarse_sum_of_rank_peaks_MB": 762.0,
+    "phg_coarse_bytes_per_coarse_pin": 131.6,
+    "phg_S_fine_sum_of_rank_peaks_MB": 1922.9,
+    "phg_S_fine_bytes_per_pin": 140.4,
+    "km1_weighted": {
+     "PHG_S": 398394755,
+     "ML_projection": 421752942,
+     "ML_refined": null
+    },
+    "blocks_per_net_unweighted": {
+     "ML_projection": 2.1799,
+     "ML_refined": null
+    },
+    "status": "PARTITION_INVALID",
+    "invalid_reason": {
+     "max_block_after_projection": 2687,
+     "contract_bound_ceil_1.03_N_over_K": 2671,
+     "zoltan_imbalance_on_cluster_weights": 1.036294,
+     "empty_blocks_repaired_before_projection_check": [
+      749,
+      874,
+      937,
+      982,
+      994,
+      996
+     ],
+     "record": "results/FREEBASE_SCALE/ml/webqsp__ML_S_k1000.FAILED.json",
+     "record_sha256": "2f6f81d548223f4616a40115b377b34cde29f5e32d6b052b4e2c750b83720c36",
+     "consequence": "no ML_S map exists at K = 1000: PARTITION_INVALID under the same validity contract every method meets (Zoltan reported imbalance 1.036 on the cluster weights, i.e. above its 1.03 tolerance, and 6 blocks came out empty).  Cluster granularity (up to 32 vertices per cluster against ~2,593 per block) is the likely cause and is NOT tested.  K = 1000 is a diagnostic cell outside the gate and enters no verdict; no parameter is changed in response"
+    }
+   }
+  }
+ },
+ "gate (unchanged from addendum 1)": "gate cells K in {100, 250, 500}, graph S, every B_N in {100, 250, 500, 1000, 2000, 5000}; rows below the reference's ALL count at matched B_P: <= 7 PASS, >= 24 FAIL (or B_P = K on more than half the rows), else BORDERLINE.  K = 1000 is a diagnostic and does not enter a verdict (ML_S has no valid K = 1000 map; PHG and PHG_S are scored there).",
+ "scoring_run": "ONE EVAL (scratchpad/_ml_eval.py EVAL) on the v1 bundle: methods PHG (the seven H4_SK maps; the gate's reference), PHG_S (control), ML_S (the candidate), ML_S_proj (the projection before the LP; diagnostic); modes own / matched (B_P = PHG's own B_P: THE GATE) / matchedS (B_P = PHG_S's own B_P: the same-graph reference).  Before it writes anything, every PHG and PHG_S cell must equal the control EVAL npz bit for bit, or the run aborts.",
+ "two_verdicts": {
+  "THE_GATE": "ML_S vs PHG (H4_SK), matched B_P: exactly addendum 1",
+  "SAME_GRAPH": "ML_S vs PHG_S (the frozen partitioner on the same graph and hypergraph semantics), matched to PHG_S's own B_P, the same cells and thresholds; the ruling's phrase 'same graph semantics, different scalable partitioning algorithm'.  Diagnostic role of the control: it is what the S arm can reach when the partitioner is the frozen one."
+ },
+ "decision_table": {
+  "THE_GATE = RECALL_PRESERVING": "4A PASSES; the SAME_GRAPH verdict is reported beside it",
+  "THE_GATE not PASS and SAME_GRAPH = RECALL_PRESERVING": "the two readings DISAGREE (the gate cannot be passed on S even by the frozen partitioner; recorded above before scoring): reported to the user as BORDERLINE with both tables; NO lane closure and NO Freebase build until the user rules",
+  "SAME_GRAPH = BORDERLINE (either THE_GATE state)": "reported to the user; no closure, no Freebase build",
+  "SAME_GRAPH = FAILED (>= 24 rows below PHG_S at some gate cell)": "4A FAILS under both readings: 'Freebase recall-preserving low-memory partitioning = unresolved', the lane is closed as a measured negative, no rung 5, no re-parameterisation; the numbers are the systems conclusion (cheap O(N) graph partitioners preserve cut, not neighbourhood locality; the hypergraph-aware multilevel construction ... as measured)"
+ },
+ "freebase_feasibility_rule_if_4A_passes": "4B is attempted only if the projected peak memory fits: (Freebase STRUCT pins 4,253,534,391 / the pin reduction the coarsener reaches on Freebase) x (bytes per coarse pin measured on WebQSP, table above) must be <= 0.9 x the 81.6 GB available to the crag lane.  The Freebase coarsening itself (structure only, bounded memory) is the first 4B step and MEASURES the pin reduction there; if the projection exceeds the budget the verdict is FBX_ML_PHG_PREDICTED_INFEASIBLE_ON_HOST and it is not attempted (an out-of-memory would endanger the shared host; precedent: section 46).  Rungs 1-3b stay available only as the systems-measurement fallback the user described (recall stated as degraded).",
+ "code_pinned": {
+  "scratchpad/_ml_agg.c": "69b74ce2aecfc1e6e9a3449b6f8ca63d906dc75fae199733070b53c8fda247ef",
+  "scratchpad/_ml_coarsen.py": "19ad42f5ac74dcfe6384c1d34d2d9821fec6b75cc1202c8d5fd9723f31ee3978",
+  "scratchpad/_ml_run.py": "7f98670670d437712d1f6c81863752d3eef841ac02aa576441ff490372766e26",
+  "scratchpad/_ml_eval.py": "10352ad12b54d1e6f35e77a97389973ec7482f59fb5c053b50a98ad59f05c6c7",
+  "src/l1_lowmem/phg_driver/phg_driver_vw.c": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4",
+  "scratchpad/_fbx_cn.c": "4c8aaa6dd4beba6020d616e170d979d3abdf95a5d6822426a09311bdda047477",
+  "scratchpad/_fbx_cn.py": "055c1fecbe0b8ab2a06e94ae885cd7b282818f217172c7038daac7695077300e"
+ },
+ "records_pinned": {
+  "results/FREEBASE_SCALE/CALIB_EVAL_WEBQSP__phgs_v1.json": "20f50346bd502f6ddd929ee6a4433f723675519675de4b6bbb4fd2ca3b3ffa40",
+  "results/FREEBASE_SCALE/ml/webqsp__ML_S__clusters.RUN.json": "f22033f5c74060d5c8f8a91d3901e4b1f04f188f1eca19cb7912c07f160f36b8",
+  "results/FREEBASE_SCALE/ml/ML_DRIVER_REGRESSION.json": "9375fca3ed69f3fcf28bb2ca650292f7aba98f38e6728b7792b95879db2cdc50",
+  "results/FREEBASE_SCALE/ml/ML_DRIVER_BUILD.json": "a8cec35a0cc5fedfba5b1b6d1b0ec0599a7f773167fd5fd3123a490b133647df"
+ }
+}

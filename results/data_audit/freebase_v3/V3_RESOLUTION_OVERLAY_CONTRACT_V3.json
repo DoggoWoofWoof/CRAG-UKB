@@ -1,0 +1,45 @@
+{
+ "schema": "RESOLUTION_OVERLAY_CONTRACT/v3",
+ "name": "CRAG_FREEBASE_RESOLUTION_OVERLAY_V1",
+ "generated_utc": "2026-09-07T00:00:00Z",
+ "status": "AMENDMENT",
+ "amends": "V3_RESOLUTION_OVERLAY_CONTRACT_V2.json (v2), which amends V3_RESOLUTION_OVERLAY_CONTRACT.json (v1)",
+ "amendment_rule": "v1 and v2 are NOT edited. Contract changes are recorded as a new document so the superseded text stays readable, per the standing rule that an amendment never overwrites the record it amends.",
+
+ "WHY_THIS_AMENDMENT_EXISTS": "The first complete build of the overlay covered all 301,977,131 nodes with NAKED_MID_DISPLAY = 0 but DISPLAY_NAME_EMPTY = 20. The 20 were not a defect in the tier logic; they were three real properties of the source that the contract had not spoken to. This document states the rule for each, so the zero-opaque invariant is defined rather than merely observed.",
+
+ "BLANK_IS_NOT_A_NAME": {
+  "rule": "A display_name is blank if it is empty OR consists only of whitespace. Blankness is tested after Unicode whitespace trimming, so U+3000 IDEOGRAPHIC SPACE and U+00A0 NO-BREAK SPACE count as blank exactly like U+0020.",
+  "consequence_for_FREEBASE_CURRENT_EXACT": "A type.object.name whose value is pure whitespace is NOT a name and no longer qualifies for this tier. Such a node falls through to the structural tiers like any other unnamed node. Exactly 1 node in the corpus is affected: m.011q6t0v, whose Freebase name is a single space.",
+  "superseded": "v1 and v2 implied the test was non-empty. It is non-blank."
+ },
+
+ "BLANK_LITERALS": {
+  "population": "17 LITERAL nodes whose lexical form is pure whitespace, including the empty string itself, single and repeated spaces, newline runs, CR/LF, U+3000 and U+00A0.",
+  "rule": "These are real, distinct nodes: literal identity is (lexical_form, datatype, language_tag), so a literal whose value is two spaces is a different node from one whose value is three. They are rendered as an exact escaped description of the value -- '(empty string)' for the empty string, '(whitespace: <escaped>)' otherwise, using Python ascii() escaping -- rather than published blank.",
+  "tier": "stays LITERAL_SELF, confidence 1.0, is_original_name true.",
+  "why_the_tier_is_unchanged": "Nothing is inferred or invented. The value is known exactly and is shown losslessly in escaped form; the escaping is a rendering concern, the same concern that governs any control character in any literal. The node's identity and value are still entirely source-derived.",
+  "reader_caveat": "For these 17 nodes the display_name is a description OF the value, not the value itself. Any consumer needing the raw lexical form must read the frozen node table, which is unchanged."
+ },
+
+ "DEGENERATE_URIS": {
+  "population": "2 EXTERNAL_URI nodes, http://www. and http://www./, whose host label is empty so the URI renderer has nothing to render.",
+  "rule": "When uri_render.render returns blank, display_name falls back to the raw URI string, which is itself self-describing and is not an opaque identifier.",
+  "tier": "stays URI_DERIVED."
+ },
+
+ "FINAL_BLANK_GUARANTEE": {
+  "rule": "After every tier has run, any display_name still blank is replaced with 'Unnamed Freebase node' and its source is set to STRUCTURAL_FALLBACK (confidence 0.0, is_original_name false).",
+  "why": "The zero-opaque invariant is now enforced BY CONSTRUCTION rather than by every tier happening to emit text. A future tier that returns an empty string can no longer silently reintroduce a blank display_name; it can only increase the STRUCTURAL_FALLBACK count, which is reported.",
+  "reported_as": "blank_caught_by_final_guarantee in the build record. This number is expected to be 0 now that the three causes above are handled; a non-zero value is a signal to investigate, not a silent repair."
+ },
+
+ "WHAT_THIS_DOES_NOT_CHANGE": [
+  "the frozen graph: 301,977,131 nodes / 2,062,430,072 edges, manifest hash 6672dab172cf5dde79c56685153d4e257be3527b5ee93b07514ad2f40425c5fb, read but never written",
+  "the display_name_source enum, its confidences, or its is_original_name mapping",
+  "the tier precedence recorded in v2",
+  "the corrected FREEBASE_KEY_EXACT sizing recorded in v2 (369,104 readable keys, 12.05% of key-bearing nodes)"
+ ],
+
+ "HONESTY_RULE_RESTATED": "Zero opaque nodes is an OPERATIONAL claim: CRAG never displays a bare MID or a blank. It is NOT a claim that every original Freebase name was recovered. AUTHORITATIVE_SOURCE_RESOLUTION and STRUCTURAL must always be quoted together."
+}

@@ -1,0 +1,189 @@
+{
+  "_config": {
+    "datasets": [
+      "webqsp",
+      "metaqa"
+    ],
+    "heldout": null,
+    "arms": [
+      "A_kl_mlp",
+      "B_xgbctrl_mlp",
+      "C_kl_xgbrank",
+      "D_xgbctrl_xgbrank",
+      "E_direct_xgbrank"
+    ],
+    "epochs": 1,
+    "seeds": 1,
+    "p_drop": 0.2,
+    "lam": 1.0,
+    "neg_cap": 150,
+    "note": "in-dist (target in training) + optional transfer sanity on heldout (never trained)."
+  },
+  "oracle": {
+    "webqsp": {
+      "standalone_R@5": {
+        "dense": 9.48,
+        "offset": 43.07,
+        "splade": 10.61,
+        "relation": 24.39,
+        "path": 8.39
+      },
+      "semantic_anchor_R@5": 9.93,
+      "per_query_expert_oracle_R@5": 59.38,
+      "n": 147
+    },
+    "metaqa": {
+      "standalone_R@5": {
+        "dense": 19.43,
+        "offset": 59.34,
+        "splade": 77.11,
+        "relation": 27.16
+      },
+      "semantic_anchor_R@5": 62.84,
+      "per_query_expert_oracle_R@5": 91.47,
+      "n": 1998
+    }
+  },
+  "results": {
+    "A_kl_mlp": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            51.6,
+            0.0
+          ],
+          "R@20": [
+            65.09,
+            0.0
+          ],
+          "R@50": [
+            76.43,
+            0.0
+          ],
+          "Hit@5": [
+            69.39,
+            0.0
+          ],
+          "Hit@50": [
+            91.84,
+            0.0
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            75.39,
+            0.0
+          ],
+          "R@20": [
+            90.22,
+            0.0
+          ],
+          "R@50": [
+            95.56,
+            0.0
+          ],
+          "Hit@5": [
+            87.94,
+            0.0
+          ],
+          "Hit@50": [
+            98.8,
+            0.0
+          ]
+        }
+      }
+    },
+    "B_xgbctrl_mlp": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            50.34,
+            0.0
+          ],
+          "R@20": [
+            66.08,
+            0.0
+          ],
+          "R@50": [
+            75.48,
+            0.0
+          ],
+          "Hit@5": [
+            69.39,
+            0.0
+          ],
+          "Hit@50": [
+            91.16,
+            0.0
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            73.62,
+            0.0
+          ],
+          "R@20": [
+            87.75,
+            0.0
+          ],
+          "R@50": [
+            94.01,
+            0.0
+          ],
+          "Hit@5": [
+            85.64,
+            0.0
+          ],
+          "Hit@50": [
+            97.95,
+            0.0
+          ]
+        }
+      }
+    }
+  },
+  "importance": {
+    "B_xgbctrl_mlp": {
+      "dense": {
+        "avail[splade]": 4.78,
+        "avail[offset]": 2.96,
+        "avail[dense]": 1.72,
+        "entropy[splade]": 0.57,
+        "avail[relation]": 0.47,
+        "margin[splade]": 0.11
+      },
+      "offset": {
+        "avail[offset]": 37.84,
+        "margin[offset]": 1.28,
+        "agree[relation]": 0.35,
+        "entropy[offset]": 0.33,
+        "agree[offset]": 0.3,
+        "avail[splade]": 0.27
+      },
+      "splade": {
+        "avail[path]": 3.1,
+        "avail[offset]": 2.22,
+        "avail[dense]": 1.96,
+        "avail[splade]": 1.0,
+        "agree[splade]": 0.42,
+        "entropy[relation]": 0.25
+      },
+      "relation": {
+        "avail[path]": 2.6,
+        "avail[offset]": 0.99,
+        "agree[relation]": 0.56,
+        "entropy[relation]": 0.19,
+        "margin[offset]": 0.13,
+        "avail[dense]": 0.12
+      },
+      "path": {
+        "avail[path]": 0.68,
+        "avail[offset]": 0.58,
+        "agree[relation]": 0.2,
+        "agree[path]": 0.13,
+        "margin[offset]": 0.1,
+        "entropy[relation]": 0.09
+      }
+    }
+  }
+}

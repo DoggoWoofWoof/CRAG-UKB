@@ -1,0 +1,133 @@
+{
+ "generated": "2026-09-05",
+ "purpose": "Step 4 of the user's SKN large-corpus promotion gate: A=SK+FULL_C(shipped online), B=SK+STRUCT_ONLY(online), C=SKN+FULL_C(online), D=SKN+STRUCT_ONLY(online) -- ALL_REQUIRED_FETCHED accuracy, McNemar significance, latency, candidate volume, build+partition cost, for all 6 corpora.",
+ "definitions": {
+  "A_SK_FULL_C": "shipped-today mechanism: SK partition (STRUCT+KNN hyperedges only), online SP1+FULL_C halo serving",
+  "B_SK_STRUCT_ONLY": "SK partition, but online serving restricted to STRUCT-only halo (tests whether FULL_C's online richness is earning its cost under the CURRENT partition)",
+  "C_SKN_FULL_C": "SKN partition (STRUCT+KNN+NER hyperedges), same FULL_C online serving as shipped (tests whether the richer OFFLINE partition alone helps, serving mechanism unchanged)",
+  "D_SKN_STRUCT_ONLY": "SKN partition + STRUCT-only online serving (the maximally-simplified architecture: richer offline partitioning does all the work, online path is cheapest possible)",
+  "C_vs_A": "does swapping ONLY the offline partition family (SK->SKN), same online mechanism, change accuracy?",
+  "D_vs_B": "same swap, but under STRUCT-only online serving",
+  "D_vs_A_ARCH": "the architecture question: does SKN+STRUCT-only(cheapest) match SK+FULL_C(shipped)? identical to SKN_E3-vs-SK_E2 in P12_ARCH_COMPARISON_*.json",
+  "B_vs_A_online_cost_baseline": "under the UNCHANGED SK partition, what does dropping to STRUCT-only online serving cost by itself? (isolates the online-serving-mode effect from the partition-family effect)"
+ },
+ "per_corpus": {
+  "metaqa": {
+   "A_SK_FULL_C": 0.8669, "B_SK_STRUCT_ONLY": 0.8574, "C_SKN_FULL_C": 0.8674, "D_SKN_STRUCT_ONLY": 0.8649,
+   "C_vs_A": {"delta": 0.0005, "p": 1.0, "gained": 25, "lost": 24, "sig": false},
+   "D_vs_B": {"delta": 0.0075, "p": 0.0534, "gained": 34, "lost": 19, "sig": false},
+   "D_vs_A_ARCH": {"delta": -0.002, "p": 0.678, "gained": 24, "lost": 28, "sig": false},
+   "B_vs_A_online_cost_baseline": {"delta": -0.0095, "p": 6.6e-05, "gained": 2, "lost": 21, "sig": true},
+   "floor": 0.0021,
+   "latency_ms": {"A": 104.556, "B": 66.002, "C": 107.339, "D": 82.804},
+   "candidates": {"A": 22700.14, "B": 16477.65, "C": 21997.0, "D": 16158.04},
+   "BUILD": {
+    "SK": {"hyperedges": 78612, "pins": 407986, "weight_sum": 37635725},
+    "SKN": {"hyperedges": 118009, "pins": 1031199, "weight_sum": 49936959}
+   },
+   "PARTITION": {
+    "SK": {"peak_rss_mb": null, "wall_seconds": null, "npz_bytes": 1133275},
+    "SKN": {"peak_rss_mb": 594.4, "wall_seconds": 111.6, "npz_bytes": 2722330}
+   }
+  },
+  "squad_clean": {
+   "A_SK_FULL_C": 0.9955, "B_SK_STRUCT_ONLY": 0.9955, "C_SKN_FULL_C": 0.995, "D_SKN_STRUCT_ONLY": 0.995,
+   "C_vs_A": {"delta": -0.0005, "p": 1.0, "gained": 2, "lost": 3, "sig": false},
+   "D_vs_B": {"delta": -0.0005, "p": 1.0, "gained": 2, "lost": 3, "sig": false},
+   "D_vs_A_ARCH": {"delta": -0.0005, "p": 1.0, "gained": 2, "lost": 3, "sig": false},
+   "B_vs_A_online_cost_baseline": {"delta": 0.0, "p": 1.0, "gained": 0, "lost": 0, "sig": false},
+   "floor": 0.0013,
+   "latency_ms": {"A": 159.793, "B": 137.761, "C": 153.762, "D": 134.36},
+   "candidates": {"A": 11342.97, "B": 8010.24, "C": 11064.19, "D": 8002.25},
+   "BUILD": {
+    "SK": {"hyperedges": 36468, "pins": 1482180, "weight_sum": 6514790},
+    "SKN": {"hyperedges": 51423, "pins": 1788165, "weight_sum": 9011516}
+   },
+   "PARTITION": {
+    "SK": {"peak_rss_mb": null, "wall_seconds": null, "npz_bytes": 752954},
+    "SKN": {"peak_rss_mb": 486.9, "wall_seconds": 23.6, "npz_bytes": 1268017}
+   }
+  },
+  "musique_clean": {
+   "A_SK_FULL_C": 0.981, "B_SK_STRUCT_ONLY": 0.981, "C_SKN_FULL_C": 0.9865, "D_SKN_STRUCT_ONLY": 0.986,
+   "C_vs_A": {"delta": 0.0055, "p": 0.126, "gained": 27, "lost": 16, "sig": false},
+   "D_vs_B": {"delta": 0.005, "p": 0.154, "gained": 25, "lost": 15, "sig": false},
+   "D_vs_A_ARCH": {"delta": 0.005, "p": 0.174, "gained": 27, "lost": 17, "sig": false},
+   "B_vs_A_online_cost_baseline": {"delta": 0.0, "p": 1.0, "gained": 2, "lost": 2, "sig": false},
+   "floor": 0.0029,
+   "latency_ms": {"A": 37.037, "B": 21.757, "C": 35.884, "D": 21.732},
+   "candidates": {"A": 6325.43, "B": 2734.64, "C": 6066.08, "D": 2819.54},
+   "BUILD": {
+    "SK": {"hyperedges": 23578, "pins": 181476, "weight_sum": 8480695},
+    "SKN": {"hyperedges": 35432, "pins": 392642, "weight_sum": 10639699}
+   },
+   "PARTITION": {
+    "SK": {"peak_rss_mb": null, "wall_seconds": null, "npz_bytes": 322349},
+    "SKN": {"peak_rss_mb": 212.3, "wall_seconds": 7.0, "npz_bytes": 648784}
+   }
+  },
+  "2wiki_clean": {
+   "A_SK_FULL_C": 0.9775, "B_SK_STRUCT_ONLY": 0.9775, "C_SKN_FULL_C": 0.9755, "D_SKN_STRUCT_ONLY": 0.976,
+   "C_vs_A": {"delta": -0.002, "p": 0.523, "gained": 9, "lost": 13, "sig": false},
+   "D_vs_B": {"delta": -0.0015, "p": 0.678, "gained": 10, "lost": 13, "sig": false},
+   "D_vs_A_ARCH": {"delta": -0.0015, "p": 0.678, "gained": 10, "lost": 13, "sig": false},
+   "B_vs_A_online_cost_baseline": {"delta": 0.0, "p": 1.0, "gained": 0, "lost": 0, "sig": false},
+   "floor": 0.0025,
+   "latency_ms": {"A": 163.28, "B": 100.634, "C": 197.806, "D": 95.792},
+   "candidates": {"A": 46881.49, "B": 41877.61, "C": 46674.84, "D": 42044.96},
+   "BUILD": {
+    "SK": {"hyperedges": 120689, "pins": 642303, "weight_sum": 48752922},
+    "SKN": {"hyperedges": 175618, "pins": 1743620, "weight_sum": 59259796}
+   },
+   "PARTITION": {
+    "SK": {"peak_rss_mb": null, "wall_seconds": null, "npz_bytes": 1660313},
+    "SKN": {"peak_rss_mb": 898.5, "wall_seconds": 102.4, "npz_bytes": 4351401}
+   }
+  },
+  "webqsp": {
+   "A_SK_FULL_C": 0.9626, "B_SK_STRUCT_ONLY": 0.9591, "C_SKN_FULL_C": 0.9598, "D_SKN_STRUCT_ONLY": 0.9577,
+   "C_vs_A": {"delta": -0.0028, "p": 0.388, "gained": 4, "lost": 8, "sig": false},
+   "D_vs_B": {"delta": -0.0014, "p": 0.774, "gained": 5, "lost": 7, "sig": false},
+   "D_vs_A_ARCH": {"delta": -0.0049, "p": 0.143, "gained": 5, "lost": 12, "sig": false},
+   "B_vs_A_online_cost_baseline": {"delta": -0.0035, "p": 0.0625, "gained": 0, "lost": 5, "sig": false},
+   "floor": 0.0077,
+   "latency_ms": {"A": 1051.139, "B": 530.477, "C": 723.544, "D": 516.797},
+   "candidates": {"A": 207841.75, "B": 199305.29, "C": 203644.9, "D": 195077.96},
+   "BUILD": {
+    "SK": {"hyperedges": 1563830, "pins": 8185424, "weight_sum": 779814636},
+    "SKN": {"hyperedges": 1846019, "pins": 10900573, "weight_sum": 898737386}
+   },
+   "PARTITION": {
+    "SK": {"peak_rss_mb": null, "wall_seconds": null, "npz_bytes": 21045899},
+    "SKN": {"peak_rss_mb": 140563.5, "wall_seconds": 3295.4, "npz_bytes": 27724242}
+   }
+  },
+  "hotpotqa_clean": {
+   "A_SK_FULL_C": 0.985, "B_SK_STRUCT_ONLY": 0.985, "C_SKN_FULL_C": 0.984, "D_SKN_STRUCT_ONLY": 0.984,
+   "C_vs_A": {"delta": -0.001, "p": 0.774, "gained": 5, "lost": 7, "sig": false},
+   "D_vs_B": {"delta": -0.001, "p": 0.791, "gained": 6, "lost": 8, "sig": false},
+   "D_vs_A_ARCH": {"delta": -0.001, "p": 0.774, "gained": 5, "lost": 7, "sig": false},
+   "B_vs_A_online_cost_baseline": {"delta": 0.0, "p": 1.0, "gained": 1, "lost": 1, "sig": false},
+   "floor": 0.0025,
+   "latency_ms": {"A": 2214.66, "B": 1828.064, "C": 2833.134, "D": 3288.619},
+   "candidates": {"A": 453008.55, "B": 449747.1, "C": 458833.66, "D": 455680.25},
+   "BUILD": {
+    "SK": {"hyperedges": 1035917, "pins": 10223111, "weight_sum": 258555148},
+    "SKN": {"hyperedges": 1473739, "pins": 19345663, "weight_sum": 326983849}
+   },
+   "PARTITION": {
+    "SK": {"peak_rss_mb": null, "wall_seconds": null, "npz_bytes": 27825957},
+    "SKN": {"peak_rss_mb": 262818.0, "wall_seconds": 3383.5, "npz_bytes": 52230974}
+   }
+  }
+ },
+ "macro_and_worst": {
+  "C_vs_A": {"macro_delta": -0.0001, "worst_delta": -0.0028, "worst_ds": "webqsp", "any_sig_regression": false, "any_sig_win": false},
+  "D_vs_A_ARCH": {"macro_delta": -0.0008, "worst_delta": -0.0049, "worst_ds": "webqsp", "any_sig_regression": false, "any_sig_win": false},
+  "B_vs_A_online_cost_baseline": {"note": "significant regression on metaqa only (-0.0095, p=6.6e-05) -- STRUCT-only online serving is NOT a free simplification even under the existing SK partition on that corpus; all other 5 corpora tie exactly or near-exactly."}
+ },
+ "latency_ms_D_vs_A_pct_change": {
+  "metaqa": -20.8, "squad_clean": -15.9, "musique_clean": -41.3, "2wiki_clean": -41.3, "webqsp": -50.8, "hotpotqa_clean": 48.5
+ },
+ "note_SK_partition_time_missing": "SK's peak_rss_mb/wall_seconds are null everywhere -- the shipped SK partition predates the stats.json instrumentation convention added for Phase 12; this is an expected historical gap, not new missing data."
+}

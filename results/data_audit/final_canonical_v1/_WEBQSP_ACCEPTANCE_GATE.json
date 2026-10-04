@@ -1,0 +1,633 @@
+{
+  "_what": "Acceptance gate for WEBQSP_ROG_STANDARD. Every field must be POPULATED FROM BUILT ARTIFACTS before webqsp may be called done, and before FULL_CANONICAL_V1 may become LOCKED_6_OF_6_BENCHMARK_SUBSTRATES.",
+  "_authority": "Explicit user checklist, 2026-09-05. Not self-approved. Verbatim field set.",
+  "_status": "PHASES 1,2,4,5,6,7,8 COMPLETE + 2WIKI FIX APPLIED AT SOURCE. PHASE 3 NOT EXECUTED (no Freebase source; reported as a failure per directive). No canonical WebQSP write, no encoder, no kNN, no H4.",
+  "_grading_rule": "Values are DERIVED FROM THE ACQUIRED SOURCE, never hard-coded from the published statistics. A small disagreement with the published counts is acceptable ONLY if the difference is explained and reproducible (serialization or dedup details). Silently falling back to the ~1.30M WebQSP-only union is NOT acceptable and fails the gate outright.",
+  "published_validation_targets": {
+    "entities": 2566291,
+    "relations": 7058,
+    "triples": 8309195,
+    "_note": "Targets to VERIFY AGAINST, not outputs to reproduce by construction."
+  },
+  "checklist": {
+    "SOURCE_REVISION": {
+      "rog_webqsp": "c0632533… (5 shards)",
+      "rog_cwq": "b0f62755… (24 shards: 3 test + 18 train + 3 validation)",
+      "_note": "Both fully verified against HuggingFace LFS sha256. Provenance in results/data_audit/final_canonical_v1/webqsp/ROG_*_SOURCE_PROVENANCE.json"
+    },
+    "SOURCE_HASHES": "RECORDED -- per-shard sha256 verified for all 29 shards",
+    "DERIVED_ENTITY_N": {
+      "value": 2592894,
+      "paper": 2566291,
+      "delta": "+26,603 (+1.04%)",
+      "status": "REPORTED, NOT FORCED"
+    },
+    "DERIVED_RELATION_N": {
+      "value": 7058,
+      "paper": 7058,
+      "delta": 0,
+      "status": "EXACT MATCH"
+    },
+    "DERIVED_TRIPLE_N": {
+      "value": 8309195,
+      "paper": 8309195,
+      "delta": 0,
+      "status": "EXACT MATCH"
+    },
+    "NO_GOLD_INJECTION": true,
+    "NO_TOPIC_INJECTION": true,
+    "NO_TEST_ONLY_GRAPH": {
+      "value": true,
+      "evidence": "WebQSP-only union computed as a component only: 1,298,306 ent / 3,791,303 triples. Reported union is WebQSP union CWQ. Did not fall back."
+    },
+    "QUERY_INDEPENDENT_AT_RUNTIME": "PENDING -- requires the build; audit did not construct a canonical node table",
+    "NODE_ID": {
+      "EXPECTED": "Freebase MID",
+      "ACHIEVABLE": "NOT from RoG alone",
+      "_finding": "Endpoints are 63.74% bare MID, 35.70% resolved surface, 0.56% literal. For named endpoints RoG DISCARDED the MID and nothing in either repo restores it. canonical ID = MID is achievable for only 63.74% of nodes.",
+      "_achievable_pair": "canonical ID = RoG endpoint string (MID where RoG kept one, surface otherwise); canonical text = same string verbatim",
+      "_STATUS": "CONFLICT -- USER DECISION REQUIRED"
+    },
+    "EDGE": {
+      "value": "(source endpoint, relation, target endpoint)",
+      "_note": "Typed relational edges confirmed. 0 malformed arity, 0 null endpoints, 0 dangling endpoints, 93,692 self-loops."
+    },
+    "CONNECTED_COMPONENTS": "PENDING -- requires the build",
+    "LARGEST_COMPONENT_N": "PENDING -- requires the build",
+    "LARGEST_COMPONENT_FRACTION": "PENDING -- requires the build",
+    "ISOLATED_NODES": "PENDING -- requires the build",
+    "CORPUS_HASH": "PENDING -- requires the build",
+    "NODE_ORDER_HASH": "PENDING -- requires the build",
+    "DENSE_REUSE_N": {
+      "reusable": 1299535,
+      "pct": "50.12%",
+      "reencode": 1293359
+    },
+    "SPLADE_REUSE_N": {
+      "reusable": 1302766,
+      "pct": "50.24%",
+      "reencode": 1290128
+    },
+    "NEW_DENSE_N": 1293359,
+    "NEW_SPLADE_N": 1290128
+  },
+  "connectivity_interpretation": "The graph does NOT have to be one connected component. The question the diagnostic answers is whether it is dominated by one giant component or fragmented into many pieces, and we want that answer BEFORE H4.",
+  "text_representation_decision": {
+    "canonical_text": "RoG entity surface string",
+    "scope": "the first benchmark-faithful build",
+    "forbidden": "Do NOT enrich names using WebQSP questions, answers, or gold files.",
+    "bare_mid_policy": "If the surface string is a bare MID, LEAVE IT BARE and report the fraction.",
+    "future_work": "If a query-independent Freebase metadata source is later obtained, compare 'RoG surface text' vs 'Freebase metadata-enriched text' as a SEPARATE REPRESENTATION EXPERIMENT. It must never be a hidden corpus-construction change.",
+    "side_benefit": "Keeping the surface string gives a fair chance of reusing existing Phase-C WebQSP embeddings wherever the token sequence matches exactly."
+  },
+  "status_board": {
+    "_as_of": "2026-09-06",
+    "metaqa": "READY",
+    "2wiki": "READY (TEXTUALIZATION_REV 2, CORPUS_HASH 94fe68b8...); see _2WIKI_TEXTUALIZATION_REV2_2026_09_06 for the hash move",
+    "musique": "READY",
+    "squad": "READY",
+    "hotpotqa": "READY (TEXTUALIZATION_REV 2, CORPUS_HASH 1b7eeac2...); 1,688 dense + 94 SPLADE rows pending feature assembly",
+    "webqsp_rog_standard": "WEBQSP_ROG_MID = UNRESOLVED_SOURCE (lineage audit 2026-09-05). Released RoG discarded the MIDs for named endpoints; next falsifiable lead is the ~1.0 GB NSM webqsp.tgz + CWQ.tgz preimage, NOT ACQUIRED. Next approved phase is WEBQSP_ROG_RESOLVED (graph + entity resolution only, no encoder).",
+    "webqsp_freebase_24m": "WEBQSP_KBQA_24M = PAPER_COMPARABLE_BENCHMARK_CONDITIONED_SUBSTRATE. NOT query-independent: it is PullNet's 2-hop-from-question-entities subset (arXiv:1904.09537 s4.1), i.e. corpus subsetting by query, so it may not support the core query-independent-corpus claim. No downloadable artifact exists. DO NOT ACQUIRE yet.",
+    "webqsp_freebase_scale": "WEBQSP_FREEBASE_SCALE = FUTURE_LANE_NOT_DEFINED -- the only lane that could carry a genuinely query-independent large-scale claim. Not started, no source chosen, no cost approved.",
+    "_lane_detail": "data/final_canonical/webqsp/status.json -> lane_status_2026_09_06"
+  },
+  "2wiki_gold_semantics": {
+    "problem": "NOT corpus coverage. A supporting ref such as \"Unconquered\" maps to {curid_A, curid_B}.",
+    "correct_semantics": "The gold reference is satisfied if EITHER acceptable canonical node is retrieved.",
+    "forbidden_1": "Do NOT require both nodes.",
+    "forbidden_2": "Do NOT test len(gold_node_ids) == len(gold_refs).",
+    "after_source_disambiguation": {
+      "ALL_GOLD_REFS_RESOLVE": true,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": "remaining unresolved ambiguous refs"
+    },
+    "preference": "If all eight resolve uniquely from source provenance, better. If not, disjunctive alternatives are correct.",
+    "INVARIANT": "2wiki CORPUS_HASH must remain 94fe68b8d5f291f1... across any gold-semantics work -- this is evaluation semantics, not corpus membership.",
+    "_INVARIANT_superseded_value": "2wiki CORPUS_HASH must remain 81fa7d1a5d4bbb24... -- this is evaluation semantics, not corpus membership.",
+    "_INVARIANT_REPINNED_2026_09_06": "2wiki CORPUS_HASH was re-pinned 81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1... on 2026-09-06 by TEXTUALIZATION_REV 2 (87,765 empty-text records retextualized to their source-native title). That is a TEXTUALIZATION change, deliberately approved by the user, and is unrelated to gold semantics: NODE_ORDER_HASH, N, node ids and node order are unchanged, and the gold results below were re-verified against the new table. The pre-rev2 value is kept in _superseded_value."
+  },
+  "terminal_status": {
+    "value": "LOCKED_6_OF_6_BENCHMARK_SUBSTRATES",
+    "not": "LOCKED_6_OF_6",
+    "gate": "Set to TRUE only when WebQSP passes every checklist field above.",
+    "methodological_note": "MetaQA / 2Wiki / MuSiQue / SQuAD / Hotpot use complete canonical retrieval universes. WebQSP uses the standard published RoG Freebase benchmark graph. The distinction is explicit and does not weaken the experiment; it makes WebQSP more comparable to actual KGQA literature."
+  },
+  "final_corpus_table": {
+    "metaqa": 43234,
+    "2wiki": 5989847,
+    "musique": 117534,
+    "squad": 20233,
+    "hotpotqa": 5233329,
+    "webqsp": 2566291,
+    "TOTAL": 13970468
+  },
+  "after_lock": {
+    "_rule": "The dataset-design phase is OVER. Stop changing corpus definitions.",
+    "pipeline": [
+      "reuse/assemble Dense + SPLADE",
+      "rebuild global graph structures",
+      "H4_SK at full scale",
+      "frozen L1 replay"
+    ],
+    "why_it_matters": "P50 over ~60k 2Wiki partitions, ~52k Hotpot partitions and ~26k WebQSP graph partitions. This is finally the scale regime L1 was built for."
+  },
+  "_precondition": {
+    "what": "WEBQSP_REPRESENTATION_AUDIT.md must land and be reviewed BEFORE any canonical WebQSP node build, any encoding, or any Freebase metadata download.",
+    "why": "The user's hypothesis is that the official RoG datasets already carry resolved human-readable surface strings on graph endpoints, and that our legacy WebQSP-only builder partially lost or mixed that information. If true, no 22 GB Freebase dump is needed and a large share of the existing 1,316,466 Phase-C rows may be reusable. This is measured, never estimated.",
+    "audit_sections": [
+      "A legacy forensics",
+      "B official RoG endpoint classification",
+      "C temp-only union + derived N/E/R",
+      "D identity-collision safety",
+      "E legacy<->RoG token-level reuse",
+      "F resolution decision"
+    ],
+    "stop_rule": "STOP after the report. No encoding, no H4, no canonical node table.",
+    "third_party_reconstruction_is_diagnostic_only": {
+      "entities": 2574900,
+      "relations": 7042,
+      "triples": 8258891,
+      "_rule": "Cross-check only. Never adopt as canonical; we want our own reproducible union, not someone else's reconstruction decisions."
+    },
+    "failure_signature": "~1.30M entities / ~3.79M triples means the WebQSP-only union was built. That is the rejected object."
+  },
+  "_audit_findings": {
+    "report": "data/final_canonical/webqsp/WEBQSP_REPRESENTATION_AUDIT.md",
+    "F_recommendation": "USE RoG SURFACES. DO NOT DOWNLOAD FREEBASE.",
+    "why_no_dump": "The 1.65M bare MIDs are CVT/mediator nodes that HAVE NO Freebase name, so a dump would not resolve them either. UNRESOLVED_MID_SET is 63.74% of the graph, not a small lookup. A dump would also invalidate all ~1.3M reusable rows and would not fix the real risk, which is the ~5% surface collapse that happened upstream inside RoG.",
+    "reuse_overturns_prior_estimate": "FREEBASE_SOURCE_PROPOSAL.md predicted 0-1.3% reuse. Measured: ~50%. Half the union is already paid for.",
+    "identity_collision_risk": {
+      "measured_from": "WebQSP.{train,test}.json MID-bearing annotations, diagnostic only",
+      "names_mapping_to_multiple_MIDs": "1,782 of 34,972 (5.10%)",
+      "max_collision_size": 46,
+      "case_variant_groups": 9334,
+      "_meaning": "DUPLICATE_SURFACE_GROUPS = 0 in the union is BY CONSTRUCTION and is the finding, not reassurance: RoG merged colliding objects upstream. Order 1e4-1e5 entity identities are silently merged. This is inherited from the published benchmark substrate, not introduced by us."
+    },
+    "legacy_781k_verdict": "FABRICATED NAMES. src/pipeline/loader_webqsp.py:52-60 deduce() titles an unnamed MID with the name of an arbitrary named NEIGHBOUR. 459,417 of 781,485 nodes (58.8%) carry an invented name belonging to a different entity. Node ids were positional (webqsp_doc_<i>). Commit ba6bd71 did NOT resolve real names. NO MID->name dictionary exists anywhere in this project.",
+    "legacy_phase_c_verdict": "Clean but bare: text == original_source_id in ALL 1,316,466 rows. Gold conditioning measured at exactly 18,160 injected a_entity rows (c1c2_webqsp.py:32).",
+    "caveats": [
+      "Temp entity list used a non-invertible backslash escape: 5 lines of 2,592,894 fail to round-trip.",
+      "Agent self-reported writing a provenance file outside the permitted write list, then MOVED it (not deleted) to results/data_audit/final_canonical_v1/webqsp/. data/original/webqsp/ verified clean."
+    ]
+  },
+  "GRAPH_ACCEPTED": {
+    "_authority": "Explicit user decision, 2026-09-05, after WEBQSP_REPRESENTATION_AUDIT.md.",
+    "N": 2592894,
+    "E": 8309195,
+    "R": 7058,
+    "manifest_note": "paper reports: 2,566,291 | derived from exact published triple set: 2,592,894 | difference: +26,603. Triples and relations reproduce EXACTLY; the entity discrepancy is attributed to a paper-side counting convention or preprocessing not recoverable from the released graph.",
+    "_rule": "Do NOT modify graph topology to force the paper's 2,566,291. If the triple set matches exactly, the endpoint set is mathematically determined. Manipulating the released graph is less defensible than reporting the difference."
+  },
+  "SERIALIZATION_BLOCKER": {
+    "status": "HARD BLOCKER -- must clear before any final graph/node hash",
+    "problem": "5 of 2,592,894 endpoint keys fail round-trip through a backslash escape",
+    "rule": "Do NOT normalize or manually repair the strings. Use a lossless format; JSON escaping is fine.",
+    "assert": [
+      "for every endpoint: decode(encode(endpoint)) == endpoint",
+      "ROUNDTRIP_FAILURES = 0",
+      "endpoint_set_before == endpoint_set_after"
+    ]
+  },
+  "MID_CLASSIFICATION_REQUIRED": {
+    "_why": "The audit asserted the bare MIDs are mediator nodes with no names. VERIFY THAT QUANTITATIVELY; do not accept it as a blanket statement. Full Freebase ingestion is not needed until these numbers exist.",
+    "report": [
+      "TOTAL_BARE_MIDS",
+      "NAME_RESOLVABLE_MIDS",
+      "NAMELESS_MEDIATOR_MIDS",
+      "UNKNOWN_MIDS"
+    ],
+    "freebase_decision": "Do NOT download full Freebase yet. Only if a meaningful population of ORDINARY NAMED entities remains unresolved should a targeted metadata pass be proposed.",
+    "_ANSWERED_2026_09_05": {
+      "STATUS": "DONE -- answered WITHOUT a Freebase download",
+      "method": "The released RoG graph is itself a LABELLED OBSERVATION of Freebase name coverage: RoG rendered an endpoint as a name where Freebase had type.object.name and left the bare MID where it did not. Per Freebase TYPE (relation id minus its last component, e.g. people.marriage.spouse -> people.marriage) we therefore MEASURE the named rate. Two independent query-independent signals per node: pass 1 = the types the node asserts as a head; pass 2 = the RANGE of the relations pointing at it. No question text, answers, gold paths, topic annotations or neighbour names were used.",
+      "scripts": [
+        "scratchpad/final_canonical_build/_analysis/webqsp_mid_cvt_classification.py",
+        "scratchpad/final_canonical_build/_analysis/webqsp_mid_pass2_inrelation.py"
+      ],
+      "raw": [
+        "scratchpad/final_canonical_build/_audit/phase45_mid_cvt_classification.json",
+        "scratchpad/final_canonical_build/_audit/phase45_mid_pass2_inrelation.json"
+      ],
+      "TOTAL_BARE_MIDS": 1652618,
+      "NAMELESS_MEDIATOR_MIDS": 1588085,
+      "NAME_RESOLVABLE_MIDS": 62375,
+      "UNKNOWN_MIDS": 0,
+      "_percentages_of_bare_mids": {
+        "NAMELESS_MEDIATOR": "96.10%",
+        "NAME_RESOLVABLE": "3.77%",
+        "MIXED_UNDECIDED": "0.13%",
+        "UNKNOWN": "0.00%"
+      },
+      "NAME_RESOLVABLE_UNCERTAINTY_BAND": {
+        "both_signals_agree": 19566,
+        "either_signal": 62375,
+        "_reading": "the population a Freebase metadata pass would actually rescue is 0.75%-2.41% of union entities. Reported as a band rather than collapsed to a point."
+      },
+      "EVIDENCE_THE_SPLIT_IS_REAL_NOT_A_THRESHOLD_ARTEFACT": {
+        "bimodality": "over 3,119 distinct types: 556 types have named-rate < 0.01, 2,531 have > 0.9, only ~20 lie in between. The relation-range histogram has the same shape (1,460 relations < 0.01, 5,514 > 0.9).",
+        "threshold_sensitivity": {
+          "tau_0.005": 964780,
+          "tau_0.01": 966364,
+          "tau_0.02": 967122,
+          "tau_0.05": 969037,
+          "tau_0.10": 969160,
+          "_reading": "a 20x change in tau moves the answer by 0.45%. tau=0.02 used throughout."
+        },
+        "control_false_positive_rate": "of 533,758 endpoints RoG DID name (so they demonstrably have type.object.name) and which have outgoing edges, only 238 (0.045%) are false-positively called mediator-like.",
+        "cross_validation": "pass 2 re-labels, from incoming relations ONLY, the 1,014,462 bare MIDs pass 1 could label from outgoing types only. 1,011,820 carry an in-relation signal; agreement 95.75%.",
+        "domain_validation": "the types called mediators are the textbook Freebase CVTs: film.performance (198,122 nodes, rate 0.0002), common.webpage (121,320), award.award_nomination (63,096), film.film_crew_gig (56,716), education.education (34,469), award.award_honor (34,368), tv.tv_guest_role (28,798), measurement_unit.dated_integer (26,953, exactly 0), sports.sports_team_roster (19,581), music.track_contribution (18,573). The types called ordinary are people.person (0.99997), film.film (0.9982), location.location (0.9602), book.written_work (0.9990)."
+      },
+      "VERDICT_ON_THE_PRIOR_BLANKET_CLAIM": "CONFIRMED at 96.10%, and its residual quantified for the first time. The claim was directionally right and quantitatively incomplete.",
+      "freebase_decision_ANSWER": "A meaningful population does NOT remain unresolved. 96.10% of bare MIDs are genuinely nameless mediators; the resolvable remainder is 0.75%-2.41% of union entities and is overwhelmingly late 'g.' machine ids that plausibly never had type.object.name. A full Freebase GRAPH download is therefore NOT justified by this number. A targeted METADATA pass is separately justified -- see SOURCE_RECOMMENDATION_2026_09_05 -- because it upgrades all 925,761 already-named endpoints with aliases and types, not because of the 62,375."
+    }
+  },
+  "2WIKI_FIX_AT_SOURCE": {
+    "_change": "Patch the builder; do NOT leave GOLD_SEMANTICS.json permanently authoritative while the builder still contains a known wrong condition.",
+    "old": "len(gold_node_ids) == len(gold_refs)",
+    "new": "for each gold_ref: resolve using canonical source identity/context; require >=1 valid canonical mapping; if uniquely resolvable store exactly that node; use alternatives ONLY when the source is genuinely ambiguous",
+    "rerun_only": [
+      "gold/query metadata generation",
+      "integrity checks",
+      "manifest pinning"
+    ],
+    "assert": {
+      "CORPUS_HASH": "94fe68b8d5f291f1... unchanged BY THE GOLD FIX (see _ASSERT_REPINNED_2026_09_06)",
+      "N": 5989847,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "READY_FOR_INDEX_BUILD": true
+    },
+    "_note": "AMBIGUOUS_GOLD_REFS = 0 because all 8 resolve uniquely from source. Disjunction is not needed here.",
+    "do_not": "alter nodes.jsonl -- the 5,989,847-node corpus stays byte-identical",
+    "build_py_unfrozen": "build.py sha256 0879e428... was previously pinned as immutable. This decision UNFREEZES it. Every manifest recording the old sha must be updated to the new one, and the change must be minimal and documented.",
+    "_RESOLVED_2026_09_05": {
+      "STATUS": "DONE",
+      "builders_patched": {
+        "build.py": {
+          "old": "0879e428a41e636bb4089ef10c8ca217030331e22d54ca1d9dc87ba38988dcd9",
+          "new": "26455c9f72191dd46281d0d107d2236d8beec3168552ec67ddecd13832311e93",
+          "datasets": [
+            "metaqa",
+            "musique",
+            "squad",
+            "2wiki(superseded build only)"
+          ]
+        },
+        "build_kb.py": {
+          "old": "00dfeb460392ff1d4d551278a713ff3a0dabda4fc758f04964c3e941a384cbeb",
+          "new": "862e0b3c284fd12a08a97e7b1cefd1de1467effffdd62025fe09fa81eef1c3b1",
+          "datasets": [
+            "2wiki",
+            "hotpotqa",
+            "webqsp"
+          ]
+        },
+        "_NOT_THE_LIVE_SHAS_2026_09_06": "The 'new' values in this block are the shas AS OF THIS 2026-09-05 gold-semantics patch, and are preserved as the historical record of that event -- they are NOT a claim about the current builders. build_kb.py has since moved 862e0b3c284fd12a... -> e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6 under TEXTUALIZATION_REV 2 (2026-09-05 hotpotqa, 2026-09-06 2wiki). build.py is unchanged at 26455c9f72191dd4... The live values are each dataset's build_info.json -> builder_sha256; the transition is recorded in _superseded_textualization_rev1/SUPERSEDED.md and in _2WIKI_TEXTUALIZATION_REV2_2026_09_06 below."
+      },
+      "_SCOPE_CORRECTION": "The directive named build.py:344 (+564,570,580) and told us to grep for 0879e428. Both were incomplete. (a) build.py does NOT build the live 2wiki corpus -- build_kb.py does, with the identical cardinality defect at 495/497/579/980/986/997 -- so BOTH builders were patched. (b) grepping only 0879e428 misses the 2wiki and hotpotqa query_independence_test.json records, which pinned the OLD build_kb.py sha 00dfeb46... Searching for the old sha of each builder found 5 stale QI records, not 3.",
+      "change": "cardinality gold-presence test len(gold_node_ids)==len(gold_refs) -> per-reference resolution; a ref resolves iff it maps to >=1 canonical node; unique source-context resolution is stored as exactly that node; disjunction retained as a documented fallback and NOT exercised.",
+      "corpus_impact": "NONE. All five datasets re-run with --queries-only, which reloads frozen nodes.jsonl and asserts CORPUS_HASH / NODE_ORDER_HASH / node count / file sha256 against the existing integrity_report.json before writing. nodes.jsonl never opened for writing.",
+      "query_independence_rerun": "re-run END TO END under the patched builders for all five datasets (each rebuilds the corpus 3x from official sources into _work/qi/<ds>/{A,B,none} and asserts equality with FINAL). CORPUS_QUERY_INDEPENDENT=true and DETERMINISTIC_REBUILD=true reconfirmed -- so the QI records were refreshed by real re-execution, not by hand-editing a sha.",
+      "historical_records_policy": "build_info.json / dataset_manifest.json / query_independence_test.json under 2wiki/_superseded_context_union_398354/ still record 0879e428... That is CORRECT: they are a frozen snapshot of a build that really was produced by that builder. They are annotated via SUPERSESSION.json rather than rewritten, because falsifying a historical record to satisfy a grep would be worse than the staleness it removes.",
+      "GOLD_SEMANTICS_sidecar": "folded into every dataset's integrity_report.json as the GOLD_SEMANTICS block (plus top-level ALL_GOLD_REFS_RESOLVE / MISSING_GOLD_REFS / AMBIGUOUS_GOLD_REFS); the standalone data/final_canonical/GOLD_SEMANTICS.json was superseded by moving, not deleted."
+    },
+    "_assert_superseded_CORPUS_HASH": "81fa7d1a5d4bbb24... unchanged",
+    "_ASSERT_REPINNED_2026_09_06": "2wiki CORPUS_HASH was re-pinned 81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1... on 2026-09-06 by TEXTUALIZATION_REV 2 (87,765 empty-text records retextualized to their source-native title). That is a TEXTUALIZATION change, deliberately approved by the user, and is unrelated to gold semantics: NODE_ORDER_HASH, N, node ids and node order are unchanged, and the gold results below were re-verified against the new table. The pre-rev2 value is kept in _superseded_value.",
+    "_do_not_note_2026_09_06": "the 'do not alter nodes.jsonl' clause below applied to the GOLD fix and was honoured: that fix ran --queries-only and did not touch the table. The later TEXTUALIZATION_REV 2 rewrite was a separate, separately approved change."
+  },
+  "_SUPERSEDED_IDENTITY_DECISION": {
+    "field_name": "rog_node_key",
+    "_replaces": "NODE_ID = Freebase MID -- that claim is RETIRED and must not be made.",
+    "definition": "the exact released RoG endpoint string; may be a human-readable surface OR a Freebase MID",
+    "examples": {
+      "surface": "Barack Obama",
+      "mid": "m.012abc"
+    },
+    "_meaning": "This is the identity of the PUBLISHED RoG graph, not necessarily the identity of the underlying original Freebase object.",
+    "known_limitation": "RoG collapsed some Freebase identities when converting MIDs to names. 1,782 of 34,972 observed names map to >1 MID (max 46). These merged identities CANNOT be reconstructed without regenerating RoG from Freebase. Acceptable for the RoG-standard benchmark lane because every method consuming the released graph inherits the same representation. Document it; do not hide it."
+  },
+  "_SUPERSEDED_TEXT_DECISION": {
+    "_principle": "Two SEPARATE questions: (1) what is a WebQSP graph node? (2) what text should Dense/SPLADE see for it? Answering (1) does not answer (2).",
+    "_rejects": "node_id = m.028xyz, node_text = m.028xyz. The graph is valid but the semantic representation is useless. 63.74% of endpoints being MIDs does not mean 63.74% should stay meaningless.",
+    "three_tiers": {
+      "A_readable_endpoint": {
+        "rog_node_key": "Barack Obama",
+        "text": "Barack Obama"
+      },
+      "B_mid_with_query_independent_name": {
+        "rog_node_key": "m.02mjmr",
+        "text": "Barack Obama"
+      },
+      "C_nameless_mediator_cvt": {
+        "rog_node_key": "m.0xyz",
+        "text": "Freebase mediator. Relations: marriage.spouse; marriage.from; marriage.to."
+      }
+    },
+    "mediator_recipe": {
+      "form": "'Freebase mediator. Relations: ' + first K unique readable relation labels + optional first M readable neighbour labels",
+      "bounds": "K and M are small fixed bounds so hub nodes do not create massive documents",
+      "ordering": "stable and deterministic",
+      "properties": [
+        "query-independent",
+        "static",
+        "precomputable",
+        "derived only from the canonical graph"
+      ]
+    },
+    "INVARIANT": "Text enrichment must NEVER modify topology or graph identity. Edges stay rog_node_key_A --relation--> rog_node_key_B.",
+    "forbidden_sources": [
+      "question text",
+      "answers",
+      "topic annotations",
+      "gold paths"
+    ],
+    "reuse_subordinate": "The measured 50.12%/50.24% reuse was under RAW endpoint text. It is NOT the final number because bare-MID text is about to improve. If reuse drops to ~25% because meaningless MIDs became useful semantic text, that is worth paying. Correct semantic input beats preserving bad embeddings."
+  },
+  "_supersession_note": "2026-09-05, explicit user decision. The two blocks above described canonical identity as the RELEASED RoG endpoint string. That is now REJECTED as canonical identity. They are retained as history because the measurements inside them remain valid descriptions of the released artifact.",
+  "MID_LEVEL_RECONSTRUCTION": {
+    "_authority": "Explicit user decision, 2026-09-05.",
+    "_headline": "STOP using released RoG endpoint strings as canonical entity identity. Reconstruct the benchmark graph from the underlying Freebase IDs, preserve real KG identity and topology, and attach human-readable Freebase metadata SEPARATELY.",
+    "_the_correction": "MIDs are NOT the problem. MIDs are exactly what we should preserve as identity -- Google documents them as stable identifiers deliberately not meant to convey meaning to humans, and real KGs do use IDs internally. FEEDING THE MID ITSELF AS SEMANTIC TEXT is the problem. What papers avoid is passing a meaningless id to a language model as the text representation, not using ids as identity.",
+    "target_representation": {
+      "IDENTITY": "m.02mjmr",
+      "HUMAN_TEXT": "Barack Obama; aliases: Barack Hussein Obama II; types: people.person, government.politician",
+      "GRAPH": "m.02mjmr --people.person.place_of_birth--> m.0d6lp"
+    },
+    "why_better_than_released_endpoints": "Released mixed endpoints give surface collision, identity loss, and irrecoverable MID identity. The audit's 1,782 names mapping to multiple MIDs proves surface strings are not safe identity keys. Reconstructing at MID level yields no collision, no fabricated identity, no arbitrary neighbour labels, and preserves the original graph structure.",
+    "reconstruction_path": "RoG official repo -> its 'Subgraph Extraction' section -> NSM Freebase preprocessing (RichardHGL/WSDM2021_NSM/preprocessing/Freebase). NSM's recipe: FastRDFStore-data.zip -> fb_en.txt + cvtnodes.bin -> filter Freebase relations -> collect question topic entities -> extract 2-hop neighbourhoods -> preserve CVT traversal. NSM's code checks actual m.*/g.* ids and explicitly loads CVT nodes; it does not require names as graph identities.",
+    "source_roles": {
+      "GRAPH_SOURCE": "NSM/RoG Freebase snapshot (the pipeline RoG itself cites)",
+      "METADATA_SOURCE": "same snapshot if labels available, else official Freebase RDF / standard id2name resources"
+    },
+    "metadata_properties": [
+      "type.object.name (English)",
+      "common.topic.alias",
+      "type.object.type",
+      "optionally key.wikipedia.en"
+    ],
+    "established_resources": "This problem is solved in the ecosystem -- GrailQA combines FACC1 mentions with Freebase names/aliases and Wikipedia keys; ChatKBQA and KBQA-o1 use the standard Freebase Virtuoso setup; idirlab/freebases exposes object_names, object_types, entities_id_label, properties_id_label. Reuse established machinery rather than inventing structural descriptions for everything.",
+    "CVT_policy": {
+      "_what": "Freebase compound-value nodes representing marriages, dated measurements, performances etc. Google documents them separately from ordinary topics. They often have no human-readable name.",
+      "identity": "preserve the CVT MID in graph identity",
+      "text": "deterministic SCHEMA representation only if semantic retrieval text is required, e.g. 'CVT types: people.marriage; relations: people.marriage.spouse, .from, .to'",
+      "alternative_to_test": "CVTs may instead be structure-only nodes with NO Dense/SPLADE text. Test which suits L1.",
+      "NEVER": "never assign a neighbour's name to a CVT -- that is exactly the legacy loader bug (loader_webqsp.py:52-60, 459,417 of 781,485 nodes)"
+    },
+    "node_schema": {
+      "node_id": "canonical Freebase MID/g-ID",
+      "display_name": null,
+      "aliases": null,
+      "types": null,
+      "is_cvt": null,
+      "text": null
+    },
+    "edge_schema": {
+      "source_mid": null,
+      "relation_id": "canonical Freebase property id, e.g. people.person.place_of_birth",
+      "target_mid": null,
+      "_rule": "relation identity stays the canonical property id; a relation_display_text may be stored SEPARATELY but never replaces it"
+    },
+    "forbidden_label_sources": [
+      "WebQSP question text",
+      "WebQSP answers",
+      "gold paths",
+      "topic annotations as labels",
+      "arbitrary graph neighbours"
+    ],
+    "deferred_lane": {
+      "name": "WEBQSP_FREEBASE_24M",
+      "scale": "~24.9M entities / 164.6M facts",
+      "used_by": "GraftNet / NSM / ReaRev / GNN-RAG style work",
+      "decision": "DO NOT BUILD NOW. Much more expensive. The 5.99M 2wiki and 5.23M hotpot corpora already provide the large-scale stress test. Get the RoG-standard graph correct first."
+    },
+    "stop_rule": "Return source recommendation, graph reconstruction statistics, MID/name/CVT resolution table, final canonical schema and reuse projection. No canonical WebQSP write, no encoder, no KNN, no H4."
+  },
+  "TWO_WEBQSP_LANES": {
+    "_authority": "Explicit user decision, 2026-09-05. BOTH are approved. This REPLACES the earlier 'WEBQSP_FREEBASE_24M is deferred, not requested'.",
+    "_framing": "Six benchmarks + ONE WebQSP SCALE VARIANT. Better than pretending the two WebQSP settings are the same experiment.",
+    "lanes": {
+      "webqsp_rog_standard": {
+        "scale": "~2.57M entities / ~8.31M triples",
+        "purpose": "Paper-comparable benchmark, manageable full static graph",
+        "question_it_answers": "Does the architecture work on the standard graph substrate used by modern WebQSP/CWQ KGQA research?",
+        "order": "BUILD FIRST",
+        "also_validates": "that our reconstructed MID graph actually matches the RoG topology",
+        "naming_rule": "NEVER call this one 'full Freebase'."
+      },
+      "webqsp_freebase_24m": {
+        "scale": "~24.9M entities / ~164.6M facts",
+        "purpose": "True large-scale L1 stress test, comparable to the backend scale used by graph-retrieval KGQA systems",
+        "question_it_answers": "Can L1 route over the ACTUAL large Freebase backend rather than starting from an already-reduced ~2.5M graph?",
+        "order": "SECOND, staged",
+        "used_by": "GraftNet / NSM / ReaRev / GNN-RAG style work"
+      }
+    },
+    "the_comparison_this_enables": {
+      "traditional_kg_retrieval": "24.9M Freebase -> query-linked topic entity -> PPR / hop expansion -> ~1k-2k query graph",
+      "our_L1": "24.9M Freebase -> offline H4 organization -> Dense/SPLADE query ranking -> P50 + bounded halo -> candidate graph",
+      "_why": "That is a real systems/research comparison, not a metric delta."
+    }
+  },
+  "SHARED_REPRESENTATION_LAYER": {
+    "_rule": "DO NOT maintain two different preprocessing philosophies. Do not build RoG one way and Freebase-24M another way.",
+    "FREEBASE_ENTITY_STORE": [
+      "MID",
+      "name",
+      "aliases",
+      "types",
+      "is_cvt",
+      "canonical_text"
+    ],
+    "FREEBASE_EDGE_STORE": [
+      "source_mid",
+      "relation",
+      "target_mid"
+    ],
+    "_datasets_are_scopes": "The two datasets are simply different GRAPH SCOPES over one canonical layer: full ~24.9M graph -> RoG scope (~2.57M nodes) OR full scale (~24.9M nodes).",
+    "consistency_check": "Every RoG entity/triple should map back into the larger Freebase representation wherever the benchmark pipeline permits. This is a valuable cross-validation, not a formality.",
+    "identity_rule": "MID is ALWAYS the identity. The name is ONLY the semantic representation for Dense/SPLADE. We never replace the MID with 'Barack Obama' as identity.",
+    "cvt_rule": "CVT/mediator nodes preserved as graph nodes, represented STRUCTURALLY, never given fake neighbour names."
+  },
+  "SCALE_24M_ENGINEERING": {
+    "_rule": "Feasible but NOT as one enormous monolithic build. Everything shards.",
+    "plan": {
+      "dense": "sharded",
+      "splade": "sparse/sharded",
+      "knn": "chunked ANN construction",
+      "struct": "compressed adjacency",
+      "h4_hypergraph": "streaming construction",
+      "partition": "remote high-memory job if necessary"
+    },
+    "the_principle_being_demonstrated": "query-independent expensive work happens ONCE offline; query-time work is tiny relative to the full graph. That is exactly what L1 is supposed to demonstrate.",
+    "KNN_OPEN_QUESTION": "Do NOT start by building semantic KNN across all 24.9M until it is profiled. Current H4 uses SK = STRUCT + KNN. The canonical-scale run must establish whether full-graph KNN is computationally practical AND still worth its cost. STRUCT itself is naturally available from Freebase, so a STRUCT-only H4 is the fallback that needs no KNN at all.",
+    "_precedent": "Track A Phase 12 already found SKN never regresses but never wins the shipped cell either, and costs more offline everywhere. At 24.9M that cost argument gets much sharper."
+  },
+  "final_program": {
+    "metaqa": 43234,
+    "musique": 117534,
+    "squad": 20233,
+    "hotpotqa": 5233329,
+    "2wiki": 5989847,
+    "webqsp_rog_standard": "~2.57M -- standard benchmark; exact N from the MID-level reconstruction, not assumed",
+    "webqsp_freebase_24m": "~24.9M -- scale extension",
+    "_structure": "six benchmarks + one WebQSP scale variant"
+  },
+  "CVT_POLICY_ANSWERED_2026_09_05": {
+    "RECOMMENDATION": "CVTs are STRUCTURE-ONLY nodes: give them a graph identity and NO Dense/SPLADE text. If retrieval text is ever required, use the deterministic schema string 'CVT | types: <sorted types> | relations: <sorted relations>' -- never a neighbour name.",
+    "evidence": [
+      "Prior KGQA code treats CVTs as structure, never as text. NSM's util/deal_cvt.py::is_cvt is a pure boolean membership test used only to steer traversal: get_2hop_subgraph.py uses it to decide whether to take an extra hop, preprocess_step1.py uses it to drop a dangling CVT triple as meaningless. NSM never reads or assigns a CVT label.",
+      "They carry almost no distinguishing text: under the deterministic recipe the 967,122 pass-1 CVTs collapse to only 2,155 DISTINCT strings (449x compression). The single most common string covers 129,982 nodes ('CVT | types: film.performance | relations: film.performance.film'); the top eight cover ~343k. A vector shared by 130,000 nodes cannot discriminate between them.",
+      "The alternative is the documented catastrophe at src/pipeline/loader_webqsp.py:52-60,68 -- verified directly in Phase 7, not cited from the prior audit."
+    ],
+    "encoder_cost_consequence": "If CVTs are structure-only, 1,588,085 nodes need no vector at all and DENSE_REENCODE_N falls from 2,070,021 to 481,936 -- a 77% cut. If CVT text is kept, cost is bounded by DISTINCT texts (2,155), not node count. Either way the real work is the ~1.0M ordinary topics.",
+    "both_variants_retained": "the schema recipe is kept as a documented option so structure-only vs schema-text can be A/B'd at L1 without any corpus change. Under either variant the CVT keeps its own MID as identity and never borrows a name."
+  },
+  "LEGACY_FABRICATION_BUG_VERIFIED_2026_09_05": {
+    "_directive": "'Explicitly verify the legacy neighbour-name assignment bug rather than citing the prior audit.' Done: deduce() was re-implemented from loader_webqsp.py:52-60 and run against the same TEST parquet shards the loader read, then compared with the stored titles in data/processed/master_nodes_webqsp.json (READ-ONLY).",
+    "MID_nodes": 459417,
+    "MID_with_no_named_neighbour_title_left_blank": 545,
+    "FABRICATED_NAMES": 458872,
+    "fabricated_title_is_SOME_named_neighbour_of_that_MID": 458872,
+    "fabricated_title_is_NOT_any_named_neighbour": 0,
+    "fabricated_title_equals_the_neighbour_THIS_RUN_picks": 373462,
+    "BUG_VERIFIED": true,
+    "NON_DETERMINISTIC": true,
+    "_the_stronger_finding": "Every stored title is provably a stolen neighbour name (458,872/458,872 = 100.000%), but 85,410 of them differ from what a re-run produces, because loader_webqsp.py builds its adjacency by iterating a Python SET of triples, whose order is hash-seed dependent. The legacy substrate is therefore not only wrong, it is UNREPRODUCIBLE across processes.",
+    "examples": {
+      "g.112yf9tt7": "Wassily Kandinsky",
+      "g.112yfc45p": "Colombia",
+      "g.112yfd_tp": "Dunkirk"
+    },
+    "commit_ba6bd71_assessment": "'resolve all raw Freebase MIDs to names' did not resolve anything; it made the fabrication total. Its claim 'ZERO raw IDs in any content/title' is true and is precisely the defect."
+  },
+  "PHASE7_FOUR_WAY_COMPARISON_2026_09_05": {
+    "legacy_781k": {
+      "N": 781485,
+      "stored": 783113,
+      "identity": "webqsp_doc_<i> positional",
+      "MID_endpoints": 459417,
+      "named": 322068,
+      "fabricated_names": 458872,
+      "MID_recoverable": "only by re-deriving sorted(entities); not stored",
+      "source": "RoG-webqsp TEST shards only, 2,277,228 triples"
+    },
+    "phaseC_1316466": {
+      "N": 1316466,
+      "identity": "webqsp_ent_<sha256(text)[:16]>",
+      "MID_endpoints": 776788,
+      "named": 539678,
+      "fabricated_names": 0,
+      "MID_recoverable": "for the 59.0% stored AS MIDs",
+      "source": "all 5 WebQSP shards",
+      "gold_conditioned": "YES -- 16,937 rows"
+    },
+    "released_RoG_union": {
+      "N": 2592894,
+      "R": 7058,
+      "E": 8309195,
+      "identity": "released endpoint string (mixed)",
+      "MID_endpoints": 1652618,
+      "named": 925761,
+      "fabricated_names": 0,
+      "MID_recoverable": "NO for the 925,761 named",
+      "source": "WebQSP u CWQ, 29 shards"
+    },
+    "reconstructed_MID_graph": "NOT BUILT -- see PHASE3_NOT_EXECUTED",
+    "overlap": {
+      "legacy781k_subset_of_union": 781485,
+      "legacy781k_outside_union": 0,
+      "legacy781k_subset_of_phaseC": 781485,
+      "legacy781k_outside_phaseC": 0,
+      "phaseC_intersect_union": 1299529,
+      "phaseC_minus_union": 16937,
+      "union_minus_phaseC": 1293365
+    },
+    "_correction_to_prior_audit": "phaseC_intersect_union = 1,299,529 corrects the prior audit's 1,299,527 by +2: that run joined through a non-invertible backslash escape which corrupted 5 of 2,592,894 strings. This run reads the lossless union_entities.jsonl.",
+    "phaseC_id_rule_confirmed": "canonical_doc_id == 'webqsp_ent_' + sha256(text)[:16], verified against the stored text_sha256 field (sha256('Jamaica')[:16] = 42c298ba17fed5da). text == original_source_id in 1,316,466 / 1,316,466 rows. The store is clean but bare."
+  },
+  "PHASE3_NOT_EXECUTED": {
+    "STATUS": "NOT BUILT -- reported as a failure, not worked around",
+    "reason": "No benchmark Freebase source exists on this machine (Phase 2 scanned 1,996,229 files across 195,273 directories in 343.7s: zero hits for FastRDFStore-data.zip, fb_en.txt, cvtnodes.bin, Freebase-Setup, Virtuoso, object_names/object_types, id2name_parts, FACC1, surface maps). Acquiring it was explicitly out of scope for this task.",
+    "capacity_finding": "FastRDFStore-data.zip is LIVE (HTTP 200) at 68,549,649,154 B = 63.84 GiB against 112.9 GiB free on a single volume. The zip alone is 57% of free space, and fb_en.txt must then be extracted AND rewritten full-size by manual_filter_rel.py before hop extraction starts. Infeasible as configured.",
+    "NO_FALLBACK": "There was NO silent fallback to the released endpoint union and nothing was fabricated. The released union remains a MEASURED DESCRIPTION of the published artifact and is NOT promoted to canonical identity.",
+    "_phase1_key_result": "The RoG repo (HEAD ccf8ec847bf61005a1b27cc9e5aff5c8ead7a24b) contains NO subgraph-extraction code, NO Freebase loader and NO MID->name resolver -- verified against the 50-blob repository tree, not taken on trust. NSM's released pipeline (HEAD 2e20915956a69b6f832143ded9d54442ccbe698e) emits MIDs verbatim: preprocess_step1.py serialises {'kb_id': head, 'text': head}. The MID->surface projection that produced the mixed-endpoint artifact is therefore an UNRELEASED RoG step, and the released graph is not byte-reproducible from released code."
+  },
+  "PHASE8_REUSE_PROJECTION_2026_09_05": {
+    "_conditional": "CONDITIONAL and labelled as such: canonical human-readable text is NOT frozen, because Phase 4 metadata resolution could not run. Projected is the best text derivable today under MID-level identity.",
+    "_method": "token-ID equality under the frozen tokenizers (Alibaba-NLP/gte-Qwen2-1.5B-instruct, naver/splade-cocondenser-ensembledistil), never raw-text equality. NOTHING WAS ENCODED.",
+    "baseline_released_endpoint_text": {
+      "DENSE_REUSE_N": 1299535,
+      "DENSE_PCT": "50.12%",
+      "SPLADE_REUSE_N": 1302766,
+      "SPLADE_PCT": "50.24%"
+    },
+    "under_MID_level_canonical_text": {
+      "DENSE_REUSE_N": 522873,
+      "DENSE_PCT": "20.17%",
+      "DENSE_REENCODE_N": 2070021,
+      "SPLADE_REUSE_N": 526096,
+      "SPLADE_PCT": "20.29%",
+      "SPLADE_REENCODE_N": 2066798
+    },
+    "DELTA": {
+      "DENSE": -776662,
+      "SPLADE": -776670
+    },
+    "decomposition": "of the 1,316,466 Phase-C rows, 742,946 become CVT schema text and 33,718 are bare MIDs blocked on Freebase metadata; 522,865 keep byte-identical text. The 940,276 union endpoints whose text is unchanged are the 925,761 surfaces plus 14,515 literals.",
+    "_reported_plainly": "Per the directive, the drop is reported rather than optimised around. Two mitigations: (a) structure-only CVTs cut DENSE_REENCODE_N to 481,936; (b) if CVT text is kept, encoder cost is bounded by 2,155 distinct strings.",
+    "_will_get_worse_correctly": "Once real Freebase metadata lands, the 925,761 named endpoints gain '; aliases: ...; types: ...' and their text changes too, driving dense reuse toward ~0. That is the right trade: correct representation over preserved embeddings."
+  },
+  "SOURCE_RECOMMENDATION_2026_09_05": {
+    "HEADLINE": "FastRDFStore-data.zip is the only correct GRAPH source and is not viable on this machine as configured. Do not substitute anything for it.",
+    "1_reject_third_party_reconstruction": "camazlucas/Freebase-WebQSP-CWQ-Subgraph is 50,304 triples and 16 relations SHORT of the published graph (2,574,900 / 7,042 / 8,258,891) -- measurably worse than our own union on the two figures that can be checked. Diagnostic only.",
+    "2_reject_full_rdf_mirror": "CleverThis/freebase (964 parquet shards, ~300 GB extracted, ~3B triples) is the wrong tool for the graph -- it is all of Freebase, not the benchmark subgraph -- and it does not fit.",
+    "3_PREFERRED_IF_ONE_DOWNLOAD_IS_EVER_AUTHORISED": {
+      "resource": "idirlab/freebases, Zenodo 10.5281/zenodo.7909511",
+      "size_bytes": 14148416296,
+      "size": "13.18 GiB",
+      "md5": "170689b7aad9f029566a4deb36605b01",
+      "contains": [
+        "object_names",
+        "object_types",
+        "entities_id_label",
+        "properties_id_label"
+      ],
+      "why": "the METADATA problem is far cheaper than the GRAPH problem and is separable. 13.18 GiB one-volume, versus 63.84 GiB plus two full-size derived files. It upgrades all 925,761 named endpoints with aliases and types and closes the 62,375-node band, WITHOUT touching topology."
+    },
+    "4_sequencing_if_graph_reconstruction_is_later_authorised": "free >= 200 GB or use an external volume; run NSM Steps 0-3 against fb_en.txt + cvtnodes.bin with the WebQSP+CWQ topic-entity population; report entity/relation/triple counts against BOTH the paper (2,566,291 / 7,058 / 8,309,195) AND the released union (2,592,894 / 7,058 / 8,309,195) with differences EXPLAINED, never tuned; then attach metadata from step 3.",
+    "5_is_cvt_does_not_block": "cvtnodes.bin is not separately distributed -- it exists only inside the 63.84 GiB zip. It is not a prerequisite: the structural classifier reproduces the CVT partition at 96.10% of bare MIDs with 0.045% control false-positives, 95.75% cross-signal agreement and 0.45% threshold sensitivity. When cvtnodes.bin is eventually obtained it becomes a VALIDATION SET for this classifier.",
+    "6_what_must_not_happen": [
+      "promoting the released mixed-endpoint union to canonical identity",
+      "re-running the legacy deduce() heuristic in any form",
+      "naming a CVT"
+    ],
+    "NOTHING_WAS_DOWNLOADED": true
+  },
+  "_deliverable": "data/final_canonical/webqsp/WEBQSP_FREEBASE_PIPELINE_AUDIT.md",
+  "_last_updated": "2026-09-06T00:41:40",
+  "WEBQSP_LANE_STATUS_2026_09_06": {
+    "_what": "Three-lane WebQSP program fixed by the user on 2026-09-06, replacing the earlier two-lane split. Recorded here because this file is the authority file for the whole webqsp lane.",
+    "1_WEBQSP_ROG_MID": "reconstruct the RoG-scale graph in MID space. Paper-comparable. STILL UNRESOLVED.",
+    "2_WEBQSP_KBQA_24M": "paper-comparable AUXILIARY lane, explicitly benchmark-conditioned. NOT allowed to support the core 'query-independent corpus' L1 claim.",
+    "3_WEBQSP_FREEBASE_SCALE": "future truly query-independent large-scale lane, if the strongest scale claim is wanted.",
+    "framing_rule": "the 24.9M substrate may still be run later, but only as a 'paper-comparable benchmark-conditioned scale experiment', never as a 'query-independent full-scale corpus'. For the main L1 claim the latter framing would be methodologically wrong.",
+    "citation_correction": "24.9M entities / 164.6M facts is PullNet's figure (Sun, Bedrax-Weiss, Cohen, EMNLP-IJCNLP 2019, arXiv:1904.09537 s4.1), not GraftNet's; GraftNet pages 5-7 do not contain it.",
+    "next_phase": "WEBQSP_ROG_RESOLVED -- human-readable NODE + EDGE tables only. No Dense, SPLADE, encoder, ANN, KNN, H4, SAFE, halo or SP1. Approved by the user, NOT STARTED.",
+    "written": "2026-09-06T00:41:40"
+  },
+  "_2WIKI_TEXTUALIZATION_REV2_2026_09_06": {
+    "TEXTUALIZATION_REV": 2,
+    "applied": true,
+    "rule": "if canonical body is nonempty: keep unchanged / elif source-native title is nonempty: canonical_text = title / else: canonical_text = ''",
+    "same_rule_as": "hotpotqa (applied 2026-09-05)",
+    "CHANGED_NODE_COUNT": 87765,
+    "CORPUS_HASH_before": "81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4",
+    "CORPUS_HASH_after": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+    "NODE_ORDER_HASH_unchanged": "57dd809af573b6b531256b2a65e4b4efd1e26794c4fea81e0b43311fdcb24c86",
+    "N_unchanged": 5989847,
+    "empty_text_nodes_after": 0,
+    "membership_identity_order_change": "NONE",
+    "rev1_preserved_at": "data/final_canonical/_superseded_textualization_rev1/2wiki/"
+  }
+}

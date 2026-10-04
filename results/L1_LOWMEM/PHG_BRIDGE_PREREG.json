@@ -1,0 +1,491 @@
+{
+ "RECORD": "PHG_BRIDGE_PREREG",
+ "utc": "2026-09-13T19:03:21Z",
+ "classification": "PHG_SCALE_BRIDGE",
+ "dataset": "musique",
+ "tag": "LOWMEM__PHG_C1_con",
+ "suffix": "__phg_c1",
+ "ruling": {
+  "path": "results/L1_LOWMEM/PHG_SMALL_DATASET_VALIDATION_RULING.json",
+  "bytes": 17869,
+  "sha256": "f7cc6337f009ecd4ac889a19d7ef2397aacc6e1f504be116331fc0d357e2a182"
+ },
+ "contract": {
+  "name": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4 + PHG_NONEMPTY_REPAIR_V1",
+  "lane_preregistration": {
+   "path": "results/L1_LOWMEM/PHG_PREREG.json",
+   "bytes": 12650,
+   "sha256": "a290ad99b3ef3394859e4653acc66d4120abd8924e7aec25568b8dd269291404"
+  },
+  "repair_preregistration": {
+   "path": "results/L1_LOWMEM/PHG_REPAIR_PREREG.json",
+   "bytes": 13859,
+   "sha256": "d219fc90772e1e8604318b434c7cf773abdfea67a30970ff5a082214732189da"
+  },
+  "build": {
+   "path": "results/L1_LOWMEM/PHG_BUILD.json",
+   "bytes": 1650,
+   "sha256": "65fa41e7141e7344f5360c35da1c30df83a6a6ac18a353db93935539fa899a1b"
+  },
+  "driver_binary_sha256": "a36e1b3dbcef2cf5f20c09cc6ab014ab13ce2dcfeb3ec7c1041aa00d14d7ccb9",
+  "driver_source_sha256": "cf5099851282444d0b6c87b399210ae3dd6bc09f8fe2a5f7b49d315ce4b133b4",
+  "phg_parameters_in_order": [
+   [
+    "DEBUG_LEVEL",
+    "0"
+   ],
+   [
+    "NUM_GID_ENTRIES",
+    "1"
+   ],
+   [
+    "NUM_LID_ENTRIES",
+    "1"
+   ],
+   [
+    "OBJ_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "EDGE_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "DETERMINISTIC",
+    "1"
+   ],
+   [
+    "RETURN_LISTS",
+    "PARTS"
+   ],
+   [
+    "REMAP",
+    "0"
+   ],
+   [
+    "LB_METHOD",
+    "HYPERGRAPH"
+   ],
+   [
+    "HYPERGRAPH_PACKAGE",
+    "PHG"
+   ],
+   [
+    "LB_APPROACH",
+    "PARTITION"
+   ],
+   [
+    "IMBALANCE_TOL",
+    "1.03"
+   ],
+   [
+    "PHG_CUT_OBJECTIVE",
+    "CONNECTIVITY"
+   ],
+   [
+    "PHG_EDGE_SIZE_THRESHOLD",
+    "1.0"
+   ],
+   [
+    "PHG_RANDOMIZE_INPUT",
+    "0"
+   ],
+   [
+    "PHG_MULTILEVEL",
+    "1"
+   ],
+   [
+    "PHG_COARSENING_METHOD",
+    "AGG"
+   ],
+   [
+    "PHG_COARSEPARTITION_METHOD",
+    "AUTO"
+   ],
+   [
+    "PHG_REFINEMENT_METHOD",
+    "FM"
+   ],
+   [
+    "PHG_REFINEMENT_QUALITY",
+    "1"
+   ],
+   [
+    "PHG_EDGE_WEIGHT_OPERATION",
+    "ERROR"
+   ],
+   [
+    "PHG_PROCESSOR_REDUCTION_LIMIT",
+    "0.5"
+   ],
+   [
+    "PHG_REPART_MULTIPLIER",
+    "100"
+   ],
+   [
+    "CHECK_HYPERGRAPH",
+    "1"
+   ],
+   [
+    "PHG_OUTPUT_LEVEL",
+    "1"
+   ]
+  ],
+  "NUM_GLOBAL_PARTS": 1175,
+  "mpi_ranks": 4,
+  "rank_count_rule": "NP = the frozen rank count unless technically impossible; if 4 ranks no longer fit, NP is NOT silently changed: the resource failure is recorded and a separate explicit rank-count scale ruling is required (the rank count is part of PHG's algorithmic contract and may change the partition)",
+  "repair": "PHG_NONEMPTY_REPAIR_V1",
+  "repair_algorithm": [
+   "input: the frozen PHG R1 k-way vector of the dataset (assembled from data/l1_lowmem/<ds>/phg/R1/part_rank*.txt, sha-pinned in PHG_RUNS_<ds>.json) and the frozen H4_SK hypergraph (weighted nets over canonical positions)",
+   "for each empty block id b, in ascending order:",
+   "  1. candidates = nodes v whose current (donor) block a = part[v] has size >= 2",
+   "  2. delta(v) = exact change of the weighted KM1 = sum over nets e containing v of w_e * (1 - [count(e, a) == 1]) -- b is empty so every net of v gains one block; a net loses one block iff v was its only pin in a",
+   "  3. choose the candidate with the minimum delta",
+   "  4. ties: smaller canonical node position, then smaller donor block id (a node has exactly one donor block, so the third key can never decide between distinct nodes; implemented as a lexicographic sort on (delta, position, donor) for fidelity)",
+   "  5. move exactly that node: part[v] = b",
+   "  6. recompute block sizes and the per-(net, block) pin counts / connectivity before the next empty block (exact, from scratch)",
+   "moves == number of empty blocks of the input (one move per empty block); no other node changes block",
+   "postconditions: same node universe (length N, every position assigned exactly once), same k, block ids in [0, k), 0 empty blocks, max block <= ceil(1.03 N/k) (the canonical bound; a move can only shrink a donor of size >= 2 and create a singleton), exact H4_SK unchanged (npz sha + H4_SK_STRUCTURE_V1 digest == ORIGINAL), KM1_after == KM1_before + sum of the recorded deltas (full recomputation)",
+   "must NOT read: queries, answers, hop labels, BASE, SAFE, coverage, any replay/eval result; no parameter search; no minimum-block-size rule"
+  ],
+  "no_tuning": "no parameter change of any kind between datasets; no second configuration; no other rank count; PHG is run once (R1 = the arm's partition) plus one identical repeat run (diagnostic only)",
+  "modules": {
+   "phg.py": {
+    "path": "src/l1_lowmem/phg.py",
+    "bytes": 55309,
+    "sha256": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4"
+   },
+   "phg_repair.py": {
+    "path": "src/l1_lowmem/phg_repair.py",
+    "bytes": 47327,
+    "sha256": "4c051e7a139abc19fd1b8433948a0d288858ac6a9c67dae40d7ef001839472b0"
+   },
+   "phg_ruling.py": {
+    "path": "src/l1_lowmem/phg_ruling.py",
+    "bytes": 16537,
+    "sha256": "3cda6192eb506e1acbb423e5d80df19b786e44309bf4b17a53071279334ad7e0"
+   }
+  }
+ },
+ "program": {
+  "path": "src/l1_lowmem/phg_bridge.py",
+  "bytes": 51740,
+  "sha256": "836d1f69a69f10fb4c86dc2f5efa38b658cc057ced318b44c77c1e9d6f671f2e"
+ },
+ "question": "does exact H4_SK -> PHG -> NONEMPTY_REPAIR_V1 if needed -> P50 -> canonical L1 complete locally with sane partition / L1 behaviour?",
+ "why_musique": "117,534 nodes; Mt-KaHyPar local = RESOURCE_INFEASIBLE_LOCAL (MUSIQUE_MTKAHYPAR_RETRY.json) -- the first dataset where PHG can demonstrate that it removes a blocker; no valid Mt-KaHyPar paired reference exists there, so no equivalence claim",
+ "no_reference": {
+  "mtkahypar": "RESOURCE_INFEASIBLE_LOCAL -- FAILED_MEMORY_CAP (threads 4, cap 6.0 GB as recorded by partition.py, RSS at kill 5862 MB, wall 1132 s)",
+  "consequence": "no paired comparison, no equivalence claim, no comparative quality claim against Mt-KaHyPar; absolute L1 numbers only"
+ },
+ "inputs": {
+  "N": 117534,
+  "M": 250732,
+  "P": 6014938,
+  "k": 1175,
+  "k_rule": "max(1, N // 100)",
+  "contract_bound_ceil_1.03_N_over_k": 104,
+  "DATASET_json_RECORD_SHA256": "67fa637183fb02c4762fc80f6f4d2e21e14e2c665977e89adfcd6d32ed6d683f",
+  "H4_SK_npz_sha256": "2b1edc6dfcb045b7799459c4582bb2fbbe6d591825a48db45366597a97c1cd72",
+  "hypergraph_content_digest": "b19fd504bad7997cd254876ed7294128ab1724a95ccc52a18aed3b2a3e5d27bc",
+  "ORIGINAL_STRUCTURE_SHA256": "27628d1c0319dcbbdf3fa932b647ce2a9b21859cea716402b11da3067e281a75",
+  "stream_manifest": {
+   "path": "data/l1_lowmem/musique/freight/stream_manifest.txt",
+   "sha256": "25f03c1aae16d0406ad22027b588ebbb463d0f17971aa87564f5e60a09c5271b",
+   "H4_SK_STREAM_V1_manifest_sha256": "1cc3700e0de7a53b9cd6d4641f2b2d47298d31afb23e0884fa9e88d74dd7c236",
+   "shards": 24,
+   "shard_nodes": 5000
+  },
+  "data_pins": {
+   "H4_SK_npz": {
+    "path": "data/l1_canonical/musique/hypergraph/H4_SK.npz",
+    "bytes": 14668169,
+    "sha256": "2b1edc6dfcb045b7799459c4582bb2fbbe6d591825a48db45366597a97c1cd72"
+   },
+   "H4_SK_manifest": {
+    "path": "data/l1_canonical/musique/hypergraph/H4_SK.json",
+    "bytes": 2137,
+    "sha256": "0c8a6ee1b4e3b927dd919bb685d8d668648f29303b7c9e8063652f60c134acf1"
+   },
+   "mtkahypar_FAILED_record": {
+    "path": "data/l1_canonical/musique/parts/H4_SK.FAILED.json",
+    "bytes": 1838,
+    "sha256": "e57b84b033980b4afe8cebeda91a69a598a86bb564b7c9a7d9c6b77bde3b017e"
+   },
+   "freight_import_npy": {
+    "path": "data/l1_canonical/musique/parts/LOWMEM__FREIGHT_con.npy",
+    "bytes": 940400,
+    "sha256": "c977f526b3f88b60fdc041f03ebcd562efc48f4a655f7c69ca7d8360543233a1"
+   },
+   "freight_import_json": {
+    "path": "data/l1_canonical/musique/parts/LOWMEM__FREIGHT_con.json",
+    "bytes": 3483,
+    "sha256": "b17afa6d951786723fd085c545cf5d6cc4d599dd013c22142b980399f5360cbb"
+   },
+   "freight_replay_cache_npz": {
+    "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__FREIGHT_con.npz",
+    "bytes": 6181748,
+    "sha256": "812fee08742732509d55890ef56bfb3db942587bcdad2d30f8e3d036c20b961c"
+   },
+   "freight_replay_cache_json": {
+    "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__FREIGHT_con.json",
+    "bytes": 6174,
+    "sha256": "88cc60ce0594b7ad8920714049d779df4e21c70243ab196ef3e98a8363ba0a75"
+   },
+   "stream_manifest_H4_SK_STREAM_V1": {
+    "path": "data/l1_lowmem/musique/stream/H4_SK_STREAM_V1.json",
+    "bytes": 10864,
+    "sha256": "aea282fcc29ed452fc82eaddee060a523edb65bb918a17df9a6bb635c91db17d"
+   },
+   "reconstruction_gate": {
+    "path": "data/l1_lowmem/musique/stream/RECONSTRUCTION_GATE.json",
+    "bytes": 904,
+    "sha256": "3d19e0b4725fa60be987ea8168d30bf26b0ab4be70ed78729bd62427b6d37919"
+   },
+   "freight_stream_manifest_txt": {
+    "path": "data/l1_lowmem/musique/freight/stream_manifest.txt",
+    "bytes": 2080,
+    "sha256": "25f03c1aae16d0406ad22027b588ebbb463d0f17971aa87564f5e60a09c5271b"
+   },
+   "official_netl_json": {
+    "path": "data/l1_lowmem/musique/H4_SK.official.netl.json",
+    "bytes": 1989,
+    "sha256": "c33141553417c924f75cbd6cc9505570af70b57b934f9c36b69b338fcbfea9cf"
+   },
+   "semantic_gate": {
+    "path": "data/l1_lowmem/musique/H4_SK.semantic_gate.json",
+    "bytes": 1688,
+    "sha256": "c04e34ab2d07005e631ff966e432fb32e8f486a6f7eb5b41a32832d697cfb588"
+   },
+   "hgr_record": {
+    "path": "data/l1_lowmem/musique/H4_SK.hgr.json",
+    "bytes": 1291,
+    "sha256": "63973eb862ed1e08e9dd14cbecb33ab079e5e301623c8ce9706697581746eb4f"
+   }
+  }
+ },
+ "expected_population": {
+  "eval_split": "dev",
+  "sample_rule": "EVAL_SPLITS dev",
+  "nq": 2000,
+  "row_query_ids_sha256": "f3cffcf9050279448d2eef8aeccc1cc53d07f341ca4edb134e78b7fec378afbb",
+  "note": "identical to the frozen musique FREIGHT replay's population (partition-independent sample rule); the sealed test split is never read"
+ },
+ "stages": [
+  "1 H4_SK input verified (shards, official netl, semantic gate, stream manifest pins; structure digest recomputed == ORIGINAL)",
+  "2 PHG input/callback manifest = exact structure gate (gate-mode run; STRUCTURE_MISMATCH = STOP)",
+  "3 completed PHG partition R1 (+ dumps byte-identical to the gate run; + R1_repeat identity diagnostic)",
+  "3b PHG_NONEMPTY_REPAIR_V1 on R1 (one minimum-delta-KM1 move per empty block; no-op when no block is empty); postconditions as preregistered in PHG_REPAIR_PREREG.json; then the canonical validity gate (no empty block, max <= ceil(1.03 N/k))",
+  "4 experimental import parts/LOWMEM__PHG_C1_con.* -> P50 replay cache (unchanged canonical builder)",
+  "5 canonical L1 numerics (l1_eval, unchanged) -> L1_DOWNSTREAM_musique__phg_c1.json (BASELINE_ABSENT expected)"
+ ],
+ "labels": [
+  "PHG_SCALE_BRIDGE_COMPLETE",
+  "PHG_STRUCTURE_MISMATCH",
+  "PHG_BRIDGE_RESOURCE_FAIL",
+  "PHG_REPAIR_POSTCONDITION_FAIL",
+  "PHG_PARTITION_INVALID",
+  "PHG_BRIDGE_L1_EXECUTION_FAIL"
+ ],
+ "sanity_checks": {
+  "S1_downstream_executed": "the unchanged canonical L1 path ran to its record (l1_downstream.run: replay cache -> l1_eval numerics); status BASELINE_ABSENT is the expected outcome (no production Mt-KaHyPar replay exists for musique)",
+  "S2_population": "the evaluated population is the frozen canonical dev sample (EVAL_SPLITS dev, nq 2000) with row_query_ids_sha256 identical to the frozen musique FREIGHT replay's -- the sample rule is partition-independent, so any difference is a pipeline fault",
+  "S3_canonical_eligibility": "l1_eval's existing ELIGIBLE flag (max block / mean <= 1.05 and every block used) is True -- an existing canonical rule, not a new threshold",
+  "S4_definitional_consistency": "n_docs == N, npart == k, 0 <= BASE_ALL <= BASE_ANY <= 1, 0 <= SAFE_ALL <= SAFE_ANY <= 1, scope nodes > 0, every number finite, SAFE selector executed (CORR present) -- ALL is a subset of ANY per query by definition",
+  "S5_no_numeric_retrieval_threshold": "no acceptance threshold on BASE / SAFE / coverage exists or will be added after seeing the numbers; the absolute numbers are recorded as they come"
+ },
+ "decision_rule": "PHG_STRUCTURE_MISMATCH (gate 1) | PHG_BRIDGE_RESOURCE_FAIL (a stage did not complete locally: mpirun failure, out-of-memory, cache build failure -- the failing stage and error are recorded; NP is never changed) | PHG_REPAIR_POSTCONDITION_FAIL | PHG_PARTITION_INVALID (after the repair) | PHG_BRIDGE_L1_EXECUTION_FAIL (stage 5 did not complete or a sanity check S1-S4 failed) | PHG_SCALE_BRIDGE_COMPLETE (every stage completed and S1-S4 pass).  No label depends on the value of any retrieval number.",
+ "diagnostics_no_rule": [
+  "KM1 / connectivity (absolute; no Mt-KaHyPar value exists for musique)",
+  "STRUCT cut",
+  "KNN cut",
+  "block distribution",
+  "P50 scope",
+  "candidate coverage (ANY)",
+  "SAFE additions",
+  "hop-wise results where the canonical replay carries hop labels",
+  "memory per stage",
+  "runtime per stage",
+  "repeat-run identity",
+  "context only: the frozen musique FREIGHT arm's absolute numbers (FREIGHT_CLOSED; not a reference partitioner) and a paired exact McNemar of PHG vs that arm on the identical 2,000 ids -- diagnostic, no decision depends on it",
+  "blocker comparison (resources, not quality): the Mt-KaHyPar retry's RSS at kill / wall vs PHG's per-rank peaks / wall"
+ ],
+ "measurements": [
+  "per stage: wall seconds, peak RSS per MPI rank (/usr/bin/time -v + getrusage), host Python peak working set after each host stage",
+  "host snapshot before / after (total / available memory; foreign python processes > 1 GB RSS, untouched)",
+  "replay-cache builder's predicted peak and BASE / STRUCT cost from its manifest"
+ ],
+ "stop_rule": "STOP_FOR_REVIEW after the musique record; WebQSP / HotpotQA / 2Wiki require a separate authorization (the ruling names WebQSP as next only if MuSiQue works); no promotion; no tuning; FREIGHT stays FREIGHT_CLOSED; the squad / metaqa PHG records are not touched",
+ "frozen_read_only": {
+  "H4_SK_LOW_MEMORY_PARTITIONING_REPORT.json": {
+   "path": "results/L1_LOWMEM/H4_SK_LOW_MEMORY_PARTITIONING_REPORT.json",
+   "bytes": 50578,
+   "sha256": "5a07e478952fdc8d46949b94cdb159f1b7eae34eb8b35e859ee981df5b2dd678"
+  },
+  "H4_SK_LOW_MEMORY_PARTITIONING_REPORT.md": {
+   "path": "results/L1_LOWMEM/H4_SK_LOW_MEMORY_PARTITIONING_REPORT.md",
+   "bytes": 11366,
+   "sha256": "89831695ce7085932222729fd0f33a32be4409887565491328b89365e6df36ec"
+  },
+  "FREIGHT_RUNS_squad.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_squad.json",
+   "bytes": 45452,
+   "sha256": "f252ff8dbcf82875330eee67d5f7af9b44e0ecc7e5f7a900fb7b2c3c415683db"
+  },
+  "FREIGHT_RUNS_metaqa.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_metaqa.json",
+   "bytes": 38282,
+   "sha256": "aaf4d3a7ad6f5a9b88448f28c5b5fc89462cf0d9d7f767f3393a7cbb0c39c0d0"
+  },
+  "FREIGHT_RUNS_musique.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_musique.json",
+   "bytes": 50727,
+   "sha256": "f23b6c85302ab7e19dfe8fc14d67b85b9e58dd4087e86c29707365d1d70230b6"
+  },
+  "FREIGHT_BUILD.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_BUILD.json",
+   "bytes": 6406,
+   "sha256": "e01faeded3c5272b6ea5ebce7e4a03d89ed662c4970fea5321c938c051b9fafb"
+  },
+  "L1_DOWNSTREAM_squad.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad.json",
+   "bytes": 3507,
+   "sha256": "1aace62a2a3cb6da1c96050b0472bea334f68d57ff95d1f9ac2bbb151180ecf9"
+  },
+  "L1_DOWNSTREAM_metaqa.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa.json",
+   "bytes": 5667,
+   "sha256": "784f3fe75abb979b7e2d2eacc84ac57335ff8373356d6c2627fbb0866f8a5bd6"
+  },
+  "L1_DOWNSTREAM_musique.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_musique.json",
+   "bytes": 1599,
+   "sha256": "4888f4aae9e713a4842721a9a9ca46c19fa68de7b40e5124515a1676827ed3f3"
+  },
+  "MUSIQUE_MTKAHYPAR_RETRY.json": {
+   "path": "results/L1_LOWMEM/MUSIQUE_MTKAHYPAR_RETRY.json",
+   "bytes": 2515,
+   "sha256": "1ef89da11257675f86fde39bf8e75a3ddb3f6b909e79373b1a640701e011b7d6"
+  },
+  "FREIGHT_RESTREAM_PREREG.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_PREREG.json",
+   "bytes": 6753,
+   "sha256": "3b0eb1fb82a0d94f65f24934c01ef73b313ca1cf5394cc140960e147dc77bfe2"
+  },
+  "FREIGHT_RESTREAM_RUNS_squad.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_RUNS_squad.json",
+   "bytes": 25172,
+   "sha256": "ac2c6b13cffef2ef4ac3023c615f9e5cc0d574d4641272219bbcad78e9909ed0"
+  },
+  "FREIGHT_RESTREAM_RUNS_metaqa.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_RUNS_metaqa.json",
+   "bytes": 39654,
+   "sha256": "a596c0a25750ab9ba3389f62d34cb75b512f0ea47879a0f8967231363fb7b6fb"
+  },
+  "FREIGHT_RESTREAM_REPORT.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_REPORT.json",
+   "bytes": 20553,
+   "sha256": "044aea86c05de815647ba444fec93cd83516e6d8e73967dfbf55accb28296ce7"
+  },
+  "FREIGHT_RESTREAM_REPORT.md": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_REPORT.md",
+   "bytes": 5328,
+   "sha256": "7dc1bbb67942e9de1337d8c3e05bbd7c6debab0eabe1a08e4fdaf2245d04672f"
+  },
+  "L1_DOWNSTREAM_metaqa__restream2.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa__restream2.json",
+   "bytes": 5682,
+   "sha256": "2dd3ef227324157824ca7be476e5dee75d8825e243277cd0056d87bd3ae3075b"
+  },
+  "AUDIT_ZOLTAN_PHG.json": {
+   "path": "results/L1_LOWMEM/AUDIT_ZOLTAN_PHG.json",
+   "bytes": 5518,
+   "sha256": "1734ed9181df71c323768cb6065a856d28d1648888381312029a0e264453b24b"
+  },
+  "PHG_PACKAGES.json": {
+   "path": "results/L1_LOWMEM/PHG_PACKAGES.json",
+   "bytes": 9677,
+   "sha256": "1c4a3d8107d8207066d20a1aadce15849ed23b5b8ebc63bd0276c52a9af17b23"
+  },
+  "PHG_PREREG.json": {
+   "path": "results/L1_LOWMEM/PHG_PREREG.json",
+   "bytes": 12650,
+   "sha256": "a290ad99b3ef3394859e4653acc66d4120abd8924e7aec25568b8dd269291404"
+  },
+  "PHG_BUILD.json": {
+   "path": "results/L1_LOWMEM/PHG_BUILD.json",
+   "bytes": 1650,
+   "sha256": "65fa41e7141e7344f5360c35da1c30df83a6a6ac18a353db93935539fa899a1b"
+  },
+  "PHG_RUNS_squad.json": {
+   "path": "results/L1_LOWMEM/PHG_RUNS_squad.json",
+   "bytes": 78420,
+   "sha256": "f70362d853fe1185377c0790dd630fb5c9e5e06327cee0a5f9f415364f02f400"
+  },
+  "PHG_RUNS_metaqa.json": {
+   "path": "results/L1_LOWMEM/PHG_RUNS_metaqa.json",
+   "bytes": 70048,
+   "sha256": "f917dfe3486bfffe3730d73833c1ada89c9f27cedf3f7d592cf72bc97f549787"
+  },
+  "PHG_REPAIR_PREREG.json": {
+   "path": "results/L1_LOWMEM/PHG_REPAIR_PREREG.json",
+   "bytes": 13859,
+   "sha256": "d219fc90772e1e8604318b434c7cf773abdfea67a30970ff5a082214732189da"
+  },
+  "PHG_REPAIR_RUNS_squad.json": {
+   "path": "results/L1_LOWMEM/PHG_REPAIR_RUNS_squad.json",
+   "bytes": 4704,
+   "sha256": "9ba46a53f53a43f2896be75453540ed842f0fff7f30d7c6bcbee872a2699ca32"
+  },
+  "PHG_REPAIR_RUNS_metaqa.json": {
+   "path": "results/L1_LOWMEM/PHG_REPAIR_RUNS_metaqa.json",
+   "bytes": 17577,
+   "sha256": "d0ab4af82b9a210651d824dc25eacd3de079f088357d1cb85aa62de0ccd86e55"
+  },
+  "PHG_REPORT.json": {
+   "path": "results/L1_LOWMEM/PHG_REPORT.json",
+   "bytes": 45200,
+   "sha256": "77b2a7781d9a183309df9bc20e3c108109159c0656a3963a73c63cc4b5ca0be3"
+  },
+  "PHG_REPORT.md": {
+   "path": "results/L1_LOWMEM/PHG_REPORT.md",
+   "bytes": 10271,
+   "sha256": "ace53d4f14c5a0c8e7f87a33e356c62e0e4c56e2593abae2c79a33b3f037fb31"
+  },
+  "L1_DOWNSTREAM_squad__phg.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad__phg.json",
+   "bytes": 3513,
+   "sha256": "f2a2704b746400557658cbe597d682f4856d298e6c2f1b426c56e7326f7507d8"
+  },
+  "L1_DOWNSTREAM_metaqa__phg_repair1.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa__phg_repair1.json",
+   "bytes": 5645,
+   "sha256": "e99da711d075d22e3a430cbdc35f985eb648c7575d2e7361a812f8321760a49f"
+  },
+  "L1_REPLAY_squad__LOWMEM__PHG_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_squad__LOWMEM__PHG_con.json",
+   "bytes": 34987,
+   "sha256": "dc14ab54ea656f2f4f495c59365b84836b70cd3c27a22c646a210e4d9d5d8846"
+  },
+  "L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json",
+   "bytes": 33356,
+   "sha256": "d4ff6870236303c4b88fbcdd4c421d33719eb19dba2829d87a53cc09f5032c17"
+  },
+  "L1_REPLAY_musique__LOWMEM__FREIGHT_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__FREIGHT_con.json",
+   "bytes": 35094,
+   "sha256": "8393116b414a1ffb1d5f6be44e136325221493d8e2103626726b9ce27ea6bfe9"
+  },
+  "H4_SK_CONTRACT_FREEZE.json": {
+   "path": "results/L1_LOWMEM/H4_SK_CONTRACT_FREEZE.json",
+   "bytes": 19650,
+   "sha256": "bbd1a3ce8cee7493769a0b32f9d6c37c6d767895d7dbb09c8dd51f5d8f3e15af"
+  },
+  "PHG_SMALL_DATASET_VALIDATION_RULING.json": {
+   "path": "results/L1_LOWMEM/PHG_SMALL_DATASET_VALIDATION_RULING.json",
+   "bytes": 17869,
+   "sha256": "f7cc6337f009ecd4ac889a19d7ef2397aacc6e1f504be116331fc0d357e2a182"
+  }
+ }
+}

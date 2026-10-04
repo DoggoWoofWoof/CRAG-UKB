@@ -1,0 +1,4556 @@
+{
+ "RECORD": "PROTOTYPE_LADDER_SUMMARY",
+ "utc": "2026-09-25T16:37:55Z",
+ "question": "How few fixed, query-free representatives per block are sufficient to preserve the ALL-gold recall of the frozen composite's stage 2 (QMAX(B, q) = max over all nodes of B of q . e_v), at the routing level (P50) and end to end (QMAX_BALANCED_H2_PATCH1)?",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_PROTOTYPE_LADDER.json",
+  "sha256": "533adfbd3fd3c6a44d91bd1b4f6be048f018ccdd41af40064549140bfdb47ea0"
+ },
+ "records": {
+  "metaqa": {
+   "path": "results/L1_COVPART/proto_A_metaqa.json",
+   "sha256": "7624b53e3d3d492c2e9de318c3d3df4edf6c2edfac54b1b1c4d97fd4c25b179f",
+   "n_split_A": 1002
+  },
+  "metaqa_phg": {
+   "path": "results/L1_COVPART/proto_A_metaqa_phg.json",
+   "sha256": "eee983f0f174f60b1142273dfc5c0d75ac43ff04a64c664f8db2aebd2d5b9919",
+   "n_split_A": 1002
+  },
+  "squad": {
+   "path": "results/L1_COVPART/proto_A_squad.json",
+   "sha256": "b2e04e2ac2245bc89cf08668b99266c6def03c747ce4cedb1582c3b610eb5d08",
+   "n_split_A": 992
+  },
+  "squad_phg": {
+   "path": "results/L1_COVPART/proto_A_squad_phg.json",
+   "sha256": "f5ee3ff80f0a81552fff74fd0bc6681db869f3cc2fb5c9552bfc5964047142da",
+   "n_split_A": 992
+  },
+  "musique": {
+   "path": "results/L1_COVPART/proto_A_musique.json",
+   "sha256": "5633ca9eac1330f60154c91124faef089c7f33065c4421d24c01e4e574cf55d5",
+   "n_split_A": 996
+  }
+ },
+ "code": {
+  "path": "scratchpad/_l1c_proto_summary.py",
+  "sha256": "97e81012911ad0305b0dff2653d35d1d8efdcf8286f0ac2d58ec306cedcfbd76"
+ },
+ "HEADLINE (PRIMARY level, the composite end to end)": "FPS_PRESERVES_QMAX_AT_m=2",
+ "labels_by_level": {
+  "ALONE": "NO_FPS_LADDER_POINT_PRESERVES_QMAX (m* > 32)",
+  "F0": "NO_FPS_LADDER_POINT_PRESERVES_QMAX (m* > 32)",
+  "SAFE": "FPS_PRESERVES_QMAX_AT_m=32",
+  "PRIMARY": "FPS_PRESERVES_QMAX_AT_m=2"
+ },
+ "levels": {
+  "ALONE": {
+   "label": "NO_FPS_LADDER_POINT_PRESERVES_QMAX (m* > 32)",
+   "m_star_FPS (all five caches)": null,
+   "FPS_m_preserving_on_all_five": [],
+   "FPS_preserving_on_all_five_from_m_star_upward": false,
+   "smallest_preserving_FPS_m_per_cache": {
+    "metaqa": null,
+    "metaqa_phg": null,
+    "squad": null,
+    "squad_phg": null,
+    "musique": null
+   },
+   "binding_caches (fail at the ladder point just below m*, or at m = 32 when there is no m*)": [
+    "metaqa",
+    "metaqa_phg",
+    "squad",
+    "squad_phg",
+    "musique"
+   ],
+   "m_star_RAND (control)": null,
+   "RAND_m_preserving_on_all_five": [],
+   "centroids_preserve (per cache)": {
+    "CENT_MEAN": {
+     "metaqa": false,
+     "metaqa_phg": false,
+     "squad": false,
+     "squad_phg": false,
+     "musique": false
+    },
+    "CENT_NORM": {
+     "metaqa": false,
+     "metaqa_phg": false,
+     "squad": false,
+     "squad_phg": false,
+     "musique": false
+    }
+   },
+   "table (ALL / net loss vs QMAX / PRESERVES)": {
+    "metaqa": {
+     "QMAX": 0.1816,
+     "CENT_MEAN": [
+      0.1437,
+      38,
+      false
+     ],
+     "CENT_NORM": [
+      0.1277,
+      54,
+      false
+     ],
+     "FPS_1": [
+      0.1088,
+      73,
+      false
+     ],
+     "FPS_2": [
+      0.1178,
+      64,
+      false
+     ],
+     "FPS_4": [
+      0.1008,
+      81,
+      false
+     ],
+     "FPS_8": [
+      0.1038,
+      78,
+      false
+     ],
+     "FPS_16": [
+      0.1118,
+      70,
+      false
+     ],
+     "FPS_32": [
+      0.1307,
+      51,
+      false
+     ],
+     "RAND_1": [
+      0.0629,
+      119,
+      false
+     ],
+     "RAND_2": [
+      0.1168,
+      65,
+      false
+     ],
+     "RAND_4": [
+      0.1098,
+      72,
+      false
+     ],
+     "RAND_8": [
+      0.1158,
+      66,
+      false
+     ],
+     "RAND_16": [
+      0.1267,
+      55,
+      false
+     ],
+     "RAND_32": [
+      0.1477,
+      34,
+      false
+     ]
+    },
+    "metaqa_phg": {
+     "QMAX": 0.1956,
+     "CENT_MEAN": [
+      0.1188,
+      77,
+      false
+     ],
+     "CENT_NORM": [
+      0.1317,
+      64,
+      false
+     ],
+     "FPS_1": [
+      0.1118,
+      84,
+      false
+     ],
+     "FPS_2": [
+      0.1198,
+      76,
+      false
+     ],
+     "FPS_4": [
+      0.1018,
+      94,
+      false
+     ],
+     "FPS_8": [
+      0.1048,
+      91,
+      false
+     ],
+     "FPS_16": [
+      0.1138,
+      82,
+      false
+     ],
+     "FPS_32": [
+      0.1367,
+      59,
+      false
+     ],
+     "RAND_1": [
+      0.0679,
+      128,
+      false
+     ],
+     "RAND_2": [
+      0.1018,
+      94,
+      false
+     ],
+     "RAND_4": [
+      0.1008,
+      95,
+      false
+     ],
+     "RAND_8": [
+      0.1208,
+      75,
+      false
+     ],
+     "RAND_16": [
+      0.1357,
+      60,
+      false
+     ],
+     "RAND_32": [
+      0.1427,
+      53,
+      false
+     ]
+    },
+    "squad": {
+     "QMAX": 0.9879,
+     "CENT_MEAN": [
+      0.9093,
+      78,
+      false
+     ],
+     "CENT_NORM": [
+      0.9083,
+      79,
+      false
+     ],
+     "FPS_1": [
+      0.8155,
+      171,
+      false
+     ],
+     "FPS_2": [
+      0.8256,
+      161,
+      false
+     ],
+     "FPS_4": [
+      0.8548,
+      132,
+      false
+     ],
+     "FPS_8": [
+      0.8982,
+      89,
+      false
+     ],
+     "FPS_16": [
+      0.9435,
+      44,
+      false
+     ],
+     "FPS_32": [
+      0.9728,
+      15,
+      false
+     ],
+     "RAND_1": [
+      0.7056,
+      280,
+      false
+     ],
+     "RAND_2": [
+      0.7782,
+      208,
+      false
+     ],
+     "RAND_4": [
+      0.8468,
+      140,
+      false
+     ],
+     "RAND_8": [
+      0.877,
+      110,
+      false
+     ],
+     "RAND_16": [
+      0.9274,
+      60,
+      false
+     ],
+     "RAND_32": [
+      0.9425,
+      45,
+      false
+     ]
+    },
+    "squad_phg": {
+     "QMAX": 0.9909,
+     "CENT_MEAN": [
+      0.9093,
+      81,
+      false
+     ],
+     "CENT_NORM": [
+      0.9214,
+      69,
+      false
+     ],
+     "FPS_1": [
+      0.8014,
+      188,
+      false
+     ],
+     "FPS_2": [
+      0.8226,
+      167,
+      false
+     ],
+     "FPS_4": [
+      0.8286,
+      161,
+      false
+     ],
+     "FPS_8": [
+      0.8831,
+      107,
+      false
+     ],
+     "FPS_16": [
+      0.9355,
+      55,
+      false
+     ],
+     "FPS_32": [
+      0.9587,
+      32,
+      false
+     ],
+     "RAND_1": [
+      0.6008,
+      387,
+      false
+     ],
+     "RAND_2": [
+      0.7228,
+      266,
+      false
+     ],
+     "RAND_4": [
+      0.8075,
+      182,
+      false
+     ],
+     "RAND_8": [
+      0.8538,
+      136,
+      false
+     ],
+     "RAND_16": [
+      0.9083,
+      82,
+      false
+     ],
+     "RAND_32": [
+      0.9446,
+      46,
+      false
+     ]
+    },
+    "musique": {
+     "QMAX": 0.7008,
+     "CENT_MEAN": [
+      0.3283,
+      371,
+      false
+     ],
+     "CENT_NORM": [
+      0.4056,
+      294,
+      false
+     ],
+     "FPS_1": [
+      0.261,
+      438,
+      false
+     ],
+     "FPS_2": [
+      0.261,
+      438,
+      false
+     ],
+     "FPS_4": [
+      0.2761,
+      423,
+      false
+     ],
+     "FPS_8": [
+      0.3163,
+      383,
+      false
+     ],
+     "FPS_16": [
+      0.3996,
+      300,
+      false
+     ],
+     "FPS_32": [
+      0.5231,
+      177,
+      false
+     ],
+     "RAND_1": [
+      0.1737,
+      525,
+      false
+     ],
+     "RAND_2": [
+      0.2159,
+      483,
+      false
+     ],
+     "RAND_4": [
+      0.2661,
+      433,
+      false
+     ],
+     "RAND_8": [
+      0.3143,
+      385,
+      false
+     ],
+     "RAND_16": [
+      0.3996,
+      300,
+      false
+     ],
+     "RAND_32": [
+      0.488,
+      212,
+      false
+     ]
+    }
+   },
+   "tolerance_net_loss_per_cache": {
+    "metaqa": 5,
+    "metaqa_phg": 5,
+    "squad": 5,
+    "squad_phg": 5,
+    "musique": 5
+   }
+  },
+  "F0": {
+   "label": "NO_FPS_LADDER_POINT_PRESERVES_QMAX (m* > 32)",
+   "m_star_FPS (all five caches)": null,
+   "FPS_m_preserving_on_all_five": [],
+   "FPS_preserving_on_all_five_from_m_star_upward": false,
+   "smallest_preserving_FPS_m_per_cache": {
+    "metaqa": 1,
+    "metaqa_phg": 1,
+    "squad": 4,
+    "squad_phg": 2,
+    "musique": null
+   },
+   "binding_caches (fail at the ladder point just below m*, or at m = 32 when there is no m*)": [
+    "squad",
+    "musique"
+   ],
+   "m_star_RAND (control)": null,
+   "RAND_m_preserving_on_all_five": [],
+   "centroids_preserve (per cache)": {
+    "CENT_MEAN": {
+     "metaqa": true,
+     "metaqa_phg": true,
+     "squad": false,
+     "squad_phg": true,
+     "musique": false
+    },
+    "CENT_NORM": {
+     "metaqa": true,
+     "metaqa_phg": true,
+     "squad": false,
+     "squad_phg": false,
+     "musique": false
+    }
+   },
+   "table (ALL / net loss vs QMAX / PRESERVES)": {
+    "metaqa": {
+     "QMAX": 0.6327,
+     "CENT_MEAN": [
+      0.6437,
+      -11,
+      true
+     ],
+     "CENT_NORM": [
+      0.6407,
+      -8,
+      true
+     ],
+     "FPS_1": [
+      0.6417,
+      -9,
+      true
+     ],
+     "FPS_2": [
+      0.6417,
+      -9,
+      true
+     ],
+     "FPS_4": [
+      0.6387,
+      -6,
+      true
+     ],
+     "FPS_8": [
+      0.6327,
+      0,
+      true
+     ],
+     "FPS_16": [
+      0.6337,
+      -1,
+      true
+     ],
+     "FPS_32": [
+      0.6317,
+      1,
+      true
+     ],
+     "RAND_1": [
+      0.6307,
+      2,
+      true
+     ],
+     "RAND_2": [
+      0.6317,
+      1,
+      true
+     ],
+     "RAND_4": [
+      0.6387,
+      -6,
+      true
+     ],
+     "RAND_8": [
+      0.6357,
+      -3,
+      true
+     ],
+     "RAND_16": [
+      0.6357,
+      -3,
+      true
+     ],
+     "RAND_32": [
+      0.6337,
+      -1,
+      true
+     ]
+    },
+    "metaqa_phg": {
+     "QMAX": 0.6747,
+     "CENT_MEAN": [
+      0.6747,
+      0,
+      true
+     ],
+     "CENT_NORM": [
+      0.6766,
+      -2,
+      true
+     ],
+     "FPS_1": [
+      0.6776,
+      -3,
+      true
+     ],
+     "FPS_2": [
+      0.6766,
+      -2,
+      true
+     ],
+     "FPS_4": [
+      0.6766,
+      -2,
+      true
+     ],
+     "FPS_8": [
+      0.6737,
+      1,
+      true
+     ],
+     "FPS_16": [
+      0.6687,
+      6,
+      false
+     ],
+     "FPS_32": [
+      0.6717,
+      3,
+      true
+     ],
+     "RAND_1": [
+      0.6707,
+      4,
+      true
+     ],
+     "RAND_2": [
+      0.6717,
+      3,
+      true
+     ],
+     "RAND_4": [
+      0.6687,
+      6,
+      false
+     ],
+     "RAND_8": [
+      0.6727,
+      2,
+      true
+     ],
+     "RAND_16": [
+      0.6756,
+      -1,
+      true
+     ],
+     "RAND_32": [
+      0.6707,
+      4,
+      true
+     ]
+    },
+    "squad": {
+     "QMAX": 0.9919,
+     "CENT_MEAN": [
+      0.9819,
+      10,
+      false
+     ],
+     "CENT_NORM": [
+      0.9788,
+      13,
+      false
+     ],
+     "FPS_1": [
+      0.9758,
+      16,
+      false
+     ],
+     "FPS_2": [
+      0.9829,
+      9,
+      false
+     ],
+     "FPS_4": [
+      0.9869,
+      5,
+      true
+     ],
+     "FPS_8": [
+      0.9869,
+      5,
+      true
+     ],
+     "FPS_16": [
+      0.9909,
+      1,
+      true
+     ],
+     "FPS_32": [
+      0.9859,
+      6,
+      false
+     ],
+     "RAND_1": [
+      0.9839,
+      8,
+      false
+     ],
+     "RAND_2": [
+      0.9879,
+      4,
+      true
+     ],
+     "RAND_4": [
+      0.9849,
+      7,
+      false
+     ],
+     "RAND_8": [
+      0.9889,
+      3,
+      true
+     ],
+     "RAND_16": [
+      0.9879,
+      4,
+      true
+     ],
+     "RAND_32": [
+      0.9909,
+      1,
+      true
+     ]
+    },
+    "squad_phg": {
+     "QMAX": 0.9889,
+     "CENT_MEAN": [
+      0.9849,
+      4,
+      true
+     ],
+     "CENT_NORM": [
+      0.9798,
+      9,
+      false
+     ],
+     "FPS_1": [
+      0.9798,
+      9,
+      false
+     ],
+     "FPS_2": [
+      0.9839,
+      5,
+      true
+     ],
+     "FPS_4": [
+      0.9899,
+      -1,
+      true
+     ],
+     "FPS_8": [
+      0.9869,
+      2,
+      true
+     ],
+     "FPS_16": [
+      0.9879,
+      1,
+      true
+     ],
+     "FPS_32": [
+      0.9859,
+      3,
+      true
+     ],
+     "RAND_1": [
+      0.9849,
+      4,
+      true
+     ],
+     "RAND_2": [
+      0.9839,
+      5,
+      true
+     ],
+     "RAND_4": [
+      0.9849,
+      4,
+      true
+     ],
+     "RAND_8": [
+      0.9859,
+      3,
+      true
+     ],
+     "RAND_16": [
+      0.9859,
+      3,
+      true
+     ],
+     "RAND_32": [
+      0.9869,
+      2,
+      true
+     ]
+    },
+    "musique": {
+     "QMAX": 0.7319,
+     "CENT_MEAN": [
+      0.7008,
+      31,
+      false
+     ],
+     "CENT_NORM": [
+      0.6867,
+      45,
+      false
+     ],
+     "FPS_1": [
+      0.6737,
+      58,
+      false
+     ],
+     "FPS_2": [
+      0.6878,
+      44,
+      false
+     ],
+     "FPS_4": [
+      0.6827,
+      49,
+      false
+     ],
+     "FPS_8": [
+      0.6837,
+      48,
+      false
+     ],
+     "FPS_16": [
+      0.6878,
+      44,
+      false
+     ],
+     "FPS_32": [
+      0.7038,
+      28,
+      false
+     ],
+     "RAND_1": [
+      0.6647,
+      67,
+      false
+     ],
+     "RAND_2": [
+      0.6727,
+      59,
+      false
+     ],
+     "RAND_4": [
+      0.6717,
+      60,
+      false
+     ],
+     "RAND_8": [
+      0.6817,
+      50,
+      false
+     ],
+     "RAND_16": [
+      0.6878,
+      44,
+      false
+     ],
+     "RAND_32": [
+      0.7088,
+      23,
+      false
+     ]
+    }
+   },
+   "tolerance_net_loss_per_cache": {
+    "metaqa": 5,
+    "metaqa_phg": 5,
+    "squad": 5,
+    "squad_phg": 5,
+    "musique": 5
+   }
+  },
+  "SAFE": {
+   "label": "FPS_PRESERVES_QMAX_AT_m=32",
+   "m_star_FPS (all five caches)": 32,
+   "FPS_m_preserving_on_all_five": [
+    32
+   ],
+   "FPS_preserving_on_all_five_from_m_star_upward": true,
+   "smallest_preserving_FPS_m_per_cache": {
+    "metaqa": 1,
+    "metaqa_phg": 1,
+    "squad": 2,
+    "squad_phg": 1,
+    "musique": 32
+   },
+   "binding_caches (fail at the ladder point just below m*, or at m = 32 when there is no m*)": [
+    "musique"
+   ],
+   "m_star_RAND (control)": 32,
+   "RAND_m_preserving_on_all_five": [
+    32
+   ],
+   "centroids_preserve (per cache)": {
+    "CENT_MEAN": {
+     "metaqa": true,
+     "metaqa_phg": true,
+     "squad": true,
+     "squad_phg": true,
+     "musique": true
+    },
+    "CENT_NORM": {
+     "metaqa": true,
+     "metaqa_phg": true,
+     "squad": false,
+     "squad_phg": true,
+     "musique": false
+    }
+   },
+   "table (ALL / net loss vs QMAX / PRESERVES)": {
+    "metaqa": {
+     "QMAX": 0.6377,
+     "CENT_MEAN": [
+      0.6457,
+      -8,
+      true
+     ],
+     "CENT_NORM": [
+      0.6407,
+      -3,
+      true
+     ],
+     "FPS_1": [
+      0.6407,
+      -3,
+      true
+     ],
+     "FPS_2": [
+      0.6407,
+      -3,
+      true
+     ],
+     "FPS_4": [
+      0.6367,
+      1,
+      true
+     ],
+     "FPS_8": [
+      0.6357,
+      2,
+      true
+     ],
+     "FPS_16": [
+      0.6347,
+      3,
+      true
+     ],
+     "FPS_32": [
+      0.6367,
+      1,
+      true
+     ],
+     "RAND_1": [
+      0.6307,
+      7,
+      false
+     ],
+     "RAND_2": [
+      0.6347,
+      3,
+      true
+     ],
+     "RAND_4": [
+      0.6407,
+      -3,
+      true
+     ],
+     "RAND_8": [
+      0.6357,
+      2,
+      true
+     ],
+     "RAND_16": [
+      0.6387,
+      -1,
+      true
+     ],
+     "RAND_32": [
+      0.6357,
+      2,
+      true
+     ]
+    },
+    "metaqa_phg": {
+     "QMAX": 0.6687,
+     "CENT_MEAN": [
+      0.6766,
+      -8,
+      true
+     ],
+     "CENT_NORM": [
+      0.6747,
+      -6,
+      true
+     ],
+     "FPS_1": [
+      0.6756,
+      -7,
+      true
+     ],
+     "FPS_2": [
+      0.6756,
+      -7,
+      true
+     ],
+     "FPS_4": [
+      0.6737,
+      -5,
+      true
+     ],
+     "FPS_8": [
+      0.6707,
+      -2,
+      true
+     ],
+     "FPS_16": [
+      0.6687,
+      0,
+      true
+     ],
+     "FPS_32": [
+      0.6727,
+      -4,
+      true
+     ],
+     "RAND_1": [
+      0.6747,
+      -6,
+      true
+     ],
+     "RAND_2": [
+      0.6727,
+      -4,
+      true
+     ],
+     "RAND_4": [
+      0.6717,
+      -3,
+      true
+     ],
+     "RAND_8": [
+      0.6737,
+      -5,
+      true
+     ],
+     "RAND_16": [
+      0.6776,
+      -9,
+      true
+     ],
+     "RAND_32": [
+      0.6697,
+      -1,
+      true
+     ]
+    },
+    "squad": {
+     "QMAX": 0.995,
+     "CENT_MEAN": [
+      0.9919,
+      3,
+      true
+     ],
+     "CENT_NORM": [
+      0.9889,
+      6,
+      false
+     ],
+     "FPS_1": [
+      0.9889,
+      6,
+      false
+     ],
+     "FPS_2": [
+      0.9919,
+      3,
+      true
+     ],
+     "FPS_4": [
+      0.9929,
+      2,
+      true
+     ],
+     "FPS_8": [
+      0.9919,
+      3,
+      true
+     ],
+     "FPS_16": [
+      0.995,
+      0,
+      true
+     ],
+     "FPS_32": [
+      0.994,
+      1,
+      true
+     ],
+     "RAND_1": [
+      0.9909,
+      4,
+      true
+     ],
+     "RAND_2": [
+      0.9919,
+      3,
+      true
+     ],
+     "RAND_4": [
+      0.9919,
+      3,
+      true
+     ],
+     "RAND_8": [
+      0.9929,
+      2,
+      true
+     ],
+     "RAND_16": [
+      0.994,
+      1,
+      true
+     ],
+     "RAND_32": [
+      0.9919,
+      3,
+      true
+     ]
+    },
+    "squad_phg": {
+     "QMAX": 0.9899,
+     "CENT_MEAN": [
+      0.9879,
+      2,
+      true
+     ],
+     "CENT_NORM": [
+      0.9869,
+      3,
+      true
+     ],
+     "FPS_1": [
+      0.9869,
+      3,
+      true
+     ],
+     "FPS_2": [
+      0.9889,
+      1,
+      true
+     ],
+     "FPS_4": [
+      0.9899,
+      0,
+      true
+     ],
+     "FPS_8": [
+      0.9909,
+      -1,
+      true
+     ],
+     "FPS_16": [
+      0.9879,
+      2,
+      true
+     ],
+     "FPS_32": [
+      0.9879,
+      2,
+      true
+     ],
+     "RAND_1": [
+      0.9869,
+      3,
+      true
+     ],
+     "RAND_2": [
+      0.9879,
+      2,
+      true
+     ],
+     "RAND_4": [
+      0.9879,
+      2,
+      true
+     ],
+     "RAND_8": [
+      0.9899,
+      0,
+      true
+     ],
+     "RAND_16": [
+      0.9879,
+      2,
+      true
+     ],
+     "RAND_32": [
+      0.9899,
+      0,
+      true
+     ]
+    },
+    "musique": {
+     "QMAX": 0.748,
+     "CENT_MEAN": [
+      0.751,
+      -3,
+      true
+     ],
+     "CENT_NORM": [
+      0.739,
+      9,
+      false
+     ],
+     "FPS_1": [
+      0.741,
+      7,
+      false
+     ],
+     "FPS_2": [
+      0.742,
+      6,
+      false
+     ],
+     "FPS_4": [
+      0.741,
+      7,
+      false
+     ],
+     "FPS_8": [
+      0.7299,
+      18,
+      false
+     ],
+     "FPS_16": [
+      0.739,
+      9,
+      false
+     ],
+     "FPS_32": [
+      0.745,
+      3,
+      true
+     ],
+     "RAND_1": [
+      0.7189,
+      29,
+      false
+     ],
+     "RAND_2": [
+      0.7249,
+      23,
+      false
+     ],
+     "RAND_4": [
+      0.7179,
+      30,
+      false
+     ],
+     "RAND_8": [
+      0.7329,
+      15,
+      false
+     ],
+     "RAND_16": [
+      0.741,
+      7,
+      false
+     ],
+     "RAND_32": [
+      0.748,
+      0,
+      true
+     ]
+    }
+   },
+   "tolerance_net_loss_per_cache": {
+    "metaqa": 5,
+    "metaqa_phg": 5,
+    "squad": 5,
+    "squad_phg": 5,
+    "musique": 5
+   }
+  },
+  "PRIMARY": {
+   "label": "FPS_PRESERVES_QMAX_AT_m=2",
+   "m_star_FPS (all five caches)": 2,
+   "FPS_m_preserving_on_all_five": [
+    2,
+    4,
+    16,
+    32
+   ],
+   "FPS_preserving_on_all_five_from_m_star_upward": false,
+   "smallest_preserving_FPS_m_per_cache": {
+    "metaqa": 1,
+    "metaqa_phg": 1,
+    "squad": 2,
+    "squad_phg": 1,
+    "musique": 1
+   },
+   "binding_caches (fail at the ladder point just below m*, or at m = 32 when there is no m*)": [
+    "squad"
+   ],
+   "m_star_RAND (control)": 16,
+   "RAND_m_preserving_on_all_five": [
+    16,
+    32
+   ],
+   "centroids_preserve (per cache)": {
+    "CENT_MEAN": {
+     "metaqa": true,
+     "metaqa_phg": true,
+     "squad": true,
+     "squad_phg": true,
+     "musique": true
+    },
+    "CENT_NORM": {
+     "metaqa": true,
+     "metaqa_phg": true,
+     "squad": false,
+     "squad_phg": true,
+     "musique": false
+    }
+   },
+   "table (ALL / net loss vs QMAX / PRESERVES)": {
+    "metaqa": {
+     "QMAX": 0.7754,
+     "CENT_MEAN": [
+      0.7804,
+      -5,
+      true
+     ],
+     "CENT_NORM": [
+      0.7774,
+      -2,
+      true
+     ],
+     "FPS_1": [
+      0.7764,
+      -1,
+      true
+     ],
+     "FPS_2": [
+      0.7764,
+      -1,
+      true
+     ],
+     "FPS_4": [
+      0.7754,
+      0,
+      true
+     ],
+     "FPS_8": [
+      0.7764,
+      -1,
+      true
+     ],
+     "FPS_16": [
+      0.7774,
+      -2,
+      true
+     ],
+     "FPS_32": [
+      0.7774,
+      -2,
+      true
+     ],
+     "RAND_1": [
+      0.7715,
+      4,
+      true
+     ],
+     "RAND_2": [
+      0.7715,
+      4,
+      true
+     ],
+     "RAND_4": [
+      0.7735,
+      2,
+      true
+     ],
+     "RAND_8": [
+      0.7754,
+      0,
+      true
+     ],
+     "RAND_16": [
+      0.7735,
+      2,
+      true
+     ],
+     "RAND_32": [
+      0.7745,
+      1,
+      true
+     ]
+    },
+    "metaqa_phg": {
+     "QMAX": 0.7964,
+     "CENT_MEAN": [
+      0.7964,
+      0,
+      true
+     ],
+     "CENT_NORM": [
+      0.7954,
+      1,
+      true
+     ],
+     "FPS_1": [
+      0.7974,
+      -1,
+      true
+     ],
+     "FPS_2": [
+      0.7974,
+      -1,
+      true
+     ],
+     "FPS_4": [
+      0.7964,
+      0,
+      true
+     ],
+     "FPS_8": [
+      0.7924,
+      4,
+      true
+     ],
+     "FPS_16": [
+      0.7934,
+      3,
+      true
+     ],
+     "FPS_32": [
+      0.7934,
+      3,
+      true
+     ],
+     "RAND_1": [
+      0.7974,
+      -1,
+      true
+     ],
+     "RAND_2": [
+      0.7964,
+      0,
+      true
+     ],
+     "RAND_4": [
+      0.7944,
+      2,
+      true
+     ],
+     "RAND_8": [
+      0.7934,
+      3,
+      true
+     ],
+     "RAND_16": [
+      0.7954,
+      1,
+      true
+     ],
+     "RAND_32": [
+      0.7924,
+      4,
+      true
+     ]
+    },
+    "squad": {
+     "QMAX": 0.995,
+     "CENT_MEAN": [
+      0.9919,
+      3,
+      true
+     ],
+     "CENT_NORM": [
+      0.9889,
+      6,
+      false
+     ],
+     "FPS_1": [
+      0.9889,
+      6,
+      false
+     ],
+     "FPS_2": [
+      0.9919,
+      3,
+      true
+     ],
+     "FPS_4": [
+      0.9929,
+      2,
+      true
+     ],
+     "FPS_8": [
+      0.9919,
+      3,
+      true
+     ],
+     "FPS_16": [
+      0.995,
+      0,
+      true
+     ],
+     "FPS_32": [
+      0.994,
+      1,
+      true
+     ],
+     "RAND_1": [
+      0.9909,
+      4,
+      true
+     ],
+     "RAND_2": [
+      0.9919,
+      3,
+      true
+     ],
+     "RAND_4": [
+      0.9919,
+      3,
+      true
+     ],
+     "RAND_8": [
+      0.9929,
+      2,
+      true
+     ],
+     "RAND_16": [
+      0.994,
+      1,
+      true
+     ],
+     "RAND_32": [
+      0.9919,
+      3,
+      true
+     ]
+    },
+    "squad_phg": {
+     "QMAX": 0.9899,
+     "CENT_MEAN": [
+      0.9879,
+      2,
+      true
+     ],
+     "CENT_NORM": [
+      0.9869,
+      3,
+      true
+     ],
+     "FPS_1": [
+      0.9869,
+      3,
+      true
+     ],
+     "FPS_2": [
+      0.9889,
+      1,
+      true
+     ],
+     "FPS_4": [
+      0.9899,
+      0,
+      true
+     ],
+     "FPS_8": [
+      0.9909,
+      -1,
+      true
+     ],
+     "FPS_16": [
+      0.9879,
+      2,
+      true
+     ],
+     "FPS_32": [
+      0.9879,
+      2,
+      true
+     ],
+     "RAND_1": [
+      0.9879,
+      2,
+      true
+     ],
+     "RAND_2": [
+      0.9889,
+      1,
+      true
+     ],
+     "RAND_4": [
+      0.9889,
+      1,
+      true
+     ],
+     "RAND_8": [
+      0.9899,
+      0,
+      true
+     ],
+     "RAND_16": [
+      0.9879,
+      2,
+      true
+     ],
+     "RAND_32": [
+      0.9899,
+      0,
+      true
+     ]
+    },
+    "musique": {
+     "QMAX": 0.76,
+     "CENT_MEAN": [
+      0.7661,
+      -6,
+      true
+     ],
+     "CENT_NORM": [
+      0.753,
+      7,
+      false
+     ],
+     "FPS_1": [
+      0.757,
+      3,
+      true
+     ],
+     "FPS_2": [
+      0.759,
+      1,
+      true
+     ],
+     "FPS_4": [
+      0.758,
+      2,
+      true
+     ],
+     "FPS_8": [
+      0.746,
+      14,
+      false
+     ],
+     "FPS_16": [
+      0.755,
+      5,
+      true
+     ],
+     "FPS_32": [
+      0.759,
+      1,
+      true
+     ],
+     "RAND_1": [
+      0.7329,
+      27,
+      false
+     ],
+     "RAND_2": [
+      0.739,
+      21,
+      false
+     ],
+     "RAND_4": [
+      0.7349,
+      25,
+      false
+     ],
+     "RAND_8": [
+      0.746,
+      14,
+      false
+     ],
+     "RAND_16": [
+      0.756,
+      4,
+      true
+     ],
+     "RAND_32": [
+      0.7641,
+      -4,
+      true
+     ]
+    }
+   },
+   "tolerance_net_loss_per_cache": {
+    "metaqa": 5,
+    "metaqa_phg": 5,
+    "squad": 5,
+    "squad_phg": 5,
+    "musique": 5
+   }
+  }
+ },
+ "recall_hierarchy": {
+  "metaqa": {
+   "ALONE (routing by one channel; P50)": {
+    "CENT_MEAN": 0.1437,
+    "CENT_NORM": 0.1277,
+    "FPS_1": 0.1088,
+    "FPS_2": 0.1178,
+    "FPS_4": 0.1008,
+    "FPS_8": 0.1038,
+    "FPS_16": 0.1118,
+    "FPS_32": 0.1307,
+    "DENSE_VOTE": 0.6337,
+    "SPLADE_VOTE": 0.6128,
+    "NODE_VOTE (L1 = RRF of the two)": 0.6397,
+    "QMAX": 0.1816
+   },
+   "recall_blocks@50 vs QMAX_ALONE": {
+    "CENT_MEAN": 0.332,
+    "CENT_NORM": 0.3535,
+    "FPS_1": 0.2528,
+    "FPS_2": 0.2544,
+    "FPS_4": 0.2505,
+    "FPS_8": 0.2603,
+    "FPS_16": 0.3219,
+    "FPS_32": 0.4797,
+    "DENSE_VOTE": 0.5991,
+    "SPLADE_VOTE": 0.2021,
+    "NODE_VOTE_L1 (F0 of Cd, Cs)": 0.4301
+   },
+   "F0 (node votes + stage 2; P50)": {
+    "CENT_MEAN": 0.6437,
+    "CENT_NORM": 0.6407,
+    "FPS_1": 0.6417,
+    "FPS_2": 0.6417,
+    "FPS_4": 0.6387,
+    "FPS_8": 0.6327,
+    "FPS_16": 0.6337,
+    "FPS_32": 0.6317,
+    "no stage 2 (L1)": 0.6397,
+    "QMAX": 0.6327
+   },
+   "recall_blocks@50 vs QMAX_F0": {
+    "CENT_MEAN": 0.711,
+    "CENT_NORM": 0.7185,
+    "FPS_1": 0.6728,
+    "FPS_2": 0.6724,
+    "FPS_4": 0.6737,
+    "FPS_8": 0.6734,
+    "FPS_16": 0.6962,
+    "FPS_32": 0.7619
+   },
+   "PRIMARY (the composite end to end)": {
+    "CENT_MEAN": 0.7804,
+    "CENT_NORM": 0.7774,
+    "FPS_1": 0.7764,
+    "FPS_2": 0.7764,
+    "FPS_4": 0.7754,
+    "FPS_8": 0.7764,
+    "FPS_16": 0.7774,
+    "FPS_32": 0.7774,
+    "no stage 2 (BALANCED_H2_PATCH1)": 0.7764,
+    "QMAX": 0.7754
+   },
+   "vectors_scored_per_query": {
+    "QMAX": 43234,
+    "CENT_MEAN": 432,
+    "CENT_NORM": 432,
+    "FPS_1": 432,
+    "RAND_1": 432,
+    "FPS_2": 864,
+    "RAND_2": 864,
+    "FPS_4": 1728,
+    "RAND_4": 1728,
+    "FPS_8": 3456,
+    "RAND_8": 3456,
+    "FPS_16": 6910,
+    "RAND_16": 6910,
+    "FPS_32": 13806,
+    "RAND_32": 13806
+   }
+  },
+  "metaqa_phg": {
+   "ALONE (routing by one channel; P50)": {
+    "CENT_MEAN": 0.1188,
+    "CENT_NORM": 0.1317,
+    "FPS_1": 0.1118,
+    "FPS_2": 0.1198,
+    "FPS_4": 0.1018,
+    "FPS_8": 0.1048,
+    "FPS_16": 0.1138,
+    "FPS_32": 0.1367,
+    "DENSE_VOTE": 0.6577,
+    "SPLADE_VOTE": 0.6537,
+    "NODE_VOTE (L1 = RRF of the two)": 0.6727,
+    "QMAX": 0.1956
+   },
+   "recall_blocks@50 vs QMAX_ALONE": {
+    "CENT_MEAN": 0.342,
+    "CENT_NORM": 0.3668,
+    "FPS_1": 0.2489,
+    "FPS_2": 0.252,
+    "FPS_4": 0.2516,
+    "FPS_8": 0.2594,
+    "FPS_16": 0.3133,
+    "FPS_32": 0.4727,
+    "DENSE_VOTE": 0.6072,
+    "SPLADE_VOTE": 0.2316,
+    "NODE_VOTE_L1 (F0 of Cd, Cs)": 0.4536
+   },
+   "F0 (node votes + stage 2; P50)": {
+    "CENT_MEAN": 0.6747,
+    "CENT_NORM": 0.6766,
+    "FPS_1": 0.6776,
+    "FPS_2": 0.6766,
+    "FPS_4": 0.6766,
+    "FPS_8": 0.6737,
+    "FPS_16": 0.6687,
+    "FPS_32": 0.6717,
+    "no stage 2 (L1)": 0.6727,
+    "QMAX": 0.6747
+   },
+   "recall_blocks@50 vs QMAX_F0": {
+    "CENT_MEAN": 0.7296,
+    "CENT_NORM": 0.7433,
+    "FPS_1": 0.6895,
+    "FPS_2": 0.6896,
+    "FPS_4": 0.692,
+    "FPS_8": 0.6947,
+    "FPS_16": 0.7129,
+    "FPS_32": 0.7716
+   },
+   "PRIMARY (the composite end to end)": {
+    "CENT_MEAN": 0.7964,
+    "CENT_NORM": 0.7954,
+    "FPS_1": 0.7974,
+    "FPS_2": 0.7974,
+    "FPS_4": 0.7964,
+    "FPS_8": 0.7924,
+    "FPS_16": 0.7934,
+    "FPS_32": 0.7934,
+    "no stage 2 (BALANCED_H2_PATCH1)": 0.7984,
+    "QMAX": 0.7964
+   },
+   "vectors_scored_per_query": {
+    "QMAX": 43234,
+    "CENT_MEAN": 432,
+    "CENT_NORM": 432,
+    "FPS_1": 432,
+    "RAND_1": 432,
+    "FPS_2": 862,
+    "RAND_2": 862,
+    "FPS_4": 1722,
+    "RAND_4": 1722,
+    "FPS_8": 3438,
+    "RAND_8": 3438,
+    "FPS_16": 6870,
+    "RAND_16": 6870,
+    "FPS_32": 13727,
+    "RAND_32": 13727
+   }
+  },
+  "squad": {
+   "ALONE (routing by one channel; P50)": {
+    "CENT_MEAN": 0.9093,
+    "CENT_NORM": 0.9083,
+    "FPS_1": 0.8155,
+    "FPS_2": 0.8256,
+    "FPS_4": 0.8548,
+    "FPS_8": 0.8982,
+    "FPS_16": 0.9435,
+    "FPS_32": 0.9728,
+    "DENSE_VOTE": 0.9829,
+    "SPLADE_VOTE": 0.9829,
+    "NODE_VOTE (L1 = RRF of the two)": 0.9859,
+    "QMAX": 0.9879
+   },
+   "recall_blocks@50 vs QMAX_ALONE": {
+    "CENT_MEAN": 0.6336,
+    "CENT_NORM": 0.6484,
+    "FPS_1": 0.5258,
+    "FPS_2": 0.5177,
+    "FPS_4": 0.5348,
+    "FPS_8": 0.5847,
+    "FPS_16": 0.6646,
+    "FPS_32": 0.7702,
+    "DENSE_VOTE": 0.5538,
+    "SPLADE_VOTE": 0.4936,
+    "NODE_VOTE_L1 (F0 of Cd, Cs)": 0.5413
+   },
+   "F0 (node votes + stage 2; P50)": {
+    "CENT_MEAN": 0.9819,
+    "CENT_NORM": 0.9788,
+    "FPS_1": 0.9758,
+    "FPS_2": 0.9829,
+    "FPS_4": 0.9869,
+    "FPS_8": 0.9869,
+    "FPS_16": 0.9909,
+    "FPS_32": 0.9859,
+    "no stage 2 (L1)": 0.9859,
+    "QMAX": 0.9919
+   },
+   "recall_blocks@50 vs QMAX_F0": {
+    "CENT_MEAN": 0.8724,
+    "CENT_NORM": 0.8749,
+    "FPS_1": 0.8349,
+    "FPS_2": 0.8314,
+    "FPS_4": 0.8405,
+    "FPS_8": 0.856,
+    "FPS_16": 0.8825,
+    "FPS_32": 0.9163
+   },
+   "PRIMARY (the composite end to end)": {
+    "CENT_MEAN": 0.9919,
+    "CENT_NORM": 0.9889,
+    "FPS_1": 0.9889,
+    "FPS_2": 0.9919,
+    "FPS_4": 0.9929,
+    "FPS_8": 0.9919,
+    "FPS_16": 0.995,
+    "FPS_32": 0.994,
+    "no stage 2 (BALANCED_H2_PATCH1)": 0.9919,
+    "QMAX": 0.995
+   },
+   "vectors_scored_per_query": {
+    "QMAX": 20233,
+    "CENT_MEAN": 202,
+    "CENT_NORM": 202,
+    "FPS_1": 202,
+    "RAND_1": 202,
+    "FPS_2": 404,
+    "RAND_2": 404,
+    "FPS_4": 808,
+    "RAND_4": 808,
+    "FPS_8": 1616,
+    "RAND_8": 1616,
+    "FPS_16": 3232,
+    "RAND_16": 3232,
+    "FPS_32": 6464,
+    "RAND_32": 6464
+   }
+  },
+  "squad_phg": {
+   "ALONE (routing by one channel; P50)": {
+    "CENT_MEAN": 0.9093,
+    "CENT_NORM": 0.9214,
+    "FPS_1": 0.8014,
+    "FPS_2": 0.8226,
+    "FPS_4": 0.8286,
+    "FPS_8": 0.8831,
+    "FPS_16": 0.9355,
+    "FPS_32": 0.9587,
+    "DENSE_VOTE": 0.9778,
+    "SPLADE_VOTE": 0.9788,
+    "NODE_VOTE (L1 = RRF of the two)": 0.9829,
+    "QMAX": 0.9909
+   },
+   "recall_blocks@50 vs QMAX_ALONE": {
+    "CENT_MEAN": 0.6204,
+    "CENT_NORM": 0.635,
+    "FPS_1": 0.5074,
+    "FPS_2": 0.4994,
+    "FPS_4": 0.5247,
+    "FPS_8": 0.5702,
+    "FPS_16": 0.6497,
+    "FPS_32": 0.7565,
+    "DENSE_VOTE": 0.5501,
+    "SPLADE_VOTE": 0.4927,
+    "NODE_VOTE_L1 (F0 of Cd, Cs)": 0.535
+   },
+   "F0 (node votes + stage 2; P50)": {
+    "CENT_MEAN": 0.9849,
+    "CENT_NORM": 0.9798,
+    "FPS_1": 0.9798,
+    "FPS_2": 0.9839,
+    "FPS_4": 0.9899,
+    "FPS_8": 0.9869,
+    "FPS_16": 0.9879,
+    "FPS_32": 0.9859,
+    "no stage 2 (L1)": 0.9829,
+    "QMAX": 0.9889
+   },
+   "recall_blocks@50 vs QMAX_F0": {
+    "CENT_MEAN": 0.8667,
+    "CENT_NORM": 0.8706,
+    "FPS_1": 0.8272,
+    "FPS_2": 0.8241,
+    "FPS_4": 0.8345,
+    "FPS_8": 0.8484,
+    "FPS_16": 0.875,
+    "FPS_32": 0.9113
+   },
+   "PRIMARY (the composite end to end)": {
+    "CENT_MEAN": 0.9879,
+    "CENT_NORM": 0.9869,
+    "FPS_1": 0.9869,
+    "FPS_2": 0.9889,
+    "FPS_4": 0.9899,
+    "FPS_8": 0.9909,
+    "FPS_16": 0.9879,
+    "FPS_32": 0.9879,
+    "no stage 2 (BALANCED_H2_PATCH1)": 0.9889,
+    "QMAX": 0.9899
+   },
+   "vectors_scored_per_query": {
+    "QMAX": 20233,
+    "CENT_MEAN": 202,
+    "CENT_NORM": 202,
+    "FPS_1": 202,
+    "RAND_1": 202,
+    "FPS_2": 404,
+    "RAND_2": 404,
+    "FPS_4": 808,
+    "RAND_4": 808,
+    "FPS_8": 1616,
+    "RAND_8": 1616,
+    "FPS_16": 3232,
+    "RAND_16": 3232,
+    "FPS_32": 6464,
+    "RAND_32": 6464
+   }
+  },
+  "musique": {
+   "ALONE (routing by one channel; P50)": {
+    "CENT_MEAN": 0.3283,
+    "CENT_NORM": 0.4056,
+    "FPS_1": 0.261,
+    "FPS_2": 0.261,
+    "FPS_4": 0.2761,
+    "FPS_8": 0.3163,
+    "FPS_16": 0.3996,
+    "FPS_32": 0.5231,
+    "DENSE_VOTE": 0.6546,
+    "SPLADE_VOTE": 0.6004,
+    "NODE_VOTE (L1 = RRF of the two)": 0.6596,
+    "QMAX": 0.7008
+   },
+   "recall_blocks@50 vs QMAX_ALONE": {
+    "CENT_MEAN": 0.4421,
+    "CENT_NORM": 0.4822,
+    "FPS_1": 0.365,
+    "FPS_2": 0.3532,
+    "FPS_4": 0.361,
+    "FPS_8": 0.4046,
+    "FPS_16": 0.4926,
+    "FPS_32": 0.6307,
+    "DENSE_VOTE": 0.4096,
+    "SPLADE_VOTE": 0.3172,
+    "NODE_VOTE_L1 (F0 of Cd, Cs)": 0.385
+   },
+   "F0 (node votes + stage 2; P50)": {
+    "CENT_MEAN": 0.7008,
+    "CENT_NORM": 0.6867,
+    "FPS_1": 0.6737,
+    "FPS_2": 0.6878,
+    "FPS_4": 0.6827,
+    "FPS_8": 0.6837,
+    "FPS_16": 0.6878,
+    "FPS_32": 0.7038,
+    "no stage 2 (L1)": 0.6596,
+    "QMAX": 0.7319
+   },
+   "recall_blocks@50 vs QMAX_F0": {
+    "CENT_MEAN": 0.828,
+    "CENT_NORM": 0.8314,
+    "FPS_1": 0.7965,
+    "FPS_2": 0.7958,
+    "FPS_4": 0.7976,
+    "FPS_8": 0.8092,
+    "FPS_16": 0.8319,
+    "FPS_32": 0.8739
+   },
+   "PRIMARY (the composite end to end)": {
+    "CENT_MEAN": 0.7661,
+    "CENT_NORM": 0.753,
+    "FPS_1": 0.757,
+    "FPS_2": 0.759,
+    "FPS_4": 0.758,
+    "FPS_8": 0.746,
+    "FPS_16": 0.755,
+    "FPS_32": 0.759,
+    "no stage 2 (BALANCED_H2_PATCH1)": 0.7269,
+    "QMAX": 0.76
+   },
+   "vectors_scored_per_query": {
+    "QMAX": 117534,
+    "CENT_MEAN": 1175,
+    "CENT_NORM": 1175,
+    "FPS_1": 1175,
+    "RAND_1": 1175,
+    "FPS_2": 2341,
+    "RAND_2": 2341,
+    "FPS_4": 4673,
+    "RAND_4": 4673,
+    "FPS_8": 9334,
+    "RAND_8": 9334,
+    "FPS_16": 18654,
+    "RAND_16": 18654,
+    "FPS_32": 37294,
+    "RAND_32": 37294
+   }
+  }
+ },
+ "outlier_diagnostic": {
+  "metaqa": {
+   "ALONE": {
+    "CENT_MEAN": {
+     "lost_queries": 89,
+     "gained_queries": 51,
+     "dropped_n": 103,
+     "retained_n": 958,
+     "percentile_median dropped / retained": [
+      0.618,
+      0.379
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.301,
+      0.15
+     ],
+     "block_max_node_share dropped / retained": [
+      0.058,
+      0.065
+     ],
+     "mann_whitney_p": 2.7901470092845876e-07
+    },
+    "CENT_NORM": {
+     "lost_queries": 90,
+     "gained_queries": 36,
+     "dropped_n": 110,
+     "retained_n": 980,
+     "percentile_median dropped / retained": [
+      0.605,
+      0.373
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.3,
+      0.147
+     ],
+     "block_max_node_share dropped / retained": [
+      0.055,
+      0.067
+     ],
+     "mann_whitney_p": 2.1456452022599236e-06
+    },
+    "FPS_1": {
+     "lost_queries": 118,
+     "gained_queries": 45,
+     "dropped_n": 144,
+     "retained_n": 786,
+     "percentile_median dropped / retained": [
+      0.605,
+      0.35
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.312,
+      0.153
+     ],
+     "block_max_node_share dropped / retained": [
+      0.028,
+      0.074
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.02
+     ],
+     "mann_whitney_p": 7.733366501270876e-10
+    },
+    "FPS_4": {
+     "lost_queries": 119,
+     "gained_queries": 38,
+     "dropped_n": 151,
+     "retained_n": 748,
+     "percentile_median dropped / retained": [
+      0.573,
+      0.355
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.285,
+      0.155
+     ],
+     "block_max_node_share dropped / retained": [
+      0.033,
+      0.071
+     ],
+     "representative_share dropped / retained": [
+      0.04,
+      0.039
+     ],
+     "mann_whitney_p": 8.16038196045314e-07
+    },
+    "FPS_8": {
+     "lost_queries": 107,
+     "gained_queries": 29,
+     "dropped_n": 131,
+     "retained_n": 740,
+     "percentile_median dropped / retained": [
+      0.539,
+      0.383
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.298,
+      0.164
+     ],
+     "block_max_node_share dropped / retained": [
+      0.031,
+      0.059
+     ],
+     "representative_share dropped / retained": [
+      0.084,
+      0.059
+     ],
+     "mann_whitney_p": 0.0005115218612018437
+    },
+    "FPS_32": {
+     "lost_queries": 67,
+     "gained_queries": 16,
+     "dropped_n": 82,
+     "retained_n": 903,
+     "percentile_median dropped / retained": [
+      0.505,
+      0.436
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.28,
+      0.165
+     ],
+     "block_max_node_share dropped / retained": [
+      0.098,
+      0.071
+     ],
+     "representative_share dropped / retained": [
+      0.268,
+      0.241
+     ],
+     "mann_whitney_p": 0.13083994505042437
+    },
+    "RAND_8": {
+     "lost_queries": 110,
+     "gained_queries": 44,
+     "dropped_n": 128,
+     "retained_n": 811,
+     "percentile_median dropped / retained": [
+      0.564,
+      0.376
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.273,
+      0.143
+     ],
+     "block_max_node_share dropped / retained": [
+      0.055,
+      0.067
+     ],
+     "representative_share dropped / retained": [
+      0.086,
+      0.1
+     ],
+     "mann_whitney_p": 7.625707128474371e-06
+    }
+   },
+   "F0": {
+    "CENT_MEAN": {
+     "lost_queries": 3,
+     "gained_queries": 14,
+     "dropped_n": 5,
+     "retained_n": 3223,
+     "percentile_median dropped / retained": [
+      0.871,
+      0.495
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      1.0,
+      0.215
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.055
+     ],
+     "mann_whitney_p": 0.0013045939205683927
+    },
+    "CENT_NORM": {
+     "lost_queries": 4,
+     "gained_queries": 12,
+     "dropped_n": 6,
+     "retained_n": 3227,
+     "percentile_median dropped / retained": [
+      0.856,
+      0.495
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.833,
+      0.214
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.055
+     ],
+     "mann_whitney_p": 0.0008766146199713778
+    },
+    "FPS_1": {
+     "lost_queries": 4,
+     "gained_queries": 13,
+     "dropped_n": 9,
+     "retained_n": 3178,
+     "percentile_median dropped / retained": [
+      0.743,
+      0.495
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.333,
+      0.217
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.055
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.012
+     ],
+     "mann_whitney_p": 0.004863379438900032
+    },
+    "FPS_4": {
+     "lost_queries": 6,
+     "gained_queries": 12,
+     "dropped_n": 7,
+     "retained_n": 3177,
+     "percentile_median dropped / retained": [
+      0.871,
+      0.495
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.714,
+      0.217
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.054
+     ],
+     "representative_share dropped / retained": [
+      0.286,
+      0.035
+     ],
+     "mann_whitney_p": 0.009703939217013742
+    },
+    "FPS_8": {
+     "lost_queries": 10,
+     "gained_queries": 10,
+     "dropped_n": 15,
+     "retained_n": 3165,
+     "percentile_median dropped / retained": [
+      0.874,
+      0.495
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.867,
+      0.216
+     ],
+     "block_max_node_share dropped / retained": [
+      0.067,
+      0.054
+     ],
+     "representative_share dropped / retained": [
+      0.267,
+      0.053
+     ],
+     "mann_whitney_p": 2.0129909053231786e-06
+    },
+    "FPS_32": {
+     "lost_queries": 4,
+     "gained_queries": 3,
+     "dropped_n": 8,
+     "retained_n": 3215,
+     "percentile_median dropped / retained": [
+      0.872,
+      0.495
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.875,
+      0.217
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.058
+     ],
+     "representative_share dropped / retained": [
+      0.375,
+      0.253
+     ],
+     "mann_whitney_p": 0.00186957970067579
+    },
+    "RAND_8": {
+     "lost_queries": 9,
+     "gained_queries": 12,
+     "dropped_n": 11,
+     "retained_n": 3189,
+     "percentile_median dropped / retained": [
+      0.84,
+      0.495
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.636,
+      0.218
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.056
+     ],
+     "representative_share dropped / retained": [
+      0.182,
+      0.065
+     ],
+     "mann_whitney_p": 0.01308364316680481
+    }
+   },
+   "PRIMARY": {
+    "CENT_MEAN": {
+     "lost_queries": 1,
+     "gained_queries": 6,
+     "dropped_n": 1,
+     "retained_n": 4022,
+     "percentile_median dropped / retained": [
+      0.627,
+      0.5
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.0,
+      0.221
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.061
+     ]
+    },
+    "CENT_NORM": {
+     "lost_queries": 1,
+     "gained_queries": 3,
+     "dropped_n": 1,
+     "retained_n": 4027,
+     "percentile_median dropped / retained": [
+      0.627,
+      0.5
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.0,
+      0.222
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.061
+     ]
+    },
+    "FPS_1": {
+     "lost_queries": 3,
+     "gained_queries": 4,
+     "dropped_n": 3,
+     "retained_n": 3989,
+     "percentile_median dropped / retained": [
+      0.627,
+      0.5
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.333,
+      0.222
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.061
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.012
+     ]
+    },
+    "FPS_4": {
+     "lost_queries": 3,
+     "gained_queries": 3,
+     "dropped_n": 3,
+     "retained_n": 3990,
+     "percentile_median dropped / retained": [
+      0.874,
+      0.5
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.667,
+      0.222
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.061
+     ],
+     "representative_share dropped / retained": [
+      0.333,
+      0.035
+     ]
+    },
+    "FPS_8": {
+     "lost_queries": 4,
+     "gained_queries": 5,
+     "dropped_n": 4,
+     "retained_n": 3981,
+     "percentile_median dropped / retained": [
+      0.66,
+      0.505
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.5,
+      0.223
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.061
+     ],
+     "representative_share dropped / retained": [
+      0.25,
+      0.056
+     ]
+    },
+    "FPS_32": {
+     "lost_queries": 0,
+     "gained_queries": 2,
+     "dropped_n": 0,
+     "retained_n": 4015
+    },
+    "RAND_8": {
+     "lost_queries": 2,
+     "gained_queries": 2,
+     "dropped_n": 2,
+     "retained_n": 4002,
+     "percentile_median dropped / retained": [
+      0.804,
+      0.505
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.5,
+      0.223
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.062
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.066
+     ]
+    }
+   }
+  },
+  "metaqa_phg": {
+   "ALONE": {
+    "CENT_MEAN": {
+     "lost_queries": 110,
+     "gained_queries": 33,
+     "dropped_n": 141,
+     "retained_n": 1115,
+     "percentile_median dropped / retained": [
+      0.454,
+      0.353
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.206,
+      0.11
+     ],
+     "block_max_node_share dropped / retained": [
+      0.05,
+      0.064
+     ],
+     "mann_whitney_p": 0.0017080249302095895
+    },
+    "CENT_NORM": {
+     "lost_queries": 97,
+     "gained_queries": 33,
+     "dropped_n": 124,
+     "retained_n": 1170,
+     "percentile_median dropped / retained": [
+      0.454,
+      0.353
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.21,
+      0.112
+     ],
+     "block_max_node_share dropped / retained": [
+      0.073,
+      0.057
+     ],
+     "mann_whitney_p": 0.002462493550365623
+    },
+    "FPS_1": {
+     "lost_queries": 135,
+     "gained_queries": 51,
+     "dropped_n": 171,
+     "retained_n": 853,
+     "percentile_median dropped / retained": [
+      0.516,
+      0.359
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.234,
+      0.103
+     ],
+     "block_max_node_share dropped / retained": [
+      0.076,
+      0.055
+     ],
+     "representative_share dropped / retained": [
+      0.006,
+      0.029
+     ],
+     "mann_whitney_p": 6.201602554172243e-07
+    },
+    "FPS_4": {
+     "lost_queries": 133,
+     "gained_queries": 39,
+     "dropped_n": 173,
+     "retained_n": 851,
+     "percentile_median dropped / retained": [
+      0.48,
+      0.373
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.231,
+      0.107
+     ],
+     "block_max_node_share dropped / retained": [
+      0.081,
+      0.056
+     ],
+     "representative_share dropped / retained": [
+      0.064,
+      0.04
+     ],
+     "mann_whitney_p": 0.00029208306201143673
+    },
+    "FPS_8": {
+     "lost_queries": 121,
+     "gained_queries": 30,
+     "dropped_n": 161,
+     "retained_n": 822,
+     "percentile_median dropped / retained": [
+      0.48,
+      0.363
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.236,
+      0.109
+     ],
+     "block_max_node_share dropped / retained": [
+      0.062,
+      0.057
+     ],
+     "representative_share dropped / retained": [
+      0.075,
+      0.056
+     ],
+     "mann_whitney_p": 0.00015272082146900817
+    },
+    "FPS_32": {
+     "lost_queries": 78,
+     "gained_queries": 19,
+     "dropped_n": 101,
+     "retained_n": 1066,
+     "percentile_median dropped / retained": [
+      0.451,
+      0.363
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.228,
+      0.123
+     ],
+     "block_max_node_share dropped / retained": [
+      0.03,
+      0.066
+     ],
+     "representative_share dropped / retained": [
+      0.267,
+      0.192
+     ],
+     "mann_whitney_p": 0.08213027687548748
+    },
+    "RAND_8": {
+     "lost_queries": 115,
+     "gained_queries": 40,
+     "dropped_n": 135,
+     "retained_n": 971,
+     "percentile_median dropped / retained": [
+      0.461,
+      0.363
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.215,
+      0.11
+     ],
+     "block_max_node_share dropped / retained": [
+      0.074,
+      0.062
+     ],
+     "representative_share dropped / retained": [
+      0.074,
+      0.088
+     ],
+     "mann_whitney_p": 0.0018044484559961373
+    }
+   },
+   "F0": {
+    "CENT_MEAN": {
+     "lost_queries": 7,
+     "gained_queries": 7,
+     "dropped_n": 13,
+     "retained_n": 3494,
+     "percentile_median dropped / retained": [
+      0.624,
+      0.431
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.462,
+      0.172
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.052
+     ],
+     "mann_whitney_p": 0.010742865204614656
+    },
+    "CENT_NORM": {
+     "lost_queries": 6,
+     "gained_queries": 8,
+     "dropped_n": 8,
+     "retained_n": 3509,
+     "percentile_median dropped / retained": [
+      0.562,
+      0.431
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.375,
+      0.172
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.052
+     ],
+     "mann_whitney_p": 0.1622482478143159
+    },
+    "FPS_1": {
+     "lost_queries": 6,
+     "gained_queries": 9,
+     "dropped_n": 10,
+     "retained_n": 3466,
+     "percentile_median dropped / retained": [
+      0.787,
+      0.431
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.6,
+      0.171
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.05
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.016
+     ],
+     "mann_whitney_p": 0.003288432569429824
+    },
+    "FPS_4": {
+     "lost_queries": 4,
+     "gained_queries": 6,
+     "dropped_n": 8,
+     "retained_n": 3467,
+     "percentile_median dropped / retained": [
+      0.787,
+      0.431
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.625,
+      0.172
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.051
+     ],
+     "representative_share dropped / retained": [
+      0.125,
+      0.041
+     ],
+     "mann_whitney_p": 0.0014113184225950915
+    },
+    "FPS_8": {
+     "lost_queries": 7,
+     "gained_queries": 6,
+     "dropped_n": 9,
+     "retained_n": 3459,
+     "percentile_median dropped / retained": [
+      0.569,
+      0.431
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.444,
+      0.171
+     ],
+     "block_max_node_share dropped / retained": [
+      0.111,
+      0.051
+     ],
+     "representative_share dropped / retained": [
+      0.111,
+      0.051
+     ],
+     "mann_whitney_p": 0.07908991430639827
+    },
+    "FPS_32": {
+     "lost_queries": 8,
+     "gained_queries": 5,
+     "dropped_n": 11,
+     "retained_n": 3488,
+     "percentile_median dropped / retained": [
+      0.454,
+      0.441
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.364,
+      0.176
+     ],
+     "block_max_node_share dropped / retained": [
+      0.091,
+      0.054
+     ],
+     "representative_share dropped / retained": [
+      0.091,
+      0.245
+     ],
+     "mann_whitney_p": 0.5952575018004002
+    },
+    "RAND_8": {
+     "lost_queries": 9,
+     "gained_queries": 7,
+     "dropped_n": 10,
+     "retained_n": 3458,
+     "percentile_median dropped / retained": [
+      0.635,
+      0.431
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.4,
+      0.172
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.052
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.103
+     ],
+     "mann_whitney_p": 0.1569362920965247
+    }
+   },
+   "PRIMARY": {
+    "CENT_MEAN": {
+     "lost_queries": 2,
+     "gained_queries": 2,
+     "dropped_n": 3,
+     "retained_n": 4272,
+     "percentile_median dropped / retained": [
+      0.772,
+      0.451
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.667,
+      0.191
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.056
+     ]
+    },
+    "CENT_NORM": {
+     "lost_queries": 2,
+     "gained_queries": 1,
+     "dropped_n": 3,
+     "retained_n": 4269,
+     "percentile_median dropped / retained": [
+      0.772,
+      0.451
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.667,
+      0.19
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.057
+     ]
+    },
+    "FPS_1": {
+     "lost_queries": 2,
+     "gained_queries": 3,
+     "dropped_n": 2,
+     "retained_n": 4254,
+     "percentile_median dropped / retained": [
+      0.931,
+      0.451
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      1.0,
+      0.189
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.056
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.014
+     ]
+    },
+    "FPS_4": {
+     "lost_queries": 3,
+     "gained_queries": 3,
+     "dropped_n": 4,
+     "retained_n": 4251,
+     "percentile_median dropped / retained": [
+      0.872,
+      0.451
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      1.0,
+      0.19
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.056
+     ],
+     "representative_share dropped / retained": [
+      0.25,
+      0.037
+     ]
+    },
+    "FPS_8": {
+     "lost_queries": 6,
+     "gained_queries": 2,
+     "dropped_n": 7,
+     "retained_n": 4240,
+     "percentile_median dropped / retained": [
+      0.804,
+      0.451
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.714,
+      0.19
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.057
+     ],
+     "representative_share dropped / retained": [
+      0.143,
+      0.052
+     ],
+     "mann_whitney_p": 0.005512376467461995
+    },
+    "FPS_32": {
+     "lost_queries": 5,
+     "gained_queries": 2,
+     "dropped_n": 6,
+     "retained_n": 4239,
+     "percentile_median dropped / retained": [
+      0.663,
+      0.451
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.5,
+      0.192
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.057
+     ],
+     "representative_share dropped / retained": [
+      0.167,
+      0.251
+     ],
+     "mann_whitney_p": 0.22217644978019113
+    },
+    "RAND_8": {
+     "lost_queries": 5,
+     "gained_queries": 2,
+     "dropped_n": 6,
+     "retained_n": 4243,
+     "percentile_median dropped / retained": [
+      0.807,
+      0.451
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.667,
+      0.19
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.057
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.1
+     ],
+     "mann_whitney_p": 0.0138407816090022
+    }
+   }
+  },
+  "squad": {
+   "ALONE": {
+    "CENT_MEAN": {
+     "lost_queries": 84,
+     "gained_queries": 6,
+     "dropped_n": 84,
+     "retained_n": 896,
+     "percentile_median dropped / retained": [
+      0.937,
+      0.449
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.738,
+      0.217
+     ],
+     "block_max_node_share dropped / retained": [
+      0.964,
+      0.84
+     ],
+     "mann_whitney_p": 1.3471630178175553e-23
+    },
+    "CENT_NORM": {
+     "lost_queries": 84,
+     "gained_queries": 5,
+     "dropped_n": 84,
+     "retained_n": 896,
+     "percentile_median dropped / retained": [
+      0.95,
+      0.447
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.774,
+      0.213
+     ],
+     "block_max_node_share dropped / retained": [
+      0.952,
+      0.842
+     ],
+     "mann_whitney_p": 1.4843203632308344e-27
+    },
+    "FPS_1": {
+     "lost_queries": 172,
+     "gained_queries": 1,
+     "dropped_n": 172,
+     "retained_n": 808,
+     "percentile_median dropped / retained": [
+      0.87,
+      0.427
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.657,
+      0.177
+     ],
+     "block_max_node_share dropped / retained": [
+      0.924,
+      0.835
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.012
+     ],
+     "mann_whitney_p": 2.3571282489867603e-34
+    },
+    "FPS_4": {
+     "lost_queries": 135,
+     "gained_queries": 3,
+     "dropped_n": 135,
+     "retained_n": 845,
+     "percentile_median dropped / retained": [
+      0.534,
+      0.461
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.348,
+      0.247
+     ],
+     "block_max_node_share dropped / retained": [
+      0.904,
+      0.843
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.052
+     ],
+     "mann_whitney_p": 0.012196348671319062
+    },
+    "FPS_8": {
+     "lost_queries": 93,
+     "gained_queries": 4,
+     "dropped_n": 93,
+     "retained_n": 887,
+     "percentile_median dropped / retained": [
+      0.525,
+      0.464
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.323,
+      0.255
+     ],
+     "block_max_node_share dropped / retained": [
+      0.892,
+      0.847
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.088
+     ],
+     "mann_whitney_p": 0.05487833304216218
+    },
+    "FPS_32": {
+     "lost_queries": 20,
+     "gained_queries": 5,
+     "dropped_n": 20,
+     "retained_n": 960,
+     "percentile_median dropped / retained": [
+      0.453,
+      0.473
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.35,
+      0.259
+     ],
+     "block_max_node_share dropped / retained": [
+      0.95,
+      0.849
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.302
+     ],
+     "mann_whitney_p": 0.5148357444963498
+    },
+    "RAND_8": {
+     "lost_queries": 114,
+     "gained_queries": 4,
+     "dropped_n": 114,
+     "retained_n": 866,
+     "percentile_median dropped / retained": [
+      0.814,
+      0.446
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.553,
+      0.223
+     ],
+     "block_max_node_share dropped / retained": [
+      0.939,
+      0.839
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.103
+     ],
+     "mann_whitney_p": 6.996725492950919e-16
+    }
+   },
+   "F0": {
+    "CENT_MEAN": {
+     "lost_queries": 11,
+     "gained_queries": 1,
+     "dropped_n": 11,
+     "retained_n": 973,
+     "percentile_median dropped / retained": [
+      0.931,
+      0.465
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.818,
+      0.253
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.845
+     ],
+     "mann_whitney_p": 0.0005110700754147842
+    },
+    "CENT_NORM": {
+     "lost_queries": 13,
+     "gained_queries": 0,
+     "dropped_n": 13,
+     "retained_n": 971,
+     "percentile_median dropped / retained": [
+      0.893,
+      0.465
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.769,
+      0.252
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.844
+     ],
+     "mann_whitney_p": 0.00017349087402877627
+    },
+    "FPS_1": {
+     "lost_queries": 16,
+     "gained_queries": 0,
+     "dropped_n": 16,
+     "retained_n": 968,
+     "percentile_median dropped / retained": [
+      0.883,
+      0.464
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.688,
+      0.252
+     ],
+     "block_max_node_share dropped / retained": [
+      0.875,
+      0.846
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.01
+     ],
+     "mann_whitney_p": 0.0001228810978982371
+    },
+    "FPS_4": {
+     "lost_queries": 7,
+     "gained_queries": 2,
+     "dropped_n": 7,
+     "retained_n": 977,
+     "percentile_median dropped / retained": [
+      0.862,
+      0.465
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.714,
+      0.256
+     ],
+     "block_max_node_share dropped / retained": [
+      0.857,
+      0.846
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.044
+     ],
+     "mann_whitney_p": 0.04492387246051887
+    },
+    "FPS_8": {
+     "lost_queries": 6,
+     "gained_queries": 1,
+     "dropped_n": 6,
+     "retained_n": 978,
+     "percentile_median dropped / retained": [
+      0.726,
+      0.466
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.5,
+      0.258
+     ],
+     "block_max_node_share dropped / retained": [
+      0.833,
+      0.847
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.079
+     ],
+     "mann_whitney_p": 0.2908897904600045
+    },
+    "FPS_32": {
+     "lost_queries": 6,
+     "gained_queries": 0,
+     "dropped_n": 6,
+     "retained_n": 978,
+     "percentile_median dropped / retained": [
+      0.896,
+      0.466
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.667,
+      0.257
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.846
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.296
+     ],
+     "mann_whitney_p": 0.06429891644233418
+    },
+    "RAND_8": {
+     "lost_queries": 5,
+     "gained_queries": 2,
+     "dropped_n": 5,
+     "retained_n": 979,
+     "percentile_median dropped / retained": [
+      0.872,
+      0.466
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.6,
+      0.257
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.846
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.092
+     ],
+     "mann_whitney_p": 0.17916395746934144
+    }
+   },
+   "PRIMARY": {
+    "CENT_MEAN": {
+     "lost_queries": 4,
+     "gained_queries": 1,
+     "dropped_n": 4,
+     "retained_n": 983,
+     "percentile_median dropped / retained": [
+      0.876,
+      0.466
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.75,
+      0.258
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.845
+     ]
+    },
+    "CENT_NORM": {
+     "lost_queries": 6,
+     "gained_queries": 0,
+     "dropped_n": 6,
+     "retained_n": 981,
+     "percentile_median dropped / retained": [
+      0.892,
+      0.465
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.833,
+      0.257
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.845
+     ],
+     "mann_whitney_p": 0.00728824085267849
+    },
+    "FPS_1": {
+     "lost_queries": 6,
+     "gained_queries": 0,
+     "dropped_n": 6,
+     "retained_n": 981,
+     "percentile_median dropped / retained": [
+      0.876,
+      0.466
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.667,
+      0.258
+     ],
+     "block_max_node_share dropped / retained": [
+      0.833,
+      0.846
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.01
+     ],
+     "mann_whitney_p": 0.18630858813477869
+    },
+    "FPS_4": {
+     "lost_queries": 4,
+     "gained_queries": 2,
+     "dropped_n": 4,
+     "retained_n": 983,
+     "percentile_median dropped / retained": [
+      0.882,
+      0.465
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      1.0,
+      0.257
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.845
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.044
+     ]
+    },
+    "FPS_8": {
+     "lost_queries": 4,
+     "gained_queries": 1,
+     "dropped_n": 4,
+     "retained_n": 983,
+     "percentile_median dropped / retained": [
+      0.876,
+      0.466
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.75,
+      0.258
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.845
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.078
+     ]
+    },
+    "FPS_32": {
+     "lost_queries": 1,
+     "gained_queries": 0,
+     "dropped_n": 1,
+     "retained_n": 986,
+     "percentile_median dropped / retained": [
+      0.862,
+      0.466
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      1.0,
+      0.26
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.846
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.294
+     ]
+    },
+    "RAND_8": {
+     "lost_queries": 3,
+     "gained_queries": 1,
+     "dropped_n": 3,
+     "retained_n": 984,
+     "percentile_median dropped / retained": [
+      0.931,
+      0.466
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      1.0,
+      0.258
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.846
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.092
+     ]
+    }
+   }
+  },
+  "squad_phg": {
+   "ALONE": {
+    "CENT_MEAN": {
+     "lost_queries": 83,
+     "gained_queries": 2,
+     "dropped_n": 83,
+     "retained_n": 900,
+     "percentile_median dropped / retained": [
+      0.863,
+      0.455
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.699,
+      0.198
+     ],
+     "block_max_node_share dropped / retained": [
+      0.964,
+      0.84
+     ],
+     "mann_whitney_p": 2.193754076741121e-19
+    },
+    "CENT_NORM": {
+     "lost_queries": 70,
+     "gained_queries": 1,
+     "dropped_n": 70,
+     "retained_n": 913,
+     "percentile_median dropped / retained": [
+      0.89,
+      0.46
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.729,
+      0.203
+     ],
+     "block_max_node_share dropped / retained": [
+      0.957,
+      0.842
+     ],
+     "mann_whitney_p": 3.336213314388275e-20
+    },
+    "FPS_1": {
+     "lost_queries": 190,
+     "gained_queries": 2,
+     "dropped_n": 190,
+     "retained_n": 793,
+     "percentile_median dropped / retained": [
+      0.792,
+      0.41
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.6,
+      0.154
+     ],
+     "block_max_node_share dropped / retained": [
+      0.911,
+      0.836
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.013
+     ],
+     "mann_whitney_p": 1.2525033379892291e-35
+    },
+    "FPS_4": {
+     "lost_queries": 162,
+     "gained_queries": 1,
+     "dropped_n": 162,
+     "retained_n": 821,
+     "percentile_median dropped / retained": [
+      0.642,
+      0.446
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.377,
+      0.213
+     ],
+     "block_max_node_share dropped / retained": [
+      0.889,
+      0.843
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.045
+     ],
+     "mann_whitney_p": 4.818526360048637e-09
+    },
+    "FPS_8": {
+     "lost_queries": 108,
+     "gained_queries": 1,
+     "dropped_n": 108,
+     "retained_n": 875,
+     "percentile_median dropped / retained": [
+      0.667,
+      0.46
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.361,
+      0.225
+     ],
+     "block_max_node_share dropped / retained": [
+      0.907,
+      0.843
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.081
+     ],
+     "mann_whitney_p": 4.834656342015695e-07
+    },
+    "FPS_32": {
+     "lost_queries": 32,
+     "gained_queries": 0,
+     "dropped_n": 32,
+     "retained_n": 951,
+     "percentile_median dropped / retained": [
+      0.507,
+      0.476
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.344,
+      0.237
+     ],
+     "block_max_node_share dropped / retained": [
+      0.875,
+      0.85
+     ],
+     "representative_share dropped / retained": [
+      0.062,
+      0.325
+     ],
+     "mann_whitney_p": 0.4442510380151614
+    },
+    "RAND_8": {
+     "lost_queries": 139,
+     "gained_queries": 3,
+     "dropped_n": 139,
+     "retained_n": 844,
+     "percentile_median dropped / retained": [
+      0.782,
+      0.446
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.532,
+      0.192
+     ],
+     "block_max_node_share dropped / retained": [
+      0.935,
+      0.836
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.081
+     ],
+     "mann_whitney_p": 1.0606576737323848e-17
+    }
+   },
+   "F0": {
+    "CENT_MEAN": {
+     "lost_queries": 6,
+     "gained_queries": 2,
+     "dropped_n": 6,
+     "retained_n": 975,
+     "percentile_median dropped / retained": [
+      0.588,
+      0.476
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.5,
+      0.237
+     ],
+     "block_max_node_share dropped / retained": [
+      0.667,
+      0.852
+     ],
+     "mann_whitney_p": 0.38941048449376814
+    },
+    "CENT_NORM": {
+     "lost_queries": 10,
+     "gained_queries": 1,
+     "dropped_n": 10,
+     "retained_n": 971,
+     "percentile_median dropped / retained": [
+      0.588,
+      0.476
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.5,
+      0.236
+     ],
+     "block_max_node_share dropped / retained": [
+      0.8,
+      0.852
+     ],
+     "mann_whitney_p": 0.5483825686037447
+    },
+    "FPS_1": {
+     "lost_queries": 10,
+     "gained_queries": 1,
+     "dropped_n": 10,
+     "retained_n": 971,
+     "percentile_median dropped / retained": [
+      0.837,
+      0.476
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.6,
+      0.235
+     ],
+     "block_max_node_share dropped / retained": [
+      0.8,
+      0.852
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.01
+     ],
+     "mann_whitney_p": 0.12240028634695808
+    },
+    "FPS_4": {
+     "lost_queries": 2,
+     "gained_queries": 3,
+     "dropped_n": 2,
+     "retained_n": 979,
+     "percentile_median dropped / retained": [
+      0.593,
+      0.476
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.5,
+      0.238
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.851
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.037
+     ]
+    },
+    "FPS_8": {
+     "lost_queries": 6,
+     "gained_queries": 4,
+     "dropped_n": 6,
+     "retained_n": 975,
+     "percentile_median dropped / retained": [
+      0.588,
+      0.476
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.5,
+      0.237
+     ],
+     "block_max_node_share dropped / retained": [
+      0.667,
+      0.852
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.071
+     ],
+     "mann_whitney_p": 0.4725580836862774
+    },
+    "FPS_32": {
+     "lost_queries": 3,
+     "gained_queries": 0,
+     "dropped_n": 3,
+     "retained_n": 978,
+     "percentile_median dropped / retained": [
+      0.343,
+      0.478
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.333,
+      0.238
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.851
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.314
+     ]
+    },
+    "RAND_8": {
+     "lost_queries": 6,
+     "gained_queries": 3,
+     "dropped_n": 6,
+     "retained_n": 975,
+     "percentile_median dropped / retained": [
+      0.837,
+      0.475
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.667,
+      0.236
+     ],
+     "block_max_node_share dropped / retained": [
+      0.833,
+      0.851
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.07
+     ],
+     "mann_whitney_p": 0.05242626178407931
+    }
+   },
+   "PRIMARY": {
+    "CENT_MEAN": {
+     "lost_queries": 3,
+     "gained_queries": 1,
+     "dropped_n": 3,
+     "retained_n": 979,
+     "percentile_median dropped / retained": [
+      0.832,
+      0.476
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.667,
+      0.237
+     ],
+     "block_max_node_share dropped / retained": [
+      0.667,
+      0.851
+     ]
+    },
+    "CENT_NORM": {
+     "lost_queries": 3,
+     "gained_queries": 0,
+     "dropped_n": 3,
+     "retained_n": 979,
+     "percentile_median dropped / retained": [
+      0.832,
+      0.476
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.667,
+      0.237
+     ],
+     "block_max_node_share dropped / retained": [
+      0.667,
+      0.851
+     ]
+    },
+    "FPS_1": {
+     "lost_queries": 4,
+     "gained_queries": 1,
+     "dropped_n": 4,
+     "retained_n": 978,
+     "percentile_median dropped / retained": [
+      0.837,
+      0.475
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.75,
+      0.236
+     ],
+     "block_max_node_share dropped / retained": [
+      0.75,
+      0.851
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.01
+     ]
+    },
+    "FPS_4": {
+     "lost_queries": 3,
+     "gained_queries": 3,
+     "dropped_n": 3,
+     "retained_n": 979,
+     "percentile_median dropped / retained": [
+      0.277,
+      0.476
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.333,
+      0.238
+     ],
+     "block_max_node_share dropped / retained": [
+      0.667,
+      0.851
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.037
+     ]
+    },
+    "FPS_8": {
+     "lost_queries": 2,
+     "gained_queries": 3,
+     "dropped_n": 2,
+     "retained_n": 980,
+     "percentile_median dropped / retained": [
+      0.242,
+      0.478
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.0,
+      0.239
+     ],
+     "block_max_node_share dropped / retained": [
+      0.0,
+      0.852
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.07
+     ]
+    },
+    "FPS_32": {
+     "lost_queries": 2,
+     "gained_queries": 0,
+     "dropped_n": 2,
+     "retained_n": 980,
+     "percentile_median dropped / retained": [
+      0.162,
+      0.478
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.0,
+      0.239
+     ],
+     "block_max_node_share dropped / retained": [
+      0.5,
+      0.851
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.313
+     ]
+    },
+    "RAND_8": {
+     "lost_queries": 2,
+     "gained_queries": 2,
+     "dropped_n": 2,
+     "retained_n": 980,
+     "percentile_median dropped / retained": [
+      0.837,
+      0.475
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      1.0,
+      0.237
+     ],
+     "block_max_node_share dropped / retained": [
+      1.0,
+      0.85
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.069
+     ]
+    }
+   }
+  },
+  "musique": {
+   "ALONE": {
+    "CENT_MEAN": {
+     "lost_queries": 386,
+     "gained_queries": 15,
+     "dropped_n": 521,
+     "retained_n": 1458,
+     "percentile_median dropped / retained": [
+      0.647,
+      0.376
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.374,
+      0.129
+     ],
+     "block_max_node_share dropped / retained": [
+      0.737,
+      0.534
+     ],
+     "mann_whitney_p": 1.6884647257374352e-46
+    },
+    "CENT_NORM": {
+     "lost_queries": 313,
+     "gained_queries": 19,
+     "dropped_n": 400,
+     "retained_n": 1614,
+     "percentile_median dropped / retained": [
+      0.725,
+      0.376
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.458,
+      0.127
+     ],
+     "block_max_node_share dropped / retained": [
+      0.777,
+      0.537
+     ],
+     "mann_whitney_p": 1.6205828185545401e-65
+    },
+    "FPS_1": {
+     "lost_queries": 447,
+     "gained_queries": 9,
+     "dropped_n": 640,
+     "retained_n": 1306,
+     "percentile_median dropped / retained": [
+      0.647,
+      0.363
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.362,
+      0.111
+     ],
+     "block_max_node_share dropped / retained": [
+      0.727,
+      0.512
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.029
+     ],
+     "mann_whitney_p": 1.4628277227055805e-56
+    },
+    "FPS_4": {
+     "lost_queries": 440,
+     "gained_queries": 17,
+     "dropped_n": 642,
+     "retained_n": 1291,
+     "percentile_median dropped / retained": [
+      0.537,
+      0.396
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.259,
+      0.176
+     ],
+     "block_max_node_share dropped / retained": [
+      0.71,
+      0.527
+     ],
+     "representative_share dropped / retained": [
+      0.005,
+      0.075
+     ],
+     "mann_whitney_p": 1.8317889707118426e-13
+    },
+    "FPS_8": {
+     "lost_queries": 401,
+     "gained_queries": 18,
+     "dropped_n": 578,
+     "retained_n": 1377,
+     "percentile_median dropped / retained": [
+      0.515,
+      0.441
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.228,
+      0.204
+     ],
+     "block_max_node_share dropped / retained": [
+      0.671,
+      0.556
+     ],
+     "representative_share dropped / retained": [
+      0.009,
+      0.121
+     ],
+     "mann_whitney_p": 0.00038191203113412695
+    },
+    "FPS_32": {
+     "lost_queries": 198,
+     "gained_queries": 21,
+     "dropped_n": 258,
+     "retained_n": 1808,
+     "percentile_median dropped / retained": [
+      0.431,
+      0.461
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.202,
+      0.216
+     ],
+     "block_max_node_share dropped / retained": [
+      0.713,
+      0.577
+     ],
+     "representative_share dropped / retained": [
+      0.054,
+      0.325
+     ],
+     "mann_whitney_p": 0.7464175528856988
+    },
+    "RAND_8": {
+     "lost_queries": 404,
+     "gained_queries": 19,
+     "dropped_n": 555,
+     "retained_n": 1424,
+     "percentile_median dropped / retained": [
+      0.614,
+      0.396
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.368,
+      0.133
+     ],
+     "block_max_node_share dropped / retained": [
+      0.703,
+      0.537
+     ],
+     "representative_share dropped / retained": [
+      0.005,
+      0.136
+     ],
+     "mann_whitney_p": 1.389522634819909e-27
+    }
+   },
+   "F0": {
+    "CENT_MEAN": {
+     "lost_queries": 58,
+     "gained_queries": 27,
+     "dropped_n": 62,
+     "retained_n": 2170,
+     "percentile_median dropped / retained": [
+      0.725,
+      0.455
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.468,
+      0.208
+     ],
+     "block_max_node_share dropped / retained": [
+      0.79,
+      0.577
+     ],
+     "mann_whitney_p": 1.0446496616001158e-06
+    },
+    "CENT_NORM": {
+     "lost_queries": 61,
+     "gained_queries": 16,
+     "dropped_n": 66,
+     "retained_n": 2163,
+     "percentile_median dropped / retained": [
+      0.778,
+      0.455
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.53,
+      0.206
+     ],
+     "block_max_node_share dropped / retained": [
+      0.864,
+      0.575
+     ],
+     "mann_whitney_p": 3.743970138534388e-09
+    },
+    "FPS_1": {
+     "lost_queries": 73,
+     "gained_queries": 15,
+     "dropped_n": 80,
+     "retained_n": 2139,
+     "percentile_median dropped / retained": [
+      0.773,
+      0.451
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.525,
+      0.203
+     ],
+     "block_max_node_share dropped / retained": [
+      0.75,
+      0.577
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.017
+     ],
+     "mann_whitney_p": 8.3598610054859e-12
+    },
+    "FPS_4": {
+     "lost_queries": 69,
+     "gained_queries": 20,
+     "dropped_n": 77,
+     "retained_n": 2143,
+     "percentile_median dropped / retained": [
+      0.52,
+      0.455
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.299,
+      0.211
+     ],
+     "block_max_node_share dropped / retained": [
+      0.714,
+      0.579
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.047
+     ],
+     "mann_whitney_p": 0.02127812915152532
+    },
+    "FPS_8": {
+     "lost_queries": 70,
+     "gained_queries": 22,
+     "dropped_n": 77,
+     "retained_n": 2141,
+     "percentile_median dropped / retained": [
+      0.49,
+      0.455
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.273,
+      0.213
+     ],
+     "block_max_node_share dropped / retained": [
+      0.636,
+      0.581
+     ],
+     "representative_share dropped / retained": [
+      0.026,
+      0.086
+     ],
+     "mann_whitney_p": 0.46938034654276717
+    },
+    "FPS_32": {
+     "lost_queries": 41,
+     "gained_queries": 13,
+     "dropped_n": 45,
+     "retained_n": 2186,
+     "percentile_median dropped / retained": [
+      0.48,
+      0.458
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.311,
+      0.215
+     ],
+     "block_max_node_share dropped / retained": [
+      0.644,
+      0.583
+     ],
+     "representative_share dropped / retained": [
+      0.067,
+      0.285
+     ],
+     "mann_whitney_p": 0.358573727619689
+    },
+    "RAND_8": {
+     "lost_queries": 66,
+     "gained_queries": 16,
+     "dropped_n": 71,
+     "retained_n": 2157,
+     "percentile_median dropped / retained": [
+      0.725,
+      0.455
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.479,
+      0.207
+     ],
+     "block_max_node_share dropped / retained": [
+      0.789,
+      0.577
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.099
+     ],
+     "mann_whitney_p": 1.4385939269755082e-06
+    }
+   },
+   "PRIMARY": {
+    "CENT_MEAN": {
+     "lost_queries": 13,
+     "gained_queries": 19,
+     "dropped_n": 15,
+     "retained_n": 2270,
+     "percentile_median dropped / retained": [
+      0.782,
+      0.461
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.533,
+      0.216
+     ],
+     "block_max_node_share dropped / retained": [
+      0.533,
+      0.585
+     ],
+     "mann_whitney_p": 0.04338540589102523
+    },
+    "CENT_NORM": {
+     "lost_queries": 18,
+     "gained_queries": 11,
+     "dropped_n": 21,
+     "retained_n": 2264,
+     "percentile_median dropped / retained": [
+      0.782,
+      0.461
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.524,
+      0.216
+     ],
+     "block_max_node_share dropped / retained": [
+      0.667,
+      0.584
+     ],
+     "mann_whitney_p": 0.0018821640500423815
+    },
+    "FPS_1": {
+     "lost_queries": 18,
+     "gained_queries": 15,
+     "dropped_n": 20,
+     "retained_n": 2261,
+     "percentile_median dropped / retained": [
+      0.586,
+      0.461
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.35,
+      0.216
+     ],
+     "block_max_node_share dropped / retained": [
+      0.55,
+      0.585
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.016
+     ],
+     "mann_whitney_p": 0.017051623837530852
+    },
+    "FPS_4": {
+     "lost_queries": 20,
+     "gained_queries": 18,
+     "dropped_n": 21,
+     "retained_n": 2258,
+     "percentile_median dropped / retained": [
+      0.51,
+      0.461
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.333,
+      0.216
+     ],
+     "block_max_node_share dropped / retained": [
+      0.524,
+      0.585
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.044
+     ],
+     "mann_whitney_p": 0.7229721341807556
+    },
+    "FPS_8": {
+     "lost_queries": 28,
+     "gained_queries": 14,
+     "dropped_n": 30,
+     "retained_n": 2248,
+     "percentile_median dropped / retained": [
+      0.493,
+      0.461
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.333,
+      0.217
+     ],
+     "block_max_node_share dropped / retained": [
+      0.567,
+      0.585
+     ],
+     "representative_share dropped / retained": [
+      0.033,
+      0.084
+     ],
+     "mann_whitney_p": 0.7593056886194081
+    },
+    "FPS_32": {
+     "lost_queries": 14,
+     "gained_queries": 13,
+     "dropped_n": 14,
+     "retained_n": 2271,
+     "percentile_median dropped / retained": [
+      0.578,
+      0.461
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.429,
+      0.218
+     ],
+     "block_max_node_share dropped / retained": [
+      0.5,
+      0.586
+     ],
+     "representative_share dropped / retained": [
+      0.071,
+      0.28
+     ],
+     "mann_whitney_p": 0.4264924335643905
+    },
+    "RAND_8": {
+     "lost_queries": 25,
+     "gained_queries": 11,
+     "dropped_n": 28,
+     "retained_n": 2258,
+     "percentile_median dropped / retained": [
+      0.739,
+      0.461
+     ],
+     "peripheral_quartile_share dropped / retained": [
+      0.5,
+      0.214
+     ],
+     "block_max_node_share dropped / retained": [
+      0.536,
+      0.585
+     ],
+     "representative_share dropped / retained": [
+      0.0,
+      0.098
+     ],
+     "mann_whitney_p": 0.025981004718528065
+    }
+   }
+  }
+ },
+ "cohesion": {
+  "metaqa": {
+   "global_resultant_length": 0.605,
+   "resultant_length actual / random": [
+    0.6332,
+    0.6102
+   ],
+   "mean_pairwise_cosine actual / random": [
+    0.3953,
+    0.366
+   ],
+   "covering_radius_r1 actual / random": [
+    1.2399,
+    1.2501
+   ],
+   "r4_over_r1 actual / random": [
+    0.9361,
+    0.9453
+   ],
+   "r32_over_r1 actual / random": [
+    0.7678,
+    0.8204
+   ]
+  },
+  "metaqa_phg": {
+   "global_resultant_length": 0.605,
+   "resultant_length actual / random": [
+    0.6287,
+    0.6102
+   ],
+   "mean_pairwise_cosine actual / random": [
+    0.3895,
+    0.366
+   ],
+   "covering_radius_r1 actual / random": [
+    1.2411,
+    1.2495
+   ],
+   "r4_over_r1 actual / random": [
+    0.9367,
+    0.9441
+   ],
+   "r32_over_r1 actual / random": [
+    0.7779,
+    0.8194
+   ]
+  },
+  "squad": {
+   "global_resultant_length": 0.3983,
+   "resultant_length actual / random": [
+    0.5427,
+    0.4086
+   ],
+   "mean_pairwise_cosine actual / random": [
+    0.2893,
+    0.1586
+   ],
+   "covering_radius_r1 actual / random": [
+    1.32,
+    1.3665
+   ],
+   "r4_over_r1 actual / random": [
+    0.9338,
+    0.9602
+   ],
+   "r32_over_r1 actual / random": [
+    0.7761,
+    0.8869
+   ]
+  },
+  "squad_phg": {
+   "global_resultant_length": 0.3983,
+   "resultant_length actual / random": [
+    0.5257,
+    0.4086
+   ],
+   "mean_pairwise_cosine actual / random": [
+    0.2709,
+    0.1586
+   ],
+   "covering_radius_r1 actual / random": [
+    1.331,
+    1.3672
+   ],
+   "r4_over_r1 actual / random": [
+    0.9352,
+    0.9597
+   ],
+   "r32_over_r1 actual / random": [
+    0.7765,
+    0.8865
+   ]
+  },
+  "musique": {
+   "global_resultant_length": 0.3838,
+   "resultant_length actual / random": [
+    0.5464,
+    0.3946
+   ],
+   "mean_pairwise_cosine actual / random": [
+    0.2949,
+    0.1472
+   ],
+   "covering_radius_r1 actual / random": [
+    1.3183,
+    1.3708
+   ],
+   "r4_over_r1 actual / random": [
+    0.9367,
+    0.9645
+   ],
+   "r32_over_r1 actual / random": [
+    0.7921,
+    0.8931
+   ]
+  }
+ },
+ "predictions": {
+  "P1": {
+   "stated": "musique, F0: CENT_NORM does NOT preserve (prior: BASE + dense centroid 0.6867 vs QMAX_F0 0.7319)",
+   "held": true
+  },
+  "P2a": {
+   "stated": "musique, PRIMARY: none of CENT_MEAN, CENT_NORM, FPS_1 preserves",
+   "held": false
+  },
+  "P2b": {
+   "stated": "metaqa and metaqa_phg, PRIMARY: CENT_MEAN, CENT_NORM and FPS_1 all preserve (QMAX adds nothing there)",
+   "held": true
+  },
+  "P2c": {
+   "stated": "squad and squad_phg, F0: CENT_NORM does NOT preserve (prior on squad: BASE + dense centroid lost 8 / gained 1 vs BASE while QMAX_F0 is +6 over it)",
+   "held": true
+  },
+  "P3a": {
+   "stated": "m*(PRIMARY) is 16 or 32",
+   "held": false
+  },
+  "P3b": {
+   "stated": "m* is monotone in the level: m*(ALONE) >= m*(F0) >= m*(PRIMARY) (None counts as infinity)",
+   "held": true
+  },
+  "P3c": {
+   "stated": "m*(ALONE) is None: no ladder point preserves the IVF-like endpoint on all five caches",
+   "held": true
+  },
+  "P4": {
+   "stated": "FPS is at least as efficient as RAND: m*_FPS <= m*_RAND at F0 and at PRIMARY",
+   "held": true
+  },
+  "P5": {
+   "stated": "musique, ALONE, CENT_NORM: the gold nodes QMAX serves and the centroid drops sit farther from their block mean (higher median centroid-distance percentile) than the gold nodes both serve",
+   "held": true
+  },
+  "P6": {
+   "stated": "the actual blocks are more cohesive than a size-matched random partition (size-weighted resultant length) on all five caches",
+   "held": true
+  }
+ },
+ "what_this_does_not_decide": "adoption of any variant into the frozen composite (FREEZE f81ebb84 stays as it is); either endpoint (a) or (b); an L1 re-freeze; anything on DEV_B, TEST, 2Wiki, HotpotQA or WebQSP.  A preserving m* is a calibrated efficiency candidate for a later explicit ruling, with its compute caveat."
+}

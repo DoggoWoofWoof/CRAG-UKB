@@ -1,0 +1,271 @@
+{
+ "RECORD": "L1_EXTERNAL_LANE_MEMORY_EXPECTATION",
+ "utc": "2026-09-13T11:44:44Z",
+ "question": "can the frozen partition recipe (H4_SPLIT_PRESERVE over STRUCT+KNN, k = N // 100, Mt-KaHyPar DETERMINISTIC_QUALITY / KM1 / eps 0.03 / seed 0, scratchpad/_l1hu_local_worker.py) run for webqsp / hotpotqa / 2wiki on the >=250 GB external lane of the return-to-L1 plan?",
+ "method": "peak RSS of every legacy worker run that recorded it (ru_maxrss inside the worker process), the canonical metaqa kill point, and two single-parameter extrapolations: linear in pins (fits the two Modal points within 5%, but under-predicts the small local runs' per-pin rate by 25-50x in the other direction -- i.e. per-pin cost GROWS with instance size) and linear in pins*k (within 5x across all points). pins ~= N_f + 2|F| per family, verified on the built metaqa/squad/musique hypergraphs (531,006 / 1,589,832 / 6,014,938 pins vs estimates 530,678 / 1,591,152 / 5,999,274).",
+ "legacy_measurements": {
+  "2wiki_clean__H4_SPLIT_PRESERVE__S": {
+   "file": "scratchpad/_l1hu/parts\\2wiki_clean__H4_SPLIT_PRESERVE__S.stats.json",
+   "sha256": "e7b4b97f32fc898acfcaf3759f9f33e2b6f761db9fd5880119cd29dc6c0a0acf",
+   "pins": 307321,
+   "hyperedges": 55181,
+   "k": 658,
+   "threads": 12,
+   "peak_rss_mb": 505.1,
+   "wall_seconds": 92.5,
+   "GB_per_Mpins": 1.644,
+   "GB_per_Mpins_k": 0.0025,
+   "lane": "local WSL 12 threads"
+  },
+  "2wiki_clean__H4_SPLIT_PRESERVE__SKN": {
+   "file": "scratchpad/_l1hu/parts\\2wiki_clean__H4_SPLIT_PRESERVE__SKN.stats.json",
+   "sha256": "a2596075360cfe2ca2223e064cd1c040a6bee5a92c5abdbcbef0d6fe0e232c0f",
+   "pins": 1743620,
+   "hyperedges": 175618,
+   "k": 658,
+   "threads": 12,
+   "peak_rss_mb": 898.5,
+   "wall_seconds": 102.4,
+   "GB_per_Mpins": 0.515,
+   "GB_per_Mpins_k": 0.00078,
+   "lane": "local WSL 12 threads"
+  },
+  "2wiki_clean__H4_SPLIT_PRESERVE__SN": {
+   "file": "scratchpad/_l1hu/parts\\2wiki_clean__H4_SPLIT_PRESERVE__SN.stats.json",
+   "sha256": "669e819cc2e53f9f9e14f7e80e07ebd05b5c8f4c0a4d52429b93bce019f0eb25",
+   "pins": 1408638,
+   "hyperedges": 110110,
+   "k": 658,
+   "threads": 12,
+   "peak_rss_mb": 791.0,
+   "wall_seconds": 179.6,
+   "GB_per_Mpins": 0.562,
+   "GB_per_Mpins_k": 0.00085,
+   "lane": "local WSL 12 threads"
+  },
+  "hotpotqa_clean__H4_SPLIT_PRESERVE__SKN": {
+   "file": "scratchpad/_l1hu/parts\\hotpotqa_clean__H4_SPLIT_PRESERVE__SKN.stats.json",
+   "sha256": "cabbbe1aae298063d81d10c8e39972ec14983a75bb96cd2a820a8845f427a9e2",
+   "pins": 19345663,
+   "hyperedges": 1473739,
+   "k": 5074,
+   "threads": 16,
+   "peak_rss_mb": 262818.0,
+   "wall_seconds": 3383.5,
+   "GB_per_Mpins": 13.585,
+   "GB_per_Mpins_k": 0.00268,
+   "lane": "Modal"
+  },
+  "metaqa__H4_SPLIT_PRESERVE__S": {
+   "file": "scratchpad/_l1hu/parts\\metaqa__H4_SPLIT_PRESERVE__S.stats.json",
+   "sha256": "35a630ca12ab02eaf72e592d302d87f5a44ba71fec37a4e078be15d3b7c141e2",
+   "pins": 259431,
+   "hyperedges": 40471,
+   "k": 401,
+   "threads": 12,
+   "peak_rss_mb": 379.5,
+   "wall_seconds": 66.1,
+   "GB_per_Mpins": 1.463,
+   "GB_per_Mpins_k": 0.00365,
+   "lane": "local WSL 12 threads"
+  },
+  "metaqa__H4_SPLIT_PRESERVE__SKN": {
+   "file": "scratchpad/_l1hu/parts\\metaqa__H4_SPLIT_PRESERVE__SKN.stats.json",
+   "sha256": "160df44dcdb8720b30e3128bfa1075ec3bb34713f6a5e13844c0e0bc199ebae5",
+   "pins": 1031199,
+   "hyperedges": 118009,
+   "k": 401,
+   "threads": 12,
+   "peak_rss_mb": 594.4,
+   "wall_seconds": 111.6,
+   "GB_per_Mpins": 0.576,
+   "GB_per_Mpins_k": 0.00144,
+   "lane": "local WSL 12 threads"
+  },
+  "metaqa__H4_SPLIT_PRESERVE__SN": {
+   "file": "scratchpad/_l1hu/parts\\metaqa__H4_SPLIT_PRESERVE__SN.stats.json",
+   "sha256": "fbbac2608444b58a6bc54f69540140a7ccd540ac80886bebea58e2fb789e6e0d",
+   "pins": 882644,
+   "hyperedges": 79868,
+   "k": 401,
+   "threads": 12,
+   "peak_rss_mb": 526.1,
+   "wall_seconds": 119.7,
+   "GB_per_Mpins": 0.596,
+   "GB_per_Mpins_k": 0.00149,
+   "lane": "local WSL 12 threads"
+  },
+  "musique_clean__H4_SPLIT_PRESERVE__S": {
+   "file": "scratchpad/_l1hu/parts\\musique_clean__H4_SPLIT_PRESERVE__S.stats.json",
+   "sha256": "9e38cc8689ce64864bfc1ebc939585f6815c8ed608694866c9a8ab51fe33806b",
+   "pins": 113174,
+   "hyperedges": 10088,
+   "k": 136,
+   "threads": 12,
+   "peak_rss_mb": 145.2,
+   "wall_seconds": 9.6,
+   "GB_per_Mpins": 1.283,
+   "GB_per_Mpins_k": 0.00943,
+   "lane": "local WSL 12 threads"
+  },
+  "musique_clean__H4_SPLIT_PRESERVE__SKN": {
+   "file": "scratchpad/_l1hu/parts\\musique_clean__H4_SPLIT_PRESERVE__SKN.stats.json",
+   "sha256": "b7bf09fad36847df2628cef862516eaa831fcfd172dd463ec473ab3cc7980e7b",
+   "pins": 392642,
+   "hyperedges": 35432,
+   "k": 136,
+   "threads": 12,
+   "peak_rss_mb": 212.3,
+   "wall_seconds": 7.0,
+   "GB_per_Mpins": 0.541,
+   "GB_per_Mpins_k": 0.00398,
+   "lane": "local WSL 12 threads"
+  },
+  "musique_clean__H4_SPLIT_PRESERVE__SN": {
+   "file": "scratchpad/_l1hu/parts\\musique_clean__H4_SPLIT_PRESERVE__SN.stats.json",
+   "sha256": "6e0a296504843eb40caeaa3c45fc06d3f65592f06d009f14002f70a3769b736e",
+   "pins": 324340,
+   "hyperedges": 21942,
+   "k": 136,
+   "threads": 12,
+   "peak_rss_mb": 202.1,
+   "wall_seconds": 23.2,
+   "GB_per_Mpins": 0.623,
+   "GB_per_Mpins_k": 0.00458,
+   "lane": "local WSL 12 threads"
+  },
+  "squad_clean__H4_SPLIT_PRESERVE__S": {
+   "file": "scratchpad/_l1hu/parts\\squad_clean__H4_SPLIT_PRESERVE__S.stats.json",
+   "sha256": "51e776170c68167643ca88ce5c9c60029512893182b31b746c7de19eabdde93b",
+   "pins": 1409951,
+   "hyperedges": 20791,
+   "k": 190,
+   "threads": 12,
+   "peak_rss_mb": 339.6,
+   "wall_seconds": 73.1,
+   "GB_per_Mpins": 0.241,
+   "GB_per_Mpins_k": 0.00127,
+   "lane": "local WSL 12 threads"
+  },
+  "squad_clean__H4_SPLIT_PRESERVE__SKN": {
+   "file": "scratchpad/_l1hu/parts\\squad_clean__H4_SPLIT_PRESERVE__SKN.stats.json",
+   "sha256": "e86bf1cafd9fd10f524ebccf2215f7cdcb1679d229b8eb26d29d93cdbe732a7a",
+   "pins": 1788165,
+   "hyperedges": 51423,
+   "k": 190,
+   "threads": 12,
+   "peak_rss_mb": 486.9,
+   "wall_seconds": 23.6,
+   "GB_per_Mpins": 0.272,
+   "GB_per_Mpins_k": 0.00143,
+   "lane": "local WSL 12 threads"
+  },
+  "squad_clean__H4_SPLIT_PRESERVE__SN": {
+   "file": "scratchpad/_l1hu/parts\\squad_clean__H4_SPLIT_PRESERVE__SN.stats.json",
+   "sha256": "1ef1b93ad0b8c16ede09a2d0c90b326c1084a059cb1863159dc0519e32ae22be",
+   "pins": 1715936,
+   "hyperedges": 35746,
+   "k": 190,
+   "threads": 12,
+   "peak_rss_mb": 434.0,
+   "wall_seconds": 118.1,
+   "GB_per_Mpins": 0.253,
+   "GB_per_Mpins_k": 0.00133,
+   "lane": "local WSL 12 threads"
+  },
+  "webqsp__H4_SPLIT_PRESERVE__SKN": {
+   "file": "scratchpad/_l1hu/parts\\webqsp__H4_SPLIT_PRESERVE__SKN.stats.json",
+   "sha256": "74838efd6fff2d1c30d2a6bdadc054c92533c8124bd3ab4e565b9103aa801c54",
+   "pins": 10900573,
+   "hyperedges": 1846019,
+   "k": 7814,
+   "threads": 16,
+   "peak_rss_mb": 140563.5,
+   "wall_seconds": 3295.4,
+   "GB_per_Mpins": 12.895,
+   "GB_per_Mpins_k": 0.00165,
+   "lane": "Modal"
+  },
+  "squad_clean__H4_SPLIT_PRESERVE__SK": {
+   "file": "scratchpad/_l1hu/local_meta/squad_clean__H4_SPLIT_PRESERVE__SK.json",
+   "sha256": "201ea85891b711b9d293f7ae21f852437734a1b3302190da9bd1733c42a06407",
+   "pins": 1482180,
+   "hyperedges": 36468,
+   "k": 190,
+   "threads": 12,
+   "peak_rss_mb": 422.8,
+   "wall_seconds": 31.7,
+   "GB_per_Mpins": 0.285,
+   "GB_per_Mpins_k": 0.0015,
+   "lane": "local WSL 12 threads"
+  }
+ },
+ "canonical_metaqa_kill_point": {
+  "pins": 531006,
+  "hyperedges": 86796,
+  "k": 432,
+  "threads": 8,
+  "peak_rss_mb_lower_bound": 931.7,
+  "killed_at_cap_gb": 0.9495976960000001,
+  "wall_seconds_at_kill": 209.2,
+  "GB_per_Mpins_k_lower_bound": 0.00406
+ },
+ "expectation_GB": {
+  "webqsp": {
+   "pins_estimate": 29578538,
+   "k": 25928,
+   "linear_in_pins_GB": 382,
+   "pins_times_k_GB": 1266,
+   "threads_measured": 16,
+   "note": "both models put every canonical big corpus above the 250 GB lane; memory may also scale with threads -- start at 16",
+   "N": 2592894,
+   "STRUCT": 5882501,
+   "KNN": 6313874,
+   "ratio_to_250GB_lane": {
+    "linear_in_pins": 1.53,
+    "pins_times_k": 5.1
+   }
+  },
+  "hotpotqa": {
+   "pins_estimate": 61951000,
+   "k": 52333,
+   "linear_in_pins_GB": 799,
+   "pins_times_k_GB": 5352,
+   "threads_measured": 16,
+   "note": "both models put every canonical big corpus above the 250 GB lane; memory may also scale with threads -- start at 16",
+   "N": 5233329,
+   "STRUCT": 15095287,
+   "KNN": 10646884,
+   "ratio_to_250GB_lane": {
+    "linear_in_pins": 3.2,
+    "pins_times_k": 21.4
+   }
+  },
+  "2wiki": {
+   "pins_estimate": 91793764,
+   "k": 59898,
+   "linear_in_pins_GB": 1184,
+   "pins_times_k_GB": 9076,
+   "threads_measured": 16,
+   "note": "both models put every canonical big corpus above the 250 GB lane; memory may also scale with threads -- start at 16",
+   "N": 5989847,
+   "STRUCT": 28208857,
+   "KNN": 11698178,
+   "ratio_to_250GB_lane": {
+    "linear_in_pins": 4.74,
+    "pins_times_k": 36.3
+   }
+  }
+ },
+ "verdict": "NOT_FEASIBLE_AT_250GB: the optimistic (linear-in-pins) bound already exceeds 250 GB for all three corpora (webqsp 1.5x, hotpotqa 3.2x, 2wiki 4.7x); the pins*k model puts them at 1.3 / 5.4 / 9.1 TB. The algorithm is not swapped here (user ruling); this record is the input to the new explicit L1 partitioning ruling.",
+ "ruling_inputs": [
+  "A. procure the memory: >=0.4-1.3 TB (webqsp), >=0.8-5.4 TB (hotpotqa), >=1.2-9.1 TB (2wiki); the kits refuse below the optimistic bound unless FORCE=1",
+  "B. pin the model first (cheap, local, no artefact): partition the built metaqa hypergraph at k in {43, 432, 4320} when host RAM frees and read peak RSS -- one afternoon turns the 3-7x range into one number before any procurement",
+  "C. a new explicit ruling that changes the recipe (e.g. two-level H4_SK: Mt-KaHyPar into ~N/10,000 super-blocks, then each induced sub-hypergraph into ~100 -- same partitioner/preset/objective, different partition structure; or a different k rule for the big corpora) -- must be ruled, never silently swapped"
+ ],
+ "kits": {
+  "webqsp": "data/l1_canonical/_external/l1_partition_kit_webqsp.tar.gz",
+  "hotpotqa": "data/l1_canonical/_external/l1_partition_kit_hotpotqa.tar.gz",
+  "2wiki": "data/l1_canonical/_external/l1_partition_kit_2wiki.tar.gz"
+ }
+}

@@ -1,0 +1,10550 @@
+{
+ "tag": "v1",
+ "status": "DEVELOPMENT (descriptive; post-hoc view, no new arm)",
+ "summary": {
+  "path": "results/L1_DEV/route_SUMMARY__v1.json",
+  "sha256": "83e02d15d72f890411fa80f1ab5ba1e75fe4370184445289766c7b10b59759d6"
+ },
+ "rounding": "shares from exact query counts, Decimal ROUND_HALF_UP to 3 decimals (means to 1, ratios to 2)",
+ "panel (FLAGGED: named after the summary existed)": [
+  {
+   "arm": "TOP3|NEFF_TOP3",
+   "router_information": "the seeds' 1-hop rows",
+   "role": "section 33's OWN.TOP3.NEFF (the proposal's item 1)"
+  },
+  {
+   "arm": "MAX|NEFF_MAX",
+   "router_information": "the seeds' 1-hop rows",
+   "role": "section 33's OWN.MAX.NEFF (item 1)"
+  },
+  {
+   "arm": "SUM|NEFF_SUM",
+   "router_information": "the seeds' 1-hop rows",
+   "role": "section 33's OWN.SUM.NEFF; SUM == greedy marginal node coverage on disjoint shards (item 2)"
+  },
+  {
+   "arm": "SDIV|KNEE_SDIV",
+   "router_information": "the seeds' 1-hop rows",
+   "role": "seed-diversity coverage (item 3), knee of its own scores"
+  },
+  {
+   "arm": "SC_L|SC_L_COVER",
+   "router_information": "the seeds' 1-hop rows",
+   "role": "greedy seed cover run to saturation (items 2-3)"
+  },
+  {
+   "arm": "FL_L|FL_L_KNEEG",
+   "router_information": "the seeds' 1-hop rows",
+   "role": "facility location, greedy, knee of its marginal gains (item 4)"
+  },
+  {
+   "arm": "FL_L|FL_L_COVER",
+   "router_information": "the seeds' 1-hop rows",
+   "role": "facility location, greedy, run to saturation (item 4)"
+  },
+  {
+   "arm": "PD|NEFF_PD",
+   "router_information": "the seeds' 1-hop rows + the static partition graph",
+   "role": "one-hop partition-graph diffusion (item 5; FLAGGED: a second hop at shard granularity)"
+  },
+  {
+   "arm": "PC_L|PC_L_KNEEG",
+   "router_information": "H_q = FLAT[:200] + the seeds' 1-hop rows",
+   "role": "noisy-OR coverage (round 2's saturation mitigation)"
+  },
+  {
+   "arm": "NSUM|NEFF_NSUM",
+   "router_information": "H_q = FLAT[:200] + the seeds' 1-hop rows",
+   "role": "additive facility location (round 2's saturation mitigation)"
+  },
+  {
+   "arm": "ES|KNEE_SDIV",
+   "router_information": "H_q = FLAT[:200] + the seeds' 1-hop rows (the router's own fused order O')",
+   "role": "text endpoint A (the router's own order O')"
+  },
+  {
+   "arm": "SDE|BPI_SDIV",
+   "router_information": "H_q = FLAT[:200] + the seeds' 1-hop rows",
+   "role": "KB endpoint B"
+  },
+  {
+   "arm": "SDK|BPI_SDIV",
+   "router_information": "H_q = FLAT[:200] + the seeds' partition sketch (the partitions of their 1-hop neighbours)",
+   "role": "KB endpoint B on the partition sketch alone"
+  },
+  {
+   "arm": "MXS_L4|MA_KS_L4",
+   "router_information": "H_q = FLAT[:200] + the seeds' 1-hop rows + its regime share",
+   "role": "round 3: lam4 mixture of A and B (native)"
+  },
+  {
+   "arm": "UM_KS_L4|UM_KS_L4",
+   "router_information": "H_q = FLAT[:200] + the seeds' 1-hop rows + its regime share",
+   "role": "round 3: lam4 union of A and B (native)"
+  },
+  {
+   "arm": "UM_KS_L4|MA_KS_L4",
+   "router_information": "H_q = FLAT[:200] + the seeds' 1-hop rows + its regime share",
+   "role": "first of the B_N 500 universality list (cross-record)"
+  },
+  {
+   "arm": "IL_S_T3|MG_KS_L2",
+   "router_information": "O + the seeds' 1-hop rows",
+   "role": "first of the B_N 1000 universality list (cross-record)"
+  },
+  {
+   "arm": "IL_S_T3|UM_KT_L4",
+   "router_information": "O + the seeds' 1-hop rows",
+   "role": "B_N 1000 lossless table, delta 0.05 (cross-record)"
+  },
+  {
+   "arm": "S|KNEE_TOP3",
+   "router_information": "O (FLAT + the seeds' 1-hop rows)",
+   "role": "B_N 1000 lossless table, delta 0.005"
+  },
+  {
+   "arm": "S|PSTAR_BN",
+   "router_information": "O (FLAT + the seeds' 1-hop rows)",
+   "role": "the B_N-coupled lossless reference (S at PSTAR == unrouted)"
+  },
+  {
+   "arm": "ES|ESTAR_BN",
+   "router_information": "H_q = FLAT[:200] + the seeds' 1-hop rows (the router's own fused order O')",
+   "role": "round 3: B_N-coupled router-side estimate of PSTAR (not in the factorial)"
+  }
+ ],
+ "few_vs_many": {
+  "counts": {
+   "NEFF_FSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      27231,
+      1998
+     ],
+     "metaqa_phg": [
+      30753,
+      1998
+     ],
+     "musique": [
+      22054,
+      2000
+     ],
+     "squad": [
+      14056,
+      2000
+     ],
+     "squad_phg": [
+      15076,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     3671991,
+     4538500
+    ],
+    "musique_over_metaqa_phg": [
+     407999,
+     569500
+    ]
+   },
+   "NEFF_FSUMFV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      122992,
+      1998
+     ],
+     "metaqa_phg": [
+      145310,
+      1998
+     ],
+     "musique": [
+      70639,
+      2000
+     ],
+     "squad": [
+      35349,
+      2000
+     ],
+     "squad_phg": [
+      39580,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     70568361,
+     122992000
+    ],
+    "musique_over_metaqa_phg": [
+     70568361,
+     145310000
+    ]
+   },
+   "NEFF_SUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      72195,
+      1998
+     ],
+     "metaqa_phg": [
+      82239,
+      1998
+     ],
+     "musique": [
+      95790,
+      2000
+     ],
+     "squad": [
+      53439,
+      2000
+     ],
+     "squad_phg": [
+      58388,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     3189807,
+     2406500
+    ],
+    "musique_over_metaqa_phg": [
+     3189807,
+     2741300
+    ]
+   },
+   "NEFF_MAX": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      109670,
+      1998
+     ],
+     "metaqa_phg": [
+      113094,
+      1998
+     ],
+     "musique": [
+      193155,
+      2000
+     ],
+     "squad": [
+      85429,
+      2000
+     ],
+     "squad_phg": [
+      91716,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     38592369,
+     21934000
+    ],
+    "musique_over_metaqa_phg": [
+     4288041,
+     2513200
+    ]
+   },
+   "NEFF_TOP3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      98898,
+      1998
+     ],
+     "metaqa_phg": [
+      106564,
+      1998
+     ],
+     "musique": [
+      168008,
+      2000
+     ],
+     "squad": [
+      76929,
+      2000
+     ],
+     "squad_phg": [
+      83394,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     6993333,
+     4120750
+    ],
+    "musique_over_metaqa_phg": [
+     20979999,
+     13320500
+    ]
+   },
+   "NEFF_SDIV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      148333,
+      1998
+     ],
+     "metaqa_phg": [
+      156219,
+      1998
+     ],
+     "musique": [
+      337898,
+      2000
+     ],
+     "squad": [
+      140858,
+      2000
+     ],
+     "squad_phg": [
+      150563,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     4561623,
+     2004500
+    ],
+    "musique_over_metaqa_phg": [
+     56260017,
+     26036500
+    ]
+   },
+   "NEFF_PD": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      117819,
+      1998
+     ],
+     "metaqa_phg": [
+      133587,
+      1998
+     ],
+     "musique": [
+      164365,
+      2000
+     ],
+     "squad": [
+      98426,
+      2000
+     ],
+     "squad_phg": [
+      103817,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     3648903,
+     2618200
+    ],
+    "musique_over_metaqa_phg": [
+     3648903,
+     2968600
+    ]
+   },
+   "KNEE_FSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      42507,
+      1998
+     ],
+     "metaqa_phg": [
+      45662,
+      1998
+     ],
+     "musique": [
+      30612,
+      2000
+     ],
+     "squad": [
+      18778,
+      2000
+     ],
+     "squad_phg": [
+      20233,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     849483,
+     1180750
+    ],
+    "musique_over_metaqa_phg": [
+     7645347,
+     11415500
+    ]
+   },
+   "KNEE_FSUMFV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      71169,
+      1998
+     ],
+     "metaqa_phg": [
+      77318,
+      1998
+     ],
+     "musique": [
+      47120,
+      2000
+     ],
+     "squad": [
+      29089,
+      2000
+     ],
+     "squad_phg": [
+      31748,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     392274,
+     593075
+    ],
+    "musique_over_metaqa_phg": [
+     588411,
+     966475
+    ]
+   },
+   "KNEE_SUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      151887,
+      1998
+     ],
+     "metaqa_phg": [
+      153437,
+      1998
+     ],
+     "musique": [
+      261785,
+      2000
+     ],
+     "squad": [
+      77029,
+      2000
+     ],
+     "squad_phg": [
+      79469,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     17434881,
+     10125800
+    ],
+    "musique_over_metaqa_phg": [
+     52304643,
+     30687400
+    ]
+   },
+   "KNEE_MAX": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      155073,
+      1998
+     ],
+     "metaqa_phg": [
+      154411,
+      1998
+     ],
+     "musique": [
+      323999,
+      2000
+     ],
+     "squad": [
+      93662,
+      2000
+     ],
+     "squad_phg": [
+      97043,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     107891667,
+     51691000
+    ],
+    "musique_over_metaqa_phg": [
+     323675001,
+     154411000
+    ]
+   },
+   "KNEE_TOP3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      155986,
+      1998
+     ],
+     "metaqa_phg": [
+      156132,
+      1998
+     ],
+     "musique": [
+      315274,
+      2000
+     ],
+     "squad": [
+      89230,
+      2000
+     ],
+     "squad_phg": [
+      91814,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     157479363,
+     77993000
+    ],
+    "musique_over_metaqa_phg": [
+     17497707,
+     8674000
+    ]
+   },
+   "KNEE_SDIV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      184308,
+      1998
+     ],
+     "metaqa_phg": [
+      182812,
+      1998
+     ],
+     "musique": [
+      396623,
+      2000
+     ],
+     "squad": [
+      117100,
+      2000
+     ],
+     "squad_phg": [
+      120815,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     132075459,
+     61436000
+    ],
+    "musique_over_metaqa_phg": [
+     396226377,
+     182812000
+    ]
+   },
+   "KNEE_PD": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      163129,
+      1998
+     ],
+     "metaqa_phg": [
+      164989,
+      1998
+     ],
+     "musique": [
+      380131,
+      2000
+     ],
+     "squad": [
+      96621,
+      2000
+     ],
+     "squad_phg": [
+      97933,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     379750869,
+     163129000
+    ],
+    "musique_over_metaqa_phg": [
+     379750869,
+     164989000
+    ]
+   },
+   "EXPH_TOP3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      255832,
+      1998
+     ],
+     "metaqa_phg": [
+      263263,
+      1998
+     ],
+     "musique": [
+      420433,
+      2000
+     ],
+     "squad": [
+      143796,
+      2000
+     ],
+     "squad_phg": [
+      151185,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     420012567,
+     255832000
+    ],
+    "musique_over_metaqa_phg": [
+     32308659,
+     20251000
+    ]
+   },
+   "NSEEDP": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      242754,
+      1998
+     ],
+     "metaqa_phg": [
+      255096,
+      1998
+     ],
+     "musique": [
+      180433,
+      2000
+     ],
+     "squad": [
+      120248,
+      2000
+     ],
+     "squad_phg": [
+      126373,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     60084189,
+     80918000
+    ],
+    "musique_over_metaqa_phg": [
+     6676021,
+     9448000
+    ]
+   },
+   "NOACT": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      207124,
+      1998
+     ],
+     "metaqa_phg": [
+      219432,
+      1998
+     ],
+     "musique": [
+      146183,
+      2000
+     ],
+     "squad": [
+      91282,
+      2000
+     ],
+     "squad_phg": [
+      97017,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     146036817,
+     207124000
+    ],
+    "musique_over_metaqa_phg": [
+     48678939,
+     73144000
+    ]
+   },
+   "NLOCP": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      199795,
+      1998
+     ],
+     "metaqa_phg": [
+      208202,
+      1998
+     ],
+     "musique": [
+      121456,
+      2000
+     ],
+     "squad": [
+      71195,
+      2000
+     ],
+     "squad_phg": [
+      77540,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     15166818,
+     24974375
+    ],
+    "musique_over_metaqa_phg": [
+     7583409,
+     13012625
+    ]
+   },
+   "SC_L_NEFFG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      7199,
+      1998
+     ],
+     "metaqa_phg": [
+      7417,
+      1998
+     ],
+     "musique": [
+      5784,
+      2000
+     ],
+     "squad": [
+      5577,
+      2000
+     ],
+     "squad_phg": [
+      5449,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     722277,
+     899875
+    ],
+    "musique_over_metaqa_phg": [
+     722277,
+     927125
+    ]
+   },
+   "SC_L_KNEEG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      8051,
+      1998
+     ],
+     "metaqa_phg": [
+      8153,
+      1998
+     ],
+     "musique": [
+      5455,
+      2000
+     ],
+     "squad": [
+      5657,
+      2000
+     ],
+     "squad_phg": [
+      5385,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     1089909,
+     1610200
+    ],
+    "musique_over_metaqa_phg": [
+     1089909,
+     1630600
+    ]
+   },
+   "SC_L_COVER": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      58884,
+      1998
+     ],
+     "metaqa_phg": [
+      57251,
+      1998
+     ],
+     "musique": [
+      34701,
+      2000
+     ],
+     "squad": [
+      39055,
+      2000
+     ],
+     "squad_phg": [
+      37492,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     11555433,
+     19628000
+    ],
+    "musique_over_metaqa_phg": [
+     34666299,
+     57251000
+    ]
+   },
+   "SC_LS_NEFFG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      7193,
+      1998
+     ],
+     "metaqa_phg": [
+      7393,
+      1998
+     ],
+     "musique": [
+      5780,
+      2000
+     ],
+     "squad": [
+      5575,
+      2000
+     ],
+     "squad_phg": [
+      5447,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     288711,
+     359650
+    ],
+    "musique_over_metaqa_phg": [
+     288711,
+     369650
+    ]
+   },
+   "SC_LS_KNEEG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      8045,
+      1998
+     ],
+     "metaqa_phg": [
+      8092,
+      1998
+     ],
+     "musique": [
+      5449,
+      2000
+     ],
+     "squad": [
+      5656,
+      2000
+     ],
+     "squad_phg": [
+      5386,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     5443551,
+     8045000
+    ],
+    "musique_over_metaqa_phg": [
+     5443551,
+     8092000
+    ]
+   },
+   "SC_LS_COVER": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      58839,
+      1998
+     ],
+     "metaqa_phg": [
+      56933,
+      1998
+     ],
+     "musique": [
+      34663,
+      2000
+     ],
+     "squad": [
+      39041,
+      2000
+     ],
+     "squad_phg": [
+      37482,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     11542779,
+     19613000
+    ],
+    "musique_over_metaqa_phg": [
+     2036961,
+     3349000
+    ]
+   },
+   "FL_L_NEFFG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      13888,
+      1998
+     ],
+     "metaqa_phg": [
+      13265,
+      1998
+     ],
+     "musique": [
+      11676,
+      2000
+     ],
+     "squad": [
+      10477,
+      2000
+     ],
+     "squad_phg": [
+      10439,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     416583,
+     496000
+    ],
+    "musique_over_metaqa_phg": [
+     416583,
+     473750
+    ]
+   },
+   "FL_L_KNEEG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      27935,
+      1998
+     ],
+     "metaqa_phg": [
+      27256,
+      1998
+     ],
+     "musique": [
+      19000,
+      2000
+     ],
+     "squad": [
+      15946,
+      2000
+     ],
+     "squad_phg": [
+      15616,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     513,
+     755
+    ],
+    "musique_over_metaqa_phg": [
+     18981,
+     27256
+    ]
+   },
+   "FL_L_COVER": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      212879,
+      1998
+     ],
+     "metaqa_phg": [
+      204880,
+      1998
+     ],
+     "musique": [
+      137915,
+      2000
+     ],
+     "squad": [
+      112750,
+      2000
+     ],
+     "squad_phg": [
+      111382,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     27555417,
+     42575800
+    ],
+    "musique_over_metaqa_phg": [
+     27555417,
+     40976000
+    ]
+   },
+   "FL_LS_NEFFG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      24565,
+      1998
+     ],
+     "metaqa_phg": [
+      27472,
+      1998
+     ],
+     "musique": [
+      20121,
+      2000
+     ],
+     "squad": [
+      12720,
+      2000
+     ],
+     "squad_phg": [
+      13585,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     20100879,
+     24565000
+    ],
+    "musique_over_metaqa_phg": [
+     20100879,
+     27472000
+    ]
+   },
+   "FL_LS_KNEEG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      40255,
+      1998
+     ],
+     "metaqa_phg": [
+      43657,
+      1998
+     ],
+     "musique": [
+      29692,
+      2000
+     ],
+     "squad": [
+      18203,
+      2000
+     ],
+     "squad_phg": [
+      19555,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     7415577,
+     10063750
+    ],
+    "musique_over_metaqa_phg": [
+     7415577,
+     10914250
+    ]
+   },
+   "FL_LS_COVER": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      244538,
+      1998
+     ],
+     "metaqa_phg": [
+      256878,
+      1998
+     ],
+     "musique": [
+      182728,
+      2000
+     ],
+     "squad": [
+      120882,
+      2000
+     ],
+     "squad_phg": [
+      127096,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     3259737,
+     4366750
+    ],
+    "musique_over_metaqa_phg": [
+     845117,
+     1189250
+    ]
+   },
+   "U_NEFF": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      146568,
+      1998
+     ],
+     "metaqa_phg": [
+      167193,
+      1998
+     ],
+     "musique": [
+      183852,
+      2000
+     ],
+     "squad": [
+      82824,
+      2000
+     ],
+     "squad_phg": [
+      89988,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     15305679,
+     12214000
+    ],
+    "musique_over_metaqa_phg": [
+     5101893,
+     4644250
+    ]
+   },
+   "U_KNEE": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      160990,
+      1998
+     ],
+     "metaqa_phg": [
+      164025,
+      1998
+     ],
+     "musique": [
+      316468,
+      2000
+     ],
+     "squad": [
+      91545,
+      2000
+     ],
+     "squad_phg": [
+      94497,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     79037883,
+     40247500
+    ],
+    "musique_over_metaqa_phg": [
+     2927329,
+     1518750
+    ]
+   },
+   "NEFF_NSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      63672,
+      1998
+     ],
+     "metaqa_phg": [
+      72487,
+      1998
+     ],
+     "musique": [
+      69026,
+      2000
+     ],
+     "squad": [
+      40706,
+      2000
+     ],
+     "squad_phg": [
+      44203,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     11492829,
+     10612000
+    ],
+    "musique_over_metaqa_phg": [
+     34478487,
+     36243500
+    ]
+   },
+   "NEFF_NSUMS": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      46796,
+      1998
+     ],
+     "metaqa_phg": [
+      54988,
+      1998
+     ],
+     "musique": [
+      43985,
+      2000
+     ],
+     "squad": [
+      24262,
+      2000
+     ],
+     "squad_phg": [
+      26685,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     8788203,
+     9359200
+    ],
+    "musique_over_metaqa_phg": [
+     8788203,
+     10997600
+    ]
+   },
+   "NEFF_SDIVS": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      133861,
+      1998
+     ],
+     "metaqa_phg": [
+      144246,
+      1998
+     ],
+     "musique": [
+      313745,
+      2000
+     ],
+     "squad": [
+      123002,
+      2000
+     ],
+     "squad_phg": [
+      133706,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     62686251,
+     26772200
+    ],
+    "musique_over_metaqa_phg": [
+     20895417,
+     9616400
+    ]
+   },
+   "NEFF_SHF": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      49236,
+      1998
+     ],
+     "metaqa_phg": [
+      57822,
+      1998
+     ],
+     "musique": [
+      49283,
+      2000
+     ],
+     "squad": [
+      27668,
+      2000
+     ],
+     "squad_phg": [
+      30477,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     16411239,
+     16412000
+    ],
+    "musique_over_metaqa_phg": [
+     16411239,
+     19274000
+    ]
+   },
+   "NEFF_SUMH": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      84946,
+      1998
+     ],
+     "metaqa_phg": [
+      98399,
+      1998
+     ],
+     "musique": [
+      110504,
+      2000
+     ],
+     "squad": [
+      54927,
+      2000
+     ],
+     "squad_phg": [
+      60945,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     13799187,
+     10618250
+    ],
+    "musique_over_metaqa_phg": [
+     13799187,
+     12299875
+    ]
+   },
+   "KNEE_NSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      146774,
+      1998
+     ],
+     "metaqa_phg": [
+      148653,
+      1998
+     ],
+     "musique": [
+      231895,
+      2000
+     ],
+     "squad": [
+      68275,
+      2000
+     ],
+     "squad_phg": [
+      69886,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     46332621,
+     29354800
+    ],
+    "musique_over_metaqa_phg": [
+     5148069,
+     3303400
+    ]
+   },
+   "KNEE_NSUMS": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      134899,
+      1998
+     ],
+     "metaqa_phg": [
+      138523,
+      1998
+     ],
+     "musique": [
+      196852,
+      2000
+     ],
+     "squad": [
+      56545,
+      2000
+     ],
+     "squad_phg": [
+      58301,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     49163787,
+     33724750
+    ],
+    "musique_over_metaqa_phg": [
+     49163787,
+     34630750
+    ]
+   },
+   "KNEE_SDIVS": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      178981,
+      1998
+     ],
+     "metaqa_phg": [
+      178019,
+      1998
+     ],
+     "musique": [
+      388838,
+      2000
+     ],
+     "squad": [
+      112416,
+      2000
+     ],
+     "squad_phg": [
+      116336,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     194224581,
+     89490500
+    ],
+    "musique_over_metaqa_phg": [
+     194224581,
+     89009500
+    ]
+   },
+   "KNEE_SHF": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      135873,
+      1998
+     ],
+     "metaqa_phg": [
+      139832,
+      1998
+     ],
+     "musique": [
+      210980,
+      2000
+     ],
+     "squad": [
+      60739,
+      2000
+     ],
+     "squad_phg": [
+      62838,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     1170939,
+     754850
+    ],
+    "musique_over_metaqa_phg": [
+     136863,
+     90800
+    ]
+   },
+   "KNEE_SUMH": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      157199,
+      1998
+     ],
+     "metaqa_phg": [
+      159947,
+      1998
+     ],
+     "musique": [
+      275260,
+      2000
+     ],
+     "squad": [
+      77862,
+      2000
+     ],
+     "squad_phg": [
+      80704,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     13749237,
+     7859950
+    ],
+    "musique_over_metaqa_phg": [
+     13749237,
+     7997350
+    ]
+   },
+   "EXPH_FSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      69642,
+      1998
+     ],
+     "metaqa_phg": [
+      77514,
+      1998
+     ],
+     "musique": [
+      48711,
+      2000
+     ],
+     "squad": [
+      28034,
+      2000
+     ],
+     "squad_phg": [
+      30399,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     5406921,
+     7738000
+    ],
+    "musique_over_metaqa_phg": [
+     16220763,
+     25838000
+    ]
+   },
+   "EXPH_FSUMFV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      178424,
+      1998
+     ],
+     "metaqa_phg": [
+      196806,
+      1998
+     ],
+     "musique": [
+      111189,
+      2000
+     ],
+     "squad": [
+      60279,
+      2000
+     ],
+     "squad_phg": [
+      65990,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     111077811,
+     178424000
+    ],
+    "musique_over_metaqa_phg": [
+     37025937,
+     65602000
+    ]
+   },
+   "EXPH_SUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      216169,
+      1998
+     ],
+     "metaqa_phg": [
+      233273,
+      1998
+     ],
+     "musique": [
+      274907,
+      2000
+     ],
+     "squad": [
+      111190,
+      2000
+     ],
+     "squad_phg": [
+      119679,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     274632093,
+     216169000
+    ],
+    "musique_over_metaqa_phg": [
+     274632093,
+     233273000
+    ]
+   },
+   "EXPH_MAX": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      256320,
+      1998
+     ],
+     "metaqa_phg": [
+      258160,
+      1998
+     ],
+     "musique": [
+      452213,
+      2000
+     ],
+     "squad": [
+      150395,
+      2000
+     ],
+     "squad_phg": [
+      157531,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     50195643,
+     28480000
+    ],
+    "musique_over_metaqa_phg": [
+     451760787,
+     258160000
+    ]
+   },
+   "EXPH_SDIV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      332767,
+      1998
+     ],
+     "metaqa_phg": [
+      335453,
+      1998
+     ],
+     "musique": [
+      626639,
+      2000
+     ],
+     "squad": [
+      208375,
+      2000
+     ],
+     "squad_phg": [
+      217345,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     626012361,
+     332767000
+    ],
+    "musique_over_metaqa_phg": [
+     626012361,
+     335453000
+    ]
+   },
+   "EXPH_NSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      191769,
+      1998
+     ],
+     "metaqa_phg": [
+      207587,
+      1998
+     ],
+     "musique": [
+      205376,
+      2000
+     ],
+     "squad": [
+      88980,
+      2000
+     ],
+     "squad_phg": [
+      95027,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     8548776,
+     7990375
+    ],
+    "musique_over_metaqa_phg": [
+     25646328,
+     25948375
+    ]
+   },
+   "EXPH_NSUMS": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      140558,
+      1998
+     ],
+     "metaqa_phg": [
+      156815,
+      1998
+     ],
+     "musique": [
+      132081,
+      2000
+     ],
+     "squad": [
+      58656,
+      2000
+     ],
+     "squad_phg": [
+      63639,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     131948919,
+     140558000
+    ],
+    "musique_over_metaqa_phg": [
+     131948919,
+     156815000
+    ]
+   },
+   "EXPH_SDIVS": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      313388,
+      1998
+     ],
+     "metaqa_phg": [
+      319661,
+      1998
+     ],
+     "musique": [
+      601885,
+      2000
+     ],
+     "squad": [
+      195488,
+      2000
+     ],
+     "squad_phg": [
+      205679,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     120256623,
+     62677600
+    ],
+    "musique_over_metaqa_phg": [
+     120256623,
+     63932200
+    ]
+   },
+   "EXPH_SHF": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      150958,
+      1998
+     ],
+     "metaqa_phg": [
+      168078,
+      1998
+     ],
+     "musique": [
+      157781,
+      2000
+     ],
+     "squad": [
+      68604,
+      2000
+     ],
+     "squad_phg": [
+      74648,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     157623219,
+     150958000
+    ],
+    "musique_over_metaqa_phg": [
+     52541073,
+     56026000
+    ]
+   },
+   "EXPH_SUMH": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      233629,
+      1998
+     ],
+     "metaqa_phg": [
+      253676,
+      1998
+     ],
+     "musique": [
+      304872,
+      2000
+     ],
+     "squad": [
+      114027,
+      2000
+     ],
+     "squad_phg": [
+      123767,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     38070891,
+     29203625
+    ],
+    "musique_over_metaqa_phg": [
+     38070891,
+     31709500
+    ]
+   },
+   "BPI_FSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      9937,
+      1998
+     ],
+     "metaqa_phg": [
+      10636,
+      1998
+     ],
+     "musique": [
+      9343,
+      2000
+     ],
+     "squad": [
+      7257,
+      2000
+     ],
+     "squad_phg": [
+      7546,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     9333657,
+     9937000
+    ],
+    "musique_over_metaqa_phg": [
+     9333657,
+     10636000
+    ]
+   },
+   "BPI_FSUMFV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      36444,
+      1998
+     ],
+     "metaqa_phg": [
+      45175,
+      1998
+     ],
+     "musique": [
+      23791,
+      2000
+     ],
+     "squad": [
+      14288,
+      2000
+     ],
+     "squad_phg": [
+      15523,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     7922403,
+     12148000
+    ],
+    "musique_over_metaqa_phg": [
+     23767209,
+     45175000
+    ]
+   },
+   "BPI_SUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      18742,
+      1998
+     ],
+     "metaqa_phg": [
+      20661,
+      1998
+     ],
+     "musique": [
+      25098,
+      2000
+     ],
+     "squad": [
+      18336,
+      2000
+     ],
+     "squad_phg": [
+      19598,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     12536451,
+     9371000
+    ],
+    "musique_over_metaqa_phg": [
+     4178817,
+     3443500
+    ]
+   },
+   "BPI_MAX": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      31700,
+      1998
+     ],
+     "metaqa_phg": [
+      33264,
+      1998
+     ],
+     "musique": [
+      44813,
+      2000
+     ],
+     "squad": [
+      27413,
+      2000
+     ],
+     "squad_phg": [
+      29718,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     44768187,
+     31700000
+    ],
+    "musique_over_metaqa_phg": [
+     1658081,
+     1232000
+    ]
+   },
+   "BPI_TOP3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      25765,
+      1998
+     ],
+     "metaqa_phg": [
+      27941,
+      1998
+     ],
+     "musique": [
+      37982,
+      2000
+     ],
+     "squad": [
+      24317,
+      2000
+     ],
+     "squad_phg": [
+      26585,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     18972009,
+     12882500
+    ],
+    "musique_over_metaqa_phg": [
+     18972009,
+     13970500
+    ]
+   },
+   "BPI_SDIV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      33043,
+      1998
+     ],
+     "metaqa_phg": [
+      36041,
+      1998
+     ],
+     "musique": [
+      84243,
+      2000
+     ],
+     "squad": [
+      54472,
+      2000
+     ],
+     "squad_phg": [
+      59784,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     84158757,
+     33043000
+    ],
+    "musique_over_metaqa_phg": [
+     84158757,
+     36041000
+    ]
+   },
+   "BPI_NSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      17438,
+      1998
+     ],
+     "metaqa_phg": [
+      19174,
+      1998
+     ],
+     "musique": [
+      20107,
+      2000
+     ],
+     "squad": [
+      14840,
+      2000
+     ],
+     "squad_phg": [
+      15869,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     20086893,
+     17438000
+    ],
+    "musique_over_metaqa_phg": [
+     20086893,
+     19174000
+    ]
+   },
+   "BPI_NSUMS": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      14353,
+      1998
+     ],
+     "metaqa_phg": [
+      16154,
+      1998
+     ],
+     "musique": [
+      14299,
+      2000
+     ],
+     "squad": [
+      10015,
+      2000
+     ],
+     "squad_phg": [
+      10705,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     14284701,
+     14353000
+    ],
+    "musique_over_metaqa_phg": [
+     14284701,
+     16154000
+    ]
+   },
+   "BPI_SDIVS": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      30610,
+      1998
+     ],
+     "metaqa_phg": [
+      33764,
+      1998
+     ],
+     "musique": [
+      74333,
+      2000
+     ],
+     "squad": [
+      40431,
+      2000
+     ],
+     "squad_phg": [
+      45330,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     74258667,
+     30610000
+    ],
+    "musique_over_metaqa_phg": [
+     74258667,
+     33764000
+    ]
+   },
+   "BPI_SHF": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      14732,
+      1998
+     ],
+     "metaqa_phg": [
+      16579,
+      1998
+     ],
+     "musique": [
+      15098,
+      2000
+     ],
+     "squad": [
+      10804,
+      2000
+     ],
+     "squad_phg": [
+      11525,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     7541451,
+     7366000
+    ],
+    "musique_over_metaqa_phg": [
+     7541451,
+     8289500
+    ]
+   },
+   "BPI_SUMH": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      21828,
+      1998
+     ],
+     "metaqa_phg": [
+      24665,
+      1998
+     ],
+     "musique": [
+      27656,
+      2000
+     ],
+     "squad": [
+      18547,
+      2000
+     ],
+     "squad_phg": [
+      20180,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     1151181,
+     909500
+    ],
+    "musique_over_metaqa_phg": [
+     3453543,
+     3083125
+    ]
+   },
+   "PC_L_NEFFG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      38490,
+      1998
+     ],
+     "metaqa_phg": [
+      43695,
+      1998
+     ],
+     "musique": [
+      41194,
+      2000
+     ],
+     "squad": [
+      26383,
+      2000
+     ],
+     "squad_phg": [
+      28495,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     6858801,
+     6415000
+    ],
+    "musique_over_metaqa_phg": [
+     2286267,
+     2427500
+    ]
+   },
+   "PC_L_KNEEG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      127018,
+      1998
+     ],
+     "metaqa_phg": [
+      129510,
+      1998
+     ],
+     "musique": [
+      186736,
+      2000
+     ],
+     "squad": [
+      56510,
+      2000
+     ],
+     "squad_phg": [
+      58097,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     11659329,
+     7938625
+    ],
+    "musique_over_metaqa_phg": [
+     1295481,
+     899375
+    ]
+   },
+   "PC_L_COVER": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      799495,
+      1998
+     ],
+     "metaqa_phg": [
+      797332,
+      1998
+     ],
+     "musique": [
+      1743809,
+      2000
+     ],
+     "squad": [
+      395038,
+      2000
+     ],
+     "squad_phg": [
+      397574,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     1742065191,
+     799495000
+    ],
+    "musique_over_metaqa_phg": [
+     1742065191,
+     797332000
+    ]
+   },
+   "PC_LS_NEFFG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      31898,
+      1998
+     ],
+     "metaqa_phg": [
+      36937,
+      1998
+     ],
+     "musique": [
+      28104,
+      2000
+     ],
+     "squad": [
+      16506,
+      2000
+     ],
+     "squad_phg": [
+      18027,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     3509487,
+     3987250
+    ],
+    "musique_over_metaqa_phg": [
+     3509487,
+     4617125
+    ]
+   },
+   "PC_LS_KNEEG": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      116949,
+      1998
+     ],
+     "metaqa_phg": [
+      121100,
+      1998
+     ],
+     "musique": [
+      157181,
+      2000
+     ],
+     "squad": [
+      46622,
+      2000
+     ],
+     "squad_phg": [
+      48407,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     52341273,
+     38983000
+    ],
+    "musique_over_metaqa_phg": [
+     157023819,
+     121100000
+    ]
+   },
+   "PC_LS_COVER": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      799511,
+      1998
+     ],
+     "metaqa_phg": [
+      797444,
+      1998
+     ],
+     "musique": [
+      1744133,
+      2000
+     ],
+     "squad": [
+      395038,
+      2000
+     ],
+     "squad_phg": [
+      397577,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     1742388867,
+     799511000
+    ],
+    "musique_over_metaqa_phg": [
+     1742388867,
+     797444000
+    ]
+   },
+   "NEV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      799511,
+      1998
+     ],
+     "metaqa_phg": [
+      797444,
+      1998
+     ],
+     "musique": [
+      1744133,
+      2000
+     ],
+     "squad": [
+      395038,
+      2000
+     ],
+     "squad_phg": [
+      397577,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     1742388867,
+     799511000
+    ],
+    "musique_over_metaqa_phg": [
+     1742388867,
+     797444000
+    ]
+   },
+   "NOACT_E": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      210262,
+      1998
+     ],
+     "metaqa_phg": [
+      222381,
+      1998
+     ],
+     "musique": [
+      148643,
+      2000
+     ],
+     "squad": [
+      94405,
+      2000
+     ],
+     "squad_phg": [
+      100034,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     148494357,
+     210262000
+    ],
+    "musique_over_metaqa_phg": [
+     16499373,
+     24709000
+    ]
+   },
+   "UF_SUM_NEFF": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      75511,
+      1998
+     ],
+     "metaqa_phg": [
+      87293,
+      1998
+     ],
+     "musique": [
+      100053,
+      2000
+     ],
+     "squad": [
+      54909,
+      2000
+     ],
+     "squad_phg": [
+      59998,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     99952947,
+     75511000
+    ],
+    "musique_over_metaqa_phg": [
+     99952947,
+     87293000
+    ]
+   },
+   "UF_SUM_KNEE": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      153384,
+      1998
+     ],
+     "metaqa_phg": [
+      156811,
+      1998
+     ],
+     "musique": [
+      263165,
+      2000
+     ],
+     "squad": [
+      78662,
+      2000
+     ],
+     "squad_phg": [
+      81353,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     2503827,
+     1460800
+    ],
+    "musique_over_metaqa_phg": [
+     52580367,
+     31362200
+    ]
+   },
+   "UF_T3_NEFF": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      100846,
+      1998
+     ],
+     "metaqa_phg": [
+      109661,
+      1998
+     ],
+     "musique": [
+      169675,
+      2000
+     ],
+     "squad": [
+      77812,
+      2000
+     ],
+     "squad_phg": [
+      84402,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     6780213,
+     4033840
+    ],
+    "musique_over_metaqa_phg": [
+     6780213,
+     4386440
+    ]
+   },
+   "UF_T3_KNEE": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      158094,
+      1998
+     ],
+     "metaqa_phg": [
+      160039,
+      1998
+     ],
+     "musique": [
+      315998,
+      2000
+     ],
+     "squad": [
+      90755,
+      2000
+     ],
+     "squad_phg": [
+      93630,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     17537889,
+     8783000
+    ],
+    "musique_over_metaqa_phg": [
+     157841001,
+     80019500
+    ]
+   },
+   "UF_SD_NEFF": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      151319,
+      1998
+     ],
+     "metaqa_phg": [
+      159935,
+      1998
+     ],
+     "musique": [
+      338886,
+      2000
+     ],
+     "squad": [
+      141263,
+      2000
+     ],
+     "squad_phg": [
+      150995,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     169273557,
+     75659500
+    ],
+    "musique_over_metaqa_phg": [
+     169273557,
+     79967500
+    ]
+   },
+   "UF_NS_NEFF": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      67375,
+      1998
+     ],
+     "metaqa_phg": [
+      78067,
+      1998
+     ],
+     "musique": [
+      73365,
+      2000
+     ],
+     "squad": [
+      41958,
+      2000
+     ],
+     "squad_phg": [
+      45655,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     14658327,
+     13475000
+    ],
+    "musique_over_metaqa_phg": [
+     14658327,
+     15613400
+    ]
+   },
+   "GAP_FSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      2425,
+      1998
+     ],
+     "metaqa_phg": [
+      2341,
+      1998
+     ],
+     "musique": [
+      2773,
+      2000
+     ],
+     "squad": [
+      2689,
+      2000
+     ],
+     "squad_phg": [
+      2732,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     2770227,
+     2425000
+    ],
+    "musique_over_metaqa_phg": [
+     2770227,
+     2341000
+    ]
+   },
+   "LGAP_FSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      3210,
+      1998
+     ],
+     "metaqa_phg": [
+      3091,
+      1998
+     ],
+     "musique": [
+      4728,
+      2000
+     ],
+     "squad": [
+      4424,
+      2000
+     ],
+     "squad_phg": [
+      4540,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     196803,
+     133750
+    ],
+    "musique_over_metaqa_phg": [
+     590409,
+     386375
+    ]
+   },
+   "GAP_SUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      3103,
+      1998
+     ],
+     "metaqa_phg": [
+      3048,
+      1998
+     ],
+     "musique": [
+      3691,
+      2000
+     ],
+     "squad": [
+      3969,
+      2000
+     ],
+     "squad_phg": [
+      3611,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     3687309,
+     3103000
+    ],
+    "musique_over_metaqa_phg": [
+     1229103,
+     1016000
+    ]
+   },
+   "LGAP_SUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      18881,
+      1998
+     ],
+     "metaqa_phg": [
+      25275,
+      1998
+     ],
+     "musique": [
+      136234,
+      2000
+     ],
+     "squad": [
+      155543,
+      2000
+     ],
+     "squad_phg": [
+      190964,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     68048883,
+     9440500
+    ],
+    "musique_over_metaqa_phg": [
+     22682961,
+     4212500
+    ]
+   },
+   "GAP_TOP3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      3658,
+      1998
+     ],
+     "metaqa_phg": [
+      3787,
+      1998
+     ],
+     "musique": [
+      4082,
+      2000
+     ],
+     "squad": [
+      4813,
+      2000
+     ],
+     "squad_phg": [
+      5326,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     2038959,
+     1829000
+    ],
+    "musique_over_metaqa_phg": [
+     2038959,
+     1893500
+    ]
+   },
+   "LGAP_TOP3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      57837,
+      1998
+     ],
+     "metaqa_phg": [
+      80818,
+      1998
+     ],
+     "musique": [
+      205097,
+      2000
+     ],
+     "squad": [
+      144026,
+      2000
+     ],
+     "squad_phg": [
+      177668,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     68297301,
+     19279000
+    ],
+    "musique_over_metaqa_phg": [
+     204891903,
+     80818000
+    ]
+   },
+   "GAP_SDIV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      3370,
+      1998
+     ],
+     "metaqa_phg": [
+      3609,
+      1998
+     ],
+     "musique": [
+      9937,
+      2000
+     ],
+     "squad": [
+      16554,
+      2000
+     ],
+     "squad_phg": [
+      19808,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     9927063,
+     3370000
+    ],
+    "musique_over_metaqa_phg": [
+     1103007,
+     401000
+    ]
+   },
+   "LGAP_SDIV": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      10578,
+      1998
+     ],
+     "metaqa_phg": [
+      14789,
+      1998
+     ],
+     "musique": [
+      91218,
+      2000
+     ],
+     "squad": [
+      244895,
+      2000
+     ],
+     "squad_phg": [
+      260389,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     15187797,
+     1763000
+    ],
+    "musique_over_metaqa_phg": [
+     1981017,
+     321500
+    ]
+   },
+   "GAP_NSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      3069,
+      1998
+     ],
+     "metaqa_phg": [
+      3067,
+      1998
+     ],
+     "musique": [
+      3484,
+      2000
+     ],
+     "squad": [
+      3536,
+      2000
+     ],
+     "squad_phg": [
+      3392,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     96681,
+     85250
+    ],
+    "musique_over_metaqa_phg": [
+     870129,
+     766750
+    ]
+   },
+   "LGAP_NSUM": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      187921,
+      1998
+     ],
+     "metaqa_phg": [
+      235979,
+      1998
+     ],
+     "musique": [
+      554016,
+      2000
+     ],
+     "squad": [
+      184396,
+      2000
+     ],
+     "squad_phg": [
+      205282,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     69182748,
+     23490125
+    ],
+    "musique_over_metaqa_phg": [
+     69182748,
+     29497375
+    ]
+   },
+   "GAP_SDIVS": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      3396,
+      1998
+     ],
+     "metaqa_phg": [
+      3456,
+      1998
+     ],
+     "musique": [
+      6116,
+      2000
+     ],
+     "squad": [
+      6351,
+      2000
+     ],
+     "squad_phg": [
+      7576,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     509157,
+     283000
+    ],
+    "musique_over_metaqa_phg": [
+     56573,
+     32000
+    ]
+   },
+   "LGAP_SDIVS": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      8330,
+      1998
+     ],
+     "metaqa_phg": [
+      18714,
+      1998
+     ],
+     "musique": [
+      83784,
+      2000
+     ],
+     "squad": [
+      186408,
+      2000
+     ],
+     "squad_phg": [
+      209035,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     10462527,
+     1041250
+    ],
+    "musique_over_metaqa_phg": [
+     3487509,
+     779750
+    ]
+   },
+   "MA_KS_L1": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      69169,
+      1998
+     ],
+     "metaqa_phg": [
+      71031,
+      1998
+     ],
+     "musique": [
+      132942,
+      2000
+     ],
+     "squad": [
+      69625,
+      2000
+     ],
+     "squad_phg": [
+      74488,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     66404529,
+     34584500
+    ],
+    "musique_over_metaqa_phg": [
+     22134843,
+     11838500
+    ]
+   },
+   "MA_KS_L2": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      134001,
+      1998
+     ],
+     "metaqa_phg": [
+      134017,
+      1998
+     ],
+     "musique": [
+      284662,
+      2000
+     ],
+     "squad": [
+      98456,
+      2000
+     ],
+     "squad_phg": [
+      102733,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     752321,
+     354500
+    ],
+    "musique_over_metaqa_phg": [
+     142188669,
+     67008500
+    ]
+   },
+   "MA_KS_L3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      69136,
+      1998
+     ],
+     "metaqa_phg": [
+      71033,
+      1998
+     ],
+     "musique": [
+      145744,
+      2000
+     ],
+     "squad": [
+      71922,
+      2000
+     ],
+     "squad_phg": [
+      76862,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     9099891,
+     4321000
+    ],
+    "musique_over_metaqa_phg": [
+     18199782,
+     8879125
+    ]
+   },
+   "MA_KS_L4": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      54968,
+      1998
+     ],
+     "metaqa_phg": [
+      58235,
+      1998
+     ],
+     "musique": [
+      233343,
+      2000
+     ],
+     "squad": [
+      81936,
+      2000
+     ],
+     "squad_phg": [
+      87431,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     233109657,
+     54968000
+    ],
+    "musique_over_metaqa_phg": [
+     233109657,
+     58235000
+    ]
+   },
+   "MA_KT_L1": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      62697,
+      1998
+     ],
+     "metaqa_phg": [
+      64899,
+      1998
+     ],
+     "musique": [
+      119451,
+      2000
+     ],
+     "squad": [
+      62905,
+      2000
+     ],
+     "squad_phg": [
+      67552,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     39777183,
+     20899000
+    ],
+    "musique_over_metaqa_phg": [
+     13259061,
+     7211000
+    ]
+   },
+   "MA_KT_L2": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      115234,
+      1998
+     ],
+     "metaqa_phg": [
+      116330,
+      1998
+     ],
+     "musique": [
+      232187,
+      2000
+     ],
+     "squad": [
+      79226,
+      2000
+     ],
+     "squad_phg": [
+      82706,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     231954813,
+     115234000
+    ],
+    "musique_over_metaqa_phg": [
+     231954813,
+     116330000
+    ]
+   },
+   "MA_KT_L3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      62553,
+      1998
+     ],
+     "metaqa_phg": [
+      64842,
+      1998
+     ],
+     "musique": [
+      129019,
+      2000
+     ],
+     "squad": [
+      64385,
+      2000
+     ],
+     "squad_phg": [
+      69025,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     42963327,
+     20851000
+    ],
+    "musique_over_metaqa_phg": [
+     42963327,
+     21614000
+    ]
+   },
+   "MA_KT_L4": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      50576,
+      1998
+     ],
+     "metaqa_phg": [
+      53863,
+      1998
+     ],
+     "musique": [
+      194085,
+      2000
+     ],
+     "squad": [
+      69045,
+      2000
+     ],
+     "squad_phg": [
+      73575,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     38778183,
+     10115200
+    ],
+    "musique_over_metaqa_phg": [
+     38778183,
+     10772600
+    ]
+   },
+   "MA_NA_L1": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      76141,
+      1998
+     ],
+     "metaqa_phg": [
+      81343,
+      1998
+     ],
+     "musique": [
+      96163,
+      2000
+     ],
+     "squad": [
+      65324,
+      2000
+     ],
+     "squad_phg": [
+      70801,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     96066837,
+     76141000
+    ],
+    "musique_over_metaqa_phg": [
+     96066837,
+     81343000
+    ]
+   },
+   "MA_NA_L2": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      151272,
+      1998
+     ],
+     "metaqa_phg": [
+      160324,
+      1998
+     ],
+     "musique": [
+      125707,
+      2000
+     ],
+     "squad": [
+      82679,
+      2000
+     ],
+     "squad_phg": [
+      88191,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     13953477,
+     16808000
+    ],
+    "musique_over_metaqa_phg": [
+     125581293,
+     160324000
+    ]
+   },
+   "MA_NA_L3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      75498,
+      1998
+     ],
+     "metaqa_phg": [
+      80666,
+      1998
+     ],
+     "musique": [
+      96679,
+      2000
+     ],
+     "squad": [
+      65658,
+      2000
+     ],
+     "squad_phg": [
+      71065,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     32194107,
+     25166000
+    ],
+    "musique_over_metaqa_phg": [
+     96582321,
+     80666000
+    ]
+   },
+   "MA_NA_L4": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      57761,
+      1998
+     ],
+     "metaqa_phg": [
+      62940,
+      1998
+     ],
+     "musique": [
+      103648,
+      2000
+     ],
+     "squad": [
+      68413,
+      2000
+     ],
+     "squad_phg": [
+      74265,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     12943044,
+     7220125
+    ],
+    "musique_over_metaqa_phg": [
+     1078587,
+     655625
+    ]
+   },
+   "MG_KS_L1": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      50253,
+      1998
+     ],
+     "metaqa_phg": [
+      53554,
+      1998
+     ],
+     "musique": [
+      108023,
+      2000
+     ],
+     "squad": [
+      65101,
+      2000
+     ],
+     "squad_phg": [
+      70324,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     35971659,
+     16751000
+    ],
+    "musique_over_metaqa_phg": [
+     107914977,
+     53554000
+    ]
+   },
+   "MG_KS_L2": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      102834,
+      1998
+     ],
+     "metaqa_phg": [
+      105375,
+      1998
+     ],
+     "musique": [
+      224268,
+      2000
+     ],
+     "squad": [
+      91855,
+      2000
+     ],
+     "squad_phg": [
+      96611,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     6223437,
+     2856500
+    ],
+    "musique_over_metaqa_phg": [
+     18670311,
+     8781250
+    ]
+   },
+   "MG_KS_L3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      50098,
+      1998
+     ],
+     "metaqa_phg": [
+      53403,
+      1998
+     ],
+     "musique": [
+      115165,
+      2000
+     ],
+     "squad": [
+      66858,
+      2000
+     ],
+     "squad_phg": [
+      72131,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     621891,
+     270800
+    ],
+    "musique_over_metaqa_phg": [
+     7669989,
+     3560200
+    ]
+   },
+   "MG_KS_L4": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      43410,
+      1998
+     ],
+     "metaqa_phg": [
+      47074,
+      1998
+     ],
+     "musique": [
+      186554,
+      2000
+     ],
+     "squad": [
+      76318,
+      2000
+     ],
+     "squad_phg": [
+      82165,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     31061241,
+     7235000
+    ],
+    "musique_over_metaqa_phg": [
+     93183723,
+     23537000
+    ]
+   },
+   "MG_KT_L1": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      48322,
+      1998
+     ],
+     "metaqa_phg": [
+      51564,
+      1998
+     ],
+     "musique": [
+      103569,
+      2000
+     ],
+     "squad": [
+      60753,
+      2000
+     ],
+     "squad_phg": [
+      65675,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     2796363,
+     1306000
+    ],
+    "musique_over_metaqa_phg": [
+     34488477,
+     17188000
+    ]
+   },
+   "MG_KT_L2": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      92036,
+      1998
+     ],
+     "metaqa_phg": [
+      94802,
+      1998
+     ],
+     "musique": [
+      193440,
+      2000
+     ],
+     "squad": [
+      76147,
+      2000
+     ],
+     "squad_phg": [
+      80026,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     1207791,
+     575225
+    ],
+    "musique_over_metaqa_phg": [
+     2415582,
+     1185025
+    ]
+   },
+   "MG_KT_L3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      48178,
+      1998
+     ],
+     "metaqa_phg": [
+      51395,
+      1998
+     ],
+     "musique": [
+      109434,
+      2000
+     ],
+     "squad": [
+      61955,
+      2000
+     ],
+     "squad_phg": [
+      66894,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     4204791,
+     1853000
+    ],
+    "musique_over_metaqa_phg": [
+     54662283,
+     25697500
+    ]
+   },
+   "MG_KT_L4": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      42082,
+      1998
+     ],
+     "metaqa_phg": [
+      45619,
+      1998
+     ],
+     "musique": [
+      163716,
+      2000
+     ],
+     "squad": [
+      66417,
+      2000
+     ],
+     "squad_phg": [
+      71244,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     40888071,
+     10520500
+    ],
+    "musique_over_metaqa_phg": [
+     5841153,
+     1629250
+    ]
+   },
+   "MG_NA_L1": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      52128,
+      1998
+     ],
+     "metaqa_phg": [
+      56448,
+      1998
+     ],
+     "musique": [
+      92319,
+      2000
+     ],
+     "squad": [
+      62369,
+      2000
+     ],
+     "squad_phg": [
+      67885,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     10247409,
+     5792000
+    ],
+    "musique_over_metaqa_phg": [
+     10247409,
+     6272000
+    ]
+   },
+   "MG_NA_L2": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      111998,
+      1998
+     ],
+     "metaqa_phg": [
+      119658,
+      1998
+     ],
+     "musique": [
+      117524,
+      2000
+     ],
+     "squad": [
+      78615,
+      2000
+     ],
+     "squad_phg": [
+      84273,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     29351619,
+     27999500
+    ],
+    "musique_over_metaqa_phg": [
+     24039,
+     24500
+    ]
+   },
+   "MG_NA_L3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      51741,
+      1998
+     ],
+     "metaqa_phg": [
+      55990,
+      1998
+     ],
+     "musique": [
+      92308,
+      2000
+     ],
+     "squad": [
+      62538,
+      2000
+     ],
+     "squad_phg": [
+      67990,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     2561547,
+     1437250
+    ],
+    "musique_over_metaqa_phg": [
+     23053923,
+     13997500
+    ]
+   },
+   "MG_NA_L4": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      43945,
+      1998
+     ],
+     "metaqa_phg": [
+      48091,
+      1998
+     ],
+     "musique": [
+      97522,
+      2000
+     ],
+     "squad": [
+      65177,
+      2000
+     ],
+     "squad_phg": [
+      70998,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     48712239,
+     21972500
+    ],
+    "musique_over_metaqa_phg": [
+     48712239,
+     24045500
+    ]
+   },
+   "UM_KS_L1": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      55236,
+      1998
+     ],
+     "metaqa_phg": [
+      56502,
+      1998
+     ],
+     "musique": [
+      103342,
+      2000
+     ],
+     "squad": [
+      53425,
+      2000
+     ],
+     "squad_phg": [
+      57094,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     17206443,
+     9206000
+    ],
+    "musique_over_metaqa_phg": [
+     5735481,
+     3139000
+    ]
+   },
+   "UM_KS_L2": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      122945,
+      1998
+     ],
+     "metaqa_phg": [
+      121985,
+      1998
+     ],
+     "musique": [
+      255587,
+      2000
+     ],
+     "squad": [
+      83262,
+      2000
+     ],
+     "squad_phg": [
+      86193,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     255331413,
+     122945000
+    ],
+    "musique_over_metaqa_phg": [
+     255331413,
+     121985000
+    ]
+   },
+   "UM_KS_L3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      54845,
+      1998
+     ],
+     "metaqa_phg": [
+      56045,
+      1998
+     ],
+     "musique": [
+      111629,
+      2000
+     ],
+     "squad": [
+      53840,
+      2000
+     ],
+     "squad_phg": [
+      57428,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     15931053,
+     7835000
+    ],
+    "musique_over_metaqa_phg": [
+     111517371,
+     56045000
+    ]
+   },
+   "UM_KS_L4": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      42906,
+      1998
+     ],
+     "metaqa_phg": [
+      44971,
+      1998
+     ],
+     "musique": [
+      201159,
+      2000
+     ],
+     "squad": [
+      63532,
+      2000
+     ],
+     "squad_phg": [
+      67786,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     66985947,
+     14302000
+    ],
+    "musique_over_metaqa_phg": [
+     200957841,
+     44971000
+    ]
+   },
+   "UM_KT_L1": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      50371,
+      1998
+     ],
+     "metaqa_phg": [
+      51946,
+      1998
+     ],
+     "musique": [
+      93465,
+      2000
+     ],
+     "squad": [
+      49093,
+      2000
+     ],
+     "squad_phg": [
+      52776,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     18674307,
+     10074200
+    ],
+    "musique_over_metaqa_phg": [
+     18674307,
+     10389200
+    ]
+   },
+   "UM_KT_L2": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      104209,
+      1998
+     ],
+     "metaqa_phg": [
+      104370,
+      1998
+     ],
+     "musique": [
+      203673,
+      2000
+     ],
+     "squad": [
+      64953,
+      2000
+     ],
+     "squad_phg": [
+      67223,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     203469327,
+     104209000
+    ],
+    "musique_over_metaqa_phg": [
+     67823109,
+     34790000
+    ]
+   },
+   "UM_KT_L3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      49994,
+      1998
+     ],
+     "metaqa_phg": [
+      51468,
+      1998
+     ],
+     "musique": [
+      98773,
+      2000
+     ],
+     "squad": [
+      49088,
+      2000
+     ],
+     "squad_phg": [
+      52661,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     98674227,
+     49994000
+    ],
+    "musique_over_metaqa_phg": [
+     32891409,
+     17156000
+    ]
+   },
+   "UM_KT_L4": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      39689,
+      1998
+     ],
+     "metaqa_phg": [
+      41895,
+      1998
+     ],
+     "musique": [
+      163936,
+      2000
+     ],
+     "squad": [
+      52766,
+      2000
+     ],
+     "squad_phg": [
+      56145,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     20471508,
+     4961125
+    ],
+    "musique_over_metaqa_phg": [
+     2274612,
+     581875
+    ]
+   },
+   "UM_NA_L1": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      60885,
+      1998
+     ],
+     "metaqa_phg": [
+      64707,
+      1998
+     ],
+     "musique": [
+      80172,
+      2000
+     ],
+     "squad": [
+      51204,
+      2000
+     ],
+     "squad_phg": [
+      55406,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     741591,
+     563750
+    ],
+    "musique_over_metaqa_phg": [
+     6674319,
+     5392250
+    ]
+   },
+   "UM_NA_L2": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      140185,
+      1998
+     ],
+     "metaqa_phg": [
+      148221,
+      1998
+     ],
+     "musique": [
+      102484,
+      2000
+     ],
+     "squad": [
+      68413,
+      2000
+     ],
+     "squad_phg": [
+      72687,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     25595379,
+     35046250
+    ],
+    "musique_over_metaqa_phg": [
+     2843931,
+     4117250
+    ]
+   },
+   "UM_NA_L3": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      59812,
+      1998
+     ],
+     "metaqa_phg": [
+      63526,
+      1998
+     ],
+     "musique": [
+      77879,
+      2000
+     ],
+     "squad": [
+      49894,
+      2000
+     ],
+     "squad_phg": [
+      53822,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     77801121,
+     59812000
+    ],
+    "musique_over_metaqa_phg": [
+     77801121,
+     63526000
+    ]
+   },
+   "UM_NA_L4": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      45028,
+      1998
+     ],
+     "metaqa_phg": [
+      48506,
+      1998
+     ],
+     "musique": [
+      80618,
+      2000
+     ],
+     "squad": [
+      51127,
+      2000
+     ],
+     "squad_phg": [
+      55500,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     40268691,
+     22514000
+    ],
+    "musique_over_metaqa_phg": [
+     40268691,
+     24253000
+    ]
+   },
+   "PSTAR_BN": {
+    "B_P_sum_and_n (B_N 1000)": {
+     "metaqa": [
+      632289,
+      1998
+     ],
+     "metaqa_phg": [
+      642948,
+      1998
+     ],
+     "musique": [
+      527780,
+      2000
+     ],
+     "squad": [
+      265217,
+      2000
+     ],
+     "squad_phg": [
+      276721,
+      2000
+     ]
+    },
+    "musique_over_metaqa": [
+     8787537,
+     10538150
+    ],
+    "musique_over_metaqa_phg": [
+     8787537,
+     10715800
+    ]
+   }
+  },
+  "need_at_B_N_1000": {
+   "metaqa": {
+    "envelope": {
+     "n": 1171,
+     "ranking": "PD",
+     "B_P": 31,
+     "share": 0.5861
+    },
+    "smallest_B_P_within_0.01_of_unrouted": {
+     "S": 28,
+     "ES": 29,
+     "TOP3": 8,
+     "SDIV": 6,
+     "SDE": 6
+    },
+    "best_fixed": {
+     "S": {
+      "B_P": 44,
+      "n": 1117
+     },
+     "ES": {
+      "B_P": 44,
+      "n": 1114
+     },
+     "TOP3": {
+      "B_P": 26,
+      "n": 1163
+     },
+     "SDIV": {
+      "B_P": 22,
+      "n": 1170
+     },
+     "SDE": {
+      "B_P": 22,
+      "n": 1170
+     }
+    }
+   },
+   "metaqa_phg": {
+    "envelope": {
+     "n": 1216,
+     "ranking": "SDK",
+     "B_P": 26,
+     "share": 0.6086
+    },
+    "smallest_B_P_within_0.01_of_unrouted": {
+     "S": 30,
+     "ES": 31,
+     "TOP3": 7,
+     "SDIV": 6,
+     "SDE": 6
+    },
+    "best_fixed": {
+     "S": {
+      "B_P": 52,
+      "n": 1145
+     },
+     "ES": {
+      "B_P": 53,
+      "n": 1139
+     },
+     "TOP3": {
+      "B_P": 27,
+      "n": 1198
+     },
+     "SDIV": {
+      "B_P": 26,
+      "n": 1216
+     },
+     "SDE": {
+      "B_P": 26,
+      "n": 1216
+     }
+    }
+   },
+   "musique": {
+    "envelope": {
+     "n": 1685,
+     "ranking": "OT3",
+     "B_P": 281,
+     "share": 0.8425
+    },
+    "smallest_B_P_within_0.01_of_unrouted": {
+     "S": 167,
+     "ES": 217,
+     "TOP3": 326,
+     "SDIV": 431,
+     "SDE": 431
+    },
+    "best_fixed": {
+     "S": {
+      "B_P": 273,
+      "n": 1683
+     },
+     "ES": {
+      "B_P": 453,
+      "n": 1681
+     },
+     "TOP3": {
+      "B_P": 764,
+      "n": 1679
+     },
+     "SDIV": {
+      "B_P": 805,
+      "n": 1681
+     },
+     "SDE": {
+      "B_P": 805,
+      "n": 1681
+     }
+    }
+   },
+   "squad": {
+    "envelope": {
+     "n": 1999,
+     "ranking": "D",
+     "B_P": 96,
+     "share": 0.9995
+    },
+    "smallest_B_P_within_0.01_of_unrouted": {
+     "S": 21,
+     "ES": 21,
+     "TOP3": 59,
+     "SDIV": 84,
+     "SDE": 84
+    },
+    "best_fixed": {
+     "S": {
+      "B_P": 127,
+      "n": 1999
+     },
+     "ES": {
+      "B_P": 155,
+      "n": 1999
+     },
+     "TOP3": {
+      "B_P": 143,
+      "n": 1999
+     },
+     "SDIV": {
+      "B_P": 158,
+      "n": 1999
+     },
+     "SDE": {
+      "B_P": 158,
+      "n": 1999
+     }
+    }
+   },
+   "squad_phg": {
+    "envelope": {
+     "n": 2000,
+     "ranking": "D",
+     "B_P": 88,
+     "share": 1.0
+    },
+    "smallest_B_P_within_0.01_of_unrouted": {
+     "S": 24,
+     "ES": 24,
+     "TOP3": 56,
+     "SDIV": 81,
+     "SDE": 81
+    },
+    "best_fixed": {
+     "S": {
+      "B_P": 100,
+      "n": 2000
+     },
+     "ES": {
+      "B_P": 97,
+      "n": 2000
+     },
+     "TOP3": {
+      "B_P": 178,
+      "n": 1999
+     },
+     "SDIV": {
+      "B_P": 182,
+      "n": 1999
+     },
+     "SDE": {
+      "B_P": 182,
+      "n": 1999
+     }
+    }
+   }
+  }
+ },
+ "panel": {
+  "metaqa": {
+   "TOP3|NEFF_TOP3": {
+    "100": {
+     "n": 801,
+     "unrouted_n": 763,
+     "B_P_sum": 98898,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 916,
+     "unrouted_n": 855,
+     "B_P_sum": 98898,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1049,
+     "unrouted_n": 919,
+     "B_P_sum": 98898,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 148,
+      "lost": 18,
+      "p": 1.3363888293326732e-26
+     }
+    },
+    "1000": {
+     "n": 1142,
+     "unrouted_n": 1015,
+     "B_P_sum": 98898,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 167,
+      "lost": 40,
+      "p": 1.2023319109332427e-19
+     }
+    },
+    "2000": {
+     "n": 1195,
+     "unrouted_n": 1110,
+     "B_P_sum": 98898,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 155,
+      "lost": 70,
+      "p": 1.4584196849407835e-08
+     }
+    },
+    "5000": {
+     "n": 1258,
+     "unrouted_n": 1271,
+     "B_P_sum": 98898,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "MAX|NEFF_MAX": {
+    "100": {
+     "n": 799,
+     "unrouted_n": 763,
+     "B_P_sum": 109670,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 930,
+     "unrouted_n": 855,
+     "B_P_sum": 109670,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1041,
+     "unrouted_n": 919,
+     "B_P_sum": 109670,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 137,
+      "lost": 15,
+      "p": 7.854293204336358e-26
+     }
+    },
+    "1000": {
+     "n": 1142,
+     "unrouted_n": 1015,
+     "B_P_sum": 109670,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 165,
+      "lost": 38,
+      "p": 4.6104393534548903e-20
+     }
+    },
+    "2000": {
+     "n": 1202,
+     "unrouted_n": 1110,
+     "B_P_sum": 109670,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 161,
+      "lost": 69,
+      "p": 1.193283360679075e-09
+     }
+    },
+    "5000": {
+     "n": 1259,
+     "unrouted_n": 1271,
+     "B_P_sum": 109670,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "SUM|NEFF_SUM": {
+    "100": {
+     "n": 800,
+     "unrouted_n": 763,
+     "B_P_sum": 72195,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 930,
+     "unrouted_n": 855,
+     "B_P_sum": 72195,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1057,
+     "unrouted_n": 919,
+     "B_P_sum": 72195,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 169,
+      "lost": 31,
+      "p": 3.413490545945216e-24
+     }
+    },
+    "1000": {
+     "n": 1142,
+     "unrouted_n": 1015,
+     "B_P_sum": 72195,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 180,
+      "lost": 53,
+      "p": 2.302001671218017e-17
+     }
+    },
+    "2000": {
+     "n": 1199,
+     "unrouted_n": 1110,
+     "B_P_sum": 72195,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 175,
+      "lost": 86,
+      "p": 3.817332330714268e-08
+     }
+    },
+    "5000": {
+     "n": 1252,
+     "unrouted_n": 1271,
+     "B_P_sum": 72195,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "SDIV|KNEE_SDIV": {
+    "100": {
+     "n": 784,
+     "unrouted_n": 763,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 879,
+     "unrouted_n": 855,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 989,
+     "unrouted_n": 919,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 80,
+      "lost": 10,
+      "p": 1.0521598690598086e-14
+     }
+    },
+    "1000": {
+     "n": 1091,
+     "unrouted_n": 1015,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 104,
+      "lost": 28,
+      "p": 1.7738815010358873e-11
+     }
+    },
+    "2000": {
+     "n": 1182,
+     "unrouted_n": 1110,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 127,
+      "lost": 55,
+      "p": 9.764949499289862e-08
+     }
+    },
+    "5000": {
+     "n": 1264,
+     "unrouted_n": 1271,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "SC_L|SC_L_COVER": {
+    "100": {
+     "n": 505,
+     "unrouted_n": 763,
+     "B_P_sum": 58884,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 629,
+     "unrouted_n": 855,
+     "B_P_sum": 58884,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 731,
+     "unrouted_n": 919,
+     "B_P_sum": 58884,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 188,
+      "lost": 376,
+      "p": 1.8943779668704036e-15
+     }
+    },
+    "1000": {
+     "n": 784,
+     "unrouted_n": 1015,
+     "B_P_sum": 58884,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 168,
+      "lost": 399,
+      "p": 1.141540804928435e-22
+     }
+    },
+    "2000": {
+     "n": 814,
+     "unrouted_n": 1110,
+     "B_P_sum": 58884,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 138,
+      "lost": 434,
+      "p": 1.330575627062996e-36
+     }
+    },
+    "5000": {
+     "n": 860,
+     "unrouted_n": 1271,
+     "B_P_sum": 58884,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "FL_L|FL_L_KNEEG": {
+    "100": {
+     "n": 542,
+     "unrouted_n": 763,
+     "B_P_sum": 27935,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 706,
+     "unrouted_n": 855,
+     "B_P_sum": 27935,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 803,
+     "unrouted_n": 919,
+     "B_P_sum": 27935,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 234,
+      "lost": 350,
+      "p": 1.8092372728034113e-06
+     }
+    },
+    "1000": {
+     "n": 849,
+     "unrouted_n": 1015,
+     "B_P_sum": 27935,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 209,
+      "lost": 375,
+      "p": 6.263354246442546e-12
+     }
+    },
+    "2000": {
+     "n": 883,
+     "unrouted_n": 1110,
+     "B_P_sum": 27935,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 183,
+      "lost": 410,
+      "p": 5.560372737740483e-21
+     }
+    },
+    "5000": {
+     "n": 884,
+     "unrouted_n": 1271,
+     "B_P_sum": 27935,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "FL_L|FL_L_COVER": {
+    "100": {
+     "n": 543,
+     "unrouted_n": 763,
+     "B_P_sum": 212879,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 622,
+     "unrouted_n": 855,
+     "B_P_sum": 212879,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 715,
+     "unrouted_n": 919,
+     "B_P_sum": 212879,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 56,
+      "lost": 260,
+      "p": 1.438036996391945e-32
+     }
+    },
+    "1000": {
+     "n": 811,
+     "unrouted_n": 1015,
+     "B_P_sum": 212879,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 75,
+      "lost": 279,
+      "p": 9.537007942300285e-29
+     }
+    },
+    "2000": {
+     "n": 920,
+     "unrouted_n": 1110,
+     "B_P_sum": 212879,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 110,
+      "lost": 300,
+      "p": 1.8794200131633753e-21
+     }
+    },
+    "5000": {
+     "n": 1004,
+     "unrouted_n": 1271,
+     "B_P_sum": 212879,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "PD|NEFF_PD": {
+    "100": {
+     "n": 784,
+     "unrouted_n": 763,
+     "B_P_sum": 117819,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 896,
+     "unrouted_n": 855,
+     "B_P_sum": 117819,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1019,
+     "unrouted_n": 919,
+     "B_P_sum": 117819,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 114,
+      "lost": 14,
+      "p": 1.162068542288481e-20
+     }
+    },
+    "1000": {
+     "n": 1129,
+     "unrouted_n": 1015,
+     "B_P_sum": 117819,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 148,
+      "lost": 34,
+      "p": 3.695560432614534e-18
+     }
+    },
+    "2000": {
+     "n": 1212,
+     "unrouted_n": 1110,
+     "B_P_sum": 117819,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 159,
+      "lost": 57,
+      "p": 2.4583436514974226e-12
+     }
+    },
+    "5000": {
+     "n": 1301,
+     "unrouted_n": 1271,
+     "B_P_sum": 117819,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "PC_L|PC_L_KNEEG": {
+    "100": {
+     "n": 777,
+     "unrouted_n": 763,
+     "B_P_sum": 127018,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 876,
+     "unrouted_n": 855,
+     "B_P_sum": 127018,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 992,
+     "unrouted_n": 919,
+     "B_P_sum": 127018,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 92,
+      "lost": 19,
+      "p": 1.123612188223784e-12
+     }
+    },
+    "1000": {
+     "n": 1105,
+     "unrouted_n": 1015,
+     "B_P_sum": 127018,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 131,
+      "lost": 41,
+      "p": 3.6278653192545546e-12
+     }
+    },
+    "2000": {
+     "n": 1188,
+     "unrouted_n": 1110,
+     "B_P_sum": 127018,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 147,
+      "lost": 69,
+      "p": 1.1883795852849385e-07
+     }
+    },
+    "5000": {
+     "n": 1260,
+     "unrouted_n": 1271,
+     "B_P_sum": 127018,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "NSUM|NEFF_NSUM": {
+    "100": {
+     "n": 800,
+     "unrouted_n": 763,
+     "B_P_sum": 63672,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 938,
+     "unrouted_n": 855,
+     "B_P_sum": 63672,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1051,
+     "unrouted_n": 919,
+     "B_P_sum": 63672,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 176,
+      "lost": 44,
+      "p": 6.837024792174633e-20
+     }
+    },
+    "1000": {
+     "n": 1135,
+     "unrouted_n": 1015,
+     "B_P_sum": 63672,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 187,
+      "lost": 67,
+      "p": 2.6813886782581884e-14
+     }
+    },
+    "2000": {
+     "n": 1192,
+     "unrouted_n": 1110,
+     "B_P_sum": 63672,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 182,
+      "lost": 100,
+      "p": 1.1965681217458451e-06
+     }
+    },
+    "5000": {
+     "n": 1239,
+     "unrouted_n": 1271,
+     "B_P_sum": 63672,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "ES|KNEE_SDIV": {
+    "100": {
+     "n": 763,
+     "unrouted_n": 763,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 867,
+     "unrouted_n": 855,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 977,
+     "unrouted_n": 919,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 71,
+      "lost": 13,
+      "p": 7.863919065998752e-11
+     }
+    },
+    "1000": {
+     "n": 1078,
+     "unrouted_n": 1015,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 97,
+      "lost": 34,
+      "p": 3.321500013147583e-08
+     }
+    },
+    "2000": {
+     "n": 1167,
+     "unrouted_n": 1110,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 120,
+      "lost": 63,
+      "p": 3.030823518226468e-05
+     }
+    },
+    "5000": {
+     "n": 1247,
+     "unrouted_n": 1271,
+     "B_P_sum": 184308,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "SDE|BPI_SDIV": {
+    "100": {
+     "n": 861,
+     "unrouted_n": 763,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 1017,
+     "unrouted_n": 855,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1107,
+     "unrouted_n": 919,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 236,
+      "lost": 48,
+      "p": 5.513417131644103e-31
+     }
+    },
+    "1000": {
+     "n": 1157,
+     "unrouted_n": 1015,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 215,
+      "lost": 73,
+      "p": 2.0984494243321417e-17
+     }
+    },
+    "2000": {
+     "n": 1203,
+     "unrouted_n": 1110,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 203,
+      "lost": 110,
+      "p": 1.6287290291413357e-07
+     }
+    },
+    "5000": {
+     "n": 1205,
+     "unrouted_n": 1271,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "SDK|BPI_SDIV": {
+    "100": {
+     "n": 861,
+     "unrouted_n": 763,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 1017,
+     "unrouted_n": 855,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1107,
+     "unrouted_n": 919,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 236,
+      "lost": 48,
+      "p": 5.513417131644103e-31
+     }
+    },
+    "1000": {
+     "n": 1157,
+     "unrouted_n": 1015,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 215,
+      "lost": 73,
+      "p": 2.0984494243321417e-17
+     }
+    },
+    "2000": {
+     "n": 1203,
+     "unrouted_n": 1110,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 203,
+      "lost": 110,
+      "p": 1.6287290291413357e-07
+     }
+    },
+    "5000": {
+     "n": 1205,
+     "unrouted_n": 1271,
+     "B_P_sum": 33043,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "MXS_L4|MA_KS_L4": {
+    "100": {
+     "n": 842,
+     "unrouted_n": 763,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 992,
+     "unrouted_n": 855,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1095,
+     "unrouted_n": 919,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 198,
+      "lost": 22,
+      "p": 1.367339225161942e-36
+     }
+    },
+    "1000": {
+     "n": 1165,
+     "unrouted_n": 1015,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 195,
+      "lost": 45,
+      "p": 1.923205360856147e-23
+     }
+    },
+    "2000": {
+     "n": 1217,
+     "unrouted_n": 1110,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 188,
+      "lost": 81,
+      "p": 5.771686815765444e-11
+     }
+    },
+    "5000": {
+     "n": 1252,
+     "unrouted_n": 1271,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "UM_KS_L4|UM_KS_L4": {
+    "100": {
+     "n": 828,
+     "unrouted_n": 763,
+     "B_P_sum": 42906,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 980,
+     "unrouted_n": 855,
+     "B_P_sum": 42906,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1085,
+     "unrouted_n": 919,
+     "B_P_sum": 42906,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 217,
+      "lost": 51,
+      "p": 1.4937640731377438e-25
+     }
+    },
+    "1000": {
+     "n": 1147,
+     "unrouted_n": 1015,
+     "B_P_sum": 42906,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 208,
+      "lost": 76,
+      "p": 2.362537935417797e-15
+     }
+    },
+    "2000": {
+     "n": 1187,
+     "unrouted_n": 1110,
+     "B_P_sum": 42906,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 189,
+      "lost": 112,
+      "p": 1.0668938952867354e-05
+     }
+    },
+    "5000": {
+     "n": 1210,
+     "unrouted_n": 1271,
+     "B_P_sum": 42906,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "UM_KS_L4|MA_KS_L4": {
+    "100": {
+     "n": 822,
+     "unrouted_n": 763,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 973,
+     "unrouted_n": 855,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1084,
+     "unrouted_n": 919,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 201,
+      "lost": 36,
+      "p": 5.559999345900573e-29
+     }
+    },
+    "1000": {
+     "n": 1145,
+     "unrouted_n": 1015,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 190,
+      "lost": 60,
+      "p": 6.440167220973979e-17
+     }
+    },
+    "2000": {
+     "n": 1193,
+     "unrouted_n": 1110,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 179,
+      "lost": 96,
+      "p": 6.322120635774588e-07
+     }
+    },
+    "5000": {
+     "n": 1230,
+     "unrouted_n": 1271,
+     "B_P_sum": 54968,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "IL_S_T3|MG_KS_L2": {
+    "100": {
+     "n": 781,
+     "unrouted_n": 763,
+     "B_P_sum": 102834,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 911,
+     "unrouted_n": 855,
+     "B_P_sum": 102834,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1036,
+     "unrouted_n": 919,
+     "B_P_sum": 102834,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 132,
+      "lost": 15,
+      "p": 1.4907381626203358e-24
+     }
+    },
+    "1000": {
+     "n": 1135,
+     "unrouted_n": 1015,
+     "B_P_sum": 102834,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 156,
+      "lost": 36,
+      "p": 5.265339191747883e-19
+     }
+    },
+    "2000": {
+     "n": 1195,
+     "unrouted_n": 1110,
+     "B_P_sum": 102834,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 153,
+      "lost": 68,
+      "p": 1.0648479970261785e-08
+     }
+    },
+    "5000": {
+     "n": 1268,
+     "unrouted_n": 1271,
+     "B_P_sum": 102834,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "IL_S_T3|UM_KT_L4": {
+    "100": {
+     "n": 775,
+     "unrouted_n": 763,
+     "B_P_sum": 39689,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 932,
+     "unrouted_n": 855,
+     "B_P_sum": 39689,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1033,
+     "unrouted_n": 919,
+     "B_P_sum": 39689,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 219,
+      "lost": 105,
+      "p": 2.257699363571195e-10
+     }
+    },
+    "1000": {
+     "n": 1086,
+     "unrouted_n": 1015,
+     "B_P_sum": 39689,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 204,
+      "lost": 133,
+      "p": 0.00013018254464848122
+     }
+    },
+    "2000": {
+     "n": 1127,
+     "unrouted_n": 1110,
+     "B_P_sum": 39689,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 187,
+      "lost": 170,
+      "p": 0.3971327573019479
+     }
+    },
+    "5000": {
+     "n": 1144,
+     "unrouted_n": 1271,
+     "B_P_sum": 39689,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "S|KNEE_TOP3": {
+    "100": {
+     "n": 764,
+     "unrouted_n": 763,
+     "B_P_sum": 155986,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 875,
+     "unrouted_n": 855,
+     "B_P_sum": 155986,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 987,
+     "unrouted_n": 919,
+     "B_P_sum": 155986,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 82,
+      "lost": 14,
+      "p": 7.242756461984744e-13
+     }
+    },
+    "1000": {
+     "n": 1089,
+     "unrouted_n": 1015,
+     "B_P_sum": 155986,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 110,
+      "lost": 36,
+      "p": 6.54725587913841e-10
+     }
+    },
+    "2000": {
+     "n": 1175,
+     "unrouted_n": 1110,
+     "B_P_sum": 155986,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 131,
+      "lost": 66,
+      "p": 4.2345348892784796e-06
+     }
+    },
+    "5000": {
+     "n": 1246,
+     "unrouted_n": 1271,
+     "B_P_sum": 155986,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "S|PSTAR_BN": {
+    "100": {
+     "n": 763,
+     "unrouted_n": 763,
+     "B_P_sum": 111955,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 855,
+     "unrouted_n": 855,
+     "B_P_sum": 249245,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 919,
+     "unrouted_n": 919,
+     "B_P_sum": 421348,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "1000": {
+     "n": 1015,
+     "unrouted_n": 1015,
+     "B_P_sum": 632289,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "2000": {
+     "n": 1110,
+     "unrouted_n": 1110,
+     "B_P_sum": 800489,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "5000": {
+     "n": 1271,
+     "unrouted_n": 1271,
+     "B_P_sum": 861374,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "ES|ESTAR_BN": {
+    "100": {
+     "n": 763,
+     "unrouted_n": 763,
+     "B_P_sum": 113014,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 856,
+     "unrouted_n": 855,
+     "B_P_sum": 254391,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 922,
+     "unrouted_n": 919,
+     "B_P_sum": 418078,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 5,
+      "lost": 2,
+      "p": 0.453125
+     }
+    },
+    "1000": {
+     "n": 1016,
+     "unrouted_n": 1015,
+     "B_P_sum": 625186,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 7,
+      "lost": 6,
+      "p": 1.0
+     }
+    },
+    "2000": {
+     "n": 1106,
+     "unrouted_n": 1110,
+     "B_P_sum": 830550,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 4,
+      "p": 0.125
+     }
+    },
+    "5000": {
+     "n": 1271,
+     "unrouted_n": 1271,
+     "B_P_sum": 863132,
+     "nq": 1998,
+     "npart": 432
+    }
+   }
+  },
+  "metaqa_phg": {
+   "TOP3|NEFF_TOP3": {
+    "100": {
+     "n": 800,
+     "unrouted_n": 763,
+     "B_P_sum": 106564,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 917,
+     "unrouted_n": 855,
+     "B_P_sum": 106564,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1052,
+     "unrouted_n": 919,
+     "B_P_sum": 106564,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 151,
+      "lost": 18,
+      "p": 2.340708340779924e-27
+     }
+    },
+    "1000": {
+     "n": 1168,
+     "unrouted_n": 1015,
+     "B_P_sum": 106564,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 185,
+      "lost": 32,
+      "p": 2.2953899925601177e-27
+     }
+    },
+    "2000": {
+     "n": 1241,
+     "unrouted_n": 1110,
+     "B_P_sum": 106564,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 183,
+      "lost": 52,
+      "p": 2.743623218527925e-18
+     }
+    },
+    "5000": {
+     "n": 1323,
+     "unrouted_n": 1271,
+     "B_P_sum": 106564,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "MAX|NEFF_MAX": {
+    "100": {
+     "n": 804,
+     "unrouted_n": 763,
+     "B_P_sum": 113094,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 934,
+     "unrouted_n": 855,
+     "B_P_sum": 113094,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1043,
+     "unrouted_n": 919,
+     "B_P_sum": 113094,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 140,
+      "lost": 16,
+      "p": 6.543821065454591e-26
+     }
+    },
+    "1000": {
+     "n": 1160,
+     "unrouted_n": 1015,
+     "B_P_sum": 113094,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 178,
+      "lost": 33,
+      "p": 3.067328648942784e-25
+     }
+    },
+    "2000": {
+     "n": 1238,
+     "unrouted_n": 1110,
+     "B_P_sum": 113094,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 182,
+      "lost": 54,
+      "p": 2.1059675079409824e-17
+     }
+    },
+    "5000": {
+     "n": 1315,
+     "unrouted_n": 1271,
+     "B_P_sum": 113094,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "SUM|NEFF_SUM": {
+    "100": {
+     "n": 807,
+     "unrouted_n": 763,
+     "B_P_sum": 82239,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 938,
+     "unrouted_n": 855,
+     "B_P_sum": 82239,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1067,
+     "unrouted_n": 919,
+     "B_P_sum": 82239,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 171,
+      "lost": 23,
+      "p": 3.805103741590395e-29
+     }
+    },
+    "1000": {
+     "n": 1179,
+     "unrouted_n": 1015,
+     "B_P_sum": 82239,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 203,
+      "lost": 39,
+      "p": 6.249979467108919e-28
+     }
+    },
+    "2000": {
+     "n": 1249,
+     "unrouted_n": 1110,
+     "B_P_sum": 82239,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 198,
+      "lost": 59,
+      "p": 9.810930475437049e-19
+     }
+    },
+    "5000": {
+     "n": 1330,
+     "unrouted_n": 1271,
+     "B_P_sum": 82239,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "SDIV|KNEE_SDIV": {
+    "100": {
+     "n": 785,
+     "unrouted_n": 763,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 878,
+     "unrouted_n": 855,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 992,
+     "unrouted_n": 919,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 85,
+      "lost": 12,
+      "p": 1.0431765969668071e-14
+     }
+    },
+    "1000": {
+     "n": 1108,
+     "unrouted_n": 1015,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 118,
+      "lost": 25,
+      "p": 1.200550102131926e-15
+     }
+    },
+    "2000": {
+     "n": 1214,
+     "unrouted_n": 1110,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 147,
+      "lost": 43,
+      "p": 1.6584652325034733e-14
+     }
+    },
+    "5000": {
+     "n": 1306,
+     "unrouted_n": 1271,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "SC_L|SC_L_COVER": {
+    "100": {
+     "n": 510,
+     "unrouted_n": 763,
+     "B_P_sum": 57251,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 644,
+     "unrouted_n": 855,
+     "B_P_sum": 57251,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 755,
+     "unrouted_n": 919,
+     "B_P_sum": 57251,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 217,
+      "lost": 381,
+      "p": 1.9862556383447494e-11
+     }
+    },
+    "1000": {
+     "n": 821,
+     "unrouted_n": 1015,
+     "B_P_sum": 57251,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 207,
+      "lost": 401,
+      "p": 2.9192341955593445e-15
+     }
+    },
+    "2000": {
+     "n": 854,
+     "unrouted_n": 1110,
+     "B_P_sum": 57251,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 171,
+      "lost": 427,
+      "p": 3.1235699631624366e-26
+     }
+    },
+    "5000": {
+     "n": 904,
+     "unrouted_n": 1271,
+     "B_P_sum": 57251,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "FL_L|FL_L_KNEEG": {
+    "100": {
+     "n": 551,
+     "unrouted_n": 763,
+     "B_P_sum": 27256,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 728,
+     "unrouted_n": 855,
+     "B_P_sum": 27256,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 807,
+     "unrouted_n": 919,
+     "B_P_sum": 27256,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 248,
+      "lost": 360,
+      "p": 6.371340121992591e-06
+     }
+    },
+    "1000": {
+     "n": 853,
+     "unrouted_n": 1015,
+     "B_P_sum": 27256,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 220,
+      "lost": 382,
+      "p": 4.0812820183511885e-11
+     }
+    },
+    "2000": {
+     "n": 898,
+     "unrouted_n": 1110,
+     "B_P_sum": 27256,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 202,
+      "lost": 414,
+      "p": 8.920006228813207e-18
+     }
+    },
+    "5000": {
+     "n": 898,
+     "unrouted_n": 1271,
+     "B_P_sum": 27256,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "FL_L|FL_L_COVER": {
+    "100": {
+     "n": 551,
+     "unrouted_n": 763,
+     "B_P_sum": 204880,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 629,
+     "unrouted_n": 855,
+     "B_P_sum": 204880,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 739,
+     "unrouted_n": 919,
+     "B_P_sum": 204880,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 78,
+      "lost": 258,
+      "p": 1.2294897775009532e-23
+     }
+    },
+    "1000": {
+     "n": 846,
+     "unrouted_n": 1015,
+     "B_P_sum": 204880,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 100,
+      "lost": 269,
+      "p": 5.228795478064707e-19
+     }
+    },
+    "2000": {
+     "n": 940,
+     "unrouted_n": 1110,
+     "B_P_sum": 204880,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 121,
+      "lost": 291,
+      "p": 2.9448148707583754e-17
+     }
+    },
+    "5000": {
+     "n": 1019,
+     "unrouted_n": 1271,
+     "B_P_sum": 204880,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "PD|NEFF_PD": {
+    "100": {
+     "n": 787,
+     "unrouted_n": 763,
+     "B_P_sum": 133587,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 895,
+     "unrouted_n": 855,
+     "B_P_sum": 133587,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1024,
+     "unrouted_n": 919,
+     "B_P_sum": 133587,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 121,
+      "lost": 16,
+      "p": 3.9047044372705275e-21
+     }
+    },
+    "1000": {
+     "n": 1138,
+     "unrouted_n": 1015,
+     "B_P_sum": 133587,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 151,
+      "lost": 28,
+      "p": 1.354765528699827e-21
+     }
+    },
+    "2000": {
+     "n": 1241,
+     "unrouted_n": 1110,
+     "B_P_sum": 133587,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 175,
+      "lost": 44,
+      "p": 1.0959314512403615e-19
+     }
+    },
+    "5000": {
+     "n": 1337,
+     "unrouted_n": 1271,
+     "B_P_sum": 133587,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "PC_L|PC_L_KNEEG": {
+    "100": {
+     "n": 784,
+     "unrouted_n": 763,
+     "B_P_sum": 129510,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 884,
+     "unrouted_n": 855,
+     "B_P_sum": 129510,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1016,
+     "unrouted_n": 919,
+     "B_P_sum": 129510,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 116,
+      "lost": 19,
+      "p": 3.565468931422972e-18
+     }
+    },
+    "1000": {
+     "n": 1133,
+     "unrouted_n": 1015,
+     "B_P_sum": 129510,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 148,
+      "lost": 30,
+      "p": 5.99560490697788e-20
+     }
+    },
+    "2000": {
+     "n": 1230,
+     "unrouted_n": 1110,
+     "B_P_sum": 129510,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 169,
+      "lost": 49,
+      "p": 1.2126115034698627e-16
+     }
+    },
+    "5000": {
+     "n": 1312,
+     "unrouted_n": 1271,
+     "B_P_sum": 129510,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "NSUM|NEFF_NSUM": {
+    "100": {
+     "n": 810,
+     "unrouted_n": 763,
+     "B_P_sum": 72487,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 941,
+     "unrouted_n": 855,
+     "B_P_sum": 72487,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1079,
+     "unrouted_n": 919,
+     "B_P_sum": 72487,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 194,
+      "lost": 34,
+      "p": 2.104837385044592e-28
+     }
+    },
+    "1000": {
+     "n": 1186,
+     "unrouted_n": 1015,
+     "B_P_sum": 72487,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 220,
+      "lost": 49,
+      "p": 4.80222282481187e-27
+     }
+    },
+    "2000": {
+     "n": 1248,
+     "unrouted_n": 1110,
+     "B_P_sum": 72487,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 207,
+      "lost": 69,
+      "p": 3.4487163588831175e-17
+     }
+    },
+    "5000": {
+     "n": 1325,
+     "unrouted_n": 1271,
+     "B_P_sum": 72487,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "ES|KNEE_SDIV": {
+    "100": {
+     "n": 762,
+     "unrouted_n": 763,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 869,
+     "unrouted_n": 855,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 991,
+     "unrouted_n": 919,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 89,
+      "lost": 17,
+      "p": 5.912079008704511e-13
+     }
+    },
+    "1000": {
+     "n": 1106,
+     "unrouted_n": 1015,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 118,
+      "lost": 27,
+      "p": 9.117043873611705e-15
+     }
+    },
+    "2000": {
+     "n": 1205,
+     "unrouted_n": 1110,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 140,
+      "lost": 45,
+      "p": 1.5241166997530071e-12
+     }
+    },
+    "5000": {
+     "n": 1299,
+     "unrouted_n": 1271,
+     "B_P_sum": 182812,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "SDE|BPI_SDIV": {
+    "100": {
+     "n": 855,
+     "unrouted_n": 763,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 1015,
+     "unrouted_n": 855,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1133,
+     "unrouted_n": 919,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 265,
+      "lost": 51,
+      "p": 5.092499483970714e-36
+     }
+    },
+    "1000": {
+     "n": 1201,
+     "unrouted_n": 1015,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 257,
+      "lost": 71,
+      "p": 6.983134536252048e-26
+     }
+    },
+    "2000": {
+     "n": 1262,
+     "unrouted_n": 1110,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 249,
+      "lost": 97,
+      "p": 1.527153362919458e-16
+     }
+    },
+    "5000": {
+     "n": 1279,
+     "unrouted_n": 1271,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "SDK|BPI_SDIV": {
+    "100": {
+     "n": 855,
+     "unrouted_n": 763,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 1015,
+     "unrouted_n": 855,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1133,
+     "unrouted_n": 919,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 265,
+      "lost": 51,
+      "p": 5.092499483970714e-36
+     }
+    },
+    "1000": {
+     "n": 1201,
+     "unrouted_n": 1015,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 257,
+      "lost": 71,
+      "p": 6.983134536252048e-26
+     }
+    },
+    "2000": {
+     "n": 1262,
+     "unrouted_n": 1110,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 249,
+      "lost": 97,
+      "p": 1.527153362919458e-16
+     }
+    },
+    "5000": {
+     "n": 1279,
+     "unrouted_n": 1271,
+     "B_P_sum": 36041,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "MXS_L4|MA_KS_L4": {
+    "100": {
+     "n": 843,
+     "unrouted_n": 763,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 989,
+     "unrouted_n": 855,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1116,
+     "unrouted_n": 919,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 222,
+      "lost": 25,
+      "p": 1.1992043997089048e-40
+     }
+    },
+    "1000": {
+     "n": 1194,
+     "unrouted_n": 1015,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 221,
+      "lost": 42,
+      "p": 1.614157466117048e-30
+     }
+    },
+    "2000": {
+     "n": 1261,
+     "unrouted_n": 1110,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 217,
+      "lost": 66,
+      "p": 5.843928583249787e-20
+     }
+    },
+    "5000": {
+     "n": 1321,
+     "unrouted_n": 1271,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "UM_KS_L4|UM_KS_L4": {
+    "100": {
+     "n": 821,
+     "unrouted_n": 763,
+     "B_P_sum": 44971,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 981,
+     "unrouted_n": 855,
+     "B_P_sum": 44971,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1103,
+     "unrouted_n": 919,
+     "B_P_sum": 44971,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 244,
+      "lost": 60,
+      "p": 1.7754229203339927e-27
+     }
+    },
+    "1000": {
+     "n": 1177,
+     "unrouted_n": 1015,
+     "B_P_sum": 44971,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 242,
+      "lost": 80,
+      "p": 4.4779322227410294e-20
+     }
+    },
+    "2000": {
+     "n": 1234,
+     "unrouted_n": 1110,
+     "B_P_sum": 44971,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 230,
+      "lost": 106,
+      "p": 1.1427035481888429e-11
+     }
+    },
+    "5000": {
+     "n": 1273,
+     "unrouted_n": 1271,
+     "B_P_sum": 44971,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "UM_KS_L4|MA_KS_L4": {
+    "100": {
+     "n": 825,
+     "unrouted_n": 763,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 980,
+     "unrouted_n": 855,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1111,
+     "unrouted_n": 919,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 226,
+      "lost": 34,
+      "p": 5.781635199713946e-36
+     }
+    },
+    "1000": {
+     "n": 1184,
+     "unrouted_n": 1015,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 221,
+      "lost": 52,
+      "p": 5.654688957135819e-26
+     }
+    },
+    "2000": {
+     "n": 1252,
+     "unrouted_n": 1110,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 217,
+      "lost": 75,
+      "p": 3.623125880260131e-17
+     }
+    },
+    "5000": {
+     "n": 1310,
+     "unrouted_n": 1271,
+     "B_P_sum": 58235,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "IL_S_T3|MG_KS_L2": {
+    "100": {
+     "n": 784,
+     "unrouted_n": 763,
+     "B_P_sum": 105375,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 915,
+     "unrouted_n": 855,
+     "B_P_sum": 105375,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1052,
+     "unrouted_n": 919,
+     "B_P_sum": 105375,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 150,
+      "lost": 17,
+      "p": 8.90476902490983e-28
+     }
+    },
+    "1000": {
+     "n": 1170,
+     "unrouted_n": 1015,
+     "B_P_sum": 105375,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 188,
+      "lost": 33,
+      "p": 1.547981511378054e-27
+     }
+    },
+    "2000": {
+     "n": 1237,
+     "unrouted_n": 1110,
+     "B_P_sum": 105375,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 180,
+      "lost": 53,
+      "p": 2.302001671218017e-17
+     }
+    },
+    "5000": {
+     "n": 1325,
+     "unrouted_n": 1271,
+     "B_P_sum": 105375,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "IL_S_T3|UM_KT_L4": {
+    "100": {
+     "n": 790,
+     "unrouted_n": 763,
+     "B_P_sum": 41895,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 951,
+     "unrouted_n": 855,
+     "B_P_sum": 41895,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1054,
+     "unrouted_n": 919,
+     "B_P_sum": 41895,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 232,
+      "lost": 97,
+      "p": 6.656404832947452e-14
+     }
+    },
+    "1000": {
+     "n": 1117,
+     "unrouted_n": 1015,
+     "B_P_sum": 41895,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 222,
+      "lost": 120,
+      "p": 3.774674955497529e-08
+     }
+    },
+    "2000": {
+     "n": 1176,
+     "unrouted_n": 1110,
+     "B_P_sum": 41895,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 218,
+      "lost": 152,
+      "p": 0.0007060789090642689
+     }
+    },
+    "5000": {
+     "n": 1201,
+     "unrouted_n": 1271,
+     "B_P_sum": 41895,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "S|KNEE_TOP3": {
+    "100": {
+     "n": 763,
+     "unrouted_n": 763,
+     "B_P_sum": 156132,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 883,
+     "unrouted_n": 855,
+     "B_P_sum": 156132,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 1006,
+     "unrouted_n": 919,
+     "B_P_sum": 156132,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 100,
+      "lost": 13,
+      "p": 8.471157872064742e-18
+     }
+    },
+    "1000": {
+     "n": 1121,
+     "unrouted_n": 1015,
+     "B_P_sum": 156132,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 132,
+      "lost": 26,
+      "p": 2.7887263882226982e-18
+     }
+    },
+    "2000": {
+     "n": 1213,
+     "unrouted_n": 1110,
+     "B_P_sum": 156132,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 148,
+      "lost": 45,
+      "p": 5.087520893806711e-14
+     }
+    },
+    "5000": {
+     "n": 1299,
+     "unrouted_n": 1271,
+     "B_P_sum": 156132,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "S|PSTAR_BN": {
+    "100": {
+     "n": 763,
+     "unrouted_n": 763,
+     "B_P_sum": 119106,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 855,
+     "unrouted_n": 855,
+     "B_P_sum": 263572,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 919,
+     "unrouted_n": 919,
+     "B_P_sum": 437268,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "1000": {
+     "n": 1015,
+     "unrouted_n": 1015,
+     "B_P_sum": 642948,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "2000": {
+     "n": 1110,
+     "unrouted_n": 1110,
+     "B_P_sum": 800350,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "5000": {
+     "n": 1271,
+     "unrouted_n": 1271,
+     "B_P_sum": 856305,
+     "nq": 1998,
+     "npart": 432
+    }
+   },
+   "ES|ESTAR_BN": {
+    "100": {
+     "n": 764,
+     "unrouted_n": 763,
+     "B_P_sum": 120070,
+     "nq": 1998,
+     "npart": 432
+    },
+    "250": {
+     "n": 856,
+     "unrouted_n": 855,
+     "B_P_sum": 267776,
+     "nq": 1998,
+     "npart": 432
+    },
+    "500": {
+     "n": 923,
+     "unrouted_n": 919,
+     "B_P_sum": 433646,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 5,
+      "lost": 1,
+      "p": 0.21875
+     }
+    },
+    "1000": {
+     "n": 1021,
+     "unrouted_n": 1015,
+     "B_P_sum": 636024,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 6,
+      "lost": 0,
+      "p": 0.03125
+     }
+    },
+    "2000": {
+     "n": 1110,
+     "unrouted_n": 1110,
+     "B_P_sum": 828862,
+     "nq": 1998,
+     "npart": 432,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "5000": {
+     "n": 1271,
+     "unrouted_n": 1271,
+     "B_P_sum": 863123,
+     "nq": 1998,
+     "npart": 432
+    }
+   }
+  },
+  "musique": {
+   "TOP3|NEFF_TOP3": {
+    "100": {
+     "n": 1196,
+     "unrouted_n": 1279,
+     "B_P_sum": 168008,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1330,
+     "unrouted_n": 1483,
+     "B_P_sum": 168008,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1378,
+     "unrouted_n": 1586,
+     "B_P_sum": 168008,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 19,
+      "lost": 227,
+      "p": 2.0804515805834676e-46
+     }
+    },
+    "1000": {
+     "n": 1432,
+     "unrouted_n": 1679,
+     "B_P_sum": 168008,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 27,
+      "lost": 274,
+      "p": 1.2531388284695809e-52
+     }
+    },
+    "2000": {
+     "n": 1462,
+     "unrouted_n": 1760,
+     "B_P_sum": 168008,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 27,
+      "lost": 325,
+      "p": 4.479092930477906e-66
+     }
+    },
+    "5000": {
+     "n": 1489,
+     "unrouted_n": 1855,
+     "B_P_sum": 168008,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "MAX|NEFF_MAX": {
+    "100": {
+     "n": 1209,
+     "unrouted_n": 1279,
+     "B_P_sum": 193155,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1343,
+     "unrouted_n": 1483,
+     "B_P_sum": 193155,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1398,
+     "unrouted_n": 1586,
+     "B_P_sum": 193155,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 22,
+      "lost": 210,
+      "p": 1.1301477268935975e-39
+     }
+    },
+    "1000": {
+     "n": 1443,
+     "unrouted_n": 1679,
+     "B_P_sum": 193155,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 26,
+      "lost": 262,
+      "p": 3.039042274786746e-50
+     }
+    },
+    "2000": {
+     "n": 1474,
+     "unrouted_n": 1760,
+     "B_P_sum": 193155,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 29,
+      "lost": 315,
+      "p": 7.4931948944041125e-62
+     }
+    },
+    "5000": {
+     "n": 1495,
+     "unrouted_n": 1855,
+     "B_P_sum": 193155,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "SUM|NEFF_SUM": {
+    "100": {
+     "n": 1075,
+     "unrouted_n": 1279,
+     "B_P_sum": 95790,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1172,
+     "unrouted_n": 1483,
+     "B_P_sum": 95790,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1213,
+     "unrouted_n": 1586,
+     "B_P_sum": 95790,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 25,
+      "lost": 398,
+      "p": 1.4031032550175523e-87
+     }
+    },
+    "1000": {
+     "n": 1244,
+     "unrouted_n": 1679,
+     "B_P_sum": 95790,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 23,
+      "lost": 458,
+      "p": 3.737961540853617e-106
+     }
+    },
+    "2000": {
+     "n": 1268,
+     "unrouted_n": 1760,
+     "B_P_sum": 95790,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 26,
+      "lost": 518,
+      "p": 6.596687206783378e-120
+     }
+    },
+    "5000": {
+     "n": 1280,
+     "unrouted_n": 1855,
+     "B_P_sum": 95790,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "SDIV|KNEE_SDIV": {
+    "100": {
+     "n": 1243,
+     "unrouted_n": 1279,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1413,
+     "unrouted_n": 1483,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1492,
+     "unrouted_n": 1586,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 15,
+      "lost": 109,
+      "p": 8.670257546981357e-19
+     }
+    },
+    "1000": {
+     "n": 1563,
+     "unrouted_n": 1679,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 15,
+      "lost": 131,
+      "p": 2.6797697811173543e-24
+     }
+    },
+    "2000": {
+     "n": 1615,
+     "unrouted_n": 1760,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 22,
+      "lost": 167,
+      "p": 8.831929922460123e-29
+     }
+    },
+    "5000": {
+     "n": 1666,
+     "unrouted_n": 1855,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "SC_L|SC_L_COVER": {
+    "100": {
+     "n": 247,
+     "unrouted_n": 1279,
+     "B_P_sum": 34701,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 255,
+     "unrouted_n": 1483,
+     "B_P_sum": 34701,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 258,
+     "unrouted_n": 1586,
+     "B_P_sum": 34701,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 6,
+      "lost": 1334,
+      "p": 0.0
+     }
+    },
+    "1000": {
+     "n": 262,
+     "unrouted_n": 1679,
+     "B_P_sum": 34701,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 7,
+      "lost": 1424,
+      "p": 0.0
+     }
+    },
+    "2000": {
+     "n": 262,
+     "unrouted_n": 1760,
+     "B_P_sum": 34701,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 4,
+      "lost": 1502,
+      "p": 0.0
+     }
+    },
+    "5000": {
+     "n": 262,
+     "unrouted_n": 1855,
+     "B_P_sum": 34701,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "FL_L|FL_L_KNEEG": {
+    "100": {
+     "n": 333,
+     "unrouted_n": 1279,
+     "B_P_sum": 19000,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 343,
+     "unrouted_n": 1483,
+     "B_P_sum": 19000,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 348,
+     "unrouted_n": 1586,
+     "B_P_sum": 19000,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 8,
+      "lost": 1246,
+      "p": 0.0
+     }
+    },
+    "1000": {
+     "n": 351,
+     "unrouted_n": 1679,
+     "B_P_sum": 19000,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 6,
+      "lost": 1334,
+      "p": 0.0
+     }
+    },
+    "2000": {
+     "n": 351,
+     "unrouted_n": 1760,
+     "B_P_sum": 19000,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 4,
+      "lost": 1413,
+      "p": 0.0
+     }
+    },
+    "5000": {
+     "n": 351,
+     "unrouted_n": 1855,
+     "B_P_sum": 19000,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "FL_L|FL_L_COVER": {
+    "100": {
+     "n": 744,
+     "unrouted_n": 1279,
+     "B_P_sum": 137915,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 824,
+     "unrouted_n": 1483,
+     "B_P_sum": 137915,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 858,
+     "unrouted_n": 1586,
+     "B_P_sum": 137915,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 19,
+      "lost": 747,
+      "p": 2.1914048619333986e-193
+     }
+    },
+    "1000": {
+     "n": 877,
+     "unrouted_n": 1679,
+     "B_P_sum": 137915,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 15,
+      "lost": 817,
+      "p": 3.036137224455766e-219
+     }
+    },
+    "2000": {
+     "n": 888,
+     "unrouted_n": 1760,
+     "B_P_sum": 137915,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 13,
+      "lost": 885,
+      "p": 3.490752010587144e-242
+     }
+    },
+    "5000": {
+     "n": 900,
+     "unrouted_n": 1855,
+     "B_P_sum": 137915,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "PD|NEFF_PD": {
+    "100": {
+     "n": 1143,
+     "unrouted_n": 1279,
+     "B_P_sum": 164365,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1275,
+     "unrouted_n": 1483,
+     "B_P_sum": 164365,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1333,
+     "unrouted_n": 1586,
+     "B_P_sum": 164365,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 26,
+      "lost": 279,
+      "p": 1.093846735196966e-54
+     }
+    },
+    "1000": {
+     "n": 1377,
+     "unrouted_n": 1679,
+     "B_P_sum": 164365,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 21,
+      "lost": 323,
+      "p": 1.1602240724406209e-70
+     }
+    },
+    "2000": {
+     "n": 1416,
+     "unrouted_n": 1760,
+     "B_P_sum": 164365,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 30,
+      "lost": 374,
+      "p": 1.0217680495491231e-76
+     }
+    },
+    "5000": {
+     "n": 1440,
+     "unrouted_n": 1855,
+     "B_P_sum": 164365,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "PC_L|PC_L_KNEEG": {
+    "100": {
+     "n": 1235,
+     "unrouted_n": 1279,
+     "B_P_sum": 186736,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1392,
+     "unrouted_n": 1483,
+     "B_P_sum": 186736,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1465,
+     "unrouted_n": 1586,
+     "B_P_sum": 186736,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 17,
+      "lost": 138,
+      "p": 9.698787407758306e-25
+     }
+    },
+    "1000": {
+     "n": 1526,
+     "unrouted_n": 1679,
+     "B_P_sum": 186736,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 24,
+      "lost": 177,
+      "p": 5.2404252779014324e-30
+     }
+    },
+    "2000": {
+     "n": 1567,
+     "unrouted_n": 1760,
+     "B_P_sum": 186736,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 27,
+      "lost": 220,
+      "p": 8.47640277734025e-39
+     }
+    },
+    "5000": {
+     "n": 1609,
+     "unrouted_n": 1855,
+     "B_P_sum": 186736,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "NSUM|NEFF_NSUM": {
+    "100": {
+     "n": 1067,
+     "unrouted_n": 1279,
+     "B_P_sum": 69026,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1154,
+     "unrouted_n": 1483,
+     "B_P_sum": 69026,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1200,
+     "unrouted_n": 1586,
+     "B_P_sum": 69026,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 34,
+      "lost": 420,
+      "p": 9.75556788499782e-86
+     }
+    },
+    "1000": {
+     "n": 1220,
+     "unrouted_n": 1679,
+     "B_P_sum": 69026,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 27,
+      "lost": 486,
+      "p": 5.384427659124656e-110
+     }
+    },
+    "2000": {
+     "n": 1239,
+     "unrouted_n": 1760,
+     "B_P_sum": 69026,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 24,
+      "lost": 545,
+      "p": 1.4151829868651098e-129
+     }
+    },
+    "5000": {
+     "n": 1247,
+     "unrouted_n": 1855,
+     "B_P_sum": 69026,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "ES|KNEE_SDIV": {
+    "100": {
+     "n": 1279,
+     "unrouted_n": 1279,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1483,
+     "unrouted_n": 1483,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1580,
+     "unrouted_n": 1586,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 4,
+      "lost": 10,
+      "p": 0.1795654296875
+     }
+    },
+    "1000": {
+     "n": 1663,
+     "unrouted_n": 1679,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 15,
+      "lost": 31,
+      "p": 0.02589608179323477
+     }
+    },
+    "2000": {
+     "n": 1725,
+     "unrouted_n": 1760,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 29,
+      "lost": 64,
+      "p": 0.00036579567696276875
+     }
+    },
+    "5000": {
+     "n": 1783,
+     "unrouted_n": 1855,
+     "B_P_sum": 396623,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "SDE|BPI_SDIV": {
+    "100": {
+     "n": 1001,
+     "unrouted_n": 1279,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1093,
+     "unrouted_n": 1483,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1132,
+     "unrouted_n": 1586,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 32,
+      "lost": 486,
+      "p": 2.574983531962886e-105
+     }
+    },
+    "1000": {
+     "n": 1153,
+     "unrouted_n": 1679,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 26,
+      "lost": 552,
+      "p": 1.9195537897770184e-129
+     }
+    },
+    "2000": {
+     "n": 1166,
+     "unrouted_n": 1760,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 24,
+      "lost": 618,
+      "p": 2.8577505074172967e-150
+     }
+    },
+    "5000": {
+     "n": 1170,
+     "unrouted_n": 1855,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "SDK|BPI_SDIV": {
+    "100": {
+     "n": 1001,
+     "unrouted_n": 1279,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1093,
+     "unrouted_n": 1483,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1132,
+     "unrouted_n": 1586,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 32,
+      "lost": 486,
+      "p": 2.574983531962886e-105
+     }
+    },
+    "1000": {
+     "n": 1153,
+     "unrouted_n": 1679,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 26,
+      "lost": 552,
+      "p": 1.9195537897770184e-129
+     }
+    },
+    "2000": {
+     "n": 1166,
+     "unrouted_n": 1760,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 24,
+      "lost": 618,
+      "p": 2.8577505074172967e-150
+     }
+    },
+    "5000": {
+     "n": 1170,
+     "unrouted_n": 1855,
+     "B_P_sum": 84243,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "MXS_L4|MA_KS_L4": {
+    "100": {
+     "n": 1254,
+     "unrouted_n": 1279,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1433,
+     "unrouted_n": 1483,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1502,
+     "unrouted_n": 1586,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 14,
+      "lost": 98,
+      "p": 1.0755959672248345e-16
+     }
+    },
+    "1000": {
+     "n": 1574,
+     "unrouted_n": 1679,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 26,
+      "lost": 131,
+      "p": 4.667996682495814e-18
+     }
+    },
+    "2000": {
+     "n": 1618,
+     "unrouted_n": 1760,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 33,
+      "lost": 175,
+      "p": 1.474858241680115e-24
+     }
+    },
+    "5000": {
+     "n": 1650,
+     "unrouted_n": 1855,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "UM_KS_L4|UM_KS_L4": {
+    "100": {
+     "n": 1282,
+     "unrouted_n": 1279,
+     "B_P_sum": 201159,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1467,
+     "unrouted_n": 1483,
+     "B_P_sum": 201159,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1533,
+     "unrouted_n": 1586,
+     "B_P_sum": 201159,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 16,
+      "lost": 69,
+      "p": 5.240266679443081e-09
+     }
+    },
+    "1000": {
+     "n": 1599,
+     "unrouted_n": 1679,
+     "B_P_sum": 201159,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 30,
+      "lost": 110,
+      "p": 6.249132901619841e-12
+     }
+    },
+    "2000": {
+     "n": 1634,
+     "unrouted_n": 1760,
+     "B_P_sum": 201159,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 34,
+      "lost": 160,
+      "p": 9.618858882702892e-21
+     }
+    },
+    "5000": {
+     "n": 1654,
+     "unrouted_n": 1855,
+     "B_P_sum": 201159,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "UM_KS_L4|MA_KS_L4": {
+    "100": {
+     "n": 1280,
+     "unrouted_n": 1279,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1475,
+     "unrouted_n": 1483,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1551,
+     "unrouted_n": 1586,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 13,
+      "lost": 48,
+      "p": 7.665168380445453e-06
+     }
+    },
+    "1000": {
+     "n": 1618,
+     "unrouted_n": 1679,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 24,
+      "lost": 85,
+      "p": 3.504828331234894e-09
+     }
+    },
+    "2000": {
+     "n": 1664,
+     "unrouted_n": 1760,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 37,
+      "lost": 133,
+      "p": 6.513945743392775e-14
+     }
+    },
+    "5000": {
+     "n": 1692,
+     "unrouted_n": 1855,
+     "B_P_sum": 233343,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "IL_S_T3|MG_KS_L2": {
+    "100": {
+     "n": 1279,
+     "unrouted_n": 1279,
+     "B_P_sum": 224268,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1479,
+     "unrouted_n": 1483,
+     "B_P_sum": 224268,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1565,
+     "unrouted_n": 1586,
+     "B_P_sum": 224268,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 12,
+      "lost": 33,
+      "p": 0.002458900322096724
+     }
+    },
+    "1000": {
+     "n": 1637,
+     "unrouted_n": 1679,
+     "B_P_sum": 224268,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 25,
+      "lost": 67,
+      "p": 1.3815919196387053e-05
+     }
+    },
+    "2000": {
+     "n": 1684,
+     "unrouted_n": 1760,
+     "B_P_sum": 224268,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 34,
+      "lost": 110,
+      "p": 1.5195920752597398e-10
+     }
+    },
+    "5000": {
+     "n": 1716,
+     "unrouted_n": 1855,
+     "B_P_sum": 224268,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "IL_S_T3|UM_KT_L4": {
+    "100": {
+     "n": 1280,
+     "unrouted_n": 1279,
+     "B_P_sum": 163936,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1449,
+     "unrouted_n": 1483,
+     "B_P_sum": 163936,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1516,
+     "unrouted_n": 1586,
+     "B_P_sum": 163936,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 21,
+      "lost": 91,
+      "p": 1.419861081655098e-11
+     }
+    },
+    "1000": {
+     "n": 1579,
+     "unrouted_n": 1679,
+     "B_P_sum": 163936,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 34,
+      "lost": 134,
+      "p": 3.0553304563825894e-15
+     }
+    },
+    "2000": {
+     "n": 1611,
+     "unrouted_n": 1760,
+     "B_P_sum": 163936,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 35,
+      "lost": 184,
+      "p": 1.3176006282926675e-25
+     }
+    },
+    "5000": {
+     "n": 1630,
+     "unrouted_n": 1855,
+     "B_P_sum": 163936,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "S|KNEE_TOP3": {
+    "100": {
+     "n": 1279,
+     "unrouted_n": 1279,
+     "B_P_sum": 315274,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1483,
+     "unrouted_n": 1483,
+     "B_P_sum": 315274,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1584,
+     "unrouted_n": 1586,
+     "B_P_sum": 315274,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 6,
+      "lost": 8,
+      "p": 0.79052734375
+     }
+    },
+    "1000": {
+     "n": 1670,
+     "unrouted_n": 1679,
+     "B_P_sum": 315274,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 18,
+      "lost": 27,
+      "p": 0.23269319190831084
+     }
+    },
+    "2000": {
+     "n": 1731,
+     "unrouted_n": 1760,
+     "B_P_sum": 315274,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 34,
+      "lost": 63,
+      "p": 0.0042258039216827616
+     }
+    },
+    "5000": {
+     "n": 1788,
+     "unrouted_n": 1855,
+     "B_P_sum": 315274,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "S|PSTAR_BN": {
+    "100": {
+     "n": 1279,
+     "unrouted_n": 1279,
+     "B_P_sum": 80268,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1483,
+     "unrouted_n": 1483,
+     "B_P_sum": 176233,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1586,
+     "unrouted_n": 1586,
+     "B_P_sum": 309418,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "1000": {
+     "n": 1679,
+     "unrouted_n": 1679,
+     "B_P_sum": 527780,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "2000": {
+     "n": 1760,
+     "unrouted_n": 1760,
+     "B_P_sum": 859475,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "5000": {
+     "n": 1855,
+     "unrouted_n": 1855,
+     "B_P_sum": 1488101,
+     "nq": 2000,
+     "npart": 1175
+    }
+   },
+   "ES|ESTAR_BN": {
+    "100": {
+     "n": 1278,
+     "unrouted_n": 1279,
+     "B_P_sum": 81299,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "250": {
+     "n": 1481,
+     "unrouted_n": 1483,
+     "B_P_sum": 180101,
+     "nq": 2000,
+     "npart": 1175
+    },
+    "500": {
+     "n": 1578,
+     "unrouted_n": 1586,
+     "B_P_sum": 307148,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 4,
+      "lost": 12,
+      "p": 0.076812744140625
+     }
+    },
+    "1000": {
+     "n": 1668,
+     "unrouted_n": 1679,
+     "B_P_sum": 509698,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 10,
+      "lost": 21,
+      "p": 0.07075554598122835
+     }
+    },
+    "2000": {
+     "n": 1747,
+     "unrouted_n": 1760,
+     "B_P_sum": 866100,
+     "nq": 2000,
+     "npart": 1175,
+     "paired_vs_unrouted": {
+      "gained": 11,
+      "lost": 24,
+      "p": 0.040959591511636986
+     }
+    },
+    "5000": {
+     "n": 1851,
+     "unrouted_n": 1855,
+     "B_P_sum": 1818225,
+     "nq": 2000,
+     "npart": 1175
+    }
+   }
+  },
+  "squad": {
+   "TOP3|NEFF_TOP3": {
+    "100": {
+     "n": 1958,
+     "unrouted_n": 1971,
+     "B_P_sum": 76929,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1971,
+     "unrouted_n": 1991,
+     "B_P_sum": 76929,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1972,
+     "unrouted_n": 1994,
+     "B_P_sum": 76929,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 23,
+      "p": 2.9802322387695312e-06
+     }
+    },
+    "1000": {
+     "n": 1973,
+     "unrouted_n": 1999,
+     "B_P_sum": 76929,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 26,
+      "p": 2.9802322387695312e-08
+     }
+    },
+    "2000": {
+     "n": 1973,
+     "unrouted_n": 2000,
+     "B_P_sum": 76929,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 27,
+      "p": 1.4901161193847656e-08
+     }
+    },
+    "5000": {
+     "n": 1973,
+     "unrouted_n": 2000,
+     "B_P_sum": 76929,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "MAX|NEFF_MAX": {
+    "100": {
+     "n": 1959,
+     "unrouted_n": 1971,
+     "B_P_sum": 85429,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1971,
+     "unrouted_n": 1991,
+     "B_P_sum": 85429,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1972,
+     "unrouted_n": 1994,
+     "B_P_sum": 85429,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 23,
+      "p": 2.9802322387695312e-06
+     }
+    },
+    "1000": {
+     "n": 1973,
+     "unrouted_n": 1999,
+     "B_P_sum": 85429,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 26,
+      "p": 2.9802322387695312e-08
+     }
+    },
+    "2000": {
+     "n": 1973,
+     "unrouted_n": 2000,
+     "B_P_sum": 85429,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 27,
+      "p": 1.4901161193847656e-08
+     }
+    },
+    "5000": {
+     "n": 1973,
+     "unrouted_n": 2000,
+     "B_P_sum": 85429,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "SUM|NEFF_SUM": {
+    "100": {
+     "n": 1933,
+     "unrouted_n": 1971,
+     "B_P_sum": 53439,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1943,
+     "unrouted_n": 1991,
+     "B_P_sum": 53439,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1944,
+     "unrouted_n": 1994,
+     "B_P_sum": 53439,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 51,
+      "p": 2.353672812205332e-14
+     }
+    },
+    "1000": {
+     "n": 1944,
+     "unrouted_n": 1999,
+     "B_P_sum": 53439,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 55,
+      "p": 5.551115123125783e-17
+     }
+    },
+    "2000": {
+     "n": 1944,
+     "unrouted_n": 2000,
+     "B_P_sum": 53439,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 56,
+      "p": 2.7755575615628914e-17
+     }
+    },
+    "5000": {
+     "n": 1944,
+     "unrouted_n": 2000,
+     "B_P_sum": 53439,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "SDIV|KNEE_SDIV": {
+    "100": {
+     "n": 1949,
+     "unrouted_n": 1971,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1961,
+     "unrouted_n": 1991,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1964,
+     "unrouted_n": 1994,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 32,
+      "p": 6.938353180885315e-08
+     }
+    },
+    "1000": {
+     "n": 1965,
+     "unrouted_n": 1999,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 34,
+      "p": 1.1641532182693481e-10
+     }
+    },
+    "2000": {
+     "n": 1965,
+     "unrouted_n": 2000,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 35,
+      "p": 5.820766091346741e-11
+     }
+    },
+    "5000": {
+     "n": 1965,
+     "unrouted_n": 2000,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "SC_L|SC_L_COVER": {
+    "100": {
+     "n": 1440,
+     "unrouted_n": 1971,
+     "B_P_sum": 39055,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1444,
+     "unrouted_n": 1991,
+     "B_P_sum": 39055,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1446,
+     "unrouted_n": 1994,
+     "B_P_sum": 39055,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 3,
+      "lost": 551,
+      "p": 9.611640794678893e-160
+     }
+    },
+    "1000": {
+     "n": 1446,
+     "unrouted_n": 1999,
+     "B_P_sum": 39055,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 553,
+      "p": 6.783321379043816e-167
+     }
+    },
+    "2000": {
+     "n": 1446,
+     "unrouted_n": 2000,
+     "B_P_sum": 39055,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 554,
+      "p": 3.391660689521908e-167
+     }
+    },
+    "5000": {
+     "n": 1446,
+     "unrouted_n": 2000,
+     "B_P_sum": 39055,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "FL_L|FL_L_KNEEG": {
+    "100": {
+     "n": 1443,
+     "unrouted_n": 1971,
+     "B_P_sum": 15946,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1444,
+     "unrouted_n": 1991,
+     "B_P_sum": 15946,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1444,
+     "unrouted_n": 1994,
+     "B_P_sum": 15946,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 550,
+      "p": 5.426657103235053e-166
+     }
+    },
+    "1000": {
+     "n": 1444,
+     "unrouted_n": 1999,
+     "B_P_sum": 15946,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 555,
+      "p": 1.695830344760954e-167
+     }
+    },
+    "2000": {
+     "n": 1444,
+     "unrouted_n": 2000,
+     "B_P_sum": 15946,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 556,
+      "p": 8.47915172380477e-168
+     }
+    },
+    "5000": {
+     "n": 1444,
+     "unrouted_n": 2000,
+     "B_P_sum": 15946,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "FL_L|FL_L_COVER": {
+    "100": {
+     "n": 1835,
+     "unrouted_n": 1971,
+     "B_P_sum": 112750,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1848,
+     "unrouted_n": 1991,
+     "B_P_sum": 112750,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1852,
+     "unrouted_n": 1994,
+     "B_P_sum": 112750,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 3,
+      "lost": 145,
+      "p": 3.0291756799432425e-39
+     }
+    },
+    "1000": {
+     "n": 1852,
+     "unrouted_n": 1999,
+     "B_P_sum": 112750,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 147,
+      "p": 1.1210387714598537e-44
+     }
+    },
+    "2000": {
+     "n": 1852,
+     "unrouted_n": 2000,
+     "B_P_sum": 112750,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 148,
+      "p": 5.605193857299268e-45
+     }
+    },
+    "5000": {
+     "n": 1852,
+     "unrouted_n": 2000,
+     "B_P_sum": 112750,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "PD|NEFF_PD": {
+    "100": {
+     "n": 1947,
+     "unrouted_n": 1971,
+     "B_P_sum": 98426,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1961,
+     "unrouted_n": 1991,
+     "B_P_sum": 98426,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1963,
+     "unrouted_n": 1994,
+     "B_P_sum": 98426,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 32,
+      "p": 7.916241884231567e-09
+     }
+    },
+    "1000": {
+     "n": 1965,
+     "unrouted_n": 1999,
+     "B_P_sum": 98426,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 34,
+      "p": 1.1641532182693481e-10
+     }
+    },
+    "2000": {
+     "n": 1965,
+     "unrouted_n": 2000,
+     "B_P_sum": 98426,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 35,
+      "p": 5.820766091346741e-11
+     }
+    },
+    "5000": {
+     "n": 1965,
+     "unrouted_n": 2000,
+     "B_P_sum": 98426,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "PC_L|PC_L_KNEEG": {
+    "100": {
+     "n": 1942,
+     "unrouted_n": 1971,
+     "B_P_sum": 56510,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1952,
+     "unrouted_n": 1991,
+     "B_P_sum": 56510,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1954,
+     "unrouted_n": 1994,
+     "B_P_sum": 56510,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 42,
+      "p": 1.1266365618212149e-10
+     }
+    },
+    "1000": {
+     "n": 1955,
+     "unrouted_n": 1999,
+     "B_P_sum": 56510,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 44,
+      "p": 1.1368683772161603e-13
+     }
+    },
+    "2000": {
+     "n": 1955,
+     "unrouted_n": 2000,
+     "B_P_sum": 56510,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 45,
+      "p": 5.684341886080802e-14
+     }
+    },
+    "5000": {
+     "n": 1955,
+     "unrouted_n": 2000,
+     "B_P_sum": 56510,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "NSUM|NEFF_NSUM": {
+    "100": {
+     "n": 1930,
+     "unrouted_n": 1971,
+     "B_P_sum": 40706,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1937,
+     "unrouted_n": 1991,
+     "B_P_sum": 40706,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1940,
+     "unrouted_n": 1994,
+     "B_P_sum": 40706,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 3,
+      "lost": 57,
+      "p": 6.253851603243987e-14
+     }
+    },
+    "1000": {
+     "n": 1940,
+     "unrouted_n": 1999,
+     "B_P_sum": 40706,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 59,
+      "p": 3.469446951953614e-18
+     }
+    },
+    "2000": {
+     "n": 1940,
+     "unrouted_n": 2000,
+     "B_P_sum": 40706,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 60,
+      "p": 1.734723475976807e-18
+     }
+    },
+    "5000": {
+     "n": 1940,
+     "unrouted_n": 2000,
+     "B_P_sum": 40706,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "ES|KNEE_SDIV": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1991,
+     "unrouted_n": 1991,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1995,
+     "unrouted_n": 1994,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 1,
+      "p": 1.0
+     }
+    },
+    "1000": {
+     "n": 1996,
+     "unrouted_n": 1999,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 3,
+      "p": 0.25
+     }
+    },
+    "2000": {
+     "n": 1996,
+     "unrouted_n": 2000,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 4,
+      "p": 0.125
+     }
+    },
+    "5000": {
+     "n": 1996,
+     "unrouted_n": 2000,
+     "B_P_sum": 117100,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "SDE|BPI_SDIV": {
+    "100": {
+     "n": 1914,
+     "unrouted_n": 1971,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1921,
+     "unrouted_n": 1991,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1923,
+     "unrouted_n": 1994,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 73,
+      "p": 1.5093068328887564e-19
+     }
+    },
+    "1000": {
+     "n": 1923,
+     "unrouted_n": 1999,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 76,
+      "p": 2.6469779601696886e-23
+     }
+    },
+    "2000": {
+     "n": 1923,
+     "unrouted_n": 2000,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 77,
+      "p": 1.3234889800848443e-23
+     }
+    },
+    "5000": {
+     "n": 1923,
+     "unrouted_n": 2000,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "SDK|BPI_SDIV": {
+    "100": {
+     "n": 1914,
+     "unrouted_n": 1971,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1921,
+     "unrouted_n": 1991,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1923,
+     "unrouted_n": 1994,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 73,
+      "p": 1.5093068328887564e-19
+     }
+    },
+    "1000": {
+     "n": 1923,
+     "unrouted_n": 1999,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 76,
+      "p": 2.6469779601696886e-23
+     }
+    },
+    "2000": {
+     "n": 1923,
+     "unrouted_n": 2000,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 77,
+      "p": 1.3234889800848443e-23
+     }
+    },
+    "5000": {
+     "n": 1923,
+     "unrouted_n": 2000,
+     "B_P_sum": 54472,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "MXS_L4|MA_KS_L4": {
+    "100": {
+     "n": 1966,
+     "unrouted_n": 1971,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1978,
+     "unrouted_n": 1991,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1981,
+     "unrouted_n": 1994,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 15,
+      "p": 0.002349853515625
+     }
+    },
+    "1000": {
+     "n": 1982,
+     "unrouted_n": 1999,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 17,
+      "p": 1.52587890625e-05
+     }
+    },
+    "2000": {
+     "n": 1982,
+     "unrouted_n": 2000,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 18,
+      "p": 7.62939453125e-06
+     }
+    },
+    "5000": {
+     "n": 1982,
+     "unrouted_n": 2000,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "UM_KS_L4|UM_KS_L4": {
+    "100": {
+     "n": 1972,
+     "unrouted_n": 1971,
+     "B_P_sum": 63532,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1986,
+     "unrouted_n": 1991,
+     "B_P_sum": 63532,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1988,
+     "unrouted_n": 1994,
+     "B_P_sum": 63532,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 7,
+      "p": 0.0703125
+     }
+    },
+    "1000": {
+     "n": 1989,
+     "unrouted_n": 1999,
+     "B_P_sum": 63532,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 10,
+      "p": 0.001953125
+     }
+    },
+    "2000": {
+     "n": 1989,
+     "unrouted_n": 2000,
+     "B_P_sum": 63532,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 11,
+      "p": 0.0009765625
+     }
+    },
+    "5000": {
+     "n": 1989,
+     "unrouted_n": 2000,
+     "B_P_sum": 63532,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "UM_KS_L4|MA_KS_L4": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1988,
+     "unrouted_n": 1991,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1991,
+     "unrouted_n": 1994,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 5,
+      "p": 0.453125
+     }
+    },
+    "1000": {
+     "n": 1992,
+     "unrouted_n": 1999,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 7,
+      "p": 0.015625
+     }
+    },
+    "2000": {
+     "n": 1992,
+     "unrouted_n": 2000,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 8,
+      "p": 0.0078125
+     }
+    },
+    "5000": {
+     "n": 1992,
+     "unrouted_n": 2000,
+     "B_P_sum": 81936,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "IL_S_T3|MG_KS_L2": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 91855,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1988,
+     "unrouted_n": 1991,
+     "B_P_sum": 91855,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1989,
+     "unrouted_n": 1994,
+     "B_P_sum": 91855,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 6,
+      "p": 0.125
+     }
+    },
+    "1000": {
+     "n": 1990,
+     "unrouted_n": 1999,
+     "B_P_sum": 91855,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 9,
+      "p": 0.00390625
+     }
+    },
+    "2000": {
+     "n": 1990,
+     "unrouted_n": 2000,
+     "B_P_sum": 91855,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 10,
+      "p": 0.001953125
+     }
+    },
+    "5000": {
+     "n": 1990,
+     "unrouted_n": 2000,
+     "B_P_sum": 91855,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "IL_S_T3|UM_KT_L4": {
+    "100": {
+     "n": 1964,
+     "unrouted_n": 1971,
+     "B_P_sum": 52766,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1975,
+     "unrouted_n": 1991,
+     "B_P_sum": 52766,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1977,
+     "unrouted_n": 1994,
+     "B_P_sum": 52766,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 19,
+      "p": 0.00022125244140625
+     }
+    },
+    "1000": {
+     "n": 1977,
+     "unrouted_n": 1999,
+     "B_P_sum": 52766,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 22,
+      "p": 4.76837158203125e-07
+     }
+    },
+    "2000": {
+     "n": 1977,
+     "unrouted_n": 2000,
+     "B_P_sum": 52766,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 23,
+      "p": 2.384185791015625e-07
+     }
+    },
+    "5000": {
+     "n": 1977,
+     "unrouted_n": 2000,
+     "B_P_sum": 52766,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "S|KNEE_TOP3": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 89230,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1989,
+     "unrouted_n": 1991,
+     "B_P_sum": 89230,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1992,
+     "unrouted_n": 1994,
+     "B_P_sum": 89230,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 4,
+      "p": 0.6875
+     }
+    },
+    "1000": {
+     "n": 1993,
+     "unrouted_n": 1999,
+     "B_P_sum": 89230,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 6,
+      "p": 0.03125
+     }
+    },
+    "2000": {
+     "n": 1993,
+     "unrouted_n": 2000,
+     "B_P_sum": 89230,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 7,
+      "p": 0.015625
+     }
+    },
+    "5000": {
+     "n": 1993,
+     "unrouted_n": 2000,
+     "B_P_sum": 89230,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "S|PSTAR_BN": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 51236,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1991,
+     "unrouted_n": 1991,
+     "B_P_sum": 108720,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1994,
+     "unrouted_n": 1994,
+     "B_P_sum": 177997,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "1000": {
+     "n": 1999,
+     "unrouted_n": 1999,
+     "B_P_sum": 265217,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "2000": {
+     "n": 2000,
+     "unrouted_n": 2000,
+     "B_P_sum": 345755,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "5000": {
+     "n": 2000,
+     "unrouted_n": 2000,
+     "B_P_sum": 397546,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "ES|ESTAR_BN": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 52609,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1991,
+     "unrouted_n": 1991,
+     "B_P_sum": 112992,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1994,
+     "unrouted_n": 1994,
+     "B_P_sum": 172677,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "1000": {
+     "n": 1998,
+     "unrouted_n": 1999,
+     "B_P_sum": 242262,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 1,
+      "p": 1.0
+     }
+    },
+    "2000": {
+     "n": 1999,
+     "unrouted_n": 2000,
+     "B_P_sum": 327433,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 1,
+      "p": 1.0
+     }
+    },
+    "5000": {
+     "n": 2000,
+     "unrouted_n": 2000,
+     "B_P_sum": 397494,
+     "nq": 2000,
+     "npart": 202
+    }
+   }
+  },
+  "squad_phg": {
+   "TOP3|NEFF_TOP3": {
+    "100": {
+     "n": 1958,
+     "unrouted_n": 1971,
+     "B_P_sum": 83394,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1972,
+     "unrouted_n": 1991,
+     "B_P_sum": 83394,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1975,
+     "unrouted_n": 1994,
+     "B_P_sum": 83394,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 3,
+      "lost": 22,
+      "p": 0.00015652179718017578
+     }
+    },
+    "1000": {
+     "n": 1977,
+     "unrouted_n": 1999,
+     "B_P_sum": 83394,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 23,
+      "p": 2.9802322387695312e-06
+     }
+    },
+    "2000": {
+     "n": 1977,
+     "unrouted_n": 2000,
+     "B_P_sum": 83394,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 23,
+      "p": 2.384185791015625e-07
+     }
+    },
+    "5000": {
+     "n": 1977,
+     "unrouted_n": 2000,
+     "B_P_sum": 83394,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "MAX|NEFF_MAX": {
+    "100": {
+     "n": 1959,
+     "unrouted_n": 1971,
+     "B_P_sum": 91716,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1973,
+     "unrouted_n": 1991,
+     "B_P_sum": 91716,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1975,
+     "unrouted_n": 1994,
+     "B_P_sum": 91716,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 21,
+      "p": 6.604194641113281e-05
+     }
+    },
+    "1000": {
+     "n": 1978,
+     "unrouted_n": 1999,
+     "B_P_sum": 91716,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 22,
+      "p": 5.7220458984375e-06
+     }
+    },
+    "2000": {
+     "n": 1978,
+     "unrouted_n": 2000,
+     "B_P_sum": 91716,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 22,
+      "p": 4.76837158203125e-07
+     }
+    },
+    "5000": {
+     "n": 1978,
+     "unrouted_n": 2000,
+     "B_P_sum": 91716,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "SUM|NEFF_SUM": {
+    "100": {
+     "n": 1926,
+     "unrouted_n": 1971,
+     "B_P_sum": 58388,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1936,
+     "unrouted_n": 1991,
+     "B_P_sum": 58388,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1940,
+     "unrouted_n": 1994,
+     "B_P_sum": 58388,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 3,
+      "lost": 57,
+      "p": 6.253851603243987e-14
+     }
+    },
+    "1000": {
+     "n": 1941,
+     "unrouted_n": 1999,
+     "B_P_sum": 58388,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 59,
+      "p": 1.0581813203458523e-16
+     }
+    },
+    "2000": {
+     "n": 1941,
+     "unrouted_n": 2000,
+     "B_P_sum": 58388,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 59,
+      "p": 3.469446951953614e-18
+     }
+    },
+    "5000": {
+     "n": 1941,
+     "unrouted_n": 2000,
+     "B_P_sum": 58388,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "SDIV|KNEE_SDIV": {
+    "100": {
+     "n": 1954,
+     "unrouted_n": 1971,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1966,
+     "unrouted_n": 1991,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1967,
+     "unrouted_n": 1994,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 28,
+      "p": 1.1175870895385742e-07
+     }
+    },
+    "1000": {
+     "n": 1970,
+     "unrouted_n": 1999,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 30,
+      "p": 2.9802322387695312e-08
+     }
+    },
+    "2000": {
+     "n": 1970,
+     "unrouted_n": 2000,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 30,
+      "p": 1.862645149230957e-09
+     }
+    },
+    "5000": {
+     "n": 1970,
+     "unrouted_n": 2000,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "SC_L|SC_L_COVER": {
+    "100": {
+     "n": 1340,
+     "unrouted_n": 1971,
+     "B_P_sum": 37492,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1344,
+     "unrouted_n": 1991,
+     "B_P_sum": 37492,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1344,
+     "unrouted_n": 1994,
+     "B_P_sum": 37492,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 651,
+      "p": 6.988532738781676e-194
+     }
+    },
+    "1000": {
+     "n": 1344,
+     "unrouted_n": 1999,
+     "B_P_sum": 37492,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 655,
+      "p": 1.3377742608693866e-197
+     }
+    },
+    "2000": {
+     "n": 1344,
+     "unrouted_n": 2000,
+     "B_P_sum": 37492,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 656,
+      "p": 6.688871304346933e-198
+     }
+    },
+    "5000": {
+     "n": 1344,
+     "unrouted_n": 2000,
+     "B_P_sum": 37492,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "FL_L|FL_L_KNEEG": {
+    "100": {
+     "n": 1399,
+     "unrouted_n": 1971,
+     "B_P_sum": 15616,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1402,
+     "unrouted_n": 1991,
+     "B_P_sum": 15616,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1402,
+     "unrouted_n": 1994,
+     "B_P_sum": 15616,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 593,
+      "p": 1.8353949692623565e-176
+     }
+    },
+    "1000": {
+     "n": 1402,
+     "unrouted_n": 1999,
+     "B_P_sum": 15616,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 597,
+      "p": 3.855871784164615e-180
+     }
+    },
+    "2000": {
+     "n": 1402,
+     "unrouted_n": 2000,
+     "B_P_sum": 15616,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 598,
+      "p": 1.9279358920823073e-180
+     }
+    },
+    "5000": {
+     "n": 1402,
+     "unrouted_n": 2000,
+     "B_P_sum": 15616,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "FL_L|FL_L_COVER": {
+    "100": {
+     "n": 1804,
+     "unrouted_n": 1971,
+     "B_P_sum": 111382,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1812,
+     "unrouted_n": 1991,
+     "B_P_sum": 111382,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1817,
+     "unrouted_n": 1994,
+     "B_P_sum": 111382,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 4,
+      "lost": 181,
+      "p": 1.96959936881418e-48
+     }
+    },
+    "1000": {
+     "n": 1817,
+     "unrouted_n": 1999,
+     "B_P_sum": 111382,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 182,
+      "p": 3.2626522339992623e-55
+     }
+    },
+    "2000": {
+     "n": 1817,
+     "unrouted_n": 2000,
+     "B_P_sum": 111382,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 183,
+      "p": 1.6313261169996311e-55
+     }
+    },
+    "5000": {
+     "n": 1817,
+     "unrouted_n": 2000,
+     "B_P_sum": 111382,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "PD|NEFF_PD": {
+    "100": {
+     "n": 1949,
+     "unrouted_n": 1971,
+     "B_P_sum": 103817,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1962,
+     "unrouted_n": 1991,
+     "B_P_sum": 103817,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1964,
+     "unrouted_n": 1994,
+     "B_P_sum": 103817,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 31,
+      "p": 1.5366822481155396e-08
+     }
+    },
+    "1000": {
+     "n": 1969,
+     "unrouted_n": 1999,
+     "B_P_sum": 103817,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 31,
+      "p": 1.5366822481155396e-08
+     }
+    },
+    "2000": {
+     "n": 1969,
+     "unrouted_n": 2000,
+     "B_P_sum": 103817,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 31,
+      "p": 9.313225746154785e-10
+     }
+    },
+    "5000": {
+     "n": 1969,
+     "unrouted_n": 2000,
+     "B_P_sum": 103817,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "PC_L|PC_L_KNEEG": {
+    "100": {
+     "n": 1935,
+     "unrouted_n": 1971,
+     "B_P_sum": 58097,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1944,
+     "unrouted_n": 1991,
+     "B_P_sum": 58097,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1946,
+     "unrouted_n": 1994,
+     "B_P_sum": 58097,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 50,
+      "p": 6.123990203832363e-13
+     }
+    },
+    "1000": {
+     "n": 1947,
+     "unrouted_n": 1999,
+     "B_P_sum": 58097,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 53,
+      "p": 6.106226635438361e-15
+     }
+    },
+    "2000": {
+     "n": 1947,
+     "unrouted_n": 2000,
+     "B_P_sum": 58097,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 53,
+      "p": 2.220446049250313e-16
+     }
+    },
+    "5000": {
+     "n": 1947,
+     "unrouted_n": 2000,
+     "B_P_sum": 58097,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "NSUM|NEFF_NSUM": {
+    "100": {
+     "n": 1919,
+     "unrouted_n": 1971,
+     "B_P_sum": 44203,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1925,
+     "unrouted_n": 1991,
+     "B_P_sum": 44203,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1927,
+     "unrouted_n": 1994,
+     "B_P_sum": 44203,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 69,
+      "p": 2.165863246129246e-18
+     }
+    },
+    "1000": {
+     "n": 1928,
+     "unrouted_n": 1999,
+     "B_P_sum": 44203,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 72,
+      "p": 1.5670109524204556e-20
+     }
+    },
+    "2000": {
+     "n": 1928,
+     "unrouted_n": 2000,
+     "B_P_sum": 44203,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 72,
+      "p": 4.235164736271502e-22
+     }
+    },
+    "5000": {
+     "n": 1928,
+     "unrouted_n": 2000,
+     "B_P_sum": 44203,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "ES|KNEE_SDIV": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1991,
+     "unrouted_n": 1991,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1994,
+     "unrouted_n": 1994,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 2,
+      "p": 1.0
+     }
+    },
+    "1000": {
+     "n": 1998,
+     "unrouted_n": 1999,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 2,
+      "p": 1.0
+     }
+    },
+    "2000": {
+     "n": 1998,
+     "unrouted_n": 2000,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 2,
+      "p": 0.5
+     }
+    },
+    "5000": {
+     "n": 1998,
+     "unrouted_n": 2000,
+     "B_P_sum": 120815,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "SDE|BPI_SDIV": {
+    "100": {
+     "n": 1918,
+     "unrouted_n": 1971,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1923,
+     "unrouted_n": 1991,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1925,
+     "unrouted_n": 1994,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 71,
+      "p": 5.721707558702799e-19
+     }
+    },
+    "1000": {
+     "n": 1926,
+     "unrouted_n": 1999,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 74,
+      "p": 4.0234064994579266e-21
+     }
+    },
+    "2000": {
+     "n": 1926,
+     "unrouted_n": 2000,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 74,
+      "p": 1.0587911840678754e-22
+     }
+    },
+    "5000": {
+     "n": 1926,
+     "unrouted_n": 2000,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "SDK|BPI_SDIV": {
+    "100": {
+     "n": 1918,
+     "unrouted_n": 1971,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1923,
+     "unrouted_n": 1991,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1925,
+     "unrouted_n": 1994,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 71,
+      "p": 5.721707558702799e-19
+     }
+    },
+    "1000": {
+     "n": 1926,
+     "unrouted_n": 1999,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 74,
+      "p": 4.0234064994579266e-21
+     }
+    },
+    "2000": {
+     "n": 1926,
+     "unrouted_n": 2000,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 74,
+      "p": 1.0587911840678754e-22
+     }
+    },
+    "5000": {
+     "n": 1926,
+     "unrouted_n": 2000,
+     "B_P_sum": 59784,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "MXS_L4|MA_KS_L4": {
+    "100": {
+     "n": 1967,
+     "unrouted_n": 1971,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1984,
+     "unrouted_n": 1991,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1988,
+     "unrouted_n": 1994,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 3,
+      "lost": 9,
+      "p": 0.14599609375
+     }
+    },
+    "1000": {
+     "n": 1990,
+     "unrouted_n": 1999,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 10,
+      "p": 0.01171875
+     }
+    },
+    "2000": {
+     "n": 1990,
+     "unrouted_n": 2000,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 10,
+      "p": 0.001953125
+     }
+    },
+    "5000": {
+     "n": 1990,
+     "unrouted_n": 2000,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "UM_KS_L4|UM_KS_L4": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 67786,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1986,
+     "unrouted_n": 1991,
+     "B_P_sum": 67786,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1990,
+     "unrouted_n": 1994,
+     "B_P_sum": 67786,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 4,
+      "lost": 8,
+      "p": 0.3876953125
+     }
+    },
+    "1000": {
+     "n": 1990,
+     "unrouted_n": 1999,
+     "B_P_sum": 67786,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 9,
+      "p": 0.00390625
+     }
+    },
+    "2000": {
+     "n": 1990,
+     "unrouted_n": 2000,
+     "B_P_sum": 67786,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 10,
+      "p": 0.001953125
+     }
+    },
+    "5000": {
+     "n": 1990,
+     "unrouted_n": 2000,
+     "B_P_sum": 67786,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "UM_KS_L4|MA_KS_L4": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1988,
+     "unrouted_n": 1991,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1992,
+     "unrouted_n": 1994,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 3,
+      "lost": 5,
+      "p": 0.7265625
+     }
+    },
+    "1000": {
+     "n": 1994,
+     "unrouted_n": 1999,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 6,
+      "p": 0.125
+     }
+    },
+    "2000": {
+     "n": 1994,
+     "unrouted_n": 2000,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 6,
+      "p": 0.03125
+     }
+    },
+    "5000": {
+     "n": 1994,
+     "unrouted_n": 2000,
+     "B_P_sum": 87431,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "IL_S_T3|MG_KS_L2": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 96611,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1988,
+     "unrouted_n": 1991,
+     "B_P_sum": 96611,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1990,
+     "unrouted_n": 1994,
+     "B_P_sum": 96611,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 6,
+      "p": 0.2890625
+     }
+    },
+    "1000": {
+     "n": 1993,
+     "unrouted_n": 1999,
+     "B_P_sum": 96611,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 1,
+      "lost": 7,
+      "p": 0.0703125
+     }
+    },
+    "2000": {
+     "n": 1993,
+     "unrouted_n": 2000,
+     "B_P_sum": 96611,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 7,
+      "p": 0.015625
+     }
+    },
+    "5000": {
+     "n": 1993,
+     "unrouted_n": 2000,
+     "B_P_sum": 96611,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "IL_S_T3|UM_KT_L4": {
+    "100": {
+     "n": 1967,
+     "unrouted_n": 1971,
+     "B_P_sum": 56145,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1977,
+     "unrouted_n": 1991,
+     "B_P_sum": 56145,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1981,
+     "unrouted_n": 1994,
+     "B_P_sum": 56145,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 4,
+      "lost": 17,
+      "p": 0.007197380065917969
+     }
+    },
+    "1000": {
+     "n": 1981,
+     "unrouted_n": 1999,
+     "B_P_sum": 56145,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 18,
+      "p": 7.62939453125e-06
+     }
+    },
+    "2000": {
+     "n": 1981,
+     "unrouted_n": 2000,
+     "B_P_sum": 56145,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 19,
+      "p": 3.814697265625e-06
+     }
+    },
+    "5000": {
+     "n": 1981,
+     "unrouted_n": 2000,
+     "B_P_sum": 56145,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "S|KNEE_TOP3": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 91814,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1989,
+     "unrouted_n": 1991,
+     "B_P_sum": 91814,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1991,
+     "unrouted_n": 1994,
+     "B_P_sum": 91814,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 2,
+      "lost": 5,
+      "p": 0.453125
+     }
+    },
+    "1000": {
+     "n": 1994,
+     "unrouted_n": 1999,
+     "B_P_sum": 91814,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 5,
+      "p": 0.0625
+     }
+    },
+    "2000": {
+     "n": 1994,
+     "unrouted_n": 2000,
+     "B_P_sum": 91814,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 6,
+      "p": 0.03125
+     }
+    },
+    "5000": {
+     "n": 1994,
+     "unrouted_n": 2000,
+     "B_P_sum": 91814,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "S|PSTAR_BN": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 54689,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1991,
+     "unrouted_n": 1991,
+     "B_P_sum": 115399,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1994,
+     "unrouted_n": 1994,
+     "B_P_sum": 188067,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "1000": {
+     "n": 1999,
+     "unrouted_n": 1999,
+     "B_P_sum": 276721,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "2000": {
+     "n": 2000,
+     "unrouted_n": 2000,
+     "B_P_sum": 354333,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "5000": {
+     "n": 2000,
+     "unrouted_n": 2000,
+     "B_P_sum": 398931,
+     "nq": 2000,
+     "npart": 202
+    }
+   },
+   "ES|ESTAR_BN": {
+    "100": {
+     "n": 1971,
+     "unrouted_n": 1971,
+     "B_P_sum": 56065,
+     "nq": 2000,
+     "npart": 202
+    },
+    "250": {
+     "n": 1991,
+     "unrouted_n": 1991,
+     "B_P_sum": 119634,
+     "nq": 2000,
+     "npart": 202
+    },
+    "500": {
+     "n": 1994,
+     "unrouted_n": 1994,
+     "B_P_sum": 182742,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "1000": {
+     "n": 1999,
+     "unrouted_n": 1999,
+     "B_P_sum": 255686,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "2000": {
+     "n": 2000,
+     "unrouted_n": 2000,
+     "B_P_sum": 339185,
+     "nq": 2000,
+     "npart": 202,
+     "paired_vs_unrouted": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "5000": {
+     "n": 2000,
+     "unrouted_n": 2000,
+     "B_P_sum": 399339,
+     "nq": 2000,
+     "npart": 202
+    }
+   }
+  }
+ },
+ "code": {
+  "path": "scratchpad/_l1d_route_view.py",
+  "sha256": "0fdbd3f9c7b55e24f58e545b5af9bbefab292b2e100ef1cb599d5cf1b68fc269"
+ }
+}

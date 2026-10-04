@@ -1,0 +1,294 @@
+{
+ "cache": "musique",
+ "partition": "PHG",
+ "n_DEV_A": 996,
+ "status": "POSTHOC_MECHANISM_TEST",
+ "arm": "BALANCED_H2_PATCH1",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_BALANCED_H2_PATCH1_DEV_A.json",
+  "sha256": "a88c9e4e23f699ebe071df1cf5cecff855e02f174f1d3f6e3d09284e0a15395a"
+ },
+ "code": {
+  "path": "scratchpad/_l1c_h2balanced.py",
+  "sha256": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe"
+ },
+ "pinned": {
+  "_l1c_microl3.py": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+  "_l1c_h2patch.py": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d"
+ },
+ "selector": {
+  "cfg": {
+   "B": 6,
+   "M_struct": 64,
+   "M_ret": 32,
+   "agg": "S4",
+   "fusion": "F6",
+   "T": 1,
+   "tag": "F6"
+  },
+  "code": "_l1ps_router.build_cache + _l1kb_core.contexts / f6_select (unchanged)"
+ },
+ "SAFE_record": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json",
+ "definition": {
+  "beam": "pinned uL3 beam (frozen admissibility, transition geometry, RRF fused order, BEAM = 100, DEPTH = 2, seeds = frozen top-5)",
+  "compression_pinned": "first 100 distinct unvisited targets in the global fused order",
+  "compression_balanced": "within-parent rank = position of (parent, target) among the parent's pairs in the frozen fused order (first occurrence per pair); sequence sorted by (rank, frontier position of the parent) = A1 B1 C1 ... A2 B2 C2 ...; first 100 distinct unvisited targets; no other constant",
+  "patch": "section 16 verbatim: SAFE minus its weakest admitted block + one query-local block of the same size = the beam's visited nodes not exposed by the 49 kept blocks in first-visit order (hop 1 then hop 2, each in beam order), topped up from the removed block (ret_rrf position, then node id)",
+  "metric": "ALL-gold under matched unique-node exposure; node-level == block-level for L1 / SAFE (asserted)"
+ },
+ "beam_diversity_DEV_A": {
+  "n_DEV_A": 996,
+  "wall_clock_ms_per_query": {
+   "pinned": 100.1,
+   "balanced": 93.2
+  },
+  "transitions_scored_per_query_mean (hop1 / hop2)": {
+   "pinned": [
+    185.2,
+    3198.0
+   ],
+   "balanced": [
+    185.2,
+    3223.8
+   ]
+  },
+  "candidates_unique_per_query_mean (hop1 / hop2)": {
+   "pinned": [
+    130.9,
+    1214.9
+   ],
+   "balanced": [
+    130.9,
+    1252.4
+   ]
+  },
+  "beam_size_mean (hop1 / hop2)": {
+   "pinned": [
+    80.3,
+    100.0
+   ],
+   "balanced": [
+    80.3,
+    100.0
+   ]
+  },
+  "queries_truncated_at_hop (hop1 / hop2) balanced": [
+   557,
+   995
+  ],
+  "same_kept_set_as_pinned (queries; hop1 / hop2)": [
+   452,
+   1
+  ],
+  "jaccard_kept_vs_pinned_mean (hop1 / hop2)": [
+   0.857,
+   0.243
+  ],
+  "distinct_parents_in_kept_beam_mean (hop1 / hop2)": {
+   "pinned": [
+    4.5,
+    23.2
+   ],
+   "balanced": [
+    4.7,
+    53.4
+   ]
+  },
+  "largest_single_parent_share_mean (hop1 / hop2)": {
+   "pinned": [
+    0.532,
+    0.254
+   ],
+   "balanced": [
+    0.455,
+    0.039
+   ]
+  },
+  "balanced_compression_stats_mean": {
+   "hop1": {
+    "parents": 5.0,
+    "parents_with_candidates": 4.79,
+    "candidates_unique": 130.9,
+    "pairs": 181.83,
+    "kept": 80.32,
+    "truncated": 0.56,
+    "rounds_used": 40.48,
+    "largest_parent_candidate_list": 78.56
+   },
+   "hop2": {
+    "parents": 80.32,
+    "parents_with_candidates": 76.66,
+    "candidates_unique": 1252.43,
+    "pairs": 3208.85,
+    "kept": 99.97,
+    "truncated": 1.0,
+    "rounds_used": 3.93,
+    "largest_parent_candidate_list": 202.49
+   }
+  }
+ },
+ "arms": {
+  "L1": {
+   "arm": "L1",
+   "ALL": 0.6596,
+   "ANY": 0.99,
+   "per_hop": {}
+  },
+  "SAFE": {
+   "arm": "SAFE",
+   "ALL": 0.7118,
+   "ANY": 0.991,
+   "per_hop": {},
+   "ALL_vs_L1": {
+    "gained": 56,
+    "lost": 4,
+    "p": 9.084503982403902e-13
+   }
+  },
+  "H2_PATCH1": {
+   "arm": "H2_PATCH1",
+   "ALL": 0.7329,
+   "ANY": 0.991,
+   "per_hop": {},
+   "exposure": "matched: |served nodes| equal to canonical SAFE per query (asserted)",
+   "novel_nodes_per_query_mean": 43.9,
+   "novel_hop1_per_query_mean": 5.9,
+   "novel_hop2_per_query_mean": 38.0,
+   "patch_size_mean": 101.6,
+   "patch_composition_mean (hop-1 novel / hop-2 novel / fill from removed block)": [
+    5.9,
+    37.9,
+    57.7
+   ],
+   "queries_truncated": 4,
+   "queries_with_no_novel_node (patch == removed block)": 1,
+   "gold_nodes_gained_vs_SAFE": 24,
+   "gold_nodes_gained_vs_SAFE_from_hop1_novel": 6,
+   "queries_with_gold_node_gained_vs_SAFE": 24,
+   "gold_nodes_lost_with_removed_block": 0,
+   "queries_with_gold_node_lost_with_removed_block": 0,
+   "ALL_vs_L1": {
+    "gained": 76,
+    "lost": 3,
+    "p": 2.72109334305444e-19
+   },
+   "ALL_vs_SAFE": {
+    "gained": 21,
+    "lost": 0,
+    "p": 9.5367431640625e-07
+   },
+   "ANY_vs_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "significant_loss_vs_SAFE": false
+  },
+  "BALANCED_H2_PATCH1": {
+   "arm": "BALANCED_H2_PATCH1",
+   "ALL": 0.7269,
+   "ANY": 0.991,
+   "per_hop": {},
+   "exposure": "matched: |served nodes| equal to canonical SAFE per query (asserted)",
+   "novel_nodes_per_query_mean": 47.3,
+   "novel_hop1_per_query_mean": 5.9,
+   "novel_hop2_per_query_mean": 41.4,
+   "patch_size_mean": 101.6,
+   "patch_composition_mean (hop-1 novel / hop-2 novel / fill from removed block)": [
+    5.9,
+    41.3,
+    54.3
+   ],
+   "queries_truncated": 3,
+   "queries_with_no_novel_node (patch == removed block)": 0,
+   "gold_nodes_gained_vs_SAFE": 17,
+   "gold_nodes_gained_vs_SAFE_from_hop1_novel": 6,
+   "queries_with_gold_node_gained_vs_SAFE": 17,
+   "gold_nodes_lost_with_removed_block": 0,
+   "queries_with_gold_node_lost_with_removed_block": 0,
+   "ALL_vs_L1": {
+    "gained": 69,
+    "lost": 2,
+    "p": 2.165863246129246e-18
+   },
+   "ALL_vs_SAFE": {
+    "gained": 15,
+    "lost": 0,
+    "p": 6.103515625e-05
+   },
+   "ANY_vs_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "significant_loss_vs_SAFE": false,
+   "ALL_vs_H2_PATCH1": {
+    "gained": 2,
+    "lost": 8,
+    "p": 0.109375
+   },
+   "ANY_vs_H2_PATCH1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "significant_loss_vs_H2_PATCH1": false
+  }
+ },
+ "section16_reproduced": "H2_PATCH1 rebuilt == h2patch_A_musique.json (ALL, ANY, vs SAFE, per hop, novel counts)",
+ "attribution_flips_vs_H2_PATCH1": {
+  "newly_covered_vs_H2_PATCH1": {
+   "n": 2,
+   "gold_nodes_newly_served": 2,
+   "of_which_newly_visited_by_the_balanced_beam": 2,
+   "of_which_visited_by_both_beams_but_cut_by_the_pinned_patch": 0
+  },
+  "newly_lost_vs_H2_PATCH1": {
+   "n": 8,
+   "gold_nodes_dropped": 8,
+   "of_which_no_longer_visited_by_the_balanced_beam": 8,
+   "of_which_visited_but_beyond_the_patch_capacity": 0
+  }
+ },
+ "diagnostic_node_level_availability": {
+  "all": {
+   "SAFE_failures": 287,
+   "missing_gold_nodes": 366,
+   "missing_is_seed (skipped exactly as in section 17)": 0,
+   "pinned: visited (hop1 / hop2)": [
+    6,
+    18
+   ],
+   "pinned: scored candidate but cut by the width (first at hop1 / hop2)": [
+    2,
+    7
+   ],
+   "pinned: never scored": 333,
+   "balanced: visited (hop1 / hop2)": [
+    6,
+    11
+   ],
+   "balanced: scored candidate but not kept (first at hop1 / hop2)": [
+    2,
+    16
+   ],
+   "balanced: never scored": 331,
+   "failures_with_all_missing_nodes_scored_or_visited_within_depth2 (pinned; section 17 population)": 29,
+   "  of_which_all_missing_nodes_VISITED_by_pinned_beam": 21,
+   "  of_which_all_missing_nodes_VISITED_by_balanced_beam": 14,
+   "  of_which_covered_by_H2_PATCH1": 21,
+   "  of_which_covered_by_BALANCED_H2_PATCH1": 14,
+   "failures_with_all_missing_nodes_visited_by_balanced_beam_and_NOT_covered_by_BALANCED: cut_by_patch_capacity": 0,
+   "failures_with_all_missing_nodes_visited_by_balanced_beam_and_NOT_covered_by_BALANCED: gold_dropped_with_removed_block": 0,
+   "candidates_unique_per_query_mean (hop1 / hop2) pinned": [
+    130.9,
+    1214.9
+   ],
+   "candidates_unique_per_query_mean (hop1 / hop2) balanced": [
+    130.9,
+    1252.4
+   ]
+  }
+ },
+ "seconds": 297.9
+}

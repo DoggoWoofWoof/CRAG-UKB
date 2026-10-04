@@ -1,0 +1,110 @@
+{
+ "RECORD": "KB_CORPUS_ENCODING_RULING",
+ "utc": "2026-09-13T13:38:00Z",
+ "RULING": "KEEP_NAME_ONLY",
+ "ruled_by": "user (chat, 2026-09-13), in answer to the two options put forward after the metaqa legacy-vs-canonical reproduction check",
+ "scope": [
+  "metaqa",
+  "webqsp"
+ ],
+ "what_it_settles": {
+  "axis": "entity node text used for the served dense (gte-Qwen2-1.5B) and SPLADE encodings of KB corpora: NAME_ONLY vs NAME_PLUS_FACTS",
+  "previous_status": "OPEN -- V1_RETRIEVAL_ROLE_DECISION.json (webqsp) chose ALL_NODE + entity NAME_ONLY as the default arm and left 'NAME_ONLY vs NAME_PLUS_FACTS' explicitly NOT settled; metaqa SOURCE_CONTRACT: triple verbalization is a downstream ENCODING choice, not corpus identity",
+  "now": "SETTLED = NAME_ONLY. The KB facts are the STRUCT edges (metaqa: KB triples; webqsp: Freebase edges + CVT record texts), not node text."
+ },
+ "why": [
+  "the facts are not lost: they are the structural graph the partition and the L1 structural hop already consume",
+  "verbalising triples into node text makes the retrieval channel perform the hop (legacy hop-1 ANY-gold-in-dense-200 = 0.716 vs 0.147 canonical) -- the wrong layer doing the graph's work; on the canonical layout retrieval finds the topic entity and structure reaches the answer (canonical hop-1 BASE 0.898)",
+  "one encoding regime across all six datasets: text corpora encode passages, KB corpora encode entities",
+  "re-encoding webqsp (~1M entity nodes) needs a GPU that is not available and would supersede frozen dense/SPLADE shards and top-1000 caches for two datasets"
+ ],
+ "consequences": {
+  "legacy_kb_l1_cells": "historical comparison points on a different encoding (legacy metaqa H4_SPLIT_PRESERVE__SK BASE 0.7863 / F6 0.7888; legacy webqsp cells); not baselines to match",
+  "canonical_baselines": {
+   "metaqa": {
+    "BASE_ALL_P50": 0.6376,
+    "SAFE_ALL_P50": 0.6401,
+    "record": "results/L1_CANONICAL/L1_REPLAY_metaqa.json"
+   }
+  },
+  "reproduction_answer": "canonical-layout L1 reproduces legacy L1 where the encoding regime is the same (squad paired 1997 rows: SAFE 0.9915 vs 0.9910, p 1.0; BASE 0.982 vs 0.989, p 0.024) and cannot reproduce the KB-corpus cells by construction (metaqa paired 1370 rows: BASE 0.6898 -> 0.5168)",
+  "no_action": [
+   "no re-encode",
+   "no supersession of CANONICAL_FREEZE channels",
+   "no change to data/final_canonical/"
+  ],
+  "manifest": "RULINGS_PENDING.KB_CORPUS_ENCODING closes at the next freeze_l1.py run (supersession, never an edit)"
+ },
+ "evidence": {
+  "METAQA_ENCODING_DIAGNOSIS.json": {
+   "path": "results/L1_CANONICAL/METAQA_ENCODING_DIAGNOSIS.json",
+   "bytes": 7339,
+   "sha256": "1ed548fa2f48aeebff5cdb26dc68492745a0e90b9e4cc537ae4f51797f9d7455"
+  },
+  "LEGACY_VS_CANONICAL_metaqa.json": {
+   "path": "results/L1_CANONICAL/LEGACY_VS_CANONICAL_metaqa.json",
+   "bytes": 1379,
+   "sha256": "4cb74bb9ea72bdd03e03eb070055f26eb969d22286323fbbee48abbbfdc2022b",
+   "BASE": {
+    "legacy_ALL_on_overlap": 0.6898,
+    "canonical_ALL_on_overlap": 0.5168,
+    "legacy_only_covered": 254,
+    "canonical_only_covered": 17,
+    "net_canonical_minus_legacy": -237,
+    "mcnemar_p": 0.0,
+    "sig": true
+   },
+   "SAFE": {
+    "legacy_ALL_on_overlap": 0.6934,
+    "canonical_ALL_on_overlap": 0.5204,
+    "legacy_only_covered": 252,
+    "canonical_only_covered": 15,
+    "net_canonical_minus_legacy": -237,
+    "mcnemar_p": 0.0,
+    "sig": true
+   }
+  },
+  "LEGACY_VS_CANONICAL_squad_legacyrows.json": {
+   "path": "results/L1_CANONICAL/LEGACY_VS_CANONICAL_squad_legacyrows.json",
+   "bytes": 1560,
+   "sha256": "940095f8774c032ed42ea8c35eeef32a6747ed6ee9ff9bdce7c21a901d379c64",
+   "BASE": {
+    "legacy_ALL_on_overlap": 0.982,
+    "canonical_ALL_on_overlap": 0.989,
+    "legacy_only_covered": 10,
+    "canonical_only_covered": 24,
+    "net_canonical_minus_legacy": 14,
+    "mcnemar_p": 0.02431,
+    "sig": true
+   },
+   "SAFE": {
+    "legacy_ALL_on_overlap": 0.9915,
+    "canonical_ALL_on_overlap": 0.991,
+    "legacy_only_covered": 8,
+    "canonical_only_covered": 7,
+    "net_canonical_minus_legacy": -1,
+    "mcnemar_p": 1.0,
+    "sig": false
+   }
+  },
+  "V1_RETRIEVAL_ROLE_DECISION.json": {
+   "path": "data/final_canonical/webqsp/V1_RETRIEVAL_ROLE_DECISION.json",
+   "bytes": 8846,
+   "sha256": "993a78707a591978ef9dc4e1157623368e67de9b917a72dffe13013f49b578db",
+   "open_axis_fields": {
+    "OPEN_AXIS_NOT_DECIDED_HERE": {
+     "axis": "entity text = NAME_ONLY vs NAME_PLUS_FACTS",
+     "status": "NOT settled by this decision and NOT written into any artifact.",
+     "measured_consequence": "under ALL_NODE, NAME_PLUS_FACTS serialises every CVT argument twice -- once in the CVT record, again inside each adjacent entity -- costing 2.554x the default arm, for information that is already retrievable as its own unit.",
+     "assistant_recommendation_not_a_user_decision": "pair ALL_NODE with entity NAME_ONLY. The substitution rationale for NAME_PLUS_FACTS was to compensate for excluding CVTs; once CVTs are eligible the compensation is redundant. NAME_PLUS_FACTS remains the correct rendering for the NO_CVT_RETRIEVAL ablation arm, which is exactly where the substitution hypothesis is under test."
+    }
+   }
+  },
+  "retrieval_channel_hop1": {
+   "canonical_ANY_gold_in_dense200": 0.1471,
+   "legacy_ANY_gold_in_dense200": 0.7162
+  }
+ },
+ "RECORD_SHA256": "cb621da99559858027f999d2d186d40887d572dbf347312cc097abb455254dd5",
+ "RECORD_SHA256_LF": "7586a9d4820e4519d3b6f26aa01c50e098fc40ff76a90d95c7a3da5528222e29"
+}

@@ -1,0 +1,99 @@
+{
+ "RECORD": "PREREGISTRATION_PROTOTYPE_LADDER_IVF_ADDENDUM",
+ "utc": "2026-09-25T16:18:32Z",
+ "status": "ADDENDUM -- re-centres the READING of the running ladder on the question the user asked.  It edits nothing: PREREGISTRATION_PROTOTYPE_LADDER.json (sha 533adfbd...), its QMAX-referenced rule and _l1c_proto_summary.py stand as pre-registered and are reported as such (they answer 'can a few representatives replace stage 2 inside the composite').",
+ "user_clarification (verbatim, 2026-09-25)": "the point of this wasnt to make qmax better it was to see if we can instead of node voting do an ivfesque approach for selecting the parititions",
+ "what_was_misframed": "the original pre-registration took QMAX (the stage-2 block max) as the reference at every level and put the headline at PRIMARY, where the dense and SPLADE node votes are still inside the fusion.  The question asked is whether an IVF-style coarse quantizer over the partitions can SELECT the partitions instead of node voting.",
+ "question": "Can an IVF-style coarse quantizer over the served graph partitions -- q scored against a few fixed, query-free representatives per block, the top 50 blocks probed (nprobe = 50 = the P50 block budget), every node inside them served -- replace node voting (dense and SPLADE top-100 hits voting for their own block and the blocks of their directed STRUCT out-neighbours, rr(sum) + rr(max) per channel, frozen RRF = L1) without losing ALL-gold recall?",
+ "reads_the_runs_of": {
+  "path": "results/L1_COVPART/PREREGISTRATION_PROTOTYPE_LADDER.json",
+  "sha256": "533adfbd3fd3c6a44d91bd1b4f6be048f018ccdd41af40064549140bfdb47ea0",
+  "ladder_module_sha256": "815828efbe22ad25e766a534fa03508f8536f7b96d92f40c387f80a2a9125158",
+  "records": "results/L1_COVPART/proto_A_<cache>.json (write-once; unchanged by this addendum)"
+ },
+ "ivf_endpoint": "the ladder's ALONE level: blocks ranked by the representative channel alone, top 50 probed, every node of a probed block served; ALL-gold = every gold node of the query inside a probed block.  Arms: CENT_MEAN, CENT_NORM (one centroid per block), FPS_m (m = 1 medoid .. 32 farthest-point prototypes, max over them), RAND_m (control), and the ladder's limit QMAX_ALONE (every node a representative; the limit of the ladder, not a coverage bound for smaller m).",
+ "references": {
+  "primary": "L1 = node voting (dense + SPLADE), the served routing",
+  "fair_dense_only": "DENSE_VOTE_ALONE = the dense node vote alone (same out-neighbour memberships, no SPLADE)",
+  "also_reported": "SPLADE_VOTE_ALONE"
+ },
+ "rule": {
+  "PRESERVES_NODE_VOTE(v, cache)": "exact McNemar of v_ALONE vs L1 on split A (already inside the record as arms[v_ALONE].ALL_vs_L1): net loss (lost - gained) <= TOL = max(2, round(0.005 * n_A)) (= 5 on every cache) AND NOT (lost > gained with p < 0.05)",
+  "per_cache_status": "IVF_PRESERVES_NODE_VOTE_AT_m=<smallest FPS m> | ONLY_THE_LADDER_LIMIT_PRESERVES | NOT_EVEN_THE_LADDER_LIMIT_PRESERVES_NODE_VOTE",
+  "HEADLINE (text caches squad, squad_phg, musique -- not read when this was written)": "m*_text = the smallest ladder m at which FPS_m PRESERVES node voting on all three text caches: IVF_REPLACES_NODE_VOTING_ON_TEXT_AT_m=<m*> or IVF_DOES_NOT_REPLACE_NODE_VOTING_ON_TEXT",
+  "universal (all five)": "already determined by the two metaqa caches, read before this addendum (below); reported as observed, not as a test",
+  "also_reported": "the same rule vs DENSE_VOTE_ALONE (dense-only fairness); RAND_m control; monotonicity in m; the recall ladder centroid -> prototypes -> ladder limit -> dense vote -> node vote per cache"
+ },
+ "seen_before_this_addendum": {
+  "records_existing": {
+   "metaqa": true,
+   "metaqa_phg": true,
+   "squad": true,
+   "squad_phg": false,
+   "musique": false
+  },
+  "read": "the metaqa and metaqa_phg log lines of every level (ALONE, F0, SAFE, PRIMARY) and the metaqa cohesion line; nothing of squad, squad_phg or musique (squad was running; its log was not opened)",
+  "metaqa ALONE ALL (seen)": {
+   "node vote L1 (known from transfer_repro)": 0.6397,
+   "QMAX_ALONE": 0.1816,
+   "CENT_MEAN": 0.1437,
+   "CENT_NORM": 0.1277,
+   "FPS_1": 0.1088,
+   "FPS_2": 0.1178,
+   "FPS_4": 0.1008,
+   "FPS_8": 0.1038,
+   "FPS_16": 0.1118,
+   "FPS_32": 0.1307,
+   "RAND_1": 0.0629,
+   "RAND_2": 0.1168,
+   "RAND_4": 0.1098,
+   "RAND_8": 0.1158,
+   "RAND_16": 0.1267,
+   "RAND_32": 0.1477
+  },
+  "metaqa_phg ALONE ALL (seen)": {
+   "node vote L1 (known)": 0.6727,
+   "QMAX_ALONE": 0.1956,
+   "CENT_MEAN": 0.1188,
+   "CENT_NORM": 0.1317,
+   "FPS_1": 0.1118,
+   "FPS_2": 0.1198,
+   "FPS_4": 0.1018,
+   "FPS_8": 0.1048,
+   "FPS_16": 0.1138,
+   "FPS_32": 0.1367,
+   "RAND_1": 0.0679,
+   "RAND_2": 0.1018,
+   "RAND_4": 0.1008,
+   "RAND_8": 0.1208,
+   "RAND_16": 0.1357,
+   "RAND_32": 0.1427
+  }
+ },
+ "predictions_stated_now (text caches, unseen)": {
+  "T1": "squad and squad_phg: CENT_NORM alone does NOT preserve node voting (prior L1_STATIC A2 on squad: dense centroid alone 0.9083 vs 0.9859, +3/-80)",
+  "T2": "musique: CENT_NORM alone does NOT preserve node voting (prior A2: 0.4056 vs 0.6596, +44/-297)",
+  "T3": "squad and squad_phg: some FPS_m with m <= 32 alone preserves node voting (50 probes = a quarter of the 202 blocks; single-hop)",
+  "T4": "musique: no FPS_m with m <= 32 alone preserves node voting, hence m*_text = None",
+  "not_predicted": "whether the ladder limit QMAX_ALONE preserves node voting on musique (never measured alone; inside the fusion it adds +72 queries)"
+ },
+ "honest_scope": {
+  "three_differences_at_once": "vs L1 the IVF arms differ in three ways: block-level instead of node-level scoring, no SPLADE side, and no out-neighbour votes (a node-vote hit also votes for its STRUCT out-neighbours' blocks; an IVF block sees only its own vectors).  DENSE_VOTE_ALONE removes the SPLADE difference only.",
+  "not_tested_here (new arms; would need a ruling)": [
+   "SPLADE-side block prototypes (L1_STATIC A2 measured SPLADE mean / max-pool block vectors: squad max-pool alone 0.9839 vs 0.9859)",
+   "membership-expanded prototypes (a block represented over its nodes plus the nodes whose STRUCT out-edges point into it -- the IVF analogue of the out-neighbour vote)",
+   "the IVF ranking fed to the frozen SAFE swap and the balanced patch (endpoint (a))"
+  ],
+  "compute": "IVF: sum_B min(m, |B|) prototype products per query plus the in-block search of the 50 probed blocks (~5,000 nodes); node voting: a dense top-100 over all N nodes plus a SPLADE top-100 (the saving is real only against an exhaustive or ANN dense top-100)"
+ },
+ "what_is_not_decided": "adoption of anything; the frozen composite (FREEZE f81ebb84) is unchanged; no DEV_B, TEST, 2Wiki, HotpotQA or WebQSP",
+ "code": {
+  "new_modules": {
+   "_l1c_proto_ivf_summary.py": {
+    "path": "scratchpad/_l1c_proto_ivf_summary.py",
+    "sha256": "00da51d70aa8fd0bb6afc671faf8ead808dee7b00333854f19fa89d1998df89c"
+   }
+  }
+ },
+ "run_plan": "after the five ladder runs finish: python -u scratchpad/_l1c_proto_ivf_summary.py -> results/L1_COVPART/proto_IVF_SUMMARY.json (write-once)"
+}

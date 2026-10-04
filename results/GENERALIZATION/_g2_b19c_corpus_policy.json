@@ -1,0 +1,474 @@
+{
+ "CONTRACT": {
+  "encoder_passes": 0,
+  "uses_dataset_id": false,
+  "uses_target_labels_for_R": false,
+  "uses_target_query_stats": false,
+  "uses_TEST": false,
+  "descriptors": "label-free index-time corpus/graph statistics only"
+ },
+ "STEP2_U_C": {
+  "metaqa": {
+   "n_queries": 1998,
+   "NET_by_R": {
+    "0": 0.0,
+    "4": 223.0,
+    "8": 378.0,
+    "16": 635.0
+   },
+   "NET_per_query_by_R": {
+    "0": 0.0,
+    "4": 0.11161161161161161,
+    "8": 0.1891891891891892,
+    "16": 0.3178178178178178
+   },
+   "best_constant_R": 16,
+   "smallest_near_optimal_R": 16,
+   "NET_per_query_at_best": 0.3178178178178178,
+   "oracle_NET": 740.0,
+   "oracle_NET_per_query": 0.37037037037037035,
+   "curve_shape": "monotone_up"
+  },
+  "2wiki_clean": {
+   "n_queries": 2000,
+   "NET_by_R": {
+    "0": 0.0,
+    "4": 84.0,
+    "8": 116.0,
+    "16": 135.0
+   },
+   "NET_per_query_by_R": {
+    "0": 0.0,
+    "4": 0.042,
+    "8": 0.058,
+    "16": 0.0675
+   },
+   "best_constant_R": 16,
+   "smallest_near_optimal_R": 4,
+   "NET_per_query_at_best": 0.0675,
+   "oracle_NET": 179.0,
+   "oracle_NET_per_query": 0.0895,
+   "curve_shape": "monotone_up"
+  },
+  "squad_clean": {
+   "n_queries": 1000,
+   "NET_by_R": {
+    "0": 0.0,
+    "4": 0.0,
+    "8": 0.0,
+    "16": 0.0
+   },
+   "NET_per_query_by_R": {
+    "0": 0.0,
+    "4": 0.0,
+    "8": 0.0,
+    "16": 0.0
+   },
+   "best_constant_R": 0,
+   "smallest_near_optimal_R": 0,
+   "NET_per_query_at_best": 0.0,
+   "oracle_NET": 1.0,
+   "oracle_NET_per_query": 0.001,
+   "curve_shape": "monotone_up"
+  },
+  "musique_clean": {
+   "n_queries": 2000,
+   "NET_by_R": {
+    "0": 0.0,
+    "4": 5.0,
+    "8": -9.0,
+    "16": -52.0
+   },
+   "NET_per_query_by_R": {
+    "0": 0.0,
+    "4": 0.0025,
+    "8": -0.0045,
+    "16": -0.026
+   },
+   "best_constant_R": 4,
+   "smallest_near_optimal_R": 0,
+   "NET_per_query_at_best": 0.0025,
+   "oracle_NET": 61.0,
+   "oracle_NET_per_query": 0.0305,
+   "curve_shape": "peak_then_down"
+  },
+  "hotpotqa_clean": {
+   "n_queries": 2000,
+   "NET_by_R": {
+    "0": 0.0,
+    "4": 8.0,
+    "8": 6.0,
+    "16": -23.0
+   },
+   "NET_per_query_by_R": {
+    "0": 0.0,
+    "4": 0.004,
+    "8": 0.003,
+    "16": -0.0115
+   },
+   "best_constant_R": 4,
+   "smallest_near_optimal_R": 0,
+   "NET_per_query_at_best": 0.004,
+   "oracle_NET": 35.0,
+   "oracle_NET_per_query": 0.0175,
+   "curve_shape": "peak_then_down"
+  },
+  "webqsp": {
+   "n_queries": 315,
+   "NET_by_R": {
+    "0": 0.0,
+    "4": 9.0,
+    "8": -6.0,
+    "16": -23.0
+   },
+   "NET_per_query_by_R": {
+    "0": 0.0,
+    "4": 0.02857142857142857,
+    "8": -0.01904761904761905,
+    "16": -0.07301587301587302
+   },
+   "best_constant_R": 4,
+   "smallest_near_optimal_R": 0,
+   "NET_per_query_at_best": 0.02857142857142857,
+   "oracle_NET": 45.0,
+   "oracle_NET_per_query": 0.14285714285714285,
+   "curve_shape": "peak_then_down"
+  }
+ },
+ "STEP4_MONOTONICITY": {
+  "mean_degree": {
+   "spearman_vs_NETperq": -0.7714,
+   "spearman_vs_bestR": -0.7143,
+   "LOCO_spearman": [
+    -0.9,
+    -0.8,
+    -0.6,
+    -0.7,
+    -0.7,
+    -0.8
+   ],
+   "sign_stable_LOCO": true,
+   "values": {
+    "metaqa": 5.4534,
+    "2wiki_clean": 3.8281,
+    "squad_clean": 73.0023,
+    "musique_clean": 7.5399,
+    "hotpotqa_clean": 13.5054,
+    "webqsp": 4.1922
+   }
+  },
+  "neighbor_jaccard_redundancy": {
+   "spearman_vs_NETperq": -0.8286,
+   "spearman_vs_bestR": -0.6,
+   "LOCO_spearman": [
+    -0.7,
+    -1.0,
+    -0.7,
+    -0.7,
+    -0.9,
+    -0.9
+   ],
+   "sign_stable_LOCO": true,
+   "values": {
+    "metaqa": 0.00028,
+    "2wiki_clean": 0.06016,
+    "squad_clean": 0.29814,
+    "musique_clean": 0.09621,
+    "hotpotqa_clean": 0.02077,
+    "webqsp": 0.01349
+   }
+  },
+  "StructSemOverlap@10": {
+   "spearman_vs_NETperq": 0.8857,
+   "spearman_vs_bestR": 0.6,
+   "LOCO_spearman": [
+    0.8,
+    0.9,
+    0.8,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "sign_stable_LOCO": true,
+   "values": {
+    "metaqa": 0.59345,
+    "2wiki_clean": 0.16893,
+    "squad_clean": 0.05124,
+    "musique_clean": 0.16635,
+    "hotpotqa_clean": 0.11354,
+    "webqsp": 0.22252
+   }
+  },
+  "StructSemOverlap@50": {
+   "spearman_vs_NETperq": 0.7143,
+   "spearman_vs_bestR": 0.3714,
+   "LOCO_spearman": [
+    0.5,
+    0.9,
+    0.5,
+    0.9,
+    0.7,
+    0.7
+   ],
+   "sign_stable_LOCO": true,
+   "values": {
+    "metaqa": 0.67281,
+    "2wiki_clean": 0.2371,
+    "squad_clean": 0.16576,
+    "musique_clean": 0.30037,
+    "hotpotqa_clean": 0.17623,
+    "webqsp": 0.38058
+   }
+  },
+  "StructSemOverlap@200": {
+   "spearman_vs_NETperq": 0.3714,
+   "spearman_vs_bestR": -0.0857,
+   "LOCO_spearman": [
+    -0.1,
+    0.7,
+    0.5,
+    0.5,
+    0.4,
+    0.2
+   ],
+   "sign_stable_LOCO": false,
+   "values": {
+    "metaqa": 0.7293,
+    "2wiki_clean": 0.28768,
+    "squad_clean": 0.31723,
+    "musique_clean": 0.44584,
+    "hotpotqa_clean": 0.23239,
+    "webqsp": 0.53749
+   }
+  },
+  "edge_semantic_lift": {
+   "spearman_vs_NETperq": 0.3714,
+   "spearman_vs_bestR": -0.0286,
+   "LOCO_spearman": [
+    -0.1,
+    0.9,
+    0.3,
+    0.4,
+    0.4,
+    0.3
+   ],
+   "sign_stable_LOCO": false,
+   "values": {
+    "metaqa": 0.95161,
+    "2wiki_clean": 0.33267,
+    "squad_clean": 0.35166,
+    "musique_clean": 0.49655,
+    "hotpotqa_clean": 0.41441,
+    "webqsp": 0.65375
+   }
+  },
+  "hop2_over_hop1": {
+   "spearman_vs_NETperq": 0.4857,
+   "spearman_vs_bestR": 0.1429,
+   "LOCO_spearman": [
+    0.3,
+    0.8,
+    0.1,
+    0.5,
+    0.5,
+    0.6
+   ],
+   "sign_stable_LOCO": false,
+   "values": {
+    "metaqa": 13.9787,
+    "2wiki_clean": 7.4436,
+    "squad_clean": 4.0555,
+    "musique_clean": 11.7016,
+    "hotpotqa_clean": 7.6347,
+    "webqsp": 25.1857
+   }
+  },
+  "edge_density": {
+   "spearman_vs_NETperq": -0.4857,
+   "spearman_vs_bestR": -0.4857,
+   "LOCO_spearman": [
+    -0.7,
+    -0.7,
+    -0.1,
+    -0.1,
+    -0.6,
+    -0.6
+   ],
+   "sign_stable_LOCO": false,
+   "values": {
+    "metaqa": 0.0001358259866637317,
+    "2wiki_clean": 5.8121785846110056e-05,
+    "squad_clean": 0.0038365703021266246,
+    "musique_clean": 0.0005515277327828393,
+    "hotpotqa_clean": 2.661191708997666e-05,
+    "webqsp": 5.364393832586055e-06
+   }
+  },
+  "degree_cv": {
+   "spearman_vs_NETperq": 0.6571,
+   "spearman_vs_bestR": 0.7714,
+   "LOCO_spearman": [
+    1.0,
+    0.7,
+    0.4,
+    0.4,
+    0.7,
+    0.7
+   ],
+   "sign_stable_LOCO": true,
+   "values": {
+    "metaqa": 6.2239,
+    "2wiki_clean": 40.032,
+    "squad_clean": 1.7107,
+    "musique_clean": 3.25,
+    "hotpotqa_clean": 16.7974,
+    "webqsp": 17.7048
+   }
+  },
+  "giant_component_frac": {
+   "spearman_vs_NETperq": 0.7143,
+   "spearman_vs_bestR": 0.4857,
+   "LOCO_spearman": [
+    0.7,
+    0.9,
+    0.5,
+    0.5,
+    0.7,
+    0.9
+   ],
+   "sign_stable_LOCO": true,
+   "values": {
+    "metaqa": 0.9981,
+    "2wiki_clean": 0.8157,
+    "squad_clean": 0.6804,
+    "musique_clean": 0.7038,
+    "hotpotqa_clean": 0.993,
+    "webqsp": 1.0
+   }
+  },
+  "_MULTIPLE_COMPARISONS": {
+   "n_descriptors_tested": 10,
+   "n_corpora": 6,
+   "P_perfect_rank_by_chance_per_descriptor": 0.002778,
+   "expected_perfect_by_chance": 0.0278,
+   "n_descriptors_achieving_perfect_rank": 0,
+   "NOTE": "descriptors were inspected before this table was built; the honest test is the LOCO protocol below, where descriptor selection happens inside each fold."
+  }
+ },
+ "STEP56_LOCO_POLICY": {
+  "LOCO_rows": [
+   {
+    "target": "metaqa",
+    "selected_descriptor": "degree_cv",
+    "source_spearman_desc_vs_bestR": 1.0,
+    "nearest_source_corpus": "musique_clean",
+    "R_configured": 4,
+    "R_target_oracle_constant": 16,
+    "R_global_fixed": 16,
+    "R_source_selected_fixed": 4,
+    "NET_configured": 223.0,
+    "NET_global_fixed": 635.0,
+    "NET_source_fixed": 223.0,
+    "NET_target_oracle_constant": 635.0,
+    "oracle_per_query_upper": 0.37037,
+    "n_queries": 1998,
+    "R_correct": false
+   },
+   {
+    "target": "2wiki_clean",
+    "selected_descriptor": "neighbor_jaccard_redundancy",
+    "source_spearman_desc_vs_bestR": -1.0,
+    "nearest_source_corpus": "musique_clean",
+    "R_configured": 4,
+    "R_target_oracle_constant": 16,
+    "R_global_fixed": 16,
+    "R_source_selected_fixed": 16,
+    "NET_configured": 84.0,
+    "NET_global_fixed": 135.0,
+    "NET_source_fixed": 135.0,
+    "NET_target_oracle_constant": 135.0,
+    "oracle_per_query_upper": 0.0895,
+    "n_queries": 2000,
+    "R_correct": false
+   },
+   {
+    "target": "squad_clean",
+    "selected_descriptor": "StructSemOverlap@10",
+    "source_spearman_desc_vs_bestR": 0.9,
+    "nearest_source_corpus": "hotpotqa_clean",
+    "R_configured": 4,
+    "R_target_oracle_constant": 0,
+    "R_global_fixed": 16,
+    "R_source_selected_fixed": 16,
+    "NET_configured": 0.0,
+    "NET_global_fixed": 0.0,
+    "NET_source_fixed": 0.0,
+    "NET_target_oracle_constant": 0.0,
+    "oracle_per_query_upper": 0.001,
+    "n_queries": 1000,
+    "R_correct": false
+   },
+   {
+    "target": "musique_clean",
+    "selected_descriptor": "StructSemOverlap@10",
+    "source_spearman_desc_vs_bestR": 0.9,
+    "nearest_source_corpus": "2wiki_clean",
+    "R_configured": 16,
+    "R_target_oracle_constant": 4,
+    "R_global_fixed": 16,
+    "R_source_selected_fixed": 16,
+    "NET_configured": -52.0,
+    "NET_global_fixed": -52.0,
+    "NET_source_fixed": -52.0,
+    "NET_target_oracle_constant": 5.0,
+    "oracle_per_query_upper": 0.0305,
+    "n_queries": 2000,
+    "R_correct": false
+   },
+   {
+    "target": "hotpotqa_clean",
+    "selected_descriptor": "StructSemOverlap@10",
+    "source_spearman_desc_vs_bestR": 0.9,
+    "nearest_source_corpus": "musique_clean",
+    "R_configured": 4,
+    "R_target_oracle_constant": 4,
+    "R_global_fixed": 16,
+    "R_source_selected_fixed": 16,
+    "NET_configured": 8.0,
+    "NET_global_fixed": -23.0,
+    "NET_source_fixed": -23.0,
+    "NET_target_oracle_constant": 8.0,
+    "oracle_per_query_upper": 0.0175,
+    "n_queries": 2000,
+    "R_correct": true
+   },
+   {
+    "target": "webqsp",
+    "selected_descriptor": "StructSemOverlap@10",
+    "source_spearman_desc_vs_bestR": 0.9,
+    "nearest_source_corpus": "2wiki_clean",
+    "R_configured": 16,
+    "R_target_oracle_constant": 4,
+    "R_global_fixed": 16,
+    "R_source_selected_fixed": 16,
+    "NET_configured": -23.0,
+    "NET_global_fixed": -23.0,
+    "NET_source_fixed": -23.0,
+    "NET_target_oracle_constant": 9.0,
+    "oracle_per_query_upper": 0.14286,
+    "n_queries": 315,
+    "R_correct": false
+   }
+  ],
+  "TOTALS": {
+   "NET_configured": 240.0,
+   "NET_global_fixed": 672.0,
+   "NET_source_fixed": 260.0,
+   "NET_target_oracle_constant": 792.0
+  },
+  "R_exact_match_rate": 0.1667,
+  "configured_beats_source_fixed": false,
+  "configured_beats_global_fixed": false,
+  "frac_of_constant_oracle_recovered": 0.303
+ }
+}

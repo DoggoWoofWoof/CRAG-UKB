@@ -1,0 +1,16 @@
+{
+ "schema": "MEDIATOR_RESOLUTION_STAGE2/v1",
+ "generated_utc": "2026-09-07T08:19:46Z",
+ "APPEND_ONLY": "this audit does not modify canonical/. The frozen node and edge universe stays at 301,977,131 nodes and 2,062,430,072 edges regardless of the result.",
+ "QUESTION": "do any of the 562 unresolved mediator type MIDs appear as a VALUE in type.object.type? If so, those subjects are mediators we did not classify and CVT_MEDIATOR = 52,272,634 is an under-count.",
+ "METHOD": "direct scan of the type column for the raw MIDs, over all 254,946,431 type rows. Stage 1B tested the contrapositive (paths -> instances) and left 6,698 unmapped instantiated paths as an open hiding place; this tests the question directly and does not depend on the MID->path map that was the source of the ambiguity.",
+ "type_rows_scanned": 254946431,
+ "unresolved_mediator_mids": 562,
+ "rows_typed_by_an_unresolved_mid": 0,
+ "distinct_unresolved_mids_instantiated": 0,
+ "VERDICT": "NO_INSTANCES_BY_MID. Zero of 254,946,431 type rows are typed by any of the 562 unresolved mediator MIDs, so no node declares its type using one of them.",
+ "instances": {},
+ "elapsed_s": 20.7,
+ "WHAT_THIS_DOES_NOT_CLOSE": "type.object.type stores a PATH, not a MID, so this rules out instantiation by raw MID only. A node could still instantiate the PATH of one of the 562 without us knowing that path belongs to a mediator. Stage 1B recovered paths for 239 of the 562 from keys and found zero instances for all of them; the remaining 323 have no key in the frozen metadata, so their paths are unknown and could in principle be among the 6,698 unmapped instantiated paths from stage 1C. Stage 3 goes to the deleted-triples dump for keys on those 323.",
+ "RESIDUAL_RISK_BOUNDED_BY": 323
+}

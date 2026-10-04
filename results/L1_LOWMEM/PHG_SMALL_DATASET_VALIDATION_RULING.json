@@ -1,0 +1,320 @@
+{
+ "RECORD": "PHG_SMALL_DATASET_VALIDATION_RULING",
+ "utc": "2026-09-13T18:57:16Z",
+ "ruled_by": "user, chat message of 2026-09-14 after the STOP_FOR_REVIEW of PHG_REPORT.json version 2",
+ "ruling_text_verbatim": "Yes \u2014 I would now rule that the small-dataset PHG validation passes.\nThe evidence is stronger than \"partitions are similar\":\n\n* SQuAD: different PHG partition, but canonical L1 SAFE changes only `0.9930 \u2192 0.9900`, with no significant paired loss.\n* MetaQA: after a deterministic, H4-only repair, SAFE changes `0.6401 \u2192 0.6712`, a significant gain.\n* PHG's generic KM1 is worse than Mt-KaHyPar, but only by about 10\u201316%, versus FREIGHT's much larger gaps.\n* Memory and runtime are dramatically lower.\n* The H4_SK structure is proven exact.\n* The MetaQA repair changed zero structural objective because the two moved nodes had no H4_SK incidence.\n\nSo this is exactly the conclusion we wanted to be able to make:\nMt-KaHyPar's exact partition is not required for L1. A substantially different globally valid partition can preserve\u2014or in one observed case improve\u2014the downstream retrieval behavior.\nI would freeze the following ruling:\n\n```text\nPHG_SMALL_DATASET_VALIDATION = PASS\n\nstatus:\n    LEADING_LOW_MEMORY_PARTITIONER_CANDIDATE\n\nevidence:\n    squad:\n        L1 = NO_SIGNIFICANT_PAIRED_LOSS\n    metaqa:\n        L1 = SIGNIFICANT_PAIRED_GAIN_OBSERVED\n\nimportant:\n    MetaQA gain is an observation,\n    NOT a general PHG-superiority claim.\n\ncanonical decision criterion:\n    downstream L1 retrieval\n    > exact partition reproduction\n    > generic KM1 alone\n```\n\nThe repair is acceptable\nI would also accept `PHG_NONEMPTY_REPAIR_V1` as part of the experimental PHG contract.\nIt has all the properties we need:\n\n```text\ndeterministic                  \u2713\ndataset-independent rule       \u2713\nuses H4_SK only                \u2713\ndoesn't inspect queries        \u2713\ndoesn't inspect answers        \u2713\ndoesn't inspect L1 metrics     \u2713\nminimal number of moves        \u2713\npreserves size upper bound     \u2713\n```\n\nAnd in this particular MetaQA case it is almost the ideal proof case:\n\n```text\nempty blocks = 2\nmoves        = 2\n\n\u0394KM1 move 1 = 0\n\u0394KM1 move 2 = 0\n\nSTRUCT cut unchanged\nKNN cut unchanged\n```\n\nThe fact that the resulting two blocks are singletons does not bother me. Our contract requires non-empty parts; it never established a minimum occupancy. Inventing a minimum-size rule now would be the post-hoc change.\nDo not chase the MetaQA gain yet\nThe `+3.1` SAFE points are very interesting, especially the hop-3 `+7.1` points, but I agree with how Claude recorded it.\nDo not now tune PHG to reproduce or maximize that phenomenon.\nThere is a plausible hypothesis:\n\n```text\nPHG block geometry\n    \u2193\nslightly broader/more uniform P50 scope\n    \u2193\nbetter structural reach\n    \u2193\nbetter multi-hop recall\n```\n\nbut that's a new research question, not something established by this experiment.\nIt may actually become relevant later for L1 research, but first we need to establish PHG as the scale-enabling partitioner.\nI would now move to scale\nThe order I recommend is:\n\n```text\nMuSiQue\n   \u2193\nWebQSP\n   \u2193\nHotpotQA\n   \u2193\n2Wiki\n```\n\nBut the interpretation changes depending on dataset.\nMuSiQue = bridge experiment\nRun PHG on MuSiQue next because:\n\n```text\n117,534 nodes\nMt-KaHyPar local = RESOURCE_INFEASIBLE_LOCAL\n```\n\nThis is the first dataset where PHG can demonstrate that it actually removes a blocker.\nWe don't have a valid Mt-KaHyPar paired partition reference there, so don't claim PHG equivalence.\nClassify this run as:\n\n```text\nPHG_SCALE_BRIDGE\n```\n\nand ask:\n\n```text\nDoes exact H4_SK\n\u2192 PHG\n\u2192 NONEMPTY_REPAIR_V1 if needed\n\u2192 P50\n\u2192 canonical L1\n\ncomplete locally with sane partition/L1 behavior?\n```\n\nRecord absolute L1 numbers, but no comparative quality claim against Mt-KaHyPar.\nIf MuSiQue completes comfortably, that's meaningful.\nThen WebQSP is the real scale breakthrough\nWebQSP is the next sensible target:\n\n```text\n~2.59M nodes\n~29.6M canonical SK pins\n```\n\nIt is much larger than MuSiQue but substantially smaller than Hotpot/2Wiki.\nUse exactly the frozen contract:\n\n```text\nH4_SK\nPHG\nNP = frozen rank count unless technically impossible\nCONNECTIVITY\n1.03\nEDGE_SIZE_THRESHOLD=1.0\ndeterministic mode\nNONEMPTY_REPAIR_V1\nP50\ncanonical L1\n```\n\nNo parameter tuning between datasets.\nIf 4 ranks no longer fit, don't silently change NP. Record the resource failure and create a separate explicit rank-count scale ruling, because MPI rank count is part of PHG's algorithmic contract and may change the partition.\nWhat should be the real success criterion now?\nFor datasets with a proper Mt-KaHyPar reference:\n\n```text\nPRIMARY:\ncanonical SAFE recall\npaired on exactly identical query IDs\n```\n\nFor datasets without one:\n\n```text\nPRIMARY:\nvalid exact H4_SK partition\n+ successful canonical L1 execution\n+ sane absolute retrieval behavior\n\nNO claim of equivalence\n```\n\nAlways retain:\n\n```text\nKM1\nSTRUCT cut\nKNN cut\nblock distribution\nP50 scope\ncandidate coverage\nhop-wise results\nmemory\nruntime\n```\n\nas diagnostics.\nOne more thing I would freeze now\nThe SQuAD result taught us an important methodological lesson:\n\n```text\nbetter KM1 \u2260 necessarily better L1\n```\n\nAnd MetaQA made that even clearer.\nSo I would explicitly add to the L1 methodology:\nPartition-objective quality is a diagnostic proxy. Downstream canonical L1 retrieval on a fixed evaluation population is the primary criterion for partitioner substitution.\nThat protects us later from rejecting a good scale partitioner solely because its KM1 is 8\u201315% worse than Mt-KaHyPar.\nI'd tell Claude to freeze the current PHG validation and move to MuSiQue only next, with no additional PHG tuning. If MuSiQue works, then we authorize WebQSP separately.",
+ "PHG_SMALL_DATASET_VALIDATION": "PASS",
+ "status": "LEADING_LOW_MEMORY_PARTITIONER_CANDIDATE",
+ "evidence": {
+  "squad": {
+   "L1": "NO_SIGNIFICANT_PAIRED_LOSS",
+   "SAFE_paired": {
+    "A_only_covered": 12,
+    "B_only_covered": 6,
+    "net_B_minus_A": -6,
+    "mcnemar_p": 0.23788,
+    "sig": false,
+    "A": 0.993,
+    "B": 0.99,
+    "delta_B_minus_A": -0.003,
+    "relative_change": -0.003
+   },
+   "BASE_paired": {
+    "A_only_covered": 19,
+    "B_only_covered": 11,
+    "net_B_minus_A": -8,
+    "mcnemar_p": 0.20049,
+    "sig": false,
+    "A": 0.9885,
+    "B": 0.9845,
+    "delta_B_minus_A": -0.004,
+    "relative_change": -0.004
+   },
+   "km1_ratio_vs_mtkahypar": 1.1552,
+   "DECISION_record": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS"
+  },
+  "metaqa": {
+   "L1": "SIGNIFICANT_PAIRED_GAIN_OBSERVED",
+   "SAFE_paired": {
+    "A_only_covered": 50,
+    "B_only_covered": 112,
+    "net_B_minus_A": 62,
+    "mcnemar_p": 0.0,
+    "sig": true,
+    "A": 0.6401,
+    "B": 0.6712,
+    "delta_B_minus_A": 0.031,
+    "relative_change": 0.0485
+   },
+   "BASE_paired": {
+    "A_only_covered": 47,
+    "B_only_covered": 113,
+    "net_B_minus_A": 66,
+    "mcnemar_p": 0.0,
+    "sig": true,
+    "A": 0.6376,
+    "B": 0.6707,
+    "delta_B_minus_A": 0.033,
+    "relative_change": 0.0518
+   },
+   "km1_ratio_vs_mtkahypar": {
+    "before": 1.1062,
+    "after": 1.1062
+   },
+   "DECISION_record": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS",
+   "repair": {
+    "empty_blocks": [
+     215,
+     430
+    ],
+    "moves": [
+     {
+      "empty_block": 215,
+      "node_position": 69,
+      "donor_block": 104,
+      "delta_km1_weighted": 0,
+      "incident_nets": 11
+     },
+     {
+      "empty_block": 430,
+      "node_position": 223,
+      "donor_block": 50,
+      "delta_km1_weighted": 0,
+      "incident_nets": 7
+     }
+    ],
+    "km1_before_after": [
+     45623771,
+     45623771
+    ],
+    "struct_cut_delta": 0.0,
+    "knn_cut_delta": 0.0
+   }
+  },
+  "structure": "H4_SK proven exact on both datasets (structure gate: digest from the Zoltan query functions == ORIGINAL; weight reception exact)",
+  "resources": {
+   "squad": {
+    "peak_rss_mb_max_rank": 53.1,
+    "partition_wall_seconds": 4.239,
+    "mtkahypar_peak_rss_mb": 539.5,
+    "mtkahypar_wall_seconds": 81.0
+   },
+   "metaqa": {
+    "peak_rss_mb_max_rank": 35.4,
+    "partition_wall_seconds": 2.615,
+    "mtkahypar_peak_rss_mb": 966.4,
+    "mtkahypar_wall_seconds": 185.7
+   }
+  },
+  "records": {
+   "PHG_PREREG.json": {
+    "path": "results/L1_LOWMEM/PHG_PREREG.json",
+    "bytes": 12650,
+    "sha256": "a290ad99b3ef3394859e4653acc66d4120abd8924e7aec25568b8dd269291404"
+   },
+   "PHG_BUILD.json": {
+    "path": "results/L1_LOWMEM/PHG_BUILD.json",
+    "bytes": 1650,
+    "sha256": "65fa41e7141e7344f5360c35da1c30df83a6a6ac18a353db93935539fa899a1b"
+   },
+   "PHG_PACKAGES.json": {
+    "path": "results/L1_LOWMEM/PHG_PACKAGES.json",
+    "bytes": 9677,
+    "sha256": "1c4a3d8107d8207066d20a1aadce15849ed23b5b8ebc63bd0276c52a9af17b23"
+   },
+   "PHG_RUNS_squad.json": {
+    "path": "results/L1_LOWMEM/PHG_RUNS_squad.json",
+    "bytes": 78420,
+    "sha256": "f70362d853fe1185377c0790dd630fb5c9e5e06327cee0a5f9f415364f02f400"
+   },
+   "PHG_RUNS_metaqa.json": {
+    "path": "results/L1_LOWMEM/PHG_RUNS_metaqa.json",
+    "bytes": 70048,
+    "sha256": "f917dfe3486bfffe3730d73833c1ada89c9f27cedf3f7d592cf72bc97f549787"
+   },
+   "PHG_REPAIR_PREREG.json": {
+    "path": "results/L1_LOWMEM/PHG_REPAIR_PREREG.json",
+    "bytes": 13859,
+    "sha256": "d219fc90772e1e8604318b434c7cf773abdfea67a30970ff5a082214732189da"
+   },
+   "PHG_REPAIR_RUNS_squad.json": {
+    "path": "results/L1_LOWMEM/PHG_REPAIR_RUNS_squad.json",
+    "bytes": 4704,
+    "sha256": "9ba46a53f53a43f2896be75453540ed842f0fff7f30d7c6bcbee872a2699ca32"
+   },
+   "PHG_REPAIR_RUNS_metaqa.json": {
+    "path": "results/L1_LOWMEM/PHG_REPAIR_RUNS_metaqa.json",
+    "bytes": 17577,
+    "sha256": "d0ab4af82b9a210651d824dc25eacd3de079f088357d1cb85aa62de0ccd86e55"
+   },
+   "PHG_REPORT.json": {
+    "path": "results/L1_LOWMEM/PHG_REPORT.json",
+    "bytes": 45200,
+    "sha256": "77b2a7781d9a183309df9bc20e3c108109159c0656a3963a73c63cc4b5ca0be3"
+   },
+   "PHG_REPORT.md": {
+    "path": "results/L1_LOWMEM/PHG_REPORT.md",
+    "bytes": 10271,
+    "sha256": "ace53d4f14c5a0c8e7f87a33e356c62e0e4c56e2593abae2c79a33b3f037fb31"
+   },
+   "L1_DOWNSTREAM_squad__phg.json": {
+    "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad__phg.json",
+    "bytes": 3513,
+    "sha256": "f2a2704b746400557658cbe597d682f4856d298e6c2f1b426c56e7326f7507d8"
+   },
+   "L1_DOWNSTREAM_metaqa__phg_repair1.json": {
+    "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa__phg_repair1.json",
+    "bytes": 5645,
+    "sha256": "e99da711d075d22e3a430cbdc35f985eb648c7575d2e7361a812f8321760a49f"
+   },
+   "L1_REPLAY_squad__LOWMEM__PHG_con.json": {
+    "path": "results/L1_LOWMEM/L1_REPLAY_squad__LOWMEM__PHG_con.json",
+    "bytes": 34987,
+    "sha256": "dc14ab54ea656f2f4f495c59365b84836b70cd3c27a22c646a210e4d9d5d8846"
+   },
+   "L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json": {
+    "path": "results/L1_LOWMEM/L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json",
+    "bytes": 33356,
+    "sha256": "d4ff6870236303c4b88fbcdd4c421d33719eb19dba2829d87a53cc09f5032c17"
+   },
+   "MUSIQUE_MTKAHYPAR_RETRY.json": {
+    "path": "results/L1_LOWMEM/MUSIQUE_MTKAHYPAR_RETRY.json",
+    "bytes": 2515,
+    "sha256": "1ef89da11257675f86fde39bf8e75a3ddb3f6b909e79373b1a640701e011b7d6"
+   },
+   "L1_DOWNSTREAM_musique.json": {
+    "path": "results/L1_LOWMEM/L1_DOWNSTREAM_musique.json",
+    "bytes": 1599,
+    "sha256": "4888f4aae9e713a4842721a9a9ca46c19fa68de7b40e5124515a1676827ed3f3"
+   },
+   "FREIGHT_RUNS_musique.json": {
+    "path": "results/L1_LOWMEM/FREIGHT_RUNS_musique.json",
+    "bytes": 50727,
+    "sha256": "f23b6c85302ab7e19dfe8fc14d67b85b9e58dd4087e86c29707365d1d70230b6"
+   }
+  },
+  "superseded_originals_in_history": {
+   "PHG_RUNS_squad.json": {
+    "path": "results/L1_LOWMEM/_history/PHG_RUNS_squad.30559e1c.json",
+    "sha256": "30559e1c02891f8a9aee0dba6e10fc1ae3d52e5a6a53f9bdd75152e00821749b",
+    "bytes": 77314
+   },
+   "PHG_REPAIR_PREREG.json": {
+    "original": {
+     "path": "results/L1_LOWMEM/_history/PHG_REPAIR_PREREG.618b1940.json",
+     "sha256": "618b19403c67ab7cf4efe4c530c32d887a6417a996ebd4c51d38b75cf215672b",
+     "bytes": 13300
+    },
+    "reason": "program bug fix before any repair ran: hgr.structure_digest returns (digest, stats), the input-verification step compared the tuple to ORIGINAL and raised; algorithm, inputs, gates and expectations unchanged",
+    "algorithm_unchanged": true,
+    "results_before_supersession": "none (no PHG_REPAIR_RUNS record existed)"
+   },
+   "PHG_REPORT": {
+    "PHG_REPORT.json": {
+     "path": "results/L1_LOWMEM/_history/PHG_REPORT.50ad72f3.json",
+     "sha256": "50ad72f399c0af5038f0a79cd1584612f159cce68d94b5738ebeb27b05650925",
+     "bytes": 43770
+    },
+    "PHG_REPORT.md": {
+     "path": "results/L1_LOWMEM/_history/PHG_REPORT.104a01c2.md",
+     "sha256": "104a01c25f14ad9b3ddc05074771823b3415f64a90b5edbff2e272ecb94e1fd7",
+     "bytes": 9428
+    }
+   }
+  }
+ },
+ "important": "the MetaQA gain is an observation, NOT a general PHG-superiority claim; PHG is not tuned to reproduce or maximize it; the hypothesis (PHG block geometry -> slightly broader / more uniform P50 scope -> better structural reach -> better multi-hop recall) is a NEW research question, not established by this experiment, and is deferred until PHG is established as the scale-enabling partitioner",
+ "canonical_decision_criterion": [
+  "downstream L1 retrieval",
+  "> exact partition reproduction",
+  "> generic KM1 alone"
+ ],
+ "methodology_addition_frozen": {
+  "lesson": "better KM1 != necessarily better L1 (SQuAD; MetaQA made it clearer)",
+  "rule": "Partition-objective quality is a diagnostic proxy. Downstream canonical L1 retrieval on a fixed evaluation population is the primary criterion for partitioner substitution.",
+  "protects_against": "rejecting a good scale partitioner solely because its KM1 is 8-15 % worse than Mt-KaHyPar"
+ },
+ "repair_accepted": {
+  "adapter": "PHG_NONEMPTY_REPAIR_V1",
+  "part_of": "the experimental PHG contract",
+  "properties": [
+   "deterministic",
+   "dataset-independent rule",
+   "uses H4_SK only",
+   "does not inspect queries",
+   "does not inspect answers",
+   "does not inspect L1 metrics",
+   "minimal number of moves (one per empty block)",
+   "preserves the size upper bound"
+  ],
+  "no_minimum_occupancy_rule": "the contract requires non-empty parts and never established a minimum occupancy; the two MetaQA singleton blocks are allowed; inventing a minimum-size rule now would be the post-hoc change",
+  "algorithm_record": {
+   "path": "results/L1_LOWMEM/PHG_REPAIR_PREREG.json",
+   "bytes": 13859,
+   "sha256": "d219fc90772e1e8604318b434c7cf773abdfea67a30970ff5a082214732189da"
+  }
+ },
+ "experimental_PHG_contract": {
+  "name": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4 + PHG_NONEMPTY_REPAIR_V1",
+  "input": "exact canonical H4_SK (H4_SPLIT_PRESERVE, STRUCT + KNN, unit vertex weights, H4 net weights), frozen H4_SK_STREAM_V1 shards as the representation",
+  "partitioner": "Zoltan-PHG as pinned in PHG_PREREG.json / PHG_BUILD.json (driver binary a36e1b3dbcef2cf5)",
+  "parameters": "PHG_PREREG.json phg_parameters_in_order, unchanged; no parameter tuning between datasets",
+  "fixed_elements": [
+   "CONNECTIVITY objective",
+   "IMBALANCE_TOL 1.03",
+   "PHG_EDGE_SIZE_THRESHOLD 1.0",
+   "DETERMINISTIC 1 / PHG_RANDOMIZE_INPUT 0",
+   "NUM_GLOBAL_PARTS = k = max(1, N // 100)",
+   "validity = canonical bound ceil(1.03 N/k), no empty block"
+  ],
+  "mpi_ranks": 4,
+  "rank_count_rule": "NP = the frozen rank count unless technically impossible; if 4 ranks no longer fit, NP is NOT silently changed: the resource failure is recorded and a separate explicit rank-count scale ruling is required (the rank count is part of PHG's algorithmic contract and may change the partition)",
+  "post_partition": "PHG_NONEMPTY_REPAIR_V1 (no-op when no block is empty)",
+  "downstream": "P50 -> unchanged canonical L1 (replay cache -> l1_eval numerics)"
+ },
+ "success_criteria": {
+  "with_mtkahypar_reference": {
+   "PRIMARY": "canonical SAFE recall paired on exactly identical query ids (exact two-sided McNemar; SIG_LOSS iff delta < 0 and p < 0.05, else NO_SIGNIFICANT_PAIRED_LOSS; no non-inferiority margin)"
+  },
+  "without_mtkahypar_reference": {
+   "PRIMARY": [
+    "valid exact H4_SK partition",
+    "successful canonical L1 execution",
+    "sane absolute retrieval behaviour"
+   ],
+   "claim": "NO claim of equivalence; absolute L1 numbers recorded, no comparative quality claim against Mt-KaHyPar"
+  },
+  "always_retained_diagnostics": [
+   "KM1",
+   "STRUCT cut",
+   "KNN cut",
+   "block distribution",
+   "P50 scope",
+   "candidate coverage",
+   "hop-wise results",
+   "memory",
+   "runtime"
+  ]
+ },
+ "next": {
+  "authorized_now": {
+   "dataset": "musique",
+   "classification": "PHG_SCALE_BRIDGE",
+   "why": "117,534 nodes; Mt-KaHyPar local = RESOURCE_INFEASIBLE_LOCAL (MUSIQUE_MTKAHYPAR_RETRY.json) -- the first dataset where PHG can demonstrate that it removes a blocker; no valid Mt-KaHyPar paired reference exists there, so no equivalence claim",
+   "question": "does exact H4_SK -> PHG -> NONEMPTY_REPAIR_V1 if needed -> P50 -> canonical L1 complete locally with sane partition / L1 behaviour?"
+  },
+  "requires_separate_authorization": [
+   "webqsp (~2.59M nodes, ~29.6M canonical SK pins): authorized separately only if MuSiQue works",
+   "hotpotqa",
+   "2wiki"
+  ],
+  "order": [
+   "musique",
+   "webqsp",
+   "hotpotqa",
+   "2wiki"
+  ],
+  "no_additional_phg_tuning": true
+ },
+ "not_done_by_this_ruling": "no promotion into the canonical partition contract; PHG is a CANDIDATE; Mt-KaHyPar remains the canonical partitioner of record; nothing frozen is edited (records are superseded, never edited)"
+}

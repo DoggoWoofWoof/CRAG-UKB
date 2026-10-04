@@ -1,0 +1,91 @@
+{
+ "record": "HOST_YIELD_POLICY",
+ "version": 1,
+ "declared": "2026-09-29T20:19:22+05:30",
+ "scope": "every crag job on the shared rx host (lanes L1_HOST and L3_HOST); it amends how their jobs run, not what they compute; the lane records are not edited",
+ "user_direction": [
+  "make sure we have complete utilization of cpu and gpu at all times either irrespective of project but mpr has the priority wherever possible",
+  "you have the second highest priority for cpu and gpu you should never wait unless mpr and finish everything as fast as possible",
+  "bro preempt it, if the job is in a queue it should yield, you have the priority over jigsaw",
+  "if your launcher detects any job from mpr in the queue you should prempt it because mpr has the highest priority thats how the queue should be"
+ ],
+ "order": "mpr > crag > jigsaw",
+ "enforced_by": {
+  "admission": "rx's own scheduler: host.json priority map {mpr: 10} (every other project 0); not changed by crag",
+  "jigsaw's running jobs": "Jigsaw's launcher scripts/canonical/launch/lowprio.py, run with '--yield-to mpr,crag': a queued mpr or crag job that jigsaw's release would admit makes jigsaw's job yield",
+  "crag's running jobs": "this record: the module below"
+ },
+ "module": {
+  "path": "scratchpad/_host_yield.py",
+  "sha256": "b96c2bb8eaea5fd5a5bf5f54e9812d5eb2012c3d1f546544028855bec795fa81",
+  "bytes": 29687
+ },
+ "rule": "a crag job yields when a live queued job of a project above crag (mpr, and any project rx's priority map ranks above crag) is refused by rx now and would be admitted once (a) every active job of the projects below crag (jigsaw) and (b) the fewest crag jobs, youngest first, gave back what they hold, and this job is one of those; when (a) alone is enough crag keeps running and jigsaw makes room, until the queued job has waited below_wait_s, from then on (a) is not counted; a queued job nothing crag holds would get admitted (it waits for its own project's jobs, or can never run on this host) stops nothing",
+ "why_not_every_queued_mpr_job": "stopping a crag job that the queued mpr job does not need gives mpr nothing and leaves the resources idle, against 'complete utilization'; every case in which a crag job stands between an mpr job and the host is covered",
+ "defaults": {
+  "above": [
+   "mpr"
+  ],
+  "below": [
+   "jigsaw"
+  ],
+  "below_wait_s": 120.0,
+  "confirm_s": 10.0,
+  "poll_s": 5.0,
+  "settle_s": 20.0,
+  "max_requeues": 50,
+  "exit_on_yield": 75,
+  "waiter_request": {
+   "cpus": 1e-11,
+   "mem_gb": 1e-11,
+   "gpus": 0.0
+  }
+ },
+ "mechanics": [
+  "run: the command runs as a child; rx's state (host.json, the live queue/ and active/ entries) is read every poll_s; a contention that persists confirm_s stops the child's whole process tree and exits 75; one met before the child starts yields at once",
+  "requeue: the yielding job launches a waiter (1e-11 CPU and GB, no GPU: below rx's fit tolerance 1e-9, so it keeps no one out) through the host's rx agent (op launch, the rpc rx.py itself uses); the waiter relaunches the same spec under a new id once rx would admit it and it would not have to yield at once, for settle_s in a row",
+  "code identity: every hop checks the sha256 of this module and of every .py file its command names against the first hop; a difference stops the chain (exit 3)",
+  "guard: a 1e-11-sized crag job watches the crag jobs that run without the wrapper (launched before it) by the same rule and cancels one that must yield (op cancel on the agent); it relaunches nothing, because such a job may run processes inside WSL (PHG's mpirun) that a cancel does not reach; it exits once no unwrapped crag job is active",
+  "log: results/HOST_YIELD/<campaign>.jsonl in the workspace (fetched with --glob) and the job's output"
+ ],
+ "never": [
+  "another project's job is never cancelled, rerun, gc'd or signalled; rx's priority map is not changed",
+  "rx's state files are only read; a launch or a cancel (crag's own jobs only) goes through the agent's rpc",
+  "a stopped job's partial work is discarded: the stage modules write their records only at the end"
+ ],
+ "applies_to": {
+  "new_jobs": "every crag rx job from this record on runs as: python -u scratchpad/_host_yield.py run -- <command>",
+  "running_unwrapped": [
+   {
+    "job": "260929-160348-2wiki-k59898-982d",
+    "lane": "L1_HOST",
+    "command": "python -u scratchpad/_l1h_host.py CELL 2wiki 59898",
+    "phase_at_declaration": "PHG_NONEMPTY_REPAIR_V1 moves (pure Python, no WSL process)",
+    "watched_by": "rx run -n crag-guard --env mpr-cpu --cpus 1e-11 --mem 1e-11 -- python -u scratchpad/_host_yield.py guard",
+    "if_cancelled": "recorded in the guard's log; a relaunch is a separate, recorded decision"
+   }
+  ]
+ },
+ "tests": {
+  "rule": {
+   "script": {
+    "path": "scratchpad/_host_yield_test_rule.py",
+    "sha256": "ee6e1776186807049b93147e64653a010dd845baae5f5e0cb258095317394ab5",
+    "bytes": 7932
+   },
+   "checks": 34,
+   "failed": 0,
+   "covers": "no queue; mpr GPU job vs a crag GPU holder; mpr job that fits now; jigsaw-alone room (before and after below_wait_s); crag-alone room; two crag jobs needed; youngest-first with pruning; impossible job; mpr blocked by mpr; queued jigsaw never makes crag yield; launch_blocker; mid-admission de-duplication; the mirror's decide equals rx_agent.decide on 5 cases; the command line (probe, rc pass-through)"
+  },
+  "end_to_end": {
+   "script": {
+    "path": "scratchpad/_host_yield_test_e2e.py",
+    "sha256": "97657f75e2729197a8087a47052869bc755f6b385205cc05381278be738dfbde",
+    "bytes": 9668
+   },
+   "checks": 15,
+   "failed": 0,
+   "covers": "a fake rx home and agent: a GPU job yields to a queued mpr GPU job in 6.6 s (confirm 2 s), its grandchild is stopped, a waiter is launched with the unchanged spec; the waiter holds while the mpr job is queued and while it runs, then relaunches; a changed code file stops the chain (exit 3); the guard cancels only the unwrapped job, once, and exits"
+  }
+ }
+}

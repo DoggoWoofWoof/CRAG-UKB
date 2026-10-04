@@ -1,0 +1,94 @@
+{
+  "dataset": "2wiki",
+  "runs": {
+    "FINAL": {
+      "dir": "data/final_canonical/2wiki",
+      "eval_subset": "legacy",
+      "canonical_node_count": 5989847,
+      "CORPUS_HASH": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+      "NODE_ORDER_HASH": "57dd809af573b6b531256b2a65e4b4efd1e26794c4fea81e0b43311fdcb24c86",
+      "nodes_jsonl_sha256": "73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a",
+      "eval_file": "data/final_canonical/_stage_2wiki_rev2/eval_2000.jsonl",
+      "eval_n": 2000,
+      "builder_sha256": "e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6",
+      "command": "python scratchpad/final_canonical_build/build_kb.py 2wiki --eval-subset legacy --out data/final_canonical/_stage_2wiki_rev2"
+    },
+    "A": {
+      "dir": "data/final_canonical/_work/qi/2wiki/A",
+      "eval_subset": "legacy",
+      "canonical_node_count": 5989847,
+      "CORPUS_HASH": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+      "NODE_ORDER_HASH": "57dd809af573b6b531256b2a65e4b4efd1e26794c4fea81e0b43311fdcb24c86",
+      "nodes_jsonl_sha256": "73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a",
+      "eval_file": "data/final_canonical/_work/qi/2wiki/A/eval_2000.jsonl",
+      "eval_n": 2000,
+      "builder_sha256": "e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6",
+      "command": "python scratchpad/final_canonical_build/build_kb.py 2wiki --eval-subset legacy --out data/final_canonical/_work/qi/2wiki/A"
+    },
+    "B": {
+      "dir": "data/final_canonical/_work/qi/2wiki/B",
+      "eval_subset": "random_held:7",
+      "canonical_node_count": 5989847,
+      "CORPUS_HASH": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+      "NODE_ORDER_HASH": "57dd809af573b6b531256b2a65e4b4efd1e26794c4fea81e0b43311fdcb24c86",
+      "nodes_jsonl_sha256": "73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a",
+      "eval_file": "data/final_canonical/_work/qi/2wiki/B/eval_2000_random_dev_s7.jsonl",
+      "eval_n": 2000,
+      "builder_sha256": "e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6",
+      "command": "python scratchpad/final_canonical_build/build_kb.py 2wiki --eval-subset random_held:7 --out data/final_canonical/_work/qi/2wiki/B"
+    },
+    "none": {
+      "dir": "data/final_canonical/_work/qi/2wiki/none",
+      "eval_subset": "none",
+      "canonical_node_count": 5989847,
+      "CORPUS_HASH": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+      "NODE_ORDER_HASH": "57dd809af573b6b531256b2a65e4b4efd1e26794c4fea81e0b43311fdcb24c86",
+      "nodes_jsonl_sha256": "73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a",
+      "eval_file": null,
+      "eval_n": null,
+      "builder_sha256": "e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6",
+      "command": "python scratchpad/final_canonical_build/build_kb.py 2wiki --eval-subset none --out data/final_canonical/_work/qi/2wiki/none"
+    }
+  },
+  "builder": "scratchpad/final_canonical_build/build_kb.py",
+  "runs_executed": [
+    "A",
+    "B",
+    "none"
+  ],
+  "node_id_set_equality_vs_FINAL": {
+    "A": {
+      "same_count": true,
+      "same_id_set": true,
+      "only_in_final": 0,
+      "only_in_run": 0
+    },
+    "B": {
+      "same_count": true,
+      "same_id_set": true,
+      "only_in_final": 0,
+      "only_in_run": 0
+    },
+    "none": {
+      "same_count": true,
+      "same_id_set": true,
+      "only_in_final": 0,
+      "only_in_run": 0
+    }
+  },
+  "eval_subsets_A_vs_B": {
+    "n_A": 2000,
+    "n_B": 2000,
+    "overlap": 0,
+    "differ": true,
+    "B_executed": true
+  },
+  "CORPUS_QUERY_INDEPENDENT": true,
+  "DETERMINISTIC_REBUILD": true,
+  "commands": {
+    "A": "C:\\Users\\Swastik\\AppData\\Local\\Programs\\Python\\Python313\\python.exe scratchpad/final_canonical_build/build_kb.py 2wiki --eval-subset legacy --out data/final_canonical/_work/qi/2wiki/A",
+    "B": "C:\\Users\\Swastik\\AppData\\Local\\Programs\\Python\\Python313\\python.exe scratchpad/final_canonical_build/build_kb.py 2wiki --eval-subset random_held:7 --out data/final_canonical/_work/qi/2wiki/B",
+    "none": "C:\\Users\\Swastik\\AppData\\Local\\Programs\\Python\\Python313\\python.exe scratchpad/final_canonical_build/build_kb.py 2wiki --eval-subset none --out data/final_canonical/_work/qi/2wiki/none"
+  },
+  "seconds": 5083.2
+}

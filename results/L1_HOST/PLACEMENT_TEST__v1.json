@@ -1,0 +1,1475 @@
+{
+ "RECORD": "L1_HOST_PLACEMENT_TEST",
+ "version": 1,
+ "utc": "2026-09-29T10:15:38Z",
+ "VERDICT": "BIT_IDENTICAL",
+ "rule": {
+  "HG": "host content digest (hypergraph.arrays_digest) == the laptop's for every (dataset, K) the laptop has: the frozen data/l1_canonical/<ds>/hypergraph/H4_SK.json at the native K and the scratchpad/_l1d_scale_parts.py builds at the grid K",
+  "SHARDS": "host PHG shard sha256 list at the native K == the shards of the served run (metaqa, squad: data/l1_lowmem/<ds>/stream/H4_SK_STREAM_V1.json; musique: the served LOWMEM__PHG_C1_con record)",
+  "PHG": "host vector at the native K == the served vector position by position (metaqa LOWMEM__PHG_REPAIR1_con, squad LOWMEM__PHG_con, musique LOWMEM__PHG_C1_con); host grid-K vectors, where run, == the laptop grid maps of results/L1_DEV/kscale_<ds>__v1.json",
+  "verdict_rule": "BIT_IDENTICAL if every comparison is equal. Otherwise NOT_IDENTICAL: host maps carry the placement label HOST_U2404, are never pooled with laptop maps without that label, and the user rules whether they are admissible. No retries to obtain a match, no parameter change, no toolchain swap without a ruling.",
+  "where": "compared on the laptop from fetched host records and vectors; no host result is used before this comparison"
+ },
+ "declaration": {
+  "path": "results/L1_HOST/HOST_LANE_DECLARATION.json",
+  "sha256": "addb4426c91179031719a24ad55be73bf8e6ec7bdf2e0b32a6fa77babc1ddde3"
+ },
+ "host_build": {
+  "path": "results/L1_HOST/PHG_BUILD_HOST.json",
+  "sha256": "698d2d4af07116bcbdcff8341e9c41b1829d55b7509da33becce84d32ee70494",
+  "binary_sha256": "0d996c710d0521735dc6f44e95fb55db25970b85495e67f082acc58c06b55531",
+  "binary_equals_laptop": false,
+  "wrapper_equals_laptop": true,
+  "toolchain_and_libs": [
+   "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+   "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+   "mpirun (Open MPI) 4.1.6",
+   "\tlibtrilinos_zoltan.so.13.2 => /lib/x86_64-linux-gnu/libtrilinos_zoltan.so.13.2 (0x0000743909604000)",
+   "\tlibmpi.so.40 => /lib/x86_64-linux-gnu/libmpi.so.40 (0x00007439094d2000)",
+   "gcc\t4:13.2.0-7ubuntu1",
+   "libopenmpi-dev:amd64\t4.1.6-7ubuntu2",
+   "libtrilinos-zoltan-13.2:amd64\t13.2.0-5build2",
+   "libtrilinos-zoltan-dev:amd64\t13.2.0-5build2",
+   "openmpi-bin\t4.1.6-7ubuntu2",
+   "time\t1.9-0.2build1",
+   "-rwxr-xr-x 1 root root 27160 Apr  8  2024 /usr/bin/time",
+   "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"",
+   "NAME=\"Ubuntu\"",
+   "VERSION_ID=\"24.04\"",
+   "VERSION=\"24.04.5 LTS (Noble Numbat)\"",
+   "Linux 6.18.33.2-microsoft-standard-WSL2 x86_64",
+   "32",
+   "               total        used        free      shared  buff/cache   available",
+   "Mem:              94           1          92           0           1          92"
+  ],
+  "placement": {
+   "machine": "DESKTOP-SLQMEQH",
+   "platform": "Windows-11-10.0.26200-SP0",
+   "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+   "cpu_count_os": 32,
+   "python": "3.13.5",
+   "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+   "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+   "numpy": "2.3.2",
+   "wsl_distro": "Ubuntu-24.04",
+   "rx_job": "260929-153815-crag-build-12f5",
+   "rx_cpus": "2",
+   "PYTHONHASHSEED": "0"
+  }
+ },
+ "cells": [
+  {
+   "dataset": "metaqa",
+   "K": 100,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "c3f24052659c33599cf4db83b0c98131fed71178d682dda93de2a2af60a308b5",
+     "cap": 432,
+     "hyperedges": 86507,
+     "pins": 530717,
+     "anchor_duplication_pins": 41
+    },
+    "laptop": {
+     "content_digest": "c3f24052659c33599cf4db83b0c98131fed71178d682dda93de2a2af60a308b5",
+     "cap": 432,
+     "hyperedges": 86507,
+     "pins": 530717,
+     "anchor_duplication_pins": 41
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153816-crag-hg-metaqa-1b9d"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-153955-crag-phg-metaqa-k100-b45b",
+    "wall_seconds": 208.6,
+    "mpirun_seconds": 207.89,
+    "peak_rss_mb_per_rank": [
+     34.1,
+     31.1,
+     31.7,
+     32.2
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 5e-08
+   },
+   "SHARDS": {
+    "host": 9,
+    "laptop": 9,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 39417414,
+    "km1_laptop": 39417414,
+    "km1_equal": true,
+    "max_block_host": 446,
+    "max_block_laptop": 446,
+    "repair_moves_host": 1,
+    "repair_moves_laptop": 1
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "9770fbf638a380897470f644ed66a4ae09c85862d0e14faaad219732671b9df8",
+    "laptop_sha256": "9770fbf638a380897470f644ed66a4ae09c85862d0e14faaad219732671b9df8"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "metaqa",
+   "K": 250,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "ad38480e56d86ebc88ae5fe176510c97fe2a3be14b0b92f3e93bc1bf5cbeb66b",
+     "cap": 173,
+     "hyperedges": 86617,
+     "pins": 530827,
+     "anchor_duplication_pins": 151
+    },
+    "laptop": {
+     "content_digest": "ad38480e56d86ebc88ae5fe176510c97fe2a3be14b0b92f3e93bc1bf5cbeb66b",
+     "cap": 173,
+     "hyperedges": 86617,
+     "pins": 530827,
+     "anchor_duplication_pins": 151
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153816-crag-hg-metaqa-1b9d"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-153957-crag-phg-metaqa-k250-36a2",
+    "wall_seconds": 207.9,
+    "mpirun_seconds": 206.91,
+    "peak_rss_mb_per_rank": [
+     33.2,
+     32.8,
+     31.8,
+     31.1
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 5e-08
+   },
+   "SHARDS": {
+    "host": 9,
+    "laptop": 9,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 42900242,
+    "km1_laptop": 42900242,
+    "km1_equal": true,
+    "max_block_host": 178,
+    "max_block_laptop": 178,
+    "repair_moves_host": 2,
+    "repair_moves_laptop": 2
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "832e04b709751b75988230a0f4012bb92cb274979a029b8b7623f03078134d6e",
+    "laptop_sha256": "832e04b709751b75988230a0f4012bb92cb274979a029b8b7623f03078134d6e"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "metaqa",
+   "K": 432,
+   "native": true,
+   "HG": {
+    "host": {
+     "content_digest": "bebdd65c305a1f565c3127a8ef91207db03a7e27af487062d8bbc548a2347fcc",
+     "cap": 100,
+     "hyperedges": 86796,
+     "pins": 531006,
+     "anchor_duplication_pins": 330
+    },
+    "laptop": {
+     "content_digest": "bebdd65c305a1f565c3127a8ef91207db03a7e27af487062d8bbc548a2347fcc",
+     "cap": 100,
+     "hyperedges": 86796,
+     "pins": 531006,
+     "anchor_duplication_pins": 330
+    },
+    "equal": true,
+    "frozen_H4_SK": {
+     "content_digest": "bebdd65c305a1f565c3127a8ef91207db03a7e27af487062d8bbc548a2347fcc",
+     "cap": 100,
+     "hyperedges": 86796,
+     "pins": 531006,
+     "anchor_duplication_pins": 330
+    },
+    "equal_frozen": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153816-crag-hg-metaqa-1b9d"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-153953-crag-phg-metaqa-k432-810b",
+    "wall_seconds": 208.6,
+    "mpirun_seconds": 207.58,
+    "peak_rss_mb_per_rank": [
+     32.6,
+     30.2,
+     31.2,
+     31.2
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 2e-08
+   },
+   "SHARDS": {
+    "host": 9,
+    "laptop": 9,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 45623771,
+    "km1_laptop": 45623771,
+    "km1_equal": true,
+    "max_block_host": 104,
+    "max_block_laptop": 104,
+    "repair_moves_host": 2,
+    "repair_moves_laptop": 2
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "b06beef6f3f493a43e6a798da694dde4a94bdc1d9b3056e8906085a4bf592daf",
+    "laptop_sha256": "b06beef6f3f493a43e6a798da694dde4a94bdc1d9b3056e8906085a4bf592daf",
+    "served": {
+     "partition": "LOWMEM__PHG_REPAIR1_con",
+     "sha256": "b06beef6f3f493a43e6a798da694dde4a94bdc1d9b3056e8906085a4bf592daf",
+     "equal": true
+    }
+   },
+   "identical": true
+  },
+  {
+   "dataset": "metaqa",
+   "K": 500,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "bd472bd35583674c333736149c3ad494462c9695c51af11e6a59a2090df3a85f",
+     "cap": 86,
+     "hyperedges": 86860,
+     "pins": 531070,
+     "anchor_duplication_pins": 394
+    },
+    "laptop": {
+     "content_digest": "bd472bd35583674c333736149c3ad494462c9695c51af11e6a59a2090df3a85f",
+     "cap": 86,
+     "hyperedges": 86860,
+     "pins": 531070,
+     "anchor_duplication_pins": 394
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153816-crag-hg-metaqa-1b9d"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-153959-crag-phg-metaqa-k500-914e",
+    "wall_seconds": 205.8,
+    "mpirun_seconds": 205.0,
+    "peak_rss_mb_per_rank": [
+     33.1,
+     29.9,
+     30.9,
+     31.7
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 4e-08
+   },
+   "SHARDS": {
+    "host": 9,
+    "laptop": 9,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 46112766,
+    "km1_laptop": 46112766,
+    "km1_equal": true,
+    "max_block_host": 89,
+    "max_block_laptop": 89,
+    "repair_moves_host": 1,
+    "repair_moves_laptop": 1
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "17091178eecef395fb6e1fe7e72eb195cd40edfef2dd2239cafc7480c1350e45",
+    "laptop_sha256": "17091178eecef395fb6e1fe7e72eb195cd40edfef2dd2239cafc7480c1350e45"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "metaqa",
+   "K": 1000,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "4ea900166ddf107ad7ac1227ea0e11a4053679462c5a4d6c24e4eb7137772ef1",
+     "cap": 43,
+     "hyperedges": 87403,
+     "pins": 531613,
+     "anchor_duplication_pins": 937
+    },
+    "laptop": {
+     "content_digest": "4ea900166ddf107ad7ac1227ea0e11a4053679462c5a4d6c24e4eb7137772ef1",
+     "cap": 43,
+     "hyperedges": 87403,
+     "pins": 531613,
+     "anchor_duplication_pins": 937
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153816-crag-hg-metaqa-1b9d"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154001-crag-phg-metaqa-k1000-9824",
+    "wall_seconds": 204.3,
+    "mpirun_seconds": 203.2,
+    "peak_rss_mb_per_rank": [
+     31.1,
+     29.5,
+     30.0,
+     30.4
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 2e-08
+   },
+   "SHARDS": {
+    "host": 9,
+    "laptop": 9,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 49453179,
+    "km1_laptop": 49453179,
+    "km1_equal": true,
+    "max_block_host": 45,
+    "max_block_laptop": 45,
+    "repair_moves_host": 5,
+    "repair_moves_laptop": 5
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "907a441ffb39147c8d5a732d169816ff11d6b8b1eb89e9ca4ec4715d6ae213bf",
+    "laptop_sha256": "907a441ffb39147c8d5a732d169816ff11d6b8b1eb89e9ca4ec4715d6ae213bf"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "metaqa",
+   "K": 2000,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "840cfb4efd88f928c21492c55c40b47268f4cee875b03991093a0383fbf5c711",
+     "cap": 22,
+     "hyperedges": 89126,
+     "pins": 533336,
+     "anchor_duplication_pins": 2660
+    },
+    "laptop": {
+     "content_digest": "840cfb4efd88f928c21492c55c40b47268f4cee875b03991093a0383fbf5c711",
+     "cap": 22,
+     "hyperedges": 89126,
+     "pins": 533336,
+     "anchor_duplication_pins": 2660
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153816-crag-hg-metaqa-1b9d"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154003-crag-phg-metaqa-k2000-3d42",
+    "wall_seconds": 22.3,
+    "mpirun_seconds": 20.0,
+    "peak_rss_mb_per_rank": [
+     31.8,
+     30.7,
+     30.6,
+     30.6
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 4e-08
+   },
+   "SHARDS": {
+    "host": 9,
+    "laptop": 9,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 53058438,
+    "km1_laptop": 53058438,
+    "km1_equal": true,
+    "max_block_host": 23,
+    "max_block_laptop": 23,
+    "repair_moves_host": 20,
+    "repair_moves_laptop": 20
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "870d909bdc7a1a812331725f0c1bf2b4510004ece9c3887ecce35ee0159116d4",
+    "laptop_sha256": "870d909bdc7a1a812331725f0c1bf2b4510004ece9c3887ecce35ee0159116d4"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "metaqa",
+   "K": 5000,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "27b15a69d40b17cdeb021bb9d7762c13ea230181c97058b6ca59f2331cccbd38",
+     "cap": 9,
+     "hyperedges": 103521,
+     "pins": 547731,
+     "anchor_duplication_pins": 17055
+    },
+    "laptop": {
+     "content_digest": "27b15a69d40b17cdeb021bb9d7762c13ea230181c97058b6ca59f2331cccbd38",
+     "cap": 9,
+     "hyperedges": 103521,
+     "pins": 547731,
+     "anchor_duplication_pins": 17055
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153816-crag-hg-metaqa-1b9d"
+    }
+   },
+   "OUTCOME": {
+    "host": "PARTITION_INVALID",
+    "laptop": "PARTITION_INVALID",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154005-crag-phg-metaqa-k5000-6389",
+    "wall_seconds": 19.5,
+    "mpirun_seconds": 18.84,
+    "peak_rss_mb_per_rank": [
+     32.9,
+     31.1,
+     31.6,
+     31.3
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 4e-08
+   },
+   "RAW": {
+    "host_gate": {
+     "max_block": 10,
+     "contract_bound_ceil_1.03_N_over_k": 9,
+     "gate": "PARTITION_INVALID"
+    },
+    "laptop_gate_record": "PARTITION_INVALID"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "squad",
+   "K": 100,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "0baeff924ef0a5c4c87fc0ec1b538b51d616db111fb3f1a5a9d85a59b5f5554d",
+     "cap": 202,
+     "hyperedges": 32972,
+     "pins": 1583658,
+     "anchor_duplication_pins": 2213
+    },
+    "laptop": {
+     "content_digest": "0baeff924ef0a5c4c87fc0ec1b538b51d616db111fb3f1a5a9d85a59b5f5554d",
+     "cap": 202,
+     "hyperedges": 32972,
+     "pins": 1583658,
+     "anchor_duplication_pins": 2213
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153818-crag-hg-squad-e5df"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154009-crag-phg-squad-k100-01d7",
+    "wall_seconds": 4.5,
+    "mpirun_seconds": 3.75,
+    "peak_rss_mb_per_rank": [
+     52.9,
+     50.2,
+     51.2,
+     50.6
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 0.0
+   },
+   "SHARDS": {
+    "host": 5,
+    "laptop": 5,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 4471867,
+    "km1_laptop": 4471867,
+    "km1_equal": true,
+    "max_block_host": 208,
+    "max_block_laptop": 208,
+    "repair_moves_host": 0,
+    "repair_moves_laptop": 0
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "170135a42b19ee2954efdb1e066dff06fd99a9f56a16b337939079610769622f",
+    "laptop_sha256": "170135a42b19ee2954efdb1e066dff06fd99a9f56a16b337939079610769622f"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "squad",
+   "K": 202,
+   "native": true,
+   "HG": {
+    "host": {
+     "content_digest": "3a170cd70d0a77aa810b6107d59c5230f26b6642af21a9d6c31cd56545b8d1c5",
+     "cap": 100,
+     "hyperedges": 39146,
+     "pins": 1589832,
+     "anchor_duplication_pins": 8387
+    },
+    "laptop": {
+     "content_digest": "3a170cd70d0a77aa810b6107d59c5230f26b6642af21a9d6c31cd56545b8d1c5",
+     "cap": 100,
+     "hyperedges": 39146,
+     "pins": 1589832,
+     "anchor_duplication_pins": 8387
+    },
+    "equal": true,
+    "frozen_H4_SK": {
+     "content_digest": "3a170cd70d0a77aa810b6107d59c5230f26b6642af21a9d6c31cd56545b8d1c5",
+     "cap": 100,
+     "hyperedges": 39146,
+     "pins": 1589832,
+     "anchor_duplication_pins": 8387
+    },
+    "equal_frozen": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153818-crag-hg-squad-e5df"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154007-crag-phg-squad-k202-a488",
+    "wall_seconds": 6.4,
+    "mpirun_seconds": 5.51,
+    "peak_rss_mb_per_rank": [
+     49.4,
+     49.3,
+     49.8,
+     50.1
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 0.0
+   },
+   "SHARDS": {
+    "host": 5,
+    "laptop": 5,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 7538754,
+    "km1_laptop": 7538754,
+    "km1_equal": true,
+    "max_block_host": 103,
+    "max_block_laptop": 103,
+    "repair_moves_host": 0,
+    "repair_moves_laptop": 0
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "1425a34d9b32f779801c09beca8ca964e614806348070f1551e6335671470413",
+    "laptop_sha256": "1425a34d9b32f779801c09beca8ca964e614806348070f1551e6335671470413",
+    "served": {
+     "partition": "LOWMEM__PHG_con",
+     "sha256": "1425a34d9b32f779801c09beca8ca964e614806348070f1551e6335671470413",
+     "equal": true
+    }
+   },
+   "identical": true
+  },
+  {
+   "dataset": "squad",
+   "K": 250,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "a4306ba3caf42c6e6e131e314226850301fa5a5485a423eb063e53f4e73e33f2",
+     "cap": 81,
+     "hyperedges": 42284,
+     "pins": 1592970,
+     "anchor_duplication_pins": 11525
+    },
+    "laptop": {
+     "content_digest": "a4306ba3caf42c6e6e131e314226850301fa5a5485a423eb063e53f4e73e33f2",
+     "cap": 81,
+     "hyperedges": 42284,
+     "pins": 1592970,
+     "anchor_duplication_pins": 11525
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153818-crag-hg-squad-e5df"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154011-crag-phg-squad-k250-0a51",
+    "wall_seconds": 6.6,
+    "mpirun_seconds": 5.73,
+    "peak_rss_mb_per_rank": [
+     50.4,
+     49.3,
+     51.4,
+     49.7
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 0.0
+   },
+   "SHARDS": {
+    "host": 5,
+    "laptop": 5,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 8998887,
+    "km1_laptop": 8998887,
+    "km1_equal": true,
+    "max_block_host": 84,
+    "max_block_laptop": 84,
+    "repair_moves_host": 0,
+    "repair_moves_laptop": 0
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "a18eb3e28cd29a001489fdd9eac6ea123b4b9242c6723ecd8255770436e2976b",
+    "laptop_sha256": "a18eb3e28cd29a001489fdd9eac6ea123b4b9242c6723ecd8255770436e2976b"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "squad",
+   "K": 500,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "d4a3e6bdf6dbfc6411f5c5223bce879a07417c8cbe3ce3a8861a715487490d72",
+     "cap": 40,
+     "hyperedges": 61244,
+     "pins": 1611930,
+     "anchor_duplication_pins": 30485
+    },
+    "laptop": {
+     "content_digest": "d4a3e6bdf6dbfc6411f5c5223bce879a07417c8cbe3ce3a8861a715487490d72",
+     "cap": 40,
+     "hyperedges": 61244,
+     "pins": 1611930,
+     "anchor_duplication_pins": 30485
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153818-crag-hg-squad-e5df"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154013-crag-phg-squad-k500-fb9e",
+    "wall_seconds": 7.1,
+    "mpirun_seconds": 5.13,
+    "peak_rss_mb_per_rank": [
+     52.7,
+     52.8,
+     52.9,
+     52.9
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 0.0
+   },
+   "SHARDS": {
+    "host": 5,
+    "laptop": 5,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 17505952,
+    "km1_laptop": 17505952,
+    "km1_equal": true,
+    "max_block_host": 42,
+    "max_block_laptop": 42,
+    "repair_moves_host": 2,
+    "repair_moves_laptop": 2
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "f4c1be0645db1e7fa2917499149af45930f1ce7d4fce4ce9e88e67482c79b968",
+    "laptop_sha256": "f4c1be0645db1e7fa2917499149af45930f1ce7d4fce4ce9e88e67482c79b968"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "squad",
+   "K": 1000,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "ad6316129d7f17d036a6d98a0ec89f35dff4817e9f1b3d3dcde169d303e748c8",
+     "cap": 20,
+     "hyperedges": 102018,
+     "pins": 1652704,
+     "anchor_duplication_pins": 71259
+    },
+    "laptop": {
+     "content_digest": "ad6316129d7f17d036a6d98a0ec89f35dff4817e9f1b3d3dcde169d303e748c8",
+     "cap": 20,
+     "hyperedges": 102018,
+     "pins": 1652704,
+     "anchor_duplication_pins": 71259
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153818-crag-hg-squad-e5df"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154016-crag-phg-squad-k1000-6af9",
+    "wall_seconds": 7.2,
+    "mpirun_seconds": 4.07,
+    "peak_rss_mb_per_rank": [
+     61.9,
+     56.2,
+     58.8,
+     57.1
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 3e-08
+   },
+   "SHARDS": {
+    "host": 5,
+    "laptop": 5,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 32373003,
+    "km1_laptop": 32373003,
+    "km1_equal": true,
+    "max_block_host": 21,
+    "max_block_laptop": 21,
+    "repair_moves_host": 6,
+    "repair_moves_laptop": 6
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "c33c44d3cf50e1ccf0d39c1247c09dbbbafd6de7951091fa26cd974bfe4b2342",
+    "laptop_sha256": "c33c44d3cf50e1ccf0d39c1247c09dbbbafd6de7951091fa26cd974bfe4b2342"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "squad",
+   "K": 2000,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "716c94ddddde4c7031c9005c67058d6a71916bca582c9f34dabf8c5aad5db7a6",
+     "cap": 10,
+     "hyperedges": 188697,
+     "pins": 1739383,
+     "anchor_duplication_pins": 157938
+    },
+    "laptop": {
+     "content_digest": "716c94ddddde4c7031c9005c67058d6a71916bca582c9f34dabf8c5aad5db7a6",
+     "cap": 10,
+     "hyperedges": 188697,
+     "pins": 1739383,
+     "anchor_duplication_pins": 157938
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153818-crag-hg-squad-e5df"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154018-crag-phg-squad-k2000-bd91",
+    "wall_seconds": 13.4,
+    "mpirun_seconds": 8.4,
+    "peak_rss_mb_per_rank": [
+     64.0,
+     62.6,
+     59.6,
+     62.9
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 0.0
+   },
+   "SHARDS": {
+    "host": 5,
+    "laptop": 5,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 70254512,
+    "km1_laptop": 70254512,
+    "km1_equal": true,
+    "max_block_host": 11,
+    "max_block_laptop": 11,
+    "repair_moves_host": 8,
+    "repair_moves_laptop": 8
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "a98943717343a92f143bda2a4395170fafde67aed4792bbed832c39c44453df0",
+    "laptop_sha256": "a98943717343a92f143bda2a4395170fafde67aed4792bbed832c39c44453df0"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "squad",
+   "K": 5000,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "e7ba361d8f4698aa7c6c61de1369913d97eeadd31a99035db18d802a20bc2953",
+     "cap": 4,
+     "hyperedges": 526539,
+     "pins": 2077225,
+     "anchor_duplication_pins": 495780
+    },
+    "laptop": {
+     "content_digest": "e7ba361d8f4698aa7c6c61de1369913d97eeadd31a99035db18d802a20bc2953",
+     "cap": 4,
+     "hyperedges": 526539,
+     "pins": 2077225,
+     "anchor_duplication_pins": 495780
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153818-crag-hg-squad-e5df"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154021-crag-phg-squad-k5000-5af2",
+    "wall_seconds": 36.1,
+    "mpirun_seconds": 13.91,
+    "peak_rss_mb_per_rank": [
+     91.5,
+     81.9,
+     77.0,
+     74.8
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 3e-08
+   },
+   "SHARDS": {
+    "host": 5,
+    "laptop": 5,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 312158601,
+    "km1_laptop": 312158601,
+    "km1_equal": true,
+    "max_block_host": 5,
+    "max_block_laptop": 5,
+    "repair_moves_host": 36,
+    "repair_moves_laptop": 36
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "82bcad9b0d1bf4609e9012f34771ac216b79c66e05c940bf6aaa0c6815d3c4d1",
+    "laptop_sha256": "82bcad9b0d1bf4609e9012f34771ac216b79c66e05c940bf6aaa0c6815d3c4d1"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "musique",
+   "K": 100,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "17d372044e9579f13c6ee50b72a4978fce4e3310c17096c62f009ea7bfe1566d",
+     "cap": 1175,
+     "hyperedges": 223086,
+     "pins": 5987292,
+     "anchor_duplication_pins": 803
+    },
+    "laptop": {
+     "content_digest": "17d372044e9579f13c6ee50b72a4978fce4e3310c17096c62f009ea7bfe1566d",
+     "cap": 1175,
+     "hyperedges": 223086,
+     "pins": 5987292,
+     "anchor_duplication_pins": 803
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153820-crag-hg-musique-f98f"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154103-crag-phg-musique-k100-d85e",
+    "wall_seconds": 30.3,
+    "mpirun_seconds": 24.94,
+    "peak_rss_mb_per_rank": [
+     165.1,
+     158.5,
+     160.7,
+     159.9
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 2e-08
+   },
+   "SHARDS": {
+    "host": 24,
+    "laptop": 24,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 43553153,
+    "km1_laptop": 43553153,
+    "km1_equal": true,
+    "max_block_host": 1211,
+    "max_block_laptop": 1211,
+    "repair_moves_host": 0,
+    "repair_moves_laptop": 0
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "40269d0106c8ae3c0353555b3d12b8f2ca0388a07955d299a05056a8c1228951",
+    "laptop_sha256": "40269d0106c8ae3c0353555b3d12b8f2ca0388a07955d299a05056a8c1228951"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "musique",
+   "K": 250,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "437a8d810d23d7aea63fd15479cf8a18c48563203402f7187bda02afa3f923dd",
+     "cap": 470,
+     "hyperedges": 225604,
+     "pins": 5989810,
+     "anchor_duplication_pins": 3321
+    },
+    "laptop": {
+     "content_digest": "437a8d810d23d7aea63fd15479cf8a18c48563203402f7187bda02afa3f923dd",
+     "cap": 470,
+     "hyperedges": 225604,
+     "pins": 5989810,
+     "anchor_duplication_pins": 3321
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153820-crag-hg-musique-f98f"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154105-crag-phg-musique-k250-2c11",
+    "wall_seconds": 37.6,
+    "mpirun_seconds": 30.01,
+    "peak_rss_mb_per_rank": [
+     165.6,
+     154.0,
+     156.4,
+     156.0
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 0.0
+   },
+   "SHARDS": {
+    "host": 24,
+    "laptop": 24,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 53555252,
+    "km1_laptop": 53555252,
+    "km1_equal": true,
+    "max_block_host": 484,
+    "max_block_laptop": 484,
+    "repair_moves_host": 1,
+    "repair_moves_laptop": 1
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "339d8600900be73a30c4b53a1c10ee78617119befc9b0eba1ddb4068eed83904",
+    "laptop_sha256": "339d8600900be73a30c4b53a1c10ee78617119befc9b0eba1ddb4068eed83904"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "musique",
+   "K": 500,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "bfe6845ff34efe27311d4483656fba44346012f4b38a8425582b9a0607151e2a",
+     "cap": 235,
+     "hyperedges": 230653,
+     "pins": 5994859,
+     "anchor_duplication_pins": 8370
+    },
+    "laptop": {
+     "content_digest": "bfe6845ff34efe27311d4483656fba44346012f4b38a8425582b9a0607151e2a",
+     "cap": 235,
+     "hyperedges": 230653,
+     "pins": 5994859,
+     "anchor_duplication_pins": 8370
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153820-crag-hg-musique-f98f"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154106-crag-phg-musique-k500-0a67",
+    "wall_seconds": 39.5,
+    "mpirun_seconds": 28.67,
+    "peak_rss_mb_per_rank": [
+     153.9,
+     172.6,
+     174.0,
+     158.8
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 3e-08
+   },
+   "SHARDS": {
+    "host": 24,
+    "laptop": 24,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 64210154,
+    "km1_laptop": 64210154,
+    "km1_equal": true,
+    "max_block_host": 243,
+    "max_block_laptop": 243,
+    "repair_moves_host": 3,
+    "repair_moves_laptop": 3
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "f936876580a69ec6daf844d3141657178a035487f4f07b98e374e4b33fbf4ea1",
+    "laptop_sha256": "f936876580a69ec6daf844d3141657178a035487f4f07b98e374e4b33fbf4ea1"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "musique",
+   "K": 1000,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "019e0e1bfbc6deea2e87cb675287df1559080a9419639c3c99b306a1eed6d07a",
+     "cap": 118,
+     "hyperedges": 245105,
+     "pins": 6009311,
+     "anchor_duplication_pins": 22822
+    },
+    "laptop": {
+     "content_digest": "019e0e1bfbc6deea2e87cb675287df1559080a9419639c3c99b306a1eed6d07a",
+     "cap": 118,
+     "hyperedges": 245105,
+     "pins": 6009311,
+     "anchor_duplication_pins": 22822
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153820-crag-hg-musique-f98f"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154108-crag-phg-musique-k1000-cf4b",
+    "wall_seconds": 45.4,
+    "mpirun_seconds": 27.77,
+    "peak_rss_mb_per_rank": [
+     158.9,
+     155.5,
+     158.7,
+     156.9
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 4e-08
+   },
+   "SHARDS": {
+    "host": 24,
+    "laptop": 24,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 80040427,
+    "km1_laptop": 80040427,
+    "km1_equal": true,
+    "max_block_host": 122,
+    "max_block_laptop": 122,
+    "repair_moves_host": 8,
+    "repair_moves_laptop": 8
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "e33cc13890d9fdb4dcc4eab56e0d32b3d1f6a69273aa4e4ea67f42090c98f19e",
+    "laptop_sha256": "e33cc13890d9fdb4dcc4eab56e0d32b3d1f6a69273aa4e4ea67f42090c98f19e"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "musique",
+   "K": 1175,
+   "native": true,
+   "HG": {
+    "host": {
+     "content_digest": "b19fd504bad7997cd254876ed7294128ab1724a95ccc52a18aed3b2a3e5d27bc",
+     "cap": 100,
+     "hyperedges": 250732,
+     "pins": 6014938,
+     "anchor_duplication_pins": 28449
+    },
+    "laptop": {
+     "content_digest": "b19fd504bad7997cd254876ed7294128ab1724a95ccc52a18aed3b2a3e5d27bc",
+     "cap": 100,
+     "hyperedges": 250732,
+     "pins": 6014938,
+     "anchor_duplication_pins": 28449
+    },
+    "equal": true,
+    "frozen_H4_SK": {
+     "content_digest": "b19fd504bad7997cd254876ed7294128ab1724a95ccc52a18aed3b2a3e5d27bc",
+     "cap": 100,
+     "hyperedges": 250732,
+     "pins": 6014938,
+     "anchor_duplication_pins": 28449
+    },
+    "equal_frozen": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153820-crag-hg-musique-f98f"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154101-crag-phg-musique-k1175-0174",
+    "wall_seconds": 46.4,
+    "mpirun_seconds": 24.24,
+    "peak_rss_mb_per_rank": [
+     173.0,
+     154.0,
+     163.7,
+     159.9
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 4e-08
+   },
+   "SHARDS": {
+    "host": 24,
+    "laptop": 24,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 85311179,
+    "km1_laptop": 85311179,
+    "km1_equal": true,
+    "max_block_host": 104,
+    "max_block_laptop": 104,
+    "repair_moves_host": 9,
+    "repair_moves_laptop": 9
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "5886ddb62c0eba6b841b9f429444c51782f1bb9413feab4041c01d14e69a51c7",
+    "laptop_sha256": "5886ddb62c0eba6b841b9f429444c51782f1bb9413feab4041c01d14e69a51c7",
+    "served": {
+     "partition": "LOWMEM__PHG_C1_con",
+     "sha256": "5886ddb62c0eba6b841b9f429444c51782f1bb9413feab4041c01d14e69a51c7",
+     "equal": true
+    }
+   },
+   "identical": true
+  },
+  {
+   "dataset": "musique",
+   "K": 2000,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "f2c5a6190241ccf1a028448ae18ad501cd4e1c83a85d246bebeccf98946d8cd2",
+     "cap": 59,
+     "hyperedges": 283672,
+     "pins": 6047878,
+     "anchor_duplication_pins": 61389
+    },
+    "laptop": {
+     "content_digest": "f2c5a6190241ccf1a028448ae18ad501cd4e1c83a85d246bebeccf98946d8cd2",
+     "cap": 59,
+     "hyperedges": 283672,
+     "pins": 6047878,
+     "anchor_duplication_pins": 61389
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153820-crag-hg-musique-f98f"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154110-crag-phg-musique-k2000-a17c",
+    "wall_seconds": 50.6,
+    "mpirun_seconds": 24.17,
+    "peak_rss_mb_per_rank": [
+     175.7,
+     164.6,
+     183.4,
+     162.4
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 1e-08
+   },
+   "SHARDS": {
+    "host": 24,
+    "laptop": 24,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 107614793,
+    "km1_laptop": 107614793,
+    "km1_equal": true,
+    "max_block_host": 61,
+    "max_block_laptop": 61,
+    "repair_moves_host": 18,
+    "repair_moves_laptop": 18
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "6910eb89880e22e1f38b8974df95adf433452528951478c84577150a71d2628e",
+    "laptop_sha256": "6910eb89880e22e1f38b8974df95adf433452528951478c84577150a71d2628e"
+   },
+   "identical": true
+  },
+  {
+   "dataset": "musique",
+   "K": 5000,
+   "native": false,
+   "HG": {
+    "host": {
+     "content_digest": "e74e733716a32a8479add5248f8edda29ebcc17d0164e92d40b0955b06933023",
+     "cap": 24,
+     "hyperedges": 410385,
+     "pins": 6174591,
+     "anchor_duplication_pins": 188102
+    },
+    "laptop": {
+     "content_digest": "e74e733716a32a8479add5248f8edda29ebcc17d0164e92d40b0955b06933023",
+     "cap": 24,
+     "hyperedges": 410385,
+     "pins": 6174591,
+     "anchor_duplication_pins": 188102
+    },
+    "equal": true,
+    "host_placement": {
+     "machine": "DESKTOP-SLQMEQH",
+     "python": "3.13.5",
+     "numpy": "2.3.2",
+     "rx_job": "260929-153820-crag-hg-musique-f98f"
+    }
+   },
+   "OUTCOME": {
+    "host": "OK",
+    "laptop": "OK",
+    "equal": true
+   },
+   "host_run": {
+    "rx_job": "260929-154112-crag-phg-musique-k5000-87b3",
+    "wall_seconds": 67.0,
+    "mpirun_seconds": 14.4,
+    "peak_rss_mb_per_rank": [
+     190.8,
+     178.1,
+     171.7,
+     175.2
+    ],
+    "zoltan_cutl_vs_python_km1_rel": 5e-08
+   },
+   "SHARDS": {
+    "host": 24,
+    "laptop": 24,
+    "equal": true
+   },
+   "RAW": {
+    "km1_host": 175938632,
+    "km1_laptop": 175938632,
+    "km1_equal": true,
+    "max_block_host": 25,
+    "max_block_laptop": 25,
+    "repair_moves_host": 53,
+    "repair_moves_laptop": 53
+   },
+   "PHG": {
+    "equal": true,
+    "host_sha256": "f2af5c2ae79ae3a400ea83988720b8c269d097c907d8a55f1a0d7b76fbd52b3b",
+    "laptop_sha256": "f2af5c2ae79ae3a400ea83988720b8c269d097c907d8a55f1a0d7b76fbd52b3b"
+   },
+   "identical": true
+  }
+ ],
+ "counts": {
+  "cells": 21,
+  "identical": 21,
+  "HG_equal": 21,
+  "shards_equal": 20,
+  "shards_compared": 20,
+  "vectors_equal": 20,
+  "vectors_compared": 20,
+  "outcomes_equal": 21
+ },
+ "code": {
+  "placement_module": {
+   "path": "scratchpad/_l1h_place.py",
+   "sha256": "bebaf8e88d0786b5f0dcaf153a414e6c1bcbe260e29e3e6da89b0aa0f084af35"
+  },
+  "host_module": {
+   "path": "scratchpad/_l1h_host.py",
+   "sha256": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e"
+  }
+ }
+}

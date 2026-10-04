@@ -1,0 +1,818 @@
+{
+ "PHASE": "L1 CANDIDATE ADMISSION CAUSAL",
+ "CONTRACT": "no LLM/MLP/learning/new encoder/new traversal; P=50, B=6, production pool = K(q)",
+ "F6_PARITY_ON_SAFE_POOL": {
+  "metaqa": "1998/1998",
+  "webqsp": "1419/1419",
+  "musique_clean": "2000/2000",
+  "2wiki_clean": "2000/2000",
+  "hotpotqa_clean": "2000/2000",
+  "squad_clean": "2000/2000"
+ },
+ "B_CURRENT_HEADROOM": {
+  "hop2": 0.0,
+  "hop3": 0.003,
+  "ALL": 0.001
+ },
+ "B_AFTER_ADMISSION_HEADROOM": {
+  "hop2": 0.045,
+  "hop3": 0.1862,
+  "ALL": 0.0771
+ },
+ "SAFE_POOL_MISSING_RECALL": 0.2794,
+ "SRC_POOL_MISSING_RECALL": 0.3261,
+ "HYBRID_POOL_MISSING_RECALL": 0.3262,
+ "UNION_POOL_MISSING_RECALL": 0.4464,
+ "SAFE_POOL_MISSING_RECALL_HOP3": 0.2792,
+ "HYBRID_POOL_MISSING_RECALL_HOP3": 0.3144,
+ "SAFE_POOL_ORACLE_HOP3": 0.3634,
+ "SRC_POOL_ORACLE_HOP3": 0.3754,
+ "HYBRID_POOL_ORACLE_HOP3": 0.3754,
+ "UNION_POOL_ORACLE_HOP3": 0.4189,
+ "SAFE_F6_HOP3": 0.2583,
+ "SAFE_G4_HOP3": 0.2778,
+ "F6_HYBRID_HOP3": 0.2703,
+ "G4_HYBRID_HOP3": 0.2808,
+ "G4_HYBRID_HOP3_NET_P": [
+  15,
+  0.0015
+ ],
+ "G4_HYBRID_ALL": 0.6667,
+ "SIGNIFICANT_REGRESSIONS_OTHER_CORPORA": [
+  "musique_clean/A2_HYBRID_ADMIT+F6 net -18 p=0.0001",
+  "musique_clean/A2_HYBRID_ADMIT+G4 net -20 p=0.0001",
+  "2wiki_clean/A2_HYBRID_ADMIT+F6 net -10 p=0.0063",
+  "2wiki_clean/A2_HYBRID_ADMIT+G4 net -9 p=0.0352",
+  "hotpotqa_clean/A2_HYBRID_ADMIT+F6 net -21 p=0.0014",
+  "hotpotqa_clean/A2_HYBRID_ADMIT+G4 net -28 p=0.0"
+ ],
+ "CROSS_CORPUS_SAFE": "NO",
+ "ADMISSION_OVERHEAD_MS": 0.4508,
+ "ADMISSION_VARIANTS": {
+  "A1_SRC_ASSIGN": "pure SRC round-robin assignment, bounded, deterministic",
+  "A2_HYBRID_ADMIT": "directive STEP-4 as written: retain SAFE candidates with unique non-SRC evidence, fill from A1",
+  "A3_INTERLEAVE": "equal 1:1 alternation of frozen admission and A1 into one fixed-K pool",
+  "A4_SUBSUME": "evict ONLY SAFE candidates whose evidence is a subset of a better-ranked SAFE candidate; fill from A1"
+ },
+ "A2_DEGENERACY": {
+  "A2_retained_SAFE_per_q": {
+   "metaqa": 0.38,
+   "webqsp": 0.23,
+   "musique_clean": 0.11,
+   "2wiki_clean": 0.34,
+   "hotpotqa_clean": 0.46,
+   "squad_clean": 0.11
+  },
+  "note": "the protected core wins nearly every non-SRC atom, so STEP-4 as written retains ~0.1-0.5 candidates per query and SRC silently takes the entire budget; A3/A4 are the non-degenerate forms of the safeguard"
+ },
+ "P50_ALL_BY_VARIANT": {
+  "metaqa": {
+   "SAFE_POOL+F6": {
+    "acc": 0.6612,
+    "net": 0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "sig": false
+   },
+   "SAFE_POOL+G4": {
+    "acc": 0.6652,
+    "net": 8,
+    "gained": 21,
+    "lost": 13,
+    "p": 0.2295,
+    "sig": false
+   },
+   "A2_HYBRID_ADMIT+F6": {
+    "acc": 0.6677,
+    "net": 13,
+    "gained": 15,
+    "lost": 2,
+    "p": 0.0024,
+    "sig": true
+   },
+   "A2_HYBRID_ADMIT+G4": {
+    "acc": 0.6667,
+    "net": 11,
+    "gained": 24,
+    "lost": 13,
+    "p": 0.0989,
+    "sig": false
+   },
+   "A3_INTERLEAVE+F6": {
+    "acc": 0.6667,
+    "net": 11,
+    "gained": 11,
+    "lost": 0,
+    "p": 0.001,
+    "sig": true
+   },
+   "A3_INTERLEAVE+G4": {
+    "acc": 0.6657,
+    "net": 9,
+    "gained": 23,
+    "lost": 14,
+    "p": 0.1877,
+    "sig": false
+   },
+   "A4_SUBSUME+F6": {
+    "acc": 0.6647,
+    "net": 7,
+    "gained": 7,
+    "lost": 0,
+    "p": 0.0156,
+    "sig": true
+   },
+   "A4_SUBSUME+G4": {
+    "acc": 0.6652,
+    "net": 8,
+    "gained": 23,
+    "lost": 15,
+    "p": 0.2559,
+    "sig": false
+   }
+  },
+  "webqsp": {
+   "SAFE_POOL+F6": {
+    "acc": 0.7646,
+    "net": 0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "sig": false
+   },
+   "SAFE_POOL+G4": {
+    "acc": 0.7632,
+    "net": -2,
+    "gained": 1,
+    "lost": 3,
+    "p": 0.625,
+    "sig": false
+   },
+   "A2_HYBRID_ADMIT+F6": {
+    "acc": 0.7618,
+    "net": -4,
+    "gained": 4,
+    "lost": 8,
+    "p": 0.3877,
+    "sig": false
+   },
+   "A2_HYBRID_ADMIT+G4": {
+    "acc": 0.7604,
+    "net": -6,
+    "gained": 3,
+    "lost": 9,
+    "p": 0.146,
+    "sig": false
+   },
+   "A3_INTERLEAVE+F6": {
+    "acc": 0.7653,
+    "net": 1,
+    "gained": 4,
+    "lost": 3,
+    "p": 1.0,
+    "sig": false
+   },
+   "A3_INTERLEAVE+G4": {
+    "acc": 0.7639,
+    "net": -1,
+    "gained": 4,
+    "lost": 5,
+    "p": 1.0,
+    "sig": false
+   },
+   "A4_SUBSUME+F6": {
+    "acc": 0.7653,
+    "net": 1,
+    "gained": 3,
+    "lost": 2,
+    "p": 1.0,
+    "sig": false
+   },
+   "A4_SUBSUME+G4": {
+    "acc": 0.7611,
+    "net": -5,
+    "gained": 3,
+    "lost": 8,
+    "p": 0.2266,
+    "sig": false
+   }
+  },
+  "musique_clean": {
+   "SAFE_POOL+F6": {
+    "acc": 0.9635,
+    "net": 0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "sig": false
+   },
+   "SAFE_POOL+G4": {
+    "acc": 0.96,
+    "net": -7,
+    "gained": 1,
+    "lost": 8,
+    "p": 0.0391,
+    "sig": true
+   },
+   "A2_HYBRID_ADMIT+F6": {
+    "acc": 0.9545,
+    "net": -18,
+    "gained": 2,
+    "lost": 20,
+    "p": 0.0001,
+    "sig": true
+   },
+   "A2_HYBRID_ADMIT+G4": {
+    "acc": 0.9535,
+    "net": -20,
+    "gained": 3,
+    "lost": 23,
+    "p": 0.0001,
+    "sig": true
+   },
+   "A3_INTERLEAVE+F6": {
+    "acc": 0.96,
+    "net": -7,
+    "gained": 1,
+    "lost": 8,
+    "p": 0.0391,
+    "sig": true
+   },
+   "A3_INTERLEAVE+G4": {
+    "acc": 0.9575,
+    "net": -12,
+    "gained": 1,
+    "lost": 13,
+    "p": 0.0018,
+    "sig": true
+   },
+   "A4_SUBSUME+F6": {
+    "acc": 0.963,
+    "net": -1,
+    "gained": 2,
+    "lost": 3,
+    "p": 1.0,
+    "sig": false
+   },
+   "A4_SUBSUME+G4": {
+    "acc": 0.96,
+    "net": -7,
+    "gained": 3,
+    "lost": 10,
+    "p": 0.0923,
+    "sig": false
+   }
+  },
+  "2wiki_clean": {
+   "SAFE_POOL+F6": {
+    "acc": 0.9435,
+    "net": 0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "sig": false
+   },
+   "SAFE_POOL+G4": {
+    "acc": 0.9435,
+    "net": 0,
+    "gained": 3,
+    "lost": 3,
+    "p": 1.0,
+    "sig": false
+   },
+   "A2_HYBRID_ADMIT+F6": {
+    "acc": 0.9385,
+    "net": -10,
+    "gained": 1,
+    "lost": 11,
+    "p": 0.0063,
+    "sig": true
+   },
+   "A2_HYBRID_ADMIT+G4": {
+    "acc": 0.939,
+    "net": -9,
+    "gained": 3,
+    "lost": 12,
+    "p": 0.0352,
+    "sig": true
+   },
+   "A3_INTERLEAVE+F6": {
+    "acc": 0.9385,
+    "net": -10,
+    "gained": 0,
+    "lost": 10,
+    "p": 0.0019,
+    "sig": true
+   },
+   "A3_INTERLEAVE+G4": {
+    "acc": 0.9395,
+    "net": -8,
+    "gained": 3,
+    "lost": 11,
+    "p": 0.0574,
+    "sig": false
+   },
+   "A4_SUBSUME+F6": {
+    "acc": 0.943,
+    "net": -1,
+    "gained": 1,
+    "lost": 2,
+    "p": 1.0,
+    "sig": false
+   },
+   "A4_SUBSUME+G4": {
+    "acc": 0.942,
+    "net": -3,
+    "gained": 3,
+    "lost": 6,
+    "p": 0.5078,
+    "sig": false
+   }
+  },
+  "hotpotqa_clean": {
+   "SAFE_POOL+F6": {
+    "acc": 0.9505,
+    "net": 0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "sig": false
+   },
+   "SAFE_POOL+G4": {
+    "acc": 0.945,
+    "net": -11,
+    "gained": 5,
+    "lost": 16,
+    "p": 0.0266,
+    "sig": true
+   },
+   "A2_HYBRID_ADMIT+F6": {
+    "acc": 0.94,
+    "net": -21,
+    "gained": 10,
+    "lost": 31,
+    "p": 0.0014,
+    "sig": true
+   },
+   "A2_HYBRID_ADMIT+G4": {
+    "acc": 0.9365,
+    "net": -28,
+    "gained": 8,
+    "lost": 36,
+    "p": 0.0,
+    "sig": true
+   },
+   "A3_INTERLEAVE+F6": {
+    "acc": 0.942,
+    "net": -17,
+    "gained": 4,
+    "lost": 21,
+    "p": 0.0009,
+    "sig": true
+   },
+   "A3_INTERLEAVE+G4": {
+    "acc": 0.9335,
+    "net": -34,
+    "gained": 4,
+    "lost": 38,
+    "p": 0.0,
+    "sig": true
+   },
+   "A4_SUBSUME+F6": {
+    "acc": 0.9445,
+    "net": -12,
+    "gained": 7,
+    "lost": 19,
+    "p": 0.029,
+    "sig": true
+   },
+   "A4_SUBSUME+G4": {
+    "acc": 0.9335,
+    "net": -34,
+    "gained": 3,
+    "lost": 37,
+    "p": 0.0,
+    "sig": true
+   }
+  },
+  "squad_clean": {
+   "SAFE_POOL+F6": {
+    "acc": 0.9875,
+    "net": 0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "sig": false
+   },
+   "SAFE_POOL+G4": {
+    "acc": 0.987,
+    "net": -1,
+    "gained": 1,
+    "lost": 2,
+    "p": 1.0,
+    "sig": false
+   },
+   "A2_HYBRID_ADMIT+F6": {
+    "acc": 0.9845,
+    "net": -6,
+    "gained": 2,
+    "lost": 8,
+    "p": 0.1094,
+    "sig": false
+   },
+   "A2_HYBRID_ADMIT+G4": {
+    "acc": 0.9845,
+    "net": -6,
+    "gained": 2,
+    "lost": 8,
+    "p": 0.1094,
+    "sig": false
+   },
+   "A3_INTERLEAVE+F6": {
+    "acc": 0.985,
+    "net": -5,
+    "gained": 1,
+    "lost": 6,
+    "p": 0.125,
+    "sig": false
+   },
+   "A3_INTERLEAVE+G4": {
+    "acc": 0.985,
+    "net": -5,
+    "gained": 2,
+    "lost": 7,
+    "p": 0.1797,
+    "sig": false
+   },
+   "A4_SUBSUME+F6": {
+    "acc": 0.9835,
+    "net": -8,
+    "gained": 0,
+    "lost": 8,
+    "p": 0.0078,
+    "sig": true
+   },
+   "A4_SUBSUME+G4": {
+    "acc": 0.9835,
+    "net": -8,
+    "gained": 1,
+    "lost": 9,
+    "p": 0.0215,
+    "sig": true
+   }
+  }
+ },
+ "MISSING_REQUIRED_ADMISSION_RECALL_ALL": {
+  "metaqa": {
+   "SAFE_POOL": 0.2794,
+   "A1_SRC_ASSIGN": 0.3261,
+   "A2_HYBRID_ADMIT": 0.3262,
+   "A3_INTERLEAVE": 0.3248,
+   "A4_SUBSUME": 0.3212,
+   "SAFE_U_SRC": 0.4464
+  },
+  "webqsp": {
+   "SAFE_POOL": 0.089,
+   "A1_SRC_ASSIGN": 0.0944,
+   "A2_HYBRID_ADMIT": 0.1039,
+   "A3_INTERLEAVE": 0.1181,
+   "A4_SUBSUME": 0.1056,
+   "SAFE_U_SRC": 0.1519
+  },
+  "musique_clean": {
+   "SAFE_POOL": 0.32,
+   "A1_SRC_ASSIGN": 0.1733,
+   "A2_HYBRID_ADMIT": 0.1733,
+   "A3_INTERLEAVE": 0.28,
+   "A4_SUBSUME": 0.2133,
+   "SAFE_U_SRC": 0.4133
+  },
+  "2wiki_clean": {
+   "SAFE_POOL": 0.1624,
+   "A1_SRC_ASSIGN": 0.1368,
+   "A2_HYBRID_ADMIT": 0.1368,
+   "A3_INTERLEAVE": 0.1453,
+   "A4_SUBSUME": 0.1538,
+   "SAFE_U_SRC": 0.2308
+  },
+  "hotpotqa_clean": {
+   "SAFE_POOL": 0.2885,
+   "A1_SRC_ASSIGN": 0.1923,
+   "A2_HYBRID_ADMIT": 0.2308,
+   "A3_INTERLEAVE": 0.1827,
+   "A4_SUBSUME": 0.2019,
+   "SAFE_U_SRC": 0.375
+  },
+  "squad_clean": {
+   "SAFE_POOL": 0.56,
+   "A1_SRC_ASSIGN": 0.16,
+   "A2_HYBRID_ADMIT": 0.16,
+   "A3_INTERLEAVE": 0.28,
+   "A4_SUBSUME": 0.16,
+   "SAFE_U_SRC": 0.56
+  }
+ },
+ "POOL_ORACLE_B6_ALL": {
+  "metaqa": {
+   "SAFE_POOL": 0.7212,
+   "A1_SRC_ASSIGN": 0.7392,
+   "A2_HYBRID_ADMIT": 0.7392,
+   "A3_INTERLEAVE": 0.7327,
+   "A4_SUBSUME": 0.7347,
+   "SAFE_U_SRC": 0.7643
+  },
+  "webqsp": {
+   "SAFE_POOL": 0.7886,
+   "A1_SRC_ASSIGN": 0.7801,
+   "A2_HYBRID_ADMIT": 0.7822,
+   "A3_INTERLEAVE": 0.7935,
+   "A4_SUBSUME": 0.79,
+   "SAFE_U_SRC": 0.8048
+  },
+  "musique_clean": {
+   "SAFE_POOL": 0.975,
+   "A1_SRC_ASSIGN": 0.958,
+   "A2_HYBRID_ADMIT": 0.959,
+   "A3_INTERLEAVE": 0.9695,
+   "A4_SUBSUME": 0.9695,
+   "SAFE_U_SRC": 0.9785
+  },
+  "2wiki_clean": {
+   "SAFE_POOL": 0.9515,
+   "A1_SRC_ASSIGN": 0.94,
+   "A2_HYBRID_ADMIT": 0.9455,
+   "A3_INTERLEAVE": 0.9465,
+   "A4_SUBSUME": 0.951,
+   "SAFE_U_SRC": 0.9555
+  },
+  "hotpotqa_clean": {
+   "SAFE_POOL": 0.9645,
+   "A1_SRC_ASSIGN": 0.942,
+   "A2_HYBRID_ADMIT": 0.946,
+   "A3_INTERLEAVE": 0.949,
+   "A4_SUBSUME": 0.951,
+   "SAFE_U_SRC": 0.969
+  },
+  "squad_clean": {
+   "SAFE_POOL": 0.9945,
+   "A1_SRC_ASSIGN": 0.982,
+   "A2_HYBRID_ADMIT": 0.9855,
+   "A3_INTERLEAVE": 0.988,
+   "A4_SUBSUME": 0.9855,
+   "SAFE_U_SRC": 0.9945
+  }
+ },
+ "EVICTION_LEDGER_F6": {
+  "metaqa/A2_HYBRID_ADMIT": {
+   "gain": 15,
+   "loss": 2,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "metaqa/A3_INTERLEAVE": {
+   "gain": 11,
+   "loss": 0,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "metaqa/A4_SUBSUME": {
+   "gain": 7,
+   "loss": 0,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "webqsp/A2_HYBRID_ADMIT": {
+   "gain": 4,
+   "loss": 8,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "webqsp/A3_INTERLEAVE": {
+   "gain": 4,
+   "loss": 3,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "webqsp/A4_SUBSUME": {
+   "gain": 3,
+   "loss": 2,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "musique_clean/A2_HYBRID_ADMIT": {
+   "gain": 2,
+   "loss": 20,
+   "gain_NEWLY_admitted": 1,
+   "loss_still_in_pool": 0
+  },
+  "musique_clean/A3_INTERLEAVE": {
+   "gain": 1,
+   "loss": 8,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "musique_clean/A4_SUBSUME": {
+   "gain": 2,
+   "loss": 3,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "2wiki_clean/A2_HYBRID_ADMIT": {
+   "gain": 1,
+   "loss": 11,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "2wiki_clean/A3_INTERLEAVE": {
+   "gain": 0,
+   "loss": 10,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "2wiki_clean/A4_SUBSUME": {
+   "gain": 1,
+   "loss": 2,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "hotpotqa_clean/A2_HYBRID_ADMIT": {
+   "gain": 10,
+   "loss": 31,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "hotpotqa_clean/A3_INTERLEAVE": {
+   "gain": 4,
+   "loss": 21,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "hotpotqa_clean/A4_SUBSUME": {
+   "gain": 7,
+   "loss": 19,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "squad_clean/A2_HYBRID_ADMIT": {
+   "gain": 2,
+   "loss": 8,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "squad_clean/A3_INTERLEAVE": {
+   "gain": 1,
+   "loss": 6,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  },
+  "squad_clean/A4_SUBSUME": {
+   "gain": 0,
+   "loss": 8,
+   "gain_NEWLY_admitted": 0,
+   "loss_still_in_pool": 0
+  }
+ },
+ "GAINS_FROM_NEWLY_ADMITTED_PARTITIONS": {
+  "total_gains": 75,
+  "of_which_newly_admitted": 1,
+  "losses_still_in_pool": 0,
+  "total_losses": 162
+ },
+ "STEP7_NO_SRC_PRESERVATION": {
+  "metaqa": 0.0,
+  "webqsp": 0.0,
+  "musique_clean": 0.0,
+  "2wiki_clean": 0.0,
+  "hotpotqa_clean": 0.0,
+  "squad_clean": 0.0
+ },
+ "STEP7_ANSWER": "NO -- 0.0000 on all six; the hybrid preserves none of the NO_SRC_ATOM partitions G4 loses",
+ "STEP8_APPLICABILITY": {
+  "inference_safe_macro_abs_AUC_minus_half": {
+   "src_atoms": 0.1356,
+   "src_targets": 0.2408,
+   "src_conc": 0.1785,
+   "src_safe_overlap": 0.1663,
+   "src_dense_agree": 0.1419,
+   "src_splade_agree": 0.1981,
+   "src_targets_per_source": 0.2309
+  },
+  "sign_of_effect_flips_across_corpora": true,
+  "ORACLE_CONTROL_frac_missing_with_SRC_atom_AUC": {
+   "metaqa": 1.0,
+   "webqsp": 1.0,
+   "musique_clean": 1.0,
+   "2wiki_clean": 1.0,
+   "hotpotqa_clean": 0.85,
+   "squad_clean": 1.0
+  },
+  "note": "the only separating statistic reads gold, so it is an oracle control, not a usable gate"
+ },
+ "SIGNIFICANT_REGRESSIONS_ALL_VARIANTS": [
+  "musique_clean/A2_HYBRID_ADMIT+F6 net -18 p=0.0001",
+  "musique_clean/A2_HYBRID_ADMIT+G4 net -20 p=0.0001",
+  "musique_clean/A3_INTERLEAVE+F6 net -7 p=0.0391",
+  "musique_clean/A3_INTERLEAVE+G4 net -12 p=0.0018",
+  "2wiki_clean/A2_HYBRID_ADMIT+F6 net -10 p=0.0063",
+  "2wiki_clean/A2_HYBRID_ADMIT+G4 net -9 p=0.0352",
+  "2wiki_clean/A3_INTERLEAVE+F6 net -10 p=0.0019",
+  "hotpotqa_clean/A2_HYBRID_ADMIT+F6 net -21 p=0.0014",
+  "hotpotqa_clean/A2_HYBRID_ADMIT+G4 net -28 p=0.0",
+  "hotpotqa_clean/A3_INTERLEAVE+F6 net -17 p=0.0009",
+  "hotpotqa_clean/A3_INTERLEAVE+G4 net -34 p=0.0",
+  "hotpotqa_clean/A4_SUBSUME+F6 net -12 p=0.029",
+  "hotpotqa_clean/A4_SUBSUME+G4 net -34 p=0.0",
+  "squad_clean/A4_SUBSUME+F6 net -8 p=0.0078",
+  "squad_clean/A4_SUBSUME+G4 net -8 p=0.0215"
+ ],
+ "BEST_BEHAVED_VARIANT": {
+  "name": "A4_SUBSUME+F6",
+  "metaqa_ALL": "0.6647 +7 (7/0) p=0.0156 SIG",
+  "metaqa_hop3": "0.2643 +4 (4/0) p=0.125 ns",
+  "still_sig_regresses": [
+   "hotpotqa_clean -12 p=0.0067",
+   "squad_clean -8 p=0.0078"
+  ]
+ },
+ "LATENCY_MS_PER_Q": {
+  "metaqa": {
+   "frozen_admit": 0.0893,
+   "a1": 0.3459,
+   "a2": 0.1049,
+   "a3": 0.027,
+   "a4": 0.2843,
+   "F6": 0.1456,
+   "G4": 0.5056
+  },
+  "webqsp": {
+   "frozen_admit": 0.0506,
+   "a1": 0.224,
+   "a2": 0.0768,
+   "a3": 0.0157,
+   "a4": 0.1338,
+   "F6": 0.0789,
+   "G4": 0.3248
+  },
+  "musique_clean": {
+   "frozen_admit": 0.0572,
+   "a1": 0.5925,
+   "a2": 0.1334,
+   "a3": 0.0178,
+   "a4": 0.1864,
+   "F6": 0.0774,
+   "G4": 0.5507
+  },
+  "2wiki_clean": {
+   "frozen_admit": 0.1033,
+   "a1": 0.3523,
+   "a2": 0.143,
+   "a3": 0.0332,
+   "a4": 0.2896,
+   "F6": 0.1661,
+   "G4": 0.6173
+  },
+  "hotpotqa_clean": {
+   "frozen_admit": 0.136,
+   "a1": 0.5017,
+   "a2": 0.1942,
+   "a3": 0.0434,
+   "a4": 0.4151,
+   "F6": 0.2302,
+   "G4": 0.8558
+  },
+  "squad_clean": {
+   "frozen_admit": 0.039,
+   "a1": 0.2734,
+   "a2": 0.0966,
+   "a3": 0.0117,
+   "a4": 0.1154,
+   "F6": 0.0526,
+   "G4": 0.3772
+  }
+ },
+ "ADMISSION_OVERHEAD_PCT_OF_L1": {
+  "A2": 2.9,
+  "A3": 2.4,
+  "A4": 4.05,
+  "L1_frozen_total_ms": 15.565,
+  "target": "<5% preferred, <10% ceiling",
+  "meets_preferred": true
+ },
+ "PROMOTED": "NONE",
+ "L1_FROZEN": "NO",
+ "VERDICT": "C. CURRENT_ADMISSION_EVIDENCE_EXHAUSTED",
+ "VERDICT_BASIS": [
+  "cross-corpus gate fails: every variant is <= frozen SAFE on 5 of 6 corpora, with significant regressions on musique/2wiki/hotpot (A2), musique/2wiki/hotpot (A3) and hotpot/squad (A4)",
+  "the SRC channel is a WORSE admission signal than the frozen admission on 4 of 6 corpora (MISSING_REQUIRED_ADMISSION_RECALL falls on musique, 2wiki, hotpot, squad)",
+  "1 of 66 realized gains across all corpora and variants came from a newly admitted partition; the other 65 were already in the frozen pool and rose only because a competitor was evicted",
+  "all 143 losses are evictions (loss_still_in_pool = 0 everywhere), never ranking misses",
+  "even A4, which is provably lossless in evidence terms, still sig-regresses two corpora: evidence subsumption does not imply requirement subsumption",
+  "no inference-safe query-local statistic separates the gain regime from the loss regime (macro |AUC-0.5| 0.14-0.24, sign flips across corpora); the only separator reads gold"
+ ],
+ "WHAT_REMAINS_TRUE": [
+  "SRC evidence is genuinely ADDITIVE: the SAFE_U_SRC union pool beats the frozen pool on missing-required recall on all six corpora and on the B6 pool oracle on all six",
+  "the binding constraint is the fixed production pool size K(q), which forces an exchange, and nothing in the current evidence predicts which side of that exchange is required",
+  "B is dormant now (O2-O1 = 0.0000 on 5/6, 0.0010 metaqa) and becomes a real secondary bottleneck only after the universe is repaired, and only on metaqa (O4-O3 = 0.1862 hop3) and webqsp (0.0169); O4-O3 = 0.0000 exactly on musique, 2wiki, hotpot, squad"
+ ]
+}

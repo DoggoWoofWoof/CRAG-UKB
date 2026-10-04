@@ -1,0 +1,242 @@
+{
+ "RECORD": "ML_S_CELL",
+ "dataset": "webqsp",
+ "tag": "ML_S_k1000",
+ "K": 1000,
+ "utc": "2026-09-30T09:54:24Z",
+ "params": {
+  "Wmax": 32,
+  "Lmax": 200,
+  "R": 10.0,
+  "MAXLEVELS": 8,
+  "MIN_GAIN": 0.05,
+  "twins": "open"
+ },
+ "cn_params": {
+  "sweeps": 10,
+  "T": 4,
+  "dmax": 5000
+ },
+ "clusters": {
+  "file": "results/FREEBASE_SCALE/ml/webqsp__ML_S__clusters.npy",
+  "sha256": "618b464a3348bb9b6a84f01d1e1bda91d0b2c862e31debc1e4d9c656f78f203b",
+  "run_json_sha256": "f22033f5c74060d5c8f8a91d3901e4b1f04f188f1eca19cb7912c07f160f36b8"
+ },
+ "fine_hypergraph": {
+  "file": "results/FREEBASE_SCALE/parts_S/webqsp__H4_S_k1000.npz",
+  "sha256": "ae89716faba22b6d88ccda8f32fa167485d046d8ec0e5695671ef488117840c1",
+  "N": 2592894,
+  "M": 2593446,
+  "P": 14358448
+ },
+ "coarse_hypergraph": {
+  "V": 115105,
+  "M_in": 2593446,
+  "P_in": 14358448,
+  "nets_dropped_singleton": 827589,
+  "nets_merged_identical": 1035850,
+  "M": 730007,
+  "P": 5790018,
+  "weight_conserved_vertex": true,
+  "pin_reduction": 2.48
+ },
+ "driver": {
+  "binary": {
+   "path": "/home/student2/phg_build_crag/phg_driver_vw",
+   "sha256": "9c1046e1539a7a392a897201d03d477bb3eb2e60bd331bdc34c6113fbc63421e"
+  },
+  "source_sha256": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4",
+  "parameters": [
+   [
+    "DEBUG_LEVEL",
+    "0"
+   ],
+   [
+    "NUM_GID_ENTRIES",
+    "1"
+   ],
+   [
+    "NUM_LID_ENTRIES",
+    "1"
+   ],
+   [
+    "OBJ_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "EDGE_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "DETERMINISTIC",
+    "1"
+   ],
+   [
+    "RETURN_LISTS",
+    "PARTS"
+   ],
+   [
+    "REMAP",
+    "0"
+   ],
+   [
+    "LB_METHOD",
+    "HYPERGRAPH"
+   ],
+   [
+    "HYPERGRAPH_PACKAGE",
+    "PHG"
+   ],
+   [
+    "LB_APPROACH",
+    "PARTITION"
+   ],
+   [
+    "IMBALANCE_TOL",
+    "1.03"
+   ],
+   [
+    "PHG_CUT_OBJECTIVE",
+    "CONNECTIVITY"
+   ],
+   [
+    "PHG_EDGE_SIZE_THRESHOLD",
+    "1.0"
+   ],
+   [
+    "PHG_RANDOMIZE_INPUT",
+    "0"
+   ],
+   [
+    "PHG_MULTILEVEL",
+    "1"
+   ],
+   [
+    "PHG_COARSENING_METHOD",
+    "AGG"
+   ],
+   [
+    "PHG_COARSEPARTITION_METHOD",
+    "AUTO"
+   ],
+   [
+    "PHG_REFINEMENT_METHOD",
+    "FM"
+   ],
+   [
+    "PHG_REFINEMENT_QUALITY",
+    "1"
+   ],
+   [
+    "PHG_EDGE_WEIGHT_OPERATION",
+    "ERROR"
+   ],
+   [
+    "PHG_PROCESSOR_REDUCTION_LIMIT",
+    "0.5"
+   ],
+   [
+    "PHG_REPART_MULTIPLIER",
+    "100"
+   ],
+   [
+    "CHECK_HYPERGRAPH",
+    "1"
+   ],
+   [
+    "PHG_OUTPUT_LEVEL",
+    "1"
+   ]
+  ],
+  "NP": 4
+ },
+ "phg_coarse": {
+  "name": "R1_ML_S_k1000",
+  "mode": "partition",
+  "np": 4,
+  "rc": 0,
+  "wall_seconds_outer": 170.01,
+  "memory": {
+   "peak_rss_kb_per_rank_time_v": [
+    158032,
+    193156,
+    167472,
+    225516
+   ],
+   "ru_maxrss_kb_per_rank": [
+    158032,
+    193156,
+    167472,
+    225516
+   ],
+   "max_rank_peak_kb": 225516,
+   "sum_of_rank_peaks_kb": 744176,
+   "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+  },
+  "timing": {
+   "partition_wall_seconds": 14.731,
+   "driver_total_seconds_rank0": 34.616,
+   "load_seconds_per_rank": [
+    1.513,
+    1.039,
+    3.683,
+    14.391
+   ],
+   "job_wall_seconds": 169.93
+  },
+  "zoltan_eval": {
+   "cutl_global": 421752928.0,
+   "cutn_global": 286676704.0,
+   "imbalance": 1.036294,
+   "obj_imbalance": 9.452239,
+   "nobj_min": 0.0,
+   "nobj_max": 1088.0,
+   "nobj_sum": 115105.0
+  },
+  "zoltan_removed_or_warning_lines": []
+ },
+ "coarse_km1": 421752936,
+ "zoltan_cutl_vs_python_km1_rel": 2e-08,
+ "repair": {
+  "empty_blocks": [
+   749,
+   874,
+   937,
+   982,
+   994,
+   996
+  ],
+  "moves": 6
+ },
+ "projection": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 2687,
+   "contract_bound_ceil_1.03_N_over_k": 2671,
+   "zoltan_tolerance_bound_1.03_x_mean": 2670.681,
+   "gate": "PARTITION_INVALID"
+  },
+  "km1_weighted": 421752942,
+  "lambda_mean": 2.1799,
+  "blocks": {
+   "k": 1000,
+   "used": 1000,
+   "empty": 0,
+   "min": 1,
+   "p50": 2667.0,
+   "p95": 2670.0,
+   "max": 2687,
+   "mean": 2592.894,
+   "ceil_N_over_k": 2593,
+   "max_over_mean": 1.0363,
+   "eps_actual(max/ceil(N/k)-1)": 0.0363,
+   "freight_upper_bound": 2671,
+   "within_eps_0.03": false
+  },
+  "blocks_per_net_unweighted": 2.1799
+ },
+ "STATUS": "PARTITION_INVALID",
+ "wall_seconds": 216.2
+}

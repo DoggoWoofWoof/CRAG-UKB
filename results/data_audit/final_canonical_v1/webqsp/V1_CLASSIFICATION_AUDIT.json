@@ -1,0 +1,254 @@
+{
+  "schema": "V1_CLASSIFICATION_AUDIT/v1",
+  "generated_utc": "2026-09-06T06:31:38Z",
+  "rule_version": "webqsp_v1_section3/v1",
+  "classifier_modified_by_this_audit": false,
+  "CONTROL_false_positive": {
+    "named_nodes_with_outgoing_edges": 533758,
+    "falsely_called_mediator_like": 238,
+    "false_positive_pct": 0.0446,
+    "prior_audit_reported": {
+      "denominator": 533758,
+      "false_positives": 238,
+      "pct": 0.045
+    },
+    "meaning": "These nodes provably HAVE a Freebase name (RoG rendered it), so any that the structural test calls mediator-like are errors of the test itself."
+  },
+  "TOPOLOGY_BY_KIND": {
+    "READABLE_ENTITY": {
+      "degree": {
+        "n": 925761,
+        "mean": 13.641,
+        "median": 3.0,
+        "p10": 1.0,
+        "p90": 19.0,
+        "max": 137000
+      },
+      "out_degree": {
+        "n": 925761,
+        "mean": 6.916,
+        "median": 2.0,
+        "p10": 0.0,
+        "p90": 13.0,
+        "max": 2186
+      },
+      "in_degree": {
+        "n": 925761,
+        "mean": 6.724,
+        "median": 1.0,
+        "p10": 1.0,
+        "p90": 6.0,
+        "max": 134935
+      },
+      "leaf_pct": 42.344
+    },
+    "CVT_MEDIATOR": {
+      "degree": {
+        "n": 1588085,
+        "mean": 2.272,
+        "median": 2.0,
+        "p10": 1.0,
+        "p90": 4.0,
+        "max": 205
+      },
+      "out_degree": {
+        "n": 1588085,
+        "mean": 1.05,
+        "median": 1.0,
+        "p10": 0.0,
+        "p90": 3.0,
+        "max": 103
+      },
+      "in_degree": {
+        "n": 1588085,
+        "mean": 1.222,
+        "median": 1.0,
+        "p10": 1.0,
+        "p90": 2.0,
+        "max": 126
+      },
+      "leaf_pct": 39.101
+    },
+    "MID_NAMED_ENTITY": {
+      "degree": {
+        "n": 62375,
+        "mean": 5.173,
+        "median": 4.0,
+        "p10": 1.0,
+        "p90": 10.0,
+        "max": 2296
+      },
+      "out_degree": {
+        "n": 62375,
+        "mean": 3.316,
+        "median": 3.0,
+        "p10": 0.0,
+        "p90": 7.0,
+        "max": 99
+      },
+      "in_degree": {
+        "n": 62375,
+        "mean": 1.857,
+        "median": 1.0,
+        "p10": 1.0,
+        "p90": 3.0,
+        "max": 2296
+      },
+      "leaf_pct": 24.104
+    },
+    "VALUE_LITERAL": {
+      "degree": {
+        "n": 14515,
+        "mean": 3.629,
+        "median": 1.0,
+        "p10": 1.0,
+        "p90": 8.0,
+        "max": 572
+      },
+      "out_degree": {
+        "n": 14515,
+        "mean": 1.984,
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 6.0,
+        "max": 294
+      },
+      "in_degree": {
+        "n": 14515,
+        "mean": 1.645,
+        "median": 1.0,
+        "p10": 1.0,
+        "p90": 2.0,
+        "max": 278
+      },
+      "leaf_pct": 61.66
+    },
+    "UNRESOLVED_OTHER": {
+      "degree": {
+        "n": 2158,
+        "mean": 3.476,
+        "median": 4.0,
+        "p10": 2.0,
+        "p90": 4.0,
+        "max": 9
+      },
+      "out_degree": {
+        "n": 2158,
+        "mean": 1.764,
+        "median": 2.0,
+        "p10": 1.0,
+        "p90": 2.0,
+        "max": 7
+      },
+      "in_degree": {
+        "n": 2158,
+        "mean": 1.712,
+        "median": 2.0,
+        "p10": 1.0,
+        "p90": 2.0,
+        "max": 4
+      },
+      "leaf_pct": 4.634
+    }
+  },
+  "topology_note": "Diagnostic only. Directive section 14: do not modify topology on the strength of these numbers.",
+  "NAME_RESOLVABLE_BAND": {
+    "band": [
+      19566,
+      62375
+    ],
+    "prior_audit_band": [
+      19566,
+      62375
+    ],
+    "reproduces_prior_band": [
+      true,
+      true
+    ],
+    "lower_end_rule": "both available signals call it ordinary (pass 1 AND pass 2, or pass 2 alone where the node has no outgoing edges)",
+    "upper_end_rule": "either signal calls it ordinary -- the merged label",
+    "persisted_to": "data/final_canonical/webqsp/v1/name_resolvable_band.parquet",
+    "why_this_matters": "The prior audit published the band as COUNTS only, which is why NAME_MAPPING_COVERAGE_OF_NAME_RESOLVABLE_BAND could not be computed and was carried as a debt. It is now a node list."
+  },
+  "NAME_MAPPING_COVERAGE_OF_NAME_RESOLVABLE_BAND": {
+    "status": "MEASURED",
+    "supersedes": "the EXACT_INTERSECTION_NOT_COMPUTABLE_YET entry in NAME_MAPPING_COVERAGE.json",
+    "at_lower_end": {
+      "denominator": 19566,
+      "named_by_entities_names_json": 0,
+      "pct": 0.0
+    },
+    "at_upper_end": {
+      "denominator": 62375,
+      "named_by_entities_names_json": 0,
+      "pct": 0.0
+    },
+    "reported_at_both_ends_never_one": true,
+    "reading": "Consistent with NAME_MAPPING_PRESENT_N = 0 over the whole bare-MID population. The structural expectation recorded in NAME_MAPPING_COVERAGE (band leaves are overwhelmingly g. ids, and the file has zero g. entries) is now confirmed by direct measurement rather than asserted."
+  },
+  "MID_CLASS_BY_PREFIX": {
+    "CVT_MEDIATOR": {
+      "m.": 1197417,
+      "g.": 390668
+    },
+    "MID_NAMED_ENTITY": {
+      "m.": 47739,
+      "g.": 14636
+    },
+    "UNRESOLVED_OTHER": {
+      "m.": 2105,
+      "g.": 53
+    }
+  },
+  "SECTION_13_TARGET_STATUS": {
+    "ORDINARY_ENTITY_UNRESOLVED_N": 62375,
+    "target": 0,
+    "met": false,
+    "declared_before_running": "V1_SECTION3_CLASSIFIER_FREEZE.json -> MID_NAMED_ENTITY_SEMANTICS_WARNING",
+    "cause": "No naming source reaches these nodes. entities_names.json names 0 of them at either end of the band, and it carries no g. entries at all while the band is overwhelmingly g. ids. Directive section 16 governs: document the upstream collapse, do NOT guess MIDs.",
+    "what_would_close_it": "A Freebase metadata source covering g. machine ids. The only identified candidates are the 63.84 GiB FastRDFStore bundle and a full Freebase dump, both explicitly forbidden by directive section 5 for this phase."
+  },
+  "elapsed_s": 22.0,
+  "CORRECTIONS_TO_RATIONALE_TEXT": [
+    {
+      "correction_id": "BAND_PREFIX_COMPOSITION_2026_09_06",
+      "what_was_claimed": "That the NAME_RESOLVABLE band is 'overwhelmingly g. machine ids'. This assistant repeated that gloss from the 2026-09-05 pipeline audit into the section 3 freeze document and the classification audit.",
+      "what_is_actually_true": {
+        "whole_band": {
+          "n": 62375,
+          "m.": 47739,
+          "g.": 14636,
+          "g_pct": 23.5
+        },
+        "leaf_subset_decided_by_pass_2": {
+          "n": 15035,
+          "m.": 399,
+          "g.": 14636,
+          "g_pct": 97.3
+        },
+        "subset_decided_by_pass_1": {
+          "n": 47340,
+          "m.": 47340,
+          "g.": 0,
+          "g_pct": 0.0
+        }
+      },
+      "diagnosis": "The prior audit's sentence was about the LEAVES it was discussing, where it is correct at 97.3%. Generalising it to the whole band was this assistant's error. The band is 76.5% m., and it splits perfectly by classification pass.",
+      "why_the_split_is_perfect": "Not one of the 405,358 g. MIDs in the released RoG graph has an outgoing edge -- 0.00%, against 81.50% of m. MIDs. So pass 1, which reads outgoing types, can never see a g. node, and every g. node is necessarily decided by pass 2.",
+      "STRUCTURAL_FACT_g_MIDS_HAVE_NO_OUT_EDGES": {
+        "m_total": 1247264,
+        "m_with_out_edges": 1016520,
+        "m_pct": 81.5,
+        "g_total": 405358,
+        "g_with_out_edges": 0,
+        "g_pct": 0.0,
+        "status": "MEASURED on the released RoG v1 tables",
+        "interpretation": "UNKNOWN which of two causes this is, and the released graph cannot separate them: (a) a genuine property of Freebase g. objects, which are late-added and may only ever appear as targets; or (b) an artefact of RoG's extraction, which may only have expanded outward from m. seeds. A boundary/cap effect is a poor fit because it would truncate BOTH prefixes, and m. sits at 81.5% while g. is exactly 0.",
+        "consequence": "All g. classification rests entirely on incoming-relation range evidence. The pass-1/pass-2 cross-validation agreement of 95.75% therefore says nothing about g. nodes -- there is no second signal for them."
+      },
+      "why_it_matters_for_section_13": "It splits ORDINARY_ENTITY_UNRESOLVED_N = 62,375 into two populations with DIFFERENT causes, which the single 'no g. entries' explanation wrongly merged: 14,636 g. nodes that entities_names.json structurally cannot name (it holds no g. keys at all), and 47,739 m. nodes it could hold and simply does not. The second group is the file's incompleteness, not a structural barrier -- so a more complete m. naming source would reduce, though not close, the section 13 gap.",
+      "classifier_unaffected": "This corrects RATIONALE TEXT only. No threshold, rule, mapping or label changed; NODE_KIND_HASH is unchanged."
+    }
+  ],
+  "_correction_policy": "Corrections are APPENDED, never applied by editing the original text. The superseded wording stays visible so the record shows what was believed when the rule was frozen."
+}

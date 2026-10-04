@@ -1,0 +1,130 @@
+{
+ "stage": "L3_HOST",
+ "addendum": 6,
+ "amends": {
+  "declaration": {
+   "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1.json",
+   "sha256": "37ff06f7bb0ae203923e0956ec767df9e8fc2f20753a3ecf945d6d714e2cd9a9"
+  },
+  "addenda": [
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_1.json",
+    "sha256": "12642119363d99e1851eefe3b43d92414cb3d53be3ea0a32e8a0361116f75b9c"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_2.json",
+    "sha256": "c12815c69a5372337a755512f8a590e843241d0252a923244eb35539676cfcd9"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_3.json",
+    "sha256": "78e0644b88048ed33c6e166fb315bcaaca6d091fb4b7e8ad79d5719d23b0702d"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_4.json",
+    "sha256": "854a483a9f44a281ee100dfa3da662f53a9cfd9e2c57a5793f9f3c277198aed0"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_5.json",
+    "sha256": "5de9f9bd2147a1b927fc449db518eda186b5d83c8967a1a84c572a905bcbb99f"
+   }
+  ],
+  "authorization": {
+   "path": "results/L3_HOST/HOST_STAGE_AUTHORIZATION__L3_HOST__2026-09-29.json",
+   "sha256": "cb94b481eeb282a120794376b9ff9438d58516ff55162353658f3836d6cdbb7e"
+  }
+ },
+ "declared": "2026-09-29T19:55:49+05:30",
+ "user_direction": [
+  "wtf then just download the model there why are you prefering the slow laptop when you have a fast cpu and gpu",
+  "you have the second highest priority for cpu and gpu you should never wait unless mpr and finish everything as fast as possible",
+  "gpu should be free if you need",
+  "bro preempt it, if the job is in a queue it should yield, you have the priority over jigsaw"
+ ],
+ "purpose": "E2 (REPORT section 40.15) scores relation names against the frozen canonical MetaQA query vectors, so the names must be encoded by the canonical encoders. This addendum declares the encoder setup on the host (the models of addendum 5, record results/L3_HOST/HF_DOWNLOAD__v1.json VERIFIED, 24 files, 7,993,483,339 B), a CPU load probe, the reproduction test that must pass before any encoding is used, and the RELENC run, which in addition needs a dated authorization naming the module and the passing test record.",
+ "download_record": {
+  "path": "results/L3_HOST/HF_DOWNLOAD__v1.json",
+  "sha256": "bd183aa007cdb7052f93946d179feecdf98c655b35993ac89d4c52e91a6a390b",
+  "status": "VERIFIED",
+  "seconds": 193.3,
+  "written_on": "the host (fetched back)"
+ },
+ "encoder_setup": {
+  "module": {
+   "path": "scratchpad/_enc_host.py",
+   "bytes": 28802,
+   "sha256": "d9373dfc74deab9736866c2a9fc9f11a11c47d7f29f267f44250f5765c652f2b"
+  },
+  "dense": "SentenceTransformer('Alibaba-NLP/gte-Qwen2-1.5B-instruct', revision a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644, trust_remote_code=True, cache_folder=<addendum-5 cache>, local_files_only=True, device='cuda').half(); encode(batch_size, normalize_embeddings=True).astype(float16); documents plain, queries prefixed with the frozen manifests' query_instruction (asserted equal); as src/experiments/canonical_encode.py _dense_encoder",
+  "dense_use_cache_false": "the remote modeling_qwen.py (written for transformers 4.41) builds a KV cache through DynamicCache.get_usable_length, absent from the host's transformers 4.57.3 (probed: from_legacy_cache present, get_usable_length absent). config.use_cache is set False after the load; a single forward pass does not read the cache, so the embeddings do not depend on it. The reproduction test measures the result against the frozen vectors either way.",
+  "splade": "AutoTokenizer / AutoModelForMaskedLM('naver/splade-cocondenser-ensembledistil', revision 49cf4c7b0db5b870a401ddf5e2669993ef3699c7) fp32 on cuda, eval; consecutive batches in input order; tok(b, truncation=True, max_length=256, padding=True); log1p(relu(logits)).max(dim=1) over every position (the canonical pools without the attention mask: SPLADE_POOLING_FINDING); CSR float32; as canonical_encode.py _splade_encoder. The test asserts the refs/main pytorch_model.bin and the 83f6dbef model.safetensors hold identical tensors.",
+  "offline": "HF_HUB_OFFLINE=1, TRANSFORMERS_OFFLINE=1, no token variable; HF_MODULES_CACHE inside the project's models dir",
+  "cache_dir": "C:/Users/Student2/rx/projects/crag/models/hf",
+  "modules_cache": "C:/Users/Student2/rx/projects/crag/models/hf_modules",
+  "env": "mpr-cu128@62fc45e9e1ba, read-only by name (probed: torch 2.8.0+cu128, transformers 4.57.3, sentence-transformers 5.2.0, huggingface_hub 0.36.0, safetensors 0.7.0, scipy 1.16.1, numpy 2.3.2, tokenizers 0.22.1, psutil 7.2.2; no flash_attn, no scikit-learn)",
+  "process_priority": "BELOW_NORMAL (psutil), as every L3_HOST job"
+ },
+ "probe": {
+  "what": "both encoders loaded on the CPU, two fixed strings encoded (no dataset data): the code path check before the GPU is asked for, so another project's job is not made to yield for a run that cannot load",
+  "job": "rx run -n crag-encprobe --env mpr-cu128 --cpus 4 --mem 16 --mem-hard 32 --timeout 3600 -- python -u scratchpad/_enc_host.py PROBE",
+  "record": "results/L3_HOST/ENC_PROBE__v1.json (a later attempt gets an _attemptN suffix; nothing overwritten)"
+ },
+ "reproduction_test": {
+  "job": "rx run -n crag-encrepro --env mpr-cu128 --gpus 1 --cpus 4 --mem 16 --mem-hard 32 --timeout 7200 -- python -u scratchpad/_enc_host.py REPRO",
+  "docs": "all 43,234 MetaQA node texts (nodes.jsonl 'text'), per canonical 40,000-row shard, dense batch 32 and splade batch 64 (scratchpad/c5_workers/metaqa_docs_*_00000.log), compared with the frozen doc shards 0 and 1 of both channels (manifest shas asserted).",
+  "pointer_index": "the archived materialisation pointers data/final_canonical/_history/materialize/metaqa__pointer_index__{dense,splade}.npz (shas equal the frozen manifests' pointer_index_sha256) show the phase-C stores in node order: dense row == position for all 43,234; splade row == position except 3,087 positions (3,083 case/accent variants of an earlier name, e.g. 'war' / 'War') that reuse the earlier position's row. The re-encoded batches therefore equal the canonical ones, and frozen splade position i is compared with the re-encoding at row[i]; the 3,087 at their own position are reported, not gated (another batch: the pooled-over-padding effect).",
+  "queries": "the 1,998 L1_DEV population rows only (the rows of results/L3_DEV/l3typed_metaqa__v1.npz, sha asserted), each a dev row by its query id; their texts are parsed from those lines of queries/dev.jsonl only. Both fields (question, question_plain), population order, dense batch 32 / splade batch 64; frozen vectors of query shards 8 and 9 at those rows only. The canonical query batches (three per-hop stores) cannot be rebuilt without reading other rows, so splade queries are reported, not gated.",
+  "gate": {
+   "docs_cos_mean_min": 0.999,
+   "docs_cos_min_min": 0.99,
+   "docs_nn_hit_share_min": 0.999,
+   "queries_dense_cos_mean_min": 0.999,
+   "queries_dense_cos_min_min": 0.99,
+   "splade_weight_files_identical": true
+  },
+  "gate_reading": "PASS iff: dense docs and splade docs each have mean cosine >= 0.999, min cosine >= 0.99 and a nearest frozen doc hit share >= 0.999 over all 43,234 (dense: the nearest frozen doc by inner product carries the same text; splade: the nearest by cosine holds the same stored row); the dense query field with the higher mean cosine has mean >= 0.999 and min >= 0.99; the two splade weight files hold identical tensors. Declared before any encoder ran on the host.",
+  "laptop_selftest_of_the_comparison_code": "the frozen stores compared with themselves: dense 43,234 equal; splade through the pointer 43,234 equal; nearest-row hits 43,234 of 43,234 by cosine (by raw dot product 43,098, so cosine was chosen)",
+  "record": "results/L3_HOST/ENC_REPRO__v1.json (write-once, written only by a completed run; exit 0 PASS, 1 FAIL)",
+  "rerun_rule": "a run that crashes writes nothing; a code change after a crash is recorded in a dated addendum before the next run; the gate is never changed after a run"
+ },
+ "gpu_sharing": "the GPU is shared through rx's reservation. At declaration another project's job (jigsaw 260929-193522-dev-mag-f993) held it; it runs under jigsaw's lowprio launcher with '--yield-to mpr,crag --confirm-s 10 --grace-s 60 --requeue', so a queued crag GPU job makes it checkpoint, exit 75 and requeue itself (the launcher's own protocol; nothing of that job is cancelled or touched by this stage). rx's priority map is not changed.",
+ "relenc": {
+  "job": "rx run -n crag-relenc --env mpr-cu128 --gpus 1 --cpus 4 --mem 16 --mem-hard 32 --timeout 7200 -- python -u scratchpad/_enc_host.py RELENC",
+  "requires": "REPRO status PASS with this module's sha, and results/L3_HOST/HOST_STAGE_AUTHORIZATION__L3_HOST_ENC__2026-09-29.json naming the module sha and the REPRO record sha",
+  "strings": "the structural relation_vocabulary of each frozen graph manifest (sha asserted), verbalised as label.replace('_',' ').replace('.',' '): MetaQA 9 labels plus the 72 ordered pairs of distinct relations '<r1>, <r2>'; WebQSP 7,058 labels",
+  "encoding": "documents (no prefix), each string alone (batch 1: no padding, so no vector depends on another string)",
+  "outputs": "results/L3_DEV/relenc_{metaqa,webqsp}__v1.{json,npz} (write-once; fetched back)",
+  "not_read": "no query row and no query text; relation labels only (corpus side)"
+ },
+ "pushed_in_addition": [
+  {
+   "path": "scratchpad/_enc_host.py",
+   "bytes": 28802,
+   "sha256": "d9373dfc74deab9736866c2a9fc9f11a11c47d7f29f267f44250f5765c652f2b"
+  },
+  {
+   "path": "data/final_canonical/_history/materialize/metaqa__pointer_index__dense.npz",
+   "bytes": 216668,
+   "sha256": "2551b902901e5b22eb6cfb9ab08060e8a9ecacf8e7fcc9abb267a06f830a43a3"
+  },
+  {
+   "path": "data/final_canonical/_history/materialize/metaqa__pointer_index__splade.npz",
+   "bytes": 216668,
+   "sha256": "d62ea8a7a8ee0f16922b0a06faed745969af05c4000887f6a92e082230fb9c31"
+  },
+  {
+   "path": "data/final_canonical/webqsp/graph/GRAPH_MANIFEST.json",
+   "bytes": 281499,
+   "sha256": "4130ad1fee08dac8c9a84a7cd4c2e56a2cbbd4909c97d932a723d13cd90a7a2c"
+  }
+ ],
+ "fetched": [
+  "results/L3_HOST/ENC_PROBE__v1*.json",
+  "results/L3_HOST/ENC_REPRO__v1.json",
+  "results/L3_DEV/relenc_metaqa__v1.json",
+  "results/L3_DEV/relenc_metaqa__v1.npz",
+  "results/L3_DEV/relenc_webqsp__v1.json",
+  "results/L3_DEV/relenc_webqsp__v1.npz"
+ ],
+ "not_scientific": "PROBE and REPRO are placement tests; RELENC encodes relation-name strings only. Nothing is evaluated under this addendum; the E2 harness is a later stage with its own placement test and addendum.",
+ "unchanged": "the bundle, the runner, the BLAS setting of addendum 2, the authorization's pins, every 'never' of the declaration; TEST and split B unread; reserved held-out rows unread"
+}

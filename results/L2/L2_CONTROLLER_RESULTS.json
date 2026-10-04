@@ -1,0 +1,902 @@
+{
+ "level": "VAL_ONLY",
+ "primary_metric": "NDCG@50",
+ "selection_rule": "primary NDCG@50, tie-break ALL@10 then ALL@50 (declared pre-training); init-inclusive (C0 floor)",
+ "loss": "multi-positive pairwise RankNet (every gold-neg pair equal weight)",
+ "table": {
+  "C0": {
+   "POOLED": {
+    "MRR": 0.9064,
+    "NDCG@50": 0.84,
+    "R@1": 0.3884,
+    "R@5": 0.7933,
+    "R@10": 0.8813,
+    "R@20": 0.9421,
+    "R@50": 0.9739,
+    "ANY@10": 0.9938,
+    "ANY@20": 0.9983,
+    "ANY@50": 0.9994,
+    "ALL@10": 0.7396,
+    "ALL@20": 0.8586,
+    "ALL@50": 0.9283
+   },
+   "2wiki_clean": {
+    "MRR": 0.9094,
+    "NDCG@50": 0.8198,
+    "R@1": 0.3923,
+    "R@5": 0.7465,
+    "R@10": 0.8477,
+    "R@20": 0.9202,
+    "R@50": 0.9652,
+    "ANY@10": 0.9927,
+    "ANY@20": 0.9987,
+    "ANY@50": 1.0,
+    "ALL@10": 0.6657,
+    "ALL@20": 0.793,
+    "ALL@50": 0.8913
+   },
+   "musique_clean": {
+    "MRR": 0.9041,
+    "NDCG@50": 0.8553,
+    "R@1": 0.3855,
+    "R@5": 0.8286,
+    "R@10": 0.9066,
+    "R@20": 0.9586,
+    "R@50": 0.9804,
+    "ANY@10": 0.9947,
+    "ANY@20": 0.998,
+    "ANY@50": 0.999,
+    "ALL@10": 0.7952,
+    "ALL@20": 0.9079,
+    "ALL@50": 0.9561
+   },
+   "gate": {
+    "mean_weight": {
+     "dense": 0.20000003345668016,
+     "splade": 0.20000003345668016,
+     "offset": 0.20000003345668016,
+     "mixture": 0.20000003345668016,
+     "relation": 0.20000003345668016
+    },
+    "entropy_mean": 1.6094379425048828,
+    "dominant_freq": {
+     "dense": 6985,
+     "splade": 0,
+     "offset": 0,
+     "mixture": 0,
+     "relation": 0
+    },
+    "relation_weight_by_signal": {
+     "0": 0.2000000332823198,
+     "1": 0.20000003358207546
+    }
+   }
+  },
+  "C0_norel": {
+   "POOLED": {
+    "MRR": 0.9243,
+    "NDCG@50": 0.8206,
+    "R@1": 0.4048,
+    "R@5": 0.7451,
+    "R@10": 0.8425,
+    "R@20": 0.9166,
+    "R@50": 0.95,
+    "ANY@10": 0.9927,
+    "ANY@20": 0.9977,
+    "ANY@50": 0.9994,
+    "ALL@10": 0.6726,
+    "ALL@20": 0.8106,
+    "ALL@50": 0.8726
+   },
+   "2wiki_clean": {
+    "MRR": 0.9284,
+    "NDCG@50": 0.7679,
+    "R@1": 0.4111,
+    "R@5": 0.6464,
+    "R@10": 0.7641,
+    "R@20": 0.8634,
+    "R@50": 0.9117,
+    "ANY@10": 0.99,
+    "ANY@20": 0.9973,
+    "ANY@50": 1.0,
+    "ALL@10": 0.5233,
+    "ALL@20": 0.6867,
+    "ALL@50": 0.767
+   },
+   "musique_clean": {
+    "MRR": 0.9212,
+    "NDCG@50": 0.8602,
+    "R@1": 0.4,
+    "R@5": 0.8195,
+    "R@10": 0.9016,
+    "R@20": 0.9567,
+    "R@50": 0.9789,
+    "ANY@10": 0.9947,
+    "ANY@20": 0.998,
+    "ANY@50": 0.999,
+    "ALL@10": 0.7849,
+    "ALL@20": 0.9039,
+    "ALL@50": 0.9521
+   },
+   "gate": {
+    "mean_weight": {
+     "dense": 0.25,
+     "splade": 0.25,
+     "offset": 0.25,
+     "mixture": 0.25,
+     "relation": 3.3750491954492345e-14
+    },
+    "entropy_mean": 1.3862943649291992,
+    "dominant_freq": {
+     "dense": 6985,
+     "splade": 0,
+     "offset": 0,
+     "mixture": 0,
+     "relation": 0
+    },
+    "relation_weight_by_signal": {
+     "0": 3.3750491952764594e-14,
+     "1": 3.3750491955734895e-14
+    }
+   }
+  },
+  "C1": {
+   "POOLED": {
+    "MRR": 0.9064,
+    "NDCG@50": 0.84,
+    "R@1": 0.3884,
+    "R@5": 0.7933,
+    "R@10": 0.8813,
+    "R@20": 0.9421,
+    "R@50": 0.9739,
+    "ANY@10": 0.9938,
+    "ANY@20": 0.9983,
+    "ANY@50": 0.9994,
+    "ALL@10": 0.7396,
+    "ALL@20": 0.8586,
+    "ALL@50": 0.9283
+   },
+   "2wiki_clean": {
+    "MRR": 0.9094,
+    "NDCG@50": 0.8198,
+    "R@1": 0.3923,
+    "R@5": 0.7465,
+    "R@10": 0.8477,
+    "R@20": 0.9202,
+    "R@50": 0.9652,
+    "ANY@10": 0.9927,
+    "ANY@20": 0.9987,
+    "ANY@50": 1.0,
+    "ALL@10": 0.6657,
+    "ALL@20": 0.793,
+    "ALL@50": 0.8913
+   },
+   "musique_clean": {
+    "MRR": 0.9041,
+    "NDCG@50": 0.8553,
+    "R@1": 0.3855,
+    "R@5": 0.8286,
+    "R@10": 0.9066,
+    "R@20": 0.9586,
+    "R@50": 0.9804,
+    "ANY@10": 0.9947,
+    "ANY@20": 0.998,
+    "ANY@50": 0.999,
+    "ALL@10": 0.7952,
+    "ALL@20": 0.9079,
+    "ALL@50": 0.9561
+   },
+   "gate": {
+    "mean_weight": {
+     "dense": 0.20000003345668016,
+     "splade": 0.20000003345668016,
+     "offset": 0.20000003345668016,
+     "mixture": 0.20000003345668016,
+     "relation": 0.20000003345668016
+    },
+    "entropy_mean": 1.6094379425048828,
+    "dominant_freq": {
+     "dense": 6985,
+     "splade": 0,
+     "offset": 0,
+     "mixture": 0,
+     "relation": 0
+    },
+    "relation_weight_by_signal": {
+     "0": 0.2000000332823198,
+     "1": 0.20000003358207546
+    }
+   },
+   "train_meta": {
+    "kind": "C1",
+    "epochs": 8,
+    "lr": 0.0003,
+    "lam": 0.0,
+    "best_sel": [
+     0.840045,
+     0.739585,
+     0.928275
+    ],
+    "pos_collisions": 0
+   },
+   "trained_trajectory": {
+    "init_ndcg": 0.84,
+    "trained_best_ndcg": 0.8341,
+    "trained_best_epoch": 0,
+    "trained_worst_ndcg": 0.7962,
+    "trained_worst_epoch": 7,
+    "final_epoch_ndcg": 0.7962,
+    "final_epoch_all50": 0.7266,
+    "selected": "init(=C0)"
+   }
+  },
+  "C2": {
+   "POOLED": {
+    "MRR": 0.9064,
+    "NDCG@50": 0.84,
+    "R@1": 0.3884,
+    "R@5": 0.7933,
+    "R@10": 0.8813,
+    "R@20": 0.9421,
+    "R@50": 0.9739,
+    "ANY@10": 0.9938,
+    "ANY@20": 0.9983,
+    "ANY@50": 0.9994,
+    "ALL@10": 0.7396,
+    "ALL@20": 0.8586,
+    "ALL@50": 0.9283
+   },
+   "2wiki_clean": {
+    "MRR": 0.9094,
+    "NDCG@50": 0.8198,
+    "R@1": 0.3923,
+    "R@5": 0.7465,
+    "R@10": 0.8477,
+    "R@20": 0.9202,
+    "R@50": 0.9652,
+    "ANY@10": 0.9927,
+    "ANY@20": 0.9987,
+    "ANY@50": 1.0,
+    "ALL@10": 0.6657,
+    "ALL@20": 0.793,
+    "ALL@50": 0.8913
+   },
+   "musique_clean": {
+    "MRR": 0.9041,
+    "NDCG@50": 0.8553,
+    "R@1": 0.3855,
+    "R@5": 0.8286,
+    "R@10": 0.9066,
+    "R@20": 0.9586,
+    "R@50": 0.9804,
+    "ANY@10": 0.9947,
+    "ANY@20": 0.998,
+    "ANY@50": 0.999,
+    "ALL@10": 0.7952,
+    "ALL@20": 0.9079,
+    "ALL@50": 0.9561
+   },
+   "gate": {
+    "mean_weight": {
+     "dense": 0.20000003345668016,
+     "splade": 0.20000003345668016,
+     "offset": 0.20000003345668016,
+     "mixture": 0.20000003345668016,
+     "relation": 0.20000003345668016
+    },
+    "entropy_mean": 1.6094379425048828,
+    "dominant_freq": {
+     "dense": 6985,
+     "splade": 0,
+     "offset": 0,
+     "mixture": 0,
+     "relation": 0
+    },
+    "relation_weight_by_signal": {
+     "0": 0.2000000332823198,
+     "1": 0.20000003358207546
+    }
+   },
+   "train_meta": {
+    "kind": "C2",
+    "epochs": 10,
+    "lr": 0.0003,
+    "lam": 0.0,
+    "best_sel": [
+     0.840045,
+     0.739585,
+     0.928275
+    ],
+    "pos_collisions": 0
+   },
+   "trained_trajectory": {
+    "init_ndcg": 0.84,
+    "trained_best_ndcg": 0.7884,
+    "trained_best_epoch": 8,
+    "trained_worst_ndcg": 0.7814,
+    "trained_worst_epoch": 1,
+    "final_epoch_ndcg": 0.787,
+    "final_epoch_all50": 0.6962,
+    "selected": "init(=C0)"
+   }
+  },
+  "C3": {
+   "POOLED": {
+    "MRR": 0.9064,
+    "NDCG@50": 0.84,
+    "R@1": 0.3884,
+    "R@5": 0.7933,
+    "R@10": 0.8813,
+    "R@20": 0.9421,
+    "R@50": 0.9739,
+    "ANY@10": 0.9938,
+    "ANY@20": 0.9983,
+    "ANY@50": 0.9994,
+    "ALL@10": 0.7396,
+    "ALL@20": 0.8586,
+    "ALL@50": 0.9283
+   },
+   "2wiki_clean": {
+    "MRR": 0.9094,
+    "NDCG@50": 0.8198,
+    "R@1": 0.3923,
+    "R@5": 0.7465,
+    "R@10": 0.8477,
+    "R@20": 0.9202,
+    "R@50": 0.9652,
+    "ANY@10": 0.9927,
+    "ANY@20": 0.9987,
+    "ANY@50": 1.0,
+    "ALL@10": 0.6657,
+    "ALL@20": 0.793,
+    "ALL@50": 0.8913
+   },
+   "musique_clean": {
+    "MRR": 0.9041,
+    "NDCG@50": 0.8553,
+    "R@1": 0.3855,
+    "R@5": 0.8286,
+    "R@10": 0.9066,
+    "R@20": 0.9586,
+    "R@50": 0.9804,
+    "ANY@10": 0.9947,
+    "ANY@20": 0.998,
+    "ANY@50": 0.999,
+    "ALL@10": 0.7952,
+    "ALL@20": 0.9079,
+    "ALL@50": 0.9561
+   },
+   "gate": {
+    "mean_weight": {
+     "dense": 0.2000000297809893,
+     "splade": 0.2000000297809893,
+     "offset": 0.2000000297809893,
+     "mixture": 0.2000000297809893,
+     "relation": 0.20000003345668016
+    },
+    "entropy_mean": 1.6094379425048828,
+    "dominant_freq": {
+     "dense": 4866,
+     "splade": 0,
+     "offset": 0,
+     "mixture": 0,
+     "relation": 2119
+    },
+    "relation_weight_by_signal": {
+     "0": 0.2000000332823198,
+     "1": 0.20000003358207546
+    }
+   },
+   "train_meta": {
+    "kind": "C3",
+    "epochs": 5,
+    "lr": 0.0003,
+    "lam": 0.0,
+    "best_sel": [
+     0.840045,
+     0.739585,
+     0.928275
+    ],
+    "pos_collisions": 0
+   },
+   "trained_trajectory": {
+    "init_ndcg": 0.84,
+    "trained_best_ndcg": 0.7815,
+    "trained_best_epoch": 0,
+    "trained_worst_ndcg": 0.7814,
+    "trained_worst_epoch": 1,
+    "final_epoch_ndcg": 0.7814,
+    "final_epoch_all50": 0.6766,
+    "selected": "init(=C0)"
+   }
+  },
+  "C4": {
+   "POOLED": {
+    "MRR": 0.9064,
+    "NDCG@50": 0.84,
+    "R@1": 0.3884,
+    "R@5": 0.7933,
+    "R@10": 0.8813,
+    "R@20": 0.9421,
+    "R@50": 0.9739,
+    "ANY@10": 0.9938,
+    "ANY@20": 0.9983,
+    "ANY@50": 0.9994,
+    "ALL@10": 0.7396,
+    "ALL@20": 0.8586,
+    "ALL@50": 0.9283
+   },
+   "2wiki_clean": {
+    "MRR": 0.9094,
+    "NDCG@50": 0.8198,
+    "R@1": 0.3923,
+    "R@5": 0.7465,
+    "R@10": 0.8477,
+    "R@20": 0.9202,
+    "R@50": 0.9652,
+    "ANY@10": 0.9927,
+    "ANY@20": 0.9987,
+    "ANY@50": 1.0,
+    "ALL@10": 0.6657,
+    "ALL@20": 0.793,
+    "ALL@50": 0.8913
+   },
+   "musique_clean": {
+    "MRR": 0.9041,
+    "NDCG@50": 0.8553,
+    "R@1": 0.3855,
+    "R@5": 0.8286,
+    "R@10": 0.9066,
+    "R@20": 0.9586,
+    "R@50": 0.9804,
+    "ANY@10": 0.9947,
+    "ANY@20": 0.998,
+    "ANY@50": 0.999,
+    "ALL@10": 0.7952,
+    "ALL@20": 0.9079,
+    "ALL@50": 0.9561
+   },
+   "gate": {
+    "mean_weight": {
+     "dense": 0.2000000297809893,
+     "splade": 0.2000000297809893,
+     "offset": 0.2000000297809893,
+     "mixture": 0.2000000297809893,
+     "relation": 0.20000003345668016
+    },
+    "entropy_mean": 1.6094379425048828,
+    "dominant_freq": {
+     "dense": 4866,
+     "splade": 0,
+     "offset": 0,
+     "mixture": 0,
+     "relation": 2119
+    },
+    "relation_weight_by_signal": {
+     "0": 0.2000000332823198,
+     "1": 0.20000003358207546
+    }
+   },
+   "train_meta": {
+    "kind": "C4",
+    "epochs": 5,
+    "lr": 0.0003,
+    "lam": 0.05,
+    "best_sel": [
+     0.840045,
+     0.739585,
+     0.928275
+    ],
+    "pos_collisions": 0
+   },
+   "trained_trajectory": {
+    "init_ndcg": 0.84,
+    "trained_best_ndcg": 0.8267,
+    "trained_best_epoch": 4,
+    "trained_worst_ndcg": 0.8039,
+    "trained_worst_epoch": 2,
+    "final_epoch_ndcg": 0.8267,
+    "final_epoch_all50": 0.7525,
+    "selected": "init(=C0)"
+   }
+  },
+  "C5": {
+   "POOLED": {
+    "MRR": 0.9064,
+    "NDCG@50": 0.84,
+    "R@1": 0.3884,
+    "R@5": 0.7933,
+    "R@10": 0.8813,
+    "R@20": 0.9421,
+    "R@50": 0.9739,
+    "ANY@10": 0.9938,
+    "ANY@20": 0.9983,
+    "ANY@50": 0.9994,
+    "ALL@10": 0.7396,
+    "ALL@20": 0.8586,
+    "ALL@50": 0.9283
+   },
+   "2wiki_clean": {
+    "MRR": 0.9094,
+    "NDCG@50": 0.8198,
+    "R@1": 0.3923,
+    "R@5": 0.7465,
+    "R@10": 0.8477,
+    "R@20": 0.9202,
+    "R@50": 0.9652,
+    "ANY@10": 0.9927,
+    "ANY@20": 0.9987,
+    "ANY@50": 1.0,
+    "ALL@10": 0.6657,
+    "ALL@20": 0.793,
+    "ALL@50": 0.8913
+   },
+   "musique_clean": {
+    "MRR": 0.9041,
+    "NDCG@50": 0.8553,
+    "R@1": 0.3855,
+    "R@5": 0.8286,
+    "R@10": 0.9066,
+    "R@20": 0.9586,
+    "R@50": 0.9804,
+    "ANY@10": 0.9947,
+    "ANY@20": 0.998,
+    "ANY@50": 0.999,
+    "ALL@10": 0.7952,
+    "ALL@20": 0.9079,
+    "ALL@50": 0.9561
+   },
+   "gate": {
+    "mean_weight": {
+     "dense": 0.2000000297809893,
+     "splade": 0.2000000297809893,
+     "offset": 0.2000000297809893,
+     "mixture": 0.2000000297809893,
+     "relation": 0.20000003345668016
+    },
+    "entropy_mean": 1.6094379425048828,
+    "dominant_freq": {
+     "dense": 4866,
+     "splade": 0,
+     "offset": 0,
+     "mixture": 0,
+     "relation": 2119
+    },
+    "relation_weight_by_signal": {
+     "0": 0.2000000332823198,
+     "1": 0.20000003358207546
+    }
+   },
+   "train_meta": {
+    "kind": "C4",
+    "epochs": 5,
+    "lr": 0.0003,
+    "lam": 0.05,
+    "best_sel": [
+     0.840045,
+     0.739585,
+     0.928275
+    ],
+    "pos_collisions": 0
+   },
+   "trained_trajectory": {
+    "init_ndcg": 0.84,
+    "trained_best_ndcg": 0.8383,
+    "trained_best_epoch": 4,
+    "trained_worst_ndcg": 0.8114,
+    "trained_worst_epoch": 0,
+    "final_epoch_ndcg": 0.8383,
+    "final_epoch_all50": 0.8067,
+    "selected": "init(=C0)"
+   }
+  }
+ },
+ "analysis": {
+  "bootstrap": {
+   "C0_vs_C1": {
+    "ndcg": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all10": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all50": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "mrr": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    }
+   },
+   "C0_vs_C2": {
+    "ndcg": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all10": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all50": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "mrr": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    }
+   },
+   "C2_vs_C3": {
+    "ndcg": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all10": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all50": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "mrr": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    }
+   },
+   "C3_vs_C4": {
+    "ndcg": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all10": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all50": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "mrr": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    }
+   },
+   "C0_vs_C3": {
+    "ndcg": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all10": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all50": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "mrr": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    }
+   },
+   "C0_vs_C4": {
+    "ndcg": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all10": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "all50": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    },
+    "mrr": {
+     "delta": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "frac_boot>0": 0.0,
+     "significant": false
+    }
+   }
+  },
+  "failure_analysis_best=C3": {
+   "n_worse": 0,
+   "n_total": 6985,
+   "frac_worse": 0.0,
+   "cause_buckets": {
+    "relation_misuse": 0,
+    "multigold_tradeoff": 0,
+    "topk_shuffle": 0,
+    "other": 0
+   },
+   "worse_pop": {
+    "frac_relation_gold_present": NaN,
+    "mean_disagreement": NaN,
+    "mean_gold_count": NaN
+   }
+  },
+  "relation_learned_best=C3": {
+   "mean_relation_weight_by_relation_gold_present": {
+    "True": 0.2,
+    "False": 0.2
+   },
+   "mean_relation_weight_by_any_signal": {
+    "True": 0.2,
+    "False": 0.2
+   }
+  },
+  "bootstrap_label": "SELECTED_CHECKPOINT_EQ_C0 (init-inclusive selection chose exact C0 state; zeros are NOT evidence trained trajectories equal C0 \u2014 they are significantly worse per history)"
+ },
+ "oracle_ceiling": {
+  "2wiki_clean": {
+   "equal": 0.8198,
+   "oracle_max": 0.8741,
+   "heuristic_relsig": 0.8215,
+   "oracle_gain": 0.0543
+  },
+  "musique_clean": {
+   "equal": 0.8552,
+   "oracle_max": 0.8836,
+   "heuristic_relsig": 0.8146,
+   "oracle_gain": 0.0283
+  },
+  "POOLED": {
+   "equal": 0.84,
+   "oracle_max": 0.8795,
+   "heuristic_relsig": 0.8175,
+   "oracle_gain": 0.0395
+  },
+  "oracle_archetype_choice_counts": {
+   "equal": 3418,
+   "up_relation": 746,
+   "up_offmix": 1235,
+   "up_splade": 1033,
+   "up_dense": 339,
+   "down_relation": 214
+  }
+ },
+ "gates": {
+  "GLOBAL_CALIBRATION_ADDS_VALUE": "NO",
+  "QUERY_ONLY_GATE_ADDS_VALUE": "NO",
+  "CANDIDATE_GATE_ADDS_VALUE": "NO",
+  "SHAPLEY_AUXILIARY_ADDS_VALUE": "MIXED (repairs collapse, no gain over equal)",
+  "EXPERT_DROPOUT_NEEDED": "TESTED (justified by collapse); best repair 0.8383, still no gain",
+  "RELATION_GATING_LEARNED": "NO (under tested features+objective; richer features untested \u2014 see C6 Task 4)",
+  "MULTI_GOLD_RECOVERY_IMPROVES": "NO",
+  "TOP_PRECISION_PRESERVED": "YES (trained gates raise MRR but at deep-recall cost; selected keeps C0)",
+  "FIXED_EQUAL_FUSION_BEATEN": "NO",
+  "QUERY_ONLY_VS_CANDIDATE": "TIE (prefer query-only; candidate adds nothing)"
+ },
+ "L2_CONTROLLER_CANDIDATE": "C0 (fixed 5-expert equal RRF fusion); selected on VAL only; TEST not inspected",
+ "recommended_next_experiment": "full-scope-aware negative sampling (deep negatives ranks 20-50) or full-scope NDCG surrogate, so train and selection objectives coincide; then re-test adaptive gate",
+ "frozen_statement": {
+  "CURRENT_CONTROLLER_TRAINING_BEATS_EQUAL_RRF": "NO",
+  "ADAPTIVE_GATING_IS_IMPOSSIBLE": "NOT_PROVEN (do not claim)",
+  "note": "oracle +0.0395 NDCG@50 headroom exists; tested inference features + tested training objectives failed to capture it; C6 phase tests objective-aligned training"
+ },
+ "oracle_headroom_note": "real (+0.0395); tested features+objectives did not capture it; impossibility NOT proven",
+ "next_phase": "C6 \u2014 FULL-SCOPE-AWARE CONTROLLER TRAINING (query-only gate; depth-aware negatives; NDCG@50 LambdaRank); see L2_CONTROLLER_OBJECTIVE_ALIGNMENT.json"
+}

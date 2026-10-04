@@ -1,0 +1,497 @@
+{
+  "_generated": "2026-08-23",
+  "_policy": "official-fidelity; immutable originals under data/original/<dataset>/<version>/",
+  "datasets": {
+    "metaqa": {
+      "source": "https://github.com/yuyuz/MetaQA (Zhang et al. 2018, AAAI)",
+      "version": "vanilla",
+      "counts": {
+        "1hop": {
+          "train": 96106,
+          "dev": 9992,
+          "test": 9947
+        },
+        "2hop": {
+          "train": 118980,
+          "dev": 14872,
+          "test": 14872
+        },
+        "3hop": {
+          "train": 114196,
+          "dev": 14274,
+          "test": 14274
+        }
+      },
+      "official_test_labels": "public",
+      "native_graph": "kb.txt 134741 triples (subject|relation|object)",
+      "match": true,
+      "status": "OFFICIAL COMPLETE"
+    },
+    "webqsp": {
+      "source": "Microsoft Download Center id=52763 (Yih et al. 2016) + rmanluo/RoG-webqsp (subgraphs)",
+      "version": "WebQSP 2016 + RoG",
+      "counts": {
+        "original": {
+          "train": 3098,
+          "test": 1639
+        },
+        "RoG": {
+          "train": 2826,
+          "dev": 246,
+          "test": 1628
+        }
+      },
+      "answerable": {
+        "original_train": 3072,
+        "original_test": 1628
+      },
+      "official_test_labels": "public",
+      "native_graph": "Freebase relation triples via RoG per-question subgraph",
+      "leakage_train_test": 0,
+      "match": true,
+      "status": "OFFICIAL COMPLETE",
+      "zip_sha256": "95cb9cd2f6b4e1116ba4bec348f08a7f5ca2a5df4f223ea5af3f9b25a971b0ee",
+      "zip_bytes": 4383010,
+      "fully_parsed": {
+        "train": 3072,
+        "test": 1628
+      },
+      "partial_annotation_file": {
+        "train": 680,
+        "test": 393,
+        "total": 1073
+      },
+      "canonical_question_source": "Microsoft WebQSP.zip ONLY; RoG parquet = subgraph layer, NOT canonical questions"
+    },
+    "2wiki": {
+      "source": "https://github.com/Alab-NII/2wikimultihop (Ho et al. 2020); data_ids_april7.zip + para_with_hyperlink.zip",
+      "version": "v1.0 ids April 2021",
+      "counts": {
+        "train": 167454,
+        "dev": 12576,
+        "test": 12576
+      },
+      "types": {
+        "compositional": 76481,
+        "comparison": 51963,
+        "bridge_comparison": 34631,
+        "inference": 4379
+      },
+      "official_test_labels": "HIDDEN (answers withheld)",
+      "native_graph": "para_with_hyperlink (Wikipedia hyperlinks) + evidences/supporting_facts",
+      "leakage": {
+        "train_dev": 0,
+        "train_test": 0,
+        "dev_test": 0
+      },
+      "match": true,
+      "status": "OFFICIAL COMPLETE",
+      "zip_sha256": {
+        "data_ids_april7.zip": "95df2bf56fdabe034e27aebc580e02264232203cf52552f9efe8a919e5529eef",
+        "para_with_hyperlink.zip": "a585bdc3c39425446e4b2701a5f7f30051cb6c100d179322055d53dc0a71a723"
+      },
+      "native_hyperlink_graph": {
+        "file": "para_with_hyperlink.jsonl (7,023,046,781 B uncompressed)",
+        "schema": "{id,title,sentences[],mentions[{start,end,ref_url,ref_ids,sent_idx}]}",
+        "article_nodes": 5989847,
+        "unique_titles_per_record": true,
+        "directed_hyperlink_edges": 35724975,
+        "approx_unique_pairs": "~98% (measured on 4.5M-para exact pass)",
+        "self_loops": 633,
+        "policy": "REPLACES heuristic title-mention as structural_native for 2Wiki"
+      }
+    },
+    "musique": {
+      "source": "https://github.com/StonyBrookNLP/musique (Trivedi et al. 2022)",
+      "version": "MuSiQue-Ans v1.0",
+      "counts": {
+        "train": 19938,
+        "dev": 2417,
+        "test": 2459
+      },
+      "hop_prefix_train": {
+        "2hop": 14376,
+        "3hop": 4387,
+        "4hop": 1175
+      },
+      "official_test_labels": "HIDDEN",
+      "native_graph": "none (question-specific paragraph sets; decomposition provided)",
+      "leakage": {
+        "train_dev": 0,
+        "train_test": 0,
+        "dev_test": 0
+      },
+      "dup_ids": 0,
+      "match": true,
+      "status": "OFFICIAL COMPLETE \u2014 CRAG derivation needed (global corpus)"
+    },
+    "hotpotqa": {
+      "source": "authors' official HF release hotpotqa/hotpot_qa (CMU curtis host was DOWN; HF is the authors' org) (Yang et al. 2018)",
+      "version": "v1.1",
+      "counts": {
+        "distractor": {
+          "train": 90447,
+          "dev": 7405
+        },
+        "fullwiki": {
+          "dev": 7405,
+          "test": 7405
+        }
+      },
+      "types": {
+        "bridge": 72991,
+        "comparison": 17456
+      },
+      "levels": {
+        "easy": 17972,
+        "medium": 56814,
+        "hard": 15661
+      },
+      "official_test_labels": "HIDDEN (fullwiki test: answers None, supporting_facts empty \u2014 verified)",
+      "native_graph": "Wikipedia hyperlinks (in fullwiki corpus, NOT yet downloaded)",
+      "leakage_train_dev": 0,
+      "match": true,
+      "status": "OFFICIAL COMPLETE (fullwiki QA + corpus)",
+      "official_question_files": {
+        "hotpot_train_v1.1.json": {
+          "purpose": "train QA",
+          "setting": "distractor+fullwiki(shared)",
+          "compressed": "535MB",
+          "have_via": "HF parquet 90447"
+        },
+        "hotpot_dev_distractor_v1.json": {
+          "purpose": "dev QA",
+          "setting": "distractor",
+          "compressed": "44MB",
+          "have_via": "HF parquet 7405"
+        },
+        "hotpot_dev_fullwiki_v1.json": {
+          "purpose": "dev QA",
+          "setting": "fullwiki",
+          "compressed": "45MB",
+          "have_via": "HF parquet 7405"
+        },
+        "hotpot_test_fullwiki_v1.json": {
+          "purpose": "test QA (hidden)",
+          "setting": "fullwiki",
+          "compressed": "46MB",
+          "have_via": "HF parquet 7405 (answers None)"
+        }
+      },
+      "fullwiki_corpus_options": {
+        "abstracts": {
+          "file": "enwiki-20171001-pages-meta-current-withlinks-abstracts.tar.bz2",
+          "url": "https://nlp.stanford.edu/projects/hotpotqa/enwiki-20171001-pages-meta-current-withlinks-abstracts.tar.bz2",
+          "compressed": "1.55 GB",
+          "est_extracted": "~6-8 GB",
+          "fields": "text_with_links + charoffset_with_links (native hyperlinks)",
+          "note": "STANDARD fullwiki retrieval corpus (intro paragraphs, ~5.2M articles)"
+        },
+        "full_withlinks": {
+          "file": "enwiki-20171001-pages-meta-current-withlinks-processed.tar.bz2",
+          "url": "https://nlp.stanford.edu/projects/hotpotqa/enwiki-20171001-pages-meta-current-withlinks-processed.tar.bz2",
+          "compressed": "7.4 GB",
+          "est_extracted": "~30-40 GB",
+          "note": "all paragraphs + hyperlinks (superset)"
+        },
+        "host_note": "CMU curtis host DOWN; Stanford nlp.stanford.edu host UP",
+        "local_corpus_provenance": "current local hotpot corpus = 507,494 passages = DISTRACTOR-context-derived, NOT fullwiki abstracts (~5.2M). Reuse only valid for distractor setting.",
+        "status": "HELD \u2014 report-before-download per user rule"
+      },
+      "fullwiki_corpus_ACQUIRED": {
+        "file": "enwiki-20171001-pages-meta-current-withlinks-abstracts.tar.bz2",
+        "compressed_bytes": 1553565403,
+        "sha256": "1acca1c5cc93c4890ea51091d2bad7c3ef6987aead127ab88728dc9e26555729",
+        "tar_members": 15517,
+        "articles": 5233329,
+        "unique_titles": "= articles (0 dupes in 2M sample)",
+        "structural_native_hyperlinks": 23438500,
+        "unique_directed_pairs": 23230200,
+        "duplicate_links": 208300,
+        "self_loops": 410,
+        "note": "canonical Hotpot FULLWIKI retrieval corpus; hyperlinks = structural_native. Old 507k = hotpot_distractor (separate)."
+      }
+    },
+    "squad": {
+      "source": "https://rajpurkar.github.io/SQuAD-explorer/ (Rajpurkar et al. 2018)",
+      "version": "v2.0",
+      "counts": {
+        "train": 130319,
+        "dev": 11873
+      },
+      "answerable": {
+        "train": 86821,
+        "dev": 5928
+      },
+      "unanswerable": {
+        "train": 43498,
+        "dev": 5945
+      },
+      "official_test_labels": "HIDDEN (no public labeled test; dev is the public eval set)",
+      "native_graph": "none",
+      "leakage_train_dev": 0,
+      "match": true,
+      "status": "OFFICIAL COMPLETE \u2014 CRAG derivation needed (answerable-retrieval layer)"
+    }
+  },
+  "file_hashes": {
+    "data/original/2wiki/v1.0_ids_april2021/dev.json": {
+      "sha256": "79f77ae104088ea8e25b1a65dbece768d45771194663bc5660ec9a98070dadf5",
+      "bytes": 57614142
+    },
+    "data/original/2wiki/v1.0_ids_april2021/id_aliases.json": {
+      "sha256": "f08ffcb6c2cefca9bdbe86b4248d6ad7a7743762d3f7264c14ff0bae85726fb6",
+      "bytes": 17501406
+    },
+    "data/original/2wiki/v1.0_ids_april2021/test.json": {
+      "sha256": "48b196d4ba8557343abb9bd1ad03566bc02762ecd734617ff910027c33821b04",
+      "bytes": 53838398
+    },
+    "data/original/2wiki/v1.0_ids_april2021/train.json": {
+      "sha256": "b318dbafbfed51a8029718fa59be8b616600cbff675a3b587694b28c5eedfc13",
+      "bytes": 707810660
+    },
+    "data/original/hotpotqa/hf_distractor/train-00000-of-00002.parquet": {
+      "sha256": "76d3bb3048a7cc73c1958107c0c5872a00d7e7d00c105b81e92f6769e7822e68",
+      "bytes": 165624177
+    },
+    "data/original/hotpotqa/hf_distractor/train-00001-of-00002.parquet": {
+      "sha256": "713661628434fbb19fff7392e2e321e4ed107e3c7c7784d0690946e5f722763f",
+      "bytes": 166162479
+    },
+    "data/original/hotpotqa/hf_distractor/validation-00000-of-00001.parquet": {
+      "sha256": "c20b638ca82b21d04fe12e14ff417ad05153d4d215a65de54497fca4e972f7c6",
+      "bytes": 27452575
+    },
+    "data/original/hotpotqa/hf_fullwiki/test-00000-of-00001.parquet": {
+      "sha256": "f6b522fed6748b33c0eaad972d53bc89c10b8afefb329629f779bfb967442cd8",
+      "bytes": 27558644
+    },
+    "data/original/hotpotqa/hf_fullwiki/validation-00000-of-00001.parquet": {
+      "sha256": "78933c0a31a5f7b420d4effdf4cd4eed573b28c6a3da6179dcf7a02b39e51d03",
+      "bytes": 28041820
+    },
+    "data/original/metaqa/1-hop/ntm/qa_dev.txt": {
+      "sha256": "30265e645ad8e106b9e70a8372d11f90d2e94865c9c771ffcedaa9dfd8923f42",
+      "bytes": 675910
+    },
+    "data/original/metaqa/1-hop/ntm/qa_test.txt": {
+      "sha256": "c12821d774793a15b45efa1e36eec8024f462688058f3f0d749e766c08f4b7ff",
+      "bytes": 677204
+    },
+    "data/original/metaqa/1-hop/ntm/qa_train.txt": {
+      "sha256": "ae5afd9bf6b7907f51951fb88e079b9287839a76ea13fa0a34b056893f38525a",
+      "bytes": 6520705
+    },
+    "data/original/metaqa/1-hop/qa_dev_qtype.txt": {
+      "sha256": "43c660806c1ba17ead85a34a60b39c8cd965db943a801355963974f9e122d3b8",
+      "bytes": 155425
+    },
+    "data/original/metaqa/1-hop/qa_test_qtype.txt": {
+      "sha256": "6390ded9d7b7e56f95af96429b38e98ee14c5a617963dc69f396c8cc4f6ff64d",
+      "bytes": 154556
+    },
+    "data/original/metaqa/1-hop/qa_train_qtype.txt": {
+      "sha256": "fd5a0b24c6d249b51990f56b170fe38b9052f90370fd3dde6f70b599999086ec",
+      "bytes": 1494465
+    },
+    "data/original/metaqa/1-hop/vanilla/qa_dev.txt": {
+      "sha256": "3c68fa73a14d9b9616e49f08e2d8b65e024af417708306874fe4d398634620d3",
+      "bytes": 673670
+    },
+    "data/original/metaqa/1-hop/vanilla/qa_test.txt": {
+      "sha256": "c57e9c2c4c05e5eec4503460042c09bfa3e80ea1a5ecaf361c92dd81d6c7bece",
+      "bytes": 675227
+    },
+    "data/original/metaqa/1-hop/vanilla/qa_train.txt": {
+      "sha256": "bd2ab48b2672232785f7ed2983c892f41f2afe4f5ff4cb0e5f80e29e99b46d44",
+      "bytes": 6496601
+    },
+    "data/original/metaqa/2-hop/ntm/qa_dev.txt": {
+      "sha256": "d2588baae5cc2b9102a786c475e624b89b849e739c3118b54fa88dd3d6e98b74",
+      "bytes": 2135095
+    },
+    "data/original/metaqa/2-hop/ntm/qa_test.txt": {
+      "sha256": "2dc3dfd444e6ef97eda200c69b0b48a74b4baf00bfc9696c5cdded8aaa2dfe6a",
+      "bytes": 2101601
+    },
+    "data/original/metaqa/2-hop/ntm/qa_train.txt": {
+      "sha256": "0da96f088d9388763ccff85bd5cdfb1a5a640c12fa040d39d07c6c5ce6513031",
+      "bytes": 16852512
+    },
+    "data/original/metaqa/2-hop/qa_dev_qtype.txt": {
+      "sha256": "e3936971b096954cfa965f5b8747fe4fa5b3b762f9fe63796d33df0f291ddfdd",
+      "bytes": 379966
+    },
+    "data/original/metaqa/2-hop/qa_test_qtype.txt": {
+      "sha256": "660b87183f3d21f3f64eaa5bcd12036124662e518a3958b5c47389a11e980210",
+      "bytes": 379927
+    },
+    "data/original/metaqa/2-hop/qa_train_qtype.txt": {
+      "sha256": "f22308d7daa6c152530156aec8966a25e163263938a838e09d17861f643e2816",
+      "bytes": 3037836
+    },
+    "data/original/metaqa/2-hop/vanilla/qa_dev.txt": {
+      "sha256": "a713ae6b4a7cdccfdda57ac99092f4114a1f8b0c4ba51b4466a15496a4ff6fbd",
+      "bytes": 2183998
+    },
+    "data/original/metaqa/2-hop/vanilla/qa_test.txt": {
+      "sha256": "b1c4f1ad77f34a27e0e5a13c08b436c6f4c9a49dccd8d43639a569ee5cd906a1",
+      "bytes": 2150912
+    },
+    "data/original/metaqa/2-hop/vanilla/qa_train.txt": {
+      "sha256": "f141e24f4d04aac7b32a9c6820ca9806bb49cabb2ca213066b992ed4f1fafeae",
+      "bytes": 17250659
+    },
+    "data/original/metaqa/3-hop/ntm/qa_dev.txt": {
+      "sha256": "ab6474f702b00ff47bbb3985527fc1601fbce0bcefc17b3f7b22e5edb87c4198",
+      "bytes": 3251916
+    },
+    "data/original/metaqa/3-hop/ntm/qa_test.txt": {
+      "sha256": "49ab998402825ddb74f78dfa265e18219a2f9c84a3822f058d836d49ae21c29c",
+      "bytes": 3305158
+    },
+    "data/original/metaqa/3-hop/ntm/qa_train.txt": {
+      "sha256": "15fe3a025cb8a45ba68aa2d1eb27375d1f132fa4c94d4f32494b1a264b9ec42d",
+      "bytes": 26239992
+    },
+    "data/original/metaqa/3-hop/qa_dev_qtype.txt": {
+      "sha256": "8734c5f528c81b39e459ded4ef4e99cf5e41e0d95c81ab90d3197ebcdd0bb687",
+      "bytes": 500330
+    },
+    "data/original/metaqa/3-hop/qa_test_qtype.txt": {
+      "sha256": "08dce72050b7d1e6271772b5d0066e2b14a00d6c64062a7d24d1f580e94f0e93",
+      "bytes": 500798
+    },
+    "data/original/metaqa/3-hop/qa_train_qtype.txt": {
+      "sha256": "47c2a264e8f5380923a5ddec8539a44f01781636e2e2e8e039207197f62478fe",
+      "bytes": 4004245
+    },
+    "data/original/metaqa/3-hop/vanilla/qa_dev.txt": {
+      "sha256": "c638b99f97db93112f7a9ceec47675066cc9efc93b7ecd43e22c54ab531741d9",
+      "bytes": 3274801
+    },
+    "data/original/metaqa/3-hop/vanilla/qa_test.txt": {
+      "sha256": "f4c2a801f864e80e809655a20b4b8c9904f4a2885a7f23850b2fabd8d38a6540",
+      "bytes": 3328337
+    },
+    "data/original/metaqa/3-hop/vanilla/qa_train.txt": {
+      "sha256": "5760a90c36e242b5be1304dd80a46c4c3a84f3d35ffb083276096248af144f62",
+      "bytes": 26427148
+    },
+    "data/original/metaqa/LICENSE.txt": {
+      "sha256": "0a9bd39b8e5d858cb705e54078223fca204ef417fd7bc903419dddf9b6b2c2ed",
+      "bytes": 19648
+    },
+    "data/original/metaqa/README.txt": {
+      "sha256": "d3138efe636c881daf01b377970be12959f0f72ebf4a4264ec98f9055de4893c",
+      "bytes": 4748
+    },
+    "data/original/metaqa/entity/kb_entity_dict.txt": {
+      "sha256": "9c15b4b7d5b0bf4fe035361fa8a8737722c0019ad8296c9c7e57f540c8741661",
+      "bytes": 877185
+    },
+    "data/original/metaqa/kb.txt": {
+      "sha256": "9b4d3b3066266075ad1577b4beed68e6e112e76e1a29ed2cb00a2896d2b792af",
+      "bytes": 5220771
+    },
+    "data/original/musique/v1.0/dev_test_singlehop_questions_v1.0.json": {
+      "sha256": "013be00ab914799891e5ae40de6cdc1baf03aaffd1f3ce4bf0de796020069613",
+      "bytes": 915921
+    },
+    "data/original/musique/v1.0/musique_ans_v1.0_dev.jsonl": {
+      "sha256": "15fa63794d18a94ce12411aca6e2327e65b6e83b0b1490efab3f1962e48abf3b",
+      "bytes": 30439728
+    },
+    "data/original/musique/v1.0/musique_ans_v1.0_test.jsonl": {
+      "sha256": "92ee3067957b8ebce885baa71156a7c0c29f3bc72cca04510aef506911dd768f",
+      "bytes": 28366572
+    },
+    "data/original/musique/v1.0/musique_ans_v1.0_train.jsonl": {
+      "sha256": "83a75b1e11e4e9bb8f8308e72ac40ca617ae4431b3a0d955b61cab259248490a",
+      "bytes": 241046755
+    },
+    "data/original/squad/v2.0/dev-v2.0.json": {
+      "sha256": "80a5225e94905956a6446d296ca1093975c4d3b3260f1d6c8f68bc2ab77182d8",
+      "bytes": 4370528
+    },
+    "data/original/squad/v2.0/train-v2.0.json": {
+      "sha256": "68dcfbb971bd3e96d5b46c7177b16c1a4e7d4bdef19fb204502738552dede002",
+      "bytes": 42123633
+    },
+    "data/original/webqsp/WebQSP/ReadMe.txt": {
+      "sha256": "0916f1186089ebb6f6252e5435965ada3541c63d93ab1838584c68dcf0f35e5a",
+      "bytes": 1276
+    },
+    "data/original/webqsp/WebQSP/data/WebQSP.test.json": {
+      "sha256": "856f50eb1ede43b799b10ddd0a980e72c88475b1a2259491af57e5db410ded52",
+      "bytes": 5140169
+    },
+    "data/original/webqsp/WebQSP/data/WebQSP.test.partial.json": {
+      "sha256": "2d3c94b0fd7622847caca1a31405b5e6fd87508b53978377875863ce4a8d5b3a",
+      "bytes": 359338
+    },
+    "data/original/webqsp/WebQSP/data/WebQSP.train.json": {
+      "sha256": "a01f87fa7808d2e90ccdf758b8eefbb882f3f92a8f386058ad6fd153c1589ed0",
+      "bytes": 10408955
+    },
+    "data/original/webqsp/WebQSP/data/WebQSP.train.partial.json": {
+      "sha256": "5c71128facc465f7fe68d7ada059ecd39614d3637751077f537f12957dbad40d",
+      "bytes": 686487
+    },
+    "data/original/webqsp/WebQSP/doc/LabelingInstructions.pdf": {
+      "sha256": "9958cc4725c2b07a631d82f36574de9426039fc2ebaca5a462164ef1871438d7",
+      "bytes": 521026
+    },
+    "data/original/webqsp/WebQSP/doc/WebQSP.pdf": {
+      "sha256": "4e9d8f055edda7d397a486098a7b8b7999c84f35449000179b37f30a929c4d1e",
+      "bytes": 347249
+    },
+    "data/original/webqsp/WebQSP/eval/Pred.sem.json": {
+      "sha256": "4aafa3d087c753cbfc536d57e2773a5e0d5704c51603a04aafb545eebff8fc09",
+      "bytes": 7940318
+    },
+    "data/original/webqsp/WebQSP/eval/eval.py": {
+      "sha256": "d5743324864853f71490b33adc0de1c068f8c29416408e12e592c351a3e994a5",
+      "bytes": 3548
+    },
+    "data/original/webqsp/rog_webqsp/train-00000-of-00002.parquet": {
+      "sha256": "4d2d4520cffb87370fa7de408dc6730a1e8d90d0233e166117a377ca71b5f2e8",
+      "bytes": 154472902
+    },
+    "data/original/webqsp/rog_webqsp/train-00001-of-00002.parquet": {
+      "sha256": "69fb1510e9990f8d0f62ab8f504ae3306130aec85c5f06fa772bce9d2db463a4",
+      "bytes": 155300860
+    },
+    "data/original/webqsp/rog_webqsp/validation-00000-of-00001.parquet": {
+      "sha256": "8355b852e5aae75197d4220031f88a6b7627dfd457383edf29c7f9b9a92a272d",
+      "bytes": 24340437
+    }
+  },
+  "pending_downloads": {
+    "hotpotqa_fullwiki_wikipedia_corpus": {
+      "why": "required only if fullwiki retrieval is the chosen setting",
+      "file": "enwiki-20171001-pages-meta-current-withlinks-processed (~5 GB tar.bz2)",
+      "host_note": "official CMU host curtis.ml.cmu.edu was UNREACHABLE this session; will need a mirror",
+      "status": "HELD \u2014 awaiting user approval before pulling ~5 GB"
+    }
+  },
+  "_tightened_rules_applied": "2026-08-23: WebQSP canonical=MS-only; 2Wiki native hyperlink graph measured; Hotpot corpus reported not downloaded; graph policy G_main=structural+NER, kNN=ablation-only",
+  "graph_policy_locked": {
+    "G_main": "structural_native + structural_derived(only if no native) + ner",
+    "kNN": "ablation only",
+    "ladder": [
+      "G_struct",
+      "G_struct+NER (MAIN)",
+      "G_struct+NER+kNN",
+      "G_kNN_only"
+    ],
+    "edge_families": [
+      "structural_native",
+      "structural_derived",
+      "ner",
+      "knn"
+    ],
+    "never_collapse": true
+  }
+}

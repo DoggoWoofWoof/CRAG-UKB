@@ -1,0 +1,277 @@
+{
+ "cache": "metaqa",
+ "partition": "MTKAHYPAR",
+ "n_DEV_A": 1002,
+ "cap": 100,
+ "hubs": 104,
+ "typed_graph": true,
+ "relation_vocabulary": [
+  "directed_by",
+  "has_genre",
+  "has_imdb_rating",
+  "has_imdb_votes",
+  "has_tags",
+  "in_language",
+  "release_year",
+  "starred_actors",
+  "written_by"
+ ],
+ "query_relation_source": "results/L1_P90_EXPLOIT/_uni_metaqa.npz orders (frozen typed-path rule; set, order ignored)",
+ "definitions": {
+  "A0": "served: own + directed out-neighbour blocks, w_r each",
+  "A1": "UND_NONHUB: served + in-neighbour blocks of non-hub hits, w_r each (union)",
+  "R1": "served + relation-compatible typed 1-hop memberships {b : (b, rho) in TM(v), rho in R(q)}, w_r each (additive: base+compat = 2 w_r)"
+ },
+ "frozen": "rr(S)+rr(M) per channel, RRF K0=60 over dense+splade, P50, exposure = 50 core blocks",
+ "arms": {
+  "A0": {
+   "arm": "A0",
+   "BASE_ALL": 0.6397,
+   "reach_all": 0.7126,
+   "feasible": 0.982,
+   "fail_pts": 36.0,
+   "fail_infeasible_pts": 1.8,
+   "fail_UNREACHED_pts": 26.9,
+   "fail_reached_weak_pts": 6.1,
+   "fail_fusion_fixable_pts": 1.2,
+   "worst_gold_block_rank_median_failed": 432,
+   "worst_gold_block_rank_median_reached_failed": 143,
+   "worst_gold_block_rank_median_all_reached": 1,
+   "blocks_voted_per_query_mean": 219.2,
+   "extra_blocks_per_query_mean_dense_splade": [
+    0.0,
+    0.0
+   ],
+   "scope_nodes_P50": 5023.0,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "BASE_ALL": 0.9172,
+     "reach_all": 0.9448,
+     "UNREACHED_pts": 5.5,
+     "reached_weak_pts": 2.1,
+     "worst_gold_block_rank_median_reached_failed": 139
+    },
+    "hop2": {
+     "n": 344,
+     "BASE_ALL": 0.4855,
+     "reach_all": 0.5901,
+     "UNREACHED_pts": 39.8,
+     "reached_weak_pts": 9.0,
+     "worst_gold_block_rank_median_reached_failed": 146
+    },
+    "hop3": {
+     "n": 332,
+     "BASE_ALL": 0.5271,
+     "reach_all": 0.6114,
+     "UNREACHED_pts": 34.6,
+     "reached_weak_pts": 6.9,
+     "worst_gold_block_rank_median_reached_failed": 145
+    }
+   },
+   "D2d_ALL": 0.6337
+  },
+  "A1": {
+   "arm": "A1",
+   "BASE_ALL": 0.6567,
+   "reach_all": 0.8533,
+   "feasible": 0.982,
+   "fail_pts": 34.3,
+   "fail_infeasible_pts": 1.8,
+   "fail_UNREACHED_pts": 13.1,
+   "fail_reached_weak_pts": 18.0,
+   "fail_fusion_fixable_pts": 1.5,
+   "worst_gold_block_rank_median_failed": 380,
+   "worst_gold_block_rank_median_reached_failed": 259,
+   "worst_gold_block_rank_median_all_reached": 3,
+   "blocks_voted_per_query_mean": 349.8,
+   "extra_blocks_per_query_mean_dense_splade": [
+    461.1,
+    140.6
+   ],
+   "scope_nodes_P50": 5027.3,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "BASE_ALL": 0.9908,
+     "reach_all": 1.0,
+     "UNREACHED_pts": 0.0,
+     "reached_weak_pts": 0.6,
+     "worst_gold_block_rank_median_reached_failed": 123,
+     "BASE_vs_A0": {
+      "gained": 25,
+      "lost": 1,
+      "p": 8.046627044677734e-07
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "BASE_ALL": 0.4826,
+     "reach_all": 0.8372,
+     "UNREACHED_pts": 15.7,
+     "reached_weak_pts": 33.1,
+     "worst_gold_block_rank_median_reached_failed": 244,
+     "BASE_vs_A0": {
+      "gained": 9,
+      "lost": 10,
+      "p": 1.0
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "BASE_ALL": 0.509,
+     "reach_all": 0.7259,
+     "UNREACHED_pts": 23.2,
+     "reached_weak_pts": 19.3,
+     "worst_gold_block_rank_median_reached_failed": 289,
+     "BASE_vs_A0": {
+      "gained": 1,
+      "lost": 7,
+      "p": 0.0703125
+     }
+    }
+   },
+   "D2d_ALL": 0.6577,
+   "BASE_ALL_vs_A0": {
+    "gained": 35,
+    "lost": 18,
+    "p": 0.027008317653722358
+   },
+   "reach_all_vs_A0": {
+    "gained": 141,
+    "lost": 0,
+    "p": 7.174648137343064e-43
+   },
+   "D2d_ALL_vs_A0": {
+    "gained": 36,
+    "lost": 12,
+    "p": 0.0007172696733945829
+   },
+   "hop2_hop3_pooled_BASE_vs_A0": {
+    "n": 676,
+    "gained": 10,
+    "lost": 17,
+    "p": 0.24778856337070465
+   }
+  },
+  "R1": {
+   "arm": "R1",
+   "BASE_ALL": 0.6577,
+   "reach_all": 0.8234,
+   "feasible": 0.982,
+   "fail_pts": 34.2,
+   "fail_infeasible_pts": 1.8,
+   "fail_UNREACHED_pts": 16.1,
+   "fail_reached_weak_pts": 14.4,
+   "fail_fusion_fixable_pts": 2.0,
+   "worst_gold_block_rank_median_failed": 432,
+   "worst_gold_block_rank_median_reached_failed": 231,
+   "worst_gold_block_rank_median_all_reached": 1,
+   "blocks_voted_per_query_mean": 312.4,
+   "extra_blocks_per_query_mean_dense_splade": [
+    397.4,
+    117.6
+   ],
+   "scope_nodes_P50": 5012.3,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "BASE_ALL": 0.9571,
+     "reach_all": 0.9847,
+     "UNREACHED_pts": 1.5,
+     "reached_weak_pts": 2.5,
+     "worst_gold_block_rank_median_reached_failed": 71,
+     "BASE_vs_A0": {
+      "gained": 13,
+      "lost": 0,
+      "p": 0.000244140625
+     },
+     "BASE_vs_A1": {
+      "gained": 2,
+      "lost": 13,
+      "p": 0.00738525390625
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "BASE_ALL": 0.5,
+     "reach_all": 0.7849,
+     "UNREACHED_pts": 20.9,
+     "reached_weak_pts": 25.6,
+     "worst_gold_block_rank_median_reached_failed": 233,
+     "BASE_vs_A0": {
+      "gained": 11,
+      "lost": 6,
+      "p": 0.332305908203125
+     },
+     "BASE_vs_A1": {
+      "gained": 8,
+      "lost": 2,
+      "p": 0.109375
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "BASE_ALL": 0.5271,
+     "reach_all": 0.7048,
+     "UNREACHED_pts": 25.3,
+     "reached_weak_pts": 14.5,
+     "worst_gold_block_rank_median_reached_failed": 243,
+     "BASE_vs_A0": {
+      "gained": 2,
+      "lost": 2,
+      "p": 1.0
+     },
+     "BASE_vs_A1": {
+      "gained": 7,
+      "lost": 1,
+      "p": 0.0703125
+     }
+    }
+   },
+   "D2d_ALL": 0.6467,
+   "BASE_ALL_vs_A0": {
+    "gained": 26,
+    "lost": 8,
+    "p": 0.0029350556433200836
+   },
+   "reach_all_vs_A0": {
+    "gained": 111,
+    "lost": 0,
+    "p": 7.703719777548943e-34
+   },
+   "D2d_ALL_vs_A0": {
+    "gained": 17,
+    "lost": 4,
+    "p": 0.007197380065917969
+   },
+   "hop2_hop3_pooled_BASE_vs_A0": {
+    "n": 676,
+    "gained": 13,
+    "lost": 8,
+    "p": 0.38331031799316406
+   },
+   "BASE_ALL_vs_A1": {
+    "gained": 17,
+    "lost": 16,
+    "p": 1.0
+   },
+   "reach_all_vs_A1": {
+    "gained": 0,
+    "lost": 30,
+    "p": 1.862645149230957e-09
+   },
+   "D2d_ALL_vs_A1": {
+    "gained": 14,
+    "lost": 25,
+    "p": 0.10812902140605732
+   },
+   "hop2_hop3_pooled_BASE_vs_A1": {
+    "n": 676,
+    "gained": 15,
+    "lost": 3,
+    "p": 0.007537841796875
+   }
+  }
+ }
+}

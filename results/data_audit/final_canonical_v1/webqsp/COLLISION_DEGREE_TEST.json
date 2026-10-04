@@ -1,0 +1,82 @@
+{
+  "schema": "COLLISION_DEGREE_TEST/v1",
+  "generated_utc": "2026-09-06T06:18:20Z",
+  "measured_on": "released RoG v1 tables (2,592,894 nodes / 8,309,195 edges)",
+  "question": "Did RoG merge the colliding MIDs, or never extract them? Degree should rise with collision-group size under merging, and be flat under non-extraction.",
+  "groups": {
+    "CONTROL_singleton_named_surfaces": {
+      "n": 424670,
+      "mean": 14.927,
+      "median": 4.0,
+      "p90": 23.0,
+      "max": 137000
+    },
+    "COLLISION_surfaces_g_ge_2": {
+      "n": 36927,
+      "mean": 85.668,
+      "median": 17.0,
+      "p90": 141.0,
+      "max": 122343
+    }
+  },
+  "MEAN_DEGREE_RATIO_collision_over_control": 5.739,
+  "by_collision_group_size": {
+    "g=2": {
+      "n": 21887,
+      "mean": 54.987,
+      "median": 13.0,
+      "p90": 89.0,
+      "max": 122343
+    },
+    "g=3-4": {
+      "n": 8697,
+      "mean": 96.357,
+      "median": 21.0,
+      "p90": 179.0,
+      "max": 35388
+    },
+    "g=5-9": {
+      "n": 4454,
+      "mean": 154.956,
+      "median": 35.0,
+      "p90": 294.0,
+      "max": 50282
+    },
+    "g=10-29": {
+      "n": 1689,
+      "mean": 229.077,
+      "median": 54.0,
+      "p90": 360.8000000000002,
+      "max": 45331
+    },
+    "g>=30": {
+      "n": 200,
+      "mean": 224.35,
+      "median": 85.5,
+      "p90": 381.49999999999966,
+      "max": 7366
+    }
+  },
+  "MEAN_DEGREE_MONOTONE_IN_GROUP_SIZE": false,
+  "verdict_rule_stated_before_reading": "Monotone rise in mean degree with group size = merging observed on the released graph. Flat = the extra MIDs were simply never extracted.",
+  "caveat": "Popularity is a confound: entities with common names (Pilot, Home) may also be better connected in Freebase independently of merging. Degree lift is therefore consistent with merging and is NOT a clean causal estimate of it.",
+  "directive": "Section 14 -- diagnostic only. No topology is modified.",
+  "elapsed_s": 5.3,
+  "MEDIAN_DEGREE_BY_GROUP_SIZE": {
+    "g=2": 13.0,
+    "g=3-4": 21.0,
+    "g=5-9": 35.0,
+    "g=10-29": 54.0,
+    "g>=30": 85.5
+  },
+  "MEDIAN_DEGREE_MONOTONE_IN_GROUP_SIZE": true,
+  "MEDIAN_DEGREE_RATIO_collision_over_control": 4.25,
+  "STATISTIC_DISCIPLINE": {
+    "prestated_rule_used": "MEAN",
+    "prestated_rule_outcome": false,
+    "where_it_failed": "only at g>=30 (n=200, mean 224.35 vs 229.08 at g=10-29)",
+    "post_hoc_observation": "The MEDIAN is strictly monotone across all five strata (13, 21, 35, 54, 85.5). Median is the more robust statistic here -- the control max is 137,000 and one g=2 node has degree 122,343, so a 200-node top stratum's mean is tail-dominated.",
+    "honesty_note": "The mean rule was fixed BEFORE the numbers were read and it returned false. The median result is reported as a POST-HOC observation and is not substituted for the pre-stated rule. It is corroboration, not the registered test."
+  },
+  "reading": "Collision surfaces carry 5.74x the mean and 4.25x the median degree of singleton-named control surfaces, and degree rises with collision-group size. That is the signature of edge UNION under merging, not of the extra MIDs being absent from RoG's extraction -- absent MIDs contribute no edges and would leave degree flat in g. The popularity confound in the caveat still applies."
+}

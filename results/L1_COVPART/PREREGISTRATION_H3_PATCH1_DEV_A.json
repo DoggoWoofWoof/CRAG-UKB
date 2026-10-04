@@ -1,0 +1,238 @@
+{
+ "RECORD": "PREREGISTRATION",
+ "name": "H3_PATCH1_DEV_A",
+ "STATUS": "POSTHOC_MECHANISM_TEST",
+ "written_before_any_run": true,
+ "utc": "2026-09-15T10:00:32Z",
+ "ruling_2026-09-15_ninth": "H2_PATCH1 tells us something extremely strong: once the beam actually visits a missing gold node, the node-level patch converts it essentially perfectly. So for deeper hops the bottleneck is now beam recall, not partition selection. We don't need a heavyweight L3. Take the exact frozen real-edge beam and implement each step as batched sparse operations: B_0 = L1 seed nodes; C_{t+1} = N(B_t); B_{t+1} = TopK(frozen score(q, B_t, C_{t+1})) ... scientifically I would continue calling it uL3 ... An H3 arm could simply do: L1 seeds -> H1 beam -> H2 beam -> H3 beam -> novel visited nodes -> same one-block PATCH. No new learned model, no new embeddings, no dataset logic ... For immediate recall improvement: extend the already-successful real-edge beam to a frozen vectorized H3 while keeping PATCH1 at exactly one block-equivalent. That directly targets the hop-3 residual.",
+ "why_posthoc": "DEV_A has been read by sections 2-16; H2_PATCH1 (section 16) was confirmed on it. This is a mechanism test of ONE further depth step under the identical rule, not a transfer test; transfer needs an untouched population (ruling: WebQSP), DEV_B is not read.",
+ "gold_free_input_statistic_read_before_this_record": {
+  "file": "h3patch_stat_A_<cache>.json (_l1c_h3patch_stat.py; gold never read)",
+  "what_it_showed": {
+   "metaqa": {
+    "visited_per_hop": [
+     32.5,
+     95.6,
+     100.0
+    ],
+    "novel_per_hop": [
+     8.3,
+     70.8,
+     67.9
+    ],
+    "novel_total_depth3_vs_depth2": [
+     147.1,
+     79.2
+    ],
+    "queries_truncated_depth3_vs_depth2": [
+     967,
+     79
+    ],
+    "fill_slots_depth2_now_available_for_hop3": 21.7,
+    "order_a_first_visit_composition_h1_h2_h3": [
+     0.084,
+     0.706,
+     0.21
+    ],
+    "order_a_hop3_admitted_per_query": 20.9,
+    "order_a_hop3_cut_per_query": 47.01,
+    "order_a_hop2_cut_per_query": 0.78,
+    "order_b_deepest_first_hop2_cut_per_query": 39.49,
+    "order_b_queries_cutting_a_hop2_node": 965,
+    "beam_ms_mean_depth3": 71.7
+   },
+   "metaqa_phg": {
+    "visited_per_hop": [
+     32.5,
+     95.6,
+     100.0
+    ],
+    "novel_per_hop": [
+     8.3,
+     69.7,
+     62.6
+    ],
+    "novel_total_depth3_vs_depth2": [
+     140.6,
+     78.0
+    ],
+    "queries_truncated_depth3_vs_depth2": [
+     964,
+     47
+    ],
+    "fill_slots_depth2_now_available_for_hop3": 23.8,
+    "order_a_first_visit_composition_h1_h2_h3": [
+     0.083,
+     0.689,
+     0.229
+    ],
+    "order_a_hop3_admitted_per_query": 22.9,
+    "order_a_hop3_cut_per_query": 39.65,
+    "order_a_hop2_cut_per_query": 0.63,
+    "order_b_deepest_first_hop2_cut_per_query": 31.95,
+    "order_b_queries_cutting_a_hop2_node": 955,
+    "beam_ms_mean_depth3": 68.4
+   },
+   "squad": {
+    "visited_per_hop": [
+     85.2,
+     96.7,
+     96.8
+    ],
+    "novel_per_hop": [
+     1.8,
+     19.7,
+     25.9
+    ],
+    "novel_total_depth3_vs_depth2": [
+     47.5,
+     21.6
+    ],
+    "queries_truncated_depth3_vs_depth2": [
+     67,
+     1
+    ],
+    "fill_slots_depth2_now_available_for_hop3": 79.0,
+    "order_a_first_visit_composition_h1_h2_h3": [
+     0.04,
+     0.425,
+     0.536
+    ],
+    "order_a_hop3_admitted_per_query": 24.9,
+    "order_a_hop3_cut_per_query": 1.03,
+    "order_a_hop2_cut_per_query": 0.01,
+    "order_b_deepest_first_hop2_cut_per_query": 0.81,
+    "order_b_queries_cutting_a_hop2_node": 56,
+    "beam_ms_mean_depth3": 188.7
+   },
+   "squad_phg": {
+    "visited_per_hop": [
+     85.2,
+     96.7,
+     96.8
+    ],
+    "novel_per_hop": [
+     2.3,
+     19.9,
+     27.0
+    ],
+    "novel_total_depth3_vs_depth2": [
+     49.3,
+     22.3
+    ],
+    "queries_truncated_depth3_vs_depth2": [
+     65,
+     0
+    ],
+    "fill_slots_depth2_now_available_for_hop3": 79.0,
+    "order_a_first_visit_composition_h1_h2_h3": [
+     0.048,
+     0.412,
+     0.54
+    ],
+    "order_a_hop3_admitted_per_query": 26.1,
+    "order_a_hop3_cut_per_query": 0.95,
+    "order_a_hop2_cut_per_query": 0.0,
+    "order_b_deepest_first_hop2_cut_per_query": 0.65,
+    "order_b_queries_cutting_a_hop2_node": 47,
+    "beam_ms_mean_depth3": 188.4
+   },
+   "musique": {
+    "visited_per_hop": [
+     80.3,
+     100.0,
+     100.0
+    ],
+    "novel_per_hop": [
+     5.9,
+     38.0,
+     46.6
+    ],
+    "novel_total_depth3_vs_depth2": [
+     90.5,
+     43.9
+    ],
+    "queries_truncated_depth3_vs_depth2": [
+     391,
+     4
+    ],
+    "fill_slots_depth2_now_available_for_hop3": 57.7,
+    "order_a_first_visit_composition_h1_h2_h3": [
+     0.072,
+     0.468,
+     0.46
+    ],
+    "order_a_hop3_admitted_per_query": 37.3,
+    "order_a_hop3_cut_per_query": 9.29,
+    "order_a_hop2_cut_per_query": 0.06,
+    "order_b_deepest_first_hop2_cut_per_query": 6.82,
+    "order_b_queries_cutting_a_hop2_node": 321,
+    "beam_ms_mean_depth3": 189.3
+   }
+  },
+  "decision_taken_from_it": "ORDER = the frozen first-visit order (hop-1 beam, hop-2 beam, hop-3 beam), i.e. the H2_PATCH1 rule with DEPTH 2 -> 3 as the ONLY changed factor. Reason (gold-free): under this order the depth-2 patch content is preserved almost exactly (hop-2 novel nodes cut per query: metaqa 0.78, metaqa_phg 0.63, squad 0.01, squad_phg 0.00, musique 0.06) and the positions that H2_PATCH1 filled from the removed block (21.7 / 23.8 / 79.0 / 79.0 / 57.7 per query) are the ones that receive hop-3 nodes (20.9 / 22.9 / 24.9 / 26.1 / 37.3 admitted). The deepest-first order would cut 39.5 / 32.0 hop-2 novel nodes per query on the metaqa caches in 96 % of the queries, i.e. it would dismantle the confirmed section-16 mechanism to make room for hop-3 material; it is NOT run. Consequence stated in advance: on metaqa the one-block budget admits only ~21 of ~68 novel hop-3 visits per query (47 cut; 88 / 49 queries admit none although some exist), so the hop-3 effect is bounded by the budget, not by beam recall; truncation is expected to be the dominant 'available but not covered' reason at depth 3."
+ },
+ "frozen_and_reused_verbatim": {
+  "beam": "scratchpad/_l1c_microl3.py (sha256 19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5), exec'd head with the string substitutions below only: DEPTH 2 -> 3 and the capture of the third beam; BEAM = 100, hub rule, admissibility, transition scores, RRF fusion of the three ranks, first-BEAM-unvisited selection -- all unchanged; hops 1 and 2 are computed by the identical code and are asserted identical to the section 14.1 record (MICRO_L3_H2 rebuilt from beams 1+2 must equal its BASE_ALL and gained/lost)",
+  "head_substitutions": [
+   [
+    "name = sys.argv[1]",
+    "name = 'metaqa'"
+   ],
+   [
+    "LATENT = \"--latent\" in sys.argv",
+    "LATENT = False"
+   ],
+   [
+    "DEPTH = 2",
+    "DEPTH = 3"
+   ],
+   [
+    "beams1, beams2 = [[] for _ in range(nq)], [[] for _ in range(nq)]",
+    "beams1, beams2, beams3 = [[] for _ in range(nq)], [[] for _ in range(nq)], [[] for _ in range(nq)]"
+   ],
+   [
+    "beams1[qi], beams2[qi] = beams[0], beams[1]",
+    "beams1[qi], beams2[qi], beams3[qi] = beams[0], beams[1], beams[2]"
+   ]
+  ],
+  "selector": "canonical SAFE (B6_S4_F6_Ms64_Mr32) through _l1ps_router.build_cache + _l1kb_core.contexts / f6_select, unchanged; asserted equal to the frozen _ind_SAFE / _ind_BASE of the replay records on every DEV_A row",
+  "H2_PATCH1": "recomputed inside the same script from beams 1+2 with the section-16 rule and asserted equal to h2patch_A_<cache>.json (ALL-gold, gained/lost vs SAFE, per hop) -- the reproduction check"
+ },
+ "the_arm_H3_PATCH1": {
+  "kept": "canonical SAFE final 50 minus its weakest admitted block (the sixth of the F6 competition), exactly as H2_PATCH1",
+  "novel": "visited nodes of the depth-3 beam (hop-1 beam, then hop-2, then hop-3; frozen fused order within each hop; seeds excluded) whose own block is not among the 49 kept blocks",
+  "patch": "the first min(k, n_b) novel nodes (n_b = size of the removed block); remaining positions filled from the removed block's own nodes by (ret_rrf position, node id) -- identical to H2_PATCH1",
+  "served": "nodes of the 49 kept blocks + the patch; |served nodes| equal to canonical SAFE per query (asserted)",
+  "budget": "exactly one block-equivalent, as ruled; nothing else changes"
+ },
+ "arms": [
+  "L1 (frozen BASE)",
+  "SAFE (canonical)",
+  "H2_PATCH1 (section 16, recomputed and asserted)",
+  "H3_PATCH1"
+ ],
+ "population": "DEV_A of the five caches metaqa (MtK), metaqa_phg, squad (MtK), squad_phg, musique (PHG); DEV_B not read; TEST never read",
+ "metric": "ALL-gold at the node level under matched exposure (every gold node served); ANY-gold reported; McNemar exact two-sided",
+ "decision_rule": {
+  "text_safety": "on squad, squad_phg and musique: H3_PATCH1 vs H2_PATCH1 AND H3_PATCH1 vs SAFE -- NOT (lost > gained with p < 0.05)",
+  "hop3_gain": "on BOTH metaqa caches, hop-3 group: H3_PATCH1 vs H2_PATCH1 gained > lost with p < 0.01",
+  "no_hop2_regression": "on both metaqa caches, hop-2 group: H3_PATCH1 vs H2_PATCH1 -- NOT (lost > gained with p < 0.05)",
+  "PASS": "all three hold -> H3_PATCH1 = MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC); not promoted; transfer still needs an untouched population",
+  "FAIL": "otherwise; the reported cause distinguishes (i) budget truncation (hop-3 gold visited but beyond the patch capacity), (ii) beam recall (hop-3 gold not visited at depth 3), (iii) text loss (gold nodes previously restored by the fill dropped)"
+ },
+ "also_recorded": [
+  "per hop ALL/ANY for all four arms; H3 vs H2_PATCH1, vs SAFE, vs L1; hop2+hop3 pooled",
+  "node-level availability at depth 2 and depth 3: SAFE failures whose missing gold nodes are all visited; covered; not covered by cause (truncated / dropped with the removed block / other); hop-3 missing gold nodes visited fraction at depth 2 vs 3",
+  "flips H3 vs H2_PATCH1 with cause: gold nodes entering through hop-3 positions; gold nodes lost because a fill or a cut position held them under H2_PATCH1",
+  "patch composition hop-1 / hop-2 / hop-3 novel / fill; truncation counts; beam transitions scored and wall-clock per query (depth 3)"
+ ],
+ "forbidden": [
+  "deepest-first or any other order; a second block, a larger capacity, a different fill or weakest rule; depth 4; a wider beam; new seeds",
+  "reading DEV_B or TEST; any per-dataset switch; tuning on the numbers; the batched multi-query implementation is deferred (it must reproduce this per-query record exactly when promoted)"
+ ],
+ "code": {
+  "statistic": "scratchpad/_l1c_h3patch_stat.py -> h3patch_stat_A_<cache>.json",
+  "arm": "scratchpad/_l1c_h3patch.py <cache> -> h3patch_A_<cache>.json; --summary -> h3patch_A_SUMMARY.json"
+ }
+}

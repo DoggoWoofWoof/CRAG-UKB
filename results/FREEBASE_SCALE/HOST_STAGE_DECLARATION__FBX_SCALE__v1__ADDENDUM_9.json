@@ -1,0 +1,85 @@
+{
+ "stage": "FBX_SCALE / addendum 9: surrogate top level for the nested partition (WebQSP, S = 25), declared before any surrogate top is partitioned or scored",
+ "declared": "2026-10-01T03:52:10+0530",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_3.json": "23b186b9c631541af5fa45e7236c20937209cd7d2aa8971aeaaaccff31a883a3",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_4.json": "6dd584733ea134dba79b8d9a7f9b45097363ae0dd3a0c3bfc807821b7f1b9920",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_5.json": "ddff074cc11de999c8d70e720880271d67af47ef4b7ba65c9c4d875f48c0f4e2",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6.json": "5ca94fa0ca8b07dd94fe69236a8f902ef269ee8a4d7fc66463a01ce8487eea10",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6A.json": "f2ada7fc164e6ce54e83e3066498133a5a5ef1132aab53ea71c157eb538c7c52",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_7.json": "a386758079a1aa128a7d06264af3911f189cab6e1d2e1905c6bde3ea92e93549",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_8.json": "47838cec49fa417ce27d1bfed6cc900f7bdcadb98e000034d8601e1a57bf0bed"
+ },
+ "basis": {
+  "results/FREEBASE_SCALE/h2l/H2LM_NETSIZE_SURVEY__webqsp__v1.json": "5c8fb8831b6c9a5b27506dfb01a7d94d4304c846e3eec7324c4c95038532fcdc"
+ },
+ "status": "DEVELOPMENT (calibration of a systems substrate); nothing here selects a retrieval mechanism and nothing here changes a gate",
+ "question": "how much can the pins of the TOP hypergraph be reduced -- by a net-size cap, by the frozen M2 quotient, or both -- before the nested partition's ALL-gold recall (K in {100, 250, 500}) leaves addendum 1's gate?  The output is a frontier (pin reduction vs verdict); Freebase needs a top of about 20x fewer pins than H4_SK (6e9 pins against ~0.3e9 that fit the 81.6 GB host at ~190 B/pin), which is reported against every arm.",
+ "not_claimed": [
+  "no Freebase partition and no claim that any arm fits Freebase: 20x is the requirement, the WebQSP reduction is the measurement",
+  "no change to addendum 1's thresholds and no re-scoring of any earlier arm; the addendum-7 flat-top arm H2L25 (BORDERLINE, max loss 8) is the in-memory reference, not re-run",
+  "no refinement and no other S: the regime that fits the host is S >= 25 (addendum 7 measured memory), so S = 25 only"
+ ],
+ "construction": {
+  "top_hypergraph": "the frozen H4_SK rule at k = S = 25 (cap = round(N / 25); exactly the addendum-7 top hypergraph, content digest checked by file hash against its record)",
+  "surrogates (spec names of scratchpad/_h2lt.py)": {
+   "N<c>": "drop every net of more than c pins; weights of the remaining nets unchanged",
+   "Q<W>L<l>": "the exact quotient under the frozen M2 clustering results/FREEBASE_SCALE/ml2/clusters__M2_W<W>_L<l>.npy (cluster map hash checked against its COARSEN record); vertex weight = cluster size; identical nets merged with summed weight",
+   "Q<W>L<l>N<c>": "first the net cap, then the quotient"
+  },
+  "arms": [
+   "N16",
+   "N8",
+   "N4",
+   "Q512L2",
+   "Q512L6",
+   "Q512L6N8",
+   "Q512L6N4"
+  ],
+  "arm_rationale": "caps 16 / 8 / 4 from the survey (pins kept x1.44 / x1.69 / x2.58, signal kept 0.973 / 0.920 / 0.723; 0 / 2 / 10,487 vertices left without a net); Q512L2 and Q512L6 are the M2 levels with 1.93x and 3.30x pin reduction whose cluster size (<= 512) is below Zoltan's 1 % tolerance at S = 25 (1,037 vertices); the two combinations take the cap at 8 and 4 on the most coarse W512 level.  Fixed before any arm is partitioned; no spec is added, removed or altered after seeing a result",
+  "top_partition": "the frozen vertex-weighted driver (scratchpad _ml_run vw_build; NP 4; unit weights for N<c> arms) at k = 25 on the surrogate hypergraph, IMBALANCE_TOL 1.01 (as addendum 7's flat top); projected to the vertices; the frozen validity rule on the FULL top hypergraph (largest block <= ceil(1.03 N / 25)), frozen empty-block repair; a violating top is PARTITION_INVALID (arm invalid at every K, recorded, never relaxed); no refinement",
+  "sub_stage": "unchanged from addendum 7 (scratchpad/_h2l.py cmd_sub): net-split K-way sub-problems from the frozen K-way hypergraph, tolerance floor_4dp(1.03 (N/K)(K/25)/n_b), frozen validity and repair",
+  "controls": [
+   "scratchpad/_h2lt.py TEST passes before launch (net cap keeps exactly the nets of <= c pins; the capped hypergraph quotients; spec names parse)",
+   "the K-way hypergraph read by every SUB has the frozen H4_SK content digest (asserted by _h2l.cmd_sub, as in addendum 7)",
+   "the PHG_SK cells of the reference reproduce CALIB_EVAL_WEBQSP__ml2_v1 bit for bit"
+  ]
+ },
+ "gate": "addendum 1's verdict rule, unchanged, via scratchpad/_h2lt_eval.py: rows below PHG_SK's ALL-gold count at matched B_P, every B_N in {100, 250, 500, 1000, 2000, 5000}, at K in {100, 250, 500}; at most 7 of 786 RECALL_PRESERVING, at least 24 FAILED, else BORDERLINE; also FAILED if B_P = K on more than half the rows",
+ "reported_for_every_arm": [
+  "top pins and pin reduction against the top hypergraph; top Zoltan seconds and peak RSS per rank",
+  "KM1 of the projected top on the full top hypergraph relative to the flat top of addendum 7",
+  "the gate table (rows below PHG_SK per K and B_N), the verdict, the descriptive two-sided churn",
+  "the same-algorithm replicate floor F of addendum 8 beside each arm's maximum loss (descriptive only)",
+  "Freebase arithmetic: top pins at 6e9 / reduction, and the reduction still missing to reach 20x"
+ ],
+ "decision_table": {
+  "an arm is RECALL_PRESERVING": "that pin reduction is recall-preserving for the top; the LARGEST such reduction is the frontier; if it is >= 20x the top surrogate is adopted for the nested design and the next addendum scales it; otherwise the gap to 20x is reported and the top needs a further lever (the user's ruling: candidates are a streaming top with a 1.01 balance bound, net sampling, or a sparser quotient)",
+  "an arm is BORDERLINE": "reported with its table beside F; the decision is the user's",
+  "an arm is FAILED (>= 24)": "that reduction is refused for the top (no map adopted); arms with larger reductions built from the same lever are expected to fail and are still scored as declared",
+  "PARTITION_INVALID": "counted as not scored (as addendum 1); never relaxed"
+ },
+ "not_done_here": [
+  "any Freebase partition",
+  "a streaming top, net sampling, or any refinement",
+  "K above 500",
+  "any spec or S beyond the declared seven arms at S = 25"
+ ],
+ "code_pinned": {
+  "scratchpad/_h2lt.py": "45375e339b005b21b443b237cf0f32f0c384fb3ed346be0ab12afcb336b9637e",
+  "scratchpad/_h2lt_eval.py": "cf03acf0163ef19b4e39d3a4d2629e11c5a32f5cb19cfb0a99abf64b46fea394",
+  "scratchpad/_h2l.py": "e578fc4b01ff29ec9a96047a7a0875fd19cff9d0e63b862a019ee48d34a46dd1",
+  "scratchpad/_ml_run.py": "7f98670670d437712d1f6c81863752d3eef841ac02aa576441ff490372766e26",
+  "scratchpad/_ml_coarsen.py": "19ad42f5ac74dcfe6384c1d34d2d9821fec6b75cc1202c8d5fd9723f31ee3978",
+  "scratchpad/_ml2_eval.py": "318c7b416985d1a301fda733186d735ca071f1499a727778b3554c0aeecfe263",
+  "scratchpad/_fbx_calib.py": "a46001f57ac56e725723a77c8eecaacc067aedf883a39ba29b1f236e9828ed7f",
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_lowmem/phg_repair.py": "4c051e7a139abc19fd1b8433948a0d288858ac6a9c67dae40d7ef001839472b0",
+  "src/l1_lowmem/phg_driver/phg_driver.c": "cf5099851282444d0b6c87b399210ae3dd6bc09f8fe2a5f7b49d315ce4b133b4",
+  "src/l1_lowmem/phg_driver/phg_driver_vw.c": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4"
+ }
+}

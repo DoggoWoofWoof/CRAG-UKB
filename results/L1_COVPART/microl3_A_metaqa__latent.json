@@ -1,0 +1,226 @@
+{
+ "cache": "metaqa",
+ "partition": "MTKAHYPAR",
+ "n_DEV_A": 1002,
+ "N": 43234,
+ "cap": 100,
+ "hubs": 104,
+ "arm_family": "LATENT",
+ "constants": {
+  "SEED_K": 5,
+  "BEAM": 100,
+  "DEPTH": 2,
+  "K0": 60,
+  "P50": 50,
+  "hub_rule": "deg_undirected + 1 > cap = N / npart (frozen)"
+ },
+ "cost": {
+  "edges_scored_per_query_mean": 4529045.0,
+  "edges_scored_per_query_p95": 4529045,
+  "edges_scored_hop1_mean": 216145.0,
+  "edges_scored_hop2_mean": 4312900.0,
+  "nodes_visited_per_query_mean": 200.0,
+  "beam_wall_clock_ms_mean": 7967.0,
+  "beam_wall_clock_ms_p50": 7619.38,
+  "beam_wall_clock_ms_p95": 10893.95,
+  "repair_and_fusion_ms_per_query": 6.24,
+  "queries_whose_seeds_are_all_hubs": 0
+ },
+ "arms": {
+  "L1": {
+   "arm": "L1",
+   "BASE_ALL": 0.6397,
+   "ANY": 0.9132,
+   "reach_all": 0.7126,
+   "feasible": 0.982,
+   "fail_pts": 36.0,
+   "fail_UNREACHED_pts": 26.9,
+   "fail_reached_pts": 7.3,
+   "blocks_voted_per_query_mean": 219.2,
+   "scope_nodes_P50": 5023.0,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "BASE_ALL": 0.9172,
+     "reach_all": 0.9448,
+     "UNREACHED_pts": 5.5,
+     "reached_failed_pts": 2.8
+    },
+    "hop2": {
+     "n": 344,
+     "BASE_ALL": 0.4855,
+     "reach_all": 0.5901,
+     "UNREACHED_pts": 39.8,
+     "reached_failed_pts": 10.5
+    },
+    "hop3": {
+     "n": 332,
+     "BASE_ALL": 0.5271,
+     "reach_all": 0.6114,
+     "UNREACHED_pts": 34.6,
+     "reached_failed_pts": 8.4
+    }
+   }
+  },
+  "LATENT_H1": {
+   "arm": "LATENT_H1",
+   "BASE_ALL": 0.5579,
+   "ANY": 0.8443,
+   "reach_all": 0.7265,
+   "feasible": 0.982,
+   "fail_pts": 44.2,
+   "fail_UNREACHED_pts": 25.5,
+   "fail_reached_pts": 16.9,
+   "blocks_voted_per_query_mean": 239.6,
+   "scope_nodes_P50": 5029.6,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "BASE_ALL": 0.7117,
+     "reach_all": 0.9479,
+     "UNREACHED_pts": 5.2,
+     "reached_failed_pts": 23.6,
+     "BASE_vs_L1": {
+      "gained": 2,
+      "lost": 69,
+      "p": 2.165863246129246e-18
+     },
+     "initial_UNREACHED": 18,
+     "initial_UNREACHED_now_reached": 1,
+     "initial_UNREACHED_now_ALL_gold_P50": 0
+    },
+    "hop2": {
+     "n": 344,
+     "BASE_ALL": 0.4826,
+     "reach_all": 0.6192,
+     "UNREACHED_pts": 36.9,
+     "reached_failed_pts": 13.7,
+     "BASE_vs_L1": {
+      "gained": 1,
+      "lost": 2,
+      "p": 1.0
+     },
+     "initial_UNREACHED": 137,
+     "initial_UNREACHED_now_reached": 10,
+     "initial_UNREACHED_now_ALL_gold_P50": 0
+    },
+    "hop3": {
+     "n": 332,
+     "BASE_ALL": 0.4849,
+     "reach_all": 0.6205,
+     "UNREACHED_pts": 33.7,
+     "reached_failed_pts": 13.6,
+     "BASE_vs_L1": {
+      "gained": 1,
+      "lost": 15,
+      "p": 0.000518798828125
+     },
+     "initial_UNREACHED": 115,
+     "initial_UNREACHED_now_reached": 3,
+     "initial_UNREACHED_now_ALL_gold_P50": 0
+    }
+   },
+   "BASE_ALL_vs_L1": {
+    "gained": 4,
+    "lost": 86,
+    "p": 4.3245487100412455e-21
+   },
+   "reach_all_vs_L1": {
+    "gained": 14,
+    "lost": 0,
+    "p": 0.0001220703125
+   },
+   "hop2_hop3_pooled_BASE_vs_L1": {
+    "n": 676,
+    "gained": 2,
+    "lost": 17,
+    "p": 0.000728607177734375,
+    "pooled_BASE_ALL_L1": 0.5059,
+    "pooled_BASE_ALL": 0.4837
+   },
+   "initial_UNREACHED": 270,
+   "initial_UNREACHED_now_reached": 14,
+   "initial_UNREACHED_now_ALL_gold_P50": 0
+  },
+  "LATENT_H2": {
+   "arm": "LATENT_H2",
+   "BASE_ALL": 0.5649,
+   "ANY": 0.8603,
+   "reach_all": 0.7535,
+   "feasible": 0.982,
+   "fail_pts": 43.5,
+   "fail_UNREACHED_pts": 22.9,
+   "fail_reached_pts": 18.9,
+   "blocks_voted_per_query_mean": 276.6,
+   "scope_nodes_P50": 5031.5,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "BASE_ALL": 0.7301,
+     "reach_all": 0.954,
+     "UNREACHED_pts": 4.6,
+     "reached_failed_pts": 22.4,
+     "BASE_vs_L1": {
+      "gained": 2,
+      "lost": 63,
+      "p": 1.1633489310769463e-16
+     },
+     "initial_UNREACHED": 18,
+     "initial_UNREACHED_now_reached": 3,
+     "initial_UNREACHED_now_ALL_gold_P50": 0
+    },
+    "hop2": {
+     "n": 344,
+     "BASE_ALL": 0.4738,
+     "reach_all": 0.6599,
+     "UNREACHED_pts": 32.8,
+     "reached_failed_pts": 18.6,
+     "BASE_vs_L1": {
+      "gained": 1,
+      "lost": 5,
+      "p": 0.21875
+     },
+     "initial_UNREACHED": 137,
+     "initial_UNREACHED_now_reached": 24,
+     "initial_UNREACHED_now_ALL_gold_P50": 0
+    },
+    "hop3": {
+     "n": 332,
+     "BASE_ALL": 0.497,
+     "reach_all": 0.6536,
+     "UNREACHED_pts": 30.4,
+     "reached_failed_pts": 15.7,
+     "BASE_vs_L1": {
+      "gained": 1,
+      "lost": 11,
+      "p": 0.00634765625
+     },
+     "initial_UNREACHED": 115,
+     "initial_UNREACHED_now_reached": 14,
+     "initial_UNREACHED_now_ALL_gold_P50": 0
+    }
+   },
+   "BASE_ALL_vs_L1": {
+    "gained": 4,
+    "lost": 79,
+    "p": 3.9973254947441296e-19
+   },
+   "reach_all_vs_L1": {
+    "gained": 41,
+    "lost": 0,
+    "p": 9.094947017729282e-13
+   },
+   "hop2_hop3_pooled_BASE_vs_L1": {
+    "n": 676,
+    "gained": 2,
+    "lost": 16,
+    "p": 0.001312255859375,
+    "pooled_BASE_ALL_L1": 0.5059,
+    "pooled_BASE_ALL": 0.4852
+   },
+   "initial_UNREACHED": 270,
+   "initial_UNREACHED_now_reached": 41,
+   "initial_UNREACHED_now_ALL_gold_P50": 0
+  }
+ }
+}

@@ -1,0 +1,48 @@
+{
+ "ds": "hotpotqa_clean",
+ "npart": 5074,
+ "PART_A": {
+  "n_cores_with_any_internal_edge": 5059,
+  "npart": 5074,
+  "unweighted_mean_struct_internal_share": 0.198428980641324,
+  "success_weighted_struct_internal_share": 0.2150968862954891,
+  "total_internal_edges": {
+   "STRUCT": 299411,
+   "NERX": 535547,
+   "KNN": 621922
+  },
+  "total_cut_edges": {
+   "STRUCT": 3127534,
+   "NERX": 3523160,
+   "KNN": 544730
+  }
+ },
+ "PART_B": {
+  "n_colocated_required_pairs": 551,
+  "counts": {
+   "NONE": 45,
+   "STRUCT": 417,
+   "NERX": 12,
+   "STRUCT+NERX": 0,
+   "KNN": 37,
+   "STRUCT+KNN": 0,
+   "NERX+KNN": 40,
+   "STRUCT+NERX+KNN": 0
+  },
+  "frac": {
+   "NONE": 0.0817,
+   "STRUCT": 0.7568,
+   "NERX": 0.0218,
+   "STRUCT+NERX": 0.0,
+   "KNN": 0.0672,
+   "STRUCT+KNN": 0.0,
+   "NERX+KNN": 0.0726,
+   "STRUCT+NERX+KNN": 0.0
+  },
+  "NOTE_STRUCT_COMBOS": "STRUCT+NERX / STRUCT+KNN / STRUCT+NERX+KNN are structurally GUARANTEED to be 0 for every corpus, not an empirical finding: NERX=NER\\STRUCT and KNN=A\\STRUCT are defined as set-differences against STRUCT everywhere in this codebase, so any pair with a STRUCT edge is by construction excluded from the NERX/KNN key arrays. The only meaningful buckets are STRUCT, NERX, KNN, NERX+KNN, and NONE.",
+  "frac_with_struct_any": 0.7568,
+  "frac_with_nerx_any": 0.0944,
+  "frac_with_knn_any": 0.1397,
+  "frac_no_direct_edge": 0.0817
+ }
+}

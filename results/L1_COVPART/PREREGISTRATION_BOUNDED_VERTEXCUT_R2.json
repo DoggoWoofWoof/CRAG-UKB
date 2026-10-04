@@ -1,0 +1,501 @@
+{
+ "RECORD": "PREREGISTRATION",
+ "name": "BOUNDED_VERTEXCUT_R2",
+ "STATUS": "POSTHOC_STRUCTURAL_MECHANISM_TEST_DEV_A",
+ "written_before_any_run": true,
+ "written_before": [
+  "any owner hypergraph",
+  "any PHG owner run",
+  "any degree-0 placement on the owner partition",
+  "any alternate assignment",
+  "any structural number of the R2 substrate",
+  "any replay number"
+ ],
+ "what_was_run_before_this_record": "the library's alternate / membership / containment functions were unit-tested on two synthetic 6-8 node graphs (no data read); V.Graph was read here for the frozen graph facts (N, |E|, k_f, C, hubs, degree-0) that already stand in sections 18-20",
+ "utc": "2026-09-15T17:50:46Z",
+ "ruling_2026-09-15_twelfth_verbatim_essentials": "This result is actually very useful because it tells us why the same vertex-cut construction cannot be the universal replacement as currently formulated. For MetaQA, overlap is informative. For SQuAD/MuSiQue, overlap is mostly redundant ... RF_MetaQA ~ 2.34 versus RF_SQuAD ~ 10.35, RF_MuSiQue ~ 9.25 ... Once you restore the same unique-node exposure, VCUT becomes statistically level with the hard substrate. So there is no free structural signal there. That means I would freeze: STRUCT_VERTEXCUT_V1: MetaQA mechanism positive / Universal replacement NOT_SUPPORTED and definitely not compose this V1 with SAFE/H2_PATCH1. But I would not conclude that overlap-aware partitioning is dead. The actual failure is more specific: we optimized overlap without placing a budget on overlap itself. That is the next partitioning problem. The natural successor is bounded-overlap partitioning ... 1 <= |M(v)| <= R with a small universal R. The most defensible first value is R = 2 ... R=1 -> hard partition; R=2 -> owner + one alternate boundary region ... min sum_v (lambda_v - 1) subject to lambda_v <= 2 plus balance/capacity. Or equivalently, allow each original node's incident edges to be distributed over at most two edge partitions ... The universal algorithm is identical everywhere. No if dataset == 'metaqa'. No graph-density threshold. No query information ... one representation rule across every graph ... replication needs to be a first-class constraint, not an after-the-fact diagnostic ... A. BOUNDED_VERTEXCUT_R2: query-independent structural substrate: each node belongs to <= 2 overlapping regions; block cap = existing effective cap; same rule all datasets. Question: Can we retain MetaQA's VCUT locality gain while preventing RF explosion on dense text graphs? This is the static-L1 workstream ... I would not execute either on MetaQA immediately without a clean preregistration ... we need to represent the graph under a controlled overlap budget and compress the dynamic frontier without destroying branch diversity.",
+ "question": "Can a bounded-overlap static substrate (every node in <= 2 blocks, cap C = 100, the same construction on every graph) retain MetaQA's vertex-cut locality gain (section 19: 0.640 -> 0.678 at P50, 0.688 at the matched budget) while preventing the replication explosion that made the unbounded vertex-cut a budget cut on the dense text graphs (section 20: RF 10.35 / 9.25, P50 = 43-63 % of the hard unique exposure, musique LOSS at P50)?",
+ "relation_to_sections_18_19_20": {
+  "section_18_19": "STRUCT_VERTEXCUT_V1 = NOT_MATERIAL (structural letter) / MECHANISM_POSITIVE_AT_LOWER_EXPOSURE (metaqa replay); frozen by the twelfth ruling as 'MetaQA mechanism positive / universal replacement NOT_SUPPORTED'; never composed with SAFE / H2_PATCH1; untouched here (its metaqa cells are recomputed only to be asserted equal and compared informationally)",
+  "section_20": "STRUCT_VERTEXCUT_V1_TRANSFER = NOT_SUPPORTED; its universal degree-0 rule and its routing / serving / exposure / matched-budget contracts (imported functions) are reused VERBATIM; its gate design (each dataset's canonical hard BASE, node-level check, matched exposure reported separately) is reused with ONE stated difference: the matched-exposure cell is the SIGNAL cell here (see decision rule) because section 20 established that P50 is not a fixed unique budget once RF > 1",
+  "this_record": "a new construction (owners + at most one alternate under a cap) with replication bounded BY CONSTRUCTION; a new arm, not a modification of V1"
+ },
+ "what_this_is": "a post-hoc structural-mechanism test on DEV_A of metaqa, squad and musique: does the R = 2 bounded-overlap BASE (static overlap decided by a deterministic construction, no 1-hop vote expansion, no query information) reach or beat each dataset's served canonical hard BASE at the same unique-node budget, and at what P50 exposure. DEV_A has been read many times in this lane; DEV_B and TEST are never read; nothing is promoted; the served L1 is unchanged.",
+ "constants": {
+  "R": 2,
+  "C": 100,
+  "k_rule": "k = R * k_f (k_f = N // 100 frozen by the lane): k blocks of cap C hold R * N memberships; k is derived, not chosen per dataset",
+  "k_per_dataset": {
+   "metaqa": 864,
+   "squad": 404,
+   "musique": 2350
+  },
+  "K0": 60,
+  "K_LOCK": 100,
+  "P_MAIN": 50,
+  "alpha": 0.01,
+  "PHG": {
+   "NP": 4,
+   "parameters": [
+    [
+     "DEBUG_LEVEL",
+     "0"
+    ],
+    [
+     "NUM_GID_ENTRIES",
+     "1"
+    ],
+    [
+     "NUM_LID_ENTRIES",
+     "1"
+    ],
+    [
+     "OBJ_WEIGHT_DIM",
+     "1"
+    ],
+    [
+     "EDGE_WEIGHT_DIM",
+     "1"
+    ],
+    [
+     "DETERMINISTIC",
+     "1"
+    ],
+    [
+     "RETURN_LISTS",
+     "PARTS"
+    ],
+    [
+     "REMAP",
+     "0"
+    ],
+    [
+     "LB_METHOD",
+     "HYPERGRAPH"
+    ],
+    [
+     "HYPERGRAPH_PACKAGE",
+     "PHG"
+    ],
+    [
+     "LB_APPROACH",
+     "PARTITION"
+    ],
+    [
+     "IMBALANCE_TOL",
+     "1.03"
+    ],
+    [
+     "PHG_CUT_OBJECTIVE",
+     "CONNECTIVITY"
+    ],
+    [
+     "PHG_EDGE_SIZE_THRESHOLD",
+     "1.0"
+    ],
+    [
+     "PHG_RANDOMIZE_INPUT",
+     "0"
+    ],
+    [
+     "PHG_MULTILEVEL",
+     "1"
+    ],
+    [
+     "PHG_COARSENING_METHOD",
+     "AGG"
+    ],
+    [
+     "PHG_COARSEPARTITION_METHOD",
+     "AUTO"
+    ],
+    [
+     "PHG_REFINEMENT_METHOD",
+     "FM"
+    ],
+    [
+     "PHG_REFINEMENT_QUALITY",
+     "1"
+    ],
+    [
+     "PHG_EDGE_WEIGHT_OPERATION",
+     "ERROR"
+    ],
+    [
+     "PHG_PROCESSOR_REDUCTION_LIMIT",
+     "0.5"
+    ],
+    [
+     "PHG_REPART_MULTIPLIER",
+     "100"
+    ],
+    [
+     "CHECK_HYPERGRAPH",
+     "1"
+    ],
+    [
+     "PHG_OUTPUT_LEVEL",
+     "1"
+    ]
+   ],
+   "imbalance": "1.03 (validity bound ceil(1.03 N_obj / k) on the owner blocks)",
+   "objective": "CONNECTIVITY (= edge cut on 2-pin nets)",
+   "repair": "the pre-registered non-empty repair of src/l1_lowmem/phg_repair.py, unchanged"
+  },
+  "hub": "deg + 1 > C (frozen definition; hubs vote through H(v) only)"
+ },
+ "construction_universal_verbatim": "BOUNDED_VERTEXCUT_R2 (twelfth ruling, 2026-09-15; pre-registered in PREREGISTRATION_BOUNDED_VERTEXCUT_R2.json before any build):\nthe bounded-overlap static substrate -- every node in at most R = 2 blocks, block cap = the lane's existing C = round(N / k_f) = 100,\nthe same construction on every graph, no density switch, no query information.\n\nConstruction (universal; the constants are R = 2 and the frozen C / k_f of the lane):\n    k        = R * k_f                      blocks sized for the replication budget: k blocks of cap C hold R * N memberships\n    owners   = a hard partition of the STRUCT nodes (degree >= 1) into k blocks by the validated PHG driver on the primal STRUCT graph\n               (objects = nodes, nets = STRUCT edges of unit weight, CONNECTIVITY objective = the edge cut; IMBALANCE 1.03; non-empty repair)\n    degree-0 = the frozen universal degree-0 rule of section 20 (_l1c_vcut_transfer.place_degree0, imported unchanged): one home =\n               H(nearest anchored frozen-KNN neighbour) else the currently smallest block in canonical node order\n    alternate= at most ONE extra block per node, chosen by a single deterministic greedy pass: for node v, the foreign blocks are ranked\n               by the number of v's STRUCT neighbours whose HOME is that block (ties -> smaller block id); nodes are processed in\n               descending best-gain order (ties -> node id); v takes the first block of its ranked list whose current size < C (live\n               sizes, homes + alternates); a node with no foreign neighbour keeps lambda = 1; a node whose every candidate block is full\n               keeps lambda = 1 (counted as refused).  Replication is therefore bounded by construction (lambda <= 2) and by the cap.\nObjective realised: maximise the STRUCT edges contained by a shared block under lambda <= 2 and |B_p| <= C, spending replication only\nwhere it contains >= 1 edge (the feasible counterpart of \"min sum(lambda - 1) s.t. lambda <= 2 + capacity\" -- every-edge-covered is\ninfeasible under a node cap once a node has more than 2 (C - 1) neighbours, so the cut edges are the residual, not a violation).\nRepresentation for routing / serving = section 19 / 20 unchanged: M(v) = {home} or {home, alternate}; H(v) = home; hubs (deg + 1 > C)\nvote through H(v) only; serving = M(g) meets the selection; unique exposure = |union B_p|.\n",
+ "construction_steps": {
+  "1_owner_hypergraph": "scratchpad/_l1c_br2_build.py <ds>: objects = STRUCT nodes of degree >= 1 (re-indexed ascending), nets = the STRUCT edges (2 pins each, unit weight), k = R * k_f -> parts/<ds>__BR2_OWNERS_k<k>.npz + .json (file sha, content digest)",
+  "2_owner_partition": "python -u scratchpad/_l1c_phg.py <ds> BR2_OWNERS_k<k> (the pinned driver: shards, Zoltan-PHG NP = 4, validity bound, non-empty repair) -> parts/<ds>__BR2_OWNERS_k<k>__PHG_con.npy + .RUN.json; ONE run per dataset, whatever its cut; no k retarget, no second seed",
+  "3_homes": "H(v) = owner block for every STRUCT node; degree-0 nodes by the section-20 rule (scratchpad/_l1c_vcut_transfer.place_degree0 imported unchanged: one home = H(nearest anchored frozen-KNN neighbour), anchored = d_STRUCT > 0, highest float32 cosine, ties -> smallest node id; else the currently smallest block in ascending canonical node id; live sizes) applied ONCE on the owner sizes",
+  "4_alternates": "scratchpad/_l1c_br2_lib.alternates: one static greedy pass -- gain(v, p) = number of v's STRUCT neighbours whose HOME is the foreign block p; candidate list of v = its foreign blocks by gain descending, block id ascending; nodes processed by best gain descending, node id ascending, only nodes with gain >= 1; v takes the first candidate block whose live size (homes + degree-0 placements + alternates so far) < C; otherwise refused (lambda = 1). Degree-0 nodes have no STRUCT neighbour and never get an alternate (no fake structural overlap for isolated nodes, as in section 20)",
+  "5_membership": "M(v) = {H(v)} or {H(v), alt(v)}; lambda(v) <= 2 and |B_p| <= C by construction (asserted); RF = mean lambda <= 2 (asserted); parts/<ds>__BR2_k<k>__R2.npz (home, alt) + .json record",
+  "6_replay": "scratchpad/_l1c_br2_replay.py <ds> with the section-19 / 20 functions: mem_vc (non-hub -> M(v), hub -> {H(v)}), PR_d / PR_s over the served dense / SPLADE top-100 ids of the replay cache, RRF fusion, served(g) iff M(g) meets the selection, unique exposure = |union B_p|, matched prefixes vs the gate's P50 exposure",
+  "one_code_path": "the dataset name only selects the frozen graph, the served caches, the KNN file and the output names; no branch on dataset, density, degree or hub share anywhere in the construction"
+ },
+ "objective_and_infeasibility_statement": {
+  "ruling_objective": "min sum_v (lambda_v - 1) s.t. lambda_v <= 2 + balance / capacity, or equivalently each node's incident edges over at most two edge partitions",
+  "why_the_edge_form_is_infeasible_under_a_node_cap": "with |B_p| <= C and lambda_v <= 2, a node of STRUCT degree d can share a block with at most 2 (C - 1) neighbours; every node with d > 2 (C - 1) = 198 therefore keeps cut edges whatever the partition (metaqa 53, squad 1546, musique 3565 such nodes), and on the dense text graphs (mean degree 73.6 / 45.1) the all-edges-covered requirement is far out of reach for ordinary nodes too. The cut edges are the residual of the construction, not a violation",
+  "objective_realised": "maximise the number of STRUCT edges contained by a shared block subject to lambda <= 2 and |B_p| <= C (owners by the partitioner's edge cut; the second membership spent greedily where it contains the most home-edges), replication bounded by construction rather than minimised as a soft term: R = 2 IS the overlap budget of the ruling",
+  "not_optimised_here": "short-path (2-hop) containment per unit of replication -- reported (metaqa wedge / path-3 / ball metrics of section 18), not optimised; no second alternate, no swap pass, no iteration"
+ },
+ "representation_routing_serving_exposure": {
+  "identical_to_sections_19_20": "M(v), H(v), hub rule, mem_vc, PR_d / PR_s = _ta_prepartition.partition_ranking over the served top-K_LOCK ids, _l1s_core.rrf_ranks, P50 = the first P_MAIN fused blocks, served(g) iff M(g) meets the selection, node-level ALL / ANY, unique exposure, matched prefixes -- via the imported, pinned _l1c_vcut_replay functions",
+  "no_added_halo": "no 1-hop / out-neighbour expansion of any kind; the served hard BASE keeps its frozen legacy vote table exactly as served",
+  "node_level_check": "the node-level ALL through each served hard partition's own-block table must equal the served block-level base_all (asserted)"
+ },
+ "population": {
+  "metaqa": "served metaqa cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache (metaqa per hop; musique per hop where present; squad none)",
+  "squad": "served squad cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache (metaqa per hop; musique per hop where present; squad none)",
+  "musique": "served musique cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache (metaqa per hop; musique per hop where present; squad none)",
+  "DEV_B": "never read",
+  "TEST": "never read"
+ },
+ "baselines_gate": {
+  "metaqa": {
+   "HARD_MTK_BASE (GATE)": "served `metaqa` cache = canonical H4_SK Mt-KaHyPar partition (k_f = 432), served P50 through the frozen legacy vote table",
+   "HARD_PHG_BASE (contrast only)": "served `metaqa_phg` cache; reported, no verdict"
+  },
+  "squad": {
+   "HARD_MTK_BASE (GATE)": "served `squad` cache (k_f = 202)",
+   "HARD_PHG_BASE (contrast only)": "served `squad_phg` cache"
+  },
+  "musique": {
+   "HARD_PHG_BASE (GATE)": "served `musique` cache = LOWMEM PHG_C1 partition (k_f = 1,175), the dataset's only served hard BASE"
+  },
+  "matched_budget_target": "per query, the GATE baseline's P50 exposure (sum of its selected hard block sizes = unique nodes)"
+ },
+ "cells_per_dataset": {
+  "R2_P50 (protocol cell)": "50 fused R2 blocks per query; ALL / ANY (per hop where labelled); unique and nominal exposure; McNemar vs the GATE (and vs the contrast, no verdict); exposure flag EXPOSURE_LE_HARD / EXPOSURE_ABOVE_HARD by the mean unique exposure over DEV_A vs the gate's mean P50 exposure",
+  "R2_MATCHED_LE (SIGNAL cell)": "per query, the LARGEST fused prefix whose unique exposure <= the GATE's P50 exposure of the same query (never exceeds the hard budget); McNemar vs the GATE. Signal cell because the question is about the representation at an equal unique-node budget; P50 compares different budgets once RF > 1 (section 20)",
+  "R2_MATCHED_GE (informational)": "the smallest prefix with unique exposure >= the hard exposure; overshoot reported",
+  "R2_HOME_ONLY_VOTE (diagnostic)": "every node votes only to H(v); serving through M(v); P50",
+  "OWNERS_ONLY_P50 / OWNERS_ONLY_MATCHED_LE (R = 1 control)": "the same owner partition (k = 2 k_f, degree-0 placed) WITHOUT alternates: home vote, home serving, owner blocks for exposure; at P50 (about half the hard budget) and at the matched budget. R2_MATCHED_LE vs OWNERS_ONLY_MATCHED_LE = the alternates' value at equal exposure and equal owners (informational label GAIN / NEUTRAL / LOSS)",
+  "HARD_OWN_BLOCK_VOTE (diagnostic)": "the GATE hard partition voted through its own-block table; P50",
+  "V1 cells (metaqa only, informational)": "the section-19 VCUT_P50 and VCUT_MATCHED_LE cells recomputed from the pinned CAP file with the pinned functions, asserted equal to vcut_replay_A_metaqa.json, then R2 vs V1 at P50 and at the matched budget (McNemar; no decision)",
+  "reach_decomposition (diagnostic)": "as sections 19 / 20 for R2_P50 (UNREACHED / REACHED_WEAK, worst gold position, hub / degree-0 gold); failure overlap with the gate for R2_P50 and R2_MATCHED_LE"
+ },
+ "structure_metrics": {
+  "full_on": [
+   "metaqa"
+  ],
+  "path3_stride": 1,
+  "cheap_on": [
+   "squad",
+   "musique"
+  ],
+  "note": "the section-18 wedge / path-3 / ball metrics (V.structure_metrics) are computed for the R2 membership and for the owners-only membership on metaqa (the only graph with section-18 reference cells: hard_MtK wedge_all 0.0011, vcut_k1004_CAP100 0.0212 / RF 2.34); on the text graphs only RF, block sizes and 1-hop containment (the wedge enumeration is not affordable on the contended host and gates nothing)"
+ },
+ "statistics": {
+  "test": "exact two-sided McNemar on paired DEV_A 0/1 ALL vectors (_l1x90_core.mcnemar): gained / lost / p",
+  "alpha": 0.01,
+  "labels": {
+   "GAIN": "gained > lost and p < 0.01",
+   "LOSS": "lost > gained and p < 0.01",
+   "NEUTRAL": "otherwise"
+  },
+  "multiplicity_note": "one signal cell (R2_MATCHED_LE vs gate) per dataset decides; R2_P50 vs gate gives the efficiency flag; every other comparison is descriptive"
+ },
+ "decision_rule_pre_registered": {
+  "metaqa": {
+   "RETAINED": "R2_MATCHED_LE vs HARD_MTK_BASE = GAIN (the section-19 locality gain survives the R = 2 bound at the equal budget)",
+   "EFFICIENT": "R2_P50 vs HARD_MTK_BASE != LOSS AND EXPOSURE_LE_HARD"
+  },
+  "text (squad, musique)": {
+   "SAFE": "R2_MATCHED_LE vs the GATE != LOSS (no significant ALL-gold loss at the equal budget)",
+   "EFFICIENT": "R2_P50 vs the GATE != LOSS AND EXPOSURE_LE_HARD (the 50-block protocol cell is not a budget cut that costs gold)"
+  },
+  "universal_outcome": {
+   "SUPPORTED": "metaqa RETAINED AND squad SAFE AND musique SAFE AND squad EFFICIENT AND musique EFFICIENT",
+   "PARTIALLY_SUPPORTED": "metaqa RETAINED AND both text SAFE, but at least one text dataset not EFFICIENT",
+   "NOT_SUPPORTED": "otherwise (metaqa not RETAINED, or a text LOSS at the matched budget)"
+  },
+  "difference_from_section_20_stated": "section 20 labelled the P50 cell primary and the matched cell secondary; here the matched cell is the signal because the bounded construction is a statement about the representation at a fixed replication budget, and section 20 showed the P50 comparison mixes representation with budget; the P50 cell keeps its exposure flag as the efficiency clause",
+  "what_follows": "SUPPORTED / PARTIALLY_SUPPORTED = post-hoc DEV_A evidence that a bounded-overlap substrate retains the sparse-graph locality gain without the text budget cut; composition with SAFE / H2_PATCH1 / BALANCED_H2_PATCH1 needs a further ruling and is NOT run here. NOT_SUPPORTED = the R = 2 construction as specified does not carry the gain (the owners-only control and the containment / wedge numbers say whether the alternates were inert or the owners too small); no rule change, no R = 3, no second alternate without a ruling",
+  "no_promotion": "nothing here changes the served L1 or any frozen record; sections 18-20 are unchanged"
+ },
+ "forbidden": [
+  "reading DEV_B or TEST",
+  "any change to R, C, the k rule, K0 / K_LOCK / P_MAIN, the RRF, the hub definition, the degree-0 rule, the greedy's gain / order / tie-breaks, the capacity rule",
+  "a second alternate, a swap or refinement pass, a re-run of the owner partition with another k / seed / imbalance, a re-repair after placement, a density or degree switch, a dataset branch",
+  "selecting more than 50 blocks except in the labelled matched-budget cells",
+  "any SAFE / H2_PATCH1 / BALANCED_H2_PATCH1 / H3 / V1 composition",
+  "any halo or out-neighbour expansion added to the memberships",
+  "editing any CONTRACT_FILE or pinned module; editing _l1c_vcut_replay.py, _l1c_vcut_lib.py, _l1c_vcut_transfer.py, _l1c_phg.py; editing the five new BR2 modules after this record (their shas are pinned below and asserted at run time)",
+  "changing NP or the PHG parameters; signalling the foreign process; touching the WebQSP watcher",
+  "writing under data/",
+  "tuning after seeing numbers; changing a label, cell or threshold after a number is seen; re-running a step after seeing its number"
+ ],
+ "code": {
+  "new_modules": {
+   "_l1c_br2_lib.py": {
+    "path": "scratchpad/_l1c_br2_lib.py",
+    "sha256": "909b7109d233a894516cc1c1620272bb395bbff6e53629600e993838484b426d",
+    "bytes": 11101
+   },
+   "_l1c_br2_build.py": {
+    "path": "scratchpad/_l1c_br2_build.py",
+    "sha256": "f7dd0c88a4e5f6177252fb691a26a53b976dc41d8c19ec8a711a881717cc8a55",
+    "bytes": 2068
+   },
+   "_l1c_br2_assign.py": {
+    "path": "scratchpad/_l1c_br2_assign.py",
+    "sha256": "c473c8b07d25d35e6646f08f6e97f397eee61a191a581080b3303d4b098a865c",
+    "bytes": 10231
+   },
+   "_l1c_br2_replay.py": {
+    "path": "scratchpad/_l1c_br2_replay.py",
+    "sha256": "281ded1924e509f0c98313f75ed8bad84b6ed6a73c602b1923a98b1d3308238f",
+    "bytes": 21776
+   },
+   "_l1c_br2_summary.py": {
+    "path": "scratchpad/_l1c_br2_summary.py",
+    "sha256": "7792cb2ebea7c10b3f951fe6ac68edfe26ef06e2e916bbd988689f3f8622d501",
+    "bytes": 4563
+   }
+  },
+  "usage": [
+   "python -u scratchpad/_l1c_br2_build.py <ds>",
+   "python -u scratchpad/_l1c_phg.py <ds> BR2_OWNERS_k<k>",
+   "python -u scratchpad/_l1c_br2_assign.py <ds>",
+   "python -u scratchpad/_l1c_br2_replay.py <ds>",
+   "python -u scratchpad/_l1c_br2_summary.py"
+  ],
+  "imports_unchanged": {
+   "_l1s_core.py": {
+    "path": "scratchpad/_l1s_core.py",
+    "sha256": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+    "bytes": 15099
+   },
+   "_l1x90_core.py": {
+    "path": "scratchpad/_l1x90_core.py",
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+    "bytes": 12081
+   },
+   "_ta_prepartition.py": {
+    "path": "scratchpad/_ta_prepartition.py",
+    "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+    "bytes": 11737
+   },
+   "_l1g_core.py": {
+    "path": "scratchpad/_l1g_core.py",
+    "sha256": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+    "bytes": 11419
+   },
+   "_l1c_vcut_lib.py": {
+    "path": "scratchpad/_l1c_vcut_lib.py",
+    "sha256": "6700f04282eb2d6ce144bd7f4b2fc7c452dafac9f7bd1c9f3a0cac1e83273cc3",
+    "bytes": 18209
+   },
+   "_l1c_vcut_replay.py": {
+    "path": "scratchpad/_l1c_vcut_replay.py",
+    "sha256": "717473f022f6107e31d5b488a141c8fe02d329fa092b811cc2b1c17d4fb6ce74",
+    "bytes": 19581
+   },
+   "_l1c_vcut_transfer.py": {
+    "path": "scratchpad/_l1c_vcut_transfer.py",
+    "sha256": "db2c9163510130011207317ad236f0b1b836bcc72aa96b0b5a638582bd0060a0",
+    "bytes": 20788
+   },
+   "_l1c_phg.py": {
+    "path": "scratchpad/_l1c_phg.py",
+    "sha256": "7f2a416c0a74bf79cd7a57a829b1f86b4c0997d4470e9be21333bc486f33bfe3",
+    "bytes": 9062
+   },
+   "src/l1_lowmem/phg.py": {
+    "path": "src/l1_lowmem/phg.py",
+    "sha256": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+    "bytes": 55309
+   },
+   "src/l1_lowmem/phg_repair.py": {
+    "path": "src/l1_lowmem/phg_repair.py",
+    "sha256": "4c051e7a139abc19fd1b8433948a0d288858ac6a9c67dae40d7ef001839472b0",
+    "bytes": 47327
+   },
+   "src/l1_lowmem/common.py": {
+    "path": "src/l1_lowmem/common.py",
+    "sha256": "18edea394b402ee1b6f5e8dac7b7cb7c474647145988ee60f18d3f947db98ff2",
+    "bytes": 2369
+   },
+   "src/l1_lowmem/freight.py": {
+    "path": "src/l1_lowmem/freight.py",
+    "sha256": "7adbe2a06146e9c60b99250cc1ac84beb1ef7115a23d96ea6930f87d298d0971",
+    "bytes": 49869
+   },
+   "src/l1_canonical/adapter.py": {
+    "path": "src/l1_canonical/adapter.py",
+    "sha256": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+    "bytes": 26015
+   },
+   "src/l1_canonical/hypergraph.py": {
+    "path": "src/l1_canonical/hypergraph.py",
+    "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+    "bytes": 12200
+   }
+  },
+  "phg_driver_build_record": {
+   "path": "results/L1_LOWMEM/PHG_BUILD.json",
+   "sha256": "65fa41e7141e7344f5360c35da1c30df83a6a6ac18a353db93935539fa899a1b",
+   "bytes": 1650
+  }
+ },
+ "graphs_frozen": {
+  "metaqa": {
+   "N": 43234,
+   "struct_edges": 124669,
+   "k_f": 432,
+   "C": 100,
+   "k_R2": 864,
+   "owners_tag": "BR2_OWNERS_k864",
+   "hubs": 104,
+   "degree_0": 0,
+   "struct_nodes": 43234,
+   "mean_struct_degree": 5.77,
+   "nodes_with_degree_gt_2(C-1) (cannot have every edge contained under lambda <= 2 and cap C)": 53,
+   "owners_per_block_mean": 50.04,
+   "struct_keys_sha256": "92bfb08acb6fd7a647fe781cdd64b3bfc67ada2174fbc65a7299caea4d50389d"
+  },
+  "squad": {
+   "N": 20233,
+   "struct_edges": 744734,
+   "k_f": 202,
+   "C": 100,
+   "k_R2": 404,
+   "owners_tag": "BR2_OWNERS_k404",
+   "hubs": 4900,
+   "degree_0": 6349,
+   "struct_nodes": 13884,
+   "mean_struct_degree": 73.62,
+   "nodes_with_degree_gt_2(C-1) (cannot have every edge contained under lambda <= 2 and cap C)": 1546,
+   "owners_per_block_mean": 34.37,
+   "struct_keys_sha256": "a1ac0cd372a31a249dd7c86bf23729a003341882dc88b05eb51c0bc82c5f92cc"
+  },
+  "musique": {
+   "N": 117534,
+   "struct_edges": 2651280,
+   "k_f": 1175,
+   "C": 100,
+   "k_R2": 2350,
+   "owners_tag": "BR2_OWNERS_k2350",
+   "hubs": 9727,
+   "degree_0": 9858,
+   "struct_nodes": 107676,
+   "mean_struct_degree": 45.12,
+   "nodes_with_degree_gt_2(C-1) (cannot have every edge contained under lambda <= 2 and cap C)": 3565,
+   "owners_per_block_mean": 45.82,
+   "struct_keys_sha256": "b57175c03a726e530796304b11ddb5ce3c7e3b32d910f8bb889a0c9641d5cf08"
+  }
+ },
+ "records_read_only": {
+  "vcut_replay_A_metaqa.json": {
+   "path": "results/L1_COVPART/vcut_replay_A_metaqa.json",
+   "sha256": "89428a3c21bffa7c675006c63f59ecb0a5a7cd8b92c6edbd4238ef18374ce051",
+   "bytes": 13124
+  },
+  "vcut_struct_metaqa.json": {
+   "path": "results/L1_COVPART/vcut_struct_metaqa.json",
+   "sha256": "f85c54980d0486d3cf6871571ca298f6f7dab43f01c14c1da5c5ca3f03015d0f",
+   "bytes": 22612
+  },
+  "vcut_transfer_A_squad.json": {
+   "path": "results/L1_COVPART/vcut_transfer_A_squad.json",
+   "sha256": "e391483a48f3778fc9ceb2de0090bc8ecce4109d01984ccea9deef131978984a",
+   "bytes": 8650
+  },
+  "vcut_transfer_A_musique.json": {
+   "path": "results/L1_COVPART/vcut_transfer_A_musique.json",
+   "sha256": "d66ad3705ca643e20e8041b789a5d8c42c2695c854e134251ce7db2f051472b8",
+   "bytes": 8242
+  },
+  "vcut_transfer_SUMMARY.json": {
+   "path": "results/L1_COVPART/vcut_transfer_SUMMARY.json",
+   "sha256": "5b9e5fa025d47ec5f15bdc9fa1d5bb63e45ac4fe0525b6c3c6c0d21409e6da69",
+   "bytes": 4899
+  },
+  "PREREGISTRATION_STRUCT_VERTEXCUT_V1.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_STRUCT_VERTEXCUT_V1.json",
+   "sha256": "a5c2f887ceaf21c79122f6abf9c5d25d63a1678a6f6e8bacd6b1bc601ec31d28",
+   "bytes": 11497
+  },
+  "PREREGISTRATION_STRUCT_VERTEXCUT_V1_REPLAY.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_STRUCT_VERTEXCUT_V1_REPLAY.json",
+   "sha256": "41ff114eda5b388849d1307f04603ef595e1e63b5fadee443cd454d8e810f621",
+   "bytes": 14780
+  },
+  "PREREGISTRATION_STRUCT_VERTEXCUT_V1_TRANSFER.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_STRUCT_VERTEXCUT_V1_TRANSFER.json",
+   "sha256": "61845f7b17fa0632b10d1c9459f8c6da60f9f499c6a27a5662093daed7c8b3af",
+   "bytes": 20011
+  }
+ },
+ "v1_substrate_metaqa": {
+  "path": "results/L1_COVPART/parts/metaqa__STRUCT_VCUT_V1_k1004__PHG_con__CAP100.npy",
+  "sha256": "9a331cf8969d07d37880a1495aca224a6632325f0ad4ae5dbd67b429b477ffbf",
+  "bytes": 997480
+ },
+ "caches_read_only": {
+  "metaqa": {
+   "path": "data/l1_canonical/metaqa/replay_cache.npz",
+   "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b",
+   "bytes": 5390599
+  },
+  "metaqa_phg": {
+   "path": "data/l1_lowmem/metaqa/replay_cache__LOWMEM__PHG_REPAIR1_con.npz",
+   "sha256": "584e17dec26d0408d5253a3f79e471bc7ec128f6dde744581bb6e502da5b4e5b",
+   "bytes": 5386215
+  },
+  "squad": {
+   "path": "data/l1_canonical/squad/replay_cache.npz",
+   "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6",
+   "bytes": 5320148
+  },
+  "squad_phg": {
+   "path": "data/l1_lowmem/squad/replay_cache__LOWMEM__PHG_con.npz",
+   "sha256": "edd9b36bb4ba45ff0579c0591f19dc263ae84296f7f9299684974530845f20ab",
+   "bytes": 5312713
+  },
+  "musique": {
+   "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+   "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5",
+   "bytes": 6183023
+  }
+ },
+ "knn_read_only": {
+  "metaqa": {
+   "path": "data/final_canonical/metaqa/graph/knn.npz",
+   "sha256": "f7c59640e816951148fee791bc8790e026461ee52a5b6741c63859244b5a4a16",
+   "bytes": 1175782
+  },
+  "squad": {
+   "path": "data/final_canonical/squad/graph/knn.npz",
+   "sha256": "fee9cca5435668378d2a139614cec141d0b4977991801a004c8ca43ee8ad796f",
+   "bytes": 516370
+  },
+  "musique": {
+   "path": "data/final_canonical/musique/graph/knn.npz",
+   "sha256": "6020ac7e0b6773e64866b5e942dc0e02c3b704615ced8de4d557aa543221ef5b",
+   "bytes": 1794442
+  }
+ }
+}

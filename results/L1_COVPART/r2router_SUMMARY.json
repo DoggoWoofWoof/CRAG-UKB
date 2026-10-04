@@ -1,0 +1,442 @@
+{
+ "RECORD": "R2_LEGACY_ROUTER_SUMMARY",
+ "utc": "2026-09-15T19:16:45Z",
+ "DEV": "A",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_R2_LEGACY_ROUTER.json",
+  "sha256": "3f18a7fc24b61611f8d19d5ea6c9fc8cd4084118137833b0fbb0efb91d67dc8f",
+  "bytes": 26236
+ },
+ "records": {
+  "metaqa": {
+   "path": "results/L1_COVPART/r2router_A_metaqa.json",
+   "sha256": "5341c41608acbbd826cb29fe8bff3b4d9e6bec7705726aaba4e86d422db6dfb8",
+   "bytes": 23393
+  },
+  "squad": {
+   "path": "results/L1_COVPART/r2router_A_squad.json",
+   "sha256": "66423ad2fcf21f7e58bfe5e33170210d8c576d8efa2c3ff51504ad72534e15b8",
+   "bytes": 12814
+  },
+  "musique": {
+   "path": "results/L1_COVPART/r2router_A_musique.json",
+   "sha256": "5ffd2c4ef8143593e0efb2c9e3b580be4764af4868c0d6dafce4f78b110b6058",
+   "bytes": 12262
+  }
+ },
+ "question": "Can bounded overlap (the frozen R = 2 substrate: every node in <= 2 blocks, cap 100, RF 1.53 / 1.61 / 1.53) reduce replication / unique-node exposure while the existing universal router (the canonical own + directed-out-neighbour vote spread) supplies the hub reach that a lambda <= 2 membership rule cannot encode? Partitioning and routing are separate mechanisms: section 22 removed both the unbounded replication and the router; this arm restores the router on the bounded substrate.",
+ "decision_rule": {
+  "TEXT_SAFE(ds)": "R2ROUTER_P50 vs the GATE != LOSS AND R2ROUTER_MATCHED_LE vs the GATE != LOSS (squad and musique must both be SAFE: 'no significant text regression' at P50 and at the matched budget)",
+  "METAQA_GAIN": "R2ROUTER_P50 vs HARD_MTK_BASE = GAIN ('a significant MetaQA gain')",
+  "METAQA_EFFICIENT": "R2ROUTER_P50 vs HARD_MTK_BASE != LOSS AND DEV_A mean unique exposure < the hard DEV_A mean P50 exposure ('exposure-efficiency improvement': the same ALL-gold at fewer unique nodes; the lane's EFFICIENT label of sections 20 / 22). Stated now: the exposure inequality is expected by construction (|B_p| <= 100, so 50 blocks expose <= 5,000 unique nodes vs 5,023 / 5,089 / 5,117 for the hard P50; section 22 measured 81 % on metaqa), so this clause is decided by the coverage side -- the router has to recover the whole 30.6-pt P50 deficit of section 22 on the same substrate for it to fire",
+  "METAQA_MATCHED_GAIN (informational sub-label, not a clause)": "R2ROUTER_MATCHED_LE vs HARD_MTK_BASE = GAIN (a significant gain at the equal budget)",
+  "OUTCOME": {
+   "PASS_GAIN": "TEXT_SAFE(squad) AND TEXT_SAFE(musique) AND METAQA_GAIN",
+   "PASS_EFFICIENCY": "TEXT_SAFE(squad) AND TEXT_SAFE(musique) AND not METAQA_GAIN AND METAQA_EFFICIENT",
+   "FAIL": "otherwise (a text LOSS in either cell of either text dataset, or metaqa LOSS at P50, or metaqa not below the hard exposure)"
+  },
+  "what_follows": {
+   "PASS_GAIN": "post-hoc DEV_A evidence that the bounded substrate under the canonical router beats the served hard BASE in ALL-gold ranking at lower exposure with the text sets safe; status MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC), not promoted; no composition with BALANCED_H2_PATCH1 / H2_PATCH1 / SAFE (the ruling keeps the mechanisms separate until each earns transfer evidence); any transfer test needs its own ruling and an untouched population",
+   "PASS_EFFICIENCY": "post-hoc DEV_A evidence for the hypothesis as stated -- bounded overlap reduces exposure while the router supplies the reach -- WITHOUT a ranking gain; status MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC; efficiency only), not promoted; the same no-composition rule; the ranking claim is explicitly NOT made",
+   "FAIL": "the ruling's letter: 'Run no R3/R4 or alternate routing if it fails' -- no R = 3 / 4, no second alternate, no undirected / 2-hop / weighted / hub-rule-changed spread, no other router on the bounded substrate; the bounded-substrate line closes in this lane with sections 22 + 23 as its record; V1 stays frozen as ruled"
+  },
+  "no_promotion": "nothing here changes the served L1 or any frozen record; sections 16-22 are unchanged; the WebQSP primary transfer remains frozen H2_PATCH1 exactly as section 16"
+ },
+ "per_dataset": {
+  "metaqa": {
+   "gate": "HARD_MTK_BASE",
+   "gate_ALL": 0.6397,
+   "gate_exposure": 5022.97,
+   "R2ROUTER_P50_ALL": 0.5359,
+   "R2ROUTER_P50_unique": 4353.24,
+   "unique_over_hard_ratio": 0.8667,
+   "R2ROUTER_P50_vs_gate": {
+    "n": 1002,
+    "base_ALL": 0.6397,
+    "cell_ALL": 0.5359,
+    "delta_pts": -10.38,
+    "gained": 80,
+    "lost": 184,
+    "p": 1.3423188675080907e-10
+   },
+   "R2ROUTER_MATCHED_LE_ALL": 0.5469,
+   "R2ROUTER_MATCHED_LE_blocks": 57.79,
+   "R2ROUTER_MATCHED_LE_vs_gate": {
+    "n": 1002,
+    "base_ALL": 0.6397,
+    "cell_ALL": 0.5469,
+    "delta_pts": -9.28,
+    "gained": 85,
+    "lost": 178,
+    "p": 9.945380783149512e-09
+   },
+   "section22_R2_P50_ALL": 0.3333,
+   "router_value_vs_section22": {
+    "n": 1002,
+    "base_ALL": 0.3333,
+    "cell_ALL": 0.5359,
+    "delta_pts": 20.26,
+    "gained": 215,
+    "lost": 12,
+    "p": 2.8538374529609743e-49
+   },
+   "OWNERS_LEGACY_P50_ALL": 0.477,
+   "OWNERS_LEGACY_MATCHED_LE_ALL": 0.514,
+   "alternates_value_under_router_P50": "GAIN",
+   "alternates_value_under_router_matched": "GAIN",
+   "reach": {
+    "HARD_LEGACY (gate table)": {
+     "reached_all": 0.7126,
+     "hub_gold": 1.0,
+     "non_hub_gold": 0.6457,
+     "votes_per_hit": {
+      "dense_top100": 2.544,
+      "splade_top100": 3.371
+     },
+     "evidence_blocks": 219.2
+    },
+    "R2_MEMBERSHIP_VOTE (section 22 table)": {
+     "reached_all": 0.5349,
+     "hub_gold": 0.6273,
+     "non_hub_gold": 0.6801,
+     "votes_per_hit": {
+      "dense_top100": 1.717,
+      "splade_top100": 1.668
+     },
+     "evidence_blocks": 237.3
+    },
+    "R2_LEGACY_ROUTER": {
+     "reached_all": 0.8074,
+     "hub_gold": 0.9799,
+     "non_hub_gold": 0.8667,
+     "votes_per_hit": {
+      "dense_top100": 4.375,
+      "splade_top100": 5.552
+     },
+     "evidence_blocks": 423.1
+    },
+    "OWNERS_LEGACY (R = 1 control)": {
+     "reached_all": 0.6337,
+     "hub_gold": 0.9196,
+     "non_hub_gold": 0.6002,
+     "votes_per_hit": {
+      "dense_top100": 2.777,
+      "splade_top100": 3.835
+     },
+     "evidence_blocks": 309.9
+    }
+   },
+   "reach_decomposition_primary": {
+    "failures_A": 465,
+    "UNREACHED": 193,
+    "REACHED_WEAK": 272,
+    "reached_rate_A": 0.8074
+   },
+   "failure_overlap_primary": {
+    "fail_both": 281,
+    "fail_router_only": 184,
+    "fail_hard_only": 80
+   },
+   "RF": 1.5288,
+   "VERDICT": "LOSS_EXPOSURE_BELOW_HARD|MATCHED_LOSS",
+   "ladder_ALL_DEV_A": {
+    "HARD_OWN_BLOCK_VOTE": 0.1786,
+    "OWNERS_ONLY_P50 (section 22)": 0.2265,
+    "R2_P50 (section 22)": 0.3333,
+    "R2_MATCHED_LE (section 22)": 0.3473,
+    "HARD_MTK_BASE (legacy spread)": 0.6397,
+    "OWNERS_LEGACY_P50 (this record)": 0.477,
+    "OWNERS_LEGACY_MATCHED_LE (this record)": 0.514,
+    "R2ROUTER_P50 (this record)": 0.5359,
+    "R2ROUTER_MATCHED_LE (this record)": 0.5469,
+    "V1_P50 (section 19)": 0.6776,
+    "V1_MATCHED_LE (section 19)": 0.6876
+   },
+   "per_hop_P50_vs_gate": {
+    "hop1": {
+     "n": 326,
+     "base_ALL": 0.9172,
+     "cell_ALL": 0.9479,
+     "delta_pts": 3.07,
+     "gained": 15,
+     "lost": 5,
+     "p": 0.04138946533203125
+    },
+    "hop2": {
+     "n": 344,
+     "base_ALL": 0.4855,
+     "cell_ALL": 0.4593,
+     "delta_pts": -2.62,
+     "gained": 59,
+     "lost": 68,
+     "p": 0.4779219422067188
+    },
+    "hop3": {
+     "n": 332,
+     "base_ALL": 0.5271,
+     "cell_ALL": 0.2108,
+     "delta_pts": -31.63,
+     "gained": 6,
+     "lost": 111,
+     "p": 3.975631567765367e-26
+    },
+    "hop2+3": {
+     "n": 676,
+     "base_ALL": 0.5059,
+     "cell_ALL": 0.3373,
+     "delta_pts": -16.86,
+     "gained": 65,
+     "lost": 179,
+     "p": 1.6814662885657713e-13
+    }
+   },
+   "per_hop_MATCHED_LE_vs_gate": {
+    "hop1": {
+     "n": 326,
+     "base_ALL": 0.9172,
+     "cell_ALL": 0.9479,
+     "delta_pts": 3.07,
+     "gained": 15,
+     "lost": 5,
+     "p": 0.04138946533203125
+    },
+    "hop2": {
+     "n": 344,
+     "base_ALL": 0.4855,
+     "cell_ALL": 0.4797,
+     "delta_pts": -0.58,
+     "gained": 63,
+     "lost": 65,
+     "p": 0.9296139078299851
+    },
+    "hop3": {
+     "n": 332,
+     "base_ALL": 0.5271,
+     "cell_ALL": 0.2229,
+     "delta_pts": -30.42,
+     "gained": 7,
+     "lost": 108,
+     "p": 2.2527678876397467e-24
+    },
+    "hop2+3": {
+     "n": 676,
+     "base_ALL": 0.5059,
+     "cell_ALL": 0.3536,
+     "delta_pts": -15.24,
+     "gained": 70,
+     "lost": 173,
+     "p": 3.0590778024919576e-11
+    }
+   }
+  },
+  "squad": {
+   "gate": "HARD_MTK_BASE",
+   "gate_ALL": 0.9859,
+   "gate_exposure": 5089.32,
+   "R2ROUTER_P50_ALL": 0.9778,
+   "R2ROUTER_P50_unique": 3628.26,
+   "unique_over_hard_ratio": 0.7129,
+   "R2ROUTER_P50_vs_gate": {
+    "n": 992,
+    "base_ALL": 0.9859,
+    "cell_ALL": 0.9778,
+    "delta_pts": -0.81,
+    "gained": 5,
+    "lost": 13,
+    "p": 0.09625244140625
+   },
+   "R2ROUTER_MATCHED_LE_ALL": 0.9879,
+   "R2ROUTER_MATCHED_LE_blocks": 72.11,
+   "R2ROUTER_MATCHED_LE_vs_gate": {
+    "n": 992,
+    "base_ALL": 0.9859,
+    "cell_ALL": 0.9879,
+    "delta_pts": 0.2,
+    "gained": 7,
+    "lost": 5,
+    "p": 0.7744140625
+   },
+   "section22_R2_P50_ALL": 0.9899,
+   "router_value_vs_section22": {
+    "n": 992,
+    "base_ALL": 0.9899,
+    "cell_ALL": 0.9778,
+    "delta_pts": -1.21,
+    "gained": 1,
+    "lost": 13,
+    "p": 0.0018310546875
+   },
+   "OWNERS_LEGACY_P50_ALL": 0.9718,
+   "OWNERS_LEGACY_MATCHED_LE_ALL": 0.9899,
+   "alternates_value_under_router_P50": "NEUTRAL",
+   "alternates_value_under_router_matched": "NEUTRAL",
+   "reach": {
+    "HARD_LEGACY (gate table)": {
+     "reached_all": 0.999,
+     "hub_gold": 1.0,
+     "non_hub_gold": 0.9987,
+     "votes_per_hit": {
+      "dense_top100": 4.978,
+      "splade_top100": 5.039
+     },
+     "evidence_blocks": 123.7
+    },
+    "R2_MEMBERSHIP_VOTE (section 22 table)": {
+     "reached_all": 0.997,
+     "hub_gold": 0.9953,
+     "non_hub_gold": 0.9974,
+     "votes_per_hit": {
+      "dense_top100": 1.375,
+      "splade_top100": 1.361
+     },
+     "evidence_blocks": 106.8
+    },
+    "R2_LEGACY_ROUTER": {
+     "reached_all": 0.999,
+     "hub_gold": 1.0,
+     "non_hub_gold": 0.9987,
+     "votes_per_hit": {
+      "dense_top100": 5.939,
+      "splade_top100": 5.989
+     },
+     "evidence_blocks": 202.2
+    },
+    "OWNERS_LEGACY (R = 1 control)": {
+     "reached_all": 0.997,
+     "hub_gold": 1.0,
+     "non_hub_gold": 0.9961,
+     "votes_per_hit": {
+      "dense_top100": 5.417,
+      "splade_top100": 5.514
+     },
+     "evidence_blocks": 191.7
+    }
+   },
+   "reach_decomposition_primary": {
+    "failures_A": 22,
+    "UNREACHED": 1,
+    "REACHED_WEAK": 21,
+    "reached_rate_A": 0.999
+   },
+   "failure_overlap_primary": {
+    "fail_both": 9,
+    "fail_router_only": 13,
+    "fail_hard_only": 5
+   },
+   "RF": 1.6098,
+   "VERDICT": "NEUTRAL_EXPOSURE_BELOW_HARD|MATCHED_NEUTRAL"
+  },
+  "musique": {
+   "gate": "HARD_PHG_BASE",
+   "gate_ALL": 0.6596,
+   "gate_exposure": 5116.84,
+   "R2ROUTER_P50_ALL": 0.5853,
+   "R2ROUTER_P50_unique": 4366.46,
+   "unique_over_hard_ratio": 0.8534,
+   "R2ROUTER_P50_vs_gate": {
+    "n": 996,
+    "base_ALL": 0.6596,
+    "cell_ALL": 0.5853,
+    "delta_pts": -7.43,
+    "gained": 61,
+    "lost": 135,
+    "p": 1.3240945319970203e-07
+   },
+   "R2ROUTER_MATCHED_LE_ALL": 0.6135,
+   "R2ROUTER_MATCHED_LE_blocks": 58.64,
+   "R2ROUTER_MATCHED_LE_vs_gate": {
+    "n": 996,
+    "base_ALL": 0.6596,
+    "cell_ALL": 0.6135,
+    "delta_pts": -4.62,
+    "gained": 67,
+    "lost": 113,
+    "p": 0.0007506289280746464
+   },
+   "section22_R2_P50_ALL": 0.6647,
+   "router_value_vs_section22": {
+    "n": 996,
+    "base_ALL": 0.6647,
+    "cell_ALL": 0.5853,
+    "delta_pts": -7.93,
+    "gained": 62,
+    "lost": 141,
+    "p": 2.9666702983631053e-08
+   },
+   "OWNERS_LEGACY_P50_ALL": 0.488,
+   "OWNERS_LEGACY_MATCHED_LE_ALL": 0.6104,
+   "alternates_value_under_router_P50": "GAIN",
+   "alternates_value_under_router_matched": "NEUTRAL",
+   "reach": {
+    "HARD_LEGACY (gate table)": {
+     "reached_all": 0.8896,
+     "hub_gold": 0.9881,
+     "non_hub_gold": 0.9423,
+     "votes_per_hit": {
+      "dense_top100": 5.772,
+      "splade_top100": 5.735
+     },
+     "evidence_blocks": 227.2
+    },
+    "R2_MEMBERSHIP_VOTE (section 22 table)": {
+     "reached_all": 0.8012,
+     "hub_gold": 0.9216,
+     "non_hub_gold": 0.9074,
+     "votes_per_hit": {
+      "dense_top100": 1.514,
+      "splade_top100": 1.503
+     },
+     "evidence_blocks": 168.8
+    },
+    "R2_LEGACY_ROUTER": {
+     "reached_all": 0.8815,
+     "hub_gold": 0.9905,
+     "non_hub_gold": 0.9404,
+     "votes_per_hit": {
+      "dense_top100": 8.782,
+      "splade_top100": 8.884
+     },
+     "evidence_blocks": 468.5
+    },
+    "OWNERS_LEGACY (R = 1 control)": {
+     "reached_all": 0.8163,
+     "hub_gold": 0.981,
+     "non_hub_gold": 0.9033,
+     "votes_per_hit": {
+      "dense_top100": 7.634,
+      "splade_top100": 7.753
+     },
+     "evidence_blocks": 400.0
+    }
+   },
+   "reach_decomposition_primary": {
+    "failures_A": 413,
+    "UNREACHED": 118,
+    "REACHED_WEAK": 295,
+    "reached_rate_A": 0.8815
+   },
+   "failure_overlap_primary": {
+    "fail_both": 278,
+    "fail_router_only": 135,
+    "fail_hard_only": 61
+   },
+   "RF": 1.5299,
+   "VERDICT": "LOSS_EXPOSURE_BELOW_HARD|MATCHED_LOSS"
+  }
+ },
+ "text_SAFE": {
+  "squad": true,
+  "musique": false
+ },
+ "metaqa_GAIN": false,
+ "metaqa_EFFICIENT": false,
+ "metaqa_MATCHED_GAIN (informational)": false,
+ "OUTCOME": "FAIL",
+ "why": [
+  "metaqa R2ROUTER_P50 vs HARD_MTK_BASE LOSS (+80/-184 p=1.34e-10; 0.5359 vs 0.6397) at 87% of the hard unique exposure -> GAIN False, EFFICIENT False; matched LOSS (+85/-178 p=9.95e-09; 0.5469)",
+  "squad SAFE: P50 NEUTRAL (+5/-13 p=0.0963; 0.9778 vs 0.9859) at 71% of the hard unique exposure; matched NEUTRAL (+7/-5 p=0.774; 0.9879)",
+  "musique NOT safe: P50 LOSS (+61/-135 p=1.32e-07; 0.5853 vs 0.6596) at 85% of the hard unique exposure; matched LOSS (+67/-113 p=0.000751; 0.6135)"
+ ],
+ "what_follows": "the ruling's letter: 'Run no R3/R4 or alternate routing if it fails' -- no R = 3 / 4, no second alternate, no undirected / 2-hop / weighted / hub-rule-changed spread, no other router on the bounded substrate; the bounded-substrate line closes in this lane with sections 22 + 23 as its record; V1 stays frozen as ruled",
+ "status": "post-hoc DEV_A mechanism result; nothing promoted; no composition; served L1 unchanged; WebQSP primary transfer remains frozen H2_PATCH1 (section 16)"
+}

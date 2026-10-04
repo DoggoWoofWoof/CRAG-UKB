@@ -1,0 +1,547 @@
+{
+ "RECORD": "PREREGISTRATION_FLAT_VS_PARTITION",
+ "utc": "2026-09-25T21:03:30Z",
+ "status": "PRE-REGISTERED before any flat coverage number of the real gold nodes exists.  DEV_A split A only; a diagnostic, no selection, no adoption; the frozen composite (FREEZE f81ebb84) is unchanged.",
+ "question (the user's, verbatim, 2026-09-25)": "when we come back to our question do the partitions even help than purely having dense and splade rankings? have we measured that with our hypergraph approach?",
+ "follow_up (the user's, verbatim, 2026-09-26, before this record)": "ok continue and show me the flat vs partition results on the proper datasets like musique, hotpot 2wiki webqsp metaqa etc if we have the partitions ready",
+ "datasets_covered": "the three datasets with canonical partitions and replay caches: MetaQA (KB; Mt-KaHyPar and PHG caches), SQuAD (Mt-KaHyPar and PHG caches), MuSiQue (PHG C1 cache)",
+ "datasets_not_covered (no canonical partitions)": {
+  "webqsp": "no canonical partition, hypergraph or replay cache: the PHG arm ran twice and ended WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED (a third arm needs the user's ruling; PHG predicted FEASIBLE_ON_PREDICTION on the WSL VM)",
+  "hotpotqa": "no canonical partition, hypergraph or replay cache: PHG INFEASIBLE_UNDER_PINNED_HYGIENE_CRITERION (predicted summed peak fits the VM only without the 1.4x margin; a launch would run at 83-88 % of the VM); the composite's pinned stage 2 needs 32.2 GB of fp32 vectors on this host",
+  "2wiki": "no canonical partition, hypergraph or replay cache: PHG INFEASIBLE_EXCEEDS_WSL_VM (predicted summed peak > the whole VM at the lower fit); the composite's pinned stage 2 needs 36.8 GB of fp32 vectors on this host",
+  "what_is_not_done": "no partition is built for these datasets here: no cheaper partitioner, no corpus subsetting, no change of the WSL cap, no WebQSP third arm without a ruling (standing constraints); the levers are the user's",
+  "legacy_prior_only": "for 2wiki and hotpotqa the legacy l1_candgen sweep (disclosed below) is the only partition-vs-flat evidence; it is not canonical and does not answer the question"
+ },
+ "question": "At the SAME per-query exposure (number of distinct corpus nodes served), do the served partition routes -- node voting L1 (top-50 blocks of F0(Cd, Cs)) and the frozen composite PRIMARY -- cover every gold node of more queries than a flat, partition-free ranking of all N nodes by dense + SPLADE (frozen node-level RRF extended to full depth)?",
+ "answer_to_have_we_measured_it": "No, not on the canonical hypergraph stack.  Every canonical-era comparison was partition vs partition (the G2 exposure audit's CANON arm is a vote-ranked partition list).  The one flat test (2026-08-10, l1_candgen, disclosed below) used the legacy partitions, pooled corpora, a dense-only flat list and mean recall.",
+ "standing": "Return-to-L1 ruling; FIFTEENTH RULING (QMAX_BALANCED_H2_PATCH1 frozen, FREEZE f81ebb84); DEV_B read twice -- never again; no TEST; no 2Wiki / HotpotQA / WebQSP; nothing under data/ written; canonical manifests, partitions, production caches and L1 results untouched; foreign processes untouched.",
+ "code": {
+  "new_modules": {
+   "_l1c_flat.py": {
+    "path": "scratchpad/_l1c_flat.py",
+    "sha256": "27aafbfc9d24e39e92154cd6d3ebe8364c07e32af5a8ced51a88e766bc6b3c95"
+   },
+   "_l1c_flat_summary.py": {
+    "path": "scratchpad/_l1c_flat_summary.py",
+    "sha256": "a21db51b8c60258d876de94b4631739ec2789b6b9998bd045f1aed4ac3e86890"
+   },
+   "_l1c_flat_chain.sh": {
+    "path": "scratchpad/_l1c_flat_chain.sh",
+    "sha256": "35f5072f118efbbcf4c6c011ab90690649c8ad4d799cc8a4c67a8d55b46d409d"
+   }
+  },
+  "imports_unchanged": {
+   "_l1g_core.py": {
+    "path": "scratchpad/_l1g_core.py",
+    "sha256": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327"
+   },
+   "_l1kb_core.py": {
+    "path": "scratchpad/_l1kb_core.py",
+    "sha256": "f804f92d3ddead9ffdfd2a69981a3470f49346f9163f6f4a5ee3c546275cf8da"
+   },
+   "_l1ps_router.py": {
+    "path": "scratchpad/_l1ps_router.py",
+    "sha256": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9"
+   },
+   "_l1c_transfer_blockmax.py": {
+    "path": "scratchpad/_l1c_transfer_blockmax.py",
+    "sha256": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9"
+   },
+   "_l1x90_core.py": {
+    "path": "scratchpad/_l1x90_core.py",
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068"
+   },
+   "_l1s_core.py": {
+    "path": "scratchpad/_l1s_core.py",
+    "sha256": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861"
+   },
+   "_ta_prepartition.py": {
+    "path": "scratchpad/_ta_prepartition.py",
+    "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+   },
+   "_l1c_microl3.py": {
+    "path": "scratchpad/_l1c_microl3.py",
+    "sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5"
+   },
+   "_l1c_transfer_composite.py": {
+    "path": "scratchpad/_l1c_transfer_composite.py",
+    "sha256": "1241ec58e759ab99e77ff17936b6edc6b072344ea1d47a76a79f940a1047cc5b"
+   },
+   "adapter.py": {
+    "path": "src/l1_canonical/adapter.py",
+    "sha256": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01"
+   },
+   "canonical.py": {
+    "path": "data/final_canonical/canonical.py",
+    "sha256": "c657830b304afe861893b516726af419d35142334f866517b83221427a9016f5"
+   },
+   "_l1g_candidate.py": {
+    "path": "scratchpad/_l1g_candidate.py",
+    "sha256": "b01c27a6e64b18756db1ca1d8910e8db4bb54fa019d9809698cb1369206169e0"
+   },
+   "_l1c_h2patch.py": {
+    "path": "scratchpad/_l1c_h2patch.py",
+    "sha256": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d"
+   },
+   "_l1c_h2balanced.py": {
+    "path": "scratchpad/_l1c_h2balanced.py",
+    "sha256": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe"
+   },
+   "_l1c_qmaxbal.py": {
+    "path": "scratchpad/_l1c_qmaxbal.py",
+    "sha256": "cae88fa64a0516a4f55c99a4a3b464afd39e467dca42e4380a546ebbd545b1c8"
+   }
+  },
+  "exec_slices": "the pinned uL3 head of _l1c_microl3.py (import json .. '# ---- repair + evaluation') and the beam/balanced/patch slices of _l1c_transfer_composite.py (MARK_BEAM .. MARK_SAFE, MARK_PATCH .. '\\n\\n\\npatches = {ARM_H2'), exec'd verbatim"
+ },
+ "records_read_only": {
+  "transfer_repro_metaqa": {
+   "path": "results/L1_COVPART/transfer_repro_metaqa.json",
+   "sha256": "4c66f776ac156733bbdc52236a89a1e9519b4730c6299fdc7c2024d89cfeb3c3"
+  },
+  "safe_replay_metaqa": {
+   "path": "results/L1_CANONICAL/L1_REPLAY_metaqa.json",
+   "sha256": "7e5ef35b549791d9b6e790615a80ad7558f4626a07e0aaccca987f1834bc0972"
+  },
+  "transfer_repro_squad": {
+   "path": "results/L1_COVPART/transfer_repro_squad.json",
+   "sha256": "17f3d714e6651a3e1abc94457294c707a3c8a13ec3f50acd6044549e768eb007"
+  },
+  "safe_replay_squad": {
+   "path": "results/L1_CANONICAL/L1_REPLAY_squad.json",
+   "sha256": "c39aa79836c0296fafa957c01f5004f81968df3e7f5baee873687d1061e09d58"
+  },
+  "transfer_repro_musique": {
+   "path": "results/L1_COVPART/transfer_repro_musique.json",
+   "sha256": "6806c0c5956d6c9a002c112c3327877bb3f8d09193f79265643f98b772130d8d"
+  },
+  "safe_replay_musique": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json",
+   "sha256": "207ad4bb3b292f7930bafba94551881896d54e80edc89974bc28c6bad71dac76"
+  },
+  "transfer_repro_metaqa_phg": {
+   "path": "results/L1_COVPART/transfer_repro_metaqa_phg.json",
+   "sha256": "240f8f55611fd529c76305964398499a3a857f19640681e292cf53c77d182cf2"
+  },
+  "safe_replay_metaqa_phg": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json",
+   "sha256": "d4ff6870236303c4b88fbcdd4c421d33719eb19dba2829d87a53cc09f5032c17"
+  },
+  "transfer_repro_squad_phg": {
+   "path": "results/L1_COVPART/transfer_repro_squad_phg.json",
+   "sha256": "764cdbc989803a738d3dc777f3b68ac90fa4aa390dcc444e7db67ebcbbaf7298"
+  },
+  "safe_replay_squad_phg": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_squad__LOWMEM__PHG_con.json",
+   "sha256": "dc14ab54ea656f2f4f495c59365b84836b70cd3c27a22c646a210e4d9d5d8846"
+  },
+  "FREEZE_QMAX_BALANCED_H2_PATCH1": {
+   "path": "results/L1_COVPART/FREEZE_QMAX_BALANCED_H2_PATCH1.json",
+   "sha256": "f81ebb84b3c4a98c8c0b16337fb0febabc360ee51dd8eedbc9a99410c1f3b152"
+  },
+  "transfer_repro_SUMMARY": {
+   "path": "results/L1_COVPART/transfer_repro_SUMMARY.json",
+   "sha256": "c106e97803508822bf8bd93b5d6697f08ff2a741dff56127f28f2b976fc95a39"
+  },
+  "proto_IVF_SUMMARY (the IVF answer, read before this)": {
+   "path": "results/L1_COVPART/proto_IVF_SUMMARY.json",
+   "sha256": "27bd28b9115f967bae51bf6c442f8f806f7d3666b499c570dc66975e5f79e2ea"
+  },
+  "PREREGISTRATION_PROTOTYPE_LADDER_IVF_ADDENDUM": {
+   "path": "results/L1_COVPART/PREREGISTRATION_PROTOTYPE_LADDER_IVF_ADDENDUM.json",
+   "sha256": "063e423e89d788b710ccf2c9ed15483c4e89e130d394e22b201316670f459f2a"
+  },
+  "CANONICAL_FREEZE (the stored vectors the flat rankings are computed from)": {
+   "path": "data/final_canonical/CANONICAL_FREEZE.json",
+   "sha256": "039dcf327aa71e39994cdeedc731033279d81d854d74efc29c86f197546f3dc8"
+  },
+  "legacy candgen, pool 5000 (disclosed prior)": {
+   "path": "results/L2/candgen_gte_qwen.json",
+   "sha256": "d66b5f857605cd9c2d35d9f12756adc9ce7550a5eb0a69bdcb01fa88f946fd64"
+  },
+  "legacy candgen sweep (disclosed prior)": {
+   "path": "results/L2/candgen_sweep_gte_qwen.json",
+   "sha256": "f93de69c650669d24d9fcfb57526adc193a93e9fe10b10c8fa8ee1bc4a270dc3"
+  },
+  "proto_A_metaqa (DENSE_VOTE_ALONE / SPLADE_VOTE_ALONE references)": {
+   "path": "results/L1_COVPART/proto_A_metaqa.json",
+   "sha256": "7624b53e3d3d492c2e9de318c3d3df4edf6c2edfac54b1b1c4d97fd4c25b179f"
+  },
+  "proto_A_metaqa_phg (DENSE_VOTE_ALONE / SPLADE_VOTE_ALONE references)": {
+   "path": "results/L1_COVPART/proto_A_metaqa_phg.json",
+   "sha256": "eee983f0f174f60b1142273dfc5c0d75ac43ff04a64c664f8db2aebd2d5b9919"
+  },
+  "proto_A_squad (DENSE_VOTE_ALONE / SPLADE_VOTE_ALONE references)": {
+   "path": "results/L1_COVPART/proto_A_squad.json",
+   "sha256": "b2e04e2ac2245bc89cf08668b99266c6def03c747ce4cedb1582c3b610eb5d08"
+  },
+  "proto_A_squad_phg (DENSE_VOTE_ALONE / SPLADE_VOTE_ALONE references)": {
+   "path": "results/L1_COVPART/proto_A_squad_phg.json",
+   "sha256": "f5ee3ff80f0a81552fff74fd0bc6681db869f3cc2fb5c9552bfc5964047142da"
+  },
+  "proto_A_musique (DENSE_VOTE_ALONE / SPLADE_VOTE_ALONE references)": {
+   "path": "results/L1_COVPART/proto_A_musique.json",
+   "sha256": "5633ca9eac1330f60154c91124faef089c7f33065c4421d24c01e4e574cf55d5"
+  },
+  "PHG_WEBQSP_RUNS (why WebQSP has no canonical partition)": {
+   "path": "results/L1_LOWMEM/PHG_WEBQSP_RUNS.json",
+   "sha256": "830f27aec8a3435b683e906734aa8f8723ac424bbaf60b4c964c720dae03fb28"
+  },
+  "TRANSFER_RESOURCE_SURVEY_2WIKI_HOTPOTQA (why 2Wiki / HotpotQA have none)": {
+   "path": "results/L1_COVPART/TRANSFER_RESOURCE_SURVEY_2WIKI_HOTPOTQA.json",
+   "sha256": "6f01efa7dde2596522765309a47b67d260c4928d35e722db45be821dc6dab1f0"
+  }
+ },
+ "caches_read_only": {
+  "metaqa": {
+   "path": "data/l1_canonical/metaqa/replay_cache.npz",
+   "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b"
+  },
+  "squad": {
+   "path": "data/l1_canonical/squad/replay_cache.npz",
+   "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6"
+  },
+  "musique": {
+   "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+   "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5"
+  },
+  "metaqa_phg": {
+   "path": "data/l1_lowmem/metaqa/replay_cache__LOWMEM__PHG_REPAIR1_con.npz",
+   "sha256": "584e17dec26d0408d5253a3f79e471bc7ec128f6dde744581bb6e502da5b4e5b"
+  },
+  "squad_phg": {
+   "path": "data/l1_lowmem/squad/replay_cache__LOWMEM__PHG_con.npz",
+   "sha256": "edd9b36bb4ba45ff0579c0591f19dc263ae84296f7f9299684974530845f20ab"
+  }
+ },
+ "design": {
+  "caches": "the five DEV_A caches, split A: metaqa (Mt-KaHyPar H4_SK), metaqa_phg (PHG), squad (Mt-KaHyPar), squad_phg (PHG), musique (PHG C1)",
+  "flat_rankings (partition-free, exhaustive over all N nodes, from the frozen stored vectors; no tuned constant)": {
+   "FLAT_DENSE": "q . e_v from the same fp32 products as the accepted streamed stage 2 (same query batches of 200 cache rows, same 40,000-node chunks); descending, ties -> lower position.  Its block maxima are asserted equal to the accepted stage 2 bit for bit on every cache row.",
+   "FLAT_SPLADE": "sparse dot of the canonical SPLADE query and document vectors (CSR, fp32); descending, ties -> lower position; only positive-score nodes are ranked (no lexical evidence -> never served)",
+   "FLAT_RRF": "the frozen node-level RRF (_ta_prepartition.node_rrf) extended to full depth: 1/(60 + p_dense) + 1/(60 + p_splade), 0-based positions, float64; a node absent from the SPLADE list takes that list's depth (node_rrf's convention); ties -> dense order.  Checked: node_rrf over the module's own top-200 lists == the served ret_rrf wherever both top-200 lists equal the served ones (asserted)."
+  },
+  "routes (served, reproduced and asserted against transfer_repro_<cache>.json and the replay record)": {
+   "L1@P": "the top P blocks of the served node-vote ranking F0(Cd, Cs), P in 1, 2, 5, 10, 20, 50 (L1 = L1@50)",
+   "DENSE_VOTE / SPLADE_VOTE": "the top 50 blocks of one node-vote channel (Cd or Cs) alone",
+   "PRIMARY": "the frozen composite QMAX_BALANCED_H2_PATCH1 (49 kept SAFE blocks + the patch's nodes; exposure == SAFE's, asserted)"
+  },
+  "matched_exposure": "for a route R and a split-A query q, B_q(R) = the number of distinct nodes R serves for q.  The flat arm paired with R serves the top B_q(R) nodes of its ranking (FLAT_SPLADE: at most its positive-score nodes).",
+  "validation_gates (asserted; a failure stops the run before any record)": [
+   "pins and the pre-registration hashes",
+   "F0(Cd, Cs) == the served base_rank",
+   "stage 2 == the accepted streamed record (sha256)",
+   "flat dense block maxima == stage 2, bitwise, every cache row",
+   "L1 / SAFE / BALANCED_H2_PATCH1 / QMAX_F0 / QMAX_SAFE / PRIMARY ALL and ANY == transfer_repro; L1 and SAFE per query == the replay record",
+   "mean top-100 set overlap of the exhaustive dense and SPLADE rankings with the served retrieval lists >= 0.99"
+  ]
+ },
+ "metrics": {
+  "ALL": "every gold node of the query served (headline)",
+  "ANY": "at least one gold node served (reported)",
+  "paired test": "exact McNemar per pair on split A, route = reference, flat = arm: gained = flat covers and the route does not, lost = the route covers and flat does not"
+ },
+ "decision_rule_pre_registered": {
+  "labels (alpha = 0.01)": {
+   "PARTITIONS_HELP": "lost > gained and p < 0.01",
+   "FLAT_BEATS_PARTITIONS": "gained > lost and p < 0.01",
+   "NO_SIGNIFICANT_DIFFERENCE": "otherwise"
+  },
+  "HEADLINE per cache": [
+   "L1@50 vs FLAT_RRF at L1@50's per-query budget",
+   "PRIMARY vs FLAT_RRF at PRIMARY's per-query budget"
+  ],
+  "cross-cache verdict per headline pair": "PARTITIONS_HELP_ON_ALL_FIVE | FLAT_BEATS_PARTITIONS_ON_ALL_FIVE | NO_SIGNIFICANT_DIFFERENCE_ON_ALL_FIVE | PARTITIONS_NEVER_HELP | PARTITIONS_HELP_OR_TIE | REGIME_DEPENDENT, with the per-cache labels and the KB / text split",
+  "also_reported (same test, not headline)": [
+   "L1@P vs FLAT_RRF for P in 1, 2, 5, 10, 20 (the budget curve)",
+   "DENSE_VOTE vs FLAT_DENSE, SPLADE_VOTE vs FLAT_SPLADE (each channel against its own flat list)",
+   "L1@50 vs FLAT_DENSE and vs FLAT_SPLADE (descriptive)"
+  ],
+  "descriptive (no test)": [
+   "flat ALL / ANY at fixed budgets 10 .. 20,000 nodes",
+   "budget-free exposure needed to cover ALL gold nodes: flat = 1 + deepest gold position; L1 = nodes of the served block ranking down to the deepest gold block; per hop",
+   "per hop and per number-of-gold-nodes strata; where the two differ"
+  ],
+  "identity (asserted by the summary)": "the flat side is partition-free: metaqa vs metaqa_phg and squad vs squad_phg must give identical flat gold positions wherever their cache rows are the same queries"
+ },
+ "known_reference_numbers_already_on_record (split A)": {
+  "metaqa": {
+   "n_split_A": 1002,
+   "N": 43234,
+   "npart": 432,
+   "L1 (= L1@50) ALL / ANY": [
+    0.6397,
+    0.9132
+   ],
+   "PRIMARY (QMAX_BALANCED_H2_PATCH1) ALL / ANY": [
+    0.7754,
+    0.988
+   ],
+   "DENSE_VOTE ALL": 0.6337,
+   "SPLADE_VOTE ALL": 0.6128,
+   "QMAX_ALONE ALL (block-max dense, 50 blocks)": 0.1816
+  },
+  "metaqa_phg": {
+   "n_split_A": 1002,
+   "N": 43234,
+   "npart": 432,
+   "L1 (= L1@50) ALL / ANY": [
+    0.6727,
+    0.9261
+   ],
+   "PRIMARY (QMAX_BALANCED_H2_PATCH1) ALL / ANY": [
+    0.7964,
+    0.992
+   ],
+   "DENSE_VOTE ALL": 0.6577,
+   "SPLADE_VOTE ALL": 0.6537,
+   "QMAX_ALONE ALL (block-max dense, 50 blocks)": 0.1956
+  },
+  "squad": {
+   "n_split_A": 992,
+   "N": 20233,
+   "npart": 202,
+   "L1 (= L1@50) ALL / ANY": [
+    0.9859,
+    0.9859
+   ],
+   "PRIMARY (QMAX_BALANCED_H2_PATCH1) ALL / ANY": [
+    0.995,
+    0.995
+   ],
+   "DENSE_VOTE ALL": 0.9829,
+   "SPLADE_VOTE ALL": 0.9829,
+   "QMAX_ALONE ALL (block-max dense, 50 blocks)": 0.9879
+  },
+  "squad_phg": {
+   "n_split_A": 992,
+   "N": 20233,
+   "npart": 202,
+   "L1 (= L1@50) ALL / ANY": [
+    0.9829,
+    0.9829
+   ],
+   "PRIMARY (QMAX_BALANCED_H2_PATCH1) ALL / ANY": [
+    0.9899,
+    0.9899
+   ],
+   "DENSE_VOTE ALL": 0.9778,
+   "SPLADE_VOTE ALL": 0.9788,
+   "QMAX_ALONE ALL (block-max dense, 50 blocks)": 0.9909
+  },
+  "musique": {
+   "n_split_A": 996,
+   "N": 117534,
+   "npart": 1175,
+   "L1 (= L1@50) ALL / ANY": [
+    0.6596,
+    0.99
+   ],
+   "PRIMARY (QMAX_BALANCED_H2_PATCH1) ALL / ANY": [
+    0.76,
+    0.992
+   ],
+   "DENSE_VOTE ALL": 0.6546,
+   "SPLADE_VOTE ALL": 0.6004,
+   "QMAX_ALONE ALL (block-max dense, 50 blocks)": 0.7008
+  }
+ },
+ "disclosed_prior (legacy, 2026-08-10, l1_candgen with gte_qwen)": {
+  "partition_minus_dense_mean_recall_gap_by_scope [mean pool, gap in points]": {
+   "musique_clean": {
+    "3": [
+     303.9,
+     -30.47
+    ],
+    "6": [
+     607.5,
+     -19.73
+    ],
+    "15": [
+     1516.4,
+     -8.38
+    ],
+    "50": [
+     5039.2,
+     -1.65
+    ]
+   },
+   "2wiki_clean": {
+    "3": [
+     304.9,
+     -42.08
+    ],
+    "6": [
+     607.3,
+     -26.77
+    ],
+    "15": [
+     1512.4,
+     -7.8
+    ],
+    "50": [
+     5024.7,
+     4.05
+    ]
+   },
+   "squad_clean": {
+    "3": [
+     303.5,
+     -47.55
+    ],
+    "6": [
+     607.3,
+     -30.0
+    ],
+    "15": [
+     1517.4,
+     -12.35
+    ],
+    "50": [
+     5049.1,
+     -0.7
+    ]
+   },
+   "metaqa": {
+    "3": [
+     302.1,
+     -16.0
+    ],
+    "6": [
+     603.7,
+     -8.74
+    ],
+    "15": [
+     1506.8,
+     6.25
+    ],
+    "50": [
+     5013.7,
+     9.02
+    ]
+   },
+   "hotpotqa_clean": {
+    "3": [
+     306.7,
+     -50.0
+    ],
+    "6": [
+     612.5,
+     -33.75
+    ],
+    "15": [
+     1528.0,
+     -13.32
+    ],
+    "50": [
+     5073.3,
+     -0.7
+    ]
+   }
+  },
+  "legacy_corpus_N": {
+   "musique_clean": 13672,
+   "2wiki_clean": 65865,
+   "squad_clean": 19029,
+   "metaqa": 40151,
+   "hotpotqa_clean": 507494
+  },
+  "why_it_does_not_answer_the_question": "legacy partitions (not H4_SK / PHG), overlap-membership pools, pooled corpora (musique_clean N = 13,672 vs canonical 117,534), verbalised-triple metaqa (canonical is NAME_ONLY), dense-only flat list, mean recall instead of ALL-gold"
+ },
+ "predictions_stated_now": {
+  "F1": "metaqa and metaqa_phg: PARTITIONS_HELP for L1@50 vs FLAT_RRF and for PRIMARY vs FLAT_RRF (NAME_ONLY node text: the answer entities are reachable through the graph's out-neighbour votes, not by text similarity)",
+  "F2": "squad and squad_phg: NOT PARTITIONS_HELP for L1@50 vs FLAT_RRF nor for PRIMARY vs FLAT_RRF (single-hop, golds text-reachable)",
+  "F3": "musique, L1@50 vs FLAT_RRF: direction NOT predicted",
+  "F4": "squad, squad_phg and musique: FLAT_BEATS_PARTITIONS for L1@P vs FLAT_RRF at every P <= 5 (tight budgets; the legacy sweep's direction)",
+  "F5": "musique, PRIMARY vs FLAT_RRF: direction NOT predicted",
+  "F6": "metaqa and metaqa_phg: PARTITIONS_HELP for L1@P vs FLAT_RRF at every P >= 10"
+ },
+ "honest_scope_stated_now": {
+  "what_is_measured": "recall of the gold node SET at matched exposure -- whether the partition machinery puts the right nodes in front of L2 better than a flat list of the same size",
+  "compute_not_measured": "the flat arms score every node exhaustively (dense and SPLADE over all N); the routes use two top-100 lists, the STRUCT memberships and the block structure.  No latency or cost claim either way.",
+  "downstream_not_measured": "the blocks' other roles -- L2 locality features, L3 traversal seeds, scoping speed -- are not measured; a flat win here does not by itself remove partitions from the system",
+  "coverage": "three datasets (MetaQA KB, SQuAD, MuSiQue) on five caches, DEV_A split A only; no 2Wiki / HotpotQA / WebQSP; no DEV_B, no TEST",
+  "exhaustive_vs_served": "the flat rankings are exhaustive recomputations from the stored vectors (the served caches keep a top-1000 only, too shallow for a ~5,000-node budget); agreement with the served lists is measured and gated (dry runs below)",
+  "ALL_gold": "multi-gold queries need every gold node; the flat list has no notion of a bridge, the routes carry graph votes -- that difference is the thing being measured"
+ },
+ "dry_runs (stand-in gold nodes for every flat statistic; the routes reproduced on the real gold nodes, no number printed)": {
+  "flat_dry_squad.log": {
+   "sha256": "9a6fe1bdf017ee4cd649fe90de73f2f5c396166b627b52c5749690af0d5cbd1c",
+   "module_sha256 (_l1c_flat.py as run)": "b89bd117e52ef949d8232ba933fddb62e547598a578fb22dcb7d1ef2a96065b0",
+   "module_version": "v1",
+   "is_the_pinned_module": false,
+   "lines": [
+    "[  383.8s] stage 2 == the accepted streamed stage 2 of transfer_repro_squad.json (scores and ranking sha256) in 16s",
+    "[  391.1s] budgets (nodes served per query): {\"L1@1\": {\"mean\": 101.8, \"median\": 103.0, \"min\": 84.0, \"max\": 104.0}, \"L1@2\": {\"mean\": 204.1, \"median\": 206.0, \"min\": 151.0, \"max\": 208.0}, \"L1@5\": {\"mean\": 511.0, \"median\": 513.0, \"min\": 457.0, \"max\": 520.0}, \"L1@10\": {\"mean\": 1021.6, \"median\": 1025.0, \"min\": 953.0, \"max\": 1038.0}, \"L1@20\": {\"mean\": 2041.0, \"median\": 2045.0, \"min\": 1928.0, \"max\": 2070.0}, \"L1@50\": {\"mean\": 5089.3, \"median\": 5096.0, \"min\": 4961.0, \"max\": 5159.0}, \"DENSE_VOTE\": {\"mean\": 5084.8, \"median\": 5093.0, \"min\": 4951.0, \"max\": 5146.0}, \"SPLADE_VOTE\": {\"mean\": 5090.3, \"median\": 5096.0, \"min\": 4986.0, \"max\": 5148.0}, \"PRIMARY\": {\"mean\": 5074.3, \"median\": 5082.0, \"min\": 4939.0, \"max\": 5143.0}}",
+    "[  391.3s] reference reproduced (no number printed): L1 / SAFE / BALANCED_H2_PATCH1 / QMAX_F0 / QMAX_SAFE / QMAX_BALANCED_H2_PATCH1 == transfer_repro_squad.json (ALL, ANY); L1 and SAFE == results/L1_CANONICAL/L1_REPLAY_squad.json (split A, per query)",
+    "[  420.4s] flat pass in 28s (RSS 447 MB): {\"flat_dense_block_max == accepted stage 2 (bitwise, every cache row)\": true, \"rows_ranked\": 992, \"dense_top100_set_overlap_with_served_mean\": 1.0, \"splade_top100_set_overlap_with_served_mean\": 1.0, \"rows_dense_top200_order_identical_to_served\": 976, \"rows_splade_top200_order_identical_to_served\": 992, \"rows_where_node_rrf_over_own_top200 == served ret_rrf (checked wherever both top-200 lists are identical; asserted)\": 976, \"splade_positive_nodes_per_query\": {\"mean\": 18218.0, \"median\": 18685.5, \"min\": 10842.0, \"max\": 20062.0}}",
+    "[  432.3s] DRY RUN (430s, RSS 489 MB): pins; F0(Cd, Cs) == served base_rank; stage 2 == the accepted streamed record; flat dense block maxima == stage 2 bitwise on all 2000 cache rows; QMAX and BASE chains (|SAFE| = 50, patch disjoint and matched to SAFE); every split-A row ranked; every coverage, pairing and record path exercised on STAND-IN gold nodes (no real coverage number computed); record assembled (55326 bytes) and NOT written.  times {\"uL3_head_and_pinned_beam\": 117.8, \"balanced_beam\": 246.9, \"stage2_reference_streamed\": 16.4, \"chains\": 6.2, \"flat_pass\": 28.4}"
+   ]
+  },
+  "flat_dry_musique.log": {
+   "sha256": "4f5dcde2b1a8cf52b0d3ada1c115cfb791d43719534713f305317be4fd7b4718",
+   "module_sha256 (_l1c_flat.py as run)": "b89bd117e52ef949d8232ba933fddb62e547598a578fb22dcb7d1ef2a96065b0",
+   "module_version": "v1",
+   "is_the_pinned_module": false,
+   "lines": [
+    "[  387.6s] stage 2 == the accepted streamed stage 2 of transfer_repro_musique.json (scores and ranking sha256) in 40s",
+    "[  397.2s] budgets (nodes served per query): {\"L1@1\": {\"mean\": 102.8, \"median\": 103.0, \"min\": 89.0, \"max\": 104.0}, \"L1@2\": {\"mean\": 205.5, \"median\": 206.0, \"min\": 183.0, \"max\": 207.0}, \"L1@5\": {\"mean\": 513.3, \"median\": 514.0, \"min\": 461.0, \"max\": 516.0}, \"L1@10\": {\"mean\": 1025.9, \"median\": 1028.0, \"min\": 957.0, \"max\": 1031.0}, \"L1@20\": {\"mean\": 2049.7, \"median\": 2054.0, \"min\": 1817.0, \"max\": 2060.0}, \"L1@50\": {\"mean\": 5116.8, \"median\": 5126.0, \"min\": 4631.0, \"max\": 5145.0}, \"DENSE_VOTE\": {\"mean\": 5116.2, \"median\": 5125.0, \"min\": 4655.0, \"max\": 5145.0}, \"SPLADE_VOTE\": {\"mean\": 5117.2, \"median\": 5125.0, \"min\": 4981.0, \"max\": 5147.0}, \"PRIMARY\": {\"mean\": 5104.2, \"median\": 5116.0, \"min\": 4691.0, \"max\": 5145.0}}",
+    "[  397.4s] reference reproduced (no number printed): L1 / SAFE / BALANCED_H2_PATCH1 / QMAX_F0 / QMAX_SAFE / QMAX_BALANCED_H2_PATCH1 == transfer_repro_musique.json (ALL, ANY); L1 and SAFE == results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json (split A, per query)",
+    "[  562.1s] flat pass in 164s (RSS 923 MB): {\"flat_dense_block_max == accepted stage 2 (bitwise, every cache row)\": true, \"rows_ranked\": 996, \"dense_top100_set_overlap_with_served_mean\": 1.0, \"splade_top100_set_overlap_with_served_mean\": 1.0, \"rows_dense_top200_order_identical_to_served\": 964, \"rows_splade_top200_order_identical_to_served\": 996, \"rows_where_node_rrf_over_own_top200 == served ret_rrf (checked wherever both top-200 lists are identical; asserted)\": 964, \"splade_positive_nodes_per_query\": {\"mean\": 111153.1, \"median\": 113179.0, \"min\": 72030.0, \"max\": 117378.0}}",
+    "[  570.8s] DRY RUN (567s, RSS 1030 MB): pins; F0(Cd, Cs) == served base_rank; stage 2 == the accepted streamed record; flat dense block maxima == stage 2 bitwise on all 2000 cache rows; QMAX and BASE chains (|SAFE| = 50, patch disjoint and matched to SAFE); every split-A row ranked; every coverage, pairing and record path exercised on STAND-IN gold nodes (no real coverage number computed); record assembled (60846 bytes) and NOT written.  times {\"uL3_head_and_pinned_beam\": 135.0, \"balanced_beam\": 208.4, \"stage2_reference_streamed\": 40.1, \"chains\": 9.1, \"flat_pass\": 163.9}"
+   ],
+   "as_run_correction (record stamp != code that ran)": {
+    "record_stamp_sha256": "35996834b5193a132444a495781ee5358b0e77359a890964385647db24c4dc0e",
+    "module_sha256_as_run": "b89bd117e52ef949d8232ba933fddb62e547598a578fb22dcb7d1ef2a96065b0",
+    "evidence": "the process started 2026-09-25T20:45:08Z (the log's host_at_start); _l1c_flat.py was edited from v1 to v2 at 2026-09-25T20:47:01Z (file mtime, read before the next edit); the run ended 2026-09-25T20:54:39Z; Python had compiled v1 at start, so the run executed v1 and the stamp (hashed at record assembly) shows v2"
+   }
+  },
+  "flat_dry_metaqa.log": {
+   "sha256": "911a9d8ae8aafd693ad7781abce43ee78ea038c06848a3d454504b85e0ccab53",
+   "module_sha256 (_l1c_flat.py as run)": "35996834b5193a132444a495781ee5358b0e77359a890964385647db24c4dc0e",
+   "module_version": "v2",
+   "is_the_pinned_module": false,
+   "lines": [
+    "[  110.6s] stage 2 == the accepted streamed stage 2 of transfer_repro_metaqa.json (scores and ranking sha256) in 28s",
+    "[  119.9s] budgets (nodes served per query): {\"L1@1\": {\"mean\": 103.2, \"median\": 104.0, \"min\": 77.0, \"max\": 104.0}, \"L1@2\": {\"mean\": 204.7, \"median\": 206.0, \"min\": 181.0, \"max\": 208.0}, \"L1@5\": {\"mean\": 508.1, \"median\": 509.0, \"min\": 467.0, \"max\": 520.0}, \"L1@10\": {\"mean\": 1011.6, \"median\": 1013.0, \"min\": 954.0, \"max\": 1036.0}, \"L1@20\": {\"mean\": 2016.1, \"median\": 2018.0, \"min\": 1950.0, \"max\": 2058.0}, \"L1@50\": {\"mean\": 5023.0, \"median\": 5024.0, \"min\": 4932.0, \"max\": 5122.0}, \"DENSE_VOTE\": {\"mean\": 5027.5, \"median\": 5028.0, \"min\": 4925.0, \"max\": 5105.0}, \"SPLADE_VOTE\": {\"mean\": 5010.4, \"median\": 5008.0, \"min\": 4880.0, \"max\": 5097.0}, \"PRIMARY\": {\"mean\": 5027.3, \"median\": 5029.0, \"min\": 4944.0, \"max\": 5113.0}}",
+    "[  120.2s] reference reproduced (no number printed): L1 / SAFE / BALANCED_H2_PATCH1 / QMAX_F0 / QMAX_SAFE / QMAX_BALANCED_H2_PATCH1 == transfer_repro_metaqa.json (ALL, ANY); L1 and SAFE == results/L1_CANONICAL/L1_REPLAY_metaqa.json (split A, per query)",
+    "[  176.9s] flat pass in 56s (RSS 493 MB): {\"flat_dense_block_max == accepted stage 2 (bitwise, every cache row)\": true, \"rows_ranked\": 1002, \"dense_top100_set_overlap_with_served_mean\": 0.99999, \"splade_top100_set_overlap_with_served_mean\": 1.0, \"rows_dense_top200_order_identical_to_served\": 969, \"rows_splade_top200_order_identical_to_served\": 1002, \"rows_where_node_rrf_over_own_top200 == served ret_rrf (checked wherever both top-200 lists are identical; asserted)\": 969, \"splade_positive_nodes_per_query\": {\"mean\": 38684.2, \"median\": 39295.0, \"min\": 18640.0, \"max\": 42703.0}}",
+    "[  183.3s] DRY RUN (179s, RSS 538 MB): pins; F0(Cd, Cs) == served base_rank; stage 2 == the accepted streamed record; flat dense block maxima == stage 2 bitwise on all 1998 cache rows; QMAX and BASE chains (|SAFE| = 50, patch disjoint and matched to SAFE); every split-A row ranked; every coverage, pairing and record path exercised on STAND-IN gold nodes (no real coverage number computed); record assembled (179947 bytes) and NOT written.  times {\"uL3_head_and_pinned_beam\": 28.3, \"balanced_beam\": 50.1, \"stage2_reference_streamed\": 28.3, \"chains\": 9.0, \"flat_pass\": 56.0}"
+   ]
+  },
+  "flat_dry_metaqa_v2.log": {
+   "sha256": "912d04cfc4eff1e7553a16bd68589c514be2b7ae6d153cf9f7f977871afd4d40",
+   "module_sha256 (_l1c_flat.py as run)": "27aafbfc9d24e39e92154cd6d3ebe8364c07e32af5a8ced51a88e766bc6b3c95",
+   "module_version": "v3",
+   "is_the_pinned_module": true,
+   "lines": [
+    "[  110.7s] stage 2 == the accepted streamed stage 2 of transfer_repro_metaqa.json (scores and ranking sha256) in 22s",
+    "[  118.7s] budgets (nodes served per query): {\"L1@1\": {\"mean\": 103.2, \"median\": 104.0, \"min\": 77.0, \"max\": 104.0}, \"L1@2\": {\"mean\": 204.7, \"median\": 206.0, \"min\": 181.0, \"max\": 208.0}, \"L1@5\": {\"mean\": 508.1, \"median\": 509.0, \"min\": 467.0, \"max\": 520.0}, \"L1@10\": {\"mean\": 1011.6, \"median\": 1013.0, \"min\": 954.0, \"max\": 1036.0}, \"L1@20\": {\"mean\": 2016.1, \"median\": 2018.0, \"min\": 1950.0, \"max\": 2058.0}, \"L1@50\": {\"mean\": 5023.0, \"median\": 5024.0, \"min\": 4932.0, \"max\": 5122.0}, \"DENSE_VOTE\": {\"mean\": 5027.5, \"median\": 5028.0, \"min\": 4925.0, \"max\": 5105.0}, \"SPLADE_VOTE\": {\"mean\": 5010.4, \"median\": 5008.0, \"min\": 4880.0, \"max\": 5097.0}, \"PRIMARY\": {\"mean\": 5027.3, \"median\": 5029.0, \"min\": 4944.0, \"max\": 5113.0}}",
+    "[  119.3s] reference reproduced (no number printed): L1 / SAFE / BALANCED_H2_PATCH1 / QMAX_F0 / QMAX_SAFE / QMAX_BALANCED_H2_PATCH1 == transfer_repro_metaqa.json (ALL, ANY); L1 and SAFE == results/L1_CANONICAL/L1_REPLAY_metaqa.json (split A, per query)",
+    "[  170.3s] flat pass in 51s (RSS 392 MB): {\"flat_dense_block_max == accepted stage 2 (bitwise, every cache row)\": true, \"rows_ranked\": 1002, \"dense_top100_set_overlap_with_served_mean\": 0.99999, \"splade_top100_set_overlap_with_served_mean\": 1.0, \"rows_dense_top200_order_identical_to_served\": 969, \"rows_splade_top200_order_identical_to_served\": 1002, \"rows_where_node_rrf_over_own_top200 == served ret_rrf (checked wherever both top-200 lists are identical; asserted)\": 969, \"splade_positive_nodes_per_query\": {\"mean\": 38684.2, \"median\": 39295.0, \"min\": 18640.0, \"max\": 42703.0}}",
+    "[  174.3s] DRY RUN (167s, RSS 461 MB): pins; F0(Cd, Cs) == served base_rank; stage 2 == the accepted streamed record; flat dense block maxima == stage 2 bitwise on all 1998 cache rows; QMAX and BASE chains (|SAFE| = 50, patch disjoint and matched to SAFE); every split-A row ranked; every coverage, pairing and record path exercised on STAND-IN gold nodes (no real coverage number computed); record assembled (179947 bytes) and NOT written.  times {\"uL3_head_and_pinned_beam\": 32.6, \"balanced_beam\": 48.9, \"stage2_reference_streamed\": 21.5, \"chains\": 7.8, \"flat_pass\": 50.6}"
+   ]
+  }
+ },
+ "dry_runs_note": {
+  "failed_attempt (disclosed)": {
+   "log": "flat_dry_squad_attempt1_NameError.log",
+   "sha256": "93a24eeed2292d73f421cd30ed6d0419329456928f5052313339bb84e1927458",
+   "what": "the first squad dry run stopped in the exec'd balanced-beam slice (NameError: secs_pinned undefined) before any flat statistic existed; fixed by defining secs_pinned / edges_pinned after the exec'd head, exactly as _l1c_proto.py does"
+  },
+  "module_versions": {
+   "b89bd117e52ef949d8232ba933fddb62e547598a578fb22dcb7d1ef2a96065b0": "v1, the first dry-run version",
+   "35996834b5193a132444a495781ee5358b0e77359a890964385647db24c4dc0e": "v2 = v1 + the descriptive where_they_differ statistic (depth quantiles over the lost queries the flat list ranks, plus a count of the ones it never ranks) + one record field documenting the never-ranked sentinel (v1 reconstructed from v2 by reversing exactly these two edits: sha256 equal)",
+   "27aafbfc9d24e39e92154cd6d3ebe8364c07e32af5a8ced51a88e766bc6b3c95": "v3 = the PINNED module = v2 + the code sha hashed at start (v1 / v2 hashed their own file when assembling the record) + an assert that the file is unchanged before the record (diff v2 -> v3: exactly these three lines); no statistic, route, test or gate changed"
+  },
+  "which_ran_what": {
+   "flat_dry_squad.log": "v1",
+   "flat_dry_musique.log": "v1",
+   "flat_dry_metaqa.log": "v2",
+   "flat_dry_metaqa_v2.log": "v3"
+  },
+  "why_several": "each fix was made after a dry run exposed it (a sentinel printed as a depth quantile; the record stamping the file at the end of a run instead of the code that ran); the heavy paths (routes, stage 2, flat rankings, pairing) are byte-identical code in v1, v2 and v3"
+ },
+ "what_is_not_decided": "adoption of anything; the frozen composite (FREEZE f81ebb84) is unchanged; no DEV_B, TEST, 2Wiki, HotpotQA or WebQSP; a change of the L1 architecture would need a ruling",
+ "run_plan": "bash scratchpad/_l1c_flat_chain.sh -> results/L1_COVPART/flat_A_<cache>.{json,log} for metaqa, metaqa_phg, squad, squad_phg, musique (sequential, stop at the first failure), then flat_SUMMARY.{json,log}; all write-once"
+}

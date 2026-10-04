@@ -1,0 +1,81 @@
+{
+ "milestone": "C12 official-VAL \u2014 three predeclared policies C8c/C11a/C12a; ONE evaluation; TEST untouched",
+ "PREDECLARED_POLICIES": [
+  "C8c",
+  "C11a",
+  "C12a"
+ ],
+ "FINAL_PRE_VAL_POLICY": "C12a",
+ "C12_VARIANT": "MEAN_ONLY",
+ "C12_LATENT_DIM": 128,
+ "C12_MAX_CONTEXT": "NO",
+ "DATASET_ID_FEATURE": "NO",
+ "NEW_ENCODER_FORWARD": 0,
+ "NEW_LLM_COMPONENT": 0,
+ "OFFICIAL_VAL_ACCESSED_FOR_C11_C12_SELECTION": "NO",
+ "backbone": {
+  "fusion": "C7b soft-archetype (fit_soft_head ndcg50)",
+  "reranker": "C8c XGBRanker rank:ndcg top-50 pool",
+  "fit_data": "FULL TRAIN (both datasets), early-stop on DEV_INNER",
+  "note": "C11a/C12a were trained on the C9_TRAIN backbone; applied unchanged here (z-scored C8c input => scale-invariant residual)."
+ },
+ "top20_construction": "per query: C7b-fused pool -> C8c score s -> take top-20 by s; C11a/C12a reorder within top-20 only; rest keep C8c order -> ALL@50 preserved",
+ "c11a": {
+  "arch": "Pq,Pd 1536->256; interaction [hq,hd,hq*hd,|hq-hd|,E(18)]; 512->128->1 zero-init residual; beta",
+  "params": 1387778,
+  "loss": "pairwise RankNet multi-positive top5-weighted",
+  "seed": 0
+ },
+ "c12a": {
+  "arch": "C11a-style local z(Z=128) + leave-one-out MEAN set context + hq + expert-set(15) -> ctx MLP 256->128->1 zero-init residual; beta",
+  "params": 1321602,
+  "use_max": false,
+  "loss": "pairwise RankNet multi-positive top5-weighted",
+  "seed": 0
+ },
+ "E_features": [
+  "c8c_oof_score",
+  "c8c_oof_rank",
+  "base_score",
+  "c_dense",
+  "c_splade",
+  "c_offset",
+  "c_mixture",
+  "c_relation",
+  "rk_dense",
+  "rk_splade",
+  "rk_offset",
+  "rk_mixture",
+  "rk_relation",
+  "rel_mask",
+  "max_contrib",
+  "second_contrib",
+  "n_top5",
+  "votes_top10"
+ ],
+ "E_standardization": "reuse TRAIN (C9_TRAIN top20) emean/estd saved in model joblibs (NOT recomputed on VAL)",
+ "representation": "frozen gte_qwen queries_all[row_all] (audited == exact dense query rep, cosine 1.0) + nodes.npy; unit-norm",
+ "artifact_sha256_32": {
+  "C11_models.joblib": "eeb0d548281b442b5164f5694cbf3ab6",
+  "C12_models.joblib": "9a1e91d274619f3fdd7bbdb83148bafd",
+  "C8c_reranker_fulltrain.joblib": "7faaf0013f02591d659f95441a95aca9",
+  "2wiki_nodes.npy": "14b5186dc6d5395e1096220abdae5ff8",
+  "musique_nodes.npy": "e865825f205b82838e2baf101b3a97ba",
+  "2wiki_queries_all.npy": "769fcb7a139058722b4c21178cb5d6be",
+  "musique_queries_all.npy": "dff097e75e876b059f68e0ca725074dc",
+  "l2_c11.py": "d6d1a116ed135232b2be1c3d8c782530",
+  "l2_c12.py": "6efa95cc1551d1fbe8f55620976a055c",
+  "_c11_qmap_2wiki": "ac5b6fe69dd3e959060c6942c7314325",
+  "_c11_qmap_musique": "2bf5d10c56ed7b73ec915348f168644b"
+ },
+ "E_std_hash": {
+  "c11_emean": 1262.605224609375,
+  "c12_emean": 1262.605224609375,
+  "emean_identical": true
+ },
+ "seeds": {
+  "torch": 0,
+  "numpy": 0
+ },
+ "written_before_val_access": true
+}

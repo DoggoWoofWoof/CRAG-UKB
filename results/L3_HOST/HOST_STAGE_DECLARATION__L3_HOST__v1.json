@@ -1,0 +1,381 @@
+{
+ "stage": "L3_HOST",
+ "declared": "2026-09-29T17:40:15+05:30",
+ "what": "the L3 development lane (MetaQA L1_DEV population, 1,998 rows) runs on the shared host 'gpu' through rx, below normal CPU priority, with the laptop's exact code and inputs; nothing else about the harnesses changes",
+ "why": [
+  "the laptop is saturated by other projects' work (CPU load 82%, 5.9 GB RAM free, no CUDA GPU, measured 2026-09-29 17:27), while the host sat at 22% CPU / 0% GPU (rx monitor, 17:25)",
+  "the host lets independent L3 development runs go in parallel instead of one heavy local process at a time"
+ ],
+ "user_direction (verbatim, chat)": [
+  "gpu and a better cpu as promised use with contention on medium priority but if resources available i want full utilization, use this for the partitioning and create for the rest",
+  "bro i give you authorization please start utilizing the gpu and cpu dont waste time",
+  "make sure we have complete utilization of cpu and gpu at all times either irrespective of project but mpr has the priority wherever possible"
+ ],
+ "host": {
+  "name": "gpu",
+  "machine": "DESKTOP-SLQMEQH",
+  "env": "mpr-cpu@31803e6457ab (mpr's, read-only by name; never edited or rebuilt)",
+  "versions_checked": {
+   "host": "Python 3.13.5, numpy 2.3.2, scipy 1.16.1, psutil 7.2.2",
+   "laptop": "Python 3.13.5, numpy 2.3.2, scipy 1.16.1"
+  }
+ },
+ "priority_policy": {
+  "cpu": "every job runs through scratchpad/_l3h_run.py, which sets the process to BELOW_NORMAL_PRIORITY_CLASS before any work: normal-priority work of any project (mpr first) always gets the CPU before CRAG's L3 lane",
+  "reservation": "--cpus 1 --mem 3 per job (peak RSS of a MetaQA run 0.83 GB); the scheduler's 2 CPU / 8 GB reserve is untouched",
+  "gpu": "none: no L3 stage uses the GPU",
+  "never": [
+   "cancel, rerun or gc another project's job",
+   "touch another project's processes",
+   "edit mpr's [envs.*]",
+   "rx gc",
+   "put a credential or token on the host (no --var secrets)"
+  ]
+ },
+ "data_movement": {
+  "rule": "move code, not data: the two top-1000 retrieval caches (2 x 2,445,078,580 bytes) are NOT pushed; the harnesses read them only row-wise for the population, so results/L3_HOST/bundle_metaqa__L1DEV.npz (scratchpad/_l3h_bundle.py) carries exactly those rows and _l3h_run.py serves CanonicalDataset.cache() from it, refusing any other row and any open of the full caches",
+  "not_pushed": [
+   {
+    "path": "data/final_canonical/metaqa/retrieval_cache/dense_top1000.npz",
+    "bytes": 2445078580
+   },
+   {
+    "path": "data/final_canonical/metaqa/retrieval_cache/splade_top1000.npz",
+    "bytes": 2445078580
+   }
+  ],
+  "pushed (exact files; the traced input set of a 200-row typed smoke minus the caches, plus the runner and the bundle)": [
+   {
+    "path": "data/final_canonical/canonical.py",
+    "bytes": 20505,
+    "sha256": "c657830b304afe861893b516726af419d35142334f866517b83221427a9016f5"
+   },
+   {
+    "path": "data/final_canonical/metaqa/DATASET.json",
+    "bytes": 13933,
+    "sha256": "2998a69af9c1e7e4f88aa12d6e3113719ca30e8c5acfd0524079d1b28d5bcf09"
+   },
+   {
+    "path": "data/final_canonical/metaqa/embeddings/dense/docs/manifest.json",
+    "bytes": 2204,
+    "sha256": "6ed812224adc5b43035c44eb9dc8f6fa27c3ef2d0d7cc540ea1b00f0937c43e1"
+   },
+   {
+    "path": "data/final_canonical/metaqa/embeddings/dense/docs/shard_00000.npy",
+    "bytes": 122880128,
+    "sha256": "113b7b2678072c56abebfb994fcaebc95e15df8c5f4c39e8525be5f2e75e99fa"
+   },
+   {
+    "path": "data/final_canonical/metaqa/embeddings/dense/docs/shard_00001.npy",
+    "bytes": 9934976,
+    "sha256": "2d16ba324dd89ac2b91199e11c8fd3c80bd721e9625880e909b54a1f54c77d8e"
+   },
+   {
+    "path": "data/final_canonical/metaqa/embeddings/dense/queries/manifest.json",
+    "bytes": 3378,
+    "sha256": "b387ec54edebf6dd3d9a4b211dc586065dc670213660dfee97dde87756663b0b"
+   },
+   {
+    "path": "data/final_canonical/metaqa/embeddings/dense/queries/shard_00008.npy",
+    "bytes": 122880128,
+    "sha256": "71a2747fdfcedc2d022c4b33a01b2f48626ed04cd5f7c17b9e105363724a2a9e"
+   },
+   {
+    "path": "data/final_canonical/metaqa/embeddings/splade/docs/manifest.json",
+    "bytes": 2024,
+    "sha256": "103ab07f3262345e12553c9cf892e51cecdbb1258975bc6e9e8ee88c7086e248"
+   },
+   {
+    "path": "data/final_canonical/metaqa/embeddings/splade/docs/shard_00000.npz",
+    "bytes": 13146677,
+    "sha256": "e5de739fee0843e4b1c9d0eb7545da644746aeed6a597c43eaa1cf5ba1928bb6"
+   },
+   {
+    "path": "data/final_canonical/metaqa/embeddings/splade/docs/shard_00001.npz",
+    "bytes": 1145005,
+    "sha256": "7817e626c850a567310a8adda475d90abfc538e486ae5b5f9ba6e18b550e117d"
+   },
+   {
+    "path": "data/final_canonical/metaqa/embeddings/splade/queries/manifest.json",
+    "bytes": 3215,
+    "sha256": "4387fa9d70c84cca571af0f4f0a7033e6aa1570cfe307b85acfee38a1f80fa12"
+   },
+   {
+    "path": "data/final_canonical/metaqa/embeddings/splade/queries/shard_00008.npz",
+    "bytes": 13608285,
+    "sha256": "32b3b92e8e959132a6912caebb7064c513a922b37ac5415db29e80e3c9a0b03f"
+   },
+   {
+    "path": "data/final_canonical/metaqa/graph/GRAPH_MANIFEST.json",
+    "bytes": 6961,
+    "sha256": "df360a84ab18b006f4f57391d02fc63992dc61495d3a7899fca8a0c6f8313bc9"
+   },
+   {
+    "path": "data/final_canonical/metaqa/graph/knn.npz",
+    "bytes": 1175782,
+    "sha256": "f7c59640e816951148fee791bc8790e026461ee52a5b6741c63859244b5a4a16"
+   },
+   {
+    "path": "data/final_canonical/metaqa/graph/ner.npz",
+    "bytes": 23084,
+    "sha256": "93065a2311c2b445cc14ce6458457c9e14ec0d3c641a4bc573ef4b175a374cb8"
+   },
+   {
+    "path": "data/final_canonical/metaqa/graph/structural.npz",
+    "bytes": 1336556,
+    "sha256": "1b2027c64b2e62b5cf122f09a246ed4cb485841bf0823fcee246e8bf45bf8570"
+   },
+   {
+    "path": "data/final_canonical/metaqa/nodes.jsonl",
+    "bytes": 17349076,
+    "sha256": "a2441a83961a3426be2650a05513fd5b85862c4e98ea13755ede1bced951f3eb"
+   },
+   {
+    "path": "data/final_canonical/metaqa/queries/dev.jsonl",
+    "bytes": 35620356,
+    "sha256": "d60ece410a392cc08ee8782a99969054847f6a82b7f649dc73e805710567f63d"
+   },
+   {
+    "path": "data/final_canonical/metaqa/queries/query_ids.json",
+    "bytes": 10818729,
+    "sha256": "c0d328208563d295cf3e702605f8d8a2bb930160f1be6978666d85465bc2bfbe"
+   },
+   {
+    "path": "data/l1_canonical/metaqa/parts/H4_SK.npy",
+    "bytes": 346000,
+    "sha256": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062"
+   },
+   {
+    "path": "data/l1_canonical/metaqa/parts/LOWMEM__PHG_REPAIR1_con.npy",
+    "bytes": 346000,
+    "sha256": "b06beef6f3f493a43e6a798da694dde4a94bdc1d9b3056e8906085a4bf592daf"
+   },
+   {
+    "path": "data/l1_canonical/metaqa/query_index.npz",
+    "bytes": 17907964,
+    "sha256": "5ce0070a60530e2ce633a528294cec90789c02357dffe76db9620100e2f58b83"
+   },
+   {
+    "path": "results/L1_DEV/L1_ROUTING_CARRY_FORWARD__v1.json",
+    "bytes": 227609,
+    "sha256": "aaae66faea2f8037f00f5be131d6a9bbe08ac80e815341090d503e444eeb417c"
+   },
+   {
+    "path": "results/L1_DEV/kbres_metaqa__v1.json",
+    "bytes": 618978,
+    "sha256": "282791b4ffc02c6fe306ab67f7db905702f49f2e61a499dfd88c60be0a1d741a"
+   },
+   {
+    "path": "results/L1_DEV/kbres_metaqa__v1.npz",
+    "bytes": 440666,
+    "sha256": "6c34e20cf338bff01b40109e4b11599704a20b94498e23637c52138be0cefb7f"
+   },
+   {
+    "path": "results/L1_DEV/kscale_metaqa__v1.json",
+    "bytes": 1536666,
+    "sha256": "91cefe4cc0b862a130cecff47b7ae967f83d7822f09191203a1a53f437b4accf"
+   },
+   {
+    "path": "results/L1_DEV/kscale_metaqa__v1.npz",
+    "bytes": 1728445,
+    "sha256": "695d59783a1a461a82d164fc089e2ebbcf7f542576bb60a9d0ad9638a55d048f"
+   },
+   {
+    "path": "results/L1_DEV/loc_metaqa__v1.npz",
+    "bytes": 433145,
+    "sha256": "200ee1cc3a7e5db267e8358420451ddc85c4566a2e714c1f8eaa875ffa658d62"
+   },
+   {
+    "path": "results/L1_DEV/loc_population.json",
+    "bytes": 267481,
+    "sha256": "c7f7080639d66f1e8f5c2fb90aff7da49dfda5f63a5fe558fe8c266bd5fef47e"
+   },
+   {
+    "path": "results/L1_P90_EXPLOIT/code_snapshot/_l1x90_core.py",
+    "bytes": 12081,
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068"
+   },
+   {
+    "path": "results/L1_P90_EXPLOIT/code_snapshot/_l1x90_relwalk.py",
+    "bytes": 6204,
+    "sha256": "41c3592f4e28702d9d5e91504f9623016426ced46dc7a7c08ccf50405ae62876"
+   },
+   {
+    "path": "results/L1_P90_EXPLOIT/code_snapshot/_l1x90_seeds.py",
+    "bytes": 4762,
+    "sha256": "58766a2cebb025a21dbecee8ba06408916f8e04ac8b1f86909b0ae78d3f76f78"
+   },
+   {
+    "path": "results/L1_P90_EXPLOIT/code_snapshot/_l1x90_typed.py",
+    "bytes": 23093,
+    "sha256": "3eb529e2e0f74bd05d63f441a5283daf57a4afa78101d3a8c43cb9b9773b913f"
+   },
+   {
+    "path": "results/L1_P90_EXPLOIT/code_snapshot/_l1x90_universal.py",
+    "bytes": 4188,
+    "sha256": "ac00db803d732b6fce10f3b8205a68aeb9a659411cb828d316ea64504185ef00"
+   },
+   {
+    "path": "results/L3_DEV/l3hop_metaqa__v1.json",
+    "bytes": 627531,
+    "sha256": "df08ca0b787327839556a6adae74a5fed877c18e0bcd3ccc15023c14466b2b63"
+   },
+   {
+    "path": "results/L3_DEV/l3hop_metaqa__v1.npz",
+    "bytes": 1018779,
+    "sha256": "1f851d0b5d99a8792689d0817f5b9689e8b1e63244dddc37e37a1ef3eed5dbaa"
+   },
+   {
+    "path": "scratchpad/_l1c_flath2.py",
+    "bytes": 60583,
+    "sha256": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b"
+   },
+   {
+    "path": "scratchpad/_l1c_transfer_blockmax.py",
+    "bytes": 5731,
+    "sha256": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9"
+   },
+   {
+    "path": "scratchpad/_l1d_adaptbp.py",
+    "bytes": 26459,
+    "sha256": "984e3aeffa3aed8ad446637c1bbe4afd4df789947a2e12ada9cc7cd73acf88da"
+   },
+   {
+    "path": "scratchpad/_l1d_arms.py",
+    "bytes": 10380,
+    "sha256": "f5f52b79a2137a6e1f764d6438cdd77600783bb075589309bc2216e0ade46fad"
+   },
+   {
+    "path": "scratchpad/_l1d_edgediag.py",
+    "bytes": 44041,
+    "sha256": "874bfc495a2d8e9b6d5aed3a5b0e6aa5bb5fd3080edbf5840351b9ebd6b2eec3"
+   },
+   {
+    "path": "scratchpad/_l1d_kbres.py",
+    "bytes": 33169,
+    "sha256": "3c002aa3cbaa24f0ab61da9acac9709b0c1a427bbae294a6fca219e4cf82d785"
+   },
+   {
+    "path": "scratchpad/_l1d_lib.py",
+    "bytes": 13636,
+    "sha256": "dafe39b2a0d77c23ae7eed2c8d8ccf93c88dfc02ebbceaefe143ce0a9a6c275a"
+   },
+   {
+    "path": "scratchpad/_l1d_node1h.py",
+    "bytes": 24731,
+    "sha256": "8265d6bc43c36b652aa9a01f1344505e04f75775e416829daa9df4b03caae438"
+   },
+   {
+    "path": "scratchpad/_l1d_route.py",
+    "bytes": 34440,
+    "sha256": "7b420e5401f31f1f0f0459bf0b7c10b90becfdfe31f1b50489ac4b00ba4ad9c2"
+   },
+   {
+    "path": "scratchpad/_l1g_core.py",
+    "bytes": 11419,
+    "sha256": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327"
+   },
+   {
+    "path": "scratchpad/_l1s_core.py",
+    "bytes": 15099,
+    "sha256": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861"
+   },
+   {
+    "path": "scratchpad/_l1x90_core.py",
+    "bytes": 12081,
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068"
+   },
+   {
+    "path": "scratchpad/_l1x90_relwalk.py",
+    "bytes": 6204,
+    "sha256": "41c3592f4e28702d9d5e91504f9623016426ced46dc7a7c08ccf50405ae62876"
+   },
+   {
+    "path": "scratchpad/_l1x90_seeds.py",
+    "bytes": 4762,
+    "sha256": "58766a2cebb025a21dbecee8ba06408916f8e04ac8b1f86909b0ae78d3f76f78"
+   },
+   {
+    "path": "scratchpad/_l1x90_typed.py",
+    "bytes": 23093,
+    "sha256": "3eb529e2e0f74bd05d63f441a5283daf57a4afa78101d3a8c43cb9b9773b913f"
+   },
+   {
+    "path": "scratchpad/_l1x90_universal.py",
+    "bytes": 4188,
+    "sha256": "ac00db803d732b6fce10f3b8205a68aeb9a659411cb828d316ea64504185ef00"
+   },
+   {
+    "path": "scratchpad/_l3d_hop.py",
+    "bytes": 29245,
+    "sha256": "70777dd9770918cf119b8b8bb9c9bb779e4ba0ec0a7d0ad2e773a72f3dcf6e2b"
+   },
+   {
+    "path": "scratchpad/_l3d_typed.py",
+    "bytes": 43823,
+    "sha256": "8eb4cbde3cc54c147f519a7aa0ae9974ae910ac6b32ad90ee673e53064266ac9"
+   },
+   {
+    "path": "scratchpad/_ta_prepartition.py",
+    "bytes": 11737,
+    "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+   },
+   {
+    "path": "src/__init__.py",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   },
+   {
+    "path": "src/l1_canonical/__init__.py",
+    "bytes": 1097,
+    "sha256": "06a7499bf0d592eb0b1e326f51aaa6d7c240d70dfa48edf935f744a93f4dd05c"
+   },
+   {
+    "path": "src/l1_canonical/adapter.py",
+    "bytes": 26015,
+    "sha256": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01"
+   },
+   {
+    "path": "scratchpad/_l3h_run.py",
+    "bytes": 7172,
+    "sha256": "757df4b7def3964cc74502ed8551e8ac416605b9f409e930e8e35b712a8adb78"
+   },
+   {
+    "path": "results/L3_HOST/bundle_metaqa__L1DEV.npz",
+    "bytes": 11559507,
+    "sha256": "8479d7a2a8a697fac609f6b44b164ba0d9be38741ea3155153af256f5d047127"
+   },
+   {
+    "path": "results/L3_HOST/bundle_metaqa__L1DEV.json",
+    "bytes": 2674,
+    "sha256": "35aa1b061c3c3691f6230c20e3e1840e50295f458fa79f66fdfba4e30acee797"
+   }
+  ],
+  "pushed_total_bytes": 387531880,
+  "fetched_back": "the write-once outputs of each run (json + npz, about 1-2 MB each), its log and the runner's sidecar",
+  "trace": {
+   "how": "sys.addaudithook 'open' events during scratchpad/_l3d_typed.py RUN metaqa trace1 --rows=200 (every repo file the harness opens or imports)",
+   "files_traced": 60,
+   "bytes_traced": 5266119687
+  }
+ },
+ "refusals_kept": [
+  "TEST is never read: the harnesses refuse TEST rows and no TEST query file is pushed",
+  "split B stays sealed; the reserved held-out rows are not read",
+  "nothing under data/ is written (laptop or host)",
+  "no encoder training, no LLM"
+ ],
+ "placement_test (gate)": "the full typed run on the host (scratchpad/_l3h_run.py scratchpad/_l3d_typed.py RUN metaqa h1) must be BIT_IDENTICAL (scratchpad/_l3h_place.py: every npz array, every non-volatile json value) to the laptop's results/L3_DEV/l3typed_metaqa__v1; until it passes and a dated authorization names this stage, nothing else of this stage runs on the host",
+ "laptop_shim_check": {
+  "what": "_l3h_run.py (bundle-served caches, below-normal priority) vs the direct harness, 200-row typed smoke on the laptop",
+  "verdict": "BIT_IDENTICAL (101 npz arrays; npz file bytes identical; 0 json differences)"
+ },
+ "new_harnesses": "a new L3 harness joins this stage only after its first host run is BIT_IDENTICAL to its laptop run of the same population (recorded under results/L3_HOST/) and a dated addendum names it",
+ "code": {
+  "scratchpad/_l3h_run.py": "757df4b7def3964cc74502ed8551e8ac416605b9f409e930e8e35b712a8adb78",
+  "scratchpad/_l3h_bundle.py": "ec720a407703bae89443fe56aa9b3b5b9495d35182933ce4f1ab40c73f42ade2",
+  "scratchpad/_l3h_place.py": "3ca471a1a0b515478a442d0ec4390542b701aab96b93376c0b51c3fa9156b55f",
+  "scratchpad/_l3d_typed.py": "8eb4cbde3cc54c147f519a7aa0ae9974ae910ac6b32ad90ee673e53064266ac9",
+  "scratchpad/_l3d_hop.py": "70777dd9770918cf119b8b8bb9c9bb779e4ba0ec0a7d0ad2e773a72f3dcf6e2b"
+ }
+}

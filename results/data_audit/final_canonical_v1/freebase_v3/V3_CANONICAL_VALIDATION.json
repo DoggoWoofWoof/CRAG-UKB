@@ -1,0 +1,394 @@
+{
+  "schema": "V3_CANONICAL_VALIDATION/v1",
+  "generated_utc": "2026-09-07T06:36:03Z",
+  "elapsed_min": 88.77,
+  "CHECKS": {
+    "node_uid_unique": {
+      "nodes": 301977131,
+      "duplicate_uids": 0,
+      "ok": true
+    },
+    "empty_node_uid": {
+      "n": 0,
+      "ok": true,
+      "note": "counts nodes whose IDENTIFIER is empty. A node whose 64-bit UID happens to be 0 is a legal node and is deliberately not counted here."
+    },
+    "mid_identity_mutations": {
+      "n": 0,
+      "examples": [],
+      "ok": true,
+      "note": "an MID node identifier must be byte-for-byte the source MID: no bracket, no namespace, no case folding."
+    },
+    "display_text_empty": {
+      "n": 0,
+      "examples": [],
+      "ok": true,
+      "empty_string_literals_excluded": 1,
+      "note": "unknown display text is NULL. The empty string is a different claim -- for an ENTITY. For a literal whose lexical form is the empty string, empty display text is the faithful representation of its value, so those are counted separately and excluded from the violation count rather than being allowed to fail the freeze."
+    },
+    "MID_VISIBLE_AS_DISPLAY_N": {
+      "n": 0,
+      "ok": true,
+      "note": "V1 section 13: an MID is an opaque endpoint identifier, never a semantic representation. A node with no name has NULL display text, not its own MID."
+    },
+    "literal_identity_collisions": {
+      "literals_checked": 105351616,
+      "collisions": 0,
+      "examples": [],
+      "ok": true,
+      "note": "identity is (lexical_form, datatype, language), never the visible string alone. Checked per fingerprint part, which is sound because every copy of a UID lands in exactly one part."
+    },
+    "dangling_edge_endpoints": {
+      "src_not_in_node_table": 0,
+      "dst_not_in_node_table": 0,
+      "examples": [],
+      "ok": true
+    },
+    "unknown_relation_uid": {
+      "n": 0,
+      "blank_relation_names": 0,
+      "ok": true
+    },
+    "duplicate_canonical_edges": {
+      "n": 0,
+      "ok": true,
+      "within_subject_run_ordering_violations": 0,
+      "note": "Re-derived from the written files, not taken from PASS D's report. The two edge families reach adjacency of equal triples by different routes (the folded parts are lexsorted; the direct parts are per-subject-run sorted over provably contiguous subjects), so the ordering property the test depends on is measured alongside it. A nonzero ordering violation makes the duplicate count an undercount, which is why it fails the check rather than being reported beside a passing zero."
+    }
+  },
+  "STATISTICS": {
+    "NODE_COUNTS": {
+      "LITERAL": 105351616,
+      "EXTERNAL_URI": 74454117,
+      "ENTITY_MID": 69839243,
+      "CVT_MEDIATOR": 52272634,
+      "SCHEMA_OTHER": 37219,
+      "SCHEMA_PROPERTY": 20063,
+      "SCHEMA_TYPE": 2239
+    },
+    "DISPLAY_TEXT_COVERAGE": {
+      "CVT_MEDIATOR": {
+        "nodes": 52272634,
+        "with_display_text": 303789,
+        "pct": 0.581
+      },
+      "ENTITY_MID": {
+        "nodes": 69839243,
+        "with_display_text": 50452054,
+        "pct": 72.24
+      },
+      "EXTERNAL_URI": {
+        "nodes": 74454117,
+        "with_display_text": 0,
+        "pct": 0.0
+      },
+      "LITERAL": {
+        "nodes": 105351616,
+        "with_display_text": 105351616,
+        "pct": 100.0
+      },
+      "SCHEMA_OTHER": {
+        "nodes": 37219,
+        "with_display_text": 37201,
+        "pct": 99.952
+      },
+      "SCHEMA_PROPERTY": {
+        "nodes": 20063,
+        "with_display_text": 20050,
+        "pct": 99.935
+      },
+      "SCHEMA_TYPE": {
+        "nodes": 2239,
+        "with_display_text": 2236,
+        "pct": 99.866
+      }
+    },
+    "RELATION_FAMILIES": {
+      "REVERSE_CANONICALISED_AWAY": 4728,
+      "UNPAIRED": 775469,
+      "MASTER": 4731
+    },
+    "RELATIONS_TOTAL": 784928,
+    "EDGES_TOTAL": 2062430072,
+    "EDGE_OBJECT_KIND": {
+      "0": 561117812,
+      "1": 75728788,
+      "2": 1425583472
+    },
+    "TOP_RELATIONS": [
+      [
+        "common.notable_for.display_name",
+        1151814885
+      ],
+      [
+        "type.type.instance",
+        254882143
+      ],
+      [
+        "common.topic.topic_equivalent_webpage",
+        65893176
+      ],
+      [
+        "common.notable_for.predicate",
+        30870097
+      ],
+      [
+        "common.notable_for.object",
+        30870097
+      ],
+      [
+        "common.notable_for.notable_object",
+        30870097
+      ],
+      [
+        "common.topic.notable_for",
+        30870050
+      ],
+      [
+        "common.topic.notable_types",
+        30851238
+      ],
+      [
+        "http://rdf.freebase.com/key/authority.musicbrainz",
+        17456630
+      ],
+      [
+        "http://rdf.freebase.com/key/dataworld.freeq",
+        17165590
+      ],
+      [
+        "music.recording.tracks",
+        15702023
+      ],
+      [
+        "music.release_track.release",
+        15692138
+      ],
+      [
+        "music.release_track.track_number",
+        15595923
+      ],
+      [
+        "http://rdf.freebase.com/key/authority.musicbrainz.recording",
+        13325894
+      ],
+      [
+        "music.recording.artist",
+        12181588
+      ],
+      [
+        "music.recording.length",
+        10094025
+      ],
+      [
+        "http://rdf.freebase.com/key/wikipedia.en",
+        10079878
+      ],
+      [
+        "music.release.track",
+        9403507
+      ],
+      [
+        "type.object.permission",
+        8057073
+      ],
+      [
+        "http://rdf.freebase.com/key/en",
+        6067392
+      ]
+    ],
+    "RELATIONS_WITH_AT_LEAST_ONE_EDGE": 780200,
+    "OUT_DEGREE": {
+      "nodes_with_outgoing_edges": 121283165,
+      "nodes_with_no_outgoing_edges": 180693966,
+      "mean_over_sources": 17.0051,
+      "max": 47552470,
+      "p50": 5,
+      "p90": 47,
+      "p99": 47,
+      "p99_9": 153
+    },
+    "CONNECTIVITY": {
+      "nodes_with_no_edge_in_either_direction": 50426,
+      "nodes_reachable_as_an_object": 294991477,
+      "note": "An isolated node is one the edge stream never mentions. An earlier draft of this note asserted that this cannot happen by construction, on the reasoning that PASS C derives the node universe FROM the endpoints. That reasoning was incomplete and the measurement below is what corrected it: PASS C opens a node for every SUBJECT as well, so a subject whose triples are all metadata -- folded into node attributes by this schema rather than emitted as edges -- is a real node with no edge. See ISOLATED_NODES for what these actually are.",
+      "WEAK_COMPONENTS": null,
+      "weak_components_not_computed_because": "A global weakly-connected-component decomposition was requested among the statistics and is NOT reported here, rather than being reported approximately. It is the one figure on the list this machine cannot produce honestly: a CSR incidence structure over 2.06e9 edges needs about 8.2 GB of index alone against ~6 GB of usable RAM, and the streaming alternative (label propagation over the edge files) costs one full 12 GB pass per iteration and converges in a number of iterations set by the graph diameter, so the realistic cost is hours, not minutes. What IS reported above is measured, not estimated: isolation and in-degree reachability are exact over all nodes and all edges. Reporting a sampled or partial component count as if it were the global one would be the kind of number that looks finished and is wrong.",
+      "ISOLATED_NODES": {
+        "n": 50426,
+        "rows_located_in_node_table": 50426,
+        "by_kind": {
+          "SCHEMA_OTHER": 22890,
+          "ENTITY_MID": 19176,
+          "SCHEMA_PROPERTY": 8286,
+          "SCHEMA_TYPE": 74
+        },
+        "examples": [
+          {
+            "node_id": "american_football.football_player.footballdb_id",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "automotive.body_style.fuel_tank_capacity",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "automotive.trim_level.max_passengers",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "aviation.aircraft.first_flight",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.aareas.schema.am.province.capital",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.aareas.schema.cz.district.administrative_children",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.aareas.schema.ht.commune.administrative_parent",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.aareas.schema.it.commune",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.aareas.schema.pf.subdivision.administrative_children",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.aareas.schema.wf.kingdom.capital",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.abcbirds.conservation_project.objective_s",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.americancomedy.tv_show.spin_offs",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.aptamer.experiment.has_bibliographic_reference",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.architecture2.structure2.architectural_style",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.art_retailer.market_offer.status",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.banking.retail_bank.fdic_certificate",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.bizmo.internal_influencer",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.bookpf.author.book_edition",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.braziliangovt.brazilian_governmental_proposal.author",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.britishpubs.pub_owner_tenure",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.burningkumquat.harvest",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.cadata.weapons.cost_1",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.cars_refactor.exterior_color.rgb_value",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.coinsdaily.coin_type.timespan_minted",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.conservationaction.program_coordination.start",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.contractbridge.bridge_tournament_standings.year",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.convictsydney.building.construction_began",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.cricketvenues.topic",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.crime.law_firm.number_of_lawyers",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.dentalnet.topic",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.electromagneticspectrum.service.service_description",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.famousuniversity.topic",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.gamecollection.owner.consoles",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.graphapi.global_properties.music_active_start",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.home12259071564150.sdf",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.hotelbooking.stay.end",
+            "kind": "SCHEMA_OTHER"
+          },
+          {
+            "node_id": "base.indonesia.democracy",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.ivoire.topic",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.learningresource.educational_audio",
+            "kind": "SCHEMA_PROPERTY"
+          },
+          {
+            "node_id": "base.lightweight.wine_grape",
+            "kind": "SCHEMA_PROPERTY"
+          }
+        ],
+        "examples_collected": 200
+      },
+      "isolation_is_reported_not_gated_because": "Isolation is a property of the node universe, not a corruption of the graph: PASS C opens a node for every subject it sees, including subjects whose only triples are metadata that this schema folds into node attributes rather than edges. Such a node is correctly present and correctly edgeless. This figure was moved out of the gate set after it was observed to be non-zero; that ordering is disclosed deliberately. It is not one of the seven pre-registered zero-checks, its pre-run note already anticipated legitimate isolation, and the failure direction that would actually indicate a broken graph -- an edge endpoint absent from the node table -- is gated at zero separately by dangling_edge_endpoints."
+    }
+  },
+  "ALL_CHECKS_PASS": true
+}

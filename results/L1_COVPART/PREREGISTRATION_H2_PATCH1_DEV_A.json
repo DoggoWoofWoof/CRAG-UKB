@@ -1,0 +1,51 @@
+{
+ "RECORD": "PREREGISTRATION",
+ "name": "H2_PATCH1_DEV_A",
+ "STATUS": "POSTHOC_MECHANISM_TEST",
+ "written_before_any_run": true,
+ "utc": "2026-09-15T09:05:00Z",
+ "ruling_2026-09-15_eighth": "We should stop trying to make H2-discovered answer nodes win six whole partition slots. That is the wrong unit of repair ... The next experiment I would run is a query-local structure patch ... collect H2 nodes NOT already exposed by SAFE -> pack them into one query-local virtual block -> replace only the weakest SAFE block -> 49 static blocks + 1 H2 patch ... Freeze section 14.1's beam exactly. Start from canonical SAFE ... 1. union of nodes already exposed by SAFE's 50 selected blocks; 2. H2 visited nodes not already in that union; 3. order them by the already frozen H2 beam order; 4. at most one block's capacity -- the same number of nodes as the block being replaced; 5. remove the weakest selected SAFE block; 6. insert the query-local patch ... if H2 has only k < n_b novel nodes, don't quietly increase/decrease the budget: fill the remaining n_b - k positions from the removed block itself, so |served nodes_PATCH| = |served nodes_SAFE| exactly ... [ordering] take novel deepest-hop nodes first, then frozen within-hop beam order -- or even cleaner, simply PATCH = H2 nodes not already served in frozen beam order; if most hop-1 nodes disappear because they're already served, we may not need a depth rule at all. Inspect that before pre-registration, without using gold ... Compare SAFE vs SAFE+PATCH1 across all five DEV_A caches, exploratory only ... Primary observations: ALL-gold under matched unique-node exposure; MetaQA hop2; SQuAD/MuSiQue regression; gold nodes discovered by the patch; novel H2 nodes/query; fraction of patch occupied by H1 vs H2; removed-block gold-loss vs patch gold-gain. And one very important diagnostic: of the 98 MetaQA failures for which H2 currently has a complete repair somewhere in its candidate pool, how many become covered when those H2 nodes are packed together rather than represented by their owner blocks? ... Do not run: agreement scoring, fourth H2 channel, support-count admission, another F6 merge, new RRF constants ... Close block-level H2->SAFE admission experiments for now. Open exactly one new arm: H2_PATCH1.",
+ "why_posthoc": "DEV_A has been read by sections 2-15 of this lane; this is a mechanism test on an already-read population. Promotion requires an untouched population (WebQSP or DEV_B by ruling).",
+ "gold_free_input_statistic_read_before_this_record": {
+  "record": "h2patch_stat_A_{metaqa,metaqa_phg,squad,squad_phg,musique}.json (_l1c_h2patch_stat.py; gold_read = false)",
+  "novel_nodes_per_query (hop-1 + hop-2, not exposed by the 49 kept blocks)": {"metaqa": "8.3 + 70.8 = 79.2 (26 % of hop-1 visits, 74 % of hop-2 visits)", "metaqa_phg": "8.3 + 69.7 = 78.0", "musique": "5.9 + 38.0 = 43.9", "squad": "1.8 + 19.7 = 21.6 (84 queries with none)", "squad_phg": "2.3 + 19.9 = 22.3 (71 with none)"},
+  "removed_block_capacity": "size of SAFE's sixth-admitted block: mean 100-101.6 nodes, p10-p90 94-104",
+  "truncation (novel > capacity)": {"metaqa": "79 / 1002 = 7.9 % (hop1 3.7 %, hop2 9.0 %, hop3 10.8 %)", "metaqa_phg": "4.7 %", "musique": "0.4 %", "squad": "0.1 %", "squad_phg": "0 %"},
+  "order_difference_where_truncated": "first-visit order cuts 0.78 (metaqa) / 0.63 (phg) / <= 0.06 (text) hop-2 novel nodes per query on average; deepest-first cuts 0.7 / 0.3 / <= 0.03 hop-1 novel nodes; the hop-1 share of the patch is 10.6 % vs 9.7 % (metaqa), 10.7 % vs 10.3 % (phg), 13.4 % vs 13.3 % (musique), 8.5 % vs 8.5 % (squad) under the two orders",
+  "decision_taken_from_it": "the frozen first-visit order (hop-1 beam then hop-2 beam, seeds excluded) -- no depth rule: most hop-1 discoveries are already served (74-98 % of hop-1 visits), the two orders differ only in the 0-11 % truncated queries and there by less than one node per query. Deepest-hop-first is NOT run (one arm)."
+ },
+ "frozen_and_reused_verbatim": {
+  "canonical_L1": "served base_rank of each replay cache; unchanged",
+  "canonical_SAFE": "the frozen B6_S4_F6_Ms64_Mr32 selector through its own code (_l1ps_router.build_cache + _l1kb_core.contexts / f6_select); its recomputed indicator must equal the frozen replay records' _ind_SAFE on every DEV_A row (asserted, else the run is invalid)",
+  "H2_beam": "the pinned MICRO_L3_H2 beam of scratchpad/_l1c_microl3.py (sha256 19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5, asserted): frozen 5 seeds, actual STRUCT adjacency under the frozen hub policy, depth exactly 2, beam 100 per hop, frozen transition geometry + RRF; identical beam output asserted by rebuilding section 14.1's MICRO_L3_H2 and matching its recorded BASE_ALL / gained / lost",
+  "partition": "the served hard partition of each cache (hard[v], part_sizes); blocks are disjoint and served whole"
+ },
+ "the_arm_H2_PATCH1": {
+  "1_start": "canonical SAFE's final 50 blocks = served positions 0-43 (protected) u the six blocks admitted by the frozen F6 competition",
+  "2_weakest": "the sixth block of the F6 competition order (SAFE's own weakest admission; ties already resolved by F6's rule); removed",
+  "3_kept": "the other 49 blocks, served whole; exposed nodes = their node sets",
+  "4_novel": "pinned-beam visited nodes (hop-1 beam then hop-2 beam in the frozen fused order; seeds excluded exactly as in the frozen vote) whose own block hard[v] is not among the 49 kept blocks -- visited nodes of the removed block therefore count as novel and keep their beam position",
+  "5_capacity": "n_b = size of the removed block; patch = the first min(k, n_b) novel nodes in that order",
+  "6_fill": "if k < n_b: the remaining n_b - k positions are the removed block's own nodes not already in the patch, in the frozen fused node-list order (ret_rrf position ascending for ranked nodes, then the rest by node id ascending) -- the budget is never increased or decreased",
+  "7_served": "served nodes = nodes of the 49 kept blocks u patch; |served_PATCH| = |served_SAFE| exactly (asserted per query)",
+  "not_done": ["no second arm (deepest-first order, alternative fill order, other weakest rule, other capacity) -- 'exactly one new arm'", "no agreement scoring / fourth channel / support-count admission / F6 merge / new RRF constants", "no cap, threshold or constant chosen from DEV_A numbers", "no change to the beam, seeds, depth, transition scoring or hub policy", "no dataset branch"]
+ },
+ "arms": {
+  "L1": "served P50 (reference only)",
+  "SAFE": "canonical SAFE (the comparison baseline, per the ruling)",
+  "H2_PATCH1": "primary: SAFE with its weakest admitted block replaced by the matched-size query-local patch"
+ },
+ "population": "DEV_A of the five caches metaqa (Mt-KaHyPar), metaqa_phg, squad (Mt-KaHyPar), squad_phg, musique (PHG); DEV_B not read",
+ "metric": "ALL-gold under matched unique-node exposure: every gold NODE of the query inside the served node set (for L1 and SAFE this equals the frozen block-level ALL-gold@P50 because gold blocks are exactly the blocks of the gold nodes -- asserted against ind_base and the frozen _ind_SAFE); ANY-gold reported; per hop on metaqa; exact two-sided McNemar on the paired indicator",
+ "decision_rule": {
+  "primary_comparison": "H2_PATCH1 vs SAFE",
+  "text_safety_required": "on each of squad, squad_phg, musique: NOT (lost > gained and p < 0.05) for H2_PATCH1 vs SAFE",
+  "metaqa_required": "hop-2 ALL-gold H2_PATCH1 vs SAFE: gained > lost and p < 0.01 on BOTH metaqa caches",
+  "magnitude_is_reported_not_thresholded": "hop-2 points vs SAFE and vs L1; the fraction of section 14.1's MICRO_L3_H2 hop-2 gain over L1 recovered over SAFE ((PATCH - SAFE) / (H2_RRF - L1)); no numeric target",
+  "PASS": "MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC): the unit-of-selection change works; promotion still requires an untouched population",
+  "FAIL": "the patch does not convert the beam's discoveries under matched exposure, or is not text-safe; reported with the attribution below"
+ },
+ "also_recorded": ["novel nodes per query (hop-1 / hop-2), fill from the removed block, truncation, patch composition (hop-1 / hop-2 / fill)", "gold nodes discovered by the patch (gold nodes served by H2_PATCH1 that SAFE did not serve) and gold nodes lost with the removed block (served by SAFE, not by H2_PATCH1); per query and per hop", "newly covered / newly lost queries vs SAFE with the cause (patch gain / removed-block loss / both)", "THE DIAGNOSTIC: of the metaqa hop-2 failures whose missing gold BLOCKS are all in section 15's SAFE_H2 candidate pool (98 MtK / 86 PHG, recomputed and asserted against h2safe_ceiling_A_*.json), how many are covered by H2_PATCH1; also the node-level availability (all missing gold NODES visited by the beam) and how many of those the patch covers, with the reason for the rest (truncated / not visited / lost with the removed block)", "H2_PATCH1 vs L1 for reference", "exposure: |served nodes| per query for SAFE and H2_PATCH1 (asserted equal)"],
+ "forbidden": ["reading DEV_B", "tuning any constant after seeing numbers", "running a second arm or an alternative order / fill / capacity after seeing numbers", "writing under data/", "editing any CONTRACT_FILE or the pinned uL3 module"],
+ "code": "scratchpad/_l1c_h2patch.py -> results/L1_COVPART/h2patch_A_<cache>.json; --summary -> h2patch_A_SUMMARY.json"
+}

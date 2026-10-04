@@ -1,0 +1,2388 @@
+{
+ "RECORD": "PROTOTYPE_LADDER_IVF_SUMMARY",
+ "utc": "2026-09-25T20:11:53Z",
+ "question": "Can an IVF-style coarse quantizer over the served graph partitions -- q scored against a few fixed, query-free representatives per block, the top 50 blocks probed (nprobe = 50 = the P50 block budget), every node inside them served -- replace node voting (dense and SPLADE top-100 hits voting for their own block and the blocks of their directed STRUCT out-neighbours, rr(sum) + rr(max) per channel, frozen RRF = L1) without losing ALL-gold recall?",
+ "addendum": {
+  "path": "results/L1_COVPART/PREREGISTRATION_PROTOTYPE_LADDER_IVF_ADDENDUM.json",
+  "sha256": "063e423e89d788b710ccf2c9ed15483c4e89e130d394e22b201316670f459f2a"
+ },
+ "records": {
+  "metaqa": {
+   "path": "results/L1_COVPART/proto_A_metaqa.json",
+   "sha256": "7624b53e3d3d492c2e9de318c3d3df4edf6c2edfac54b1b1c4d97fd4c25b179f"
+  },
+  "metaqa_phg": {
+   "path": "results/L1_COVPART/proto_A_metaqa_phg.json",
+   "sha256": "eee983f0f174f60b1142273dfc5c0d75ac43ff04a64c664f8db2aebd2d5b9919"
+  },
+  "squad": {
+   "path": "results/L1_COVPART/proto_A_squad.json",
+   "sha256": "b2e04e2ac2245bc89cf08668b99266c6def03c747ce4cedb1582c3b610eb5d08"
+  },
+  "squad_phg": {
+   "path": "results/L1_COVPART/proto_A_squad_phg.json",
+   "sha256": "f5ee3ff80f0a81552fff74fd0bc6681db869f3cc2fb5c9552bfc5964047142da"
+  },
+  "musique": {
+   "path": "results/L1_COVPART/proto_A_musique.json",
+   "sha256": "5633ca9eac1330f60154c91124faef089c7f33065c4421d24c01e4e574cf55d5"
+  }
+ },
+ "code": {
+  "path": "scratchpad/_l1c_proto_ivf_summary.py",
+  "sha256": "00da51d70aa8fd0bb6afc671faf8ead808dee7b00333854f19fa89d1998df89c"
+ },
+ "HEADLINE (text caches; pre-registered in the addendum)": "IVF_DOES_NOT_REPLACE_NODE_VOTING_ON_TEXT (no FPS_m with m <= 32 preserves it on all three)",
+ "text_verdict": {
+  "label": "IVF_DOES_NOT_REPLACE_NODE_VOTING_ON_TEXT (no FPS_m with m <= 32 preserves it on all three)",
+  "m_star_text_FPS": null,
+  "FPS_m_preserving_on_all_three": [],
+  "from_m_star_upward": false,
+  "m_star_text_RAND (control)": null,
+  "binding_text_caches (fail at the ladder point just below m*, or at m = 32 when there is no m*)": [
+   "squad",
+   "squad_phg",
+   "musique"
+  ],
+  "ladder_limit_preserves_on_all_three": true
+ },
+ "universal_verdict": {
+  "label (observed on the two metaqa caches before the addendum; not a test)": "IVF_DOES_NOT_REPLACE_NODE_VOTING_UNIVERSALLY",
+  "m_star_all_five_FPS": null,
+  "kb_status": {
+   "metaqa": "NOT_EVEN_THE_LADDER_LIMIT_PRESERVES_NODE_VOTE",
+   "metaqa_phg": "NOT_EVEN_THE_LADDER_LIMIT_PRESERVES_NODE_VOTE"
+  }
+ },
+ "status_by_cache": {
+  "metaqa": "NOT_EVEN_THE_LADDER_LIMIT_PRESERVES_NODE_VOTE",
+  "metaqa_phg": "NOT_EVEN_THE_LADDER_LIMIT_PRESERVES_NODE_VOTE",
+  "squad": "ONLY_THE_LADDER_LIMIT_PRESERVES (every node a representative; no FPS_m with m <= 32)",
+  "squad_phg": "ONLY_THE_LADDER_LIMIT_PRESERVES (every node a representative; no FPS_m with m <= 32)",
+  "musique": "ONLY_THE_LADDER_LIMIT_PRESERVES (every node a representative; no FPS_m with m <= 32)"
+ },
+ "per_cache": {
+  "metaqa": {
+   "status": "NOT_EVEN_THE_LADDER_LIMIT_PRESERVES_NODE_VOTE",
+   "n_split_A": 1002,
+   "tolerance_net_loss": 5,
+   "N": 43234,
+   "npart": 432,
+   "block_size_min_median_max": [
+    14,
+    102.0,
+    104
+   ],
+   "node_vote (L1)": 0.6397,
+   "dense_vote_alone": 0.6337,
+   "splade_vote_alone": 0.6128,
+   "node_vote_per_hop_ALL": {
+    "hop1": 0.9172,
+    "hop2": 0.4855,
+    "hop3": 0.5271
+   },
+   "smallest_FPS_m_preserving_node_vote": null,
+   "FPS_m_preserving_node_vote": [],
+   "FPS_preserving_from_smallest_m_upward": false,
+   "smallest_RAND_m_preserving_node_vote": null,
+   "centroids_preserve_node_vote": {
+    "CENT_MEAN": false,
+    "CENT_NORM": false
+   },
+   "ladder_limit_preserves_node_vote": false,
+   "smallest_FPS_m_preserving_dense_vote (dense-only comparison)": null,
+   "ivf": {
+    "CENT_MEAN": {
+     "ALL": 0.1437,
+     "ANY": 0.4391,
+     "points_vs_node_vote": -49.6,
+     "vs_node_vote": {
+      "gained": 8,
+      "lost": 505,
+      "net_queries": -497,
+      "p": 8.533891176958719e-138,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 499,
+      "net_queries": -491,
+      "p": 4.968804428863494e-136,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2945,
+      "hop2": 0.1192,
+      "hop3": 0.0211
+     },
+     "prototype_vectors_scored_per_query": 432
+    },
+    "CENT_NORM": {
+     "ALL": 0.1277,
+     "ANY": 0.4361,
+     "points_vs_node_vote": -51.2,
+     "vs_node_vote": {
+      "gained": 7,
+      "lost": 520,
+      "net_queries": -513,
+      "p": 9.930054252281492e-144,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 515,
+      "net_queries": -507,
+      "p": 9.732956018458759e-141,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2638,
+      "hop2": 0.1017,
+      "hop3": 0.0211
+     },
+     "prototype_vectors_scored_per_query": 432
+    },
+    "FPS_1": {
+     "ALL": 0.1088,
+     "ANY": 0.3972,
+     "points_vs_node_vote": -53.09,
+     "vs_node_vote": {
+      "gained": 7,
+      "lost": 539,
+      "net_queries": -532,
+      "p": 2.429158121838185e-149,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 7,
+      "lost": 533,
+      "net_queries": -526,
+      "p": 1.4385346661756636e-147,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2331,
+      "hop2": 0.0785,
+      "hop3": 0.0181
+     },
+     "prototype_vectors_scored_per_query": 432
+    },
+    "FPS_2": {
+     "ALL": 0.1178,
+     "ANY": 0.3992,
+     "points_vs_node_vote": -52.2,
+     "vs_node_vote": {
+      "gained": 7,
+      "lost": 530,
+      "net_queries": -523,
+      "p": 1.1066526951644262e-146,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 7,
+      "lost": 524,
+      "net_queries": -517,
+      "p": 6.544938047552693e-145,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2607,
+      "hop2": 0.0727,
+      "hop3": 0.0241
+     },
+     "prototype_vectors_scored_per_query": 864
+    },
+    "FPS_4": {
+     "ALL": 0.1008,
+     "ANY": 0.3733,
+     "points_vs_node_vote": -53.89,
+     "vs_node_vote": {
+      "gained": 6,
+      "lost": 546,
+      "net_queries": -540,
+      "p": 5.244626910815032e-153,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 542,
+      "net_queries": -534,
+      "p": 1.0867670204057548e-148,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.227,
+      "hop2": 0.061,
+      "hop3": 0.0181
+     },
+     "prototype_vectors_scored_per_query": 1728
+    },
+    "FPS_8": {
+     "ALL": 0.1038,
+     "ANY": 0.3723,
+     "points_vs_node_vote": -53.59,
+     "vs_node_vote": {
+      "gained": 8,
+      "lost": 545,
+      "net_queries": -537,
+      "p": 1.4191604392625375e-149,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 10,
+      "lost": 541,
+      "net_queries": -531,
+      "p": 1.8098940282382517e-145,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2147,
+      "hop2": 0.0727,
+      "hop3": 0.0271
+     },
+     "prototype_vectors_scored_per_query": 3456
+    },
+    "FPS_16": {
+     "ALL": 0.1118,
+     "ANY": 0.3812,
+     "points_vs_node_vote": -52.79,
+     "vs_node_vote": {
+      "gained": 6,
+      "lost": 535,
+      "net_queries": -529,
+      "p": 9.51591556112644e-150,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 6,
+      "lost": 529,
+      "net_queries": -523,
+      "p": 5.694939709695831e-148,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2209,
+      "hop2": 0.0872,
+      "hop3": 0.0301
+     },
+     "prototype_vectors_scored_per_query": 6910
+    },
+    "FPS_32": {
+     "ALL": 0.1307,
+     "ANY": 0.4142,
+     "points_vs_node_vote": -50.9,
+     "vs_node_vote": {
+      "gained": 9,
+      "lost": 519,
+      "net_queries": -510,
+      "p": 1.900774908960452e-140,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 12,
+      "lost": 516,
+      "net_queries": -504,
+      "p": 2.0135179078798305e-135,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2607,
+      "hop2": 0.1017,
+      "hop3": 0.0331
+     },
+     "prototype_vectors_scored_per_query": 13806
+    },
+    "RAND_1": {
+     "ALL": 0.0629,
+     "ANY": 0.3114,
+     "points_vs_node_vote": -57.68,
+     "vs_node_vote": {
+      "gained": 5,
+      "lost": 583,
+      "net_queries": -578,
+      "p": 1.1466235054379901e-165,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 580,
+      "net_queries": -572,
+      "p": 6.762889478301515e-160,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.1227,
+      "hop2": 0.0494,
+      "hop3": 0.0181
+     },
+     "prototype_vectors_scored_per_query": 432
+    },
+    "RAND_2": {
+     "ALL": 0.1168,
+     "ANY": 0.3842,
+     "points_vs_node_vote": -52.3,
+     "vs_node_vote": {
+      "gained": 7,
+      "lost": 531,
+      "net_queries": -524,
+      "p": 5.606066464234528e-147,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 526,
+      "net_queries": -518,
+      "p": 5.617883472049711e-144,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2209,
+      "hop2": 0.1017,
+      "hop3": 0.0301
+     },
+     "prototype_vectors_scored_per_query": 864
+    },
+    "RAND_4": {
+     "ALL": 0.1098,
+     "ANY": 0.3872,
+     "points_vs_node_vote": -52.99,
+     "vs_node_vote": {
+      "gained": 10,
+      "lost": 541,
+      "net_queries": -531,
+      "p": 1.8098940282382517e-145,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 9,
+      "lost": 534,
+      "net_queries": -525,
+      "p": 7.474585488610261e-145,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2178,
+      "hop2": 0.0901,
+      "hop3": 0.0241
+     },
+     "prototype_vectors_scored_per_query": 1728
+    },
+    "RAND_8": {
+     "ALL": 0.1158,
+     "ANY": 0.4002,
+     "points_vs_node_vote": -52.4,
+     "vs_node_vote": {
+      "gained": 11,
+      "lost": 536,
+      "net_queries": -525,
+      "p": 1.3162806979350566e-142,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 14,
+      "lost": 533,
+      "net_queries": -519,
+      "p": 9.283241731513591e-138,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2239,
+      "hop2": 0.093,
+      "hop3": 0.0331
+     },
+     "prototype_vectors_scored_per_query": 3456
+    },
+    "RAND_16": {
+     "ALL": 0.1267,
+     "ANY": 0.4182,
+     "points_vs_node_vote": -51.3,
+     "vs_node_vote": {
+      "gained": 12,
+      "lost": 526,
+      "net_queries": -514,
+      "p": 2.4675423009969037e-138,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 10,
+      "lost": 518,
+      "net_queries": -508,
+      "p": 9.884696384556461e-139,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2301,
+      "hop2": 0.1163,
+      "hop3": 0.0361
+     },
+     "prototype_vectors_scored_per_query": 6910
+    },
+    "RAND_32": {
+     "ALL": 0.1477,
+     "ANY": 0.4361,
+     "points_vs_node_vote": -49.2,
+     "vs_node_vote": {
+      "gained": 9,
+      "lost": 502,
+      "net_queries": -493,
+      "p": 1.852614075646876e-135,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 7,
+      "lost": 494,
+      "net_queries": -487,
+      "p": 4.6700875893191125e-136,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.3037,
+      "hop2": 0.1134,
+      "hop3": 0.0301
+     },
+     "prototype_vectors_scored_per_query": 13806
+    },
+    "QMAX_ALONE": {
+     "ALL": 0.1816,
+     "ANY": 0.4731,
+     "points_vs_node_vote": -45.81,
+     "vs_node_vote": {
+      "gained": 6,
+      "lost": 465,
+      "net_queries": -459,
+      "p": 4.880063734017686e-129,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 4,
+      "lost": 457,
+      "net_queries": -453,
+      "p": 6.2940306488939525e-130,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.3742,
+      "hop2": 0.1366,
+      "hop3": 0.0392
+     },
+     "prototype_vectors_scored_per_query": 43234
+    }
+   },
+   "recall_as_we_move_left (ALL; points vs node vote)": [
+    [
+     "CENT_MEAN",
+     0.1437,
+     -49.6
+    ],
+    [
+     "CENT_NORM",
+     0.1277,
+     -51.2
+    ],
+    [
+     "FPS_1",
+     0.1088,
+     -53.09
+    ],
+    [
+     "FPS_2",
+     0.1178,
+     -52.2
+    ],
+    [
+     "FPS_4",
+     0.1008,
+     -53.89
+    ],
+    [
+     "FPS_8",
+     0.1038,
+     -53.59
+    ],
+    [
+     "FPS_16",
+     0.1118,
+     -52.79
+    ],
+    [
+     "FPS_32",
+     0.1307,
+     -50.9
+    ],
+    [
+     "QMAX_ALONE",
+     0.1816,
+     -45.81
+    ],
+    [
+     "DENSE_VOTE",
+     0.6337,
+     null
+    ],
+    [
+     "SPLADE_VOTE",
+     0.6128,
+     null
+    ],
+    [
+     "NODE_VOTE (L1)",
+     0.6397,
+     0.0
+    ]
+   ]
+  },
+  "metaqa_phg": {
+   "status": "NOT_EVEN_THE_LADDER_LIMIT_PRESERVES_NODE_VOTE",
+   "n_split_A": 1002,
+   "tolerance_net_loss": 5,
+   "N": 43234,
+   "npart": 432,
+   "block_size_min_median_max": [
+    1,
+    103.0,
+    104
+   ],
+   "node_vote (L1)": 0.6727,
+   "dense_vote_alone": 0.6577,
+   "splade_vote_alone": 0.6537,
+   "node_vote_per_hop_ALL": {
+    "hop1": 0.9172,
+    "hop2": 0.5291,
+    "hop3": 0.5813
+   },
+   "smallest_FPS_m_preserving_node_vote": null,
+   "FPS_m_preserving_node_vote": [],
+   "FPS_preserving_from_smallest_m_upward": false,
+   "smallest_RAND_m_preserving_node_vote": null,
+   "centroids_preserve_node_vote": {
+    "CENT_MEAN": false,
+    "CENT_NORM": false
+   },
+   "ladder_limit_preserves_node_vote": false,
+   "smallest_FPS_m_preserving_dense_vote (dense-only comparison)": null,
+   "ivf": {
+    "CENT_MEAN": {
+     "ALL": 0.1188,
+     "ANY": 0.4052,
+     "points_vs_node_vote": -55.39,
+     "vs_node_vote": {
+      "gained": 13,
+      "lost": 568,
+      "net_queries": -555,
+      "p": 3.1181969319065154e-149,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 11,
+      "lost": 551,
+      "net_queries": -540,
+      "p": 5.420909147705519e-147,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2178,
+      "hop2": 0.1134,
+      "hop3": 0.0271
+     },
+     "prototype_vectors_scored_per_query": 432
+    },
+    "CENT_NORM": {
+     "ALL": 0.1317,
+     "ANY": 0.4281,
+     "points_vs_node_vote": -54.09,
+     "vs_node_vote": {
+      "gained": 12,
+      "lost": 554,
+      "net_queries": -542,
+      "p": 1.698240693034857e-146,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 13,
+      "lost": 540,
+      "net_queries": -527,
+      "p": 4.379332861728947e-141,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2423,
+      "hop2": 0.1221,
+      "hop3": 0.0331
+     },
+     "prototype_vectors_scored_per_query": 432
+    },
+    "FPS_1": {
+     "ALL": 0.1118,
+     "ANY": 0.3603,
+     "points_vs_node_vote": -56.09,
+     "vs_node_vote": {
+      "gained": 5,
+      "lost": 567,
+      "net_queries": -562,
+      "p": 6.544732365323976e-161,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 5,
+      "lost": 552,
+      "net_queries": -547,
+      "p": 1.8773115300465723e-156,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.1902,
+      "hop2": 0.1163,
+      "hop3": 0.0301
+     },
+     "prototype_vectors_scored_per_query": 432
+    },
+    "FPS_2": {
+     "ALL": 0.1198,
+     "ANY": 0.3932,
+     "points_vs_node_vote": -55.29,
+     "vs_node_vote": {
+      "gained": 5,
+      "lost": 559,
+      "net_queries": -554,
+      "p": 1.5613269921808064e-158,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 5,
+      "lost": 544,
+      "net_queries": -539,
+      "p": 4.4699819953314206e-154,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2147,
+      "hop2": 0.1134,
+      "hop3": 0.0331
+     },
+     "prototype_vectors_scored_per_query": 862
+    },
+    "FPS_4": {
+     "ALL": 0.1018,
+     "ANY": 0.3693,
+     "points_vs_node_vote": -57.09,
+     "vs_node_vote": {
+      "gained": 5,
+      "lost": 577,
+      "net_queries": -572,
+      "p": 6.970940352572717e-164,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 6,
+      "lost": 563,
+      "net_queries": -557,
+      "p": 4.802353260663506e-158,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.181,
+      "hop2": 0.093,
+      "hop3": 0.0331
+     },
+     "prototype_vectors_scored_per_query": 1722
+    },
+    "FPS_8": {
+     "ALL": 0.1048,
+     "ANY": 0.3743,
+     "points_vs_node_vote": -56.79,
+     "vs_node_vote": {
+      "gained": 5,
+      "lost": 574,
+      "net_queries": -569,
+      "p": 5.434255914900768e-163,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 562,
+      "net_queries": -554,
+      "p": 1.3809783600227555e-154,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.184,
+      "hop2": 0.0901,
+      "hop3": 0.0422
+     },
+     "prototype_vectors_scored_per_query": 3438
+    },
+    "FPS_16": {
+     "ALL": 0.1138,
+     "ANY": 0.3782,
+     "points_vs_node_vote": -55.89,
+     "vs_node_vote": {
+      "gained": 6,
+      "lost": 566,
+      "net_queries": -560,
+      "p": 6.195873022834166e-159,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 10,
+      "lost": 555,
+      "net_queries": -545,
+      "p": 1.421955348503596e-149,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2178,
+      "hop2": 0.0814,
+      "hop3": 0.0452
+     },
+     "prototype_vectors_scored_per_query": 6870
+    },
+    "FPS_32": {
+     "ALL": 0.1367,
+     "ANY": 0.4162,
+     "points_vs_node_vote": -53.59,
+     "vs_node_vote": {
+      "gained": 9,
+      "lost": 546,
+      "net_queries": -537,
+      "p": 2.2239870111652717e-148,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 12,
+      "lost": 534,
+      "net_queries": -522,
+      "p": 1.152365403444838e-140,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2607,
+      "hop2": 0.1076,
+      "hop3": 0.0452
+     },
+     "prototype_vectors_scored_per_query": 13727
+    },
+    "RAND_1": {
+     "ALL": 0.0679,
+     "ANY": 0.3463,
+     "points_vs_node_vote": -60.48,
+     "vs_node_vote": {
+      "gained": 5,
+      "lost": 611,
+      "net_queries": -606,
+      "p": 5.392179429700943e-174,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 6,
+      "lost": 597,
+      "net_queries": -591,
+      "p": 3.963233424683688e-168,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.1166,
+      "hop2": 0.0581,
+      "hop3": 0.0301
+     },
+     "prototype_vectors_scored_per_query": 432
+    },
+    "RAND_2": {
+     "ALL": 0.1018,
+     "ANY": 0.3693,
+     "points_vs_node_vote": -57.09,
+     "vs_node_vote": {
+      "gained": 6,
+      "lost": 578,
+      "net_queries": -572,
+      "p": 1.713890506624195e-162,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 5,
+      "lost": 562,
+      "net_queries": -557,
+      "p": 2.004212853015533e-159,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.1963,
+      "hop2": 0.0814,
+      "hop3": 0.0301
+     },
+     "prototype_vectors_scored_per_query": 862
+    },
+    "RAND_4": {
+     "ALL": 0.1008,
+     "ANY": 0.3743,
+     "points_vs_node_vote": -57.19,
+     "vs_node_vote": {
+      "gained": 8,
+      "lost": 581,
+      "net_queries": -573,
+      "p": 3.427923141674004e-160,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 9,
+      "lost": 567,
+      "net_queries": -558,
+      "p": 1.4840132838395804e-154,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.1779,
+      "hop2": 0.1017,
+      "hop3": 0.0241
+     },
+     "prototype_vectors_scored_per_query": 1722
+    },
+    "RAND_8": {
+     "ALL": 0.1208,
+     "ANY": 0.3932,
+     "points_vs_node_vote": -55.19,
+     "vs_node_vote": {
+      "gained": 10,
+      "lost": 563,
+      "net_queries": -553,
+      "p": 6.3985817649216136e-152,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 12,
+      "lost": 550,
+      "net_queries": -538,
+      "p": 2.493801209657374e-145,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2025,
+      "hop2": 0.125,
+      "hop3": 0.0361
+     },
+     "prototype_vectors_scored_per_query": 3438
+    },
+    "RAND_16": {
+     "ALL": 0.1357,
+     "ANY": 0.4162,
+     "points_vs_node_vote": -53.69,
+     "vs_node_vote": {
+      "gained": 8,
+      "lost": 546,
+      "net_queries": -538,
+      "p": 7.199575025031657e-150,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 12,
+      "lost": 535,
+      "net_queries": -523,
+      "p": 5.890813099984093e-141,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.227,
+      "hop2": 0.1366,
+      "hop3": 0.0452
+     },
+     "prototype_vectors_scored_per_query": 6870
+    },
+    "RAND_32": {
+     "ALL": 0.1427,
+     "ANY": 0.4341,
+     "points_vs_node_vote": -52.99,
+     "vs_node_vote": {
+      "gained": 8,
+      "lost": 539,
+      "net_queries": -531,
+      "p": 8.320263826390908e-148,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 11,
+      "lost": 527,
+      "net_queries": -516,
+      "p": 5.6076005578071855e-140,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.2454,
+      "hop2": 0.1395,
+      "hop3": 0.0452
+     },
+     "prototype_vectors_scored_per_query": 13727
+    },
+    "QMAX_ALONE": {
+     "ALL": 0.1956,
+     "ANY": 0.496,
+     "points_vs_node_vote": -47.7,
+     "vs_node_vote": {
+      "gained": 7,
+      "lost": 485,
+      "net_queries": -478,
+      "p": 2.1050653361698956e-133,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 7,
+      "lost": 470,
+      "net_queries": -463,
+      "p": 5.548831637934182e-129,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {
+      "hop1": 0.3558,
+      "hop2": 0.1773,
+      "hop3": 0.0572
+     },
+     "prototype_vectors_scored_per_query": 43234
+    }
+   },
+   "recall_as_we_move_left (ALL; points vs node vote)": [
+    [
+     "CENT_MEAN",
+     0.1188,
+     -55.39
+    ],
+    [
+     "CENT_NORM",
+     0.1317,
+     -54.09
+    ],
+    [
+     "FPS_1",
+     0.1118,
+     -56.09
+    ],
+    [
+     "FPS_2",
+     0.1198,
+     -55.29
+    ],
+    [
+     "FPS_4",
+     0.1018,
+     -57.09
+    ],
+    [
+     "FPS_8",
+     0.1048,
+     -56.79
+    ],
+    [
+     "FPS_16",
+     0.1138,
+     -55.89
+    ],
+    [
+     "FPS_32",
+     0.1367,
+     -53.59
+    ],
+    [
+     "QMAX_ALONE",
+     0.1956,
+     -47.7
+    ],
+    [
+     "DENSE_VOTE",
+     0.6577,
+     null
+    ],
+    [
+     "SPLADE_VOTE",
+     0.6537,
+     null
+    ],
+    [
+     "NODE_VOTE (L1)",
+     0.6727,
+     0.0
+    ]
+   ]
+  },
+  "squad": {
+   "status": "ONLY_THE_LADDER_LIMIT_PRESERVES (every node a representative; no FPS_m with m <= 32)",
+   "n_split_A": 992,
+   "tolerance_net_loss": 5,
+   "N": 20233,
+   "npart": 202,
+   "block_size_min_median_max": [
+    49,
+    102.0,
+    104
+   ],
+   "node_vote (L1)": 0.9859,
+   "dense_vote_alone": 0.9829,
+   "splade_vote_alone": 0.9829,
+   "node_vote_per_hop_ALL": {},
+   "smallest_FPS_m_preserving_node_vote": null,
+   "FPS_m_preserving_node_vote": [],
+   "FPS_preserving_from_smallest_m_upward": false,
+   "smallest_RAND_m_preserving_node_vote": null,
+   "centroids_preserve_node_vote": {
+    "CENT_MEAN": false,
+    "CENT_NORM": false
+   },
+   "ladder_limit_preserves_node_vote": true,
+   "smallest_FPS_m_preserving_dense_vote (dense-only comparison)": null,
+   "ivf": {
+    "CENT_MEAN": {
+     "ALL": 0.9093,
+     "ANY": 0.9093,
+     "points_vs_node_vote": -7.66,
+     "vs_node_vote": {
+      "gained": 3,
+      "lost": 79,
+      "net_queries": -76,
+      "p": 3.803541892641332e-20,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 4,
+      "lost": 77,
+      "net_queries": -73,
+      "p": 1.4495364161868997e-18,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 202
+    },
+    "CENT_NORM": {
+     "ALL": 0.9083,
+     "ANY": 0.9083,
+     "points_vs_node_vote": -7.76,
+     "vs_node_vote": {
+      "gained": 3,
+      "lost": 80,
+      "net_queries": -77,
+      "p": 1.9721640164489286e-20,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 4,
+      "lost": 78,
+      "net_queries": -74,
+      "p": 7.614296800224126e-19,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 202
+    },
+    "FPS_1": {
+     "ALL": 0.8155,
+     "ANY": 0.8155,
+     "points_vs_node_vote": -17.04,
+     "vs_node_vote": {
+      "gained": 2,
+      "lost": 171,
+      "net_queries": -169,
+      "p": 2.514403401019233e-48,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 2,
+      "lost": 168,
+      "net_queries": -166,
+      "p": 1.9425653912950078e-47,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 202
+    },
+    "FPS_2": {
+     "ALL": 0.8256,
+     "ANY": 0.8256,
+     "points_vs_node_vote": -16.03,
+     "vs_node_vote": {
+      "gained": 8,
+      "lost": 167,
+      "net_queries": -159,
+      "p": 8.130421095395161e-40,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 6,
+      "lost": 162,
+      "net_queries": -156,
+      "p": 1.5830257760758477e-40,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 404
+    },
+    "FPS_4": {
+     "ALL": 0.8548,
+     "ANY": 0.8548,
+     "points_vs_node_vote": -13.1,
+     "vs_node_vote": {
+      "gained": 10,
+      "lost": 140,
+      "net_queries": -130,
+      "p": 1.7629282549387198e-30,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 135,
+      "net_queries": -127,
+      "p": 6.767917179441369e-31,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 808
+    },
+    "FPS_8": {
+     "ALL": 0.8982,
+     "ANY": 0.8982,
+     "points_vs_node_vote": -8.77,
+     "vs_node_vote": {
+      "gained": 9,
+      "lost": 96,
+      "net_queries": -87,
+      "p": 1.631136685631456e-19,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 6,
+      "lost": 90,
+      "net_queries": -84,
+      "p": 2.5032559976926473e-20,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 1616
+    },
+    "FPS_16": {
+     "ALL": 0.9435,
+     "ANY": 0.9435,
+     "points_vs_node_vote": -4.23,
+     "vs_node_vote": {
+      "gained": 10,
+      "lost": 52,
+      "net_queries": -42,
+      "p": 5.713613733093065e-08,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 47,
+      "net_queries": -39,
+      "p": 8.067609591488889e-08,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 3232
+    },
+    "FPS_32": {
+     "ALL": 0.9728,
+     "ANY": 0.9728,
+     "points_vs_node_vote": -1.31,
+     "vs_node_vote": {
+      "gained": 8,
+      "lost": 21,
+      "net_queries": -13,
+      "p": 0.0241195447742939,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 6,
+      "lost": 16,
+      "net_queries": -10,
+      "p": 0.052478790283203125,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 6464
+    },
+    "RAND_1": {
+     "ALL": 0.7056,
+     "ANY": 0.7056,
+     "points_vs_node_vote": -28.02,
+     "vs_node_vote": {
+      "gained": 4,
+      "lost": 282,
+      "net_queries": -278,
+      "p": 4.453644096723758e-78,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 4,
+      "lost": 279,
+      "net_queries": -275,
+      "p": 3.415513048339387e-77,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 202
+    },
+    "RAND_2": {
+     "ALL": 0.7782,
+     "ANY": 0.7782,
+     "points_vs_node_vote": -20.77,
+     "vs_node_vote": {
+      "gained": 6,
+      "lost": 212,
+      "net_queries": -206,
+      "p": 6.793724406375383e-55,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 6,
+      "lost": 209,
+      "net_queries": -203,
+      "p": 4.9985446847242844e-54,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 404
+    },
+    "RAND_4": {
+     "ALL": 0.8468,
+     "ANY": 0.8468,
+     "points_vs_node_vote": -13.91,
+     "vs_node_vote": {
+      "gained": 5,
+      "lost": 143,
+      "net_queries": -138,
+      "p": 3.2085276013428707e-36,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 5,
+      "lost": 140,
+      "net_queries": -135,
+      "p": 2.315446615810949e-35,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 808
+    },
+    "RAND_8": {
+     "ALL": 0.877,
+     "ANY": 0.877,
+     "points_vs_node_vote": -10.89,
+     "vs_node_vote": {
+      "gained": 5,
+      "lost": 113,
+      "net_queries": -108,
+      "p": 1.1008568075907249e-27,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 5,
+      "lost": 110,
+      "net_queries": -105,
+      "p": 7.734682182892878e-27,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 1616
+    },
+    "RAND_16": {
+     "ALL": 0.9274,
+     "ANY": 0.9274,
+     "points_vs_node_vote": -5.85,
+     "vs_node_vote": {
+      "gained": 7,
+      "lost": 65,
+      "net_queries": -58,
+      "p": 6.9644370929921e-13,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 63,
+      "net_queries": -55,
+      "p": 1.0271364278048329e-11,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 3232
+    },
+    "RAND_32": {
+     "ALL": 0.9425,
+     "ANY": 0.9425,
+     "points_vs_node_vote": -4.33,
+     "vs_node_vote": {
+      "gained": 9,
+      "lost": 52,
+      "net_queries": -43,
+      "p": 1.802802378388091e-08,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 11,
+      "lost": 51,
+      "net_queries": -40,
+      "p": 2.775636864143019e-07,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 6464
+    },
+    "QMAX_ALONE": {
+     "ALL": 0.9879,
+     "ANY": 0.9879,
+     "points_vs_node_vote": 0.2,
+     "vs_node_vote": {
+      "gained": 10,
+      "lost": 8,
+      "net_queries": 2,
+      "p": 0.8145294189453125,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES_NODE_VOTE": true,
+     "vs_dense_vote": {
+      "gained": 12,
+      "lost": 7,
+      "net_queries": 5,
+      "p": 0.359283447265625,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES_DENSE_VOTE": true,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 20233
+    }
+   },
+   "recall_as_we_move_left (ALL; points vs node vote)": [
+    [
+     "CENT_MEAN",
+     0.9093,
+     -7.66
+    ],
+    [
+     "CENT_NORM",
+     0.9083,
+     -7.76
+    ],
+    [
+     "FPS_1",
+     0.8155,
+     -17.04
+    ],
+    [
+     "FPS_2",
+     0.8256,
+     -16.03
+    ],
+    [
+     "FPS_4",
+     0.8548,
+     -13.1
+    ],
+    [
+     "FPS_8",
+     0.8982,
+     -8.77
+    ],
+    [
+     "FPS_16",
+     0.9435,
+     -4.23
+    ],
+    [
+     "FPS_32",
+     0.9728,
+     -1.31
+    ],
+    [
+     "QMAX_ALONE",
+     0.9879,
+     0.2
+    ],
+    [
+     "DENSE_VOTE",
+     0.9829,
+     null
+    ],
+    [
+     "SPLADE_VOTE",
+     0.9829,
+     null
+    ],
+    [
+     "NODE_VOTE (L1)",
+     0.9859,
+     0.0
+    ]
+   ]
+  },
+  "squad_phg": {
+   "status": "ONLY_THE_LADDER_LIMIT_PRESERVES (every node a representative; no FPS_m with m <= 32)",
+   "n_split_A": 992,
+   "tolerance_net_loss": 5,
+   "N": 20233,
+   "npart": 202,
+   "block_size_min_median_max": [
+    60,
+    102.0,
+    103
+   ],
+   "node_vote (L1)": 0.9829,
+   "dense_vote_alone": 0.9778,
+   "splade_vote_alone": 0.9788,
+   "node_vote_per_hop_ALL": {},
+   "smallest_FPS_m_preserving_node_vote": null,
+   "FPS_m_preserving_node_vote": [],
+   "FPS_preserving_from_smallest_m_upward": false,
+   "smallest_RAND_m_preserving_node_vote": null,
+   "centroids_preserve_node_vote": {
+    "CENT_MEAN": false,
+    "CENT_NORM": false
+   },
+   "ladder_limit_preserves_node_vote": true,
+   "smallest_FPS_m_preserving_dense_vote (dense-only comparison)": null,
+   "ivf": {
+    "CENT_MEAN": {
+     "ALL": 0.9093,
+     "ANY": 0.9093,
+     "points_vs_node_vote": -7.36,
+     "vs_node_vote": {
+      "gained": 7,
+      "lost": 80,
+      "net_queries": -73,
+      "p": 8.255809114227991e-17,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 76,
+      "net_queries": -68,
+      "p": 5.0213888745341685e-15,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 202
+    },
+    "CENT_NORM": {
+     "ALL": 0.9214,
+     "ANY": 0.9214,
+     "points_vs_node_vote": -6.15,
+     "vs_node_vote": {
+      "gained": 5,
+      "lost": 66,
+      "net_queries": -61,
+      "p": 1.1901876782304671e-14,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 7,
+      "lost": 63,
+      "net_queries": -56,
+      "p": 2.2750760151658833e-12,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 202
+    },
+    "FPS_1": {
+     "ALL": 0.8014,
+     "ANY": 0.8014,
+     "points_vs_node_vote": -18.15,
+     "vs_node_vote": {
+      "gained": 5,
+      "lost": 185,
+      "net_queries": -180,
+      "p": 2.5623876926074986e-48,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 9,
+      "lost": 184,
+      "net_queries": -175,
+      "p": 1.4183988707102182e-43,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 202
+    },
+    "FPS_2": {
+     "ALL": 0.8226,
+     "ANY": 0.8226,
+     "points_vs_node_vote": -16.03,
+     "vs_node_vote": {
+      "gained": 7,
+      "lost": 166,
+      "net_queries": -159,
+      "p": 1.418461131983934e-40,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 10,
+      "lost": 164,
+      "net_queries": -154,
+      "p": 4.787244158587412e-37,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 404
+    },
+    "FPS_4": {
+     "ALL": 0.8286,
+     "ANY": 0.8286,
+     "points_vs_node_vote": -15.42,
+     "vs_node_vote": {
+      "gained": 8,
+      "lost": 161,
+      "net_queries": -153,
+      "p": 3.9204408088063e-38,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 10,
+      "lost": 158,
+      "net_queries": -148,
+      "p": 2.1416199587982634e-35,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 808
+    },
+    "FPS_8": {
+     "ALL": 0.8831,
+     "ANY": 0.8831,
+     "points_vs_node_vote": -9.98,
+     "vs_node_vote": {
+      "gained": 10,
+      "lost": 109,
+      "net_queries": -99,
+      "p": 3.518195580823734e-22,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 11,
+      "lost": 105,
+      "net_queries": -94,
+      "p": 2.1087572875819484e-20,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 1616
+    },
+    "FPS_16": {
+     "ALL": 0.9355,
+     "ANY": 0.9355,
+     "points_vs_node_vote": -4.74,
+     "vs_node_vote": {
+      "gained": 10,
+      "lost": 57,
+      "net_queries": -47,
+      "p": 4.042104433067336e-09,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 12,
+      "lost": 54,
+      "net_queries": -42,
+      "p": 1.6944941229476377e-07,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 3232
+    },
+    "FPS_32": {
+     "ALL": 0.9587,
+     "ANY": 0.9587,
+     "points_vs_node_vote": -2.42,
+     "vs_node_vote": {
+      "gained": 9,
+      "lost": 33,
+      "net_queries": -24,
+      "p": 0.0002715392342906853,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 11,
+      "lost": 30,
+      "net_queries": -19,
+      "p": 0.00432400493446039,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 6464
+    },
+    "RAND_1": {
+     "ALL": 0.6008,
+     "ANY": 0.6008,
+     "points_vs_node_vote": -38.21,
+     "vs_node_vote": {
+      "gained": 6,
+      "lost": 385,
+      "net_queries": -379,
+      "p": 1.9234268968624072e-105,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 10,
+      "lost": 384,
+      "net_queries": -374,
+      "p": 1.1266868875946845e-99,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 202
+    },
+    "RAND_2": {
+     "ALL": 0.7228,
+     "ANY": 0.7228,
+     "points_vs_node_vote": -26.01,
+     "vs_node_vote": {
+      "gained": 7,
+      "lost": 265,
+      "net_queries": -258,
+      "p": 5.472156203552558e-69,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 9,
+      "lost": 262,
+      "net_queries": -253,
+      "p": 1.036613504524022e-65,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 404
+    },
+    "RAND_4": {
+     "ALL": 0.8075,
+     "ANY": 0.8075,
+     "points_vs_node_vote": -17.54,
+     "vs_node_vote": {
+      "gained": 7,
+      "lost": 181,
+      "net_queries": -174,
+      "p": 7.796807359600508e-45,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 8,
+      "lost": 177,
+      "net_queries": -169,
+      "p": 1.2460750947034405e-42,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 808
+    },
+    "RAND_8": {
+     "ALL": 0.8538,
+     "ANY": 0.8538,
+     "points_vs_node_vote": -12.9,
+     "vs_node_vote": {
+      "gained": 8,
+      "lost": 136,
+      "net_queries": -128,
+      "p": 3.581409356808509e-31,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 12,
+      "lost": 135,
+      "net_queries": -123,
+      "p": 1.6465225662342825e-27,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 1616
+    },
+    "RAND_16": {
+     "ALL": 0.9083,
+     "ANY": 0.9083,
+     "points_vs_node_vote": -7.46,
+     "vs_node_vote": {
+      "gained": 8,
+      "lost": 82,
+      "net_queries": -74,
+      "p": 1.3838495394081657e-16,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 13,
+      "lost": 82,
+      "net_queries": -69,
+      "p": 2.0830055605008275e-13,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 3232
+    },
+    "RAND_32": {
+     "ALL": 0.9446,
+     "ANY": 0.9446,
+     "points_vs_node_vote": -3.83,
+     "vs_node_vote": {
+      "gained": 10,
+      "lost": 48,
+      "net_queries": -38,
+      "p": 4.5166191631196295e-07,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 14,
+      "lost": 47,
+      "net_queries": -33,
+      "p": 2.7191876822818543e-05,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 6464
+    },
+    "QMAX_ALONE": {
+     "ALL": 0.9909,
+     "ANY": 0.9909,
+     "points_vs_node_vote": 0.81,
+     "vs_node_vote": {
+      "gained": 12,
+      "lost": 4,
+      "net_queries": 8,
+      "p": 0.076812744140625,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES_NODE_VOTE": true,
+     "vs_dense_vote": {
+      "gained": 16,
+      "lost": 3,
+      "net_queries": 13,
+      "p": 0.004425048828125,
+      "label": "GAIN"
+     },
+     "PRESERVES_DENSE_VOTE": true,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 20233
+    }
+   },
+   "recall_as_we_move_left (ALL; points vs node vote)": [
+    [
+     "CENT_MEAN",
+     0.9093,
+     -7.36
+    ],
+    [
+     "CENT_NORM",
+     0.9214,
+     -6.15
+    ],
+    [
+     "FPS_1",
+     0.8014,
+     -18.15
+    ],
+    [
+     "FPS_2",
+     0.8226,
+     -16.03
+    ],
+    [
+     "FPS_4",
+     0.8286,
+     -15.42
+    ],
+    [
+     "FPS_8",
+     0.8831,
+     -9.98
+    ],
+    [
+     "FPS_16",
+     0.9355,
+     -4.74
+    ],
+    [
+     "FPS_32",
+     0.9587,
+     -2.42
+    ],
+    [
+     "QMAX_ALONE",
+     0.9909,
+     0.81
+    ],
+    [
+     "DENSE_VOTE",
+     0.9778,
+     null
+    ],
+    [
+     "SPLADE_VOTE",
+     0.9788,
+     null
+    ],
+    [
+     "NODE_VOTE (L1)",
+     0.9829,
+     0.0
+    ]
+   ]
+  },
+  "musique": {
+   "status": "ONLY_THE_LADDER_LIMIT_PRESERVES (every node a representative; no FPS_m with m <= 32)",
+   "n_split_A": 996,
+   "tolerance_net_loss": 5,
+   "N": 117534,
+   "npart": 1175,
+   "block_size_min_median_max": [
+    1,
+    103.0,
+    104
+   ],
+   "node_vote (L1)": 0.6596,
+   "dense_vote_alone": 0.6546,
+   "splade_vote_alone": 0.6004,
+   "node_vote_per_hop_ALL": {},
+   "smallest_FPS_m_preserving_node_vote": null,
+   "FPS_m_preserving_node_vote": [],
+   "FPS_preserving_from_smallest_m_upward": false,
+   "smallest_RAND_m_preserving_node_vote": null,
+   "centroids_preserve_node_vote": {
+    "CENT_MEAN": false,
+    "CENT_NORM": false
+   },
+   "ladder_limit_preserves_node_vote": true,
+   "smallest_FPS_m_preserving_dense_vote (dense-only comparison)": null,
+   "ivf": {
+    "CENT_MEAN": {
+     "ALL": 0.3283,
+     "ANY": 0.8464,
+     "points_vs_node_vote": -33.13,
+     "vs_node_vote": {
+      "gained": 41,
+      "lost": 371,
+      "net_queries": -330,
+      "p": 1.3164066404864378e-67,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 33,
+      "lost": 358,
+      "net_queries": -325,
+      "p": 4.3627086891185166e-70,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 1175
+    },
+    "CENT_NORM": {
+     "ALL": 0.4056,
+     "ANY": 0.8956,
+     "points_vs_node_vote": -25.4,
+     "vs_node_vote": {
+      "gained": 44,
+      "lost": 297,
+      "net_queries": -253,
+      "p": 2.991256997745637e-47,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 44,
+      "lost": 292,
+      "net_queries": -248,
+      "p": 4.790498950224618e-46,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 1175
+    },
+    "FPS_1": {
+     "ALL": 0.261,
+     "ANY": 0.7932,
+     "points_vs_node_vote": -39.86,
+     "vs_node_vote": {
+      "gained": 17,
+      "lost": 414,
+      "net_queries": -397,
+      "p": 4.692899836410369e-100,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 17,
+      "lost": 409,
+      "net_queries": -392,
+      "p": 1.227481398962728e-98,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 1175
+    },
+    "FPS_2": {
+     "ALL": 0.261,
+     "ANY": 0.7882,
+     "points_vs_node_vote": -39.86,
+     "vs_node_vote": {
+      "gained": 21,
+      "lost": 418,
+      "net_queries": -397,
+      "p": 5.539664111275995e-97,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 24,
+      "lost": 416,
+      "net_queries": -392,
+      "p": 1.763024881012384e-93,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 2341
+    },
+    "FPS_4": {
+     "ALL": 0.2761,
+     "ANY": 0.7791,
+     "points_vs_node_vote": -38.35,
+     "vs_node_vote": {
+      "gained": 28,
+      "lost": 410,
+      "net_queries": -382,
+      "p": 3.75560135214068e-88,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 26,
+      "lost": 403,
+      "net_queries": -377,
+      "p": 4.903519720194715e-88,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 4673
+    },
+    "FPS_8": {
+     "ALL": 0.3163,
+     "ANY": 0.8122,
+     "points_vs_node_vote": -34.34,
+     "vs_node_vote": {
+      "gained": 33,
+      "lost": 375,
+      "net_queries": -342,
+      "p": 1.4324468483460773e-74,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 32,
+      "lost": 369,
+      "net_queries": -337,
+      "p": 9.031840527220107e-74,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 9334
+    },
+    "FPS_16": {
+     "ALL": 0.3996,
+     "ANY": 0.8635,
+     "points_vs_node_vote": -26.0,
+     "vs_node_vote": {
+      "gained": 56,
+      "lost": 315,
+      "net_queries": -259,
+      "p": 6.858814607697649e-45,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 52,
+      "lost": 306,
+      "net_queries": -254,
+      "p": 6.545746691768548e-45,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 18654
+    },
+    "FPS_32": {
+     "ALL": 0.5231,
+     "ANY": 0.9277,
+     "points_vs_node_vote": -13.65,
+     "vs_node_vote": {
+      "gained": 69,
+      "lost": 205,
+      "net_queries": -136,
+      "p": 7.786631496165773e-17,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 72,
+      "lost": 203,
+      "net_queries": -131,
+      "p": 1.2852237490631292e-15,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 37294
+    },
+    "RAND_1": {
+     "ALL": 0.1737,
+     "ANY": 0.6667,
+     "points_vs_node_vote": -48.59,
+     "vs_node_vote": {
+      "gained": 12,
+      "lost": 496,
+      "net_queries": -484,
+      "p": 1.3229917981915124e-129,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 11,
+      "lost": 490,
+      "net_queries": -479,
+      "p": 3.4983800541705324e-129,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 1175
+    },
+    "RAND_2": {
+     "ALL": 0.2159,
+     "ANY": 0.739,
+     "points_vs_node_vote": -44.38,
+     "vs_node_vote": {
+      "gained": 18,
+      "lost": 460,
+      "net_queries": -442,
+      "p": 5.111761217897121e-112,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 18,
+      "lost": 455,
+      "net_queries": -437,
+      "p": 1.3495996942323938e-110,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 2341
+    },
+    "RAND_4": {
+     "ALL": 0.2661,
+     "ANY": 0.7761,
+     "points_vs_node_vote": -39.36,
+     "vs_node_vote": {
+      "gained": 28,
+      "lost": 420,
+      "net_queries": -392,
+      "p": 7.028605917091493e-91,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 18,
+      "lost": 405,
+      "net_queries": -387,
+      "p": 1.9654886057448942e-96,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 4673
+    },
+    "RAND_8": {
+     "ALL": 0.3143,
+     "ANY": 0.8253,
+     "points_vs_node_vote": -34.54,
+     "vs_node_vote": {
+      "gained": 35,
+      "lost": 379,
+      "net_queries": -344,
+      "p": 4.518058617122251e-74,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 31,
+      "lost": 370,
+      "net_queries": -339,
+      "p": 7.786465820182106e-75,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 9334
+    },
+    "RAND_16": {
+     "ALL": 0.3996,
+     "ANY": 0.8695,
+     "points_vs_node_vote": -26.0,
+     "vs_node_vote": {
+      "gained": 53,
+      "lost": 312,
+      "net_queries": -259,
+      "p": 8.942176319692012e-46,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 46,
+      "lost": 300,
+      "net_queries": -254,
+      "p": 8.187066432914294e-47,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 18654
+    },
+    "RAND_32": {
+     "ALL": 0.488,
+     "ANY": 0.9177,
+     "points_vs_node_vote": -17.17,
+     "vs_node_vote": {
+      "gained": 72,
+      "lost": 243,
+      "net_queries": -171,
+      "p": 7.811475867735913e-23,
+      "label": "LOSS"
+     },
+     "PRESERVES_NODE_VOTE": false,
+     "vs_dense_vote": {
+      "gained": 62,
+      "lost": 228,
+      "net_queries": -166,
+      "p": 1.7888586586756293e-23,
+      "label": "LOSS"
+     },
+     "PRESERVES_DENSE_VOTE": false,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 37294
+    },
+    "QMAX_ALONE": {
+     "ALL": 0.7008,
+     "ANY": 0.99,
+     "points_vs_node_vote": 4.12,
+     "vs_node_vote": {
+      "gained": 105,
+      "lost": 64,
+      "net_queries": 41,
+      "p": 0.002001342228607936,
+      "label": "GAIN"
+     },
+     "PRESERVES_NODE_VOTE": true,
+     "vs_dense_vote": {
+      "gained": 107,
+      "lost": 61,
+      "net_queries": 46,
+      "p": 0.0004805507257089419,
+      "label": "GAIN"
+     },
+     "PRESERVES_DENSE_VOTE": true,
+     "per_hop_ALL": {},
+     "prototype_vectors_scored_per_query": 117534
+    }
+   },
+   "recall_as_we_move_left (ALL; points vs node vote)": [
+    [
+     "CENT_MEAN",
+     0.3283,
+     -33.13
+    ],
+    [
+     "CENT_NORM",
+     0.4056,
+     -25.4
+    ],
+    [
+     "FPS_1",
+     0.261,
+     -39.86
+    ],
+    [
+     "FPS_2",
+     0.261,
+     -39.86
+    ],
+    [
+     "FPS_4",
+     0.2761,
+     -38.35
+    ],
+    [
+     "FPS_8",
+     0.3163,
+     -34.34
+    ],
+    [
+     "FPS_16",
+     0.3996,
+     -26.0
+    ],
+    [
+     "FPS_32",
+     0.5231,
+     -13.65
+    ],
+    [
+     "QMAX_ALONE",
+     0.7008,
+     4.12
+    ],
+    [
+     "DENSE_VOTE",
+     0.6546,
+     null
+    ],
+    [
+     "SPLADE_VOTE",
+     0.6004,
+     null
+    ],
+    [
+     "NODE_VOTE (L1)",
+     0.6596,
+     0.0
+    ]
+   ]
+  }
+ },
+ "predictions": {
+  "T1": {
+   "stated": "squad and squad_phg: CENT_NORM alone does NOT preserve node voting (prior L1_STATIC A2 on squad: dense centroid alone 0.9083 vs 0.9859, +3/-80)",
+   "held": true
+  },
+  "T2": {
+   "stated": "musique: CENT_NORM alone does NOT preserve node voting (prior A2: 0.4056 vs 0.6596, +44/-297)",
+   "held": true
+  },
+  "T3": {
+   "stated": "squad and squad_phg: some FPS_m with m <= 32 alone preserves node voting (50 probes = a quarter of the 202 blocks; single-hop)",
+   "held": false
+  },
+  "T4": {
+   "stated": "musique: no FPS_m with m <= 32 alone preserves node voting, hence m*_text = None",
+   "held": true
+  }
+ },
+ "what_this_does_not_decide": "adoption of anything; the frozen composite (FREEZE f81ebb84) is unchanged; no DEV_B, TEST, 2Wiki, HotpotQA or WebQSP"
+}

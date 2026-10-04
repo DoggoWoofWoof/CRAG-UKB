@@ -1,0 +1,482 @@
+{
+ "cache": "squad",
+ "partition": "MTKAHYPAR",
+ "n_DEV_A": 992,
+ "status": "PREREGISTERED_SUCCESSOR_TEST_DEV_A",
+ "arm": "COVSCORE_H2_PATCH1",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_COVSCORE_H2_PATCH1.json",
+  "sha256": "fdac27a89f3b39386c185d1c819533c79eef0535fd482cea2024e45ceb5c503d"
+ },
+ "code": {
+  "path": "scratchpad/_l1c_covscore.py",
+  "sha256": "5b8c530e1ee3e018c27f380978a45565d705486b9312bcb0042d996803dbd899"
+ },
+ "pinned": {
+  "_l1c_microl3.py": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+  "_l1c_h2patch.py": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d",
+  "_l1c_h2balanced.py": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe"
+ },
+ "selector": {
+  "cfg": {
+   "B": 6,
+   "M_struct": 64,
+   "M_ret": 32,
+   "agg": "S4",
+   "fusion": "F6",
+   "T": 1,
+   "tag": "F6"
+  },
+  "code": "_l1ps_router.build_cache + _l1kb_core.contexts / f6_select (unchanged)"
+ },
+ "SAFE_record": "results/L1_CANONICAL/L1_REPLAY_squad.json",
+ "definition": {
+  "beam": "pinned uL3 beam (frozen admissibility, transition geometry, RRF fused order, BEAM = 100, DEPTH = 2, seeds = frozen top-5)",
+  "compression_pinned": "first 100 distinct unvisited targets in the global fused order",
+  "compression_balanced": "section 21: (parent, target) pairs in fused order (first occurrence), within-parent rank r, sequence sorted by (r, frontier position) = A1 B1 C1 ... A2 B2 C2 ...",
+  "compression_covscore": "phase 1 = the pairs with r = 0 in frontier order (the best child of every active parent: A1 B1 C1 D1 ...); phase 2 = all remaining pairs in the frozen global fused order (A2 A3 B2 A4 ...); the first 100 distinct unvisited targets of phase 1 then phase 2; a parent whose best child is already taken contributes nothing in phase 1; no other constant",
+  "patch": "section 16 verbatim: SAFE minus its weakest admitted block + one query-local block of the same size = the beam's visited nodes not exposed by the 49 kept blocks in first-visit order (hop 1 then hop 2, each in beam order), topped up from the removed block (ret_rrf position, then node id)",
+  "metric": "ALL-gold under matched unique-node exposure; node-level == block-level for L1 / SAFE (asserted)"
+ },
+ "beam_diversity_DEV_A": {
+  "n_DEV_A": 992,
+  "wall_clock_ms_per_query": {
+   "pinned": 50.8,
+   "balanced": 50.7
+  },
+  "transitions_scored_per_query_mean (hop1 / hop2)": {
+   "pinned": [
+    238.2,
+    3436.7
+   ],
+   "balanced": [
+    238.2,
+    3446.6
+   ]
+  },
+  "candidates_unique_per_query_mean (hop1 / hop2)": {
+   "pinned": [
+    155.0,
+    918.5
+   ],
+   "balanced": [
+    155.0,
+    928.5
+   ]
+  },
+  "beam_size_mean (hop1 / hop2)": {
+   "pinned": [
+    85.2,
+    96.7
+   ],
+   "balanced": [
+    85.2,
+    96.7
+   ]
+  },
+  "queries_truncated_at_hop (hop1 / hop2) balanced": [
+   655,
+   952
+  ],
+  "same_kept_set_as_pinned (queries; hop1 / hop2)": [
+   379,
+   41
+  ],
+  "jaccard_kept_vs_pinned_mean (hop1 / hop2)": [
+   0.831,
+   0.361
+  ],
+  "distinct_parents_in_kept_beam_mean (hop1 / hop2)": {
+   "pinned": [
+    3.3,
+    17.9
+   ],
+   "balanced": [
+    3.4,
+    36.9
+   ]
+  },
+  "largest_single_parent_share_mean (hop1 / hop2)": {
+   "pinned": [
+    0.551,
+    0.258
+   ],
+   "balanced": [
+    0.45,
+    0.065
+   ]
+  },
+  "balanced_compression_stats_mean": {
+   "hop1": {
+    "parents": 5.0,
+    "parents_with_candidates": 3.55,
+    "candidates_unique": 160.2,
+    "pairs": 232.63,
+    "kept": 88.03,
+    "truncated": 0.68,
+    "rounds_used": 46.17,
+    "largest_parent_candidate_list": 96.95
+   },
+   "hop2": {
+    "parents": 88.03,
+    "parents_with_candidates": 66.44,
+    "candidates_unique": 959.42,
+    "pairs": 3467.24,
+    "kept": 99.92,
+    "truncated": 0.99,
+    "rounds_used": 6.93,
+    "largest_parent_candidate_list": 176.93
+   }
+  }
+ },
+ "covscore_beam_DEV_A": {
+  "wall_clock_ms_per_query": 50.5,
+  "transitions_scored_per_query_mean (hop1 / hop2)": [
+   238.2,
+   3436.9
+  ],
+  "candidates_unique_per_query_mean (hop1 / hop2)": [
+   155.0,
+   918.6
+  ],
+  "beam_size_mean (hop1 / hop2)": [
+   85.2,
+   96.7
+  ],
+  "queries_truncated_at_hop (hop1 / hop2)": [
+   655,
+   952
+  ],
+  "same_kept_set_as_pinned (queries; hop1 / hop2)": [
+   982,
+   170
+  ],
+  "same_kept_set_as_balanced (queries; hop1 / hop2)": [
+   379,
+   41
+  ],
+  "jaccard_kept_vs_pinned_mean (hop1 / hop2)": [
+   1.0,
+   0.863
+  ],
+  "jaccard_kept_vs_balanced_mean (hop1 / hop2)": [
+   0.831,
+   0.395
+  ],
+  "distinct_parents_in_kept_beam_mean (hop1 / hop2)": [
+   3.3,
+   28.2
+  ],
+  "largest_single_parent_share_mean (hop1 / hop2)": [
+   0.55,
+   0.237
+  ],
+  "covscore_compression_stats_mean": {
+   "hop1": {
+    "parents": 5.0,
+    "parents_with_candidates": 3.55,
+    "candidates_unique": 160.2,
+    "pairs": 232.63,
+    "kept": 88.03,
+    "truncated": 0.68,
+    "kept_phase1_coverage": 2.71,
+    "kept_phase2_score": 85.32,
+    "parents_represented": 3.46,
+    "largest_parent_candidate_list": 96.95
+   },
+   "hop2": {
+    "parents": 88.03,
+    "parents_with_candidates": 69.97,
+    "candidates_unique": 949.25,
+    "pairs": 3466.29,
+    "kept": 99.92,
+    "truncated": 0.99,
+    "kept_phase1_coverage": 23.04,
+    "kept_phase2_score": 76.89,
+    "parents_represented": 29.19,
+    "largest_parent_candidate_list": 175.71
+   }
+  }
+ },
+ "arms": {
+  "L1": {
+   "arm": "L1",
+   "ALL": 0.9859,
+   "ANY": 0.9859,
+   "per_hop": {}
+  },
+  "SAFE": {
+   "arm": "SAFE",
+   "ALL": 0.9919,
+   "ANY": 0.9919,
+   "per_hop": {},
+   "ALL_vs_L1": {
+    "gained": 6,
+    "lost": 0,
+    "p": 0.03125,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_L1": {
+    "gained": 6,
+    "lost": 0,
+    "p": 0.03125
+   }
+  },
+  "H2_PATCH1": {
+   "arm": "H2_PATCH1",
+   "ALL": 0.9919,
+   "ANY": 0.9919,
+   "per_hop": {},
+   "exposure": "matched: |served nodes| equal to canonical SAFE per query (asserted)",
+   "novel_nodes_per_query_mean": 21.6,
+   "novel_hop1_per_query_mean": 1.8,
+   "novel_hop2_per_query_mean": 19.7,
+   "patch_size_mean": 100.5,
+   "patch_composition_mean (hop-1 novel / hop-2 novel / fill from removed block)": [
+    1.8,
+    19.7,
+    79.0
+   ],
+   "queries_truncated": 1,
+   "queries_with_no_novel_node (patch == removed block)": 84,
+   "gold_nodes_gained_vs_SAFE": 0,
+   "gold_nodes_gained_vs_SAFE_from_hop1_novel": 0,
+   "queries_with_gold_node_gained_vs_SAFE": 0,
+   "gold_nodes_lost_with_removed_block": 0,
+   "queries_with_gold_node_lost_with_removed_block": 0,
+   "ALL_vs_L1": {
+    "gained": 6,
+    "lost": 0,
+    "p": 0.03125,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_L1": {
+    "gained": 6,
+    "lost": 0,
+    "p": 0.03125
+   },
+   "ALL_vs_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "significant_loss_vs_SAFE": false
+  },
+  "BALANCED_H2_PATCH1": {
+   "arm": "BALANCED_H2_PATCH1",
+   "ALL": 0.9919,
+   "ANY": 0.9919,
+   "per_hop": {},
+   "exposure": "matched: |served nodes| equal to canonical SAFE per query (asserted)",
+   "novel_nodes_per_query_mean": 29.2,
+   "novel_hop1_per_query_mean": 2.0,
+   "novel_hop2_per_query_mean": 27.2,
+   "patch_size_mean": 100.5,
+   "patch_composition_mean (hop-1 novel / hop-2 novel / fill from removed block)": [
+    2.0,
+    27.2,
+    71.4
+   ],
+   "queries_truncated": 3,
+   "queries_with_no_novel_node (patch == removed block)": 54,
+   "gold_nodes_gained_vs_SAFE": 0,
+   "gold_nodes_gained_vs_SAFE_from_hop1_novel": 0,
+   "queries_with_gold_node_gained_vs_SAFE": 0,
+   "gold_nodes_lost_with_removed_block": 0,
+   "queries_with_gold_node_lost_with_removed_block": 0,
+   "ALL_vs_L1": {
+    "gained": 6,
+    "lost": 0,
+    "p": 0.03125,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_L1": {
+    "gained": 6,
+    "lost": 0,
+    "p": 0.03125
+   },
+   "ALL_vs_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "ALL_vs_H2_PATCH1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_H2_PATCH1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "significant_loss_vs_SAFE": false,
+   "significant_loss_vs_H2_PATCH1": false
+  },
+  "COVSCORE_H2_PATCH1": {
+   "arm": "COVSCORE_H2_PATCH1",
+   "ALL": 0.9919,
+   "ANY": 0.9919,
+   "per_hop": {},
+   "exposure": "matched: |served nodes| equal to canonical SAFE per query (asserted)",
+   "novel_nodes_per_query_mean": 21.9,
+   "novel_hop1_per_query_mean": 1.8,
+   "novel_hop2_per_query_mean": 20.0,
+   "patch_size_mean": 100.5,
+   "patch_composition_mean (hop-1 novel / hop-2 novel / fill from removed block)": [
+    1.8,
+    20.0,
+    78.7
+   ],
+   "queries_truncated": 1,
+   "queries_with_no_novel_node (patch == removed block)": 66,
+   "gold_nodes_gained_vs_SAFE": 0,
+   "gold_nodes_gained_vs_SAFE_from_hop1_novel": 0,
+   "queries_with_gold_node_gained_vs_SAFE": 0,
+   "gold_nodes_lost_with_removed_block": 0,
+   "queries_with_gold_node_lost_with_removed_block": 0,
+   "ALL_vs_L1": {
+    "gained": 6,
+    "lost": 0,
+    "p": 0.03125,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_L1": {
+    "gained": 6,
+    "lost": 0,
+    "p": 0.03125
+   },
+   "ALL_vs_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "ALL_vs_H2_PATCH1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_H2_PATCH1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_BALANCED_H2_PATCH1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "significant_loss_vs_SAFE": false,
+   "significant_loss_vs_H2_PATCH1": false,
+   "significant_loss_vs_BALANCED_H2_PATCH1": false
+  }
+ },
+ "reference_arms_reproduced": "H2_PATCH1 == h2patch_A_squad.json and BALANCED_H2_PATCH1 == h2balanced_A_squad.json (ALL, ANY, vs SAFE / H2_PATCH1 / L1, per hop, novel counts, patch size)",
+ "attribution_flips": {
+  "COVSCORE_vs_BALANCED_H2_PATCH1": {
+   "newly_covered": {
+    "n": 0,
+    "gold_nodes_newly_served": 0,
+    "of_which_newly_visited_by_the_covscore_beam": 0,
+    "of_which_visited_by_both_beams_but_cut_by_the_reference_patch": 0
+   },
+   "newly_lost": {
+    "n": 0,
+    "gold_nodes_dropped": 0,
+    "of_which_no_longer_visited_by_the_covscore_beam": 0,
+    "of_which_visited_but_beyond_the_patch_capacity": 0
+   }
+  },
+  "COVSCORE_vs_H2_PATCH1": {
+   "newly_covered": {
+    "n": 0,
+    "gold_nodes_newly_served": 0,
+    "of_which_newly_visited_by_the_covscore_beam": 0,
+    "of_which_visited_by_both_beams_but_cut_by_the_reference_patch": 0
+   },
+   "newly_lost": {
+    "n": 0,
+    "gold_nodes_dropped": 0,
+    "of_which_no_longer_visited_by_the_covscore_beam": 0,
+    "of_which_visited_but_beyond_the_patch_capacity": 0
+   }
+  }
+ },
+ "diagnostic_frontier_compression_vs_gold": {
+  "all": {
+   "SAFE_failures": 8,
+   "missing_gold_nodes": 8,
+   "pinned": {
+    "missing_gold_visited (hop1 / hop2)": [
+     0,
+     0
+    ],
+    "missing_gold_scored_at_hop2_but_not_kept": 0,
+    "missing_gold_never_scored_within_depth2": 8,
+    "gold_bearing_hop1_parents (parents with a missing gold node among their hop-2 candidates)": 0,
+    "gold_bearing_hop1_parents_with_a_gold_child_kept": 0,
+    "failures_with_all_missing_nodes_visited": 0,
+    "failures_covered_by_the_arm": 0
+   },
+   "balanced": {
+    "missing_gold_visited (hop1 / hop2)": [
+     0,
+     0
+    ],
+    "missing_gold_scored_at_hop2_but_not_kept": 0,
+    "missing_gold_never_scored_within_depth2": 8,
+    "gold_bearing_hop1_parents (parents with a missing gold node among their hop-2 candidates)": 0,
+    "gold_bearing_hop1_parents_with_a_gold_child_kept": 0,
+    "failures_with_all_missing_nodes_visited": 0,
+    "failures_covered_by_the_arm": 0
+   },
+   "covscore": {
+    "missing_gold_visited (hop1 / hop2)": [
+     0,
+     0
+    ],
+    "missing_gold_scored_at_hop2_but_not_kept": 0,
+    "missing_gold_never_scored_within_depth2": 8,
+    "gold_bearing_hop1_parents (parents with a missing gold node among their hop-2 candidates)": 0,
+    "gold_bearing_hop1_parents_with_a_gold_child_kept": 0,
+    "failures_with_all_missing_nodes_visited": 0,
+    "failures_covered_by_the_arm": 0
+   }
+  }
+ },
+ "per_cache_labels": {
+  "ALL_vs_BALANCED_H2_PATCH1": "NEUTRAL",
+  "ALL_vs_H2_PATCH1": "NEUTRAL",
+  "ALL_vs_SAFE": "NEUTRAL",
+  "text_safe_vs_BALANCED (not (lost > gained and p < 0.05))": true,
+  "text_safe_vs_H2_PATCH1": true,
+  "text_safe_vs_SAFE": true
+ },
+ "seconds": 206.5
+}

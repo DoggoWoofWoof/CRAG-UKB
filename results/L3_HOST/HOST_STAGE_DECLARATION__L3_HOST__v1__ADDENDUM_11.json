@@ -1,0 +1,110 @@
+{
+ "stage": "L3_HOST",
+ "addendum": 11,
+ "amends": {
+  "declaration": {
+   "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1.json",
+   "sha256": "37ff06f7bb0ae203923e0956ec767df9e8fc2f20753a3ecf945d6d714e2cd9a9"
+  },
+  "addenda": [
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_1.json",
+    "sha256": "12642119363d99e1851eefe3b43d92414cb3d53be3ea0a32e8a0361116f75b9c"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_2.json",
+    "sha256": "c12815c69a5372337a755512f8a590e843241d0252a923244eb35539676cfcd9"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_3.json",
+    "sha256": "78e0644b88048ed33c6e166fb315bcaaca6d091fb4b7e8ad79d5719d23b0702d"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_4.json",
+    "sha256": "854a483a9f44a281ee100dfa3da662f53a9cfd9e2c57a5793f9f3c277198aed0"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_5.json",
+    "sha256": "5de9f9bd2147a1b927fc449db518eda186b5d83c8967a1a84c572a905bcbb99f"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_6.json",
+    "sha256": "dbf7ea22bf6664bbe287c5275406c0c541d3d9ac099a6bed6ff65faceeb79c03"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_7.json",
+    "sha256": "9cbbe6ef2f16d2f49712c943aac4cf659af4ce4f7eee4bdc45aedad536c06466"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_8.json",
+    "sha256": "ebc80655b7ef9ac3af512035c6fb6d206722369615e9c520a2be3248bf5658b4"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_9.json",
+    "sha256": "30a4fd5bd9273ead7a97ceb1f54a96f54af8a5e4da01cb51103b26983a6f1fbc"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_10.json",
+    "sha256": "835aa711e200c7e789b17b590fae828cf6e058143dcde05c894e4eb38a44c29f"
+   }
+  ],
+  "authorization": {
+   "path": "results/L3_HOST/HOST_STAGE_AUTHORIZATION__L3_HOST__2026-09-29.json",
+   "sha256": "cb94b481eeb282a120794376b9ff9438d58516ff55162353658f3836d6cdbb7e"
+  },
+  "encoder_authorization": {
+   "path": "results/L3_HOST/HOST_STAGE_AUTHORIZATION__L3_HOST_ENC__2026-09-29.json",
+   "sha256": "9313ed0f21bca0ef99da467604f6e223c25e3dd6798aff9d2eafde7a0472c2a1"
+  }
+ },
+ "declared": "2026-09-29T21:39:27+05:30",
+ "purpose": "the placement test of a new harness, as the authorization requires before it joins: its first host run must be BIT_IDENTICAL to its laptop run of the same population, and a dated addendum names it",
+ "harness": {
+  "path": "scratchpad/_l3d_e2b.py",
+  "sha256": "e1441f3a93bb05f2781eafdc308cfb2f4d32b5638b3ef5e058dc0dc2399547a3",
+  "bytes": 41600,
+  "what": "E2b (REPORT 41.15): _l3d_e2.py with the arms XT and P dropped and the arms UAG (UA where the lexical schedule is non-empty, else LEX), UF (the fill union: the lexical candidates first, then the appended walk's new ones, in its own order) and UFG (UF where the lexical schedule is non-empty, else LEX) added; the TYPED v1 walk (_l3d_typed, imported and sha-pinned), the RELENC relation-name encodings against the population rows' frozen query vectors; the laptop run also asserts LEX / XA / UA identical to the E2 v1 record and UAG equal to its post-hoc derivation; UNROUTED and PHG_k432 / MTK_k432 with the ROWS mask; no model runs"
+ },
+ "inputs_on_the_host": {
+  "relenc": "results/L3_DEV/relenc_metaqa__v1.{json,npz} (already on the host; addendum 9)",
+  "typed_v1": "results/L3_DEV/l3typed_metaqa__v1.{json,npz} (pushed under addendum 3)",
+  "e2_v1": [
+   {
+    "path": "results/L3_DEV/l3e2_metaqa__v1.json",
+    "sha256": "e381453219a183400de485ac8454a83e77b31879ce9d2ba8fb01b75ef8688600",
+    "bytes": 1662969
+   },
+   {
+    "path": "results/L3_DEV/l3e2_metaqa__v1.npz",
+    "sha256": "512006698bab305061cbb757d287c9710f56af3583db7029702ee42f9c790412",
+    "bytes": 4238921
+   }
+  ],
+  "query_vectors": "data/final_canonical/metaqa/embeddings/{dense,splade}/queries/shard_0000{8,9} (pushed under the declaration and addendum 1); only the population rows are read"
+ },
+ "test": {
+  "laptop": "PYTHONHASHSEED=0 python -u scratchpad/_l3d_e2b.py RUN metaqa v1 -> results/L3_DEV/l3e2b_metaqa__v1.{json,npz}",
+  "host": "rx run -n l3h-e2b-h1 --cpus 2 --mem 3 --var OPENBLAS_NUM_THREADS=12 -- python -u scratchpad/_host_yield.py run -- python -u scratchpad/_l3h_run.py scratchpad/_l3d_e2b.py RUN metaqa h1 -> results/L3_DEV/l3e2b_metaqa__h1.{json,npz}",
+  "compare": "python scratchpad/_l3h_place.py results/L3_DEV/l3e2b_metaqa__v1 results/L3_DEV/l3e2b_metaqa__h1 --record=results/L3_HOST/PLACEMENT_TEST__L3_E2B__v1.json",
+  "gate": "BIT_IDENTICAL; then a dated addendum names the harness; until then its host output is a test artifact only"
+ },
+ "priority": "the host job runs under the crag host-yield wrapper (results/HOST_YIELD/HOST_YIELD_POLICY__v1.json, addendum 8)",
+ "pushed_in_addition": [
+  {
+   "path": "scratchpad/_l3d_e2b.py",
+   "sha256": "e1441f3a93bb05f2781eafdc308cfb2f4d32b5638b3ef5e058dc0dc2399547a3",
+   "bytes": 41600
+  },
+  {
+   "path": "results/L3_DEV/l3e2_metaqa__v1.json",
+   "sha256": "e381453219a183400de485ac8454a83e77b31879ce9d2ba8fb01b75ef8688600",
+   "bytes": 1662969
+  },
+  {
+   "path": "results/L3_DEV/l3e2_metaqa__v1.npz",
+   "sha256": "512006698bab305061cbb757d287c9710f56af3583db7029702ee42f9c790412",
+   "bytes": 4238921
+  }
+ ],
+ "unchanged": "the bundle, the runner, the BLAS setting of addendum 2, the authorizations' pins and every 'never' of the declaration"
+}

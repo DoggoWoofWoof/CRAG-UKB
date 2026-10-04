@@ -1,0 +1,113 @@
+{
+  "contract": "G2_UNIVERSAL_FEATURE_CONTRACT",
+  "version": "v2",
+  "date": "2026-08-31",
+  "v2_change": "Added the HARD INFERENCE-SAFETY / CACHE CONTRACT (applies to L1, B1, B2) and the per-feature FEATURE_PROVENANCE_MANIFEST for the actually-implemented B1.1 features, each carrying the hard-gate booleans. An automated inference-safety audit (leakage test) runs before every LODO/eval and hard-fails on violation.",
+  "purpose": "Dataset-agnostic per-candidate feature contract for G2 Track-B universal L2 (pool admission B1, then final ranking B2). No dataset IDs, no gold-derived entity links, no supporting-fact/target labels. Every feature has bounded/relative semantics and a deterministic dataset-agnostic abstention rule.",
+  "candidate_universe": {
+    "definition": "original P50 scope UNION parameter-free STRUCTURAL directional expansion",
+    "M_MAX": 256,
+    "M_note": "M_MAX is an upper candidate-GENERATION budget, not the final pool size; no per-dataset M.",
+    "graph_for_mainline": "structural / native only (row-space master_nodes.neighbors); kNN graph = ablation only",
+    "final_admission_budget_TOP_POOL": 50
+  },
+  "anchor_policy": {
+    "seed_resolver": "UNIVERSAL, parameter-free, no dataset branch: seed set = retrieval seeds (dense/splade top-k docs) UNION title-match topics (deterministic find_topics). Retrieval seeds guarantee ~100% coverage everywhere.",
+    "FORBIDDEN": ["bracketed-entity rule (metaqa-only -> reveals dataset id)", "any if dataset== branch", "gold-derived entity links", "topic-entity pools that encode gold"],
+    "rationale": "Title-match-ALONE anchor coverage is dataset-correlated (metaqa 1.00 / 2wiki 1.00 / musique 0.67 / squad 0.24) and would leak dataset identity via missingness. Retrieval-seeded anchors are ~1.0 for all datasets, so anchor-present flags do not reveal identity.",
+    "abstention": "Every anchor-dependent feature is paired with a binary *_anchor_present flag and uses sentinel 0.0 when the anchor is absent. The learned model always sees the flag; abstention is explicit, never a magic in-band value."
+  },
+  "feature_sets": {
+    "S0_retrieval_relative": {
+      "always_available": true,
+      "abstention": "none (retrieval scores present for every candidate in scope)",
+      "features": [
+        {"name": "dense_rank_pct", "range": [0,1], "def": "percentile of candidate by dense score within the query scope (1=best)"},
+        {"name": "splade_rank_pct", "range": [0,1], "def": "percentile by splade_scope score within scope"},
+        {"name": "fused_rrf_pct", "range": [0,1], "def": "percentile by equal RRF(dense,splade), k0=60"},
+        {"name": "retriever_support_frac", "range": [0,1], "def": "fraction of {dense,splade} that place candidate in their top-K0 (K0=60)"},
+        {"name": "dense_splade_agreement", "range": [0,1], "def": "1 - |dense_rank_pct - splade_rank_pct| (cross-retriever agreement)"},
+        {"name": "original_P50_membership", "range": [0,1], "def": "1 if candidate in the original P50 scope else 0 (0 only for geometry-added candidates)"},
+        {"name": "original_fused_rank_pct", "range": [0,1], "def": "percentile by the base fused pool-selection score within scope"}
+      ]
+    },
+    "S1_plus_structural": {
+      "extends": "S0",
+      "abstention": "seed-relative features -> sentinel 0.0 + struct_anchor_present=0 when no seed resolves; degree_pct is anchor-free (available if node in graph, else 0 + node_in_graph=0)",
+      "graph": "row-space structural adjacency from master_nodes.neighbors (uniform interface; provenance varies by dataset)",
+      "features": [
+        {"name": "struct_anchor_present", "range": [0,1], "def": "1 if >=1 seed resolves into the structural graph"},
+        {"name": "min_struct_hop_from_seed_norm", "range": [0,1], "def": "1/(1+min BFS hop from any seed to candidate), capped at H; 0 if unreachable/no anchor"},
+        {"name": "seed_connectivity_frac", "range": [0,1], "def": "fraction of seeds with a path (<=H) to candidate"},
+        {"name": "struct_support_count_norm", "range": [0,1], "def": "#seeds structurally adjacent (<=1 hop) to candidate / n_seeds"},
+        {"name": "ppr_pct", "range": [0,1], "def": "percentile of candidate PPR mass within scope (restart set = seeds); 0 if no anchor"},
+        {"name": "degree_pct", "range": [0,1], "def": "percentile of candidate degree within the query-local graph (anchor-free)"}
+      ]
+    },
+    "S2_plus_directional_geometry": {
+      "extends": "S1",
+      "abstention": "directional features -> sentinel 0.0 + dir_anchor_present=0 when no anchor; expansion_hop=0 and expansion_rank_pct degenerate on pure-P50 (no expansion) scopes",
+      "demonstrated_efficacy": "Track-A/Q2 established directional s_dir value on MetaQA (entity-anchored) ONLY; text-dataset efficacy via retrieval-seed anchors is UNTESTED and is an explicit B1/Track-A-extension question.",
+      "features": [
+        {"name": "dir_anchor_present", "range": [0,1], "def": "1 if a directional anchor+edge resolves for candidate"},
+        {"name": "s_dir_max", "range": [-1,1], "def": "max over edges of cos(r_q, norm(x_v - x_e)); r_q = query residual after projecting out seed span"},
+        {"name": "s_dir_mean", "range": [-1,1], "def": "mean directional compatibility over supporting edges"},
+        {"name": "s_dir_rank_pct", "range": [0,1], "def": "percentile of candidate by s_dir within scope"},
+        {"name": "expansion_hop", "range": [0,1], "def": "normalized hop at which candidate was reached by directional expansion (0 if in P50)"},
+        {"name": "expansion_rank_pct", "range": [0,1], "def": "percentile of candidate by directional expansion score"},
+        {"name": "n_dir_anchors_supporting_frac", "range": [0,1], "def": "fraction of anchors whose directional edge supports the candidate"}
+      ]
+    }
+  },
+  "excluded_features": [
+    "dataset id / corpus name",
+    "bracketed-entity indicator (metaqa-only)",
+    "relation TYPE / relation name (metaqa=9, webqsp=6094, others=1 -> reveals identity, non-transferable)",
+    "raw corpus-scale scores used as absolute values",
+    "gold relations / supporting facts / target labels",
+    "any KB-specific path name or freebase predicate"
+  ],
+  "guardrails": ["true LODO (train all-except-D, hyperparams+normalization on TRAIN only, eval target VAL once)", "no target refit/calibration/model-selection", "target-refit systems = oracle/control only", "existing 6 datasets = development/LODO evidence, not final external generalization proof"],
+
+  "inference_safety_cache_contract": {
+    "core_rule": "For a completely unseen query Q, every inference feature must be computable from ONLY: (1) Q itself; (2) frozen model parameters; (3) corpus/graph artifacts built before Q arrived and independent of relevance labels; (4) intermediate results produced while processing Q. If a feature cannot be computed when Q is the FIRST EVER query after deployment, it is NOT inference-safe.",
+    "offline_cache_allowed": ["document/node embeddings", "SPLADE document vectors", "dense retrieval index/shards", "structural graph adjacency", "partition maps", "neighbor lists", "node degree / static graph statistics", "edge provenance from corpus construction", "node/entity embeddings", "graph transition operators", "optional precomputed edge displacement vectors", "frozen universal B1/B2 weights", "normalization/calibration statistics fit ONLY on permitted TRAIN data"],
+    "offline_cache_invariant": "All offline artifacts must be QUERY-INDEPENDENT and RELEVANCE-LABEL-INDEPENDENT (except legitimate parameters/statistics learned on TRAIN). Caching does NOT make leaked information safe.",
+    "online_query_computation_allowed": ["query embedding", "query SPLADE representation", "dense/SPLADE retrieval results", "retrieval seeds", "RRF / retriever agreement", "bounded graph traversal", "seed-conditioned BFS distances", "seed connectivity/support", "query-local PPR", "query/entity or retrieval-seed residual", "directional compatibility", "expansion provenance", "expansion hop (our own traversal)", "query-local rank/percentile features", "B1 forward pass", "B2 forward pass"],
+    "normalization": {"A_TRAIN_FROZEN": "fit only on TRAIN datasets in the fold, frozen before target eval", "B_QUERY_LOCAL": "computed only over the current query's candidate universe (rank/degree/PPR/direction percentiles)", "FORBIDDEN": "target-dataset-wide VAL/TEST normalization statistics; any target calibration"},
+    "anchors": {"canonical": "RETRIEVAL-SEEDED ANCHORS", "forbidden_mainline": ["MetaQA bracket annotation", "gold entity IDs", "supporting-fact entities", "gold paths"], "optional_auxiliary_entity_linker": "allowed ONLY if same algorithm/interface across datasets, inference-safe, no target labels, may abstain; if no valid anchor -> fall back to retrieval-seeded"},
+    "hop_path_safety": {"allowed_as_model_input": ["expansion_hop from our own online traversal", "min distance from current-query seeds", "paths discovered by current-query BFS/PPR"], "forbidden_as_model_input": ["benchmark question-hop annotation", "gold decomposition", "gold supporting path", "gold relation chain"], "note": "benchmark hop labels used ONLY for post-hoc evaluation breakdowns"},
+    "provenance_pass_through": "L1 must NOT emit only candidate IDs. For every candidate preserve inference-generated evidence (entered_via_dense/splade/structural_expansion, dense_rank_pct, splade_rank_pct, min_expansion_hop, structural_support, directional_score/rank, supporting_anchor_count, query-local PPR) and pass it to B1/B2. Q2 showed discarding WHY a candidate was retrieved destroys useful signal.",
+    "cache_implementation": "Distinguish CAN_BE_CACHED from MUST_BE_MATERIALIZED. Normalized edge displacement is inference-safe to cache but do NOT blindly materialize all_edges x 1536; cache node embeddings + adjacency and compute x_v - x_u on demand for traversed edges only. Profile storage/latency before deciding.",
+    "ppr": "Offline cache may hold adjacency / degree normalization / transition representation, but the personalization/restart vector MUST come from the current query's retrieval seeds. No target-wide precomputed query relevance.",
+    "repeated_query_cache": "Deployment MAY cache query hash/embedding/retrieval/universe/features/B1-top50/B2-top5, but correctness must never depend on it; scientific evaluation assumes unseen/cache-miss queries; do not report canonical latency from repeated-query hits.",
+    "dataset_missingness": "No silent dataset-specific replacement of missing features; each universal feature has deterministic abstention semantics; audit whether missingness fingerprints dataset identity; NO `if dataset==...` anywhere in the inference feature path.",
+    "hard_gate": "Every inference feature must satisfy: uses_gold_labels=NO AND uses_supporting_fact_annotations=NO AND uses_dataset_identity=NO AND uses_target_statistics=NO AND available_for_first_unseen_query=YES.",
+    "leakage_test": "Before every LODO/full eval run an automated inference-safety audit; FAIL immediately if any inference tensor depends on target labels, target VAL/TEST aggregate statistics, benchmark annotations unavailable for a real unseen query, dataset ID, gold entities/relations/paths, or future queries."
+  },
+
+  "feature_provenance_manifest_B1_1_implemented": {
+    "note": "The ACTUAL 17 features emitted by scratchpad/_b11_build.py (S0=cols0-4, S1=cols5-9, S2=cols10-16). qhop is stored per query for POST-HOC per-hop breakdown ONLY and is never a model input. All features pass the hard gate.",
+    "normalization_used": "model input standardization = TRAIN-FROZEN (mean/std from the fold's source datasets only); all percentile features = QUERY-LOCAL over the current universe. No target-wide statistics.",
+    "features": [
+      {"name": "dense_pct", "family": "QUERY_RETRIEVAL", "offline": ["node embeddings"], "online": ["query embedding", "cos(Q,node)", "query-local percentile"], "provenance": "entered_via_dense", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "splade_pct", "family": "QUERY_RETRIEVAL", "offline": ["SPLADE doc vectors"], "online": ["query SPLADE rep", "SPLADE retrieval", "query-local percentile"], "provenance": "entered_via_splade", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "fused_rrf_pct", "family": "QUERY_RETRIEVAL", "offline": ["node embeddings", "SPLADE doc vectors"], "online": ["dense+splade ranks", "RRF k0=60", "query-local percentile"], "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "retriever_support_frac", "family": "QUERY_RETRIEVAL", "offline": [], "online": ["in dense top-K0", "in splade top-K0"], "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "dense_splade_agree", "family": "QUERY_RETRIEVAL", "offline": [], "online": ["1-|dense_pct-splade_pct|"], "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "min_hop_from_seed_norm", "family": "QUERY_STRUCTURE", "offline": ["structural adjacency"], "online": ["BFS from retrieval seeds", "1/(1+hop)"], "provenance": "min_expansion_hop", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "seed_connectivity_frac", "family": "QUERY_STRUCTURE", "offline": ["structural adjacency"], "online": ["fraction of seeds reaching candidate <=H"], "provenance": "supporting_anchor_count", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "struct_support_norm", "family": "QUERY_STRUCTURE", "offline": ["structural adjacency"], "online": ["#seeds reaching candidate -> query-local percentile"], "provenance": "structural_support_count", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "degree_pct", "family": "STATIC_GRAPH", "offline": ["node degree"], "online": ["query-local percentile over universe"], "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "ppr_pct", "family": "QUERY_STRUCTURE", "offline": ["structural adjacency"], "online": ["query-local PPR restart=seeds", "query-local percentile"], "provenance": "query_local_ppr", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "s_dir_pct", "family": "QUERY_GEOMETRY", "offline": ["node embeddings", "structural adjacency"], "online": ["seed residual r_q", "cos(r_q, norm(x_v-x_e)) on traversed edges", "query-local percentile (abstain=0)"], "provenance": "directional_score", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "dir_exp_rank_pct", "family": "QUERY_GEOMETRY", "offline": ["node embeddings", "structural adjacency"], "online": ["rank in current-query directional expansion"], "provenance": "directional_rank", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "min_exp_hop_norm", "family": "QUERY_GEOMETRY", "offline": ["structural adjacency"], "online": ["hop at which OUR expansion first reached candidate; 1/(1+hop)"], "note": "OUR online traversal hop, NOT benchmark question-hop", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "n_struct_anchors_pct", "family": "QUERY_GEOMETRY", "offline": ["structural adjacency"], "online": ["#anchor edges into candidate during traversal -> query-local percentile"], "provenance": "supporting_anchor_count", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "struct_dist_pct", "family": "QUERY_STRUCTURE", "offline": ["structural adjacency"], "online": ["BFS distance from seeds -> query-local percentile"], "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "dir_support_max_pct", "family": "QUERY_GEOMETRY", "offline": ["node embeddings", "structural adjacency"], "online": ["max directional support over in-edges -> query-local percentile (abstain=0)"], "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"},
+      {"name": "geometry_added_ind", "family": "QUERY_GEOMETRY", "offline": [], "online": ["1 if candidate entered via structural expansion (not in P50)"], "provenance": "entered_via_structural_expansion", "guard": "included WITH confidence/context features per contract; geometry provenance alone does not define relevance", "uses_gold_labels": "NO", "uses_supporting_fact_annotations": "NO", "uses_dataset_identity": "NO", "uses_target_statistics": "NO", "available_for_first_unseen_query": "YES"}
+    ],
+    "evaluation_only_not_a_feature": [{"name": "qhop", "reason": "benchmark question-hop; used ONLY for post-hoc per-hop metric breakdown; asserted absent from the model feature matrix by the automated audit"}]
+  }
+}

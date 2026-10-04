@@ -1,0 +1,57 @@
+{
+ "RECORD": "FBQ_SET_PARENT_CHECK",
+ "version": "v1",
+ "utc": "2026-10-03T21:36:03Z",
+ "question": "Does the CWQ id prefix encode the WebQSP parent question?  Observed overlap of the CWQ row's topic MIDs with the id-parent's topic MIDs vs a random-parent baseline (permuted, seed 0).",
+ "cwq_rows_with_WebQTrn_parent_present_in_nsm_webqsp": 21689,
+ "topic_mid_overlap_observed": {
+  "hits": 11345,
+  "rate": 0.523076
+ },
+ "topic_mid_overlap_random_parent_baseline": {
+  "hits": 48,
+  "rate": 0.002213
+ },
+ "any_shared_mid_(topic_or_answer)_observed": {
+  "hits": 21689,
+  "rate": 1.0
+ },
+ "any_shared_mid_(topic_or_answer)_random_parent_baseline": {
+  "hits": 169,
+  "rate": 0.007792
+ },
+ "distinct_parents_by_kind": {
+  "WebQTrn": 2077,
+  "WebQTest": 1022
+ },
+ "cwq_rows_by_split_and_parent_kind": {
+  "dev/WebQTest": 888,
+  "dev/WebQTrn": 2631,
+  "train/WebQTest": 8581,
+  "train/WebQTrn": 19058
+ },
+ "cwq_rows_by_split_and_parent_eval_flag": {
+  "dev/DEV_L3W": 515,
+  "dev/NSM_DEV": 226,
+  "dev/PARENT_WEBQSP_TEST_SEALED": 888,
+  "dev/TRAIN_OTHER": 1890,
+  "train/DEV_L3W": 4710,
+  "train/NSM_DEV": 1268,
+  "train/PARENT_WEBQSP_TEST_SEALED": 8581,
+  "train/TRAIN_OTHER": 13080
+ },
+ "parents_with_children_in_both_cwq_train_and_dev": 0,
+ "webqsp_rows_with_at_least_one_cwq_child_by_eval_flag": {
+  "TRAIN_OTHER": 1420,
+  "DEV_L3W": 519,
+  "NSM_DEV": 138
+ },
+ "reading": "see the record's `topic_mid_overlap_observed` vs the baseline: a large gap = the id prefix is a real parent link (even though a CWQ rewrite often swaps the topic entity so the overlap is far from 100%). WebQTest parents are only counted from the id prefix (not verifiable without reading the sealed WebQSP test).",
+ "code": {
+  "scratchpad/_fbq_parent_check.py": "4629ca1bdf282267f6b9de4473375714f63f61f74f97d72daa342d53a55b1589"
+ },
+ "input": {
+  "results/FREEBASE_SCALE/FBQ_SET__v1.parquet": "81595221a5512925a6cb5792bdb97c8c43a191cbf069d1dfcd5b11200bd4bd9c"
+ },
+ "seconds": 4.0
+}

@@ -1,0 +1,293 @@
+{
+ "dataset": "webqsp",
+ "arm": "H2L5",
+ "S": 5,
+ "K": 100,
+ "kb": 20,
+ "utc": "2026-09-30T19:57:01Z",
+ "top": {
+  "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LTOP_k5__PHG_con.npy",
+  "sha256": "ee89170eac601e2557db5678398d555451efa4545aa5c6a78063078ca3b7e97d",
+  "tolerance": "1.01",
+  "record_sha256": "2e6648fbc715d84c7617399129f96488795a8e966b5d943575bfd4c5f1c6028a"
+ },
+ "hypergraph": {
+  "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_SK_k100.npz",
+  "sha256": "01d5ccb5574d42c5b8635b8a75f9e5e3dc2f14a04a78b0e3ae6ac3bf572eca13",
+  "content_digest": "ae11bd0dde39f1df2132d4af0719aa89282fe579ce91970e75512b0dbe489981",
+  "N": 2592894,
+  "M": 5181621,
+  "P": 29574371
+ },
+ "blocks": [
+  {
+   "block": 0,
+   "N": 523764,
+   "M": 1298052,
+   "pins": 6817055,
+   "zoltan_tolerance": 1.0198,
+   "status": "OK",
+   "seconds": 96.44,
+   "max_block": 26706,
+   "min_block": 20869,
+   "peak_rss_kb_per_rank": [
+    280768,
+    249812,
+    239900,
+    230892
+   ],
+   "zoltan_imbalance": 1.019772
+  },
+  {
+   "block": 1,
+   "N": 522814,
+   "M": 1190390,
+   "pins": 5837488,
+   "zoltan_tolerance": 1.0216,
+   "status": "OK",
+   "seconds": 95.22,
+   "max_block": 26705,
+   "min_block": 21565,
+   "peak_rss_kb_per_rank": [
+    242380,
+    208600,
+    212536,
+    191580
+   ],
+   "zoltan_imbalance": 1.021587
+  },
+  {
+   "block": 2,
+   "N": 519961,
+   "M": 1093115,
+   "pins": 5207934,
+   "zoltan_tolerance": 1.0272,
+   "status": "OK",
+   "seconds": 96.2,
+   "max_block": 26705,
+   "min_block": 18693,
+   "peak_rss_kb_per_rank": [
+    202780,
+    189740,
+    191444,
+    178152
+   ],
+   "zoltan_imbalance": 1.027192
+  },
+  {
+   "block": 3,
+   "N": 521586,
+   "M": 1107938,
+   "pins": 5389526,
+   "zoltan_tolerance": 1.024,
+   "status": "OK",
+   "seconds": 13.2,
+   "max_block": 26705,
+   "min_block": 19569,
+   "peak_rss_kb_per_rank": [
+    199864,
+    197632,
+    182332,
+    191560
+   ],
+   "zoltan_imbalance": 1.023992
+  },
+  {
+   "block": 4,
+   "N": 504769,
+   "M": 1063499,
+   "pins": 5056115,
+   "zoltan_tolerance": 1.0581,
+   "status": "OK",
+   "seconds": 12.33,
+   "max_block": 26704,
+   "min_block": 11955,
+   "peak_rss_kb_per_rank": [
+    196524,
+    182568,
+    172468,
+    176120
+   ],
+   "zoltan_imbalance": 1.058068
+  }
+ ],
+ "rule": "two-level: top S-way partition, net-split sub-hypergraphs, K/S-way sub-partitions with the tolerance that equals the contract bound (scratchpad/_h2l.py)",
+ "driver": {
+  "build_record_sha256": "698d2d4af07116bcbdcff8341e9c41b1829d55b7509da33becce84d32ee70494",
+  "parameters_base": [
+   [
+    "DEBUG_LEVEL",
+    "0"
+   ],
+   [
+    "NUM_GID_ENTRIES",
+    "1"
+   ],
+   [
+    "NUM_LID_ENTRIES",
+    "1"
+   ],
+   [
+    "OBJ_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "EDGE_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "DETERMINISTIC",
+    "1"
+   ],
+   [
+    "RETURN_LISTS",
+    "PARTS"
+   ],
+   [
+    "REMAP",
+    "0"
+   ],
+   [
+    "LB_METHOD",
+    "HYPERGRAPH"
+   ],
+   [
+    "HYPERGRAPH_PACKAGE",
+    "PHG"
+   ],
+   [
+    "LB_APPROACH",
+    "PARTITION"
+   ],
+   [
+    "IMBALANCE_TOL",
+    "1.03"
+   ],
+   [
+    "PHG_CUT_OBJECTIVE",
+    "CONNECTIVITY"
+   ],
+   [
+    "PHG_EDGE_SIZE_THRESHOLD",
+    "1.0"
+   ],
+   [
+    "PHG_RANDOMIZE_INPUT",
+    "0"
+   ],
+   [
+    "PHG_MULTILEVEL",
+    "1"
+   ],
+   [
+    "PHG_COARSENING_METHOD",
+    "AGG"
+   ],
+   [
+    "PHG_COARSEPARTITION_METHOD",
+    "AUTO"
+   ],
+   [
+    "PHG_REFINEMENT_METHOD",
+    "FM"
+   ],
+   [
+    "PHG_REFINEMENT_QUALITY",
+    "1"
+   ],
+   [
+    "PHG_EDGE_WEIGHT_OPERATION",
+    "ERROR"
+   ],
+   [
+    "PHG_PROCESSOR_REDUCTION_LIMIT",
+    "0.5"
+   ],
+   [
+    "PHG_REPART_MULTIPLIER",
+    "100"
+   ],
+   [
+    "CHECK_HYPERGRAPH",
+    "1"
+   ],
+   [
+    "PHG_OUTPUT_LEVEL",
+    "1"
+   ]
+  ],
+  "NP": 4
+ },
+ "placement": {
+  "machine": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "cpu_count_os": 32,
+  "python": "3.13.5",
+  "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+  "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+  "numpy": "2.3.2",
+  "wsl_distro": "Ubuntu-24.04",
+  "rx_job": "261001-011705-h2l-sub5-fb75",
+  "rx_cpus": "4",
+  "PYTHONHASHSEED": "0"
+ },
+ "code": {
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+  "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+  "scratchpad/_l1hu_build.py": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79",
+  "src/l1_lowmem/common.py": "18edea394b402ee1b6f5e8dac7b7cb7c474647145988ee60f18d3f947db98ff2",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_lowmem/phg_repair.py": "4c051e7a139abc19fd1b8433948a0d288858ac6a9c67dae40d7ef001839472b0",
+  "src/l1_lowmem/freight.py": "7adbe2a06146e9c60b99250cc1ac84beb1ef7115a23d96ea6930f87d298d0971",
+  "scratchpad/_h2l.py": "e578fc4b01ff29ec9a96047a7a0875fd19cff9d0e63b862a019ee48d34a46dd1"
+ },
+ "raw": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 26706,
+   "contract_bound_ceil_1.03_N_over_k": 26707,
+   "zoltan_tolerance_bound_1.03_x_mean": 26706.808,
+   "gate": "PASS"
+  },
+  "km1": 1017638855,
+  "cut_weighted": 672052255,
+  "blocks": {
+   "k": 100,
+   "used": 100,
+   "empty": 0,
+   "min": 11955,
+   "p50": 26616.0,
+   "p95": 26706.0,
+   "max": 26706,
+   "mean": 25928.94,
+   "ceil_N_over_k": 25929,
+   "max_over_mean": 1.03,
+   "eps_actual(max/ceil(N/k)-1)": 0.03,
+   "freight_upper_bound": 26707,
+   "within_eps_0.03": true
+  }
+ },
+ "repair": null,
+ "STATUS": "OK",
+ "balance": {
+  "length_ok": true,
+  "ids_in_range": true,
+  "blocks_used": 100,
+  "every_block_used": true,
+  "size_min": 11955,
+  "size_max": 26706,
+  "size_mean": 25928.94,
+  "ceil_N_over_K": 25929,
+  "within_ceil_1.03_N_over_K": true
+ },
+ "wall_seconds": 340.7,
+ "output": {
+  "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2L5_k100__PHG_con.npy",
+  "sha256": "21e60f9d93e6dd648ef62eefc1729941f78e30a7329a679f6ad8fd26edd84f36",
+  "n": 2592894
+ }
+}

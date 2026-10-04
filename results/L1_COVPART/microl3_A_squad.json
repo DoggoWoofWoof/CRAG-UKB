@@ -1,0 +1,96 @@
+{
+ "cache": "squad",
+ "partition": "MTKAHYPAR",
+ "n_DEV_A": 992,
+ "N": 20233,
+ "cap": 100,
+ "hubs": 4900,
+ "arm_family": "MICRO_L3",
+ "constants": {
+  "SEED_K": 5,
+  "BEAM": 100,
+  "DEPTH": 2,
+  "K0": 60,
+  "P50": 50,
+  "hub_rule": "deg_undirected + 1 > cap = N / npart (frozen)"
+ },
+ "cost": {
+  "edges_scored_per_query_mean": 3675.0,
+  "edges_scored_per_query_p95": 7254,
+  "edges_scored_hop1_mean": 238.2,
+  "edges_scored_hop2_mean": 3436.7,
+  "nodes_visited_per_query_mean": 181.9,
+  "beam_wall_clock_ms_mean": 87.83,
+  "beam_wall_clock_ms_p50": 78.85,
+  "beam_wall_clock_ms_p95": 206.83,
+  "repair_and_fusion_ms_per_query": 5.35,
+  "queries_whose_seeds_are_all_hubs": 58
+ },
+ "arms": {
+  "L1": {
+   "arm": "L1",
+   "BASE_ALL": 0.9859,
+   "ANY": 0.9859,
+   "reach_all": 0.999,
+   "feasible": 1.0,
+   "fail_pts": 1.4,
+   "fail_UNREACHED_pts": 0.1,
+   "fail_reached_pts": 1.3,
+   "blocks_voted_per_query_mean": 123.7,
+   "scope_nodes_P50": 5089.3,
+   "per_hop": {}
+  },
+  "MICRO_L3_H1": {
+   "arm": "MICRO_L3_H1",
+   "BASE_ALL": 0.878,
+   "ANY": 0.878,
+   "reach_all": 0.999,
+   "feasible": 1.0,
+   "fail_pts": 12.2,
+   "fail_UNREACHED_pts": 0.1,
+   "fail_reached_pts": 12.1,
+   "blocks_voted_per_query_mean": 129.8,
+   "scope_nodes_P50": 5097.7,
+   "per_hop": {},
+   "BASE_ALL_vs_L1": {
+    "gained": 1,
+    "lost": 108,
+    "p": 3.389636702121535e-31
+   },
+   "reach_all_vs_L1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "initial_UNREACHED": 1,
+   "initial_UNREACHED_now_reached": 0,
+   "initial_UNREACHED_now_ALL_gold_P50": 0
+  },
+  "MICRO_L3_H2": {
+   "arm": "MICRO_L3_H2",
+   "BASE_ALL": 0.7792,
+   "ANY": 0.7792,
+   "reach_all": 0.999,
+   "feasible": 1.0,
+   "fail_pts": 22.1,
+   "fail_UNREACHED_pts": 0.1,
+   "fail_reached_pts": 22.0,
+   "blocks_voted_per_query_mean": 136.1,
+   "scope_nodes_P50": 5101.3,
+   "per_hop": {},
+   "BASE_ALL_vs_L1": {
+    "gained": 2,
+    "lost": 207,
+    "p": 5.33477708156018e-59
+   },
+   "reach_all_vs_L1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "initial_UNREACHED": 1,
+   "initial_UNREACHED_now_reached": 0,
+   "initial_UNREACHED_now_ALL_gold_P50": 0
+  }
+ }
+}

@@ -1,0 +1,48 @@
+{
+  "DATASET": "2wiki",
+  "CANONICAL_CORPUS_SOURCE": "The official 2WikiMultihopQA v1.0 (ids, April 2021) FULL ARTICLE UNIVERSE: every record of para_with_hyperlink.jsonl inside data/original/2wiki/v1.0_ids_april2021/para_with_hyperlink.zip -- one node per Wikipedia article curid. The official release describes this file as containing all articles/paragraphs with hyperlink information except error paragraphs, i.e. it IS the complete retrieval corpus. The question files are read only for the QUERY layer (gold/context title resolution); no question can add or remove a node.",
+  "SOURCE_VERSION": "2wikimultihopqa v1.0_ids_april2021 (Ho et al., COLING 2020), data_ids_april7.zip; para_with_hyperlink.zip (one member, para_with_hyperlink.jsonl, 7,023,046,781 bytes uncompressed) plus the extracted train/dev/test json under data/original/2wiki/v1.0_ids_april2021.",
+  "SOURCE_PATHS": [
+    "data/original/2wiki/v1.0_ids_april2021/para_with_hyperlink.zip",
+    "data/original/2wiki/v1.0_ids_april2021/train.json",
+    "data/original/2wiki/v1.0_ids_april2021/dev.json",
+    "data/original/2wiki/v1.0_ids_april2021/test.json"
+  ],
+  "SOURCE_HASHES": {
+    "data/original/2wiki/v1.0_ids_april2021/para_with_hyperlink.zip": {
+      "sha256": "a585bdc3c39425446e4b2701a5f7f30051cb6c100d179322055d53dc0a71a723",
+      "bytes": 1900740270,
+      "hash_source": "hashed in this task",
+      "exists": true
+    },
+    "data/original/2wiki/v1.0_ids_april2021/train.json": {
+      "sha256": "b318dbafbfed51a8029718fa59be8b616600cbff675a3b587694b28c5eedfc13",
+      "bytes": 707810660,
+      "hash_source": "hashed in this task",
+      "exists": true
+    },
+    "data/original/2wiki/v1.0_ids_april2021/dev.json": {
+      "sha256": "79f77ae104088ea8e25b1a65dbece768d45771194663bc5660ec9a98070dadf5",
+      "bytes": 57614142,
+      "hash_source": "hashed in this task",
+      "exists": true
+    },
+    "data/original/2wiki/v1.0_ids_april2021/test.json": {
+      "sha256": "48b196d4ba8557343abb9bd1ad03566bc02762ecd734617ff910027c33821b04",
+      "bytes": 53838398,
+      "hash_source": "hashed in this task",
+      "exists": true
+    }
+  },
+  "WHY_THIS_IS_THE_FULL_RETRIEVAL_UNIVERSE": "para_with_hyperlink.jsonl is a WIKIPEDIA-SNAPSHOT derivative, not a benchmark by-product, and that is checkable from the file itself:\n(1) Record schema is {id, title, sentences, mentions} keyed by the Wikipedia curid. There is no question id, question string, answer, supporting_fact, split label or any other 2Wiki annotation anywhere in a record; the record set is fixed by the underlying Wikipedia dump and is defined without reference to any question.\n(2) Scale proves non-derivation: 5,989,847 article records, whereas the deduplicated union of the context paragraphs of ALL 192,606 official questions of ALL three splits is only 398,354 titles -- i.e. ~93.3% of the corpus is never referenced by any 2Wiki question. A question-derived collection cannot contain 5.59M unreferenced records.\n(3) It is the file the official release itself designates as the retrieval corpus ('all the paragraphs with hyperlink information except error paragraphs').\n(4) SUPERSESSION: the previously built canonical_v1 2wiki node table was exactly the pooled question-context universe (398,354 nodes, corpus_hash ec7fbbe8cd783040...). It was REJECTED in this task because, although invariant to the EVALUATED query subset, its membership is still a function of the question set -- distractor mass, partition structure and reachability are all inherited from the questions, and it applied a weaker standard than the one HotpotQA is held to (full 5.23M fullwiki abstracts, distractor-context union rejected). The superseded artifacts are preserved, not deleted, under data/final_canonical/2wiki/_superseded_context_union_398354/ (see SUPERSESSION.json) because the old node table is needed to remap the 398,354 already-encoded embedding rows.",
+  "RAW_SOURCE_RECORDS": "5,989,847 article records expected (one json line per article in para_with_hyperlink.jsonl); counted exactly at build time. The question layer additionally reads 1,926,060 context entries over 192,606 questions, which contribute NO nodes.",
+  "CANONICAL_NODE_IDENTITY_RULE": "official Wikipedia curid (the record's 'id' field), exact string; node_id = '2wiki:c<curid>'. The id is READABLE rather than hashed: the curid is already source-stable and globally unique, so hashing buys no collision safety and costs debuggability and remapping. Titles are NOT the identity (several curids can share a title), so gold/context resolution is title -> curid via the corpus and an ambiguous title contributes ALL matching nodes, recorded per query in gold_title_ambiguous.",
+  "NORMALIZATION_RULE": "Stored text = ' '.join(official 'sentences' list), because the official file stores the article as a sentence list. The OFFICIAL string is then kept verbatim including its tokenizer artefacts. No NFC/NFKC, no casefold, no whitespace collapse, and explicitly NO strip -- note that the pre-existing full-universe encode (scratchpad/build_2wiki_universe.py:42) DID apply .strip() to the joined text, so the build COUNTS how many records differ under that one step (strip_delta) and reports the exact dense/SPLADE reuse impact rather than assuming it. Empty-text articles are KEPT as nodes: dropping them would make corpus membership depend on a text-quality filter.\nSECOND CONSTRUCTION STEP -- TEXTUALIZATION_REV 2 (2026-09-06). Where that join is EMPTY, the canonical text is the record's own 'title'. This is the SAME general source-level rule hotpotqa received on 2026-09-05, not a per-dataset policy: an empty body plus a non-empty source title becomes the title, everywhere it occurs. FALLBACK ONLY -- a record that already yields text is untouched and no title is prepended anywhere else, so the join above remains the rule for 5,902,082 of 5,989,847 records. Applies to the 87,765 records whose 'sentences' list is empty; the forensic scan (results/data_audit/final_canonical_v1/2wiki/EMPTY_TEXT_AUDIT.md) measured TITLE_NONEMPTY = 87,765, ALT_TEXT_NONEMPTY = 0 and TRULY_TEXTLESS = 0, so the title is the only source-native candidate and no record needs to stay empty. Query-independent: the para_with_hyperlink schema is exactly {id, title, sentences, mentions} and holds no question, answer or supporting_facts field, and the corpus pass never opens a question file (re-proven by executing the four-lane QI test after the change). Motivation: \"\" tokenizes to the ZERO-LENGTH sequence [] under gte-Qwen2, so all such nodes collapsed onto one degenerate forward pass, and 20,524 of them are hyperlink targets -- the degenerate points would propagate into every KNN/H4 structure built over this corpus. This MOVES CORPUS_HASH (rev1 81fa7d1a5d4bbb24...; the live value is build_info.json -> CORPUS_HASH) but leaves membership, node identity, node order and NODE_ORDER_HASH untouched. The rev1 build outputs are preserved under data/final_canonical/_superseded_textualization_rev1/2wiki/ with the hash history in SUPERSEDED.md.",
+  "DEDUP_RULE": "identity = curid; a repeated curid collapses onto its first occurrence (counted at build time). Text-hash identity is NOT used: distinct articles with identical intro text must stay distinct nodes.",
+  "EXPECTED_NODE_COUNT": 5989847,
+  "DERIVED_NODE_COUNT": 5989847,
+  "QUERY_DEPENDENT_CORPUS": false,
+  "QUALITY_LOCKED_QUERY_SOURCE": "official 2Wiki DEV split, 12,576 questions. Official TEST labels are HIDDEN (results/data_audit: official_test_labels='HIDDEN (answers withheld)'), so dev is the only proper held-out labelled split.",
+  "SCALE_ALL_QUERY_SOURCE": "every official question in all splits = 192,606 (train 167,454 + dev 12,576 + test 12,576); test carries no gold, usable for scale/latency only.",
+  "SOURCE_CONTRACT_STATUS": "APPROVED (data/final_canonical/_APPROVALS.json: approvals.2wiki.status) -- full-universe corpus; supersedes the REJECTED 398,354 context-union table"
+}

@@ -1,0 +1,189 @@
+{
+  "_config": {
+    "kind": "in_distribution_universal",
+    "datasets": [
+      "webqsp",
+      "metaqa"
+    ],
+    "arms": [
+      "dropout_only",
+      "kl_dropout"
+    ],
+    "epochs": 10,
+    "seeds": 3,
+    "lam": 1.0,
+    "tau": 1.0,
+    "p_drop": 0.5,
+    "regimes": {
+      "full": [],
+      "no_edge_path": [
+        5,
+        6
+      ],
+      "no_graph_edge_path": [
+        4,
+        5,
+        6
+      ],
+      "no_splade": [
+        3
+      ],
+      "no_offset": [
+        1
+      ],
+      "dense_only": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "dense_splade": [
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "structure_heavy": [
+        0,
+        1
+      ]
+    },
+    "norm": "FROZEN present-only pooled mu/sd from the pooled train of ALL datasets (target INCLUDED)",
+    "note": "ONE universal checkpoint per arm, target-in-training; direct counterpart to run_lodo."
+  },
+  "results": {
+    "dropout_only": {
+      "per_dataset": {
+        "webqsp": {
+          "R@5": [
+            50.27,
+            0.46
+          ],
+          "R@20": [
+            69.44,
+            0.88
+          ],
+          "R@50": [
+            78.01,
+            0.45
+          ],
+          "Hit@5": [
+            67.8,
+            0.85
+          ],
+          "Hit@50": [
+            89.57,
+            0.64
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            68.74,
+            1.4
+          ],
+          "R@20": [
+            81.07,
+            3.03
+          ],
+          "R@50": [
+            88.92,
+            3.15
+          ],
+          "Hit@5": [
+            76.58,
+            2.11
+          ],
+          "Hit@50": [
+            93.44,
+            2.77
+          ]
+        }
+      },
+      "mean_alpha": {
+        "webqsp": {
+          "dense": 0.0,
+          "offset": 0.9994,
+          "splade": 0.0,
+          "relation": 0.0,
+          "path": 0.0006
+        },
+        "metaqa": {
+          "dense": 0.0,
+          "offset": 1.0,
+          "splade": 0.0,
+          "relation": 0.0,
+          "path": 0.0
+        }
+      },
+      "xgb_gain_importance": null
+    },
+    "kl_dropout": {
+      "per_dataset": {
+        "webqsp": {
+          "R@5": [
+            50.34,
+            0.94
+          ],
+          "R@20": [
+            70.25,
+            0.18
+          ],
+          "R@50": [
+            78.66,
+            0.21
+          ],
+          "Hit@5": [
+            68.03,
+            1.47
+          ],
+          "Hit@50": [
+            90.48,
+            0.56
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            66.63,
+            0.2
+          ],
+          "R@20": [
+            76.78,
+            0.19
+          ],
+          "R@50": [
+            84.17,
+            0.23
+          ],
+          "Hit@5": [
+            73.32,
+            0.19
+          ],
+          "Hit@50": [
+            89.44,
+            0.11
+          ]
+        }
+      },
+      "mean_alpha": {
+        "webqsp": {
+          "dense": 0.1023,
+          "offset": 0.5692,
+          "splade": 0.0877,
+          "relation": 0.1727,
+          "path": 0.0681
+        },
+        "metaqa": {
+          "dense": 0.0985,
+          "offset": 0.6457,
+          "splade": 0.2488,
+          "relation": 0.007,
+          "path": 0.0
+        }
+      },
+      "xgb_gain_importance": null
+    }
+  }
+}

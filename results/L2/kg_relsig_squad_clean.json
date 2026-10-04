@@ -1,0 +1,85 @@
+{
+  "dataset": "squad_clean",
+  "ner_edges": false,
+  "hops": 2,
+  "path_cap": 8,
+  "reranker_R@5": {
+    "none": [
+      84.21,
+      1.11
+    ],
+    "+relation": [
+      84.28,
+      0.61
+    ],
+    "+relation+path": [
+      84.09,
+      0.79
+    ],
+    "gated_rescue": [
+      80.17,
+      0.0
+    ],
+    "gated_rescue_supervised": [
+      80.17,
+      0.0
+    ],
+    "gated_rescue_subset": {
+      "rescued": 0,
+      "rescuable": 2
+    },
+    "kl_router": [
+      85.93,
+      3.22
+    ]
+  },
+  "per_signal_R@5": {
+    "dense": 87.85,
+    "offset": 79.45,
+    "prototype": 9.35,
+    "splade": 87.85,
+    "graph": 2.65,
+    "relation_raw": 0.1,
+    "relation_trained": 0.1,
+    "path_raw": 0.1
+  },
+  "oracle_R@5": {
+    "old": 94.25,
+    "+relation": 94.25,
+    "+relation+path": 94.25
+  },
+  "oracle_R@20": {
+    "old": 97.45,
+    "+relation": 97.45,
+    "+relation+path": 97.45
+  },
+  "oracle_R@5_by_hop": {
+    "1hop": {
+      "old": null,
+      "+relation": null,
+      "+relation+path": null
+    },
+    "2hop": {
+      "old": null,
+      "+relation": null,
+      "+relation+path": null
+    },
+    "unreach": {
+      "old": null,
+      "+relation": null,
+      "+relation+path": null
+    }
+  },
+  "n_by_hop": {
+    "1hop": 0,
+    "2hop": 0,
+    "unreach": 0
+  },
+  "rank_movement": {},
+  "n_golds_with_relation": 0,
+  "reference": {
+    "prev_reranker_R@5": 38.8,
+    "prev_oracle_R@5": 39.1,
+    "benchmark": 29.7
+  }
+}

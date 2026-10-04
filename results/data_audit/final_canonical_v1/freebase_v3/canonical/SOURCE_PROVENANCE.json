@@ -1,0 +1,120 @@
+{
+  "schema": "SOURCE_PROVENANCE/v1",
+  "name": "CRAG_FREEBASE_CANONICAL",
+  "generated_utc": "2026-09-07T06:39:29Z",
+  "SOURCE_OF_RECORD": {
+    "url": "https://archive.org/download/freebase-rdf-latest/freebase-rdf-latest.gz",
+    "identifier": "freebase-rdf-latest",
+    "archive_org_server": "ia803201.us.archive.org",
+    "archive_org_dir": "/28/items/freebase-rdf-latest",
+    "size_bytes": 31305093084,
+    "size_gb": 31.31,
+    "md5_expected": "38d8e9cb7a12634e46a0c52c4ee8dd52",
+    "sha1_expected": "d1950f3c966932358a79a02cd1d56ae3165b26f4",
+    "crc32_expected": "74c62738",
+    "source_mtime_epoch": 1435655545,
+    "source_mtime_utc": "2015-06-30T09:12:25Z"
+  },
+  "custody": {
+    "uploader": "admin@cryto.net",
+    "addeddate": "2015-06-30 09:12:26",
+    "chain": "Google published freebase-rdf-latest.gz; the Internet Archive item was created 2015-06-30 and has held it since. Our copy will come from the Internet Archive.",
+    "LIMITATION": "third-party custody. Google's own endpoint returns 403 AccessDenied (verified, recorded in V3_SOURCE_ASSESSMENT.json), so there is NO upstream digest to verify against. The MD5/SHA1 below attest to what the Internet Archive holds, not that it equals what Google published.",
+    "MITIGATION": "IDIR is an independent 2023 preprocessing of the same dump. Check 4 measured 99.998% exact structural agreement on retained predicates with zero reverse-only cases. If the raw build reproduces IDIR's 134,142,730 triples at that rate, the mirror is corroborated by a party that never saw our copy.",
+    "this_is_a_chain_plus_a_cross_check": "not a signature. Recorded as such so no later document can cite this lock as proof of authenticity it does not provide."
+  },
+  "local_copy": "data/final_canonical/freebase_v3/_acquisition/raw/freebase-rdf-latest.gz",
+  "GZIP_MEMBER_STRUCTURE": {
+    "members": null,
+    "why_it_matters": "the mirror is a concatenation of complete gzip members, so a worker can take a byte range and decode it with no dependency on any other worker. Every parallel pass in this build rests on that fact."
+  },
+  "LINES": {
+    "total_rdf_statements": 3008314716,
+    "metadata_statements": null,
+    "structural_statements": 2192405853
+  },
+  "SUBJECT_CONTIGUITY": {
+    "distinct_subject_blocks": 121616633,
+    "reopened_subject_blocks": 0,
+    "why_it_matters": "zero reopened blocks is what removed the source-side external sort from this build and licensed every member-parallel pass."
+  },
+  "NODE_IDENTITY": {
+    "function": "CPython hash() over the namespace-stripped identifier, as UTF-8 bytes",
+    "width_bits": 64,
+    "PYTHONHASHSEED": "0",
+    "python": "3.13.5",
+    "note": "siphash is an interpreter detail, so the interpreter version is part of the build provenance. PASS C re-checks UID -> string injectivity across the whole node universe, so a changed hash surfaces as a mismatch, never as silent drift."
+  },
+  "SUBJECT_UID_COLLISIONS": {
+    "distinct_subjects_expected": 121616633,
+    "subjects_hashed": 121616633,
+    "distinct_uids": 121616633,
+    "colliding_uid_groups": 0,
+    "COLLISION_FREE": true,
+    "nonbracketed_openers": 0,
+    "examples": [],
+    "reading": "distinct_uids == subjects_hashed means the 64-bit UID space separates every subject in Freebase exactly. It is a measurement over all 121.6M of them, not a birthday-bound argument."
+  },
+  "SCHEMA_FREEZE_HASH": "c6cd9454b9cc38048675989fde88523dcde052952fbc37add6acd4f15f2cbf27",
+  "CONTRACT_HASHES": {
+    "V3_CANONICAL_CONTRACT.json": "761003db05e3fbbdafd930c2842a53be6169d3f655579ebada024f618f36f4c8",
+    "V3_CANONICAL_CONTRACT_V2.json": "ed7281df27d3e2f7e44cb5c227012645dcf8e840b31b8f44c094dbcd01f952b0",
+    "V3_CANONICAL_CONTRACT_V3.json": "0664dac6c5d0cbb6caa1b6652e8c7517f7489c6f4f45134e80126709e3cf4ebf",
+    "V3_CANONICAL_CONTRACT_V4.json": "a9b059fa9ed7fce58a0c39a39c1ae98e0155cf4bf6007a1b83fc7f9e92f33d6b"
+  },
+  "PASS_REPORTS": {
+    "PASS_A": "V3_PASS_A_SCHEMA_METADATA.json + V3_PASS_A_VALIDATION.json",
+    "PASS_A_FREEZE": "V3_PASS_A_SCHEMA_FREEZE.json",
+    "PASS_B": "V3_PASS_B_REPORT.json",
+    "PASS_C": "V3_PASS_C_NODE_UNIVERSE.json",
+    "PASS_D": "V3_PASS_D_CANONICAL_EDGES.json",
+    "TYPE_MIRROR_FINDING": "V3_TYPE_MIRROR_FINDING.json",
+    "ASSEMBLY": "V3_CANONICAL_ASSEMBLY.json",
+    "VALIDATION": "V3_CANONICAL_VALIDATION.json",
+    "IDIR_ORACLE": "V3_IDIR_ORACLE_COMPARISON.json"
+  },
+  "INDEPENDENT_CROSS_CHECK": {
+    "oracle": "IDIR Freebase (Zenodo 7909511), built from the same dump by an unrelated parser. Frozen role: audit oracle and structural validation reference, never the canonical graph.",
+    "coverage_pct": 95.662,
+    "verdict": "STOP",
+    "retained_orientation": "IDIR retains the same side we canonicalise to",
+    "band_verification": {
+      "band_bits": 8,
+      "band_idir_triples": 523114,
+      "band_idir_distinct_fingerprints": 523114,
+      "band_our_triples": 8055937,
+      "exact_forward_hits": 500210,
+      "fingerprint_forward_hits": 500210,
+      "forward_agrees": true,
+      "note": "exact_forward_hits counts band triples; fingerprint_forward_hits counts distinct band fingerprints, so the two agree exactly when the band holds no duplicate triples and no collision inflated the probe."
+    }
+  },
+  "OPEN_FINDINGS": [
+    {
+      "record": "V3_TYPE_MIRROR_FINDING.json",
+      "summary": "type membership is asserted in both directions by two predicates that landed in two different layers: type.object.type in metadata (254,946,431 rows) and its declared inverse type.type.instance in the edge table (254,882,143 edges, 12.36% of all canonical edges). Nothing is lost and neither layer is internally duplicated, but a consumer reading both sees type membership twice.",
+      "disposition": "OPEN. Both layers retained as built; no removal, merge or reweighting was applied."
+    },
+    {
+      "record": "V3_IDIR_SOURCE_DIVERGENCE.json",
+      "summary": "the pre-registered IDIR oracle gate returned STOP at 95.662% coverage. The shortfall is characterised, not outstanding: 3.184% of IDIR triples have an endpoint absent from our node universe, 0.740% sit on predicates where IDIR simply holds more than our source does, and 0.427% is residue. Our build is provably lossless from its source (PASS B accounts for all 3,008,314,716 lines with zero dropped or malformed, and 784,928 relations survive to the canonical table unchanged). The divergence is SYMMETRIC -- we hold ~1.10M facts IDIR lacks against ~5.86M it holds that we lack -- so neither source is a subset of the other and IDIR is not a preprocessing of the same bytes.",
+      "disposition": "DECIDED: FREEZE_WITH_DIVERGENCE_RECORDED. The gate was NOT retargeted or relaxed -- it stands as written and still returns STOP; this artifact records that it was overridden, and why. The lock's MITIGATION clause named this comparison as the corroboration of the Internet Archive mirror, and that corroboration is NOT discharged, because its premise is falsified rather than merely unmet. Transfer fidelity from the Internet Archive remains proven by digest; IA-versus-Google does not, and cannot by this route. The caveat travels with this dataset."
+    }
+  ],
+  "REPRODUCIBILITY": {
+    "python": "3.13.5",
+    "PYTHONHASHSEED": "0",
+    "note": "the node UID is CPython hash() over the namespace-stripped identifier, so the interpreter version and hash seed are part of the dataset identity, not of the build environment. A rebuild under a different interpreter produces a different but equally valid UID space; the strings, not the UIDs, are the portable identity."
+  },
+  "HOW_TO_DESCRIBE_THIS_DATASET": {
+    "supported_claim": "We construct the canonical CRAG Freebase universe from the freebase-rdf-latest.gz snapshot preserved by the Internet Archive, whose downloaded artifact was verified against the archive-published size and checksums.",
+    "and_separately": "IDIR Freebase (Zenodo 7909511) was used as an independent structural oracle. It reproduced 95.662% of its own FB+CVT-REV triples against our graph; the residual divergence is symmetric, so it corroborates structure without establishing shared provenance.",
+    "NOT_supported": [
+      "that this reconstructs the official final Google Freebase dump",
+      "that the Internet Archive copy is byte-identical to what Google published",
+      "that IDIR independently verifies this mirror's provenance"
+    ],
+    "why": "transfer fidelity from the Internet Archive is proven by MD5, SHA1, CRC32 and byte count against values locked before transfer. Equality with Google's original is a historical claim about an artifact its publisher no longer serves, and the single route to corroborating it -- an independent preprocessing of the same bytes -- turned out not to be one. See V3_IDIR_SOURCE_DIVERGENCE.json.",
+    "instructed_by": "user, 2026-09-07, at the freeze decision"
+  }
+}

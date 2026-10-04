@@ -1,0 +1,1226 @@
+{
+ "mode": "L1X_COLOCATION_REACH_DIAGNOSTIC (development; descriptive; nothing chosen)",
+ "definitions": "L1X -- SELECT lane, step 13: COLOCATION REACH DIAGNOSTIC -- are the higher-hop gold answers reachable through the partition?  (development only; dataset-agnostic; measures, chooses nothing)\n(User ruling 2026-10-04: \"i dont think the higher hops are unreachable that is the entire point of having partitions or colocation\".)\n\nThe earlier 'ceiling' (MetaQA ALL <= .64 at B_N 5000) was measured on the node POOL O[:5000] (one-hop support of the top-ACT FLAT hits); it says nothing about what the PARTITION co-locates.  Here, per gold node g of a\nquestion with h hops (h = hops of the dataset's own question annotation) and per partition map K (shipped router count B_P(q), asserted per row):\n  block      b(g) = hard[g]\n  rank       rank of b(g) in the router's block order: ES (shipped, first appearance in O'), ES_m (BM desc, ties ES), ES_mr (equal-weight RRF of the block ranks ES, BM, BRin; ties ES)    [BM, BRin as _l1x_blockrel.py]\n  contacted  rank < B_P(q)\n  colocation flags of the gold's block:  HIT (it holds a top-ACT FLAT hit), SUP (it holds a node of the one-hop support LOC), BM (it receives relation-conditioned mass, BM > 0)\n  served     the gold's position in the served order of the contacted nodes under the shipped order and under Sro+Sri+BRin+BM (-1 = block not contacted); per-gold recall @ B_N\nand per question the number of DISTINCT gold blocks n_gb (a question with n_gb > B_P can never be fully contacted whatever the router: the budget feasibility ceiling).  Everything is split by hop count.\n\n  python -u scratchpad/_l1x_coloc.py RUN <ds> <tag> [--rows=K]      -> results/L1_X/coloc_<ds>__<tag>.{json,npz}  (write-once; typed graphs only, like _l1x_blockrel.py)\n",
+ "dataset": "metaqa",
+ "tag": "v1",
+ "N": 43234,
+ "n_rows": 1998,
+ "gold_nodes": 14489,
+ "n_relations": 9,
+ "cells": [
+  "100",
+  "250",
+  "432",
+  "500",
+  "1000"
+ ],
+ "routers": [
+  "ES",
+  "ES_m",
+  "ES_mr"
+ ],
+ "budgets": [
+  100,
+  250,
+  500,
+  1000,
+  2000,
+  5000
+ ],
+ "hops": [
+  1,
+  2,
+  3
+ ],
+ "identity_vs_stored": {
+  "100": {
+   "mismatching_(row,B_N)_cells": 0,
+   "of": 11988
+  },
+  "250": {
+   "mismatching_(row,B_N)_cells": 0,
+   "of": 11988
+  },
+  "432": {
+   "mismatching_(row,B_N)_cells": 0,
+   "of": 11988
+  },
+  "500": {
+   "mismatching_(row,B_N)_cells": 0,
+   "of": 11988
+  },
+  "1000": {
+   "mismatching_(row,B_N)_cells": 0,
+   "of": 11988
+  }
+ },
+ "summary": {
+  "100": {
+   "1": {
+    "gold_nodes": 1334,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 1.0,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 27.83,
+    "gold_block_has_FLAT_hit": 0.8388,
+    "gold_block_has_support_node": 1.0,
+    "gold_block_receives_BM_mass": 1.0,
+    "gold_block_contacted_ES": 0.8688,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.557,
+     1.043
+    ],
+    "gold_block_contacted_ES_m": 0.9895,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.036,
+     0.299
+    ],
+    "gold_block_contacted_ES_mr": 0.9618,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.138,
+     0.673
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.8643,
+     0.8666,
+     0.8688,
+     0.8688,
+     0.8688,
+     0.8688
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.8606,
+     0.8688,
+     0.8688,
+     0.8688,
+     0.8688,
+     0.8688
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.9565,
+     0.9595,
+     0.9618,
+     0.9618,
+     0.9618,
+     0.9618
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.9453,
+     0.9618,
+     0.9618,
+     0.9618,
+     0.9618,
+     0.9618
+    ]
+   },
+   "2": {
+    "gold_nodes": 4613,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.9595,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 29.75,
+    "gold_block_has_FLAT_hit": 0.7683,
+    "gold_block_has_support_node": 1.0,
+    "gold_block_receives_BM_mass": 1.0,
+    "gold_block_contacted_ES": 0.4431,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     1.156,
+     2.97
+    ],
+    "gold_block_contacted_ES_m": 0.4557,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     1.138,
+     2.896
+    ],
+    "gold_block_contacted_ES_mr": 0.452,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     1.154,
+     2.963
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.046,
+     0.0889,
+     0.1368,
+     0.2001,
+     0.2651,
+     0.333
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.0761,
+     0.111,
+     0.1606,
+     0.2196,
+     0.2753,
+     0.3499
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.0468,
+     0.093,
+     0.1433,
+     0.2079,
+     0.2768,
+     0.3419
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.085,
+     0.1238,
+     0.17,
+     0.227,
+     0.2825,
+     0.3586
+    ]
+   },
+   "3": {
+    "gold_nodes": 8542,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.9429,
+    "median_distinct_gold_blocks": 2.0,
+    "mean_B_P": 27.71,
+    "gold_block_has_FLAT_hit": 0.8777,
+    "gold_block_has_support_node": 0.9998,
+    "gold_block_receives_BM_mass": 0.9996,
+    "gold_block_contacted_ES": 0.6273,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.714,
+     2.654
+    ],
+    "gold_block_contacted_ES_m": 0.6521,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.263,
+     2.625
+    ],
+    "gold_block_contacted_ES_mr": 0.6458,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.393,
+     2.72
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.0958,
+     0.1792,
+     0.2709,
+     0.3658,
+     0.45,
+     0.5563
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.197,
+     0.2766,
+     0.341,
+     0.4068,
+     0.4754,
+     0.556
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.1017,
+     0.1844,
+     0.2768,
+     0.3754,
+     0.4648,
+     0.5766
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.1921,
+     0.2724,
+     0.3342,
+     0.4035,
+     0.4849,
+     0.5752
+    ]
+   },
+   "all": {
+    "gold_nodes": 14489,
+    "questions": 1998,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.9675,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 28.43,
+    "gold_block_has_FLAT_hit": 0.8393,
+    "gold_block_has_support_node": 0.9999,
+    "gold_block_receives_BM_mass": 0.9998,
+    "gold_block_contacted_ES": 0.5909,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.771,
+     2.714
+    ],
+    "gold_block_contacted_ES_m": 0.6206,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.433,
+     2.677
+    ],
+    "gold_block_contacted_ES_mr": 0.6132,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.526,
+     2.742
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.1507,
+     0.2137,
+     0.2832,
+     0.3594,
+     0.4297,
+     0.514
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.2196,
+     0.2784,
+     0.3322,
+     0.3897,
+     0.4479,
+     0.5192
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.163,
+     0.2267,
+     0.2973,
+     0.3761,
+     0.4507,
+     0.5373
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.2273,
+     0.2886,
+     0.3397,
+     0.3987,
+     0.4644,
+     0.5418
+    ]
+   }
+  },
+  "250": {
+   "1": {
+    "gold_nodes": 1334,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 1.0,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 55.66,
+    "gold_block_has_FLAT_hit": 0.6942,
+    "gold_block_has_support_node": 1.0,
+    "gold_block_receives_BM_mass": 1.0,
+    "gold_block_contacted_ES": 0.9903,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.339,
+     0.625
+    ],
+    "gold_block_contacted_ES_m": 0.9933,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.019,
+     0.162
+    ],
+    "gold_block_contacted_ES_mr": 0.9925,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.082,
+     0.38
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.9798,
+     0.9873,
+     0.9903,
+     0.9903,
+     0.9903,
+     0.9903
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.9528,
+     0.9903,
+     0.9903,
+     0.9903,
+     0.9903,
+     0.9903
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.9858,
+     0.9903,
+     0.9925,
+     0.9925,
+     0.9925,
+     0.9925
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.9655,
+     0.9925,
+     0.9925,
+     0.9925,
+     0.9925,
+     0.9925
+    ]
+   },
+   "2": {
+    "gold_nodes": 4613,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.9865,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 59.5,
+    "gold_block_has_FLAT_hit": 0.5263,
+    "gold_block_has_support_node": 0.9989,
+    "gold_block_receives_BM_mass": 0.9896,
+    "gold_block_contacted_ES": 0.4073,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     1.414,
+     3.706
+    ],
+    "gold_block_contacted_ES_m": 0.4253,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     1.32,
+     3.56
+    ],
+    "gold_block_contacted_ES_mr": 0.4158,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     1.422,
+     3.706
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.0442,
+     0.0932,
+     0.1459,
+     0.2068,
+     0.2682,
+     0.3364
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.0999,
+     0.1437,
+     0.186,
+     0.2352,
+     0.2887,
+     0.3542
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.0479,
+     0.0991,
+     0.1478,
+     0.212,
+     0.2716,
+     0.3395
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.0984,
+     0.1446,
+     0.1858,
+     0.2402,
+     0.294,
+     0.359
+    ]
+   },
+   "3": {
+    "gold_nodes": 8542,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.988,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 55.42,
+    "gold_block_has_FLAT_hit": 0.7189,
+    "gold_block_has_support_node": 0.9984,
+    "gold_block_receives_BM_mass": 0.9911,
+    "gold_block_contacted_ES": 0.6099,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.537,
+     3.37
+    ],
+    "gold_block_contacted_ES_m": 0.6048,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.371,
+     3.419
+    ],
+    "gold_block_contacted_ES_mr": 0.6103,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.409,
+     3.333
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.0884,
+     0.1815,
+     0.2793,
+     0.3871,
+     0.4671,
+     0.5658
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.2547,
+     0.3393,
+     0.3877,
+     0.4252,
+     0.4838,
+     0.5583
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.0999,
+     0.1841,
+     0.2813,
+     0.3841,
+     0.467,
+     0.5684
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.2375,
+     0.3174,
+     0.3843,
+     0.4241,
+     0.4841,
+     0.5631
+    ]
+   },
+   "all": {
+    "gold_nodes": 14489,
+    "questions": 1998,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.9915,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 56.86,
+    "gold_block_has_FLAT_hit": 0.6553,
+    "gold_block_has_support_node": 0.9987,
+    "gold_block_receives_BM_mass": 0.9914,
+    "gold_block_contacted_ES": 0.5804,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.636,
+     3.435
+    ],
+    "gold_block_contacted_ES_m": 0.5834,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.5,
+     3.397
+    ],
+    "gold_block_contacted_ES_mr": 0.5835,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.523,
+     3.404
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.1564,
+     0.2276,
+     0.3023,
+     0.3853,
+     0.4519,
+     0.5319
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.2697,
+     0.3369,
+     0.379,
+     0.4167,
+     0.4684,
+     0.5331
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.1649,
+     0.2313,
+     0.3043,
+     0.3853,
+     0.4532,
+     0.5345
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.2603,
+     0.3245,
+     0.3771,
+     0.4179,
+     0.4704,
+     0.5376
+    ]
+   }
+  },
+  "432": {
+   "1": {
+    "gold_nodes": 1334,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 1.0,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 83.49,
+    "gold_block_has_FLAT_hit": 0.5622,
+    "gold_block_has_support_node": 1.0,
+    "gold_block_receives_BM_mass": 1.0,
+    "gold_block_contacted_ES": 0.9955,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.245,
+     0.451
+    ],
+    "gold_block_contacted_ES_m": 0.9963,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.013,
+     0.111
+    ],
+    "gold_block_contacted_ES_mr": 0.9963,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.061,
+     0.254
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.9828,
+     0.9925,
+     0.9955,
+     0.9955,
+     0.9955,
+     0.9955
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.9723,
+     0.9955,
+     0.9955,
+     0.9955,
+     0.9955,
+     0.9955
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.988,
+     0.994,
+     0.9963,
+     0.9963,
+     0.9963,
+     0.9963
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.9738,
+     0.9963,
+     0.9963,
+     0.9963,
+     0.9963,
+     0.9963
+    ]
+   },
+   "2": {
+    "gold_nodes": 4613,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.997,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 89.24,
+    "gold_block_has_FLAT_hit": 0.3583,
+    "gold_block_has_support_node": 0.9822,
+    "gold_block_receives_BM_mass": 0.9573,
+    "gold_block_contacted_ES": 0.3943,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     1.595,
+     4.115
+    ],
+    "gold_block_contacted_ES_m": 0.4069,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     1.423,
+     4.0
+    ],
+    "gold_block_contacted_ES_mr": 0.3952,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     1.543,
+     4.192
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.0434,
+     0.0902,
+     0.1476,
+     0.2101,
+     0.2645,
+     0.3289
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.0997,
+     0.1507,
+     0.1986,
+     0.2502,
+     0.3002,
+     0.3497
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.046,
+     0.0982,
+     0.1574,
+     0.2157,
+     0.2679,
+     0.3315
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.1012,
+     0.1491,
+     0.1977,
+     0.2562,
+     0.3048,
+     0.3525
+    ]
+   },
+   "3": {
+    "gold_nodes": 8542,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.997,
+    "median_distinct_gold_blocks": 2.0,
+    "mean_B_P": 83.13,
+    "gold_block_has_FLAT_hit": 0.3692,
+    "gold_block_has_support_node": 0.9829,
+    "gold_block_receives_BM_mass": 0.9601,
+    "gold_block_contacted_ES": 0.5746,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.587,
+     3.895
+    ],
+    "gold_block_contacted_ES_m": 0.5578,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.576,
+     3.949
+    ],
+    "gold_block_contacted_ES_mr": 0.5705,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.551,
+     3.928
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.0857,
+     0.1744,
+     0.2818,
+     0.3862,
+     0.4664,
+     0.5478
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.2465,
+     0.3423,
+     0.3876,
+     0.4234,
+     0.4765,
+     0.5431
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.0953,
+     0.1824,
+     0.2866,
+     0.385,
+     0.4662,
+     0.5435
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.2374,
+     0.3366,
+     0.3886,
+     0.4251,
+     0.4768,
+     0.5409
+    ]
+   },
+   "all": {
+    "gold_nodes": 14489,
+    "questions": 1998,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.998,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 85.29,
+    "gold_block_has_FLAT_hit": 0.3835,
+    "gold_block_has_support_node": 0.9843,
+    "gold_block_receives_BM_mass": 0.9629,
+    "gold_block_contacted_ES": 0.5559,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.675,
+     3.867
+    ],
+    "gold_block_contacted_ES_m": 0.5501,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.679,
+     3.867
+    ],
+    "gold_block_contacted_ES_mr": 0.5539,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.654,
+     3.907
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.1548,
+     0.2229,
+     0.3048,
+     0.3862,
+     0.4508,
+     0.5193
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.2666,
+     0.3414,
+     0.3834,
+     0.4209,
+     0.4681,
+     0.5232
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.1618,
+     0.2303,
+     0.3108,
+     0.3874,
+     0.4519,
+     0.5177
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.2619,
+     0.3376,
+     0.3837,
+     0.4239,
+     0.4699,
+     0.5228
+    ]
+   }
+  },
+  "500": {
+   "1": {
+    "gold_nodes": 1334,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 1.0,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 93.46,
+    "gold_block_has_FLAT_hit": 0.5135,
+    "gold_block_has_support_node": 1.0,
+    "gold_block_receives_BM_mass": 1.0,
+    "gold_block_contacted_ES": 0.9955,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.231,
+     0.415
+    ],
+    "gold_block_contacted_ES_m": 0.9993,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.011,
+     0.104
+    ],
+    "gold_block_contacted_ES_mr": 0.997,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.057,
+     0.228
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.9828,
+     0.9933,
+     0.9955,
+     0.9955,
+     0.9955,
+     0.9955
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.9738,
+     0.9955,
+     0.9955,
+     0.9955,
+     0.9955,
+     0.9955
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.9895,
+     0.9955,
+     0.997,
+     0.997,
+     0.997,
+     0.997
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.9805,
+     0.997,
+     0.997,
+     0.997,
+     0.997,
+     0.997
+    ]
+   },
+   "2": {
+    "gold_nodes": 4613,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.997,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 99.88,
+    "gold_block_has_FLAT_hit": 0.3113,
+    "gold_block_has_support_node": 0.9757,
+    "gold_block_receives_BM_mass": 0.9475,
+    "gold_block_contacted_ES": 0.385,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     1.667,
+     4.286
+    ],
+    "gold_block_contacted_ES_m": 0.4049,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     1.448,
+     4.202
+    ],
+    "gold_block_contacted_ES_mr": 0.3939,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     1.571,
+     4.356
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.0434,
+     0.0878,
+     0.1459,
+     0.2077,
+     0.2623,
+     0.3254
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.1006,
+     0.1485,
+     0.1923,
+     0.245,
+     0.2927,
+     0.3453
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.0457,
+     0.0986,
+     0.1533,
+     0.2155,
+     0.2669,
+     0.3319
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.1019,
+     0.15,
+     0.1936,
+     0.2558,
+     0.3005,
+     0.3492
+    ]
+   },
+   "3": {
+    "gold_nodes": 8542,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 1.0,
+    "median_distinct_gold_blocks": 2.0,
+    "mean_B_P": 93.08,
+    "gold_block_has_FLAT_hit": 0.3557,
+    "gold_block_has_support_node": 0.9789,
+    "gold_block_receives_BM_mass": 0.9447,
+    "gold_block_contacted_ES": 0.566,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.616,
+     4.021
+    ],
+    "gold_block_contacted_ES_m": 0.5526,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.619,
+     4.17
+    ],
+    "gold_block_contacted_ES_mr": 0.5625,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.552,
+     4.072
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.0856,
+     0.1662,
+     0.2762,
+     0.3802,
+     0.4629,
+     0.5407
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.2492,
+     0.3362,
+     0.3799,
+     0.4158,
+     0.4644,
+     0.5351
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.0937,
+     0.1775,
+     0.2789,
+     0.3778,
+     0.4596,
+     0.5379
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.2346,
+     0.3133,
+     0.3671,
+     0.4145,
+     0.4643,
+     0.5334
+    ]
+   },
+   "all": {
+    "gold_nodes": 14489,
+    "questions": 1998,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 0.999,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 95.48,
+    "gold_block_has_FLAT_hit": 0.3561,
+    "gold_block_has_support_node": 0.9798,
+    "gold_block_receives_BM_mass": 0.9507,
+    "gold_block_contacted_ES": 0.5479,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.712,
+     4.03
+    ],
+    "gold_block_contacted_ES_m": 0.5467,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.676,
+     4.072
+    ],
+    "gold_block_contacted_ES_mr": 0.5488,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.644,
+     4.072
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.1547,
+     0.2174,
+     0.3009,
+     0.3819,
+     0.4481,
+     0.514
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.2686,
+     0.3372,
+     0.3768,
+     0.4148,
+     0.4586,
+     0.5171
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.1609,
+     0.2277,
+     0.305,
+     0.3831,
+     0.4477,
+     0.5146
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.261,
+     0.3242,
+     0.3699,
+     0.4176,
+     0.4612,
+     0.5174
+    ]
+   }
+  },
+  "1000": {
+   "1": {
+    "gold_nodes": 1334,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 1.0,
+    "median_distinct_gold_blocks": 1.0,
+    "mean_B_P": 156.97,
+    "gold_block_has_FLAT_hit": 0.4295,
+    "gold_block_has_support_node": 1.0,
+    "gold_block_receives_BM_mass": 1.0,
+    "gold_block_contacted_ES": 0.9993,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.154,
+     0.274
+    ],
+    "gold_block_contacted_ES_m": 1.0,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.007,
+     0.059
+    ],
+    "gold_block_contacted_ES_mr": 0.9985,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.033,
+     0.12
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.9828,
+     0.997,
+     0.9993,
+     0.9993,
+     0.9993,
+     0.9993
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.9813,
+     0.9993,
+     0.9993,
+     0.9993,
+     0.9993,
+     0.9993
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.9843,
+     0.9955,
+     0.9985,
+     0.9985,
+     0.9985,
+     0.9985
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.9828,
+     0.9985,
+     0.9985,
+     0.9985,
+     0.9985,
+     0.9985
+    ]
+   },
+   "2": {
+    "gold_nodes": 4613,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 1.0,
+    "median_distinct_gold_blocks": 2.0,
+    "mean_B_P": 167.77,
+    "gold_block_has_FLAT_hit": 0.2246,
+    "gold_block_has_support_node": 0.9122,
+    "gold_block_receives_BM_mass": 0.8489,
+    "gold_block_contacted_ES": 0.3661,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     1.78,
+     4.894
+    ],
+    "gold_block_contacted_ES_m": 0.3989,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     1.565,
+     4.687
+    ],
+    "gold_block_contacted_ES_mr": 0.382,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     1.706,
+     5.035
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.0434,
+     0.0839,
+     0.1385,
+     0.2036,
+     0.2573,
+     0.3232
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.1021,
+     0.1528,
+     0.2001,
+     0.2465,
+     0.2933,
+     0.3403
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.0438,
+     0.0956,
+     0.1556,
+     0.2205,
+     0.2749,
+     0.3442
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.1038,
+     0.1585,
+     0.2114,
+     0.2677,
+     0.3111,
+     0.3562
+    ]
+   },
+   "3": {
+    "gold_nodes": 8542,
+    "questions": 666,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 1.0,
+    "median_distinct_gold_blocks": 3.0,
+    "mean_B_P": 156.29,
+    "gold_block_has_FLAT_hit": 0.2622,
+    "gold_block_has_support_node": 0.9061,
+    "gold_block_receives_BM_mass": 0.8397,
+    "gold_block_contacted_ES": 0.5512,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.716,
+     4.785
+    ],
+    "gold_block_contacted_ES_m": 0.5247,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.802,
+     4.862
+    ],
+    "gold_block_contacted_ES_mr": 0.5462,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.67,
+     4.823
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.0852,
+     0.1468,
+     0.2636,
+     0.3802,
+     0.4625,
+     0.5361
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.2252,
+     0.2943,
+     0.3472,
+     0.4028,
+     0.465,
+     0.5357
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.0903,
+     0.1712,
+     0.276,
+     0.3849,
+     0.462,
+     0.5341
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.2153,
+     0.2806,
+     0.3373,
+     0.395,
+     0.4616,
+     0.5313
+    ]
+   },
+   "all": {
+    "gold_nodes": 14489,
+    "questions": 1998,
+    "questions_with_n_gold_blocks_le_B_P (budget feasibility ceiling)": 1.0,
+    "median_distinct_gold_blocks": 2.0,
+    "mean_B_P": 160.34,
+    "gold_block_has_FLAT_hit": 0.2656,
+    "gold_block_has_support_node": 0.9167,
+    "gold_block_receives_BM_mass": 0.8574,
+    "gold_block_contacted_ES": 0.5335,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.794,
+     4.687
+    ],
+    "gold_block_contacted_ES_m": 0.5284,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.793,
+     4.661
+    ],
+    "gold_block_contacted_ES_mr": 0.5356,
+    "gold_block_rank_over_B_P_p50_p90_ES_mr": [
+     0.756,
+     4.783
+    ],
+    "gold_recall_at_B_N_ES_SHIPPED": [
+     0.1545,
+     0.2051,
+     0.2915,
+     0.381,
+     0.4466,
+     0.5109
+    ],
+    "gold_recall_at_B_N_ES_BEST": [
+     0.2556,
+     0.3142,
+     0.3604,
+     0.408,
+     0.4595,
+     0.5162
+    ],
+    "gold_recall_at_B_N_ES_mr_SHIPPED": [
+     0.1578,
+     0.223,
+     0.3042,
+     0.3891,
+     0.4518,
+     0.5164
+    ],
+    "gold_recall_at_B_N_ES_mr_BEST": [
+     0.2505,
+     0.3078,
+     0.3581,
+     0.41,
+     0.4631,
+     0.5185
+    ]
+   }
+  }
+ },
+ "seconds": 145.0,
+ "code": {
+  "path": "scratchpad/_l1x_coloc.py",
+  "sha256": "91d4978ab80b94aef328c1689297dfced6effaec4618a43ff7d2dda7ae361cba"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "npz": {
+  "path": "coloc_metaqa__v1.npz",
+  "sha256": "62937ff504b02e5ae8215169644277d7e6e8f43a6535eba599dc23bb70e34a89"
+ }
+}

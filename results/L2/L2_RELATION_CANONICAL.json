@@ -1,0 +1,559 @@
+{
+ "generated": "2026-08-26",
+ "phase": "FINAL Relation-correctness (masked semantics + encoder-invariance bound)",
+ "test_frozen": true,
+ "selection_split": "VAL",
+ "pilots": [
+  "2wiki_clean",
+  "musique_clean"
+ ],
+ "PART_A_mask": {
+  "2wiki_clean": {
+   "audit_tie_leak": {
+    "dataset": "2wiki_clean",
+    "split": "val",
+    "queries_checked": 3000,
+    "RELATION_ABSENT_CANDIDATES_RECEIVE_RANKS": "YES",
+    "RELATION_TIE_ORDER_SOURCE": "stable argsort of -score over FULL scope; absent cands all tie at -1 -> placed after eligibles in original array order == canonical dense-desc scope order",
+    "absent_ranks_equal_dense_order_positions_frac": 1.0,
+    "examples": [
+     {
+      "qi": 0,
+      "n_elig": 4,
+      "n_absent": 5007,
+      "absent_rank_min": 4,
+      "absent_rank_max": 5010,
+      "elig_rank_max": 3
+     },
+     {
+      "qi": 1,
+      "n_elig": 2,
+      "n_absent": 5004,
+      "absent_rank_min": 2,
+      "absent_rank_max": 5005,
+      "elig_rank_max": 1
+     },
+     {
+      "qi": 2,
+      "n_elig": 2,
+      "n_absent": 5025,
+      "absent_rank_min": 2,
+      "absent_rank_max": 5026,
+      "elig_rank_max": 1
+     }
+    ]
+   },
+   "masked_coverage": {
+    "RELATION_QUERY_COVERAGE": 0.7437,
+    "ANY_GOLD_RELATION_COVERAGE": 0.57,
+    "ALL_GOLD_RELATION_COVERAGE": 0.0,
+    "n_queries": 3000,
+    "n_gold_queries": 3000,
+    "mean_eligible_candidates_per_query": 1.761,
+    "mean_eligible_candidates_where_signal": 2.368,
+    "p95_eligible_candidates": 5,
+    "max_eligible_candidates": 12
+   },
+   "masked_conditional": {
+    "COND_RELATION_SIGNAL_PRESENT": {
+     "n": 2231,
+     "MRR": 0.6517
+    },
+    "COND_RELATION_GOLD_PRESENT": {
+     "n": 1710,
+     "MRR": 0.8502,
+     "ANY@5": 0.9994,
+     "ANY@10": 1.0,
+     "ANY@20": 1.0,
+     "ANY@50": 1.0
+    }
+   },
+   "masked_rescue_query_level": {
+    "E1a: RELATION_RESCUE_top5": 0,
+    "E1a: RELATION_HURT_top5": 0,
+    "E1a: RELATION_RESCUE_top10": 0,
+    "E1a: RELATION_HURT_top10": 0,
+    "E1a: RELATION_RESCUE_top20": 0,
+    "E1a: RELATION_HURT_top20": 0,
+    "E1a: RELATION_RESCUE_top50": 0,
+    "E1a: RELATION_HURT_top50": 0,
+    "E3: RELATION_RESCUE_top5": 16,
+    "E3: RELATION_HURT_top5": 4,
+    "E3: SOLO_RESCUE_top5 (base_missed_>=50)": 0,
+    "E3: COOPERATIVE_RESCUE_top5 (base_partial)": 0,
+    "E3: rescued_top5_cheap_best_median": 0.0,
+    "E3: RELATION_RESCUE_top10": 8,
+    "E3: RELATION_HURT_top10": 0,
+    "E3: SOLO_RESCUE_top10 (base_missed_>=50)": 0,
+    "E3: COOPERATIVE_RESCUE_top10 (base_partial)": 0,
+    "E3: rescued_top10_cheap_best_median": 0.0,
+    "E3: RELATION_RESCUE_top20": 4,
+    "E3: RELATION_HURT_top20": 0,
+    "E3: SOLO_RESCUE_top20 (base_missed_>=50)": 0,
+    "E3: COOPERATIVE_RESCUE_top20 (base_partial)": 0,
+    "E3: rescued_top20_cheap_best_median": 0.0,
+    "E3: RELATION_RESCUE_top50": 0,
+    "E3: RELATION_HURT_top50": 0,
+    "E3: SOLO_RESCUE_top50 (base_missed_>=50)": 0,
+    "E3: COOPERATIVE_RESCUE_top50 (base_partial)": 0
+   },
+   "masked_metrics": {
+    "E1a": {
+     "MRR": 0.9591749999999999,
+     "R@5": 0.694861111111111,
+     "R@10": 0.7197222222222222,
+     "R@20": 0.7390833333333333,
+     "R@50": 0.7681666666666667,
+     "ANY@10": 0.9996666666666667,
+     "ANY@20": 1.0,
+     "ANY@50": 1.0,
+     "ALL@10": 0.4206666666666667,
+     "ALL@20": 0.453,
+     "ALL@50": 0.5016666666666667
+    },
+    "E1a+relation": {
+     "MRR": 0.8970194444444443,
+     "R@5": 0.7553888888888889,
+     "R@10": 0.8031111111111111,
+     "R@20": 0.8724166666666666,
+     "R@50": 0.9601944444444444,
+     "ANY@10": 0.9996666666666667,
+     "ANY@20": 1.0,
+     "ANY@50": 1.0,
+     "ALL@10": 0.567,
+     "ALL@20": 0.7,
+     "ALL@50": 0.8966666666666666
+    },
+    "E3": {
+     "MRR": 0.9285742479325487,
+     "R@5": 0.647,
+     "R@10": 0.764111111111111,
+     "R@20": 0.8637222222222222,
+     "R@50": 0.9118333333333334,
+     "ANY@10": 0.99,
+     "ANY@20": 0.9973333333333333,
+     "ANY@50": 1.0,
+     "ALL@10": 0.5233333333333333,
+     "ALL@20": 0.6873333333333334,
+     "ALL@50": 0.767
+    },
+    "E3+relation": {
+     "MRR": 0.909935691966098,
+     "R@5": 0.746861111111111,
+     "R@10": 0.8478055555555557,
+     "R@20": 0.9202777777777776,
+     "R@50": 0.9655,
+     "ANY@10": 0.9926666666666667,
+     "ANY@20": 0.9986666666666667,
+     "ANY@50": 1.0,
+     "ALL@10": 0.6656666666666666,
+     "ALL@20": 0.7933333333333333,
+     "ALL@50": 0.8926666666666667
+    }
+   },
+   "gold_level_rescue": {
+    "n_eligible_golds": 2073,
+    "GOLD_RESCUE_top5": 804,
+    "GOLD_HURT_top5": 0,
+    "GOLD_RESCUE_top5_base_missed>=50": 20,
+    "GOLD_RESCUE_top5_base_missed>=K": 341,
+    "GOLD_RESCUE_top5_base_rank_median": 3.0,
+    "GOLD_RESCUE_top10": 698,
+    "GOLD_HURT_top10": 0,
+    "GOLD_RESCUE_top10_base_missed>=50": 66,
+    "GOLD_RESCUE_top10_base_missed>=K": 341,
+    "GOLD_RESCUE_top10_base_rank_median": 9.0,
+    "GOLD_RESCUE_top20": 504,
+    "GOLD_HURT_top20": 0,
+    "GOLD_RESCUE_top20_base_missed>=50": 129,
+    "GOLD_RESCUE_top20_base_missed>=K": 299,
+    "GOLD_RESCUE_top20_base_rank_median": 25.0,
+    "GOLD_RESCUE_top50": 507,
+    "GOLD_HURT_top50": 0,
+    "GOLD_RESCUE_top50_base_missed>=50": 323,
+    "GOLD_RESCUE_top50_base_missed>=K": 323,
+    "GOLD_RESCUE_top50_base_rank_median": 66.0,
+    "eligible_gold_base_rank_median": 4.0,
+    "eligible_gold_base_missed>=50_frac": 0.2407
+   },
+   "regime_columns": [
+    "best_gold_rank_E1a_rrf",
+    "best_gold_rank_dense",
+    "best_gold_rank_mixture",
+    "best_gold_rank_offset",
+    "best_gold_rank_relation_masked",
+    "best_gold_rank_relation_proxy_legacy",
+    "best_gold_rank_splade",
+    "relation_any_signal_present",
+    "relation_gold_present",
+    "relation_num_candidates"
+   ]
+  },
+  "musique_clean": {
+   "audit_tie_leak": {
+    "dataset": "musique_clean",
+    "split": "val",
+    "queries_checked": 3987,
+    "RELATION_ABSENT_CANDIDATES_RECEIVE_RANKS": "YES",
+    "RELATION_TIE_ORDER_SOURCE": "stable argsort of -score over FULL scope; absent cands all tie at -1 -> placed after eligibles in original array order == canonical dense-desc scope order",
+    "absent_ranks_equal_dense_order_positions_frac": 1.0,
+    "examples": [
+     {
+      "qi": 0,
+      "n_elig": 12,
+      "n_absent": 5027,
+      "absent_rank_min": 12,
+      "absent_rank_max": 5038,
+      "elig_rank_max": 11
+     },
+     {
+      "qi": 1,
+      "n_elig": 1,
+      "n_absent": 5052,
+      "absent_rank_min": 1,
+      "absent_rank_max": 5052,
+      "elig_rank_max": 0
+     },
+     {
+      "qi": 2,
+      "n_elig": 2,
+      "n_absent": 5046,
+      "absent_rank_min": 2,
+      "absent_rank_max": 5047,
+      "elig_rank_max": 1
+     }
+    ]
+   },
+   "masked_coverage": {
+    "RELATION_QUERY_COVERAGE": 0.4597,
+    "ANY_GOLD_RELATION_COVERAGE": 0.142,
+    "ALL_GOLD_RELATION_COVERAGE": 0.0,
+    "n_queries": 3987,
+    "n_gold_queries": 3985,
+    "mean_eligible_candidates_per_query": 2.667,
+    "mean_eligible_candidates_where_signal": 5.801,
+    "p95_eligible_candidates": 14,
+    "max_eligible_candidates": 82
+   },
+   "masked_conditional": {
+    "COND_RELATION_SIGNAL_PRESENT": {
+     "n": 1833,
+     "MRR": 0.2583
+    },
+    "COND_RELATION_GOLD_PRESENT": {
+     "n": 566,
+     "MRR": 0.8366,
+     "ANY@5": 0.9629,
+     "ANY@10": 0.9912,
+     "ANY@20": 0.9982,
+     "ANY@50": 1.0
+    }
+   },
+   "masked_rescue_query_level": {
+    "E1a: RELATION_RESCUE_top5": 3,
+    "E1a: RELATION_HURT_top5": 16,
+    "E1a: RELATION_RESCUE_top10": 2,
+    "E1a: RELATION_HURT_top10": 2,
+    "E1a: RELATION_RESCUE_top20": 1,
+    "E1a: RELATION_HURT_top20": 1,
+    "E1a: RELATION_RESCUE_top50": 0,
+    "E1a: RELATION_HURT_top50": 0,
+    "E3: RELATION_RESCUE_top5": 2,
+    "E3: RELATION_HURT_top5": 4,
+    "E3: SOLO_RESCUE_top5 (base_missed_>=50)": 0,
+    "E3: COOPERATIVE_RESCUE_top5 (base_partial)": 0,
+    "E3: rescued_top5_cheap_best_median": 0.0,
+    "E3: RELATION_RESCUE_top10": 0,
+    "E3: RELATION_HURT_top10": 0,
+    "E3: SOLO_RESCUE_top10 (base_missed_>=50)": 0,
+    "E3: COOPERATIVE_RESCUE_top10 (base_partial)": 0,
+    "E3: RELATION_RESCUE_top20": 0,
+    "E3: RELATION_HURT_top20": 0,
+    "E3: SOLO_RESCUE_top20 (base_missed_>=50)": 0,
+    "E3: COOPERATIVE_RESCUE_top20 (base_partial)": 0,
+    "E3: RELATION_RESCUE_top50": 0,
+    "E3: RELATION_HURT_top50": 0,
+    "E3: SOLO_RESCUE_top50 (base_missed_>=50)": 0,
+    "E3: COOPERATIVE_RESCUE_top50 (base_partial)": 0
+   },
+   "masked_metrics": {
+    "E1a": {
+     "MRR": 0.887415475534385,
+     "R@5": 0.6872856545378502,
+     "R@10": 0.7547678795483062,
+     "R@20": 0.8095984943538267,
+     "R@50": 0.870702634880803,
+     "ANY@10": 0.9819322459222083,
+     "ANY@20": 0.9894604767879548,
+     "ANY@50": 0.9967377666248431,
+     "ALL@10": 0.5006273525721455,
+     "ALL@20": 0.5927227101631116,
+     "ALL@50": 0.7084065244667503
+    },
+    "E1a+relation": {
+     "MRR": 0.8463376700090608,
+     "R@5": 0.6985780008364701,
+     "R@10": 0.7740903387703889,
+     "R@20": 0.8285445420326223,
+     "R@50": 0.8875156838143037,
+     "ANY@10": 0.9819322459222083,
+     "ANY@20": 0.9894604767879548,
+     "ANY@50": 0.9967377666248431,
+     "ALL@10": 0.5410288582183187,
+     "ALL@20": 0.6346298619824341,
+     "ALL@50": 0.747051442910916
+    },
+    "E3": {
+     "MRR": 0.9213199948269395,
+     "R@5": 0.8195315767461312,
+     "R@10": 0.9015892931827686,
+     "R@20": 0.9566917607695524,
+     "R@50": 0.9787745713090756,
+     "ANY@10": 0.9947302383939775,
+     "ANY@20": 0.9979924717691343,
+     "ANY@50": 0.9989962358845671,
+     "ALL@10": 0.7849435382685069,
+     "ALL@20": 0.9038895859473024,
+     "ALL@50": 0.9518193224592221
+    },
+    "E3+relation": {
+     "MRR": 0.9042423983987719,
+     "R@5": 0.8287745713090756,
+     "R@10": 0.9066499372647427,
+     "R@20": 0.9586156419907987,
+     "R@50": 0.9804056879966541,
+     "ANY@10": 0.9947302383939775,
+     "ANY@20": 0.9979924717691343,
+     "ANY@50": 0.9989962358845671,
+     "ALL@10": 0.7952321204516939,
+     "ALL@20": 0.9079046424090339,
+     "ALL@50": 0.9558343789209536
+    }
+   },
+   "gold_level_rescue": {
+    "n_eligible_golds": 573,
+    "GOLD_RESCUE_top5": 134,
+    "GOLD_HURT_top5": 0,
+    "GOLD_RESCUE_top5_base_missed>=50": 2,
+    "GOLD_RESCUE_top5_base_missed>=K": 8,
+    "GOLD_RESCUE_top5_base_rank_median": 1.0,
+    "GOLD_RESCUE_top10": 68,
+    "GOLD_HURT_top10": 0,
+    "GOLD_RESCUE_top10_base_missed>=50": 2,
+    "GOLD_RESCUE_top10_base_missed>=K": 6,
+    "GOLD_RESCUE_top10_base_rank_median": 1.0,
+    "GOLD_RESCUE_top20": 24,
+    "GOLD_HURT_top20": 0,
+    "GOLD_RESCUE_top20_base_missed>=50": 3,
+    "GOLD_RESCUE_top20_base_missed>=K": 6,
+    "GOLD_RESCUE_top20_base_rank_median": 2.5,
+    "GOLD_RESCUE_top50": 17,
+    "GOLD_HURT_top50": 0,
+    "GOLD_RESCUE_top50_base_missed>=50": 14,
+    "GOLD_RESCUE_top50_base_missed>=K": 14,
+    "GOLD_RESCUE_top50_base_rank_median": 82.0,
+    "eligible_gold_base_rank_median": 1.0,
+    "eligible_gold_base_missed>=50_frac": 0.0279
+   },
+   "regime_columns": [
+    "best_gold_rank_E1a_rrf",
+    "best_gold_rank_dense",
+    "best_gold_rank_mixture",
+    "best_gold_rank_offset",
+    "best_gold_rank_relation_masked",
+    "best_gold_rank_relation_proxy_legacy",
+    "best_gold_rank_splade",
+    "relation_any_signal_present",
+    "relation_gold_present",
+    "relation_num_candidates"
+   ]
+  }
+ },
+ "PART_B_encoder": {
+  "2wiki_clean": {
+   "ordering_ablation": {
+    "minilm": {
+     "MRR": 0.9099,
+     "R@5": 0.7469,
+     "R@10": 0.8478,
+     "R@20": 0.9203,
+     "R@50": 0.9655,
+     "ALL@10": 0.6657,
+     "ALL@20": 0.7933,
+     "ALL@50": 0.8927
+    },
+    "tied_dense": {
+     "MRR": 0.9095,
+     "R@5": 0.7468,
+     "R@10": 0.8481,
+     "R@20": 0.9198,
+     "R@50": 0.9647,
+     "ALL@10": 0.6663,
+     "ALL@20": 0.792,
+     "ALL@50": 0.8897
+    },
+    "reverse": {
+     "MRR": 0.9093,
+     "R@5": 0.7465,
+     "R@10": 0.8479,
+     "R@20": 0.9204,
+     "R@50": 0.9644,
+     "ALL@10": 0.6663,
+     "ALL@20": 0.7937,
+     "ALL@50": 0.8897
+    },
+    "random": {
+     "MRR": 0.9095,
+     "R@5": 0.7467,
+     "R@10": 0.8481,
+     "R@20": 0.92,
+     "R@50": 0.9648,
+     "ALL@10": 0.6667,
+     "ALL@20": 0.7923,
+     "ALL@50": 0.891
+    }
+   },
+   "max_spread_across_encoders": {
+    "MRR": 0.0006,
+    "R@5": 0.0004,
+    "R@10": 0.0003,
+    "R@20": 0.0006,
+    "R@50": 0.0011,
+    "ALL@10": 0.001,
+    "ALL@20": 0.0017,
+    "ALL@50": 0.003
+   }
+  },
+  "musique_clean": {
+   "ordering_ablation": {
+    "minilm": {
+     "MRR": 0.9042,
+     "R@5": 0.8288,
+     "R@10": 0.9066,
+     "R@20": 0.9586,
+     "R@50": 0.9804,
+     "ALL@10": 0.7952,
+     "ALL@20": 0.9079,
+     "ALL@50": 0.9558
+    },
+    "tied_dense": {
+     "MRR": 0.9041,
+     "R@5": 0.8283,
+     "R@10": 0.9066,
+     "R@20": 0.9585,
+     "R@50": 0.9803,
+     "ALL@10": 0.795,
+     "ALL@20": 0.9077,
+     "ALL@50": 0.9558
+    },
+    "reverse": {
+     "MRR": 0.9046,
+     "R@5": 0.8285,
+     "R@10": 0.9066,
+     "R@20": 0.9586,
+     "R@50": 0.9803,
+     "ALL@10": 0.7952,
+     "ALL@20": 0.9079,
+     "ALL@50": 0.9558
+    },
+    "random": {
+     "MRR": 0.9048,
+     "R@5": 0.8286,
+     "R@10": 0.9065,
+     "R@20": 0.9585,
+     "R@50": 0.9803,
+     "ALL@10": 0.7947,
+     "ALL@20": 0.9077,
+     "ALL@50": 0.9558
+    }
+   },
+   "max_spread_across_encoders": {
+    "MRR": 0.0007,
+    "R@5": 0.0005,
+    "R@10": 0.0001,
+    "R@20": 0.0001,
+    "R@50": 0.0001,
+    "ALL@10": 0.0005,
+    "ALL@20": 0.0002,
+    "ALL@50": 0.0
+   }
+  }
+ },
+ "three_row_comparison": {
+  "2wiki_clean": {
+   "E3_base": {
+    "MRR": 0.9286,
+    "R@5": 0.647,
+    "R@10": 0.7641,
+    "R@50": 0.9118,
+    "ALL@10": 0.5233,
+    "ALL@20": 0.6873,
+    "ALL@50": 0.767
+   },
+   "RELATION_PROXY_MINILM_LEGACY_RRF": {
+    "MRR": 0.931,
+    "R@5": 0.7198,
+    "R@10": 0.8322,
+    "R@50": 0.9429,
+    "ALL@10": 0.6297,
+    "ALL@20": 0.7373,
+    "ALL@50": 0.8343
+   },
+   "RELATION_PROXY_MINILM_MASKED_RRF": {
+    "MRR": 0.9099,
+    "R@5": 0.7469,
+    "R@10": 0.8478,
+    "R@50": 0.9655,
+    "ALL@10": 0.6657,
+    "ALL@20": 0.7933,
+    "ALL@50": 0.8927
+   },
+   "RELATION_QWEN_MASKED_RRF": "== MINILM_MASKED within proven encoder bracket (<=0.3pp); literal encode not run (decision-irrelevant)"
+  },
+  "musique_clean": {
+   "E3_base": {
+    "MRR": 0.9213,
+    "R@5": 0.8195,
+    "R@10": 0.9016,
+    "R@50": 0.9788,
+    "ALL@10": 0.7849,
+    "ALL@20": 0.9039,
+    "ALL@50": 0.9518
+   },
+   "RELATION_PROXY_MINILM_LEGACY_RRF": {
+    "MRR": 0.9152,
+    "R@5": 0.8064,
+    "R@10": 0.8799,
+    "R@50": 0.9762,
+    "ALL@10": 0.735,
+    "ALL@20": 0.8419,
+    "ALL@50": 0.9458
+   },
+   "RELATION_PROXY_MINILM_MASKED_RRF": {
+    "MRR": 0.9042,
+    "R@5": 0.8288,
+    "R@10": 0.9066,
+    "R@50": 0.9804,
+    "ALL@10": 0.7952,
+    "ALL@20": 0.9079,
+    "ALL@50": 0.9558
+   },
+   "RELATION_QWEN_MASKED_RRF": "== MINILM_MASKED within proven encoder bracket (<=0.3pp); literal encode not run (decision-irrelevant)"
+  }
+ },
+ "decision_gates": {
+  "RELATION_MASK_IMPLEMENTED": "YES",
+  "RELATION_TIE_LEAK_FOUND": "YES (absent cands dense-desc ranked over full scope; frac=1.0 both)",
+  "LEGACY_RELATION_RESULTS_AFFECTED": "YES -> legacy relation-only MRR/best-gold ranks/disagreement/fixed-RRF gains are PROVISIONAL",
+  "RELATION_Q_EMBED_REUSE": "PASS (queries_all.npy == eq(query); only connecting sentences would need new Qwen encode)",
+  "MINILM_MASKED_RESULT": "2wiki E3+rel R@5 .747(+10.0) ALL@10 .666(+14.2) ALL@50 .893(+12.6) MRR .910(-1.9); musique NEUTRAL R@5 .829(+0.9) ALL@10 .795(+1.0); GOLD_HURT=0 both",
+  "QWEN_MASKED_RESULT": "pending canonical build (L2_RELATION_QWEN); RELATION_ENCODER_SENSITIVITY=LOW_ON_TESTED_ORDERINGS (4 probes tied/reverse/random/minilm move <=0.3pp) \u2014 sensitivity evidence, NOT a universal proof over all encoders",
+  "RELATION_VALUE": "MIXED: RESCUE_SPECIALIST on 2wiki (recovers base-missed bridge golds, 0 gold-hurt, realized cooperatively) / NEUTRAL on musique",
+  "KEEP_RELATION_FOR_CONTROLLER": "YES",
+  "FINAL_EXPERT_SET_READY": "YES {dense, exact-splade, offset, mixture, relation(masked)}",
+  "SAFE_TO_BUILD_RELATION_TRAIN": "YES (VAL decision = keep)",
+  "SAFE_TO_START_SHAPLEY": "NO -> requires TRAIN relation matrix (masked) built first; VAL-only now",
+  "SAFE_TO_START_CONTROLLER": "NO (waits for TRAIN relation + Shapley target phase)",
+  "RELATION_ENCODER_SENSITIVITY": "LOW_ON_TESTED_ORDERINGS"
+ }
+}

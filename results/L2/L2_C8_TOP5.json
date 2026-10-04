@@ -1,0 +1,426 @@
+{
+ "phase": "C8 \u2014 TOP-5 EVIDENCE OPTIMIZATION (design on DEV_INNER from TRAIN; official VAL evaluated once; TEST untouched)",
+ "final_policy": "C7b soft-archetype fusion -> top-50 -> C8c XGBRanker residual reranker -> final top-5",
+ "split": "Within l2_corpus, gold_count == in-scope gold count for EVERY query (full L1 coverage by construction; only a few degenerate gold_count=0 queries, already excluded from 'valid'). Therefore Task-1 categories A (L1_ANY_FAIL) and B (L1_PARTIAL) are empty HERE \u2014 the pre-P50 L1 scope-coverage failure population lives upstream and is out of C8 scope (Task 9). All audited top-5 failures are the recoverable L2-ranking population (C/D/E).",
+ "C7B_TOP5_BASELINE_val": {
+  "per_ds": {
+   "2wiki_clean": {
+    "any5": 0.989,
+    "recall5_micro": 0.7512,
+    "recall5_macro": 0.7849,
+    "ndcg5": 0.766,
+    "ndcg50": 0.8382,
+    "mrr": 0.9087,
+    "all5": 0.5573,
+    "all10": 0.733,
+    "all50": 0.9217,
+    "all5_feas": 0.5573
+   },
+   "musique_clean": {
+    "any5": 0.9849,
+    "recall5_micro": 0.8297,
+    "recall5_macro": 0.8405,
+    "ndcg5": 0.8125,
+    "ndcg50": 0.8648,
+    "mrr": 0.9134,
+    "all5": 0.6642,
+    "all10": 0.8188,
+    "all50": 0.9548,
+    "all5_feas": 0.6642
+   }
+  },
+  "pooled": {
+   "n": 6985,
+   "any5": 0.9867,
+   "recall5_micro": 0.7954,
+   "recall5_macro": 0.8166,
+   "ndcg5": 0.7926,
+   "ndcg50": 0.8533,
+   "mrr": 0.9114,
+   "all5": 0.6183,
+   "all10": 0.782,
+   "all50": 0.9406,
+   "all5_feas": 0.6183
+  }
+ },
+ "TOP5_ARCHETYPE_RETARGET_C8a_C8b": {
+  "selected_on_dev": "C7b",
+  "dev_C7b": {
+   "any5": 0.998,
+   "recall5_micro": 0.8895,
+   "recall5_macro": 0.9059,
+   "ndcg5": 0.8721,
+   "ndcg50": 0.9087,
+   "mrr": 0.9404,
+   "all5": 0.7793,
+   "all10": 0.9169,
+   "all50": 0.9832,
+   "all5_feas": 0.7793
+  },
+  "dev_C8a": {
+   "any5": 0.998,
+   "recall5_micro": 0.8883,
+   "recall5_macro": 0.9047,
+   "ndcg5": 0.8717,
+   "ndcg50": 0.9084,
+   "mrr": 0.941,
+   "all5": 0.7752,
+   "all10": 0.9107,
+   "all50": 0.9824,
+   "all5_feas": 0.7752
+  },
+  "dev_C8b": {
+   "any5": 0.998,
+   "recall5_micro": 0.889,
+   "recall5_macro": 0.9053,
+   "ndcg5": 0.8718,
+   "ndcg50": 0.9085,
+   "mrr": 0.941,
+   "all5": 0.7772,
+   "all10": 0.9144,
+   "all50": 0.9824,
+   "all5_feas": 0.7772
+  },
+  "verdict": "archetype retargeting does NOT beat C7b on top5 (NDCG@5-optimal archetype == NDCG@50-optimal for ~89-90% of queries)"
+ },
+ "C8C_reranker": {
+  "best_iteration": 350,
+  "feature_importance_top": {
+   "max_contrib": 0.6716,
+   "min_rk4": 0.1579,
+   "pool_pos": 0.061,
+   "base_rank": 0.038,
+   "rk_mixture": 0.0191,
+   "c_mixture": 0.0127,
+   "base_score": 0.0039,
+   "rk_splade": 0.0036,
+   "c_relation": 0.0035,
+   "rel_mask": 0.0027
+  },
+  "DEV": {
+   "C7b": {
+    "pooled": {
+     "any5": 0.998,
+     "recall5_micro": 0.8895,
+     "recall5_macro": 0.9059,
+     "ndcg5": 0.8721,
+     "ndcg50": 0.9087,
+     "mrr": 0.9404,
+     "all5": 0.7793,
+     "all10": 0.9169,
+     "all50": 0.9832,
+     "all5_feas": 0.7793
+    },
+    "per_ds": {
+     "2wiki_clean": {
+      "any5": 0.9981,
+      "recall5_micro": 0.8634,
+      "recall5_macro": 0.8907,
+      "ndcg5": 0.8493,
+      "ndcg50": 0.8899,
+      "mrr": 0.9233,
+      "all5": 0.7462,
+      "all10": 0.8817,
+      "all50": 0.9628,
+      "all5_feas": 0.7462
+     },
+     "musique_clean": {
+      "any5": 0.9978,
+      "recall5_micro": 0.9096,
+      "recall5_macro": 0.9173,
+      "ndcg5": 0.8892,
+      "ndcg50": 0.9228,
+      "mrr": 0.9532,
+      "all5": 0.8042,
+      "all10": 0.9433,
+      "all50": 0.9986,
+      "all5_feas": 0.8042
+     }
+    }
+   },
+   "C8c": {
+    "pooled": {
+     "any5": 0.9996,
+     "recall5_micro": 0.9684,
+     "recall5_macro": 0.9768,
+     "ndcg5": 0.965,
+     "ndcg50": 0.9729,
+     "mrr": 0.9885,
+     "all5": 0.9349,
+     "all10": 0.9717,
+     "all50": 0.9832,
+     "all5_feas": 0.9349
+    },
+    "per_ds": {
+     "2wiki_clean": {
+      "any5": 1.0,
+      "recall5_micro": 0.9358,
+      "recall5_macro": 0.9538,
+      "ndcg5": 0.9349,
+      "ndcg50": 0.9506,
+      "mrr": 0.9771,
+      "all5": 0.8683,
+      "all10": 0.9399,
+      "all50": 0.9628,
+      "all5_feas": 0.8683
+     },
+     "musique_clean": {
+      "any5": 0.9993,
+      "recall5_micro": 0.9934,
+      "recall5_macro": 0.9941,
+      "ndcg5": 0.9876,
+      "ndcg50": 0.9897,
+      "mrr": 0.9971,
+      "all5": 0.9849,
+      "all10": 0.9957,
+      "all50": 0.9986,
+      "all5_feas": 0.9849
+     }
+    }
+   },
+   "delta_C8c_minus_C7b": {
+    "any5": 0.0016,
+    "recall5_micro": 0.0789,
+    "recall5_macro": 0.0709,
+    "ndcg5": 0.0929,
+    "ndcg50": 0.0642,
+    "mrr": 0.0482,
+    "all5": 0.1556,
+    "all10": 0.0549,
+    "all50": 0.0,
+    "all5_feas": 0.1556
+   },
+   "guardrail_harm": {},
+   "C8c_beats_C7b_on_dev": true
+  },
+  "OFFICIAL_VAL": {
+   "C0": {
+    "pooled": {
+     "any5": 0.984,
+     "recall5_micro": 0.7695,
+     "recall5_macro": 0.7935,
+     "ndcg5": 0.7735,
+     "ndcg50": 0.8401,
+     "mrr": 0.9064,
+     "all5": 0.5817,
+     "all10": 0.7397,
+     "all50": 0.9283,
+     "all5_feas": 0.5817
+    },
+    "per_ds": {
+     "2wiki_clean": {
+      "any5": 0.983,
+      "recall5_micro": 0.71,
+      "recall5_macro": 0.7468,
+      "ndcg5": 0.7399,
+      "ndcg50": 0.8199,
+      "mrr": 0.9094,
+      "all5": 0.5017,
+      "all10": 0.666,
+      "all50": 0.8913,
+      "all5_feas": 0.5017
+     },
+     "musique_clean": {
+      "any5": 0.9847,
+      "recall5_micro": 0.8155,
+      "recall5_macro": 0.8286,
+      "ndcg5": 0.7987,
+      "ndcg50": 0.8553,
+      "mrr": 0.9042,
+      "all5": 0.6419,
+      "all10": 0.7952,
+      "all50": 0.9561,
+      "all5_feas": 0.6419
+     }
+    }
+   },
+   "C7b": {
+    "pooled": {
+     "any5": 0.9867,
+     "recall5_micro": 0.7954,
+     "recall5_macro": 0.8166,
+     "ndcg5": 0.7926,
+     "ndcg50": 0.8533,
+     "mrr": 0.9114,
+     "all5": 0.6183,
+     "all10": 0.782,
+     "all50": 0.9406,
+     "all5_feas": 0.6183
+    },
+    "per_ds": {
+     "2wiki_clean": {
+      "any5": 0.989,
+      "recall5_micro": 0.7512,
+      "recall5_macro": 0.7849,
+      "ndcg5": 0.766,
+      "ndcg50": 0.8382,
+      "mrr": 0.9087,
+      "all5": 0.5573,
+      "all10": 0.733,
+      "all50": 0.9217,
+      "all5_feas": 0.5573
+     },
+     "musique_clean": {
+      "any5": 0.9849,
+      "recall5_micro": 0.8297,
+      "recall5_macro": 0.8405,
+      "ndcg5": 0.8125,
+      "ndcg50": 0.8648,
+      "mrr": 0.9134,
+      "all5": 0.6642,
+      "all10": 0.8188,
+      "all50": 0.9548,
+      "all5_feas": 0.6642
+     }
+    }
+   },
+   "C8c": {
+    "pooled": {
+     "any5": 0.9941,
+     "recall5_micro": 0.8894,
+     "recall5_macro": 0.903,
+     "ndcg5": 0.8824,
+     "ndcg50": 0.9114,
+     "mrr": 0.9569,
+     "all5": 0.7771,
+     "all10": 0.8736,
+     "all50": 0.9406,
+     "all5_feas": 0.7771
+    },
+    "per_ds": {
+     "2wiki_clean": {
+      "any5": 0.999,
+      "recall5_micro": 0.8794,
+      "recall5_macro": 0.9044,
+      "ndcg5": 0.8834,
+      "ndcg50": 0.9124,
+      "mrr": 0.9597,
+      "all5": 0.7617,
+      "all10": 0.8653,
+      "all50": 0.9217,
+      "all5_feas": 0.7617
+     },
+     "musique_clean": {
+      "any5": 0.9905,
+      "recall5_micro": 0.8971,
+      "recall5_macro": 0.9019,
+      "ndcg5": 0.8816,
+      "ndcg50": 0.9107,
+      "mrr": 0.9548,
+      "all5": 0.7887,
+      "all10": 0.8798,
+      "all50": 0.9548,
+      "all5_feas": 0.7887
+     }
+    }
+   },
+   "delta_C8c_minus_C7b": {
+    "any5": 0.0074,
+    "recall5_micro": 0.094,
+    "recall5_macro": 0.0864,
+    "ndcg5": 0.0898,
+    "ndcg50": 0.0581,
+    "mrr": 0.0455,
+    "all5": 0.1588,
+    "all10": 0.0916,
+    "all50": 0.0,
+    "all5_feas": 0.1588
+   },
+   "delta_C8c_minus_C0": {
+    "any5": 0.0102,
+    "recall5_micro": 0.1199,
+    "recall5_macro": 0.1095,
+    "ndcg5": 0.1089,
+    "ndcg50": 0.0713,
+    "mrr": 0.0505,
+    "all5": 0.1954,
+    "all10": 0.1339,
+    "all50": 0.0123,
+    "all5_feas": 0.1954
+   }
+  },
+  "bootstrap_C8c_vs_C7b_VAL": {
+   "ndcg5": {
+    "delta": 0.0898,
+    "ci95": [
+     0.0861,
+     0.0937
+    ],
+    "frac_boot>0": 1.0,
+    "significant": true
+   },
+   "recall5_macro": {
+    "delta": 0.0864,
+    "ci95": [
+     0.0815,
+     0.0911
+    ],
+    "frac_boot>0": 1.0,
+    "significant": true
+   },
+   "ndcg50": {
+    "delta": 0.0581,
+    "ci95": [
+     0.0556,
+     0.0607
+    ],
+    "frac_boot>0": 1.0,
+    "significant": true
+   },
+   "all50": {
+    "delta": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "frac_boot>0": 0.0,
+    "significant": false
+   }
+  },
+  "TOP5_GOLD_RESCUE_dev": {
+   "2wiki_clean": {
+    "rescued_into_top5_by_source_bin": {
+     "5-9": 152,
+     "10-19": 38,
+     "20-49": 7,
+     "50-99": 0,
+     "100-499": 0,
+     "500+": 0
+    },
+    "TOP5_GOLD_RESCUE": 197,
+    "TOP5_GOLD_HURT": 19,
+    "NET_TOP5_GOLD_GAIN": 178
+   },
+   "musique_clean": {
+    "rescued_into_top5_by_source_bin": {
+     "5-9": 206,
+     "10-19": 65,
+     "20-49": 5,
+     "50-99": 0,
+     "100-499": 0,
+     "500+": 0
+    },
+    "TOP5_GOLD_RESCUE": 276,
+    "TOP5_GOLD_HURT": 8,
+    "NET_TOP5_GOLD_GAIN": 268
+   },
+   "pooled": {
+    "TOP5_GOLD_RESCUE": 473,
+    "TOP5_GOLD_HURT": 27,
+    "NET_TOP5_GOLD_GAIN": 446
+   }
+  }
+ },
+ "GATES": {
+  "TOP5_HEADROOM_EXISTS": "YES",
+  "TOP5_FAILURE_MOSTLY_L1": "NO",
+  "TOP5_FAILURE_MOSTLY_L2_RANKING": "YES",
+  "TOP5_ARCHETYPE_DISTILLATION_HELPS": "NO",
+  "TOP50_RERANKER_NEEDED": "YES",
+  "TOP50_RERANKER_HELPS": "YES",
+  "C8_BEATS_C7B_TOP5": "YES",
+  "C8_PRESERVES_DEEP_RECALL": "YES",
+  "SAFE_TO_CONTINUE_TOP5_OPTIMIZATION": "YES",
+  "SAFE_TO_FREEZE_L2": "NO"
+ }
+}

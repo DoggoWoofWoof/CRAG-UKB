@@ -1,0 +1,182 @@
+{
+ "RECORD": "L1_LOWMEM_DOWNSTREAM",
+ "dataset": "squad",
+ "utc": "2026-09-13T16:28:33Z",
+ "arms": {
+  "A": "canonical Mt-KaHyPar H4_SK (results/L1_CANONICAL/L1_REPLAY_squad.json)",
+  "B": "FREIGHT connectivity (LOWMEM__FREIGHT_con)"
+ },
+ "B": {
+  "BASE_ALL_P50": 0.949,
+  "BASE_ANY_P50": 0.949,
+  "BASE_SCOPE_NODES": 5149.2,
+  "SAFE_ALL_P50": 0.972,
+  "SAFE_ANY_P50": 0.972,
+  "SAFE_SCOPE_NODES": 5140.4,
+  "BND_ALL_P50": 0.949,
+  "CORR": {
+   "dALL": 0.023,
+   "gained": 52,
+   "lost": 6,
+   "net": 46,
+   "mcnemar_p": 0.0,
+   "sig": true,
+   "gold_admitted": 52,
+   "gold_evicted": 6,
+   "churn_per_query": 4.431,
+   "churn_max": 6,
+   "queries_with_zero_churn": 21
+  },
+  "BALANCE": {
+   "npart": 202,
+   "blocks_used": 202,
+   "size_min": 72,
+   "size_max": 104,
+   "size_median": 104.0,
+   "size_mean": 100.16,
+   "size_p90": 104.0,
+   "size_p99": 104.0,
+   "size_cv": 0.0927,
+   "max_over_mean": 1.0383,
+   "ELIGIBLE": true
+  },
+  "CUT": {
+   "STRUCT": {
+    "edges": 744734,
+    "cut": 705231,
+    "edge_cut_fraction": 0.947
+   },
+   "KNN": {
+    "edges": 30609,
+    "cut": 19868,
+    "edge_cut_fraction": 0.6491
+   },
+   "NERX": {
+    "edges": 135287,
+    "cut": 127003,
+    "edge_cut_fraction": 0.9388
+   }
+  }
+ },
+ "population_B": {
+  "eval_split": "dev",
+  "sample_rule": "EVAL_SPLITS dev",
+  "nq": 2000,
+  "row_query_ids_sha256": "9b5fe782597fd485a94793c2cdb7d2fd6c7e890ea053f123b0e415b32fadff12"
+ },
+ "population_A": {
+  "eval_split": "dev",
+  "sample_rule": "EVAL_SPLITS dev",
+  "nq": 2000,
+  "row_query_ids_sha256": "9b5fe782597fd485a94793c2cdb7d2fd6c7e890ea053f123b0e415b32fadff12"
+ },
+ "identical_population": true,
+ "A": {
+  "BASE_ALL_P50": 0.9885,
+  "BASE_ANY_P50": 0.9885,
+  "BASE_SCOPE_NODES": 5089.2,
+  "SAFE_ALL_P50": 0.993,
+  "SAFE_ANY_P50": 0.993,
+  "SAFE_SCOPE_NODES": 5085.8,
+  "BND_ALL_P50": 0.9885,
+  "CORR": {
+   "dALL": 0.0045,
+   "gained": 9,
+   "lost": 0,
+   "net": 9,
+   "mcnemar_p": 0.00391,
+   "sig": true,
+   "gold_admitted": 9,
+   "gold_evicted": 0,
+   "churn_per_query": 3.725,
+   "churn_max": 6,
+   "queries_with_zero_churn": 229
+  },
+  "BALANCE": {
+   "npart": 202,
+   "blocks_used": 202,
+   "size_min": 49,
+   "size_max": 104,
+   "size_median": 102.0,
+   "size_mean": 100.16,
+   "size_p90": 104.0,
+   "size_p99": 104.0,
+   "size_cv": 0.0648,
+   "max_over_mean": 1.0383,
+   "ELIGIBLE": true
+  },
+  "CUT": {
+   "STRUCT": {
+    "edges": 744734,
+    "cut": 671052,
+    "edge_cut_fraction": 0.9011
+   },
+   "KNN": {
+    "edges": 30609,
+    "cut": 5948,
+    "edge_cut_fraction": 0.1943
+   },
+   "NERX": {
+    "edges": 135287,
+    "cut": 107962,
+    "edge_cut_fraction": 0.798
+   }
+  }
+ },
+ "paired": {
+  "SAFE_ALL_P50": {
+   "A_only_covered": 48,
+   "B_only_covered": 6,
+   "net_B_minus_A": -42,
+   "mcnemar_p": 0.0,
+   "sig": true,
+   "A": 0.993,
+   "B": 0.972,
+   "delta_B_minus_A": -0.021,
+   "relative_change": -0.0211
+  },
+  "BASE_ALL_P50": {
+   "A_only_covered": 91,
+   "B_only_covered": 12,
+   "net_B_minus_A": -79,
+   "mcnemar_p": 0.0,
+   "sig": true,
+   "A": 0.9885,
+   "B": 0.949,
+   "delta_B_minus_A": -0.0395,
+   "relative_change": -0.04
+  },
+  "nq": 2000
+ },
+ "safe_additions": {
+  "A": {
+   "gained": 9,
+   "lost": 0,
+   "net": 9
+  },
+  "B": {
+   "gained": 52,
+   "lost": 6,
+   "net": 46
+  }
+ },
+ "coverage": {
+  "BASE_ANY": {
+   "A": 0.9885,
+   "B": 0.949
+  },
+  "SAFE_ANY": {
+   "A": 0.993,
+   "B": 0.972
+  },
+  "BASE_SCOPE_NODES": {
+   "A": 5089.2,
+   "B": 5149.2
+  },
+  "SAFE_SCOPE_NODES": {
+   "A": 5085.8,
+   "B": 5140.4
+  }
+ },
+ "status": "PAIRED"
+}

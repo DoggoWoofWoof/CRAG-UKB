@@ -1,0 +1,132 @@
+{
+  "_config": {
+    "datasets": [
+      "webqsp",
+      "metaqa"
+    ],
+    "arms": [
+      "G1"
+    ],
+    "epochs": 25,
+    "seeds": 3,
+    "p_drop": 0.2,
+    "metric": "recall@k = golds_in_topk/ng"
+  },
+  "anchors_oracles": {
+    "webqsp": {
+      "dense": 9.46,
+      "splade": 10.48,
+      "offset": 39.3,
+      "coop_maxrank": 36.63,
+      "oracle_dense_splade_offset": 43.46,
+      "klmlp": 53.35,
+      "oracle_coop_vs_klmlp": 56.75,
+      "oracle_5way": 60.52
+    },
+    "metaqa": {
+      "dense": 19.43,
+      "splade": 77.08,
+      "offset": 59.32,
+      "coop_maxrank": 82.6,
+      "oracle_dense_splade_offset": 81.17,
+      "klmlp": 67.67,
+      "oracle_coop_vs_klmlp": 88.39,
+      "oracle_5way": 89.98
+    }
+  },
+  "results": {
+    "A_softmaxKL": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": 53.35,
+          "R@20": 72.58,
+          "R@50": 81.31,
+          "Hit@5": 71.43,
+          "Hit@50": 92.52
+        },
+        "metaqa": {
+          "R@5": 67.67,
+          "R@20": 78.53,
+          "R@50": 86.12,
+          "Hit@5": 75.73,
+          "Hit@50": 91.99
+        }
+      },
+      "seeds": 1
+    },
+    "G1": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            51.99,
+            0.98
+          ],
+          "R@20": [
+            70.62,
+            1.15
+          ],
+          "R@50": [
+            81.19,
+            0.37
+          ],
+          "Hit@5": [
+            70.3,
+            1.28
+          ],
+          "Hit@50": [
+            92.52,
+            0.56
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            71.5,
+            3.36
+          ],
+          "R@20": [
+            87.33,
+            3.07
+          ],
+          "R@50": [
+            93.23,
+            1.8
+          ],
+          "Hit@5": [
+            80.88,
+            4.14
+          ],
+          "Hit@50": [
+            96.82,
+            0.83
+          ]
+        }
+      },
+      "seeds": 3
+    }
+  },
+  "mean_query_gates": {
+    "G1": {
+      "webqsp": {
+        "dense": 0.131,
+        "offset": 0.772,
+        "splade": 0.11,
+        "relation": 0.254,
+        "path": 0.161
+      },
+      "metaqa": {
+        "dense": 0.151,
+        "offset": 0.942,
+        "splade": 0.415,
+        "relation": 0.002,
+        "path": 0.048
+      }
+    }
+  },
+  "coop_maxrank_baseline_R@5": {
+    "webqsp": 35.69,
+    "metaqa": 83.04,
+    "2wiki_clean": 89.63,
+    "musique_clean": 75.81,
+    "hotpotqa_clean": 77.05
+  }
+}

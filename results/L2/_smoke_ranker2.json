@@ -1,0 +1,244 @@
+{
+  "_config": {
+    "datasets": [
+      "webqsp",
+      "metaqa"
+    ],
+    "heldout": null,
+    "arms": [
+      "C_kl_xgbrank",
+      "D_xgbctrl_xgbrank",
+      "E_direct_xgbrank"
+    ],
+    "epochs": 1,
+    "seeds": 1,
+    "p_drop": 0.2,
+    "lam": 1.0,
+    "neg_cap": 150,
+    "note": "in-dist (target in training) + optional transfer sanity on heldout (never trained)."
+  },
+  "oracle": {
+    "webqsp": {
+      "standalone_R@5": {
+        "dense": 9.48,
+        "offset": 43.07,
+        "splade": 10.61,
+        "relation": 24.39,
+        "path": 8.39
+      },
+      "semantic_anchor_R@5": 9.93,
+      "per_query_expert_oracle_R@5": 59.38,
+      "n": 147
+    },
+    "metaqa": {
+      "standalone_R@5": {
+        "dense": 19.43,
+        "offset": 59.34,
+        "splade": 77.11,
+        "relation": 27.16
+      },
+      "semantic_anchor_R@5": 62.84,
+      "per_query_expert_oracle_R@5": 91.47,
+      "n": 1998
+    }
+  },
+  "results": {
+    "C_kl_xgbrank": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            49.71,
+            0.0
+          ],
+          "R@20": [
+            67.75,
+            0.0
+          ],
+          "R@50": [
+            75.84,
+            0.0
+          ],
+          "Hit@5": [
+            69.39,
+            0.0
+          ],
+          "Hit@50": [
+            89.12,
+            0.0
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            64.97,
+            0.0
+          ],
+          "R@20": [
+            75.73,
+            0.0
+          ],
+          "R@50": [
+            81.2,
+            0.0
+          ],
+          "Hit@5": [
+            75.98,
+            0.0
+          ],
+          "Hit@50": [
+            89.59,
+            0.0
+          ]
+        }
+      }
+    },
+    "D_xgbctrl_xgbrank": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            48.46,
+            0.0
+          ],
+          "R@20": [
+            66.71,
+            0.0
+          ],
+          "R@50": [
+            74.86,
+            0.0
+          ],
+          "Hit@5": [
+            67.35,
+            0.0
+          ],
+          "Hit@50": [
+            86.39,
+            0.0
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            65.33,
+            0.0
+          ],
+          "R@20": [
+            75.21,
+            0.0
+          ],
+          "R@50": [
+            79.64,
+            0.0
+          ],
+          "Hit@5": [
+            75.88,
+            0.0
+          ],
+          "Hit@50": [
+            88.29,
+            0.0
+          ]
+        }
+      }
+    },
+    "E_direct_xgbrank": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            51.85,
+            0.0
+          ],
+          "R@20": [
+            68.25,
+            0.0
+          ],
+          "R@50": [
+            76.94,
+            0.0
+          ],
+          "Hit@5": [
+            70.75,
+            0.0
+          ],
+          "Hit@50": [
+            89.8,
+            0.0
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            66.88,
+            0.0
+          ],
+          "R@20": [
+            78.24,
+            0.0
+          ],
+          "R@50": [
+            83.94,
+            0.0
+          ],
+          "Hit@5": [
+            79.58,
+            0.0
+          ],
+          "Hit@50": [
+            91.79,
+            0.0
+          ]
+        }
+      }
+    }
+  },
+  "importance": {
+    "C_kl_xgbrank": {
+      "top5[offset]": 769.8,
+      "pct[offset]": 139.1,
+      "score[offset]": 18.2,
+      "alpha_x_score[relation]": 15.5,
+      "q_avail[path]": 14.0,
+      "q_margin[offset]": 9.4,
+      "avail[relation]": 9.2,
+      "avail[path]": 7.7,
+      "q_pmax[offset]": 7.6,
+      "offset_evidence_adv": 7.6,
+      "alpha_x_score[splade]": 6.1,
+      "pct[path]": 6.0,
+      "alpha[dense]": 5.0,
+      "top5[relation]": 4.5,
+      "pct[relation]": 4.3
+    },
+    "D_xgbctrl_xgbrank": {
+      "top5[offset]": 967.9,
+      "pct[offset]": 127.6,
+      "score[offset]": 20.3,
+      "alpha_x_score[relation]": 12.9,
+      "q_pmax[offset]": 10.4,
+      "q_margin[offset]": 9.8,
+      "avail[path]": 9.7,
+      "q_avail[path]": 7.9,
+      "offset_evidence_adv": 7.8,
+      "alpha[path]": 7.7,
+      "alpha_x_score[splade]": 6.6,
+      "avail[relation]": 6.3,
+      "alpha[relation]": 6.2,
+      "alpha_x_score[path]": 6.1,
+      "pct[path]": 5.8
+    },
+    "E_direct_xgbrank": {
+      "top5[offset]": 1109.8,
+      "pct[offset]": 102.5,
+      "score[offset]": 16.9,
+      "q_avail[path]": 14.0,
+      "q_margin[offset]": 10.4,
+      "score[relation]": 9.7,
+      "avail[path]": 8.8,
+      "avail[relation]": 7.7,
+      "q_pmax[offset]": 7.0,
+      "pct[path]": 5.5,
+      "q_validfrac[relation]": 5.3,
+      "relation_coverage": 5.2,
+      "offset_evidence_adv": 4.7,
+      "pct[relation]": 4.6,
+      "pct[splade]": 4.2
+    }
+  }
+}

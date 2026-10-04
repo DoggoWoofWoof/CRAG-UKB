@@ -1,0 +1,129 @@
+{
+  "_what": "PER-DATASET source-contract approval status. This REPLACES the all-or-nothing _APPROVED_SOURCE_CONTRACTS gate, which must NOT be created while webqsp is blocked.",
+  "_authority": "Explicit user decision, 2026-09-05. Transcribed verbatim from the user's five-decision message. Not self-approved.",
+  "_criteria": "data/final_canonical/_APPROVAL_CRITERIA.md",
+  "FULL_CANONICAL_V1_STATUS": "READY_6_OF_6_SOURCE_CONTRACTS",
+  "WEBQSP_STATUS": "WEBQSP_UNBLOCKED_ROG_STANDARD_KG",
+  "_do_not_mark_locked_until": "WEBQSP_ROG_STANDARD passes construction + verification. The terminal status is LOCKED_6_OF_6_BENCHMARK_SUBSTRATES (NOT plain LOCKED_6_OF_6), because five datasets use their complete canonical retrieval universes while webqsp uses the standard published RoG Freebase benchmark graph.",
+  "approvals": {
+    "metaqa": {
+      "status": "APPROVED",
+      "target_n": 43234,
+      "note": "Existing exact-case canonical source approved as-is."
+    },
+    "musique": {
+      "status": "APPROVED",
+      "target_n": 117534,
+      "note": "Existing full official dataset paragraph universe (gold + distractor, all splits) approved as-is."
+    },
+    "squad": {
+      "status": "APPROVED",
+      "target_n": 20233,
+      "note": "Existing complete official train+dev context universe approved as-is."
+    },
+    "2wiki": {
+      "status": "APPROVED_WITH_CONTRACT_CHANGE_REQUIRED",
+      "target_n": 5989847,
+      "target_n_is": "EXPECTED -- derive and verify the exact count from the archive",
+      "REJECTED_previous_target": 398354,
+      "reason": "398,354 is the pooled question-context universe, not the full retrieval corpus. The official 2Wiki release states para_with_hyperlink.zip contains ALL articles/paragraphs with hyperlink information except error paragraphs. The asymmetry with Hotpot was real and is resolved in favour of the full universe.",
+      "canonical_source": "para_with_hyperlink.zip (official 2Wiki release)",
+      "embeddings": "DO NOT discard the existing 398,354 Dense/SPLADE rows. Map them into the full corpus and reuse every exact compatible row.",
+      "invalidates": "2wiki downstream artifacts (KNN, graph, H4, router caches, halo/SP1) -- but NOT necessarily the embeddings themselves."
+    },
+    "hotpotqa": {
+      "status": "APPROVED",
+      "target_n": 5233329,
+      "target_n_is": "EXPECTED -- derive exact N from source",
+      "canonical_source": "enwiki-20171001 introductory-paragraph / abstracts corpus (~1.55 GB)",
+      "REJECTED_alternative": "enwiki-20171001-pages-meta-current-withlinks-processed (7.4 GB, complete pages)",
+      "reason": "'Full corpus' here means the full OFFICIAL RETRIEVAL UNIVERSE for the benchmark, not every token in Wikipedia. The introductory-paragraph corpus is what HotpotQA FullWiki indexes for retrieval; the 7.4 GB archive is broader than the intended FullWiki retrieval corpus.",
+      "canonical_node_id": "hotpotqa:c<curid>",
+      "node_id_rationale": "curid is already a source-stable identity; hashing it buys nothing and makes debugging/remapping worse.",
+      "canonical_directory": "data/final_canonical/hotpotqa/",
+      "legacy_alias": "hotpotqa_clean (documented alias only)"
+    },
+    "webqsp": {
+      "status": "APPROVED_ROG_STANDARD_KG",
+      "_supersedes": "BLOCKED_PENDING_FREEBASE_SOURCE (2026-09-05, lifted same day by explicit user decision)",
+      "_authority": "Explicit user decision. Do not wait for an 88M-entity full Freebase dump.",
+      "dataset_name": "WEBQSP_ROG_STANDARD",
+      "CORPUS_TYPE": "STANDARD_BENCHMARK_KG_SUBGRAPH",
+      "definition": "The single fixed Freebase graph used by RoG and reused by later KGQA work: all triples within the maximum reasoning hops of question entities, taken over WebQSP + CWQ TOGETHER.",
+      "validation_targets": {
+        "entities": 2566291,
+        "relations": 7058,
+        "triples": 8309195,
+        "_note": "VALIDATION TARGETS, NOT HARD-CODED OUTPUTS. Derive from source and report any disagreement."
+      },
+      "REJECTED_alternatives": {
+        "full_raw_freebase": "~88M entities. Rejected: becomes a full-Freebase infrastructure project, and needs ~124 GB dense vs 118 GB free.",
+        "webqsp_only_union": "~1.30M entities / ~3.79M triples. Rejected: the paper graph is built from WebQSP + CWQ, so a WebQSP-only union is NOT the RoG paper graph.",
+        "legacy_781k": "RoG TEST-split subgraph union. Rejected: query-split-derived.",
+        "gold_injected_1316466": "Rejected: scratchpad/c1c2_webqsp.py:30-33 injected answer + topic entities."
+      },
+      "hard_rules": [
+        "Do NOT build a WebQSP-test-only graph.",
+        "Do NOT simply reproduce the current 781k substrate.",
+        "Do NOT inject topic entities, answer entities or gold nodes. Ever.",
+        "Do NOT treat the old ~1,316,466 gold-conditioned count as canonical.",
+        "Do NOT call the result full Freebase."
+      ],
+      "preserve": [
+        "entity/MID identity",
+        "source relation",
+        "target entity"
+      ],
+      "verify": [
+        "source revision/hash",
+        "entity count",
+        "relation count",
+        "triple count",
+        "duplicate triples",
+        "self loops",
+        "dangling endpoints",
+        "train/val/test independence"
+      ],
+      "connectivity_diagnostic": {
+        "metrics": [
+          "N entities",
+          "E triples",
+          "weakly connected components",
+          "largest component N",
+          "largest component pct",
+          "isolated nodes",
+          "median component size",
+          "top-10 component sizes"
+        ],
+        "_note": "It need NOT be one globally connected graph. What matters is that it is a proper relational graph and that we know how fragmented it is BEFORE H4."
+      },
+      "local_data_state": {
+        "rog_webqsp": "PRESENT: data/original/webqsp/rog_webqsp/ (5 parquet shards, train+validation+test, 494 MB)",
+        "rog_cwq": "ABSENT anywhere on the machine. REQUIRED for the WebQSP+CWQ union; without it the build yields the rejected ~1.30M WebQSP-only union. The user directive explicitly authorises reconstructing/downloading it, preferring official RoG artifacts/code.",
+        "storage": "~7.9 GB dense fp16 plus SPLADE at 2.57M nodes, against 118 GB free. The full-Freebase storage blocker does not apply."
+      }
+    }
+  },
+  "expected_final_corpus_table": {
+    "metaqa": 43234,
+    "2wiki": 5989847,
+    "musique": 117534,
+    "squad": 20233,
+    "hotpotqa": 5233329,
+    "webqsp": 2566291,
+    "_subtotal_excluding_webqsp": 11404177,
+    "_subtotal_excluding_webqsp_ORIGINALLY_RECORDED": 11403177,
+    "_subtotal_correction_note": "The five per-dataset targets in this same object sum to 11404177, not the 11403177 originally recorded (1,000 low). Only the DERIVED subtotal was corrected; no per-dataset target was touched and no decision changed. All five built corpora match their approved target exactly, and MANIFEST.json corpus_totals independently derives 11404177 from the built nodes.jsonl files.",
+    "_total_all_six": 13970468,
+    "_total_note": "webqsp is an APPROXIMATE paper-stated target; the built count may differ and must be reported if it does."
+  },
+  "_corpus_type_declaration": {
+    "metaqa": "FULL_CANONICAL_RETRIEVAL_UNIVERSE",
+    "2wiki": "FULL_CANONICAL_RETRIEVAL_UNIVERSE",
+    "musique": "FULL_CANONICAL_RETRIEVAL_UNIVERSE",
+    "squad": "FULL_CANONICAL_RETRIEVAL_UNIVERSE",
+    "hotpotqa": "FULL_CANONICAL_RETRIEVAL_UNIVERSE",
+    "webqsp": "STANDARD_BENCHMARK_KG_SUBGRAPH",
+    "_why_webqsp_differs": "WebQSP is fundamentally a KGQA benchmark. Published work defines an OPERATIONAL Freebase graph rather than a document corpus, so the literature-standard substrate is the correct comparable object. It must never be described as full Freebase."
+  }
+}

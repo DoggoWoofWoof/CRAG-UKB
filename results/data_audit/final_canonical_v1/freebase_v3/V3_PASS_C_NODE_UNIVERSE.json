@@ -1,0 +1,54 @@
+{
+  "schema": "V3_PASS_C_NODE_UNIVERSE/v1",
+  "generated_utc": "2026-09-07T01:08:46Z",
+  "elapsed_min": 21.88,
+  "parts": 128,
+  "NODE_COUNTS": {
+    "LITERAL": 105351616,
+    "CVT_MEDIATOR": 52272634,
+    "ENTITY_MID": 69839243,
+    "SCHEMA_TYPE": 2239,
+    "SCHEMA_PROPERTY": 20063,
+    "SCHEMA_OTHER": 37219,
+    "EXTERNAL_URI": 74454117
+  },
+  "TOTAL_NODES": 301977131,
+  "SOURCES": {
+    "subjects": 121616633,
+    "subjects_expected": 121616633,
+    "subjects_match": true,
+    "object_only_uris_distinct": 75008882,
+    "object_dictionary_rows_read": 76195025,
+    "literals_distinct": 105351616,
+    "literal_rows_read": 143874910,
+    "reading": "rows_read exceeds distinct because PASS B's repeat suppressor is a direct-mapped cache: it can emit a node twice but never drop one. The difference is the cache's miss rate, not lost data."
+  },
+  "INTEGRITY": {
+    "uid_string_collisions": 0,
+    "UID_INJECTIVE": true,
+    "object_nodes_that_are_also_subjects": 0,
+    "OBJECT_SUBJECT_DISJOINT": true,
+    "examples": [],
+    "reading": "UID_INJECTIVE false would mean two distinct nodes share a 64-bit UID, which makes every edge on either ambiguous; the remedy is to re-run PASS B under a salt, not to merge the nodes. OBJECT_SUBJECT_DISJOINT false would mean the node universe double counts."
+  },
+  "CVT": {
+    "declared_mediator_mids": 2211,
+    "resolved_to_type_paths": 1649,
+    "unresolved_mids": 562,
+    "type_object_type_rows_matched": 52301260,
+    "mediator_paths_with_at_least_one_instance": 1217,
+    "mediator_paths_never_instantiated": 432,
+    "cvt_nodes": 52272634,
+    "cvt_uids_found_in_subject_universe": 52272634,
+    "CVT_UID_ENCODING_AGREES": true,
+    "authority": "freebase.type_hints.mediator = true, frozen in V3_PASS_A_SCHEMA_FREEZE.json. No shape or degree heuristic participates.",
+    "name_space": "the declaration is on a MID; type.object.type names types by path only. The freeze's MID->path resolution is what makes the two joinable, and the unresolved MIDs are a bounded under-count stated here rather than hidden in a zero."
+  },
+  "ANSWERS": {
+    "ENTITY_MID": 69839243,
+    "CVT_MEDIATOR": 52272634,
+    "LITERAL": 105351616,
+    "OTHER": 74513638,
+    "TOTAL_NODES": 301977131
+  }
+}

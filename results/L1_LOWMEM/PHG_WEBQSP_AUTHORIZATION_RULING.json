@@ -1,0 +1,318 @@
+{
+ "RECORD": "PHG_WEBQSP_AUTHORIZATION_RULING",
+ "utc": "2026-09-13T20:41:50Z",
+ "classification": "PHG_SCALE_WEBQSP",
+ "dataset": "webqsp",
+ "ruled_by": "user, chat message of 2026-09-14 (transcript timestamp 2026-09-13T19:59:21Z) after the STOP_FOR_REVIEW of PHG_BRIDGE_REPORT.json",
+ "authorization_text_verbatim": "The MuSiQue bridge is a clear pass for feasibility. I\u2019d freeze it exactly as `PHG_SCALE_BRIDGE_COMPLETE` and authorize WebQSP next, but not while the host has only ~1.45 GB available.\nThe important result from MuSiQue is that the whole real chain worked:\n\n```text\nexact H4_SK\n\u2192 PHG NP=4\n\u2192 deterministic non-empty repair\n\u2192 P50\n\u2192 canonical L1\n```\n\nwith no tuning and without touching the canonical substrate. That is enough evidence to move from a bridge dataset to the first genuinely large lane.\nThe 9 empty blocks also don\u2019t concern me now. `PHG_NONEMPTY_REPAIR_V1` behaved exactly as intended: minimum number of moves, every move \u0394KM1=0, and no change to STRUCT/KNN cuts. It is now a legitimate part of the experimental PHG contract.\nFor WebQSP, though, I would add a resource preflight. MuSiQue was ~6.0M pins and reached 178 MB on the largest rank. WebQSP is ~29.6M pins, so it is a much larger job. I would not intentionally launch it into an already paging host with only ~1.45 GB available and then interpret the resulting failure as evidence against PHG.\nSend Claude this:\nAuthorize the WebQSP PHG scale run as the next experiment.\nFreeze the completed MuSiQue record unchanged:\n`PHG_SCALE_BRIDGE_COMPLETE`\nDo not rerun or tune MuSiQue.\nThe WebQSP run must use the exact existing experimental PHG contract:\n\n* dataset lane: canonical `WEBQSP_ROG_RESOLVED`\n* H4 construction: `H4_SPLIT_PRESERVE`\n* families: `STRUCT + KNN` only\n* tag: `H4_SK`\n* PHG connectivity/KM1 objective\n* NP = 4\n* identical frozen PHG parameter set\n* `PHG_EDGE_SIZE_THRESHOLD=1.0`\n* deterministic mode\n* same imbalance contract\n* `PHG_NONEMPTY_REPAIR_V1`\n* same P50 and canonical L1 downstream machinery\n* no parameter or rank-count tuning\n\nDo not touch the full 302M Freebase scale lane. This authorization is WebQSP V1 / RoG-resolved only.\nResource preflight\nDo NOT start the PHG partition while the host is actively paging or while only ~1.45 GB host memory is available.\nThe unrelated foreign process must remain untouched.\nWait until the unrelated process naturally releases enough memory for a clean attempt, then record immediately before launch:\n\n* host total / available memory\n* WSL total / available memory\n* swap usage\n* foreign-process RSS\n* number of MPI ranks\n* disk free space\n\nThis is not a PHG parameter change; it is an execution hygiene requirement so a host-starvation failure is not misclassified as an algorithmic resource failure.\nIf adequate clean memory never becomes available, record:\n`WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED`\nrather than killing unrelated work.\nPreregistration\nBefore executing WebQSP, write a new WebQSP-specific preregistration that pins:\n\n* frozen PHG small-dataset ruling\n* MuSiQue bridge result\n* WebQSP canonical dataset / node-order / H4_SK / stream hashes\n* PHG binary and driver hashes\n* repair implementation hash\n* NP=4\n* all effective PHG parameters\n* evaluation population\n* decision rules\n\nNo results from WebQSP may be inspected before this record is written.\nStage 1 \u2014 exact H4_SK structure gate\nRequire exact reconstruction of the canonical WebQSP H4_SK input:\n\n* node count\n* hyperedge count\n* pin count\n* vertex weights\n* hyperedge weights\n* global node positions\n* global hyperedge IDs\n* incidence multiset\n* canonical structure digest\n\nAny mismatch:\n`STRUCTURE_MISMATCH`\nand STOP.\nDo not silently remove large hyperedges or change the family set.\nStage 2 \u2014 PHG partition\nRun the frozen NP=4 contract.\nRecord:\n\n* partition wall time\n* total job wall time\n* peak RSS for every rank\n* aggregate rank RSS diagnostic\n* Zoltan connectivity\n* independently recomputed weighted KM1\n* imbalance\n* block min/p50/p95/max\n* empty block count\n* STRUCT cut\n* KNN cut\n\nRun the frozen deterministic repeat check if it remains feasible under the existing protocol.\nDo not change NP if NP=4 fails.\nIf NP=4 cannot complete because of genuine rank/process memory requirements on an otherwise clean host, record:\n`WEBQSP_NP4_RESOURCE_INFEASIBLE`\nand STOP_FOR_REVIEW.\nA different rank count requires a separate ruling because MPI rank count is part of the PHG experimental contract.\nStage 3 \u2014 non-empty repair\nIf empty parts exist, apply the already-frozen:\n`PHG_NONEMPTY_REPAIR_V1`\nwithout modification.\nRecord every move and exact \u0394KM1.\nRequire after repair:\n\n* all nodes assigned once\n* same k\n* zero empty blocks\n* maximum-size bound satisfied\n* exact H4_SK unchanged\n\nDo not create any new minimum-part-size condition.\nStage 4 \u2014 canonical L1\nIf the repaired partition is valid:\nPHG partition\n\u2192 canonical P50\n\u2192 canonical replay cache\n\u2192 unchanged canonical L1 evaluation\nUse only the already-authorized non-test WebQSP evaluation population (`train_holdout`; test remains barred).\nReport:\n\n* BASE_ALL\n* SAFE_ALL\n* BASE_ANY\n* SAFE_ANY\n* candidate coverage\n* SAFE additions\n* scope\n* hop-wise results if already defined for this population\n* all existing L1 sanity checks\n\nIf a valid frozen Mt-KaHyPar WebQSP comparison exists on exactly the same representation/evaluation contract, report it separately.\nDo NOT compare current NAME_ONLY canonical WebQSP numerically against a legacy NAME+FACTS result as if it were a reproduction target.\nIf there is no truly comparable canonical Mt-KaHyPar reference, classify this as a scale/absolute-L1 result rather than claiming equivalence.\nInterpretation\nPartition equality with Mt-KaHyPar is NOT required.\nKM1 and edge-cut metrics are diagnostics.\nThe primary scientific question is:\nCan the frozen PHG contract produce a valid partition of the exact canonical WebQSP H4_SK and carry it through unchanged canonical L1 with sane retrieval behavior at a memory footprint that makes the scale lane practical?\nDo not tune PHG based on WebQSP L1 outcomes.\nSTOP_FOR_REVIEW after WebQSP.\nDo not proceed automatically to HotpotQA or 2Wiki.\nOne thing I especially want preserved is the WebQSP representation distinction. This run is canonical `NAME_ONLY`. Any old WebQSP Mt-KaHyPar/L1 number obtained from the legacy `NAME + verbalized facts` corpus is not a fair paired baseline. It can be shown as historical context only.\nSo the progression now is:\n\n```text\nSQuAD          PHG quality evidence       \u2713\nMetaQA         PHG quality evidence       \u2713\nMuSiQue        PHG feasibility bridge     \u2713\nWebQSP         first large-scale test      NEXT\nHotpotQA       unauthorized\n2Wiki          unauthorized\n```\n\nIf WebQSP completes on NP=4 with the exact H4_SK structure and canonical L1 runs successfully, then we have much stronger evidence that the original single-machine Mt-KaHyPar memory wall is no longer blocking canonical L1.",
+ "authorization_text_sha256": "6a88c77477799a25aa10283a082a2fa0b763b4c12788865891ce01de941d8efc",
+ "musique_frozen_unchanged": {
+  "DECISION": "PHG_SCALE_BRIDGE_COMPLETE",
+  "no_rerun_no_tuning": true,
+  "records": {
+   "PHG_BRIDGE_PREREG.json": {
+    "path": "results/L1_LOWMEM/PHG_BRIDGE_PREREG.json",
+    "bytes": 20761,
+    "sha256": "7cb6cbe2fc29c7497849e1391ff9751bad848354d84cebb2ced2c80bf7bea95b"
+   },
+   "PHG_BRIDGE_RUNS_musique.json": {
+    "path": "results/L1_LOWMEM/PHG_BRIDGE_RUNS_musique.json",
+    "bytes": 93008,
+    "sha256": "704a4126e508b9cc2fb594d4956d04481450ce1447dbb40de57d821c8bd4a26d"
+   },
+   "PHG_BRIDGE_REPORT.json": {
+    "path": "results/L1_LOWMEM/PHG_BRIDGE_REPORT.json",
+    "bytes": 19116,
+    "sha256": "785cf55c78a7b9427599002a98a43102ebf7e81241679075ab6525a515b941db"
+   },
+   "PHG_BRIDGE_REPORT.md": {
+    "path": "results/L1_LOWMEM/PHG_BRIDGE_REPORT.md",
+    "bytes": 5871,
+    "sha256": "22e0d8d00c1c9fc90731f414ff75564aea47465adfd74e703393927927a070cc"
+   },
+   "L1_REPLAY_musique__LOWMEM__PHG_C1_con.json": {
+    "path": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json",
+    "bytes": 35090,
+    "sha256": "207ad4bb3b292f7930bafba94551881896d54e80edc89974bc28c6bad71dac76"
+   },
+   "L1_DOWNSTREAM_musique__phg_c1.json": {
+    "path": "results/L1_LOWMEM/L1_DOWNSTREAM_musique__phg_c1.json",
+    "bytes": 1593,
+    "sha256": "a7197129a4f80aa51feba465c1133c120b8c52c2df8be200f69fe7f266be2f43"
+   }
+  },
+  "data_files": {
+   "parts_npy": {
+    "path": "data/l1_canonical/musique/parts/LOWMEM__PHG_C1_con.npy",
+    "bytes": 940400,
+    "sha256": "5886ddb62c0eba6b841b9f429444c51782f1bb9413feab4041c01d14e69a51c7"
+   },
+   "parts_json": {
+    "path": "data/l1_canonical/musique/parts/LOWMEM__PHG_C1_con.json",
+    "bytes": 8960,
+    "sha256": "4fd21a4c411216ce422bf3292bcc11c610a945e2db3c1e0b1760cd27b4be3246"
+   },
+   "replay_cache_npz": {
+    "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+    "bytes": 6183023,
+    "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5"
+   },
+   "replay_cache_json": {
+    "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.json",
+    "bytes": 6165,
+    "sha256": "d444b9e6b3bdcc01b50612747b6a749b3c40e7d69b5f86b3cd0a849341d214cc"
+   },
+   "repaired_npy": {
+    "path": "data/l1_lowmem/musique/phg_repair1/repaired.npy",
+    "bytes": 940400,
+    "sha256": "5886ddb62c0eba6b841b9f429444c51782f1bb9413feab4041c01d14e69a51c7"
+   },
+   "phg_STAGE1_INPUT_VERIFIED.json": {
+    "path": "data/l1_lowmem/musique/phg/STAGE1_INPUT_VERIFIED.json",
+    "bytes": 4671,
+    "sha256": "bc27cb06913d72a8161cf3c63d80d2d170220ead91e1e82c934323c0868efcdb"
+   },
+   "phg_STAGE2_PHG_INPUT_CALLBACK_MANIFEST.json": {
+    "path": "data/l1_lowmem/musique/phg/STAGE2_PHG_INPUT_CALLBACK_MANIFEST.json",
+    "bytes": 2304,
+    "sha256": "d45130da1d217d02193bd913f59032faea4d705b4db1854b8f171cef7dbdebae"
+   },
+   "phg_STAGE3_PHG_PARTITION.json": {
+    "path": "data/l1_lowmem/musique/phg/STAGE3_PHG_PARTITION.json",
+    "bytes": 3204,
+    "sha256": "0e12f5eb921147c17dd3660f5b8df24f99fbddccc2695e2a3a94297c418d3c0f"
+   },
+   "phg_STAGE3b_REPAIR.json": {
+    "path": "data/l1_lowmem/musique/phg/STAGE3b_REPAIR.json",
+    "bytes": 5529,
+    "sha256": "d3aec92133d4c0cc7475f8821dc007d1435466b6264e3780362b42eb34456a86"
+   },
+   "phg_STAGE4_5_P50_REPLAY_ABSOLUTE.json": {
+    "path": "data/l1_lowmem/musique/phg/STAGE4_5_P50_REPLAY_ABSOLUTE.json",
+    "bytes": 2135,
+    "sha256": "23828b28d74ed133e06242422b9ea96ab665edfced28d720ef4c1b241cf3ac7b"
+   }
+  },
+  "numbers_as_frozen": {
+   "N": 117534,
+   "M": 250732,
+   "P": 6014938,
+   "k": 1175,
+   "km1_weighted": 85311179,
+   "peak_rss_mb_max_rank": 177.9,
+   "partition_wall_seconds": 34.824,
+   "repair_moves": 9,
+   "repair_delta_km1_total": 0,
+   "BASE_ALL_P50": 0.6415,
+   "SAFE_ALL_P50": 0.6965,
+   "BASE_ANY_P50": 0.9905,
+   "SAFE_ANY_P50": 0.992,
+   "downstream_status": "BASELINE_ABSENT"
+  }
+ },
+ "small_dataset_ruling": {
+  "path": "results/L1_LOWMEM/PHG_SMALL_DATASET_VALIDATION_RULING.json",
+  "bytes": 17869,
+  "sha256": "f7cc6337f009ecd4ac889a19d7ef2397aacc6e1f504be116331fc0d357e2a182"
+ },
+ "authorized": {
+  "dataset": "webqsp",
+  "classification": "PHG_SCALE_WEBQSP",
+  "lane": "WEBQSP_ROG_RESOLVED / BENCHMARK_CONDITIONED / query_independent NOT CLAIMED / MID completeness NOT REQUIRED FOR V1",
+  "encoding": "NAME_ONLY (results/L1_CANONICAL/KB_CORPUS_ENCODING_RULING.json: KEEP_NAME_ONLY; the legacy webqsp corpus was NAME + verbalised facts)",
+  "scope": "WebQSP V1 / RoG-resolved only",
+  "contract": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4 + PHG_NONEMPTY_REPAIR_V1",
+  "contract_elements_verbatim": [
+   "dataset lane: canonical WEBQSP_ROG_RESOLVED",
+   "H4 construction: H4_SPLIT_PRESERVE",
+   "families: STRUCT + KNN only",
+   "tag: H4_SK",
+   "PHG connectivity/KM1 objective",
+   "NP = 4",
+   "identical frozen PHG parameter set",
+   "PHG_EDGE_SIZE_THRESHOLD=1.0",
+   "deterministic mode",
+   "same imbalance contract",
+   "PHG_NONEMPTY_REPAIR_V1",
+   "same P50 and canonical L1 downstream machinery",
+   "no parameter or rank-count tuning"
+  ],
+  "evaluation_population": "the already-authorized non-test webqsp population: EVAL_SPLITS train_holdout (stride-2 carve of train by sorted query_id, carve digest recorded in CANONICAL_FREEZE.json); the test split remains barred",
+  "expected_scale": {
+   "N": 2592894,
+   "k": 25928,
+   "STRUCT_keys": 5882501,
+   "KNN_keys": 6313874,
+   "expected_pins_upper_bound": 29578538,
+   "keys_npz_sha256": "081c3fa4b27f56de9a91a3b5ece10f77182c6a072caf35aa3691adcb41043c5e",
+   "expected_stream_shards_at_5000_nodes": 519
+  }
+ },
+ "excluded": [
+  "the full 302M Freebase scale lane (CRAG_FREEBASE_CANONICAL) -- not touched",
+  "hotpotqa",
+  "2wiki",
+  "any NP change (a different rank count needs a separate ruling)",
+  "any PHG parameter change",
+  "any new minimum-part-size condition",
+  "any MuSiQue rerun or tuning",
+  "any tuning on WebQSP L1 outcomes",
+  "any numeric comparison of the canonical NAME_ONLY result against the legacy NAME + verbalised-facts webqsp cells",
+  "any equivalence claim without a truly comparable canonical Mt-KaHyPar reference"
+ ],
+ "resource_preflight_requirement": {
+  "classification": "execution hygiene requirement, not a PHG parameter change",
+  "criterion": {
+   "host_available_gb_min": 6.0,
+   "pages_input_per_sec_max": 300.0,
+   "pages_samples": 5,
+   "wsl_available_mb_min": 5000,
+   "disk_free_gb_min": 8.0,
+   "swap_growth_gb_max_between_samples": 0.1,
+   "consecutive_clean_samples": 3,
+   "sample_spacing_seconds_wait_loop": 60,
+   "sample_spacing_seconds_in_run": 20,
+   "wait_budget_hours": 24.0,
+   "what_is_recorded_immediately_before_every_launch": [
+    "host total / available memory",
+    "WSL total / available memory",
+    "swap usage (host and WSL)",
+    "foreign-process RSS (pid 8628 and every python process over 1 GB RSS)",
+    "number of MPI ranks",
+    "disk free space",
+    "Pages Input/sec (typeperf, 5 x 1 s)"
+   ],
+   "derivation": {
+    "host_available_gb_min": "6.0 >= 1.7 x the predicted summed PHG rank footprint (~ 3.5 GB, see wsl_available_mb_min) and ~ the predicted peak of the largest host-Python stage: the semantic gate (freight.semantic_gate, pinned) parses the official net-list and the shards independently -- per-node-line numpy objects plus three O(P) int64 arrays, concatenated, sorted, then CSR -- at P ~ 29.6M that is ~ 4-6 GB with the canonical CSR and the digest temporaries; the repair / KM1 recomputation ~ 2 GB; the L1 replay-cache builder streams the 8.0 GB fp16 shards memory-mapped (page cache, not RSS) plus ~ 1.5 GB of arrays.  A MemoryError in the host-Python input chain is a harness retry after a new clean preflight, never evidence about PHG",
+    "wsl_available_mb_min": "5000 >= 1.4 x the predicted summed rank peak: musique R1 peaked at 177.9 MB on the largest rank at 6,014,938 pins; webqsp has ~ 29.6M pins (x 4.92) -> ~ 0.9 GB per rank, <= 3.5 GB summed over 4 ranks inside the 7.8 GB WSL VM, plus the page cache of the ~ 0.3 GB shard files",
+    "pages_input_per_sec_max": "300: the contended host measured 26,000-64,000 hard-fault pages/s (2026-09-14 01:39-01:47 local, ~ 0.5-0.7 GB available, swap 6.9-7.8 GB); an idle host reads under ~ 100; 300 sits two orders of magnitude under the contended readings and above idle noise -- it operationalises 'actively paging'",
+    "disk_free_gb_min": "8.0 = the canonical replay-cache builder's 5 GB free-space floor + ~ 1.8 GB of new webqsp artefacts (hgr, shards, net-list, PHG dumps, replay cache) + margin",
+    "swap_growth": "a host whose available memory reads high only while it is paging out is not clean: swap use may not grow by more than 0.1 GB between consecutive samples",
+    "consecutive_samples": "3 consecutive clean samples (60 s apart in the wait loop; 20 s apart immediately before each launch inside the run) so a transient dip of the foreign process's working set does not trigger a launch",
+    "wait_budget": "24 h from arming; if the host is never clean for that long, WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED is recorded and nothing is launched; the foreign process is never signalled",
+    "status": "set before any WebQSP artefact exists; gates execution hygiene only -- no PHG parameter, rank count, objective or representation depends on it"
+   },
+   "user_requirement_verbatim": "Do NOT start the PHG partition while the host is actively paging or while only ~1.45 GB host memory is available. The unrelated foreign process must remain untouched. Wait until the unrelated process naturally releases enough memory for a clean attempt, then record immediately before launch: host total / available memory; WSL total / available memory; swap usage; foreign-process RSS; number of MPI ranks; disk free space. This is not a PHG parameter change; it is an execution hygiene requirement so a host-starvation failure is not misclassified as an algorithmic resource failure. If adequate clean memory never becomes available, record: WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED rather than killing unrelated work."
+  },
+  "if_never_clean": "WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED",
+  "foreign_process": "pid 8628 remains untouched",
+  "host_at_ruling": {
+   "utc": "2026-09-13T20:41:50Z",
+   "purpose": "at_ruling",
+   "host_total_gb": 15.69,
+   "host_available_gb": 0.57,
+   "host_percent_used": 96.4,
+   "swap_used_gb": 7.52,
+   "swap_total_gb": 30.65,
+   "pages_input_per_sec_samples": [
+    10906.519328,
+    60954.798671,
+    16790.325455,
+    12423.359455,
+    12864.2831
+   ],
+   "pages_input_per_sec_mean": 22787.9,
+   "typeperf_available_mbytes": [
+    609.0,
+    602.0,
+    653.0,
+    595.0,
+    680.0
+   ],
+   "typeperf_error": null,
+   "wsl": {
+    "wsl_total_mb": 7789,
+    "wsl_used_mb": 374,
+    "wsl_free_mb": 7103,
+    "wsl_buff_cache_mb": 311,
+    "wsl_available_mb": 7187,
+    "wsl_swap_total_mb": 2048,
+    "wsl_swap_used_mb": 0,
+    "wsl_loadavg_1_5_15": [
+     1.38,
+     0.4,
+     0.14
+    ]
+   },
+   "disk_free_gb": 14.2,
+   "foreign_processes": [
+    {
+     "pid": 8628,
+     "name": "python.exe",
+     "rss_mb": 5503,
+     "private_mb": 10126,
+     "started": "2026-09-13T20:29:08"
+    }
+   ],
+   "foreign_pid": 8628,
+   "foreign_pid_present": true,
+   "foreign_pid_rss_mb": 5503,
+   "mpi_ranks": 4,
+   "swap_growth_gb_since_previous": null,
+   "checks": {
+    "host_available_ge_min": false,
+    "not_paging": false,
+    "wsl_available_ge_min": true,
+    "disk_free_ge_min": true,
+    "swap_not_growing": true
+   },
+   "CLEAN": false
+  },
+  "host_at_ruling_verdict": "CONTENDED"
+ },
+ "stages_required": [
+  "preregistration written before any PHG run (no WebQSP result inspected before it)",
+  "stage 1 exact H4_SK structure gate (node / hyperedge / pin counts, unit vertex weights, hyperedge weights, global node positions, global hyperedge ids, incidence multiset, canonical structure digest) -> STRUCTURE_MISMATCH and STOP on any mismatch; no hyperedge removed, family set unchanged",
+  "stage 2 PHG partition under the frozen NP=4 contract with the full measurement list; deterministic repeat check if feasible; WEBQSP_NP4_RESOURCE_INFEASIBLE + STOP_FOR_REVIEW on a genuine memory failure on an otherwise clean host; NP never changed",
+  "stage 3 PHG_NONEMPTY_REPAIR_V1 unchanged if empty parts exist; every move and exact delta-KM1 recorded; postconditions: all nodes assigned once, same k, zero empty blocks, maximum-size bound satisfied, exact H4_SK unchanged; no new minimum-part-size condition",
+  "stage 4 PHG partition -> canonical P50 -> canonical replay cache -> unchanged canonical L1 evaluation on train_holdout only; report BASE_ALL, SAFE_ALL, BASE_ANY, SAFE_ANY, candidate coverage, SAFE additions, scope, hop-wise if defined, all existing L1 sanity checks"
+ ],
+ "reference_policy": {
+  "canonical_mtkahypar_webqsp_reference": "ABSENT (results/L1_CANONICAL/L1_REPLAY_webqsp.json and data/l1_canonical/webqsp/parts/H4_SK.npy do not exist; EXTERNAL_LANE_MEMORY_EXPECTATION.json: NOT_FEASIBLE_AT_250GB)",
+  "classification_if_absent": "scale / absolute-L1 result; no equivalence claim",
+  "legacy_name_plus_facts_cells": "historical context only; never a paired baseline; never compared numerically"
+ },
+ "interpretation": {
+  "partition_equality_with_mtkahypar_required": false,
+  "km1_and_edge_cut": "diagnostics",
+  "primary_question": "Can the frozen PHG contract produce a valid partition of the exact canonical WebQSP H4_SK and carry it through unchanged canonical L1 with sane retrieval behaviour at a memory footprint that makes the scale lane practical?",
+  "no_tuning_on_webqsp_l1_outcomes": true,
+  "after": "STOP_FOR_REVIEW; HotpotQA / 2Wiki not proceeded to automatically"
+ },
+ "progression": {
+  "squad": "PHG quality evidence -- done",
+  "metaqa": "PHG quality evidence -- done",
+  "musique": "PHG feasibility bridge -- done",
+  "webqsp": "first large-scale test -- NEXT (this authorization)",
+  "hotpotqa": "unauthorized",
+  "2wiki": "unauthorized"
+ },
+ "evidence_pins": {
+  "KB_CORPUS_ENCODING_RULING.json": {
+   "path": "results/L1_CANONICAL/KB_CORPUS_ENCODING_RULING.json",
+   "bytes": 5490,
+   "sha256": "ad46700c6aa653ff7d2585732703c02dbb9b941177ca4ed3c4b0571d72e5628d"
+  },
+  "RETURN_TO_L1_BASELINE.json": {
+   "path": "results/L1_CANONICAL/RETURN_TO_L1_BASELINE.json",
+   "bytes": 9909,
+   "sha256": "c822e68cb76bc602177537616f679c693a935e54a7eb68e34ee4a9d0061f65db"
+  },
+  "L1_CANONICAL_MANIFEST.json": {
+   "path": "results/L1_CANONICAL/L1_CANONICAL_MANIFEST.json",
+   "bytes": 29763,
+   "sha256": "2bf7637ecef3188f477fd4eac54e32b3f7fca29bb29ede1a2d5bb9356b887e37"
+  },
+  "EXTERNAL_LANE_MEMORY_EXPECTATION.json": {
+   "path": "results/L1_CANONICAL/EXTERNAL_LANE_MEMORY_EXPECTATION.json",
+   "bytes": 10205,
+   "sha256": "c86ba8a5e10ba67cd9d017d6bcc02558baeb83b82fbf74839b0e979862ec35f7"
+  }
+ },
+ "legacy_context_pin": {
+  "path": "results/L1/L1_LOCKED_MANIFEST.json",
+  "bytes": 27436,
+  "sha256": "e12f341cd023ee0a392de1fd0de1c436584f619153b70e00f761479b3236348d"
+ },
+ "not_done_by_this_record": "nothing executed; no WebQSP artefact exists yet; the inputs are built only after the host is clean; the preregistration is written after the inputs and before any PHG run"
+}

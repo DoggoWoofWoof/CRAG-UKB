@@ -1,0 +1,186 @@
+{
+ "generated": "2026-08-26",
+ "phase": "Canonical gte-Qwen2 masked Relation (TRAIN+VAL build, VAL decision)",
+ "test_frozen": true,
+ "selection_split": "VAL",
+ "pilots": [
+  "2wiki_clean",
+  "musique_clean"
+ ],
+ "encoder": {
+  "RELATION_ENCODER": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+  "dim": 1536,
+  "RELATION_Q_EMBED_REUSE": "PASS",
+  "Q_MODEL": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+  "Q_DIM": 1536,
+  "Q_PROMPT": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+  "Q_POOLING": "last-token (gte-Qwen2 default via sentence-transformers)",
+  "Q_NORMALIZATION": "L2 (unit)",
+  "QUERY_ENCODING_TEMPLATE": "normalize(gteQwen(Q_PROMPT + query))  == cached queries_all.npy (reused, NOT re-encoded)",
+  "RELATION_SENTENCE_ENCODING_TEMPLATE": "normalize(gteQwen(sentence))  RAW, doc_prefix=\"\" (CANONICAL document semantics == nodes.npy); fp16 weights, max_seq_length=256",
+  "SENTENCE_ENCODING_NOTE": "the old kg_relsig applied the QUERY instruction to the connecting sentence; that is NON-canonical (asymmetric gte-Qwen2 design = instructed query / raw passage) and is CORRECTED here to raw/document encoding"
+ },
+ "sentences": {
+  "N_UNIQUE_GLOBAL": 19235,
+  "per_split_counts": {
+   "2wiki_clean/train": 11388,
+   "2wiki_clean/val": 3464,
+   "musique_clean/train": 4101,
+   "musique_clean/val": 1617
+  },
+  "encode_profile": "19235 sentences, gte-Qwen2 fp16 on Modal A10G, 60.3s (3.1 ms/sent), model load 35s"
+ },
+ "mask_parity": {
+  "2wiki_clean": {
+   "split": "val",
+   "n_pairs": 15086505,
+   "qwen_eligible": 5284,
+   "minilm_eligible": 5284,
+   "QWEN_RELATION_MASK_PARITY": "PASS"
+  },
+  "musique_clean": {
+   "split": "val",
+   "n_pairs": 20101830,
+   "qwen_eligible": 10633,
+   "minilm_eligible": 10633,
+   "QWEN_RELATION_MASK_PARITY": "PASS"
+  }
+ },
+ "eligible_pairs": {
+  "2wiki_clean/train": 18269,
+  "2wiki_clean/val": 5284,
+  "musique_clean/train": 38321,
+  "musique_clean/val": 10633
+ },
+ "val_result": {
+  "2wiki_clean": {
+   "metrics": {
+    "E3": {
+     "MRR": 0.9286,
+     "R@5": 0.647,
+     "R@10": 0.7641,
+     "R@20": 0.8637,
+     "R@50": 0.9118,
+     "ALL@10": 0.5233,
+     "ALL@20": 0.6873,
+     "ALL@50": 0.767
+    },
+    "E3+relation_qwen": {
+     "MRR": 0.9095,
+     "R@5": 0.747,
+     "R@10": 0.8478,
+     "R@20": 0.9202,
+     "R@50": 0.9652,
+     "ALL@10": 0.6657,
+     "ALL@20": 0.793,
+     "ALL@50": 0.8913
+    }
+   },
+   "gold_level": {
+    "n_eligible_golds": 2073,
+    "eligible_gold_base_missed>=50_frac": 0.2407,
+    "GOLD_RESCUE@5": 806,
+    "GOLD_HURT@5": 0,
+    "GOLD_RESCUE@5_base_missed>=50": 21,
+    "GOLD_RESCUE@10": 698,
+    "GOLD_HURT@10": 0,
+    "GOLD_RESCUE@10_base_missed>=50": 66,
+    "GOLD_RESCUE@20": 503,
+    "GOLD_HURT@20": 0,
+    "GOLD_RESCUE@20_base_missed>=50": 128,
+    "GOLD_RESCUE@50": 503,
+    "GOLD_HURT@50": 0,
+    "GOLD_RESCUE@50_base_missed>=50": 319
+   },
+   "ordering_agreement_vs_minilm": {
+    "n_queries_multi_eligible": 1484,
+    "n_queries_sole_eligible": 747,
+    "kendall_tau_eligible_order_mean": 0.6123,
+    "note": "sole-eligible queries (rank fixed=0) are encoder-invariant by construction"
+   }
+  },
+  "musique_clean": {
+   "metrics": {
+    "E3": {
+     "MRR": 0.9213,
+     "R@5": 0.8195,
+     "R@10": 0.9016,
+     "R@20": 0.9567,
+     "R@50": 0.9788,
+     "ALL@10": 0.7849,
+     "ALL@20": 0.9039,
+     "ALL@50": 0.9518
+    },
+    "E3+relation_qwen": {
+     "MRR": 0.9041,
+     "R@5": 0.8287,
+     "R@10": 0.9066,
+     "R@20": 0.9586,
+     "R@50": 0.9803,
+     "ALL@10": 0.7952,
+     "ALL@20": 0.9079,
+     "ALL@50": 0.9558
+    }
+   },
+   "gold_level": {
+    "n_eligible_golds": 573,
+    "eligible_gold_base_missed>=50_frac": 0.0279,
+    "GOLD_RESCUE@5": 134,
+    "GOLD_HURT@5": 0,
+    "GOLD_RESCUE@5_base_missed>=50": 2,
+    "GOLD_RESCUE@10": 68,
+    "GOLD_HURT@10": 0,
+    "GOLD_RESCUE@10_base_missed>=50": 2,
+    "GOLD_RESCUE@20": 24,
+    "GOLD_HURT@20": 0,
+    "GOLD_RESCUE@20_base_missed>=50": 3,
+    "GOLD_RESCUE@50": 16,
+    "GOLD_HURT@50": 0,
+    "GOLD_RESCUE@50_base_missed>=50": 13
+   },
+   "ordering_agreement_vs_minilm": {
+    "n_queries_multi_eligible": 1270,
+    "n_queries_sole_eligible": 563,
+    "kendall_tau_eligible_order_mean": 0.6955,
+    "note": "sole-eligible queries (rank fixed=0) are encoder-invariant by construction"
+   }
+  }
+ },
+ "decision_gates": {
+  "RELATION_Q_EMBED_REUSE": "PASS",
+  "N_QWEN_SENTENCES_ENCODED": 19235,
+  "QWEN_RELATION_MASK_PARITY": "PASS (both VAL; topology mask encoder-independent)",
+  "QWEN_RELATION_VAL_RESULT": "2wiki E3+rel R@5 .747(+10.0)/ALL@10 .666(+14.2)/ALL@50 .891(+12.4)/MRR .910(-1.9); musique NEUTRAL R@5 .829(+0.9)/ALL@10 .795(+1.0); GOLD_HURT=0 both",
+  "QWEN_VS_MINILM_DELTA": "<=0.0014 on every metric (max |d|=ALL@50 2wiki 0.0014) despite eligible-order Kendall tau ~0.6 -> mask carries the value",
+  "QWEN_GOLD_RESCUE": "2wiki GOLD_RESCUE@50=503 (319 base-missed>=50), @10=698(66 base-missed); musique @50=16(13 base-missed)",
+  "QWEN_GOLD_HURT": "0 at every K on BOTH datasets",
+  "RELATION_VALUE_FINAL": "MIXED: RESCUE_SPECIALIST(2wiki, realized cooperatively)/NEUTRAL(musique) \u2014 preserved under canonical encoder",
+  "FINAL_EXPERT_SET_READY": "YES {Dense, Exact-SPLADE, Offset, Mixture, Masked-Qwen-Relation}",
+  "EXPERT_MATRIX_TRAIN_READY": "YES",
+  "EXPERT_MATRIX_VAL_READY": "YES",
+  "SAFE_TO_START_EXACT_SHAPLEY": "YES (5-expert TRAIN+VAL matrix frozen; relation mask preserved; TEST untouched)",
+  "SAFE_TO_START_CONTROLLER": "NO"
+ },
+ "QWEN_VS_MINILM_DELTA": {
+  "2wiki_clean": {
+   "MRR": -0.0004,
+   "R@5": 0.0001,
+   "R@10": -0.0,
+   "R@20": -0.0001,
+   "R@50": -0.0003,
+   "ALL@10": 0.0,
+   "ALL@20": -0.0003,
+   "ALL@50": -0.0014
+  },
+  "musique_clean": {
+   "MRR": -0.0001,
+   "R@5": -0.0001,
+   "R@10": -0.0,
+   "R@20": -0.0,
+   "R@50": -0.0001,
+   "ALL@10": -0.0,
+   "ALL@20": -0.0,
+   "ALL@50": -0.0
+  }
+ }
+}

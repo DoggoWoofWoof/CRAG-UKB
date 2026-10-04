@@ -1,0 +1,81 @@
+{
+  "name": "cooperative_maxrank_baseline",
+  "definition": "CANONICAL deterministic: per-expert rank_pct=1-pos/n (missing->0) over {dense,splade,offset,relation}; fuse=elementwise max + 1e-6*sum(rank_pct) corroboration tie-break; rank stable; recall@5=golds_in_top5/ng. Single source of truth = crag_gates.coop_maxrank.",
+  "R@5": {
+    "webqsp": 35.69,
+    "metaqa": 83.04,
+    "2wiki_clean": 89.63,
+    "musique_clean": 75.81,
+    "hotpotqa_clean": 77.05
+  },
+  "supersedes": {
+    "note": "earlier 37.00/76.06/86.62/71.33/76.15 were tie-break + missing-handling fragile (gave missing candidates spurious rank credit); DO NOT USE",
+    "old": {
+      "webqsp": 37.0,
+      "metaqa": 76.06,
+      "2wiki_clean": 86.62,
+      "musique_clean": 71.33,
+      "hotpotqa_clean": 76.15
+    }
+  },
+  "vs_learned_LODO": {
+    "webqsp": {
+      "coop": 35.69,
+      "lodo": 34.29,
+      "delta": 1.4
+    },
+    "metaqa": {
+      "coop": 83.04,
+      "lodo": 74.7,
+      "delta": 8.34
+    },
+    "2wiki_clean": {
+      "coop": 89.63,
+      "lodo": 77.94,
+      "delta": 11.69
+    },
+    "musique_clean": {
+      "coop": 75.81,
+      "lodo": 68.74,
+      "delta": 7.07
+    },
+    "hotpotqa_clean": {
+      "coop": 77.05,
+      "lodo": 64.69,
+      "delta": 12.36
+    }
+  },
+  "vs_best_standalone": {
+    "webqsp": {
+      "coop": 35.69,
+      "best": 39.3,
+      "expert": "offset",
+      "delta": -3.61
+    },
+    "metaqa": {
+      "coop": 83.04,
+      "best": 77.08,
+      "expert": "splade",
+      "delta": 5.96
+    },
+    "2wiki_clean": {
+      "coop": 89.63,
+      "best": 75.92,
+      "expert": "offset",
+      "delta": 13.71
+    },
+    "musique_clean": {
+      "coop": 75.81,
+      "best": 66.63,
+      "expert": "dense",
+      "delta": 9.18
+    },
+    "hotpotqa_clean": {
+      "coop": 77.05,
+      "best": 70.98,
+      "expert": "splade",
+      "delta": 6.07
+    }
+  },
+  "note": "FROZEN universal baseline; every subsequent L2 table must beat this on all 5. Beats standalone SPLADE on metaqa (+6); only webqsp trails single best expert (offset)."
+}

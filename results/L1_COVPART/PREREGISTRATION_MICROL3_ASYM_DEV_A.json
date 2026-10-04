@@ -1,0 +1,58 @@
+{
+ "record": "PREREGISTRATION_MICROL3_ASYM_DEV_A",
+ "name": "MICRO_L3_H2_ASYM_REPAIR_DEV_A",
+ "STATUS": "POSTHOC_MECHANISM_TEST",
+ "written_utc": "2026-09-15T07:07:08Z",
+ "written_before_any_run": true,
+ "why_posthoc": "section 14 (MICRO_L3_H2) has already exposed DEV_A to this lane; whatever this test shows is mechanism evidence only and cannot become confirmatory; any promotion requires a population this lane has not read (WebQSP, or DEV_B by ruling)",
+ "ruling": "user, 2026-09-15: 'run #2 only -- asymmetric repair fusion. Do not run all three. Freeze the beam, transition scoring, seeds, depth, hub policy, embeddings, everything else exactly as in MICRO_L3_H2. Change only the interface between the served ranking and repair ranking: the served order remains authoritative; uL3 can repair only the weak tail of P50 ... Use the already-existing frozen HOLD/CORE rule in fuse. Do not invent a new hold size from these results ... identical MICRO_L3_H2 beam output; identical transition/node scores; exactly the already-frozen HOLD/CORE fusion semantics; exactly P50; no additional fallback; no dataset branches; evaluate all five caches; no DEV_B ... continuation gate: MetaQA hop2 must retain a substantial fraction of H2 gain, while none of the three text caches may show significant loss versus canonical L1. Do not invent a numerical MetaQA target; just report retention. If this fails, close uL3 H2 as an L1-repair mechanism. Do not then proceed to #1 and #3.' Candidates #1 (existential / best-beam-rank repair evidence) and #3 (served hits keep voting) remain UNRUN. The latent diagnostic (still running) is not used to modify this arm.",
+ "module": {
+  "path": "scratchpad/_l1c_microl3_asym.py",
+  "sha256": "f72518a5b2a1057ea212d7bbe79ab75ae8f5134b0fd82e5073a838474e262dd4",
+  "usage": "python -u _l1c_microl3_asym.py <cache>",
+  "beam_module": "scratchpad/_l1c_microl3.py",
+  "beam_module_sha256_asserted": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+  "reproduction_assertion": "the RRF-fused arm rebuilt from the re-executed beam must equal the recorded microl3_A_<cache>.json MICRO_L3_H2 (BASE_ALL, gained, lost) -- proves identical beam output"
+ },
+ "frozen_verbatim_from_MICRO_L3_H2": [
+  "SEED_K = 5 frozen replay-cache seeds (visited, not voting)",
+  "actual directed STRUCT adjacency; frozen hub policy (cap = round(N/npart) = 100; hub := deg_undirected + 1 > cap; out-neighbours always, in-neighbours only from non-hubs)",
+  "DEPTH = 2, BEAM = K_LOCK = 100 distinct targets per hop",
+  "transition ranking S_dst / S_dir / S_mid fused by RRF K0 = 60",
+  "repair channel = visited nodes (hop-1 beam then hop-2 beam) voting through the served membership table, w_r = 1/(K0 + r), frozen rr(S) + rr(M), unvoted blocks unranked",
+  "frozen embeddings (fp16 memmap rows, unit-normalised)",
+  "P50 output"
+ ],
+ "the_only_change": {
+  "primary_arm": "H2_HOLD = _l1x90_core.fuse(C, base_rank, repair_order, 'HOLD') -- the pre-existing, parameter-free asymmetric rule of the L1_P90_EXPLOIT lane (2026-09-14): incumbents = the served P50 in served order; challengers = repair-ranked blocks that are not incumbents, taken in repair order; the worst incumbent (largest served position) is replaced by the next challenger iff the challenger's repair position < that incumbent's served position; the process stops at the first challenger that fails; exactly 50 blocks. A served block at position p can only be evicted by a challenger whose repair rank beats p, and only after every weaker incumbent has been replaced -- the served order remains authoritative and repair touches the weak tail only. No hold size exists to choose.",
+  "information_arms_not_selectable": "H2_CORE6 / H2_CORE12 / H2_CORE25 = fuse(..., 'CORE', B) with B in {6, 12, 25} = exactly the values the L1_P90_EXPLOIT lane explored on 2026-09-14 (none was ever chosen; recorded here so the report can show how retention and text safety move with a fixed protected core). They cannot alter the verdict, cannot be promoted, and no B may be picked from these results.",
+  "reproduction_arm": "H2_RRF = the section-14 symmetric fusion, rebuilt from the same beam and asserted equal to the recorded run"
+ },
+ "population": "DEV_A only on all five caches (metaqa, metaqa_phg, squad, squad_phg, musique); DEV_B not read; no query subsetting; corpus never subset",
+ "metrics": [
+  "ALL-gold@P50 (BASE_ALL), ANY, reach (unchanged by fusion), UNREACHED / reached-failed pts, per hop on metaqa",
+  "McNemar vs L1 (overall, per hop, hop2+hop3 pooled) and vs H2_RRF",
+  "retention = (arm - L1) / (H2_RRF - L1) on BASE_ALL, overall, per hop and pooled hop2+hop3 (metaqa caches) -- reported, no threshold",
+  "served P50 blocks replaced per query (mean, p95), queries with no replacement",
+  "text safety: significant_loss_vs_L1 := lost > gained and p < 0.05 on squad / squad_phg / musique"
+ ],
+ "decision_rule": {
+  "text_safety_required": "H2_HOLD must show NO significant loss vs canonical L1 on ANY of squad, squad_phg, musique (lost > gained with p < 0.05 on any one = FAIL)",
+  "metaqa_required": "H2_HOLD vs L1 on hop 2 must be a significant gain on BOTH metaqa caches (gained > lost, p < 0.01) -- the minimal, non-invented criterion; the SIZE of the retained fraction is reported, not thresholded (per the ruling: 'do not invent a numerical MetaQA target after seeing +10 hop2; just report retention')",
+  "PASS": "both hold -> MICRO_L3_H2_ASYM_REPAIR = MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC): the beam evidence can be consumed safely through the asymmetric repair interface; promotion still requires an untouched population",
+  "FAIL": "either fails -> MICRO_L3_H2 = CLOSED as an L1-repair mechanism (per the ruling); candidates #1 and #3 are NOT run",
+  "hop3": "expected null for a depth-2 stage (s -> m1 -> m2 -> a needs a third hop); reported, carries no weight",
+  "information_arms": "CORE rows are descriptive; they cannot rescue a FAIL or be chosen"
+ },
+ "forbidden": [
+  "any change to the beam, scoring, seeds, depth, hub policy, repair channel or embeddings",
+  "choosing a CORE size",
+  "dataset branches, fallbacks, thresholds",
+  "reading DEV_B",
+  "using the latent diagnostic to modify this arm"
+ ],
+ "records": {
+  "results": "results/L1_COVPART/microl3_asym_A_<cache>.json (+ .log)",
+  "report": "results/L1_COVPART/REPORT.md section 14.3"
+ }
+}

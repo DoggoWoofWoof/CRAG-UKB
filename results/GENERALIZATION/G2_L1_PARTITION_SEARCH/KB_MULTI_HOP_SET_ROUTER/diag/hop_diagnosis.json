@@ -1,0 +1,2189 @@
+{
+ "B_GRID": [
+  1,
+  2,
+  4,
+  6
+ ],
+ "ROUTER": {
+  "B": 6,
+  "M_struct": 64,
+  "M_ret": 32,
+  "agg": "S4",
+  "fusion": "F6",
+  "T": 1,
+  "tag": "F6"
+ },
+ "RESULTS": {
+  "metaqa": {
+   "n": 1998,
+   "BASE_ALL": 0.6587,
+   "BASE_ANY": 0.9745,
+   "B6_ALL": 0.6612,
+   "B6_ANY": 0.9785,
+   "B6_gold_admitted": 257,
+   "B6_gold_evicted": 183,
+   "B6_churn_mean": 4.659,
+   "ORACLE": {
+    "1": {
+     "ALL": 0.7072,
+     "dALL": 0.0485
+    },
+    "2": {
+     "ALL": 0.7172,
+     "dALL": 0.0586
+    },
+    "4": {
+     "ALL": 0.7202,
+     "dALL": 0.0616
+    },
+    "6": {
+     "ALL": 0.7222,
+     "dALL": 0.0636
+    }
+   },
+   "ALL_QUERIES": {
+    "n": 1998,
+    "BASE": 0.6587,
+    "B6": 0.6612,
+    "ORACLE": {
+     "1": 0.7072,
+     "2": 0.7172,
+     "4": 0.7202,
+     "6": 0.7222
+    },
+    "n_uncovered_BASE": 682,
+    "mean_missing_gold_parts": 8.635,
+    "missing_count_hist": {
+     "1": 191,
+     "2": 102,
+     "3+": 389
+    },
+    "missing_part_canonical_rank": {
+     "median": 157,
+     "frac_within_top200": 0.6203,
+     "frac_beyond_top200": 0.3797
+    },
+    "STRUCT_reaches_all_missing": 0.2478,
+    "RET_reaches_all_missing": 0.1012,
+    "COMBINED_reaches_all_missing": 0.3167,
+    "min_replacements_needed_mean": 8.955,
+    "router_outcome": {
+     "NEUTRAL": 1830,
+     "RECOVERED": 22,
+     "DAMAGED": 17,
+     "PARTIAL": 129
+    },
+    "residual_failure_modes": {
+     "CAPACITY": 246,
+     "CO_SELECT": 16,
+     "EVICTION": 26,
+     "RANKING": 78,
+     "REACH": 226,
+     "REACH_AT_ROUTER_M": 85
+    }
+   },
+   "direct_node": {
+    "STRUCT32": {
+     "ALL": 0.6977,
+     "per_hop": {
+      "1": {
+       "n": 666,
+       "ALL": 0.9955
+      },
+      "2": {
+       "n": 666,
+       "ALL": 0.7778
+      },
+      "3": {
+       "n": 666,
+       "ALL": 0.3198
+      }
+     }
+    },
+    "STRUCT64": {
+     "ALL": 0.7132,
+     "per_hop": {
+      "1": {
+       "n": 666,
+       "ALL": 0.997
+      },
+      "2": {
+       "n": 666,
+       "ALL": 0.8078
+      },
+      "3": {
+       "n": 666,
+       "ALL": 0.3348
+      }
+     }
+    },
+    "RET32": {
+     "ALL": 0.6612,
+     "per_hop": {
+      "1": {
+       "n": 666,
+       "ALL": 0.997
+      },
+      "2": {
+       "n": 666,
+       "ALL": 0.7267
+      },
+      "3": {
+       "n": 666,
+       "ALL": 0.2598
+      }
+     }
+    },
+    "COMBINED_32_32": {
+     "ALL": 0.7002,
+     "per_hop": {
+      "1": {
+       "n": 666,
+       "ALL": 0.997
+      },
+      "2": {
+       "n": 666,
+       "ALL": 0.7808
+      },
+      "3": {
+       "n": 666,
+       "ALL": 0.3228
+      }
+     }
+    }
+   },
+   "PER_HOP": {
+    "1": {
+     "n": 666,
+     "BASE": 0.9955,
+     "B6": 0.9955,
+     "ORACLE": {
+      "1": 0.9985,
+      "2": 0.9985,
+      "4": 0.9985,
+      "6": 0.9985
+     },
+     "n_uncovered_BASE": 3,
+     "mean_missing_gold_parts": 1.333,
+     "missing_count_hist": {
+      "1": 2,
+      "2": 1
+     },
+     "missing_part_canonical_rank": {
+      "median": 118,
+      "frac_within_top200": 0.75,
+      "frac_beyond_top200": 0.25
+     },
+     "STRUCT_reaches_all_missing": 0.6667,
+     "RET_reaches_all_missing": 0.6667,
+     "COMBINED_reaches_all_missing": 0.6667,
+     "min_replacements_needed_mean": 2.0,
+     "router_outcome": {
+      "NEUTRAL": 666
+     },
+     "residual_failure_modes": {
+      "EVICTION": 1,
+      "REACH": 1,
+      "REACH_AT_ROUTER_M": 1
+     }
+    },
+    "2": {
+     "n": 666,
+     "BASE": 0.7237,
+     "B6": 0.7297,
+     "ORACLE": {
+      "1": 0.7958,
+      "2": 0.8018,
+      "4": 0.8078,
+      "6": 0.8093
+     },
+     "n_uncovered_BASE": 184,
+     "mean_missing_gold_parts": 4.755,
+     "missing_count_hist": {
+      "1": 87,
+      "2": 28,
+      "3+": 69
+     },
+     "missing_part_canonical_rank": {
+      "median": 115,
+      "frac_within_top200": 0.7509,
+      "frac_beyond_top200": 0.2491
+     },
+     "STRUCT_reaches_all_missing": 0.4293,
+     "RET_reaches_all_missing": 0.1467,
+     "COMBINED_reaches_all_missing": 0.5054,
+     "min_replacements_needed_mean": 5.043,
+     "router_outcome": {
+      "NEUTRAL": 617,
+      "RECOVERED": 15,
+      "DAMAGED": 11,
+      "PARTIAL": 23
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 33,
+      "CO_SELECT": 4,
+      "EVICTION": 17,
+      "RANKING": 28,
+      "REACH": 58,
+      "REACH_AT_ROUTER_M": 40
+     }
+    },
+    "3": {
+     "n": 666,
+     "BASE": 0.2568,
+     "B6": 0.2583,
+     "ORACLE": {
+      "1": 0.3273,
+      "2": 0.3514,
+      "4": 0.3544,
+      "6": 0.3589
+     },
+     "n_uncovered_BASE": 495,
+     "mean_missing_gold_parts": 10.121,
+     "missing_count_hist": {
+      "1": 102,
+      "2": 73,
+      "3+": 320
+     },
+     "missing_part_canonical_rank": {
+      "median": 165,
+      "frac_within_top200": 0.5974,
+      "frac_beyond_top200": 0.4026
+     },
+     "STRUCT_reaches_all_missing": 0.1778,
+     "RET_reaches_all_missing": 0.0808,
+     "COMBINED_reaches_all_missing": 0.2444,
+     "min_replacements_needed_mean": 10.451,
+     "router_outcome": {
+      "NEUTRAL": 547,
+      "RECOVERED": 7,
+      "DAMAGED": 6,
+      "PARTIAL": 106
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 213,
+      "CO_SELECT": 12,
+      "EVICTION": 8,
+      "RANKING": 50,
+      "REACH": 167,
+      "REACH_AT_ROUTER_M": 44
+     }
+    }
+   },
+   "PER_HOP_paired_B6_vs_BASE": {
+    "1": {
+     "gained": 0,
+     "lost": 0,
+     "net": 0,
+     "mcnemar_p": 1.0,
+     "sig": false
+    },
+    "2": {
+     "gained": 15,
+     "lost": 11,
+     "net": 4,
+     "mcnemar_p": 0.5572,
+     "sig": false
+    },
+    "3": {
+     "gained": 7,
+     "lost": 6,
+     "net": 1,
+     "mcnemar_p": 1.0,
+     "sig": false
+    }
+   },
+   "PER_MISSING_COUNT": {
+    "0": {
+     "n": 1316,
+     "BASE": 1.0,
+     "B6": 0.9871,
+     "ORACLE": {
+      "1": 1.0,
+      "2": 1.0,
+      "4": 1.0,
+      "6": 1.0
+     },
+     "n_uncovered_BASE": 0,
+     "mean_missing_gold_parts": 0.0,
+     "missing_count_hist": {},
+     "missing_part_canonical_rank": {
+      "median": 1000000,
+      "frac_within_top200": 0.0,
+      "frac_beyond_top200": 1.0
+     },
+     "STRUCT_reaches_all_missing": null,
+     "RET_reaches_all_missing": null,
+     "COMBINED_reaches_all_missing": null,
+     "min_replacements_needed_mean": null,
+     "router_outcome": {
+      "NEUTRAL": 1299,
+      "DAMAGED": 17
+     },
+     "residual_failure_modes": {
+      "EVICTION": 17
+     }
+    },
+    "1": {
+     "n": 191,
+     "BASE": 0.0,
+     "B6": 0.1152,
+     "ORACLE": {
+      "1": 0.5079,
+      "2": 0.5131,
+      "4": 0.5131,
+      "6": 0.5131
+     },
+     "n_uncovered_BASE": 191,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 191
+     },
+     "missing_part_canonical_rank": {
+      "median": 91,
+      "frac_within_top200": 0.8063,
+      "frac_beyond_top200": 0.1937
+     },
+     "STRUCT_reaches_all_missing": 0.5812,
+     "RET_reaches_all_missing": 0.2775,
+     "COMBINED_reaches_all_missing": 0.6702,
+     "min_replacements_needed_mean": 1.12,
+     "router_outcome": {
+      "NEUTRAL": 169,
+      "RECOVERED": 22
+     },
+     "residual_failure_modes": {
+      "CO_SELECT": 2,
+      "EVICTION": 8,
+      "RANKING": 62,
+      "REACH": 63,
+      "REACH_AT_ROUTER_M": 34
+     }
+    },
+    "2": {
+     "n": 102,
+     "BASE": 0.0,
+     "B6": 0.0,
+     "ORACLE": {
+      "1": 0.0,
+      "2": 0.1863,
+      "4": 0.1863,
+      "6": 0.1863
+     },
+     "n_uncovered_BASE": 102,
+     "mean_missing_gold_parts": 2.0,
+     "missing_count_hist": {
+      "2": 102
+     },
+     "missing_part_canonical_rank": {
+      "median": 108,
+      "frac_within_top200": 0.7892,
+      "frac_beyond_top200": 0.2108
+     },
+     "STRUCT_reaches_all_missing": 0.3333,
+     "RET_reaches_all_missing": 0.0882,
+     "COMBINED_reaches_all_missing": 0.4412,
+     "min_replacements_needed_mean": 2.137,
+     "router_outcome": {
+      "NEUTRAL": 88,
+      "PARTIAL": 14
+     },
+     "residual_failure_modes": {
+      "CO_SELECT": 7,
+      "RANKING": 13,
+      "REACH": 57,
+      "REACH_AT_ROUTER_M": 25
+     }
+    },
+    "3+": {
+     "n": 389,
+     "BASE": 0.0,
+     "B6": 0.0,
+     "ORACLE": {
+      "1": 0.0,
+      "2": 0.0,
+      "4": 0.0154,
+      "6": 0.0257
+     },
+     "n_uncovered_BASE": 389,
+     "mean_missing_gold_parts": 14.123,
+     "missing_count_hist": {
+      "3+": 389
+     },
+     "missing_part_canonical_rank": {
+      "median": 162,
+      "frac_within_top200": 0.6076,
+      "frac_beyond_top200": 0.3924
+     },
+     "STRUCT_reaches_all_missing": 0.0617,
+     "RET_reaches_all_missing": 0.018,
+     "COMBINED_reaches_all_missing": 0.1105,
+     "min_replacements_needed_mean": 14.589,
+     "router_outcome": {
+      "NEUTRAL": 274,
+      "PARTIAL": 115
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 246,
+      "CO_SELECT": 7,
+      "EVICTION": 1,
+      "RANKING": 3,
+      "REACH": 106,
+      "REACH_AT_ROUTER_M": 26
+     }
+    }
+   },
+   "PER_SEED_GRAPH_DISTANCE": {
+    "unreached": {
+     "n": 134,
+     "BASE": 0.0,
+     "B6": 0.0,
+     "ORACLE": {
+      "1": 0.0522,
+      "2": 0.0522,
+      "4": 0.0522,
+      "6": 0.0522
+     },
+     "n_uncovered_BASE": 134,
+     "mean_missing_gold_parts": 2.179,
+     "missing_count_hist": {
+      "1": 80,
+      "2": 27,
+      "3+": 27
+     },
+     "missing_part_canonical_rank": {
+      "median": 131,
+      "frac_within_top200": 0.6884,
+      "frac_beyond_top200": 0.3116
+     },
+     "STRUCT_reaches_all_missing": 0.0,
+     "RET_reaches_all_missing": 0.1493,
+     "COMBINED_reaches_all_missing": 0.1493,
+     "min_replacements_needed_mean": 2.313,
+     "router_outcome": {
+      "NEUTRAL": 132,
+      "PARTIAL": 2
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 6,
+      "RANKING": 4,
+      "REACH": 108,
+      "REACH_AT_ROUTER_M": 16
+     }
+    },
+    "1": {
+     "n": 84,
+     "BASE": 0.0,
+     "B6": 0.0476,
+     "ORACLE": {
+      "1": 0.1548,
+      "2": 0.1667,
+      "4": 0.2024,
+      "6": 0.2024
+     },
+     "n_uncovered_BASE": 84,
+     "mean_missing_gold_parts": 15.012,
+     "missing_count_hist": {
+      "1": 17,
+      "2": 5,
+      "3+": 62
+     },
+     "missing_part_canonical_rank": {
+      "median": 149,
+      "frac_within_top200": 0.6297,
+      "frac_beyond_top200": 0.3703
+     },
+     "STRUCT_reaches_all_missing": 0.2976,
+     "RET_reaches_all_missing": 0.0952,
+     "COMBINED_reaches_all_missing": 0.3214,
+     "min_replacements_needed_mean": 15.524,
+     "router_outcome": {
+      "NEUTRAL": 54,
+      "RECOVERED": 4,
+      "PARTIAL": 26
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 49,
+      "CO_SELECT": 2,
+      "EVICTION": 2,
+      "RANKING": 6,
+      "REACH": 9,
+      "REACH_AT_ROUTER_M": 12
+     }
+    },
+    "2": {
+     "n": 370,
+     "BASE": 0.0,
+     "B6": 0.0459,
+     "ORACLE": {
+      "1": 0.1676,
+      "2": 0.2162,
+      "4": 0.2243,
+      "6": 0.2351
+     },
+     "n_uncovered_BASE": 370,
+     "mean_missing_gold_parts": 10.486,
+     "missing_count_hist": {
+      "1": 72,
+      "2": 55,
+      "3+": 243
+     },
+     "missing_part_canonical_rank": {
+      "median": 164,
+      "frac_within_top200": 0.6015,
+      "frac_beyond_top200": 0.3985
+     },
+     "STRUCT_reaches_all_missing": 0.3243,
+     "RET_reaches_all_missing": 0.0757,
+     "COMBINED_reaches_all_missing": 0.3676,
+     "min_replacements_needed_mean": 10.843,
+     "router_outcome": {
+      "NEUTRAL": 266,
+      "RECOVERED": 17,
+      "PARTIAL": 87
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 166,
+      "CO_SELECT": 13,
+      "EVICTION": 6,
+      "RANKING": 53,
+      "REACH": 71,
+      "REACH_AT_ROUTER_M": 44
+     }
+    },
+    "3": {
+     "n": 94,
+     "BASE": 0.0,
+     "B6": 0.0106,
+     "ORACLE": {
+      "1": 0.1596,
+      "2": 0.1702,
+      "4": 0.1702,
+      "6": 0.1702
+     },
+     "n_uncovered_BASE": 94,
+     "mean_missing_gold_parts": 4.851,
+     "missing_count_hist": {
+      "1": 22,
+      "2": 15,
+      "3+": 57
+     },
+     "missing_part_canonical_rank": {
+      "median": 137,
+      "frac_within_top200": 0.7105,
+      "frac_beyond_top200": 0.2895
+     },
+     "STRUCT_reaches_all_missing": 0.2553,
+     "RET_reaches_all_missing": 0.1383,
+     "COMBINED_reaches_all_missing": 0.3511,
+     "min_replacements_needed_mean": 5.117,
+     "router_outcome": {
+      "NEUTRAL": 79,
+      "RECOVERED": 1,
+      "PARTIAL": 14
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 25,
+      "CO_SELECT": 1,
+      "EVICTION": 1,
+      "RANKING": 15,
+      "REACH": 38,
+      "REACH_AT_ROUTER_M": 13
+     }
+    }
+   }
+  },
+  "webqsp": {
+   "n": 1419,
+   "BASE_ALL": 0.7618,
+   "BASE_ANY": 0.9436,
+   "B6_ALL": 0.7646,
+   "B6_ANY": 0.9457,
+   "B6_gold_admitted": 91,
+   "B6_gold_evicted": 90,
+   "B6_churn_mean": 4.968,
+   "ORACLE": {
+    "1": {
+     "ALL": 0.7956,
+     "dALL": 0.0338
+    },
+    "2": {
+     "ALL": 0.7999,
+     "dALL": 0.0381
+    },
+    "4": {
+     "ALL": 0.8013,
+     "dALL": 0.0395
+    },
+    "6": {
+     "ALL": 0.8013,
+     "dALL": 0.0395
+    }
+   },
+   "ALL_QUERIES": {
+    "n": 1419,
+    "BASE": 0.7618,
+    "B6": 0.7646,
+    "ORACLE": {
+     "1": 0.7956,
+     "2": 0.7999,
+     "4": 0.8013,
+     "6": 0.8013
+    },
+    "n_uncovered_BASE": 338,
+    "mean_missing_gold_parts": 4.988,
+    "missing_count_hist": {
+     "1": 140,
+     "2": 62,
+     "3+": 136
+    },
+    "missing_part_canonical_rank": {
+     "median": 163,
+     "frac_within_top200": 0.5374,
+     "frac_beyond_top200": 0.4626
+    },
+    "STRUCT_reaches_all_missing": 0.145,
+    "RET_reaches_all_missing": 0.1391,
+    "COMBINED_reaches_all_missing": 0.2515,
+    "min_replacements_needed_mean": 5.243,
+    "router_outcome": {
+     "NEUTRAL": 1337,
+     "RECOVERED": 25,
+     "DAMAGED": 21,
+     "PARTIAL": 36
+    },
+    "residual_failure_modes": {
+     "CAPACITY": 65,
+     "CO_SELECT": 1,
+     "EVICTION": 21,
+     "RANKING": 12,
+     "REACH": 188,
+     "REACH_AT_ROUTER_M": 47
+    }
+   },
+   "direct_node": {
+    "STRUCT32": {
+     "ALL": 0.7759,
+     "per_hop": null
+    },
+    "STRUCT64": {
+     "ALL": 0.7829,
+     "per_hop": null
+    },
+    "RET32": {
+     "ALL": 0.7787,
+     "per_hop": null
+    },
+    "COMBINED_32_32": {
+     "ALL": 0.7914,
+     "per_hop": null
+    }
+   },
+   "PER_MISSING_COUNT": {
+    "0": {
+     "n": 1081,
+     "BASE": 1.0,
+     "B6": 0.9806,
+     "ORACLE": {
+      "1": 1.0,
+      "2": 1.0,
+      "4": 1.0,
+      "6": 1.0
+     },
+     "n_uncovered_BASE": 0,
+     "mean_missing_gold_parts": 0.0,
+     "missing_count_hist": {},
+     "missing_part_canonical_rank": {
+      "median": 1000000,
+      "frac_within_top200": 0.0,
+      "frac_beyond_top200": 1.0
+     },
+     "STRUCT_reaches_all_missing": null,
+     "RET_reaches_all_missing": null,
+     "COMBINED_reaches_all_missing": null,
+     "min_replacements_needed_mean": null,
+     "router_outcome": {
+      "NEUTRAL": 1060,
+      "DAMAGED": 21
+     },
+     "residual_failure_modes": {
+      "EVICTION": 21
+     }
+    },
+    "1": {
+     "n": 140,
+     "BASE": 0.0,
+     "B6": 0.1571,
+     "ORACLE": {
+      "1": 0.3429,
+      "2": 0.3429,
+      "4": 0.3429,
+      "6": 0.3429
+     },
+     "n_uncovered_BASE": 140,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 140
+     },
+     "missing_part_canonical_rank": {
+      "median": 96,
+      "frac_within_top200": 0.7214,
+      "frac_beyond_top200": 0.2786
+     },
+     "STRUCT_reaches_all_missing": 0.2786,
+     "RET_reaches_all_missing": 0.2714,
+     "COMBINED_reaches_all_missing": 0.4643,
+     "min_replacements_needed_mean": 1.064,
+     "router_outcome": {
+      "NEUTRAL": 118,
+      "RECOVERED": 22
+     },
+     "residual_failure_modes": {
+      "RANKING": 12,
+      "REACH": 75,
+      "REACH_AT_ROUTER_M": 31
+     }
+    },
+    "2": {
+     "n": 62,
+     "BASE": 0.0,
+     "B6": 0.0484,
+     "ORACLE": {
+      "1": 0.0,
+      "2": 0.0968,
+      "4": 0.0968,
+      "6": 0.0968
+     },
+     "n_uncovered_BASE": 62,
+     "mean_missing_gold_parts": 2.0,
+     "missing_count_hist": {
+      "2": 62
+     },
+     "missing_part_canonical_rank": {
+      "median": 82,
+      "frac_within_top200": 0.8065,
+      "frac_beyond_top200": 0.1935
+     },
+     "STRUCT_reaches_all_missing": 0.1613,
+     "RET_reaches_all_missing": 0.1129,
+     "COMBINED_reaches_all_missing": 0.2742,
+     "min_replacements_needed_mean": 2.242,
+     "router_outcome": {
+      "NEUTRAL": 55,
+      "RECOVERED": 3,
+      "PARTIAL": 4
+     },
+     "residual_failure_modes": {
+      "CO_SELECT": 1,
+      "REACH": 45,
+      "REACH_AT_ROUTER_M": 13
+     }
+    },
+    "3+": {
+     "n": 136,
+     "BASE": 0.0,
+     "B6": 0.0,
+     "ORACLE": {
+      "1": 0.0,
+      "2": 0.0,
+      "4": 0.0147,
+      "6": 0.0147
+     },
+     "n_uncovered_BASE": 136,
+     "mean_missing_gold_parts": 10.456,
+     "missing_count_hist": {
+      "3+": 136
+     },
+     "missing_part_canonical_rank": {
+      "median": 1000000,
+      "frac_within_top200": 0.4958,
+      "frac_beyond_top200": 0.5042
+     },
+     "STRUCT_reaches_all_missing": 0.0,
+     "RET_reaches_all_missing": 0.0147,
+     "COMBINED_reaches_all_missing": 0.0221,
+     "min_replacements_needed_mean": 10.912,
+     "router_outcome": {
+      "NEUTRAL": 104,
+      "PARTIAL": 32
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 65,
+      "REACH": 68,
+      "REACH_AT_ROUTER_M": 3
+     }
+    }
+   },
+   "PER_SEED_GRAPH_DISTANCE": {
+    "unreached": {
+     "n": 214,
+     "BASE": 0.0,
+     "B6": 0.014,
+     "ORACLE": {
+      "1": 0.0748,
+      "2": 0.0748,
+      "4": 0.0794,
+      "6": 0.0794
+     },
+     "n_uncovered_BASE": 214,
+     "mean_missing_gold_parts": 3.098,
+     "missing_count_hist": {
+      "1": 101,
+      "2": 41,
+      "3+": 72
+     },
+     "missing_part_canonical_rank": {
+      "median": 141,
+      "frac_within_top200": 0.6018,
+      "frac_beyond_top200": 0.3982
+     },
+     "STRUCT_reaches_all_missing": 0.0,
+     "RET_reaches_all_missing": 0.1402,
+     "COMBINED_reaches_all_missing": 0.1402,
+     "min_replacements_needed_mean": 3.262,
+     "router_outcome": {
+      "NEUTRAL": 206,
+      "RECOVERED": 3,
+      "PARTIAL": 5
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 23,
+      "REACH": 161,
+      "REACH_AT_ROUTER_M": 27
+     }
+    },
+    "1": {
+     "n": 15,
+     "BASE": 0.0,
+     "B6": 0.4667,
+     "ORACLE": {
+      "1": 0.5333,
+      "2": 0.5333,
+      "4": 0.5333,
+      "6": 0.5333
+     },
+     "n_uncovered_BASE": 15,
+     "mean_missing_gold_parts": 6.133,
+     "missing_count_hist": {
+      "1": 8,
+      "2": 2,
+      "3+": 5
+     },
+     "missing_part_canonical_rank": {
+      "median": 123,
+      "frac_within_top200": 0.5543,
+      "frac_beyond_top200": 0.4457
+     },
+     "STRUCT_reaches_all_missing": 0.6,
+     "RET_reaches_all_missing": 0.2667,
+     "COMBINED_reaches_all_missing": 0.6,
+     "min_replacements_needed_mean": 6.133,
+     "router_outcome": {
+      "NEUTRAL": 3,
+      "RECOVERED": 7,
+      "PARTIAL": 5
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 4,
+      "REACH": 2,
+      "REACH_AT_ROUTER_M": 2
+     }
+    },
+    "2": {
+     "n": 72,
+     "BASE": 0.0,
+     "B6": 0.1528,
+     "ORACLE": {
+      "1": 0.1944,
+      "2": 0.25,
+      "4": 0.2639,
+      "6": 0.2639
+     },
+     "n_uncovered_BASE": 72,
+     "mean_missing_gold_parts": 7.319,
+     "missing_count_hist": {
+      "1": 21,
+      "2": 15,
+      "3+": 36
+     },
+     "missing_part_canonical_rank": {
+      "median": 1000000,
+      "frac_within_top200": 0.4744,
+      "frac_beyond_top200": 0.5256
+     },
+     "STRUCT_reaches_all_missing": 0.3889,
+     "RET_reaches_all_missing": 0.1389,
+     "COMBINED_reaches_all_missing": 0.4444,
+     "min_replacements_needed_mean": 7.722,
+     "router_outcome": {
+      "NEUTRAL": 45,
+      "RECOVERED": 11,
+      "PARTIAL": 16
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 22,
+      "CO_SELECT": 1,
+      "RANKING": 6,
+      "REACH": 18,
+      "REACH_AT_ROUTER_M": 14
+     }
+    },
+    "3": {
+     "n": 37,
+     "BASE": 0.0,
+     "B6": 0.1081,
+     "ORACLE": {
+      "1": 0.2703,
+      "2": 0.3243,
+      "4": 0.3243,
+      "6": 0.3243
+     },
+     "n_uncovered_BASE": 37,
+     "mean_missing_gold_parts": 10.919,
+     "missing_count_hist": {
+      "1": 10,
+      "2": 4,
+      "3+": 23
+     },
+     "missing_part_canonical_rank": {
+      "median": 185,
+      "frac_within_top200": 0.5099,
+      "frac_beyond_top200": 0.4901
+     },
+     "STRUCT_reaches_all_missing": 0.3243,
+     "RET_reaches_all_missing": 0.0811,
+     "COMBINED_reaches_all_missing": 0.3784,
+     "min_replacements_needed_mean": 11.514,
+     "router_outcome": {
+      "NEUTRAL": 23,
+      "RECOVERED": 4,
+      "PARTIAL": 10
+     },
+     "residual_failure_modes": {
+      "CAPACITY": 16,
+      "RANKING": 6,
+      "REACH": 7,
+      "REACH_AT_ROUTER_M": 4
+     }
+    }
+   }
+  },
+  "2wiki_clean": {
+   "n": 2000,
+   "BASE_ALL": 0.9375,
+   "BASE_ANY": 1.0,
+   "B6_ALL": 0.9435,
+   "B6_ANY": 1.0,
+   "B6_gold_admitted": 20,
+   "B6_gold_evicted": 6,
+   "B6_churn_mean": 4.259,
+   "ORACLE": {
+    "1": {
+     "ALL": 0.961,
+     "dALL": 0.0235
+    },
+    "2": {
+     "ALL": 0.961,
+     "dALL": 0.0235
+    },
+    "4": {
+     "ALL": 0.961,
+     "dALL": 0.0235
+    },
+    "6": {
+     "ALL": 0.961,
+     "dALL": 0.0235
+    }
+   },
+   "ALL_QUERIES": {
+    "n": 2000,
+    "BASE": 0.9375,
+    "B6": 0.9435,
+    "ORACLE": {
+     "1": 0.961,
+     "2": 0.961,
+     "4": 0.961,
+     "6": 0.961
+    },
+    "n_uncovered_BASE": 125,
+    "mean_missing_gold_parts": 1.048,
+    "missing_count_hist": {
+     "1": 119,
+     "2": 6
+    },
+    "missing_part_canonical_rank": {
+     "median": 152,
+     "frac_within_top200": 0.5802,
+     "frac_beyond_top200": 0.4198
+    },
+    "STRUCT_reaches_all_missing": 0.136,
+    "RET_reaches_all_missing": 0.504,
+    "COMBINED_reaches_all_missing": 0.584,
+    "min_replacements_needed_mean": 1.064,
+    "router_outcome": {
+     "NEUTRAL": 1976,
+     "RECOVERED": 17,
+     "DAMAGED": 5,
+     "PARTIAL": 2
+    },
+    "residual_failure_modes": {
+     "EVICTION": 5,
+     "RANKING": 11,
+     "REACH": 52,
+     "REACH_AT_ROUTER_M": 45
+    }
+   },
+   "direct_node": {
+    "STRUCT32": {
+     "ALL": 0.939,
+     "per_hop": null
+    },
+    "STRUCT64": {
+     "ALL": 0.939,
+     "per_hop": null
+    },
+    "RET32": {
+     "ALL": 0.948,
+     "per_hop": null
+    },
+    "COMBINED_32_32": {
+     "ALL": 0.949,
+     "per_hop": null
+    }
+   },
+   "PER_MISSING_COUNT": {
+    "0": {
+     "n": 1875,
+     "BASE": 1.0,
+     "B6": 0.9973,
+     "ORACLE": {
+      "1": 1.0,
+      "2": 1.0,
+      "4": 1.0,
+      "6": 1.0
+     },
+     "n_uncovered_BASE": 0,
+     "mean_missing_gold_parts": 0.0,
+     "missing_count_hist": {},
+     "missing_part_canonical_rank": {
+      "median": 1000000,
+      "frac_within_top200": 0.0,
+      "frac_beyond_top200": 1.0
+     },
+     "STRUCT_reaches_all_missing": null,
+     "RET_reaches_all_missing": null,
+     "COMBINED_reaches_all_missing": null,
+     "min_replacements_needed_mean": null,
+     "router_outcome": {
+      "NEUTRAL": 1870,
+      "DAMAGED": 5
+     },
+     "residual_failure_modes": {
+      "EVICTION": 5
+     }
+    },
+    "1": {
+     "n": 119,
+     "BASE": 0.0,
+     "B6": 0.1429,
+     "ORACLE": {
+      "1": 0.395,
+      "2": 0.395,
+      "4": 0.395,
+      "6": 0.395
+     },
+     "n_uncovered_BASE": 119,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 119
+     },
+     "missing_part_canonical_rank": {
+      "median": 167,
+      "frac_within_top200": 0.563,
+      "frac_beyond_top200": 0.437
+     },
+     "STRUCT_reaches_all_missing": 0.1429,
+     "RET_reaches_all_missing": 0.521,
+     "COMBINED_reaches_all_missing": 0.605,
+     "min_replacements_needed_mean": 1.008,
+     "router_outcome": {
+      "NEUTRAL": 102,
+      "RECOVERED": 17
+     },
+     "residual_failure_modes": {
+      "RANKING": 11,
+      "REACH": 47,
+      "REACH_AT_ROUTER_M": 44
+     }
+    },
+    "2": {
+     "n": 6,
+     "BASE": 0.0,
+     "B6": 0.0,
+     "ORACLE": {
+      "1": 0.0,
+      "2": 0.0,
+      "4": 0.0,
+      "6": 0.0
+     },
+     "n_uncovered_BASE": 6,
+     "mean_missing_gold_parts": 2.0,
+     "missing_count_hist": {
+      "2": 6
+     },
+     "missing_part_canonical_rank": {
+      "median": 66,
+      "frac_within_top200": 0.75,
+      "frac_beyond_top200": 0.25
+     },
+     "STRUCT_reaches_all_missing": 0.0,
+     "RET_reaches_all_missing": 0.1667,
+     "COMBINED_reaches_all_missing": 0.1667,
+     "min_replacements_needed_mean": 2.167,
+     "router_outcome": {
+      "NEUTRAL": 4,
+      "PARTIAL": 2
+     },
+     "residual_failure_modes": {
+      "REACH": 5,
+      "REACH_AT_ROUTER_M": 1
+     }
+    },
+    "3+": null
+   },
+   "PER_SEED_GRAPH_DISTANCE": {
+    "unreached": {
+     "n": 108,
+     "BASE": 0.0,
+     "B6": 0.1389,
+     "ORACLE": {
+      "1": 0.3333,
+      "2": 0.3333,
+      "4": 0.3333,
+      "6": 0.3333
+     },
+     "n_uncovered_BASE": 108,
+     "mean_missing_gold_parts": 1.056,
+     "missing_count_hist": {
+      "1": 102,
+      "2": 6
+     },
+     "missing_part_canonical_rank": {
+      "median": 146,
+      "frac_within_top200": 0.5789,
+      "frac_beyond_top200": 0.4211
+     },
+     "STRUCT_reaches_all_missing": 0.0,
+     "RET_reaches_all_missing": 0.5185,
+     "COMBINED_reaches_all_missing": 0.5185,
+     "min_replacements_needed_mean": 1.074,
+     "router_outcome": {
+      "NEUTRAL": 91,
+      "RECOVERED": 15,
+      "PARTIAL": 2
+     },
+     "residual_failure_modes": {
+      "RANKING": 2,
+      "REACH": 52,
+      "REACH_AT_ROUTER_M": 39
+     }
+    },
+    "2": {
+     "n": 9,
+     "BASE": 0.0,
+     "B6": 0.2222,
+     "ORACLE": {
+      "1": 0.7778,
+      "2": 0.7778,
+      "4": 0.7778,
+      "6": 0.7778
+     },
+     "n_uncovered_BASE": 9,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 9
+     },
+     "missing_part_canonical_rank": {
+      "median": 189,
+      "frac_within_top200": 0.6667,
+      "frac_beyond_top200": 0.3333
+     },
+     "STRUCT_reaches_all_missing": 1.0,
+     "RET_reaches_all_missing": 0.3333,
+     "COMBINED_reaches_all_missing": 1.0,
+     "min_replacements_needed_mean": 1.0,
+     "router_outcome": {
+      "NEUTRAL": 7,
+      "RECOVERED": 2
+     },
+     "residual_failure_modes": {
+      "RANKING": 6,
+      "REACH_AT_ROUTER_M": 1
+     }
+    },
+    "3": {
+     "n": 8,
+     "BASE": 0.0,
+     "B6": 0.0,
+     "ORACLE": {
+      "1": 0.5,
+      "2": 0.5,
+      "4": 0.5,
+      "6": 0.5
+     },
+     "n_uncovered_BASE": 8,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 8
+     },
+     "missing_part_canonical_rank": {
+      "median": 500088,
+      "frac_within_top200": 0.5,
+      "frac_beyond_top200": 0.5
+     },
+     "STRUCT_reaches_all_missing": 1.0,
+     "RET_reaches_all_missing": 0.5,
+     "COMBINED_reaches_all_missing": 1.0,
+     "min_replacements_needed_mean": 1.0,
+     "router_outcome": {
+      "NEUTRAL": 8
+     },
+     "residual_failure_modes": {
+      "RANKING": 3,
+      "REACH_AT_ROUTER_M": 5
+     }
+    }
+   }
+  },
+  "musique_clean": {
+   "n": 2000,
+   "BASE_ALL": 0.9565,
+   "BASE_ANY": 0.999,
+   "B6_ALL": 0.9635,
+   "B6_ANY": 0.9995,
+   "B6_gold_admitted": 26,
+   "B6_gold_evicted": 11,
+   "B6_churn_mean": 4.312,
+   "ORACLE": {
+    "1": {
+     "ALL": 0.9905,
+     "dALL": 0.034
+    },
+    "2": {
+     "ALL": 0.992,
+     "dALL": 0.0355
+    },
+    "4": {
+     "ALL": 0.992,
+     "dALL": 0.0355
+    },
+    "6": {
+     "ALL": 0.992,
+     "dALL": 0.0355
+    }
+   },
+   "ALL_QUERIES": {
+    "n": 2000,
+    "BASE": 0.9565,
+    "B6": 0.9635,
+    "ORACLE": {
+     "1": 0.9905,
+     "2": 0.992,
+     "4": 0.992,
+     "6": 0.992
+    },
+    "n_uncovered_BASE": 87,
+    "mean_missing_gold_parts": 1.034,
+    "missing_count_hist": {
+     "1": 84,
+     "2": 3
+    },
+    "missing_part_canonical_rank": {
+     "median": 71,
+     "frac_within_top200": 1.0,
+     "frac_beyond_top200": 0.0
+    },
+    "STRUCT_reaches_all_missing": 0.3793,
+    "RET_reaches_all_missing": 0.8161,
+    "COMBINED_reaches_all_missing": 0.8736,
+    "min_replacements_needed_mean": 1.069,
+    "router_outcome": {
+     "NEUTRAL": 1963,
+     "RECOVERED": 25,
+     "DAMAGED": 11,
+     "PARTIAL": 1
+    },
+    "residual_failure_modes": {
+     "CO_SELECT": 2,
+     "EVICTION": 11,
+     "RANKING": 10,
+     "REACH": 11,
+     "REACH_AT_ROUTER_M": 39
+    }
+   },
+   "direct_node": {
+    "STRUCT32": {
+     "ALL": 0.9585,
+     "per_hop": null
+    },
+    "STRUCT64": {
+     "ALL": 0.959,
+     "per_hop": null
+    },
+    "RET32": {
+     "ALL": 0.977,
+     "per_hop": null
+    },
+    "COMBINED_32_32": {
+     "ALL": 0.9775,
+     "per_hop": null
+    }
+   },
+   "PER_MISSING_COUNT": {
+    "0": {
+     "n": 1913,
+     "BASE": 1.0,
+     "B6": 0.9942,
+     "ORACLE": {
+      "1": 1.0,
+      "2": 1.0,
+      "4": 1.0,
+      "6": 1.0
+     },
+     "n_uncovered_BASE": 0,
+     "mean_missing_gold_parts": 0.0,
+     "missing_count_hist": {},
+     "missing_part_canonical_rank": {
+      "median": 1000000,
+      "frac_within_top200": 0.0,
+      "frac_beyond_top200": 1.0
+     },
+     "STRUCT_reaches_all_missing": null,
+     "RET_reaches_all_missing": null,
+     "COMBINED_reaches_all_missing": null,
+     "min_replacements_needed_mean": null,
+     "router_outcome": {
+      "NEUTRAL": 1902,
+      "DAMAGED": 11
+     },
+     "residual_failure_modes": {
+      "EVICTION": 11
+     }
+    },
+    "1": {
+     "n": 84,
+     "BASE": 0.0,
+     "B6": 0.2976,
+     "ORACLE": {
+      "1": 0.8095,
+      "2": 0.8214,
+      "4": 0.8214,
+      "6": 0.8214
+     },
+     "n_uncovered_BASE": 84,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 84
+     },
+     "missing_part_canonical_rank": {
+      "median": 72,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 0.3929,
+     "RET_reaches_all_missing": 0.8214,
+     "COMBINED_reaches_all_missing": 0.881,
+     "min_replacements_needed_mean": 1.036,
+     "router_outcome": {
+      "NEUTRAL": 59,
+      "RECOVERED": 25
+     },
+     "residual_failure_modes": {
+      "CO_SELECT": 1,
+      "RANKING": 10,
+      "REACH": 10,
+      "REACH_AT_ROUTER_M": 38
+     }
+    },
+    "2": {
+     "n": 3,
+     "BASE": 0.0,
+     "B6": 0.0,
+     "ORACLE": {
+      "1": 0.0,
+      "2": 0.6667,
+      "4": 0.6667,
+      "6": 0.6667
+     },
+     "n_uncovered_BASE": 3,
+     "mean_missing_gold_parts": 2.0,
+     "missing_count_hist": {
+      "2": 3
+     },
+     "missing_part_canonical_rank": {
+      "median": 62,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 0.0,
+     "RET_reaches_all_missing": 0.6667,
+     "COMBINED_reaches_all_missing": 0.6667,
+     "min_replacements_needed_mean": 2.0,
+     "router_outcome": {
+      "NEUTRAL": 2,
+      "PARTIAL": 1
+     },
+     "residual_failure_modes": {
+      "CO_SELECT": 1,
+      "REACH": 1,
+      "REACH_AT_ROUTER_M": 1
+     }
+    },
+    "3+": null
+   },
+   "PER_SEED_GRAPH_DISTANCE": {
+    "unreached": {
+     "n": 52,
+     "BASE": 0.0,
+     "B6": 0.1731,
+     "ORACLE": {
+      "1": 0.7115,
+      "2": 0.7115,
+      "4": 0.7115,
+      "6": 0.7115
+     },
+     "n_uncovered_BASE": 52,
+     "mean_missing_gold_parts": 1.019,
+     "missing_count_hist": {
+      "1": 51,
+      "2": 1
+     },
+     "missing_part_canonical_rank": {
+      "median": 68,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 0.0,
+     "RET_reaches_all_missing": 0.7885,
+     "COMBINED_reaches_all_missing": 0.7885,
+     "min_replacements_needed_mean": 1.058,
+     "router_outcome": {
+      "NEUTRAL": 43,
+      "RECOVERED": 9
+     },
+     "residual_failure_modes": {
+      "CO_SELECT": 1,
+      "RANKING": 2,
+      "REACH": 11,
+      "REACH_AT_ROUTER_M": 29
+     }
+    },
+    "1": {
+     "n": 1,
+     "BASE": 0.0,
+     "B6": 1.0,
+     "ORACLE": {
+      "1": 1.0,
+      "2": 1.0,
+      "4": 1.0,
+      "6": 1.0
+     },
+     "n_uncovered_BASE": 1,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 1
+     },
+     "missing_part_canonical_rank": {
+      "median": 69,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 1.0,
+     "RET_reaches_all_missing": 1.0,
+     "COMBINED_reaches_all_missing": 1.0,
+     "min_replacements_needed_mean": 1.0,
+     "router_outcome": {
+      "RECOVERED": 1
+     },
+     "residual_failure_modes": {}
+    },
+    "2": {
+     "n": 23,
+     "BASE": 0.0,
+     "B6": 0.5217,
+     "ORACLE": {
+      "1": 0.913,
+      "2": 1.0,
+      "4": 1.0,
+      "6": 1.0
+     },
+     "n_uncovered_BASE": 23,
+     "mean_missing_gold_parts": 1.043,
+     "missing_count_hist": {
+      "1": 22,
+      "2": 1
+     },
+     "missing_part_canonical_rank": {
+      "median": 70,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 0.9565,
+     "RET_reaches_all_missing": 0.8261,
+     "COMBINED_reaches_all_missing": 1.0,
+     "min_replacements_needed_mean": 1.087,
+     "router_outcome": {
+      "NEUTRAL": 10,
+      "RECOVERED": 12,
+      "PARTIAL": 1
+     },
+     "residual_failure_modes": {
+      "CO_SELECT": 1,
+      "RANKING": 6,
+      "REACH_AT_ROUTER_M": 4
+     }
+    },
+    "3": {
+     "n": 11,
+     "BASE": 0.0,
+     "B6": 0.2727,
+     "ORACLE": {
+      "1": 0.8182,
+      "2": 0.9091,
+      "4": 0.9091,
+      "6": 0.9091
+     },
+     "n_uncovered_BASE": 11,
+     "mean_missing_gold_parts": 1.091,
+     "missing_count_hist": {
+      "1": 10,
+      "2": 1
+     },
+     "missing_part_canonical_rank": {
+      "median": 75,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 0.9091,
+     "RET_reaches_all_missing": 0.9091,
+     "COMBINED_reaches_all_missing": 1.0,
+     "min_replacements_needed_mean": 1.091,
+     "router_outcome": {
+      "NEUTRAL": 8,
+      "RECOVERED": 3
+     },
+     "residual_failure_modes": {
+      "RANKING": 2,
+      "REACH_AT_ROUTER_M": 6
+     }
+    }
+   }
+  },
+  "hotpotqa_clean": {
+   "n": 2000,
+   "BASE_ALL": 0.9345,
+   "BASE_ANY": 0.995,
+   "B6_ALL": 0.9505,
+   "B6_ANY": 0.997,
+   "B6_gold_admitted": 39,
+   "B6_gold_evicted": 5,
+   "B6_churn_mean": 5.098,
+   "ORACLE": {
+    "1": {
+     "ALL": 0.9695,
+     "dALL": 0.035
+    },
+    "2": {
+     "ALL": 0.97,
+     "dALL": 0.0355
+    },
+    "4": {
+     "ALL": 0.97,
+     "dALL": 0.0355
+    },
+    "6": {
+     "ALL": 0.97,
+     "dALL": 0.0355
+    }
+   },
+   "ALL_QUERIES": {
+    "n": 2000,
+    "BASE": 0.9345,
+    "B6": 0.9505,
+    "ORACLE": {
+     "1": 0.9695,
+     "2": 0.97,
+     "4": 0.97,
+     "6": 0.97
+    },
+    "n_uncovered_BASE": 131,
+    "mean_missing_gold_parts": 1.053,
+    "missing_count_hist": {
+     "1": 124,
+     "2": 7
+    },
+    "missing_part_canonical_rank": {
+     "median": 138,
+     "frac_within_top200": 0.5725,
+     "frac_beyond_top200": 0.4275
+    },
+    "STRUCT_reaches_all_missing": 0.2214,
+    "RET_reaches_all_missing": 0.6641,
+    "COMBINED_reaches_all_missing": 0.7176,
+    "min_replacements_needed_mean": 1.069,
+    "router_outcome": {
+     "NEUTRAL": 1957,
+     "RECOVERED": 36,
+     "DAMAGED": 4,
+     "PARTIAL": 3
+    },
+    "residual_failure_modes": {
+     "EVICTION": 5,
+     "RANKING": 23,
+     "REACH": 37,
+     "REACH_AT_ROUTER_M": 34
+    }
+   },
+   "direct_node": {
+    "STRUCT32": {
+     "ALL": 0.938,
+     "per_hop": null
+    },
+    "STRUCT64": {
+     "ALL": 0.9395,
+     "per_hop": null
+    },
+    "RET32": {
+     "ALL": 0.963,
+     "per_hop": null
+    },
+    "COMBINED_32_32": {
+     "ALL": 0.9635,
+     "per_hop": null
+    }
+   },
+   "PER_MISSING_COUNT": {
+    "0": {
+     "n": 1869,
+     "BASE": 1.0,
+     "B6": 0.9979,
+     "ORACLE": {
+      "1": 1.0,
+      "2": 1.0,
+      "4": 1.0,
+      "6": 1.0
+     },
+     "n_uncovered_BASE": 0,
+     "mean_missing_gold_parts": 0.0,
+     "missing_count_hist": {},
+     "missing_part_canonical_rank": {
+      "median": 1000000,
+      "frac_within_top200": 0.0,
+      "frac_beyond_top200": 1.0
+     },
+     "STRUCT_reaches_all_missing": null,
+     "RET_reaches_all_missing": null,
+     "COMBINED_reaches_all_missing": null,
+     "min_replacements_needed_mean": null,
+     "router_outcome": {
+      "NEUTRAL": 1865,
+      "DAMAGED": 4
+     },
+     "residual_failure_modes": {
+      "EVICTION": 4
+     }
+    },
+    "1": {
+     "n": 124,
+     "BASE": 0.0,
+     "B6": 0.2903,
+     "ORACLE": {
+      "1": 0.5645,
+      "2": 0.5726,
+      "4": 0.5726,
+      "6": 0.5726
+     },
+     "n_uncovered_BASE": 124,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 124
+     },
+     "missing_part_canonical_rank": {
+      "median": 143,
+      "frac_within_top200": 0.5726,
+      "frac_beyond_top200": 0.4274
+     },
+     "STRUCT_reaches_all_missing": 0.2339,
+     "RET_reaches_all_missing": 0.6855,
+     "COMBINED_reaches_all_missing": 0.7419,
+     "min_replacements_needed_mean": 1.016,
+     "router_outcome": {
+      "NEUTRAL": 88,
+      "RECOVERED": 36
+     },
+     "residual_failure_modes": {
+      "EVICTION": 1,
+      "RANKING": 23,
+      "REACH": 32,
+      "REACH_AT_ROUTER_M": 32
+     }
+    },
+    "2": {
+     "n": 7,
+     "BASE": 0.0,
+     "B6": 0.0,
+     "ORACLE": {
+      "1": 0.0,
+      "2": 0.0,
+      "4": 0.0,
+      "6": 0.0
+     },
+     "n_uncovered_BASE": 7,
+     "mean_missing_gold_parts": 2.0,
+     "missing_count_hist": {
+      "2": 7
+     },
+     "missing_part_canonical_rank": {
+      "median": 98,
+      "frac_within_top200": 0.5714,
+      "frac_beyond_top200": 0.4286
+     },
+     "STRUCT_reaches_all_missing": 0.0,
+     "RET_reaches_all_missing": 0.2857,
+     "COMBINED_reaches_all_missing": 0.2857,
+     "min_replacements_needed_mean": 2.0,
+     "router_outcome": {
+      "NEUTRAL": 4,
+      "PARTIAL": 3
+     },
+     "residual_failure_modes": {
+      "REACH": 5,
+      "REACH_AT_ROUTER_M": 2
+     }
+    },
+    "3+": null
+   },
+   "PER_SEED_GRAPH_DISTANCE": {
+    "unreached": {
+     "n": 101,
+     "BASE": 0.0,
+     "B6": 0.2079,
+     "ORACLE": {
+      "1": 0.4653,
+      "2": 0.4752,
+      "4": 0.4752,
+      "6": 0.4752
+     },
+     "n_uncovered_BASE": 101,
+     "mean_missing_gold_parts": 1.059,
+     "missing_count_hist": {
+      "1": 95,
+      "2": 6
+     },
+     "missing_part_canonical_rank": {
+      "median": 172,
+      "frac_within_top200": 0.5421,
+      "frac_beyond_top200": 0.4579
+     },
+     "STRUCT_reaches_all_missing": 0.0,
+     "RET_reaches_all_missing": 0.6436,
+     "COMBINED_reaches_all_missing": 0.6436,
+     "min_replacements_needed_mean": 1.079,
+     "router_outcome": {
+      "NEUTRAL": 78,
+      "RECOVERED": 21,
+      "PARTIAL": 2
+     },
+     "residual_failure_modes": {
+      "EVICTION": 1,
+      "RANKING": 16,
+      "REACH": 36,
+      "REACH_AT_ROUTER_M": 27
+     }
+    },
+    "1": {
+     "n": 8,
+     "BASE": 0.0,
+     "B6": 0.875,
+     "ORACLE": {
+      "1": 0.875,
+      "2": 0.875,
+      "4": 0.875,
+      "6": 0.875
+     },
+     "n_uncovered_BASE": 8,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 8
+     },
+     "missing_part_canonical_rank": {
+      "median": 85,
+      "frac_within_top200": 0.75,
+      "frac_beyond_top200": 0.25
+     },
+     "STRUCT_reaches_all_missing": 1.0,
+     "RET_reaches_all_missing": 0.875,
+     "COMBINED_reaches_all_missing": 1.0,
+     "min_replacements_needed_mean": 1.0,
+     "router_outcome": {
+      "NEUTRAL": 1,
+      "RECOVERED": 7
+     },
+     "residual_failure_modes": {
+      "RANKING": 1
+     }
+    },
+    "2": {
+     "n": 13,
+     "BASE": 0.0,
+     "B6": 0.4615,
+     "ORACLE": {
+      "1": 0.7692,
+      "2": 0.7692,
+      "4": 0.7692,
+      "6": 0.7692
+     },
+     "n_uncovered_BASE": 13,
+     "mean_missing_gold_parts": 1.077,
+     "missing_count_hist": {
+      "1": 12,
+      "2": 1
+     },
+     "missing_part_canonical_rank": {
+      "median": 114,
+      "frac_within_top200": 0.7143,
+      "frac_beyond_top200": 0.2857
+     },
+     "STRUCT_reaches_all_missing": 0.9231,
+     "RET_reaches_all_missing": 0.6923,
+     "COMBINED_reaches_all_missing": 0.9231,
+     "min_replacements_needed_mean": 1.077,
+     "router_outcome": {
+      "NEUTRAL": 6,
+      "RECOVERED": 6,
+      "PARTIAL": 1
+     },
+     "residual_failure_modes": {
+      "RANKING": 3,
+      "REACH": 1,
+      "REACH_AT_ROUTER_M": 3
+     }
+    },
+    "3": {
+     "n": 9,
+     "BASE": 0.0,
+     "B6": 0.2222,
+     "ORACLE": {
+      "1": 0.6667,
+      "2": 0.6667,
+      "4": 0.6667,
+      "6": 0.6667
+     },
+     "n_uncovered_BASE": 9,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 9
+     },
+     "missing_part_canonical_rank": {
+      "median": 174,
+      "frac_within_top200": 0.5556,
+      "frac_beyond_top200": 0.4444
+     },
+     "STRUCT_reaches_all_missing": 1.0,
+     "RET_reaches_all_missing": 0.6667,
+     "COMBINED_reaches_all_missing": 1.0,
+     "min_replacements_needed_mean": 1.0,
+     "router_outcome": {
+      "NEUTRAL": 7,
+      "RECOVERED": 2
+     },
+     "residual_failure_modes": {
+      "RANKING": 3,
+      "REACH_AT_ROUTER_M": 4
+     }
+    }
+   }
+  },
+  "squad_clean": {
+   "n": 2000,
+   "BASE_ALL": 0.9805,
+   "BASE_ANY": 0.9805,
+   "B6_ALL": 0.9875,
+   "B6_ANY": 0.9875,
+   "B6_gold_admitted": 17,
+   "B6_gold_evicted": 3,
+   "B6_churn_mean": 3.974,
+   "ORACLE": {
+    "1": {
+     "ALL": 0.9975,
+     "dALL": 0.017
+    },
+    "2": {
+     "ALL": 0.9975,
+     "dALL": 0.017
+    },
+    "4": {
+     "ALL": 0.9975,
+     "dALL": 0.017
+    },
+    "6": {
+     "ALL": 0.9975,
+     "dALL": 0.017
+    }
+   },
+   "ALL_QUERIES": {
+    "n": 2000,
+    "BASE": 0.9805,
+    "B6": 0.9875,
+    "ORACLE": {
+     "1": 0.9975,
+     "2": 0.9975,
+     "4": 0.9975,
+     "6": 0.9975
+    },
+    "n_uncovered_BASE": 39,
+    "mean_missing_gold_parts": 1.0,
+    "missing_count_hist": {
+     "1": 39
+    },
+    "missing_part_canonical_rank": {
+     "median": 81,
+     "frac_within_top200": 1.0,
+     "frac_beyond_top200": 0.0
+    },
+    "STRUCT_reaches_all_missing": 0.2821,
+    "RET_reaches_all_missing": 0.8974,
+    "COMBINED_reaches_all_missing": 0.9744,
+    "min_replacements_needed_mean": 1.0,
+    "router_outcome": {
+     "NEUTRAL": 1980,
+     "RECOVERED": 17,
+     "DAMAGED": 3
+    },
+    "residual_failure_modes": {
+     "EVICTION": 3,
+     "RANKING": 11,
+     "REACH": 1,
+     "REACH_AT_ROUTER_M": 10
+    }
+   },
+   "direct_node": {
+    "STRUCT32": {
+     "ALL": 0.981,
+     "per_hop": null
+    },
+    "STRUCT64": {
+     "ALL": 0.981,
+     "per_hop": null
+    },
+    "RET32": {
+     "ALL": 0.9955,
+     "per_hop": null
+    },
+    "COMBINED_32_32": {
+     "ALL": 0.9955,
+     "per_hop": null
+    }
+   },
+   "PER_MISSING_COUNT": {
+    "0": {
+     "n": 1961,
+     "BASE": 1.0,
+     "B6": 0.9985,
+     "ORACLE": {
+      "1": 1.0,
+      "2": 1.0,
+      "4": 1.0,
+      "6": 1.0
+     },
+     "n_uncovered_BASE": 0,
+     "mean_missing_gold_parts": 0.0,
+     "missing_count_hist": {},
+     "missing_part_canonical_rank": {
+      "median": 1000000,
+      "frac_within_top200": 0.0,
+      "frac_beyond_top200": 1.0
+     },
+     "STRUCT_reaches_all_missing": null,
+     "RET_reaches_all_missing": null,
+     "COMBINED_reaches_all_missing": null,
+     "min_replacements_needed_mean": null,
+     "router_outcome": {
+      "NEUTRAL": 1958,
+      "DAMAGED": 3
+     },
+     "residual_failure_modes": {
+      "EVICTION": 3
+     }
+    },
+    "1": {
+     "n": 39,
+     "BASE": 0.0,
+     "B6": 0.4359,
+     "ORACLE": {
+      "1": 0.8718,
+      "2": 0.8718,
+      "4": 0.8718,
+      "6": 0.8718
+     },
+     "n_uncovered_BASE": 39,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 39
+     },
+     "missing_part_canonical_rank": {
+      "median": 81,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 0.2821,
+     "RET_reaches_all_missing": 0.8974,
+     "COMBINED_reaches_all_missing": 0.9744,
+     "min_replacements_needed_mean": 1.0,
+     "router_outcome": {
+      "NEUTRAL": 22,
+      "RECOVERED": 17
+     },
+     "residual_failure_modes": {
+      "RANKING": 11,
+      "REACH": 1,
+      "REACH_AT_ROUTER_M": 10
+     }
+    },
+    "2": null,
+    "3+": null
+   },
+   "PER_SEED_GRAPH_DISTANCE": {
+    "unreached": {
+     "n": 28,
+     "BASE": 0.0,
+     "B6": 0.3214,
+     "ORACLE": {
+      "1": 0.8571,
+      "2": 0.8571,
+      "4": 0.8571,
+      "6": 0.8571
+     },
+     "n_uncovered_BASE": 28,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 28
+     },
+     "missing_part_canonical_rank": {
+      "median": 85,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 0.0,
+     "RET_reaches_all_missing": 0.9643,
+     "COMBINED_reaches_all_missing": 0.9643,
+     "min_replacements_needed_mean": 1.0,
+     "router_outcome": {
+      "NEUTRAL": 19,
+      "RECOVERED": 9
+     },
+     "residual_failure_modes": {
+      "RANKING": 9,
+      "REACH": 1,
+      "REACH_AT_ROUTER_M": 9
+     }
+    },
+    "1": {
+     "n": 5,
+     "BASE": 0.0,
+     "B6": 1.0,
+     "ORACLE": {
+      "1": 1.0,
+      "2": 1.0,
+      "4": 1.0,
+      "6": 1.0
+     },
+     "n_uncovered_BASE": 5,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 5
+     },
+     "missing_part_canonical_rank": {
+      "median": 51,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 1.0,
+     "RET_reaches_all_missing": 1.0,
+     "COMBINED_reaches_all_missing": 1.0,
+     "min_replacements_needed_mean": 1.0,
+     "router_outcome": {
+      "RECOVERED": 5
+     },
+     "residual_failure_modes": {}
+    },
+    "2": {
+     "n": 3,
+     "BASE": 0.0,
+     "B6": 0.6667,
+     "ORACLE": {
+      "1": 1.0,
+      "2": 1.0,
+      "4": 1.0,
+      "6": 1.0
+     },
+     "n_uncovered_BASE": 3,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 3
+     },
+     "missing_part_canonical_rank": {
+      "median": 89,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 1.0,
+     "RET_reaches_all_missing": 0.6667,
+     "COMBINED_reaches_all_missing": 1.0,
+     "min_replacements_needed_mean": 1.0,
+     "router_outcome": {
+      "NEUTRAL": 1,
+      "RECOVERED": 2
+     },
+     "residual_failure_modes": {
+      "RANKING": 1
+     }
+    },
+    "3": {
+     "n": 3,
+     "BASE": 0.0,
+     "B6": 0.3333,
+     "ORACLE": {
+      "1": 0.6667,
+      "2": 0.6667,
+      "4": 0.6667,
+      "6": 0.6667
+     },
+     "n_uncovered_BASE": 3,
+     "mean_missing_gold_parts": 1.0,
+     "missing_count_hist": {
+      "1": 3
+     },
+     "missing_part_canonical_rank": {
+      "median": 109,
+      "frac_within_top200": 1.0,
+      "frac_beyond_top200": 0.0
+     },
+     "STRUCT_reaches_all_missing": 1.0,
+     "RET_reaches_all_missing": 0.3333,
+     "COMBINED_reaches_all_missing": 1.0,
+     "min_replacements_needed_mean": 1.0,
+     "router_outcome": {
+      "NEUTRAL": 2,
+      "RECOVERED": 1
+     },
+     "residual_failure_modes": {
+      "RANKING": 1,
+      "REACH_AT_ROUTER_M": 1
+     }
+    }
+   }
+  }
+ }
+}

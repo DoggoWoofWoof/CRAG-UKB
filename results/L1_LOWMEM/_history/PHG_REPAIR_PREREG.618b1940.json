@@ -1,0 +1,286 @@
+{
+ "RECORD": "PHG_REPAIR_PREREG",
+ "utc": "2026-09-13T18:25:32Z",
+ "adapter": "PHG_NONEMPTY_REPAIR_V1",
+ "tag": "LOWMEM__PHG_REPAIR1_con",
+ "suffix": "__phg_repair1",
+ "purpose": "adapt an otherwise valid PHG k-way assignment to the existing canonical L1 requirement that all k part ids are non-empty; the MetaQA PARTITION_INVALID was an interface/validity mismatch between PHG (upper-only balance) and the canonical contract, not evidence about retrieval -- L1 was never reached",
+ "not_done": "PHG is not rerun and not retuned; no parameter search; no rank-count change; no minimum-block-size rule (the frozen contract rejected empty blocks only, so the two singleton blocks the repair creates are allowed and L1 gets the final say)",
+ "algorithm": [
+  "input: the frozen PHG R1 k-way vector of the dataset (assembled from data/l1_lowmem/<ds>/phg/R1/part_rank*.txt, sha-pinned in PHG_RUNS_<ds>.json) and the frozen H4_SK hypergraph (weighted nets over canonical positions)",
+  "for each empty block id b, in ascending order:",
+  "  1. candidates = nodes v whose current (donor) block a = part[v] has size >= 2",
+  "  2. delta(v) = exact change of the weighted KM1 = sum over nets e containing v of w_e * (1 - [count(e, a) == 1]) -- b is empty so every net of v gains one block; a net loses one block iff v was its only pin in a",
+  "  3. choose the candidate with the minimum delta",
+  "  4. ties: smaller canonical node position, then smaller donor block id (a node has exactly one donor block, so the third key can never decide between distinct nodes; implemented as a lexicographic sort on (delta, position, donor) for fidelity)",
+  "  5. move exactly that node: part[v] = b",
+  "  6. recompute block sizes and the per-(net, block) pin counts / connectivity before the next empty block (exact, from scratch)",
+  "moves == number of empty blocks of the input (one move per empty block); no other node changes block",
+  "postconditions: same node universe (length N, every position assigned exactly once), same k, block ids in [0, k), 0 empty blocks, max block <= ceil(1.03 N/k) (the canonical bound; a move can only shrink a donor of size >= 2 and create a singleton), exact H4_SK unchanged (npz sha + H4_SK_STRUCTURE_V1 digest == ORIGINAL), KM1_after == KM1_before + sum of the recorded deltas (full recomputation)",
+  "must NOT read: queries, answers, hop labels, BASE, SAFE, coverage, any replay/eval result; no parameter search; no minimum-block-size rule"
+ ],
+ "program": {
+  "path": "src/l1_lowmem/phg_repair.py",
+  "bytes": 44329,
+  "sha256": "14076c747dfd9c12dc11eb8a13c0322779a70e1c4c64cd141768824bd768eca0"
+ },
+ "phg_module": {
+  "path": "src/l1_lowmem/phg.py",
+  "bytes": 55309,
+  "sha256": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4"
+ },
+ "inputs": {
+  "squad": {
+   "PHG_RUNS_record": {
+    "path": "results/L1_LOWMEM/PHG_RUNS_squad.json",
+    "bytes": 77314,
+    "sha256": "30559e1c02891f8a9aee0dba6e10fc1ae3d52e5a6a53f9bdd75152e00821749b"
+   },
+   "DECISION_as_recorded": "PHG_L1_NONINFERIOR",
+   "R1_part_rank_txt_sha256": {
+    "0": "0ad0e43a6ae50fd65401a76f831150c483817af016bf5b2b6d8a236991ddd50a",
+    "1": "a452f8b1fc8c6f1208f5438283c4e5f03da6fd0c1f415e6a5b0a09ca55f94aa9",
+    "2": "8bdef572a0c89677311c08507401c8b1de6027017ee927a5b38d010f209f574a",
+    "3": "b062c1650460abceee073d2d37299f16f84e432668e8cbcae1648d8d6e2fadef"
+   },
+   "N": 20233,
+   "k": 202,
+   "M": 39146,
+   "P": 1589832,
+   "ORIGINAL_STRUCTURE_SHA256": "4fd825932a3ae75800c0e736a751367d728daac5457b7daaa479ee29f08e56f3",
+   "H4_SK_npz_sha256": "ed6b8336adb44fd868ef715f81401c5a06b7bbc19a91eafb9ada39c59c59b1a6",
+   "hypergraph_content_digest": "3a170cd70d0a77aa810b6107d59c5230f26b6642af21a9d6c31cd56545b8d1c5",
+   "empty_blocks_recorded": 0,
+   "max_block_recorded": 103,
+   "contract_bound": 104,
+   "km1_recorded": 7538754,
+   "mtkahypar_km1": 6525934,
+   "frozen_import": {
+    "npy": {
+     "path": "data/l1_canonical/squad/parts/LOWMEM__PHG_con.npy",
+     "bytes": 161992,
+     "sha256": "1425a34d9b32f779801c09beca8ca964e614806348070f1551e6335671470413"
+    },
+    "json": {
+     "path": "data/l1_canonical/squad/parts/LOWMEM__PHG_con.json",
+     "bytes": 4391,
+     "sha256": "56c0e8c55afa2d30629fbc12bc95cd8e9ba18bb8ca572b2fec8fa9851f885ba7"
+    },
+    "downstream": {
+     "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad__phg.json",
+     "bytes": 3513,
+     "sha256": "f2a2704b746400557658cbe597d682f4856d298e6c2f1b426c56e7326f7507d8"
+    }
+   }
+  },
+  "metaqa": {
+   "PHG_RUNS_record": {
+    "path": "results/L1_LOWMEM/PHG_RUNS_metaqa.json",
+    "bytes": 70048,
+    "sha256": "f917dfe3486bfffe3730d73833c1ada89c9f27cedf3f7d592cf72bc97f549787"
+   },
+   "DECISION_as_recorded": "PHG_PARTITION_INVALID",
+   "R1_part_rank_txt_sha256": {
+    "0": "c0f251677b2af720fb294555df07772c3cdfdecc777264c266d67797a5d39171",
+    "1": "2038b3e6f966982e8a4cdfc96fe508216f7186ebd26f17299c3e382e22e1391b",
+    "2": "8595bb4935e452f3d3ce094214a3af563376eb8ca9ef2db89537373ae6cad266",
+    "3": "27cd5cfad7b47b3fecb39577e389040661b7550e5f2280da00579ea5f0ef3d3a"
+   },
+   "N": 43234,
+   "k": 432,
+   "M": 86796,
+   "P": 531006,
+   "ORIGINAL_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "H4_SK_npz_sha256": "edd0cb51683df14973cbb4021518455b97c827ab3aad577d238ae07227f84743",
+   "hypergraph_content_digest": "bebdd65c305a1f565c3127a8ef91207db03a7e27af487062d8bbc548a2347fcc",
+   "empty_blocks_recorded": 2,
+   "max_block_recorded": 104,
+   "contract_bound": 104,
+   "km1_recorded": 45623771,
+   "mtkahypar_km1": 41244100
+  }
+ },
+ "expectations": {
+  "squad": "no empty block recorded -> 0 moves; repaired vector byte-identical to the frozen import parts/LOWMEM__PHG_con.npy (no-op correctness test; the existing squad downstream record stands, nothing is re-evaluated)",
+  "metaqa": "2 empty blocks recorded -> exactly 2 moves (unless the frozen input proves otherwise), then import + replay cache + paired canonical L1 on the identical 1,998 dev query ids vs the frozen Mt-KaHyPar replay"
+ },
+ "postconditions": [
+  "same node universe: length N, every position assigned exactly once",
+  "same k",
+  "block ids in [0, k)",
+  "0 empty blocks",
+  "max block <= ceil(1.03 N/k)",
+  "exact H4_SK unchanged (npz sha + structure digest == ORIGINAL)",
+  "moves == empty blocks of the input",
+  "KM1_after == KM1_before + sum(delta) by full recomputation"
+ ],
+ "recorded_per_run": [
+  "moved canonical node ids",
+  "source / destination blocks",
+  "per-move weighted KM1 delta",
+  "KM1 before / after",
+  "STRUCT cut before / after",
+  "KNN cut before / after",
+  "partition sha before / after (vector bytes and npy file)"
+ ],
+ "downstream": {
+  "path": "normal experimental canonical L1 path (l1_downstream.run: replay cache -> l1_eval numerics -> paired vs results/L1_CANONICAL replay)",
+  "population": "identical dev query ids (metaqa 1,998) to the frozen Mt-KaHyPar replay; the sealed test split is never read",
+  "primary": "final SAFE_ALL_P50 paired exact two-sided McNemar: PHG_L1_SIG_LOSS iff delta(PHG - MtK) < 0 and p < 0.05, else PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS",
+  "secondary_reported": "BASE_ALL_P50 (same rule, not the decision)",
+  "diagnostics_no_rule": [
+   "candidate coverage (ANY)",
+   "SAFE additions",
+   "hop1 / hop2 / hop3 paired",
+   "scope nodes",
+   "balance",
+   "KM1 before / after repair and the 2-move delta",
+   "STRUCT / KNN cut before / after"
+  ],
+  "no_tuning": "nothing is tuned on these results"
+ },
+ "labels": {
+  "repair": [
+   "REPAIR_NOOP_IDENTICAL (squad expectation)",
+   "REPAIR_APPLIED",
+   "PHG_REPAIR_POSTCONDITION_FAIL"
+  ],
+  "L1": [
+   "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS",
+   "PHG_L1_SIG_LOSS"
+  ]
+ },
+ "terminology_amendment": {
+  "from": "PHG_L1_NONINFERIOR",
+  "to": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS",
+  "verdict_field": {
+   "from": "NONINFERIOR",
+   "to": "NO_SIGNIFICANT_PAIRED_LOSS"
+  },
+  "why": "a non-significant paired McNemar difference is not formal non-inferiority; no non-inferiority margin was preregistered in PHG_PREREG.json, so no non-inferiority claim is made (the squad point estimate is -0.003, not 'same or better')",
+  "rule_unchanged": "SIG_LOSS iff delta < 0 and p < 0.05; otherwise the renamed label -- identical to PHG_PREREG.json gate 3",
+  "applied_by": "supersession of PHG_RUNS_squad.json and PHG_REPORT.{json,md}: originals moved unchanged to results/L1_LOWMEM/_history/, superseding records carry `supersedes` pointers; PHG_PREREG.json itself is never edited",
+  "user_spellings_mapped": [
+   "PHG_L1_NO_SIGNIFICANT_LOSS",
+   "NO_SIGNIFICANT_PAIRED_LOSS"
+  ]
+ },
+ "stop_rule": "STOP_FOR_REVIEW after the repaired MetaQA downstream result; MuSiQue / WebQSP / HotpotQA / 2Wiki untouched; no promotion",
+ "frozen_read_only": {
+  "H4_SK_LOW_MEMORY_PARTITIONING_REPORT.json": {
+   "path": "results/L1_LOWMEM/H4_SK_LOW_MEMORY_PARTITIONING_REPORT.json",
+   "bytes": 50578,
+   "sha256": "5a07e478952fdc8d46949b94cdb159f1b7eae34eb8b35e859ee981df5b2dd678"
+  },
+  "H4_SK_LOW_MEMORY_PARTITIONING_REPORT.md": {
+   "path": "results/L1_LOWMEM/H4_SK_LOW_MEMORY_PARTITIONING_REPORT.md",
+   "bytes": 11366,
+   "sha256": "89831695ce7085932222729fd0f33a32be4409887565491328b89365e6df36ec"
+  },
+  "FREIGHT_RUNS_squad.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_squad.json",
+   "bytes": 45452,
+   "sha256": "f252ff8dbcf82875330eee67d5f7af9b44e0ecc7e5f7a900fb7b2c3c415683db"
+  },
+  "FREIGHT_RUNS_metaqa.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_metaqa.json",
+   "bytes": 38282,
+   "sha256": "aaf4d3a7ad6f5a9b88448f28c5b5fc89462cf0d9d7f767f3393a7cbb0c39c0d0"
+  },
+  "FREIGHT_RUNS_musique.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_musique.json",
+   "bytes": 50727,
+   "sha256": "f23b6c85302ab7e19dfe8fc14d67b85b9e58dd4087e86c29707365d1d70230b6"
+  },
+  "FREIGHT_BUILD.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_BUILD.json",
+   "bytes": 6406,
+   "sha256": "e01faeded3c5272b6ea5ebce7e4a03d89ed662c4970fea5321c938c051b9fafb"
+  },
+  "L1_DOWNSTREAM_squad.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad.json",
+   "bytes": 3507,
+   "sha256": "1aace62a2a3cb6da1c96050b0472bea334f68d57ff95d1f9ac2bbb151180ecf9"
+  },
+  "L1_DOWNSTREAM_metaqa.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa.json",
+   "bytes": 5667,
+   "sha256": "784f3fe75abb979b7e2d2eacc84ac57335ff8373356d6c2627fbb0866f8a5bd6"
+  },
+  "L1_DOWNSTREAM_musique.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_musique.json",
+   "bytes": 1599,
+   "sha256": "4888f4aae9e713a4842721a9a9ca46c19fa68de7b40e5124515a1676827ed3f3"
+  },
+  "MUSIQUE_MTKAHYPAR_RETRY.json": {
+   "path": "results/L1_LOWMEM/MUSIQUE_MTKAHYPAR_RETRY.json",
+   "bytes": 2515,
+   "sha256": "1ef89da11257675f86fde39bf8e75a3ddb3f6b909e79373b1a640701e011b7d6"
+  },
+  "FREIGHT_RESTREAM_PREREG.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_PREREG.json",
+   "bytes": 6753,
+   "sha256": "3b0eb1fb82a0d94f65f24934c01ef73b313ca1cf5394cc140960e147dc77bfe2"
+  },
+  "FREIGHT_RESTREAM_RUNS_squad.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_RUNS_squad.json",
+   "bytes": 25172,
+   "sha256": "ac2c6b13cffef2ef4ac3023c615f9e5cc0d574d4641272219bbcad78e9909ed0"
+  },
+  "FREIGHT_RESTREAM_RUNS_metaqa.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_RUNS_metaqa.json",
+   "bytes": 39654,
+   "sha256": "a596c0a25750ab9ba3389f62d34cb75b512f0ea47879a0f8967231363fb7b6fb"
+  },
+  "FREIGHT_RESTREAM_REPORT.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_REPORT.json",
+   "bytes": 20553,
+   "sha256": "044aea86c05de815647ba444fec93cd83516e6d8e73967dfbf55accb28296ce7"
+  },
+  "FREIGHT_RESTREAM_REPORT.md": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_REPORT.md",
+   "bytes": 5328,
+   "sha256": "7dc1bbb67942e9de1337d8c3e05bbd7c6debab0eabe1a08e4fdaf2245d04672f"
+  },
+  "L1_DOWNSTREAM_metaqa__restream2.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa__restream2.json",
+   "bytes": 5682,
+   "sha256": "2dd3ef227324157824ca7be476e5dee75d8825e243277cd0056d87bd3ae3075b"
+  },
+  "AUDIT_ZOLTAN_PHG.json": {
+   "path": "results/L1_LOWMEM/AUDIT_ZOLTAN_PHG.json",
+   "bytes": 5518,
+   "sha256": "1734ed9181df71c323768cb6065a856d28d1648888381312029a0e264453b24b"
+  },
+  "PHG_PACKAGES.json": {
+   "path": "results/L1_LOWMEM/PHG_PACKAGES.json",
+   "bytes": 9677,
+   "sha256": "1c4a3d8107d8207066d20a1aadce15849ed23b5b8ebc63bd0276c52a9af17b23"
+  },
+  "PHG_PREREG.json": {
+   "path": "results/L1_LOWMEM/PHG_PREREG.json",
+   "bytes": 12650,
+   "sha256": "a290ad99b3ef3394859e4653acc66d4120abd8924e7aec25568b8dd269291404"
+  },
+  "PHG_BUILD.json": {
+   "path": "results/L1_LOWMEM/PHG_BUILD.json",
+   "bytes": 1650,
+   "sha256": "65fa41e7141e7344f5360c35da1c30df83a6a6ac18a353db93935539fa899a1b"
+  },
+  "PHG_RUNS_metaqa.json": {
+   "path": "results/L1_LOWMEM/PHG_RUNS_metaqa.json",
+   "bytes": 70048,
+   "sha256": "f917dfe3486bfffe3730d73833c1ada89c9f27cedf3f7d592cf72bc97f549787"
+  },
+  "L1_DOWNSTREAM_squad__phg.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad__phg.json",
+   "bytes": 3513,
+   "sha256": "f2a2704b746400557658cbe597d682f4856d298e6c2f1b426c56e7326f7507d8"
+  },
+  "L1_REPLAY_squad__LOWMEM__PHG_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_squad__LOWMEM__PHG_con.json",
+   "bytes": 34987,
+   "sha256": "dc14ab54ea656f2f4f495c59365b84836b70cd3c27a22c646a210e4d9d5d8846"
+  }
+ }
+}

@@ -1,0 +1,69 @@
+{
+  "DATASET": "webqsp",
+  "CANONICAL_CORPUS_SOURCE": "*** REJECTED -- NOT THE CANONICAL SOURCE. NO CORPUS EXISTS FOR webqsp. *** The source described here is the union of the Freebase entity nodes of the RoG-webqsp per-question subgraphs over ALL THREE RoG splits (train 2,826 + validation 246 + test 1,628 = 4,700 questions), entities being the distinct endpoints (head and tail) of every triple in every question's 'graph' field. It is recorded verbatim so the rejection is auditable, and it is REJECTED because corpus membership is query-derived: an entity is in it only because some question's subgraph reached it. A canonical webqsp corpus must come from a Freebase dump, which is NOT on this machine (verified by exhaustive search). See data/final_canonical/webqsp/FREEBASE_SOURCE_PROPOSAL.md.",
+  "SOURCE_VERSION": "rmanluo/RoG-webqsp parquet export (subgraph layer) + Microsoft WebQSP 2016 (question layer); data/original/webqsp/rog_webqsp + data/original/webqsp/WebQSP/data.",
+  "SOURCE_PATHS": [
+    "data/original/webqsp/rog_webqsp/train-00000-of-00002.parquet",
+    "data/original/webqsp/rog_webqsp/train-00001-of-00002.parquet",
+    "data/original/webqsp/rog_webqsp/validation-00000-of-00001.parquet",
+    "data/original/webqsp/rog_webqsp/test-00000-of-00002.parquet",
+    "data/original/webqsp/rog_webqsp/test-00001-of-00002.parquet",
+    "data/original/webqsp/WebQSP/data/WebQSP.train.json",
+    "data/original/webqsp/WebQSP/data/WebQSP.test.json"
+  ],
+  "SOURCE_HASHES": {
+    "data/original/webqsp/rog_webqsp/train-00000-of-00002.parquet": {
+      "sha256": "4d2d4520cffb87370fa7de408dc6730a1e8d90d0233e166117a377ca71b5f2e8",
+      "bytes": 154472902,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    },
+    "data/original/webqsp/rog_webqsp/train-00001-of-00002.parquet": {
+      "sha256": "69fb1510e9990f8d0f62ab8f504ae3306130aec85c5f06fa772bce9d2db463a4",
+      "bytes": 155300860,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    },
+    "data/original/webqsp/rog_webqsp/validation-00000-of-00001.parquet": {
+      "sha256": "8355b852e5aae75197d4220031f88a6b7627dfd457383edf29c7f9b9a92a272d",
+      "bytes": 24340437,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    },
+    "data/original/webqsp/rog_webqsp/test-00000-of-00002.parquet": {
+      "sha256": "3e756abdcdf944e72fb7408ff670ff33d030c1a81413338478904e8b07c64235",
+      "bytes": 90854720,
+      "hash_source": "hashed in this task",
+      "exists": true
+    },
+    "data/original/webqsp/rog_webqsp/test-00001-of-00002.parquet": {
+      "sha256": "0f7b81b759a0c0a7e675f567b7b378687c849d5aeb75cd50409de80b1c5b0a83",
+      "bytes": 93236638,
+      "hash_source": "hashed in this task",
+      "exists": true
+    },
+    "data/original/webqsp/WebQSP/data/WebQSP.train.json": {
+      "sha256": "a01f87fa7808d2e90ccdf758b8eefbb882f3f92a8f386058ad6fd153c1589ed0",
+      "bytes": 10408955,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    },
+    "data/original/webqsp/WebQSP/data/WebQSP.test.json": {
+      "sha256": "856f50eb1ede43b799b10ddd0a980e72c88475b1a2259491af57e5db410ded52",
+      "bytes": 5140169,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    }
+  },
+  "WHY_THIS_IS_THE_FULL_RETRIEVAL_UNIVERSE": "THIS IS THE WEAKEST CONTRACT OF THE SIX AND NEEDS AN EXPLICIT DECISION. Evidence, stated plainly:\n(1) NO question-independent Freebase corpus exists in this project or in the official release. The official Microsoft WebQSP files (WebQSP.train.json 3,098 / WebQSP.test.json 1,639) contain questions, SPARQL programs, topic entities and answers -- and NO graph: they cannot yield a single corpus node. There is no Freebase dump on disk (data/original/webqsp holds exactly the 5 RoG parquets, the 4 WebQSP json files, docs and eval.py). The ONLY Freebase material available is the per-question RoG subgraph. Consequently a corpus for this dataset is necessarily the union of per-question subgraphs; the only real choice is WHICH questions.\n(2) This contract takes ALL 4,700 RoG questions in ALL THREE splits (parquet row counts verified from file metadata: train 1,413+1,413, validation 246, test 814+814). The corpus is therefore a pure function of the five parquet files and cannot be changed by any choice of evaluated queries -- the Track-B invariant (corpus not subsettable by query) HOLDS.\n(3) It explicitly rules out the legacy failure mode. The legacy 781,485-node substrate was built ONLY from the two RoG TEST parquets (src/pipeline/loader_webqsp.py:118-123 defaults to data/raw/full/kb/webqsp_test0.parquet + webqsp_test1.parquet, which are sha256-identical to the official RoG test shards), all 1,578 of its question ids are 'WebQTest-*', and 1,419 of those same test questions were the evaluated set -- i.e. the corpus was literally the union of the evaluated questions' own subgraphs (verified in data/final_canonical/_work/webqsp_legacy_verify.json). Adding the train+validation subgraphs removes that coupling and grows the corpus ~1.68x.\n(4) IT ALSO REMOVES A GOLD-CONDITIONING DEFECT IN THE PHASE-C REFERENCE. scratchpad/c1c2_webqsp.py:30-33 builds its 1,316,466-entity corpus from the triple endpoints AND THEN EXPLICITLY INJECTS every question's ANSWER entities (`for a in aslist(r['a_entity']): add(a)`) and topic entities (`for q in aslist(r['q_entity']): add(q)`). A corpus that is seeded with the answers guarantees its own gold coverage and is conditioned on the labels, which is exactly what this track forbids. THIS CONTRACT READS ONLY THE 'graph' FIELD at corpus time; a_entity/q_entity are read only in the query stage. Consequence to expect and measure at build time: canonical_v1's node set is a SUBSET of Phase-C's (<= 1,316,466), and some answer entities may not resolve to a node -- that gold coverage number is a RESULT to report honestly, not a target to engineer. (Reuse is unaffected: a subset of Phase-C's nodes is still 100% covered by its rows.)\n(5) HONEST LIMIT: this is still question-set-conditioned by construction of RoG, and it cannot be otherwise without acquiring a Freebase slice. Any WebQSP number must be reported as retrieval over 'the RoG subgraph union', not over Freebase.",
+  "RAW_SOURCE_RECORDS": "4,700 RoG question records (train 2,826 / validation 246 / test 1,628); triple endpoints per record are the raw node records and are counted at build time. Question layer: 4,737 official MS questions.",
+  "CANONICAL_NODE_IDENTITY_RULE": "Freebase entity SURFACE STRING as it appears in a RoG 'graph' TRIPLE ENDPOINT (head or tail), exact; node_id = 'webqsp:<sha256(entity_string)[:24]>'. Phase-C used the same identity with a 16-hex id (webqsp_ent_<sha256(name)[:16]>, 1,316,466 unique ids == 1,316,466 unique text hashes) BUT over a larger set: it also injected a_entity (answers) and q_entity (topic entities). canonical_v1 takes triple endpoints ONLY, so its node set is a subset.",
+  "NORMALIZATION_RULE": "OFFICIAL VERBATIM. Stored text = title = the exact RoG entity string, INCLUDING raw Freebase MIDs ('m.0k8nh0b', 'g.12tb6gh4f') for unlabeled CVT/mediator nodes -- measured at 55.3% of the first 200,000 Phase-C entity docs. No NFC/NFKC, no casefold, no whitespace collapse, no strip. The MID->name resolution of commit ba6bd71 is NOT applied to canonical_v1 text: it is a graph-dependent DERIVED transform (src/pipeline/loader_webqsp.py, deduces a named neighbour through the subgraph), it was applied only to the legacy master_nodes_webqsp.json substrate, and applying it here would (a) make the corpus depend on a downstream artifact and (b) invalidate the 1,316,466 dense + SPLADE rows already computed over the verbatim text. It is recorded as a separate derived field to be produced downstream: resolved_text (nullable, absent in canonical_v1).",
+  "DEDUP_RULE": "identity = exact entity surface string; every repeat across questions/splits collapses onto one node. n_source_records / split_provenance record how many questions and which splits contributed each node.",
+  "EXPECTED_NODE_COUNT": 1316466,
+  "DERIVED_NODE_COUNT": null,
+  "QUERY_DEPENDENT_CORPUS": false,
+  "QUALITY_LOCKED_QUERY_SOURCE": "official Microsoft WebQSP.test.json, 1,639 questions (1,628 answerable). WebQSP test labels are PUBLIC. NOTE the leakage hazard this fixes: those same test questions are what the legacy substrate both built its corpus from and evaluated on.",
+  "SCALE_ALL_QUERY_SOURCE": "every official Microsoft WebQSP question = 4,737 (train 3,098 + test 1,639). The RoG splits (2,826/246/1,628) are a subgraph layer over the same questions, not an independent question set.",
+  "SOURCE_CONTRACT_STATUS": "BLOCKED_PENDING_FREEBASE_SOURCE -- NOTHING BUILT AND NOTHING MAY BE BUILT. data/final_canonical/_APPROVALS.json sets approvals.webqsp.status = BLOCKED_PENDING_FREEBASE_SOURCE, and scratchpad/final_canonical_build/build_kb.py hard-codes NEVER_BUILD = {'webqsp'} so the builder refuses unconditionally: no flag, environment variable or argument can make it build. The corpus source described below (the RoG all-question subgraph union) is REJECTED because its membership is query-derived. See data/final_canonical/webqsp/FREEBASE_SOURCE_PROPOSAL.md for the proposed question-independent Freebase source, scope rules, deterministic textualization, cost and reuse analysis."
+}

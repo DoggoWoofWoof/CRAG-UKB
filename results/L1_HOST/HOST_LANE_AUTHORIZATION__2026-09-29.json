@@ -1,0 +1,77 @@
+{
+ "RECORD": "L1_HOST_LANE_AUTHORIZATION",
+ "date": "2026-09-29",
+ "utc": "2026-09-29T10:16:17Z",
+ "authorized_by_user": {
+  "2026-09-29, answer to the held-out / host question": "gpu and a better cpu as promised use with contention on medium priority but if resources available i want full utilization, use this for the partitioning and create for the rest",
+  "2026-09-29, apt install": "nothing has run yet, and the host lacks MPI/Zoltan/compiler in WSL, with apt install requiring authorization, bro i give you authorization please start utilizing the gpu and cpu dont waste time"
+ },
+ "authorizes": "the declared stage L1_HOST_SHARD_MAPS on the named machine with the named settings: hypergraphs (frozen H4_SK rule at k = K) and Zoltan-PHG shard maps (NP 4, PARAMS, PHG_NONEMPTY_REPAIR_V1) for webqsp, hotpotqa and 2wiki at K 100, 250, 500, 1000, 2000, 5000 and the native K (25928, 52333, 59898), in that order of datasets",
+ "machine": {
+  "rx_host": "gpu",
+  "windows_host": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "logical_cpus": 32,
+  "wsl": "Ubuntu-24.04 (noble), kernel line in PHG_BUILD_HOST.json"
+ },
+ "settings": {
+  "python_env": "mpr-cpu (read-only): 3.13.5, numpy 2.3.2",
+  "driver_binary_sha256": "0d996c710d0521735dc6f44e95fb55db25970b85495e67f082acc58c06b55531",
+  "wrapper_sha256": "6de130e4bde663ce5f12d8633c45b20573eaaf1dd0cd7f228c71877f7c8c4367",
+  "driver_source_sha256": "cf5099851282444d0b6c87b399210ae3dd6bc09f8fe2a5f7b49d315ce4b133b4",
+  "compile": "mpicc -O2 -Wall -Wextra -I/usr/include/trilinos phg_driver.c -o phg_driver -ltrilinos_zoltan -lm",
+  "toolchain_and_libs": [
+   "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+   "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+   "mpirun (Open MPI) 4.1.6",
+   "\tlibtrilinos_zoltan.so.13.2 => /lib/x86_64-linux-gnu/libtrilinos_zoltan.so.13.2 (0x0000743909604000)",
+   "\tlibmpi.so.40 => /lib/x86_64-linux-gnu/libmpi.so.40 (0x00007439094d2000)",
+   "gcc\t4:13.2.0-7ubuntu1",
+   "libopenmpi-dev:amd64\t4.1.6-7ubuntu2",
+   "libtrilinos-zoltan-13.2:amd64\t13.2.0-5build2",
+   "libtrilinos-zoltan-dev:amd64\t13.2.0-5build2",
+   "openmpi-bin\t4.1.6-7ubuntu2",
+   "time\t1.9-0.2build1",
+   "-rwxr-xr-x 1 root root 27160 Apr  8  2024 /usr/bin/time",
+   "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"",
+   "NAME=\"Ubuntu\"",
+   "VERSION_ID=\"24.04\"",
+   "VERSION=\"24.04.5 LTS (Noble Numbat)\"",
+   "Linux 6.18.33.2-microsoft-standard-WSL2 x86_64",
+   "32",
+   "               total        used        free      shared  buff/cache   available",
+   "Mem:              94           1          92           0           1          92"
+  ],
+  "NP": 4,
+  "host_module": {
+   "path": "scratchpad/_l1h_host.py",
+   "sha256": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e"
+  },
+  "PYTHONHASHSEED": "0"
+ },
+ "placement_test": {
+  "record": {
+   "path": "results/L1_HOST/PLACEMENT_TEST__v1.json",
+   "sha256": "16316ee328a79553a345fedfc1822bf385259c6671db43631d971d40f9b1a289"
+  },
+  "VERDICT": "BIT_IDENTICAL",
+  "counts": {
+   "cells": 21,
+   "identical": 21,
+   "HG_equal": 21,
+   "shards_equal": 20,
+   "shards_compared": 20,
+   "vectors_equal": 20,
+   "vectors_compared": 20,
+   "outcomes_equal": 21
+  },
+  "meaning": "on metaqa, squad and musique at the native K and every grid K the host reproduced, bit for bit: every hypergraph content digest (21 / 21), every PHG shard file (20 / 20 cells run), every raw KM1, every final PHG vector (20 / 20, including the three served vectors LOWMEM__PHG_REPAIR1_con, LOWMEM__PHG_con, LOWMEM__PHG_C1_con) and the one refused cell (metaqa K 5000 PARTITION_INVALID on both machines) -- despite a different driver binary (gcc 13.3 / OpenMPI 4.1.6 / Zoltan 13.2.0-5build2 vs gcc 11.4 / OpenMPI 4.1.2 / Zoltan 13.2.0-1ubuntu1)"
+ },
+ "conditions": [
+  "every PHG run re-checks the host driver binary and wrapper sha256 against PHG_BUILD_HOST.json and /usr/bin/time (host_build())",
+  "a functional change to scratchpad/_l1h_host.py, the driver build, the toolchain, NP or PARAMS voids this block: a new placement test and a superseding block are required first",
+  "maps built under this block are labelled PHG (never Mt-KaHyPar) and carry their placement fields; PARTITION_INVALID cells are absent",
+  "inputs are only the declared key sets (HOST_LANE_DECLARATION.json inputs_pushed); nothing under data/ is written on either machine"
+ ]
+}

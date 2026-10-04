@@ -1,0 +1,229 @@
+{
+  "_config": {
+    "kind": "regime_ablation_R0R3",
+    "episodes": {
+      "A": {
+        "train": [
+          "metaqa",
+          "squad_clean"
+        ],
+        "val": "webqsp"
+      },
+      "B": {
+        "train": [
+          "webqsp",
+          "squad_clean"
+        ],
+        "val": "metaqa"
+      },
+      "C": {
+        "train": [
+          "webqsp",
+          "metaqa"
+        ],
+        "val": "squad_clean"
+      }
+    },
+    "samplers": {
+      "R0": "natural",
+      "R1": "dataset-balanced",
+      "R2": "regime-balanced",
+      "R3": "dataset x regime (cap5x)"
+    },
+    "max_steps": 20,
+    "select_on": "held-out-domain MRR",
+    "note": "identical arch/loss/opt; TRAIN-only regime thresholds; no dataset-ID; no final-test"
+  },
+  "episodes": {
+    "A": {
+      "train": [
+        "metaqa",
+        "squad_clean"
+      ],
+      "held_out": "webqsp",
+      "n_train": 2179,
+      "n_ho": 147,
+      "cell_counts": {
+        "metaqa|conflict": 627,
+        "metaqa|redundant": 274,
+        "metaqa|hard": 36,
+        "metaqa|single_rescue": 154,
+        "squad_clean|missing_structure": 912,
+        "squad_clean|single_rescue": 72,
+        "squad_clean|conflict": 34,
+        "squad_clean|redundant": 50,
+        "squad_clean|hard": 20
+      },
+      "samplers": {
+        "R0": {
+          "best_step": 10,
+          "held_out_metrics": {
+            "R@1": 10.14,
+            "R@5": 16.72,
+            "MRR": 0.2256,
+            "NDCG@5": 0.184
+          },
+          "gates_by_regime": {
+            "redundant": {
+              "offset": 0.642,
+              "splade": 0.553,
+              "n": 15
+            },
+            "mixed_coop": {
+              "offset": 0.643,
+              "splade": 0.556,
+              "n": 21
+            },
+            "conflict": {
+              "offset": 0.661,
+              "splade": 0.575,
+              "n": 57
+            },
+            "single_rescue": {
+              "offset": 0.64,
+              "splade": 0.55,
+              "n": 28
+            },
+            "hard": {
+              "offset": 0.665,
+              "splade": 0.584,
+              "n": 24
+            },
+            "relational": {
+              "offset": 0.657,
+              "splade": 0.58,
+              "n": 2
+            }
+          },
+          "runtime_s": 14.4
+        },
+        "R1": {
+          "best_step": 20,
+          "held_out_metrics": {
+            "R@1": 10.01,
+            "R@5": 16.7,
+            "MRR": 0.2223,
+            "NDCG@5": 0.1815
+          },
+          "gates_by_regime": {
+            "redundant": {
+              "offset": 0.711,
+              "splade": 0.579,
+              "n": 15
+            },
+            "mixed_coop": {
+              "offset": 0.712,
+              "splade": 0.581,
+              "n": 21
+            },
+            "conflict": {
+              "offset": 0.729,
+              "splade": 0.599,
+              "n": 57
+            },
+            "single_rescue": {
+              "offset": 0.711,
+              "splade": 0.575,
+              "n": 28
+            },
+            "hard": {
+              "offset": 0.729,
+              "splade": 0.606,
+              "n": 24
+            },
+            "relational": {
+              "offset": 0.718,
+              "splade": 0.603,
+              "n": 2
+            }
+          },
+          "runtime_s": 12.2
+        },
+        "R2": {
+          "best_step": 10,
+          "held_out_metrics": {
+            "R@1": 10.14,
+            "R@5": 16.71,
+            "MRR": 0.2256,
+            "NDCG@5": 0.1831
+          },
+          "gates_by_regime": {
+            "redundant": {
+              "offset": 0.621,
+              "splade": 0.55,
+              "n": 15
+            },
+            "mixed_coop": {
+              "offset": 0.623,
+              "splade": 0.553,
+              "n": 21
+            },
+            "conflict": {
+              "offset": 0.641,
+              "splade": 0.572,
+              "n": 57
+            },
+            "single_rescue": {
+              "offset": 0.619,
+              "splade": 0.547,
+              "n": 28
+            },
+            "hard": {
+              "offset": 0.647,
+              "splade": 0.581,
+              "n": 24
+            },
+            "relational": {
+              "offset": 0.639,
+              "splade": 0.577,
+              "n": 2
+            }
+          },
+          "runtime_s": 17.0
+        },
+        "R3": {
+          "best_step": 10,
+          "held_out_metrics": {
+            "R@1": 10.14,
+            "R@5": 16.72,
+            "MRR": 0.2256,
+            "NDCG@5": 0.184
+          },
+          "gates_by_regime": {
+            "redundant": {
+              "offset": 0.64,
+              "splade": 0.552,
+              "n": 15
+            },
+            "mixed_coop": {
+              "offset": 0.642,
+              "splade": 0.555,
+              "n": 21
+            },
+            "conflict": {
+              "offset": 0.658,
+              "splade": 0.575,
+              "n": 57
+            },
+            "single_rescue": {
+              "offset": 0.637,
+              "splade": 0.549,
+              "n": 28
+            },
+            "hard": {
+              "offset": 0.663,
+              "splade": 0.583,
+              "n": 24
+            },
+            "relational": {
+              "offset": 0.656,
+              "splade": 0.579,
+              "n": 2
+            }
+          },
+          "runtime_s": 25.5
+        }
+      }
+    }
+  }
+}

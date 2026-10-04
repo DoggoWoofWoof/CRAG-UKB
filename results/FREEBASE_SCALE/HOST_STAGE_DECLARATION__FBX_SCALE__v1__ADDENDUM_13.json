@@ -1,0 +1,156 @@
+{
+ "stage": "FBX_SCALE / addendum 13: the encode ORDER (a 32-chunk stratified sample first) and T2 -- the IVF transfer measurement on that sample with the re-rank depth R as a design axis (Track C step 3c)",
+ "declared": "2026-10-01T19:18:51+0530",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_3.json": "23b186b9c631541af5fa45e7236c20937209cd7d2aa8971aeaaaccff31a883a3",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_4.json": "6dd584733ea134dba79b8d9a7f9b45097363ae0dd3a0c3bfc807821b7f1b9920",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_5.json": "ddff074cc11de999c8d70e720880271d67af47ef4b7ba65c9c4d875f48c0f4e2",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6.json": "5ca94fa0ca8b07dd94fe69236a8f902ef269ee8a4d7fc66463a01ce8487eea10",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6A.json": "f2ada7fc164e6ce54e83e3066498133a5a5ef1132aab53ea71c157eb538c7c52",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_7.json": "a386758079a1aa128a7d06264af3911f189cab6e1d2e1905c6bde3ea92e93549",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_8.json": "47838cec49fa417ce27d1bfed6cc900f7bdcadb98e000034d8601e1a57bf0bed",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_9.json": "572a62c51f5a80840bab9731ef7b36ec1b566191115702c15078814c41dd0ea8",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_10.json": "decf737e177259d62521940d0d559dcd599129f7e583dd75e72ac13615199b0f",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_11.json": "00a5558a57c393209dae0693586758617a2755b84df8437071b2a38e1293e264",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_12.json": "01aee835267c20be19e16afe6a39987a33383f7a52e9610e549b7c8c71c90f9d"
+ },
+ "basis": {
+  "results/FREEBASE_SCALE/ivf/FBX_IVF_TRANSFER_T1__v1.json": "1df3ca46150deff4b67308d9026d02ce63eb915c6f8a2031c712654c98fb0d25",
+  "results/FREEBASE_SCALE/ivf/FBX_IVF_TRANSFER_T1R__v1.json": "1eb11e99d7fea40dec13a4cc2dbce389bc117a756e072e3eec8d09f64c08b2d0",
+  "results/FREEBASE_SCALE/ivf/WEBQSP_IVF_SAMPLE__v1.json": "8b21c8720e2395e46108d26bd3c53cc793343c40ac1f9567c498569e0696f84a",
+  "results/FREEBASE_SCALE/enc/FBX_QWEN_ENCODING_CONTRACT__v1.json": "aef5fb581aab93390bea0ebaa1b64e6fb9dd64285da606f19890cafb5f217f97"
+ },
+ "status": "DEVELOPMENT (a systems measurement); selects no lever, builds no KNN family, changes no gate or contract",
+ "user_ruling": "2026-10-01 (reply to the open decisions): item 3 'yes: do the 32-chunk strided sample now.  Getting T2 in ~2.4 h is worth changing encode order only; keep the final encoded artifact identical.'  Item 4 'defer: use T2/full-scale evidence before choosing R.  Test 512 / 2048 / 8192 rather than guessing now.'  Item 2 'all 245M names'.",
+ "encode_order_change": {
+  "what": "the sequential encode job 261001-123023-fbx-enc-chunks-2348 (CHUNKS 0 1872, ascending) was cancelled by rx right after it wrote chunk 133 (log line 19:15:39 host clock); the job 261001-191519-fbx-enc-order-1f8c runs scratchpad/_fbx_enc_order.py RETRY 20: phase 1 encodes the sample chunks that are still missing, phase 2 every remaining chunk ascending.  Chunks 0 .. 133 existed before the swap (node order).",
+  "sample": {
+   "strata": 32,
+   "chunks_total": 1872,
+   "rule": "the chunk at the midpoint of each of 32 equal strata: int((k + 0.5) * 1872 / 32), k = 0 .. 31",
+   "by_stratum": [
+    29,
+    87,
+    146,
+    204,
+    263,
+    321,
+    380,
+    438,
+    497,
+    555,
+    614,
+    672,
+    731,
+    789,
+    848,
+    906,
+    965,
+    1023,
+    1082,
+    1140,
+    1199,
+    1257,
+    1316,
+    1374,
+    1433,
+    1491,
+    1550,
+    1608,
+    1667,
+    1725,
+    1784,
+    1842
+   ],
+   "nested_order": [
+    29,
+    965,
+    497,
+    1433,
+    263,
+    1199,
+    731,
+    1667,
+    146,
+    1082,
+    614,
+    1550,
+    380,
+    1316,
+    848,
+    1784,
+    87,
+    1023,
+    555,
+    1491,
+    321,
+    1257,
+    789,
+    1725,
+    204,
+    1140,
+    672,
+    1608,
+    438,
+    1374,
+    906,
+    1842
+   ],
+   "nested_order_rule": "bit-reversed stratum index, so the first 2^j chunks are an even spread over the name space (j = 0 .. 5)"
+  },
+  "artifact_invariance": "every chunk is written by _fbx_encode.cmd_chunks itself (same model, revision, max_seq_length, batch composition within a chunk, OPQ+PQ quantiser, record fields and checksum); the wrapper only changes which chunks cmd_chunks sees as missing (chunk_ok is answered True for non-sample chunks in phase 1).  A chunk is a function of its own rows alone, so the final 1,872 chunk files are the ones a sequential run produces; VERIFY passes on the same criterion.  Not claimed: bitwise equality of GPU float arithmetic across two separate runs (the quantised codes are the artifact; the TEST in _fbx_encode.py checks a re-encode against the stored codes bit for bit).",
+  "cost": "one chunk in flight (<= 4.5 min) was lost to the cancel; the sample's 30 missing chunks take about 2.1 h at 4.2 min each; the total encode time is unchanged (the same chunks, a different order)"
+ },
+ "question": "Do the T1 (prefix, R = 512) and T1R (R in {512, 2048, 8192} at a few prefix cells) findings hold on a stratified sample of the name space, and how does the re-rank depth R needed to reach the WebQSP-level neighbour recall grow with the database size from 131 k to 4.2 M rows?",
+ "observed_before_declaring": {
+  "T1": "L437 prefix recall falls about 1 pt per doubling of n at R = 512 (tie-tolerant 0.9337 / 0.9493 / 0.9582 at nprobe 32 / 64 / 128, c = 32)",
+  "T1R": "the loss is the re-rank depth: R = 8192 at c = 32 gives 0.9623 / 0.9867 / 0.9952 at nprobe 32 / 128 / 512 and 0.9972 at every list; the small-norm-crowding mechanism was not supported (missed neighbours have higher norm)",
+  "limit": "a prefix of the chunks is the first names in node first-occurrence order and is not a random sample; the sizes were never compared with a spread sample"
+ },
+ "design": {
+  "script": "scratchpad/_ivf_t2.py T2 (6 threads, 12 GB, resumable per stage and cell; one write-once record results/FREEBASE_SCALE/ivf/FBX_IVF_TRANSFER_T2__v1.json at the end); runs only after all 32 sample chunks verify",
+  "database": "the PQ64 codes of SAMPLE_ORDER[:c], c in {1, 2, 4, 8, 16, 32}, concatenated in that order (n = c * 131,072); every chunk record verifies against the frozen contract and codebook",
+  "search": "addendum 10's scoring unchanged (faiss IndexIVFPQ, by_residual False, inner product, fp16-rounded centroid table; ADC by ||x|| cos; the best R re-ranked by cosine from the stored decoded norms; top 4 with self), the T1 code paths",
+  "queries_and_truth": "4,000 rows of the database (RandomState(1)), EXACT decoded-vs-decoded top 4 including self (blocked fp32 inner product over every row)",
+  "coarse": "spherical k-means niter 20, seed 2026, on min(n, 64 * nlist) decoded unit rows (RandomState(0)), as T1",
+  "cells": {
+   "L437 (nlist = round(n / 437.386))": "every c; nprobe {32, 64, 128, 256, 512} (never above nlist / 2) x R {512, 2048, 8192}",
+   "F4096 (nlist 4096)": "c = 32 only; nprobe {32, 128, 512} x R {512, 2048, 8192}"
+  },
+  "adc_rank (descriptive)": "at c in {8, 32}, L437, nprobe in {32, 128}: for the true non-self top-3 neighbours of every query, where each sits in the ADC order of the probed lists' best 8,192: rank < 512 | 512 .. 2047 | 2048 .. 8191 | in a probed list but rank >= 8192 | in no probed list",
+  "duplicate_code_fraction (descriptive)": "per c, the fraction of rows whose 64-byte code equals another row's",
+  "metrics": "tie-tolerant recall@3 (PRIMARY), ids recall@3, nearest recall, self_in_top4, four-fold SE, scan fraction, seconds and queries per second per cell"
+ },
+ "reading_rules_declared_before_any_T2_recall_exists": {
+  "P1_representativeness": "D = recall(T2 strided, L437, R = 512) - recall(T1 prefix) at the same c and nprobe.  Over c in {8, 16, 32} and nprobe in {32, 128, 512}: all |D| <= 0.010 => AGREE (the node-order prefix of T1 / T1R was representative at these sizes); some D < -0.010 and none > +0.010 => STRIDED_LOWER (the prefix was optimistic); some D > +0.010 and none < -0.010 => STRIDED_HIGHER; otherwise MIXED.  The fold SE of a cell (0.001 - 0.004) is reported beside D",
+  "P2_slope": "least-squares slope of recall per doubling of n over c in {4, 8, 16, 32}, L437, at R = 512 and at R = 8192, for each nprobe; R = 512 at nprobe 128 below -0.005 => FALLING (T1's rule)",
+  "P3_R_limited": "G = recall(R = 8192) - recall(R = 512) at c in {8, 32}, nprobe in {32, 128, 512}: G >= 0.010 R_LIMITED, G < 0.003 NOT_R_LIMITED, else PARTLY (T1R's rule); and the smallest R in {512, 2048, 8192} within 0.003 of the R = 8192 recall at nprobe 128 for c = 8 and c = 32 ('not reached' if none)",
+  "P4_transfer_with_larger_R": "D8192 = recall(c = 32, L437, R = 8192) - the frozen WebQSP R = 512 baseline at nprobe 32 and 128: HOLDS if both >= -0.010 (T1R's rule), else DEGRADES",
+  "P5_adc_rank": "descriptive: the share of the true neighbours missed at R = 512 that lie in ADC rank 512 .. 8191 (a depth problem), in a probed list beyond 8192, or in no probed list (a probing problem)"
+ },
+ "decision_table": {
+  "P1 AGREE and P3 R_LIMITED and P4 HOLDS": "T1 / T1R stand on a spread sample; the lever is the re-rank depth R (grown with n); the value for 245 M is measured at T3 on the full encode, not extrapolated; the choice of R stays the user's",
+  "P1 STRIDED_LOWER or STRIDED_HIGHER": "the node-order prefix was biased: T2 supersedes T1 / T1R numbers for the transfer question (T1 / T1R stay as records); the R decision waits for T3 either way",
+  "P3 NOT_R_LIMITED or PARTLY on the sample": "R is not the whole cause on a spread sample: report the R curve and the P5 decomposition, and the next lever (more lists probed, a hierarchical coarse quantiser, GPU exact re-score of a candidate set) is the user's call",
+  "P4 DEGRADES at R = 8192": "even the large R does not restore the WebQSP level at 4 M rows: the user chooses between a larger R, a different scoring, or accepting the loss",
+  "all cases": "no end-to-end claim and no KNN family is produced; the end-to-end gate stays unrun at scale; T3 (the full 245 M, GPU coarse quantiser) follows the full encode"
+ },
+ "not_claimed": [
+  "no claim about 245 M rows from 4.2 M (T3 measures it)",
+  "no change to addendum 10's R = 512 operating point; R > 512 cells are measurements, not a chosen operating point",
+  "no claim that the sample is a random sample of names: it is a systematic stratified sample of chunks (each chunk is a contiguous block of node first-occurrence order); within a chunk the order is the node order",
+  "no claim about the end-to-end effect of the recall differences (the gate's noise floor, F = 8 rows, cannot separate them)"
+ ],
+ "next_declared": [
+  "T3: the full 245.35 M database (GPU coarse quantiser), after the full encode and VERIFY; the R choice is made on T2 / T3 evidence (user ruling 2026-10-01)"
+ ],
+ "code_pinned": {
+  "scratchpad/_ivf_t2.py": "71ed1b54add274aacb8a1abcb67c65e5d509908332875a955852aa2b16b9f3ff",
+  "scratchpad/_fbx_enc_order.py": "4e5d42f7b69d230814c7839abeee721ff8a29fbfcf9590c1c293db47b17c45cd",
+  "scratchpad/_ivf_transfer.py": "905e81377273396e6c2fed7cc4d5f73eb39a6921d961108aa4b0af08d38ac93c",
+  "scratchpad/_ivf_knn.py": "b2e573ffbe1d6c22be6583431342acbd78698c33faa6f6f76bc113901c499e65",
+  "scratchpad/_fbx_encode.py": "de66c9399fa7f08677356054a871b1f1fd6464f1b820189db618796b1c858d17"
+ }
+}

@@ -1,0 +1,1060 @@
+{
+ "mode": "L1X_BLOCK_QUOTIENT_COLOCATION_DIAGNOSTIC (development; descriptive; nothing chosen)",
+ "definitions": "L1X -- SELECT lane, step 14: BLOCK-QUOTIENT COLOCATION DIAGNOSTIC -- is the hop-2/3 gold block ADJACENT to a hit block in the partition?  (development only; dataset-agnostic; measures, chooses nothing)\n(User ruling 2026-10-04: \"i dont think the higher hops are unreachable that is the entire point of having partitions or colocation\".)\n\nStep 13 (_l1x_coloc.py, MetaQA) found: the gold blocks ARE co-located (median 1-2 distinct gold blocks per question; n_gold_blocks <= B_P for 94-100% of questions) but the shipped router and the hit/relation-mass router (ES_m) CONTACT the hop-2 gold block only 37-46% of the time\n(hop 1 .99, hop 3 .55-.65) and only 22-77% of hop-2 gold blocks hold a top-ACT FLAT hit.  Here the QUOTIENT graph of the partition (static, from the structural edges: Q[b',b] = edges from block b' to block b, optionally relation-weighted by the query's w(q,r)) is used to ask whether the\ngold block is the hit block's NEIGHBOUR, i.e. whether colocation 'one block over' carries the hop-2/3 golds.\nBlock scores (all non-parametric; Qs = symmetrised quotient, row-normalised; w(q,r) = 1/(1+rank of relation r by dense cosine with the relation encodings), as _l1x_blockrel.py):\n  hm        block hit mass: sum of the seed weights 1/(1+i) of the top-ACT FLAT hits that sit in the block (the block-level seed vector)\n  bm        block relation mass BM of _l1x_blockrel.py\n  QSu       hm  @ Qs_unweighted        (one block-quotient step from the hit blocks, relations ignored)\n  QSr       hm  @ Qs_relation-weighted (same, edges weighted by w(q, r))\n  QMr       bm  @ Qs_relation-weighted (the block-quotient step applied to the one-hop relation mass: two propagation steps in all)\nRouters (block order; ties -> ES position): ES (shipped) | ES_m (BM) | QSu | QSr | QMr | ES_qs (equal RRF of ES, BM, QSr) | ES_qm (equal RRF of ES, BM, QMr).\nPer gold: block rank under each router, contacted = rank < B_P(q) (asserted equal to the stored B_P); flags: gold block is a HIT block, or ADJ (Qs_u[hit block, gold block] > 0 for some hit block).\nPer question: ALL-contact = every gold block contacted.  Split by hop.\n\n  python -u scratchpad/_l1x_coloc_quot.py RUN <ds> <tag> [--rows=K]      -> results/L1_X/colocq_<ds>__<tag>.{json,npz}  (write-once; typed graphs only)\n",
+ "dataset": "metaqa",
+ "tag": "v1",
+ "N": 43234,
+ "n_rows": 1998,
+ "gold_nodes": 14489,
+ "n_relations": 9,
+ "cells": [
+  "100",
+  "250",
+  "432",
+  "500",
+  "1000"
+ ],
+ "routers": [
+  "ES",
+  "ES_m",
+  "QSu",
+  "QSr",
+  "QMr",
+  "ES_qs",
+  "ES_qm"
+ ],
+ "hops": [
+  1,
+  2,
+  3
+ ],
+ "summary": {
+  "100": {
+   "1": {
+    "gold_nodes": 1334,
+    "questions": 666,
+    "mean_B_P": 27.83,
+    "random_contact_share_B_P_over_K": 0.2783,
+    "gold_block_is_HIT_block": 0.8388,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.8688,
+    "question_ALL_gold_blocks_contacted_ES": 0.8829,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.557,
+     1.043
+    ],
+    "gold_block_contacted_ES_m": 0.9895,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.994,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.036,
+     0.299
+    ],
+    "gold_block_contacted_QSu": 0.7039,
+    "question_ALL_gold_blocks_contacted_QSu": 0.7447,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.184,
+     2.4
+    ],
+    "gold_block_contacted_QSr": 0.7091,
+    "question_ALL_gold_blocks_contacted_QSr": 0.7538,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.184,
+     2.25
+    ],
+    "gold_block_contacted_QMr": 0.982,
+    "question_ALL_gold_blocks_contacted_QMr": 0.982,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.087,
+     0.455
+    ],
+    "gold_block_contacted_ES_qs": 0.934,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.9429,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.125,
+     0.846
+    ],
+    "gold_block_contacted_ES_qm": 0.988,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.991,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.083,
+     0.381
+    ]
+   },
+   "2": {
+    "gold_nodes": 4613,
+    "questions": 666,
+    "mean_B_P": 29.75,
+    "random_contact_share_B_P_over_K": 0.2975,
+    "gold_block_is_HIT_block": 0.7683,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.4431,
+    "question_ALL_gold_blocks_contacted_ES": 0.5165,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     1.156,
+     2.97
+    ],
+    "gold_block_contacted_ES_m": 0.4557,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.515,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     1.138,
+     2.896
+    ],
+    "gold_block_contacted_QSu": 0.4444,
+    "question_ALL_gold_blocks_contacted_QSu": 0.5526,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     1.2,
+     2.889
+    ],
+    "gold_block_contacted_QSr": 0.444,
+    "question_ALL_gold_blocks_contacted_QSr": 0.5495,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     1.188,
+     2.899
+    ],
+    "gold_block_contacted_QMr": 0.4962,
+    "question_ALL_gold_blocks_contacted_QMr": 0.5841,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     1.0,
+     2.75
+    ],
+    "gold_block_contacted_ES_qs": 0.4728,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.5736,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     1.067,
+     2.848
+    ],
+    "gold_block_contacted_ES_qm": 0.4819,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.5706,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     1.056,
+     2.846
+    ]
+   },
+   "3": {
+    "gold_nodes": 8542,
+    "questions": 666,
+    "mean_B_P": 27.71,
+    "random_contact_share_B_P_over_K": 0.2771,
+    "gold_block_is_HIT_block": 0.8777,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.6273,
+    "question_ALL_gold_blocks_contacted_ES": 0.5571,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.714,
+     2.654
+    ],
+    "gold_block_contacted_ES_m": 0.6521,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.5976,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.263,
+     2.625
+    ],
+    "gold_block_contacted_QSu": 0.6738,
+    "question_ALL_gold_blocks_contacted_QSu": 0.5886,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.2,
+     2.586
+    ],
+    "gold_block_contacted_QSr": 0.6751,
+    "question_ALL_gold_blocks_contacted_QSr": 0.5856,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.208,
+     2.575
+    ],
+    "gold_block_contacted_QMr": 0.6823,
+    "question_ALL_gold_blocks_contacted_QMr": 0.6141,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.161,
+     2.483
+    ],
+    "gold_block_contacted_ES_qs": 0.6686,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.6051,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.28,
+     2.562
+    ],
+    "gold_block_contacted_ES_qm": 0.6692,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.6126,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.259,
+     2.562
+    ]
+   },
+   "all": {
+    "gold_nodes": 14489,
+    "questions": 1998,
+    "mean_B_P": 28.43,
+    "random_contact_share_B_P_over_K": 0.2843,
+    "gold_block_is_HIT_block": 0.8393,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.5909,
+    "question_ALL_gold_blocks_contacted_ES": 0.6522,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.771,
+     2.714
+    ],
+    "gold_block_contacted_ES_m": 0.6206,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.7022,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.433,
+     2.677
+    ],
+    "gold_block_contacted_QSu": 0.6036,
+    "question_ALL_gold_blocks_contacted_QSu": 0.6286,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.481,
+     2.704
+    ],
+    "gold_block_contacted_QSr": 0.6047,
+    "question_ALL_gold_blocks_contacted_QSr": 0.6296,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.483,
+     2.68
+    ],
+    "gold_block_contacted_QMr": 0.6506,
+    "question_ALL_gold_blocks_contacted_QMr": 0.7267,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.32,
+     2.536
+    ],
+    "gold_block_contacted_ES_qs": 0.6307,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.7072,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.467,
+     2.615
+    ],
+    "gold_block_contacted_ES_qm": 0.6389,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.7247,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.385,
+     2.6
+    ]
+   }
+  },
+  "250": {
+   "1": {
+    "gold_nodes": 1334,
+    "questions": 666,
+    "mean_B_P": 55.66,
+    "random_contact_share_B_P_over_K": 0.2226,
+    "gold_block_is_HIT_block": 0.6942,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.9903,
+    "question_ALL_gold_blocks_contacted_ES": 0.991,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.339,
+     0.625
+    ],
+    "gold_block_contacted_ES_m": 0.9933,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.9955,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.019,
+     0.162
+    ],
+    "gold_block_contacted_QSu": 0.7354,
+    "question_ALL_gold_blocks_contacted_QSu": 0.7643,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.205,
+     2.255
+    ],
+    "gold_block_contacted_QSr": 0.7549,
+    "question_ALL_gold_blocks_contacted_QSr": 0.7883,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.187,
+     2.01
+    ],
+    "gold_block_contacted_QMr": 0.9888,
+    "question_ALL_gold_blocks_contacted_QMr": 0.9895,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.045,
+     0.311
+    ],
+    "gold_block_contacted_ES_qs": 0.991,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.991,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.081,
+     0.468
+    ],
+    "gold_block_contacted_ES_qm": 0.9948,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.9955,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.045,
+     0.212
+    ]
+   },
+   "2": {
+    "gold_nodes": 4613,
+    "questions": 666,
+    "mean_B_P": 59.5,
+    "random_contact_share_B_P_over_K": 0.238,
+    "gold_block_is_HIT_block": 0.5263,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.4073,
+    "question_ALL_gold_blocks_contacted_ES": 0.509,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     1.414,
+     3.706
+    ],
+    "gold_block_contacted_ES_m": 0.4253,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.515,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     1.32,
+     3.56
+    ],
+    "gold_block_contacted_QSu": 0.4216,
+    "question_ALL_gold_blocks_contacted_QSu": 0.5541,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     1.259,
+     3.557
+    ],
+    "gold_block_contacted_QSr": 0.4323,
+    "question_ALL_gold_blocks_contacted_QSr": 0.5601,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     1.269,
+     3.52
+    ],
+    "gold_block_contacted_QMr": 0.4804,
+    "question_ALL_gold_blocks_contacted_QMr": 0.5766,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     1.069,
+     3.239
+    ],
+    "gold_block_contacted_ES_qs": 0.4455,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.5511,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     1.259,
+     3.517
+    ],
+    "gold_block_contacted_ES_qm": 0.4537,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.5541,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     1.194,
+     3.4
+    ]
+   },
+   "3": {
+    "gold_nodes": 8542,
+    "questions": 666,
+    "mean_B_P": 55.42,
+    "random_contact_share_B_P_over_K": 0.2217,
+    "gold_block_is_HIT_block": 0.7189,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.6099,
+    "question_ALL_gold_blocks_contacted_ES": 0.5991,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.537,
+     3.37
+    ],
+    "gold_block_contacted_ES_m": 0.6048,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.6171,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.371,
+     3.419
+    ],
+    "gold_block_contacted_QSu": 0.6466,
+    "question_ALL_gold_blocks_contacted_QSu": 0.6096,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.309,
+     3.191
+    ],
+    "gold_block_contacted_QSr": 0.6469,
+    "question_ALL_gold_blocks_contacted_QSr": 0.6111,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.311,
+     3.154
+    ],
+    "gold_block_contacted_QMr": 0.6692,
+    "question_ALL_gold_blocks_contacted_QMr": 0.6321,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.232,
+     2.977
+    ],
+    "gold_block_contacted_ES_qs": 0.6407,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.6246,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.36,
+     3.206
+    ],
+    "gold_block_contacted_ES_qm": 0.6483,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.6321,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.339,
+     3.167
+    ]
+   },
+   "all": {
+    "gold_nodes": 14489,
+    "questions": 1998,
+    "mean_B_P": 56.86,
+    "random_contact_share_B_P_over_K": 0.2274,
+    "gold_block_is_HIT_block": 0.6553,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.5804,
+    "question_ALL_gold_blocks_contacted_ES": 0.6997,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.636,
+     3.435
+    ],
+    "gold_block_contacted_ES_m": 0.5834,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.7092,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.5,
+     3.397
+    ],
+    "gold_block_contacted_QSu": 0.5831,
+    "question_ALL_gold_blocks_contacted_QSu": 0.6426,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.589,
+     3.278
+    ],
+    "gold_block_contacted_QSr": 0.5885,
+    "question_ALL_gold_blocks_contacted_QSr": 0.6532,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.58,
+     3.257
+    ],
+    "gold_block_contacted_QMr": 0.6385,
+    "question_ALL_gold_blocks_contacted_QMr": 0.7327,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.368,
+     3.0
+    ],
+    "gold_block_contacted_ES_qs": 0.6108,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.7222,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.481,
+     3.231
+    ],
+    "gold_block_contacted_ES_qm": 0.6183,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.7272,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.429,
+     3.18
+    ]
+   }
+  },
+  "432": {
+   "1": {
+    "gold_nodes": 1334,
+    "questions": 666,
+    "mean_B_P": 83.49,
+    "random_contact_share_B_P_over_K": 0.1933,
+    "gold_block_is_HIT_block": 0.5622,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.9955,
+    "question_ALL_gold_blocks_contacted_ES": 0.997,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.245,
+     0.451
+    ],
+    "gold_block_contacted_ES_m": 0.9963,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.997,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.013,
+     0.111
+    ],
+    "gold_block_contacted_QSu": 0.7646,
+    "question_ALL_gold_blocks_contacted_QSu": 0.7763,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.145,
+     2.096
+    ],
+    "gold_block_contacted_QSr": 0.7924,
+    "question_ALL_gold_blocks_contacted_QSr": 0.8078,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.125,
+     1.777
+    ],
+    "gold_block_contacted_QMr": 0.9858,
+    "question_ALL_gold_blocks_contacted_QMr": 0.9835,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.032,
+     0.252
+    ],
+    "gold_block_contacted_ES_qs": 0.997,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.9985,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.053,
+     0.323
+    ],
+    "gold_block_contacted_ES_qm": 0.9963,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.997,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.03,
+     0.154
+    ]
+   },
+   "2": {
+    "gold_nodes": 4613,
+    "questions": 666,
+    "mean_B_P": 89.24,
+    "random_contact_share_B_P_over_K": 0.2066,
+    "gold_block_is_HIT_block": 0.3583,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.3943,
+    "question_ALL_gold_blocks_contacted_ES": 0.5015,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     1.595,
+     4.115
+    ],
+    "gold_block_contacted_ES_m": 0.4069,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.488,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     1.423,
+     4.0
+    ],
+    "gold_block_contacted_QSu": 0.3913,
+    "question_ALL_gold_blocks_contacted_QSu": 0.5646,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     1.488,
+     3.942
+    ],
+    "gold_block_contacted_QSr": 0.4039,
+    "question_ALL_gold_blocks_contacted_QSr": 0.5916,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     1.462,
+     3.936
+    ],
+    "gold_block_contacted_QMr": 0.4899,
+    "question_ALL_gold_blocks_contacted_QMr": 0.5976,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     1.046,
+     3.504
+    ],
+    "gold_block_contacted_ES_qs": 0.4273,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.5495,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     1.319,
+     3.937
+    ],
+    "gold_block_contacted_ES_qm": 0.4463,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.5495,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     1.225,
+     3.737
+    ]
+   },
+   "3": {
+    "gold_nodes": 8542,
+    "questions": 666,
+    "mean_B_P": 83.13,
+    "random_contact_share_B_P_over_K": 0.1924,
+    "gold_block_is_HIT_block": 0.3692,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.5746,
+    "question_ALL_gold_blocks_contacted_ES": 0.5811,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.587,
+     3.895
+    ],
+    "gold_block_contacted_ES_m": 0.5578,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.5871,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.576,
+     3.949
+    ],
+    "gold_block_contacted_QSu": 0.6159,
+    "question_ALL_gold_blocks_contacted_QSu": 0.6006,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.356,
+     3.634
+    ],
+    "gold_block_contacted_QSr": 0.6195,
+    "question_ALL_gold_blocks_contacted_QSr": 0.6081,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.35,
+     3.577
+    ],
+    "gold_block_contacted_QMr": 0.6401,
+    "question_ALL_gold_blocks_contacted_QMr": 0.6156,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.286,
+     3.449
+    ],
+    "gold_block_contacted_ES_qs": 0.6027,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.6051,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.423,
+     3.689
+    ],
+    "gold_block_contacted_ES_qm": 0.6083,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.6006,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.404,
+     3.649
+    ]
+   },
+   "all": {
+    "gold_nodes": 14489,
+    "questions": 1998,
+    "mean_B_P": 85.29,
+    "random_contact_share_B_P_over_K": 0.1974,
+    "gold_block_is_HIT_block": 0.3835,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.5559,
+    "question_ALL_gold_blocks_contacted_ES": 0.6932,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.675,
+     3.867
+    ],
+    "gold_block_contacted_ES_m": 0.5501,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.6907,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.679,
+     3.867
+    ],
+    "gold_block_contacted_QSu": 0.5581,
+    "question_ALL_gold_blocks_contacted_QSu": 0.6471,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.679,
+     3.676
+    ],
+    "gold_block_contacted_QSr": 0.5668,
+    "question_ALL_gold_blocks_contacted_QSr": 0.6692,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.642,
+     3.632
+    ],
+    "gold_block_contacted_QMr": 0.6241,
+    "question_ALL_gold_blocks_contacted_QMr": 0.7322,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.395,
+     3.344
+    ],
+    "gold_block_contacted_ES_qs": 0.5831,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.7177,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.533,
+     3.675
+    ],
+    "gold_block_contacted_ES_qm": 0.5924,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.7157,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.5,
+     3.572
+    ]
+   }
+  },
+  "500": {
+   "1": {
+    "gold_nodes": 1334,
+    "questions": 666,
+    "mean_B_P": 93.46,
+    "random_contact_share_B_P_over_K": 0.1869,
+    "gold_block_is_HIT_block": 0.5135,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.9955,
+    "question_ALL_gold_blocks_contacted_ES": 0.9955,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.231,
+     0.415
+    ],
+    "gold_block_contacted_ES_m": 0.9993,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.9985,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.011,
+     0.104
+    ],
+    "gold_block_contacted_QSu": 0.7759,
+    "question_ALL_gold_blocks_contacted_QSu": 0.7898,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.16,
+     1.772
+    ],
+    "gold_block_contacted_QSr": 0.8486,
+    "question_ALL_gold_blocks_contacted_QSr": 0.8679,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.138,
+     1.389
+    ],
+    "gold_block_contacted_QMr": 0.9865,
+    "question_ALL_gold_blocks_contacted_QMr": 0.979,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.029,
+     0.238
+    ],
+    "gold_block_contacted_ES_qs": 0.9963,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.994,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.054,
+     0.284
+    ],
+    "gold_block_contacted_ES_qm": 0.9985,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.997,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.028,
+     0.134
+    ]
+   },
+   "2": {
+    "gold_nodes": 4613,
+    "questions": 666,
+    "mean_B_P": 99.88,
+    "random_contact_share_B_P_over_K": 0.1998,
+    "gold_block_is_HIT_block": 0.3113,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.385,
+    "question_ALL_gold_blocks_contacted_ES": 0.5015,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     1.667,
+     4.286
+    ],
+    "gold_block_contacted_ES_m": 0.4049,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.497,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     1.448,
+     4.202
+    ],
+    "gold_block_contacted_QSu": 0.3956,
+    "question_ALL_gold_blocks_contacted_QSu": 0.5751,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     1.527,
+     4.103
+    ],
+    "gold_block_contacted_QSr": 0.4058,
+    "question_ALL_gold_blocks_contacted_QSr": 0.6051,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     1.433,
+     4.115
+    ],
+    "gold_block_contacted_QMr": 0.4953,
+    "question_ALL_gold_blocks_contacted_QMr": 0.6291,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     1.015,
+     3.476
+    ],
+    "gold_block_contacted_ES_qs": 0.4208,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.548,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     1.377,
+     4.068
+    ],
+    "gold_block_contacted_ES_qm": 0.437,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.5465,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     1.25,
+     3.768
+    ]
+   },
+   "3": {
+    "gold_nodes": 8542,
+    "questions": 666,
+    "mean_B_P": 93.08,
+    "random_contact_share_B_P_over_K": 0.1862,
+    "gold_block_is_HIT_block": 0.3557,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.566,
+    "question_ALL_gold_blocks_contacted_ES": 0.5916,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.616,
+     4.021
+    ],
+    "gold_block_contacted_ES_m": 0.5526,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.5946,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.619,
+     4.17
+    ],
+    "gold_block_contacted_QSu": 0.6044,
+    "question_ALL_gold_blocks_contacted_QSu": 0.6006,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.395,
+     3.769
+    ],
+    "gold_block_contacted_QSr": 0.6058,
+    "question_ALL_gold_blocks_contacted_QSr": 0.6081,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.392,
+     3.766
+    ],
+    "gold_block_contacted_QMr": 0.6269,
+    "question_ALL_gold_blocks_contacted_QMr": 0.6156,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.298,
+     3.535
+    ],
+    "gold_block_contacted_ES_qs": 0.6001,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.6141,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.448,
+     3.817
+    ],
+    "gold_block_contacted_ES_qm": 0.6074,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.6186,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.437,
+     3.762
+    ]
+   },
+   "all": {
+    "gold_nodes": 14489,
+    "questions": 1998,
+    "mean_B_P": 95.48,
+    "random_contact_share_B_P_over_K": 0.191,
+    "gold_block_is_HIT_block": 0.3561,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.5479,
+    "question_ALL_gold_blocks_contacted_ES": 0.6962,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.712,
+     4.03
+    ],
+    "gold_block_contacted_ES_m": 0.5467,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.6967,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.676,
+     4.072
+    ],
+    "gold_block_contacted_QSu": 0.5537,
+    "question_ALL_gold_blocks_contacted_QSu": 0.6552,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.701,
+     3.816
+    ],
+    "gold_block_contacted_QSr": 0.5645,
+    "question_ALL_gold_blocks_contacted_QSr": 0.6937,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.67,
+     3.815
+    ],
+    "gold_block_contacted_QMr": 0.6181,
+    "question_ALL_gold_blocks_contacted_QMr": 0.7412,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.418,
+     3.385
+    ],
+    "gold_block_contacted_ES_qs": 0.5795,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.7187,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.547,
+     3.802
+    ],
+    "gold_block_contacted_ES_qm": 0.5891,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.7207,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.515,
+     3.636
+    ]
+   }
+  },
+  "1000": {
+   "1": {
+    "gold_nodes": 1334,
+    "questions": 666,
+    "mean_B_P": 156.97,
+    "random_contact_share_B_P_over_K": 0.157,
+    "gold_block_is_HIT_block": 0.4295,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.9993,
+    "question_ALL_gold_blocks_contacted_ES": 0.9985,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.154,
+     0.274
+    ],
+    "gold_block_contacted_ES_m": 1.0,
+    "question_ALL_gold_blocks_contacted_ES_m": 1.0,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.007,
+     0.059
+    ],
+    "gold_block_contacted_QSu": 0.9108,
+    "question_ALL_gold_blocks_contacted_QSu": 0.9174,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.111,
+     0.962
+    ],
+    "gold_block_contacted_QSr": 0.94,
+    "question_ALL_gold_blocks_contacted_QSr": 0.9625,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.085,
+     0.62
+    ],
+    "gold_block_contacted_QMr": 0.991,
+    "question_ALL_gold_blocks_contacted_QMr": 0.9865,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.02,
+     0.184
+    ],
+    "gold_block_contacted_ES_qs": 0.9985,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.9985,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.034,
+     0.142
+    ],
+    "gold_block_contacted_ES_qm": 1.0,
+    "question_ALL_gold_blocks_contacted_ES_qm": 1.0,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.019,
+     0.081
+    ]
+   },
+   "2": {
+    "gold_nodes": 4613,
+    "questions": 666,
+    "mean_B_P": 167.77,
+    "random_contact_share_B_P_over_K": 0.1678,
+    "gold_block_is_HIT_block": 0.2246,
+    "gold_block_is_HIT_or_quotient_adjacent": 1.0,
+    "gold_block_contacted_ES": 0.3661,
+    "question_ALL_gold_blocks_contacted_ES": 0.47,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     1.78,
+     4.894
+    ],
+    "gold_block_contacted_ES_m": 0.3989,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.482,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     1.565,
+     4.687
+    ],
+    "gold_block_contacted_QSu": 0.3965,
+    "question_ALL_gold_blocks_contacted_QSu": 0.6171,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     1.554,
+     4.716
+    ],
+    "gold_block_contacted_QSr": 0.4032,
+    "question_ALL_gold_blocks_contacted_QSr": 0.6486,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     1.531,
+     4.685
+    ],
+    "gold_block_contacted_QMr": 0.5628,
+    "question_ALL_gold_blocks_contacted_QMr": 0.7492,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.782,
+     3.315
+    ],
+    "gold_block_contacted_ES_qs": 0.4264,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.5901,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     1.381,
+     4.588
+    ],
+    "gold_block_contacted_ES_qm": 0.4685,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.6021,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     1.135,
+     3.949
+    ]
+   },
+   "3": {
+    "gold_nodes": 8542,
+    "questions": 666,
+    "mean_B_P": 156.29,
+    "random_contact_share_B_P_over_K": 0.1563,
+    "gold_block_is_HIT_block": 0.2622,
+    "gold_block_is_HIT_or_quotient_adjacent": 0.9999,
+    "gold_block_contacted_ES": 0.5512,
+    "question_ALL_gold_blocks_contacted_ES": 0.545,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.716,
+     4.785
+    ],
+    "gold_block_contacted_ES_m": 0.5247,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.5781,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.802,
+     4.862
+    ],
+    "gold_block_contacted_QSu": 0.5817,
+    "question_ALL_gold_blocks_contacted_QSu": 0.5976,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.497,
+     4.379
+    ],
+    "gold_block_contacted_QSr": 0.5853,
+    "question_ALL_gold_blocks_contacted_QSr": 0.6006,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.482,
+     4.331
+    ],
+    "gold_block_contacted_QMr": 0.6137,
+    "question_ALL_gold_blocks_contacted_QMr": 0.6126,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.365,
+     3.854
+    ],
+    "gold_block_contacted_ES_qs": 0.5738,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.5916,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.553,
+     4.488
+    ],
+    "gold_block_contacted_ES_qm": 0.5815,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.5946,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.501,
+     4.256
+    ]
+   },
+   "all": {
+    "gold_nodes": 14489,
+    "questions": 1998,
+    "mean_B_P": 160.34,
+    "random_contact_share_B_P_over_K": 0.1603,
+    "gold_block_is_HIT_block": 0.2656,
+    "gold_block_is_HIT_or_quotient_adjacent": 0.9999,
+    "gold_block_contacted_ES": 0.5335,
+    "question_ALL_gold_blocks_contacted_ES": 0.6712,
+    "gold_block_rank_over_B_P_p50_p90_ES": [
+     0.794,
+     4.687
+    ],
+    "gold_block_contacted_ES_m": 0.5284,
+    "question_ALL_gold_blocks_contacted_ES_m": 0.6867,
+    "gold_block_rank_over_B_P_p50_p90_ES_m": [
+     0.793,
+     4.661
+    ],
+    "gold_block_contacted_QSu": 0.553,
+    "question_ALL_gold_blocks_contacted_QSu": 0.7107,
+    "gold_block_rank_over_B_P_p50_p90_QSu": [
+     0.707,
+     4.37
+    ],
+    "gold_block_contacted_QSr": 0.56,
+    "question_ALL_gold_blocks_contacted_QSr": 0.7372,
+    "gold_block_rank_over_B_P_p50_p90_QSr": [
+     0.607,
+     4.349
+    ],
+    "gold_block_contacted_QMr": 0.6322,
+    "question_ALL_gold_blocks_contacted_QMr": 0.7828,
+    "gold_block_rank_over_B_P_p50_p90_QMr": [
+     0.388,
+     3.497
+    ],
+    "gold_block_contacted_ES_qs": 0.5659,
+    "question_ALL_gold_blocks_contacted_ES_qs": 0.7267,
+    "gold_block_rank_over_B_P_p50_p90_ES_qs": [
+     0.611,
+     4.4
+    ],
+    "gold_block_contacted_ES_qm": 0.584,
+    "question_ALL_gold_blocks_contacted_ES_qm": 0.7322,
+    "gold_block_rank_over_B_P_p50_p90_ES_qm": [
+     0.525,
+     4.0
+    ]
+   }
+  }
+ },
+ "seconds": 115.1,
+ "code": {
+  "path": "scratchpad/_l1x_coloc_quot.py",
+  "sha256": "b9a24205e89bedae3ed105c451c9dd3f1d60fec9992d4c0312211637bda3cbfa"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "npz": {
+  "path": "colocq_metaqa__v1.npz",
+  "sha256": "83cfc163e6acd5e4ff890be7dfa5b9f04dfd6fdde20d12f2dfb0d25be081967f"
+ }
+}

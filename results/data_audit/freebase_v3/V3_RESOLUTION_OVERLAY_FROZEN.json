@@ -1,0 +1,60 @@
+{
+ "schema": "RESOLUTION_OVERLAY_MANIFEST/v1",
+ "name": "CRAG_FREEBASE_RESOLUTION_OVERLAY_V1",
+ "status": "FROZEN",
+ "frozen_utc": "2026-09-07T10:36:16Z",
+ "files": 262,
+ "rows": 301977131,
+ "bytes": 8697865103,
+ "gb": 8.101,
+ "KEYED_TO": {
+  "artifact": "CRAG_FREEBASE_CANONICAL",
+  "manifest_sha256": "6672dab172cf5dde79c56685153d4e257be3527b5ee93b07514ad2f40425c5fb",
+  "nodes": 301977131,
+  "edges": 2062430072,
+  "note": "this overlay is a SIDECAR. The frozen graph was read, never written; its manifest hash above is unchanged by this build."
+ },
+ "CONTRACT": [
+  "V3_RESOLUTION_OVERLAY_CONTRACT.json (v1)",
+  "V3_RESOLUTION_OVERLAY_CONTRACT_V2.json (amendment: column names, tier precedence, corrected key-tier sizing)",
+  "V3_RESOLUTION_OVERLAY_CONTRACT_V3.json (amendment: blank-is-not-a-name, blank literals, degenerate URIs, final blank guarantee)"
+ ],
+ "VALIDATION": {
+  "verdict": "PASS",
+  "nodes": 301977131,
+  "DISPLAY_NAME_EMPTY": 0,
+  "NAKED_MID_DISPLAY": 0,
+  "NAKED_MID_SELF": 0,
+  "NAKED_MID_DERIVED": 0,
+  "MID_SHAPED_TEXT_ON_MID_KIND": 14,
+  "MID_SHAPED_TEXT_IS_NOT_OPACITY": "The MID-shaped counts are diagnostics, NOT failures. Freebase itself names some entities in a MID-like form -- abbreviated personal names lowercased (m.albarn = M. Albarn, g.wygonik, g.carillo) and filename fragments (m.jpg). Those strings are source-declared, so showing them is showing what Freebase says, not showing an opaque identifier; suppressing them would destroy real data to satisfy a regex. The gate is therefore NAKED_MID_SELF (the display IS the node's own id) and NAKED_MID_DERIVED (MID-shaped text emitted by a tier that does not quote the source verbatim). Evidence for every shaped row is listed in mid_shaped_evidence.",
+  "OPERATIONALLY_UNRESOLVED": 0
+ },
+ "RESOLUTION_MIX": {
+  "by_source": {
+   "LITERAL_SELF": 105351616,
+   "URI_DERIVED": 74454117,
+   "STRUCTURAL_FALLBACK": 8060228,
+   "FREEBASE_DELETED_EXACT": 1253282,
+   "FREEBASE_CURRENT_EXACT": 50815329,
+   "STRUCTURAL_INFERRED": 61717739,
+   "FREEBASE_KEY_EXACT": 324820
+  },
+  "AUTHORITATIVE_SOURCE_RESOLUTION_PCT": 52.2374,
+  "STRUCTURAL_PCT": 23.107
+ },
+ "HOW_TO_DESCRIBE_THIS_OVERLAY": {
+  "supported": "Every node in CRAG_FREEBASE_CANONICAL has a deterministic human-readable representation. Original or historically recovered Freebase names are used wherever they exist; inherently anonymous or unrecoverable objects are represented from their source-derived type and graph semantics.",
+  "NOT_supported": [
+   "that every node's original Freebase name was recovered -- most unnamed nodes never had one",
+   "that a STRUCTURAL_INFERRED or STRUCTURAL_FALLBACK display_name is what the node was called",
+   "that zero opaque nodes means zero information loss"
+  ],
+  "always_report_together": [
+   "AUTHORITATIVE_SOURCE_RESOLUTION_PCT",
+   "STRUCTURAL_PCT"
+  ]
+ },
+ "elapsed_s": 28.8,
+ "MANIFEST_HASH": "25b734fe9acf2ca74814cf9f3444757636f19100305daa28b3ec19a2fb27d865"
+}

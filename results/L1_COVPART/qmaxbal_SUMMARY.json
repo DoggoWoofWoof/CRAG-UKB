@@ -1,0 +1,994 @@
+{
+ "RECORD": "QMAX_BALANCED_H2_PATCH1_DEV_A_SUMMARY",
+ "STATUS": "PREREGISTERED_COMPOSITION_TEST_DEV_A",
+ "utc": "2026-09-15T20:21:50Z",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_QMAX_BALANCED_H2_PATCH1.json",
+  "sha256": "4230b2610f680381e4ec4dcedfb5454909d33a7ee526cad0b566866598a20209"
+ },
+ "records": {
+  "metaqa": {
+   "path": "results/L1_COVPART/qmaxbal_A_metaqa.json",
+   "sha256": "10dbb5c59ee3a795a974234d5bcbc935c31c4246be39e1683f2e516feefb7cf3"
+  },
+  "metaqa_phg": {
+   "path": "results/L1_COVPART/qmaxbal_A_metaqa_phg.json",
+   "sha256": "5bb55780ee212bf88883d3805672a4a8d610dd97eac2ac769c1c802ca3265235"
+  },
+  "squad": {
+   "path": "results/L1_COVPART/qmaxbal_A_squad.json",
+   "sha256": "6c4b54b7f6b37f0558cece43ddba9a9842f419a4e71e24912f81b279ac3f073c"
+  },
+  "squad_phg": {
+   "path": "results/L1_COVPART/qmaxbal_A_squad_phg.json",
+   "sha256": "09877f5461a18abffcc63f2e84da4ae2b6f0a1f997d515a9c05859ede97f82b7"
+  },
+  "musique": {
+   "path": "results/L1_COVPART/qmaxbal_A_musique.json",
+   "sha256": "50590f7ebbb10f5e554ec7451154a8456f034245bc61a17b6257e0bd6ef4e103"
+  }
+ },
+ "rule": {
+  "per_cache_cell": "CONFLICT if PRIMARY is LOSS vs either parent; STACKS if GAIN vs both; CARRIES if GAIN vs one and NEUTRAL vs the other; NEUTRAL otherwise",
+  "(a) no_CONFLICT": "PRIMARY vs BALANCED_H2_PATCH1 != LOSS AND PRIMARY vs QMAX_F0 != LOSS on ALL five caches (the universal-candidate condition: one algorithm, never worse than either parent)",
+  "(b) musique_GAIN_over_BALANCED": "PRIMARY vs BALANCED_H2_PATCH1 = GAIN on musique (the aggregation's ranking gain shows through the structural chain)",
+  "(c) metaqa_GAIN_over_QMAX": "PRIMARY vs QMAX_F0 = GAIN on BOTH metaqa and metaqa_phg (the structural hop-2 gain shows through the aggregation ranking)",
+  "OUTCOME": {
+   "PASS_STACKS": "(a) AND (b) AND (c)",
+   "FAIL_CONFLICT": "not (a)",
+   "FAIL_NOT_STACKED": "(a) but not ((b) AND (c))"
+  },
+  "secondary_flags (reported, never decided on)": {
+   "ADDITIVE_ON_MUSIQUE": "PRIMARY vs QMAX_F0 = GAIN on musique (SAFE + patch add on top of the aggregation)",
+   "ADDITIVE_ON_METAQA": "PRIMARY vs BALANCED_H2_PATCH1 = GAIN on both metaqa caches (the aggregation adds on top of the structural chain)",
+   "SQUAD_NON_REGRESSION": "no LOSS vs either parent on squad / squad_phg (already inside (a); reported for the ceiling population)"
+  },
+  "what_follows": {
+   "PASS_STACKS": "QMAX_BALANCED_H2_PATCH1 = the universal L1+ candidate of the fourteenth ruling: status MECHANISM_CONFIRMED_ON_DEV_A (composition; not promoted; NOT transfer-confirmed). Roles: H2_PATCH1 stays the frozen WebQSP transfer reference (section 16, unchanged); the composite is the candidate for the multi-hop text transfer populations (2Wiki / HotpotQA) when their substrates exist and a resource ruling allows it. Item 2 (coverage-then-score frontier) is pre-registered separately as a successor of the compression component; the composite's compression stays the section-21 rule until item 2 earns its own verdict.",
+   "FAIL_CONFLICT": "the two mechanisms interfere (the QMAX ranking's protected set or admission drops blocks the structural chain needs, or the patch destroys the aggregation's ranking gain): the composition is recorded as NOT a candidate; the parents keep their frozen roles; the flip attribution says which stage conflicts; no re-weighting, no second composition without a new ruling; item 2 proceeds on the reference chain",
+   "FAIL_NOT_STACKED": "no conflict, but a required GAIN is missing (typically: the SAFE swap / patch recover the same musique queries the block max already ranks -- redundancy): the composite is recorded as 'carries at most one regime gain'; the parents keep their frozen roles; the ruling's MuSiQue diagnosis (ranking / aggregation, not reach) is then confirmed from the other side; item 2 proceeds on the reference chain"
+  },
+  "no_promotion": "nothing here changes the served L1 or any frozen record; sections 16-23 are unchanged; the WebQSP primary transfer remains frozen H2_PATCH1 exactly as section 16"
+ },
+ "components": {
+  "no_CONFLICT_on_any_cache (a)": true,
+  "conflict_caches": [],
+  "musique_PRIMARY_vs_BALANCED_GAIN (b)": true,
+  "metaqa_and_metaqa_phg_PRIMARY_vs_QMAX_F0_GAIN (c)": true
+ },
+ "labels": {
+  "PRIMARY_vs_BALANCED_H2_PATCH1": {
+   "metaqa": "NEUTRAL",
+   "metaqa_phg": "NEUTRAL",
+   "squad": "NEUTRAL",
+   "squad_phg": "NEUTRAL",
+   "musique": "GAIN"
+  },
+  "PRIMARY_vs_QMAX_F0": {
+   "metaqa": "GAIN",
+   "metaqa_phg": "GAIN",
+   "squad": "NEUTRAL",
+   "squad_phg": "NEUTRAL",
+   "musique": "GAIN"
+  }
+ },
+ "cells": {
+  "metaqa": "CARRIES",
+  "metaqa_phg": "CARRIES",
+  "squad": "NEUTRAL",
+  "squad_phg": "NEUTRAL",
+  "musique": "STACKS"
+ },
+ "OUTCOME": "PASS_STACKS",
+ "secondary_flags": {
+  "ADDITIVE_ON_MUSIQUE (PRIMARY vs QMAX_F0 = GAIN on musique: SAFE + patch add on top of the aggregation)": true,
+  "ADDITIVE_ON_METAQA (PRIMARY vs BALANCED = GAIN on both metaqa caches: the aggregation adds on top of the structural chain)": false,
+  "SQUAD_NON_REGRESSION (no LOSS vs either parent on squad / squad_phg)": true
+ },
+ "per_dataset": {
+  "metaqa": {
+   "ALL": {
+    "L1": 0.6397,
+    "SAFE": 0.6407,
+    "H2_PATCH1": 0.7515,
+    "BALANCED_H2_PATCH1": 0.7764,
+    "QMAX_F0": 0.6327,
+    "QMAX_SAFE": 0.6377,
+    "QMAX_BALANCED_H2_PATCH1": 0.7754
+   },
+   "exposure_nodes_mean": {
+    "L1": 5023.0,
+    "SAFE": 5023.1,
+    "H2_PATCH1": 5023.1,
+    "BALANCED_H2_PATCH1": 5023.1,
+    "QMAX_F0": 5028.3,
+    "QMAX_SAFE": 5027.3,
+    "QMAX_BALANCED_H2_PATCH1": 5027.3
+   },
+   "PRIMARY_vs_BALANCED_H2_PATCH1": {
+    "gained": 2,
+    "lost": 3,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_QMAX_F0": {
+    "gained": 143,
+    "lost": 0,
+    "p": 1.793662034335766e-43,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_H2_PATCH1": {
+    "gained": 31,
+    "lost": 7,
+    "p": 0.00011616700794547796,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_SAFE": {
+    "gained": 137,
+    "lost": 2,
+    "p": 2.792660040979414e-38,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_L1": {
+    "gained": 138,
+    "lost": 2,
+    "p": 1.4164190352742676e-38,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_QMAX_SAFE": {
+    "gained": 138,
+    "lost": 0,
+    "p": 5.739718509874451e-42,
+    "label": "GAIN"
+   },
+   "QMAX_SAFE_vs_SAFE": {
+    "gained": 5,
+    "lost": 8,
+    "p": 0.5810546875,
+    "label": "NEUTRAL"
+   },
+   "QMAX_SAFE_vs_QMAX_F0": {
+    "gained": 5,
+    "lost": 0,
+    "p": 0.0625,
+    "label": "NEUTRAL"
+   },
+   "stage_increments": {
+    "BASE": {
+     "L1 -> SAFE": {
+      "gained": 3,
+      "lost": 2,
+      "p": 1.0,
+      "label": "NEUTRAL",
+      "from": 0.6397,
+      "to": 0.6407
+     },
+     "SAFE -> BALANCED_H2_PATCH1": {
+      "gained": 136,
+      "lost": 0,
+      "p": 2.2958874039497803e-41,
+      "label": "GAIN",
+      "from": 0.6407,
+      "to": 0.7764
+     },
+     "L1 -> BALANCED_H2_PATCH1 (chain)": {
+      "gained": 139,
+      "lost": 2,
+      "p": 7.183257715107875e-39,
+      "label": "GAIN",
+      "from": 0.6397,
+      "to": 0.7764
+     }
+    },
+    "QMAX": {
+     "QMAX_F0 -> QMAX_SAFE": {
+      "gained": 5,
+      "lost": 0,
+      "p": 0.0625,
+      "label": "NEUTRAL",
+      "from": 0.6327,
+      "to": 0.6377
+     },
+     "QMAX_SAFE -> QMAX_BALANCED_H2_PATCH1": {
+      "gained": 138,
+      "lost": 0,
+      "p": 5.739718509874451e-42,
+      "label": "GAIN",
+      "from": 0.6377,
+      "to": 0.7754
+     },
+     "QMAX_F0 -> QMAX_BALANCED_H2_PATCH1 (chain)": {
+      "gained": 143,
+      "lost": 0,
+      "p": 1.793662034335766e-43,
+      "label": "GAIN",
+      "from": 0.6327,
+      "to": 0.7754
+     }
+    }
+   },
+   "cell": "CARRIES",
+   "flips_PRIMARY_vs_BALANCED": {
+    "newly_covered": {
+     "n": 2,
+     "gold_nodes_newly_served": 2,
+     "of_which_served_by_a_kept_block_of_QMAX_SAFE": 2,
+     "of_which_served_by_the_patch_nodes": 0
+    },
+    "newly_lost": {
+     "n": 3,
+     "gold_nodes_dropped": 5,
+     "of_which_block_no_longer_kept_(QMAX_SAFE_kept_49_differ)": 5,
+     "of_which_dropped_with_the_weakest_block": 0,
+     "of_which_visited_but_beyond_the_patch_capacity": 0,
+     "of_which_not_visited_by_the_balanced_beam": 5
+    }
+   },
+   "composed_chain_identities": {
+    "QMAX_P50 == BASE_P50 blocks per query (mean of 50)": 36.45,
+    "QMAX_SAFE == SAFE (queries)": 0,
+    "QMAX_SAFE & SAFE blocks per query (mean of 50)": 38.68,
+    "same weakest admitted block (queries)": 57,
+    "admitted six overlap (mean of 6)": 2.19,
+    "challengers admitted from outside the chain's own P50 (mean of 6): BASE / QMAX": [
+     4.59,
+     4.92
+    ],
+    "nominal exposure mean nodes: L1 / SAFE / QMAX_F0 / QMAX_SAFE": [
+     5023.0,
+     5023.1,
+     5028.3,
+     5027.3
+    ]
+   },
+   "seconds": 53.7,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "PRIMARY": 0.9939,
+     "BALANCED_H2_PATCH1": 0.9939,
+     "QMAX_F0": 0.911,
+     "H2_PATCH1": 0.9939,
+     "SAFE": 0.9172,
+     "L1": 0.9172,
+     "PRIMARY_vs_BALANCED": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "PRIMARY_vs_QMAX_F0": {
+      "gained": 27,
+      "lost": 0,
+      "p": 1.4901161193847656e-08
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "PRIMARY": 0.8081,
+     "BALANCED_H2_PATCH1": 0.814,
+     "QMAX_F0": 0.4797,
+     "H2_PATCH1": 0.7413,
+     "SAFE": 0.4942,
+     "L1": 0.4855,
+     "PRIMARY_vs_BALANCED": {
+      "gained": 0,
+      "lost": 2,
+      "p": 0.5
+     },
+     "PRIMARY_vs_QMAX_F0": {
+      "gained": 113,
+      "lost": 0,
+      "p": 1.925929944387236e-34
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "PRIMARY": 0.5271,
+     "BALANCED_H2_PATCH1": 0.5241,
+     "QMAX_F0": 0.5181,
+     "H2_PATCH1": 0.5241,
+     "SAFE": 0.5211,
+     "L1": 0.5271,
+     "PRIMARY_vs_BALANCED": {
+      "gained": 2,
+      "lost": 1,
+      "p": 1.0
+     },
+     "PRIMARY_vs_QMAX_F0": {
+      "gained": 3,
+      "lost": 0,
+      "p": 0.25
+     }
+    }
+   }
+  },
+  "metaqa_phg": {
+   "ALL": {
+    "L1": 0.6727,
+    "SAFE": 0.6747,
+    "H2_PATCH1": 0.7735,
+    "BALANCED_H2_PATCH1": 0.7984,
+    "QMAX_F0": 0.6747,
+    "QMAX_SAFE": 0.6687,
+    "QMAX_BALANCED_H2_PATCH1": 0.7964
+   },
+   "exposure_nodes_mean": {
+    "L1": 5088.7,
+    "SAFE": 5088.1,
+    "H2_PATCH1": 5088.1,
+    "BALANCED_H2_PATCH1": 5088.1,
+    "QMAX_F0": 5084.2,
+    "QMAX_SAFE": 5085.8,
+    "QMAX_BALANCED_H2_PATCH1": 5085.8
+   },
+   "PRIMARY_vs_BALANCED_H2_PATCH1": {
+    "gained": 2,
+    "lost": 4,
+    "p": 0.6875,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_QMAX_F0": {
+    "gained": 122,
+    "lost": 0,
+    "p": 3.76158192263132e-37,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_H2_PATCH1": {
+    "gained": 33,
+    "lost": 10,
+    "p": 0.0006061066312668117,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_SAFE": {
+    "gained": 127,
+    "lost": 5,
+    "p": 1.1820533154262882e-31,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_L1": {
+    "gained": 127,
+    "lost": 3,
+    "p": 5.381942110522302e-34,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_QMAX_SAFE": {
+    "gained": 128,
+    "lost": 0,
+    "p": 5.877471754111438e-39,
+    "label": "GAIN"
+   },
+   "QMAX_SAFE_vs_SAFE": {
+    "gained": 7,
+    "lost": 13,
+    "p": 0.26317596435546875,
+    "label": "NEUTRAL"
+   },
+   "QMAX_SAFE_vs_QMAX_F0": {
+    "gained": 2,
+    "lost": 8,
+    "p": 0.109375,
+    "label": "NEUTRAL"
+   },
+   "stage_increments": {
+    "BASE": {
+     "L1 -> SAFE": {
+      "gained": 4,
+      "lost": 2,
+      "p": 0.6875,
+      "label": "NEUTRAL",
+      "from": 0.6727,
+      "to": 0.6747
+     },
+     "SAFE -> BALANCED_H2_PATCH1": {
+      "gained": 125,
+      "lost": 1,
+      "p": 2.9857556510886103e-36,
+      "label": "GAIN",
+      "from": 0.6747,
+      "to": 0.7984
+     },
+     "L1 -> BALANCED_H2_PATCH1 (chain)": {
+      "gained": 127,
+      "lost": 1,
+      "p": 7.581938562803754e-37,
+      "label": "GAIN",
+      "from": 0.6727,
+      "to": 0.7984
+     }
+    },
+    "QMAX": {
+     "QMAX_F0 -> QMAX_SAFE": {
+      "gained": 2,
+      "lost": 8,
+      "p": 0.109375,
+      "label": "NEUTRAL",
+      "from": 0.6747,
+      "to": 0.6687
+     },
+     "QMAX_SAFE -> QMAX_BALANCED_H2_PATCH1": {
+      "gained": 128,
+      "lost": 0,
+      "p": 5.877471754111438e-39,
+      "label": "GAIN",
+      "from": 0.6687,
+      "to": 0.7964
+     },
+     "QMAX_F0 -> QMAX_BALANCED_H2_PATCH1 (chain)": {
+      "gained": 122,
+      "lost": 0,
+      "p": 3.76158192263132e-37,
+      "label": "GAIN",
+      "from": 0.6747,
+      "to": 0.7964
+     }
+    }
+   },
+   "cell": "CARRIES",
+   "flips_PRIMARY_vs_BALANCED": {
+    "newly_covered": {
+     "n": 2,
+     "gold_nodes_newly_served": 3,
+     "of_which_served_by_a_kept_block_of_QMAX_SAFE": 3,
+     "of_which_served_by_the_patch_nodes": 0
+    },
+    "newly_lost": {
+     "n": 4,
+     "gold_nodes_dropped": 4,
+     "of_which_block_no_longer_kept_(QMAX_SAFE_kept_49_differ)": 4,
+     "of_which_dropped_with_the_weakest_block": 0,
+     "of_which_visited_but_beyond_the_patch_capacity": 0,
+     "of_which_not_visited_by_the_balanced_beam": 4
+    }
+   },
+   "composed_chain_identities": {
+    "QMAX_P50 == BASE_P50 blocks per query (mean of 50)": 37.87,
+    "QMAX_SAFE == SAFE (queries)": 0,
+    "QMAX_SAFE & SAFE blocks per query (mean of 50)": 39.82,
+    "same weakest admitted block (queries)": 51,
+    "admitted six overlap (mean of 6)": 2.27,
+    "challengers admitted from outside the chain's own P50 (mean of 6): BASE / QMAX": [
+     4.43,
+     4.85
+    ],
+    "nominal exposure mean nodes: L1 / SAFE / QMAX_F0 / QMAX_SAFE": [
+     5088.7,
+     5088.1,
+     5084.2,
+     5085.8
+    ]
+   },
+   "seconds": 45.7,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "PRIMARY": 0.9969,
+     "BALANCED_H2_PATCH1": 0.9969,
+     "QMAX_F0": 0.9172,
+     "H2_PATCH1": 0.9969,
+     "SAFE": 0.9172,
+     "L1": 0.9172,
+     "PRIMARY_vs_BALANCED": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "PRIMARY_vs_QMAX_F0": {
+      "gained": 26,
+      "lost": 0,
+      "p": 2.9802322387695312e-08
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "PRIMARY": 0.8198,
+     "BALANCED_H2_PATCH1": 0.8169,
+     "QMAX_F0": 0.5494,
+     "H2_PATCH1": 0.7442,
+     "SAFE": 0.5291,
+     "L1": 0.5291,
+     "PRIMARY_vs_BALANCED": {
+      "gained": 1,
+      "lost": 0,
+      "p": 1.0
+     },
+     "PRIMARY_vs_QMAX_F0": {
+      "gained": 93,
+      "lost": 0,
+      "p": 2.0194839173657902e-28
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "PRIMARY": 0.5753,
+     "BALANCED_H2_PATCH1": 0.5843,
+     "QMAX_F0": 0.5663,
+     "H2_PATCH1": 0.5843,
+     "SAFE": 0.5873,
+     "L1": 0.5813,
+     "PRIMARY_vs_BALANCED": {
+      "gained": 1,
+      "lost": 4,
+      "p": 0.375
+     },
+     "PRIMARY_vs_QMAX_F0": {
+      "gained": 3,
+      "lost": 0,
+      "p": 0.25
+     }
+    }
+   }
+  },
+  "squad": {
+   "ALL": {
+    "L1": 0.9859,
+    "SAFE": 0.9919,
+    "H2_PATCH1": 0.9919,
+    "BALANCED_H2_PATCH1": 0.9919,
+    "QMAX_F0": 0.9919,
+    "QMAX_SAFE": 0.995,
+    "QMAX_BALANCED_H2_PATCH1": 0.995
+   },
+   "exposure_nodes_mean": {
+    "L1": 5089.3,
+    "SAFE": 5086.0,
+    "H2_PATCH1": 5086.0,
+    "BALANCED_H2_PATCH1": 5086.0,
+    "QMAX_F0": 5075.9,
+    "QMAX_SAFE": 5074.3,
+    "QMAX_BALANCED_H2_PATCH1": 5074.3
+   },
+   "PRIMARY_vs_BALANCED_H2_PATCH1": {
+    "gained": 3,
+    "lost": 0,
+    "p": 0.25,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_QMAX_F0": {
+    "gained": 3,
+    "lost": 0,
+    "p": 0.25,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_H2_PATCH1": {
+    "gained": 3,
+    "lost": 0,
+    "p": 0.25,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_SAFE": {
+    "gained": 3,
+    "lost": 0,
+    "p": 0.25,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_L1": {
+    "gained": 9,
+    "lost": 0,
+    "p": 0.00390625,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_QMAX_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "QMAX_SAFE_vs_SAFE": {
+    "gained": 3,
+    "lost": 0,
+    "p": 0.25,
+    "label": "NEUTRAL"
+   },
+   "QMAX_SAFE_vs_QMAX_F0": {
+    "gained": 3,
+    "lost": 0,
+    "p": 0.25,
+    "label": "NEUTRAL"
+   },
+   "stage_increments": {
+    "BASE": {
+     "L1 -> SAFE": {
+      "gained": 6,
+      "lost": 0,
+      "p": 0.03125,
+      "label": "NEUTRAL",
+      "from": 0.9859,
+      "to": 0.9919
+     },
+     "SAFE -> BALANCED_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0,
+      "label": "NEUTRAL",
+      "from": 0.9919,
+      "to": 0.9919
+     },
+     "L1 -> BALANCED_H2_PATCH1 (chain)": {
+      "gained": 6,
+      "lost": 0,
+      "p": 0.03125,
+      "label": "NEUTRAL",
+      "from": 0.9859,
+      "to": 0.9919
+     }
+    },
+    "QMAX": {
+     "QMAX_F0 -> QMAX_SAFE": {
+      "gained": 3,
+      "lost": 0,
+      "p": 0.25,
+      "label": "NEUTRAL",
+      "from": 0.9919,
+      "to": 0.995
+     },
+     "QMAX_SAFE -> QMAX_BALANCED_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0,
+      "label": "NEUTRAL",
+      "from": 0.995,
+      "to": 0.995
+     },
+     "QMAX_F0 -> QMAX_BALANCED_H2_PATCH1 (chain)": {
+      "gained": 3,
+      "lost": 0,
+      "p": 0.25,
+      "label": "NEUTRAL",
+      "from": 0.9919,
+      "to": 0.995
+     }
+    }
+   },
+   "cell": "NEUTRAL",
+   "flips_PRIMARY_vs_BALANCED": {
+    "newly_covered": {
+     "n": 3,
+     "gold_nodes_newly_served": 3,
+     "of_which_served_by_a_kept_block_of_QMAX_SAFE": 3,
+     "of_which_served_by_the_patch_nodes": 0
+    },
+    "newly_lost": {
+     "n": 0,
+     "gold_nodes_dropped": 0,
+     "of_which_block_no_longer_kept_(QMAX_SAFE_kept_49_differ)": 0,
+     "of_which_dropped_with_the_weakest_block": 0,
+     "of_which_visited_but_beyond_the_patch_capacity": 0,
+     "of_which_not_visited_by_the_balanced_beam": 0
+    }
+   },
+   "composed_chain_identities": {
+    "QMAX_P50 == BASE_P50 blocks per query (mean of 50)": 42.4,
+    "QMAX_SAFE == SAFE (queries)": 0,
+    "QMAX_SAFE & SAFE blocks per query (mean of 50)": 43.33,
+    "same weakest admitted block (queries)": 71,
+    "admitted six overlap (mean of 6)": 2.65,
+    "challengers admitted from outside the chain's own P50 (mean of 6): BASE / QMAX": [
+     3.74,
+     3.59
+    ],
+    "nominal exposure mean nodes: L1 / SAFE / QMAX_F0 / QMAX_SAFE": [
+     5089.3,
+     5086.0,
+     5075.9,
+     5074.3
+    ]
+   },
+   "seconds": 362.3
+  },
+  "squad_phg": {
+   "ALL": {
+    "L1": 0.9829,
+    "SAFE": 0.9889,
+    "H2_PATCH1": 0.9909,
+    "BALANCED_H2_PATCH1": 0.9889,
+    "QMAX_F0": 0.9889,
+    "QMAX_SAFE": 0.9899,
+    "QMAX_BALANCED_H2_PATCH1": 0.9899
+   },
+   "exposure_nodes_mean": {
+    "L1": 5089.2,
+    "SAFE": 5085.1,
+    "H2_PATCH1": 5085.1,
+    "BALANCED_H2_PATCH1": 5085.1,
+    "QMAX_F0": 5073.5,
+    "QMAX_SAFE": 5071.8,
+    "QMAX_BALANCED_H2_PATCH1": 5071.8
+   },
+   "PRIMARY_vs_BALANCED_H2_PATCH1": {
+    "gained": 1,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_QMAX_F0": {
+    "gained": 1,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_H2_PATCH1": {
+    "gained": 1,
+    "lost": 2,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_SAFE": {
+    "gained": 1,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_L1": {
+    "gained": 7,
+    "lost": 0,
+    "p": 0.015625,
+    "label": "NEUTRAL"
+   },
+   "PRIMARY_vs_QMAX_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "QMAX_SAFE_vs_SAFE": {
+    "gained": 1,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "QMAX_SAFE_vs_QMAX_F0": {
+    "gained": 1,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "stage_increments": {
+    "BASE": {
+     "L1 -> SAFE": {
+      "gained": 6,
+      "lost": 0,
+      "p": 0.03125,
+      "label": "NEUTRAL",
+      "from": 0.9829,
+      "to": 0.9889
+     },
+     "SAFE -> BALANCED_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0,
+      "label": "NEUTRAL",
+      "from": 0.9889,
+      "to": 0.9889
+     },
+     "L1 -> BALANCED_H2_PATCH1 (chain)": {
+      "gained": 6,
+      "lost": 0,
+      "p": 0.03125,
+      "label": "NEUTRAL",
+      "from": 0.9829,
+      "to": 0.9889
+     }
+    },
+    "QMAX": {
+     "QMAX_F0 -> QMAX_SAFE": {
+      "gained": 1,
+      "lost": 0,
+      "p": 1.0,
+      "label": "NEUTRAL",
+      "from": 0.9889,
+      "to": 0.9899
+     },
+     "QMAX_SAFE -> QMAX_BALANCED_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0,
+      "label": "NEUTRAL",
+      "from": 0.9899,
+      "to": 0.9899
+     },
+     "QMAX_F0 -> QMAX_BALANCED_H2_PATCH1 (chain)": {
+      "gained": 1,
+      "lost": 0,
+      "p": 1.0,
+      "label": "NEUTRAL",
+      "from": 0.9889,
+      "to": 0.9899
+     }
+    }
+   },
+   "cell": "NEUTRAL",
+   "flips_PRIMARY_vs_BALANCED": {
+    "newly_covered": {
+     "n": 1,
+     "gold_nodes_newly_served": 1,
+     "of_which_served_by_a_kept_block_of_QMAX_SAFE": 1,
+     "of_which_served_by_the_patch_nodes": 0
+    },
+    "newly_lost": {
+     "n": 0,
+     "gold_nodes_dropped": 0,
+     "of_which_block_no_longer_kept_(QMAX_SAFE_kept_49_differ)": 0,
+     "of_which_dropped_with_the_weakest_block": 0,
+     "of_which_visited_but_beyond_the_patch_capacity": 0,
+     "of_which_not_visited_by_the_balanced_beam": 0
+    }
+   },
+   "composed_chain_identities": {
+    "QMAX_P50 == BASE_P50 blocks per query (mean of 50)": 42.21,
+    "QMAX_SAFE == SAFE (queries)": 0,
+    "QMAX_SAFE & SAFE blocks per query (mean of 50)": 43.3,
+    "same weakest admitted block (queries)": 79,
+    "admitted six overlap (mean of 6)": 2.58,
+    "challengers admitted from outside the chain's own P50 (mean of 6): BASE / QMAX": [
+     3.88,
+     3.62
+    ],
+    "nominal exposure mean nodes: L1 / SAFE / QMAX_F0 / QMAX_SAFE": [
+     5089.2,
+     5085.1,
+     5073.5,
+     5071.8
+    ]
+   },
+   "seconds": 454.2
+  },
+  "musique": {
+   "ALL": {
+    "L1": 0.6596,
+    "SAFE": 0.7118,
+    "H2_PATCH1": 0.7329,
+    "BALANCED_H2_PATCH1": 0.7269,
+    "QMAX_F0": 0.7319,
+    "QMAX_SAFE": 0.748,
+    "QMAX_BALANCED_H2_PATCH1": 0.76
+   },
+   "exposure_nodes_mean": {
+    "L1": 5116.8,
+    "SAFE": 5113.9,
+    "H2_PATCH1": 5113.9,
+    "BALANCED_H2_PATCH1": 5113.9,
+    "QMAX_F0": 5106.0,
+    "QMAX_SAFE": 5104.2,
+    "QMAX_BALANCED_H2_PATCH1": 5104.2
+   },
+   "PRIMARY_vs_BALANCED_H2_PATCH1": {
+    "gained": 34,
+    "lost": 1,
+    "p": 2.0954757928848267e-09,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_QMAX_F0": {
+    "gained": 36,
+    "lost": 8,
+    "p": 2.5448598648836196e-05,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_H2_PATCH1": {
+    "gained": 36,
+    "lost": 9,
+    "p": 6.57466324582856e-05,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_SAFE": {
+    "gained": 49,
+    "lost": 1,
+    "p": 9.059419880941277e-14,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_L1": {
+    "gained": 101,
+    "lost": 1,
+    "p": 4.062633661888211e-29,
+    "label": "GAIN"
+   },
+   "PRIMARY_vs_QMAX_SAFE": {
+    "gained": 16,
+    "lost": 4,
+    "p": 0.01181793212890625,
+    "label": "NEUTRAL"
+   },
+   "QMAX_SAFE_vs_SAFE": {
+    "gained": 39,
+    "lost": 3,
+    "p": 5.631591193377972e-09,
+    "label": "GAIN"
+   },
+   "QMAX_SAFE_vs_QMAX_F0": {
+    "gained": 25,
+    "lost": 9,
+    "p": 0.00904118549078703,
+    "label": "GAIN"
+   },
+   "stage_increments": {
+    "BASE": {
+     "L1 -> SAFE": {
+      "gained": 56,
+      "lost": 4,
+      "p": 9.084503982403902e-13,
+      "label": "GAIN",
+      "from": 0.6596,
+      "to": 0.7118
+     },
+     "SAFE -> BALANCED_H2_PATCH1": {
+      "gained": 15,
+      "lost": 0,
+      "p": 6.103515625e-05,
+      "label": "GAIN",
+      "from": 0.7118,
+      "to": 0.7269
+     },
+     "L1 -> BALANCED_H2_PATCH1 (chain)": {
+      "gained": 69,
+      "lost": 2,
+      "p": 2.165863246129246e-18,
+      "label": "GAIN",
+      "from": 0.6596,
+      "to": 0.7269
+     }
+    },
+    "QMAX": {
+     "QMAX_F0 -> QMAX_SAFE": {
+      "gained": 25,
+      "lost": 9,
+      "p": 0.00904118549078703,
+      "label": "GAIN",
+      "from": 0.7319,
+      "to": 0.748
+     },
+     "QMAX_SAFE -> QMAX_BALANCED_H2_PATCH1": {
+      "gained": 16,
+      "lost": 4,
+      "p": 0.01181793212890625,
+      "label": "NEUTRAL",
+      "from": 0.748,
+      "to": 0.76
+     },
+     "QMAX_F0 -> QMAX_BALANCED_H2_PATCH1 (chain)": {
+      "gained": 36,
+      "lost": 8,
+      "p": 2.5448598648836196e-05,
+      "label": "GAIN",
+      "from": 0.7319,
+      "to": 0.76
+     }
+    }
+   },
+   "cell": "STACKS",
+   "flips_PRIMARY_vs_BALANCED": {
+    "newly_covered": {
+     "n": 34,
+     "gold_nodes_newly_served": 37,
+     "of_which_served_by_a_kept_block_of_QMAX_SAFE": 35,
+     "of_which_served_by_the_patch_nodes": 2
+    },
+    "newly_lost": {
+     "n": 1,
+     "gold_nodes_dropped": 1,
+     "of_which_block_no_longer_kept_(QMAX_SAFE_kept_49_differ)": 1,
+     "of_which_dropped_with_the_weakest_block": 0,
+     "of_which_visited_but_beyond_the_patch_capacity": 0,
+     "of_which_not_visited_by_the_balanced_beam": 1
+    }
+   },
+   "composed_chain_identities": {
+    "QMAX_P50 == BASE_P50 blocks per query (mean of 50)": 39.01,
+    "QMAX_SAFE == SAFE (queries)": 0,
+    "QMAX_SAFE & SAFE blocks per query (mean of 50)": 40.29,
+    "same weakest admitted block (queries)": 59,
+    "admitted six overlap (mean of 6)": 2.36,
+    "challengers admitted from outside the chain's own P50 (mean of 6): BASE / QMAX": [
+     4.72,
+     4.76
+    ],
+    "nominal exposure mean nodes: L1 / SAFE / QMAX_F0 / QMAX_SAFE": [
+     5116.8,
+     5113.9,
+     5106.0,
+     5104.2
+    ]
+   },
+   "seconds": 217.0
+  }
+ },
+ "what_follows": "QMAX_BALANCED_H2_PATCH1 = the universal L1+ candidate of the fourteenth ruling: status MECHANISM_CONFIRMED_ON_DEV_A (composition; not promoted; NOT transfer-confirmed). Roles: H2_PATCH1 stays the frozen WebQSP transfer reference (section 16, unchanged); the composite is the candidate for the multi-hop text transfer populations (2Wiki / HotpotQA) when their substrates exist and a resource ruling allows it. Item 2 (coverage-then-score frontier) is pre-registered separately as a successor of the compression component; the composite's compression stays the section-21 rule until item 2 earns its own verdict."
+}

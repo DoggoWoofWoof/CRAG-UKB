@@ -1,0 +1,80 @@
+{
+ "stage": "L3_HOST",
+ "addendum": 2,
+ "amends": {
+  "declaration": {
+   "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1.json",
+   "sha256": "37ff06f7bb0ae203923e0956ec767df9e8fc2f20753a3ecf945d6d714e2cd9a9"
+  },
+  "addendum_1": {
+   "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_1.json",
+   "sha256": "12642119363d99e1851eefe3b43d92414cb3d53be3ea0a32e8a0361116f75b9c"
+  }
+ },
+ "declared": "2026-09-29T18:12:41+05:30",
+ "what_happened": "the placement run (rx job 260929-175715-l3h-typed-h1b-4987) computed all 1,998 rows (266.7 s) and stopped at the harness's own identity check 'FLAT positions differ from the v1 record' before writing anything (the tag h1 is still unused; its runner sidecar is results/L3_HOST/runs/_l3d_typed__RUN__metaqa__h1.2.run.json, rc 1)",
+ "cause (measured on the laptop, results/L3_HOST/BLAS_PROBE__laptop.json)": {
+  "product": "the FLAT dense score Qu[j0:j1] @ Ec.T is a float32 OpenBLAS sgemm; OpenBLAS partitions it by its thread count, so the float sums depend on the number of BLAS threads",
+  "laptop": "OpenBLAS 0.3.30, Haswell kernel, 12 threads by default (i5-1335U, 12 logical CPUs): every laptop record was computed so",
+  "per thread count (first population batch x first node block, 200 x 40,000 products)": {
+   "1": {
+    "equals the laptop default": false,
+    "entries that differ": 191844,
+    "max |diff|": 2.384185791015625e-07
+   },
+   "2": {
+    "equals the laptop default": false,
+    "entries that differ": 190921,
+    "max |diff|": 2.384185791015625e-07
+   },
+   "4": {
+    "equals the laptop default": false,
+    "entries that differ": 193192,
+    "max |diff|": 2.384185791015625e-07
+   },
+   "8": {
+    "equals the laptop default": false,
+    "entries that differ": 193317,
+    "max |diff|": 2.980232238769531e-07
+   },
+   "12": {
+    "equals the laptop default": true,
+    "entries that differ": 0,
+    "max |diff|": 0.0
+   },
+   "16": {
+    "equals the laptop default": false,
+    "entries that differ": 3866291,
+    "max |diff|": 2.980232238769531e-07
+   },
+   "32": {
+    "equals the laptop default": false,
+    "entries that differ": 5776133,
+    "max |diff|": 2.980232238769531e-07
+   }
+  },
+  "consequence": "a host job at another BLAS thread count computes slightly different dense scores, near-tied FLAT ranks flip and the harness refuses the run (as designed)"
+ },
+ "change": {
+  "every L3_HOST job sets": {
+   "OPENBLAS_NUM_THREADS": "12"
+  },
+  "how": "rx run --var OPENBLAS_NUM_THREADS=12 (a thread count, not a credential); the project's [run] defaults are not changed",
+  "reservation": "--cpus 2 --mem 3: the dense sgemm (N 43,234 x 1,536 per 200-row batch) runs on 12 threads for well under a second per batch, everything else on one thread; the job runs BELOW_NORMAL through scratchpad/_l3h_run.py, so normal-priority work (mpr first) keeps the CPU",
+  "host": "DESKTOP-SLQMEQH, i9-14900 (Raptor Lake, 32 logical CPUs, no AVX-512), the same core family as the laptop's i5-1335U, so OpenBLAS's dynamic kernel choice is expected to be Haswell on both; the probe records it",
+  "gate": "the host BLAS probe (python -u scratchpad/_l3h_run.py scratchpad/_l3h_blasprobe.py host_t12, with OPENBLAS_NUM_THREADS=12, through the runner so population rows come from the bundle) must reproduce the laptop inputs (Qu 2d89f7ce5c4e3e83, Ec 95947298bf34822b) and default product sha 5db3e5817cbfc68374a65d3b7c781fd573b74987b8c8ac323573aeea93f0d71e before the placement run is repeated; if the product differs, nothing runs and the kernel is investigated (OPENBLAS_CORETYPE is a further addendum, not a silent change); the placement gate of v1 is unchanged"
+ },
+ "pushed_in_addition (code and the laptop probe record)": [
+  {
+   "path": "scratchpad/_l3h_blasprobe.py",
+   "bytes": 3359,
+   "sha256": "3ed95dd6e74aea5812fa77ffcdbd5abf58a56c6d77466468a2437b78f0a6f065"
+  },
+  {
+   "path": "results/L3_HOST/BLAS_PROBE__laptop.json",
+   "bytes": 2829,
+   "sha256": "6774d25f0745d94ea4657b16d6a49fbba8e6d6ed655817d72d1ce04ceedb333c"
+  }
+ ],
+ "unchanged": "the bundle, the runner, the placement test and its BIT_IDENTICAL gate, the harness pins and every 'never' of the declaration; the placement run repeats with tag h1 (still unused)"
+}

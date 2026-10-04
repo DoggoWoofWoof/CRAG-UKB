@@ -1,0 +1,624 @@
+{
+ "RECORD": "PREREGISTRATION",
+ "name": "COVSCORE_H2_PATCH1",
+ "STATUS": "PREREGISTERED_SUCCESSOR_TEST_DEV_A",
+ "written_before_any_run": true,
+ "written_before": [
+  "any coverage (ALL / ANY) number of COVSCORE_H2_PATCH1 on any cache",
+  "any paired comparison of the new arm",
+  "any per-hop number of the new arm",
+  "any gold-bearing diagnostic of the covscore beam",
+  "any number of any kind for the new arm on metaqa_phg, squad, squad_phg or musique"
+ ],
+ "what_was_run_before_this_record": {
+  "unit_test": "python -u scratchpad/_l1c_covscore.py --unit: five synthetic examples (no cache, no graph, no gold) assert the hand-derived sequences, including the example that separates the rule from the section-21 round-robin ([a1 b1 c1 a2 a3] vs [a1 b1 c1 a2 b2]) and a permuted fused order",
+  "dry_run": "python -u scratchpad/_l1c_covscore.py metaqa --dry: the pinned beam with candidate recording == the exec'd pinned beam; the balanced beam reproduces every deterministic figure of h2balanced_A_metaqa.json beam_diversity_DEV_A; canonical SAFE / BASE == the L1_REPLAY record on DEV_A rows; the covscore beam built and its gold-free statistics printed; no coverage number of the new arm; no record",
+  "dry_run_log_lines_verbatim": [
+   "unit test OK: 5 synthetic examples",
+   "[   49.4s] beam done: edges scored / query hop1 37.8 hop2 334.9 (total mean 372.7, p95 761); nodes visited / query mean 128.0; wall-clock / query mean 42.4 ms p50 21.7 p95 137.8; seeds all hubs 0 / 1002",
+   "[  170.5s] beams done (121s): wall-clock / query mean balanced 39.1 ms, covscore 42.0 ms (pinned 42.4 ms)",
+   "[  170.5s] balanced beam reproduced: every deterministic figure of h2balanced_A_metaqa.json beam_diversity_DEV_A matches",
+   "[  170.5s] covscore beam (gold-free) {\"wall_clock_ms_per_query\": 42.0, \"transitions_scored_per_query_mean (hop1 / hop2)\": [37.8, 334.9], \"candidates_unique_per_query_mean (hop1 / hop2)\": [32.5, 263.9], \"beam_size_mean (hop1 / hop2)\": [32.5, 95.6], \"queries_truncated_at_hop (hop1 / hop2)\": [1, 866], \"same_kept_set_as_pinned (queries; hop1 / hop2)\": [1002, 295], \"same_kept_set_as_balanced (queries; hop1 / hop2)\": [1001, 138], \"jaccard_kept_vs_pinned_mean (hop1 / hop2)\": [1.0, 0.935], \"jaccard_kept_vs_balanced_mean (hop1 / hop2)\": [1.0, 0.622], \"distinct_parents_in_kept_beam_mean (hop1 / hop2)\": [5.0, 23.0], \"largest_single_parent_share_mean (hop1 / hop2)\": [0.403, 0.226], \"covscore_compression_stats_mean\": {\"hop1\": {\"parents\": 5.0, \"parents_with_candidates\": 4.99, \"candidates_unique\": 32.49, \"pairs\": 34.51, \"kept\": 32.47, \"truncated\": 0.0, \"kept_phase1_coverage\": 4.86, \"kept_phase2_score\": 27.61, \"parents_represented\": 4.96, \"largest_parent_candidate_list\": 13.33}, \"hop2\": {\"parents\": 32.47, \"parents_with_candidates\": 24.77, \"candidates_unique\": 263.87, \"pairs\": 317.7, \"kept\": 95.56, \"truncated\": 0.86, \"kept_phase1_coverage\": 20.5, \"kept_phase2_score\": 75.05, \"parents_represented\": 23.0, \"largest_parent_candidate_list\": 53.6}}}",
+   "[  176.0s] canonical SAFE reproduced (SAFE 0.6407, BASE 0.6397)",
+   "[  176.0s] DRY RUN: BASE, SAFE and the pinned / balanced beams reproduced; the covscore beam built (gold-free statistics above); no coverage number of the new arm; no record (176s)"
+  ],
+  "covscore_beam_gold_free_statistics_metaqa_DEV_A": {
+   "wall_clock_ms_per_query": 42.0,
+   "transitions_scored_per_query_mean (hop1 / hop2)": [
+    37.8,
+    334.9
+   ],
+   "candidates_unique_per_query_mean (hop1 / hop2)": [
+    32.5,
+    263.9
+   ],
+   "beam_size_mean (hop1 / hop2)": [
+    32.5,
+    95.6
+   ],
+   "queries_truncated_at_hop (hop1 / hop2)": [
+    1,
+    866
+   ],
+   "same_kept_set_as_pinned (queries; hop1 / hop2)": [
+    1002,
+    295
+   ],
+   "same_kept_set_as_balanced (queries; hop1 / hop2)": [
+    1001,
+    138
+   ],
+   "jaccard_kept_vs_pinned_mean (hop1 / hop2)": [
+    1.0,
+    0.935
+   ],
+   "jaccard_kept_vs_balanced_mean (hop1 / hop2)": [
+    1.0,
+    0.622
+   ],
+   "distinct_parents_in_kept_beam_mean (hop1 / hop2)": [
+    5.0,
+    23.0
+   ],
+   "largest_single_parent_share_mean (hop1 / hop2)": [
+    0.403,
+    0.226
+   ],
+   "covscore_compression_stats_mean": {
+    "hop1": {
+     "parents": 5.0,
+     "parents_with_candidates": 4.99,
+     "candidates_unique": 32.49,
+     "pairs": 34.51,
+     "kept": 32.47,
+     "truncated": 0.0,
+     "kept_phase1_coverage": 4.86,
+     "kept_phase2_score": 27.61,
+     "parents_represented": 4.96,
+     "largest_parent_candidate_list": 13.33
+    },
+    "hop2": {
+     "parents": 32.47,
+     "parents_with_candidates": 24.77,
+     "candidates_unique": 263.87,
+     "pairs": 317.7,
+     "kept": 95.56,
+     "truncated": 0.86,
+     "kept_phase1_coverage": 20.5,
+     "kept_phase2_score": 75.05,
+     "parents_represented": 23.0,
+     "largest_parent_candidate_list": 53.6
+    }
+   }
+  },
+  "coverage_of_the_new_arm": "NEVER computed anywhere before this record"
+ },
+ "utc": "2026-09-15T20:18:04Z",
+ "ruling_2026-09-16_fourteenth_item_2_verbatim_essentials": "2. BALANCED is good, but its sparse/dense tradeoff can probably be improved once ... I would try exactly one parameter-free rule: Coverage-then-score frontier: First give every active parent one child (A1 B1 C1 D1 ...), then fill the remaining global budget using the original frozen global candidate ranking (A2 A3 B2 A4 ...). No k_local. No lambda. No learned weighting. No dataset branch. B = {best child of each parent} u TopK(remaining candidates) until capacity is reached. ... I would not run five diversity methods. One coverage-then-score successor is enough. ... 3. Only after fixing H2 compression should you reopen H3 ... If coverage-then-score or BALANCED keeps more correct H2 parents, then run one H3_PATCH1 successor using that frontier. No wider patch initially. No H3-specific scoring. Same real-edge maths. ... We have over-read DEV_A. So don't use MetaQA/MuSiQue indefinitely to select every next rule.",
+ "question": "Does the ruling's coverage-then-score frontier (one child per active parent, then the frozen global ranking) keep more correct hop-2 parents / gold children than the section-21 round-robin (BALANCED_H2_PATCH1) -- i.e. is it a better sparse/dense compromise -- with the frozen H2_PATCH1 patch, budget, beam and SAFE unchanged?",
+ "frozen_and_reused_verbatim": {
+  "beam": "the pinned uL3 beam of _l1c_microl3.py (sha 19774617...): frozen admissibility (out always, in for non-hubs; hub = deg_u + 1 > N / k), frozen transition geometry S_dst / S_dir / S_mid, frozen RRF fused order (K0 = 60), BEAM = 100, DEPTH = 2, seeds = the frozen top-5 RRF nodes; exec'd verbatim; the section-16 pinned beam and the section-21 balanced beam are recomputed and asserted against their records",
+  "patch": "section 16 verbatim (_l1c_h2patch.py sha a1ed9caa...; build_patches copied from _l1c_h2balanced.py sha 7aed6b1d...): SAFE minus its weakest admitted block + one query-local block of the same size = the beam's visited nodes not exposed by the 49 kept blocks in first-visit order (hop 1 then hop 2), topped up from the removed block (ret_rrf position, then node id); matched unique-node exposure (asserted)",
+  "SAFE": "_l1ps_router.build_cache + _l1kb_core.contexts / f6_select, BASE_CFG unchanged (B = 6, M_struct = 64, M_ret = 32, S4, F6); served BASE ranking",
+  "constants": "K0 = 60, K_LOCK = 100, P_MAIN = 50, B = 6, BEAM = 100, DEPTH = 2 -- all frozen before; nothing new, nothing fitted, no dataset branch, no weight"
+ },
+ "the_one_change_frontier_compression": {
+  "rule": "(1) (parent, target) pairs in the frozen fused transition order, a pair reached twice keeping its first occurrence; (2) within-parent rank r = position of the pair among its parent's pairs in that order (section 21's definition); (3) phase 1 = the pairs with r = 0 in frontier order (A1 B1 C1 D1 ...: the best child of every active parent); phase 2 = ALL remaining pairs in the frozen global fused order (A2 A3 B2 A4 ...); (4) B(h) = the first BEAM distinct unvisited targets of phase 1 then phase 2, a target already taken being skipped, visited marked exactly as the pinned beam. A parent whose best child is already taken contributes nothing in phase 1. B = {best child of each parent} u TopK(remaining candidates) until capacity.",
+  "what_differs_from_section_21": "section 21 continues round-robin after round 1 (A2 B2 C2 ... A3 B3 ...); this rule fills the remainder in the frozen global order. Both rules share round 1 exactly. Where a hop has at most BEAM distinct unvisited candidates, all three beams (pinned, balanced, covscore) are identical.",
+  "no_constant": "no k_local, no lambda, no weight, no dataset branch; the only constants are the frozen BEAM / DEPTH / K0 and the frozen patch budget",
+  "code_verbatim (scratchpad/_l1c_covscore.py, cs_compress_core)": [
+   "def cs_compress_core(N, v_idx, u_idx, order, frontier, visited, budget):",
+   "    \"\"\"coverage-then-score compression (pure function of the frozen fused order; N = node count for the pair key).",
+   "    returns (kept targets in sequence order, parent of each kept target, stats).\"\"\"",
+   "    pos = np.full(N, -1, np.int64)",
+   "    pos[np.asarray(frontier, np.int64)] = np.arange(len(frontier))",
+   "    v_o, u_o = v_idx[order], u_idx[order]",
+   "    pp = pos[v_o]",
+   "    assert (pp >= 0).all()",
+   "    key = pp.astype(np.int64) * N + u_o",
+   "    _, first = np.unique(key, return_index=True)             # (parent, target) pairs: keep the first occurrence in fused order",
+   "    first.sort()",
+   "    pp, uu = pp[first], u_o[first]                           # pairs in the frozen fused order (index j ascending = better)",
+   "    o = np.argsort(pp, kind=\"stable\")                        # within-parent rank = position among the parent's pairs in fused order",
+   "    ps = pp[o]",
+   "    start = np.r_[0, np.flatnonzero(np.diff(ps)) + 1]",
+   "    grp = np.repeat(np.arange(len(start)), np.diff(np.r_[start, len(ps)]))",
+   "    r = np.empty(len(pp), np.int64)",
+   "    r[o] = np.arange(len(ps)) - start[grp]",
+   "    best = np.flatnonzero(r == 0)                            # the best child of every active parent",
+   "    phase1 = best[np.argsort(pp[best], kind=\"stable\")]       # A1 B1 C1 D1 ... in frontier order",
+   "    phase2 = np.flatnonzero(r > 0)                           # A2 A3 B2 A4 ... in the frozen global fused order",
+   "    is1 = np.zeros(len(pp), bool)",
+   "    is1[phase1] = True",
+   "    nb, par, n1 = [], {}, 0",
+   "    for j in np.concatenate([phase1, phase2]):",
+   "        u = int(uu[j])",
+   "        if not visited[u]:",
+   "            visited[u] = True",
+   "            nb.append(u)",
+   "            par[u] = int(v_o[first[j]])",
+   "            n1 += int(is1[j])",
+   "            if len(nb) >= budget:",
+   "                break",
+   "    st = {\"parents\": int(len(frontier)), \"parents_with_candidates\": int(len(start)), \"candidates_unique\": int(len(np.unique(uu))), \"pairs\": int(len(uu)),",
+   "          \"kept\": len(nb), \"truncated\": int(len(np.unique(uu)) > budget), \"kept_phase1_coverage\": n1, \"kept_phase2_score\": len(nb) - n1,",
+   "          \"parents_represented\": len(set(par.values())), \"largest_parent_candidate_list\": int(np.bincount(pp).max()) if len(pp) else 0}",
+   "    return nb, par, st"
+  ],
+  "unit_test": "five synthetic examples asserted at every start of the runner (see what_was_run_before_this_record)"
+ },
+ "arms": {
+  "reference (recomputed; asserted equal to the frozen section-16 / 21 records)": [
+   "L1",
+   "SAFE",
+   "H2_PATCH1",
+   "BALANCED_H2_PATCH1"
+  ],
+  "new": {
+   "COVSCORE_H2_PATCH1": "the ONLY decided-on arm: the section-16 patch over the covscore beam"
+  },
+  "not_run": [
+   "any k_local / lambda / weighted variant",
+   "any other diversity method",
+   "COVSCORE over the QMAX_F0 ranking (item 1 is a separate pre-registration)",
+   "depth 3 (item 3 is conditional on this outcome and separately pre-registered)",
+   "any change of the patch, budget, beam width, SAFE or fusion"
+  ]
+ },
+ "seen_numbers_DEV_A (section 21 records; the reference arms of this test)": {
+  "metaqa": {
+   "n_DEV_A": 1002,
+   "L1": 0.6397,
+   "SAFE": 0.6407,
+   "H2_PATCH1": 0.7515,
+   "BALANCED_H2_PATCH1": 0.7764,
+   "BALANCED_vs_H2_PATCH1": {
+    "gained": 30,
+    "lost": 5,
+    "p": 2.2361520677804947e-05
+   },
+   "BALANCED_vs_SAFE": {
+    "gained": 136,
+    "lost": 0,
+    "p": 2.2958874039497803e-41
+   },
+   "per_hop_BALANCED": {
+    "hop1": 0.9939,
+    "hop2": 0.814,
+    "hop3": 0.5241
+   },
+   "per_hop_BALANCED_vs_H2_PATCH1": {
+    "hop1": [
+     0,
+     0
+    ],
+    "hop2": [
+     30,
+     5
+    ],
+    "hop3": [
+     0,
+     0
+    ]
+   },
+   "beam_size_mean_balanced (hop1 / hop2)": [
+    32.5,
+    95.6
+   ],
+   "queries_truncated_at_hop_balanced": [
+    1,
+    866
+   ]
+  },
+  "metaqa_phg": {
+   "n_DEV_A": 1002,
+   "L1": 0.6727,
+   "SAFE": 0.6747,
+   "H2_PATCH1": 0.7735,
+   "BALANCED_H2_PATCH1": 0.7984,
+   "BALANCED_vs_H2_PATCH1": {
+    "gained": 31,
+    "lost": 6,
+    "p": 4.12575900554657e-05
+   },
+   "BALANCED_vs_SAFE": {
+    "gained": 125,
+    "lost": 1,
+    "p": 2.9857556510886103e-36
+   },
+   "per_hop_BALANCED": {
+    "hop1": 0.9969,
+    "hop2": 0.8169,
+    "hop3": 0.5843
+   },
+   "per_hop_BALANCED_vs_H2_PATCH1": {
+    "hop1": [
+     0,
+     0
+    ],
+    "hop2": [
+     31,
+     6
+    ],
+    "hop3": [
+     0,
+     0
+    ]
+   },
+   "beam_size_mean_balanced (hop1 / hop2)": [
+    32.5,
+    95.6
+   ],
+   "queries_truncated_at_hop_balanced": [
+    1,
+    866
+   ]
+  },
+  "squad": {
+   "n_DEV_A": 992,
+   "L1": 0.9859,
+   "SAFE": 0.9919,
+   "H2_PATCH1": 0.9919,
+   "BALANCED_H2_PATCH1": 0.9919,
+   "BALANCED_vs_H2_PATCH1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "BALANCED_vs_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "per_hop_BALANCED": {},
+   "per_hop_BALANCED_vs_H2_PATCH1": {},
+   "beam_size_mean_balanced (hop1 / hop2)": [
+    85.2,
+    96.7
+   ],
+   "queries_truncated_at_hop_balanced": [
+    655,
+    952
+   ]
+  },
+  "squad_phg": {
+   "n_DEV_A": 992,
+   "L1": 0.9829,
+   "SAFE": 0.9889,
+   "H2_PATCH1": 0.9909,
+   "BALANCED_H2_PATCH1": 0.9889,
+   "BALANCED_vs_H2_PATCH1": {
+    "gained": 0,
+    "lost": 2,
+    "p": 0.5
+   },
+   "BALANCED_vs_SAFE": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "per_hop_BALANCED": {},
+   "per_hop_BALANCED_vs_H2_PATCH1": {},
+   "beam_size_mean_balanced (hop1 / hop2)": [
+    85.2,
+    96.7
+   ],
+   "queries_truncated_at_hop_balanced": [
+    655,
+    952
+   ]
+  },
+  "musique": {
+   "n_DEV_A": 996,
+   "L1": 0.6596,
+   "SAFE": 0.7118,
+   "H2_PATCH1": 0.7329,
+   "BALANCED_H2_PATCH1": 0.7269,
+   "BALANCED_vs_H2_PATCH1": {
+    "gained": 2,
+    "lost": 8,
+    "p": 0.109375
+   },
+   "BALANCED_vs_SAFE": {
+    "gained": 15,
+    "lost": 0,
+    "p": 6.103515625e-05
+   },
+   "per_hop_BALANCED": {},
+   "per_hop_BALANCED_vs_H2_PATCH1": {},
+   "beam_size_mean_balanced (hop1 / hop2)": [
+    80.3,
+    100.0
+   ],
+   "queries_truncated_at_hop_balanced": [
+    557,
+    995
+   ]
+  }
+ },
+ "item1_records_existing_at_write_time (QMAX_BALANCED_H2_PATCH1; not used by this test)": {
+  "metaqa": {
+   "QMAX_BALANCED_H2_PATCH1": 0.7754,
+   "cell": "CARRIES"
+  },
+  "metaqa_phg": {
+   "QMAX_BALANCED_H2_PATCH1": 0.7964,
+   "cell": "CARRIES"
+  },
+  "squad": {
+   "QMAX_BALANCED_H2_PATCH1": 0.995,
+   "cell": "NEUTRAL"
+  },
+  "squad_phg": "not yet run at the time of this record (its chain is running; its numbers do not enter this test)",
+  "musique": "not yet run at the time of this record (its chain is running; its numbers do not enter this test)"
+ },
+ "section21_and_16_outcomes_read": {
+  "BALANCED_H2_PATCH1": {
+   "verdict": "PASS",
+   "label": "MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC; not promoted)"
+  },
+  "H2_PATCH1": {
+   "verdict": "PASS",
+   "label": null
+  }
+ },
+ "predictions_stated_now": {
+  "mechanism": "the rule differs from BALANCED only where a hop has more than 100 distinct candidates: at hop 1 (5 seeds) it keeps one child per seed and then the global top of the rest (BALANCED keeps ~20 per seed); at hop 2 (up to 100 parents) phase 1 alone can fill the budget, in which case it equals BALANCED's round 1. The metaqa dry run shows the covscore beam closer to the pinned beam than to the balanced beam at hop 2 (Jaccard 0.935 vs 0.622), identical to both for most queries (295 / 138 of 1,002 same set as pinned / balanced at hop 2).",
+  "direction": "uncertain, stated honestly: section 21's hop-2 gain (+30 / -5 on metaqa) came from representing more hop-1 parents at hop 2 and from balancing the 5 seeds at hop 1. If the gain came from round 1 (coverage), COVSCORE keeps it and may add the global fill's precision (PASS_SUCCESSOR); if it came from the later rounds (the second and third children of the right parents), COVSCORE lands between H2_PATCH1 and BALANCED (FAIL_NOT_BETTER or FAIL_WORSE). The dry run's identity (covscore closer to the pinned beam) makes the second reading more likely on metaqa; text caches: within noise of BALANCED (squad at the ceiling; musique differences of a few queries)."
+ },
+ "population": {
+  "metaqa": "served metaqa cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "metaqa_phg": "served metaqa_phg cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "squad": "served squad cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "squad_phg": "served squad_phg cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "musique": "served musique cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "DEV_B": "never read",
+  "TEST": "never read",
+  "WebQSP / 2Wiki / HotpotQA": "not used"
+ },
+ "statistics": {
+  "test": "exact two-sided McNemar on paired DEV_A 0/1 ALL vectors (_l1x90_core.mcnemar): gained / lost / p",
+  "alpha_gain": 0.01,
+  "alpha_regression_and_safety": 0.05,
+  "labels": {
+   "GAIN": "gained > lost and p < 0.01",
+   "LOSS": "lost > gained and p < 0.01",
+   "NEUTRAL": "otherwise"
+  },
+  "decision_comparisons": "COVSCORE_H2_PATCH1 vs BALANCED_H2_PATCH1 (hop 2 and hop 1 / hop 3 on the two metaqa caches; ALL on the three text caches) and, for text safety only, vs H2_PATCH1 and vs SAFE; everything else (vs L1, per hop on text, flips, beam statistics, the gold-bearing-parent diagnostic) is descriptive"
+ },
+ "decision_rule_pre_registered": {
+  "metaqa_required": "hop-2 ALL of COVSCORE_H2_PATCH1 vs BALANCED_H2_PATCH1 with gained > lost and p < 0.01 on BOTH metaqa and metaqa_phg",
+  "no_regression_required": "hop-1 and hop-3 vs BALANCED_H2_PATCH1 on both metaqa caches: not (lost > gained and p < 0.05)",
+  "text_safety_required": "squad, squad_phg, musique: ALL vs BALANCED_H2_PATCH1, vs H2_PATCH1 and vs SAFE: not (lost > gained and p < 0.05)",
+  "OUTCOME": {
+   "PASS_SUCCESSOR": "metaqa_required AND no_regression_required AND text_safety_required",
+   "FAIL_WORSE": "not PASS and (a LOSS vs BALANCED_H2_PATCH1 on a metaqa cache at hop 2 or on ALL (p < 0.01) OR a hop-1 / hop-3 regression OR a text-safety violation)",
+   "FAIL_NOT_BETTER": "otherwise (neither the required gain nor a loss)"
+  },
+  "frontier_for_item_3": "COVSCORE_H2_PATCH1 if PASS_SUCCESSOR, else BALANCED_H2_PATCH1 (section 21 already showed BALANCED keeps more correct hop-2 parents than the pinned beam: hop 2 +30 / -5 and +31 / -6 vs H2_PATCH1); the H3 successor of item 3 is a separate pre-registration on that frontier",
+  "what_follows": {
+   "PASS_SUCCESSOR": "COVSCORE_H2_PATCH1 = the current best experimental successor (MECHANISM_CONFIRMED_ON_DEV_A, pre-registered; not promoted; NOT transfer-confirmed); BALANCED_H2_PATCH1 keeps its section-21 record; H2_PATCH1 stays the frozen WebQSP transfer reference exactly as section 16; item 3 runs on the covscore frontier",
+   "FAIL_WORSE": "the coverage-then-score rule is recorded as worse than the round-robin on DEV_A and CLOSED (no k_local, no lambda, no other diversity rule -- 'one coverage-then-score successor is enough'); BALANCED_H2_PATCH1 keeps the frontier role; item 3 runs on the balanced frontier",
+   "FAIL_NOT_BETTER": "the rule is recorded as not better than the round-robin on DEV_A and CLOSED; BALANCED_H2_PATCH1 keeps the frontier role; item 3 runs on the balanced frontier"
+  },
+  "no_promotion": "nothing here changes the served L1 or any frozen record; sections 16-24 are unchanged; the WebQSP primary transfer remains frozen H2_PATCH1 exactly as section 16"
+ },
+ "also_recorded (descriptive, never decided on)": [
+  "COVSCORE vs H2_PATCH1, vs SAFE, vs L1 (ALL, ANY, per hop, hop-2 + hop-3 pooled)",
+  "flips vs BALANCED and vs H2_PATCH1 with their cause (newly visited / cut by the reference patch; no longer visited / beyond the patch capacity)",
+  "the ruling's diagnostic: on SAFE failures, missing gold nodes visited / scored-but-not-kept / never scored per beam, gold-bearing hop-1 parents and how many keep a gold child at hop 2, failures with every missing node visited, failures covered by each arm (per hop on metaqa)",
+  "gold-free beam statistics: beam sizes, truncation, Jaccard vs pinned / balanced, distinct parents, largest-parent share, phase-1 / phase-2 composition, wall clock"
+ ],
+ "forbidden": [
+  "reading DEV_B or TEST; using WebQSP, 2Wiki or HotpotQA",
+  "any second compression rule, any k_local / lambda / weight, any dataset branch, any change of the patch, budget, beam width, depth, SAFE, F6, RRF or hub definition",
+  "editing any CONTRACT_FILE or pinned module; editing the two new modules after this record (their shas are pinned below and asserted at run time)",
+  "signalling the foreign process; touching the WebQSP watcher; writing under data/",
+  "tuning after seeing numbers; changing a label, clause or threshold after a number is seen; re-running a cache after seeing its number"
+ ],
+ "code": {
+  "new_modules": {
+   "_l1c_covscore.py": {
+    "path": "scratchpad/_l1c_covscore.py",
+    "sha256": "5b8c530e1ee3e018c27f380978a45565d705486b9312bcb0042d996803dbd899",
+    "bytes": 41665
+   },
+   "_l1c_covscore_summary.py": {
+    "path": "scratchpad/_l1c_covscore_summary.py",
+    "sha256": "3ef8d2b4221d961f62d81dbe91c1b204505904ec479597e74dff92fd678c34c4",
+    "bytes": 6580
+   }
+  },
+  "usage": [
+   "python -u scratchpad/_l1c_covscore.py <cache> for metaqa, metaqa_phg, squad, squad_phg, musique (chain: scratchpad/_l1c_covscore_chain.sh)",
+   "python -u scratchpad/_l1c_covscore_summary.py"
+  ],
+  "imports_unchanged": {
+   "_l1g_core.py": {
+    "path": "scratchpad/_l1g_core.py",
+    "sha256": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+    "bytes": 11419
+   },
+   "_l1s_core.py": {
+    "path": "scratchpad/_l1s_core.py",
+    "sha256": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+    "bytes": 15099
+   },
+   "_l1x90_core.py": {
+    "path": "scratchpad/_l1x90_core.py",
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+    "bytes": 12081
+   },
+   "_ta_prepartition.py": {
+    "path": "scratchpad/_ta_prepartition.py",
+    "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+    "bytes": 11737
+   },
+   "_l1ps_router.py": {
+    "path": "scratchpad/_l1ps_router.py",
+    "sha256": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9",
+    "bytes": 19503
+   },
+   "_l1kb_core.py": {
+    "path": "scratchpad/_l1kb_core.py",
+    "sha256": "f804f92d3ddead9ffdfd2a69981a3470f49346f9163f6f4a5ee3c546275cf8da",
+    "bytes": 5770
+   },
+   "_l1c_microl3.py": {
+    "path": "scratchpad/_l1c_microl3.py",
+    "sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+    "bytes": 15145
+   },
+   "_l1c_h2patch.py": {
+    "path": "scratchpad/_l1c_h2patch.py",
+    "sha256": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d",
+    "bytes": 21581
+   },
+   "_l1c_h2balanced.py": {
+    "path": "scratchpad/_l1c_h2balanced.py",
+    "sha256": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe",
+    "bytes": 36015
+   },
+   "src/l1_canonical/adapter.py": {
+    "path": "src/l1_canonical/adapter.py",
+    "sha256": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+    "bytes": 26015
+   },
+   "src/l1_canonical/hypergraph.py": {
+    "path": "src/l1_canonical/hypergraph.py",
+    "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+    "bytes": 12200
+   }
+  },
+  "pins_asserted_at_run_time": "the runner asserts the pinned module shas, this record's new-module / import / cache / record shas and write-once outputs; the new arm is computed only after the reference arms are reproduced against the section-16 / 21 records"
+ },
+ "records_read_only": {
+  "h2patch_A_metaqa.json": {
+   "path": "results/L1_COVPART/h2patch_A_metaqa.json",
+   "sha256": "f5b5a91cba8d906b4189e4caf023cbab445ae3dbab15786a9abee236f3297438",
+   "bytes": 8845
+  },
+  "h2patch_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/h2patch_A_metaqa_phg.json",
+   "sha256": "b2e2b57f16a3e724644e44f329b3fc0181bac4ccd6b787d444c003987e0d2cef",
+   "bytes": 8876
+  },
+  "h2patch_A_squad.json": {
+   "path": "results/L1_COVPART/h2patch_A_squad.json",
+   "sha256": "cfb66bc7aa2ca53c4c0447b03d7b272e69c45e73589e50812ee099d7b886fe7b",
+   "bytes": 3944
+  },
+  "h2patch_A_squad_phg.json": {
+   "path": "results/L1_COVPART/h2patch_A_squad_phg.json",
+   "sha256": "e745473a47cb5552bf5d1559c0d1153f8dcaf49a2a7c30e704e5dee964844c45",
+   "bytes": 3894
+  },
+  "h2patch_A_musique.json": {
+   "path": "results/L1_COVPART/h2patch_A_musique.json",
+   "sha256": "8cdc85482ada7e131cec09ac38377365822180ab7b044f9d3f0124f33e2c197d",
+   "bytes": 4021
+  },
+  "h2balanced_A_metaqa.json": {
+   "path": "results/L1_COVPART/h2balanced_A_metaqa.json",
+   "sha256": "761f4b952aae04441b99708bfa9ca6400038975542d3f957f35f758c1778a557",
+   "bytes": 15085
+  },
+  "h2balanced_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/h2balanced_A_metaqa_phg.json",
+   "sha256": "b34469047f0ba0c2e8855ed220d2b0b64b289d5386509cb51405ab24877498a6",
+   "bytes": 15123
+  },
+  "h2balanced_A_squad.json": {
+   "path": "results/L1_COVPART/h2balanced_A_squad.json",
+   "sha256": "512e21083734265f5bbb57190f94271b87f1e93add24cca98aa6574ed864180e",
+   "bytes": 8110
+  },
+  "h2balanced_A_squad_phg.json": {
+   "path": "results/L1_COVPART/h2balanced_A_squad_phg.json",
+   "sha256": "178887d12488c278320d062244012dbdb9ce3c90b5c819b9d94b296e633a9511",
+   "bytes": 8131
+  },
+  "h2balanced_A_musique.json": {
+   "path": "results/L1_COVPART/h2balanced_A_musique.json",
+   "sha256": "a092cb28e68de1fc0de1f5ce6a6e6f85fa8dbd0674bf7db37a52c35cd15c20d1",
+   "bytes": 8226
+  },
+  "L1_REPLAY_metaqa.json": {
+   "path": "results/L1_CANONICAL/L1_REPLAY_metaqa.json",
+   "sha256": "7e5ef35b549791d9b6e790615a80ad7558f4626a07e0aaccca987f1834bc0972",
+   "bytes": 23067
+  },
+  "L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json",
+   "sha256": "d4ff6870236303c4b88fbcdd4c421d33719eb19dba2829d87a53cc09f5032c17",
+   "bytes": 33356
+  },
+  "L1_REPLAY_squad.json": {
+   "path": "results/L1_CANONICAL/L1_REPLAY_squad.json",
+   "sha256": "c39aa79836c0296fafa957c01f5004f81968df3e7f5baee873687d1061e09d58",
+   "bytes": 22709
+  },
+  "L1_REPLAY_squad__LOWMEM__PHG_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_squad__LOWMEM__PHG_con.json",
+   "sha256": "dc14ab54ea656f2f4f495c59365b84836b70cd3c27a22c646a210e4d9d5d8846",
+   "bytes": 34987
+  },
+  "L1_REPLAY_musique__LOWMEM__PHG_C1_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json",
+   "sha256": "207ad4bb3b292f7930bafba94551881896d54e80edc89974bc28c6bad71dac76",
+   "bytes": 35090
+  },
+  "h2balanced_A_SUMMARY.json": {
+   "path": "results/L1_COVPART/h2balanced_A_SUMMARY.json",
+   "sha256": "0873799f9da43c9e6b5ed7c4d41c8de60a8f8208196dcb97d837942d09578df8",
+   "bytes": 25594
+  },
+  "h2patch_A_SUMMARY.json": {
+   "path": "results/L1_COVPART/h2patch_A_SUMMARY.json",
+   "sha256": "39192834cfbd3ec5396c8b8de79519263e6e600b5af902d1a57a3257d175209b",
+   "bytes": 3145
+  },
+  "PREREGISTRATION_BALANCED_H2_PATCH1_DEV_A.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_BALANCED_H2_PATCH1_DEV_A.json",
+   "sha256": "a88c9e4e23f699ebe071df1cf5cecff855e02f174f1d3f6e3d09284e0a15395a",
+   "bytes": 21150
+  },
+  "PREREGISTRATION_H2_PATCH1_DEV_A.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_H2_PATCH1_DEV_A.json",
+   "sha256": "c092a56b955784424f9e9050cc9777e3c57e0fd0b30ec5f61d1596d5fcb11f3e",
+   "bytes": 9367
+  }
+ },
+ "caches_read_only": {
+  "metaqa": {
+   "path": "data/l1_canonical/metaqa/replay_cache.npz",
+   "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b",
+   "bytes": 5390599
+  },
+  "metaqa_phg": {
+   "path": "data/l1_lowmem/metaqa/replay_cache__LOWMEM__PHG_REPAIR1_con.npz",
+   "sha256": "584e17dec26d0408d5253a3f79e471bc7ec128f6dde744581bb6e502da5b4e5b",
+   "bytes": 5386215
+  },
+  "squad": {
+   "path": "data/l1_canonical/squad/replay_cache.npz",
+   "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6",
+   "bytes": 5320148
+  },
+  "squad_phg": {
+   "path": "data/l1_lowmem/squad/replay_cache__LOWMEM__PHG_con.npz",
+   "sha256": "edd9b36bb4ba45ff0579c0591f19dc263ae84296f7f9299684974530845f20ab",
+   "bytes": 5312713
+  },
+  "musique": {
+   "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+   "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5",
+   "bytes": 6183023
+  }
+ },
+ "outputs": {
+  "per_cache": "results/L1_COVPART/covscore_A_<cache>.{json,log} (write-once)",
+  "summary": "results/L1_COVPART/covscore_SUMMARY.{json,log} (write-once)"
+ }
+}

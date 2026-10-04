@@ -1,0 +1,52 @@
+{
+ "RECORD": "FBX_QWEN_ENCODING_CONTRACT",
+ "version": 1,
+ "utc": "2026-09-30T22:17:42Z",
+ "status": "frozen before the first Freebase vector is encoded",
+ "encoding": {
+  "model": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+  "revision": "a9af15a6372d7d6b25e9fb07c2ccb9e1fe645644",
+  "sentence_transformers_call": "SentenceTransformer(snapshot, trust_remote_code=True, local_files_only=True).half(); encode(names, batch_size, normalize_embeddings=True).astype(float16)",
+  "config_use_cache": false,
+  "documents": "plain (no instruction prefix)",
+  "text": "the Freebase node `name` string, verbatim (UTF-8), one text per distinct name",
+  "max_seq_length": 512,
+  "batch_size": 32,
+  "batching": "sentence-transformers sorts each encode() call by character length and cuts consecutive batches; one call per chunk",
+  "dim": 1536,
+  "dtype": "float16",
+  "normalisation": "unit L2 (normalize_embeddings=True)",
+  "tokenizer": "the model's own (padding side as shipped)",
+  "hf_offline": true
+ },
+ "ordering": {
+  "unit": "distinct name; row r has first position first_pos[r]; ptr[p] = row of position p (results/FREEBASE_SCALE/names/FBX_NAME_DEDUP__v1.json); node-ID ordering = position = canonical row order of the node shards",
+  "n_positions": 301977131,
+  "n_distinct_rows": 4096,
+  "chunk_rows": 512,
+  "n_chunks": 8,
+  "chunk_c_rows": "[c * chunk_rows, min((c + 1) * chunk_rows, n_distinct_rows))",
+  "ptr_sha256": "822b27f7da9fa57cbad5e1ed308d8e9555aa7609a38bdec0580922cd38eee5b7",
+  "first_pos_sha256": "acc18a59477b7f336d9c1d95edbc798eba968deff13360d8c59ff11dbbb54940",
+  "name_dedup_record_sha256": "071d7b1c57db7f854c70fc2da54aca0c7612f5b1caed1caf1fe07b686ca162ed"
+ },
+ "representation": {
+  "kind": "OPQ rotation (faiss OPQMatrix(1536, m), niter 20) + ProductQuantizer(1536, m, 8 bit)",
+  "m_bytes_per_row": 16,
+  "train_rows": 2048,
+  "train_sample": "RandomState(0).choice(n_distinct_rows, train_rows, replace=False), sorted",
+  "holdout": "RandomState(1) draw of min(n_distinct_rows, 10256) rows, training rows removed, first 256 kept, sorted (float fp16 kept for measurement only)",
+  "quantise": "fp16 -> fp32 renormalise -> y = x A^T -> pq.compute_codes",
+  "float_policy": "no float chunk is kept: a chunk's vectors are quantised and discarded; only the training sample and the holdout stay as fp16",
+  "calibration_evidence": {
+   "eval_record": "none",
+   "eval_record_sha256": null,
+   "note": "the WebQSP end-to-end calibration (addenda 6/6A) accepts this m"
+  }
+ },
+ "chunk_record": "per chunk: row range, vector count, names sha256 (length-prefixed UTF-8), codes sha256, model revision, contract sha256, codebook sha256, seconds; files codes_<c>.npy + chunk_<c>.json under data/freebase_scale/enc/chunks/",
+ "code": {
+  "scratchpad/_fbx_encode.py": "de66c9399fa7f08677356054a871b1f1fd6464f1b820189db618796b1c858d17",
+  "scratchpad/_enc_host.py": "d26727ae0e5164992cfe8fba81db895f0d27680f2aba7fc81eaa8a1716b8dbef"
+ }
+}

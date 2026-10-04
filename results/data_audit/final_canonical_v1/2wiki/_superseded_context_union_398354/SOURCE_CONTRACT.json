@@ -1,0 +1,41 @@
+{
+  "DATASET": "2wiki",
+  "CANONICAL_CORPUS_SOURCE": "Official 2WikiMultihopQA v1.0 (ids, April 2021) context paragraphs: the union of the 'context' field over train.json + dev.json + test.json (ALL official questions of ALL splits).",
+  "SOURCE_VERSION": "2wikimultihopqa v1.0_ids_april2021 (Ho et al., COLING 2020), data_ids_april7.zip; extracted train/dev/test json under data/original/2wiki/v1.0_ids_april2021.",
+  "SOURCE_PATHS": [
+    "data/original/2wiki/v1.0_ids_april2021/train.json",
+    "data/original/2wiki/v1.0_ids_april2021/dev.json",
+    "data/original/2wiki/v1.0_ids_april2021/test.json"
+  ],
+  "SOURCE_HASHES": {
+    "data/original/2wiki/v1.0_ids_april2021/train.json": {
+      "sha256": "b318dbafbfed51a8029718fa59be8b616600cbff675a3b587694b28c5eedfc13",
+      "bytes": 707810660,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    },
+    "data/original/2wiki/v1.0_ids_april2021/dev.json": {
+      "sha256": "79f77ae104088ea8e25b1a65dbece768d45771194663bc5660ec9a98070dadf5",
+      "bytes": 57614142,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    },
+    "data/original/2wiki/v1.0_ids_april2021/test.json": {
+      "sha256": "48b196d4ba8557343abb9bd1ad03566bc02762ecd734617ff910027c33821b04",
+      "bytes": 53838398,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    }
+  },
+  "WHY_THIS_IS_THE_FULL_RETRIEVAL_UNIVERSE": "HONEST QUALIFICATION -- this is the full universe of the DISTRIBUTED BENCHMARK, not of Wikipedia. The 398,354 nodes are the deduplicated union of every context paragraph of every official question in ALL THREE splits (1,926,060 raw context entries over 192,606 questions), so no choice of evaluated queries can add or remove a node: the corpus is a pure function of the three official files. It is NOT, however, question-set-independent in the strong sense: 2Wiki also ships a genuinely question-independent full universe -- para_with_hyperlink.zip (5,989,847 Wikipedia article records, ON DISK at data/original/2wiki/v1.0_ids_april2021/para_with_hyperlink.zip, sha256 a585bdc3...), of which the 398,354 context titles are a 6.7% subset (the structural graph build already streamed all 5,989,847 records: see data/canonical/2wiki/graph_manifest.json total_records_scanned). USER REVIEW POINT: canonical_v1 currently applies a STRICTER standard to HotpotQA (full 5.23M-article fullwiki corpus, rejecting the distractor-context union) than to 2Wiki (context union accepted, 5.99M-article hyperlink universe not used). This node table is already built and accepted and is NOT changed here; the inconsistency is recorded so it is a decision and not an oversight.",
+  "RAW_SOURCE_RECORDS": 1926060,
+  "CANONICAL_NODE_IDENTITY_RULE": "context paragraph TITLE, exact string; node_id = '2wiki:<sha256(title)[:24]>'. (0 titles carry conflicting official texts; 86 distinct titles share identical text and are deliberately kept separate, which text-hash identity would have merged.)",
+  "NORMALIZATION_RULE": "Stored text = ' '.join(official sentence list) -- the only construction step, because the official file stores context as a list of sentences. Beyond that the OFFICIAL string is kept verbatim including its tokenizer artefacts (e.g. 'Rosenberg( August 11, 1927'). No NFC/NFKC, no casefold, no whitespace collapse, no strip, and explicitly NO detokenization (the legacy FlashRAG substrate's text was a de-tokenized variant; 3,575 legacy nodes differ from official by punctuation spacing, 153 by whitespace).",
+  "DEDUP_RULE": "identity = exact title; 1,527,706 repeated context entries collapse onto their first occurrence.",
+  "EXPECTED_NODE_COUNT": 398354,
+  "DERIVED_NODE_COUNT": 398354,
+  "QUERY_DEPENDENT_CORPUS": false,
+  "QUALITY_LOCKED_QUERY_SOURCE": "official 2Wiki DEV split, 12,576 questions. Official TEST labels are HIDDEN (results/data_audit: official_test_labels='HIDDEN (answers withheld)'), so dev is the only proper held-out labelled split.",
+  "SCALE_ALL_QUERY_SOURCE": "every official question in all splits = 192,606 (train 167,454 + dev 12,576 + test 12,576); test carries no gold, usable for scale/latency only.",
+  "SOURCE_CONTRACT_STATUS": "BUILT_AND_ACCEPTED (derived retroactively; carries an open consistency flag vs. hotpotqa)"
+}

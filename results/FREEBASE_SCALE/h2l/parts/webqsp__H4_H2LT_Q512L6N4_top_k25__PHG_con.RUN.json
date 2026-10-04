@@ -1,0 +1,281 @@
+{
+ "RECORD": "H2LT_TOP",
+ "dataset": "webqsp",
+ "spec": {
+  "name": "Q512L6N4",
+  "W": 512,
+  "level": 6,
+  "cap": 4
+ },
+ "S": 25,
+ "utc": "2026-09-30T22:24:09Z",
+ "top_hypergraph": {
+  "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LTOP_k25.npz",
+  "sha256": "0a6a4540c570a96a717ce3973b897e777da9937641966b094a358958a79c2d19",
+  "content_digest": "2f0f95e20c9e0e8ddb9628f641a635819c075f17ffc94d5400a4d274fe9e82e2",
+  "N": 2592894,
+  "M": 5181600,
+  "P": 29574350
+ },
+ "net_cap": {
+  "cap": 4,
+  "nets_kept": 3747974,
+  "nets_dropped": 1433626,
+  "pins_kept": 11473697,
+  "pin_share_kept": 0.388,
+  "signal_share_kept": 0.723,
+  "vertices_without_a_net": 10487
+ },
+ "quotient": {
+  "V": 5913,
+  "M_in": 3747974,
+  "P_in": 11473697,
+  "nets_dropped_singleton": 2207783,
+  "nets_merged_identical": 750611,
+  "M": 789580,
+  "P": 2089781,
+  "weight_conserved_vertex": true,
+  "clusters": {
+   "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W512_L6.npy",
+   "sha256": "fbce856bdfb1723a9e6afc633c350682e88e737089e885b93d83df2cec8f4d03",
+   "n_clusters": 5913,
+   "coarsen_record_sha256": "6bfda0d5e490562bbb84afdb82c0d8d68eb4200f4cf60a0893017499bc0fff01"
+  },
+  "vertex_weight_max": 512
+ },
+ "surrogate": {
+  "V": 5913,
+  "M": 789580,
+  "P": 2089781,
+  "pin_reduction_vs_top": 14.1519
+ },
+ "driver": {
+  "binary": {
+   "path": "/home/student2/phg_build_crag/phg_driver_vw",
+   "sha256": "9c1046e1539a7a392a897201d03d477bb3eb2e60bd331bdc34c6113fbc63421e"
+  },
+  "source_sha256": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4",
+  "parameters_top": [
+   [
+    "DEBUG_LEVEL",
+    "0"
+   ],
+   [
+    "NUM_GID_ENTRIES",
+    "1"
+   ],
+   [
+    "NUM_LID_ENTRIES",
+    "1"
+   ],
+   [
+    "OBJ_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "EDGE_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "DETERMINISTIC",
+    "1"
+   ],
+   [
+    "RETURN_LISTS",
+    "PARTS"
+   ],
+   [
+    "REMAP",
+    "0"
+   ],
+   [
+    "LB_METHOD",
+    "HYPERGRAPH"
+   ],
+   [
+    "HYPERGRAPH_PACKAGE",
+    "PHG"
+   ],
+   [
+    "LB_APPROACH",
+    "PARTITION"
+   ],
+   [
+    "IMBALANCE_TOL",
+    "1.01"
+   ],
+   [
+    "PHG_CUT_OBJECTIVE",
+    "CONNECTIVITY"
+   ],
+   [
+    "PHG_EDGE_SIZE_THRESHOLD",
+    "1.0"
+   ],
+   [
+    "PHG_RANDOMIZE_INPUT",
+    "0"
+   ],
+   [
+    "PHG_MULTILEVEL",
+    "1"
+   ],
+   [
+    "PHG_COARSENING_METHOD",
+    "AGG"
+   ],
+   [
+    "PHG_COARSEPARTITION_METHOD",
+    "AUTO"
+   ],
+   [
+    "PHG_REFINEMENT_METHOD",
+    "FM"
+   ],
+   [
+    "PHG_REFINEMENT_QUALITY",
+    "1"
+   ],
+   [
+    "PHG_EDGE_WEIGHT_OPERATION",
+    "ERROR"
+   ],
+   [
+    "PHG_PROCESSOR_REDUCTION_LIMIT",
+    "0.5"
+   ],
+   [
+    "PHG_REPART_MULTIPLIER",
+    "100"
+   ],
+   [
+    "CHECK_HYPERGRAPH",
+    "1"
+   ],
+   [
+    "PHG_OUTPUT_LEVEL",
+    "1"
+   ]
+  ],
+  "NP": 4
+ },
+ "phg": {
+  "name": "R1_H2LT_Q512L6N4_25",
+  "mode": "partition",
+  "np": 4,
+  "rc": 0,
+  "wall_seconds_outer": 319.39,
+  "memory": {
+   "peak_rss_kb_per_rank_time_v": [
+    72560,
+    107956,
+    72360,
+    85384
+   ],
+   "ru_maxrss_kb_per_rank": [
+    72560,
+    107956,
+    72360,
+    85384
+   ],
+   "max_rank_peak_kb": 107956,
+   "sum_of_rank_peaks_kb": 338260,
+   "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+  },
+  "timing": {
+   "partition_wall_seconds": 27.07,
+   "driver_total_seconds_rank0": 57.29,
+   "load_seconds_per_rank": [
+    0.012,
+    8.14,
+    0.011,
+    2.633
+   ],
+   "job_wall_seconds": 319.31
+  },
+  "zoltan_eval": {
+   "cutl_global": 528441024.0,
+   "cutn_global": 417590432.0,
+   "imbalance": 1.009933,
+   "obj_imbalance": 1.040081,
+   "nobj_min": 217.0,
+   "nobj_max": 246.0,
+   "nobj_sum": 5913.0
+  },
+  "zoltan_removed_or_warning_lines": []
+ },
+ "raw": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 104746,
+   "contract_bound_ceil_1.03_N_over_k": 106828,
+   "zoltan_tolerance_bound_1.03_x_mean": 106827.233,
+   "gate": "PASS"
+  },
+  "km1_on_full_top_hypergraph": 954231385,
+  "cut_weighted": 605421043,
+  "blocks": {
+   "k": 25,
+   "used": 25,
+   "empty": 0,
+   "min": 92703,
+   "p50": 104601.0,
+   "p95": 104741.6,
+   "max": 104746,
+   "mean": 103715.76,
+   "ceil_N_over_k": 103716,
+   "max_over_mean": 1.0099,
+   "eps_actual(max/ceil(N/k)-1)": 0.0099,
+   "freight_upper_bound": 106828,
+   "within_eps_0.03": true
+  },
+  "flat_top_km1_addendum7": 791538830,
+  "km1_ratio_vs_flat_top": 1.2055
+ },
+ "placement": {
+  "machine": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "cpu_count_os": 32,
+  "python": "3.13.5",
+  "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+  "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+  "numpy": "2.3.2",
+  "wsl_distro": "Ubuntu-24.04",
+  "rx_job": "261001-035236-h2lt-Q512L6N4-5f8f",
+  "rx_cpus": "4",
+  "PYTHONHASHSEED": "0"
+ },
+ "code": {
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+  "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+  "scratchpad/_l1hu_build.py": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79",
+  "src/l1_lowmem/common.py": "18edea394b402ee1b6f5e8dac7b7cb7c474647145988ee60f18d3f947db98ff2",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_lowmem/phg_repair.py": "4c051e7a139abc19fd1b8433948a0d288858ac6a9c67dae40d7ef001839472b0",
+  "src/l1_lowmem/freight.py": "7adbe2a06146e9c60b99250cc1ac84beb1ef7115a23d96ea6930f87d298d0971",
+  "scratchpad/_h2lt.py": "45375e339b005b21b443b237cf0f32f0c384fb3ed346be0ab12afcb336b9637e"
+ },
+ "repair": null,
+ "STATUS": "OK",
+ "balance": {
+  "length_ok": true,
+  "ids_in_range": true,
+  "blocks_used": 25,
+  "every_block_used": true,
+  "size_min": 92703,
+  "size_max": 104746,
+  "size_mean": 103715.76,
+  "ceil_N_over_K": 103716,
+  "within_ceil_1.03_N_over_K": true
+ },
+ "wall_seconds": 338.1,
+ "output": {
+  "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_Q512L6N4_top_k25__PHG_con.npy",
+  "sha256": "f2232837d3d21e73f794d60afafd1f9564f00cdf0ba740da6675ae880b881b81",
+  "n": 2592894
+ }
+}

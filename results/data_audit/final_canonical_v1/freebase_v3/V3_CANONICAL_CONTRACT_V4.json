@@ -1,0 +1,194 @@
+{
+  "schema": "V3_CANONICAL_CONTRACT/v4",
+  "name": "CRAG_FREEBASE_CANONICAL",
+  "generated_utc": "2026-09-07T00:05:10Z",
+  "status": "AMENDMENT. Closes PASS A, records the reverse-property structure, and adopts the node identity function. Every other v1, v2 and v3 clause stands.",
+  "amends": {
+    "record": "V3_CANONICAL_CONTRACT_V3.json",
+    "v3_contract_hash": "0664dac6c5d0cbb6caa1b6652e8c7517f7489c6f4f45134e80126709e3cf4ebf",
+    "v2_contract_hash": "ed7281df27d3e2f7e44cb5c227012645dcf8e840b31b8f44c094dbcd01f952b0",
+    "v1_contract_hash": "761003db05e3fbbdafd930c2842a53be6169d3f655579ebada024f618f36f4c8",
+    "v1_rule_being_honoured": "sha256 over the contract with this field absent. Any later change to the contract must appear as a new record with its own hash, never as an edit that leaves this one looking prescient.",
+    "earlier_records_are_unmodified": true
+  },
+  "PASS_A_CLOSED": {
+    "supersedes": "V3_CANONICAL_CONTRACT_V3.json PASS_A_STATUS",
+    "stage_1": "COMPLETE. 200/200 members, 3,008,314,716 lines, 815,908,863 rows, 26.1 min. short_lines = 0, literal_parse_failed = 0, subject_not_ns = 0.",
+    "stage_2": "COMPLETE. 200 members, 7 workers, 14.4 min.",
+    "TABLES": {
+      "name": 68362456,
+      "alias": 4827624,
+      "description": 20065975,
+      "type": 254946431,
+      "key": 143981520,
+      "reverse_property": 12108,
+      "master_property": 6054,
+      "property_schema": 350097,
+      "type_hints": 47711,
+      "rdf_type": 128576,
+      "label_residue": 0,
+      "rdf_type_residue": 0
+    },
+    "ROW_RECONCILIATION": {
+      "stage1_rows_emitted": 815908863,
+      "stage2_rows_accounted": 815908863,
+      "difference": 0,
+      "balanced": true,
+      "identity": "sum(pass-through tables) + label_rows + rdf_type_rows == stage 1 rows, where label_rows = redundant + residue and rdf_type_rows = out-of-ns kept + dropped-as-redundant + residue",
+      "rdf_type_kept_equals_out_of_ns": true,
+      "label_split_closes": true,
+      "rdf_type_split_closes": true
+    },
+    "INDEPENDENT_VALIDATION": {
+      "method": "shard line counts re-derived by reading all 200 gz shards again, independently of the stage 2 loop that wrote the Parquet, then compared against a full streaming scan of each Parquet file.",
+      "ALL_CHECKS_PASS": true,
+      "checks": {
+        "rows_name": true,
+        "rows_alias": true,
+        "rows_description": true,
+        "rows_type": true,
+        "rows_key": true,
+        "rows_reverse_property": true,
+        "rows_master_property": true,
+        "rows_property_schema": true,
+        "rows_type_hints": true,
+        "rows_label_split": true,
+        "rows_rdf_type_split": true,
+        "total_rows": true,
+        "schema": true,
+        "endpoint_integrity": true,
+        "tables_present": true
+      },
+      "why_it_was_re-derived": "stage 2 reconciles its own arithmetic, but the loop that wrote the rows also counted them, so a systematic error would agree with itself. The shard counts were read again from the 200 gz shards independently of that loop."
+    },
+    "shards_deleted": true,
+    "openers_retained": "m*_openers.tsv.gz retained: they are the distinct-subject list PASS B mints node UIDs from, and regenerating them costs a full pass over the 409 GB source."
+  },
+  "REDUNDANCY_RESOLVED": {
+    "supersedes": "V3_CANONICAL_CONTRACT_V3.json redundancy_rule_unchanged_from_v2 -- the rule is unchanged, but it was stated as a policy and is now also a measurement.",
+    "LABEL_RESIDUE_N": 0,
+    "label_rows": 68362456,
+    "label_dropped_as_redundant": 68362456,
+    "label_finding": "every rdfs:label row in Freebase is exactly reproduced by a type.object.name row of the same subject, agreeing on lexical form AND language tag. rdfs:label is therefore discarded with provenance and nothing is lost. This is a measurement over all 68,362,456 rows, not a sample.",
+    "RDF_TYPE_RESIDUE_N": 0,
+    "rdf_type_rows": 254946431,
+    "rdf_type_in_namespace_dropped": 254817855,
+    "rdf_type_out_of_namespace_kept": 128576,
+    "rdf_type_finding": "v2 forbade collapsing rdf:type into type.object.type on the grounds that a probe had measured them non-equivalent. The full measurement CONFIRMS the prohibition and localises it: the non-equivalence is entirely the 128576 out-of-namespace rows, which are the RDF/OWL vocabulary layer, and is exactly zero everywhere else. The prohibition stands with an exact boundary; the out-of-namespace rows are retained as their own table.",
+    "prohibition_status": "STANDS. Do not collapse rdf:type into type.object.type. The measurement narrows where they differ; it does not license the merge."
+  },
+  "REVERSE_PROPERTY_STRUCTURE": {
+    "why_recorded": "the naive reading of this map is wrong, and the wrong reading would have propagated straight into PASS D's canonicalisation.",
+    "declaration_rows": 12108,
+    "DIRECTED_PAIRS": 5780,
+    "conflicting": 0,
+    "shape": "each pair is declared ONCE, directed from the master side to its reverse, and the SAME direction is restated in a second name space: once naming both properties by schema path, once by MID. Neither side declares the pairing back at the other. Read without resolving the two name spaces this looks like ~11,860 one-sided declarations and zero reciprocal pairs, i.e. a broken map; resolved, it is 5780 clean pairs with an explicit primary side and no conflicts.",
+    "name_space_join": "the mediator declarations name types by MID while every type assertion names types by schema path. Frozen without the join, the declared set matches no instance at all and the CVT count comes out zero without anything erroring.",
+    "MID_PATH_RESOLUTION": {
+      "schema_mids_referenced": 51451,
+      "type_universe_size": 16682,
+      "type_mids_resolved_by_key": 9972,
+      "type_mids_resolved_by_property_schema": 11140,
+      "type_mids_resolved_total": 12246,
+      "property_mids_resolved": 32475,
+      "ambiguous_type_keys": 0,
+      "ambiguous_property_keys": 0,
+      "ambiguous_property_schema_links": 0,
+      "CROSS_CHECK": {
+        "resolved_by_both_joins": 8866,
+        "agree": 8866,
+        "disagree": 0,
+        "examples_disagree": [],
+        "reading": "the two joins are independent -- one reads type.object.key, the other pairs the two name-space forms of a property through type.property.schema -- and neither uses names, which the contract forbids as an identity signal. Perfect agreement on the overlap is the evidence that both are sound."
+      }
+    },
+    "master_agreement": {
+      "agrees": 5759,
+      "disagrees": 0,
+      "rule_for_pass_d": "the master side is stored as canonical_relation and the other as reverse_relation, so the direction is Freebase's own choice and not alphabetical."
+    },
+    "FREEZE_HASH": "c6cd9454b9cc38048675989fde88523dcde052952fbc37add6acd4f15f2cbf27"
+  },
+  "MEDIATOR_AUTHORITY": {
+    "why_contract_level": "which nodes are CVT_MEDIATOR is a claim about what the graph IS, and the naive way of computing it fails silently rather than loudly. Recording the resolution here is what makes the CVT count auditable instead of merely reported.",
+    "THE_HAZARD_MEASURED": {
+      "mediator_declaration_subjects": {
+        "mid": 2211,
+        "path": 0
+      },
+      "type_object_type_objects": {
+        "mid": 0,
+        "path": 254946431
+      },
+      "property_schema_values": {
+        "mid": 35655,
+        "path": 33041
+      },
+      "why_it_matters": "the mediator declarations name types by MID while every type assertion names types by schema path. Frozen without the join, the declared set matches no instance at all and the CVT count comes out zero without anything erroring."
+    },
+    "reading": "freebase.type_hints.mediator is asserted on 2,211 MIDs. type.object.type names types by schema path in 254,946,431 rows out of 254,946,431 -- never once by MID. Matching the declared set against the type column directly therefore returns zero rows and returns them WITHOUT ERROR, yielding a Freebase with no CVTs at all. This was measured, not anticipated, and the freeze exists to stop it reaching PASS C.",
+    "RESOLUTION": {
+      "declared_mediator_types": 2211,
+      "RESOLVED_TO_TYPE_PATHS": 1649,
+      "unresolved": 562,
+      "explicitly_non_mediator": 657,
+      "enumeration_types": 1151,
+      "deprecated_types": 112,
+      "properties_whose_expected_type_is_a_mediator": 4154,
+      "properties_belonging_to_a_mediator_type": 5968
+    },
+    "rule": "freebase.type_hints.mediator = true, joined into path space. A node is a CVT_MEDIATOR in PASS C if and only if one of its type.object.type values is in MEDIATOR_TYPE_PATHS. No shape, degree or naming heuristic participates.",
+    "cross_check": {
+      "resolved_by_both_joins": 8866,
+      "agree": 8866,
+      "disagree": 0,
+      "examples_disagree": [],
+      "reading": "the two joins are independent -- one reads type.object.key, the other pairs the two name-space forms of a property through type.property.schema -- and neither uses names, which the contract forbids as an identity signal. Perfect agreement on the overlap is the evidence that both are sound."
+    },
+    "KNOWN_UNDER_COUNT": "the 562 unresolved mediator MIDs are carried into PASS C's report as a stated, bounded shortfall of the mediator declaration. They are not guessed at by shape, degree or naming, because a CVT set assembled by heuristic is not a set anyone can check."
+  },
+  "NODE_IDENTITY_ADOPTED": {
+    "why_contract_level": "every artifact from PASS B onward is keyed by this function. It is not an implementation detail, and it is not reproducible without recording the interpreter setting it depends on.",
+    "uid": "64-bit CPython hash() over the namespace-stripped identifier as UTF-8 bytes. '<http://rdf.freebase.com/ns/m.0zgmtqc>' mints from 'm.0zgmtqc'; a non-Freebase URI keeps its full form because there the host is part of the identity.",
+    "literal_uid": "hash over (lexical_form, datatype, language) joined by TAB -- never the visible string alone. This is what keeps \"5\", \"5\"@en and \"5\"^^xsd:int three distinct nodes, and it is unambiguous because N-Triples escapes a literal tab as two characters. raw_rdf_term is stored alongside so the display form is never inferred from the identity.",
+    "PYTHONHASHSEED": "0, REQUIRED. hash() is randomised per process otherwise, so two workers would mint different UIDs for the same node. Both PASS B and PASS C refuse to start without it.",
+    "collision_policy": "collisions are DETECTED, not assumed away. The subject universe was checked exhaustively before PASS B was allowed to write anything, and PASS C re-checks UID -> string injectivity across the whole node universe including objects and literals. The pre-registered remedy for a collision is to re-run PASS B under a salt -- never to merge the colliding nodes, which would violate the v1 rule that nodes are not merged because their surface forms coincide.",
+    "subject_universe_result": {
+      "distinct_subjects_expected": 121616633,
+      "subjects_hashed": 121616633,
+      "distinct_uids": 121616633,
+      "colliding_uid_groups": 0,
+      "COLLISION_FREE": true,
+      "nonbracketed_openers": 0,
+      "examples": [],
+      "reading": "distinct_uids == subjects_hashed means the 64-bit UID space separates every subject in Freebase exactly. It is a measurement over all 121.6M of them, not a birthday-bound argument."
+    },
+    "interpreter": {
+      "function": "CPython hash() over the namespace-stripped identifier, as UTF-8 bytes",
+      "width_bits": 64,
+      "PYTHONHASHSEED": "0",
+      "python": "3.13.5",
+      "note": "siphash is an interpreter detail, so the interpreter version is part of the build provenance. PASS C re-checks UID -> string injectivity across the whole node universe, so a changed hash surfaces as a mismatch, never as silent drift."
+    }
+  },
+  "PASS_B_RULES": {
+    "definition": "an edge is any triple whose predicate is not one of PASS A's nineteen metadata predicates. 3.0e9 RDF statements are not 3.0e9 edges.",
+    "faithfulness": "PASS B does NOT reclassify type.type.instance or any other declared reverse of a metadata predicate. It is a faithful projection of the source; the frozen reverse map is applied in PASS D, where it lives. An extraction pass that silently disagrees with its source is not auditable.",
+    "no_subject_sort": "still in force, per v3: REOPENED_SUBJECT_BLOCKS_N = 0.",
+    "source_order_retained": "rows are written in source order, so src is constant across a subject block and costs almost nothing under RLE. Sorting would cost more than the column does."
+  },
+  "NEXT_CHECKPOINT": {
+    "was": {
+      "was": [
+        "mirror assembled",
+        "checksums pass",
+        "full PASS A succeeds",
+        "global subject-contiguity result recorded"
+      ],
+      "now": "PASS A stage 2 complete, then PASS B built member-parallel with literal_uid minting, validated against the IDIR oracle at the pre-registered thresholds in v2 (PASS >= 99.9% / INVESTIGATE 99.0-99.9% / STOP < 99.0%)."
+    },
+    "now": "PASS B complete and reconciled against 2,192,405,853 structural lines; then PASS C for the exact node universe by kind; then PASS D reverse canonicalisation with the pre-registered NEITHER_SIDE / reverse-pair checks; then the IDIR oracle comparison at the thresholds frozen in v2 (PASS >= 99.9% / INVESTIGATE 99.0-99.9% / STOP < 99.0%); then canonical graph validation and the freeze."
+  },
+  "CONTRACT_HASH": "a9b059fa9ed7fce58a0c39a39c1ae98e0155cf4bf6007a1b83fc7f9e92f33d6b",
+  "CONTRACT_HASH_NOTE": "sha256 over this amendment with this field absent. v1, v2 and v3 remain byte-identical to when they were frozen. Any later change is a new record, never an edit."
+}

@@ -1,0 +1,146 @@
+{
+  "schema": "V3_IDIR_SOURCE_DIVERGENCE/v1",
+  "generated_utc": "2026-09-07T05:05:00Z",
+  "TRIGGER": {
+    "gate": "IDIR oracle comparison, pre-registered at >=99.9 PASS / 99.0-99.9 INVESTIGATE / <99.0 STOP",
+    "frozen_before_the_number_was_known": true,
+    "measured_coverage_pct": 95.662,
+    "VERDICT": "STOP",
+    "idir_triples": 134142730,
+    "forward_hits": 128323566,
+    "missing": 5819164
+  },
+  "THE_MEASUREMENT_IS_EXACT": {
+    "band_bits": 8,
+    "band_idir_triples": 523114,
+    "exact_forward_hits": 500210,
+    "fingerprint_forward_hits": 500210,
+    "forward_agrees": true,
+    "our_edges_streamed": 2062430072,
+    "reading": "the 1/256 band was materialised in FULL TRIPLES on both sides and agreed exactly with the fingerprint answer, so no hash collision inflated the result. The probe streamed 2,062,430,072 edges, which equals CANONICAL_EDGES, so the whole graph was compared -- both edge families, not just the fingerprint-partitioned one."
+  },
+  "OUR_BUILD_IS_LOSSLESS_FROM_ITS_SOURCE": {
+    "pass_b_line_accounting": {
+      "lines_read": 3008314716,
+      "metadata_lines_skipped": 815908863,
+      "structural_lines": 2192405853,
+      "malformed_lines": 0,
+      "edges_written": 2192405853,
+      "dropped_literal_unparsed": 0,
+      "dropped_object_blank_or_other": 0,
+      "sums_exactly": true
+    },
+    "relations_preserved": {"raw_inventory": 784928, "canonical": 784928},
+    "extraction": {"source_bytes": 31305093084, "scanned_bytes": 31305093084, "members": 200},
+    "transfer": {"md5_match": true, "sha1_match": true, "crc32_match": true, "bytes_match": true},
+    "downstream": {"dangling_edge_endpoints": 0, "pass_d_balanced": true},
+    "reading": "every raw line is accounted for as either metadata folded into node attributes or a structural edge; nothing was dropped or malformed. The gap is therefore not loss between our source and our graph."
+  },
+  "IDIR_DESCRIBES_A_DIFFERENT_UNIVERSE": {
+    "predicates_absent_from_our_raw_inventory": [
+      "time.event.previous_in_series",
+      "time.event.next_in_series",
+      "sports.team_rivalry.team",
+      "biology.organism_classification.lower_classification_closure"
+    ],
+    "predicates_absent_note": "zero occurrences among our source's 784,928 distinct predicates, checked against the PASS B raw inventory before any canonicalisation. Eight sibling time.event.* predicates ARE present, so this is not namespace exclusion.",
+    "entities": {
+      "idir_entities": 101917083,
+      "present_in_our_node_universe": 98861562,
+      "absent": 3055521,
+      "absent_pct": 2.998,
+      "by_namespace": {
+        "idir_g_prefixed": 7046936,
+        "idir_m_prefixed": 94870147,
+        "idir_other_prefix": 0,
+        "absent_g": 2219470,
+        "absent_m": 836051,
+        "g_absent_rate_pct": 31.496,
+        "m_absent_rate_pct": 0.8813
+      },
+      "namespace_reading": "the divergence is strongly namespace-correlated: 31.5% of IDIR's /g/ entities are absent from our graph against only 0.88% of its /m/ entities. It is NOT that we exclude /g/ -- we carry 16,817,902 g.* node_ids in three subject shards alone, comfortably more g entities in total than IDIR's 7,046,936. The absent ones are specific MIDs our source does not contain.",
+      "we_do_carry_g_nodes": "16,817,902 g.* node_ids in three subject shards alone, so the namespace is not filtered by us; the absent entities are specific MIDs our source does not contain."
+    },
+    "relation_level": {
+      "relations_where_idir_exceeds_our_raw_count": 202,
+      "excess_triples": 2901695,
+      "excess_pct_of_idir": 2.163,
+      "relations_where_we_match_or_exceed": 2438,
+      "idir_triples_they_cover_pct": 85.879
+    }
+  },
+  "GAP_DECOMPOSITION_PCT_OF_IDIR": {
+    "entity_absent_endpoint_not_in_our_node_universe": 3.184,
+    "relation_deficit_idir_has_more_of_that_predicate": 0.74,
+    "unexplained_residue": 0.427,
+    "total": 4.338,
+    "method": "measured on the pre-registered 1/256 band: 22,904 misses split into 16,801 ENTITY_ABSENT (73.4%) and 6,103 EDGE_ABSENT (26.6%); of the EDGE_ABSENT, 3,871 (63.4%) fall on predicates where IDIR simply has more than our source does.",
+    "EXACT_GLOBAL_CONFIRMATION": {
+      "note": "the band split above was then recomputed exactly over all 134,142,730 IDIR triples rather than left as a 1/256 estimate. The two agree to within 0.01 percentage points, which also independently corroborates that the band is an unbiased slice.",
+      "idir_triples_touching_an_absent_entity": 4268204,
+      "idir_triples_touching_an_absent_entity_pct": 3.182,
+      "band_estimate_was_pct": 3.184,
+      "idir_triples_with_both_endpoints_present": 129874526,
+      "idir_triples_with_both_endpoints_present_pct": 96.818,
+      "miss_not_explained_by_an_absent_endpoint": 1550960,
+      "miss_not_explained_by_an_absent_endpoint_pct": 1.156,
+      "band_estimate_was_pct_edge_absent": 1.167,
+      "idir_triples_touching_a_g_entity": 7915294,
+      "idir_triples_touching_a_g_entity_pct": 5.901
+    }
+  },
+  "THE_DIVERGENCE_IS_SYMMETRIC": {
+    "our_band_triples_on_idir_relations": 504516,
+    "ours_only": 4306,
+    "ours_only_pct": 0.85,
+    "theirs_only": 22904,
+    "theirs_only_pct": 4.38,
+    "scaled_to_full_graphs": {"ours_only": 1102336, "theirs_only": 5863424},
+    "reading": "THIS IS THE DECISIVE TEST. If our mirror were a degraded subset of IDIR's source, the reverse direction would be near-empty. It is not: restricted to IDIR's own 2,641 relations we hold roughly 1.10M facts IDIR lacks while IDIR holds roughly 5.86M we lack. Neither source is a subset of the other, so this is two different snapshots or preprocessings rather than one truncated copy."
+  },
+  "CONSEQUENCE_FOR_THE_PROVENANCE_LOCK": {
+    "the_lock_said": "IDIR is an independent 2023 preprocessing of the same dump. If the raw build reproduces IDIR's 134,142,730 triples at that rate, the mirror is corroborated by a party that never saw our copy.",
+    "the_acquisition_record_said": "the custody caveat is not discharged until PASS B reproduces IDIR's retained triples.",
+    "measured_outcome": "NOT DISCHARGED. The premise itself is falsified: IDIR's FB+CVT-REV contains predicates, entities and facts absent from freebase-rdf-latest.gz as held by the Internet Archive, and our source contains facts absent from IDIR. They are not preprocessings of the same bytes, so IDIR cannot corroborate our mirror in either direction.",
+    "what_remains_true": "transfer fidelity from the Internet Archive is proven (MD5, SHA1, CRC32 and byte count all match the values locked before transfer). What is NOT proven, and now cannot be proven by this route, is that the Internet Archive copy equals what Google published. Google's own endpoint returns 403."
+  },
+  "DISPOSITION": {
+    "decided": true,
+    "decision": "FREEZE_WITH_DIVERGENCE_RECORDED",
+    "decided_by": "user, 2026-09-07, in response to this finding being presented with the gate blocking the freeze",
+    "decision_means": "CRAG_FREEBASE_CANONICAL is frozen with --force. The manifest status is FROZEN_WITH_ORACLE_GATE_OVERRIDDEN, not a bare FROZEN, and carries an ORACLE_GATE_OVERRIDE block naming the verdict, the coverage that caused it, this record, and the fact that the custody caveat travels UNDISCHARGED. The gate was not retargeted, relaxed or deleted.",
+    "gate_enforcement_added": "v3_freeze_canonical.py now refuses on a STOP or INVESTIGATE oracle verdict, not only on failing validation checks. Previously the verdict was copied into provenance while the manifest still said FROZEN, which would have shipped a failing pre-registered gate inside an artifact that looked clean.",
+    "options": [
+      {
+        "option": "FREEZE_WITH_DIVERGENCE_RECORDED",
+        "means": "freeze with --force, recording this divergence and that the custody caveat is undischarged. Justified by our build being provably faithful to a byte-verified source and by the gate's premise being falsified.",
+        "cost": "the artifact ships with an unresolved provenance caveat that must travel with it."
+      },
+      {
+        "option": "ACQUIRE_A_SECOND_DUMP",
+        "means": "obtain a different Freebase distribution (for example the final 2015-08-09 dump) and compare, to establish which snapshot our mirror actually is.",
+        "cost": "another ~31 GB acquisition plus a full rebuild; availability unverified."
+      },
+      {
+        "option": "RETARGET_THE_GATE",
+        "means": "replace the IDIR corroboration gate with the internal-consistency gate that already passes, and demote IDIR to a documented divergence report.",
+        "cost": "this moves a pre-registered gate after it failed. Recorded here as an option precisely so that it cannot be done quietly; it is NOT taken."
+      }
+    ],
+    "options_not_taken": {
+      "ACQUIRE_A_SECOND_DUMP": "not taken. A second distribution would be no more provenance-verifiable than the first, since Google's endpoint is 403 either way.",
+      "RETARGET_THE_GATE": "explicitly NOT taken. The gate stands as written and still returns STOP; the freeze records that it was overridden rather than redefining it so that it passes.",
+      "MERGE_IDIR_TRIPLES_INTO_OURS": "never on the table: a standing decision fixes RAW FREEBASE as the source of record for CRAG_FREEBASE_CANONICAL, and IDIR is an audit oracle, not a source."
+    },
+    "not_taken_unilaterally": "the pre-registered gate returned STOP. Which option applies was a contract-level decision, put to the user and decided by them, following the ADMIN_MEDIATORS and TYPE_MIRROR precedent that dispositions of this kind are decided explicitly and recorded, never absorbed into a build step."
+  },
+  "SUPPORTING_RECORDS": [
+    "V3_IDIR_ORACLE_COMPARISON.json",
+    "V3_IDIR_MISS_DIAGNOSTIC.json",
+    "V3_IDIR_MISS_PARTITION.json",
+    "V3_IDIR_RELATION_DEFICIT.json",
+    "V3_IDIR_SYMMETRY.json",
+    "V3_IDIR_ENTITY_COVERAGE.json",
+    "V3_IDIR_G_NAMESPACE_DIAGNOSTIC.json"
+  ]
+}

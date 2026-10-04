@@ -1,0 +1,281 @@
+{
+ "dataset": "squad",
+ "tag": "H4_SK_k500",
+ "utc": "2026-09-29T03:58:38Z",
+ "hypergraph": {
+  "file": "results/L1_COVPART/parts/squad__H4_SK_k500.npz",
+  "sha256": "076678f2675cbc4fc42a0e9aeac50676696407fbfb5e1ea858d59d95d4c5b156",
+  "N": 20233,
+  "M": 61244,
+  "P": 1611930,
+  "k": 500
+ },
+ "shards": [
+  {
+   "index": 0,
+   "file": "results/L1_COVPART/phg_data/squad/stream_H4_SK_k500/shard_00000.netl",
+   "nodes": 5000,
+   "pins": 392098,
+   "sha256": "e5a8521026ff5d2d1533ad15bdf72c59c22a50051bf02fb0fa90442296a85594"
+  },
+  {
+   "index": 1,
+   "file": "results/L1_COVPART/phg_data/squad/stream_H4_SK_k500/shard_00001.netl",
+   "nodes": 5000,
+   "pins": 392660,
+   "sha256": "59303ded0b6918359de1cab5e09aad39397d3868c2696d9e397b6500f40e9c9b"
+  },
+  {
+   "index": 2,
+   "file": "results/L1_COVPART/phg_data/squad/stream_H4_SK_k500/shard_00002.netl",
+   "nodes": 5000,
+   "pins": 399446,
+   "sha256": "449e547b031acd50dadd5792858cd1429d694903e5fac062ec655c9959cdf2d8"
+  },
+  {
+   "index": 3,
+   "file": "results/L1_COVPART/phg_data/squad/stream_H4_SK_k500/shard_00003.netl",
+   "nodes": 5000,
+   "pins": 411241,
+   "sha256": "0672a7b3d4a6fd8b36ac7cb672c04345053dd0025b6b1adb805cffa92325f2eb"
+  },
+  {
+   "index": 4,
+   "file": "results/L1_COVPART/phg_data/squad/stream_H4_SK_k500/shard_00004.netl",
+   "nodes": 233,
+   "pins": 16485,
+   "sha256": "1846b2ab0e9be7f6bbc0090719f128931021137eda19dcb384d0d019134d00b0"
+  }
+ ],
+ "driver": {
+  "binary": {
+   "path": "/home/swastik/phg_build/phg_driver",
+   "sha256": "a36e1b3dbcef2cf5f20c09cc6ab014ab13ce2dcfeb3ec7c1041aa00d14d7ccb9"
+  },
+  "wrapper": {
+   "path": "/home/swastik/phg_build/rank_wrap.sh",
+   "sha256": "6de130e4bde663ce5f12d8633c45b20573eaaf1dd0cd7f228c71877f7c8c4367"
+  },
+  "source_sha256": "cf5099851282444d0b6c87b399210ae3dd6bc09f8fe2a5f7b49d315ce4b133b4",
+  "parameters": [
+   [
+    "DEBUG_LEVEL",
+    "0"
+   ],
+   [
+    "NUM_GID_ENTRIES",
+    "1"
+   ],
+   [
+    "NUM_LID_ENTRIES",
+    "1"
+   ],
+   [
+    "OBJ_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "EDGE_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "DETERMINISTIC",
+    "1"
+   ],
+   [
+    "RETURN_LISTS",
+    "PARTS"
+   ],
+   [
+    "REMAP",
+    "0"
+   ],
+   [
+    "LB_METHOD",
+    "HYPERGRAPH"
+   ],
+   [
+    "HYPERGRAPH_PACKAGE",
+    "PHG"
+   ],
+   [
+    "LB_APPROACH",
+    "PARTITION"
+   ],
+   [
+    "IMBALANCE_TOL",
+    "1.03"
+   ],
+   [
+    "PHG_CUT_OBJECTIVE",
+    "CONNECTIVITY"
+   ],
+   [
+    "PHG_EDGE_SIZE_THRESHOLD",
+    "1.0"
+   ],
+   [
+    "PHG_RANDOMIZE_INPUT",
+    "0"
+   ],
+   [
+    "PHG_MULTILEVEL",
+    "1"
+   ],
+   [
+    "PHG_COARSENING_METHOD",
+    "AGG"
+   ],
+   [
+    "PHG_COARSEPARTITION_METHOD",
+    "AUTO"
+   ],
+   [
+    "PHG_REFINEMENT_METHOD",
+    "FM"
+   ],
+   [
+    "PHG_REFINEMENT_QUALITY",
+    "1"
+   ],
+   [
+    "PHG_EDGE_WEIGHT_OPERATION",
+    "ERROR"
+   ],
+   [
+    "PHG_PROCESSOR_REDUCTION_LIMIT",
+    "0.5"
+   ],
+   [
+    "PHG_REPART_MULTIPLIER",
+    "100"
+   ],
+   [
+    "CHECK_HYPERGRAPH",
+    "1"
+   ],
+   [
+    "PHG_OUTPUT_LEVEL",
+    "1"
+   ]
+  ],
+  "NP": 4
+ },
+ "run": {
+  "name": "R1_H4_SK_k500",
+  "mode": "partition",
+  "np": 4,
+  "rc": 0,
+  "wall_seconds_outer": 10.53,
+  "memory": {
+   "peak_rss_kb_per_rank_time_v": [
+    58824,
+    57504,
+    59124,
+    57752
+   ],
+   "ru_maxrss_kb_per_rank": [
+    58824,
+    57504,
+    59124,
+    57752
+   ],
+   "max_rank_peak_kb": 59124,
+   "sum_of_rank_peaks_kb": 233204,
+   "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+  },
+  "timing": {
+   "partition_wall_seconds": 3.284,
+   "driver_total_seconds_rank0": 9.104,
+   "load_seconds_per_rank": [
+    4.844,
+    4.934,
+    5.052,
+    5.308
+   ],
+   "job_wall_seconds": 9.69
+  },
+  "zoltan_eval": {
+   "cutl_global": 17505952.0,
+   "cutn_global": 5761454.0,
+   "imbalance": 1.037908,
+   "obj_imbalance": 1.037908,
+   "nobj_min": 0.0,
+   "nobj_max": 42.0,
+   "nobj_sum": 20233.0
+  },
+  "zoltan_removed_or_warning_lines": []
+ },
+ "raw": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 2,
+   "max_block": 42,
+   "contract_bound_ceil_1.03_N_over_k": 42,
+   "zoltan_tolerance_bound_1.03_x_mean": 41.68,
+   "gate": "PARTITION_INVALID"
+  },
+  "km1": 17505952,
+  "cut_weighted": 5761454,
+  "blocks": {
+   "k": 500,
+   "used": 498,
+   "empty": 2,
+   "min": 0,
+   "p50": 41.0,
+   "p95": 42.0,
+   "max": 42,
+   "mean": 40.466,
+   "ceil_N_over_k": 41,
+   "max_over_mean": 1.0379,
+   "eps_actual(max/ceil(N/k)-1)": 0.0244,
+   "freight_upper_bound": 42,
+   "within_eps_0.03": true
+  },
+  "zoltan_cutl_vs_python_km1_rel": 0.0
+ },
+ "repair": {
+  "rule": "PHG_NONEMPTY_REPAIR_V1",
+  "empty_blocks": [
+   484,
+   498
+  ],
+  "moves": 2,
+  "km1_before": 17505952,
+  "km1_after": 17505952
+ },
+ "repaired": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 42,
+   "contract_bound_ceil_1.03_N_over_k": 42,
+   "zoltan_tolerance_bound_1.03_x_mean": 41.68,
+   "gate": "PASS"
+  },
+  "km1": 17505952,
+  "blocks": {
+   "k": 500,
+   "used": 500,
+   "empty": 0,
+   "min": 1,
+   "p50": 41.0,
+   "p95": 42.0,
+   "max": 42,
+   "mean": 40.466,
+   "ceil_N_over_k": 41,
+   "max_over_mean": 1.0379,
+   "eps_actual(max/ceil(N/k)-1)": 0.0244,
+   "freight_upper_bound": 42,
+   "within_eps_0.03": true
+  }
+ },
+ "output": {
+  "file": "results/L1_COVPART/parts/squad__H4_SK_k500__PHG_con.npy",
+  "sha256": "f4c1be0645db1e7fa2917499149af45930f1ce7d4fce4ce9e88e67482c79b968",
+  "n": 20233,
+  "STATUS": "OK"
+ }
+}

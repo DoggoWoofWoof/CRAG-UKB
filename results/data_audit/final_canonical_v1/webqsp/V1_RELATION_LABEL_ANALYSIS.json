@@ -1,0 +1,94 @@
+{
+  "schema": "V1_RELATION_LABEL_ANALYSIS/v1",
+  "generated_utc": "2026-09-06T11:45:00Z",
+  "section": "V1 \u00a77 -- readable relation_label beside the preserved relation_key",
+  "measured_on": "data/final_canonical/webqsp/v1/relations.parquet (7,058 relations, the reproduced released-RoG schema)",
+  "directive_rule_as_written": {
+    "rule": "people.person.place_of_birth -> 'place of birth'",
+    "implementation": "last dot-segment, underscores to spaces",
+    "status": "IMPLEMENTED as relation_label in relations.parquet",
+    "works_perfectly_for_the_example": true
+  },
+  "measurement": {
+    "note": "The directive does not require relation_label to be unique -- relation_key remains the identity, and a non-unique READABLE surface is legitimate. This is measured because relation_label is an input to TEXT RENDERING (entity rich text \u00a77, CVT structural labels \u00a76), where a collapsed label costs a real distinction.",
+    "schemes": [
+      {
+        "id": "LAST_SEGMENT",
+        "example": "place of birth",
+        "distinct_labels": 4657,
+        "colliding_relations": 2401,
+        "colliding_pct": 34.02
+      },
+      {
+        "id": "TYPE_PLUS_PROPERTY",
+        "example": "person - place of birth",
+        "distinct_labels": 7009,
+        "colliding_relations": 49,
+        "colliding_pct": 0.69
+      },
+      {
+        "id": "DOMAIN_PLUS_TYPE_PLUS_PROPERTY",
+        "example": "people - person - place of birth",
+        "distinct_labels": 7058,
+        "colliding_relations": 0,
+        "colliding_pct": 0.0
+      }
+    ],
+    "worked_collision": {
+      "label_under_last_segment": "representations",
+      "relation_keys_sharing_it": [
+        "base.mathematics1.mathematical_concept.generalizations -> 'generalizations' (separate case)",
+        "base.mediaasset.recorded_work.representations",
+        "base.militaryinfiction.armed_force_represented_in_fiction.representations",
+        "base.militaryinfiction.location_represented_in_fiction.representations",
+        "base.militaryinfiction.military_unit_represented_in_fiction.representations"
+      ],
+      "under_type_plus_property": [
+        "recorded work - representations",
+        "armed force represented in fiction - representations",
+        "location represented in fiction - representations",
+        "military unit represented in fiction - representations"
+      ],
+      "reading": "Four unrelated relations across two domains render identically under the last-segment rule and separate cleanly once the type segment is kept."
+    },
+    "single_token_long_labels": {
+      "count": 15,
+      "example": "base.wastrology.zodiacsign.astrologicalrulership -> 'astrologicalrulership'",
+      "cause": "Freebase property names that are concatenated rather than underscore-separated; no rule recovers word boundaries without a dictionary. Rare (15 of 7,058) and NOT worth guessing at."
+    }
+  },
+  "why_this_bears_on_splade_specifically": "SPLADE is learned-lexical: its signal is which terms survive in the expanded representation. Two relations rendering to the identical token sequence are indistinguishable to it, whereas dense could in principle still separate them via surrounding context. 34% of the schema collapsing to a shared label is therefore a lexical-channel loss, not a cosmetic one. The 256-token SPLADE cap also means the qualified form costs a few extra tokens in a budget that is already the binding constraint.",
+  "recommendation": {
+    "proposal": "Keep relation_label exactly as the directive specifies (short, readable, non-unique) AND add relation_label_qualified (type + property) as an additional column. Additive, lossless, 7,058 rows, changes no semantics and no identity.",
+    "open_decision": "RESOLVED: SPLADE/CVT rendering consumes relation_label_qualified; GRAPH_SAMPLES/UI consume relation_label_short.",
+    "not_done_yet": false,
+    "hard_rule_respected": "relation_key remains the identity in edges.parquet. No edge semantics are changed by any labelling scheme (directive \u00a77: 'Never change edge semantics')."
+  },
+  "COUNTING_CORRECTION_2026_09_06": {
+    "what_was_wrong": "The 'colliding_relations' figures in measurement.schemes were LABELS LOST (relations minus distinct labels), not the number of relations involved in a collision. The two differ whenever a group has more than 2 members.",
+    "corrected": {
+      "LAST_SEGMENT": {
+        "distinct_labels": 4657,
+        "collision_groups": 893,
+        "relations_involved": 3294,
+        "labels_lost": 2401,
+        "relations_involved_pct": 46.67
+      },
+      "TYPE_PLUS_PROPERTY": {
+        "distinct_labels": 7009,
+        "collision_groups": 47,
+        "relations_involved": 96,
+        "labels_lost": 49,
+        "relations_involved_pct": 1.36
+      }
+    },
+    "impact_on_the_decision": "None. The ladder escalates whatever actually collides, so the design is unchanged; only the size of the escalated set moves, 49 -> 96."
+  },
+  "RESOLVED_BY": {
+    "decision": "user, 2026-09-06 -- minimum qualification necessary for uniqueness",
+    "implemented": "scratchpad/final_canonical_build/webqsp_v1/build_relation_labels.py",
+    "result": "data/final_canonical/webqsp/V1_RELATION_LABELS.json",
+    "outcome": "6,959 TYPE_PROPERTY + 93 DOMAIN_TYPE_PROPERTY + 6 FULL_KEY, 0 collisions, relation_uid -> relation_key identity preserved.",
+    "why_a_third_rung_was_needed": "Escalating only the colliding relations can create a NEW collision with a different relation's un-escalated label. music.artist.album -> 'music artist album' collides with base.svocab.music_artist.album, whose type segment is already 'music_artist'. Once underscores become spaces the two are identical, so the dots in the naturalized full key are load-bearing and the terminal rung must be unique BY CONSTRUCTION rather than assumed."
+  }
+}

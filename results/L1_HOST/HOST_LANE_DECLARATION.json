@@ -1,0 +1,227 @@
+{
+ "RECORD": "L1_HOST_LANE_DECLARATION",
+ "version": 1,
+ "utc": "2026-09-29T10:06:28Z",
+ "status": "DECLARED. The placement test is pending; the dated authorization block is a separate record written after it (results/L1_HOST/HOST_LANE_AUTHORIZATION__2026-09-29.json). This record is never edited: amendments supersede it.",
+ "authorized_by_user": {
+  "2026-09-29, answer to the held-out / host question": "gpu and a better cpu as promised use with contention on medium priority but if resources available i want full utilization, use this for the partitioning and create for the rest",
+  "2026-09-29, apt install": "nothing has run yet, and the host lacks MPI/Zoltan/compiler in WSL, with apt install requiring authorization, bro i give you authorization please start utilizing the gpu and cpu dont waste time"
+ },
+ "stage": {
+  "name": "L1_HOST_SHARD_MAPS",
+  "what": "routing-shard maps (node -> shard) under the frozen H4_SK rule at K in the development grid, partitioned by the lane's already-validated Zoltan-PHG substitute with its frozen contract (NP 4, src/l1_lowmem/phg.PARAMS, PHG_NONEMPTY_REPAIR_V1). Mt-KaHyPar is not run here and is not replaced silently: every map is labelled PHG.",
+  "why_here": "the laptop cannot build these maps for WebQSP / HotpotQA / 2Wiki (Mt-KaHyPar ~0.4-9 TB; PHG for WebQSP twice host-contended at 16 GB).",
+  "purpose": "development / transfer infrastructure (the user's plan of 2026-09-29): WebQSP shard maps for the KB lane first. No held-out row is read (split B stays sealed; the reserved held-out A rows are not read); building a map reads no query at all.",
+  "module": "scratchpad/_l1h_host.py (sha256 recorded in every output record)",
+  "order": [
+   "BUILD: compile the unchanged driver source in the host WSL with the laptop's exact command",
+   "PLACEMENT: metaqa, squad, musique -- hypergraphs at the native K and the grid K, PHG at the native K -- compared locally",
+   "AUTHORIZATION: a dated block naming machine, settings and the placement verdict",
+   "webqsp: hypergraph + PHG at the grid K, then the native K",
+   "hotpotqa",
+   "2wiki"
+  ],
+  "K_grid": [
+   100,
+   250,
+   500,
+   1000,
+   2000,
+   5000
+  ],
+  "native_K": {
+   "metaqa": 432,
+   "squad": 202,
+   "musique": 1175,
+   "webqsp": 25928,
+   "hotpotqa": 52333,
+   "2wiki": 59898
+  },
+  "hypergraph_rule": "src/l1_canonical/hypergraph.build_hypergraph(N, {STRUCT, KNN}, K) from the dataset's stamped key sets: the frozen H4_SK rule with k = K (cap = round(N / K)), exactly as scratchpad/_l1d_scale_parts.py HG"
+ },
+ "machine": {
+  "rx_host": "gpu",
+  "windows_host": "DESKTOP-SLQMEQH",
+  "account": "Student2 (Windows) / student2 (WSL, passwordless sudo set up by the account owner)",
+  "rx_project": "crag (own workspace C:\\Users\\Student2\\rx\\projects\\crag\\ws; WSL view /mnt/c/Users/Student2/rx/projects/crag/ws)",
+  "python": "mpr's pinned env 'mpr-cpu', used read-only by name (CPython 3.13.5, numpy 2.3.2, scipy 1.16.1); the exact versions are recorded per job",
+  "wsl": "Ubuntu-24.04 (noble), WSL 2; .wslconfig 96 GB / 32 processors / 32 GB swap as set by the account owner (not changed by this lane)",
+  "laptop_reference": {
+   "wsl": "Ubuntu-22.04 (jammy)",
+   "toolchain_and_libs": [
+    "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+    "mpirun (Open MPI) 4.1.2",
+    "\tlibtrilinos_zoltan.so.13.2 => /lib/x86_64-linux-gnu/libtrilinos_zoltan.so.13.2 (0x00007f1c16725000)",
+    "\tlibmpi.so.40 => /lib/x86_64-linux-gnu/libmpi.so.40 (0x00007f1c165ee000)",
+    "libopenmpi-dev:amd64\t4.1.2-2ubuntu1",
+    "libtrilinos-zoltan-13.2:amd64\t13.2.0-1ubuntu1",
+    "openmpi-bin\t4.1.2-2ubuntu1"
+   ],
+   "binary_sha256": "a36e1b3dbcef2cf5f20c09cc6ab014ab13ce2dcfeb3ec7c1041aa00d14d7ccb9",
+   "wrapper_sha256": "6de130e4bde663ce5f12d8633c45b20573eaaf1dd0cd7f228c71877f7c8c4367"
+  }
+ },
+ "toolchain_install": {
+  "job": "260929-152202-crag-apt-e814",
+  "script": {
+   "path": "scratchpad/_l1h_apt.sh",
+   "bytes": 2125,
+   "sha256": "8a5ef1f7c0b79a9743d19dc98f9ae00887f6e49f798de195e71ad9adcf257078"
+  },
+  "log": {
+   "path": "results/L1_HOST/apt/apt_20260929T095207Z.log",
+   "bytes": 23698,
+   "sha256": "cc7e1a003351895439d4e1c7adaaf89193a92845276097ad97725990f8d3e579"
+  },
+  "requested": "libtrilinos-zoltan-dev libopenmpi-dev openmpi-bin gcc (the laptop's PHG_PACKAGES command plus gcc, absent on this distro)",
+  "result": "rc_install 0; 96 newly installed, 4 upgraded as dependencies (libc6, libc-bin, locales 2.39-0ubuntu8.8 -> 2.39-0ubuntu8.9; libevent-core-2.1-7t64 2.1.12-stable-9ubuntu2.1 -> 2.1.12-stable-9ubuntu2.2); 145,282,484 bytes from archive.ubuntu.com (noble, noble-updates, noble-security)",
+  "after": {
+   "gcc": "13.3.0-6ubuntu2~24.04.1",
+   "libopenmpi-dev / openmpi-bin": "4.1.6-7ubuntu2",
+   "libtrilinos-zoltan-13.2 / -dev": "13.2.0-5build2",
+   "ZOLTAN_VERSION_NUMBER": "3.90",
+   "libc6-dev": "2.39-0ubuntu8.9"
+  },
+  "time_package": "scratchpad/_l1h_apt_time.sh installs Ubuntu 'time' only if /usr/bin/time is missing (the rank wrapper execs /usr/bin/time -v)",
+  "differs_from_laptop": "gcc 13.3 vs 11.4, OpenMPI 4.1.6 vs 4.1.2, Zoltan package build 13.2.0-5build2 vs 13.2.0-1ubuntu1 (same Zoltan 3.90 source release) -- which is why the placement test compares partitions position by position before any map is used"
+ },
+ "driver": {
+  "source": {
+   "path": "src/l1_lowmem/phg_driver/phg_driver.c",
+   "bytes": 18529,
+   "sha256": "cf5099851282444d0b6c87b399210ae3dd6bc09f8fe2a5f7b49d315ce4b133b4"
+  },
+  "wrapper_source": {
+   "path": "src/l1_lowmem/phg_driver/rank_wrap.sh",
+   "bytes": 308,
+   "sha256": "6de130e4bde663ce5f12d8633c45b20573eaaf1dd0cd7f228c71877f7c8c4367"
+  },
+  "sources_equal_laptop": true,
+  "compile": "mpicc -O2 -Wall -Wextra -I/usr/include/trilinos phg_driver.c -o phg_driver -ltrilinos_zoltan -lm",
+  "record": "results/L1_HOST/PHG_BUILD_HOST.json"
+ },
+ "placement_test": {
+  "HG": "host content digest (hypergraph.arrays_digest) == the laptop's for every (dataset, K) the laptop has: the frozen data/l1_canonical/<ds>/hypergraph/H4_SK.json at the native K and the scratchpad/_l1d_scale_parts.py builds at the grid K",
+  "SHARDS": "host PHG shard sha256 list at the native K == the shards of the served run (metaqa, squad: data/l1_lowmem/<ds>/stream/H4_SK_STREAM_V1.json; musique: the served LOWMEM__PHG_C1_con record)",
+  "PHG": "host vector at the native K == the served vector position by position (metaqa LOWMEM__PHG_REPAIR1_con, squad LOWMEM__PHG_con, musique LOWMEM__PHG_C1_con); host grid-K vectors, where run, == the laptop grid maps of results/L1_DEV/kscale_<ds>__v1.json",
+  "verdict_rule": "BIT_IDENTICAL if every comparison is equal. Otherwise NOT_IDENTICAL: host maps carry the placement label HOST_U2404, are never pooled with laptop maps without that label, and the user rules whether they are admissible. No retries to obtain a match, no parameter change, no toolchain swap without a ruling.",
+  "where": "compared on the laptop from fetched host records and vectors; no host result is used before this comparison"
+ },
+ "inputs_pushed": {
+  "rule": "pushing data is a declared step of this declared stage; code moves, data only as listed here",
+  "key_sets": {
+   "metaqa": {
+    "path": "data/l1_canonical/metaqa/keys.npz",
+    "bytes": 1873830,
+    "sha256": "7b65508cb14e8cd4c66e1d926fd678c204e13c249348c6c02e8ce2f5157cfc4f",
+    "stamp_equals_DATASET_json": true,
+    "DATASET_json_RECORD_SHA256": "8ab4506933d0df8f9b8443848b9da80e49e698cf9cb40ef32523fdb4e31e2c87",
+    "n_nodes": 43234,
+    "native_K": 432,
+    "STRUCT": 124669,
+    "KNN": 97436,
+    "DATASET_json_sha256": "2998a69af9c1e7e4f88aa12d6e3113719ca30e8c5acfd0524079d1b28d5bcf09"
+   },
+   "squad": {
+    "path": "data/l1_canonical/squad/keys.npz",
+    "bytes": 8536942,
+    "sha256": "1a92c96f38341966f6430facf2d28e8d77e077e40f77a206c5171771b6566491",
+    "stamp_equals_DATASET_json": true,
+    "DATASET_json_RECORD_SHA256": "29976120cf085d2f776c9eea28da6363bc6c6d0be679cca550db7f714a151a23",
+    "n_nodes": 20233,
+    "native_K": 202,
+    "STRUCT": 744734,
+    "KNN": 30609,
+    "DATASET_json_sha256": "54bcdb3007f56e30f1f4aaee864e5faa313839934bb139dbb88c0d38871629d1"
+   },
+   "musique": {
+    "path": "data/l1_canonical/musique/keys.npz",
+    "bytes": 35330250,
+    "sha256": "c44c3cd4326555b46fbb9aa990c4eaaf14e33b18721848befa421f3b024f55b2",
+    "stamp_equals_DATASET_json": true,
+    "DATASET_json_RECORD_SHA256": "67fa637183fb02c4762fc80f6f4d2e21e14e2c665977e89adfcd6d32ed6d683f",
+    "n_nodes": 117534,
+    "native_K": 1175,
+    "STRUCT": 2651280,
+    "KNN": 230823,
+    "DATASET_json_sha256": "7825b2315a2932f15386fc95eea80379f9e864ead7b5b1a1be4fd801ceb6473e"
+   },
+   "webqsp": {
+    "path": "data/l1_canonical/webqsp/keys.npz",
+    "bytes": 141322782,
+    "sha256": "081c3fa4b27f56de9a91a3b5ece10f77182c6a072caf35aa3691adcb41043c5e",
+    "stamp_equals_DATASET_json": true,
+    "DATASET_json_RECORD_SHA256": "56c8ed2352c5f0ecdebf1a103dc0aa9913ec5067f10664f70a4b1b26412b525d",
+    "n_nodes": 2592894,
+    "native_K": 25928,
+    "STRUCT": 5882501,
+    "KNN": 6313874,
+    "DATASET_json_sha256": "83c4814b3c6b7ccd30dfa8299db59413cb520bbfd76b4a30d50ea926d5a43670"
+   },
+   "hotpotqa": {
+    "path": "data/l1_canonical/hotpotqa/keys.npz",
+    "bytes": 515506262,
+    "sha256": "dea82ccfde91516dea77986a519efd9931d014b3806a4ce07b46829cbd9d5998",
+    "stamp_equals_DATASET_json": true,
+    "DATASET_json_RECORD_SHA256": "2f778679a52f75c045615f32095c27d8217dfce0d7600319180d985e45793c6f",
+    "n_nodes": 5233329,
+    "native_K": 52333,
+    "STRUCT": 15095287,
+    "KNN": 10646884,
+    "DATASET_json_sha256": "bc24f8532845224ede36f1d3e5f5eccdae3b121140f7997064b51883ba930d45"
+   },
+   "2wiki": {
+    "path": "data/l1_canonical/2wiki/keys.npz",
+    "bytes": 836301002,
+    "sha256": "ef9e12706a196d1d4d6580fdcd0849e8d3530e751d49332e20b0d206f19c9677",
+    "stamp_equals_DATASET_json": true,
+    "DATASET_json_RECORD_SHA256": "ddb083a8f8cc0a1e5626d17ebd834c25c7b571d72c2bea58223276da8ff26a8a",
+    "n_nodes": 5989847,
+    "native_K": 59898,
+    "STRUCT": 28208857,
+    "KNN": 11698178,
+    "DATASET_json_sha256": "f43eee1edf80b00d15d6bbd596aaf6db5e5c27904a886b2dcc48701cfce6c956"
+   }
+  },
+  "waves": [
+   [
+    "metaqa",
+    "squad",
+    "musique",
+    "webqsp"
+   ],
+   [
+    "hotpotqa"
+   ],
+   [
+    "2wiki"
+   ]
+  ],
+  "force": "rx push --force is named for hotpotqa (515,506,262 B) and 2wiki (836,301,002 B) keys.npz only, if the 512 MB push cap refuses them",
+  "records_pushed_as_code": [
+   "data/final_canonical/canonical.py",
+   "data/final_canonical/CANONICAL_FREEZE.json",
+   "data/final_canonical/<ds>/DATASET.json (six)",
+   "results/L1_LOWMEM/PHG_BUILD.json (the laptop build record, read-only)"
+  ]
+ },
+ "outputs": {
+  "host": "results/L1_HOST/** (records, maps, hypergraph .npz) and work/L1_HOST/phg_data/** (PHG shards, run dirs, dumps; outside the rx output glob)",
+  "fetched": "records (*.json), maps (*.npy), logs; hypergraph .npz, shards and dumps stay on the host with their sha256 in the records",
+  "laptop": "results/L1_HOST/ only; nothing under data/ is written on either machine"
+ },
+ "scheduling": {
+  "unit": "one rx job per dataset stage (HG per dataset, PHG per (dataset, K)), so the host scheduler queues by capacity",
+  "reservation": "HG 2 cpus; PHG 4 cpus (NP 4 ranks); memory reserved per dataset from the input size",
+  "priority": "the user's 'medium priority under contention, full utilization when free': rx FIFO + backfill by reservation; the capacity reserve (2 CPUs, 8 GB) is left as it is; no other user's job is cancelled, rerun or gc'd",
+  "timeouts": "PHG mpirun harness timeout 12 h (a harness limit, not a partitioner parameter)"
+ },
+ "kept": [
+  "PHG contract: NP 4, PARAMS, PHG_NONEMPTY_REPAIR_V1; no tuning or relaxation; PARTITION_INVALID -> the cell is absent",
+  "CONTRACT_FILES and pinned modules imported unchanged; the lane modules are redirected at runtime only (common.DISTRO, common.DATA)",
+  "no credentials on the host (no Modal, Hugging Face or cloud tokens; no --var values)",
+  "no download other than the authorized apt packages",
+  "held-out rows are not read; TEST is never read"
+ ],
+ "gpu": "no declared stage uses the GPU: PHG is CPU/MPI and the hypergraph build is numpy on CPU. The GPU stays free for other users; L1's GPU-shaped work (dense/SPLADE scoring) is already cached."
+}

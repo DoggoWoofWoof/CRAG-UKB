@@ -1,0 +1,37 @@
+{
+ "GOAL": "move Mt-KaHyPar partitioning off Modal to local compute; stop burning cloud spend",
+ "LOCAL_ENV": {
+  "runtime": "WSL2 Ubuntu-22.04",
+  "python": "3.10.12",
+  "mtkahypar": "1.6.2",
+  "numpy": "1.26.4",
+  "host_logical_cpus": 12,
+  "host_total_ram_gb": 15.7,
+  "wsl_default_ram_ceiling_gb": 7.6,
+  "install_method": "pip bootstrapped via get-pip.py --user (no sudo/apt available)"
+ },
+ "PARITY_CHECK": {
+  "apisig_discriminating_test": "byte-identical to the Modal probe (unweighted, node+edge weighted, weight-readback, and the equal-vs-heavy-middle discriminating partition all matched)",
+  "squad_clean_H4_SPLIT_PRESERVE": {
+   "result": "BIT-IDENTICAL to the Modal-produced assignment (sha256 017a327a198f0670 both sides, agreement 1.0000)",
+   "wall_seconds": 31.7,
+   "peak_rss_mb": 432.9,
+   "threads": 12
+  }
+ },
+ "SMALL_CORPUS_VERDICT": "metaqa, musique_clean, 2wiki_clean, squad_clean now run fully locally: seconds of wall time, under 1 GB RSS, zero Modal spend, verified bit-identical to the prior cloud results. No reason to use Modal for any of these four going forward.",
+ "LARGE_CORPUS_ATTEMPT": {
+  "webqsp_H4_SPLIT_PRESERVE": {
+   "where": "local WSL, same worker, 12 threads",
+   "result": "CRASHED, exit code 11 (SIGSEGV), zero output, within ~15 seconds of launch",
+   "diagnosis": "memory exhaustion inside the Mt-KaHyPar C++ layer while constructing/loading the hypergraph (1,563,830 hyperedges / 8,185,424 pins on N=781,485) -- a null-pointer dereference from a failed allocation reads as SIGSEGV rather than a clean OOM-kill, but the timing and the corroborating Modal number both point at the same cause",
+   "corroboration": "Modal itself measured 34,103.6 MB peak RSS for the SMALLER webqsp H0_FIXED_CAP build (6,693,258 pins, 66% retention); H4_SPLIT_PRESERVE keeps 100% of pins (8,185,424, +22%), so its real requirement is at or above that 34.1 GB figure",
+   "host_headroom": "15.7 GB total RAM, 2.8-3.8 GB free at the time of the attempt -- short of the ~34+ GB figure by roughly an order of magnitude, not a close call"
+  },
+  "hotpotqa_clean_H4_SPLIT_PRESERVE": {
+   "attempted": false,
+   "reason": "has MORE pins than webqsp (10,223,111 vs 8,185,424); not attempted given webqsp already failed on a strictly larger memory requirement"
+  }
+ },
+ "CONCLUSION": "local execution is now the default for every job that fits in memory (verified correct, not just fast). WebQSP and HotpotQA H4_SPLIT_PRESERVE partitioning need roughly 35-45+ GB resident, and this machine physically has 15.7 GB total -- no WSL/Docker/venv configuration manufactures RAM that is not there. This is a hardware ceiling, not a tuning problem, and the two remaining Stage-3 corpora are blocked on it."
+}

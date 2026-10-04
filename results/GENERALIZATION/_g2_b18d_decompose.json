@@ -1,0 +1,77 @@
+{
+ "HYPOTHESIS": "H1: the in-domain reserve gain is a per-domain CONSTANT R, not query discrimination.",
+ "DECOMPOSITION": {
+  "metaqa": {
+   "eval_n": 999,
+   "NET_by_constant_R_eval": {
+    "0": 0.0,
+    "4": 106.0,
+    "8": 174.0,
+    "16": 290.0
+   },
+   "best_constant_R_from_train": 16,
+   "NET_best_constant_R": 290.0,
+   "NET_learned_in_domain_policy": 260.0,
+   "NET_per_query_oracle": 355.0,
+   "mean_oracle_R": 1.69,
+   "frac_oracle_R0": 0.855,
+   "DOMAIN_LEVEL_headroom": 290.0,
+   "QUERY_LEVEL_headroom": 65.0,
+   "query_share_of_total_headroom": 0.1831,
+   "learned_in_domain_variant": "COMP",
+   "learned_minus_best_constant": -30.0
+  },
+  "2wiki_clean": {
+   "eval_n": 1000,
+   "NET_by_constant_R_eval": {
+    "0": 0.0,
+    "4": 31.0,
+    "8": 44.0,
+    "16": 52.0
+   },
+   "best_constant_R_from_train": 16,
+   "NET_best_constant_R": 52.0,
+   "NET_learned_in_domain_policy": 29.0,
+   "NET_per_query_oracle": 75.0,
+   "mean_oracle_R": 0.58,
+   "frac_oracle_R0": 0.927,
+   "DOMAIN_LEVEL_headroom": 52.0,
+   "QUERY_LEVEL_headroom": 23.0,
+   "query_share_of_total_headroom": 0.3067,
+   "learned_in_domain_variant": "COMP",
+   "learned_minus_best_constant": -23.0
+  },
+  "squad_clean": {
+   "eval_n": 500,
+   "NET_by_constant_R_eval": {
+    "0": 0.0,
+    "4": 0.0,
+    "8": 0.0,
+    "16": 1.0
+   },
+   "best_constant_R_from_train": 0,
+   "NET_best_constant_R": 0.0,
+   "NET_learned_in_domain_policy": 0.0,
+   "NET_per_query_oracle": 1.0,
+   "mean_oracle_R": 0.032,
+   "frac_oracle_R0": 0.998,
+   "DOMAIN_LEVEL_headroom": 0.0,
+   "QUERY_LEVEL_headroom": 1.0,
+   "query_share_of_total_headroom": 1.0,
+   "learned_in_domain_variant": "COMP",
+   "learned_minus_best_constant": 0.0
+  }
+ },
+ "VERDICT": {
+  "H1_supported": {
+   "metaqa": true,
+   "2wiki_clean": true,
+   "squad_clean": true
+  },
+  "query_share_of_total_headroom": {
+   "metaqa": 0.1831,
+   "2wiki_clean": 0.3067,
+   "squad_clean": 1.0
+  }
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "dataset": "squad",
+ "K": 5000,
+ "native_K": 202,
+ "partitioner": "Zoltan-PHG (validated substitute; scratchpad/_l1c_phg.py unchanged)",
+ "hypergraph": {
+  "file": "results/L1_COVPART/parts/squad__H4_SK_k5000.npz",
+  "sha256": "1c5463d8ace0bc38aa74f3d8b4ac6ff169c4841e6bf2467d197053e3639c9a86"
+ },
+ "output": {
+  "file": "results/L1_COVPART/parts/squad__H4_SK_k5000__PHG_con.npy",
+  "sha256": "82bcad9b0d1bf4609e9012f34771ac216b79c66e05c940bf6aaa0c6815d3c4d1"
+ },
+ "phg_run_record": {
+  "file": "results/L1_COVPART/parts/squad__H4_SK_k5000__PHG_con.RUN.json",
+  "sha256": "393d519a799d3c50686bd48f705bc6e2b9ada1a5249a34ecc6a1bb40c2423243"
+ },
+ "repair": {
+  "rule": "PHG_NONEMPTY_REPAIR_V1",
+  "empty_blocks": [
+   3338,
+   4680,
+   4681,
+   4687,
+   4828,
+   4838,
+   4842,
+   4904,
+   4906,
+   4914,
+   4916,
+   4919,
+   4921,
+   4925,
+   4930,
+   4931,
+   4934,
+   4935,
+   4936,
+   4939,
+   4940,
+   4941,
+   4943,
+   4944,
+   4949,
+   4951,
+   4953,
+   4956,
+   4957,
+   4962,
+   4967,
+   4971,
+   4973,
+   4974,
+   4978,
+   4979
+  ],
+  "moves": 36,
+  "km1_before": 312158601,
+  "km1_after": 312158601
+ },
+ "balance": {
+  "length_ok": true,
+  "ids_in_range": true,
+  "blocks_used": 5000,
+  "every_block_used": true,
+  "size_min": 1,
+  "size_max": 5,
+  "size_mean": 4.047,
+  "ceil_N_over_K": 5,
+  "within_ceil_1.03_N_over_K": true
+ },
+ "equals_served_PHG": null,
+ "served_PHG": null,
+ "wall_seconds": 73.8,
+ "run_memory": {
+  "peak_rss_kb_per_rank_time_v": [
+   98744,
+   87356,
+   82868,
+   80216
+  ],
+  "ru_maxrss_kb_per_rank": [
+   98744,
+   87356,
+   82868,
+   80216
+  ],
+  "max_rank_peak_kb": 98744,
+  "sum_of_rank_peaks_kb": 349184,
+  "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+ },
+ "code": {
+  "harness": {
+   "path": "scratchpad/_l1d_scale_parts.py",
+   "sha256": "2090b01eb29c9ad9e59f4778c89fc98752673fcd5fecb4480fd3c788b2f70e13"
+  },
+  "hypergraph_builder": {
+   "path": "src/l1_canonical/hypergraph.py",
+   "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262"
+  },
+  "frozen_rule_module": {
+   "path": "scratchpad/_l1hu_build.py",
+   "sha256": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79"
+  },
+  "partition_driver_reused": {
+   "path": "src/l1_canonical/partition.py",
+   "sha256": "45be47b5dd5d432af6b7339133e9cb4d5acf38d9ee5661368af0db3e5f175257"
+  },
+  "phg_script": {
+   "path": "scratchpad/_l1c_phg.py",
+   "sha256": "7f2a416c0a74bf79cd7a57a829b1f86b4c0997d4470e9be21333bc486f33bfe3"
+  },
+  "mtk_worker": {
+   "path": "scratchpad/_l1hu_local_worker.py",
+   "sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb"
+  }
+ }
+}

@@ -1,0 +1,281 @@
+{
+  "generated": "2026-08-26 02:15:39",
+  "sample_dense_splade_offset_mixture": 300,
+  "sample_graph_relpath": 120,
+  "split": "train",
+  "device": "cpu",
+  "datasets": {
+    "2wiki_clean": {
+      "dataset": "2wiki_clean",
+      "split": "train",
+      "SPLADE_PARITY_argmax_vs_top200": {
+        "rate": 0.9833333333333333,
+        "checked": 60
+      },
+      "signals": {
+        "DENSE": {
+          "impl": "cached nodes.npy\u00b7queries_all.npy cosine (corpus dense_score)",
+          "device": "GPU-precomputed",
+          "output_dim": 1,
+          "coverage": "100% of scope (every candidate has a real score)",
+          "gold_best_rank_median": 0.0,
+          "gold_best_rank_p90": 0.0,
+          "queries_with_gold": 300,
+          "sec_per_1k_cand": 0.00033685848743688257,
+          "bytes_per_pair": 2,
+          "cacheable": true,
+          "batchable": true
+        },
+        "SPLADE": {
+          "impl": "exact sparse dot: splade_doc_embs.pkl[cand] \u00b7 splade_q_shards[row_all]  (NO re-encode)",
+          "device": "CPU scipy sparse",
+          "output_dim": 1,
+          "coverage": "100% of scope \u2014 every P50 candidate gets an EXACT score",
+          "prev_corpus_had_only_rank": "splade_rank was top-200 membership; mean frac of scope with rank==-1 (now scored) = 0.985",
+          "mean_nonzero_score_frac": 0.9602712529335897,
+          "gold_best_rank_median": 0.0,
+          "gold_best_rank_p90": 0.0,
+          "queries_with_gold": 300,
+          "sec_per_1k_cand": 0.004608945574178921,
+          "bytes_per_pair": 2,
+          "cacheable": true,
+          "batchable": true,
+          "reusable_vectors_exist": true,
+          "reencode_required": false
+        },
+        "OFFSET": {
+          "impl": "cached offset head forward -> pred vector(s); score = pred\u00b7docemb[cand]",
+          "checkpoint": "head_06a9fd3a3e39b3d0.pt",
+          "checkpoint_note": "AVAILABLE cache \u2014 compat/runtime probe, NOT the canonical L2 checkpoint",
+          "device": "GPU",
+          "output_dim": 1,
+          "coverage": "100% of scope (dense-family dot; works on any candidate set)",
+          "gold_best_rank_median": 0.0,
+          "gold_best_rank_p90": 0.0,
+          "queries_with_gold": 300,
+          "sec_per_1k_cand": 0.0036960528509113783,
+          "bytes_per_pair": 2,
+          "cacheable": true,
+          "batchable": true,
+          "compatible": true
+        },
+        "MIXTURE": {
+          "impl": "cached mixture head forward -> pred vector(s); score = pred\u00b7docemb[cand]",
+          "checkpoint": "head_32404bf9b65a2d95.pt",
+          "checkpoint_note": "AVAILABLE cache \u2014 compat/runtime probe, NOT the canonical L2 checkpoint",
+          "device": "GPU",
+          "output_dim": 8,
+          "coverage": "100% of scope (dense-family dot; works on any candidate set)",
+          "gold_best_rank_median": 0.0,
+          "gold_best_rank_p90": 0.0,
+          "queries_with_gold": 300,
+          "sec_per_1k_cand": 0.004079765612498592,
+          "bytes_per_pair": 2,
+          "cacheable": true,
+          "batchable": true,
+          "compatible": true
+        }
+      },
+      "GRAPH": {
+        "impl": "C edge families (STRUCT/NER/C) reconstructed; per-scope degree, 2-hop, components",
+        "device": "CPU scipy sparse",
+        "families_load_sec": 28.837313413619995,
+        "cheap_features": [
+          "global_degree(struct/ner/C)",
+          "in_scope_degree",
+          "2hop_reach",
+          "induced_components",
+          "seed_geodesic(available)"
+        ],
+        "sec_per_1k_cand": 0.047396576759737824,
+        "bytes_per_pair": 2,
+        "cacheable": true,
+        "compatible": true,
+        "mean_global_deg_struct": 3.8281333029681925,
+        "mean_global_deg_ner": 15.886859485310863,
+        "mean_global_deg_C": 22.126744097775752,
+        "RELATION_structural_coverage_meanfrac": 0.9702200044916626,
+        "PATH_structural_coverage_meanfrac": 0.0,
+        "C_in_scope_membership_meanfrac": 0.999981773923722,
+        "C_largest_component_meanfrac": 0.9986751231170387,
+        "coverage_note": "RELATION/PATH coverage = UPPER BOUND (structural A-edge/2-hop within scope, no topic-detection, no encode). Actual relation/path signal is nonzero only for candidates whose title-entity is 1-hop/2-hop from a DETECTED query topic AND whose connecting sentence is text-encoded (gte-Qwen). Encode pass = the expensive deferred build."
+      }
+    },
+    "musique_clean": {
+      "dataset": "musique_clean",
+      "split": "train",
+      "SPLADE_PARITY_argmax_vs_top200": {
+        "rate": 1.0,
+        "checked": 60
+      },
+      "signals": {
+        "DENSE": {
+          "impl": "cached nodes.npy\u00b7queries_all.npy cosine (corpus dense_score)",
+          "device": "GPU-precomputed",
+          "output_dim": 1,
+          "coverage": "100% of scope (every candidate has a real score)",
+          "gold_best_rank_median": 0.0,
+          "gold_best_rank_p90": 2.0,
+          "queries_with_gold": 300,
+          "sec_per_1k_cand": 0.00021990235146031735,
+          "bytes_per_pair": 2,
+          "cacheable": true,
+          "batchable": true
+        },
+        "SPLADE": {
+          "impl": "exact sparse dot: splade_doc_embs.pkl[cand] \u00b7 splade_q_shards[row_all]  (NO re-encode)",
+          "device": "CPU scipy sparse",
+          "output_dim": 1,
+          "coverage": "100% of scope \u2014 every P50 candidate gets an EXACT score",
+          "prev_corpus_had_only_rank": "splade_rank was top-200 membership; mean frac of scope with rank==-1 (now scored) = 0.971",
+          "mean_nonzero_score_frac": 0.9439203012977976,
+          "gold_best_rank_median": 0.0,
+          "gold_best_rank_p90": 2.0,
+          "queries_with_gold": 300,
+          "sec_per_1k_cand": 0.004415616637172931,
+          "bytes_per_pair": 2,
+          "cacheable": true,
+          "batchable": true,
+          "reusable_vectors_exist": true,
+          "reencode_required": false
+        },
+        "OFFSET": {
+          "impl": "cached offset head forward -> pred vector(s); score = pred\u00b7docemb[cand]",
+          "checkpoint": "head_06a9fd3a3e39b3d0.pt",
+          "checkpoint_note": "AVAILABLE cache \u2014 compat/runtime probe, NOT the canonical L2 checkpoint",
+          "device": "GPU",
+          "output_dim": 1,
+          "coverage": "100% of scope (dense-family dot; works on any candidate set)",
+          "gold_best_rank_median": 0.0,
+          "gold_best_rank_p90": 1.0,
+          "queries_with_gold": 300,
+          "sec_per_1k_cand": 0.0026819863503979137,
+          "bytes_per_pair": 2,
+          "cacheable": true,
+          "batchable": true,
+          "compatible": true
+        },
+        "MIXTURE": {
+          "impl": "cached mixture head forward -> pred vector(s); score = pred\u00b7docemb[cand]",
+          "checkpoint": "head_32404bf9b65a2d95.pt",
+          "checkpoint_note": "AVAILABLE cache \u2014 compat/runtime probe, NOT the canonical L2 checkpoint",
+          "device": "GPU",
+          "output_dim": 8,
+          "coverage": "100% of scope (dense-family dot; works on any candidate set)",
+          "gold_best_rank_median": 0.0,
+          "gold_best_rank_p90": 1.0,
+          "queries_with_gold": 300,
+          "sec_per_1k_cand": 0.008027371728552784,
+          "bytes_per_pair": 2,
+          "cacheable": true,
+          "batchable": true,
+          "compatible": true
+        }
+      },
+      "GRAPH": {
+        "impl": "C edge families (STRUCT/NER/C) reconstructed; per-scope degree, 2-hop, components",
+        "device": "CPU scipy sparse",
+        "families_load_sec": 4.771517515182495,
+        "cheap_features": [
+          "global_degree(struct/ner/C)",
+          "in_scope_degree",
+          "2hop_reach",
+          "induced_components",
+          "seed_geodesic(available)"
+        ],
+        "sec_per_1k_cand": 0.03727445605899919,
+        "bytes_per_pair": 2,
+        "cacheable": true,
+        "compatible": true,
+        "mean_global_deg_struct": 7.539935634874196,
+        "mean_global_deg_ner": 14.578115857226448,
+        "mean_global_deg_C": 23.950117027501463,
+        "RELATION_structural_coverage_meanfrac": 0.9830476487301089,
+        "PATH_structural_coverage_meanfrac": 0.0,
+        "C_in_scope_membership_meanfrac": 1.0,
+        "C_largest_component_meanfrac": 0.9996117896972108,
+        "coverage_note": "RELATION/PATH coverage = UPPER BOUND (structural A-edge/2-hop within scope, no topic-detection, no encode). Actual relation/path signal is nonzero only for candidates whose title-entity is 1-hop/2-hop from a DETECTED query topic AND whose connecting sentence is text-encoded (gte-Qwen). Encode pass = the expensive deferred build."
+      }
+    }
+  },
+  "SPLADE_COMPLETENESS": {
+    "reusable_query_vectors_found": "data/ukb_storage/<ds>/gte_qwen/splade_q_shards/q_shard_*.npz (scipy CSR, sharded by 8192, concatenation == all-order EXACT for both datasets)",
+    "doc_matrix": "data/ukb_storage/<ds>/splade_doc_embs.pkl  (CSR n_docs x 30522, id_to_idx; DOC_ROW_ORDER_ALIGNMENT=PASS => doc_mat[cand_id] is correct row)",
+    "method": "SPLADE_SCORE(q,d) = doc_mat[cand] . Q_all[row_all]^T  restricted to the ~5k P50 candidates (NOT full-corpus recompute)",
+    "reencode_required": false,
+    "parity_gate": "global-argmax(doc_mat . q) == splade_top200_all[row_all,0]: 2wiki 59/60 (the 1 'miss' is an EXACT score tie 27.249336==27.249336, argmax vs argpartition tie-break); musique 60/60. => alignment bit-exact.",
+    "completeness_finding": "In the current corpus, splade_rank stored only global-top200 membership => ~97-98% of each ~5k scope had splade_rank=-1 (no SPLADE info). Exact scope scoring gives ALL candidates a real score; ~94-96% are nonzero. This removes the 'not-in-top200 => 0' bias the user warned about.",
+    "cost": "~0.0045 s / 1000 candidates (CPU scipy). Full scope 2wiki+musique train ~ (75.4M+100.5M) pairs => ~13 min CPU total; trivially cacheable at 2 bytes/pair (f16).",
+    "flag": "SPLADE_P50_SCORE_COMPLETE = YES"
+  },
+  "RELATION_AUDIT": {
+    "exact_semantics_passage_corpora": "relation_raw(q,d) = cos(E(q), E(connecting_sentence(topic_title -> candidate_title))). On 2wiki/musique the 'relation' is the SENTENCE in the topic passage that names the candidate title (title-mention edge = A). NOT a KB relation label.",
+    "exact_semantics_kb": "webqsp: relation = Freebase relation on edge q_entity->candidate (text = rel.split('.')[-1]). metaqa: relation parsed from doc facts (directed by / written by / ...). NOT relevant to the C/P50 pilot (text corpora).",
+    "inputs_required": [
+      "master_nodes_<ds>.json (title<->doc rows, present)",
+      "A title-mention graph (graph.pt, present)",
+      "optional NER edges (ner_edges_w_df25.pkl, present)",
+      "find_topics(query) topic detection (deterministic, in kg_relsig)",
+      "Rtext = gte-Qwen encode of the relation-sentence vocab  <-- the EXPENSIVE, NOT-cached step"
+    ],
+    "candidate_indexing": "per-candidate lookup (doc->entity->edge-from-topic) => POOL-AGNOSTIC: runs on ANY candidate set incl. C/P50.",
+    "structural_coverage_upper_bound_C_P50": {
+      "2wiki": 0.97,
+      "musique": 0.983,
+      "meaning": "frac of P50 candidates with >=1 in-scope title-mention edge (could carry a connecting-sentence relation score). Actual nonzero relation depends additionally on topic-detection hitting the query and the encode."
+    },
+    "cost_estimate": "one gte-Qwen forward pass over the per-dataset relation-sentence vocab (order 1e5-1e6 short sentences). This is the deferred 'expensive feature' build; NOT a cached matmul like dense/splade/offset.",
+    "flag": "CAN_RELATION_RUN_ON_C_P50 = YES (mechanically), but REQUIRES a construction+encode build (not a cached lookup) => gated behind E4."
+  },
+  "PATH_AUDIT": {
+    "exact_semantics": "path_raw(q,d) = max over bounded k-hop paths P_K(d) of cos(E(q), E(path_context)). Scored ONLY for path-only candidates (no 1-hop edge). Bounded by path_cap(per-cand) / path_q_cap(per-question) / max_paths(global).",
+    "inputs_required": [
+      "same as relation, plus bounded path enumeration (BFS depth>=2 over A[+NER]) and Ptext = gte-Qwen encode of path-context vocab (EXPENSIVE, not cached)"
+    ],
+    "candidate_indexing": "pool-agnostic (per-candidate), same as relation.",
+    "structural_coverage_C_P50": {
+      "2wiki": 0.0,
+      "musique": 0.0,
+      "meaning": "frac of P50 candidates reachable in EXACTLY 2 hops via title-mention but NOT 1-hop. ~0 because ~97-98% of scope is already 1-hop reachable within scope; path adds essentially NO new scorable candidates at P50 on these text corpora."
+    },
+    "consistency": "matches [[musique-graph-reachability-ceiling]]: 2-hop title-mention chains do not add reachable evidence beyond 1-hop at this scope.",
+    "flag": "CAN_PATH_RUN_ON_C_P50 = YES (mechanically) but STRUCTURALLY NEAR-EMPTY at P50 on 2wiki/musique (adds ~0% new candidates) => LOW PRIORITY / likely drop for the text pilot; revisit only on KB (webqsp/metaqa) where multi-hop is the regime."
+  },
+  "FULLSCOPE_VS_TRAINSUBSET_POLICY": {
+    "DENSE": "A - compute on FULL scope (already in corpus; cheap, 2B/pair).",
+    "SPLADE": "A - compute on FULL scope (cheap exact, ~13 min CPU; cache as f16 splade_score + int16 splade_rank_within_scope). REPLACES the top-200-only rank.",
+    "OFFSET": "A - full scope (cached-head forward + dot; GPU-cheap). Compute at train time from the CANONICAL trained head once chosen.",
+    "MIXTURE": "A - full scope (same).",
+    "GRAPH_cheap": "A - full scope (degree/2hop/component from C families; ~0.04 s/1k CPU; cache degrees + component id).",
+    "RELATION": "C - TRAIN-SUBSET ONLY first (compute over positives + sampled negatives), because the encode is the expensive step; only materialize full scope if E4 shows lift.",
+    "PATH": "D - DEFER/DROP on text pilot (near-empty coverage); build only for KB datasets.",
+    "legend": "A=full scope now, B=full scope later, C=train-subset first, D=defer/drop"
+  },
+  "QUERY_REGIME_DATA": {
+    "status": "DERIVABLE, not yet labeled",
+    "available_now": "per-candidate gold-rank-by-expert for DENSE/SPLADE/OFFSET/MIXTURE over the sample (all put gold at median rank 0 on 2wiki/musique train => TRAIN is easy/saturated for these experts, consistent with [[crag-valproxy-shapley-findings]]).",
+    "requirement": "compute the 4 cheap experts on FULL train scope => per-query best-gold-rank vector; regimes (LEXICAL/SEMANTIC/CONFLICT/RESCUE/REDUNDANT/HARD) derived on TRAIN ONLY via soft clustering. No TEST peeking. No hard labels yet."
+  },
+  "DECISION_GATES": {
+    "SPLADE_P50_SCORE_COMPLETE": "YES",
+    "OFFSET_C_P50_COMPATIBLE": "YES",
+    "MIXTURE_C_P50_COMPATIBLE": "YES",
+    "RELATION_C_P50_COMPATIBLE": "YES_WITH_BUILD (construction+gte-Qwen encode; not a cached lookup)",
+    "PATH_C_P50_COMPATIBLE": "YES_MECHANICALLY_BUT_NEAR_EMPTY (~0% new candidates at P50 on text pilot)",
+    "GRAPH_FEATURES_C_P50_COMPATIBLE": "YES (cheap)",
+    "EXPENSIVE_FEATURE_PROFILE_COMPLETE": "YES",
+    "SAFE_TO_BEGIN_E0_E3": "YES (dense/splade/offset/mixture + cheap graph all cached-cheap, 100% scope coverage, gold reachable)",
+    "SAFE_TO_BEGIN_RELATION_PATH_ABLATIONS": "RELATION=YES-AFTER-BUILD (E4, train-subset first); PATH=NO on text pilot (defer to KB)"
+  },
+  "PROPOSED_TRAINING_ORDER": [
+    "E0  DENSE-only reranker on C/P50 train-subset (baseline; sanity that corpus trains).",
+    "E1  DENSE+SPLADE (exact scope SPLADE) fusion reranker  <-- first real lever; SPLADE completeness now unlocked.",
+    "E2  + OFFSET (retrain the offset head ON the C/P50 pool per reuse-rule; do NOT reuse old-pool head as a signal claim).",
+    "E3  + MIXTURE-K8 (retrained on C/P50).  [E0-E3 = cheap, cached-family experts]",
+    "E3b + cheap GRAPH features (degree/component) as reranker inputs (not a separate expert).",
+    "E4  BUILD RELATION feature (construction+encode) on train-subset -> add relation expert; keep only if oracle/reranker lift over E3 is real.",
+    "E5  PATH: SKIP on text pilot (near-empty); schedule only when corpus extends to webqsp/metaqa.",
+    "GATING: soft per-query controller over the retained experts (crag_fusion/gates), learned on TRAIN regimes; checkpoint-select on VAL; report on TEST once.",
+    "NOTE: every expert must be (re)trained on the C/P50 pool before it enters an ablation; never mix pools (reuse-rule)."
+  ]
+}

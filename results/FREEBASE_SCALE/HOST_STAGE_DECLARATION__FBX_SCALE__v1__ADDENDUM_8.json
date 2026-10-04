@@ -1,0 +1,58 @@
+{
+ "stage": "FBX_SCALE / addendum 8: run-to-run noise floor of the addendum-1 gate (flat PHG recipe, one declared change, WebQSP), declared before any replicate is partitioned or scored",
+ "declared": "2026-10-01T03:40:35+0530",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_3.json": "23b186b9c631541af5fa45e7236c20937209cd7d2aa8971aeaaaccff31a883a3",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_4.json": "6dd584733ea134dba79b8d9a7f9b45097363ae0dd3a0c3bfc807821b7f1b9920",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_5.json": "ddff074cc11de999c8d70e720880271d67af47ef4b7ba65c9c4d875f48c0f4e2",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6.json": "5ca94fa0ca8b07dd94fe69236a8f902ef269ee8a4d7fc66463a01ce8487eea10",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6A.json": "f2ada7fc164e6ce54e83e3066498133a5a5ef1132aab53ea71c157eb538c7c52",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_7.json": "a386758079a1aa128a7d06264af3911f189cab6e1d2e1905c6bde3ea92e93549"
+ },
+ "status": "DEVELOPMENT (calibration of a systems substrate); nothing here selects a retrieval mechanism and nothing here changes a gate",
+ "question": "how many of the 786 rows does a SAME-ALGORITHM replicate of the frozen flat PHG lose to the frozen PHG_SK under addendum 1's rule (rows below PHG_SK's ALL-gold count at matched B_P, every B_N, K in {100, 250, 500})?  That count is the run-to-run floor of the gate's statistic; addendum 7's nested arms scored 8 against a pass line of 7.",
+ "not_claimed": [
+  "no change to addendum 1's thresholds (at most 7 = RECALL_PRESERVING, at least 24 = FAILED, else BORDERLINE) and no re-scoring or re-labelling of any earlier arm: the addendum-7 verdicts stand as recorded",
+  "the replicates are not candidate partitioners and nothing is adopted from them",
+  "two replicates estimate a floor, not a distribution: the result is 'a same-algorithm replicate scored X', never a confidence interval"
+ ],
+ "arms": {
+  "reference": "PHG_SK = the frozen flat WebQSP maps on H4_SK at K in {100, 250, 500} (Zoltan PHG, NP 4); their cells must reproduce the earlier EVAL (CALIB_EVAL_WEBQSP__ml2_v1) bit for bit (control)",
+  "SKR1": "the frozen driver, parameters, hypergraph, validity rule and empty-block repair, NP 4, with PHG_RANDOMIZE_INPUT = 1 (the frozen value is 0) and nothing else changed; DETERMINISTIC stays 1",
+  "SKN3": "the same with NP = 3 (rank count; the frozen contract notes that partitions are not assumed identical across rank counts) and every parameter at its frozen value",
+  "hypergraph_control": "the K-way hypergraph read by each replicate has the frozen H4_SK content digest at each K (scratchpad/_h2l.py CONTROL, EQUAL at K 100, 250, 500 in addendum 7)"
+ },
+ "gate": "addendum 1's verdict rule, unchanged, via scratchpad/_h2lm_eval.py (scratchpad/_ml2_eval.py's arithmetic, the 786-row population, matched-B_P comparison): per replicate and K, rows below PHG_SK at each B_N in {100, 250, 500, 1000, 2000, 5000}; verdict = max over all cells: at most 7 RECALL_PRESERVING, at least 24 FAILED, else BORDERLINE; also FAILED if B_P = K on more than half the rows",
+ "reading_rule": {
+  "statistic": "F = the larger of the two replicates' maximum cell losses (rows below PHG_SK) over all K and B_N; also the per-cell table, the rows gained (above PHG_SK) and the descriptive two-sided churn, as in addendum 7",
+  "F >= 8": "the pass line of 7 lies inside the flat recipe's own replicate-to-replicate variation on this population: the gate as written cannot certify a same-algorithm replicate of the reference, and the 8-row results of the nested arms are not distinguishable from re-running PHG_SK; reported to the user with the tables.  The gate is NOT relaxed here: any change of threshold is the user's ruling",
+  "F <= 7": "both replicates are RECALL_PRESERVING: the gate is attainable by the flat recipe, and the nested arms' 8 is a measured miss of the gate as written; the BORDERLINE verdicts stand and the options of addendum 7 (A/B/C) remain the user's",
+  "any replicate FAILED (>= 24)": "reported; it would show the floor is far above the pass line and the gate's statistic is dominated by partition-to-partition variation",
+  "PARTITION_INVALID cell": "reported as not scored (as addendum 1); never relaxed"
+ },
+ "measured_constants_carried_in": {
+  "flat_job": "WebQSP H4_SK, 29.57M pins, NP 4: ~129 B/pin RSS, ~187-345 s partition + 50-95 s load per K",
+  "addendum_7_gate_result": "H2L5 and H2L25 BORDERLINE, max cell loss 8"
+ },
+ "not_done_here": [
+  "the top-level surrogate for the nested partition (addendum 9, declared after the user's ruling on addendum 7 and after the net-size survey)",
+  "any Freebase partition",
+  "K above 500",
+  "a third replicate or any other perturbation after seeing the result"
+ ],
+ "code_pinned": {
+  "scratchpad/_h2lm_noise.py": "d2ab8a1f06d19e587c27efc531a92474442747e02ccf0b7056c11efcf9adde6e",
+  "scratchpad/_h2lm_eval.py": "aaecd6bc2d9a2970676dfcf47ec1d3e7dd8194fbce5caba2e72cd7dc6f597c63",
+  "scratchpad/_h2l.py": "e578fc4b01ff29ec9a96047a7a0875fd19cff9d0e63b862a019ee48d34a46dd1",
+  "scratchpad/_ml2_eval.py": "318c7b416985d1a301fda733186d735ca071f1499a727778b3554c0aeecfe263",
+  "scratchpad/_fbx_calib.py": "a46001f57ac56e725723a77c8eecaacc067aedf883a39ba29b1f236e9828ed7f",
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_lowmem/phg_repair.py": "4c051e7a139abc19fd1b8433948a0d288858ac6a9c67dae40d7ef001839472b0",
+  "src/l1_lowmem/freight.py": "7adbe2a06146e9c60b99250cc1ac84beb1ef7115a23d96ea6930f87d298d0971",
+  "src/l1_lowmem/phg_driver/phg_driver.c": "cf5099851282444d0b6c87b399210ae3dd6bc09f8fe2a5f7b49d315ce4b133b4"
+ }
+}

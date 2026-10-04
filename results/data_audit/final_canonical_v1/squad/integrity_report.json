@@ -1,0 +1,116 @@
+{
+  "dataset": "squad",
+  "dataset_version": "canonical_v1",
+  "built_at": "2026-09-05T18:15:41",
+  "unique_node_ids": true,
+  "canonical_node_count": 20233,
+  "raw_source_records": 20239,
+  "duplicates_collapsed": 6,
+  "dropped_records": 0,
+  "drop_reasons": {},
+  "accounting_identity": "RAW_SOURCE_RECORDS == CANONICAL_NODES + DUPLICATES_COLLAPSED + DROPPED_RECORDS (asserted)",
+  "empty_text_nodes": 0,
+  "empty_title_nodes": 0,
+  "corpus_accounting_detail": {
+    "raw_source_records": 20239,
+    "dropped_records": [],
+    "duplicates_collapsed": 6,
+    "identity": "(article title, context) exact pair; node_id = squad:<sha256(title+US+context)[:24]>",
+    "alternative_identity_context_hash_only": {
+      "n_nodes": 20233,
+      "delta_vs_chosen": 0
+    },
+    "identity_normalization_diagnostics": {
+      "exact_identities": 20233,
+      "extra_collapses_if_NFC": 0,
+      "extra_collapses_if_whitespace_collapse": 0,
+      "extra_collapses_if_NFC+ws+casefold": 0
+    }
+  },
+  "query_stats": {
+    "train": {
+      "n": 130319,
+      "n_with_gold_refs": 130319,
+      "n_all_gold_resolved": 130319,
+      "n_any_gold_resolved": 130319,
+      "gold_refs_total": 130319,
+      "gold_nodes_total": 130319,
+      "GOLD_REFS_TOTAL": 130319,
+      "GOLD_REFS_RESOLVED": 130319,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    },
+    "dev": {
+      "n": 11873,
+      "n_with_gold_refs": 11873,
+      "n_all_gold_resolved": 11873,
+      "n_any_gold_resolved": 11873,
+      "gold_refs_total": 11873,
+      "gold_nodes_total": 11873,
+      "GOLD_REFS_TOTAL": 11873,
+      "GOLD_REFS_RESOLVED": 11873,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    }
+  },
+  "splits_with_gold": [
+    "train",
+    "dev"
+  ],
+  "ALL_EVAL_GOLDS_PRESENT": true,
+  "GOLD_SEMANTICS": {
+    "_semantics": "gold ref -> {canonical node,...}; a ref resolves iff it maps to >=1 node; ALL_GOLD_REFS_RESOLVE = every ref in every gold-bearing split resolves; ambiguous refs are DISJUNCTIVE (retrieved & {alternatives} != {}), never conjunctive.",
+    "_supersedes": "the cardinality test len(gold_node_ids)==len(set(gold_refs)), which failed a question merely because one of its refs legitimately expanded to >1 canonical node.",
+    "ALL_GOLD_REFS_RESOLVE": true,
+    "GOLD_REFS_TOTAL": 142192,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "per_split": {
+      "train": {
+        "GOLD_REFS_TOTAL": 130319,
+        "GOLD_REFS_RESOLVED": 130319,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "dev": {
+        "GOLD_REFS_TOTAL": 11873,
+        "GOLD_REFS_RESOLVED": 11873,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      }
+    },
+    "_index_cardinality": "GoldResolver builds a 1:1 ref->node index for every dataset in this builder, so AMBIGUOUS_GOLD_REFS is 0 by construction here."
+  },
+  "ALL_GOLD_REFS_RESOLVE": true,
+  "MISSING_GOLD_REFS": 0,
+  "AMBIGUOUS_GOLD_REFS": 0,
+  "unresolved_gold_refs": {
+    "counts": {},
+    "examples": []
+  },
+  "eval_subset": {
+    "method": "legacy id squad_clean_q_{counter}; counter reproduced over official train-v2.0.json qas in file order; question text verified equal",
+    "n_legacy": 2000,
+    "n_recovered": 2000,
+    "n_missed": 0,
+    "misses": [],
+    "official_split_distribution": {
+      "train": 2000
+    },
+    "file": "data/final_canonical/squad/eval_2000.jsonl",
+    "n": 2000,
+    "n_all_gold_resolved": 2000,
+    "n_with_gold_refs": 2000,
+    "GOLD_REFS_TOTAL": 2000,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "ALL_GOLD_REFS_RESOLVE": true
+  },
+  "CORPUS_HASH": "f592d4ab61956c1b8f4b46a0eeabdc73d2369549dec6151b2c8e976b4bafbe29",
+  "NODE_ORDER_HASH": "76e816641fba320c383ec2e163c126ce80ba105de65cf23ea6ddf038315c7d7f",
+  "nodes_jsonl_sha256": "34ac47757e0080f0e2eb6c679009a6090ca97be39d576307ba7281db730c1a8b"
+}

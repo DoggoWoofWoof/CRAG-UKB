@@ -1,0 +1,505 @@
+{
+ "CONTRACT": {
+  "encoder_passes": 0,
+  "uses_dataset_id": false,
+  "uses_target_stats": false,
+  "uses_TEST": false,
+  "frozen": [
+   "universe",
+   "BASE_FUSED",
+   "s_dir",
+   "two_channel_pool",
+   "TOP_POOL=50",
+   "R in {0,4,8,16}"
+  ]
+ },
+ "A_CONSTANT_BASELINE": {
+  "metaqa": {
+   "const_pred_D": [
+    0.028,
+    0.0107,
+    0.0063
+   ],
+   "true_D": [
+    0.1116,
+    0.0776,
+    0.1286
+   ],
+   "CONST_sum_abs_err": 0.2728,
+   "B17_P0_sum_abs_err": 0.2928,
+   "CONST_D4_err": 0.0836,
+   "B17_P0_D4_err": 0.0916
+  },
+  "2wiki_clean": {
+   "const_pred_D": [
+    0.0744,
+    0.0517,
+    0.0857
+   ],
+   "true_D": [
+    0.042,
+    0.016,
+    0.0095
+   ],
+   "CONST_sum_abs_err": 0.1443,
+   "B17_P0_sum_abs_err": 0.1795,
+   "CONST_D4_err": 0.0324,
+   "B17_P0_D4_err": 0.057
+  },
+  "squad_clean": {
+   "const_pred_D": [
+    0.0768,
+    0.0468,
+    0.069
+   ],
+   "true_D": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "CONST_sum_abs_err": 0.1926,
+   "B17_P0_sum_abs_err": 0.718,
+   "CONST_D4_err": 0.0768,
+   "B17_P0_D4_err": 0.246
+  },
+  "TOTAL": {
+   "CONST": 0.6097,
+   "B17_P0": 1.1903
+  },
+  "NOTE": "The constant source-pooled-mean predictor uses ZERO query information. Any representation that does not beat it has added no query-conditional signal."
+ },
+ "B_COLLINEARITY_AND_NULL_CONTROL": {
+  "corr_with_added_frac": {
+   "ovl10": {
+    "metaqa": -0.428,
+    "2wiki_clean": -0.654,
+    "squad_clean": -1.0
+   },
+   "ovl50": {
+    "metaqa": -0.428,
+    "2wiki_clean": -0.654,
+    "squad_clean": -1.0
+   },
+   "rbo": {
+    "metaqa": -0.428,
+    "2wiki_clean": -0.654,
+    "squad_clean": -1.0
+   },
+   "str_out_sem50": {
+    "metaqa": 0.428,
+    "2wiki_clean": 0.654,
+    "squad_clean": 1.0
+   },
+   "sem_core10": {
+    "metaqa": -1.0,
+    "2wiki_clean": -1.0,
+    "squad_clean": -1.0
+   },
+   "sem_core50": {
+    "metaqa": -0.9,
+    "2wiki_clean": -0.986,
+    "squad_clean": -0.984
+   },
+   "sem_blind_frac": {
+    "metaqa": 0.81,
+    "2wiki_clean": 0.994,
+    "squad_clean": 0.979
+   },
+   "str_conc": {
+    "metaqa": 0.09,
+    "2wiki_clean": 0.828,
+    "squad_clean": 0.916
+   },
+   "added_frac": {
+    "metaqa": 1.0,
+    "2wiki_clean": 1.0,
+    "squad_clean": 1.0
+   },
+   "js_rank_null": {
+    "metaqa": 0.789,
+    "2wiki_clean": 0.953,
+    "squad_clean": 1.0
+   }
+  },
+  "corr_with_js_rank_null": {
+   "ovl10": {
+    "metaqa": -0.816,
+    "2wiki_clean": -0.744,
+    "squad_clean": -1.0
+   },
+   "ovl50": {
+    "metaqa": -0.816,
+    "2wiki_clean": -0.744,
+    "squad_clean": -1.0
+   },
+   "rbo": {
+    "metaqa": -0.816,
+    "2wiki_clean": -0.744,
+    "squad_clean": -1.0
+   },
+   "str_out_sem50": {
+    "metaqa": 0.816,
+    "2wiki_clean": 0.744,
+    "squad_clean": 1.0
+   },
+   "sem_core10": {
+    "metaqa": -0.789,
+    "2wiki_clean": -0.953,
+    "squad_clean": -1.0
+   },
+   "sem_core50": {
+    "metaqa": -0.686,
+    "2wiki_clean": -0.943,
+    "squad_clean": -0.983
+   },
+   "sem_blind_frac": {
+    "metaqa": 0.63,
+    "2wiki_clean": 0.942,
+    "squad_clean": 0.977
+   },
+   "str_conc": {
+    "metaqa": 0.154,
+    "2wiki_clean": 0.897,
+    "squad_clean": 0.916
+   },
+   "added_frac": {
+    "metaqa": 0.789,
+    "2wiki_clean": 0.953,
+    "squad_clean": 1.0
+   },
+   "js_rank_null": {
+    "metaqa": 1.0,
+    "2wiki_clean": 1.0,
+    "squad_clean": 1.0
+   }
+  },
+  "NULL_CONTROL": {
+   "metaqa": {
+    "abs_corr_null_vs_phiG": 0.0035,
+    "best_abs_corr_real_feature_vs_phiG": 0.1088,
+    "REAL_BEATS_NULL": true
+   },
+   "2wiki_clean": {
+    "abs_corr_null_vs_phiG": 0.1279,
+    "best_abs_corr_real_feature_vs_phiG": 0.2021,
+    "REAL_BEATS_NULL": true
+   },
+   "squad_clean": {
+    "abs_corr_null_vs_phiG": 0.3499,
+    "best_abs_corr_real_feature_vs_phiG": 0.3505,
+    "REAL_BEATS_NULL": false
+   }
+  }
+ },
+ "C_IN_DOMAIN_CEILING": {
+  "metaqa": {
+   "n_train": 999,
+   "n_test": 999,
+   "phiG_std": 2.1332,
+   "phiG_mean": 0.4248,
+   "COMP": {
+    "heldout_R2": 0.0089,
+    "heldout_spearman": 0.0483
+   },
+   "P0": {
+    "heldout_R2": -0.2677,
+    "heldout_spearman": 0.1773
+   },
+   "P0+COMP": {
+    "heldout_R2": -0.7034,
+    "heldout_spearman": 0.1843
+   }
+  },
+  "2wiki_clean": {
+   "n_train": 1000,
+   "n_test": 1000,
+   "phiG_std": 0.3662,
+   "phiG_mean": -0.0354,
+   "COMP": {
+    "heldout_R2": 0.096,
+    "heldout_spearman": 0.2945
+   },
+   "P0": {
+    "heldout_R2": 0.0687,
+    "heldout_spearman": 0.2898
+   },
+   "P0+COMP": {
+    "heldout_R2": 0.0991,
+    "heldout_spearman": 0.3235
+   }
+  },
+  "squad_clean": {
+   "n_train": 500,
+   "n_test": 500,
+   "phiG_std": 0.1019,
+   "phiG_mean": -0.0859,
+   "COMP": {
+    "heldout_R2": 0.1265,
+    "heldout_spearman": 0.3675
+   },
+   "P0": {
+    "heldout_R2": 0.1551,
+    "heldout_spearman": 0.266
+   },
+   "P0+COMP": {
+    "heldout_R2": 0.1555,
+    "heldout_spearman": 0.2816
+   }
+  },
+  "NOTE": "IN-DOMAIN held-out R2 is an UPPER BOUND on any cross-domain policy using these features. If it is ~0 for a dataset, phi_structural is not representable there and the cross-domain stability question is moot for that domain."
+ },
+ "D_LODO_PHI_PREDICTION": {
+  "metaqa": {
+   "COMP": {
+    "pred_mean": -0.0955,
+    "true_mean": 0.4248,
+    "target_R2": -0.0586,
+    "target_spearman": 0.0276
+   },
+   "P0": {
+    "pred_mean": -0.0906,
+    "true_mean": 0.4248,
+    "target_R2": -0.0579,
+    "target_spearman": 0.0625
+   },
+   "P0+COMP": {
+    "pred_mean": -0.0936,
+    "true_mean": 0.4248,
+    "target_R2": -0.0563,
+    "target_spearman": 0.0826
+   }
+  },
+  "2wiki_clean": {
+   "COMP": {
+    "pred_mean": 0.3767,
+    "true_mean": -0.0354,
+    "target_R2": -2.3732,
+    "target_spearman": 0.1896
+   },
+   "P0": {
+    "pred_mean": 0.3436,
+    "true_mean": -0.0354,
+    "target_R2": -2.7677,
+    "target_spearman": 0.2307
+   },
+   "P0+COMP": {
+    "pred_mean": 0.3846,
+    "true_mean": -0.0354,
+    "target_R2": -4.5178,
+    "target_spearman": 0.2131
+   }
+  },
+  "squad_clean": {
+   "COMP": {
+    "pred_mean": 0.256,
+    "true_mean": -0.0859,
+    "target_R2": -15.4151,
+    "target_spearman": -0.6044
+   },
+   "P0": {
+    "pred_mean": 1.11,
+    "true_mean": -0.0859,
+    "target_R2": -303.3919,
+    "target_spearman": -0.6225
+   },
+   "P0+COMP": {
+    "pred_mean": 1.1083,
+    "true_mean": -0.0859,
+    "target_R2": -303.8667,
+    "target_spearman": -0.5758
+   }
+  }
+ },
+ "E_LINEAR_COMPLEMENTARITY_POLICY": {
+  "COMP": {
+   "metaqa": {
+    "selected_taus": [
+     0.05,
+     0.05,
+     0.05
+    ],
+    "NET_gold": 3.0,
+    "target_oracle_NET": 740.0,
+    "pred_D_target_mean": [
+     0.0212,
+     0.008,
+     0.0013
+    ],
+    "true_D_target_mean": [
+     0.1116,
+     0.0776,
+     0.1286
+    ],
+    "mean_R": 0.118,
+    "RESERVE_WASTE_mean": 0.106,
+    "UTILITY_REGRET_mean": 0.3689,
+    "frac_R0": 0.984,
+    "mean_oracle_R": 1.694
+   },
+   "2wiki_clean": {
+    "selected_taus": [
+     0.05,
+     0.05,
+     0.05
+    ],
+    "NET_gold": 94.0,
+    "target_oracle_NET": 179.0,
+    "pred_D_target_mean": [
+     0.1091,
+     0.0593,
+     0.1114
+    ],
+    "true_D_target_mean": [
+     0.042,
+     0.016,
+     0.0095
+    ],
+    "mean_R": 11.638,
+    "RESERVE_WASTE_mean": 11.16,
+    "UTILITY_REGRET_mean": 0.0425,
+    "frac_R0": 0.144,
+    "mean_oracle_R": 0.664
+   },
+   "squad_clean": {
+    "selected_taus": [
+     0.05,
+     0.05,
+     0.05
+    ],
+    "NET_gold": 0.0,
+    "target_oracle_NET": 1.0,
+    "pred_D_target_mean": [
+     0.0659,
+     0.0451,
+     0.0787
+    ],
+    "true_D_target_mean": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "mean_R": 10.024,
+    "RESERVE_WASTE_mean": 10.008,
+    "UTILITY_REGRET_mean": 0.001,
+    "frac_R0": 0.159,
+    "mean_oracle_R": 0.016
+   }
+  },
+  "P0+COMP": {
+   "metaqa": {
+    "selected_taus": [
+     0.05,
+     0.05,
+     0.05
+    ],
+    "NET_gold": 3.0,
+    "target_oracle_NET": 740.0,
+    "pred_D_target_mean": [
+     0.0197,
+     0.0026,
+     0.0009
+    ],
+    "true_D_target_mean": [
+     0.1116,
+     0.0776,
+     0.1286
+    ],
+    "mean_R": 0.148,
+    "RESERVE_WASTE_mean": 0.14,
+    "UTILITY_REGRET_mean": 0.3689,
+    "frac_R0": 0.978,
+    "mean_oracle_R": 1.694
+   },
+   "2wiki_clean": {
+    "selected_taus": [
+     0.05,
+     0.05,
+     0.05
+    ],
+    "NET_gold": 79.0,
+    "target_oracle_NET": 179.0,
+    "pred_D_target_mean": [
+     0.1187,
+     0.0682,
+     0.1058
+    ],
+    "true_D_target_mean": [
+     0.042,
+     0.016,
+     0.0095
+    ],
+    "mean_R": 8.738,
+    "RESERVE_WASTE_mean": 8.37,
+    "UTILITY_REGRET_mean": 0.05,
+    "frac_R0": 0.32,
+    "mean_oracle_R": 0.664
+   },
+   "squad_clean": {
+    "selected_taus": [
+     0.05,
+     0.05,
+     0.05
+    ],
+    "NET_gold": 0.0,
+    "target_oracle_NET": 1.0,
+    "pred_D_target_mean": [
+     0.2422,
+     0.1456,
+     0.3234
+    ],
+    "true_D_target_mean": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "mean_R": 9.676,
+    "RESERVE_WASTE_mean": 9.66,
+    "UTILITY_REGRET_mean": 0.001,
+    "frac_R0": 0.354,
+    "mean_oracle_R": 0.016
+   }
+  },
+  "B15_REFERENCE": {
+   "metaqa": {
+    "NET": 51,
+    "mean_R": null
+   },
+   "2wiki_clean": {
+    "NET": 69
+   },
+   "squad_clean": {
+    "NET": 0,
+    "mean_R": 8.72
+   }
+  },
+  "B17_REFERENCE": {
+   "metaqa": {
+    "NET": 3,
+    "mean_R": 0.13
+   },
+   "2wiki_clean": {
+    "NET": 73,
+    "mean_R": 9.05
+   },
+   "squad_clean": {
+    "NET": 0,
+    "mean_R": 10.12
+   }
+  }
+ },
+ "F_IDENTITY_DIAGNOSTIC": {
+  "P0": {
+   "heldout_dataset_id_accuracy": 0.6879,
+   "chance": 0.3333
+  },
+  "COMP": {
+   "heldout_dataset_id_accuracy": 0.6122,
+   "chance": 0.3333
+  },
+  "P0+COMP": {
+   "heldout_dataset_id_accuracy": 0.7143,
+   "chance": 0.3333
+  },
+  "NOTE": "Dataset predictability is NOT itself disqualifying. The question is whether P(structural utility | representation) becomes more stable -- see A/D/E."
+ }
+}

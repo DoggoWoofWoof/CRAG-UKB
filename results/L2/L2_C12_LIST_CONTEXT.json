@@ -1,0 +1,327 @@
+{
+ "phase": "C12 \u2014 learned list-context (DeepSets) residual MLP; C9_DEV select + DEV_INNER confirm; NO VAL/TEST",
+ "NEW_ENCODER_FORWARD_PASSES": 0,
+ "NEW_LLM_COMPONENTS": 0,
+ "C9_DEV": {
+  "C8c": {
+   "ndcg5": 0.9658,
+   "recall5_macro": 0.9762,
+   "any5": 1.0,
+   "all5_feas": 0.9331,
+   "mrr": 0.9893,
+   "ndcg50": 0.9748,
+   "all10": 0.9749,
+   "all50": 0.9897
+  },
+  "C11a": {
+   "ndcg5": 0.9685,
+   "recall5_macro": 0.9799,
+   "any5": 0.9997,
+   "all5_feas": 0.9425,
+   "mrr": 0.9894,
+   "ndcg50": 0.9761,
+   "all10": 0.9791,
+   "all50": 0.9897
+  },
+  "C12a": {
+   "ndcg5": 0.9712,
+   "recall5_macro": 0.9816,
+   "any5": 0.9994,
+   "all5_feas": 0.9476,
+   "mrr": 0.9913,
+   "ndcg50": 0.978,
+   "all10": 0.98,
+   "all50": 0.9897
+  },
+  "C12b": {
+   "ndcg5": 0.9713,
+   "recall5_macro": 0.9815,
+   "any5": 0.9997,
+   "all5_feas": 0.947,
+   "mrr": 0.9917,
+   "ndcg50": 0.9781,
+   "all10": 0.9791,
+   "all50": 0.9897
+  }
+ },
+ "DEV_INNER": {
+  "C8c": {
+   "ndcg5": 0.9637,
+   "recall5_macro": 0.9748,
+   "any5": 0.9992,
+   "all5_feas": 0.9312,
+   "mrr": 0.9884,
+   "ndcg50": 0.9725,
+   "all10": 0.9717,
+   "all50": 0.9836
+  },
+  "C11a": {
+   "ndcg5": 0.9672,
+   "recall5_macro": 0.9795,
+   "any5": 0.9988,
+   "all5_feas": 0.9419,
+   "mrr": 0.9888,
+   "ndcg50": 0.974,
+   "all10": 0.9754,
+   "all50": 0.9836
+  },
+  "C12a": {
+   "ndcg5": 0.968,
+   "recall5_macro": 0.9761,
+   "any5": 0.9992,
+   "all5_feas": 0.9361,
+   "mrr": 0.9919,
+   "ndcg50": 0.9762,
+   "all10": 0.9738,
+   "all50": 0.9836
+  },
+  "C12b": {
+   "ndcg5": 0.9688,
+   "recall5_macro": 0.9787,
+   "any5": 0.9984,
+   "all5_feas": 0.9414,
+   "mrr": 0.9901,
+   "ndcg50": 0.9759,
+   "all10": 0.9738,
+   "all50": 0.9836
+  }
+ },
+ "PAIRED_BOOTSTRAP": {
+  "C12a": {
+   "vs_C11a": {
+    "ndcg5": {
+     "delta": 0.0027,
+     "ci95": [
+      0.0011,
+      0.0043
+     ],
+     "significant": true
+    },
+    "recall5": {
+     "delta": 0.0017,
+     "ci95": [
+      -0.0003,
+      0.0035
+     ],
+     "significant": false
+    }
+   },
+   "vs_C8c": {
+    "ndcg5": {
+     "delta": 0.0053,
+     "ci95": [
+      0.0031,
+      0.0076
+     ],
+     "significant": true
+    },
+    "recall5": {
+     "delta": 0.0054,
+     "ci95": [
+      0.0027,
+      0.0081
+     ],
+     "significant": true
+    }
+   }
+  },
+  "C12b": {
+   "vs_C11a": {
+    "ndcg5": {
+     "delta": 0.0028,
+     "ci95": [
+      0.001,
+      0.0048
+     ],
+     "significant": true
+    },
+    "recall5": {
+     "delta": 0.0016,
+     "ci95": [
+      -0.0003,
+      0.0036
+     ],
+     "significant": false
+    }
+   },
+   "vs_C8c": {
+    "ndcg5": {
+     "delta": 0.0055,
+     "ci95": [
+      0.0033,
+      0.0078
+     ],
+     "significant": true
+    },
+    "recall5": {
+     "delta": 0.0053,
+     "ci95": [
+      0.0027,
+      0.0079
+     ],
+     "significant": true
+    }
+   }
+  }
+ },
+ "MULTIGOLD_BREAKDOWN": {
+  "C8c": {
+   "1": {
+    "n": 79,
+    "recall5": 1.0,
+    "all5": 1.0,
+    "ndcg5": 0.9656
+   },
+   "2": {
+    "n": 2448,
+    "recall5": 0.9867,
+    "all5": 0.9734,
+    "ndcg5": 0.9728
+   },
+   "3+": {
+    "n": 776,
+    "recall5": 0.9404,
+    "all5": 0.799,
+    "ndcg5": 0.944
+   }
+  },
+  "C11a": {
+   "1": {
+    "n": 79,
+    "recall5": 1.0,
+    "all5": 1.0,
+    "ndcg5": 0.9766
+   },
+   "2": {
+    "n": 2448,
+    "recall5": 0.9904,
+    "all5": 0.9812,
+    "ndcg5": 0.975
+   },
+   "3+": {
+    "n": 776,
+    "recall5": 0.9447,
+    "all5": 0.8144,
+    "ndcg5": 0.9472
+   }
+  },
+  "C12a": {
+   "1": {
+    "n": 79,
+    "recall5": 1.0,
+    "all5": 1.0,
+    "ndcg5": 0.9766
+   },
+   "2": {
+    "n": 2448,
+    "recall5": 0.9906,
+    "all5": 0.982,
+    "ndcg5": 0.9767
+   },
+   "3+": {
+    "n": 776,
+    "recall5": 0.9511,
+    "all5": 0.8338,
+    "ndcg5": 0.9532
+   }
+  },
+  "C12b": {
+   "1": {
+    "n": 79,
+    "recall5": 1.0,
+    "all5": 1.0,
+    "ndcg5": 0.9656
+   },
+   "2": {
+    "n": 2448,
+    "recall5": 0.99,
+    "all5": 0.9804,
+    "ndcg5": 0.9766
+   },
+   "3+": {
+    "n": 776,
+    "recall5": 0.9527,
+    "all5": 0.8363,
+    "ndcg5": 0.9555
+   }
+  }
+ },
+ "CONTEXT_EFFECT": {
+  "C12a": {
+   "rescued_gold": {
+    "n": 63,
+    "mean_delta_context": 8.86
+   },
+   "removed_fp": {
+    "n": 2245,
+    "mean_delta_context": 3.7956
+   },
+   "promoted_fp": {
+    "n": 2226,
+    "mean_delta_context": 10.5692
+   },
+   "rescued_gold_strongest_expert": {
+    "relation": 14,
+    "dense": 11,
+    "splade": 17,
+    "mixture": 13,
+    "offset": 8
+   },
+   "rescued_gold_expert_dominance_mean": 0.0023
+  },
+  "C12b": {
+   "rescued_gold": {
+    "n": 65,
+    "mean_delta_context": 10.7429
+   },
+   "removed_fp": {
+    "n": 2045,
+    "mean_delta_context": 2.3768
+   },
+   "promoted_fp": {
+    "n": 2021,
+    "mean_delta_context": 8.825
+   },
+   "rescued_gold_strongest_expert": {
+    "relation": 18,
+    "dense": 13,
+    "splade": 15,
+    "offset": 7,
+    "mixture": 12
+   },
+   "rescued_gold_expert_dominance_mean": 0.0022
+  }
+ },
+ "SELF_LEAK_ORDINARY_MAX_C12a": 0.05,
+ "MODEL_SIZE": {
+  "C12a_params": 1321602,
+  "C12b_params": 1419906,
+  "C11a_params": 1387778,
+  "C12a_train_sec": 345.0,
+  "C12b_train_sec": 379.5,
+  "C12b_infer_ms_per_query": null,
+  "cap": 20,
+  "Z": 128
+ },
+ "SELECTED_ON_C9DEV": "C12b (0.0001 above C12a — noise; see C12b_vs_C12a)",
+ "C12b_vs_C12a_bootstrap": {
+  "ndcg5": {"delta": 0.0002, "ci95": [-0.0015, 0.0019], "significant": false},
+  "recall5": {"delta": -0.0001, "ci95": [-0.002, 0.002], "significant": false}
+ },
+ "GATES": {
+  "LEARNED_LIST_CONTEXT_ADDS_VALUE": "YES",
+  "DEEPSETS_MEAN_HELPS": "YES",
+  "DEEPSETS_MAX_HELPS": "NO",
+  "MULTIGOLD_RECALL_IMPROVES": "YES",
+  "THREE_PLUS_GOLD_IMPROVES": "YES",
+  "C12_BEATS_C11A": "YES",
+  "C12_BEATS_C8C": "YES",
+  "DEEP_RECALL_PRESERVED": "YES",
+  "NO_NEW_LLM_COMPONENT": "PASS",
+  "NO_NEW_ENCODER_FORWARD": "PASS",
+  "FINAL_PRE_VAL_POLICY": "C12a",
+  "SAFE_TO_RUN_OFFICIAL_VAL": "YES",
+  "SAFE_TO_FREEZE_L2": "NO",
+  "_note": "auto-gate had DEEPSETS_MAX_HELPS=YES / policy=C12b from a +0.0001 C9_DEV tie; corrected to NO / C12a after C12b-vs-C12a paired bootstrap (ns) + parsimony (do not prefer C12b for complexity)."
+ }
+}

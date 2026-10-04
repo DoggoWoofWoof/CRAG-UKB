@@ -1,0 +1,683 @@
+{
+ "RECORD": "H4_SK_CONTRACT_FREEZE",
+ "utc": "2026-09-13T13:40:11Z",
+ "PURPOSE": "the exact H4_SK partitioning contract every low-memory candidate is compared against; quoted from the defining source lines and from the partition manifests that ran -- no inferred values",
+ "CONTRACT": {
+  "hypergraph_construction": {
+   "rule": "H4_SPLIT_PRESERVE",
+   "families": [
+    "STRUCT",
+    "KNN"
+   ],
+   "famset": "SK",
+   "hyperedge": "closed neighbourhood of each anchor node over each family; oversized ones split into anchor-preserving chunks (mode split), no pin discarded; cap = target block size (('blk', 1.0) -> 100)",
+   "vertex_weights": "unit ([1] * N)",
+   "hyperedge_weights": "max(1, rint(1000 / (|e| - 1))) (WSCALE 1000)",
+   "pins": "canonical positions (nodes.jsonl line order, pinned by DATASET.json nodes.sha256)",
+   "file_format": "H4_SK.npz: eptr int64 [E+1], eidx int32 [pins], N int64 [1], k int64 [1], ew int32 [E]"
+  },
+  "partitioner": {
+   "name": "mtkahypar",
+   "version_in_use": "see environment",
+   "preset": "DETERMINISTIC_QUALITY",
+   "objective": "KM1",
+   "epsilon": 0.03,
+   "seed": 0,
+   "threads_default": 8,
+   "thread_independence": "DETERMINISTIC_QUALITY is thread-count independent (LOCAL_COMPUTE.json verified local == Modal bit-identical)",
+   "k_rule": "max(1, N // 100)",
+   "output": "position -> block id (int64 npy)"
+  },
+  "node_order": "canonical position order = nodes.jsonl line i is position i; every L1 artefact indexes that space",
+  "P50_post_processing": {
+   "router": "dense[:K] -> partition ranking PR_d; splade[:K] -> PR_s; partition-level RRF(PR_d, PR_s) -> top-P",
+   "K": 100,
+   "K0": 60,
+   "P": 50,
+   "rrf_tie_break": "rankings[0] (dense) supplies the deterministic tie-break order",
+   "cache_depth": {
+    "TOPP": 200,
+    "SMAX": 256,
+    "TOP200": 200,
+    "EVAL_CAP": 2000
+   },
+   "selector": "SAFE = BASE_CFG B=6, M_struct=64, M_ret=32, agg S4, fusion F6 (_l1kb_core.sel_f6); BASE = sel_base"
+  },
+  "balance_envelope_downstream": "l1_eval ELIGIBLE = max_block/mean_block <= 1.05 and every block used"
+ },
+ "SOURCE_QUOTES": {
+  "src/l1_canonical/hypergraph.py": {
+   "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+   "lines": {
+    "TARGET = 100": [
+     [
+      35,
+      "TARGET = 100                              # frozen: build_canonical_topo.TARGET"
+     ]
+    ],
+    "RULE = \"H4_SPLIT_PRESERVE\"": [
+     [
+      36,
+      "RULE = \"H4_SPLIT_PRESERVE\""
+     ]
+    ],
+    "FAMSET = \"SK\"": [
+     [
+      37,
+      "FAMSET = \"SK\""
+     ]
+    ],
+    "return max(1, int(N) // TARGET)": [
+     [
+      50,
+      "    return max(1, int(N) // TARGET)"
+     ]
+    ],
+    "eptr int64 [E+1], eidx int32 [pins]": [
+     [
+      16,
+      "Output format is the legacy worker's input format unchanged: eptr int64 [E+1], eidx int32 [pins],"
+     ]
+    ],
+    "hyperedge weight = max(1, rint(1000 / (|e| - 1)))": [
+     [
+      17,
+      "N int64 [1], k int64 [1], ew int32 [E]  (hyperedge weight = max(1, rint(1000 / (|e| - 1))))."
+     ]
+    ]
+   }
+  },
+  "scratchpad/_l1hu_build.py": {
+   "sha256": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79",
+   "lines": {
+    "WSCALE = 1000": [
+     [
+      44,
+      "WSCALE = 1000                     # frozen: the quantisation hyper_clique() already uses"
+     ]
+    ],
+    "\"H4_SPLIT_PRESERVE\": {\"mode\": \"split\"": [
+     [
+      57,
+      "    \"H4_SPLIT_PRESERVE\": {\"mode\": \"split\", \"cap\": (\"blk\", 1.0),         \"w\": True},"
+     ]
+    ],
+    "w = np.maximum(1, np.rint(WSCALE / (sz - 1))": [
+     [
+      201,
+      "    w = np.maximum(1, np.rint(WSCALE / (sz - 1)).astype(np.int64))"
+     ]
+    ],
+    "H4_SPLIT_PRESERVE   oversized e decomposed": [
+     [
+      15,
+      "  H4_SPLIT_PRESERVE   oversized e decomposed into anchor-preserving chunks; NO pin discarded"
+     ]
+    ]
+   }
+  },
+  "scratchpad/_l1hu_local_worker.py": {
+   "sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+   "lines": {
+    "N, k, EPS = int(z['N'][0]), int(z['k'][0]), 0.03": [
+     [
+      18,
+      "N, k, EPS = int(z['N'][0]), int(z['k'][0]), 0.03"
+     ]
+    ],
+    "PresetType.DETERMINISTIC_QUALITY": [
+     [
+      24,
+      "ctx = init.context_from_preset(mtkahypar.PresetType.DETERMINISTIC_QUALITY)"
+     ]
+    ],
+    "set_partitioning_parameters(k, EPS, mtkahypar.Objective.KM1)": [
+     [
+      25,
+      "ctx.set_partitioning_parameters(k, EPS, mtkahypar.Objective.KM1)"
+     ]
+    ],
+    "mtkahypar.set_seed(0)": [
+     [
+      26,
+      "mtkahypar.set_seed(0)"
+     ]
+    ],
+    "[1] * N, ew.tolist()": [
+     [
+      40,
+      "    hg = init.create_hypergraph(ctx, N, ne, he, [1] * N, ew.tolist())"
+     ]
+    ],
+    "part = hg.partition(ctx)": [
+     [
+      48,
+      "part = hg.partition(ctx)"
+     ]
+    ],
+    "part.block_id(i)": [
+     [
+      49,
+      "mem = np.array([part.block_id(i) for i in range(N)], np.int64)"
+     ]
+    ],
+    "ru_maxrss": [
+     [
+      55,
+      "st['peak_rss_mb'] = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 1)"
+     ]
+    ]
+   }
+  },
+  "src/l1_canonical/partition.py": {
+   "sha256": "45be47b5dd5d432af6b7339133e9cb4d5acf38d9ee5661368af0db3e5f175257",
+   "lines": {
+    "\"partitioner\": \"mtkahypar\"": [
+     [
+      152,
+      "           \"contract\": {\"partitioner\": \"mtkahypar\", \"preset\": \"DETERMINISTIC_QUALITY\", \"objective\": \"KM1\", \"epsilon\": 0.03, \"seed\": 0,"
+     ]
+    ],
+    "\"vertex_weights\": \"unit\"": [
+     [
+      153,
+      "                        \"vertex_weights\": \"unit\", \"hyperedge_weights\": \"H4 build (max(1, rint(1000/(|e|-1))))\","
+     ]
+    ],
+    "DEFAULT_THREADS = 8": [
+     [
+      34,
+      "DEFAULT_THREADS = 8"
+     ]
+    ],
+    "HARD_CAP_GB = 6.0": [
+     [
+      36,
+      "HARD_CAP_GB = 6.0          # never above the WSL VM default ceiling (7.6 GB) minus headroom"
+     ]
+    ],
+    "MARGIN_GB = 1.0": [
+     [
+      35,
+      "MARGIN_GB = 1.0            # host memory kept free for everything else, always"
+     ]
+    ],
+    "deterministic_preset_note": [
+     [
+      156,
+      "                        \"deterministic_preset_note\": \"DETERMINISTIC_QUALITY is thread-count independent; LOCAL_COMPUTE.json verified local == Modal bit-identical\"},"
+     ]
+    ]
+   }
+  },
+  "src/l1_canonical/adapter.py": {
+   "sha256": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+   "lines": {
+    "indexed in canonical POSITION space": [
+     [
+      4,
+      "the pinned loader (canonical.py), indexed in canonical POSITION space:"
+     ]
+    ],
+    "position -> block id, when that L1 artefact exists": [
+     [
+      17,
+      "    ds.partition(tag)              position -> block id, when that L1 artefact exists"
+     ]
+    ]
+   }
+  },
+  "scratchpad/_ta_prepartition.py": {
+   "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+   "lines": {
+    "K0 = 60": [
+     [
+      34,
+      "K0 = 60          # RRF constant, l1_eval_phase1.K0"
+     ]
+    ],
+    "K_LOCK = 100": [
+     [
+      35,
+      "K_LOCK = 100     # router K, L1_LOCKED_MANIFEST"
+     ]
+    ],
+    "TOP200 = 200": [
+     [
+      43,
+      "TOP200 = 200"
+     ]
+    ],
+    "def rrf_partitions(rankings, npart, masks=None):": [
+     [
+      147,
+      "def rrf_partitions(rankings, npart, masks=None):"
+     ]
+    ],
+    "BASE  dense[:K] -> PR_d ;  splade[:K] -> PR_s ;  RRF(PR_d, PR_s) -> top-P": [
+     [
+      9,
+      "  BASE  dense[:K] -> PR_d ;  splade[:K] -> PR_s ;  RRF(PR_d, PR_s) -> top-P"
+     ]
+    ]
+   }
+  },
+  "scratchpad/_l1ps_router.py": {
+   "sha256": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9",
+   "lines": {
+    "P = 50": [
+     [
+      38,
+      "P = 50"
+     ]
+    ],
+    "output             EXACTLY 50 canonical C partitions, no stray nodes": [
+     [
+      5,
+      "    output             EXACTLY 50 canonical C partitions, no stray nodes"
+     ]
+    ]
+   }
+  },
+  "scratchpad/_l1kb_core.py": {
+   "sha256": "f804f92d3ddead9ffdfd2a69981a3470f49346f9163f6f4a5ee3c546275cf8da",
+   "lines": {
+    "BASE_CFG = dict(B=6, M_struct=64, M_ret=32, agg=\"S4\", fusion=\"F6\", T=1, tag=\"F6\")": [
+     [
+      25,
+      "BASE_CFG = dict(B=6, M_struct=64, M_ret=32, agg=\"S4\", fusion=\"F6\", T=1, tag=\"F6\")"
+     ]
+    ]
+   }
+  },
+  "src/l1_canonical/replay_cache.py": {
+   "sha256": "1fc5411c9f12f25d81586aabdb1af0da371752f20be5d4d09d8d17529a89f0d1",
+   "lines": {
+    "TOPP = 200": [
+     [
+      43,
+      "TOPP = 200"
+     ]
+    ],
+    "SMAX = 256": [
+     [
+      44,
+      "SMAX = 256"
+     ]
+    ],
+    "EVAL_CAP = 2000": [
+     [
+      45,
+      "EVAL_CAP = 2000"
+     ]
+    ]
+   }
+  }
+ },
+ "L1_CONTRACT": {
+  "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+  "files": {
+   "scratchpad/_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+   "scratchpad/_l1ps_cache.py": "ab81e214def8eb8e56bf04543475971e7cbdf4dfcf026111922817e38bfa176e",
+   "scratchpad/_l1ps_router.py": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9",
+   "scratchpad/_l1hu_build.py": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79",
+   "scratchpad/_l1hu_local_worker.py": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+   "scratchpad/_l1ep_part.py": "a7adda6a85f55ad2d740a495002dac1bbaa5758b0758ec5a3e48db48ef8d7706",
+   "scratchpad/_l1ep_c.py": "6a34073181944baba5b8d5d0fdc683299fbb42eb6c15a33fb406047eaa46d848",
+   "scratchpad/_l1ep_pu.py": "8dd1e0a6818f1ce99733fd6b6c7e513cdf3bfbfafe0340bec09828e60bd215f7",
+   "scratchpad/_l1kn_sub.py": "3cb85dfd6698bc01fe52ae8a75c5b0629558204204ab2a60eba1a386e10046f3",
+   "scratchpad/_l1ov_core.py": "b689c1983bf4d920990e7610369b151f9aead97d39c39a1e5807b5595b8d750d",
+   "scratchpad/_l1ov_eval.py": "0fee96e0106f9b886b759b337cfcea1ff3a8fd75cb4a8f1f92b1c3bcacf08b28",
+   "scratchpad/_l1hu_s.py": "66a86494beb4fefca9d772a88e224e0f91a470f50abb8ecc761c625cdbf13649",
+   "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+   "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+   "src/l1_canonical/partition.py": "45be47b5dd5d432af6b7339133e9cb4d5acf38d9ee5661368af0db3e5f175257",
+   "src/l1_canonical/replay_cache.py": "1fc5411c9f12f25d81586aabdb1af0da371752f20be5d4d09d8d17529a89f0d1",
+   "src/l1_canonical/l1_eval.py": "01266b0609bceb7a0aa33f0d73d35939e3a1abf54983b6efa9c8dce15de06ee7"
+  },
+  "constants": {
+   "K0": 60,
+   "K": 100,
+   "P_MAIN": 50,
+   "SEED_K": 5,
+   "BEAM": 64,
+   "MAX_HOPS": 3,
+   "DEG_CAP": 300,
+   "SMAX": 256,
+   "TOPP": 200,
+   "EVAL_CAP": 2000,
+   "MIN_VAL": 1000,
+   "PARTITION": {
+    "rule": "H4_SPLIT_PRESERVE",
+    "families": [
+     "STRUCT",
+     "KNN"
+    ],
+    "target_block_size": 100,
+    "partitioner": "mtkahypar",
+    "preset": "DETERMINISTIC_QUALITY",
+    "objective": "KM1",
+    "epsilon": 0.03,
+    "seed": 0
+   }
+  }
+ },
+ "environment_wsl": [
+  "dev",
+  "3.10.12",
+  "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "Name: mtkahypar",
+  "Version: 1.6.2",
+  "12",
+  "MemTotal:        7976124 kB"
+ ],
+ "RAN": {
+  "metaqa": {
+   "N": 43234,
+   "k_frozen_rule": 432,
+   "DATASET_json_RECORD_SHA256": "8ab4506933d0df8f9b8443848b9da80e49e698cf9cb40ef32523fdb4e31e2c87",
+   "hypergraph": {
+    "rule": "H4_SPLIT_PRESERVE",
+    "famset": "SK",
+    "families": [
+     "STRUCT",
+     "KNN"
+    ],
+    "k": 432,
+    "k_rule": "max(1, N // 100)",
+    "cap": 100,
+    "cap_rule": [
+     "blk",
+     1.0
+    ],
+    "mode": "split",
+    "weighted": true,
+    "weight_scale": 1000,
+    "hyperedges": 86796,
+    "pins": 531006,
+    "weight_min": 10,
+    "weight_max": 1000,
+    "content_digest": "bebdd65c305a1f565c3127a8ef91207db03a7e27af487062d8bbc548a2347fcc",
+    "file_sha256": "edd0cb51683df14973cbb4021518455b97c827ab3aad577d238ae07227f84743"
+   },
+   "partition_run": {
+    "STATUS": "OK",
+    "contract": {
+     "partitioner": "mtkahypar",
+     "preset": "DETERMINISTIC_QUALITY",
+     "objective": "KM1",
+     "epsilon": 0.03,
+     "seed": 0,
+     "vertex_weights": "unit",
+     "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+     "k": 432,
+     "k_rule": "max(1, N // 100)",
+     "hypergraph_rule": "H4_SPLIT_PRESERVE",
+     "families": [
+      "STRUCT",
+      "KNN"
+     ],
+     "worker": "scratchpad/_l1hu_local_worker.py",
+     "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+     "threads": 8,
+     "deterministic_preset_note": "DETERMINISTIC_QUALITY is thread-count independent; LOCAL_COMPUTE.json verified local == Modal bit-identical"
+    },
+    "worker_stats": {
+     "hyperedges": 86796,
+     "pins": 531006,
+     "N": 43234,
+     "k": 432,
+     "threads": 8,
+     "ran_on": "local_wsl",
+     "edge_weighted": true,
+     "ew_min": 10,
+     "ew_max": 1000,
+     "ew_readback_exact": true,
+     "objective_km1": 41244100.0,
+     "objective_cut": 16213783.0,
+     "peak_rss_mb": 966.4,
+     "wall_seconds": 185.7
+    },
+    "guard": {
+     "rss_cap_gb": 2.267723264,
+     "host_available_gb_at_start": 3.267723264,
+     "margin_gb": 1.0,
+     "peak_rss_kb": 989584,
+     "killed": 0,
+     "rc": 0,
+     "wall_seconds": 190.8,
+     "returncode": 0
+    },
+    "wsl": {
+     "distro": "Ubuntu-22.04",
+     "raw": [
+      "dev",
+      "1.26.4",
+      "3.10.12",
+      "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+      "Version: 1.6.2",
+      "12",
+      "7789"
+     ],
+     "returncode": 0
+    },
+    "output": {
+     "file": "data/l1_canonical/metaqa/parts/H4_SK.npy",
+     "bytes": 346000,
+     "sha256": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062",
+     "dtype": "int64",
+     "n": 43234
+    },
+    "post_checks": {
+     "length_ok": true,
+     "min_block": 0,
+     "max_block": 431,
+     "blocks_used": 432,
+     "k": 432,
+     "every_block_used": true,
+     "size_min": 14,
+     "size_max": 104,
+     "size_mean": 100.079,
+     "ceil_N_over_k": 101,
+     "balance_max_over_mean": 1.0392,
+     "max_over_allowed_eps003": 0.9997,
+     "balance_within_eps": true
+    }
+   }
+  },
+  "squad": {
+   "N": 20233,
+   "k_frozen_rule": 202,
+   "DATASET_json_RECORD_SHA256": "29976120cf085d2f776c9eea28da6363bc6c6d0be679cca550db7f714a151a23",
+   "hypergraph": {
+    "rule": "H4_SPLIT_PRESERVE",
+    "famset": "SK",
+    "families": [
+     "STRUCT",
+     "KNN"
+    ],
+    "k": 202,
+    "k_rule": "max(1, N // 100)",
+    "cap": 100,
+    "cap_rule": [
+     "blk",
+     1.0
+    ],
+    "mode": "split",
+    "weighted": true,
+    "weight_scale": 1000,
+    "hyperedges": 39146,
+    "pins": 1589832,
+    "weight_min": 10,
+    "weight_max": 1000,
+    "content_digest": "3a170cd70d0a77aa810b6107d59c5230f26b6642af21a9d6c31cd56545b8d1c5",
+    "file_sha256": "ed6b8336adb44fd868ef715f81401c5a06b7bbc19a91eafb9ada39c59c59b1a6"
+   },
+   "partition_run": {
+    "STATUS": "OK",
+    "contract": {
+     "partitioner": "mtkahypar",
+     "preset": "DETERMINISTIC_QUALITY",
+     "objective": "KM1",
+     "epsilon": 0.03,
+     "seed": 0,
+     "vertex_weights": "unit",
+     "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+     "k": 202,
+     "k_rule": "max(1, N // 100)",
+     "hypergraph_rule": "H4_SPLIT_PRESERVE",
+     "families": [
+      "STRUCT",
+      "KNN"
+     ],
+     "worker": "scratchpad/_l1hu_local_worker.py",
+     "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+     "threads": 8,
+     "deterministic_preset_note": "DETERMINISTIC_QUALITY is thread-count independent; LOCAL_COMPUTE.json verified local == Modal bit-identical"
+    },
+    "worker_stats": {
+     "hyperedges": 39146,
+     "pins": 1589832,
+     "N": 20233,
+     "k": 202,
+     "threads": 8,
+     "ran_on": "local_wsl",
+     "edge_weighted": true,
+     "ew_min": 10,
+     "ew_max": 1000,
+     "ew_readback_exact": true,
+     "objective_km1": 6525934.0,
+     "objective_cut": 2521407.0,
+     "peak_rss_mb": 539.5,
+     "wall_seconds": 81.0
+    },
+    "guard": {
+     "rss_cap_gb": 2.333709824,
+     "host_available_gb_at_start": 3.333709824,
+     "margin_gb": 1.0,
+     "peak_rss_kb": 519692,
+     "killed": 0,
+     "rc": 0,
+     "wall_seconds": 83.9,
+     "returncode": 0
+    },
+    "wsl": {
+     "distro": "Ubuntu-22.04",
+     "raw": [
+      "dev",
+      "1.26.4",
+      "3.10.12",
+      "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+      "Version: 1.6.2",
+      "12",
+      "7789"
+     ],
+     "returncode": 0
+    },
+    "output": {
+     "file": "data/l1_canonical/squad/parts/H4_SK.npy",
+     "bytes": 161992,
+     "sha256": "a45195b825fa2f2fed58a64b08aa5471a20ad946f2b47831db3689b1348f54ce",
+     "dtype": "int64",
+     "n": 20233
+    },
+    "post_checks": {
+     "length_ok": true,
+     "min_block": 0,
+     "max_block": 201,
+     "blocks_used": 202,
+     "k": 202,
+     "every_block_used": true,
+     "size_min": 49,
+     "size_max": 104,
+     "size_mean": 100.163,
+     "ceil_N_over_k": 101,
+     "balance_max_over_mean": 1.0383,
+     "max_over_allowed_eps003": 0.9997,
+     "balance_within_eps": true
+    }
+   }
+  },
+  "musique": {
+   "N": 117534,
+   "k_frozen_rule": 1175,
+   "DATASET_json_RECORD_SHA256": "67fa637183fb02c4762fc80f6f4d2e21e14e2c665977e89adfcd6d32ed6d683f",
+   "hypergraph": {
+    "rule": "H4_SPLIT_PRESERVE",
+    "famset": "SK",
+    "families": [
+     "STRUCT",
+     "KNN"
+    ],
+    "k": 1175,
+    "k_rule": "max(1, N // 100)",
+    "cap": 100,
+    "cap_rule": [
+     "blk",
+     1.0
+    ],
+    "mode": "split",
+    "weighted": true,
+    "weight_scale": 1000,
+    "hyperedges": 250732,
+    "pins": 6014938,
+    "weight_min": 10,
+    "weight_max": 1000,
+    "content_digest": "b19fd504bad7997cd254876ed7294128ab1724a95ccc52a18aed3b2a3e5d27bc",
+    "file_sha256": "2b1edc6dfcb045b7799459c4582bb2fbbe6d591825a48db45366597a97c1cd72"
+   },
+   "partition_run": {
+    "STATUS": "FAILED_MEMORY_CAP",
+    "contract": {
+     "partitioner": "mtkahypar",
+     "preset": "DETERMINISTIC_QUALITY",
+     "objective": "KM1",
+     "epsilon": 0.03,
+     "seed": 0,
+     "vertex_weights": "unit",
+     "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+     "k": 1175,
+     "k_rule": "max(1, N // 100)",
+     "hypergraph_rule": "H4_SPLIT_PRESERVE",
+     "families": [
+      "STRUCT",
+      "KNN"
+     ],
+     "worker": "scratchpad/_l1hu_local_worker.py",
+     "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+     "threads": 8,
+     "deterministic_preset_note": "DETERMINISTIC_QUALITY is thread-count independent; LOCAL_COMPUTE.json verified local == Modal bit-identical"
+    },
+    "worker_stats": null,
+    "guard": {
+     "rss_cap_gb": 3.5904035839999997,
+     "host_available_gb_at_start": 4.590403584,
+     "margin_gb": 1.0,
+     "peak_rss_kb": 3597980,
+     "killed": 1,
+     "rc": 137,
+     "wall_seconds": 613.6,
+     "returncode": 0
+    },
+    "wsl": {
+     "distro": "Ubuntu-22.04",
+     "raw": [
+      "dev",
+      "1.26.4",
+      "3.10.12",
+      "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+      "Version: 1.6.2",
+      "12",
+      "7789"
+     ],
+     "returncode": 0
+    },
+    "output": null,
+    "post_checks": null
+   }
+  }
+ },
+ "guard_note": "peak_rss_mb in worker_stats is the WSL worker's ru_maxrss: it includes the Python-side pin lists handed to create_hypergraph, not only Mt-KaHyPar's internal structures; the guard's peak_rss_kb is the 1 s RSS poll of the same process",
+ "RECORD_SHA256": "5c01690ccf83249b765f4c1d79ab616ae3c2c12b89bc862fd222001180b40807",
+ "RECORD_SHA256_LF": "4f66bc3c1b28fbe68ccdc73b0c5ac1cdd3771ee018e316ae5ac93f6abeb3d7e5"
+}

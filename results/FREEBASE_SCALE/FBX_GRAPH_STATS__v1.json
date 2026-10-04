@@ -1,0 +1,453 @@
+{
+ "stage": "FBX_STATS",
+ "utc": "2026-09-30T04:39:46Z",
+ "status": "DEVELOPMENT (systems statistics only; nothing partitioned, embedded or routed)",
+ "input": {
+  "tree": "data/final_canonical/freebase",
+  "DATASET_json_RECORD_SHA256": "d3b9324b1c287f1090c8c1c31e4b5c0dd8792d0f2729a0b6a5feaf762e14f05b",
+  "graph_files_verified_by": "results/FREEBASE_SCALE/FBX_HOST_VERIFY__v1.json (verify_freebase --full on this host)"
+ },
+ "method": {
+  "chunk_endpoints": 32000000,
+  "chunks": 128,
+  "workers": 8,
+  "und_rule": "per node: unique(out_dst U in_src) minus itself == the STRUCT undirected key set (CanonicalDataset.ukeys)"
+ },
+ "wall_seconds": 113.6,
+ "code": {
+  "scratchpad/_fbx_stats.py": "3e759e06e93ca4005a0083c940a199b497c4462d50658ce55bcc23da9d47de99"
+ },
+ "stats": {
+  "nodes": 301977131,
+  "directed_edges_as_served": 2062430072,
+  "self_loops": 55785,
+  "self_loops_in_side": 55785,
+  "directed_nonself_edges": 2062374287,
+  "unique_undirected_pairs_F": 1975803843,
+  "mean_multiplicity_D_over_F": 1.0438,
+  "anchors_deg_ge_1": 301926705,
+  "isolated_nodes": 50426,
+  "nodes_without_out_edges": 180693966,
+  "nodes_without_in_edges": 6985654,
+  "mean_und_degree": 13.0858,
+  "H4_STRUCT_only": {
+   "hyperedges_precap": 301926705,
+   "pins_precap": 4253534391,
+   "formula": "pins = anchors + sum(und_degree) = anchors + 2F (closed neighbourhood per anchor; the split rule keeps every pin and adds the anchor once per extra chunk)",
+   "pins_int32_eidx_bytes": 17014137564
+  },
+  "degree_quantiles_exact": {
+   "und": {
+    "p50": 1,
+    "p90": 27,
+    "p99": 48,
+    "p99.9": 126
+   },
+   "out": {
+    "p50": 0,
+    "p90": 19,
+    "p99": 47,
+    "p99.9": 98
+   },
+   "in": {
+    "p50": 1,
+    "p90": 5,
+    "p99": 13,
+    "p99.9": 58
+   }
+  },
+  "hist_log2_bin0_is_zero_binb_is_2^(b-1)_to_2^b-1": {
+   "und": [
+    50426,
+    178266024,
+    16748047,
+    43156948,
+    26017100,
+    8532891,
+    28335941,
+    574272,
+    186259,
+    58813,
+    23813,
+    9445,
+    5622,
+    4242,
+    2635,
+    1958,
+    725,
+    810,
+    392,
+    316,
+    261,
+    79,
+    54,
+    5,
+    47,
+    5,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "out": [
+    180693966,
+    8907379,
+    41670167,
+    21573375,
+    17181644,
+    4161131,
+    27208135,
+    400410,
+    144174,
+    28698,
+    6332,
+    662,
+    407,
+    227,
+    147,
+    89,
+    47,
+    51,
+    23,
+    22,
+    11,
+    17,
+    6,
+    4,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "in": [
+    6985654,
+    154683848,
+    104477199,
+    27123888,
+    6375856,
+    1699385,
+    355557,
+    134793,
+    65333,
+    34968,
+    15954,
+    8512,
+    5198,
+    4073,
+    2504,
+    1863,
+    703,
+    759,
+    376,
+    296,
+    250,
+    62,
+    52,
+    2,
+    44,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "hub_pin_mass": {
+   "und_degree_>100": {
+    "anchors": 421106,
+    "pins": 1676379305,
+    "share_of_und_degree_sum": 0.424227
+   },
+   "und_degree_>1000": {
+    "anchors": 26908,
+    "pins": 1593840074,
+    "share_of_und_degree_sum": 0.40334
+   },
+   "und_degree_>10000": {
+    "anchors": 6168,
+    "pins": 1529457606,
+    "share_of_und_degree_sum": 0.387047
+   },
+   "und_degree_>100000": {
+    "anchors": 1480,
+    "pins": 1397750966,
+    "share_of_und_degree_sum": 0.353717
+   },
+   "und_degree_>1000000": {
+    "anchors": 195,
+    "pins": 976671952,
+    "share_of_und_degree_sum": 0.247158
+   }
+  },
+  "oversize_hyperedges_by_K": {
+   "1000": {
+    "cap_round_N_over_K": 301977,
+    "oversize_anchors": 622,
+    "pins_in_oversize": 1245910871,
+    "share_of_pins": 0.292912
+   },
+   "2000": {
+    "cap_round_N_over_K": 150989,
+    "oversize_anchors": 1094,
+    "pins_in_oversize": 1351260422,
+    "share_of_pins": 0.317679
+   },
+   "5000": {
+    "cap_round_N_over_K": 60395,
+    "oversize_anchors": 2007,
+    "pins_in_oversize": 1437393901,
+    "share_of_pins": 0.337929
+   },
+   "10000": {
+    "cap_round_N_over_K": 30198,
+    "oversize_anchors": 2822,
+    "pins_in_oversize": 1470028756,
+    "share_of_pins": 0.345602
+   },
+   "20000": {
+    "cap_round_N_over_K": 15099,
+    "oversize_anchors": 4866,
+    "pins_in_oversize": 1513718798,
+    "share_of_pins": 0.355873
+   },
+   "50000": {
+    "cap_round_N_over_K": 6040,
+    "oversize_anchors": 8751,
+    "pins_in_oversize": 1549812831,
+    "share_of_pins": 0.364359
+   },
+   "100000": {
+    "cap_round_N_over_K": 3020,
+    "oversize_anchors": 13862,
+    "pins_in_oversize": 1571913701,
+    "share_of_pins": 0.369555
+   },
+   "3019771": {
+    "cap_round_N_over_K": 100,
+    "oversize_anchors": 427773,
+    "pins_in_oversize": 1677473778,
+    "share_of_pins": 0.394372
+   }
+  },
+  "top_hubs_pos_und_out_in": [
+   [
+    85298991,
+    47552470,
+    47552470,
+    2768
+   ],
+   [
+    214763509,
+    30870098,
+    30870098,
+    0
+   ],
+   [
+    221906489,
+    27519876,
+    0,
+    27519877
+   ],
+   [
+    142024291,
+    21776578,
+    66,
+    32664694
+   ],
+   [
+    81052767,
+    21268254,
+    21268254,
+    0
+   ],
+   [
+    215587442,
+    19737667,
+    19737667,
+    0
+   ],
+   [
+    28271689,
+    15709159,
+    15709159,
+    0
+   ],
+   [
+    247639198,
+    11425660,
+    0,
+    11425660
+   ],
+   [
+    121526734,
+    11194964,
+    11194964,
+    0
+   ],
+   [
+    3246790,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    23695670,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    31807246,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    30454408,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    39140455,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    46148268,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    57153057,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    58138211,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    67826578,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    79076994,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    93933729,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    96764789,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    111441767,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    113691908,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    118684990,
+    10888179,
+    0,
+    10888179
+   ],
+   [
+    126660419,
+    10888179,
+    0,
+    10888179
+   ]
+  ],
+  "relations_with_edges": 780200,
+  "relations_total": 784928,
+  "mirror_rel_779840_edges": 254882143,
+  "mirror_share_of_edges": 0.123583,
+  "top_relations_id_count": [
+   [
+    11170,
+    1151814885
+   ],
+   [
+    779840,
+    254882143
+   ],
+   [
+    11189,
+    65893176
+   ],
+   [
+    11171,
+    30870097
+   ],
+   [
+    11173,
+    30870097
+   ],
+   [
+    11172,
+    30870097
+   ],
+   [
+    11183,
+    30870050
+   ],
+   [
+    11184,
+    30851238
+   ],
+   [
+    13227,
+    17456630
+   ],
+   [
+    29345,
+    17165590
+   ],
+   [
+    778266,
+    15702023
+   ],
+   [
+    778284,
+    15692138
+   ]
+  ]
+ }
+}

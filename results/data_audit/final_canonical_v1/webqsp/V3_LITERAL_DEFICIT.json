@@ -1,0 +1,93 @@
+{
+  "schema": "V3_LITERAL_DEFICIT/v1",
+  "generated_utc": "2026-09-06T08:36:17Z",
+  "question": "how many WebQSP/CWQ-relevant facts would the IDIR filter destroy?",
+  "idir_filter_verified_verbatim": "WHERE subject REGEXP '^/m/|^/g/' AND object REGEXP '^/m/|^/g/' -- confirmed in DataPreparationScripts/FB1.sh",
+  "WHY_NSM_IS_NOT_THE_INSTRUMENT": {
+    "finding": "the NSM sibling release also strips literals; its vocabulary is ~99.99% MIDs.",
+    "per_dataset": {
+      "webqsp": {
+        "vocab": 1441420,
+        "non_mid": 149,
+        "non_mid_pct": 0.0103,
+        "examples": [
+          "-1332",
+          "Seattle Pilots",
+          "1972",
+          "1991",
+          "1906-04-18",
+          "2011-02-22",
+          "1892-01-11",
+          "1897-03-04",
+          "1961-01-20",
+          "1980"
+        ]
+      },
+      "CWQ": {
+        "vocab": 2429346,
+        "non_mid": 226,
+        "non_mid_pct": 0.0093,
+        "examples": [
+          "m.09b6zr?x",
+          "1892-01-11",
+          "1897-03-04",
+          "m.0157m?x",
+          "1957-03-25",
+          "1973-01-01",
+          "1981-01-01",
+          "1986-01-01",
+          "1995-01-01",
+          "2004-05-01"
+        ]
+      }
+    },
+    "consequence": "NSM cannot measure literal loss because it already suffered it. This is a finding in its own right: no existing WebQSP-lineage graph preserves literal-valued facts. RoG collapsed them into strings indistinguishable from entity names, NSM dropped them, IDIR filters them by regex."
+  },
+  "INSTRUMENT": "RoG V1, whose VALUE_LITERAL class was frozen in section 3.",
+  "LOWER_BOUND_DISCLAIMER": "counts pattern-identifiable literals (date-shaped and numeric-shaped) only. A literal STRING is indistinguishable from a collapsed entity name in RoG, so the true deficit is strictly larger than every number below.",
+  "EDGES": {
+    "total": 8309195,
+    "literal_incident": 52566,
+    "literal_incident_pct": 0.6326,
+    "object_is_literal": 23874,
+    "subject_is_literal": 28799
+  },
+  "NODES": {
+    "total": 2592894,
+    "value_literal": 14515,
+    "distinct_literal_surfaces": 14515
+  },
+  "CVT_DAMAGE": {
+    "cvt_total": 1588085,
+    "cvt_with_at_least_one_argument": 967122,
+    "cvt_losing_every_argument_under_the_filter": 1807,
+    "cvt_losing_some_arguments_under_the_filter": 1018,
+    "why_this_matters": "a mediator that loses all its arguments is not a smaller record, it is an empty one. The composition that makes a CVT worth retrieving is exactly what a literal-stripping filter removes."
+  },
+  "GOLD_ANSWERS_THAT_ARE_LITERALS": {
+    "distinct": 564,
+    "distinct_pct_of_gold": 1.6758,
+    "occurrences": 818,
+    "occurrence_pct": 0.6396,
+    "gold_total_distinct": 33655,
+    "examples": [
+      "08260",
+      "08540",
+      "08541",
+      "08542",
+      "08543",
+      "08544",
+      "08601",
+      "08602",
+      "08603",
+      "08604",
+      "08605",
+      "08606",
+      "08607",
+      "08608",
+      "08609"
+    ],
+    "reading": "these answers are unreachable in a graph whose literal-valued facts were filtered out. Those questions are not made harder, they are made unanswerable."
+  },
+  "elapsed_s": 9.0
+}

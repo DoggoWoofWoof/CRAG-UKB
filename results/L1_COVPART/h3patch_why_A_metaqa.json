@@ -1,0 +1,110 @@
+{
+ "cache": "metaqa",
+ "n_DEV_A": 1002,
+ "diagnostic_only": true,
+ "depth": 3,
+ "beam_module_sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+ "head_substitutions": [
+  [
+   "name = sys.argv[1]",
+   "name = 'metaqa'"
+  ],
+  [
+   "LATENT = \"--latent\" in sys.argv",
+   "LATENT = False"
+  ],
+  [
+   "DEPTH = 2",
+   "DEPTH = 3"
+  ],
+  [
+   "beams1, beams2 = [[] for _ in range(nq)], [[] for _ in range(nq)]",
+   "beams1, beams2, beams3 = [[] for _ in range(nq)], [[] for _ in range(nq)], [[] for _ in range(nq)]"
+  ],
+  [
+   "beams1[qi], beams2[qi] = beams[0], beams[1]",
+   "beams1[qi], beams2[qi], beams3[qi] = beams[0], beams[1], beams[2]"
+  ],
+  [
+   "        beams.append(nb)\n        B = nb\n",
+   "        beams.append(nb)\n        if m[qi]:\n            CAND[(qi, h)] = np.unique(u_idx)\n        B = nb\n"
+  ]
+ ],
+ "groups": {
+  "hop1": {
+   "SAFE_failures": 27,
+   "missing_gold_nodes": 97,
+   "missing_is_seed": 0,
+   "missing_is_hub": 0,
+   "visited_at_hop (1 / 2 / 3)": [
+    94,
+    0,
+    0
+   ],
+   "scored_but_not_selected_first_at_hop (1 / 2 / 3)": [
+    0,
+    0,
+    0
+   ],
+   "never_scored (not adjacent to any beam node under the frozen admissibility)": 3,
+   "candidates_scored_unique_per_query_mean (hop 1 / 2 / 3)": [
+    32.1,
+    259.8,
+    740.8
+   ],
+   "failures_where_all_missing_nodes_are_scored_within_depth3": 25,
+   "failures_where_all_missing_nodes_are_scored_or_visited_within_depth2": 25,
+   "missing_nodes_per_failure_mean": 3.59
+  },
+  "hop2": {
+   "SAFE_failures": 174,
+   "missing_gold_nodes": 1169,
+   "missing_is_seed": 1,
+   "missing_is_hub": 0,
+   "visited_at_hop (1 / 2 / 3)": [
+    0,
+    536,
+    0
+   ],
+   "scored_but_not_selected_first_at_hop (1 / 2 / 3)": [
+    0,
+    630,
+    0
+   ],
+   "never_scored (not adjacent to any beam node under the frozen admissibility)": 2,
+   "candidates_scored_unique_per_query_mean (hop 1 / 2 / 3)": [
+    27.3,
+    214.6,
+    772.0
+   ],
+   "failures_where_all_missing_nodes_are_scored_within_depth3": 173,
+   "failures_where_all_missing_nodes_are_scored_or_visited_within_depth2": 173,
+   "missing_nodes_per_failure_mean": 6.72
+  },
+  "hop3": {
+   "SAFE_failures": 159,
+   "missing_gold_nodes": 2597,
+   "missing_is_seed": 0,
+   "missing_is_hub": 0,
+   "visited_at_hop (1 / 2 / 3)": [
+    1,
+    6,
+    261
+   ],
+   "scored_but_not_selected_first_at_hop (1 / 2 / 3)": [
+    0,
+    1,
+    655
+   ],
+   "never_scored (not adjacent to any beam node under the frozen admissibility)": 1673,
+   "candidates_scored_unique_per_query_mean (hop 1 / 2 / 3)": [
+    38.3,
+    318.9,
+    777.1
+   ],
+   "failures_where_all_missing_nodes_are_scored_within_depth3": 33,
+   "failures_where_all_missing_nodes_are_scored_or_visited_within_depth2": 1,
+   "missing_nodes_per_failure_mean": 16.33
+  }
+ }
+}

@@ -1,0 +1,84 @@
+{
+  "dataset": "2wiki",
+  "dataset_version": "canonical_v1",
+  "built_at": "2026-09-05T06:17:45",
+  "unique_node_ids": true,
+  "canonical_node_count": 398354,
+  "raw_source_records": 1926060,
+  "duplicates_collapsed": 1527706,
+  "dropped_records": 0,
+  "drop_reasons": {},
+  "accounting_identity": "RAW_SOURCE_RECORDS == CANONICAL_NODES + DUPLICATES_COLLAPSED + DROPPED_RECORDS (asserted)",
+  "empty_text_nodes": 0,
+  "empty_title_nodes": 0,
+  "corpus_accounting_detail": {
+    "raw_source_records": 1926060,
+    "dropped_records": [],
+    "duplicates_collapsed": 1527706,
+    "identity": "context paragraph TITLE (exact string); node_id = 2wiki:<sha256(title)[:24]>",
+    "identity_text_conflicts": {
+      "n": 0,
+      "examples": []
+    },
+    "identity_normalization_diagnostics": {
+      "exact_identities": 398354,
+      "extra_collapses_if_NFC": 0,
+      "extra_collapses_if_whitespace_collapse": 0,
+      "extra_collapses_if_NFC+ws+casefold": 113
+    },
+    "text_construction": "text = ' '.join(sentences) (official file stores a sentence list)",
+    "note": "2wiki_universe (para_with_hyperlink, 5,989,847 articles) is a separate full-universe corpus, OUT OF SCOPE here"
+  },
+  "query_stats": {
+    "train": {
+      "n": 167454,
+      "n_with_gold_refs": 167454,
+      "n_all_gold_resolved": 167454,
+      "n_any_gold_resolved": 167454,
+      "gold_refs_total": 404170,
+      "gold_nodes_total": 404170
+    },
+    "dev": {
+      "n": 12576,
+      "n_with_gold_refs": 12576,
+      "n_all_gold_resolved": 12576,
+      "n_any_gold_resolved": 12576,
+      "gold_refs_total": 30654,
+      "gold_nodes_total": 30654
+    },
+    "test": {
+      "n": 12576,
+      "n_with_gold_refs": 0,
+      "n_all_gold_resolved": 0,
+      "n_any_gold_resolved": 0,
+      "gold_refs_total": 0,
+      "gold_nodes_total": 0
+    }
+  },
+  "splits_with_gold": [
+    "train",
+    "dev"
+  ],
+  "ALL_EVAL_GOLDS_PRESENT": true,
+  "unresolved_gold_refs": {
+    "counts": {},
+    "examples": []
+  },
+  "eval_subset": {
+    "method": "legacy 2wiki_clean questions came from the FlashRAG 15k train sample (raw file no longer present); matched to official train/dev/test by EXACT question text; ambiguities resolved by supporting-fact title set == legacy gold title set",
+    "n_legacy": 2000,
+    "n_recovered": 2000,
+    "n_missed": 0,
+    "misses": [],
+    "official_split_distribution": {
+      "train": 2000
+    },
+    "file": "data/final_canonical/2wiki/eval_2000.jsonl",
+    "n": 2000,
+    "n_all_gold_resolved": 2000,
+    "n_with_gold_refs": 2000
+  },
+  "CORPUS_HASH": "ec7fbbe8cd7830402932135cd82c9b87f0b87a96175c914b3b02bc1b37d1f2c3",
+  "NODE_ORDER_HASH": "246d9c445174fe733310f7cc8d7c156ba9112905b2b59ee9ac52d317645abfd4",
+  "nodes_jsonl_sha256": "5971b61bcd6e7c09af7cdf5d51e3425a709a16d8a3c01edcf1675cfd245df97a"
+}

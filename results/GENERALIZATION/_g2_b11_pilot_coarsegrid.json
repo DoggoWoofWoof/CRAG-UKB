@@ -1,0 +1,718 @@
+{
+ "phase": "G2 B1.1 expanded-universe admission LODO pilot; TEST untouched",
+ "datasets": [
+  "metaqa",
+  "2wiki_clean",
+  "squad_clean"
+ ],
+ "TOP_POOL": 50,
+ "M_MAX": 256,
+ "feature_cols": [
+  "dense_pct",
+  "splade_pct",
+  "fused_rrf_pct",
+  "retriever_support_frac",
+  "dense_splade_agree",
+  "min_hop_from_seed_norm",
+  "seed_connectivity_frac",
+  "struct_support_norm",
+  "degree_pct",
+  "ppr_pct",
+  "s_dir_pct",
+  "dir_exp_rank_pct",
+  "min_exp_hop_norm",
+  "n_struct_anchors_pct",
+  "struct_dist_pct",
+  "dir_support_max_pct",
+  "geometry_added_ind"
+ ],
+ "ladder": [
+  "S0",
+  "S1",
+  "S2"
+ ],
+ "leakage_checks": {
+  "target_excluded_from_train": true,
+  "train_only_normalization": true,
+  "no_dataset_id_feature": true,
+  "no_gold_or_relationtype_or_bracket_feature": true
+ },
+ "central_metric": "RECOVERED_GOLD_ADMISSION@50",
+ "INFERENCE_SAFETY_AUDIT": {
+  "per_dataset": {
+   "metaqa": {
+    "n_cand": 598522,
+    "feat_dim": 17,
+    "s_dir_abstain_frac": 0.1204,
+    "geometry_added_frac": 0.8331,
+    "struct_unreachable_frac": 0.1253
+   },
+   "2wiki_clean": {
+    "n_cand": 485699,
+    "feat_dim": 17,
+    "s_dir_abstain_frac": 0.1765,
+    "geometry_added_frac": 0.7941,
+    "struct_unreachable_frac": 0.1854
+   },
+   "squad_clean": {
+    "n_cand": 260903,
+    "feat_dim": 17,
+    "s_dir_abstain_frac": 0.1177,
+    "geometry_added_frac": 0.8084,
+    "struct_unreachable_frac": 0.1148
+   }
+  },
+  "violations": [],
+  "PASS": true
+ },
+ "RESULTS": {
+  "metaqa": {
+   "train": [
+    "2wiki_clean",
+    "squad_clean"
+   ],
+   "BASE_FUSED": {
+    "nq": 1166,
+    "ANY@50": 0.5969,
+    "GOLD_RECALL@50": 0.2799,
+    "ALL@50": 0.4931,
+    "RECOVERED_GOLD_ADMISSION@50": 0.0,
+    "recovered_golds_available": 3260,
+    "recovered_golds_admitted": 0,
+    "ORIGINAL_GOLD_RETENTION@50": 1.0,
+    "NEW_GOLDS_ADMITTED": 0,
+    "OLD_GOLDS_EVICTED": 0,
+    "NET_GOLD_GAIN@50": 0,
+    "POOL_CHURN_mean": 0.0,
+    "PER_HOP": {
+     "1": {
+      "nq": 490,
+      "GOLD_RECALL@50": 0.9713,
+      "ALL@50": 0.9469,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0,
+      "recovered_avail": 27,
+      "recovered_admitted": 0,
+      "NET_GOLD_GAIN@50": 0
+     },
+     "2": {
+      "nq": 219,
+      "GOLD_RECALL@50": 0.2589,
+      "ALL@50": 0.2557,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0,
+      "recovered_avail": 312,
+      "recovered_admitted": 0,
+      "NET_GOLD_GAIN@50": 0
+     },
+     "3": {
+      "nq": 457,
+      "GOLD_RECALL@50": 0.0768,
+      "ALL@50": 0.1204,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0,
+      "recovered_avail": 2921,
+      "recovered_admitted": 0,
+      "NET_GOLD_GAIN@50": 0
+     }
+    }
+   },
+   "S0_linear": {
+    "nq": 1166,
+    "ANY@50": 0.5995,
+    "GOLD_RECALL@50": 0.2794,
+    "ALL@50": 0.4117,
+    "RECOVERED_GOLD_ADMISSION@50": 0.0868,
+    "recovered_golds_available": 3260,
+    "recovered_golds_admitted": 283,
+    "ORIGINAL_GOLD_RETENTION@50": 0.7751,
+    "NEW_GOLDS_ADMITTED": 283,
+    "OLD_GOLDS_EVICTED": 285,
+    "NET_GOLD_GAIN@50": -2,
+    "POOL_CHURN_mean": 0.1876,
+    "PER_HOP": {
+     "1": {
+      "nq": 490,
+      "GOLD_RECALL@50": 0.7495,
+      "ALL@50": 0.7408,
+      "RECOVERED_GOLD_ADMISSION@50": 0.4444,
+      "recovered_avail": 27,
+      "recovered_admitted": 12,
+      "NET_GOLD_GAIN@50": -209
+     },
+     "2": {
+      "nq": 219,
+      "GOLD_RECALL@50": 0.361,
+      "ALL@50": 0.2877,
+      "RECOVERED_GOLD_ADMISSION@50": 0.1763,
+      "recovered_avail": 312,
+      "recovered_admitted": 55,
+      "NET_GOLD_GAIN@50": 43
+     },
+     "3": {
+      "nq": 457,
+      "GOLD_RECALL@50": 0.1286,
+      "ALL@50": 0.1182,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0739,
+      "recovered_avail": 2921,
+      "recovered_admitted": 216,
+      "NET_GOLD_GAIN@50": 164
+     }
+    },
+    "beta_train_selected": 0.1
+   },
+   "S1_linear": {
+    "nq": 1166,
+    "ANY@50": 0.5086,
+    "GOLD_RECALL@50": 0.2205,
+    "ALL@50": 0.3208,
+    "RECOVERED_GOLD_ADMISSION@50": 0.0537,
+    "recovered_golds_available": 3260,
+    "recovered_golds_admitted": 175,
+    "ORIGINAL_GOLD_RETENTION@50": 0.6496,
+    "NEW_GOLDS_ADMITTED": 175,
+    "OLD_GOLDS_EVICTED": 444,
+    "NET_GOLD_GAIN@50": -269,
+    "POOL_CHURN_mean": 0.1561,
+    "PER_HOP": {
+     "1": {
+      "nq": 490,
+      "GOLD_RECALL@50": 0.6083,
+      "ALL@50": 0.5816,
+      "RECOVERED_GOLD_ADMISSION@50": 0.1111,
+      "recovered_avail": 27,
+      "recovered_admitted": 3,
+      "NET_GOLD_GAIN@50": -342
+     },
+     "2": {
+      "nq": 219,
+      "GOLD_RECALL@50": 0.2328,
+      "ALL@50": 0.2009,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0865,
+      "recovered_avail": 312,
+      "recovered_admitted": 27,
+      "NET_GOLD_GAIN@50": -11
+     },
+     "3": {
+      "nq": 457,
+      "GOLD_RECALL@50": 0.1034,
+      "ALL@50": 0.0985,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0496,
+      "recovered_avail": 2921,
+      "recovered_admitted": 145,
+      "NET_GOLD_GAIN@50": 84
+     }
+    },
+    "beta_train_selected": 0.1
+   },
+   "S2_linear": {
+    "nq": 1166,
+    "ANY@50": 0.4074,
+    "GOLD_RECALL@50": 0.1836,
+    "ALL@50": 0.2075,
+    "RECOVERED_GOLD_ADMISSION@50": 0.0669,
+    "recovered_golds_available": 3260,
+    "recovered_golds_admitted": 218,
+    "ORIGINAL_GOLD_RETENTION@50": 0.4838,
+    "NEW_GOLDS_ADMITTED": 218,
+    "OLD_GOLDS_EVICTED": 654,
+    "NET_GOLD_GAIN@50": -436,
+    "POOL_CHURN_mean": 0.1577,
+    "PER_HOP": {
+     "1": {
+      "nq": 490,
+      "GOLD_RECALL@50": 0.4066,
+      "ALL@50": 0.3224,
+      "RECOVERED_GOLD_ADMISSION@50": 0.1111,
+      "recovered_avail": 27,
+      "recovered_admitted": 3,
+      "NET_GOLD_GAIN@50": -532
+     },
+     "2": {
+      "nq": 219,
+      "GOLD_RECALL@50": 0.3183,
+      "ALL@50": 0.2374,
+      "RECOVERED_GOLD_ADMISSION@50": 0.1538,
+      "recovered_avail": 312,
+      "recovered_admitted": 48,
+      "NET_GOLD_GAIN@50": 25
+     },
+     "3": {
+      "nq": 457,
+      "GOLD_RECALL@50": 0.0992,
+      "ALL@50": 0.07,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0572,
+      "recovered_avail": 2921,
+      "recovered_admitted": 167,
+      "NET_GOLD_GAIN@50": 71
+     }
+    },
+    "beta_train_selected": 0.1
+   },
+   "S2_linear_NAIVE_PURE_rerank": {
+    "nq": 1166,
+    "ANY@50": 0.3602,
+    "GOLD_RECALL@50": 0.2187,
+    "ALL@50": 0.1449,
+    "RECOVERED_GOLD_ADMISSION@50": 0.2521,
+    "recovered_golds_available": 3260,
+    "recovered_golds_admitted": 822,
+    "ORIGINAL_GOLD_RETENTION@50": 0.1326,
+    "NEW_GOLDS_ADMITTED": 822,
+    "OLD_GOLDS_EVICTED": 1099,
+    "NET_GOLD_GAIN@50": -277,
+    "POOL_CHURN_mean": 0.6,
+    "PER_HOP": {
+     "1": {
+      "nq": 490,
+      "GOLD_RECALL@50": 0.0382,
+      "ALL@50": 0.0612,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0741,
+      "recovered_avail": 27,
+      "recovered_admitted": 2,
+      "NET_GOLD_GAIN@50": -879
+     },
+     "2": {
+      "nq": 219,
+      "GOLD_RECALL@50": 0.4252,
+      "ALL@50": 0.3516,
+      "RECOVERED_GOLD_ADMISSION@50": 0.3942,
+      "recovered_avail": 312,
+      "recovered_admitted": 123,
+      "NET_GOLD_GAIN@50": 70
+     },
+     "3": {
+      "nq": 457,
+      "GOLD_RECALL@50": 0.2449,
+      "ALL@50": 0.1357,
+      "RECOVERED_GOLD_ADMISSION@50": 0.2386,
+      "recovered_avail": 2921,
+      "recovered_admitted": 697,
+      "NET_GOLD_GAIN@50": 532
+     }
+    }
+   },
+   "best_linear_tag": "S0",
+   "MLP_on_best": {
+    "nq": 1166,
+    "ANY@50": 0.6192,
+    "GOLD_RECALL@50": 0.275,
+    "ALL@50": 0.4322,
+    "RECOVERED_GOLD_ADMISSION@50": 0.0393,
+    "recovered_golds_available": 3260,
+    "recovered_golds_admitted": 128,
+    "ORIGINAL_GOLD_RETENTION@50": 0.8816,
+    "NEW_GOLDS_ADMITTED": 128,
+    "OLD_GOLDS_EVICTED": 150,
+    "NET_GOLD_GAIN@50": -22,
+    "POOL_CHURN_mean": 0.1075,
+    "PER_HOP": {
+     "1": {
+      "nq": 490,
+      "GOLD_RECALL@50": 0.8461,
+      "ALL@50": 0.7939,
+      "RECOVERED_GOLD_ADMISSION@50": 0.3333,
+      "recovered_avail": 27,
+      "recovered_admitted": 9,
+      "NET_GOLD_GAIN@50": -118
+     },
+     "2": {
+      "nq": 219,
+      "GOLD_RECALL@50": 0.3088,
+      "ALL@50": 0.274,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0833,
+      "recovered_avail": 312,
+      "recovered_admitted": 26,
+      "NET_GOLD_GAIN@50": 21
+     },
+     "3": {
+      "nq": 457,
+      "GOLD_RECALL@50": 0.1005,
+      "ALL@50": 0.1204,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0318,
+      "recovered_avail": 2921,
+      "recovered_admitted": 93,
+      "NET_GOLD_GAIN@50": 75
+     }
+    },
+    "beta_train_selected": 0.1
+   },
+   "MLP_feature_set": "S0"
+  },
+  "2wiki_clean": {
+   "train": [
+    "metaqa",
+    "squad_clean"
+   ],
+   "BASE_FUSED": {
+    "nq": 2000,
+    "ANY@50": 1.0,
+    "GOLD_RECALL@50": 0.8963,
+    "ALL@50": 0.818,
+    "RECOVERED_GOLD_ADMISSION@50": 0.0,
+    "recovered_golds_available": 402,
+    "recovered_golds_admitted": 0,
+    "ORIGINAL_GOLD_RETENTION@50": 1.0,
+    "NEW_GOLDS_ADMITTED": 0,
+    "OLD_GOLDS_EVICTED": 0,
+    "NET_GOLD_GAIN@50": 0,
+    "POOL_CHURN_mean": 0.0,
+    "PER_HOP": {
+     "1": {
+      "nq": 2000,
+      "GOLD_RECALL@50": 0.8963,
+      "ALL@50": 0.818,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0,
+      "recovered_avail": 402,
+      "recovered_admitted": 0,
+      "NET_GOLD_GAIN@50": 0
+     }
+    }
+   },
+   "S0_linear": {
+    "nq": 2000,
+    "ANY@50": 0.7675,
+    "GOLD_RECALL@50": 0.6615,
+    "ALL@50": 0.5555,
+    "RECOVERED_GOLD_ADMISSION@50": 0.1692,
+    "recovered_golds_available": 402,
+    "recovered_golds_admitted": 68,
+    "ORIGINAL_GOLD_RETENTION@50": 0.7185,
+    "NEW_GOLDS_ADMITTED": 68,
+    "OLD_GOLDS_EVICTED": 978,
+    "NET_GOLD_GAIN@50": -910,
+    "POOL_CHURN_mean": 0.123,
+    "PER_HOP": {
+     "1": {
+      "nq": 2000,
+      "GOLD_RECALL@50": 0.6615,
+      "ALL@50": 0.5555,
+      "RECOVERED_GOLD_ADMISSION@50": 0.1692,
+      "recovered_avail": 402,
+      "recovered_admitted": 68,
+      "NET_GOLD_GAIN@50": -910
+     }
+    },
+    "beta_train_selected": 0.1
+   },
+   "S1_linear": {
+    "nq": 2000,
+    "ANY@50": 0.9695,
+    "GOLD_RECALL@50": 0.8547,
+    "ALL@50": 0.7545,
+    "RECOVERED_GOLD_ADMISSION@50": 0.1841,
+    "recovered_golds_available": 402,
+    "recovered_golds_admitted": 74,
+    "ORIGINAL_GOLD_RETENTION@50": 0.9324,
+    "NEW_GOLDS_ADMITTED": 74,
+    "OLD_GOLDS_EVICTED": 235,
+    "NET_GOLD_GAIN@50": -161,
+    "POOL_CHURN_mean": 0.1345,
+    "PER_HOP": {
+     "1": {
+      "nq": 2000,
+      "GOLD_RECALL@50": 0.8547,
+      "ALL@50": 0.7545,
+      "RECOVERED_GOLD_ADMISSION@50": 0.1841,
+      "recovered_avail": 402,
+      "recovered_admitted": 74,
+      "NET_GOLD_GAIN@50": -161
+     }
+    },
+    "beta_train_selected": 0.1
+   },
+   "S2_linear": {
+    "nq": 2000,
+    "ANY@50": 0.975,
+    "GOLD_RECALL@50": 0.8669,
+    "ALL@50": 0.7765,
+    "RECOVERED_GOLD_ADMISSION@50": 0.1642,
+    "recovered_golds_available": 402,
+    "recovered_golds_admitted": 66,
+    "ORIGINAL_GOLD_RETENTION@50": 0.9482,
+    "NEW_GOLDS_ADMITTED": 66,
+    "OLD_GOLDS_EVICTED": 180,
+    "NET_GOLD_GAIN@50": -114,
+    "POOL_CHURN_mean": 0.1209,
+    "PER_HOP": {
+     "1": {
+      "nq": 2000,
+      "GOLD_RECALL@50": 0.8669,
+      "ALL@50": 0.7765,
+      "RECOVERED_GOLD_ADMISSION@50": 0.1642,
+      "recovered_avail": 402,
+      "recovered_admitted": 66,
+      "NET_GOLD_GAIN@50": -114
+     }
+    },
+    "beta_train_selected": 0.1
+   },
+   "S2_linear_NAIVE_PURE_rerank": {
+    "nq": 2000,
+    "ANY@50": 0.395,
+    "GOLD_RECALL@50": 0.3135,
+    "ALL@50": 0.1985,
+    "RECOVERED_GOLD_ADMISSION@50": 0.3458,
+    "recovered_golds_available": 402,
+    "recovered_golds_admitted": 139,
+    "ORIGINAL_GOLD_RETENTION@50": 0.3097,
+    "NEW_GOLDS_ADMITTED": 139,
+    "OLD_GOLDS_EVICTED": 2398,
+    "NET_GOLD_GAIN@50": -2259,
+    "POOL_CHURN_mean": 0.6555,
+    "PER_HOP": {
+     "1": {
+      "nq": 2000,
+      "GOLD_RECALL@50": 0.3135,
+      "ALL@50": 0.1985,
+      "RECOVERED_GOLD_ADMISSION@50": 0.3458,
+      "recovered_avail": 402,
+      "recovered_admitted": 139,
+      "NET_GOLD_GAIN@50": -2259
+     }
+    }
+   },
+   "best_linear_tag": "S2",
+   "MLP_on_best": {
+    "nq": 2000,
+    "ANY@50": 0.9855,
+    "GOLD_RECALL@50": 0.8723,
+    "ALL@50": 0.7765,
+    "RECOVERED_GOLD_ADMISSION@50": 0.0821,
+    "recovered_golds_available": 402,
+    "recovered_golds_admitted": 33,
+    "ORIGINAL_GOLD_RETENTION@50": 0.9637,
+    "NEW_GOLDS_ADMITTED": 33,
+    "OLD_GOLDS_EVICTED": 126,
+    "NET_GOLD_GAIN@50": -93,
+    "POOL_CHURN_mean": 0.0762,
+    "PER_HOP": {
+     "1": {
+      "nq": 2000,
+      "GOLD_RECALL@50": 0.8723,
+      "ALL@50": 0.7765,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0821,
+      "recovered_avail": 402,
+      "recovered_admitted": 33,
+      "NET_GOLD_GAIN@50": -93
+     }
+    },
+    "beta_train_selected": 0.1
+   },
+   "MLP_feature_set": "S2"
+  },
+  "squad_clean": {
+   "train": [
+    "metaqa",
+    "2wiki_clean"
+   ],
+   "BASE_FUSED": {
+    "nq": 984,
+    "ANY@50": 0.9959,
+    "GOLD_RECALL@50": 0.9959,
+    "ALL@50": 0.9959,
+    "RECOVERED_GOLD_ADMISSION@50": 0.0,
+    "recovered_golds_available": 4,
+    "recovered_golds_admitted": 0,
+    "ORIGINAL_GOLD_RETENTION@50": 1.0,
+    "NEW_GOLDS_ADMITTED": 0,
+    "OLD_GOLDS_EVICTED": 0,
+    "NET_GOLD_GAIN@50": 0,
+    "POOL_CHURN_mean": 0.0,
+    "PER_HOP": {
+     "1": {
+      "nq": 984,
+      "GOLD_RECALL@50": 0.9959,
+      "ALL@50": 0.9959,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0,
+      "recovered_avail": 4,
+      "recovered_admitted": 0,
+      "NET_GOLD_GAIN@50": 0
+     }
+    }
+   },
+   "S0_linear": {
+    "nq": 984,
+    "ANY@50": 0.7815,
+    "GOLD_RECALL@50": 0.7815,
+    "ALL@50": 0.7815,
+    "RECOVERED_GOLD_ADMISSION@50": 0.75,
+    "recovered_golds_available": 4,
+    "recovered_golds_admitted": 3,
+    "ORIGINAL_GOLD_RETENTION@50": 0.7816,
+    "NEW_GOLDS_ADMITTED": 3,
+    "OLD_GOLDS_EVICTED": 214,
+    "NET_GOLD_GAIN@50": -211,
+    "POOL_CHURN_mean": 0.3292,
+    "PER_HOP": {
+     "1": {
+      "nq": 984,
+      "GOLD_RECALL@50": 0.7815,
+      "ALL@50": 0.7815,
+      "RECOVERED_GOLD_ADMISSION@50": 0.75,
+      "recovered_avail": 4,
+      "recovered_admitted": 3,
+      "NET_GOLD_GAIN@50": -211
+     }
+    },
+    "beta_train_selected": 0.1
+   },
+   "S1_linear": {
+    "nq": 984,
+    "ANY@50": 0.7348,
+    "GOLD_RECALL@50": 0.7348,
+    "ALL@50": 0.7348,
+    "RECOVERED_GOLD_ADMISSION@50": 1.0,
+    "recovered_golds_available": 4,
+    "recovered_golds_admitted": 4,
+    "ORIGINAL_GOLD_RETENTION@50": 0.7337,
+    "NEW_GOLDS_ADMITTED": 4,
+    "OLD_GOLDS_EVICTED": 261,
+    "NET_GOLD_GAIN@50": -257,
+    "POOL_CHURN_mean": 0.2629,
+    "PER_HOP": {
+     "1": {
+      "nq": 984,
+      "GOLD_RECALL@50": 0.7348,
+      "ALL@50": 0.7348,
+      "RECOVERED_GOLD_ADMISSION@50": 1.0,
+      "recovered_avail": 4,
+      "recovered_admitted": 4,
+      "NET_GOLD_GAIN@50": -257
+     }
+    },
+    "beta_train_selected": 0.1
+   },
+   "S2_linear": {
+    "nq": 984,
+    "ANY@50": 0.4929,
+    "GOLD_RECALL@50": 0.4929,
+    "ALL@50": 0.4929,
+    "RECOVERED_GOLD_ADMISSION@50": 1.0,
+    "recovered_golds_available": 4,
+    "recovered_golds_admitted": 4,
+    "ORIGINAL_GOLD_RETENTION@50": 0.4908,
+    "NEW_GOLDS_ADMITTED": 4,
+    "OLD_GOLDS_EVICTED": 499,
+    "NET_GOLD_GAIN@50": -495,
+    "POOL_CHURN_mean": 0.5742,
+    "PER_HOP": {
+     "1": {
+      "nq": 984,
+      "GOLD_RECALL@50": 0.4929,
+      "ALL@50": 0.4929,
+      "RECOVERED_GOLD_ADMISSION@50": 1.0,
+      "recovered_avail": 4,
+      "recovered_admitted": 4,
+      "NET_GOLD_GAIN@50": -495
+     }
+    },
+    "beta_train_selected": 0.2
+   },
+   "S2_linear_NAIVE_PURE_rerank": {
+    "nq": 984,
+    "ANY@50": 0.1494,
+    "GOLD_RECALL@50": 0.1494,
+    "ALL@50": 0.1494,
+    "RECOVERED_GOLD_ADMISSION@50": 0.0,
+    "recovered_golds_available": 4,
+    "recovered_golds_admitted": 0,
+    "ORIGINAL_GOLD_RETENTION@50": 0.15,
+    "NEW_GOLDS_ADMITTED": 0,
+    "OLD_GOLDS_EVICTED": 833,
+    "NET_GOLD_GAIN@50": -833,
+    "POOL_CHURN_mean": 0.8506,
+    "PER_HOP": {
+     "1": {
+      "nq": 984,
+      "GOLD_RECALL@50": 0.1494,
+      "ALL@50": 0.1494,
+      "RECOVERED_GOLD_ADMISSION@50": 0.0,
+      "recovered_avail": 4,
+      "recovered_admitted": 0,
+      "NET_GOLD_GAIN@50": -833
+     }
+    }
+   },
+   "best_linear_tag": "S0",
+   "MLP_on_best": {
+    "nq": 984,
+    "ANY@50": 0.9573,
+    "GOLD_RECALL@50": 0.9573,
+    "ALL@50": 0.9573,
+    "RECOVERED_GOLD_ADMISSION@50": 0.75,
+    "recovered_golds_available": 4,
+    "recovered_golds_admitted": 3,
+    "ORIGINAL_GOLD_RETENTION@50": 0.9582,
+    "NEW_GOLDS_ADMITTED": 3,
+    "OLD_GOLDS_EVICTED": 41,
+    "NET_GOLD_GAIN@50": -38,
+    "POOL_CHURN_mean": 0.2578,
+    "PER_HOP": {
+     "1": {
+      "nq": 984,
+      "GOLD_RECALL@50": 0.9573,
+      "ALL@50": 0.9573,
+      "RECOVERED_GOLD_ADMISSION@50": 0.75,
+      "recovered_avail": 4,
+      "recovered_admitted": 3,
+      "NET_GOLD_GAIN@50": -38
+     }
+    },
+    "beta_train_selected": 0.2
+   },
+   "MLP_feature_set": "S0"
+  }
+ },
+ "IDENTITY_LEAK_DIAGNOSTIC": {
+  "S0": {
+   "accuracy": 0.3888,
+   "chance": 0.3333,
+   "per_feature_importance": [
+    0.139,
+    0.434,
+    0.148,
+    0.608,
+    0.355
+   ]
+  },
+  "S1": {
+   "accuracy": 0.5727,
+   "chance": 0.3333,
+   "per_feature_importance": [
+    0.151,
+    0.489,
+    0.437,
+    1.301,
+    0.18,
+    0.784,
+    2.571,
+    1.625,
+    0.04,
+    0.281
+   ]
+  },
+  "S2": {
+   "accuracy": 0.63,
+   "chance": 0.3333,
+   "per_feature_importance": [
+    0.104,
+    0.435,
+    0.352,
+    1.066,
+    0.238,
+    0.907,
+    2.418,
+    1.513,
+    0.025,
+    0.227,
+    1.283,
+    1.341,
+    1.491,
+    0.073,
+    0.767,
+    1.283,
+    0.612
+   ]
+  }
+ },
+ "NEW_ENCODER_FORWARD_PASSES": 0,
+ "TARGET_TEST_TOUCHED": "NO"
+}

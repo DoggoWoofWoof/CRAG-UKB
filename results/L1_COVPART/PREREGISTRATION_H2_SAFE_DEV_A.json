@@ -1,0 +1,38 @@
+{
+ "RECORD": "PREREGISTRATION",
+ "name": "H2_AS_SAFE_CANDIDATE_GENERATOR_DEV_A",
+ "STATUS": "POSTHOC_MECHANISM_TEST",
+ "written_before_any_run": true,
+ "utc": "2026-09-15T07:55:00Z",
+ "ruling_2026-09-15": "Dynamic structure is good at generating candidates, but we gave those candidates too much authority ... Keep the canonical L1 completely unchanged through its BASE ranking ... top 44 locked -> SAFE candidate generation + H2 discovered nodes/blocks -> existing SAFE selection machinery -> choose exactly six -> P50. The crucial rule: H2 does not obtain its own RRF channel. Its output is merely another candidate source for the existing structure swap ... I'd preserve the H2 first-visit / beam order, but use it only to order H2 candidates before feeding them into SAFE: H2 candidate block rank = best beam rank of any node in that block ... we're only using it to rank candidate proposals to SAFE ... First test whether simply adding H2 candidates to the existing SAFE machinery already works ... evaluate it against canonical SAFE, not BASE ... on all five DEV_A caches. If MetaQA hop2 increases substantially without significant text losses, then we have found a genuinely better L1-ish retrieval stage. If it still damages text, then the next problem isn't retrieval anymore -- we need a better universal SAFE admission criterion, probably based on cross-signal agreement (not run under this pre-registration).",
+ "why_posthoc": "DEV_A has been read by sections 2-14 of this lane; this is a mechanism test on an already-read population. Any promotion requires an untouched population (WebQSP or DEV_B by ruling).",
+ "frozen_and_reused_verbatim": {
+  "canonical_L1": "served base_rank of each replay cache (Dense + SPLADE -> static block voting -> frozen RRF); unchanged",
+  "canonical_SAFE": "the frozen B6_S4_F6_Ms64_Mr32 selector: _l1ps_router.build_cache (M_struct 64, M_ret 32, S4) + _l1kb_core.contexts + _l1kb_core.f6_select, code unchanged; protected core = base_rank[:44]; boundary = base_rank[44:50]; candidates = boundary u structural challengers (S4 order of the frozen expand_dir nodes) u retrieval challengers (rrf200 continuation); score = 1/(K0+cpos) + 1/(K0+spos) + 1/(K0+rpos), unranked channel = 0; ties by canonical rank then block id; exactly 6 chosen; final = core u 6, exactly 50",
+  "SAFE_reproduction_check": "the recomputed canonical SAFE indicator on DEV_A rows must equal the frozen replay records' _ind_SAFE (results/L1_CANONICAL/L1_REPLAY_{metaqa,squad}.json; results/L1_LOWMEM/L1_REPLAY_{metaqa__LOWMEM__PHG_REPAIR1_con,squad__LOWMEM__PHG_con,musique__LOWMEM__PHG_C1_con}.json) -- asserted, else the run is invalid",
+  "H2_beam": "the pinned MICRO_L3_H2 beam of scratchpad/_l1c_microl3.py (sha256 19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5, asserted): frozen 5 seeds, actual STRUCT adjacency under the frozen hub policy, depth exactly 2, beam 100 per hop, S_dst/S_dir/S_mid fused by the frozen RRF; identical beam output asserted by rebuilding section 14.1's MICRO_L3_H2 (symmetric RRF) and matching its recorded BASE_ALL / gained / lost"
+ },
+ "the_only_change": {
+  "H2_candidate_source": "H2 nodes in first-visit order = hop-1 beam (fused order) followed by hop-2 beam (fused order); seeds excluded exactly as in the frozen beam's vote. H2 block list = the distinct own blocks hard[v] of those nodes in first-visit order, i.e. block rank = best beam rank of any of its nodes; h2pos[b] = dense position in that list.",
+  "how_it_enters_SAFE": "candidates = boundary u structural challengers u retrieval challengers u {H2 blocks not in the served P50}; the structural position used by the unchanged F6 score becomes spos'[b] = min(spos[b], h2pos[b]) -- a block's structural rank is its best rank across the two structural generators (frozen static expansion, H2 beam). No fourth channel; no new weight; incumbents (boundary blocks) receive the same H2 credit (F6's symmetric-evidence rule); canonical and retrieval channels untouched; top 44 locked; exactly 6 slots; exactly 50 blocks.",
+  "not_done": ["no fourth RRF channel for H2", "no cap or hold size on H2 blocks (the position -> credit rule is the only filter)", "no agreement / support-count admission rule (deferred by the ruling)", "no dataset branch", "no change to the beam, seeds, depth, transition scoring or hub policy", "alternative merge rules (append H2 after the static list; RRF-merge inside the structural channel; H2 as a 4th channel) NOT run"]
+ },
+ "arms": {
+  "L1": "served BASE P50 (reference only)",
+  "SAFE": "canonical SAFE (the comparison baseline, per the ruling)",
+  "SAFE_H2": "primary: SAFE with the H2 candidate source as specified above"
+ },
+ "population": "DEV_A of the five caches metaqa (Mt-KaHyPar), metaqa_phg, squad (Mt-KaHyPar), squad_phg, musique (PHG); DEV_B not read",
+ "metric": "ALL-gold@P50 (every gold block inside the final 50); ANY reported; per hop on metaqa; exact two-sided McNemar on the paired indicator",
+ "decision_rule": {
+  "primary_comparison": "SAFE_H2 vs SAFE",
+  "text_safety_required": "on each of squad, squad_phg, musique: NOT (lost > gained and p < 0.05) for SAFE_H2 vs SAFE",
+  "metaqa_required": "hop-2 ALL-gold@P50 SAFE_H2 vs SAFE: gained > lost and p < 0.01 on BOTH metaqa caches",
+  "substantial_is_reported_not_thresholded": "hop-2 points vs SAFE, and the fraction of section 14.1's MICRO_L3_H2 hop-2 gain over L1 that SAFE_H2 recovers over SAFE ((SAFE_H2 - SAFE) / (H2_RRF - L1), hop 2 and hop2+hop3 pooled); no numeric target is invented",
+  "PASS": "MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC): H2 works as a candidate generator inside the canonical six-slot structure swap; promotion still requires an untouched population",
+  "FAIL": "H2 candidates under the frozen SAFE admission are not universally safe or not useful; per the ruling the next question would be a universal SAFE admission criterion (cross-signal agreement) -- a separate pre-registration, not run here"
+ },
+ "also_recorded": ["churn per query and H2-credited admissions per query", "gold blocks admitted / evicted vs base50", "decisive source (H2-credited / static structural / retrieval / boundary reorder) for queries newly covered or newly lost vs SAFE", "candidate-generator recall: for gold blocks outside the served P50, whether the static structural list, the retrieval list or the H2 list proposes them at all, and at which H2 position (0-5 / 6-24 / 25-49 / 50+)", "SAFE_H2 vs L1 for reference"],
+ "forbidden": ["reading DEV_B", "tuning any constant after seeing numbers", "choosing among merge rules after seeing numbers", "writing under data/", "editing any CONTRACT_FILE or the pinned uL3 module"],
+ "code": "scratchpad/_l1c_h2safe.py -> results/L1_COVPART/h2safe_A_<cache>.json"
+}

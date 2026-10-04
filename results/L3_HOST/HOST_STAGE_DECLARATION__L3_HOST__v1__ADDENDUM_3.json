@@ -1,0 +1,56 @@
+{
+ "stage": "L3_HOST",
+ "addendum": 3,
+ "amends": {
+  "declaration": {
+   "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1.json",
+   "sha256": "37ff06f7bb0ae203923e0956ec767df9e8fc2f20753a3ecf945d6d714e2cd9a9"
+  },
+  "addenda": [
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_1.json",
+    "sha256": "12642119363d99e1851eefe3b43d92414cb3d53be3ea0a32e8a0361116f75b9c"
+   },
+   {
+    "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_2.json",
+    "sha256": "c12815c69a5372337a755512f8a590e843241d0252a923244eb35539676cfcd9"
+   }
+  ],
+  "authorization": {
+   "path": "results/L3_HOST/HOST_STAGE_AUTHORIZATION__L3_HOST__2026-09-29.json",
+   "sha256": "cb94b481eeb282a120794376b9ff9438d58516ff55162353658f3836d6cdbb7e"
+  }
+ },
+ "declared": "2026-09-29T18:20:55+05:30",
+ "purpose": "the placement test of a new harness, as the authorization requires before it joins: a new harness joins only after its first host run is BIT_IDENTICAL to its laptop run of the same population (recorded under results/L3_HOST/) and a dated addendum names it (the v1 declaration's new_harnesses rule)",
+ "harness": {
+  "path": "scratchpad/_l3d_budget.py",
+  "sha256": "cd95edc9cec5558395d029dce1a345dc75ea65cccf32bcccae07c198262e7581",
+  "what": "E1 read budget: the TYPED v1 walk (_l3d_typed, imported and sha-pinned) with a readable set that starts at the contacted nodes and grows by S whole shards or R node rows chosen by frontier mass; it recomputes every TYPED v1 arm and asserts S0 == PUSH and SINF == the unmasked walk per gated row, and compares its arrays with the TYPED v1 record"
+ },
+ "test": {
+  "laptop": "PYTHONHASHSEED=0 python -u scratchpad/_l3d_budget.py RUN metaqa v1 -> results/L3_DEV/l3budget_metaqa__v1.{json,npz}",
+  "host": "rx run -n l3h-budget-h1 --cpus 2 --mem 3 --var OPENBLAS_NUM_THREADS=12 -- python -u scratchpad/_l3h_run.py scratchpad/_l3d_budget.py RUN metaqa h1 -> results/L3_DEV/l3budget_metaqa__h1.{json,npz}",
+  "compare": "python scratchpad/_l3h_place.py results/L3_DEV/l3budget_metaqa__v1 results/L3_DEV/l3budget_metaqa__h1 --record=results/L3_HOST/PLACEMENT_TEST__L3_BUDGET__v1.json",
+  "gate": "BIT_IDENTICAL; then a dated addendum names the harness; until then its host output is a test artifact only"
+ },
+ "pushed_in_addition": [
+  {
+   "path": "scratchpad/_l3d_budget.py",
+   "bytes": 24065,
+   "sha256": "cd95edc9cec5558395d029dce1a345dc75ea65cccf32bcccae07c198262e7581"
+  },
+  {
+   "path": "results/L3_DEV/l3typed_metaqa__v1.json",
+   "bytes": 1568528,
+   "sha256": "a6e80216a802d12ec91ded5d5a7d6c59f24e7339a2efd34f6e447486cc7b90a4"
+  },
+  {
+   "path": "results/L3_DEV/l3typed_metaqa__v1.npz",
+   "bytes": 1022476,
+   "sha256": "0ee65e76660223d0378708582e8bd19142e58595ff495340705d5112d29e1355"
+  }
+ ],
+ "why_the_typed_records": "the harness asserts the TYPED v1 record's sha and compares its arrays member by member with it (laptop records of the same population, 2.6 MB; the host's own TYPED run h1 is byte-identical in its npz)",
+ "unchanged": "the bundle, the runner, the BLAS setting of addendum 2, the authorization's pins and every 'never' of the declaration"
+}

@@ -1,0 +1,715 @@
+{
+ "generated_by": "scratchpad/_w0_build_manifest.py",
+ "note": "W0 discovery-only inventory; clean=controlled substrate, world=open retrieval corpus, universe=full graph universe",
+ "datasets": {
+  "2wiki": {
+   "kind": "TEXT",
+   "clean": {
+    "ablation_dir": "scratchpad/ablation_qwen/2wiki_clean/variant_C",
+    "n_nodes": 65865,
+    "n_parts": 658,
+    "partition_map": true,
+    "graph_pt": true,
+    "C_uses_qwen_knn": "reused from A"
+   },
+   "world": {
+    "corpus_path": "data/canonical/2wiki/documents.jsonl",
+    "n_docs": 398354,
+    "id_scheme": "context paragraph (title-level dedup)",
+    "provenance": "union of official train/dev/test context paragraphs",
+    "raw_source_local": "2.8G",
+    "docs_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 398354,
+     "rows": 398354,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "docs_splade": {
+     "present": true,
+     "complete": true,
+     "n_items": 398354,
+     "rows": 398354,
+     "encoder": "naver/splade-cocondenser-ensembledistil",
+     "dim": null,
+     "dtype": null
+    },
+    "queries_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 192606,
+     "rows": 192606,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "faiss_index": [],
+    "graph": {
+     "structural": {
+      "present": true,
+      "n_edges": 359549,
+      "subtype": "hyperlink",
+      "family": "structural_native"
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 3274931
+     },
+     "qwen_knn": {
+      "present": false,
+      "files": []
+     }
+    },
+    "gold_map": {
+     "train": {
+      "n": 167454,
+      "gold_mapped": 167454
+     },
+     "dev": {
+      "n": 12576,
+      "gold_mapped": 12576
+     },
+     "test": {
+      "n": 12576,
+      "gold_mapped": 0
+     }
+    }
+   },
+   "universe": {
+    "path": "data/canonical/2wiki_universe",
+    "n_docs": 5989847,
+    "dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 5989847,
+     "rows": 5989847,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "splade": {
+     "present": true,
+     "complete": true,
+     "n_items": 5989847,
+     "rows": 5989847,
+     "encoder": "naver/splade-cocondenser-ensembledistil",
+     "dim": null,
+     "dtype": null
+    },
+    "graph": {
+     "structural": {
+      "present": true,
+      "n_edges": 28963600,
+      "subtype": "hyperlink",
+      "family": "structural_native"
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 34067241
+     },
+     "qwen_knn": {
+      "present": false,
+      "files": []
+     }
+    },
+    "crosswalk_to_view": true
+   },
+   "gates": {
+    "WORLD_RAW_READY": true,
+    "WORLD_ID_MAP_READY": true,
+    "CLEAN_WORLD_MAP_READY": true,
+    "GOLD_WORLD_MAP_READY": true,
+    "WORLD_QWEN_READY": true,
+    "WORLD_DENSE_INDEX_READY": true,
+    "WORLD_SPLADE_READY": true,
+    "WORLD_GRAPH_C_READY": true,
+    "WORLD_PARTITIONS_READY": true,
+    "WORLD_RETRIEVAL_READY": false,
+    "_dense_parity": {
+     "world": "faiss-exact max\u03941.25e-6 nontie0",
+     "universe": "sharded-merge exact"
+    }
+   }
+  },
+  "hotpotqa": {
+   "kind": "TEXT",
+   "clean": {
+    "ablation_dir": "scratchpad/ablation_qwen/hotpotqa_clean/variant_C",
+    "n_nodes": 507494,
+    "n_parts": 5074,
+    "partition_map": true,
+    "graph_pt": true,
+    "C_uses_qwen_knn": "reused from A"
+   },
+   "world": {
+    "corpus_path": "data/canonical/hotpotqa/documents.jsonl",
+    "n_docs": 5233329,
+    "id_scheme": "wiki abstract article",
+    "provenance": "official enwiki-20171001 withlinks-abstracts (structural_native hyperlinks in raw)",
+    "raw_source_local": "1.9G",
+    "docs_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 5233329,
+     "rows": 5233329,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "docs_splade": {
+     "present": true,
+     "complete": true,
+     "n_items": 5233329,
+     "rows": 5233329,
+     "encoder": "naver/splade-cocondenser-ensembledistil",
+     "dim": null,
+     "dtype": null
+    },
+    "queries_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 105257,
+     "rows": 105257,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "faiss_index": [],
+    "graph": {
+     "structural": {
+      "present": true,
+      "n_edges": 15367541,
+      "subtype": "hyperlink",
+      "family": "structural_native"
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 20369074
+     },
+     "qwen_knn": {
+      "present": false,
+      "files": []
+     }
+    },
+    "gold_map": {
+     "train": {
+      "n": 90447,
+      "gold_mapped": 90447
+     },
+     "dev": {
+      "n": 7405,
+      "gold_mapped": 7405
+     },
+     "test": {
+      "n": 7405,
+      "gold_mapped": 0
+     }
+    }
+   },
+   "universe": null,
+   "gates": {
+    "WORLD_RAW_READY": true,
+    "WORLD_ID_MAP_READY": true,
+    "CLEAN_WORLD_MAP_READY": false,
+    "GOLD_WORLD_MAP_READY": true,
+    "WORLD_QWEN_READY": true,
+    "WORLD_DENSE_INDEX_READY": true,
+    "WORLD_SPLADE_READY": true,
+    "WORLD_GRAPH_C_READY": false,
+    "WORLD_PARTITIONS_READY": false,
+    "WORLD_RETRIEVAL_READY": false,
+    "_dense_parity": {
+     "world": "sharded-merge exact"
+    }
+   }
+  },
+  "musique": {
+   "kind": "TEXT",
+   "clean": {
+    "ablation_dir": "scratchpad/ablation_qwen/musique_clean/variant_C",
+    "n_nodes": 13672,
+    "n_parts": 136,
+    "partition_map": true,
+    "graph_pt": true,
+    "C_uses_qwen_knn": "reused from A"
+   },
+   "world": {
+    "corpus_path": "data/canonical/musique/documents.jsonl",
+    "n_docs": 117533,
+    "id_scheme": "paragraph (text-hash dedup)",
+    "provenance": "union of official train/dev/test paragraphs",
+    "raw_source_local": "287M",
+    "docs_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 117533,
+     "rows": 117533,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "docs_splade": {
+     "present": true,
+     "complete": true,
+     "n_items": 117533,
+     "rows": 117533,
+     "encoder": "naver/splade-cocondenser-ensembledistil",
+     "dim": null,
+     "dtype": null
+    },
+    "queries_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 24814,
+     "rows": 24814,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "faiss_index": [],
+    "graph": {
+     "structural": {
+      "present": true,
+      "n_edges": 2744076,
+      "subtype": "title_mention",
+      "family": "structural_derived"
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 800278
+     },
+     "qwen_knn": {
+      "present": false,
+      "files": []
+     }
+    },
+    "gold_map": {
+     "train": {
+      "n": 19938,
+      "gold_mapped": 19938
+     },
+     "dev": {
+      "n": 2417,
+      "gold_mapped": 2417
+     },
+     "test": {
+      "n": 2459,
+      "gold_mapped": 0
+     }
+    }
+   },
+   "universe": null,
+   "gates": {
+    "WORLD_RAW_READY": true,
+    "WORLD_ID_MAP_READY": true,
+    "CLEAN_WORLD_MAP_READY": false,
+    "GOLD_WORLD_MAP_READY": true,
+    "WORLD_QWEN_READY": true,
+    "WORLD_DENSE_INDEX_READY": true,
+    "WORLD_SPLADE_READY": true,
+    "WORLD_GRAPH_C_READY": true,
+    "WORLD_PARTITIONS_READY": true,
+    "WORLD_RETRIEVAL_READY": false,
+    "_dense_parity": {
+     "world": "faiss-exact max\u03946.56e-7 nontie0"
+    }
+   }
+  },
+  "squad": {
+   "kind": "TEXT",
+   "clean": {
+    "ablation_dir": "scratchpad/ablation_qwen/squad_clean/variant_C",
+    "n_nodes": 19029,
+    "n_parts": 190,
+    "partition_map": true,
+    "graph_pt": true,
+    "C_uses_qwen_knn": "reused from A"
+   },
+   "world": {
+    "corpus_path": "data/canonical/squad/documents.jsonl",
+    "n_docs": 20233,
+    "id_scheme": "context paragraph (text-hash dedup)",
+    "provenance": "union of official train+dev contexts (no public test)",
+    "raw_source_local": "45M",
+    "docs_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 20233,
+     "rows": 20233,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "docs_splade": {
+     "present": true,
+     "complete": true,
+     "n_items": 20233,
+     "rows": 20233,
+     "encoder": "naver/splade-cocondenser-ensembledistil",
+     "dim": null,
+     "dtype": null
+    },
+    "queries_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 142192,
+     "rows": 142192,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "faiss_index": [],
+    "graph": {
+     "structural": {
+      "present": true,
+      "n_edges": 874190,
+      "subtype": "title_mention",
+      "family": "structural_derived"
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 156130
+     },
+     "qwen_knn": {
+      "present": false,
+      "files": []
+     }
+    },
+    "gold_map": {
+     "train": {
+      "n": 86821,
+      "gold_mapped": 130319
+     },
+     "dev": {
+      "n": 5928,
+      "gold_mapped": 11873
+     }
+    }
+   },
+   "universe": null,
+   "gates": {
+    "WORLD_RAW_READY": true,
+    "WORLD_ID_MAP_READY": true,
+    "CLEAN_WORLD_MAP_READY": false,
+    "GOLD_WORLD_MAP_READY": true,
+    "WORLD_QWEN_READY": true,
+    "WORLD_DENSE_INDEX_READY": true,
+    "WORLD_SPLADE_READY": true,
+    "WORLD_GRAPH_C_READY": true,
+    "WORLD_PARTITIONS_READY": true,
+    "WORLD_RETRIEVAL_READY": false,
+    "_dense_parity": {
+     "world": "faiss-exact max\u03941.25e-6 nontie0"
+    }
+   }
+  },
+  "webqsp": {
+   "kind": "KB",
+   "clean": {
+    "ablation_dir": "scratchpad/ablation_qwen/webqsp/variant_C",
+    "n_nodes": 781485,
+    "n_parts": 7814,
+    "partition_map": true,
+    "graph_pt": true,
+    "C_uses_qwen_knn": "reused from A"
+   },
+   "world": {
+    "corpus_path": "data/canonical/webqsp/documents.jsonl",
+    "n_docs": 1316466,
+    "id_scheme": "Freebase entity (RoG subgraph node)",
+    "provenance": "structural_derived_from_freebase \u2014 RoG-webqsp subgraphs, NOT official Microsoft WebQSP graph",
+    "raw_source_local": "523M",
+    "docs_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 1316466,
+     "rows": 1316466,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "docs_splade": {
+     "present": true,
+     "complete": true,
+     "n_items": 1316466,
+     "rows": 1316466,
+     "encoder": "naver/splade-cocondenser-ensembledistil",
+     "dim": null,
+     "dtype": null
+    },
+    "queries_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 4737,
+     "rows": 4737,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "faiss_index": [],
+    "graph": {
+     "structural": {
+      "present": true,
+      "n_edges": 3791303,
+      "subtype": null,
+      "family": "structural_derived_from_freebase"
+     },
+     "ner": {
+      "present": false,
+      "n_edges": null
+     },
+     "qwen_knn": {
+      "present": false,
+      "files": []
+     }
+    },
+    "gold_map": {
+     "train": {
+      "n": 3072,
+      "gold_mapped": 3072
+     },
+     "test": {
+      "n": 1628,
+      "gold_mapped": 1628
+     }
+    }
+   },
+   "universe": null,
+   "gates": {
+    "WORLD_RAW_READY": true,
+    "WORLD_ID_MAP_READY": true,
+    "CLEAN_WORLD_MAP_READY": false,
+    "GOLD_WORLD_MAP_READY": true,
+    "WORLD_QWEN_READY": true,
+    "WORLD_DENSE_INDEX_READY": true,
+    "WORLD_SPLADE_READY": true,
+    "WORLD_GRAPH_C_READY": false,
+    "WORLD_PARTITIONS_READY": false,
+    "WORLD_RETRIEVAL_READY": false,
+    "_dense_parity": {
+     "world": "sharded-merge exact"
+    }
+   }
+  },
+  "metaqa": {
+   "kind": "KB",
+   "clean": {
+    "ablation_dir": "scratchpad/ablation_qwen/metaqa/variant_C",
+    "n_nodes": 40151,
+    "n_parts": 401,
+    "partition_map": true,
+    "graph_pt": true,
+    "C_uses_qwen_knn": "reused from A"
+   },
+   "world": {
+    "corpus_path": "data/canonical/metaqa/documents.jsonl",
+    "n_docs": 43234,
+    "id_scheme": "KB entity (name)",
+    "provenance": null,
+    "raw_source_local": "135M",
+    "docs_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 43234,
+     "rows": 43234,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "docs_splade": {
+     "present": true,
+     "complete": true,
+     "n_items": 43234,
+     "rows": 43234,
+     "encoder": "naver/splade-cocondenser-ensembledistil",
+     "dim": null,
+     "dtype": null
+    },
+    "queries_dense": {
+     "present": true,
+     "complete": true,
+     "n_items": 116045,
+     "rows": 116045,
+     "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+     "dim": 1536,
+     "dtype": "float16"
+    },
+    "faiss_index": [],
+    "graph": {
+     "structural": {
+      "present": true,
+      "n_edges": 133582,
+      "subtype": null,
+      "family": "structural_native"
+     },
+     "ner": {
+      "present": false,
+      "n_edges": null
+     },
+     "qwen_knn": {
+      "present": false,
+      "files": []
+     }
+    },
+    "gold_map": {
+     "1hop/train": {
+      "n": 96106,
+      "gold_mapped": 96106
+     },
+     "1hop/dev": {
+      "n": 9992,
+      "gold_mapped": 9992
+     },
+     "1hop/test": {
+      "n": 9947,
+      "gold_mapped": 9947
+     },
+     "2hop/train": {
+      "n": 118980,
+      "gold_mapped": 118980
+     },
+     "2hop/dev": {
+      "n": 14872,
+      "gold_mapped": 14872
+     },
+     "2hop/test": {
+      "n": 14872,
+      "gold_mapped": 14872
+     },
+     "3hop/train": {
+      "n": 114196,
+      "gold_mapped": 114196
+     },
+     "3hop/dev": {
+      "n": 14274,
+      "gold_mapped": 14274
+     },
+     "3hop/test": {
+      "n": 14274,
+      "gold_mapped": 14274
+     }
+    }
+   },
+   "universe": null,
+   "gates": {
+    "WORLD_RAW_READY": true,
+    "WORLD_ID_MAP_READY": true,
+    "CLEAN_WORLD_MAP_READY": false,
+    "GOLD_WORLD_MAP_READY": true,
+    "WORLD_QWEN_READY": true,
+    "WORLD_DENSE_INDEX_READY": true,
+    "WORLD_SPLADE_READY": true,
+    "WORLD_GRAPH_C_READY": true,
+    "WORLD_PARTITIONS_READY": true,
+    "WORLD_RETRIEVAL_READY": false,
+    "_dense_parity": {
+     "world": "faiss-exact max\u03941.49e-6 nontie0 (qry=metaqa_1hop)"
+    }
+   }
+  }
+ },
+ "WORLD_RAW_INPUTS_LOCAL": "YES",
+ "SAFE_TO_START_FULL_WORLD_EXPERIMENT": "NO",
+ "STOP_BEFORE_STARTING": true,
+ "clean_to_world_mapping_coverage": {
+  "2wiki": {
+   "materialized": true,
+   "coverage": 1.0,
+   "file": "data/canonical/2wiki_universe/crosswalk_to_retrieval_view.json"
+  },
+  "hotpotqa": {
+   "materialized": false,
+   "derivable": "identity on canonical curid"
+  },
+  "musique": {
+   "materialized": false,
+   "derivable": "identity on canonical text-hash id"
+  },
+  "squad": {
+   "materialized": false,
+   "derivable": "identity on canonical text-hash id"
+  },
+  "webqsp": {
+   "materialized": false,
+   "derivable": "identity on canonical entity id"
+  },
+  "metaqa": {
+   "materialized": false,
+   "derivable": "identity on canonical entity id"
+  }
+ },
+ "task7_dense_index_cost": {
+  "note": "no FAISS index exists yet; exact IndexFlatIP stores fp32 (N*1536*4B); fp16 sharded GPU topk is the established parity-1.0 path",
+  "exact_flatip_fp32_GB": {
+   "2wiki_universe": 36.8,
+   "hotpotqa": 32.2,
+   "webqsp": 8.1,
+   "2wiki": 2.45,
+   "musique": 0.72,
+   "metaqa": 0.27,
+   "squad": 0.12
+  },
+  "recommended": "Option A: exact sharded fp16 GPU topk for 5M corpora + IndexFlatIP for <=1.32M; exact semantics preserved; STOP for sign-off before build",
+  "STOP_for_index_approach_signoff": true
+ },
+ "WORLD_DENSE_METHOD": "EXHAUSTIVE_SHARDED_FP32_COMPUTE",
+ "WORLD_DENSE_APPROXIMATE": "NO",
+ "WORLD_DENSE_PARITY_REQUIRED": "YES",
+ "WORLD_DENSE_METHOD_DESC": "Exhaustive sharded inner-product with fp32 computation/accumulation over fp16 storage; local exact top-K per shard; exact global merge; canonical world_node_ids. NOT 'fp16 exact' \u2014 reduced-fp16 arithmetic (0.998) rejected.",
+ "WORLD_DENSE_PARITY_GATE": {
+  "sample": "deterministic query sample per corpus",
+  "report": [
+   "top1_parity",
+   "top10_overlap",
+   "top50_overlap",
+   "top100_overlap",
+   "top200_overlap",
+   "rank_agreement"
+  ],
+  "required": "TOPK_PARITY == 1.0 for canonical downstream K; investigate fp16 ties before accepting"
+ },
+ "remaining_work_to_retrieval_ready": [
+  "dense index (after approach sign-off)",
+  "qwen-kNN edge family from existing world dense shards (no re-encode)",
+  "world C graph.pt = structural (+) NER (+) qwen-kNN per frozen C",
+  "world C partitions (~100-node balanced) + stats",
+  "clean<->world crosswalks for hotpot/musique/squad/webqsp/metaqa"
+ ],
+ "task7_dense_parity": "7/7 PASS \u2014 EXHAUSTIVE_SHARDED_FP32_COMPUTE; faiss-exact ref \u2264600k (max\u0394~1e-6, 0 non-tie misses), sharded fp32-merge exhaustive-exact >600k",
+ "task8_splade_verify": "7/7 PASS \u2014 rows==n_items, vocab=30522, 0 zero-rows, per-shard sha256",
+ "task9_world_graph": {
+  "structural_family": "DONE all 7 (graph_manifest.json world-scale)",
+  "ner_family": "clean-only; world CPU rebuild pending",
+  "qwen_knn": "frozen-C = exact GLOBAL k=3 faiss.IndexFlatIP (src/core/indexers.py:109-161); world path = reuse EXHAUSTIVE_SHARDED_FP32_COMPUTE harness qry=corpus k=4 cosine, bit-exact, NO ANN",
+  "tractable_exact_now": [
+   "squad",
+   "metaqa",
+   "musique",
+   "2wiki_world"
+  ],
+  "spend_decision_required": [
+   "webqsp_1.32M",
+   "hotpotqa_5.23M",
+   "2wiki_universe_5.99M"
+  ],
+  "note": "exact remains feasible at multi-million (sharded, not memory-blocked, not ANN); wall is GPU-$ on month-end free tier"
+ },
+ "task9_10_build": {
+  "structural": "DONE all 7 (graph_structural.tsv)",
+  "ner": "DONE all 7 (5 with edges; metaqa+webqsp ner_available=false by design, KB entity nodes)",
+  "qwen_knn_exact_k3": "DONE tractable-4: squad42969/metaqa97920/musique266488 (local faiss-cpu), 2wiki-world908911 (Modal GPU 41s); big-3 spend decision",
+  "partitions_pymetis_target100": "DONE tractable-4: squad202/metaqa432/musique1175/2wiki3983 parts, all min~97/mean100/max103 (frozen variant_C signature); big-3 after kNN",
+  "partition_rule": "npart=N//100, P_MAIN=50 -> ~5k scope (scale-invariant); frozen build_partition_map (pymetis.part_graph)",
+  "outputs": "data/canonical/<ds>/{graph_knn.tsv,knn_manifest.json,partition_map_C.json,partition_manifest_C.json}"
+ },
+ "WORLD_EXACT_IP_METHOD": "EXHAUSTIVE_SHARDED_FP32_COMPUTE",
+ "WORLD_EXACT_IP_FLAGS": {
+  "FP16_STORAGE": "YES",
+  "FP16_REDUCED_COMPUTE": "NO",
+  "FP32_COMPUTE": "YES",
+  "ANN": "NO",
+  "EXHAUSTIVE": "YES"
+ }
+}

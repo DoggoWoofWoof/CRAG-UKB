@@ -1,0 +1,30 @@
+{
+  "schema": "V3_PASS_C_RECLAMATION/v1",
+  "generated_utc": "2026-09-07T01:09:38Z",
+  "deleted": [
+    "data/final_canonical/freebase_v3/pass_c/_buckets",
+    "data/final_canonical/freebase_v3/pass_b/objdict",
+    "data/final_canonical/freebase_v3/pass_b/literals"
+  ],
+  "bytes_freed": 16506603981,
+  "gb_freed": 16.51,
+  "GATE": {
+    "objdict_written_by_B": 76195025,
+    "objdict_read_by_C": 76195025,
+    "literals_written_by_B": 143874910,
+    "literals_read_by_C": 143874910,
+    "subjects_expected": 121616633,
+    "subjects_emitted": 121616633,
+    "uid_injective": true,
+    "object_subject_disjoint": true,
+    "ALL_ROWS_ACCOUNTED": true
+  },
+  "why_safe": "every row PASS B wrote to the object and literal dictionaries was read by PASS C -- the counts match exactly, not approximately -- and the folded node table is UID-injective with the subject set disjoint from it. The dictionaries are reproducible from the source at the cost of one pass; the buckets are a transient regrouping of them.",
+  "retained": [
+    "pass_b/edges (PASS D input)",
+    "pass_b/subject_uids.npy",
+    "pass_b/relations_raw.parquet",
+    "pass_c/nodes",
+    "pass_a/shards/m*_openers.tsv.gz"
+  ]
+}

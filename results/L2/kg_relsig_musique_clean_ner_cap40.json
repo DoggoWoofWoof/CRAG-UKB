@@ -1,0 +1,610 @@
+{
+  "dataset": "musique_clean",
+  "ner_edges": true,
+  "hops": 4,
+  "path_cap": 8,
+  "reranker_R@5": {
+    "none": [
+      64.24,
+      0.38
+    ],
+    "+relation": [
+      63.46,
+      0.93
+    ],
+    "+relation+path": [
+      63.17,
+      1.29
+    ],
+    "gated_rescue": [
+      61.44,
+      0.09
+    ],
+    "gated_rescue_supervised": [
+      61.29,
+      0.11
+    ],
+    "gated_rescue_subset": {
+      "rescued": 5,
+      "rescuable": 125
+    },
+    "kl_router": [
+      63.06,
+      2.3
+    ]
+  },
+  "per_signal_R@5": {
+    "dense": 67.44,
+    "offset": 61.33,
+    "prototype": 55.28,
+    "splade": 0.49,
+    "graph": 2.31,
+    "relation_raw": 9.8,
+    "relation_trained": 4.44,
+    "path_raw": 1.28
+  },
+  "oracle_R@5": {
+    "old": 77.65,
+    "+relation": 77.69,
+    "+relation+path": 77.69
+  },
+  "oracle_R@20": {
+    "old": 88.42,
+    "+relation": 88.46,
+    "+relation+path": 88.49
+  },
+  "oracle_R@5_by_hop": {
+    "2hop": {
+      "old": 83.91,
+      "+relation": 83.97,
+      "+relation+path": 83.97
+    },
+    "3hop": {
+      "old": 61.09,
+      "+relation": 61.09,
+      "+relation+path": 61.09
+    },
+    "4hop": {
+      "old": 55.77,
+      "+relation": 55.77,
+      "+relation+path": 55.77
+    },
+    "unreach": {
+      "old": null,
+      "+relation": null,
+      "+relation+path": null
+    }
+  },
+  "n_by_hop": {
+    "2hop": 889,
+    "3hop": 233,
+    "4hop": 78,
+    "unreach": 0
+  },
+  "rank_movement": {
+    "stayed_top5": 74,
+    "into_top5": 39
+  },
+  "n_golds_with_relation": 378,
+  "reference": {
+    "prev_reranker_R@5": 38.8,
+    "prev_oracle_R@5": 39.1,
+    "benchmark": 29.7
+  },
+  "per_signal_R@1": {
+    "dense": 37.64,
+    "offset": 36.86,
+    "prototype": 32.79,
+    "splade": 0.49,
+    "graph": 0.49,
+    "relation_raw": 5.28,
+    "relation_trained": 1.44,
+    "path_raw": 0.88
+  },
+  "oracle_R@1": {
+    "old": 41.02,
+    "+relation": 41.2,
+    "+relation+path": 41.24
+  },
+  "subset_R@5": {
+    "topic": {
+      "dense": 91.42,
+      "offset": 94.41,
+      "splade": 0.27,
+      "prototype": 81.58,
+      "relation_raw": 0.47,
+      "path_raw": 0.0
+    },
+    "bridge": {
+      "dense": 54.57,
+      "offset": 46.2,
+      "splade": 0.6,
+      "prototype": 42.35,
+      "relation_raw": 18.22,
+      "path_raw": 2.17
+    },
+    "all": {
+      "dense": 67.44,
+      "offset": 61.33,
+      "splade": 0.49,
+      "prototype": 55.28,
+      "relation_raw": 9.8,
+      "path_raw": 1.28
+    }
+  },
+  "oracle_subset_R@5": {
+    "topic": {
+      "old": 98.74,
+      "+relation": 98.74,
+      "+relation+path": 98.74
+    },
+    "bridge": {
+      "old": 69.61,
+      "+relation": 75.25,
+      "+relation+path": 75.55
+    },
+    "all": {
+      "old": 77.65,
+      "+relation": 77.69,
+      "+relation+path": 77.69
+    }
+  },
+  "n_subset": {
+    "topic": 752,
+    "bridge": 1170,
+    "all": 1200
+  },
+  "debug_examples_2wiki": [
+    {
+      "question": "When did the Soviet Union seal off the city where the director of The Man from Morocco was born?",
+      "topics": [
+        "The Man from Morocco",
+        "Soviet Union"
+      ],
+      "source": "The Man from Morocco",
+      "target": "Mutz Greenbaum",
+      "edge_sentence": "The Man from Morocco is a 1945 action adventure film directed by Mutz Greenbaum as Max Greene.",
+      "edge_pair": "The Man from Morocco \u2014 Mutz Greenbaum",
+      "edge_masked": "[SRC] is a 1945 action adventure film directed by [TGT] as Max Greene.",
+      "is_gold": true
+    },
+    {
+      "question": "Who was married to the author of The Night of Enitharmon's Joy?",
+      "topics": [
+        "The Night of Enitharmon's Joy"
+      ],
+      "source": "The Night of Enitharmon's Joy",
+      "target": "Catherine Blake",
+      "edge_sentence": "The Night of Enitharmon's Joy, often referred as The Triple Hecate or simply Hecate, is a 1795 work of art by the English artist and poet William Blake which depicts Enitharmon, a female character in his mythology, or Hecate, a chthonic Gre [SEP] Catherine Blake (n\u00e9e Boucher; 25 April 1762 \u2013 18 October 1831) was the wife of the poet, painter and engraver William Blake, and a vital presence and assistant throughout his life.",
+      "edge_pair": "The Night of Enitharmon's Joy \u2014 Catherine Blake",
+      "edge_masked": "[SRC], often referred as The Triple Hecate or simply Hecate, is a 1795 work of art by the English artist and poet William Blake which depicts Enitharmon, a female character in his mythology, or Hecate, a chthonic Gre [SEP] [TGT] (n\u00e9e Boucher; 25 April 1762 \u2013 18 October 1831) was the wife of the poet, painter and engraver William Blake, and a vital presence and assistant throughout his life.",
+      "is_gold": true
+    },
+    {
+      "question": "Who is the cuban legend born in 1925 in the city Leon Ichaso was born?",
+      "topics": [
+        "Leon Ichaso"
+      ],
+      "source": "Leon Ichaso",
+      "target": "Havana",
+      "edge_sentence": "Leon Ichaso was born in Havana August 3, 1948, into a family of well-known writers, journalists and artists.",
+      "edge_pair": "Leon Ichaso \u2014 Havana",
+      "edge_masked": "[SRC] was born in [TGT] August 3, 1948, into a family of well-known writers, journalists and artists.",
+      "is_gold": false
+    },
+    {
+      "question": "What is the biggest attack by the group Bush said the 'war on terror' began with, on the country containing the Federal Detention Center, in the birthplace of George Pocheptsov?",
+      "topics": [
+        "George Pocheptsov",
+        "War on Terror"
+      ],
+      "source": "George Pocheptsov",
+      "target": "Philadelphia",
+      "edge_sentence": "George Pocheptsov, who is sometimes also referred to as \"Georgie\", was born in Philadelphia, Pennsylvania, in 1992 to Ukrainian parents.",
+      "edge_pair": "George Pocheptsov \u2014 Philadelphia",
+      "edge_masked": "[SRC], who is sometimes also referred to as \"Georgie\", was born in [TGT], Pennsylvania, in 1992 to Ukrainian parents.",
+      "is_gold": false
+    },
+    {
+      "question": "What college did the father of Vyvyan Holland go to?",
+      "topics": [
+        "Holland"
+      ],
+      "source": "Holland",
+      "target": "North Carolina",
+      "edge_sentence": "Holland North and South Holland (in orange) shown together within the Netherlands Country Netherlands Largest settlements List (show) Amsterdam Rotterdam The Hague Haarlem Zoetermeer Dordrecht Leiden Area Total 5,488 km (2,119 sq mi) Popula [SEP] State of North Carolina Flag Seal Nickname (s): Old North State; Tar Heel State Motto (s): Esse quam videri: ``To be, rather than to seem ''(official); First in Flight: First in Freedom Official language English Spoken languages As of 2000 ",
+      "edge_pair": "Holland \u2014 North Carolina",
+      "edge_masked": "[SRC] North and South [SRC] (in orange) shown together within the Netherlands Country Netherlands Largest settlements List (show) Amsterdam Rotterdam The Hague Haarlem Zoetermeer Dordrecht Leiden Area Total 5,488 km (2,119 sq mi) Popula [SEP] State of [TGT] Flag Seal Nickname (s): Old North State; Tar Heel State Motto (s): Esse quam videri: ``To be, rather than to seem ''(official); First in Flight: First in Freedom Official language English Spoken languages As of 2000 ",
+      "is_gold": false
+    },
+    {
+      "question": "Who formed and first came to the colony where Jacob Highbarger House is located?",
+      "topics": [
+        "Jacob Highbarger House"
+      ],
+      "source": "Jacob Highbarger House",
+      "target": "United States",
+      "edge_sentence": "The Jacob Highbarger House was built \"circa\" 1832 in Sharpsburg, Maryland, United States.",
+      "edge_pair": "Jacob Highbarger House \u2014 United States",
+      "edge_masked": "The [SRC] was built \"circa\" 1832 in Sharpsburg, Maryland, [TGT].",
+      "is_gold": false
+    },
+    {
+      "question": "Who played Opie on the show named after the actor who featured in the film Onionhead?",
+      "topics": [
+        "Onionhead"
+      ],
+      "source": "Onionhead",
+      "target": "Oklahoma",
+      "edge_sentence": "Scott, a native Oklahoman who based the novel on his own World War II service in the Coast Guard. [SEP] In 1927, Oklahoman businessman Cyrus Avery, known as the \"Father of Route 66\", began the campaign to create U.S.",
+      "edge_pair": "Onionhead \u2014 Oklahoma",
+      "edge_masked": "Scott, a native [TGT]n who based the novel on his own World War II service in the Coast Guard. [SEP] In 1927, [TGT]n businessman Cyrus Avery, known as the \"Father of Route 66\", began the campaign to create U.S.",
+      "is_gold": false
+    },
+    {
+      "question": "When does the monsoon season occur in the city which is the fashion capital of India?",
+      "topics": [
+        "Fashion capital"
+      ],
+      "source": "Fashion capital",
+      "target": "Houston",
+      "edge_sentence": "54 33 22 Moscow 22 23 Tokyo 10 13 24 Santiago 43 19 25 Vienna 34 9 26 Shanghai 15 11 27 Mumbai 38 11 28 Melbourne 49 21 29 Stockholm 46 23 30 Bangkok 50 20 31 Warsaw 42 11 32 Copenhagen 36 33 San Francisco 37 34 Sydney 13 21 35 S\u00e3o Paulo 16 19 36 Antwerpen 25 11 37 Johannesburg 48 11 38 Dallas 20 18 39 Austin 45 6 40 Abu Dhabi Debut 41 St Petersburg 35 6 42 Cape Town 41 43 Mexico City 53 10 44 Portland, Oregon Debut 45 Frankfurt 51 6 46 Boston 24 18 47 Kuala Lumpur Debut 48 Johannesburg 37 11 49 Monaco 21 28 50 Atlanta 47 51 New Delhi 39 12 52 Vancouver 52 53 Chicago, Illinois 27 26 54 Houston, Texas 30 24 55 Montreal 47 8 56 Dakar Debut 57 Beirut Debut 58 Krak\u00f3w 44 14 59 Toronto 28 31 60 Lagos Debut 61 Columbus Debut 62 Accra Debut 63 Caracas Hiatus",
+      "edge_pair": "Fashion capital \u2014 Houston",
+      "edge_masked": "54 33 22 Moscow 22 23 Tokyo 10 13 24 Santiago 43 19 25 Vienna 34 9 26 Shanghai 15 11 27 Mumbai 38 11 28 Melbourne 49 21 29 Stockholm 46 23 30 Bangkok 50 20 31 Warsaw 42 11 32 Copenhagen 36 33 San Francisco 37 34 Sydney 13 21 35 S\u00e3o Paulo 16 19 36 Antwerpen 25 11 37 Johannesburg 48 11 38 Dallas 20 18 39 Austin 45 6 40 Abu Dhabi Debut 41 St Petersburg 35 6 42 Cape Town 41 43 Mexico City 53 10 44 Portland, Oregon Debut 45 Frankfurt 51 6 46 Boston 24 18 47 Kuala Lumpur Debut 48 Johannesburg 37 11 49 Monaco 21 28 50 Atlanta 47 51 New Delhi 39 12 52 Vancouver 52 53 Chicago, Illinois 27 26 54 [TGT], Texas 30 24 55 Montreal 47 8 56 Dakar Debut 57 Beirut Debut 58 Krak\u00f3w 44 14 59 Toronto 28 31 60 Lagos Debut 61 Columbus Debut 62 Accra Debut 63 Caracas Hiatus",
+      "is_gold": false
+    },
+    {
+      "question": "What does the acronym of the agency National Center for the Analysis of Violent Crime is part of stand for",
+      "topics": [
+        "National Center for the Analysis of Violent Crime"
+      ],
+      "source": "National Center for the Analysis of Violent Crime",
+      "target": "Federal Bureau of Investigation",
+      "edge_sentence": "The National Center for the Analysis of Violent Crime (NCAVC) is a specialist FBI department. [SEP] From the end of the 1980s to the early 1990s, the FBI reassigned more than 300 agents from foreign counter-intelligence duties to violent crime, and made violent crime the sixth national priority.",
+      "edge_pair": "National Center for the Analysis of Violent Crime \u2014 Federal Bureau of Investigation",
+      "edge_masked": "The [SRC] (NCAVC) is a specialist FBI department. [SEP] From the end of the 1980s to the early 1990s, the FBI reassigned more than 300 agents from foreign counter-intelligence duties to violent crime, and made violent crime the sixth national priority.",
+      "is_gold": false
+    },
+    {
+      "question": "Who is a cast member in the work David Brandner is present in?",
+      "topics": [
+        "David Brandner"
+      ],
+      "source": "David Brandner",
+      "target": "David",
+      "edge_sentence": "David Brandner is a fictional character on the German soap opera \"Verbotene Liebe (Forbidden Love)\" portrayed by actor Sven Koller from September 11, 2008 to June 15, 2010.",
+      "edge_pair": "David Brandner \u2014 David",
+      "edge_masked": "[TGT] Brandner is a fictional character on the German soap opera \"Verbotene Liebe (Forbidden Love)\" portrayed by actor Sven Koller from September 11, 2008 to June 15, 2010.",
+      "is_gold": false
+    },
+    {
+      "question": "Who is We Belong Together, by the artist who performed Up Out My Face, about?",
+      "topics": [
+        "We Belong Together",
+        "Up Out My Face"
+      ],
+      "source": "We Belong Together",
+      "target": "Europe",
+      "edge_sentence": "In Europe the song was performed at the Live 8 charity concert, the Fashion Rocks in Monaco, and the German Bambi Awards.",
+      "edge_pair": "We Belong Together \u2014 Europe",
+      "edge_masked": "In [TGT] the song was performed at the Live 8 charity concert, the Fashion Rocks in Monaco, and the German Bambi Awards.",
+      "is_gold": false
+    },
+    {
+      "question": "Weardale is the same type of geographical feature as the one of Ten Thousand Smokes in the state purchased from Russia. Which country is the National Historic Site named after the president who made that purchase located in?",
+      "topics": [
+        "Weardale",
+        "Russia"
+      ],
+      "source": "Weardale",
+      "target": "England",
+      "edge_sentence": "Weardale is a dale, or valley, of the east side of the Pennines in County Durham, England.",
+      "edge_pair": "Weardale \u2014 England",
+      "edge_masked": "[SRC] is a dale, or valley, of the east side of the Pennines in County Durham, [TGT].",
+      "is_gold": false
+    },
+    {
+      "question": "How many square miles is the country that provided the most legal immigrants to the city where most Jamaicans live in the U.S. from the region serving as the middle leg of the journey from England to Africa to the Americas?",
+      "topics": [
+        "England",
+        "Africa"
+      ],
+      "source": "England",
+      "target": "London",
+      "edge_sentence": "Some of the best-known of these are: Hadrian's Wall, Stonehenge, Avebury and Associated Sites, Tower of London, Jurassic Coast, Saltaire, Ironbridge Gorge, Studley Royal Park and various others.There are many museums in England, but perhaps the most notable is London's British Museum.",
+      "edge_pair": "England \u2014 London",
+      "edge_masked": "Some of the best-known of these are: Hadrian's Wall, Stonehenge, Avebury and Associated Sites, Tower of [TGT], Jurassic Coast, Saltaire, Ironbridge Gorge, Studley Royal Park and various others.There are many museums in [SRC], but perhaps the most notable is [TGT]'s British Museum.",
+      "is_gold": false
+    },
+    {
+      "question": "Who was ordered to force a Tibetan assault into the birthplace of Li Shuoxun?",
+      "topics": [
+        "Li Shuoxun",
+        "Force"
+      ],
+      "source": "Li Shuoxun",
+      "target": "Sichuan",
+      "edge_sentence": "Li Shuoxun (; 1903 Sichuan \u2013 1931 Hainan).",
+      "edge_pair": "Li Shuoxun \u2014 Sichuan",
+      "edge_masked": "[SRC] (; 1903 [TGT] \u2013 1931 Hainan).",
+      "is_gold": false
+    },
+    {
+      "question": "The speaker of the governing body in India controlling the Prime Minister of India is elected by whom?",
+      "topics": [
+        "Prime Minister of India"
+      ],
+      "source": "Prime Minister of India",
+      "target": "Lok Sabha",
+      "edge_sentence": "Union cabinet is collectively responsible to the Lok Sabha as per article 75 (3) of the Constitution of India.",
+      "edge_pair": "Prime Minister of India \u2014 Lok Sabha",
+      "edge_masked": "Union cabinet is collectively responsible to the [TGT] as per article 75 (3) of the Constitution of India.",
+      "is_gold": false
+    },
+    {
+      "question": "Where did the first team to play in three consecutive Fall Classics play before Wrigley Field?",
+      "topics": [
+        "Wrigley Field"
+      ],
+      "source": "Wrigley Field",
+      "target": "Chicago Cubs",
+      "edge_sentence": "to buy the Chicago Cubs from Charles P.",
+      "edge_pair": "Wrigley Field \u2014 Chicago Cubs",
+      "edge_masked": "to buy the [TGT] from Charles P.",
+      "is_gold": true
+    },
+    {
+      "question": "How many times did Eddie Newton's team win Premier League?",
+      "topics": [
+        "Premier League",
+        "Eddie Newton"
+      ],
+      "source": "Premier League",
+      "target": "Cristiano Ronaldo",
+      "edge_sentence": "The three highest transfer in the sport's history had a Premier League club on the selling end, with Tottenham Hotspur selling Gareth Bale to Real Madrid for \u00a385 million in 2013, Manchester United's sale of Cristiano Ronaldo to Real Madrid for \u00a380 million in 2009, and Liverpool selling Luis Su\u00e1rez to Barcelona for \u00a375 million in 2014.",
+      "edge_pair": "Premier League \u2014 Cristiano Ronaldo",
+      "edge_masked": "The three highest transfer in the sport's history had a [SRC] club on the selling end, with Tottenham Hotspur selling Gareth Bale to Real Madrid for \u00a385 million in 2013, Manchester United's sale of [TGT] to Real Madrid for \u00a380 million in 2009, and Liverpool selling Luis Su\u00e1rez to Barcelona for \u00a375 million in 2014.",
+      "is_gold": false
+    },
+    {
+      "question": "What is the record label for the singer of Vinternatten?",
+      "topics": [
+        "Vinternatten"
+      ],
+      "source": "Vinternatten",
+      "target": "Sweden",
+      "edge_sentence": "Vinternatten () is a Christmas album by Swedish singer Sanna Nielsen, released in Sweden on November 19, 2012.",
+      "edge_pair": "Vinternatten \u2014 Sweden",
+      "edge_masked": "[SRC] () is a Christmas album by Swedish singer Sanna Nielsen, released in [TGT] on November 19, 2012.",
+      "is_gold": false
+    },
+    {
+      "question": "What kind of agency is the employer of David Rossi?",
+      "topics": [
+        "David Rossi"
+      ],
+      "source": "David Rossi",
+      "target": "Federal Bureau of Investigation",
+      "edge_sentence": "Rossi begins the series returning to the FBI after a lengthy period of being semi-retired, with his return due to \"unfinished business\". [SEP] From the end of the 1980s to the early 1990s, the FBI reassigned more than 300 agents from foreign counter-intelligence duties to violent crime, and made violent crime the sixth national priority.",
+      "edge_pair": "David Rossi \u2014 Federal Bureau of Investigation",
+      "edge_masked": "Rossi begins the series returning to the FBI after a lengthy period of being semi-retired, with his return due to \"unfinished business\". [SEP] From the end of the 1980s to the early 1990s, the FBI reassigned more than 300 agents from foreign counter-intelligence duties to violent crime, and made violent crime the sixth national priority.",
+      "is_gold": true
+    },
+    {
+      "question": "When did the country where Nyelutong is located gain independence from Great Britain?",
+      "topics": [
+        "Nyelutong"
+      ],
+      "source": "Nyelutong",
+      "target": "Malaysia",
+      "edge_sentence": "Nyelutong is a settlement in the Betong division of Sarawak, Malaysia.",
+      "edge_pair": "Nyelutong \u2014 Malaysia",
+      "edge_masked": "[SRC] is a settlement in the Betong division of Sarawak, [TGT].",
+      "is_gold": false
+    }
+  ],
+  "debug_edges_gold": [
+    {
+      "question": "Who was married to the author of The Night of Enitharmon's Joy?",
+      "target": "Catherine Blake",
+      "rel_score": 0.618,
+      "is_gold": true,
+      "edge_sentence": "The Night of Enitharmon's Joy, often referred as The Triple Hecate or simply Hecate, is a 1795 work of art by the English artist and poet William Blake which de"
+    },
+    {
+      "question": "Who is We Belong Together, by the artist who performed Up Out My Face, about?",
+      "target": "We Belong Together",
+      "rel_score": 0.6,
+      "is_gold": true,
+      "edge_sentence": "\"Up Out My Face\" is a song by American singer and songwriter Mariah Carey from her twelfth studio album, \"Memoirs of an Imperfect Angel\" (2009). [SEP] The song'"
+    },
+    {
+      "question": "Who was ordered to force a Tibetan assault into the birthplace of Li Shuoxun?",
+      "target": "Sino-Tibetan relations during the Ming dynasty",
+      "rel_score": 0.682,
+      "is_gold": true,
+      "edge_sentence": "Li Shuoxun (; 1903 Sichuan \u2013 1931 Hainan). [SEP] Langlois writes that there was unrest in Tibet and western Sichuan, which the Marquis Mu Ying (\u6c90\u82f1) was commissi"
+    },
+    {
+      "question": "The speaker of the governing body in India controlling the Prime Minister of India is elected by who",
+      "target": "Speaker of the Lok Sabha",
+      "rel_score": 0.594,
+      "is_gold": true,
+      "edge_sentence": "Union cabinet is collectively responsible to the Lok Sabha as per article 75 (3) of the Constitution of India. [SEP] The Speaker of the Lok Sabha is the presidi"
+    },
+    {
+      "question": "What is the record label for the singer of Vinternatten?",
+      "target": "7 (Sanna Nielsen album)",
+      "rel_score": 0.651,
+      "is_gold": true,
+      "edge_sentence": "Vinternatten () is a Christmas album by Swedish singer Sanna Nielsen, released in Sweden on November 19, 2012. [SEP] 7 is the eighth studio album by Swedish sin"
+    },
+    {
+      "question": "Who is the father of the director of Seemabaddha?",
+      "target": "Sukumar Ray (film)",
+      "rel_score": 0.677,
+      "is_gold": true,
+      "edge_sentence": "Seemabaddha ( \"Shimab\u00f4ddho\"; English title: \"Company Limited\") is a 1971 social drama Bengali film directed by Satyajit Ray. [SEP] Sukumar Ray is a 1987 Bengali"
+    },
+    {
+      "question": "Under which amendment was the state encompassing the pangolakha wildlife sanctuary (pws) made an int",
+      "target": "Sikkim",
+      "rel_score": 0.709,
+      "is_gold": true,
+      "edge_sentence": "Pangolakha Wildlife Sanctuary (Pron: p\u01fdng\u00f3l\u0251\u0301kha, Nepali: \u092a\u093e\u0919\u094d\u0932\u0916\u093e) is a wildlife reserve in the East Sikkim district of the state of Sikkim in India."
+    },
+    {
+      "question": "What is the population of the state where the Battle of Mine Creek was fought?",
+      "target": "Kansas",
+      "rel_score": 0.702,
+      "is_gold": true,
+      "edge_sentence": "The Battle of Mine Creek, also known as the Battle of the Osage, was a battle that occurred on October 25, 1864, in Kansas as part of Price's Raid during the Am"
+    },
+    {
+      "question": "Who was the mother of the performer of 'Til Tomorrow?",
+      "target": "Marvin Gaye",
+      "rel_score": 0.66,
+      "is_gold": true,
+      "edge_sentence": "\"'Til Tomorrow\" is a 1982 R&B/soul quiet storm-styled song recorded by American singer Marvin Gaye."
+    },
+    {
+      "question": "At what age did the performer of Breakout start on Hannah Montana?",
+      "target": "Miley Cyrus",
+      "rel_score": 0.537,
+      "is_gold": true,
+      "edge_sentence": "It focuses on Miley Stewart (portrayed by Miley Cyrus), who is a teenager living a double life as an average schoolgirl by day and as the famous recording artis"
+    },
+    {
+      "question": "Rila is in the country with Ottoman era in its history having a main subject. In what year were the ",
+      "target": "Ottoman Tripolitania",
+      "rel_score": 0.532,
+      "is_gold": true,
+      "edge_sentence": "The sovereign state is made of three historical regions: Tripolitania, Fezzan and Cyrenaica. [SEP] As a result of this conflict, the Ottoman Turks ceded the pro"
+    },
+    {
+      "question": "Where on a map is the river Petroleum Street Bridge crosses over?",
+      "target": "Allegheny River",
+      "rel_score": 0.733,
+      "is_gold": true,
+      "edge_sentence": "The Petroleum Street Bridge is a girder bridge connecting the North Side and South Side neighborhoods of Oil City, Pennsylvania and crosses the Allegheny River."
+    }
+  ],
+  "debug_edges_fp": [
+    {
+      "question": "When did the Soviet Union seal off the city where the director of The Man from Morocco was born?",
+      "target": "Ishtar (film)",
+      "rel_score": 0.591,
+      "is_gold": false,
+      "edge_sentence": "The Man from Morocco is a 1945 action adventure film directed by Mutz Greenbaum as Max Greene. [SEP] The story revolves around a duo of incredibly untalented Am"
+    },
+    {
+      "question": "When did the Soviet Union seal off the city where the director of The Man from Morocco was born?",
+      "target": "French colonial empire",
+      "rel_score": 0.57,
+      "is_gold": false,
+      "edge_sentence": "The Man from Morocco is a 1945 action adventure film directed by Mutz Greenbaum as Max Greene. [SEP] The French colonial empire began to fall during the Second "
+    },
+    {
+      "question": "When did the Soviet Union seal off the city where the director of The Man from Morocco was born?",
+      "target": "Jews",
+      "rel_score": 0.569,
+      "is_gold": false,
+      "edge_sentence": "The Man from Morocco is a 1945 action adventure film directed by Mutz Greenbaum as Max Greene. [SEP] Western Europe's largest Jewish community, and the third-la"
+    },
+    {
+      "question": "When did the Soviet Union seal off the city where the director of The Man from Morocco was born?",
+      "target": "Jews",
+      "rel_score": 0.569,
+      "is_gold": false,
+      "edge_sentence": "The Man from Morocco is a 1945 action adventure film directed by Mutz Greenbaum as Max Greene. [SEP] Western Europe's largest Jewish community, and the third-la"
+    },
+    {
+      "question": "Who was married to the author of The Night of Enitharmon's Joy?",
+      "target": "Don Frye",
+      "rel_score": 0.605,
+      "is_gold": false,
+      "edge_sentence": "The Night of Enitharmon's Joy, often referred as The Triple Hecate or simply Hecate, is a 1795 work of art by the English artist and poet William Blake which de"
+    },
+    {
+      "question": "Who was married to the author of The Night of Enitharmon's Joy?",
+      "target": "Chester Starr",
+      "rel_score": 0.592,
+      "is_gold": false,
+      "edge_sentence": "The Night of Enitharmon's Joy, often referred as The Triple Hecate or simply Hecate, is a 1795 work of art by the English artist and poet William Blake which de"
+    },
+    {
+      "question": "Who was married to the author of The Night of Enitharmon's Joy?",
+      "target": "Hassan Shahsavan",
+      "rel_score": 0.568,
+      "is_gold": false,
+      "edge_sentence": "The Night of Enitharmon's Joy, often referred as The Triple Hecate or simply Hecate, is a 1795 work of art by the English artist and poet William Blake which de"
+    },
+    {
+      "question": "Who is the cuban legend born in 1925 in the city Leon Ichaso was born?",
+      "target": "Havana",
+      "rel_score": 0.81,
+      "is_gold": false,
+      "edge_sentence": "Leon Ichaso was born in Havana August 3, 1948, into a family of well-known writers, journalists and artists."
+    },
+    {
+      "question": "What is the biggest attack by the group Bush said the 'war on terror' began with, on the country con",
+      "target": "Philadelphia",
+      "rel_score": 0.514,
+      "is_gold": false,
+      "edge_sentence": "George Pocheptsov, who is sometimes also referred to as \"Georgie\", was born in Philadelphia, Pennsylvania, in 1992 to Ukrainian parents."
+    },
+    {
+      "question": "What is the biggest attack by the group Bush said the 'war on terror' began with, on the country con",
+      "target": "Philadelphia",
+      "rel_score": 0.514,
+      "is_gold": false,
+      "edge_sentence": "George Pocheptsov, who is sometimes also referred to as \"Georgie\", was born in Philadelphia, Pennsylvania, in 1992 to Ukrainian parents."
+    },
+    {
+      "question": "What is the biggest attack by the group Bush said the 'war on terror' began with, on the country con",
+      "target": "Philadelphia",
+      "rel_score": 0.514,
+      "is_gold": false,
+      "edge_sentence": "George Pocheptsov, who is sometimes also referred to as \"Georgie\", was born in Philadelphia, Pennsylvania, in 1992 to Ukrainian parents."
+    },
+    {
+      "question": "What is the biggest attack by the group Bush said the 'war on terror' began with, on the country con",
+      "target": "Dissolution of the Soviet Union",
+      "rel_score": 0.495,
+      "is_gold": false,
+      "edge_sentence": "George Pocheptsov, who is sometimes also referred to as \"Georgie\", was born in Philadelphia, Pennsylvania, in 1992 to Ukrainian parents. [SEP] On July 11, Ivash"
+    }
+  ],
+  "per_signal_R@5_by_hop": {
+    "2hop": {
+      "dense": 73.45,
+      "offset": 66.59,
+      "prototype": 62.2,
+      "splade": 0.56,
+      "graph": 2.31,
+      "relation_raw": 11.14,
+      "relation_trained": 4.78,
+      "path_raw": 1.41
+    },
+    "3hop": {
+      "dense": 52.5,
+      "offset": 46.64,
+      "prototype": 39.2,
+      "splade": 0.29,
+      "graph": 2.58,
+      "relation_raw": 6.58,
+      "relation_trained": 3.43,
+      "path_raw": 1.14
+    },
+    "4hop": {
+      "dense": 43.59,
+      "offset": 45.19,
+      "prototype": 24.36,
+      "splade": 0.32,
+      "graph": 1.6,
+      "relation_raw": 4.17,
+      "relation_trained": 3.53,
+      "path_raw": 0.32
+    }
+  }
+}

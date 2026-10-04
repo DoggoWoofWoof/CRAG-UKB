@@ -1,0 +1,13 @@
+{
+  "gate": "validate EXHAUSTIVE_SHARDED_FP32_COMPUTE (>1M query x doc blocking) vs the validated exhaustive reference",
+  "method": "EXHAUSTIVE_SHARDED_FP32_COMPUTE",
+  "flags": {"FP16_STORAGE": "YES", "FP16_REDUCED_COMPUTE": "NO", "FP32_COMPUTE": "YES", "TF32": "NO", "ANN": "NO", "EXHAUSTIVE": "YES"},
+  "storage_norm": "raw fp16 storage; L2 normalization in fp32 on the fly (never re-rounded to fp16) = bit-faithful to faiss.normalize_L2 / indexers.py:109-161",
+  "TIE_EPS": 0.001,
+  "self_parity_merge_vs_singleshot": {"ds": "metaqa", "doc_blocks": 18, "top1": 1.0, "top3_set": 1.0, "max_score_diff": 0.0, "real_nontie": 0, "PASS": true},
+  "cross_impl": [
+    {"ds": "metaqa_43234", "reference": "faiss_IndexFlatIP_cpu_fp32", "raw_top1_agree": 1.0, "raw_top3_set_agree": 0.999954, "real_nontie_disagreements": 0, "max_sorted_score_diff": 1.31e-06, "residual": "fp32 accumulation-order only", "PARITY_PASS": true},
+    {"ds": "webqsp_world_1316466", "reference": "local_bruteforce_fp32 (512-sample)", "raw_top1_agree": 0.958984, "raw_top3_set_agree": 0.958984, "real_nontie_disagreements": 0, "max_sorted_score_diff": 0.0, "residual": "EXACT score ties (duplicate KB entity embeddings) — score multisets bitwise identical on every disagreement", "PARITY_PASS": true}
+  ],
+  "verdict": "PASS — sharded >1M implementation is exact w.r.t. the reference; every id-disagreement is a within-TIE_EPS score tie (metaqa: fp32 accum-order 1.3e-6; webqsp: exact 0.0 duplicate-embedding ties). Same implementation used unchanged for WebQSP, HotpotQA FullWiki, 2Wiki_universe."
+}

@@ -1,0 +1,210 @@
+{
+ "stage": "L3_HOST",
+ "addendum": 6,
+ "what": "REPRO: the placement test of the encoder setup",
+ "addendum_sha256": "dbf7ea22bf6664bbe287c5275406c0c541d3d9ac099a6bed6ff65faceeb79c03",
+ "download_record_sha256": "bd183aa007cdb7052f93946d179feecdf98c655b35993ac89d4c52e91a6a390b",
+ "module_sha256": "d26727ae0e5164992cfe8fba81db895f0d27680f2aba7fc81eaa8a1716b8dbef",
+ "priority": "BELOW_NORMAL",
+ "env": {
+  "python": "3.13.5",
+  "torch": "2.8.0+cu128",
+  "transformers": "4.57.3",
+  "sentence_transformers": "5.2.0",
+  "numpy": "2.3.2",
+  "cuda": "12.8",
+  "device": "NVIDIA RTX 4500 Ada Generation",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "torch_threads": 4,
+  "flash_attn_installed": false
+ },
+ "started": "2026-09-29T20:22:08+0530",
+ "frozen_shards_verified": {
+  "dense/docs/shard_00000.npy": "113b7b2678072c56abebfb994fcaebc95e15df8c5f4c39e8525be5f2e75e99fa",
+  "dense/docs/shard_00001.npy": "2d16ba324dd89ac2b91199e11c8fd3c80bd721e9625880e909b54a1f54c77d8e",
+  "dense/queries/shard_00008.npy": "71a2747fdfcedc2d022c4b33a01b2f48626ed04cd5f7c17b9e105363724a2a9e",
+  "dense/queries/shard_00009.npy": "686a5ca1f98f6f27cd0117f84391bb0d6069fd887e97d8020a131f2a466a1eab",
+  "splade/docs/shard_00000.npz": "e5de739fee0843e4b1c9d0eb7545da644746aeed6a597c43eaa1cf5ba1928bb6",
+  "splade/docs/shard_00001.npz": "7817e626c850a567310a8adda475d90abfc538e486ae5b5f9ba6e18b550e117d",
+  "splade/queries/shard_00008.npz": "32b3b92e8e959132a6912caebb7064c513a922b37ac5415db29e80e3c9a0b03f",
+  "splade/queries/shard_00009.npz": "14f85075b335d234f828e94a451fd1cb323cabcd28162565495fc91ca8e1392e"
+ },
+ "pointers": {
+  "dense": {
+   "sha256": "2551b902901e5b22eb6cfb9ab08060e8a9ecacf8e7fcc9abb267a06f830a43a3",
+   "identity": true
+  },
+  "splade": {
+   "sha256": "d62ea8a7a8ee0f16922b0a06faed745969af05c4000887f6a92e082230fb9c31",
+   "redirected_positions": 3087,
+   "distinct_stored_rows": 40147,
+   "redirects_to_earlier_self_stored_row": true
+  }
+ },
+ "population": {
+  "rows": 1998,
+  "query_shards": [
+   8,
+   9
+  ],
+  "dev_block": [
+   329282,
+   368420
+  ],
+  "lines_parsed": 1998
+ },
+ "splade_weight_files": {
+  "bin_keys": 205,
+  "safetensors_keys": 203,
+  "only_bin": [
+   "cls.predictions.decoder.bias",
+   "cls.predictions.decoder.weight"
+  ],
+  "only_safetensors": [],
+  "shared": 203,
+  "shared_differing": [],
+  "identical_shared": true,
+  "only_bin_ties": {
+   "cls.predictions.decoder.bias": {
+    "tied_to": "cls.predictions.bias",
+    "tie_target_in_both_files": true,
+    "equal_to_tie_target": true
+   },
+   "cls.predictions.decoder.weight": {
+    "tied_to": "bert.embeddings.word_embeddings.weight",
+    "tie_target_in_both_files": true,
+    "equal_to_tie_target": true
+   }
+  },
+  "only_bin_all_verified_ties": true
+ },
+ "dense_load_seconds": 11.5,
+ "dense_attn_implementation": "sdpa",
+ "dense_docs_seconds": 89.7,
+ "dense_docs": {
+  "rows": 43234,
+  "cos_mean": 0.9999967,
+  "cos_min": 0.9994217,
+  "cos_p001": 0.9999611,
+  "rows_cos_below_0.999": 0,
+  "rows_cos_below_0.99": 0,
+  "max_abs_diff": 0.005249,
+  "rows_exactly_equal": 0,
+  "nn": {
+   "rows": 43234,
+   "nearest_frozen_same_text": 43234,
+   "nearest_frozen_is_self": 43234
+  }
+ },
+ "dense_queries": {
+  "question": {
+   "rows": 1998,
+   "cos_mean": 0.9999974,
+   "cos_min": 0.9999636,
+   "cos_p001": 0.9999853,
+   "rows_cos_below_0.999": 0,
+   "rows_cos_below_0.99": 0,
+   "max_abs_diff": 0.0013428,
+   "rows_exactly_equal": 190
+  },
+  "question_plain": {
+   "rows": 1998,
+   "cos_mean": 0.9833879,
+   "cos_min": 0.8749582,
+   "cos_p001": 0.907351,
+   "rows_cos_below_0.999": 1998,
+   "rows_cos_below_0.99": 1264,
+   "max_abs_diff": 0.0597534,
+   "rows_exactly_equal": 0
+  }
+ },
+ "dense_queries_seconds": 9.5,
+ "splade_load_seconds": 1.1,
+ "splade_docs_seconds": 23.8,
+ "splade_docs": {
+  "rows": 43234,
+  "cos_mean": 1.0,
+  "cos_min": 0.9999997,
+  "cos_p001": 0.9999998,
+  "rows_cos_below_0.999": 0,
+  "rows_cos_below_0.99": 0,
+  "jaccard_mean": 0.9999958,
+  "jaccard_min": 0.952381,
+  "rows_same_support": 43225,
+  "rows_exactly_equal": 1094,
+  "max_abs_diff": 0.0005281,
+  "nnz_host": 1764523,
+  "nnz_frozen": 1764528,
+  "compared": "frozen position i vs the re-encoding at pointer row[i] (the stored row's own batch)",
+  "nn": {
+   "rows": 43234,
+   "nearest_frozen_same_stored_row": 43234,
+   "nearest_frozen_is_self": 40147
+  }
+ },
+ "splade_docs_redirected_own_position": {
+  "rows": 3087,
+  "cos_mean": 0.9991427,
+  "cos_min": 0.962233,
+  "cos_p001": 0.9691595,
+  "rows_cos_below_0.999": 522,
+  "rows_cos_below_0.99": 55,
+  "jaccard_mean": 0.9757175,
+  "jaccard_min": 0.5434783,
+  "rows_same_support": 2225,
+  "rows_exactly_equal": 49,
+  "max_abs_diff": 0.748149,
+  "nnz_host": 106955,
+  "nnz_frozen": 106613,
+  "what": "report only: the 3087 redirected positions compared at their OWN position (another batch; the pooled-over-padding effect)"
+ },
+ "splade_queries": {
+  "question": {
+   "rows": 1998,
+   "cos_mean": 0.9998854,
+   "cos_min": 0.9956521,
+   "cos_p001": 0.9967285,
+   "rows_cos_below_0.999": 64,
+   "rows_cos_below_0.99": 0,
+   "jaccard_mean": 0.9935085,
+   "jaccard_min": 0.8571429,
+   "rows_same_support": 1601,
+   "rows_exactly_equal": 44,
+   "max_abs_diff": 0.4518445,
+   "nnz_host": 84525,
+   "nnz_frozen": 84408
+  },
+  "question_plain": {
+   "rows": 1998,
+   "cos_mean": 0.9907372,
+   "cos_min": 0.8994104,
+   "cos_p001": 0.9274672,
+   "rows_cos_below_0.999": 1995,
+   "rows_cos_below_0.99": 546,
+   "jaccard_mean": 0.8086062,
+   "jaccard_min": 0.4727273,
+   "rows_same_support": 3,
+   "rows_exactly_equal": 0,
+   "max_abs_diff": 1.838654,
+   "nnz_host": 82097,
+   "nnz_frozen": 84408
+  }
+ },
+ "query_field_matching_canonical": "question",
+ "gate": {
+  "docs_cos_mean_min": 0.999,
+  "docs_cos_min_min": 0.99,
+  "docs_nn_hit_share_min": 0.999,
+  "queries_dense_cos_mean_min": 0.999,
+  "queries_dense_cos_min_min": 0.99,
+  "splade_weight_files_identical": true
+ },
+ "gate_results": {
+  "dense_docs": true,
+  "splade_docs": true,
+  "dense_queries(question)": true,
+  "splade_weight_files_identical": true
+ },
+ "status": "PASS",
+ "seconds": 251.3
+}

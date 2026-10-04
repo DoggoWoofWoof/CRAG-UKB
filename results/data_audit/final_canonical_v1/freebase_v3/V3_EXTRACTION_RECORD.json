@@ -1,0 +1,262 @@
+{
+  "schema": "V3_EXTRACTION_RECORD/v2",
+  "generated_utc": "2026-09-06T12:31:18Z",
+  "archive": "data/final_canonical/freebase_v3/_acquisition/idir/idirlab-freebases.zip",
+  "archive_sha256": "8deacc7e55768291fe54cb328ff2519da3235d1f7cbb4254049a4d254f15e7f7",
+  "destination": "data/final_canonical/freebase_v3/_acquisition/idir/extracted",
+  "FINDING_3_ARCHIVE_CENTRAL_DIRECTORY_IS_CORRUPT": {
+    "statement": "the published Zenodo archive cannot be extracted by a conforming reader. Our copy is byte-perfect -- size and MD5 both match the published values -- so the defect is in the artifact as published, not in the transfer.",
+    "evidence": {
+      "file_size": 14148416296,
+      "max_reported_header_offset": 16766275907,
+      "offset_exceeds_file_by": 2617859611,
+      "infozip_diagnosis": "12884901888 extra bytes at beginning or within zipfile",
+      "that_constant_is": "3 x 2^32 exactly (12 GiB), a 32-bit offset overflow",
+      "python_zipfile_error": "BadZipFile: Truncated file header, on every entry",
+      "uniform_constant_does_NOT_fix_it": "subtracting 12 GiB validates only 25 of 92 entries; entries wrapped a differing number of times by position",
+      "delta_distribution_in_multiples_of_2^32": {
+        "3.0": 25,
+        "2.0": 41,
+        "1.0": 19,
+        "0.0": 7
+      }
+    },
+    "repair_rule": "ignore central-directory offsets; recover true local-header offsets by scanning the file for PK\\x03\\x04 and accepting only those whose parsed filename is in the central directory's name set. Sizes, CRCs and methods still come from the central directory. Every read is CRC-verified, so a wrong offset cannot pass silently.",
+    "is_a_general_rule_not_a_special_case": true,
+    "duplicate_name_offsets": [],
+    "offsets_recovered": 92,
+    "offsets_expected": 92
+  },
+  "extracted": [
+    {
+      "name": "idirlab-freebases/FB+CVT-REV/train.txt",
+      "bytes": 2527440120,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/FB+CVT-REV/test.txt",
+      "bytes": 139216099,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/FB+CVT-REV/valid.txt",
+      "bytes": 139207173,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/FB+CVT-REV/entity2id.txt",
+      "bytes": 2050114533,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/FB+CVT-REV/relation2id.txt",
+      "bytes": 116507,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/FB+CVT+REV/relation2id.txt",
+      "bytes": 200450,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/FB-CVT-REV/relation2id.txt",
+      "bytes": 183336,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/FB-CVT+REV/relation2id.txt",
+      "bytes": 301134,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/Metadata/object_ids.csv",
+      "bytes": 161903657,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/Metadata/entities_id_label.csv",
+      "bytes": 1933710254,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/Metadata/properties_id_label.csv",
+      "bytes": 517628,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/Metadata/types_id_label.csv",
+      "bytes": 89407,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/Metadata/domains_id_label.csv",
+      "bytes": 1978,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/TypeSystem/freebase_endtypes.csv",
+      "bytes": 47725,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/Metadata/object_names.csv",
+      "bytes": 4006052812,
+      "matches_central_directory_size": true
+    },
+    {
+      "name": "idirlab-freebases/Metadata/object_types.csv",
+      "bytes": 13654225258,
+      "matches_central_directory_size": false,
+      "size_source": "true deflate output length, CRC-verified; central directory value wrapped by 3 x 2^32"
+    }
+  ],
+  "extracted_n": 16,
+  "extracted_gb": 24.61,
+  "all_sizes_match_central_directory": false,
+  "failed": [],
+  "elapsed_s": 186.7,
+  "SECOND_PASS_END_OFFSET_FIX": {
+    "root_cause": "ZipInfo._end_offset is precomputed by Python 3.12+ from central-directory ordering as a zip-bomb guard. Those offsets are corrupt in this archive, so the bound was meaningless and truncated the read. Pass 1 patched header_offset but not _end_offset.",
+    "symptoms_explained": {
+      "object_names.csv": "BadZipFile: Overlapped entries",
+      "object_types.csv": "BadZipFile: Bad CRC-32"
+    },
+    "fix": "recompute _end_offset from the recovered layout so each entry is bounded by its true successor. The guard remains active and CRC verification is untouched.",
+    "recovered": [
+      {
+        "name": "idirlab-freebases/Metadata/object_names.csv",
+        "bytes": 4006052812,
+        "matches_central_directory_size": true
+      }
+    ],
+    "still_failed": [
+      {
+        "name": "idirlab-freebases/Metadata/object_types.csv",
+        "reason": "BadZipFile: Bad CRC-32 for file 'idirlab-freebases/Metadata/object_types.csv'"
+      }
+    ]
+  },
+  "FINDING_4_UNCOMPRESSED_SIZE_FIELD_ALSO_WRAPPED": {
+    "statement": "the same 32-bit overflow that corrupted the local-header offsets (FINDING_3) also corrupted the UNCOMPRESSED SIZE field, on three entries. Third field, one defect.",
+    "detected_by": "compress_size exceeding file_size on entries that are plain text -- impossible for deflate. That signature is what prompted reading the streams in full rather than trusting the field.",
+    "rule_applied": "inflate each stream to its own deflate EOF and take the true size from the output. The central-directory CRC validates the recovered size; CRC-32 has no length field to wrap. General, deterministic, no per-file special case.",
+    "measured": [
+      {
+        "name": "idirlab-freebases/Metadata/object_types.csv",
+        "declared_file_size": 769323370,
+        "true_uncompressed_size": 13654225258,
+        "compress_size": 1201090329,
+        "input_fully_consumed": true,
+        "deflate_reached_eof": true,
+        "crc_declared": "0xed19ca81",
+        "crc_computed": "0xed19ca81",
+        "crc_match": true,
+        "size_field_wrapped": true,
+        "wrap_multiples_of_2^32": 3.0,
+        "wrap_is_exact_multiple": true,
+        "written_to_disk": true
+      },
+      {
+        "name": "idirlab-freebases/FB+CVT+REV/train.txt",
+        "declared_file_size": 486708432,
+        "true_uncompressed_size": 4781675728,
+        "compress_size": 2063452841,
+        "input_fully_consumed": true,
+        "deflate_reached_eof": true,
+        "crc_declared": "0x7e265604",
+        "crc_computed": "0x7e265604",
+        "crc_match": true,
+        "size_field_wrapped": true,
+        "wrap_multiples_of_2^32": 1.0,
+        "wrap_is_exact_multiple": true,
+        "written_to_disk": false
+      },
+      {
+        "name": "idirlab-freebases/FB-CVT+REV/train.txt",
+        "declared_file_size": 11534690,
+        "true_uncompressed_size": 4306501986,
+        "compress_size": 1988539199,
+        "input_fully_consumed": true,
+        "deflate_reached_eof": true,
+        "crc_declared": "0xb3b6aacc",
+        "crc_computed": "0xb3b6aacc",
+        "crc_match": true,
+        "size_field_wrapped": true,
+        "wrap_multiples_of_2^32": 1.0,
+        "wrap_is_exact_multiple": true,
+        "written_to_disk": false
+      }
+    ],
+    "object_types_csv": {
+      "declared": 769323370,
+      "true": 13654225258,
+      "difference": 12884901888,
+      "difference_is": "3 x 2^32 exactly -- the same constant Info-ZIP reported for the offsets",
+      "crc_match_over_full_stream": true,
+      "why_it_read_as_Bad_CRC_32": "Python stopped at the wrapped size and computed the CRC over a 769 MB prefix of a 13.65 GB stream. The payload was never damaged."
+    },
+    "CORRECTS_FINDING_2": {
+      "finding_2_said": "both +REV variants are size-inconsistent with their published triple counts by more than an order of magnitude; FB-CVT+REV/train.txt is 11.5 MB against test and valid at 239 MB each.",
+      "that_reading_was_wrong": "those two train.txt entries are exactly the other two wrapped size fields. Their streams inflate to a clean EOF with matching CRCs at 1 x 2^32 above the declared value.",
+      "corrected_sizes": {
+        "idirlab-freebases/FB+CVT+REV/train.txt": {
+          "declared": 486708432,
+          "true": 4781675728,
+          "crc_match": true
+        },
+        "idirlab-freebases/FB-CVT+REV/train.txt": {
+          "declared": 11534690,
+          "true": 4306501986,
+          "crc_match": true
+        }
+      },
+      "consequence": "the +REV variants are NOT truncated and NOT packaged wrongly. The archive is internally consistent once the 32-bit wrap is undone. FINDING_2's 'not_asserted' clause held the door open for exactly this; the door is now closed by measurement.",
+      "why_the_original_entry_is_kept": "it is the record of what the size fields alone supported before the streams were read. Superseded, not deleted."
+    },
+    "other_14_extractions_are_not_in_doubt": "each was CRC-verified by zipfile against its declared size. A CRC over a truncated prefix does not match, so those size fields are sound. The CRC is what proves this; all_sizes_match_central_directory could not.",
+    "recovered_offsets_cached_at": "data/final_canonical/freebase_v3/_acquisition/idir/recovered_offsets.json"
+  },
+  "all_entries_crc_verified": true,
+  "size_field_note": "false is now the CORRECT value: object_types.csv deliberately does not match the central directory, because the central directory is wrong there. See FINDING_4.",
+  "FINDING_2_CLOSED_BY_FINDING_4": {
+    "status": "CLOSED. The inconsistency was an artifact of the wrapped size fields, not of the packaging.",
+    "recomputed_with_true_sizes": {
+      "FB+CVT-REV": {
+        "published_triples": 134213735,
+        "true_triple_file_bytes": 2805863392,
+        "bytes_per_triple": 20.91,
+        "train_declared": 2527440120,
+        "train_true": 2527440120
+      },
+      "FB-CVT-REV": {
+        "published_triples": 125124274,
+        "true_triple_file_bytes": 2482581730,
+        "bytes_per_triple": 19.84,
+        "train_declared": 2234320200,
+        "train_true": 2234320200
+      },
+      "FB+CVT+REV": {
+        "published_triples": 244112599,
+        "true_triple_file_bytes": 5361576017,
+        "bytes_per_triple": 21.96,
+        "train_declared": 486708432,
+        "train_true": 4781675728
+      },
+      "FB-CVT+REV": {
+        "published_triples": 238981274,
+        "true_triple_file_bytes": 4785019069,
+        "bytes_per_triple": 20.02,
+        "train_declared": 11534690,
+        "train_true": 4306501986
+      }
+    },
+    "bytes_per_triple_range": [
+      19.84,
+      21.96
+    ],
+    "reading": "all four variants now land in a 19.8-22.0 bytes/triple band. Before the wrap was undone, FB+CVT+REV read as 4.4 and FB-CVT+REV as 2.1, which is what made them look truncated. Each of the two train.txt streams was inflated to its own deflate EOF and its CRC matched the central directory exactly, so the true sizes are verified rather than inferred.",
+    "what_this_changes_for_CRAG": "nothing about the backbone, which was always one of the two consistent variants. It does mean FB+CVT+REV is usable if the reverse-orientation question ever sends us there, which FINDING_2 had implicitly ruled out.",
+    "method_note": "the original FINDING_2 entry is retained verbatim above. It recorded what the size fields supported at the time and explicitly declined to assert a cause ('do not guess; it does not block the backbone'). That restraint is why this closes cleanly instead of contradicting a claim.",
+    "appended_utc": "2026-09-06T12:58:04Z"
+  }
+}

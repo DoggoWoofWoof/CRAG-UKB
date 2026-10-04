@@ -1,0 +1,2257 @@
+{
+ "stage": "FBX_SCALE Track B addendum 14: nested partition with a V-cycle top level vs the frozen flat PHG_SK (addendum-1 gate)",
+ "tag": "vc_v1",
+ "status": "DEVELOPMENT (calibration of a systems substrate)",
+ "definitions": "FBX_SCALE Track B, addendum 14 -- score the nested (two-level) arms whose TOP level is a V-CYCLE (scratchpad/_vc.py TOP) against the frozen flat PHG_SK under the addendum-1 gate, K in {100, 250, 500}.\n\nIdentical to scratchpad/_h2lt_eval.py (addendum 9) in every respect -- the per-row arithmetic, the 786-row population, the matched-B_P comparison, the verdict rule, the map loader -- except the declaration it\ncites: this module imports _h2lt_eval and _ml2_eval and runs them unchanged; only the record's stage text and the addendum hash it embeds differ.  Methods: PHG = the frozen flat PHG_SK maps (the reference);\nH2LT_<arm>_<S> = the nested map whose S-way top level is the V-cycle arm <arm> (VC<spec><REFINER>).\n\n  python scratchpad/_vc_eval.py EVAL <tag> <bundle_tag> <control_tag> H2LT_<arm>_<S>[,...]          # control_tag = an earlier EVAL whose PHG cells must be reproduced bit for bit\n",
+ "N": 2592894,
+ "n_rows": 786,
+ "M_curve": [
+  100,
+  250,
+  500,
+  1000,
+  2000,
+  5000
+ ],
+ "K_grid": [
+  100,
+  250,
+  500
+ ],
+ "gate_K": [
+  100,
+  250,
+  500
+ ],
+ "loss_pass_rows": 7,
+ "loss_fail_rows": 24,
+ "block_rule": 0.1,
+ "candidates_declared": [
+  "H2LT_VCQ512L6N4FM2_25",
+  "H2LT_VCQ512L6N8FM2_25",
+  "H2LT_VCQ512L6FM2_25",
+  "H2LT_VCQ512L6N4LP2_25"
+ ],
+ "candidates_scored": [
+  "H2LT_VCQ512L6N4FM2_25",
+  "H2LT_VCQ512L6N8FM2_25",
+  "H2LT_VCQ512L6FM2_25",
+  "H2LT_VCQ512L6N4LP2_25"
+ ],
+ "candidates_without_K100_map": [],
+ "regression_vs_earlier_eval": {
+  "eval_npz_sha256": "cd70e751f4d81f6935b1706b727b88b7aa752e7edb44cc30c3a020a9f083f2e4",
+  "cells": {
+   "PHG|K100|own": "equal",
+   "PHG|K100|matched": "equal",
+   "PHG|K250|own": "equal",
+   "PHG|K250|matched": "equal",
+   "PHG|K500|own": "equal",
+   "PHG|K500|matched": "equal"
+  }
+ },
+ "results": {
+  "PHG|K100|own": {
+   "ALL": [
+    368,
+    470,
+    524,
+    561,
+    575,
+    586
+   ],
+   "ANY": [
+    565,
+    665,
+    707,
+    727,
+    734,
+    735
+   ],
+   "gold_served": [
+    1379,
+    2462,
+    3250,
+    3727,
+    3941,
+    4195
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 570865.0,
+    "median": 527448.0
+   },
+   "contacted_mass_over_N_mean": 0.2202,
+   "lost_to_reach (B_P < LO)": 192,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "PHG|K100|matched": {
+   "ALL": [
+    368,
+    470,
+    524,
+    561,
+    575,
+    586
+   ],
+   "ANY": [
+    565,
+    665,
+    707,
+    727,
+    734,
+    735
+   ],
+   "gold_served": [
+    1379,
+    2462,
+    3250,
+    3727,
+    3941,
+    4195
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 570865.0,
+    "median": 527448.0
+   },
+   "contacted_mass_over_N_mean": 0.2202,
+   "lost_to_reach (B_P < LO)": 192,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "H2LT_VCQ512L6N4FM2_25|K100|own": {
+   "ALL": [
+    364,
+    468,
+    528,
+    565,
+    578,
+    589
+   ],
+   "ANY": [
+    565,
+    662,
+    710,
+    729,
+    736,
+    738
+   ],
+   "gold_served": [
+    1374,
+    2488,
+    3312,
+    3753,
+    3933,
+    4182
+   ],
+   "B_P": {
+    "mean": 22.1,
+    "median": 20.0,
+    "min": 2,
+    "max": 70
+   },
+   "B_P_over_K_mean": 0.2215,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 578744.0,
+    "median": 525664.0
+   },
+   "contacted_mass_over_N_mean": 0.2232,
+   "lost_to_reach (B_P < LO)": 191,
+   "vs_PHG_gained": [
+    4,
+    18,
+    31,
+    38,
+    41,
+    44
+   ],
+   "vs_PHG_lost": [
+    8,
+    20,
+    27,
+    34,
+    38,
+    41
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.388,
+    0.871,
+    0.694,
+    0.724,
+    0.822,
+    0.828
+   ]
+  },
+  "H2LT_VCQ512L6N4FM2_25|K100|matched": {
+   "ALL": [
+    363,
+    472,
+    527,
+    566,
+    579,
+    590
+   ],
+   "ANY": [
+    563,
+    664,
+    707,
+    728,
+    735,
+    737
+   ],
+   "gold_served": [
+    1372,
+    2489,
+    3310,
+    3770,
+    3961,
+    4211
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 568792.0,
+    "median": 524475.0
+   },
+   "contacted_mass_over_N_mean": 0.2194,
+   "lost_to_reach (B_P < LO)": 190,
+   "vs_PHG_gained": [
+    4,
+    18,
+    29,
+    37,
+    40,
+    43
+   ],
+   "vs_PHG_lost": [
+    9,
+    16,
+    26,
+    32,
+    36,
+    39
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.267,
+    0.864,
+    0.788,
+    0.63,
+    0.731,
+    0.741
+   ]
+  },
+  "H2LT_VCQ512L6N8FM2_25|K100|own": {
+   "ALL": [
+    368,
+    472,
+    538,
+    575,
+    589,
+    603
+   ],
+   "ANY": [
+    569,
+    669,
+    711,
+    731,
+    738,
+    740
+   ],
+   "gold_served": [
+    1382,
+    2469,
+    3260,
+    3741,
+    3930,
+    4206
+   ],
+   "B_P": {
+    "mean": 22.2,
+    "median": 20.0,
+    "min": 3,
+    "max": 74
+   },
+   "B_P_over_K_mean": 0.2222,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 580239.0,
+    "median": 525392.0
+   },
+   "contacted_mass_over_N_mean": 0.2238,
+   "lost_to_reach (B_P < LO)": 172,
+   "vs_PHG_gained": [
+    5,
+    13,
+    30,
+    35,
+    39,
+    44
+   ],
+   "vs_PHG_lost": [
+    5,
+    11,
+    16,
+    21,
+    25,
+    27
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.839,
+    0.0541,
+    0.0814,
+    0.103,
+    0.0568
+   ]
+  },
+  "H2LT_VCQ512L6N8FM2_25|K100|matched": {
+   "ALL": [
+    367,
+    482,
+    542,
+    578,
+    591,
+    603
+   ],
+   "ANY": [
+    568,
+    672,
+    713,
+    735,
+    740,
+    742
+   ],
+   "gold_served": [
+    1375,
+    2486,
+    3276,
+    3738,
+    3921,
+    4199
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 568332.0,
+    "median": 525226.5
+   },
+   "contacted_mass_over_N_mean": 0.2192,
+   "lost_to_reach (B_P < LO)": 173,
+   "vs_PHG_gained": [
+    4,
+    19,
+    32,
+    38,
+    40,
+    44
+   ],
+   "vs_PHG_lost": [
+    5,
+    7,
+    14,
+    21,
+    24,
+    27
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.029,
+    0.0114,
+    0.0363,
+    0.0599,
+    0.0568
+   ]
+  },
+  "H2LT_VCQ512L6FM2_25|K100|own": {
+   "ALL": [
+    368,
+    470,
+    535,
+    576,
+    591,
+    601
+   ],
+   "ANY": [
+    565,
+    664,
+    708,
+    729,
+    735,
+    737
+   ],
+   "gold_served": [
+    1381,
+    2473,
+    3296,
+    3748,
+    3944,
+    4202
+   ],
+   "B_P": {
+    "mean": 22.0,
+    "median": 20.0,
+    "min": 2,
+    "max": 70
+   },
+   "B_P_over_K_mean": 0.2204,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 574990.0,
+    "median": 523495.5
+   },
+   "contacted_mass_over_N_mean": 0.2218,
+   "lost_to_reach (B_P < LO)": 175,
+   "vs_PHG_gained": [
+    6,
+    19,
+    34,
+    43,
+    48,
+    52
+   ],
+   "vs_PHG_lost": [
+    6,
+    19,
+    23,
+    28,
+    32,
+    37
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    0.185,
+    0.0959,
+    0.0929,
+    0.137
+   ]
+  },
+  "H2LT_VCQ512L6FM2_25|K100|matched": {
+   "ALL": [
+    369,
+    478,
+    539,
+    581,
+    596,
+    606
+   ],
+   "ANY": [
+    564,
+    670,
+    712,
+    735,
+    740,
+    742
+   ],
+   "gold_served": [
+    1377,
+    2484,
+    3299,
+    3757,
+    3949,
+    4217
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 567867.0,
+    "median": 524678.0
+   },
+   "contacted_mass_over_N_mean": 0.219,
+   "lost_to_reach (B_P < LO)": 170,
+   "vs_PHG_gained": [
+    6,
+    21,
+    32,
+    42,
+    47,
+    51
+   ],
+   "vs_PHG_lost": [
+    5,
+    13,
+    17,
+    22,
+    26,
+    31
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.229,
+    0.0444,
+    0.0169,
+    0.0186,
+    0.0352
+   ]
+  },
+  "H2LT_VCQ512L6N4LP2_25|K100|own": {
+   "ALL": [
+    369,
+    475,
+    537,
+    569,
+    581,
+    591
+   ],
+   "ANY": [
+    569,
+    668,
+    711,
+    726,
+    732,
+    733
+   ],
+   "gold_served": [
+    1387,
+    2516,
+    3331,
+    3759,
+    3922,
+    4161
+   ],
+   "B_P": {
+    "mean": 23.1,
+    "median": 21.0,
+    "min": 3,
+    "max": 74
+   },
+   "B_P_over_K_mean": 0.2308,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 603489.0,
+    "median": 551356.0
+   },
+   "contacted_mass_over_N_mean": 0.2327,
+   "lost_to_reach (B_P < LO)": 184,
+   "vs_PHG_gained": [
+    7,
+    21,
+    40,
+    45,
+    48,
+    49
+   ],
+   "vs_PHG_lost": [
+    6,
+    16,
+    27,
+    37,
+    42,
+    44
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.511,
+    0.142,
+    0.44,
+    0.598,
+    0.679
+   ]
+  },
+  "H2LT_VCQ512L6N4LP2_25|K100|matched": {
+   "ALL": [
+    366,
+    469,
+    526,
+    561,
+    571,
+    581
+   ],
+   "ANY": [
+    567,
+    667,
+    707,
+    724,
+    730,
+    731
+   ],
+   "gold_served": [
+    1376,
+    2475,
+    3267,
+    3684,
+    3841,
+    4085
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 569099.0,
+    "median": 524611.5
+   },
+   "contacted_mass_over_N_mean": 0.2195,
+   "lost_to_reach (B_P < LO)": 195,
+   "vs_PHG_gained": [
+    6,
+    19,
+    32,
+    40,
+    42,
+    43
+   ],
+   "vs_PHG_lost": [
+    8,
+    20,
+    30,
+    40,
+    46,
+    48
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.791,
+    1.0,
+    0.899,
+    1.0,
+    0.749,
+    0.675
+   ]
+  },
+  "PHG|K250|own": {
+   "ALL": [
+    370,
+    498,
+    573,
+    612,
+    628,
+    634
+   ],
+   "ANY": [
+    566,
+    674,
+    726,
+    745,
+    749,
+    753
+   ],
+   "gold_served": [
+    1376,
+    2558,
+    3449,
+    3924,
+    4101,
+    4352
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 456004.0,
+    "median": 421210.5
+   },
+   "contacted_mass_over_N_mean": 0.1759,
+   "lost_to_reach (B_P < LO)": 140,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "PHG|K250|matched": {
+   "ALL": [
+    370,
+    498,
+    573,
+    612,
+    628,
+    634
+   ],
+   "ANY": [
+    566,
+    674,
+    726,
+    745,
+    749,
+    753
+   ],
+   "gold_served": [
+    1376,
+    2558,
+    3449,
+    3924,
+    4101,
+    4352
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 456004.0,
+    "median": 421210.5
+   },
+   "contacted_mass_over_N_mean": 0.1759,
+   "lost_to_reach (B_P < LO)": 140,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "H2LT_VCQ512L6N4FM2_25|K250|own": {
+   "ALL": [
+    368,
+    495,
+    568,
+    605,
+    616,
+    623
+   ],
+   "ANY": [
+    565,
+    671,
+    722,
+    743,
+    748,
+    750
+   ],
+   "gold_served": [
+    1374,
+    2555,
+    3409,
+    3874,
+    4053,
+    4315
+   ],
+   "B_P": {
+    "mean": 44.3,
+    "median": 40.0,
+    "min": 4,
+    "max": 140
+   },
+   "B_P_over_K_mean": 0.1772,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 463346.0,
+    "median": 421476.0
+   },
+   "contacted_mass_over_N_mean": 0.1787,
+   "lost_to_reach (B_P < LO)": 157,
+   "vs_PHG_gained": [
+    0,
+    5,
+    13,
+    19,
+    21,
+    24
+   ],
+   "vs_PHG_lost": [
+    2,
+    8,
+    18,
+    26,
+    33,
+    35
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.5,
+    0.581,
+    0.473,
+    0.371,
+    0.134,
+    0.193
+   ]
+  },
+  "H2LT_VCQ512L6N4FM2_25|K250|matched": {
+   "ALL": [
+    368,
+    497,
+    568,
+    605,
+    614,
+    621
+   ],
+   "ANY": [
+    565,
+    675,
+    723,
+    744,
+    749,
+    751
+   ],
+   "gold_served": [
+    1374,
+    2552,
+    3418,
+    3911,
+    4091,
+    4351
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 455403.0,
+    "median": 419677.5
+   },
+   "contacted_mass_over_N_mean": 0.1756,
+   "lost_to_reach (B_P < LO)": 159,
+   "vs_PHG_gained": [
+    0,
+    5,
+    10,
+    16,
+    18,
+    21
+   ],
+   "vs_PHG_lost": [
+    2,
+    6,
+    15,
+    23,
+    32,
+    34
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.5,
+    1.0,
+    0.424,
+    0.337,
+    0.0649,
+    0.105
+   ]
+  },
+  "H2LT_VCQ512L6N8FM2_25|K250|own": {
+   "ALL": [
+    368,
+    497,
+    577,
+    617,
+    631,
+    640
+   ],
+   "ANY": [
+    565,
+    678,
+    728,
+    751,
+    755,
+    758
+   ],
+   "gold_served": [
+    1374,
+    2554,
+    3418,
+    3879,
+    4075,
+    4336
+   ],
+   "B_P": {
+    "mean": 44.4,
+    "median": 40.0,
+    "min": 6,
+    "max": 148
+   },
+   "B_P_over_K_mean": 0.1778,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 464304.0,
+    "median": 419701.0
+   },
+   "contacted_mass_over_N_mean": 0.1791,
+   "lost_to_reach (B_P < LO)": 136,
+   "vs_PHG_gained": [
+    0,
+    7,
+    13,
+    23,
+    26,
+    30
+   ],
+   "vs_PHG_lost": [
+    2,
+    8,
+    9,
+    18,
+    23,
+    24
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.5,
+    1.0,
+    0.523,
+    0.533,
+    0.775,
+    0.497
+   ]
+  },
+  "H2LT_VCQ512L6N8FM2_25|K250|matched": {
+   "ALL": [
+    369,
+    500,
+    580,
+    619,
+    631,
+    640
+   ],
+   "ANY": [
+    565,
+    677,
+    721,
+    745,
+    750,
+    753
+   ],
+   "gold_served": [
+    1373,
+    2549,
+    3417,
+    3892,
+    4075,
+    4339
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 454745.0,
+    "median": 420497.0
+   },
+   "contacted_mass_over_N_mean": 0.1754,
+   "lost_to_reach (B_P < LO)": 134,
+   "vs_PHG_gained": [
+    0,
+    6,
+    13,
+    22,
+    24,
+    28
+   ],
+   "vs_PHG_lost": [
+    1,
+    4,
+    6,
+    15,
+    21,
+    22
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.754,
+    0.167,
+    0.324,
+    0.766,
+    0.48
+   ]
+  },
+  "H2LT_VCQ512L6FM2_25|K250|own": {
+   "ALL": [
+    370,
+    501,
+    575,
+    618,
+    631,
+    643
+   ],
+   "ANY": [
+    566,
+    680,
+    729,
+    750,
+    753,
+    757
+   ],
+   "gold_served": [
+    1376,
+    2569,
+    3448,
+    3930,
+    4107,
+    4346
+   ],
+   "B_P": {
+    "mean": 44.1,
+    "median": 40.0,
+    "min": 4,
+    "max": 140
+   },
+   "B_P_over_K_mean": 0.1763,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 460653.0,
+    "median": 419034.5
+   },
+   "contacted_mass_over_N_mean": 0.1777,
+   "lost_to_reach (B_P < LO)": 133,
+   "vs_PHG_gained": [
+    1,
+    6,
+    14,
+    25,
+    27,
+    33
+   ],
+   "vs_PHG_lost": [
+    1,
+    3,
+    12,
+    19,
+    24,
+    24
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.508,
+    0.845,
+    0.451,
+    0.78,
+    0.289
+   ]
+  },
+  "H2LT_VCQ512L6FM2_25|K250|matched": {
+   "ALL": [
+    369,
+    502,
+    576,
+    619,
+    631,
+    643
+   ],
+   "ANY": [
+    566,
+    679,
+    728,
+    749,
+    752,
+    756
+   ],
+   "gold_served": [
+    1375,
+    2554,
+    3444,
+    3922,
+    4103,
+    4346
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 454978.0,
+    "median": 420802.0
+   },
+   "contacted_mass_over_N_mean": 0.1755,
+   "lost_to_reach (B_P < LO)": 132,
+   "vs_PHG_gained": [
+    0,
+    6,
+    13,
+    23,
+    25,
+    31
+   ],
+   "vs_PHG_lost": [
+    1,
+    2,
+    10,
+    16,
+    22,
+    22
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.289,
+    0.678,
+    0.337,
+    0.771,
+    0.272
+   ]
+  },
+  "H2LT_VCQ512L6N4LP2_25|K250|own": {
+   "ALL": [
+    369,
+    494,
+    572,
+    610,
+    621,
+    634
+   ],
+   "ANY": [
+    566,
+    674,
+    724,
+    746,
+    751,
+    754
+   ],
+   "gold_served": [
+    1377,
+    2548,
+    3443,
+    3899,
+    4069,
+    4344
+   ],
+   "B_P": {
+    "mean": 46.2,
+    "median": 42.0,
+    "min": 6,
+    "max": 148
+   },
+   "B_P_over_K_mean": 0.1847,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 482468.0,
+    "median": 441669.0
+   },
+   "contacted_mass_over_N_mean": 0.1861,
+   "lost_to_reach (B_P < LO)": 146,
+   "vs_PHG_gained": [
+    0,
+    3,
+    11,
+    19,
+    21,
+    29
+   ],
+   "vs_PHG_lost": [
+    1,
+    7,
+    12,
+    21,
+    28,
+    29
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.344,
+    1.0,
+    0.875,
+    0.392,
+    1.0
+   ]
+  },
+  "H2LT_VCQ512L6N4LP2_25|K250|matched": {
+   "ALL": [
+    369,
+    494,
+    566,
+    604,
+    613,
+    624
+   ],
+   "ANY": [
+    566,
+    675,
+    720,
+    743,
+    748,
+    751
+   ],
+   "gold_served": [
+    1376,
+    2527,
+    3410,
+    3837,
+    4002,
+    4274
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 454991.0,
+    "median": 419305.5
+   },
+   "contacted_mass_over_N_mean": 0.1755,
+   "lost_to_reach (B_P < LO)": 156,
+   "vs_PHG_gained": [
+    0,
+    4,
+    9,
+    17,
+    18,
+    25
+   ],
+   "vs_PHG_lost": [
+    1,
+    8,
+    16,
+    25,
+    33,
+    35
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.388,
+    0.23,
+    0.28,
+    0.0489,
+    0.245
+   ]
+  },
+  "PHG|K500|own": {
+   "ALL": [
+    370,
+    506,
+    593,
+    638,
+    652,
+    660
+   ],
+   "ANY": [
+    567,
+    678,
+    729,
+    755,
+    759,
+    762
+   ],
+   "gold_served": [
+    1376,
+    2575,
+    3541,
+    4022,
+    4191,
+    4449
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 384149.0,
+    "median": 352950.5
+   },
+   "contacted_mass_over_N_mean": 0.1482,
+   "lost_to_reach (B_P < LO)": 118,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "PHG|K500|matched": {
+   "ALL": [
+    370,
+    506,
+    593,
+    638,
+    652,
+    660
+   ],
+   "ANY": [
+    567,
+    678,
+    729,
+    755,
+    759,
+    762
+   ],
+   "gold_served": [
+    1376,
+    2575,
+    3541,
+    4022,
+    4191,
+    4449
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 384149.0,
+    "median": 352950.5
+   },
+   "contacted_mass_over_N_mean": 0.1482,
+   "lost_to_reach (B_P < LO)": 118,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "H2LT_VCQ512L6N4FM2_25|K500|own": {
+   "ALL": [
+    370,
+    508,
+    595,
+    640,
+    650,
+    656
+   ],
+   "ANY": [
+    567,
+    680,
+    733,
+    758,
+    760,
+    762
+   ],
+   "gold_served": [
+    1376,
+    2575,
+    3544,
+    4047,
+    4225,
+    4475
+   ],
+   "B_P": {
+    "mean": 74.5,
+    "median": 67.0,
+    "min": 7,
+    "max": 235
+   },
+   "B_P_over_K_mean": 0.1491,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 390343.0,
+    "median": 353319.0
+   },
+   "contacted_mass_over_N_mean": 0.1505,
+   "lost_to_reach (B_P < LO)": 124,
+   "vs_PHG_gained": [
+    0,
+    2,
+    7,
+    14,
+    15,
+    16
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    5,
+    12,
+    17,
+    20
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.5,
+    0.774,
+    0.845,
+    0.86,
+    0.618
+   ]
+  },
+  "H2LT_VCQ512L6N4FM2_25|K500|matched": {
+   "ALL": [
+    370,
+    508,
+    590,
+    633,
+    644,
+    650
+   ],
+   "ANY": [
+    567,
+    679,
+    728,
+    754,
+    758,
+    760
+   ],
+   "gold_served": [
+    1376,
+    2574,
+    3530,
+    4037,
+    4215,
+    4469
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 383741.0,
+    "median": 351844.0
+   },
+   "contacted_mass_over_N_mean": 0.148,
+   "lost_to_reach (B_P < LO)": 130,
+   "vs_PHG_gained": [
+    0,
+    2,
+    4,
+    9,
+    11,
+    12
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    7,
+    14,
+    19,
+    22
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.5,
+    0.549,
+    0.405,
+    0.2,
+    0.121
+   ]
+  },
+  "H2LT_VCQ512L6N8FM2_25|K500|own": {
+   "ALL": [
+    370,
+    508,
+    595,
+    637,
+    648,
+    653
+   ],
+   "ANY": [
+    567,
+    681,
+    732,
+    757,
+    764,
+    767
+   ],
+   "gold_served": [
+    1376,
+    2575,
+    3519,
+    4037,
+    4238,
+    4501
+   ],
+   "B_P": {
+    "mean": 74.8,
+    "median": 67.0,
+    "min": 11,
+    "max": 248
+   },
+   "B_P_over_K_mean": 0.1496,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 391491.0,
+    "median": 352039.0
+   },
+   "contacted_mass_over_N_mean": 0.151,
+   "lost_to_reach (B_P < LO)": 122,
+   "vs_PHG_gained": [
+    0,
+    3,
+    7,
+    12,
+    14,
+    15
+   ],
+   "vs_PHG_lost": [
+    0,
+    1,
+    5,
+    13,
+    18,
+    22
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.625,
+    0.774,
+    1.0,
+    0.597,
+    0.324
+   ]
+  },
+  "H2LT_VCQ512L6N8FM2_25|K500|matched": {
+   "ALL": [
+    370,
+    509,
+    591,
+    636,
+    647,
+    653
+   ],
+   "ANY": [
+    567,
+    680,
+    728,
+    757,
+    762,
+    765
+   ],
+   "gold_served": [
+    1376,
+    2573,
+    3515,
+    4030,
+    4228,
+    4488
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 383466.0,
+    "median": 351696.5
+   },
+   "contacted_mass_over_N_mean": 0.1479,
+   "lost_to_reach (B_P < LO)": 122,
+   "vs_PHG_gained": [
+    0,
+    3,
+    2,
+    9,
+    10,
+    12
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    4,
+    11,
+    15,
+    19
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.25,
+    0.688,
+    0.824,
+    0.424,
+    0.281
+   ]
+  },
+  "H2LT_VCQ512L6FM2_25|K500|own": {
+   "ALL": [
+    370,
+    507,
+    593,
+    635,
+    653,
+    661
+   ],
+   "ANY": [
+    567,
+    681,
+    732,
+    752,
+    756,
+    760
+   ],
+   "gold_served": [
+    1376,
+    2579,
+    3547,
+    4062,
+    4268,
+    4515
+   ],
+   "B_P": {
+    "mean": 74.2,
+    "median": 67.0,
+    "min": 7,
+    "max": 235
+   },
+   "B_P_over_K_mean": 0.1484,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 387921.0,
+    "median": 350684.5
+   },
+   "contacted_mass_over_N_mean": 0.1496,
+   "lost_to_reach (B_P < LO)": 115,
+   "vs_PHG_gained": [
+    0,
+    3,
+    6,
+    12,
+    20,
+    22
+   ],
+   "vs_PHG_lost": [
+    0,
+    2,
+    6,
+    15,
+    19,
+    21
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    0.701,
+    1.0,
+    1.0
+   ]
+  },
+  "H2LT_VCQ512L6FM2_25|K500|matched": {
+   "ALL": [
+    370,
+    506,
+    593,
+    634,
+    649,
+    656
+   ],
+   "ANY": [
+    567,
+    680,
+    730,
+    751,
+    755,
+    759
+   ],
+   "gold_served": [
+    1376,
+    2571,
+    3538,
+    4065,
+    4267,
+    4522
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 383201.0,
+    "median": 351952.0
+   },
+   "contacted_mass_over_N_mean": 0.1478,
+   "lost_to_reach (B_P < LO)": 120,
+   "vs_PHG_gained": [
+    0,
+    2,
+    4,
+    9,
+    15,
+    17
+   ],
+   "vs_PHG_lost": [
+    0,
+    2,
+    4,
+    13,
+    18,
+    21
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    0.523,
+    0.728,
+    0.627
+   ]
+  },
+  "H2LT_VCQ512L6N4LP2_25|K500|own": {
+   "ALL": [
+    370,
+    505,
+    596,
+    643,
+    652,
+    658
+   ],
+   "ANY": [
+    567,
+    679,
+    731,
+    754,
+    759,
+    761
+   ],
+   "gold_served": [
+    1376,
+    2570,
+    3551,
+    4064,
+    4232,
+    4478
+   ],
+   "B_P": {
+    "mean": 77.7,
+    "median": 71.0,
+    "min": 11,
+    "max": 248
+   },
+   "B_P_over_K_mean": 0.1553,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 406724.0,
+    "median": 372971.0
+   },
+   "contacted_mass_over_N_mean": 0.1569,
+   "lost_to_reach (B_P < LO)": 116,
+   "vs_PHG_gained": [
+    0,
+    2,
+    9,
+    17,
+    18,
+    19
+   ],
+   "vs_PHG_lost": [
+    0,
+    3,
+    6,
+    12,
+    18,
+    21
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    0.607,
+    0.458,
+    1.0,
+    0.875
+   ]
+  },
+  "H2LT_VCQ512L6N4LP2_25|K500|matched": {
+   "ALL": [
+    370,
+    506,
+    589,
+    635,
+    642,
+    648
+   ],
+   "ANY": [
+    567,
+    679,
+    726,
+    753,
+    757,
+    760
+   ],
+   "gold_served": [
+    1376,
+    2573,
+    3533,
+    4030,
+    4197,
+    4442
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 383710.0,
+    "median": 352157.5
+   },
+   "contacted_mass_over_N_mean": 0.148,
+   "lost_to_reach (B_P < LO)": 129,
+   "vs_PHG_gained": [
+    0,
+    2,
+    5,
+    13,
+    13,
+    15
+   ],
+   "vs_PHG_lost": [
+    0,
+    2,
+    9,
+    16,
+    23,
+    27
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    0.424,
+    0.711,
+    0.132,
+    0.0884
+   ]
+  }
+ },
+ "verdicts": {
+  "H2LT_VCQ512L6N4FM2_25": {
+   "verdict": "BORDERLINE",
+   "gate_cells_scored": [
+    100,
+    250,
+    500
+   ],
+   "gate_cells_not_scored": {},
+   "max_loss_rows_vs_PHG_matched_over_scored_gate_cells": 14,
+   "loss_rows_by_cell_and_B_N": {
+    "H2LT_VCQ512L6N4FM2_25 K100": [
+     5,
+     -2,
+     -3,
+     -5,
+     -4,
+     -4
+    ],
+    "H2LT_VCQ512L6N4FM2_25 K250": [
+     2,
+     1,
+     5,
+     7,
+     14,
+     13
+    ],
+    "H2LT_VCQ512L6N4FM2_25 K500": [
+     0,
+     -2,
+     3,
+     5,
+     8,
+     10
+    ]
+   }
+  },
+  "H2LT_VCQ512L6N8FM2_25": {
+   "verdict": "RECALL_PRESERVING",
+   "gate_cells_scored": [
+    100,
+    250,
+    500
+   ],
+   "gate_cells_not_scored": {},
+   "max_loss_rows_vs_PHG_matched_over_scored_gate_cells": 7,
+   "loss_rows_by_cell_and_B_N": {
+    "H2LT_VCQ512L6N8FM2_25 K100": [
+     1,
+     -12,
+     -18,
+     -17,
+     -16,
+     -17
+    ],
+    "H2LT_VCQ512L6N8FM2_25 K250": [
+     1,
+     -2,
+     -7,
+     -7,
+     -3,
+     -6
+    ],
+    "H2LT_VCQ512L6N8FM2_25 K500": [
+     0,
+     -3,
+     2,
+     2,
+     5,
+     7
+    ]
+   }
+  },
+  "H2LT_VCQ512L6FM2_25": {
+   "verdict": "RECALL_PRESERVING",
+   "gate_cells_scored": [
+    100,
+    250,
+    500
+   ],
+   "gate_cells_not_scored": {},
+   "max_loss_rows_vs_PHG_matched_over_scored_gate_cells": 4,
+   "loss_rows_by_cell_and_B_N": {
+    "H2LT_VCQ512L6FM2_25 K100": [
+     -1,
+     -8,
+     -15,
+     -20,
+     -21,
+     -20
+    ],
+    "H2LT_VCQ512L6FM2_25 K250": [
+     1,
+     -4,
+     -3,
+     -7,
+     -3,
+     -9
+    ],
+    "H2LT_VCQ512L6FM2_25 K500": [
+     0,
+     0,
+     0,
+     4,
+     3,
+     4
+    ]
+   }
+  },
+  "H2LT_VCQ512L6N4LP2_25": {
+   "verdict": "BORDERLINE",
+   "gate_cells_scored": [
+    100,
+    250,
+    500
+   ],
+   "gate_cells_not_scored": {},
+   "max_loss_rows_vs_PHG_matched_over_scored_gate_cells": 15,
+   "loss_rows_by_cell_and_B_N": {
+    "H2LT_VCQ512L6N4LP2_25 K100": [
+     2,
+     1,
+     -2,
+     0,
+     4,
+     5
+    ],
+    "H2LT_VCQ512L6N4LP2_25 K250": [
+     1,
+     4,
+     7,
+     8,
+     15,
+     10
+    ],
+    "H2LT_VCQ512L6N4LP2_25 K500": [
+     0,
+     0,
+     4,
+     3,
+     10,
+     12
+    ]
+   }
+  }
+ },
+ "seconds_loop": 1008.0,
+ "inputs": {
+  "bundle_meta": {
+   "path": "work/FBX_CALIB/bundle_v1/meta.json",
+   "sha256": "1b1b482a4e263b0afb7d96d3244e4b56b7f1cc3cd1b87c5ea884cf3feb002273"
+  },
+  "maps": {
+   "PHG|100": {
+    "STATUS": "OK",
+    "sha256": "36d69391735d13fee50cc6a605102f3fd60746568549e2e3b3faccb5eb94a7de",
+    "file": "results/L1_HOST/parts/webqsp__H4_SK_k100__PHG_con.npy"
+   },
+   "PHG|250": {
+    "STATUS": "OK",
+    "sha256": "fbe79aaf509943550fdc4ac562e2f5161158ccec3ead9dff3da0835f55e01ce3",
+    "file": "results/L1_HOST/parts/webqsp__H4_SK_k250__PHG_con.npy"
+   },
+   "PHG|500": {
+    "STATUS": "OK",
+    "sha256": "a6ae7e068134a8cb7139b1fe9911fde96a029fa4f2ca4beb649b4a972cc4e08f",
+    "file": "results/L1_HOST/parts/webqsp__H4_SK_k500__PHG_con.npy"
+   },
+   "H2LT_VCQ512L6N4FM2_25|100": {
+    "STATUS": "OK",
+    "sha256": "0ed0da37f8b9b795c39dd2d7cb0e5a0617cdb8d1de866b089137d50da72ffd9a",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6N4FM2_25_k100__PHG_con.npy",
+    "run_json_sha256": "03bbeaba399b4f2246ca46608df4ebbf12587ca8f73b39e8ecc8cfb085329788"
+   },
+   "H2LT_VCQ512L6N8FM2_25|100": {
+    "STATUS": "OK",
+    "sha256": "6b66a35d006a5f332a08f2b959a368ae72172614474cf9eeceb70b11b66c35a7",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6N8FM2_25_k100__PHG_con.npy",
+    "run_json_sha256": "aca995c2ed6be82d2ed8f5ecdba87e08e71c50b0ad7335c44d9f6ae9912c13d7"
+   },
+   "H2LT_VCQ512L6FM2_25|100": {
+    "STATUS": "OK",
+    "sha256": "6bdd8b2e19aec09f730b529dd4f57cb7cd82d9691517608ac332f472ffeda9d2",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6FM2_25_k100__PHG_con.npy",
+    "run_json_sha256": "25b9f36bc6270ef3dcdf4d09b364c546c28b01ab1c153d8d98668083d5e2a0c7"
+   },
+   "H2LT_VCQ512L6N4LP2_25|100": {
+    "STATUS": "OK",
+    "sha256": "4bf6742fb41c620bcd9551b54f0c7cb294b072ac55712e7e8a97e48bb0bd7cca",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6N4LP2_25_k100__PHG_con.npy",
+    "run_json_sha256": "33082f7843ef87a0755367c7449aa1a00a7370151ea36c3f727ad1503250960d"
+   },
+   "H2LT_VCQ512L6N4FM2_25|250": {
+    "STATUS": "OK",
+    "sha256": "64f3d987549cfc0215c3d6768aaf8837e778d23a2492ce5cdc7ac620fd557986",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6N4FM2_25_k250__PHG_con.npy",
+    "run_json_sha256": "f435c05fec7f58e4d90283ad631acba6ce6523fc086814044a7f01fb1050ca69"
+   },
+   "H2LT_VCQ512L6N8FM2_25|250": {
+    "STATUS": "OK",
+    "sha256": "965c161c7a759ed2ca4af9e2cd2f14fd0de048adfbf98034ac60cd531d35f388",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6N8FM2_25_k250__PHG_con.npy",
+    "run_json_sha256": "2ad5a48b87136044dcd7b0bf2dd98844b0d9f1ed22e9d8cb91b813b66e8d8cda"
+   },
+   "H2LT_VCQ512L6FM2_25|250": {
+    "STATUS": "OK",
+    "sha256": "c94f96294d648e01f8bb72a360b2173a09c0f4b2046ce524421ee71643ea4727",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6FM2_25_k250__PHG_con.npy",
+    "run_json_sha256": "6d94fb580d198dd11029778bdd29abcd7c3111a4a0f57281cb4668e83caa7907"
+   },
+   "H2LT_VCQ512L6N4LP2_25|250": {
+    "STATUS": "OK",
+    "sha256": "34a8b1be096e7c9b8cbc9a991b7c69fba292cbe34630dc060e876060830a962b",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6N4LP2_25_k250__PHG_con.npy",
+    "run_json_sha256": "5073ddc1057496fbe21d0acf9e4b82216d00e0ab3d46c8dea648250b913b760f"
+   },
+   "H2LT_VCQ512L6N4FM2_25|500": {
+    "STATUS": "OK",
+    "sha256": "e17013ba4aced0190315f1aaebe03e26f300c5b53b1d5192772df61a29639ed3",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6N4FM2_25_k500__PHG_con.npy",
+    "run_json_sha256": "b61ecb6fa57768c982bfce4dc21ef4b85a41251088095b3ed9b6f391c2bd70b8"
+   },
+   "H2LT_VCQ512L6N8FM2_25|500": {
+    "STATUS": "OK",
+    "sha256": "e469a2e109aa6d31a0ff9c0966f213113776f31bf4ab36f7ba652011eff42d04",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6N8FM2_25_k500__PHG_con.npy",
+    "run_json_sha256": "2d74c958a692ba91712e215238a7350b6483cc9521c9df6dcb2904bec98a32cf"
+   },
+   "H2LT_VCQ512L6FM2_25|500": {
+    "STATUS": "OK",
+    "sha256": "2da80366c44905babf37b9f07563778aec7995c77b32ee80f5f713ff312a9f62",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6FM2_25_k500__PHG_con.npy",
+    "run_json_sha256": "b206f338342f1f72c1384cc85fd3c91eb8c85248e30962a2f00f0662b8180625"
+   },
+   "H2LT_VCQ512L6N4LP2_25|500": {
+    "STATUS": "OK",
+    "sha256": "1c38d1ae4ee54c3e65e768faa51349214e8d63329778fbcfbce0571453a9b5c0",
+    "file": "results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_VCQ512L6N4LP2_25_k500__PHG_con.npy",
+    "run_json_sha256": "1906d660b88c4809ecdde40b3fb33ea020b51005f88b53d17146043b52542f59"
+   }
+  },
+  "population": {
+   "path": "results/L3_DEV/l3w_population_webqsp__v1.json",
+   "sha256": "7e67c9b116b2921cc243e2e664951984d985127191a320a4bfe70594a9016009"
+  },
+  "addendum": {
+   "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+   "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+   "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_14.json": "67c99b68dc79dca413b0268c0cdd878f51cac95dfd86764411fbbd8318d062d8"
+  }
+ },
+ "code": {
+  "scratchpad/_ml2_eval.py": "318c7b416985d1a301fda733186d735ca071f1499a727778b3554c0aeecfe263",
+  "scratchpad/_fbx_calib.py": "a46001f57ac56e725723a77c8eecaacc067aedf883a39ba29b1f236e9828ed7f",
+  "scratchpad/_vc_eval.py": "edc9fca788cc972f2fbf609d51aa6901a240f0cbdfe0cf40384cedc440aa8366",
+  "scratchpad/_h2lt_eval.py": "cf03acf0163ef19b4e39d3a4d2629e11c5a32f5cb19cfb0a99abf64b46fea394",
+  "scratchpad/_vc.py": "89456ba5d6039f77d5a23515222f7ee69bcbbfc95d5ca67a0729cc8a2769995a",
+  "scratchpad/_vc_sub.py": "8679f7a0d18e40508bad09bc93f844c52ea8f12d29a9a3256773d61f80889709"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "pinned_repo": {
+  "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+  "data/final_canonical/canonical.py": "c657830b304afe861893b516726af419d35142334f866517b83221427a9016f5"
+ },
+ "platform": {
+  "python": "3.13.5",
+  "numpy": "2.3.2"
+ },
+ "process_peak_rss_mb": 8241.2,
+ "utc": "2026-10-02T16:39:19Z",
+ "npz": {
+  "path": "CALIB_EVAL_WEBQSP__vc_v1.npz",
+  "sha256": "0e27e2fb32c2b0ce0862dc8cdb9676a9191f7801fb227267854ec1baa1b0b688"
+ },
+ "addendum_14_sha256": "67c99b68dc79dca413b0268c0cdd878f51cac95dfd86764411fbbd8318d062d8"
+}

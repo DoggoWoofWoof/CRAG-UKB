@@ -1,0 +1,45 @@
+{
+ "lane": "L1_COVPART",
+ "record": "PREREGISTRATION_RELSIG_DEV_A",
+ "written_utc": "2026-09-14T14:49:13Z",
+ "written_before": "any relsig number existed (no relsig_A_*.json present at write time)",
+ "ruling_2026-09-14": "ONE_HOP_STRUCTURAL_VOTE = CLOSED (served OUT/full vote canonical; UND_NONHUB full = MetaQA diagnostic only; mass-conserving and support-normalised votes rejected). Next L1 question (route 1): a query-conditioned, parameter-free discriminator over already-reached blocks, no walk, no expansion, no changed membership, no learned weights: S_q(b) = S_base(b) + compatibility(q, static relation signature). One version only; then route 2 (concede MetaQA multi-hop to L3) if it fails.",
+ "module": {
+  "path": "scratchpad/_l1c_relsig.py",
+  "sha256": "9e52d1ca6fd140b3c06ff7060b9c0be0c13cce10555b7471145fc9ccedb56e40"
+ },
+ "design": {
+  "static": "TM(v) = {(P(u), rho)} over admissible typed STRUCT edges (out-edges for all v; in-edges for non-hub v, frozen cap rule) -- precomputed from edge IDs, like the served membership table",
+  "query": "R(q) = set of relation labels in the frozen typed-path rule's schedule (results/L1_P90_EXPLOIT/_uni_<cache>.npz 'orders'; lexical match of relation labels in the question, entity mention masked); order ignored; empty -> served ranking",
+  "runtime": "per channel, hit v at rank r: base blocks (own + out-neighbour, served) w_r each; compat blocks {b : (b,rho) in TM(v), rho in R(q)} w_r each; a block in both gets 2 w_r; frozen rr(S)+rr(M), frozen RRF K0=60 over dense+splade, P50; exposure = 50 core blocks",
+  "gate": "typed graph only (>= 2 relation labels, the frozen P90 typed-graph test); squad/musique (single label) are served by construction and are run as the check",
+  "arms": [
+   "A0 served (asserted == frozen partition_ranking and served evidence)",
+   "A1 UND_NONHUB full (asserted == massvote A1)",
+   "R1 as above"
+  ],
+  "why_membership_level_not_block_level": "a per-block relation-count signature is a node-type composition (movie-rich vs person-rich blocks) and cannot separate 'movies X starred in' from 'movies X directed' -- both are movie blocks; that distinction lives on the relation label of the hit -> block membership, which is the static signature scored here"
+ },
+ "population": "DEV_A only (metaqa, metaqa_phg; squad, squad_phg, musique as identity checks). DEV_B NOT read (spent twice). Transfer population for a surviving candidate = WebQSP once the PHG lane runs.",
+ "metrics": [
+  "BASE_ALL @P50",
+  "per hop",
+  "reach / UNREACHED / reached-weak / fusion-fixable",
+  "median worst gold block rank (reached-failed, all-reached)",
+  "blocks voted per query",
+  "exact McNemar vs A0 and vs A1",
+  "hop2+hop3 pooled McNemar",
+  "D2d on top (information)"
+ ],
+ "decision_rule": {
+  "CANDIDATE": "on BOTH metaqa (MtK) and metaqa_phg DEV_A: BASE_ALL R1 vs A0 gained > lost with exact McNemar p < 0.01, AND hop2+hop3 pooled R1 vs A0 gained > lost with p < 0.05, AND squad/squad_phg/musique identical to A0 (0 gained / 0 lost)",
+  "if_CANDIDATE": "freeze the module (this sha); no DEV_B read; wait for the WebQSP transfer population; no variant tuning",
+  "else": "NOT_CONFIRMED -> route 2: MetaQA multi-hop conceded to dynamic relation reasoning (L3); no further weighting / kernel / halo / PATH / RRF variants at L1"
+ },
+ "secondary_expectations_not_gating": [
+  "reached-weak(R1) < reached-weak(A1)",
+  "median missed-reached rank(R1) < A1's 259/266",
+  "blocks voted per query well below A1's ~350"
+ ],
+ "no_parameters": "compat weight = w_r (the served per-membership weight, undivided per the closed A2/A3 finding); no threshold, no constant, no tuning on results; the only variant run is the one above"
+}

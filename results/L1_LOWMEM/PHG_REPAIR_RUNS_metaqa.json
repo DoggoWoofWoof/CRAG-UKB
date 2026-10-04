@@ -1,0 +1,683 @@
+{
+ "RECORD": "PHG_REPAIR_RUNS",
+ "adapter": "PHG_NONEMPTY_REPAIR_V1",
+ "dataset": "metaqa",
+ "utc": "2026-09-13T18:26:36Z",
+ "preregistration": {
+  "path": "results/L1_LOWMEM/PHG_REPAIR_PREREG.json",
+  "bytes": 13859,
+  "sha256": "d219fc90772e1e8604318b434c7cf773abdfea67a30970ff5a082214732189da"
+ },
+ "program": {
+  "path": "src/l1_lowmem/phg_repair.py",
+  "bytes": 44834,
+  "sha256": "eeac930729e777940a5fe30cf042202171524d51c73a574957b5b228efa40000"
+ },
+ "inputs": {
+  "PHG_RUNS_record": {
+   "path": "results/L1_LOWMEM/PHG_RUNS_metaqa.json",
+   "bytes": 70048,
+   "sha256": "f917dfe3486bfffe3730d73833c1ada89c9f27cedf3f7d592cf72bc97f549787"
+  },
+  "R1_part_rank_txt_sha256": {
+   "0": "c0f251677b2af720fb294555df07772c3cdfdecc777264c266d67797a5d39171",
+   "1": "2038b3e6f966982e8a4cdfc96fe508216f7186ebd26f17299c3e382e22e1391b",
+   "2": "8595bb4935e452f3d3ce094214a3af563376eb8ca9ef2db89537373ae6cad266",
+   "3": "27cd5cfad7b47b3fecb39577e389040661b7550e5f2280da00579ea5f0ef3d3a"
+  },
+  "vector_sha256_in": "b516fbbab59b39ad93eac0ec3c87d13f52579229acd4f5152c98daed3a389f63",
+  "H4_SK_npz_sha256": "edd0cb51683df14973cbb4021518455b97c827ab3aad577d238ae07227f84743",
+  "structure_digest": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+  "N": 43234,
+  "k": 432,
+  "M": 86796,
+  "P": 531006
+ },
+ "before": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 2,
+   "max_block": 104,
+   "contract_bound_ceil_1.03_N_over_k": 104,
+   "zoltan_tolerance_bound_1.03_x_mean": 103.081,
+   "gate": "PARTITION_INVALID"
+  },
+  "km1_weighted": 45623771,
+  "cut_weighted": 17156207,
+  "blocks": {
+   "k": 432,
+   "used": 430,
+   "empty": 2,
+   "min": 0,
+   "p50": 103.0,
+   "p95": 103.0,
+   "max": 104,
+   "mean": 100.079,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0392,
+   "eps_actual(max/ceil(N/k)-1)": 0.0297,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 124669,
+    "cut": 103694,
+    "edge_cut_fraction": 0.8318
+   },
+   "KNN": {
+    "edges": 97436,
+    "cut": 71327,
+    "edge_cut_fraction": 0.732
+   },
+   "NERX": {
+    "edges": 5819,
+    "cut": 3802,
+    "edge_cut_fraction": 0.6534
+   }
+  }
+ },
+ "empty_blocks": [
+  215,
+  430
+ ],
+ "moves": [
+  {
+   "empty_block": 215,
+   "node_position": 69,
+   "donor_block": 104,
+   "donor_size_before": 103,
+   "donor_size_after": 102,
+   "delta_km1_weighted": 0,
+   "min_delta_candidates_tied": 168,
+   "incident_nets": 11,
+   "km1_before": 45623771,
+   "km1_after": 45623771,
+   "candidates": 43234
+  },
+  {
+   "empty_block": 430,
+   "node_position": 223,
+   "donor_block": 50,
+   "donor_size_before": 103,
+   "donor_size_after": 102,
+   "delta_km1_weighted": 0,
+   "min_delta_candidates_tied": 167,
+   "incident_nets": 7,
+   "km1_before": 45623771,
+   "km1_after": 45623771,
+   "candidates": 43233
+  }
+ ],
+ "repair_seconds": 1.002,
+ "after": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 104,
+   "contract_bound_ceil_1.03_N_over_k": 104,
+   "zoltan_tolerance_bound_1.03_x_mean": 103.081,
+   "gate": "PASS"
+  },
+  "km1_weighted": 45623771,
+  "cut_weighted": 17156207,
+  "blocks": {
+   "k": 432,
+   "used": 432,
+   "empty": 0,
+   "min": 1,
+   "p50": 103.0,
+   "p95": 103.0,
+   "max": 104,
+   "mean": 100.079,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0392,
+   "eps_actual(max/ceil(N/k)-1)": 0.0297,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 124669,
+    "cut": 103694,
+    "edge_cut_fraction": 0.8318
+   },
+   "KNN": {
+    "edges": 97436,
+    "cut": 71327,
+    "edge_cut_fraction": 0.732
+   },
+   "NERX": {
+    "edges": 5819,
+    "cut": 3802,
+    "edge_cut_fraction": 0.6534
+   }
+  },
+  "delta_km1_total": 0,
+  "delta_km1_relative": 0.0,
+  "struct_cut_delta": 0.0,
+  "knn_cut_delta": 0.0,
+  "vector_sha256_out": "29ccfc18b1840023140bfca26621a8e513b8c1ccfc619c0453d5973edac39308",
+  "repaired_npy": {
+   "path": "data/l1_lowmem/metaqa/phg_repair1/repaired.npy",
+   "bytes": 346000,
+   "sha256": "b06beef6f3f493a43e6a798da694dde4a94bdc1d9b3056e8906085a4bf592daf"
+  }
+ },
+ "postconditions": {
+  "same_N": true,
+  "assigned_once": true,
+  "same_k": true,
+  "empty_blocks_after": 0,
+  "max_block_after": 104,
+  "contract_bound": 104,
+  "H4_SK_unchanged": true,
+  "moves": 2,
+  "empty_blocks_before": 2,
+  "moves_equal_empties": true,
+  "nodes_changed": 2,
+  "nodes_changed_equal_moves": true,
+  "km1_consistent": true,
+  "PASS": true
+ },
+ "mtkahypar_km1": 41244100,
+ "km1_ratio_vs_mtkahypar": {
+  "before": 1.1062,
+  "after": 1.1062
+ },
+ "import": {
+  "dataset": "metaqa",
+  "utc": "2026-09-13T18:26:36Z",
+  "EXPERIMENTAL": true,
+  "arm": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4__PHG_NONEMPTY_REPAIR_V1",
+  "not_canonical": "L1_LOWMEM validation arm (Zoltan-PHG); the canonical partition is parts/H4_SK.*; nothing canonical was modified",
+  "contract": {
+   "partitioner": "Zoltan-PHG (Trilinos 13.2.0-1ubuntu1, ZOLTAN_VERSION_NUMBER 3.90, Ubuntu 22.04 apt libtrilinos-zoltan-dev)",
+   "mpi": "Open MPI 4.1.2-2ubuntu1, 4 ranks (contract element)",
+   "worker": "/home/swastik/phg_build/phg_driver",
+   "worker_sha256": "a36e1b3dbcef2cf5f20c09cc6ab014ab13ce2dcfeb3ec7c1041aa00d14d7ccb9",
+   "worker_note": "src/l1_lowmem/phg_driver/phg_driver.c (sha cf5099851282444d) driven by src/l1_lowmem/phg.py; rank r owns a contiguous H4_SK_STREAM_V1 shard range",
+   "algorithm": "multilevel PHG: agglomerative coarsening (AGG), AUTO coarse partition, FM refinement quality 1, recursive scheme as shipped",
+   "objective": "connectivity (lambda-1) = weighted KM1 (PHG_CUT_OBJECTIVE=CONNECTIVITY)",
+   "epsilon": 0.03,
+   "imbalance_percent": 3,
+   "IMBALANCE_TOL": "1.03",
+   "seed": "none exposed by Zoltan; DETERMINISTIC=1; repeat-run diagnostic recorded",
+   "num_streams_passes": null,
+   "restream_vcycle": null,
+   "parameters": {
+    "DEBUG_LEVEL": "0",
+    "NUM_GID_ENTRIES": "1",
+    "NUM_LID_ENTRIES": "1",
+    "OBJ_WEIGHT_DIM": "1",
+    "EDGE_WEIGHT_DIM": "1",
+    "DETERMINISTIC": "1",
+    "RETURN_LISTS": "PARTS",
+    "REMAP": "0",
+    "LB_METHOD": "HYPERGRAPH",
+    "HYPERGRAPH_PACKAGE": "PHG",
+    "LB_APPROACH": "PARTITION",
+    "IMBALANCE_TOL": "1.03",
+    "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+    "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+    "PHG_RANDOMIZE_INPUT": "0",
+    "PHG_MULTILEVEL": "1",
+    "PHG_COARSENING_METHOD": "AGG",
+    "PHG_COARSEPARTITION_METHOD": "AUTO",
+    "PHG_REFINEMENT_METHOD": "FM",
+    "PHG_REFINEMENT_QUALITY": "1",
+    "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+    "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+    "PHG_REPART_MULTIPLIER": "100",
+    "CHECK_HYPERGRAPH": "1",
+    "PHG_OUTPUT_LEVEL": "1"
+   },
+   "NUM_GLOBAL_PARTS": 432,
+   "mpi_ranks": 4,
+   "vertex_weights": "unit",
+   "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+   "k": 432,
+   "k_rule": "max(1, N // 100)",
+   "hypergraph_rule": "H4_SPLIT_PRESERVE",
+   "families": [
+    "STRUCT",
+    "KNN"
+   ],
+   "node_distribution": "contiguous canonical position ranges (H4_SK_STREAM_V1 shards) per rank; PHG_RANDOMIZE_INPUT=0",
+   "repair": "PHG_NONEMPTY_REPAIR_V1 applied to the frozen PHG R1 vector (program sha eeac930729e77794): one minimum-delta-KM1 node move per empty block"
+  },
+  "inputs": {
+   "DATASET_json_RECORD_SHA256": "8ab4506933d0df8f9b8443848b9da80e49e698cf9cb40ef32523fdb4e31e2c87",
+   "hypergraph_file": "data/l1_canonical/metaqa/hypergraph/H4_SK.npz",
+   "hypergraph_sha256": "edd0cb51683df14973cbb4021518455b97c827ab3aad577d238ae07227f84743",
+   "hypergraph_content_digest": "bebdd65c305a1f565c3127a8ef91207db03a7e27af487062d8bbc548a2347fcc",
+   "ORIGINAL_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "official_netl_sha256": "9dd470ca2bd2fda5e49f6dc813c3d7a8951dc37178a8b9373e8ca0dd7384d811",
+   "stream_manifest_sha256": "c7ce6e7aabd0ac72fb0113601962ecebf03e7ee9c1fabdf631ac9668c770d7e7",
+   "structure_gate": "PASS",
+   "digest_from_queries": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "hyperedges": 86796,
+   "pins": 531006,
+   "N": 43234
+  },
+  "STATUS": "OK",
+  "worker_stats": {
+   "N": 43234,
+   "k": 432,
+   "hyperedges": 86796,
+   "pins": 531006,
+   "objective_km1": 45623771,
+   "objective_cut": 17156207,
+   "zoltan_eval_cutl": 45623772.0,
+   "mpi_ranks": 4,
+   "peak_rss_mb_max_rank": 35.4,
+   "peak_rss_mb_sum_ranks": 136.8,
+   "wall_seconds_partition": 2.615,
+   "wall_seconds_job": 6.52,
+   "ran_on": "local_wsl"
+  },
+  "post_checks": {
+   "length_ok": true,
+   "min_block": 0,
+   "max_block": 431,
+   "blocks_used": 432,
+   "k": 432,
+   "every_block_used": true,
+   "size_min": 1,
+   "size_max": 104,
+   "size_mean": 100.079,
+   "ceil_N_over_k": 101,
+   "balance_max_over_mean": 1.0392,
+   "balance_within_eps": true
+  },
+  "repeatability": {
+   "identical_partition": true,
+   "n_diff": 0,
+   "km1_repeat": 45623771,
+   "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+  },
+  "output": {
+   "file": "data/l1_canonical/metaqa/parts/LOWMEM__PHG_REPAIR1_con.npy",
+   "bytes": 346000,
+   "sha256": "b06beef6f3f493a43e6a798da694dde4a94bdc1d9b3056e8906085a4bf592daf",
+   "dtype": "int64",
+   "n": 43234
+  },
+  "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+  "repair": {
+   "adapter": "PHG_NONEMPTY_REPAIR_V1",
+   "program": {
+    "path": "src/l1_lowmem/phg_repair.py",
+    "bytes": 44834,
+    "sha256": "eeac930729e777940a5fe30cf042202171524d51c73a574957b5b228efa40000"
+   },
+   "preregistration": {
+    "path": "results/L1_LOWMEM/PHG_REPAIR_PREREG.json",
+    "bytes": 13859,
+    "sha256": "d219fc90772e1e8604318b434c7cf773abdfea67a30970ff5a082214732189da"
+   },
+   "input_R1_part_rank_txt_sha256": {
+    "0": "c0f251677b2af720fb294555df07772c3cdfdecc777264c266d67797a5d39171",
+    "1": "2038b3e6f966982e8a4cdfc96fe508216f7186ebd26f17299c3e382e22e1391b",
+    "2": "8595bb4935e452f3d3ce094214a3af563376eb8ca9ef2db89537373ae6cad266",
+    "3": "27cd5cfad7b47b3fecb39577e389040661b7550e5f2280da00579ea5f0ef3d3a"
+   },
+   "vector_sha256_in": "b516fbbab59b39ad93eac0ec3c87d13f52579229acd4f5152c98daed3a389f63",
+   "vector_sha256_out": "29ccfc18b1840023140bfca26621a8e513b8c1ccfc619c0453d5973edac39308",
+   "empty_blocks": [
+    215,
+    430
+   ],
+   "moves": [
+    {
+     "empty_block": 215,
+     "node_position": 69,
+     "donor_block": 104,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 168,
+     "incident_nets": 11,
+     "km1_before": 45623771,
+     "km1_after": 45623771,
+     "candidates": 43234
+    },
+    {
+     "empty_block": 430,
+     "node_position": 223,
+     "donor_block": 50,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 167,
+     "incident_nets": 7,
+     "km1_before": 45623771,
+     "km1_after": 45623771,
+     "candidates": 43233
+    }
+   ],
+   "km1_before": 45623771,
+   "km1_after": 45623771,
+   "postconditions": {
+    "same_N": true,
+    "assigned_once": true,
+    "same_k": true,
+    "empty_blocks_after": 0,
+    "max_block_after": 104,
+    "contract_bound": 104,
+    "H4_SK_unchanged": true,
+    "moves": 2,
+    "empty_blocks_before": 2,
+    "moves_equal_empties": true,
+    "nodes_changed": 2,
+    "nodes_changed_equal_moves": true,
+    "km1_consistent": true,
+    "PASS": true
+   },
+   "note": "PHG R1 (frozen, PARTITION_INVALID: empty blocks) + PHG_NONEMPTY_REPAIR_V1 = this vector; PHG was not rerun"
+  }
+ },
+ "downstream": {
+  "status": "PAIRED",
+  "record": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa__phg_repair1.json",
+   "bytes": 5645,
+   "sha256": "e99da711d075d22e3a430cbdc35f985eb648c7575d2e7361a812f8321760a49f"
+  },
+  "paired": {
+   "SAFE_ALL_P50": {
+    "A_only_covered": 50,
+    "B_only_covered": 112,
+    "net_B_minus_A": 62,
+    "mcnemar_p": 0.0,
+    "sig": true,
+    "A": 0.6401,
+    "B": 0.6712,
+    "delta_B_minus_A": 0.031,
+    "relative_change": 0.0485
+   },
+   "BASE_ALL_P50": {
+    "A_only_covered": 47,
+    "B_only_covered": 113,
+    "net_B_minus_A": 66,
+    "mcnemar_p": 0.0,
+    "sig": true,
+    "A": 0.6376,
+    "B": 0.6707,
+    "delta_B_minus_A": 0.033,
+    "relative_change": 0.0518
+   },
+   "nq": 1998
+  },
+  "B_phg_repaired": {
+   "BASE_ALL_P50": 0.6707,
+   "BASE_ANY_P50": 0.9219,
+   "BASE_SCOPE_NODES": 5086.3,
+   "SAFE_ALL_P50": 0.6712,
+   "SAFE_ANY_P50": 0.9204,
+   "SAFE_SCOPE_NODES": 5086.1,
+   "BND_ALL_P50": 0.6707,
+   "CORR": {
+    "dALL": 0.0005,
+    "gained": 6,
+    "lost": 5,
+    "net": 1,
+    "mcnemar_p": 1.0,
+    "sig": false,
+    "gold_admitted": 124,
+    "gold_evicted": 125,
+    "churn_per_query": 4.462,
+    "churn_max": 6,
+    "queries_with_zero_churn": 0
+   },
+   "BALANCE": {
+    "npart": 432,
+    "blocks_used": 432,
+    "size_min": 1,
+    "size_max": 104,
+    "size_median": 103.0,
+    "size_mean": 100.08,
+    "size_p90": 103.0,
+    "size_p99": 103.0,
+    "size_cv": 0.1079,
+    "max_over_mean": 1.0392,
+    "ELIGIBLE": true
+   },
+   "CUT": {
+    "STRUCT": {
+     "edges": 124669,
+     "cut": 103694,
+     "edge_cut_fraction": 0.8318
+    },
+    "KNN": {
+     "edges": 97436,
+     "cut": 71327,
+     "edge_cut_fraction": 0.732
+    },
+    "NERX": {
+     "edges": 5819,
+     "cut": 3802,
+     "edge_cut_fraction": 0.6534
+    }
+   },
+   "by_hop": {
+    "hop1": {
+     "n": 666,
+     "BASE_ALL": 0.8904,
+     "SAFE_ALL": 0.8904
+    },
+    "hop2": {
+     "n": 666,
+     "BASE_ALL": 0.5345,
+     "SAFE_ALL": 0.5315
+    },
+    "hop3": {
+     "n": 666,
+     "BASE_ALL": 0.5871,
+     "SAFE_ALL": 0.5916
+    }
+   }
+  },
+  "A_mtkahypar": {
+   "BASE_ALL_P50": 0.6376,
+   "BASE_ANY_P50": 0.9094,
+   "BASE_SCOPE_NODES": 5023.3,
+   "SAFE_ALL_P50": 0.6401,
+   "SAFE_ANY_P50": 0.9134,
+   "SAFE_SCOPE_NODES": 5023.6,
+   "BND_ALL_P50": 0.6376,
+   "CORR": {
+    "dALL": 0.0025,
+    "gained": 11,
+    "lost": 6,
+    "net": 5,
+    "mcnemar_p": 0.33231,
+    "sig": false,
+    "gold_admitted": 132,
+    "gold_evicted": 113,
+    "churn_per_query": 4.559,
+    "churn_max": 6,
+    "queries_with_zero_churn": 0
+   },
+   "BALANCE": {
+    "npart": 432,
+    "blocks_used": 432,
+    "size_min": 14,
+    "size_max": 104,
+    "size_median": 102.0,
+    "size_mean": 100.08,
+    "size_p90": 104.0,
+    "size_p99": 104.0,
+    "size_cv": 0.0617,
+    "max_over_mean": 1.0392,
+    "ELIGIBLE": true
+   },
+   "CUT": {
+    "STRUCT": {
+     "edges": 124669,
+     "cut": 102098,
+     "edge_cut_fraction": 0.819
+    },
+    "KNN": {
+     "edges": 97436,
+     "cut": 61467,
+     "edge_cut_fraction": 0.6308
+    },
+    "NERX": {
+     "edges": 5819,
+     "cut": 3160,
+     "edge_cut_fraction": 0.543
+    }
+   },
+   "by_hop": {
+    "hop1": {
+     "n": 666,
+     "BASE_ALL": 0.8979,
+     "SAFE_ALL": 0.8979
+    },
+    "hop2": {
+     "n": 666,
+     "BASE_ALL": 0.488,
+     "SAFE_ALL": 0.5015
+    },
+    "hop3": {
+     "n": 666,
+     "BASE_ALL": 0.527,
+     "SAFE_ALL": 0.521
+    }
+   }
+  },
+  "by_hop_paired": {
+   "hop1": {
+    "n": 666,
+    "SAFE": {
+     "A_only_covered": 14,
+     "B_only_covered": 9,
+     "net_B_minus_A": -5,
+     "mcnemar_p": 0.40487,
+     "sig": false,
+     "A": 0.8979,
+     "B": 0.8904,
+     "delta_B_minus_A": -0.0075,
+     "relative_change": -0.0084
+    },
+    "BASE": {
+     "A_only_covered": 14,
+     "B_only_covered": 9,
+     "net_B_minus_A": -5,
+     "mcnemar_p": 0.40487,
+     "sig": false,
+     "A": 0.8979,
+     "B": 0.8904,
+     "delta_B_minus_A": -0.0075,
+     "relative_change": -0.0084
+    }
+   },
+   "hop2": {
+    "n": 666,
+    "SAFE": {
+     "A_only_covered": 23,
+     "B_only_covered": 43,
+     "net_B_minus_A": 20,
+     "mcnemar_p": 0.01866,
+     "sig": true,
+     "A": 0.5015,
+     "B": 0.5315,
+     "delta_B_minus_A": 0.03,
+     "relative_change": 0.0599
+    },
+    "BASE": {
+     "A_only_covered": 18,
+     "B_only_covered": 49,
+     "net_B_minus_A": 31,
+     "mcnemar_p": 0.00019,
+     "sig": true,
+     "A": 0.488,
+     "B": 0.5345,
+     "delta_B_minus_A": 0.0465,
+     "relative_change": 0.0954
+    }
+   },
+   "hop3": {
+    "n": 666,
+    "SAFE": {
+     "A_only_covered": 13,
+     "B_only_covered": 60,
+     "net_B_minus_A": 47,
+     "mcnemar_p": 0.0,
+     "sig": true,
+     "A": 0.521,
+     "B": 0.5916,
+     "delta_B_minus_A": 0.0706,
+     "relative_change": 0.1354
+    },
+    "BASE": {
+     "A_only_covered": 15,
+     "B_only_covered": 55,
+     "net_B_minus_A": 40,
+     "mcnemar_p": 0.0,
+     "sig": true,
+     "A": 0.527,
+     "B": 0.5871,
+     "delta_B_minus_A": 0.0601,
+     "relative_change": 0.114
+    }
+   }
+  },
+  "coverage": {
+   "BASE_ANY": {
+    "A": 0.9094,
+    "B": 0.9219
+   },
+   "SAFE_ANY": {
+    "A": 0.9134,
+    "B": 0.9204
+   },
+   "BASE_SCOPE_NODES": {
+    "A": 5023.3,
+    "B": 5086.3
+   },
+   "SAFE_SCOPE_NODES": {
+    "A": 5023.6,
+    "B": 5086.1
+   }
+  },
+  "safe_additions": {
+   "A": {
+    "gained": 11,
+    "lost": 6,
+    "net": 5
+   },
+   "B": {
+    "gained": 6,
+    "lost": 5,
+    "net": 1
+   }
+  },
+  "population": {
+   "eval_split": "dev",
+   "sample_rule": "EVAL_SPLITS dev, hop-balanced (identical to _ta_resid.py / _ta_comb.py)",
+   "nq": 1998,
+   "row_query_ids_sha256": "6b73b067ed91805f30bbcc5eba388694b40808635986a46c09b8b6aa68349a8f"
+  }
+ },
+ "l1_primary_SAFE": {
+  "delta_phg_minus_mtk": 0.031,
+  "p": 0.0,
+  "sig": true,
+  "phg_only": 112,
+  "mtk_only": 50,
+  "verdict": "NO_SIGNIFICANT_PAIRED_LOSS"
+ },
+ "l1_secondary_BASE": {
+  "delta_phg_minus_mtk": 0.033,
+  "p": 0.0,
+  "sig": true,
+  "phg_only": 113,
+  "mtk_only": 47,
+  "verdict": "NO_SIGNIFICANT_PAIRED_LOSS"
+ },
+ "DECISION": "PHG_L1_NO_SIGNIFICANT_PAIRED_LOSS"
+}

@@ -1,0 +1,1236 @@
+{
+ "phase": "G2 B1.6 query-local interaction gate; 3-target source-only pilot; TEST untouched; STOP before six-way",
+ "datasets": [
+  "metaqa",
+  "2wiki_clean",
+  "squad_clean"
+ ],
+ "R_values": [
+  0,
+  4,
+  8,
+  16
+ ],
+ "verification_channel_fixed": "BASE_FUSED",
+ "structural_reserve_orderer": "s_dir (frozen)",
+ "P0_features": [
+  "rc_agree",
+  "rc_support",
+  "rc_peaked",
+  "rc_coredepth",
+  "rc_pool_agree",
+  "rc_pool_invis",
+  "sn_unique_out",
+  "sn_novel_frac",
+  "sn_overlap_frac",
+  "sn_univ_frac",
+  "sc_dirmargin_max",
+  "sc_dirmargin_topk",
+  "sc_seed_supp",
+  "sc_multiseed",
+  "sc_dirvsret",
+  "sc_weak_support",
+  "sc_anchor"
+ ],
+ "interaction_features": [
+  "ix_RCxSNOV",
+  "ix_RCxSRED",
+  "ix_RCxSEED",
+  "ix_SNOVxSEED",
+  "ix_DVRxRC",
+  "ix_SEEDxWEAKRET"
+ ],
+ "interaction_hypotheses": {
+  "ix_RCxSNOV": "novelty|confident (ambiguous)",
+  "ix_RCxSRED": "CASE A confident+redundant->R0 (NEG)",
+  "ix_RCxSEED": "de-confound seed|confident->R down (NEG)",
+  "ix_SNOVxSEED": "CASE B novel+anchored->R up (POS)",
+  "ix_DVRxRC": "struct beats retrieval|confident (POS)",
+  "ix_SEEDxWEAKRET": "CASE B core anchored+graph-only->R up; LOW SQuAD (POS)"
+ },
+ "policy_model": "linear 4-way softmax over P0_INTERACT (+ optional tiny gate)",
+ "tiny_gate_spec": "1 hidden tanh layer width=8, L2=5e-3, class-balanced, same P0_INTERACT inputs (one config, no search)",
+ "leakage_checks": {
+  "target_excluded_from_training_and_selection": true,
+  "features_interactions_norm_weights_source_train_only": true,
+  "gold_only_for_TRAIN_labels_and_eval_only_oracle": true,
+  "no_gold_in_pool_construction": true,
+  "no_dataset_id_feature": true,
+  "no_hop_or_benchmark_metadata_feature": true,
+  "verification_channel_frozen": true,
+  "structural_orderer_frozen_s_dir": true,
+  "no_new_retriever_encoder_graph_c11a": true,
+  "only_reserve_policy_representation_changed": true
+ },
+ "FOLDS": {
+  "metaqa": {
+   "P0_LINEAR": {
+    "metrics": {
+     "nq": 1166,
+     "GOLD_RECALL@50": 0.2911,
+     "ALL@50": 0.5034,
+     "ANY@50": 0.6115,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0145,
+     "graph_only_gold_available": 2906,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.9961,
+     "retrieval_visible_gold_base": 1267,
+     "retrieval_visible_gold_retained": 1262,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 42,
+     "NEW_GOLDS_ADMITTED": 56,
+     "OLD_GOLDS_EVICTED": 5,
+     "NET_GOLD_GAIN@50": 51,
+     "POOL_CHURN_mean": 0.0189,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 0.947,
+       "median": 0.0,
+       "p95": 8.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.019,
+       "median": 0.0,
+       "p95": 0.16
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 490,
+       "GOLD_RECALL@50": 0.9692,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+       "graph_only_gold_available": 7,
+       "NET_GOLD_GAIN@50": -2
+      },
+      "2": {
+       "nq": 219,
+       "GOLD_RECALL@50": 0.2803,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.037,
+       "graph_only_gold_available": 243,
+       "NET_GOLD_GAIN@50": 9
+      },
+      "3": {
+       "nq": 457,
+       "GOLD_RECALL@50": 0.0907,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0124,
+       "graph_only_gold_available": 2656,
+       "NET_GOLD_GAIN@50": 44
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.8398,
+     "4": 0.0886,
+     "8": 0.0671,
+     "16": 0.0045
+    },
+    "policy_vs_target_oracle": {
+     "R_accuracy": 0.7207,
+     "mean_abs_reserve_error": 2.408,
+     "OVER_RESERVE_RATE": 0.1421,
+     "UNDER_RESERVE_RATE": 0.1371,
+     "mean_chosen_R": 0.963,
+     "mean_oracle_R": 1.694
+    },
+    "source_label_dist": {
+     "0": 0.943,
+     "4": 0.03,
+     "8": 0.013,
+     "16": 0.014
+    }
+   },
+   "P0_INTERACT_LINEAR": {
+    "metrics": {
+     "nq": 1166,
+     "GOLD_RECALL@50": 0.2911,
+     "ALL@50": 0.5026,
+     "ANY@50": 0.6141,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0145,
+     "graph_only_gold_available": 2906,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.9961,
+     "retrieval_visible_gold_base": 1267,
+     "retrieval_visible_gold_retained": 1262,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 42,
+     "NEW_GOLDS_ADMITTED": 56,
+     "OLD_GOLDS_EVICTED": 5,
+     "NET_GOLD_GAIN@50": 51,
+     "POOL_CHURN_mean": 0.0187,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 0.936,
+       "median": 0.0,
+       "p95": 8.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.001,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.019,
+       "median": 0.0,
+       "p95": 0.16
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 490,
+       "GOLD_RECALL@50": 0.9703,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+       "graph_only_gold_available": 7,
+       "NET_GOLD_GAIN@50": -1
+      },
+      "2": {
+       "nq": 219,
+       "GOLD_RECALL@50": 0.2708,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0206,
+       "graph_only_gold_available": 243,
+       "NET_GOLD_GAIN@50": 5
+      },
+      "3": {
+       "nq": 457,
+       "GOLD_RECALL@50": 0.0917,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0139,
+       "graph_only_gold_available": 2656,
+       "NET_GOLD_GAIN@50": 47
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.8493,
+     "4": 0.0771,
+     "8": 0.0686,
+     "16": 0.005
+    },
+    "policy_vs_target_oracle": {
+     "R_accuracy": 0.7287,
+     "mean_abs_reserve_error": 2.378,
+     "OVER_RESERVE_RATE": 0.1331,
+     "UNDER_RESERVE_RATE": 0.1381,
+     "mean_chosen_R": 0.937,
+     "mean_oracle_R": 1.694
+    },
+    "source_label_dist": {
+     "0": 0.943,
+     "4": 0.03,
+     "8": 0.013,
+     "16": 0.014
+    }
+   },
+   "TARGET_ORACLE_ADAPTIVE_eval_only": {
+    "metrics": {
+     "nq": 1166,
+     "GOLD_RECALL@50": 0.4433,
+     "ALL@50": 0.5901,
+     "ANY@50": 0.801,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.2072,
+     "graph_only_gold_available": 2906,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.9913,
+     "retrieval_visible_gold_base": 1267,
+     "retrieval_visible_gold_retained": 1256,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 602,
+     "NEW_GOLDS_ADMITTED": 751,
+     "OLD_GOLDS_EVICTED": 11,
+     "NET_GOLD_GAIN@50": 740,
+     "POOL_CHURN_mean": 0.058,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 2.902,
+       "median": 0.0,
+       "p95": 16.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.058,
+       "median": 0.0,
+       "p95": 0.32
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 490,
+       "GOLD_RECALL@50": 0.982,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.4286,
+       "graph_only_gold_available": 7,
+       "NET_GOLD_GAIN@50": 10
+      },
+      "2": {
+       "nq": 219,
+       "GOLD_RECALL@50": 0.4418,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.2222,
+       "graph_only_gold_available": 243,
+       "NET_GOLD_GAIN@50": 77
+      },
+      "3": {
+       "nq": 457,
+       "GOLD_RECALL@50": 0.2832,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.2052,
+       "graph_only_gold_available": 2656,
+       "NET_GOLD_GAIN@50": 653
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.8534,
+     "4": 0.037,
+     "8": 0.026,
+     "16": 0.0836
+    }
+   },
+   "TINY_GATE": {
+    "metrics": {
+     "nq": 1166,
+     "GOLD_RECALL@50": 0.3024,
+     "ALL@50": 0.5069,
+     "ANY@50": 0.6269,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0265,
+     "graph_only_gold_available": 2906,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.9913,
+     "retrieval_visible_gold_base": 1267,
+     "retrieval_visible_gold_retained": 1256,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 77,
+     "NEW_GOLDS_ADMITTED": 113,
+     "OLD_GOLDS_EVICTED": 11,
+     "NET_GOLD_GAIN@50": 102,
+     "POOL_CHURN_mean": 0.035,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 1.749,
+       "median": 0.0,
+       "p95": 8.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.001,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.035,
+       "median": 0.0,
+       "p95": 0.16
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 490,
+       "GOLD_RECALL@50": 0.9692,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+       "graph_only_gold_available": 7,
+       "NET_GOLD_GAIN@50": -2
+      },
+      "2": {
+       "nq": 219,
+       "GOLD_RECALL@50": 0.2827,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0288,
+       "graph_only_gold_available": 243,
+       "NET_GOLD_GAIN@50": 10
+      },
+      "3": {
+       "nq": 457,
+       "GOLD_RECALL@50": 0.1065,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0264,
+       "graph_only_gold_available": 2656,
+       "NET_GOLD_GAIN@50": 94
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.7382,
+     "4": 0.1376,
+     "8": 0.1056,
+     "16": 0.0185
+    },
+    "policy_vs_target_oracle": {
+     "R_accuracy": 0.6411,
+     "mean_abs_reserve_error": 2.917,
+     "OVER_RESERVE_RATE": 0.2302,
+     "UNDER_RESERVE_RATE": 0.1286,
+     "mean_chosen_R": 1.692,
+     "mean_oracle_R": 1.694
+    },
+    "source_label_dist": {
+     "0": 0.943,
+     "4": 0.03,
+     "8": 0.013,
+     "16": 0.014
+    }
+   }
+  },
+  "2wiki_clean": {
+   "P0_LINEAR": {
+    "metrics": {
+     "nq": 2000,
+     "GOLD_RECALL@50": 0.9141,
+     "ALL@50": 0.847,
+     "ANY@50": 1.0,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.1741,
+     "graph_only_gold_available": 316,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.9974,
+     "retrieval_visible_gold_base": 3474,
+     "retrieval_visible_gold_retained": 3465,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 55,
+     "NEW_GOLDS_ADMITTED": 78,
+     "OLD_GOLDS_EVICTED": 9,
+     "NET_GOLD_GAIN@50": 69,
+     "POOL_CHURN_mean": 0.0884,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 4.42,
+       "median": 4.0,
+       "p95": 16.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.06,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.088,
+       "median": 0.08,
+       "p95": 0.32
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 2000,
+       "GOLD_RECALL@50": 0.9141,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.1741,
+       "graph_only_gold_available": 316,
+       "NET_GOLD_GAIN@50": 69
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.3285,
+     "4": 0.413,
+     "8": 0.1635,
+     "16": 0.095
+    },
+    "policy_vs_target_oracle": {
+     "R_accuracy": 0.332,
+     "mean_abs_reserve_error": 4.568,
+     "OVER_RESERVE_RATE": 0.6195,
+     "UNDER_RESERVE_RATE": 0.0485,
+     "mean_chosen_R": 4.48,
+     "mean_oracle_R": 0.664
+    },
+    "source_label_dist": {
+     "0": 0.9019,
+     "4": 0.0247,
+     "8": 0.0173,
+     "16": 0.056
+    }
+   },
+   "P0_INTERACT_LINEAR": {
+    "metrics": {
+     "nq": 2000,
+     "GOLD_RECALL@50": 0.9141,
+     "ALL@50": 0.847,
+     "ANY@50": 1.0,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.1741,
+     "graph_only_gold_available": 316,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.998,
+     "retrieval_visible_gold_base": 3474,
+     "retrieval_visible_gold_retained": 3467,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 55,
+     "NEW_GOLDS_ADMITTED": 76,
+     "OLD_GOLDS_EVICTED": 7,
+     "NET_GOLD_GAIN@50": 69,
+     "POOL_CHURN_mean": 0.0852,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 4.262,
+       "median": 4.0,
+       "p95": 16.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.06,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.085,
+       "median": 0.08,
+       "p95": 0.32
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 2000,
+       "GOLD_RECALL@50": 0.9141,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.1741,
+       "graph_only_gold_available": 316,
+       "NET_GOLD_GAIN@50": 69
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.365,
+     "4": 0.3705,
+     "8": 0.174,
+     "16": 0.0905
+    },
+    "policy_vs_target_oracle": {
+     "R_accuracy": 0.3665,
+     "mean_abs_reserve_error": 4.414,
+     "OVER_RESERVE_RATE": 0.584,
+     "UNDER_RESERVE_RATE": 0.0495,
+     "mean_chosen_R": 4.322,
+     "mean_oracle_R": 0.664
+    },
+    "source_label_dist": {
+     "0": 0.9019,
+     "4": 0.0247,
+     "8": 0.0173,
+     "16": 0.056
+    }
+   },
+   "TARGET_ORACLE_ADAPTIVE_eval_only": {
+    "metrics": {
+     "nq": 2000,
+     "GOLD_RECALL@50": 0.9425,
+     "ALL@50": 0.895,
+     "ANY@50": 1.0,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.4272,
+     "graph_only_gold_available": 316,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 1.0,
+     "retrieval_visible_gold_base": 3474,
+     "retrieval_visible_gold_retained": 3474,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 135,
+     "NEW_GOLDS_ADMITTED": 179,
+     "OLD_GOLDS_EVICTED": 0,
+     "NET_GOLD_GAIN@50": 179,
+     "POOL_CHURN_mean": 0.013,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 0.652,
+       "median": 0.0,
+       "p95": 4.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.012,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.013,
+       "median": 0.0,
+       "p95": 0.08
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 2000,
+       "GOLD_RECALL@50": 0.9425,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.4272,
+       "graph_only_gold_available": 316,
+       "NET_GOLD_GAIN@50": 179
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.915,
+     "4": 0.045,
+     "8": 0.0195,
+     "16": 0.0205
+    }
+   },
+   "TINY_GATE": {
+    "metrics": {
+     "nq": 2000,
+     "GOLD_RECALL@50": 0.9118,
+     "ALL@50": 0.843,
+     "ANY@50": 1.0,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.1487,
+     "graph_only_gold_available": 316,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.998,
+     "retrieval_visible_gold_base": 3474,
+     "retrieval_visible_gold_retained": 3467,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 47,
+     "NEW_GOLDS_ADMITTED": 67,
+     "OLD_GOLDS_EVICTED": 7,
+     "NET_GOLD_GAIN@50": 60,
+     "POOL_CHURN_mean": 0.0726,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 3.631,
+       "median": 0.0,
+       "p95": 16.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.04,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.073,
+       "median": 0.0,
+       "p95": 0.32
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 2000,
+       "GOLD_RECALL@50": 0.9118,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.1487,
+       "graph_only_gold_available": 316,
+       "NET_GOLD_GAIN@50": 60
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.5025,
+     "4": 0.2585,
+     "8": 0.1485,
+     "16": 0.0905
+    },
+    "policy_vs_target_oracle": {
+     "R_accuracy": 0.493,
+     "mean_abs_reserve_error": 3.842,
+     "OVER_RESERVE_RATE": 0.453,
+     "UNDER_RESERVE_RATE": 0.054,
+     "mean_chosen_R": 3.67,
+     "mean_oracle_R": 0.664
+    },
+    "source_label_dist": {
+     "0": 0.9019,
+     "4": 0.0247,
+     "8": 0.0173,
+     "16": 0.056
+    }
+   }
+  },
+  "squad_clean": {
+   "P0_LINEAR": {
+    "metrics": {
+     "nq": 984,
+     "GOLD_RECALL@50": 0.9959,
+     "ALL@50": 0.9959,
+     "ANY@50": 0.9959,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+     "graph_only_gold_available": 0,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.999,
+     "retrieval_visible_gold_base": 980,
+     "retrieval_visible_gold_retained": 979,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 0,
+     "NEW_GOLDS_ADMITTED": 1,
+     "OLD_GOLDS_EVICTED": 1,
+     "NET_GOLD_GAIN@50": 0,
+     "POOL_CHURN_mean": 0.1746,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 8.732,
+       "median": 8.0,
+       "p95": 16.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.175,
+       "median": 0.16,
+       "p95": 0.32
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 984,
+       "GOLD_RECALL@50": 0.9959,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+       "graph_only_gold_available": 0,
+       "NET_GOLD_GAIN@50": 0
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.385,
+     "4": 0.006,
+     "8": 0.131,
+     "16": 0.478
+    },
+    "policy_vs_target_oracle": {
+     "R_accuracy": 0.386,
+     "mean_abs_reserve_error": 8.704,
+     "OVER_RESERVE_RATE": 0.614,
+     "UNDER_RESERVE_RATE": 0.0,
+     "mean_chosen_R": 8.72,
+     "mean_oracle_R": 0.016
+    },
+    "source_label_dist": {
+     "0": 0.8842,
+     "4": 0.041,
+     "8": 0.0228,
+     "16": 0.052
+    }
+   },
+   "P0_INTERACT_LINEAR": {
+    "metrics": {
+     "nq": 984,
+     "GOLD_RECALL@50": 0.9959,
+     "ALL@50": 0.9959,
+     "ANY@50": 0.9959,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+     "graph_only_gold_available": 0,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.999,
+     "retrieval_visible_gold_base": 980,
+     "retrieval_visible_gold_retained": 979,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 0,
+     "NEW_GOLDS_ADMITTED": 1,
+     "OLD_GOLDS_EVICTED": 1,
+     "NET_GOLD_GAIN@50": 0,
+     "POOL_CHURN_mean": 0.1749,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 8.744,
+       "median": 8.0,
+       "p95": 16.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.175,
+       "median": 0.16,
+       "p95": 0.32
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 984,
+       "GOLD_RECALL@50": 0.9959,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+       "graph_only_gold_available": 0,
+       "NET_GOLD_GAIN@50": 0
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.394,
+     "4": 0.008,
+     "8": 0.107,
+     "16": 0.491
+    },
+    "policy_vs_target_oracle": {
+     "R_accuracy": 0.395,
+     "mean_abs_reserve_error": 8.728,
+     "OVER_RESERVE_RATE": 0.605,
+     "UNDER_RESERVE_RATE": 0.0,
+     "mean_chosen_R": 8.744,
+     "mean_oracle_R": 0.016
+    },
+    "source_label_dist": {
+     "0": 0.8842,
+     "4": 0.041,
+     "8": 0.0228,
+     "16": 0.052
+    }
+   },
+   "TARGET_ORACLE_ADAPTIVE_eval_only": {
+    "metrics": {
+     "nq": 984,
+     "GOLD_RECALL@50": 0.997,
+     "ALL@50": 0.997,
+     "ANY@50": 0.997,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+     "graph_only_gold_available": 0,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 1.0,
+     "retrieval_visible_gold_base": 980,
+     "retrieval_visible_gold_retained": 980,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 0,
+     "NEW_GOLDS_ADMITTED": 1,
+     "OLD_GOLDS_EVICTED": 0,
+     "NET_GOLD_GAIN@50": 1,
+     "POOL_CHURN_mean": 0.0003,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 0.016,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 984,
+       "GOLD_RECALL@50": 0.997,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+       "graph_only_gold_available": 0,
+       "NET_GOLD_GAIN@50": 1
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.999,
+     "4": 0.0,
+     "8": 0.0,
+     "16": 0.001
+    }
+   },
+   "TINY_GATE": {
+    "metrics": {
+     "nq": 984,
+     "GOLD_RECALL@50": 0.9959,
+     "ALL@50": 0.9959,
+     "ANY@50": 0.9959,
+     "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+     "graph_only_gold_available": 0,
+     "RETRIEVAL_VISIBLE_GOLD_RETENTION@50": 0.999,
+     "retrieval_visible_gold_base": 980,
+     "retrieval_visible_gold_retained": 979,
+     "NEW_GRAPH_ONLY_GOLDS_ADMITTED": 0,
+     "NEW_GOLDS_ADMITTED": 1,
+     "OLD_GOLDS_EVICTED": 1,
+     "NET_GOLD_GAIN@50": 0,
+     "POOL_CHURN_mean": 0.1754,
+     "CHANNEL_COMPOSITION": {
+      "nominal_R_unique_inserted": {
+       "mean": 8.772,
+       "median": 16.0,
+       "p95": 16.0
+      },
+      "structural_overlap_with_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "unused_structural_slots_to_verification": {
+       "mean": 0.0,
+       "median": 0.0,
+       "p95": 0.0
+      },
+      "fraction_final_pool_structural": {
+       "mean": 0.175,
+       "median": 0.32,
+       "p95": 0.32
+      }
+     },
+     "PER_HOP": {
+      "1": {
+       "nq": 984,
+       "GOLD_RECALL@50": 0.9959,
+       "GRAPH_ONLY_GOLD_ADMISSION@50": 0.0,
+       "graph_only_gold_available": 0,
+       "NET_GOLD_GAIN@50": 0
+      }
+     }
+    },
+    "R_distribution": {
+     "0": 0.412,
+     "4": 0.007,
+     "8": 0.068,
+     "16": 0.513
+    },
+    "policy_vs_target_oracle": {
+     "R_accuracy": 0.413,
+     "mean_abs_reserve_error": 8.764,
+     "OVER_RESERVE_RATE": 0.587,
+     "UNDER_RESERVE_RATE": 0.0,
+     "mean_chosen_R": 8.78,
+     "mean_oracle_R": 0.016
+    },
+    "source_label_dist": {
+     "0": 0.8842,
+     "4": 0.041,
+     "8": 0.0228,
+     "16": 0.052
+    }
+   }
+  }
+ },
+ "VERDICT": {
+  "P0_LINEAR": {
+   "metaqa": {
+    "NET": 51,
+    "GO_adm": 0.0145,
+    "RV_ret": 0.9961,
+    "over_reserve": 0.1421,
+    "mean_R": 0.963
+   },
+   "2wiki_clean": {
+    "NET": 69,
+    "GO_adm": 0.1741,
+    "RV_ret": 0.9974,
+    "over_reserve": 0.6195,
+    "mean_R": 4.48
+   },
+   "squad_clean": {
+    "NET": 0,
+    "GO_adm": 0.0,
+    "RV_ret": 0.999,
+    "over_reserve": 0.614,
+    "mean_R": 8.72
+   }
+  },
+  "P0_INTERACT_LINEAR": {
+   "metaqa": {
+    "NET": 51,
+    "GO_adm": 0.0145,
+    "RV_ret": 0.9961,
+    "over_reserve": 0.1331,
+    "mean_R": 0.937
+   },
+   "2wiki_clean": {
+    "NET": 69,
+    "GO_adm": 0.1741,
+    "RV_ret": 0.998,
+    "over_reserve": 0.584,
+    "mean_R": 4.322
+   },
+   "squad_clean": {
+    "NET": 0,
+    "GO_adm": 0.0,
+    "RV_ret": 0.999,
+    "over_reserve": 0.605,
+    "mean_R": 8.744
+   }
+  },
+  "TINY_GATE": {
+   "metaqa": {
+    "NET": 102,
+    "GO_adm": 0.0265,
+    "RV_ret": 0.9913,
+    "over_reserve": 0.2302,
+    "mean_R": 1.692
+   },
+   "2wiki_clean": {
+    "NET": 60,
+    "GO_adm": 0.1487,
+    "RV_ret": 0.998,
+    "over_reserve": 0.453,
+    "mean_R": 3.67
+   },
+   "squad_clean": {
+    "NET": 0,
+    "GO_adm": 0.0,
+    "RV_ret": 0.999,
+    "over_reserve": 0.587,
+    "mean_R": 8.78
+   }
+  },
+  "metaqa_headroom_capture": {
+   "P0": 0.069,
+   "P0_INTERACT": 0.069,
+   "TINY": 0.138,
+   "oracle_NET": 740
+  },
+  "metaqa_3hop": {
+   "P0_NET": 44,
+   "P0_GO": 0.0124,
+   "PI_NET": 47,
+   "PI_GO": 0.0139,
+   "TINY_NET": 94,
+   "TINY_GO": 0.0264,
+   "oracle_NET": 653
+  },
+  "SQUAD_HARD_GATE": {
+   "baseline_B15": {
+    "over_reserve": 0.614,
+    "mean_R": 8.72
+   },
+   "P0_INTERACT": {
+    "over_reserve": 0.605,
+    "mean_R": 8.744
+   },
+   "TINY": {
+    "over_reserve": 0.587,
+    "mean_R": 8.78
+   },
+   "reduced_by_interactions": false
+  },
+  "interaction_signal_all_three_gates": false,
+  "directional_improvement": true,
+  "identity_diagnostic": {
+   "P0_acc": 0.7147,
+   "P0_INTERACT_acc": 0.7107,
+   "chance": 0.3333,
+   "P0_dominant": [
+    [
+     "sn_unique_out",
+     1.046
+    ],
+    [
+     "rc_pool_agree",
+     0.888
+    ],
+    [
+     "rc_agree",
+     0.759
+    ],
+    [
+     "sc_dirvsret",
+     0.61
+    ],
+    [
+     "sc_weak_support",
+     0.594
+    ],
+    [
+     "sc_seed_supp",
+     0.549
+    ]
+   ],
+   "P0_INTERACT_dominant": [
+    [
+     "sn_unique_out",
+     1.061
+    ],
+    [
+     "rc_pool_agree",
+     0.903
+    ],
+    [
+     "rc_agree",
+     0.808
+    ],
+    [
+     "sc_seed_supp",
+     0.714
+    ],
+    [
+     "sc_dirvsret",
+     0.522
+    ],
+    [
+     "sn_univ_frac",
+     0.519
+    ]
+   ],
+   "fingerprint_rise": false,
+   "INTERACTION_POLICY_MAY_BE_DATASET_ROUTING_PROXY": false
+  },
+  "interaction_coeff_reserve_tendency_(w_R16 - w_R0)": {
+   "metaqa": [
+    [
+     "sn_unique_out",
+     -1.693
+    ],
+    [
+     "rc_pool_agree",
+     -0.949
+    ],
+    [
+     "sn_novel_frac",
+     0.938
+    ],
+    [
+     "ix_DVRxRC",
+     -0.814
+    ],
+    [
+     "rc_agree",
+     0.784
+    ],
+    [
+     "sc_dirvsret",
+     -0.714
+    ],
+    [
+     "sc_dirmargin_max",
+     0.691
+    ],
+    [
+     "sc_weak_support",
+     0.681
+    ]
+   ],
+   "2wiki_clean": [
+    [
+     "sc_dirmargin_topk",
+     1.227
+    ],
+    [
+     "rc_pool_agree",
+     -1.199
+    ],
+    [
+     "ix_RCxSEED",
+     -0.879
+    ],
+    [
+     "sc_seed_supp",
+     -0.636
+    ],
+    [
+     "rc_support",
+     0.539
+    ],
+    [
+     "ix_SEEDxWEAKRET",
+     0.491
+    ],
+    [
+     "sc_multiseed",
+     0.49
+    ],
+    [
+     "ix_SNOVxSEED",
+     0.49
+    ]
+   ],
+   "squad_clean": [
+    [
+     "sc_dirmargin_topk",
+     0.705
+    ],
+    [
+     "sc_seed_supp",
+     0.596
+    ],
+    [
+     "sn_novel_frac",
+     0.458
+    ],
+    [
+     "rc_support",
+     0.443
+    ],
+    [
+     "sn_unique_out",
+     -0.394
+    ],
+    [
+     "rc_pool_agree",
+     -0.375
+    ],
+    [
+     "ix_RCxSNOV",
+     0.332
+    ],
+    [
+     "ix_DVRxRC",
+     -0.289
+    ]
+   ]
+  },
+  "interaction_term_means_per_dataset": {
+   "ix_RCxSNOV": {
+    "metaqa": 0.576,
+    "2wiki_clean": 0.559,
+    "squad_clean": 0.65,
+    "squad_minus_rich": 0.082,
+    "hypothesis": "novelty|confident (ambiguous)"
+   },
+   "ix_RCxSRED": {
+    "metaqa": 0.08,
+    "2wiki_clean": 0.101,
+    "squad_clean": 0.328,
+    "squad_minus_rich": 0.238,
+    "hypothesis": "CASE A confident+redundant->R0 (NEG)"
+   },
+   "ix_RCxSEED": {
+    "metaqa": 0.132,
+    "2wiki_clean": 0.098,
+    "squad_clean": 0.436,
+    "squad_minus_rich": 0.32,
+    "hypothesis": "de-confound seed|confident->R down (NEG)"
+   },
+   "ix_SNOVxSEED": {
+    "metaqa": 0.23,
+    "2wiki_clean": 0.161,
+    "squad_clean": 0.568,
+    "squad_minus_rich": 0.372,
+    "hypothesis": "CASE B novel+anchored->R up (POS)"
+   },
+   "ix_DVRxRC": {
+    "metaqa": 0.404,
+    "2wiki_clean": 0.399,
+    "squad_clean": 0.435,
+    "squad_minus_rich": 0.033,
+    "hypothesis": "struct beats retrieval|confident (POS)"
+   },
+   "ix_SEEDxWEAKRET": {
+    "metaqa": 0.188,
+    "2wiki_clean": 0.139,
+    "squad_clean": 0.348,
+    "squad_minus_rich": 0.185,
+    "hypothesis": "CASE B core anchored+graph-only->R up; LOW SQuAD (POS)"
+   }
+  },
+  "tiny_gate_ran": true,
+  "tiny_gate_acceptance": false,
+  "tiny_gate_note": "vs B1.5 baseline squad over 0.614->0.587 (drop +0.027, material>=0.1=False); squad mean_R 8.72->8.78 (drop -0.06, substantial>=1.0=False); meta GO-adm 0.0145->0.0265 (improved=True); 2wiki NET 60 ret 0.998 (ok=True). SQuAD HARD GATE requires MATERIAL reduction -> ACCEPT = False. The tiny gate raising MetaQA capture by reserving MORE aggressively (mean_R up on metaqa+squad) while leaving SQuAD over-reservation ~unchanged is a pooled-average gain, which the rule rejects.",
+  "PREFERRED_POLICY": "P0_LINEAR",
+  "FLAG": "QUERY_LOCAL_INTERACTION_SIGNAL=PARTIAL",
+  "INTERPRETATION": "Explicit interactions did NOT clear the SQuAD hard gate: the linear P0_INTERACT policy left SQuAD over-reservation essentially unchanged (0.614->0.605, mean R 8.74) and MetaQA capture flat (~7%). Root cause: the intended de-confounders are contaminated by SQuAD's extreme seed/anchor support (every SEED-bearing interaction RC*SEED/SNOV*SEED/SEED*WEAKRET is +0.19..+0.37 HIGHER on SQuAD, pushing R UP), and the CASE-A regime that should fire R=0 (confident retrieval AND redundant structure, RC*SRED) is nearly absent from the graph-rich training pair (source SRED 0.14-0.17 vs SQuAD 0.44) -> the rule is OUT-OF-DISTRIBUTION for source-only supervision. The ONE tiny nonlinear gate raised MetaQA capture 7%->14% (3-hop NET 44->94) and preserved 2Wiki, but it did so by reserving MORE aggressively on graph-rich deep queries (mean R up), NOT by learning the SQuAD redundancy rule -> SQuAD over-reservation stayed ~unchanged (0.614->0.587), FAILING the material SQuAD hard gate -> tiny gate REJECTED (pooled-average gain). LINEAR_RESERVE_POLICY stays INSUFFICIENT; ADAPTIVE_TWO_CHANNEL_ADMISSION NOT YET PROVEN. The missing signal (structure redundant despite high anchor support) is a TARGET property under-represented in graph-rich sources; more policy capacity cannot manufacture it. Do NOT enlarge capacity further; six-way NOT launched.",
+  "B1_marked_solved": false,
+  "six_way_launched": false
+ },
+ "NEW_ENCODER_FORWARD_PASSES": 0,
+ "TARGET_TEST_TOUCHED": "NO",
+ "SIX_WAY_LODO_LAUNCHED": "NO"
+}

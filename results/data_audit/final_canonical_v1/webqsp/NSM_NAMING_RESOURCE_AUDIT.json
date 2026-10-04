@@ -1,0 +1,79 @@
+{
+  "schema": "NSM_NAMING_RESOURCE_AUDIT/v1",
+  "generated_utc": "2026-09-05T22:50:00Z",
+  "artifact": "entities_names.json",
+  "provenance": "data/final_canonical/webqsp/NSM_ACQUISITION_PROVENANCE.json",
+  "sha256": "93ce094acccb06b1906db8a4534175481efe55bb9fa8ed711fedd1f8b37d2f98",
+  "bytes": 23377816,
+  "role": "SUPPLEMENTAL_NAMING_RESOURCE_ONLY",
+  "preregistration": "data/final_canonical/webqsp/NSM_ACQUISITION_PREREGISTRATION.json",
+
+  "structure": {
+    "top_level_type": "dict",
+    "entries": 560012,
+    "mapping_direction": "MID -> name",
+    "direction_verified": true,
+    "keys_mid_shaped_fraction": 1.0,
+    "values_mid_shaped_fraction": 0.0,
+    "note": "Directive §4 requires the mapping direction to be verified rather than assumed from the filename. It is MID -> name, the direction we need."
+  },
+
+  "HARD_STRUCTURAL_LIMIT_g_MIDS": {
+    "key_prefix_counts": {"m.": 560012, "g.": 0},
+    "finding": "The file contains ZERO g. machine ids.",
+    "consequence": "It cannot name ANY of the 405,357 g. MIDs in the RoG bare-MID population, no matter how complete it is for m. ids. This is a structural property of the resource, not a coverage shortfall.",
+    "bears_on": "the ORDINARY_ENTITY_UNRESOLVED_N = 0 target in directive §13. The prior audit noted the ordinary-entity unresolved leaves are overwhelmingly g. machine ids -- late Freebase objects that plausibly never carried type.object.name. This file is silent on all of them, so it can neither confirm nor refute that.",
+    "forbidden_inference": "Absence of a g. MID here is NOT evidence that it has no Freebase name. The file simply has no g. entries at all."
+  },
+
+  "collapse_measurement": {
+    "what_this_measures": "How many DISTINCT Freebase MIDs share a single display name. This is the mechanism by which RoG's name projection merged identities, measured directly on a MID->name table rather than extrapolated from a sample of RoG surfaces.",
+    "distinct_mids": 560012,
+    "distinct_names": 462455,
+    "identities_lost_if_keyed_on_name": 97557,
+    "shrinkage_fraction": 0.174205,
+    "duplicate_name_groups": 36944,
+    "duplicate_name_groups_fraction_of_names": 0.079887,
+    "mids_in_duplicate_groups": 134501,
+    "mids_in_duplicate_groups_fraction": 0.240175,
+    "max_group_size": 124,
+    "largest_groups": [
+      {"name": "New York Times", "mids": 124},
+      {"name": "Greatest Hits", "mids": 117},
+      {"name": "Pilot", "mids": 109},
+      {"name": "Mercy", "mids": 95},
+      {"name": "Home", "mids": 91},
+      {"name": "Fuel", "mids": 86}
+    ],
+    "comparison_to_prior_extrapolation": {
+      "prior": "1,782 of 34,972 sampled RoG surfaces (5.10%) mapped to >=2 distinct MIDs; max collision 46; extrapolated to 10^4-10^5 merged identities",
+      "measured_here": "36,944 of 462,455 names (7.99%) carry >=2 MIDs; max collision 124; 97,557 identities would be lost",
+      "agreement": "Same order of magnitude and the same direction; measured collision rate is somewhat higher and the tail is heavier (124 vs 46).",
+      "IMPORTANT_CAVEAT": "This is NOT a measurement of RoG's actual collapse. RoG's own MID->name projection is unreleased, so the names in this file are not guaranteed to be the strings RoG emitted. Treat this as a direct measurement of the MECHANISM on a real Freebase name table, and as corroboration of the prior extrapolation -- not as a recount of RoG's specific merges."
+    }
+  },
+
+  "coverage": {
+    "entries": 560012,
+    "nsm_global_entity_vocab": 2839896,
+    "naive_upper_bound_coverage_of_nsm_vocab": 0.197195,
+    "rog_endpoints": 2592894,
+    "rog_bare_mids_prior_audit": 1652618,
+    "rog_bare_mid_split_prior_audit": {"m.": 1247261, "g.": 405357},
+    "status": "PER_POPULATION_COVERAGE_NOT_YET_MEASURED",
+    "why_not_yet": "Measuring NAME_MAPPING_PRESENT/MISSING against the RoG bare-MID population and against the honest name-resolvable band [19,566 .. 62,375] requires the persisted RoG endpoint list, which arrives with V1 §2 (nodes table). The counts above are structural bounds, not the per-population measurement the pre-registration requires.",
+    "fields_still_owed": ["NAME_MAPPING_PRESENT_N", "NAME_MAPPING_MISSING_N",
+                          "NAME_MAPPING_COVERAGE_OF_NAME_RESOLVABLE_BAND",
+                          "NAME_MAPPING_COVERAGE_OF_ALL_BARE_MIDS",
+                          "NAME_MAPPING_APPLIED_TO_CVT_N (must be 0)"]
+  },
+
+  "third_party_incompleteness_report": {
+    "tag": "P",
+    "claim": "an open issue on cmavro/GNN-RAG titled 'entities_names.json is incomplete'",
+    "source": "user-supplied 2026-09-06",
+    "verified_by_this_project": false,
+    "corroborated_structurally": true,
+    "corroboration": "560,012 entries against a 2,839,896-MID NSM vocabulary is a naive ceiling of 19.7%, and the file carries no g. ids at all. Both are consistent with the report, independently of whether the issue itself was read."
+  }
+}

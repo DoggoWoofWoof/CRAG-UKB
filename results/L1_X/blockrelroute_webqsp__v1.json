@@ -1,0 +1,1104 @@
+{
+ "mode": "L1X_BLOCK_RELATION_SUPPORT (development; descriptive; nothing chosen)",
+ "definitions": "L1X -- SELECT lane, step 12: ROUTER ORDER with block relation support (development only; dataset-agnostic).  Step 11 (_l1x_blockrel.py) showed the block views lift the served order and that the\nshipped router now binds (gold blocks all contacted: .65-.70).  Here ONLY the order of the partitions is varied (count B_P(q) is the shipped one, asserted per row):\n  ES     shipped (first appearance in O' = RRF(H_q, LOC))\n  ES_m   blocks by BM desc (the relation-conditioned evidence mass the block receives), ties -> ES\n  ES_mr  equal-weight RRF (K0 = 60) of the block ranks ES, BM and BRin, ties -> ES\nand the served rule is one of a FIXED short list (the step-11 table rules; nothing re-selected).\n\nSTEP 11 DOCSTRING FOLLOWS (unchanged ingredients):\nL1X step 11: BLOCK RELATION SUPPORT as one more equal-weight view of the typed-graph switch\n(User ruling 2026-10-01: L1 = parameter-free routing and SELECTION only -- no traversal, no fitted or learned rule.  User 2026-10-04: relation support features for KB\ndatasets -- if the relations of a partition / block match the relations of the query, that block should benefit -- dataset-agnostic, \"just another feature to add if the\ndataset has it\".)\n\nSwitch (build-time, no constant): the view exists iff the structural family carries > 1 relation label (n_relations > 1) and a relation-label encoding exists\n(results/L3_DEV/relenc_<ds>__v1.npz).  Text datasets (one relation) are not run and stay byte-identical to the shipped L1.\n\nIngredients (all static, query-independent, computed once per partition map; the only query-side input is the step-5 relation weight w(q, r) = 1 / (1 + rank of relation r by\ndense cosine of the query with the label encoding), i.e. nothing is fitted):\n    E_in[b, r]   number of structural edges INTO a node of block b with relation r        E_out[b, r]  the same for edges OUT of a node of b\n    lift[b, r]   (E[b, r] / sum_r E[b, r]) / (global share of relation r)                  (enrichment of r in the block over the graph: \"this block is about r\")\nPer query q, per block b (all blocks of the map):\n    BRin(b)   = sum_r w(q, r) lift_in[b, r]       BRout(b) = sum_r w(q, r) lift_out[b, r]\n    BM(b)     = sum over nodes u of b of ( Sro(u) + Sri(u) )   the relation-conditioned one-hop evidence mass the block receives from the FLAT hits (step-5 views)\nThe per-NODE view of a block feature is the value of the node's block (ties inside a block -> the shipped order).\n\nCandidate set (the new part): the nodes of the CONTACTED blocks (shipped router ES, shipped count B_P(q), asserted per row), in the shipped order; all of them are rankable (the earlier steps\nre-ranked only the pool O[:5000] and kept the shipped tail).  Views over those nodes: ship (shipped position), Sro, Sri, Tin, Tout (step 5), BRin, BRout, BM.  A rule = the equal-weight\nreciprocal-rank fusion (K0 = 60; ties -> the shipped position) of a subset of 1..4 views; 162 rules + the shipped order.  Nothing is chosen here.\n\nIdentity (always on): per row B_P(q) == the stored record and the shipped order's routed ALL equals the stored verdict at every B_N (as in _l1x_rrt.py).\n\n  python -u scratchpad/_l1x_blockrel_route.py RUN <metaqa|webqsp> <tag> [--rows=K]      -> results/L1_X/blockrelroute_<ds>__<tag>.{json,npz}  (write-once)\n  python -u scratchpad/_l1x_blockrel_route.py SHOW <ds> <tag> [rule ...]                 (prints; no record)\n",
+ "dataset": "webqsp",
+ "tag": "v1",
+ "N": 2592894,
+ "n_rows": 786,
+ "n_relations": 7058,
+ "cells": [
+  "100|ES",
+  "100|ES_m",
+  "100|ES_mr",
+  "250|ES",
+  "250|ES_m",
+  "250|ES_mr",
+  "500|ES",
+  "500|ES_m",
+  "500|ES_mr"
+ ],
+ "routers": [
+  "ES",
+  "ES_m",
+  "ES_mr"
+ ],
+ "rules": [
+  "SHIPPED",
+  "Sro+Sri+Tin",
+  "Sro+BM",
+  "Sro+Sri+BM",
+  "Sro+Sri+Tin+BM",
+  "Sro+Sri+BRin+BM"
+ ],
+ "views": [
+  "ship",
+  "Sro",
+  "Sri",
+  "Tin",
+  "Tout",
+  "BRin",
+  "BRout",
+  "BM"
+ ],
+ "budgets": [
+  100,
+  250,
+  500,
+  1000,
+  2000,
+  5000
+ ],
+ "identity_vs_stored": {
+  "100": {
+   "mismatching_(row,B_N)_cells": 0,
+   "of": 4716
+  },
+  "250": {
+   "mismatching_(row,B_N)_cells": 0,
+   "of": 4716
+  },
+  "500": {
+   "mismatching_(row,B_N)_cells": 0,
+   "of": 4716
+  }
+ },
+ "rows_A": 359,
+ "rows_B": 427,
+ "mean_B_P": {
+  "100": 21.77,
+  "250": 43.53,
+  "500": 73.27
+ },
+ "gold_blocks_all_contacted": {
+  "100|ES": 0.7557,
+  "100|ES_m": 0.8868,
+  "100|ES_mr": 0.8511,
+  "250|ES": 0.8219,
+  "250|ES_m": 0.9097,
+  "250|ES_mr": 0.8931,
+  "500|ES": 0.8499,
+  "500|ES_m": 0.9135,
+  "500|ES_mr": 0.9071
+ },
+ "mean_contacted_nodes": {
+  "100|ES": 438042.5,
+  "100|ES_m": 515634.2,
+  "100|ES_mr": 491902.1,
+  "250|ES": 379453.0,
+  "250|ES_m": 422067.1,
+  "250|ES_mr": 411900.1,
+  "500|ES": 331692.6,
+  "500|ES_m": 353059.2,
+  "500|ES_mr": 350591.6
+ },
+ "hops": [],
+ "table": {
+  "100|ES": {
+   "SHIPPED": {
+    "A": [
+     0.4485,
+     0.5989,
+     0.6741,
+     0.7103,
+     0.7298,
+     0.7409
+    ],
+    "B": [
+     0.4848,
+     0.5972,
+     0.6604,
+     0.7166,
+     0.733,
+     0.7494
+    ]
+   },
+   "Sro+Sri+Tin": {
+    "A": [
+     0.6518,
+     0.6992,
+     0.7187,
+     0.7326,
+     0.7409,
+     0.7437
+    ],
+    "B": [
+     0.6534,
+     0.6979,
+     0.7166,
+     0.7283,
+     0.7471,
+     0.7494
+    ]
+   },
+   "Sro+BM": {
+    "A": [
+     0.6212,
+     0.6797,
+     0.7242,
+     0.727,
+     0.7298,
+     0.7382
+    ],
+    "B": [
+     0.63,
+     0.6862,
+     0.7002,
+     0.7119,
+     0.7283,
+     0.7424
+    ]
+   },
+   "Sro+Sri+BM": {
+    "A": [
+     0.6295,
+     0.688,
+     0.7131,
+     0.727,
+     0.7326,
+     0.7409
+    ],
+    "B": [
+     0.6323,
+     0.6862,
+     0.7073,
+     0.7143,
+     0.7377,
+     0.7424
+    ]
+   },
+   "Sro+Sri+Tin+BM": {
+    "A": [
+     0.6407,
+     0.7019,
+     0.7187,
+     0.7354,
+     0.7382,
+     0.7437
+    ],
+    "B": [
+     0.6393,
+     0.6909,
+     0.7119,
+     0.726,
+     0.7447,
+     0.7494
+    ]
+   },
+   "Sro+Sri+BRin+BM": {
+    "A": [
+     0.5989,
+     0.6797,
+     0.7075,
+     0.727,
+     0.7298,
+     0.7409
+    ],
+    "B": [
+     0.5925,
+     0.6745,
+     0.6979,
+     0.719,
+     0.733,
+     0.7424
+    ]
+   }
+  },
+  "100|ES_m": {
+   "SHIPPED": {
+    "A": [
+     0.4708,
+     0.649,
+     0.7632,
+     0.8273,
+     0.844,
+     0.8607
+    ],
+    "B": [
+     0.5059,
+     0.6487,
+     0.7588,
+     0.8384,
+     0.8571,
+     0.8782
+    ]
+   },
+   "Sro+Sri+Tin": {
+    "A": [
+     0.7493,
+     0.805,
+     0.8273,
+     0.844,
+     0.8607,
+     0.8635
+    ],
+    "B": [
+     0.7471,
+     0.808,
+     0.8431,
+     0.8571,
+     0.8735,
+     0.8806
+    ]
+   },
+   "Sro+BM": {
+    "A": [
+     0.7103,
+     0.7827,
+     0.8273,
+     0.8468,
+     0.8468,
+     0.8579
+    ],
+    "B": [
+     0.7073,
+     0.7869,
+     0.8103,
+     0.8314,
+     0.8501,
+     0.8689
+    ]
+   },
+   "Sro+Sri+BM": {
+    "A": [
+     0.7019,
+     0.7911,
+     0.8217,
+     0.844,
+     0.8524,
+     0.8607
+    ],
+    "B": [
+     0.7143,
+     0.7963,
+     0.829,
+     0.8384,
+     0.8618,
+     0.8712
+    ]
+   },
+   "Sro+Sri+Tin+BM": {
+    "A": [
+     0.727,
+     0.8022,
+     0.8301,
+     0.8496,
+     0.8552,
+     0.8635
+    ],
+    "B": [
+     0.7213,
+     0.7892,
+     0.8337,
+     0.8548,
+     0.8712,
+     0.8806
+    ]
+   },
+   "Sro+Sri+BRin+BM": {
+    "A": [
+     0.6657,
+     0.7827,
+     0.805,
+     0.8412,
+     0.8496,
+     0.8607
+    ],
+    "B": [
+     0.6651,
+     0.7752,
+     0.8103,
+     0.8431,
+     0.8548,
+     0.8689
+    ]
+   }
+  },
+  "100|ES_mr": {
+   "SHIPPED": {
+    "A": [
+     0.4652,
+     0.6351,
+     0.7354,
+     0.7883,
+     0.8162,
+     0.8357
+    ],
+    "B": [
+     0.4965,
+     0.6276,
+     0.7143,
+     0.7845,
+     0.8126,
+     0.8384
+    ]
+   },
+   "Sro+Sri+Tin": {
+    "A": [
+     0.727,
+     0.7855,
+     0.8022,
+     0.8189,
+     0.8329,
+     0.8384
+    ],
+    "B": [
+     0.7283,
+     0.7775,
+     0.8056,
+     0.8173,
+     0.8337,
+     0.8384
+    ]
+   },
+   "Sro+BM": {
+    "A": [
+     0.6908,
+     0.7577,
+     0.7994,
+     0.8189,
+     0.8217,
+     0.8329
+    ],
+    "B": [
+     0.6862,
+     0.7564,
+     0.7775,
+     0.7986,
+     0.8126,
+     0.829
+    ]
+   },
+   "Sro+Sri+BM": {
+    "A": [
+     0.6908,
+     0.7716,
+     0.7939,
+     0.8162,
+     0.8245,
+     0.8357
+    ],
+    "B": [
+     0.6909,
+     0.7658,
+     0.7916,
+     0.8033,
+     0.8244,
+     0.8314
+    ]
+   },
+   "Sro+Sri+Tin+BM": {
+    "A": [
+     0.7047,
+     0.7799,
+     0.8078,
+     0.8245,
+     0.8301,
+     0.8384
+    ],
+    "B": [
+     0.7002,
+     0.7681,
+     0.8009,
+     0.815,
+     0.829,
+     0.8384
+    ]
+   },
+   "Sro+Sri+BRin+BM": {
+    "A": [
+     0.6546,
+     0.7604,
+     0.7855,
+     0.8134,
+     0.8217,
+     0.8357
+    ],
+    "B": [
+     0.644,
+     0.7518,
+     0.7799,
+     0.808,
+     0.8197,
+     0.8314
+    ]
+   }
+  },
+  "250|ES": {
+   "SHIPPED": {
+    "A": [
+     0.454,
+     0.6379,
+     0.7382,
+     0.7855,
+     0.8134,
+     0.8217
+    ],
+    "B": [
+     0.4848,
+     0.63,
+     0.7213,
+     0.7728,
+     0.7869,
+     0.7939
+    ]
+   },
+   "Sro+Sri+Tin": {
+    "A": [
+     0.7159,
+     0.766,
+     0.7883,
+     0.8078,
+     0.8189,
+     0.8245
+    ],
+    "B": [
+     0.6721,
+     0.74,
+     0.7681,
+     0.7775,
+     0.7939,
+     0.7963
+    ]
+   },
+   "Sro+BM": {
+    "A": [
+     0.6852,
+     0.7549,
+     0.7939,
+     0.805,
+     0.805,
+     0.8189
+    ],
+    "B": [
+     0.6628,
+     0.726,
+     0.7518,
+     0.7635,
+     0.7775,
+     0.7892
+    ]
+   },
+   "Sro+Sri+BM": {
+    "A": [
+     0.6797,
+     0.7604,
+     0.7883,
+     0.8078,
+     0.8106,
+     0.8217
+    ],
+    "B": [
+     0.6417,
+     0.733,
+     0.7611,
+     0.7681,
+     0.7869,
+     0.7892
+    ]
+   },
+   "Sro+Sri+Tin+BM": {
+    "A": [
+     0.6908,
+     0.766,
+     0.7911,
+     0.805,
+     0.8162,
+     0.8217
+    ],
+    "B": [
+     0.6557,
+     0.719,
+     0.7611,
+     0.7728,
+     0.7916,
+     0.7939
+    ]
+   },
+   "Sro+Sri+BRin+BM": {
+    "A": [
+     0.6518,
+     0.7549,
+     0.7827,
+     0.8022,
+     0.8078,
+     0.8217
+    ],
+    "B": [
+     0.6136,
+     0.7049,
+     0.7494,
+     0.7705,
+     0.7822,
+     0.7916
+    ]
+   }
+  },
+  "250|ES_m": {
+   "SHIPPED": {
+    "A": [
+     0.468,
+     0.6657,
+     0.7772,
+     0.8412,
+     0.8663,
+     0.8802
+    ],
+    "B": [
+     0.5105,
+     0.6581,
+     0.7775,
+     0.8525,
+     0.8735,
+     0.897
+    ]
+   },
+   "Sro+Sri+Tin": {
+    "A": [
+     0.7493,
+     0.8217,
+     0.8412,
+     0.8607,
+     0.8747,
+     0.883
+    ],
+    "B": [
+     0.7635,
+     0.8267,
+     0.8665,
+     0.8759,
+     0.8923,
+     0.9016
+    ]
+   },
+   "Sro+BM": {
+    "A": [
+     0.7187,
+     0.7967,
+     0.844,
+     0.8607,
+     0.8607,
+     0.8774
+    ],
+    "B": [
+     0.7237,
+     0.8056,
+     0.8384,
+     0.8571,
+     0.8735,
+     0.8829
+    ]
+   },
+   "Sro+Sri+BM": {
+    "A": [
+     0.7214,
+     0.8078,
+     0.8384,
+     0.8635,
+     0.8663,
+     0.8802
+    ],
+    "B": [
+     0.7096,
+     0.8173,
+     0.8618,
+     0.8665,
+     0.8806,
+     0.8899
+    ]
+   },
+   "Sro+Sri+Tin+BM": {
+    "A": [
+     0.7354,
+     0.8106,
+     0.8412,
+     0.8607,
+     0.8719,
+     0.8802
+    ],
+    "B": [
+     0.719,
+     0.8056,
+     0.8548,
+     0.8689,
+     0.8899,
+     0.8993
+    ]
+   },
+   "Sro+Sri+BRin+BM": {
+    "A": [
+     0.688,
+     0.805,
+     0.8329,
+     0.8635,
+     0.8663,
+     0.8802
+    ],
+    "B": [
+     0.6768,
+     0.7892,
+     0.8384,
+     0.8689,
+     0.8806,
+     0.8899
+    ]
+   }
+  },
+  "250|ES_mr": {
+   "SHIPPED": {
+    "A": [
+     0.4596,
+     0.6546,
+     0.7716,
+     0.8301,
+     0.8607,
+     0.8774
+    ],
+    "B": [
+     0.4988,
+     0.6487,
+     0.7518,
+     0.8267,
+     0.8501,
+     0.8712
+    ]
+   },
+   "Sro+Sri+Tin": {
+    "A": [
+     0.7493,
+     0.8217,
+     0.8412,
+     0.8579,
+     0.8719,
+     0.8802
+    ],
+    "B": [
+     0.7424,
+     0.8033,
+     0.8361,
+     0.8454,
+     0.8642,
+     0.8735
+    ]
+   },
+   "Sro+BM": {
+    "A": [
+     0.7131,
+     0.7967,
+     0.8357,
+     0.8552,
+     0.8607,
+     0.8747
+    ],
+    "B": [
+     0.7119,
+     0.7869,
+     0.8126,
+     0.8314,
+     0.8478,
+     0.8595
+    ]
+   },
+   "Sro+Sri+BM": {
+    "A": [
+     0.7159,
+     0.7994,
+     0.8329,
+     0.8579,
+     0.8663,
+     0.8774
+    ],
+    "B": [
+     0.6932,
+     0.7916,
+     0.8267,
+     0.8384,
+     0.8548,
+     0.8642
+    ]
+   },
+   "Sro+Sri+Tin+BM": {
+    "A": [
+     0.7326,
+     0.8078,
+     0.844,
+     0.8607,
+     0.8719,
+     0.8802
+    ],
+    "B": [
+     0.7049,
+     0.7869,
+     0.8314,
+     0.8384,
+     0.8642,
+     0.8735
+    ]
+   },
+   "Sro+Sri+BRin+BM": {
+    "A": [
+     0.688,
+     0.7967,
+     0.8245,
+     0.8552,
+     0.8635,
+     0.8774
+    ],
+    "B": [
+     0.6628,
+     0.7705,
+     0.8126,
+     0.8384,
+     0.8525,
+     0.8642
+    ]
+   }
+  },
+  "500|ES": {
+   "SHIPPED": {
+    "A": [
+     0.4568,
+     0.6435,
+     0.7577,
+     0.8022,
+     0.8301,
+     0.8357
+    ],
+    "B": [
+     0.4824,
+     0.644,
+     0.7518,
+     0.8197,
+     0.829,
+     0.8431
+    ]
+   },
+   "Sro+Sri+Tin": {
+    "A": [
+     0.7242,
+     0.7827,
+     0.8022,
+     0.8217,
+     0.8301,
+     0.8384
+    ],
+    "B": [
+     0.719,
+     0.7822,
+     0.8173,
+     0.8267,
+     0.8384,
+     0.8454
+    ]
+   },
+   "Sro+BM": {
+    "A": [
+     0.6741,
+     0.7604,
+     0.8022,
+     0.8189,
+     0.8273,
+     0.8329
+    ],
+    "B": [
+     0.6909,
+     0.7588,
+     0.7869,
+     0.8033,
+     0.822,
+     0.8361
+    ]
+   },
+   "Sro+Sri+BM": {
+    "A": [
+     0.6908,
+     0.7744,
+     0.7967,
+     0.8217,
+     0.8273,
+     0.8357
+    ],
+    "B": [
+     0.6909,
+     0.7705,
+     0.8033,
+     0.8103,
+     0.8314,
+     0.8361
+    ]
+   },
+   "Sro+Sri+Tin+BM": {
+    "A": [
+     0.7075,
+     0.7799,
+     0.7994,
+     0.8162,
+     0.8329,
+     0.8384
+    ],
+    "B": [
+     0.6956,
+     0.7658,
+     0.808,
+     0.8244,
+     0.8384,
+     0.8454
+    ]
+   },
+   "Sro+Sri+BRin+BM": {
+    "A": [
+     0.6657,
+     0.7632,
+     0.7911,
+     0.8134,
+     0.8273,
+     0.8357
+    ],
+    "B": [
+     0.6628,
+     0.7541,
+     0.7963,
+     0.8126,
+     0.8314,
+     0.8361
+    ]
+   }
+  },
+  "500|ES_m": {
+   "SHIPPED": {
+    "A": [
+     0.468,
+     0.6546,
+     0.7799,
+     0.8468,
+     0.8691,
+     0.8802
+    ],
+    "B": [
+     0.5105,
+     0.6534,
+     0.7869,
+     0.8665,
+     0.8899,
+     0.911
+    ]
+   },
+   "Sro+Sri+Tin": {
+    "A": [
+     0.7493,
+     0.8217,
+     0.844,
+     0.8635,
+     0.8719,
+     0.883
+    ],
+    "B": [
+     0.7611,
+     0.8431,
+     0.8829,
+     0.8923,
+     0.904,
+     0.9157
+    ]
+   },
+   "Sro+BM": {
+    "A": [
+     0.7019,
+     0.7883,
+     0.8412,
+     0.8607,
+     0.8719,
+     0.8802
+    ],
+    "B": [
+     0.7213,
+     0.815,
+     0.8454,
+     0.8665,
+     0.8829,
+     0.9016
+    ]
+   },
+   "Sro+Sri+BM": {
+    "A": [
+     0.7103,
+     0.8078,
+     0.8357,
+     0.8607,
+     0.8747,
+     0.8802
+    ],
+    "B": [
+     0.7213,
+     0.829,
+     0.8665,
+     0.8759,
+     0.897,
+     0.9063
+    ]
+   },
+   "Sro+Sri+Tin+BM": {
+    "A": [
+     0.7354,
+     0.8134,
+     0.8412,
+     0.8579,
+     0.8719,
+     0.883
+    ],
+    "B": [
+     0.733,
+     0.8197,
+     0.8712,
+     0.8876,
+     0.904,
+     0.911
+    ]
+   },
+   "Sro+Sri+BRin+BM": {
+    "A": [
+     0.688,
+     0.7883,
+     0.8217,
+     0.8524,
+     0.8691,
+     0.8802
+    ],
+    "B": [
+     0.6909,
+     0.8009,
+     0.8525,
+     0.8782,
+     0.8923,
+     0.904
+    ]
+   }
+  },
+  "500|ES_mr": {
+   "SHIPPED": {
+    "A": [
+     0.4596,
+     0.6518,
+     0.7716,
+     0.8245,
+     0.8635,
+     0.8747
+    ],
+    "B": [
+     0.4965,
+     0.6511,
+     0.7658,
+     0.8478,
+     0.8806,
+     0.904
+    ]
+   },
+   "Sro+Sri+Tin": {
+    "A": [
+     0.7493,
+     0.8245,
+     0.8412,
+     0.8607,
+     0.8691,
+     0.8774
+    ],
+    "B": [
+     0.7588,
+     0.8337,
+     0.8689,
+     0.8782,
+     0.8946,
+     0.9063
+    ]
+   },
+   "Sro+BM": {
+    "A": [
+     0.6992,
+     0.7827,
+     0.8357,
+     0.8552,
+     0.8635,
+     0.8719
+    ],
+    "B": [
+     0.719,
+     0.8033,
+     0.8361,
+     0.8548,
+     0.8735,
+     0.8923
+    ]
+   },
+   "Sro+Sri+BM": {
+    "A": [
+     0.7103,
+     0.7994,
+     0.8329,
+     0.8552,
+     0.8691,
+     0.8747
+    ],
+    "B": [
+     0.719,
+     0.8173,
+     0.8548,
+     0.8642,
+     0.8876,
+     0.897
+    ]
+   },
+   "Sro+Sri+Tin+BM": {
+    "A": [
+     0.7326,
+     0.8106,
+     0.8384,
+     0.8552,
+     0.8719,
+     0.8774
+    ],
+    "B": [
+     0.719,
+     0.8103,
+     0.8595,
+     0.8712,
+     0.8946,
+     0.904
+    ]
+   },
+   "Sro+Sri+BRin+BM": {
+    "A": [
+     0.688,
+     0.7855,
+     0.8245,
+     0.8468,
+     0.8663,
+     0.8747
+    ],
+    "B": [
+     0.6862,
+     0.7916,
+     0.8407,
+     0.8665,
+     0.8806,
+     0.897
+    ]
+   }
+  }
+ },
+ "seconds": 10830.0,
+ "code": {
+  "path": "scratchpad/_l1x_blockrel_route.py",
+  "sha256": "e9070fc0b9a155e65f4a6875263861f8db28d4eb3e0a5f27eb7c73e834bada3d"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "npz": {
+  "path": "blockrelroute_webqsp__v1.npz",
+  "sha256": "cd5bb4804488eefcf085ac185215fda7eb025481fa6fdc8345963def0ef092b7"
+ }
+}

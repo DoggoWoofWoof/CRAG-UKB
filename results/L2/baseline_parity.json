@@ -1,0 +1,146 @@
+{
+  "_meta": {
+    "purpose": "Phase-A baseline-parity archaeology: reconcile OLD CRAG headline numbers with the CURRENT frozen relsig substrate under GENUINELY comparable settings. A number is comparable ONLY if same dataset+corpus variant, same gold definition, same metric, same candidate budget, same eval split. Numbers from different pool variants are marked NON_COMPARABLE.",
+    "date": "2026-08-22",
+    "current_substrate": "results/L2/relsig_feats_{ds}.pt (masked, present-only norm, splade fixed) -- the crag_fusion / kg_hybrid substrate",
+    "metric_def": "R@k = mean over queries of |topk INTERSECT gold| / |gold|; Hit@k = mean over queries of 1[topk INTERSECT gold != empty]. Ranking over the frozen per-query candidate pool.",
+    "pool_note": "THE central comparability axis. Four DIFFERENT WebQSP/text pools appear across history and are NOT interchangeable: (a) relsig substrate pool (~1185 webqsp, 1280 2wiki, 1386 musique, 1288 metaqa, 4533 hotpot); (b) _hpr small distractor pool (~1k docs, 100-query test); (c) open 781k WebQSP KB; (d) topic-anchored WebQSP subgraph. Absolute recall differs by 20-60pt across these for the SAME system."
+  },
+
+  "current_fixed_substrate": {
+    "_source": "results/L2/substrate_audit.json (standalone), crag_lodo.json + crag_lodo_xgb.json (LODO), train_ref proxy for in-dist",
+    "pools": {
+      "webqsp":        {"n_test": 147,  "pool_size_mean": 1184.9, "pool_gold_coverage": 0.8819},
+      "metaqa":        {"n_test": 1998, "pool_size_mean": 1288.4, "pool_gold_coverage": 0.9995},
+      "2wiki_clean":   {"n_test": 1500, "pool_size_mean": 1280.0, "pool_gold_coverage": 0.9617},
+      "musique_clean": {"n_test": 1994, "pool_size_mean": 1386.4, "pool_gold_coverage": 0.9642},
+      "hotpotqa_clean":{"n_test": 1985, "pool_size_mean": 4533.5, "pool_gold_coverage": 0.9831}
+    },
+    "standalone_expert_R5": {
+      "webqsp":        {"dense": 9.46,  "offset": 39.30, "prototype": 7.89,  "splade": 10.48, "graph": 2.40, "relation_raw": 24.25, "path_raw": 7.72, "best": ["offset", 39.30]},
+      "metaqa":        {"dense": 19.43, "offset": 59.32, "prototype": 19.43, "splade": 77.08, "graph": 1.78, "relation_raw": 27.16, "path_raw": null, "best": ["splade", 77.08]},
+      "2wiki_clean":   {"dense": 64.03, "offset": 75.92, "prototype": 63.95, "splade": 67.90, "graph": 1.62, "relation_raw": 26.12, "path_raw": 1.12, "best": ["offset", 75.92]},
+      "musique_clean": {"dense": 66.63, "offset": 66.35, "prototype": 54.94, "splade": 64.51, "graph": 2.29, "relation_raw": 6.06,  "path_raw": 1.46, "best": ["dense", 66.63]},
+      "hotpotqa_clean":{"dense": 70.43, "offset": 58.39, "prototype": 70.43, "splade": 70.98, "graph": 1.99, "relation_raw": 14.99, "path_raw": 0.45, "best": ["splade", 70.98]}
+    },
+    "lodo_heldout_zeroshot_R5": {
+      "_comment": "target dataset HELD OUT of training (true domain transfer). 3 seeds, eps=10, p_drop=0.5.",
+      "webqsp":        {"dropout_only": 30.92, "kl_dropout": 32.95, "xgb_kl": 34.29},
+      "metaqa":        {"dropout_only": 75.50, "kl_dropout": 74.70, "xgb_kl": 74.57},
+      "2wiki_clean":   {"dropout_only": 76.93, "kl_dropout": 77.94, "xgb_kl": 76.42},
+      "musique_clean": {"dropout_only": 67.89, "kl_dropout": 68.44, "xgb_kl": 68.74},
+      "hotpotqa_clean":{"dropout_only": 62.14, "kl_dropout": 64.33, "xgb_kl": 64.69}
+    },
+    "in_training_trainref_R5_proxy": {
+      "_comment": "R@5 of each dataset when it is one of the 4 TRAINING datasets in LODO (kl_dropout), mean over the 4 folds. A direct in-distribution proxy from EXISTING data. Dedicated single-model-all-5 in-dist run (crag_indist.json) confirms with full R@20/50/Hit.",
+      "webqsp":        {"folds": [51.20, 51.65, 52.58, 53.61], "mean": 52.26},
+      "metaqa":        {"folds": [69.29, 71.37, 67.84, 71.64], "mean": 70.04},
+      "2wiki_clean":   {"folds": [81.15, 82.09, 83.66, 83.79], "mean": 82.67},
+      "musique_clean": {"folds": [69.53, 70.16, 69.26, 68.37], "mean": 69.33},
+      "hotpotqa_clean":{"folds": [67.92, 66.66, 66.69, 69.83], "mean": 67.78}
+    },
+    "lodo_heldout_full_metrics_kl": {
+      "webqsp":        {"R@5": 32.95, "R@20": 49.29, "R@50": 63.82, "Hit@5": 48.98, "Hit@50": 81.63},
+      "metaqa":        {"R@5": 74.70, "R@20": 90.50, "R@50": 96.02, "Hit@5": 87.90, "Hit@50": 98.80},
+      "2wiki_clean":   {"R@5": 77.94, "R@20": 87.26, "R@50": 91.51, "Hit@5": 99.93, "Hit@50": 100.0},
+      "musique_clean": {"R@5": 68.44, "R@20": 81.19, "R@50": 86.84, "Hit@5": 95.05, "Hit@50": 98.95},
+      "hotpotqa_clean":{"R@5": 64.33, "R@20": 78.51, "R@50": 86.02, "Hit@5": 85.29, "Hit@50": 96.02}
+    }
+  },
+
+  "in_distribution_confirmed": {
+    "_source": "crag_indist.json (all-5 universal, Modal acct9) + crag_indist_wm.json (2-ds webqsp+metaqa, local). epochs>=10, seeds=3, p_drop=0.5.",
+    "all5_universal_R5": {
+      "_comment": "ONE model trained on the pooled train of ALL 5 (target included), eval each.",
+      "webqsp":        {"dropout_only": 49.82, "kl_dropout": 48.71, "R@20_kl": 66.58, "R@50_kl": 74.19, "Hit@5_kl": 67.35, "Hit@50_kl": 86.85},
+      "metaqa":        {"dropout_only": 67.92, "kl_dropout": 69.47, "R@20_kl": 84.98, "R@50_kl": 92.76, "Hit@5_kl": 79.00, "Hit@50_kl": 97.23},
+      "2wiki_clean":   {"dropout_only": 80.31, "kl_dropout": 80.53, "R@20_kl": 90.04, "R@50_kl": 93.57, "Hit@5_kl": 100.0, "Hit@50_kl": 100.0},
+      "musique_clean": {"dropout_only": 68.66, "kl_dropout": 69.03, "R@20_kl": 81.58, "R@50_kl": 88.00, "Hit@5_kl": 95.37, "Hit@50_kl": 99.18},
+      "hotpotqa_clean":{"dropout_only": 66.85, "kl_dropout": 67.10, "R@20_kl": 80.76, "R@50_kl": 87.59, "Hit@5_kl": 87.99, "Hit@50_kl": 97.08}
+    },
+    "twods_webqsp_metaqa_R5": {
+      "_comment": "EXACT reproduction setting of old kg_hybrid full_fd2 (same 2 datasets, in-dist). p_drop=0.5.",
+      "webqsp":  {"dropout_only": 50.27, "kl_dropout": 50.34},
+      "metaqa":  {"dropout_only": 68.74, "kl_dropout": 66.63}
+    },
+    "p_drop_sweep_2ds_indist_R5": {
+      "_comment": "webqsp+metaqa in-dist, {dropout_only, kl_dropout}. p_drop=0.2 optimal for BOTH datasets and arms.",
+      "webqsp": {"0.0": {"dropout_only": 48.23, "kl_dropout": 48.78}, "0.2": {"dropout_only": 52.11, "kl_dropout": 52.00}, "0.5": {"dropout_only": 50.27, "kl_dropout": 50.34}},
+      "metaqa": {"0.0": {"dropout_only": 68.22, "kl_dropout": 66.37}, "0.2": {"dropout_only": 69.87, "kl_dropout": 69.46}, "0.5": {"dropout_only": 68.74, "kl_dropout": 66.63}}
+    },
+    "architecture_regression_finding": {
+      "webqsp": {"new_2ds_indist_best": 52.1, "at_p_drop": 0.2, "old_full_fd2_2ds": 54.8, "gap": -2.7, "verdict": "PARITY (within noise); p_drop=0.5 was the cause of the earlier -4.5. WebQSP is FINE in-distribution."},
+      "metaqa": {"new_2ds_indist_best": 69.9, "old_full_fd2_2ds": 87.7, "standalone_splade": 77.0, "current_substrate_best_fusion": 72.2, "verdict": "old 87.7 NON-COMPARABLE (no current-substrate fusion, old-style flat kl_router 72.2 OR new crag_fusion 69.9, exceeds ~72; all < splade 77.0). Real defect = fusion dilutes splade; needs an ARCHITECTURAL fix (Phase D), not dropout."},
+      "conclusion": "Not a substrate loss. WebQSP reproduces old in-dist at p_drop=0.2. MetaQA old anchor is non-comparable; the genuine defect (fusion < standalone splade, also on hotpot) is architectural and universal across fusion methods on this substrate -> Phase D bounded evidence-gated delta over a semantic anchor."
+    }
+  },
+
+  "old_crag": {
+    "webqsp": {
+      "comparable_anchor": {
+        "source": "results/L2/kg_hybrid_fullfd.json full_fd2",
+        "setting": "2-dataset (webqsp+metaqa) pooled in-distribution, 10 seeds, relsig-substrate LINEAGE (pre-mask; splade weaker/absent)",
+        "pool": "~1185 (same lineage as current relsig webqsp)",
+        "in_training": true,
+        "R@5": 54.80, "R@20": 73.03, "R@50": 81.58, "Hit@5": 72.24, "Hit@50": 93.67,
+        "comparability": "COMPARABLE (same substrate lineage; current should be >= since splade is now fixed)."
+      },
+      "secondary": {"source": "kg_hybrid_universal4.json full_fd2 (4ds in-dist)", "R@5": 52.29, "R@20": 73.59, "R@50": 80.93},
+      "non_comparable_other_pools": {
+        "open_781k_KB": {"source": "webqsp_anchored_fullstrength open_corpus / graphlift", "R@5": 26.27, "note": "full 781k entity pool -- different candidate budget"},
+        "topic_anchored_subgraph": {"source": "webqsp_anchored_fullstrength L2/+NER", "R@5_L2": 28.40, "R@5_plusNERL3": 31.09},
+        "e2e_full6_clean_pipeline": {"source": "e2e_full6_universal", "R@5_minrank": 23.64, "R@5_plusNERL3": 29.74, "note": "min-rank+NER-L3 pipeline, its own open-corpus pool"}
+      }
+    },
+    "metaqa": {
+      "comparable_anchor": {
+        "source": "kg_hybrid_fullfd.json full_fd2 (2ds in-dist, 10 seeds)",
+        "R@5": 87.70, "R@20": 96.45, "R@50": 98.24, "Hit@5": 96.60, "Hit@50": 99.15,
+        "comparability": "UNCERTAIN / NEEDS_VERIFICATION -- current standalone splade is only 77.08 and current fusion in-dist ~70; an 87.7 fusion on the same pool is implausible unless the old metaqa substrate/pool differed. FLAG."
+      },
+      "secondary": {"source": "kg_hybrid_universal4.json (4ds)", "R@5": 79.71},
+      "non_comparable_other_pools": {"e2e_full6_plusNERL3": 68.75}
+    },
+    "2wiki_clean": {
+      "comparable_anchor": {
+        "source": "kg_hybrid_universal4.json full_fd2 (4ds in-dist, 10 seeds)",
+        "R@5": 87.47, "R@20": 93.20, "R@50": 94.71, "Hit@5": 99.97, "Hit@50": 100.0,
+        "comparability": "POOL_UNVERIFIED -- old substrate overwritten by masked rebuild; current 2wiki standalone offset is 75.92 and in-dist fusion ~82.7. Treat 87.47 as NON_COMPARABLE until the old pool is confirmed."
+      },
+      "non_comparable_other_pools": {"e2e_full6_plusNERL3": 75.15, "hpr_headtohead_R5": 82.5}
+    },
+    "musique_clean": {
+      "comparable_anchor": {
+        "source": "kg_hybrid_universal4.json full_fd2 (4ds in-dist)",
+        "R@5": 69.62, "R@20": 82.84, "R@50": 88.99, "Hit@5": 95.51, "Hit@50": 99.50,
+        "comparability": "LIKELY_COMPARABLE -- matches current in-dist proxy ~69.3 closely; pool unverified but consistent."
+      },
+      "non_comparable_other_pools": {"e2e_full6_plusNERL3": 74.63, "hpr_headtohead_R5": 72.2}
+    },
+    "hotpotqa_clean": {
+      "comparable_anchor": null,
+      "note": "NO old number exists on the relsig substrate for hotpot. All historical hotpot numbers are on the _hpr small-pool variant (100-query, ~1k distractor) and are NON_COMPARABLE to the current full-corpus relsig pool (4533).",
+      "non_comparable_other_pools": {
+        "hpr_dense_R5": 88.5, "hpr_ours_multitask_R5": 91.0, "e2e_full6_plusNERL3": 75.0
+      }
+    }
+  },
+
+  "old_L3_reachability_for_phaseG": {
+    "_note": "Historical graph reachability. Budget/pool differ from the relsig L2 substrate -- match carefully in Phase G before claiming regression.",
+    "webqsp_781k_KB": {"source": "graphlift_gte_qwen.json", "n_seed": 20, "budget": 100, "hops": 2, "dense_recall": 25.39, "union_recall": 87.79, "traversal_lift": 62.39, "dense_missed_golds": 748, "graph_reachable_of_missed_pct": 63.24},
+    "recall_at_100_struct_plus_weightedNER_from_dense_top20": {
+      "source": "ner_edge_ablation.json",
+      "full_corpus_clean": {"musique_clean": 88.2, "2wiki_clean": 93.7, "metaqa_KB": 97.5, "squad_clean": 95.2, "dense_baseline": {"musique_clean": 79.4, "2wiki_clean": 70.3, "metaqa_KB": 32.8}},
+      "hpr_1k_pool": {"musique": 86.2, "2wiki": 98.8, "hotpot": 97.5, "metaqa": 97.5}
+    }
+  },
+
+  "verdicts": {
+    "webqsp":        {"mark": "PASS_PENDING_CONFIRM", "detail": "in-dist proxy 52.3 ~ old 54.8 (within noise; splade-fix should close it). The 34.29 LODO is PURE domain transfer, NOT a substrate regression."},
+    "metaqa":        {"mark": "REGRESSION_OR_NONCOMPARABLE_FLAG", "detail": "in-dist ~70 vs old 87.7; AND fusion (74.7 LODO / ~70 in-dist) is BELOW standalone splade 77.08 -- fusion is diluting the strong expert. Investigate in Phase C. Old 87.7 comparability unverified."},
+    "2wiki_clean":   {"mark": "NON_COMPARABLE", "detail": "old 87.47 pool unverified (substrate overwritten); current in-dist ~82.7 already beats standalone offset 75.92 and LODO 77.94 -- healthy."},
+    "musique_clean": {"mark": "PASS", "detail": "in-dist ~69.3 ~ old 69.62; LODO 68.44 ~ standalone dense 66.63. Consistent, mildly positive."},
+    "hotpotqa_clean":{"mark": "INTERNAL_ISSUE", "detail": "no comparable old anchor; the real problem is fusion (64.3 LODO / ~67.8 in-dist) < standalone splade 70.98 -- fusion destroys evidence. Phase E target."}
+  }
+}

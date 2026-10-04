@@ -1,0 +1,162 @@
+{
+ "RECORD": "STRUCT_VERTEXCUT_V1_TRANSFER_SUMMARY",
+ "utc": "2026-09-15T13:18:30Z",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_STRUCT_VERTEXCUT_V1_TRANSFER.json",
+  "sha256": "61845f7b17fa0632b10d1c9459f8c6da60f9f499c6a27a5662093daed7c8b3af",
+  "bytes": 20011
+ },
+ "inputs": {
+  "metaqa_section_19": {
+   "path": "results/L1_COVPART/vcut_replay_A_metaqa.json",
+   "sha256": "89428a3c21bffa7c675006c63f59ecb0a5a7cd8b92c6edbd4238ef18374ce051",
+   "bytes": 13124
+  },
+  "squad": {
+   "path": "results/L1_COVPART/vcut_transfer_A_squad.json",
+   "sha256": "e391483a48f3778fc9ceb2de0090bc8ecce4109d01984ccea9deef131978984a",
+   "bytes": 8650
+  },
+  "musique": {
+   "path": "results/L1_COVPART/vcut_transfer_A_musique.json",
+   "sha256": "d66ad3705ca643e20e8041b789a5d8c42c2695c854e134251ce7db2f051472b8",
+   "bytes": 8242
+  }
+ },
+ "metaqa_section_19_verdict": "MECHANISM_POSITIVE_AT_LOWER_EXPOSURE",
+ "per_dataset": {
+  "squad": {
+   "VERDICT": "NEUTRAL_EXPOSURE_LE_HARD",
+   "primary_label": "NEUTRAL",
+   "exposure_flag": "EXPOSURE_LE_HARD",
+   "matched_label": "NEUTRAL",
+   "gate": "HARD_MTK_BASE",
+   "P50_ALL": 0.9768,
+   "gate_ALL": 0.9859,
+   "primary_vs_gate": {
+    "n": 992,
+    "base_ALL": 0.9859,
+    "cell_ALL": 0.9768,
+    "delta_pts": -0.91,
+    "gained": 4,
+    "lost": 13,
+    "p": 0.049041748046875
+   },
+   "unique_exposure": 2208.49,
+   "hard_exposure": 5089.32,
+   "MATCHED_LE_ALL": 0.9909,
+   "matched_vs_gate": {
+    "n": 992,
+    "base_ALL": 0.9859,
+    "cell_ALL": 0.9909,
+    "delta_pts": 0.5,
+    "gained": 9,
+    "lost": 4,
+    "p": 0.266845703125
+   },
+   "matched_blocks_mean": 143.75,
+   "matched_exposure_mean": 5070.55,
+   "degree_0_placement": {
+    "degree_0": 6349,
+    "anchored": 5294,
+    "fallback": 1055,
+    "degree_0_without_any_knn_row": 0,
+    "fallback_with_a_placed_degree_0_neighbour (chaining reading would anchor)": 960,
+    "anchored_ties_broken_by_node_id": 0,
+    "anchor_weight": {
+     "mean": 0.5964,
+     "min": 0.412
+    },
+    "knn_rows": 42969,
+    "seconds": 0.0
+   },
+   "block_size_after_placement": {
+    "mean": 86.35,
+    "max": 112,
+    "min": 45,
+    "p50": 100.0,
+    "p90": 101.0,
+    "blocks_gt_C": 284,
+    "blocks_gt_1.5C": 0
+   },
+   "RF_after_placement": 10.6649,
+   "k": 2499
+  },
+  "musique": {
+   "VERDICT": "LOSS_EXPOSURE_LE_HARD",
+   "primary_label": "LOSS",
+   "exposure_flag": "EXPOSURE_LE_HARD",
+   "matched_label": "NEUTRAL",
+   "gate": "HARD_PHG_BASE",
+   "P50_ALL": 0.6014,
+   "gate_ALL": 0.6596,
+   "primary_vs_gate": {
+    "n": 996,
+    "base_ALL": 0.6596,
+    "cell_ALL": 0.6014,
+    "delta_pts": -5.82,
+    "gained": 65,
+    "lost": 123,
+    "p": 2.8117586607301452e-05
+   },
+   "unique_exposure": 3203.61,
+   "hard_exposure": 5116.84,
+   "MATCHED_LE_ALL": 0.6687,
+   "matched_vs_gate": {
+    "n": 996,
+    "base_ALL": 0.6596,
+    "cell_ALL": 0.6687,
+    "delta_pts": 0.9,
+    "gained": 93,
+    "lost": 84,
+    "p": 0.5477509096395397
+   },
+   "matched_blocks_mean": 86.91,
+   "matched_exposure_mean": 5088.35,
+   "degree_0_placement": {
+    "degree_0": 9858,
+    "anchored": 9599,
+    "fallback": 259,
+    "degree_0_without_any_knn_row": 0,
+    "fallback_with_a_placed_degree_0_neighbour (chaining reading would anchor)": 248,
+    "anchored_ties_broken_by_node_id": 0,
+    "anchor_weight": {
+     "mean": 0.5625,
+     "min": 0.3594
+    },
+    "knn_rows": 265366,
+    "seconds": 0.0
+   },
+   "block_size_after_placement": {
+    "mean": 87.68,
+    "max": 132,
+    "min": 49,
+    "p50": 100.0,
+    "p90": 101.0,
+    "blocks_gt_C": 2492,
+    "blocks_gt_1.5C": 0
+   },
+   "RF_after_placement": 9.3381,
+   "k": 12518
+  }
+ },
+ "universal_statement": {
+  "statement": "Overlap-native partitioning can replace generic 1-hop block expansion with a more exposure-efficient static routing representation.",
+  "label": "NOT_SUPPORTED",
+  "rule": {
+   "statement": "Overlap-native partitioning can replace generic 1-hop block expansion with a more exposure-efficient static routing representation.",
+   "SUPPORTED": "metaqa section 19 = MECHANISM_POSITIVE_AT_LOWER_EXPOSURE (already recorded) AND squad primary != LOSS AND musique primary != LOSS AND both text datasets EXPOSURE_LE_HARD",
+   "PARTIALLY_SUPPORTED": "no LOSS on either text dataset, but at least one EXPOSURE_ABOVE_HARD",
+   "NOT_SUPPORTED": "LOSS on squad or musique"
+  },
+  "metaqa_positive_at_lower_exposure": true,
+  "no_LOSS_on_text": false,
+  "both_text_exposure_le_hard": true
+ },
+ "status": "post-hoc DEV_A evidence (all three datasets); nothing promoted; no composition run; the served L1 unchanged",
+ "code": {
+  "path": "scratchpad/_l1c_vcut_transfer_summary.py",
+  "sha256": "6cd9df826b947db4565cd7561f19d6d6d812b67b43198fc3bb6233c1f4e55e65",
+  "bytes": 3587
+ }
+}

@@ -1,0 +1,549 @@
+{
+ "phase": "C10 \u2014 SET-AWARE MULTI-EVIDENCE TOP-5 SELECTION (C9_DEV selection; DEV_INNER confirm; NO VAL/TEST)",
+ "standing_policy": "C8c (unchanged) \u2014 nothing in C10 significantly beats it",
+ "note_scale": "C9_DEV/DEV_INNER are TRAIN-derived nested-development splits (~0.96); NOT comparable to official VAL (C8c 0.8824). C10 measures set-aware methods vs C8c on the SAME split only.",
+ "SET_REDUNDANCY_AUDIT": {
+  "hypothesis": "missed golds are MORE NOVEL (less redundant with the already-selected top5) than the top5 false positives",
+  "C9_DEV": {
+   "n_missed_golds": 207,
+   "n_top5_false_positives": 9128,
+   "qwen_MAX_sim_to_selected": {
+    "missed_gold": {
+     "n": 207,
+     "mean": 0.4766,
+     "median": 0.4621,
+     "p25": 0.3822,
+     "p75": 0.5311,
+     "std": 0.1712
+    },
+    "fp": {
+     "n": 9128,
+     "mean": 0.5687,
+     "median": 0.5367,
+     "p25": 0.4428,
+     "p75": 0.6539,
+     "std": 0.1774
+    }
+   },
+   "expert_support_MAX_cos": {
+    "missed_gold": {
+     "n": 207,
+     "mean": 0.8949,
+     "median": 0.9371,
+     "p25": 0.8223,
+     "p75": 0.9839,
+     "std": 0.1173
+    },
+    "fp": {
+     "n": 9128,
+     "mean": 0.9514,
+     "median": 0.9868,
+     "p25": 0.9409,
+     "p75": 0.9981,
+     "std": 0.0836
+    }
+   },
+   "argmax_expert_overlap": {
+    "missed_gold": {
+     "n": 207,
+     "mean": 0.1913,
+     "median": 0.2,
+     "p25": 0.0,
+     "p75": 0.2,
+     "std": 0.174
+    },
+    "fp": {
+     "n": 9128,
+     "mean": 0.3685,
+     "median": 0.4,
+     "p25": 0.2,
+     "p75": 0.4,
+     "std": 0.1537
+    }
+   },
+   "cohend_mg_minus_fp": {
+    "qwen_MAX_sim": -0.5197,
+    "support_MAX_cos": -0.6685
+   },
+   "query_conditioned_paired": {
+    "n_queries_with_both": 189,
+    "mean_missedgold_qmax": 0.4787,
+    "mean_fp_qmax": 0.6729,
+    "mean_paired_diff_mg_minus_fp": -0.1942,
+    "frac_queries_missedgold_more_novel": 0.8042,
+    "paired_diff_ci95": [
+     -0.227,
+     -0.1612
+    ],
+    "paired_diff_significant": true
+   }
+  },
+  "DEV_INNER": {
+   "cohend_mg_minus_fp": {
+    "qwen_MAX_sim": -0.5074,
+    "support_MAX_cos": -0.4527
+   },
+   "query_conditioned_paired": {
+    "n_queries_with_both": 134,
+    "mean_missedgold_qmax": 0.4869,
+    "mean_fp_qmax": 0.6581,
+    "mean_paired_diff_mg_minus_fp": -0.1712,
+    "frac_queries_missedgold_more_novel": 0.7836,
+    "paired_diff_ci95": [
+     -0.2073,
+     -0.1355
+    ],
+    "paired_diff_significant": true
+   }
+  }
+ },
+ "MULTIGOLD_BREAKDOWN_C8c": {
+  "1": {
+   "n": 79,
+   "recall5": 1.0,
+   "all5": 1.0,
+   "ndcg5": 0.9656
+  },
+  "2": {
+   "n": 2448,
+   "recall5": 0.9867,
+   "all5": 0.9734,
+   "ndcg5": 0.9728
+  },
+  "3+": {
+   "n": 776,
+   "recall5": 0.9404,
+   "all5": 0.799,
+   "ndcg5": 0.944
+  }
+ },
+ "TOP20_SET_ORACLE": {
+  "recall5": 0.9956,
+  "all5_feasible": 0.9861,
+  "ndcg5": 0.9969
+ },
+ "TOP50_SET_ORACLE": {
+  "recall5": 0.9969,
+  "all5_feasible": 0.9897,
+  "ndcg5": 0.9979
+ },
+ "C10A_MMR_RESULT": {
+  "lam0.0": {
+   "ndcg5": 0.9658,
+   "recall5": 0.9762,
+   "all5_feas": 0.9331,
+   "all50": 0.9897,
+   "mrr": 0.9893
+  },
+  "lam0.05": {
+   "ndcg5": 0.966,
+   "recall5": 0.9761,
+   "all5_feas": 0.9334,
+   "all50": 0.9897,
+   "mrr": 0.9894
+  },
+  "lam0.1": {
+   "ndcg5": 0.9662,
+   "recall5": 0.9762,
+   "all5_feas": 0.9331,
+   "all50": 0.9897,
+   "mrr": 0.9894
+  }
+ },
+ "C10A_best_lambda": 0.1,
+ "C10A2_SUPPORT_DIVERSITY_RESULT": {
+  "lam_sem0.05_lam_exp0.05": {
+   "ndcg5": 0.9662,
+   "recall5": 0.9764,
+   "all5_feas": 0.934,
+   "all50": 0.9897,
+   "mrr": 0.9894
+  }
+ },
+ "C10A_selected_vs_C8c_C9DEV": {
+  "C8c": {
+   "ndcg5": 0.9658,
+   "recall5_macro": 0.9762,
+   "any5": 1.0,
+   "all5_feas": 0.9331,
+   "mrr": 0.9893,
+   "ndcg50": 0.9748,
+   "all10": 0.9749,
+   "all50": 0.9897
+  },
+  "C10a_lam0.1": {
+   "ndcg5": 0.9662,
+   "recall5_macro": 0.9762,
+   "any5": 1.0,
+   "all5_feas": 0.9331,
+   "mrr": 0.9894,
+   "ndcg50": 0.9752,
+   "all10": 0.9749,
+   "all50": 0.9897
+  }
+ },
+ "C10A_bootstrap_vs_C8c": {
+  "ndcg5": {
+   "delta": 0.0004,
+   "ci95": [
+    -0.0002,
+    0.001
+   ],
+   "significant": false
+  },
+  "recall5": {
+   "delta": 0.0,
+   "ci95": [
+    -0.001,
+    0.0011
+   ],
+   "significant": false
+  },
+  "ndcg50": {
+   "delta": 0.0004,
+   "ci95": [
+    0.0001,
+    0.0007
+   ],
+   "significant": true
+  },
+  "all50": {
+   "delta": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ],
+   "significant": false
+  }
+ },
+ "C10A_DEV_INNER_confirm": {
+  "C8c": {
+   "ndcg5": 0.9637,
+   "recall5_macro": 0.9748,
+   "any5": 0.9992,
+   "all5_feas": 0.9312,
+   "mrr": 0.9884,
+   "ndcg50": 0.9725,
+   "all10": 0.9717,
+   "all50": 0.9836
+  },
+  "C10a_lam0.1": {
+   "ndcg5": 0.9653,
+   "recall5_macro": 0.9767,
+   "any5": 0.9996,
+   "all5_feas": 0.9345,
+   "mrr": 0.9884,
+   "ndcg50": 0.9733,
+   "all10": 0.9717,
+   "all50": 0.9836
+  }
+ },
+ "C10B_POINTWISE_RESULT": {
+  "C9_DEV": {
+   "C8c": {
+    "ndcg5": 0.9658,
+    "recall5_macro": 0.9762,
+    "any5": 1.0,
+    "all5_feas": 0.9331,
+    "mrr": 0.9893,
+    "ndcg50": 0.9748,
+    "all10": 0.9749,
+    "all50": 0.9897
+   },
+   "C10b": {
+    "ndcg5": 0.9074,
+    "recall5_macro": 0.902,
+    "any5": 0.9985,
+    "all5_feas": 0.7654,
+    "mrr": 0.9779,
+    "ndcg50": 0.9508,
+    "all10": 0.9737,
+    "all50": 0.9897
+   }
+  },
+  "note": "from-scratch pointwise P(gold) selector COLLAPSES relevance (weaker top-5 ranker than C8c's listwise LambdaMART)",
+  "bootstrap_vs_C8c": {
+   "ndcg5": {
+    "delta": -0.0585,
+    "ci95": [
+     -0.0631,
+     -0.0539
+    ],
+    "significant": true
+   },
+   "recall5": {
+    "delta": -0.0742,
+    "ci95": [
+     -0.0798,
+     -0.0683
+    ],
+    "significant": true
+   },
+   "ndcg50": {
+    "delta": -0.0241,
+    "ci95": [
+     -0.0265,
+     -0.0216
+    ],
+    "significant": true
+   },
+   "all50": {
+    "delta": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "significant": false
+   }
+  },
+  "gold_rescue": {
+   "rescued_by_bin": {
+    "5-9": 32,
+    "10-19": 1,
+    "20-49": 0
+   },
+   "TOP5_RESCUE": 33,
+   "TOP5_HURT": 651,
+   "NET_TOP5_GAIN": -618
+  }
+ },
+ "C10B2_LEARNED_SET_RESULT": {
+  "C9_DEV": {
+   "C8c": {
+    "ndcg5": 0.9658,
+    "recall5_macro": 0.9762,
+    "any5": 1.0,
+    "all5_feas": 0.9331,
+    "mrr": 0.9893,
+    "ndcg50": 0.9748,
+    "all10": 0.9749,
+    "all50": 0.9897
+   },
+   "C10b2": {
+    "ndcg5": 0.9532,
+    "recall5_macro": 0.9538,
+    "any5": 0.9997,
+    "all5_feas": 0.878,
+    "mrr": 0.9888,
+    "ndcg50": 0.9728,
+    "all10": 0.9734,
+    "all50": 0.9897
+   }
+  },
+  "bootstrap_vs_C8c": {
+   "ndcg5": {
+    "delta": -0.0126,
+    "ci95": [
+     -0.015,
+     -0.0101
+    ],
+    "significant": true
+   },
+   "recall5": {
+    "delta": -0.0224,
+    "ci95": [
+     -0.0261,
+     -0.0187
+    ],
+    "significant": true
+   },
+   "ndcg50": {
+    "delta": -0.002,
+    "ci95": [
+     -0.0031,
+     -0.001
+    ],
+    "significant": true
+   },
+   "all50": {
+    "delta": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "significant": false
+   }
+  },
+  "gold_rescue": {
+   "rescued_by_bin": {
+    "5-9": 44,
+    "10-19": 1,
+    "20-49": 0
+   },
+   "TOP5_RESCUE": 45,
+   "TOP5_HURT": 257,
+   "NET_TOP5_GAIN": -212
+  },
+  "gold_rescue_by_multigold": {
+   "1": {
+    "rescued": 4,
+    "hurt": 6,
+    "net": -2
+   },
+   "2": {
+    "rescued": 27,
+    "hurt": 115,
+    "net": -88
+   },
+   "3+": {
+    "rescued": 14,
+    "hurt": 136,
+    "net": -122
+   }
+  },
+  "multigold": {
+   "C8c": {
+    "1": {
+     "n": 79,
+     "recall5": 1.0,
+     "all5": 1.0,
+     "ndcg5": 0.9656
+    },
+    "2": {
+     "n": 2448,
+     "recall5": 0.9867,
+     "all5": 0.9734,
+     "ndcg5": 0.9728
+    },
+    "3+": {
+     "n": 776,
+     "recall5": 0.9404,
+     "all5": 0.799,
+     "ndcg5": 0.944
+    }
+   },
+   "C10b2": {
+    "1": {
+     "n": 79,
+     "recall5": 1.0,
+     "all5": 1.0,
+     "ndcg5": 0.9648
+    },
+    "2": {
+     "n": 2448,
+     "recall5": 0.971,
+     "all5": 0.9424,
+     "ndcg5": 0.9649
+    },
+    "3+": {
+     "n": 776,
+     "recall5": 0.8947,
+     "all5": 0.6624,
+     "ndcg5": 0.9152
+    }
+   }
+  },
+  "single_gold": {
+   "C8c": {
+    "n": 79,
+    "mrr": 0.9536,
+    "ndcg5": 0.9656,
+    "any5": 1.0
+   },
+   "C10b2": {
+    "n": 79,
+    "mrr": 0.9525,
+    "ndcg5": 0.9648,
+    "any5": 1.0
+   }
+  },
+  "dynamic_feature_importance": {
+   "dyn_qmax": 0.0044,
+   "dyn_qmean": 0.0087,
+   "dyn_qmin": 0.0039,
+   "dyn_smax": 0.0048,
+   "dyn_smean": 0.0036,
+   "dyn_same_argmax_frac": 0.0072,
+   "dyn_same_argmax_count": 0.0033,
+   "dyn_novelty_rank": 0.0044,
+   "dyn_step": 0.0251,
+   "dyn_remaining": 0.0249
+  },
+  "feature_importance_top": {
+   "c8c_oof_score": 0.2803,
+   "c8c_score_minus_rank1": 0.1376,
+   "c_dense": 0.1363,
+   "rk_dense": 0.0875,
+   "c8c_score_minus_rank5": 0.0398,
+   "dyn_step": 0.0251,
+   "dyn_remaining": 0.0249,
+   "best_rank5": 0.0241,
+   "n_top5": 0.0192,
+   "second_min_rank5": 0.0176,
+   "max_contrib": 0.0169,
+   "median_rank5": 0.0138,
+   "c8c_oof_rank": 0.0103,
+   "c8c_rank_minus5": 0.0103,
+   "dyn_qmean": 0.0087,
+   "rk_relation": 0.0077,
+   "dyn_same_argmax_frac": 0.0072,
+   "wr_dense": 0.0061
+  },
+  "DEV_INNER_confirm": {
+   "C8c": {
+    "ndcg5": 0.9637,
+    "recall5_macro": 0.9748,
+    "any5": 0.9992,
+    "all5_feas": 0.9312,
+    "mrr": 0.9884,
+    "ndcg50": 0.9725,
+    "all10": 0.9717,
+    "all50": 0.9836
+   },
+   "C10b2": {
+    "ndcg5": 0.9483,
+    "recall5_macro": 0.9475,
+    "any5": 0.9996,
+    "all5_feas": 0.864,
+    "mrr": 0.9884,
+    "ndcg50": 0.97,
+    "all10": 0.9709,
+    "all50": 0.9836
+   }
+  },
+  "note": "relevance-preserving per-step NDCG ranker + C8c-seeded pos0; still SIGNIFICANTLY worse than C8c; greedy set-selection sacrifices C8c's joint listwise top-5 and swaps in novel non-gold distractors (net rescue -212, worst in 3+-gold)"
+ },
+ "REDUNDANCY_ANALYSIS": {
+  "C8c": {
+   "mean_pairwise_qwen_sim": 0.4032,
+   "max_pairwise_qwen_sim": 0.6677,
+   "mean_pairwise_support_sim": 0.8464,
+   "unique_strongest_expert_count": 3.2816
+  },
+  "C10A": {
+   "mean_pairwise_qwen_sim": 0.3991,
+   "max_pairwise_qwen_sim": 0.6568,
+   "mean_pairwise_support_sim": 0.8442,
+   "unique_strongest_expert_count": 3.2988
+  },
+  "C10B2": {
+   "mean_pairwise_qwen_sim": 0.3891,
+   "max_pairwise_qwen_sim": 0.6156,
+   "mean_pairwise_support_sim": 0.8343,
+   "unique_strongest_expert_count": 2.7693
+  }
+ },
+ "GOLD_RESCUE_bestSetAware_C10A": {
+  "rescued_by_bin": {
+   "5-9": 10,
+   "10-19": 0,
+   "20-49": 0
+  },
+  "TOP5_RESCUE": 10,
+  "TOP5_HURT": 12,
+  "NET_TOP5_GAIN": -2
+ },
+ "FINAL_GATES": {
+  "SET_AWARE_SIGNAL_PRESENT": "YES",
+  "MMR_HELPS": "NO (C10a best +0.0004 NDCG@5 on C9_DEV, bootstrap NOT significant; net rescue -2)",
+  "LEARNED_SET_SELECTOR_HELPS": "NO (C10b pointwise collapses to 0.9074; C10b2 ranker+seed 0.9532, both significantly < C8c 0.9658)",
+  "MULTIGOLD_RECALL_IMPROVES": "NO (MMR 3+-gold flat 0.9404->0.9399; C10b2 3+-gold 0.9404->0.8947 worse)",
+  "SINGLE_GOLD_PRESERVED": "YES (MMR identical; C10b2 -0.001 negligible)",
+  "C10_BEATS_C8C": "NO",
+  "DEEP_RECALL_PRESERVED": "YES (ALL@50 identical 0.9897 for every C10 variant; reorder within top50 only)",
+  "SET_AWARE_AXIS_EXHAUSTED": "YES (best set-aware method ties C8c non-significantly; learned greedy hurts)",
+  "SAFE_TO_RUN_OFFICIAL_VAL": "NO (nothing beats C8c on C9_DEV; do not spend the VAL milestone)",
+  "SAFE_TO_FREEZE_L2": "NO"
+ },
+ "CONCLUSION": "The set-redundancy hypothesis is CONFIRMED as a diagnostic (missed golds are reliably more novel than top5 FPs: Qwen cohend -0.52, support cohend -0.67, query-conditioned paired diff significant on both dev splits, ~80% of queries) BUT it is NOT CONVERTIBLE into a top-5 gain. Deterministic MMR (C10a) ties C8c (+0.0004 NDCG@5, not significant); a from-scratch pointwise selector (C10b) collapses; a relevance-preserving per-step NDCG ranker with a C8c-seeded rank-1 (C10b2) is still significantly worse (-0.0126 NDCG@5), hurting the very 2/3+-gold tail it targeted. Root cause: novelty separates missed-golds from FPs ON AVERAGE, but at the per-candidate decision boundary the novel population is dominated by non-gold distractors, so acting on it (greedy or MMR) swaps in more noise than evidence, and greedy set-selection additionally forfeits the joint listwise optimization C8c already performs. STANDING TOP-5 POLICY REMAINS C8c. The remaining ~0.0208 top-50 oracle gap (3+-gold tail) needs a genuinely NEW discriminative signal or a larger scope, not set-aware reselection of the current pool. Returned BEFORE official VAL."
+}

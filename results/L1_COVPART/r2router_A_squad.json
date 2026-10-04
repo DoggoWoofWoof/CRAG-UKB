@@ -1,0 +1,539 @@
+{
+ "RECORD": "R2_LEGACY_ROUTER_REPLAY",
+ "dataset": "squad",
+ "cache": "squad",
+ "contrast_cache": "squad_phg",
+ "utc": "2026-09-15T19:14:43Z",
+ "DEV": "A",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_R2_LEGACY_ROUTER.json",
+  "sha256": "3f18a7fc24b61611f8d19d5ea6c9fc8cd4084118137833b0fbb0efb91d67dc8f",
+  "bytes": 26236
+ },
+ "substrate": {
+  "path": "results/L1_COVPART/parts/squad__BR2_k404__R2.npz",
+  "sha256": "ee1531416212fc6ecf99588c6b87f3093994966644443e4d96032399055c355b",
+  "bytes": 63317
+ },
+ "substrate_record": {
+  "path": "results/L1_COVPART/parts/squad__BR2_k404__R2.json",
+  "sha256": "b9c59b785246cb441a981f0b2108602ddead3b8401e360e24afb5f9c6f628385",
+  "bytes": 6997
+ },
+ "code": {
+  "path": "scratchpad/_l1c_r2router.py",
+  "sha256": "6dc257c890ae05386369ade1c4de5e539085408addf04500ffb0f073ce4735cb",
+  "bytes": 24691
+ },
+ "spread_and_reach_functions": {
+  "path": "scratchpad/_l1c_br2_why.py",
+  "sha256": "4912b60d34fe6fef8b04365983d16021e74ed95c01a00a61d283a52fed9c89b1",
+  "bytes": 11130
+ },
+ "lib": {
+  "path": "scratchpad/_l1c_br2_lib.py",
+  "sha256": "909b7109d233a894516cc1c1620272bb395bbff6e53629600e993838484b426d",
+  "bytes": 11101
+ },
+ "n_DEV_A": 992,
+ "hop_counts_A": {
+  "all": 992
+ },
+ "representation": {
+  "k": 404,
+  "C": 100,
+  "R": 2,
+  "RF": 1.6098,
+  "hubs": 4900,
+  "degree_0": 6349,
+  "vote_table_entries": {
+   "legacy_hard (gate)": 101222,
+   "R2_MEMBERSHIP_VOTE (section 22)": 27672,
+   "R2_LEGACY_ROUTER": 114521,
+   "OWNERS_LEGACY": 104379
+  },
+  "membership_entries": 32571,
+  "block_size": {
+   "mean": 80.62,
+   "max": 100,
+   "min": 44
+  },
+  "router": "spread_table(mem_vc, xo, ao, N, k): own vote set (hub -> H(v), non-hub -> M(v)) + the vote sets of the directed STRUCT out-neighbours, deduped; identical rule to _l1s_core.Data.legacy_mem (asserted on the hard partition)"
+ },
+ "cells": {
+  "R2ROUTER_P50 (primary)": {
+   "ALL": {
+    "all": 0.9778
+   },
+   "ANY": {
+    "all": 0.9778
+   },
+   "vs_HARD_MTK_BASE": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9859,
+     "cell_ALL": 0.9778,
+     "delta_pts": -0.81,
+     "gained": 5,
+     "lost": 13,
+     "p": 0.09625244140625
+    }
+   },
+   "exposure_unique_A": {
+    "mean": 3628.26,
+    "p50": 3633.0,
+    "p90": 3815.8,
+    "min": 3113,
+    "max": 4071
+   },
+   "exposure_nominal_A": {
+    "mean": 4503.92,
+    "p50": 4506.0,
+    "p90": 4659.5,
+    "min": 4115,
+    "max": 4876
+   },
+   "blocks": 50,
+   "queries_A_with_unique_lt_hard": 992,
+   "unique_over_hard_ratio_A": 0.7129,
+   "vs_R2_MEMBERSHIP_VOTE_P50 (the router's value on the same substrate; informational)": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9899,
+     "cell_ALL": 0.9778,
+     "delta_pts": -1.21,
+     "gained": 1,
+     "lost": 13,
+     "p": 0.0018310546875
+    }
+   },
+   "vs_OWNERS_LEGACY_P50 (the alternates' value under the router; informational)": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9718,
+     "cell_ALL": 0.9778,
+     "delta_pts": 0.6,
+     "gained": 8,
+     "lost": 2,
+     "p": 0.109375
+    }
+   },
+   "vs_HARD_PHG_BASE (contrast)": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9829,
+     "cell_ALL": 0.9778,
+     "delta_pts": -0.5,
+     "gained": 7,
+     "lost": 12,
+     "p": 0.359283447265625
+    }
+   }
+  },
+  "R2ROUTER_MATCHED_LE (secondary)": {
+   "ALL": {
+    "all": 0.9879
+   },
+   "ANY": {
+    "all": 0.9879
+   },
+   "vs_HARD_MTK_BASE": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9859,
+     "cell_ALL": 0.9879,
+     "delta_pts": 0.2,
+     "gained": 7,
+     "lost": 5,
+     "p": 0.7744140625
+    }
+   },
+   "blocks_used_A": {
+    "mean": 72.11,
+    "p50": 72.0,
+    "p90": 76.0,
+    "min": 64,
+    "max": 81
+   },
+   "exposure_unique_A": {
+    "mean": 5054.04,
+    "p50": 5060.0,
+    "p90": 5099.0,
+    "min": 4903,
+    "max": 5137
+   },
+   "rule": "largest fused prefix with unique exposure <= the HARD_MTK_BASE P50 exposure of the same query",
+   "vs_OWNERS_LEGACY_MATCHED_LE (the alternates' value under the router at equal exposure; informational)": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9899,
+     "cell_ALL": 0.9879,
+     "delta_pts": -0.2,
+     "gained": 1,
+     "lost": 3,
+     "p": 0.625
+    }
+   },
+   "vs_HARD_PHG_BASE (contrast)": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9829,
+     "cell_ALL": 0.9879,
+     "delta_pts": 0.5,
+     "gained": 11,
+     "lost": 6,
+     "p": 0.332305908203125
+    }
+   }
+  },
+  "R2ROUTER_MATCHED_GE (informational)": {
+   "ALL": {
+    "all": 0.9889
+   },
+   "ANY": {
+    "all": 0.9889
+   },
+   "vs_HARD_MTK_BASE": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9859,
+     "cell_ALL": 0.9889,
+     "delta_pts": 0.3,
+     "gained": 8,
+     "lost": 5,
+     "p": 0.5810546875
+    }
+   },
+   "blocks_used_A": {
+    "mean": 73.09,
+    "p50": 73.0,
+    "p90": 77.0,
+    "min": 65,
+    "max": 82
+   },
+   "exposure_unique_A": {
+    "mean": 5125.55,
+    "p50": 5127.0,
+    "p90": 5173.0,
+    "min": 4992,
+    "max": 5230
+   },
+   "overshoot_nodes_A": {
+    "mean": 36.23,
+    "p50": 33.0,
+    "p90": 74.0,
+    "min": 0,
+    "max": 99
+   }
+  },
+  "R2_MEMBERSHIP_VOTE_P50 (section 22 reproduced)": {
+   "ALL": {
+    "all": 0.9899
+   },
+   "ANY": {
+    "all": 0.9899
+   },
+   "vs_HARD_MTK_BASE": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9859,
+     "cell_ALL": 0.9899,
+     "delta_pts": 0.4,
+     "gained": 12,
+     "lost": 8,
+     "p": 0.5034446716308594
+    }
+   },
+   "exposure_unique_A": {
+    "mean": 3487.93,
+    "p50": 3500.5,
+    "p90": 3737.9,
+    "min": 2855,
+    "max": 3949
+   },
+   "reproduced": {
+    "R2_P50_ALL_all": 0.9899,
+    "R2_P50_unique_mean": 3487.93
+   },
+   "record": "br2_replay_A_squad.json / R2_P50"
+  },
+  "OWNERS_LEGACY_P50 (R = 1 control)": {
+   "ALL": {
+    "all": 0.9718
+   },
+   "ANY": {
+    "all": 0.9718
+   },
+   "vs_HARD_MTK_BASE": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9859,
+     "cell_ALL": 0.9718,
+     "delta_pts": -1.41,
+     "gained": 3,
+     "lost": 17,
+     "p": 0.0025768280029296875
+    }
+   },
+   "exposure_unique_A": {
+    "mean": 2680.69,
+    "p50": 2677.0,
+    "p90": 2806.0,
+    "min": 2366,
+    "max": 3095
+   },
+   "blocks": 50,
+   "note": "the same owner partition (k = 2 k_f, degree-0 placed) without alternates, voted through the same legacy spread; home serving; owner blocks for exposure"
+  },
+  "OWNERS_LEGACY_MATCHED_LE (R = 1 control)": {
+   "ALL": {
+    "all": 0.9899
+   },
+   "ANY": {
+    "all": 0.9899
+   },
+   "vs_HARD_MTK_BASE": {
+    "all": {
+     "n": 992,
+     "base_ALL": 0.9859,
+     "cell_ALL": 0.9899,
+     "delta_pts": 0.4,
+     "gained": 9,
+     "lost": 5,
+     "p": 0.4239501953125
+    }
+   },
+   "blocks_used_A": {
+    "mean": 97.16,
+    "p50": 97.0,
+    "p90": 101.0,
+    "min": 86,
+    "max": 105
+   },
+   "exposure_unique_A": {
+    "mean": 5063.86,
+    "p50": 5069.0,
+    "p90": 5104.0,
+    "min": 4935,
+    "max": 5156
+   }
+  },
+  "HARD_MTK_BASE": {
+   "ALL": {
+    "all": 0.9859
+   },
+   "exposure_A": {
+    "mean": 5089.32,
+    "p50": 5096.0,
+    "p90": 5123.0,
+    "min": 4961,
+    "max": 5159
+   },
+   "npart": 202,
+   "cache": "squad",
+   "role": "GATE"
+  },
+  "HARD_PHG_BASE (contrast)": {
+   "ALL": {
+    "all": 0.9829
+   },
+   "exposure_A": {
+    "mean": 5089.17,
+    "p50": 5096.0,
+    "p90": 5122.0,
+    "min": 4947,
+    "max": 5141
+   },
+   "npart": 202,
+   "cache": "squad_phg",
+   "role": "contrast only"
+  }
+ },
+ "reach_tables": {
+  "HARD_LEGACY (gate table)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 4.978,
+    "splade_top100": 5.039
+   },
+   "vote_table_entries": 101222,
+   "membership_entries": 20233,
+   "lambda_mean_all_nodes (membership)": 1.0,
+   "lambda_mean_gold_nodes_A (membership)": 1.0,
+   "blocks_with_evidence_per_query_mean": 123.7,
+   "reached_all_gold_rate": {
+    "all": 0.999
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.999
+   },
+   "gold_node_reached_rate_A_by_hubness": {
+    "hub": 1.0,
+    "non_hub": 0.9987,
+    "hub_gold_nodes": 215,
+    "non_hub_gold_nodes": 777
+   }
+  },
+  "R2_MEMBERSHIP_VOTE (section 22 table)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 1.375,
+    "splade_top100": 1.361
+   },
+   "vote_table_entries": 27672,
+   "membership_entries": 32571,
+   "lambda_mean_all_nodes (membership)": 1.61,
+   "lambda_mean_gold_nodes_A (membership)": 1.64,
+   "blocks_with_evidence_per_query_mean": 106.8,
+   "reached_all_gold_rate": {
+    "all": 0.997
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.997
+   },
+   "gold_node_reached_rate_A_by_hubness": {
+    "hub": 0.9953,
+    "non_hub": 0.9974,
+    "hub_gold_nodes": 215,
+    "non_hub_gold_nodes": 777
+   }
+  },
+  "R2_LEGACY_ROUTER": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 5.939,
+    "splade_top100": 5.989
+   },
+   "vote_table_entries": 114521,
+   "membership_entries": 32571,
+   "lambda_mean_all_nodes (membership)": 1.61,
+   "lambda_mean_gold_nodes_A (membership)": 1.64,
+   "blocks_with_evidence_per_query_mean": 202.2,
+   "reached_all_gold_rate": {
+    "all": 0.999
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.999
+   },
+   "gold_node_reached_rate_A_by_hubness": {
+    "hub": 1.0,
+    "non_hub": 0.9987,
+    "hub_gold_nodes": 215,
+    "non_hub_gold_nodes": 777
+   }
+  },
+  "OWNERS_LEGACY (R = 1 control)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 5.417,
+    "splade_top100": 5.514
+   },
+   "vote_table_entries": 104379,
+   "membership_entries": 20233,
+   "lambda_mean_all_nodes (membership)": 1.0,
+   "lambda_mean_gold_nodes_A (membership)": 1.0,
+   "blocks_with_evidence_per_query_mean": 191.7,
+   "reached_all_gold_rate": {
+    "all": 0.997
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.997
+   },
+   "gold_node_reached_rate_A_by_hubness": {
+    "hub": 1.0,
+    "non_hub": 0.9961,
+    "hub_gold_nodes": 215,
+    "non_hub_gold_nodes": 777
+   }
+  }
+ },
+ "reach_reproduced_on_metaqa": false,
+ "reach_decomposition_R2ROUTER_P50": {
+  "failures_A": 22,
+  "UNREACHED": 1,
+  "REACHED_WEAK": 21,
+  "reached_rate_A": 0.999,
+  "worst_gold_position_among_failures": {
+   "mean": 100.36,
+   "p50": 74.0,
+   "p90": 149.5,
+   "min": 52,
+   "max": 363
+  },
+  "failures_with_worst_le_100": 15,
+  "failures_with_worst_le_200": 21,
+  "failures_with_hub_gold": 6,
+  "failures_with_degree_0_gold": 5,
+  "gold_nodes_per_query_A": {
+   "mean": 1.0,
+   "p50": 1.0,
+   "p90": 1.0,
+   "min": 1,
+   "max": 1
+  }
+ },
+ "failure_overlap_with_gate_A": {
+  "R2ROUTER_P50": {
+   "fail_both": 9,
+   "fail_router_only": 13,
+   "fail_hard_only": 5
+  },
+  "R2ROUTER_MATCHED_LE": {
+   "fail_both": 7,
+   "fail_router_only": 5,
+   "fail_hard_only": 7
+  }
+ },
+ "ladder_ALL_DEV_A": {
+  "HARD_OWN_BLOCK_VOTE": 0.994,
+  "OWNERS_ONLY_P50 (section 22)": 0.9869,
+  "R2_P50 (section 22)": 0.9899,
+  "R2_MATCHED_LE (section 22)": 0.9929,
+  "HARD_MTK_BASE (legacy spread)": 0.9859,
+  "OWNERS_LEGACY_P50 (this record)": 0.9718,
+  "OWNERS_LEGACY_MATCHED_LE (this record)": 0.9899,
+  "R2ROUTER_P50 (this record)": 0.9778,
+  "R2ROUTER_MATCHED_LE (this record)": 0.9879
+ },
+ "verdict": {
+  "VERDICT": "NEUTRAL_EXPOSURE_BELOW_HARD|MATCHED_NEUTRAL",
+  "primary_label_R2ROUTER_P50": "NEUTRAL",
+  "exposure_flag": "EXPOSURE_BELOW_HARD",
+  "matched_label_R2ROUTER_MATCHED_LE": "NEUTRAL",
+  "alpha": 0.01,
+  "gate": "HARD_MTK_BASE",
+  "R2ROUTER_P50_vs_gate": {
+   "n": 992,
+   "base_ALL": 0.9859,
+   "cell_ALL": 0.9778,
+   "delta_pts": -0.81,
+   "gained": 5,
+   "lost": 13,
+   "p": 0.09625244140625
+  },
+  "R2ROUTER_MATCHED_LE_vs_gate": {
+   "n": 992,
+   "base_ALL": 0.9859,
+   "cell_ALL": 0.9879,
+   "delta_pts": 0.2,
+   "gained": 7,
+   "lost": 5,
+   "p": 0.7744140625
+  },
+  "router_mean_unique_exposure_P50": 3628.26,
+  "hard_mean_exposure": 5089.32,
+  "unique_over_hard_ratio": 0.7129,
+  "router_value_vs_section22_R2_P50 (informational)": "LOSS",
+  "alternates_value_under_router_P50 (informational)": "NEUTRAL",
+  "alternates_value_under_router_matched (informational)": "NEUTRAL",
+  "status": "post-hoc mechanism result on DEV_A; not a confirmation; not promotable; served L1 unchanged; no composition",
+  "SAFE": true,
+  "role": "text: SAFE iff R2ROUTER_P50 vs gate != LOSS AND R2ROUTER_MATCHED_LE vs gate != LOSS"
+ },
+ "constants": {
+  "K0": 60,
+  "K_LOCK": 100,
+  "P_MAIN": 50,
+  "R": 2,
+  "C": 100,
+  "k": 404,
+  "alpha": 0.01
+ },
+ "seconds": 95.1
+}

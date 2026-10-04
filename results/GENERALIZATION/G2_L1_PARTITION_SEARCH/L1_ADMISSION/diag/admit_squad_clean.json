@@ -1,0 +1,116 @@
+{
+ "ds": "squad_clean",
+ "nq": 2000,
+ "F6_PARITY_ON_SAFE_POOL": "2000/2000",
+ "pool_sizes": {
+  "K_per_q": 15.77,
+  "A1_filled_per_q": 14.51,
+  "A2_retained_SAFE_per_q": 0.11,
+  "A2_new_vs_SAFE_per_q": 8.31,
+  "A3_new_vs_SAFE_per_q": 4.07,
+  "A4_new_vs_SAFE_per_q": 6.06,
+  "A4_subsumed_evictable_per_q": 9.27,
+  "UNION_per_q": 24.1
+ },
+ "admission": {
+  "ALL": {
+   "missing_total": 25,
+   "missing_visited": 1.0,
+   "missing_with_SRC_atom": 0.52,
+   "missing_already_admitted": 0.56,
+   "SAFE_POOL_MISSING_RECALL": 0.56,
+   "A1_SRC_ASSIGN_MISSING_RECALL": 0.16,
+   "A2_HYBRID_ADMIT_MISSING_RECALL": 0.16,
+   "A3_INTERLEAVE_MISSING_RECALL": 0.28,
+   "A4_SUBSUME_MISSING_RECALL": 0.16,
+   "SAFE_U_SRC_MISSING_RECALL": 0.56
+  }
+ },
+ "pool_oracle": {
+  "ALL": {
+   "SAFE_POOL": 0.9945,
+   "A1_SRC_ASSIGN": 0.982,
+   "A2_HYBRID_ADMIT": 0.9855,
+   "A3_INTERLEAVE": 0.988,
+   "A4_SUBSUME": 0.9855,
+   "SAFE_U_SRC": 0.9945
+  }
+ },
+ "p50_2x2": {
+  "ALL": {
+   "SAFE_POOL+F6": {
+    "acc": 0.9875,
+    "net": 0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "sig": false
+   },
+   "SAFE_POOL+G4": {
+    "acc": 0.987,
+    "net": -1,
+    "gained": 1,
+    "lost": 2,
+    "p": 1.0,
+    "sig": false
+   },
+   "A2_HYBRID_ADMIT+F6": {
+    "acc": 0.9845,
+    "net": -6,
+    "gained": 2,
+    "lost": 8,
+    "p": 0.1094,
+    "sig": false
+   },
+   "A2_HYBRID_ADMIT+G4": {
+    "acc": 0.9845,
+    "net": -6,
+    "gained": 2,
+    "lost": 8,
+    "p": 0.1094,
+    "sig": false
+   },
+   "A3_INTERLEAVE+F6": {
+    "acc": 0.985,
+    "net": -5,
+    "gained": 1,
+    "lost": 6,
+    "p": 0.125,
+    "sig": false
+   },
+   "A3_INTERLEAVE+G4": {
+    "acc": 0.985,
+    "net": -5,
+    "gained": 2,
+    "lost": 7,
+    "p": 0.1797,
+    "sig": false
+   },
+   "A4_SUBSUME+F6": {
+    "acc": 0.9835,
+    "net": -8,
+    "gained": 0,
+    "lost": 8,
+    "p": 0.0078,
+    "sig": true
+   },
+   "A4_SUBSUME+G4": {
+    "acc": 0.9835,
+    "net": -8,
+    "gained": 1,
+    "lost": 9,
+    "p": 0.0215,
+    "sig": true
+   }
+  }
+ },
+ "latency_ms": {
+  "frozen_admit": 0.039,
+  "a1": 0.2734,
+  "a2": 0.0966,
+  "a3": 0.0117,
+  "a4": 0.1154,
+  "F6": 0.0526,
+  "G4": 0.3772
+ }
+}

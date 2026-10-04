@@ -1,0 +1,239 @@
+{
+ "RECORD": "PHG_WEBQSP_RUNS",
+ "classification": "PHG_SCALE_WEBQSP",
+ "dataset": "webqsp",
+ "utc": "2026-09-14T20:44:45Z",
+ "DECISION": "WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED",
+ "authorization": {
+  "path": "results/L1_LOWMEM/PHG_WEBQSP_AUTHORIZATION_RULING.json",
+  "bytes": 22387,
+  "sha256": "b1266fcc19500d797b876aaadef2f4b5fd7d3730f2dd844d6e6680d4d953b36b"
+ },
+ "preregistration": null,
+ "program": {
+  "path": "src/l1_lowmem/phg_webqsp.py",
+  "bytes": 108195,
+  "sha256": "5f1f3f8861baad562e15cbc6ba34a4f6423f2f43892b9f7db9e4eb70ee0b03d6"
+ },
+ "wait_state": {
+  "armed_utc": "2026-09-13T20:43:40Z",
+  "armed_epoch": 1789332220.0229962,
+  "wait_budget_hours": 24.0,
+  "deadline_epoch": 1789418620.0229962,
+  "deadline_utc": "2026-09-14T20:43:40Z",
+  "criterion": {
+   "host_available_gb_min": 6.0,
+   "pages_input_per_sec_max": 300.0,
+   "pages_samples": 5,
+   "wsl_available_mb_min": 5000,
+   "disk_free_gb_min": 8.0,
+   "swap_growth_gb_max_between_samples": 0.1,
+   "consecutive_clean_samples": 3,
+   "sample_spacing_seconds_wait_loop": 60,
+   "sample_spacing_seconds_in_run": 20,
+   "wait_budget_hours": 24.0,
+   "what_is_recorded_immediately_before_every_launch": [
+    "host total / available memory",
+    "WSL total / available memory",
+    "swap usage (host and WSL)",
+    "foreign-process RSS (pid 8628 and every python process over 1 GB RSS)",
+    "number of MPI ranks",
+    "disk free space",
+    "Pages Input/sec (typeperf, 5 x 1 s)"
+   ],
+   "derivation": {
+    "host_available_gb_min": "6.0 >= 1.7 x the predicted summed PHG rank footprint (~ 3.5 GB, see wsl_available_mb_min) and ~ the predicted peak of the largest host-Python stage: the semantic gate (freight.semantic_gate, pinned) parses the official net-list and the shards independently -- per-node-line numpy objects plus three O(P) int64 arrays, concatenated, sorted, then CSR -- at P ~ 29.6M that is ~ 4-6 GB with the canonical CSR and the digest temporaries; the repair / KM1 recomputation ~ 2 GB; the L1 replay-cache builder streams the 8.0 GB fp16 shards memory-mapped (page cache, not RSS) plus ~ 1.5 GB of arrays.  A MemoryError in the host-Python input chain is a harness retry after a new clean preflight, never evidence about PHG",
+    "wsl_available_mb_min": "5000 >= 1.4 x the predicted summed rank peak: musique R1 peaked at 177.9 MB on the largest rank at 6,014,938 pins; webqsp has ~ 29.6M pins (x 4.92) -> ~ 0.9 GB per rank, <= 3.5 GB summed over 4 ranks inside the 7.8 GB WSL VM, plus the page cache of the ~ 0.3 GB shard files",
+    "pages_input_per_sec_max": "300: the contended host measured 26,000-64,000 hard-fault pages/s (2026-09-14 01:39-01:47 local, ~ 0.5-0.7 GB available, swap 6.9-7.8 GB); an idle host reads under ~ 100; 300 sits two orders of magnitude under the contended readings and above idle noise -- it operationalises 'actively paging'",
+    "disk_free_gb_min": "8.0 = the canonical replay-cache builder's 5 GB free-space floor + ~ 1.8 GB of new webqsp artefacts (hgr, shards, net-list, PHG dumps, replay cache) + margin",
+    "swap_growth": "a host whose available memory reads high only while it is paging out is not clean: swap use may not grow by more than 0.1 GB between consecutive samples",
+    "consecutive_samples": "3 consecutive clean samples (60 s apart in the wait loop; 20 s apart immediately before each launch inside the run) so a transient dip of the foreign process's working set does not trigger a launch",
+    "wait_budget": "24 h from arming; if the host is never clean for that long, WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED is recorded and nothing is launched; the foreign process is never signalled",
+    "status": "set before any WebQSP artefact exists; gates execution hygiene only -- no PHG parameter, rank count, objective or representation depends on it"
+   },
+   "user_requirement_verbatim": "Do NOT start the PHG partition while the host is actively paging or while only ~1.45 GB host memory is available. The unrelated foreign process must remain untouched. Wait until the unrelated process naturally releases enough memory for a clean attempt, then record immediately before launch: host total / available memory; WSL total / available memory; swap usage; foreign-process RSS; number of MPI ranks; disk free space. This is not a PHG parameter change; it is an execution hygiene requirement so a host-starvation failure is not misclassified as an algorithmic resource failure. If adequate clean memory never becomes available, record: WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED rather than killing unrelated work."
+  }
+ },
+ "preflight": {
+  "criterion": {
+   "host_available_gb_min": 6.0,
+   "pages_input_per_sec_max": 300.0,
+   "pages_samples": 5,
+   "wsl_available_mb_min": 5000,
+   "disk_free_gb_min": 8.0,
+   "swap_growth_gb_max_between_samples": 0.1,
+   "consecutive_clean_samples": 3,
+   "sample_spacing_seconds_wait_loop": 60,
+   "sample_spacing_seconds_in_run": 20,
+   "wait_budget_hours": 24.0,
+   "what_is_recorded_immediately_before_every_launch": [
+    "host total / available memory",
+    "WSL total / available memory",
+    "swap usage (host and WSL)",
+    "foreign-process RSS (pid 8628 and every python process over 1 GB RSS)",
+    "number of MPI ranks",
+    "disk free space",
+    "Pages Input/sec (typeperf, 5 x 1 s)"
+   ],
+   "derivation": {
+    "host_available_gb_min": "6.0 >= 1.7 x the predicted summed PHG rank footprint (~ 3.5 GB, see wsl_available_mb_min) and ~ the predicted peak of the largest host-Python stage: the semantic gate (freight.semantic_gate, pinned) parses the official net-list and the shards independently -- per-node-line numpy objects plus three O(P) int64 arrays, concatenated, sorted, then CSR -- at P ~ 29.6M that is ~ 4-6 GB with the canonical CSR and the digest temporaries; the repair / KM1 recomputation ~ 2 GB; the L1 replay-cache builder streams the 8.0 GB fp16 shards memory-mapped (page cache, not RSS) plus ~ 1.5 GB of arrays.  A MemoryError in the host-Python input chain is a harness retry after a new clean preflight, never evidence about PHG",
+    "wsl_available_mb_min": "5000 >= 1.4 x the predicted summed rank peak: musique R1 peaked at 177.9 MB on the largest rank at 6,014,938 pins; webqsp has ~ 29.6M pins (x 4.92) -> ~ 0.9 GB per rank, <= 3.5 GB summed over 4 ranks inside the 7.8 GB WSL VM, plus the page cache of the ~ 0.3 GB shard files",
+    "pages_input_per_sec_max": "300: the contended host measured 26,000-64,000 hard-fault pages/s (2026-09-14 01:39-01:47 local, ~ 0.5-0.7 GB available, swap 6.9-7.8 GB); an idle host reads under ~ 100; 300 sits two orders of magnitude under the contended readings and above idle noise -- it operationalises 'actively paging'",
+    "disk_free_gb_min": "8.0 = the canonical replay-cache builder's 5 GB free-space floor + ~ 1.8 GB of new webqsp artefacts (hgr, shards, net-list, PHG dumps, replay cache) + margin",
+    "swap_growth": "a host whose available memory reads high only while it is paging out is not clean: swap use may not grow by more than 0.1 GB between consecutive samples",
+    "consecutive_samples": "3 consecutive clean samples (60 s apart in the wait loop; 20 s apart immediately before each launch inside the run) so a transient dip of the foreign process's working set does not trigger a launch",
+    "wait_budget": "24 h from arming; if the host is never clean for that long, WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED is recorded and nothing is launched; the foreign process is never signalled",
+    "status": "set before any WebQSP artefact exists; gates execution hygiene only -- no PHG parameter, rank count, objective or representation depends on it"
+   },
+   "user_requirement_verbatim": "Do NOT start the PHG partition while the host is actively paging or while only ~1.45 GB host memory is available. The unrelated foreign process must remain untouched. Wait until the unrelated process naturally releases enough memory for a clean attempt, then record immediately before launch: host total / available memory; WSL total / available memory; swap usage; foreign-process RSS; number of MPI ranks; disk free space. This is not a PHG parameter change; it is an execution hygiene requirement so a host-starvation failure is not misclassified as an algorithmic resource failure. If adequate clean memory never becomes available, record: WEBQSP_NOT_RUN_HOST_RESOURCE_CONTENDED rather than killing unrelated work."
+  },
+  "history_summary": {
+   "n": 775,
+   "clean": 0,
+   "all_clean": false,
+   "first_utc": "2026-09-13T20:41:09Z",
+   "last_utc": "2026-09-14T20:44:43Z",
+   "last": {
+    "utc": "2026-09-14T20:44:43Z",
+    "purpose": "wait_loop",
+    "host_total_gb": 15.69,
+    "host_available_gb": 1.16,
+    "host_percent_used": 92.6,
+    "swap_used_gb": 9.57,
+    "swap_total_gb": 18.71,
+    "pages_input_per_sec_samples": [
+     37845.116789,
+     46714.624046,
+     32847.482543,
+     22651.501508,
+     45225.520337
+    ],
+    "pages_input_per_sec_mean": 37056.8,
+    "typeperf_available_mbytes": [
+     1162.0,
+     975.0,
+     1046.0,
+     919.0,
+     904.0
+    ],
+    "typeperf_error": null,
+    "wsl": {
+     "wsl_total_mb": 7789,
+     "wsl_used_mb": 384,
+     "wsl_free_mb": 7049,
+     "wsl_buff_cache_mb": 354,
+     "wsl_available_mb": 7174,
+     "wsl_swap_total_mb": 2048,
+     "wsl_swap_used_mb": 0,
+     "wsl_loadavg_1_5_15": [
+      0.89,
+      0.83,
+      0.88
+     ]
+    },
+    "disk_free_gb": 17.31,
+    "foreign_processes": [
+     {
+      "pid": 6620,
+      "name": "python.exe",
+      "rss_mb": 7120,
+      "private_mb": 14322,
+      "started": "2026-09-14T14:54:56"
+     }
+    ],
+    "foreign_pid": 8628,
+    "foreign_pid_present": false,
+    "foreign_pid_rss_mb": null,
+    "mpi_ranks": 4,
+    "swap_growth_gb_since_previous": 0.27,
+    "checks": {
+     "host_available_ge_min": false,
+     "not_paging": false,
+     "wsl_available_ge_min": true,
+     "disk_free_ge_min": true,
+     "swap_not_growing": false
+    },
+    "CLEAN": false,
+    "streak": 0
+   },
+   "host_available_gb_min_max": [
+    0.0,
+    4.21
+   ],
+   "pages_input_per_sec_mean_min_max": [
+    816.4,
+    138831.9
+   ]
+  },
+  "log": {
+   "path": "results/L1_LOWMEM/logs/phg_webqsp_preflight.jsonl",
+   "bytes": 851171,
+   "sha256": "07fc17d1cfe5bc31078643118a310ab58bf0e9f07c4f05f21256088a36402e96"
+  }
+ },
+ "foreign_process": "pid 8628 never signalled; nothing killed",
+ "launched": "nothing (no mpirun, no PHG dump, no partition, no replay cache)",
+ "claim": "no WebQSP result exists; this is a host-resource outcome, not evidence about PHG",
+ "host_after": {
+  "utc": "2026-09-14T20:44:54Z",
+  "purpose": "not_run",
+  "host_total_gb": 15.69,
+  "host_available_gb": 0.59,
+  "host_percent_used": 96.2,
+  "swap_used_gb": 9.6,
+  "swap_total_gb": 18.71,
+  "pages_input_per_sec_samples": [
+   54619.388878,
+   14047.012111,
+   46872.889184,
+   17994.588751,
+   16025.952727
+  ],
+  "pages_input_per_sec_mean": 29912.0,
+  "typeperf_available_mbytes": [
+   957.0,
+   912.0,
+   929.0,
+   828.0,
+   894.0
+  ],
+  "typeperf_error": null,
+  "wsl": {
+   "wsl_total_mb": 7789,
+   "wsl_used_mb": 446,
+   "wsl_free_mb": 6874,
+   "wsl_buff_cache_mb": 468,
+   "wsl_available_mb": 7112,
+   "wsl_swap_total_mb": 2048,
+   "wsl_swap_used_mb": 0,
+   "wsl_loadavg_1_5_15": [
+    1.06,
+    0.87,
+    0.89
+   ]
+  },
+  "disk_free_gb": 17.31,
+  "foreign_processes": [
+   {
+    "pid": 6620,
+    "name": "python.exe",
+    "rss_mb": 7144,
+    "private_mb": 14207,
+    "started": "2026-09-14T14:54:56"
+   }
+  ],
+  "foreign_pid": 8628,
+  "foreign_pid_present": false,
+  "foreign_pid_rss_mb": null,
+  "mpi_ranks": 4,
+  "swap_growth_gb_since_previous": null,
+  "checks": {
+   "host_available_ge_min": false,
+   "not_paging": false,
+   "wsl_available_ge_min": true,
+   "disk_free_ge_min": true,
+   "swap_not_growing": true
+  },
+  "CLEAN": false
+ }
+}

@@ -1,0 +1,153 @@
+{
+  "schema": "V1_RETRIEVAL_ROLE_DECISION/v1",
+  "generated_utc": "2026-09-06T08:20:54Z",
+  "decided_by": "user, 2026-09-06",
+  "DECISION": "CRAG's canonical graph contains every node. Every node participates in partition construction. Every semantically renderable node, including CVTs and literals, is eligible to provide L1 partition-routing evidence. Node-type exclusion is an ablation, not the default architecture.",
+  "WHAT_CHANGED_AND_WHY": {
+    "superseded_direction": "the build was drifting toward CVT_MEDIATOR -> STRUCTURAL_ONLY, with CVTs required to earn retrieval permission by passing the gold-text gate.",
+    "why_that_was_wrong": "L1 in CRAG does not return standalone documents; it selects graph REGIONS for L3 to traverse. A node's retrieval value is therefore its ability to route to the partition containing it, not its ability to be the answer. A CVT is the node whose text best matches the COMPOSITION of a multi-constraint query (which award was X nominated for in 2008), even though the answer string itself lives on an adjacent entity.",
+    "status_of_the_gold_gate": "retained as analysis, demoted from switch. It established a true and narrow fact -- CVT text introduces no unique answer vocabulary (GOLD_ONLY_IN_CVT_TEXT_N = 20, all punctuation artifacts). It never addressed routing, and could not have: see V1_CVT_GATE_DIAGNOSTICS DIAGNOSIS_3."
+  },
+  "NODE_CONTRACT": {
+    "statement": "every canonical node satisfies the same interface; node_kind selects the SERIALIZER, never the permission.",
+    "interface": [
+      "stable identity",
+      "graph edges",
+      "deterministic semantic view",
+      "retrieval representation",
+      "partition membership"
+    ],
+    "node_kind_is_not_a_permission": true
+  },
+  "retrieval_role_ASSIGNED": {
+    "value_for_every_node": "RETRIEVAL_ELIGIBLE",
+    "n_nodes": 2592894,
+    "by_node_kind": {
+      "CVT_MEDIATOR": 1588085,
+      "READABLE_ENTITY": 925761,
+      "MID_NAMED_ENTITY": 62375,
+      "VALUE_LITERAL": 14515,
+      "UNRESOLVED_OTHER": 2158
+    },
+    "prior_values_superseded": {
+      "UNDECIDED_PENDING_RETRIEVAL_POLICY": 1004809,
+      "UNDECIDED_PENDING_CVT_GOLD_GATE": 1588085
+    },
+    "RETRIEVAL_ROLE_HASH": "b36502a53679a1b13c86008e42bf22077034ce0c180d1c45444645d6f3a76b82"
+  },
+  "THE_CONDITIONAL_IN_THE_POLICY_IS_VACUOUS": {
+    "policy_text": "UNRESOLVED_OTHER eligible 'if deterministic semantic/structural text exists'",
+    "measured_nodes_failing_that_test": 0,
+    "consequence": "no node renders to a contentless fallback, so the conditional excludes nobody and the policy is unconditional in practice. All canonical nodes are eligible.",
+    "weakest_text_retained_deliberately": {
+      "cvt_records_with_a_type_but_no_arguments": 900,
+      "entities_whose_text_is_only_their_name": 405054,
+      "note": "weak text is not absent text; a Freebase type is deterministic signal."
+    }
+  },
+  "TYPE_AWARE_SERIALIZER": {
+    "principle": "equal participation in the retrieval mechanism, NOT identical representation.",
+    "READABLE_ENTITY": "entity_text.parquet :: RoG surface",
+    "MID_NAMED_ENTITY": "entity_text.parquet :: structural descriptor from incident schema",
+    "UNRESOLVED_OTHER": "entity_text.parquet :: structural descriptor",
+    "VALUE_LITERAL": "entity_text.parquet :: literal verbatim",
+    "CVT_MEDIATOR": "cvt_text.parquet :: record type + role:value arguments, roles taken from relation_label_qualified"
+  },
+  "OPEN_AXIS_NOT_DECIDED_HERE": {
+    "axis": "entity text = NAME_ONLY vs NAME_PLUS_FACTS",
+    "status": "NOT settled by this decision and NOT written into any artifact.",
+    "measured_consequence": "under ALL_NODE, NAME_PLUS_FACTS serialises every CVT argument twice -- once in the CVT record, again inside each adjacent entity -- costing 2.554x the default arm, for information that is already retrievable as its own unit.",
+    "assistant_recommendation_not_a_user_decision": "pair ALL_NODE with entity NAME_ONLY. The substitution rationale for NAME_PLUS_FACTS was to compensate for excluding CVTs; once CVTs are eligible the compensation is redundant. NAME_PLUS_FACTS remains the correct rendering for the NO_CVT_RETRIEVAL ablation arm, which is exactly where the substitution hypothesis is under test."
+  },
+  "H4_SK_SUBSTRATE_CONSEQUENCE": {
+    "user_observation": "if CVTs get no embeddings then KNN is built over only part of the graph, giving ENTITY = STRUCT+KNN while CVT and LITERAL = STRUCT only -- a hidden node-type asymmetry in the substrate.",
+    "verified_current_state": "the asymmetry does NOT exist in any shipped artifact today, but not because it was avoided on purpose.",
+    "evidence": {
+      "existing_partition_manifest": "data/canonical/webqsp/partition_manifest_C.json",
+      "existing_partition_n_nodes": 1316466,
+      "existing_knn_manifest": "data/canonical/webqsp/knn_manifest.json",
+      "existing_knn_n_nodes": 1316466,
+      "knn_covers_every_node_in_that_build": true,
+      "why": "that build is a DIFFERENT and superseded lineage which never classified node kinds at all, so it could not have discriminated by kind even in principle. It embedded whatever text it held for every node.",
+      "v1_has_no_partition_or_knn_yet": true,
+      "v1_n_nodes": 2592894,
+      "node_count_ratio_v1_over_superseded": 1.97
+    },
+    "reading": "section 3 classification is what first made node-type discrimination POSSIBLE on this substrate. This decision declines to spend it on exclusion. H4_SK for V1 is entirely forward-looking, so KNN over all semantically renderable nodes -- including CVT-to-CVT neighbourhoods -- is available as a design option rather than a retrofit.",
+    "not_asserted": "whether CVT-to-CVT semantic KNN improves H4 organisation. Untested."
+  },
+  "ABLATION_LADDER": {
+    "default_arm": "ALL_NODE",
+    "framing": "the full-graph version IS the system; filtered versions measure which parts carry value. No node kind has to earn its place.",
+    "arms": [
+      {
+        "arm": "ALL_NODE__entity_NAME_ONLY",
+        "nodes": 2592894,
+        "chars": 229212135,
+        "est_tokens_chars_over_4": 57303034,
+        "note": "DEFAULT under the ALL_NODE decision. CVT records carry composition, so entity text does not also need to carry the same arguments.",
+        "ratio_vs_ALL_NODE_entity_NAME_ONLY": 1.0
+      },
+      {
+        "arm": "ALL_NODE__entity_NAME_PLUS_FACTS",
+        "nodes": 2592894,
+        "chars": 585353738,
+        "est_tokens_chars_over_4": 146338434,
+        "note": "every CVT argument is serialised twice, once in the CVT record and again inside each adjacent entity. Redundant by construction under ALL_NODE.",
+        "ratio_vs_ALL_NODE_entity_NAME_ONLY": 2.554
+      },
+      {
+        "arm": "NO_CVT_RETRIEVAL__entity_NAME_PLUS_FACTS",
+        "nodes": 1004809,
+        "chars": 382916274,
+        "est_tokens_chars_over_4": 95729068,
+        "note": "the substitution arm: CVT information is flattened into entity text instead of being retrievable as its own unit.",
+        "ratio_vs_ALL_NODE_entity_NAME_ONLY": 1.671
+      },
+      {
+        "arm": "NO_CVT_RETRIEVAL__entity_NAME_ONLY",
+        "nodes": 1004809,
+        "chars": 26774671,
+        "est_tokens_chars_over_4": 6693668,
+        "note": "strict exclusion with no compensation. Lower bound on corpus cost.",
+        "ratio_vs_ALL_NODE_entity_NAME_ONLY": 0.117
+      },
+      {
+        "arm": "ENTITY_ONLY",
+        "nodes": 990294,
+        "chars": 26651590,
+        "est_tokens_chars_over_4": 6662898,
+        "note": "no CVT, no literal.",
+        "ratio_vs_ALL_NODE_entity_NAME_ONLY": 0.116
+      },
+      {
+        "arm": "ENTITY_ONLY__NAME_PLUS_FACTS",
+        "nodes": 990294,
+        "chars": 381857427,
+        "est_tokens_chars_over_4": 95464357,
+        "note": "no CVT, no literal, flattened facts.",
+        "ratio_vs_ALL_NODE_entity_NAME_ONLY": 1.666
+      },
+      {
+        "arm": "ALL_NODE_MINUS_LITERAL",
+        "nodes": 2578379,
+        "chars": 229089054,
+        "est_tokens_chars_over_4": 57272264,
+        "note": "literals excluded from retrieval but retained in the graph and its partitions.",
+        "ratio_vs_ALL_NODE_entity_NAME_ONLY": 0.999
+      }
+    ],
+    "cost_facts_worth_stating": {
+      "cvt_records_share_of_default_arm_text_pct": 88.3,
+      "excluding_literals_saves_pct": 0.1,
+      "note": "literal exclusion is not a cost lever. If that arm is ever run it tests whether literals add retrieval NOISE, not whether they are affordable."
+    }
+  },
+  "WHAT_THIS_DOES_NOT_TOUCH": [
+    "node_kind (frozen; hash verified unchanged before writing)",
+    "graph topology, edges, or partition membership -- every node stays in the graph and in its partition regardless of any retrieval ablation",
+    "relation_key identity",
+    "the gate result, which stands as measured"
+  ],
+  "elapsed_s": 14.4
+}

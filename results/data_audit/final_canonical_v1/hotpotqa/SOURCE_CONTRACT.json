@@ -1,0 +1,55 @@
+{
+  "DATASET": "hotpotqa",
+  "CANONICAL_CORPUS_SOURCE": "The official HotpotQA FULLWIKI retrieval corpus: data/original/hotpotqa/fullwiki_corpus/enwiki-20171001-pages-meta-current-withlinks-abstracts.tar.bz2 -- one node per English Wikipedia article abstract (introductory paragraph) of the 2017-10-01 snapshot.",
+  "SOURCE_VERSION": "enwiki-20171001 pages-meta-current withlinks abstracts, the authors' standard fullwiki corpus (nlp.stanford.edu/projects/hotpotqa/), 1,553,565,403 bytes, sha256 1acca1c5cc93c4890ea51091d2bad7c3ef6987aead127ab88728dc9e26555729. Question layer: HotpotQA v1.1 HF parquet (authors' own org) under data/original/hotpotqa/hf_*.",
+  "SOURCE_PATHS": [
+    "data/original/hotpotqa/fullwiki_corpus/enwiki-20171001-pages-meta-current-withlinks-abstracts.tar.bz2",
+    "data/original/hotpotqa/hf_distractor/train-00000-of-00002.parquet",
+    "data/original/hotpotqa/hf_distractor/train-00001-of-00002.parquet",
+    "data/original/hotpotqa/hf_fullwiki/validation-00000-of-00001.parquet",
+    "data/original/hotpotqa/hf_fullwiki/test-00000-of-00001.parquet"
+  ],
+  "SOURCE_HASHES": {
+    "data/original/hotpotqa/fullwiki_corpus/enwiki-20171001-pages-meta-current-withlinks-abstracts.tar.bz2": {
+      "sha256": "1acca1c5cc93c4890ea51091d2bad7c3ef6987aead127ab88728dc9e26555729",
+      "bytes": 1553565403,
+      "hash_source": "hashed in this task",
+      "exists": true
+    },
+    "data/original/hotpotqa/hf_distractor/train-00000-of-00002.parquet": {
+      "sha256": "76d3bb3048a7cc73c1958107c0c5872a00d7e7d00c105b81e92f6769e7822e68",
+      "bytes": 165624177,
+      "hash_source": "hashed in this task",
+      "exists": true
+    },
+    "data/original/hotpotqa/hf_distractor/train-00001-of-00002.parquet": {
+      "sha256": "713661628434fbb19fff7392e2e321e4ed107e3c7c7784d0690946e5f722763f",
+      "bytes": 166162479,
+      "hash_source": "hashed in this task",
+      "exists": true
+    },
+    "data/original/hotpotqa/hf_fullwiki/validation-00000-of-00001.parquet": {
+      "sha256": "78933c0a31a5f7b420d4effdf4cd4eed573b28c6a3da6179dcf7a02b39e51d03",
+      "bytes": 28041820,
+      "hash_source": "hashed in this task",
+      "exists": true
+    },
+    "data/original/hotpotqa/hf_fullwiki/test-00000-of-00001.parquet": {
+      "sha256": "f6b522fed6748b33c0eaad972d53bc89c10b8afefb329629f779bfb967442cd8",
+      "bytes": 27558644,
+      "hash_source": "hashed in this task",
+      "exists": true
+    }
+  },
+  "WHY_THIS_IS_THE_FULL_RETRIEVAL_UNIVERSE": "This is a WIKIPEDIA SNAPSHOT, not a benchmark by-product, and that is checkable from the file itself:\n(1) Record schema (probed directly from the first tar member, enwiki-.../CN/wiki_55.bz2, in this task) is {id, title, url, text, text_with_links, charoffset, charoffset_with_links} -- a Wikipedia article record keyed by the wiki curid, with url = 'https://en.wikipedia.org/wiki?curid=<id>'. There is NO question id, question string, answer, supporting_facts, split label or any other HotpotQA annotation anywhere in the record. The file is a dump derivative: its record set is fixed by the 2017-10-01 Wikipedia snapshot and is defined without reference to any question.\n(2) Scale proves non-derivation: it holds 5,233,329 articles, whereas the union of the 10 context paragraphs of ALL 97,852 official distractor questions is only 507,494 titles -- i.e. ~90.3% of the corpus is never referenced by any HotpotQA question at all. A question-derived collection cannot contain 4.7M unreferenced records.\n(3) It explicitly rules out the legacy substrate. The legacy 507,494-node corpus IS the distractor-setting context union (src/pipeline/rebuild_dataset.py:70-84 -> loaders.load_hotpotqa title-keyed article_cache -> build_clean dedup over hotpot_{dev,train}_distractor.jsonl), i.e. exactly 'the 10 paragraphs shown to the model for each question, deduplicated' -- a SETTING-conditioned and question-conditioned pool, and its 2,000 evaluated queries were a seeded sample of that same question pool. The locked setting for this project is FULLWIKI, whose retrieval universe is (1).\n(4) Independent corroboration inside this repo: the Phase-C stream of the same tarball produced exactly 5,233,329 unique curids with 0 duplicates (data/canonical/hotpotqa/document_manifest.json), matching the corpus size the HotpotQA authors state for the abstracts release.\n(5) WHY THE ABSTRACTS ARCHIVE AND NOT THE 7.4 GB 'withlinks-processed' ARCHIVE. 'Full corpus' here means the benchmark's full OFFICIAL RETRIEVAL UNIVERSE, i.e. the document collection the benchmark's own FullWiki setting indexes and retrieves over -- and that collection is the introductory-paragraph (abstract) corpus, one document per article, which is what the HotpotQA authors distribute for FullWiki retrieval and what every FullWiki baseline indexes. The larger enwiki-20171001-pages-meta-current-withlinks-processed.tar.bz2 (~7.4 GB) contains the FULL BODY TEXT of the same articles; it is a strictly BROADER document collection than the intended FullWiki retrieval corpus, and indexing it would change the retrieval unit (article body / arbitrary passage instead of article abstract) and so would no longer be the benchmark's universe. Choosing it would not be 'more complete', it would be a different task. The abstracts archive is therefore the correct maximal choice, and it is also the one whose 5,233,329 documents this repo already encoded end to end.",
+  "RAW_SOURCE_RECORDS": "5,233,329 article records expected (one json line per article across the bz2 members inside the tar); counted exactly at build time.",
+  "CANONICAL_NODE_IDENTITY_RULE": "official Wikipedia curid (the record's 'id' field), exact string; node_id = 'hotpotqa:c<curid>'. The id is READABLE rather than hashed: the curid is already source-stable and globally unique, so hashing buys no collision safety and costs debuggability and remapping. (Earlier draft of this contract proposed 'hotpotqa:<sha256(curid)[:24]>'; changed BEFORE any node was written, so no artifact carries the hashed form. 2wiki's full-universe table uses the identical '2wiki:c<curid>' scheme.) Titles are NOT the identity: several curids can share a title, so gold resolution is title -> curid via the corpus and an ambiguous title contributes ALL matching nodes.",
+  "NORMALIZATION_RULE": "Stored text = ' '.join(non-empty elements of the official 'text' sentence list), exactly parallel to 2wiki, because the official record stores the abstract as a sentence list. Plain 'text' is used, NOT 'text_with_links' (no <a> markup in the retrieval text); hyperlinks stay a downstream structural artifact. No NFC/NFKC, no casefold, no whitespace collapse, and NO strip -- note that the Phase-C derivation (scratchpad/c1_hotpot_fullwiki.py:39) DID apply .strip() to the joined text, so the build must count how many records differ under that one step and report the exact dense/SPLADE reuse impact rather than assume it. Empty-abstract articles (94 in the Phase-C pass) are KEPT as nodes: dropping them would make corpus membership depend on a text-quality filter. SECOND CONSTRUCTION STEP -- TEXTUALIZATION_REV 2 (2026-09-05): if that join is empty, the stored text is the SAME record's source-native 'title' instead. It is a fallback only: no title is prepended to any record that already has text, and a record with an empty title stays empty. The rule is deterministic, reads one field of the same JSON line, and is query-independent (the record schema carries no question/answer/supporting_facts field). It fired for exactly the 94 empty-abstract articles above, leaving 0 empty. Rationale: the previous empty encoder input tokenizes to the ZERO-LENGTH sequence [] under gte-Qwen2, collapsing all 94 nodes onto one degenerate forward pass, and 'text_with_links' is not a usable alternative here (measured readable residue 0/94, charoffset == [[]] for all 94). This step changed CORPUS_HASH fe139de9... -> 1b7eeac2... and left NODE_ORDER_HASH, node count, node ids and node order untouched; the superseded rev-1 artifacts are preserved under data/final_canonical/_superseded_textualization_rev1/. Full forensics: results/data_audit/final_canonical_v1/hotpotqa/EMPTY_TEXT_94_AUDIT.md",
+  "DEDUP_RULE": "identity = curid; a repeated curid collapses (Phase-C observed 0). Titles are NOT the identity: two articles may share a title string across the dump, and gold resolution is title->curid via the corpus, not the reverse.",
+  "EXPECTED_NODE_COUNT": 5233329,
+  "DERIVED_NODE_COUNT": 5233329,
+  "QUERY_DEPENDENT_CORPUS": false,
+  "QUALITY_LOCKED_QUERY_SOURCE": "official HotpotQA FULLWIKI DEV split, 7,405 questions (hf_fullwiki/validation parquet). The fullwiki TEST split (7,405) has HIDDEN labels -- verified: answers None, supporting_facts empty -- so it cannot serve as the accuracy lane.",
+  "SCALE_ALL_QUERY_SOURCE": "every official question = 105,257 (train 90,447 from hf_distractor -- the train split is shared by both settings -- + fullwiki dev 7,405 + fullwiki test 7,405). Test carries no gold, usable for scale/latency only.",
+  "SOURCE_CONTRACT_STATUS": "APPROVED (data/final_canonical/_APPROVALS.json: approvals.hotpotqa.status) and BUILT; the heavy build was additionally gated on data/final_canonical/_GATE_HOTPOT_HEAVY_OK, which is present. Canonical directory is data/final_canonical/hotpotqa/; 'hotpotqa_clean' is a LEGACY SUBSTRATE ALIAS only (its deferral record is preserved at data/final_canonical/hotpotqa/_legacy_alias_hotpotqa_clean/status.json)."
+}

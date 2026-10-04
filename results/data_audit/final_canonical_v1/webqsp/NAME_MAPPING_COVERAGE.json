@@ -1,0 +1,90 @@
+{
+  "schema": "NAME_MAPPING_COVERAGE/v1",
+  "generated_utc": "2026-09-06T06:16:03Z",
+  "measured_on": "data/final_canonical/webqsp/v1/nodes.parquet (released RoG, 2,592,894 nodes)",
+  "naming_resource": {
+    "file": "entities_names.json",
+    "entries": 560012,
+    "sha256": "93ce094acccb06b1906db8a4534175481efe55bb9fa8ed711fedd1f8b37d2f98",
+    "role": "SUPPLEMENTAL_NAMING_RESOURCE_ONLY"
+  },
+  "rog_population": {
+    "nodes_total": 2592894,
+    "bare_mid_nodes": 1652622,
+    "bare_mid_m": 1247264,
+    "bare_mid_g": 405358,
+    "non_mid_surface_nodes": 940272
+  },
+  "reproduces_prior_audit": {
+    "prior_total_bare_mids": 1652618,
+    "measured": 1652622,
+    "delta": 4,
+    "prior_m": 1247261,
+    "measured_m": 1247264,
+    "delta_m": 3,
+    "prior_g": 405357,
+    "measured_g": 405358,
+    "delta_g": 1
+  },
+  "NAME_MAPPING_PRESENT_N": 0,
+  "NAME_MAPPING_MISSING_N": 1652622,
+  "NAME_MAPPING_PRESENT_BY_CLASS": {
+    "m.": 0,
+    "g.": 0
+  },
+  "NAME_MAPPING_MISSING_BY_CLASS": {
+    "m.": 1247264,
+    "g.": 405358
+  },
+  "NAME_MAPPING_COVERAGE_OF_ALL_BARE_MIDS": {
+    "denominator": 1652622,
+    "numerator": 0,
+    "pct": 0.0
+  },
+  "NAME_MAPPING_COVERAGE_OF_NAME_RESOLVABLE_BAND": {
+    "band": [
+      19566,
+      62375
+    ],
+    "status": "SUPERSEDED_NOW_MEASURED",
+    "why": "The prior audit reported the band as COUNTS. It never persisted the member node ids, so the intersection with entities_names.json cannot be computed without re-deriving the classification -- which is exactly the section 3 job.",
+    "hard_upper_bound": 0,
+    "hard_upper_bound_note": "The band cannot intersect the naming file in more nodes than the file names in the whole bare-MID population, nor in more than the band's own size.",
+    "structural_expectation": "The audit states the band leaves are OVERWHELMINGLY g. machine ids, and this file has ZERO g. entries. So the true intersection is expected near the low end. Recorded as an expectation, NOT as a measurement.",
+    "owed_at": "section 3, once node_kind is assigned and the band exists as a node list",
+    "measured_in": "data/final_canonical/webqsp/V1_CLASSIFICATION_AUDIT.json",
+    "measured_result": {
+      "at_lower_end": {
+        "denominator": 19566,
+        "named": 0,
+        "pct": 0.0
+      },
+      "at_upper_end": {
+        "denominator": 62375,
+        "named": 0,
+        "pct": 0.0
+      },
+      "note": "The structural expectation recorded here was directionally right but rested on a wrong premise -- see CORRECTIONS_TO_RATIONALE_TEXT in V1_CLASSIFICATION_AUDIT.json. The band is 76.5% m., not overwhelmingly g.; coverage is 0 anyway, and for the m. majority the cause is the file's incompleteness rather than a structural barrier."
+    }
+  },
+  "NAME_MAPPING_APPLIED_TO_CVT_N": 0,
+  "NAME_MAPPING_APPLIED_TO_CVT_NOTE": "Trivially 0: no name from this file has been applied to any V1 node. nodes.parquet display fields are all null with resolution_status=PENDING_SECTION_3. This field MUST be re-measured in section 3 and must stay 0.",
+  "rog_naming_shortfall": {
+    "what": "Bare MIDs still visible in the RELEASED RoG graph that this third-party file CAN name. RoG converted MIDs to names wherever its own (unreleased) resolver succeeded, so every node counted here is one RoG left unresolved that a commonly-available resource resolves.",
+    "n": 0,
+    "by_class": {
+      "m.": 0,
+      "g.": 0
+    },
+    "reading": "A lower bound on RoG's naming shortfall, not an upper bound: this file covers only a fraction of Freebase."
+  },
+  "surface_consistency": {
+    "what": "RoG non-MID surfaces that exactly equal some name in this file.",
+    "non_mid_surface_nodes": 940272,
+    "matching_a_name_in_file": 461597,
+    "pct_of_surfaces": 49.0919,
+    "reading": "Consistency evidence that the two naming vocabularies are the same kind of string. NOT proof that RoG used this file -- it did not; RoG's resolver is unreleased and predates it."
+  },
+  "forbidden_inference": "MID absent from entities_names.json => the MID has no Freebase name. That inference is prohibited by the pre-registration and is not made anywhere in this file.",
+  "elapsed_s": 4.7
+}

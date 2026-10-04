@@ -1,0 +1,152 @@
+{
+  "schema": "V3_DISK_RECLAMATION/v1",
+  "generated_utc": "2026-09-06T18:00:45Z",
+  "why": "the raw mirror needs headroom for source + edge shards + sort spills + canonical outputs coexisting. 46 GB free was too tight for a 31.3 GB source.",
+  "STANDING_RULE_OVERRIDE": {
+    "the_rule": "supersede-don't-delete: move superseded artifacts into a clearly named subdirectory rather than removing them.",
+    "overridden_by": "the user, explicitly, for extraction products and temporary repair products.",
+    "why_it_is_sound_here": "these files are a cache, not history. Every one is re-derivable from idirlab-freebases.zip, which is retained and whose bytes and MD5 match Zenodo exactly. Deleting a verified-regenerable cache loses no record. Nothing that constitutes evidence -- no measurement, no check record, no hash -- is touched.",
+    "what_was_NOT_deleted": {
+      "idirlab-freebases.zip": "provenance anchor AND the compressed store every deletion here is reversible from. Never delete.",
+      "recovered_offsets.json": "the repair key. Without it re-extraction costs an 81-second signature scan of 14 GB; with it, nothing.",
+      "oracle/*.parquet": "IDIR's frozen role, in the form that role actually needs.",
+      "Metadata/object_ids.csv": "162 MB, already small",
+      "Metadata/{properties,types,domains}_id_label.csv": "under 1 MB total; the TypeSystem keys",
+      "TypeSystem/freebase_endtypes.csv": "48 KB; property type signatures",
+      "*/relation2id.txt": "all four variants, under 1 MB total; the reverse-split evidence"
+    }
+  },
+  "PRECONDITIONS_CHECKED": {
+    "zip_present_and_size_matches_check_1": true,
+    "zip_bytes": 14148416296,
+    "offsets_cached_for_every_deleted_entry": true,
+    "oracle_row_counts_match_sources": {
+      "backbone_entity2id.parquet": {
+        "rows": 101917083,
+        "expected": 101917083,
+        "match": true
+      },
+      "backbone_triples.parquet": {
+        "rows": 134142730,
+        "expected": 134142730,
+        "match": true
+      },
+      "backbone_relation2id.parquet": {
+        "rows": 2641,
+        "expected": 2641,
+        "match": true
+      },
+      "entity_label.parquet": {
+        "rows": 47176593,
+        "expected": 47176593,
+        "match": true
+      },
+      "mid_name.parquet": {
+        "rows": 72537217,
+        "expected": 72537217,
+        "match": true
+      },
+      "mid_type.parquet": {
+        "rows": 266262349,
+        "expected": 266262349,
+        "match": true
+      }
+    }
+  },
+  "deleted": [
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/Metadata/object_types.csv",
+      "bytes": 13654225258,
+      "gb": 13.654,
+      "reason": "distilled",
+      "superseded_by": "oracle/mid_type.parquet + schema_type.parquet"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/Metadata/object_names.csv",
+      "bytes": 4006052812,
+      "gb": 4.006,
+      "reason": "distilled",
+      "superseded_by": "oracle/mid_name.parquet + schema_name.parquet"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/Metadata/entities_id_label.csv",
+      "bytes": 1933710254,
+      "gb": 1.934,
+      "reason": "distilled",
+      "superseded_by": "oracle/entity_label.parquet"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/FB+CVT-REV/entity2id.txt",
+      "bytes": 2050114533,
+      "gb": 2.05,
+      "reason": "distilled",
+      "superseded_by": "oracle/backbone_entity2id.parquet"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/FB+CVT-REV/train.txt",
+      "bytes": 2527440120,
+      "gb": 2.527,
+      "reason": "distilled",
+      "superseded_by": "oracle/backbone_triples.parquet"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/FB+CVT-REV/test.txt",
+      "bytes": 139216099,
+      "gb": 0.139,
+      "reason": "distilled",
+      "superseded_by": "oracle/backbone_triples.parquet"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/FB+CVT-REV/valid.txt",
+      "bytes": 139207173,
+      "gb": 0.139,
+      "reason": "distilled",
+      "superseded_by": "oracle/backbone_triples.parquet"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/FB+CVT+REV/entity2id.txt",
+      "bytes": 2485754002,
+      "gb": 2.486,
+      "reason": "purpose served",
+      "superseded_by": "V3_WHY_CVTS_DROPPED.json"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/FB+CVT+REV/train.txt",
+      "bytes": 4781675728,
+      "gb": 4.782,
+      "reason": "purpose served",
+      "superseded_by": "V3_WHY_CVTS_DROPPED.json"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/FB+CVT+REV/test.txt",
+      "bytes": 289953152,
+      "gb": 0.29,
+      "reason": "purpose served",
+      "superseded_by": "V3_WHY_CVTS_DROPPED.json"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/extracted/idirlab-freebases/FB+CVT+REV/valid.txt",
+      "bytes": 289947137,
+      "gb": 0.29,
+      "reason": "purpose served",
+      "superseded_by": "V3_WHY_CVTS_DROPPED.json"
+    },
+    {
+      "path": "data/final_canonical/freebase_v3/_acquisition/idir/_quarantine_failed_crc/object_types.csv.PARTIAL_CRC_FAILED",
+      "bytes": 767557632,
+      "gb": 0.768,
+      "reason": "superseded repair product",
+      "superseded_by": "the full CRC-verified extraction, FINDING_4"
+    }
+  ],
+  "deleted_bytes": 33064853900,
+  "deleted_gb": 33.06,
+  "free_before_gb": 48.3,
+  "free_after_gb": 81.3,
+  "REGENERATION": {
+    "how": "python scratchpad/final_canonical_build/webqsp_v1/v3_extract_true_size.py with the WRITE list set to the wanted entries. It reads recovered_offsets.json, inflates each stream to its own deflate EOF and CRC-verifies against the central directory.",
+    "cost": "object_types.csv 66s; the FB+CVT+REV set about 62s; everything else faster.",
+    "caveat": "the distillation logged small unparsed residues -- 794 lines of entities_id_label.csv and 677 of object_names.csv, 0 of object_types.csv, out of 386M lines total. If those ever need inspecting, re-extract; the Parquet does not contain them."
+  },
+  "elapsed_note": "oracle distillation took 1138s and is recorded in V3_ORACLE_DISTILLATION.json."
+}

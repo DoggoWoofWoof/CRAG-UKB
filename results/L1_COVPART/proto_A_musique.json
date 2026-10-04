@@ -1,0 +1,4722 @@
+{
+ "cache": "musique",
+ "dataset": "musique",
+ "partition": "PHG",
+ "n_split_A": 996,
+ "n_cache_rows": 2000,
+ "N": 117534,
+ "npart": 1175,
+ "block_size_min_median_max": [
+  1,
+  103.0,
+  104
+ ],
+ "mode": "PREREGISTERED_PROTOTYPE_LADDER_SPLIT_A",
+ "status": "DEV_A_EFFICIENCY_CALIBRATION (no selection: DEV_A is exhausted for selection)",
+ "request_sha256": "ae0921a89dd3120ddd853ffcc1ba7c5eb7c7584426f13c7c4a5d7063228fae6a",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_PROTOTYPE_LADDER.json",
+  "sha256": "533adfbd3fd3c6a44d91bd1b4f6be048f018ccdd41af40064549140bfdb47ea0"
+ },
+ "cache_file": {
+  "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+  "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5",
+  "row_query_ids_sha256": "f3cffcf9050279448d2eef8aeccc1cc53d07f341ca4edb134e78b7fec378afbb"
+ },
+ "code": {
+  "path": "scratchpad/_l1c_proto.py",
+  "sha256": "815828efbe22ad25e766a534fa03508f8536f7b96d92f40c387f80a2a9125158"
+ },
+ "pinned": {
+  "_l1c_microl3.py": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+  "_l1c_h2patch.py": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d",
+  "_l1c_h2balanced.py": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe",
+  "_l1c_qmaxbal.py": "cae88fa64a0516a4f55c99a4a3b464afd39e467dca42e4380a546ebbd545b1c8",
+  "_l1g_candidate.py": "b01c27a6e64b18756db1ca1d8910e8db4bb54fa019d9809698cb1369206169e0",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1c_transfer_composite.py": "1241ec58e759ab99e77ff17936b6edc6b072344ea1d47a76a79f940a1047cc5b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9"
+ },
+ "selector": {
+  "cfg": {
+   "B": 6,
+   "M_struct": 64,
+   "M_ret": 32,
+   "agg": "S4",
+   "fusion": "F6",
+   "T": 1,
+   "tag": "F6"
+  },
+  "code": "_l1ps_router.build_cache + _l1kb_core.contexts / f6_select (unchanged)"
+ },
+ "platform": {
+  "python": "3.13.5",
+  "numpy": "2.3.2"
+ },
+ "host_at_start": {
+  "utc": "2026-09-25T16:25:46Z",
+  "host_total_gib": 15.69,
+  "host_available_gib": 1.09,
+  "swap_used_gib": 13.56,
+  "other_python_processes_over_500_MB (untouched)": [
+   {
+    "pid": 20560,
+    "rss_mb": 7112
+   }
+  ]
+ },
+ "reference_reproduced": "L1 / SAFE / BALANCED_H2_PATCH1 / QMAX_F0 / QMAX_SAFE / QMAX_BALANCED_H2_PATCH1 == transfer_repro_musique.json (ALL, ANY, per hop, PRIMARY's paired comparisons); L1 and SAFE == results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json (split A)",
+ "stage2_reference": {
+  "source": "_l1c_transfer_blockmax.blockmax_scores_streamed (accepted, transfer_repro_musique.json)",
+  "sha256_scores": "46d19b96e03c2585015d13f6560b414bec37692b1c6f4c1890dd0cf6fcc04676",
+  "sha256_ranking": "221b55edb746797acab2c957b896a5aa58f30ae8e1ee674352560c6ed6cca0ee"
+ },
+ "representatives": {
+  "ladder": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32
+  ],
+  "rand_seed": 20260925,
+  "vectors_scored_per_query": {
+   "QMAX": 117534,
+   "CENT_MEAN": 1175,
+   "CENT_NORM": 1175,
+   "FPS_1": 1175,
+   "RAND_1": 1175,
+   "FPS_2": 2341,
+   "RAND_2": 2341,
+   "FPS_4": 4673,
+   "RAND_4": 4673,
+   "FPS_8": 9334,
+   "RAND_8": 9334,
+   "FPS_16": 18654,
+   "RAND_16": 18654,
+   "FPS_32": 37294,
+   "RAND_32": 37294
+  },
+  "dot_product_reduction_vs_QMAX": {
+   "CENT_MEAN": 100.03,
+   "CENT_NORM": 100.03,
+   "FPS_1": 100.03,
+   "FPS_2": 50.21,
+   "FPS_4": 25.15,
+   "FPS_8": 12.59,
+   "FPS_16": 6.3,
+   "FPS_32": 3.15,
+   "RAND_1": 100.03,
+   "RAND_2": 50.21,
+   "RAND_4": 25.15,
+   "RAND_8": 12.59,
+   "RAND_16": 6.3,
+   "RAND_32": 3.15
+  },
+  "identities": {
+   "all_nodes_subset == accepted stage 2 (bitwise)": true,
+   "blocks_with_|B|<=m (FPS_m / RAND_m == QMAX exactly there)": {
+    "1": 9,
+    "2": 9,
+    "4": 9,
+    "8": 10,
+    "16": 10,
+    "32": 11
+   },
+   "node-subset scores <= QMAX everywhere": true,
+   "FPS_m and RAND_m monotone in m (nested sets)": true
+  }
+ },
+ "alone_references (IVF-like endpoint comparators)": {
+  "DENSE_VOTE_ALONE": 0.6546,
+  "SPLADE_VOTE_ALONE": 0.6004,
+  "L1": 0.6596,
+  "QMAX_ALONE": 0.7008,
+  "recall_blocks@50 vs QMAX_ALONE": {
+   "DENSE_VOTE": 0.4096,
+   "SPLADE_VOTE": 0.3172,
+   "NODE_VOTE_L1 (F0 of Cd, Cs)": 0.385
+  }
+ },
+ "levels": {
+  "ALONE": {
+   "reference": "QMAX_ALONE",
+   "ALL_reference": 0.7008,
+   "tolerance_net_loss": 5,
+   "no_stage2_reference": null,
+   "ALL_no_stage2_reference": null,
+   "variants": {
+    "CENT_MEAN": {
+     "ALL": 0.3283,
+     "ANY": 0.8464,
+     "vs_QMAX": {
+      "gained": 15,
+      "lost": 386,
+      "p": 2.6343488334096467e-94,
+      "net_loss": 371,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.4421,
+     "exposure": {
+      "P50_nodes_mean": 4894.5,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "CENT_NORM": {
+     "ALL": 0.4056,
+     "ANY": 0.8956,
+     "vs_QMAX": {
+      "gained": 19,
+      "lost": 313,
+      "p": 9.432922167843051e-70,
+      "net_loss": 294,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.4822,
+     "exposure": {
+      "P50_nodes_mean": 5072.7,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "FPS_1": {
+     "ALL": 0.261,
+     "ANY": 0.7932,
+     "vs_QMAX": {
+      "gained": 9,
+      "lost": 447,
+      "p": 2.3799291575909394e-119,
+      "net_loss": 438,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.365,
+     "exposure": {
+      "P50_nodes_mean": 5022.7,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "FPS_2": {
+     "ALL": 0.261,
+     "ANY": 0.7882,
+     "vs_QMAX": {
+      "gained": 15,
+      "lost": 453,
+      "p": 1.8718749882100252e-113,
+      "net_loss": 438,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 2341,
+     "dot_product_reduction_vs_QMAX": 50.21,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.3532,
+     "exposure": {
+      "P50_nodes_mean": 5022.4,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "FPS_4": {
+     "ALL": 0.2761,
+     "ANY": 0.7791,
+     "vs_QMAX": {
+      "gained": 17,
+      "lost": 440,
+      "p": 1.9232341059604683e-107,
+      "net_loss": 423,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 4673,
+     "dot_product_reduction_vs_QMAX": 25.15,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.361,
+     "exposure": {
+      "P50_nodes_mean": 5026.9,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "FPS_8": {
+     "ALL": 0.3163,
+     "ANY": 0.8122,
+     "vs_QMAX": {
+      "gained": 18,
+      "lost": 401,
+      "p": 2.6422455339232648e-95,
+      "net_loss": 383,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 9334,
+     "dot_product_reduction_vs_QMAX": 12.59,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.4046,
+     "exposure": {
+      "P50_nodes_mean": 5039.7,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "FPS_16": {
+     "ALL": 0.3996,
+     "ANY": 0.8635,
+     "vs_QMAX": {
+      "gained": 22,
+      "lost": 322,
+      "p": 1.709419237493008e-69,
+      "net_loss": 300,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 18654,
+     "dot_product_reduction_vs_QMAX": 6.3,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.4926,
+     "exposure": {
+      "P50_nodes_mean": 5045.2,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "FPS_32": {
+     "ALL": 0.5231,
+     "ANY": 0.9277,
+     "vs_QMAX": {
+      "gained": 21,
+      "lost": 198,
+      "p": 2.719440069203471e-37,
+      "net_loss": 177,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 37294,
+     "dot_product_reduction_vs_QMAX": 3.15,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.6307,
+     "exposure": {
+      "P50_nodes_mean": 5056.0,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "RAND_1": {
+     "ALL": 0.1737,
+     "ANY": 0.6667,
+     "vs_QMAX": {
+      "gained": 5,
+      "lost": 530,
+      "p": 6.434730626879995e-150,
+      "net_loss": 525,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.2767,
+     "exposure": {
+      "P50_nodes_mean": 4985.4,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "RAND_2": {
+     "ALL": 0.2159,
+     "ANY": 0.739,
+     "vs_QMAX": {
+      "gained": 12,
+      "lost": 495,
+      "p": 2.5836083672517637e-129,
+      "net_loss": 483,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 2341,
+     "dot_product_reduction_vs_QMAX": 50.21,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.325,
+     "exposure": {
+      "P50_nodes_mean": 5012.6,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "RAND_4": {
+     "ALL": 0.2661,
+     "ANY": 0.7761,
+     "vs_QMAX": {
+      "gained": 9,
+      "lost": 442,
+      "p": 6.891827397439827e-118,
+      "net_loss": 433,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 4673,
+     "dot_product_reduction_vs_QMAX": 25.15,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.3669,
+     "exposure": {
+      "P50_nodes_mean": 5026.1,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "RAND_8": {
+     "ALL": 0.3143,
+     "ANY": 0.8253,
+     "vs_QMAX": {
+      "gained": 19,
+      "lost": 404,
+      "p": 4.200893280219654e-95,
+      "net_loss": 385,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 9334,
+     "dot_product_reduction_vs_QMAX": 12.59,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.423,
+     "exposure": {
+      "P50_nodes_mean": 5040.6,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "RAND_16": {
+     "ALL": 0.3996,
+     "ANY": 0.8695,
+     "vs_QMAX": {
+      "gained": 18,
+      "lost": 318,
+      "p": 4.4316638933309243e-72,
+      "net_loss": 300,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 18654,
+     "dot_product_reduction_vs_QMAX": 6.3,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.4917,
+     "exposure": {
+      "P50_nodes_mean": 5049.1,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    },
+    "RAND_32": {
+     "ALL": 0.488,
+     "ANY": 0.9177,
+     "vs_QMAX": {
+      "gained": 26,
+      "lost": 238,
+      "p": 4.810630172618913e-44,
+      "net_loss": 212,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 37294,
+     "dot_product_reduction_vs_QMAX": 3.15,
+     "recall_blocks@50 (mean |P50_alone & P50_QMAX_alone| / 50)": 0.5994,
+     "exposure": {
+      "P50_nodes_mean": 5052.9,
+      "QMAX_ALONE_P50_nodes_mean": 5074.4
+     }
+    }
+   },
+   "FPS_m_preserving": [],
+   "smallest_preserving_FPS_m": null,
+   "FPS_preserving_from_smallest_m_upward": false,
+   "RAND_m_preserving": [],
+   "smallest_preserving_RAND_m": null,
+   "CENT_MEAN_PRESERVES": false,
+   "CENT_NORM_PRESERVES": false
+  },
+  "F0": {
+   "reference": "QMAX_F0",
+   "ALL_reference": 0.7319,
+   "tolerance_net_loss": 5,
+   "no_stage2_reference": "L1",
+   "ALL_no_stage2_reference": 0.6596,
+   "variants": {
+    "CENT_MEAN": {
+     "ALL": 0.7008,
+     "ANY": 0.988,
+     "vs_QMAX": {
+      "gained": 27,
+      "lost": 58,
+      "p": 0.001016220951347889,
+      "net_loss": 31,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (L1)": {
+      "gained": 62,
+      "lost": 21,
+      "p": 7.505332324620721e-06,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.569,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.828,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5082.0,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5087.4,
+      "patch_novel_nodes_mean": 53.7,
+      "patch_queries_truncated": 12
+     }
+    },
+    "CENT_NORM": {
+     "ALL": 0.6867,
+     "ANY": 0.99,
+     "vs_QMAX": {
+      "gained": 16,
+      "lost": 61,
+      "p": 2.4176312825015983e-07,
+      "net_loss": 45,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (L1)": {
+      "gained": 50,
+      "lost": 23,
+      "p": 0.0021181727464006325,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.375,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.8314,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5107.3,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5105.7,
+      "patch_novel_nodes_mean": 52.9,
+      "patch_queries_truncated": 13
+     }
+    },
+    "FPS_1": {
+     "ALL": 0.6737,
+     "ANY": 0.99,
+     "vs_QMAX": {
+      "gained": 15,
+      "lost": 73,
+      "p": 2.559492715287498e-10,
+      "net_loss": 58,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (L1)": {
+      "gained": 45,
+      "lost": 31,
+      "p": 0.13538510529943087,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.194,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.7965,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.2,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.1,
+      "patch_novel_nodes_mean": 53.3,
+      "patch_queries_truncated": 16
+     }
+    },
+    "FPS_2": {
+     "ALL": 0.6878,
+     "ANY": 0.991,
+     "vs_QMAX": {
+      "gained": 25,
+      "lost": 69,
+      "p": 6.339264707376482e-06,
+      "net_loss": 44,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 2341,
+     "dot_product_reduction_vs_QMAX": 50.21,
+     "vs_no_stage2 (L1)": {
+      "gained": 54,
+      "lost": 26,
+      "p": 0.002324541288088704,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.389,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.7958,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5100.8,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.9,
+      "patch_novel_nodes_mean": 53.4,
+      "patch_queries_truncated": 13
+     }
+    },
+    "FPS_4": {
+     "ALL": 0.6827,
+     "ANY": 0.988,
+     "vs_QMAX": {
+      "gained": 20,
+      "lost": 69,
+      "p": 1.7769640600713887e-07,
+      "net_loss": 49,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 4673,
+     "dot_product_reduction_vs_QMAX": 25.15,
+     "vs_no_stage2 (L1)": {
+      "gained": 47,
+      "lost": 24,
+      "p": 0.008554538502693429,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.319,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.7976,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5099.1,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5099.3,
+      "patch_novel_nodes_mean": 53.0,
+      "patch_queries_truncated": 11
+     }
+    },
+    "FPS_8": {
+     "ALL": 0.6837,
+     "ANY": 0.988,
+     "vs_QMAX": {
+      "gained": 22,
+      "lost": 70,
+      "p": 5.348143171041871e-07,
+      "net_loss": 48,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 9334,
+     "dot_product_reduction_vs_QMAX": 12.59,
+     "vs_no_stage2 (L1)": {
+      "gained": 50,
+      "lost": 26,
+      "p": 0.007905180027859783,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.333,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.8092,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.2,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.7,
+      "patch_novel_nodes_mean": 53.6,
+      "patch_queries_truncated": 14
+     }
+    },
+    "FPS_16": {
+     "ALL": 0.6878,
+     "ANY": 0.9849,
+     "vs_QMAX": {
+      "gained": 15,
+      "lost": 59,
+      "p": 2.5534220074411045e-07,
+      "net_loss": 44,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 18654,
+     "dot_product_reduction_vs_QMAX": 6.3,
+     "vs_no_stage2 (L1)": {
+      "gained": 53,
+      "lost": 25,
+      "p": 0.00203114037416273,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.389,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.8319,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5100.9,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.1,
+      "patch_novel_nodes_mean": 54.0,
+      "patch_queries_truncated": 17
+     }
+    },
+    "FPS_32": {
+     "ALL": 0.7038,
+     "ANY": 0.99,
+     "vs_QMAX": {
+      "gained": 13,
+      "lost": 41,
+      "p": 0.00017512673440589485,
+      "net_loss": 28,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 37294,
+     "dot_product_reduction_vs_QMAX": 3.15,
+     "vs_no_stage2 (L1)": {
+      "gained": 61,
+      "lost": 17,
+      "p": 5.663739625418237e-07,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.611,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.8739,
+      "rows_identical_P50": 1
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.5,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5101.0,
+      "patch_novel_nodes_mean": 53.9,
+      "patch_queries_truncated": 15
+     }
+    },
+    "RAND_1": {
+     "ALL": 0.6647,
+     "ANY": 0.989,
+     "vs_QMAX": {
+      "gained": 15,
+      "lost": 82,
+      "p": 2.3753959346733286e-12,
+      "net_loss": 67,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (L1)": {
+      "gained": 33,
+      "lost": 28,
+      "p": 0.6089207154048286,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.069,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.7703,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5096.5,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5098.5,
+      "patch_novel_nodes_mean": 52.7,
+      "patch_queries_truncated": 13
+     }
+    },
+    "RAND_2": {
+     "ALL": 0.6727,
+     "ANY": 0.991,
+     "vs_QMAX": {
+      "gained": 8,
+      "lost": 67,
+      "p": 1.0098638262297781e-12,
+      "net_loss": 59,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 2341,
+     "dot_product_reduction_vs_QMAX": 50.21,
+     "vs_no_stage2 (L1)": {
+      "gained": 38,
+      "lost": 25,
+      "p": 0.12991792302255253,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.181,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.7844,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.1,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.1,
+      "patch_novel_nodes_mean": 53.1,
+      "patch_queries_truncated": 14
+     }
+    },
+    "RAND_4": {
+     "ALL": 0.6717,
+     "ANY": 0.989,
+     "vs_QMAX": {
+      "gained": 13,
+      "lost": 73,
+      "p": 2.7188213670780667e-11,
+      "net_loss": 60,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 4673,
+     "dot_product_reduction_vs_QMAX": 25.15,
+     "vs_no_stage2 (L1)": {
+      "gained": 43,
+      "lost": 31,
+      "p": 0.20067820312938567,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.167,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.7979,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.4,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.5,
+      "patch_novel_nodes_mean": 53.1,
+      "patch_queries_truncated": 11
+     }
+    },
+    "RAND_8": {
+     "ALL": 0.6817,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 16,
+      "lost": 66,
+      "p": 2.251979591393417e-08,
+      "net_loss": 50,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 9334,
+     "dot_product_reduction_vs_QMAX": 12.59,
+     "vs_no_stage2 (L1)": {
+      "gained": 52,
+      "lost": 30,
+      "p": 0.0198269158458416,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.306,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.814,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.4,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.2,
+      "patch_novel_nodes_mean": 53.0,
+      "patch_queries_truncated": 17
+     }
+    },
+    "RAND_16": {
+     "ALL": 0.6878,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 17,
+      "lost": 61,
+      "p": 5.663739625418237e-07,
+      "net_loss": 44,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 18654,
+     "dot_product_reduction_vs_QMAX": 6.3,
+     "vs_no_stage2 (L1)": {
+      "gained": 62,
+      "lost": 34,
+      "p": 0.005572997762164588,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.389,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.8335,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.9,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5101.5,
+      "patch_novel_nodes_mean": 53.1,
+      "patch_queries_truncated": 16
+     }
+    },
+    "RAND_32": {
+     "ALL": 0.7088,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 18,
+      "lost": 41,
+      "p": 0.0037937056353716074,
+      "net_loss": 23,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 37294,
+     "dot_product_reduction_vs_QMAX": 3.15,
+     "vs_no_stage2 (L1)": {
+      "gained": 70,
+      "lost": 21,
+      "p": 2.509086976240059e-07,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.681,
+     "overlap_with_QMAX_chain": {
+      "recall_blocks@50 (mean |P50 & P50_QMAX_F0| / 50)": 0.864,
+      "rows_identical_P50": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5103.1,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5102.1,
+      "patch_novel_nodes_mean": 53.3,
+      "patch_queries_truncated": 17
+     }
+    }
+   },
+   "FPS_m_preserving": [],
+   "smallest_preserving_FPS_m": null,
+   "FPS_preserving_from_smallest_m_upward": false,
+   "RAND_m_preserving": [],
+   "smallest_preserving_RAND_m": null,
+   "CENT_MEAN_PRESERVES": false,
+   "CENT_NORM_PRESERVES": false
+  },
+  "SAFE": {
+   "reference": "QMAX_SAFE",
+   "ALL_reference": 0.748,
+   "tolerance_net_loss": 5,
+   "no_stage2_reference": "SAFE",
+   "ALL_no_stage2_reference": 0.7118,
+   "variants": {
+    "CENT_MEAN": {
+     "ALL": 0.751,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 18,
+      "lost": 15,
+      "p": 0.7283324808813632,
+      "net_loss": -3,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 42,
+      "lost": 3,
+      "p": 8.654978955746628e-10,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 1.083,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8514,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5082.0,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5087.4,
+      "patch_novel_nodes_mean": 53.7,
+      "patch_queries_truncated": 12
+     }
+    },
+    "CENT_NORM": {
+     "ALL": 0.739,
+     "ANY": 0.99,
+     "vs_QMAX": {
+      "gained": 10,
+      "lost": 19,
+      "p": 0.13604594767093658,
+      "net_loss": 9,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 33,
+      "lost": 6,
+      "p": 1.429926123819314e-05,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.75,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8548,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5107.3,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5105.7,
+      "patch_novel_nodes_mean": 52.9,
+      "patch_queries_truncated": 13
+     }
+    },
+    "FPS_1": {
+     "ALL": 0.741,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 15,
+      "lost": 22,
+      "p": 0.3240086000878364,
+      "net_loss": 7,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 35,
+      "lost": 6,
+      "p": 4.873598300036974e-06,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.806,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8216,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.2,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.1,
+      "patch_novel_nodes_mean": 53.3,
+      "patch_queries_truncated": 16
+     }
+    },
+    "FPS_2": {
+     "ALL": 0.742,
+     "ANY": 0.991,
+     "vs_QMAX": {
+      "gained": 21,
+      "lost": 27,
+      "p": 0.470879013621712,
+      "net_loss": 6,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 2341,
+     "dot_product_reduction_vs_QMAX": 50.21,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 40,
+      "lost": 10,
+      "p": 2.3861331676755526e-05,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.833,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8221,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5100.8,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.9,
+      "patch_novel_nodes_mean": 53.4,
+      "patch_queries_truncated": 13
+     }
+    },
+    "FPS_4": {
+     "ALL": 0.741,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 18,
+      "lost": 25,
+      "p": 0.3603776529357674,
+      "net_loss": 7,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 4673,
+     "dot_product_reduction_vs_QMAX": 25.15,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 36,
+      "lost": 7,
+      "p": 8.963039363152348e-06,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.806,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8243,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5099.1,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5099.3,
+      "patch_novel_nodes_mean": 53.0,
+      "patch_queries_truncated": 11
+     }
+    },
+    "FPS_8": {
+     "ALL": 0.7299,
+     "ANY": 0.991,
+     "vs_QMAX": {
+      "gained": 14,
+      "lost": 32,
+      "p": 0.011351591436778108,
+      "net_loss": 18,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 9334,
+     "dot_product_reduction_vs_QMAX": 12.59,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 29,
+      "lost": 11,
+      "p": 0.006426576095691416,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.5,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.835,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.2,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.7,
+      "patch_novel_nodes_mean": 53.6,
+      "patch_queries_truncated": 14
+     }
+    },
+    "FPS_16": {
+     "ALL": 0.739,
+     "ANY": 0.989,
+     "vs_QMAX": {
+      "gained": 14,
+      "lost": 23,
+      "p": 0.18774155899882317,
+      "net_loss": 9,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 18654,
+     "dot_product_reduction_vs_QMAX": 6.3,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 36,
+      "lost": 9,
+      "p": 6.57466324582856e-05,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.75,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8559,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5100.9,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.1,
+      "patch_novel_nodes_mean": 54.0,
+      "patch_queries_truncated": 17
+     }
+    },
+    "FPS_32": {
+     "ALL": 0.745,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 12,
+      "lost": 15,
+      "p": 0.7011080384254456,
+      "net_loss": 3,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 37294,
+     "dot_product_reduction_vs_QMAX": 3.15,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 38,
+      "lost": 5,
+      "p": 2.4995097192004323e-07,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.917,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8926,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.5,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5101.0,
+      "patch_novel_nodes_mean": 53.9,
+      "patch_queries_truncated": 15
+     }
+    },
+    "RAND_1": {
+     "ALL": 0.7189,
+     "ANY": 0.992,
+     "vs_QMAX": {
+      "gained": 10,
+      "lost": 39,
+      "p": 3.845911694355664e-05,
+      "net_loss": 29,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 21,
+      "lost": 14,
+      "p": 0.31050465907901537,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.194,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8005,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5096.5,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5098.5,
+      "patch_novel_nodes_mean": 52.7,
+      "patch_queries_truncated": 13
+     }
+    },
+    "RAND_2": {
+     "ALL": 0.7249,
+     "ANY": 0.991,
+     "vs_QMAX": {
+      "gained": 10,
+      "lost": 33,
+      "p": 0.0006061066312668117,
+      "net_loss": 23,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 2341,
+     "dot_product_reduction_vs_QMAX": 50.21,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 25,
+      "lost": 12,
+      "p": 0.04703102743951604,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.361,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8126,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.1,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.1,
+      "patch_novel_nodes_mean": 53.1,
+      "patch_queries_truncated": 14
+     }
+    },
+    "RAND_4": {
+     "ALL": 0.7179,
+     "ANY": 0.992,
+     "vs_QMAX": {
+      "gained": 10,
+      "lost": 40,
+      "p": 2.3861331676755526e-05,
+      "net_loss": 30,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 4673,
+     "dot_product_reduction_vs_QMAX": 25.15,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 23,
+      "lost": 17,
+      "p": 0.42959050784338615,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.167,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8222,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.4,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.5,
+      "patch_novel_nodes_mean": 53.1,
+      "patch_queries_truncated": 11
+     }
+    },
+    "RAND_8": {
+     "ALL": 0.7329,
+     "ANY": 0.995,
+     "vs_QMAX": {
+      "gained": 14,
+      "lost": 29,
+      "p": 0.03153949735315109,
+      "net_loss": 15,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 9334,
+     "dot_product_reduction_vs_QMAX": 12.59,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 31,
+      "lost": 10,
+      "p": 0.0014504910141113214,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.583,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8377,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.4,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.2,
+      "patch_novel_nodes_mean": 53.0,
+      "patch_queries_truncated": 17
+     }
+    },
+    "RAND_16": {
+     "ALL": 0.741,
+     "ANY": 0.995,
+     "vs_QMAX": {
+      "gained": 13,
+      "lost": 20,
+      "p": 0.296206368599087,
+      "net_loss": 7,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 18654,
+     "dot_product_reduction_vs_QMAX": 6.3,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 36,
+      "lost": 7,
+      "p": 8.963039363152348e-06,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.806,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8567,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.9,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5101.5,
+      "patch_novel_nodes_mean": 53.1,
+      "patch_queries_truncated": 16
+     }
+    },
+    "RAND_32": {
+     "ALL": 0.748,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 17,
+      "lost": 17,
+      "p": 1.0,
+      "net_loss": 0,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 37294,
+     "dot_product_reduction_vs_QMAX": 3.15,
+     "vs_no_stage2 (SAFE)": {
+      "gained": 42,
+      "lost": 6,
+      "p": 1.0087482138487759e-07,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 1.0,
+     "overlap_with_QMAX_chain": {
+      "mean |SAFE & QMAX_SAFE| / 50": 0.8828,
+      "rows_identical_SAFE": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5103.1,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5102.1,
+      "patch_novel_nodes_mean": 53.3,
+      "patch_queries_truncated": 17
+     }
+    }
+   },
+   "FPS_m_preserving": [
+    32
+   ],
+   "smallest_preserving_FPS_m": 32,
+   "FPS_preserving_from_smallest_m_upward": true,
+   "RAND_m_preserving": [
+    32
+   ],
+   "smallest_preserving_RAND_m": 32,
+   "CENT_MEAN_PRESERVES": true,
+   "CENT_NORM_PRESERVES": false
+  },
+  "PRIMARY": {
+   "reference": "QMAX_BALANCED_H2_PATCH1",
+   "ALL_reference": 0.76,
+   "tolerance_net_loss": 5,
+   "no_stage2_reference": "BALANCED_H2_PATCH1",
+   "ALL_no_stage2_reference": 0.7269,
+   "variants": {
+    "CENT_MEAN": {
+     "ALL": 0.7661,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 19,
+      "lost": 13,
+      "p": 0.37708558747544885,
+      "net_loss": -6,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 41,
+      "lost": 2,
+      "p": 2.1532287064474076e-10,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 1.182,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 41.56,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5082.0,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5087.4,
+      "patch_novel_nodes_mean": 53.7,
+      "patch_queries_truncated": 12
+     }
+    },
+    "CENT_NORM": {
+     "ALL": 0.753,
+     "ANY": 0.99,
+     "vs_QMAX": {
+      "gained": 11,
+      "lost": 18,
+      "p": 0.26493089646101,
+      "net_loss": 7,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 30,
+      "lost": 4,
+      "p": 6.16488978266716e-06,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.788,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 41.71,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5107.3,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5105.7,
+      "patch_novel_nodes_mean": 52.9,
+      "patch_queries_truncated": 13
+     }
+    },
+    "FPS_1": {
+     "ALL": 0.757,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 15,
+      "lost": 18,
+      "p": 0.7283324808813632,
+      "net_loss": 3,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 34,
+      "lost": 4,
+      "p": 6.038535502739251e-07,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.909,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 40.05,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.2,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.1,
+      "patch_novel_nodes_mean": 53.3,
+      "patch_queries_truncated": 16
+     }
+    },
+    "FPS_2": {
+     "ALL": 0.759,
+     "ANY": 0.991,
+     "vs_QMAX": {
+      "gained": 21,
+      "lost": 22,
+      "p": 1.0,
+      "net_loss": 1,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 2341,
+     "dot_product_reduction_vs_QMAX": 50.21,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 38,
+      "lost": 6,
+      "p": 9.430375484953402e-07,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.97,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 40.08,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5100.8,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.9,
+      "patch_novel_nodes_mean": 53.4,
+      "patch_queries_truncated": 13
+     }
+    },
+    "FPS_4": {
+     "ALL": 0.758,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 18,
+      "lost": 20,
+      "p": 0.8714146793645341,
+      "net_loss": 2,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 4673,
+     "dot_product_reduction_vs_QMAX": 25.15,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 34,
+      "lost": 3,
+      "p": 1.233129296451807e-07,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.939,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 40.18,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5099.1,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5099.3,
+      "patch_novel_nodes_mean": 53.0,
+      "patch_queries_truncated": 11
+     }
+    },
+    "FPS_8": {
+     "ALL": 0.746,
+     "ANY": 0.991,
+     "vs_QMAX": {
+      "gained": 14,
+      "lost": 28,
+      "p": 0.04355852192384191,
+      "net_loss": 14,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 9334,
+     "dot_product_reduction_vs_QMAX": 12.59,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 27,
+      "lost": 8,
+      "p": 0.0018782254774123432,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.576,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 40.74,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.2,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.7,
+      "patch_novel_nodes_mean": 53.6,
+      "patch_queries_truncated": 14
+     }
+    },
+    "FPS_16": {
+     "ALL": 0.755,
+     "ANY": 0.989,
+     "vs_QMAX": {
+      "gained": 15,
+      "lost": 20,
+      "p": 0.4995598332025112,
+      "net_loss": 5,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 18654,
+     "dot_product_reduction_vs_QMAX": 6.3,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 35,
+      "lost": 7,
+      "p": 1.5097200957825409e-05,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.848,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 41.78,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5100.9,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.1,
+      "patch_novel_nodes_mean": 54.0,
+      "patch_queries_truncated": 17
+     }
+    },
+    "FPS_32": {
+     "ALL": 0.759,
+     "ANY": 0.991,
+     "vs_QMAX": {
+      "gained": 13,
+      "lost": 14,
+      "p": 1.0,
+      "net_loss": 1,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 37294,
+     "dot_product_reduction_vs_QMAX": 3.15,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 36,
+      "lost": 4,
+      "p": 1.8570244719740003e-07,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.97,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 43.6,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.5,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5101.0,
+      "patch_novel_nodes_mean": 53.9,
+      "patch_queries_truncated": 15
+     }
+    },
+    "RAND_1": {
+     "ALL": 0.7329,
+     "ANY": 0.992,
+     "vs_QMAX": {
+      "gained": 8,
+      "lost": 35,
+      "p": 4.1934157934520044e-05,
+      "net_loss": 27,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 1175,
+     "dot_product_reduction_vs_QMAX": 100.03,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 19,
+      "lost": 13,
+      "p": 0.37708558747544885,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.182,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 39.03,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5096.5,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5098.5,
+      "patch_novel_nodes_mean": 52.7,
+      "patch_queries_truncated": 13
+     }
+    },
+    "RAND_2": {
+     "ALL": 0.739,
+     "ANY": 0.991,
+     "vs_QMAX": {
+      "gained": 8,
+      "lost": 29,
+      "p": 0.0007528970600105822,
+      "net_loss": 21,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 2341,
+     "dot_product_reduction_vs_QMAX": 50.21,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 22,
+      "lost": 10,
+      "p": 0.050102459732443094,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.364,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 39.67,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.1,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.1,
+      "patch_novel_nodes_mean": 53.1,
+      "patch_queries_truncated": 14
+     }
+    },
+    "RAND_4": {
+     "ALL": 0.7349,
+     "ANY": 0.992,
+     "vs_QMAX": {
+      "gained": 8,
+      "lost": 33,
+      "p": 0.00011222142620681552,
+      "net_loss": 25,
+      "label": "LOSS"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 4673,
+     "dot_product_reduction_vs_QMAX": 25.15,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 21,
+      "lost": 13,
+      "p": 0.22948101302608848,
+      "label": "NEUTRAL"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.242,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 40.14,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.4,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.5,
+      "patch_novel_nodes_mean": 53.1,
+      "patch_queries_truncated": 11
+     }
+    },
+    "RAND_8": {
+     "ALL": 0.746,
+     "ANY": 0.995,
+     "vs_QMAX": {
+      "gained": 11,
+      "lost": 25,
+      "p": 0.028816719655878845,
+      "net_loss": 14,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": false,
+     "vectors_scored_per_query": 9334,
+     "dot_product_reduction_vs_QMAX": 12.59,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 28,
+      "lost": 9,
+      "p": 0.0025632079923525453,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.576,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 40.9,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.4,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5100.2,
+      "patch_novel_nodes_mean": 53.0,
+      "patch_queries_truncated": 17
+     }
+    },
+    "RAND_16": {
+     "ALL": 0.756,
+     "ANY": 0.995,
+     "vs_QMAX": {
+      "gained": 14,
+      "lost": 18,
+      "p": 0.5966148958541453,
+      "net_loss": 4,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 18654,
+     "dot_product_reduction_vs_QMAX": 6.3,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 34,
+      "lost": 5,
+      "p": 2.4299079086631536e-06,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 0.879,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 41.82,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5101.9,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5101.5,
+      "patch_novel_nodes_mean": 53.1,
+      "patch_queries_truncated": 16
+     }
+    },
+    "RAND_32": {
+     "ALL": 0.7641,
+     "ANY": 0.993,
+     "vs_QMAX": {
+      "gained": 19,
+      "lost": 15,
+      "p": 0.6075913612730801,
+      "net_loss": -4,
+      "label": "NEUTRAL"
+     },
+     "PRESERVES": true,
+     "vectors_scored_per_query": 37294,
+     "dot_product_reduction_vs_QMAX": 3.15,
+     "vs_no_stage2 (BALANCED_H2_PATCH1)": {
+      "gained": 41,
+      "lost": 4,
+      "p": 9.334883088740753e-09,
+      "label": "GAIN"
+     },
+     "share_of_QMAX_gain_retained ((covered - no_stage2) / (QMAX covered - no_stage2); null if |QMAX - no_stage2| < 5 queries)": 1.121,
+     "overlap_with_QMAX_chain": {
+      "kept_blocks_overlap_mean (of 49)": 43.13,
+      "rows_identical_served_set": 0
+     },
+     "exposure": {
+      "P50_nodes_mean": 5103.1,
+      "SAFE_nodes_mean (= the PRIMARY served nodes, matched)": 5102.1,
+      "patch_novel_nodes_mean": 53.3,
+      "patch_queries_truncated": 17
+     }
+    }
+   },
+   "FPS_m_preserving": [
+    1,
+    2,
+    4,
+    16,
+    32
+   ],
+   "smallest_preserving_FPS_m": 1,
+   "FPS_preserving_from_smallest_m_upward": false,
+   "RAND_m_preserving": [
+    16,
+    32
+   ],
+   "smallest_preserving_RAND_m": 16,
+   "CENT_MEAN_PRESERVES": true,
+   "CENT_NORM_PRESERVES": false
+  }
+ },
+ "arms": {
+  "DENSE_VOTE_ALONE": {
+   "ALL": 0.6546,
+   "ANY": 0.9819,
+   "per_hop": {}
+  },
+  "SPLADE_VOTE_ALONE": {
+   "ALL": 0.6004,
+   "ANY": 0.9809,
+   "per_hop": {}
+  },
+  "L1": {
+   "ALL": 0.6596,
+   "ANY": 0.99,
+   "per_hop": {}
+  },
+  "SAFE": {
+   "ALL": 0.7118,
+   "ANY": 0.991,
+   "per_hop": {}
+  },
+  "BALANCED_H2_PATCH1": {
+   "ALL": 0.7269,
+   "ANY": 0.991,
+   "per_hop": {}
+  },
+  "QMAX_ALONE": {
+   "ALL": 0.7008,
+   "ANY": 0.99,
+   "per_hop": {},
+   "ALL_vs_L1": {
+    "gained": 105,
+    "lost": 64,
+    "p": 0.002001342228607936,
+    "label": "GAIN"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 107,
+    "lost": 61,
+    "p": 0.0004805507257089419,
+    "label": "GAIN"
+   }
+  },
+  "QMAX_F0": {
+   "ALL": 0.7319,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_L1": {
+    "gained": 77,
+    "lost": 5,
+    "p": 1.2046380153120002e-17,
+    "label": "GAIN"
+   }
+  },
+  "QMAX_SAFE": {
+   "ALL": 0.748,
+   "ANY": 0.992,
+   "per_hop": {},
+   "ALL_vs_SAFE": {
+    "gained": 39,
+    "lost": 3,
+    "p": 5.631591193377972e-09,
+    "label": "GAIN"
+   }
+  },
+  "QMAX_BALANCED_H2_PATCH1": {
+   "ALL": 0.76,
+   "ANY": 0.992,
+   "per_hop": {},
+   "ALL_vs_SAFE": {
+    "gained": 49,
+    "lost": 1,
+    "p": 9.059419880941277e-14,
+    "label": "GAIN"
+   },
+   "ALL_vs_L1": {
+    "gained": 101,
+    "lost": 1,
+    "p": 4.062633661888211e-29,
+    "label": "GAIN"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 34,
+    "lost": 1,
+    "p": 2.0954757928848267e-09,
+    "label": "GAIN"
+   }
+  },
+  "CENT_MEAN_ALONE": {
+   "ALL": 0.3283,
+   "ANY": 0.8464,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 15,
+    "lost": 386,
+    "p": 2.6343488334096467e-94,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 41,
+    "lost": 371,
+    "p": 1.3164066404864378e-67,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 33,
+    "lost": 358,
+    "p": 4.3627086891185166e-70,
+    "label": "LOSS"
+   }
+  },
+  "CENT_MEAN_F0": {
+   "ALL": 0.7008,
+   "ANY": 0.988,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 27,
+    "lost": 58,
+    "p": 0.001016220951347889,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 62,
+    "lost": 21,
+    "p": 7.505332324620721e-06,
+    "label": "GAIN"
+   }
+  },
+  "CENT_MEAN_SAFE": {
+   "ALL": 0.751,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 18,
+    "lost": 15,
+    "p": 0.7283324808813632,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 42,
+    "lost": 3,
+    "p": 8.654978955746628e-10,
+    "label": "GAIN"
+   }
+  },
+  "CENT_MEAN_PRIMARY": {
+   "ALL": 0.7661,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 19,
+    "lost": 13,
+    "p": 0.37708558747544885,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 41,
+    "lost": 2,
+    "p": 2.1532287064474076e-10,
+    "label": "GAIN"
+   }
+  },
+  "CENT_NORM_ALONE": {
+   "ALL": 0.4056,
+   "ANY": 0.8956,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 19,
+    "lost": 313,
+    "p": 9.432922167843051e-70,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 44,
+    "lost": 297,
+    "p": 2.991256997745637e-47,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 44,
+    "lost": 292,
+    "p": 4.790498950224618e-46,
+    "label": "LOSS"
+   }
+  },
+  "CENT_NORM_F0": {
+   "ALL": 0.6867,
+   "ANY": 0.99,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 16,
+    "lost": 61,
+    "p": 2.4176312825015983e-07,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 50,
+    "lost": 23,
+    "p": 0.0021181727464006325,
+    "label": "GAIN"
+   }
+  },
+  "CENT_NORM_SAFE": {
+   "ALL": 0.739,
+   "ANY": 0.99,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 10,
+    "lost": 19,
+    "p": 0.13604594767093658,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 33,
+    "lost": 6,
+    "p": 1.429926123819314e-05,
+    "label": "GAIN"
+   }
+  },
+  "CENT_NORM_PRIMARY": {
+   "ALL": 0.753,
+   "ANY": 0.99,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 11,
+    "lost": 18,
+    "p": 0.26493089646101,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 30,
+    "lost": 4,
+    "p": 6.16488978266716e-06,
+    "label": "GAIN"
+   }
+  },
+  "FPS_1_ALONE": {
+   "ALL": 0.261,
+   "ANY": 0.7932,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 9,
+    "lost": 447,
+    "p": 2.3799291575909394e-119,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 17,
+    "lost": 414,
+    "p": 4.692899836410369e-100,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 17,
+    "lost": 409,
+    "p": 1.227481398962728e-98,
+    "label": "LOSS"
+   }
+  },
+  "FPS_1_F0": {
+   "ALL": 0.6737,
+   "ANY": 0.99,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 15,
+    "lost": 73,
+    "p": 2.559492715287498e-10,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 45,
+    "lost": 31,
+    "p": 0.13538510529943087,
+    "label": "NEUTRAL"
+   }
+  },
+  "FPS_1_SAFE": {
+   "ALL": 0.741,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 15,
+    "lost": 22,
+    "p": 0.3240086000878364,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 35,
+    "lost": 6,
+    "p": 4.873598300036974e-06,
+    "label": "GAIN"
+   }
+  },
+  "FPS_1_PRIMARY": {
+   "ALL": 0.757,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 15,
+    "lost": 18,
+    "p": 0.7283324808813632,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 34,
+    "lost": 4,
+    "p": 6.038535502739251e-07,
+    "label": "GAIN"
+   }
+  },
+  "FPS_2_ALONE": {
+   "ALL": 0.261,
+   "ANY": 0.7882,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 15,
+    "lost": 453,
+    "p": 1.8718749882100252e-113,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 21,
+    "lost": 418,
+    "p": 5.539664111275995e-97,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 24,
+    "lost": 416,
+    "p": 1.763024881012384e-93,
+    "label": "LOSS"
+   }
+  },
+  "FPS_2_F0": {
+   "ALL": 0.6878,
+   "ANY": 0.991,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 25,
+    "lost": 69,
+    "p": 6.339264707376482e-06,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 54,
+    "lost": 26,
+    "p": 0.002324541288088704,
+    "label": "GAIN"
+   }
+  },
+  "FPS_2_SAFE": {
+   "ALL": 0.742,
+   "ANY": 0.991,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 21,
+    "lost": 27,
+    "p": 0.470879013621712,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 40,
+    "lost": 10,
+    "p": 2.3861331676755526e-05,
+    "label": "GAIN"
+   }
+  },
+  "FPS_2_PRIMARY": {
+   "ALL": 0.759,
+   "ANY": 0.991,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 21,
+    "lost": 22,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 38,
+    "lost": 6,
+    "p": 9.430375484953402e-07,
+    "label": "GAIN"
+   }
+  },
+  "FPS_4_ALONE": {
+   "ALL": 0.2761,
+   "ANY": 0.7791,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 17,
+    "lost": 440,
+    "p": 1.9232341059604683e-107,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 28,
+    "lost": 410,
+    "p": 3.75560135214068e-88,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 26,
+    "lost": 403,
+    "p": 4.903519720194715e-88,
+    "label": "LOSS"
+   }
+  },
+  "FPS_4_F0": {
+   "ALL": 0.6827,
+   "ANY": 0.988,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 20,
+    "lost": 69,
+    "p": 1.7769640600713887e-07,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 47,
+    "lost": 24,
+    "p": 0.008554538502693429,
+    "label": "GAIN"
+   }
+  },
+  "FPS_4_SAFE": {
+   "ALL": 0.741,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 18,
+    "lost": 25,
+    "p": 0.3603776529357674,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 36,
+    "lost": 7,
+    "p": 8.963039363152348e-06,
+    "label": "GAIN"
+   }
+  },
+  "FPS_4_PRIMARY": {
+   "ALL": 0.758,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 18,
+    "lost": 20,
+    "p": 0.8714146793645341,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 34,
+    "lost": 3,
+    "p": 1.233129296451807e-07,
+    "label": "GAIN"
+   }
+  },
+  "FPS_8_ALONE": {
+   "ALL": 0.3163,
+   "ANY": 0.8122,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 18,
+    "lost": 401,
+    "p": 2.6422455339232648e-95,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 33,
+    "lost": 375,
+    "p": 1.4324468483460773e-74,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 32,
+    "lost": 369,
+    "p": 9.031840527220107e-74,
+    "label": "LOSS"
+   }
+  },
+  "FPS_8_F0": {
+   "ALL": 0.6837,
+   "ANY": 0.988,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 22,
+    "lost": 70,
+    "p": 5.348143171041871e-07,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 50,
+    "lost": 26,
+    "p": 0.007905180027859783,
+    "label": "GAIN"
+   }
+  },
+  "FPS_8_SAFE": {
+   "ALL": 0.7299,
+   "ANY": 0.991,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 14,
+    "lost": 32,
+    "p": 0.011351591436778108,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 29,
+    "lost": 11,
+    "p": 0.006426576095691416,
+    "label": "GAIN"
+   }
+  },
+  "FPS_8_PRIMARY": {
+   "ALL": 0.746,
+   "ANY": 0.991,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 14,
+    "lost": 28,
+    "p": 0.04355852192384191,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 27,
+    "lost": 8,
+    "p": 0.0018782254774123432,
+    "label": "GAIN"
+   }
+  },
+  "FPS_16_ALONE": {
+   "ALL": 0.3996,
+   "ANY": 0.8635,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 22,
+    "lost": 322,
+    "p": 1.709419237493008e-69,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 56,
+    "lost": 315,
+    "p": 6.858814607697649e-45,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 52,
+    "lost": 306,
+    "p": 6.545746691768548e-45,
+    "label": "LOSS"
+   }
+  },
+  "FPS_16_F0": {
+   "ALL": 0.6878,
+   "ANY": 0.9849,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 15,
+    "lost": 59,
+    "p": 2.5534220074411045e-07,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 53,
+    "lost": 25,
+    "p": 0.00203114037416273,
+    "label": "GAIN"
+   }
+  },
+  "FPS_16_SAFE": {
+   "ALL": 0.739,
+   "ANY": 0.989,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 14,
+    "lost": 23,
+    "p": 0.18774155899882317,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 36,
+    "lost": 9,
+    "p": 6.57466324582856e-05,
+    "label": "GAIN"
+   }
+  },
+  "FPS_16_PRIMARY": {
+   "ALL": 0.755,
+   "ANY": 0.989,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 15,
+    "lost": 20,
+    "p": 0.4995598332025112,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 35,
+    "lost": 7,
+    "p": 1.5097200957825409e-05,
+    "label": "GAIN"
+   }
+  },
+  "FPS_32_ALONE": {
+   "ALL": 0.5231,
+   "ANY": 0.9277,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 21,
+    "lost": 198,
+    "p": 2.719440069203471e-37,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 69,
+    "lost": 205,
+    "p": 7.786631496165773e-17,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 72,
+    "lost": 203,
+    "p": 1.2852237490631292e-15,
+    "label": "LOSS"
+   }
+  },
+  "FPS_32_F0": {
+   "ALL": 0.7038,
+   "ANY": 0.99,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 13,
+    "lost": 41,
+    "p": 0.00017512673440589485,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 61,
+    "lost": 17,
+    "p": 5.663739625418237e-07,
+    "label": "GAIN"
+   }
+  },
+  "FPS_32_SAFE": {
+   "ALL": 0.745,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 12,
+    "lost": 15,
+    "p": 0.7011080384254456,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 38,
+    "lost": 5,
+    "p": 2.4995097192004323e-07,
+    "label": "GAIN"
+   }
+  },
+  "FPS_32_PRIMARY": {
+   "ALL": 0.759,
+   "ANY": 0.991,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 13,
+    "lost": 14,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 36,
+    "lost": 4,
+    "p": 1.8570244719740003e-07,
+    "label": "GAIN"
+   }
+  },
+  "RAND_1_ALONE": {
+   "ALL": 0.1737,
+   "ANY": 0.6667,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 5,
+    "lost": 530,
+    "p": 6.434730626879995e-150,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 12,
+    "lost": 496,
+    "p": 1.3229917981915124e-129,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 11,
+    "lost": 490,
+    "p": 3.4983800541705324e-129,
+    "label": "LOSS"
+   }
+  },
+  "RAND_1_F0": {
+   "ALL": 0.6647,
+   "ANY": 0.989,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 15,
+    "lost": 82,
+    "p": 2.3753959346733286e-12,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 33,
+    "lost": 28,
+    "p": 0.6089207154048286,
+    "label": "NEUTRAL"
+   }
+  },
+  "RAND_1_SAFE": {
+   "ALL": 0.7189,
+   "ANY": 0.992,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 10,
+    "lost": 39,
+    "p": 3.845911694355664e-05,
+    "label": "LOSS"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 21,
+    "lost": 14,
+    "p": 0.31050465907901537,
+    "label": "NEUTRAL"
+   }
+  },
+  "RAND_1_PRIMARY": {
+   "ALL": 0.7329,
+   "ANY": 0.992,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 8,
+    "lost": 35,
+    "p": 4.1934157934520044e-05,
+    "label": "LOSS"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 19,
+    "lost": 13,
+    "p": 0.37708558747544885,
+    "label": "NEUTRAL"
+   }
+  },
+  "RAND_2_ALONE": {
+   "ALL": 0.2159,
+   "ANY": 0.739,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 12,
+    "lost": 495,
+    "p": 2.5836083672517637e-129,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 18,
+    "lost": 460,
+    "p": 5.111761217897121e-112,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 18,
+    "lost": 455,
+    "p": 1.3495996942323938e-110,
+    "label": "LOSS"
+   }
+  },
+  "RAND_2_F0": {
+   "ALL": 0.6727,
+   "ANY": 0.991,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 8,
+    "lost": 67,
+    "p": 1.0098638262297781e-12,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 38,
+    "lost": 25,
+    "p": 0.12991792302255253,
+    "label": "NEUTRAL"
+   }
+  },
+  "RAND_2_SAFE": {
+   "ALL": 0.7249,
+   "ANY": 0.991,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 10,
+    "lost": 33,
+    "p": 0.0006061066312668117,
+    "label": "LOSS"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 25,
+    "lost": 12,
+    "p": 0.04703102743951604,
+    "label": "NEUTRAL"
+   }
+  },
+  "RAND_2_PRIMARY": {
+   "ALL": 0.739,
+   "ANY": 0.991,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 8,
+    "lost": 29,
+    "p": 0.0007528970600105822,
+    "label": "LOSS"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 22,
+    "lost": 10,
+    "p": 0.050102459732443094,
+    "label": "NEUTRAL"
+   }
+  },
+  "RAND_4_ALONE": {
+   "ALL": 0.2661,
+   "ANY": 0.7761,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 9,
+    "lost": 442,
+    "p": 6.891827397439827e-118,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 28,
+    "lost": 420,
+    "p": 7.028605917091493e-91,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 18,
+    "lost": 405,
+    "p": 1.9654886057448942e-96,
+    "label": "LOSS"
+   }
+  },
+  "RAND_4_F0": {
+   "ALL": 0.6717,
+   "ANY": 0.989,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 13,
+    "lost": 73,
+    "p": 2.7188213670780667e-11,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 43,
+    "lost": 31,
+    "p": 0.20067820312938567,
+    "label": "NEUTRAL"
+   }
+  },
+  "RAND_4_SAFE": {
+   "ALL": 0.7179,
+   "ANY": 0.992,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 10,
+    "lost": 40,
+    "p": 2.3861331676755526e-05,
+    "label": "LOSS"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 23,
+    "lost": 17,
+    "p": 0.42959050784338615,
+    "label": "NEUTRAL"
+   }
+  },
+  "RAND_4_PRIMARY": {
+   "ALL": 0.7349,
+   "ANY": 0.992,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 8,
+    "lost": 33,
+    "p": 0.00011222142620681552,
+    "label": "LOSS"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 21,
+    "lost": 13,
+    "p": 0.22948101302608848,
+    "label": "NEUTRAL"
+   }
+  },
+  "RAND_8_ALONE": {
+   "ALL": 0.3143,
+   "ANY": 0.8253,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 19,
+    "lost": 404,
+    "p": 4.200893280219654e-95,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 35,
+    "lost": 379,
+    "p": 4.518058617122251e-74,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 31,
+    "lost": 370,
+    "p": 7.786465820182106e-75,
+    "label": "LOSS"
+   }
+  },
+  "RAND_8_F0": {
+   "ALL": 0.6817,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 16,
+    "lost": 66,
+    "p": 2.251979591393417e-08,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 52,
+    "lost": 30,
+    "p": 0.0198269158458416,
+    "label": "NEUTRAL"
+   }
+  },
+  "RAND_8_SAFE": {
+   "ALL": 0.7329,
+   "ANY": 0.995,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 14,
+    "lost": 29,
+    "p": 0.03153949735315109,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 31,
+    "lost": 10,
+    "p": 0.0014504910141113214,
+    "label": "GAIN"
+   }
+  },
+  "RAND_8_PRIMARY": {
+   "ALL": 0.746,
+   "ANY": 0.995,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 11,
+    "lost": 25,
+    "p": 0.028816719655878845,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 28,
+    "lost": 9,
+    "p": 0.0025632079923525453,
+    "label": "GAIN"
+   }
+  },
+  "RAND_16_ALONE": {
+   "ALL": 0.3996,
+   "ANY": 0.8695,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 18,
+    "lost": 318,
+    "p": 4.4316638933309243e-72,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 53,
+    "lost": 312,
+    "p": 8.942176319692012e-46,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 46,
+    "lost": 300,
+    "p": 8.187066432914294e-47,
+    "label": "LOSS"
+   }
+  },
+  "RAND_16_F0": {
+   "ALL": 0.6878,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 17,
+    "lost": 61,
+    "p": 5.663739625418237e-07,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 62,
+    "lost": 34,
+    "p": 0.005572997762164588,
+    "label": "GAIN"
+   }
+  },
+  "RAND_16_SAFE": {
+   "ALL": 0.741,
+   "ANY": 0.995,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 13,
+    "lost": 20,
+    "p": 0.296206368599087,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 36,
+    "lost": 7,
+    "p": 8.963039363152348e-06,
+    "label": "GAIN"
+   }
+  },
+  "RAND_16_PRIMARY": {
+   "ALL": 0.756,
+   "ANY": 0.995,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 14,
+    "lost": 18,
+    "p": 0.5966148958541453,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 34,
+    "lost": 5,
+    "p": 2.4299079086631536e-06,
+    "label": "GAIN"
+   }
+  },
+  "RAND_32_ALONE": {
+   "ALL": 0.488,
+   "ANY": 0.9177,
+   "per_hop": {},
+   "ALL_vs_QMAX_ALONE": {
+    "gained": 26,
+    "lost": 238,
+    "p": 4.810630172618913e-44,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 72,
+    "lost": 243,
+    "p": 7.811475867735913e-23,
+    "label": "LOSS"
+   },
+   "ALL_vs_DENSE_VOTE_ALONE": {
+    "gained": 62,
+    "lost": 228,
+    "p": 1.7888586586756293e-23,
+    "label": "LOSS"
+   }
+  },
+  "RAND_32_F0": {
+   "ALL": 0.7088,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_F0": {
+    "gained": 18,
+    "lost": 41,
+    "p": 0.0037937056353716074,
+    "label": "LOSS"
+   },
+   "ALL_vs_L1": {
+    "gained": 70,
+    "lost": 21,
+    "p": 2.509086976240059e-07,
+    "label": "GAIN"
+   }
+  },
+  "RAND_32_SAFE": {
+   "ALL": 0.748,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 17,
+    "lost": 17,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_SAFE": {
+    "gained": 42,
+    "lost": 6,
+    "p": 1.0087482138487759e-07,
+    "label": "GAIN"
+   }
+  },
+  "RAND_32_PRIMARY": {
+   "ALL": 0.7641,
+   "ANY": 0.993,
+   "per_hop": {},
+   "ALL_vs_QMAX_BALANCED_H2_PATCH1": {
+    "gained": 19,
+    "lost": 15,
+    "p": 0.6075913612730801,
+    "label": "NEUTRAL"
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 41,
+    "lost": 4,
+    "p": 9.334883088740753e-09,
+    "label": "GAIN"
+   }
+  }
+ },
+ "outlier_diagnostic": {
+  "all_gold_nodes_split_A": {
+   "n": 2603,
+   "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.465,
+   "centroid_distance_percentile_mean": 0.478,
+   "share_in_peripheral_quartile (percentile >= 0.75)": 0.228,
+   "cos_to_normalized_block_centroid_median": 0.5518,
+   "share_that_is_the_block_max_node_for_its_query": 0.552,
+   "rank_in_block_by_q.e_median": 1.0
+  },
+  "per_level": {
+   "ALONE": {
+    "CENT_MEAN": {
+     "lost_queries (QMAX covers, variant not)": 386,
+     "gained_queries (variant covers, QMAX not)": 15,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 521,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.647,
+      "centroid_distance_percentile_mean": 0.611,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.374,
+      "cos_to_normalized_block_centroid_median": 0.4709,
+      "share_that_is_the_block_max_node_for_its_query": 0.737,
+      "rank_in_block_by_q.e_median": 1.0,
+      "gold_block_position_median (variant / QMAX)": [
+       129.0,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1458,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.376,
+      "centroid_distance_percentile_mean": 0.399,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.129,
+      "cos_to_normalized_block_centroid_median": 0.5878,
+      "share_that_is_the_block_max_node_for_its_query": 0.534,
+      "rank_in_block_by_q.e_median": 1.0,
+      "gold_block_position_median (variant / QMAX)": [
+       5.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 1.6884647257374352e-46
+    },
+    "CENT_NORM": {
+     "lost_queries (QMAX covers, variant not)": 313,
+     "gained_queries (variant covers, QMAX not)": 19,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 400,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.725,
+      "centroid_distance_percentile_mean": 0.677,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.458,
+      "cos_to_normalized_block_centroid_median": 0.4662,
+      "share_that_is_the_block_max_node_for_its_query": 0.777,
+      "rank_in_block_by_q.e_median": 1.0,
+      "gold_block_position_median (variant / QMAX)": [
+       123.0,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1614,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.376,
+      "centroid_distance_percentile_mean": 0.397,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.127,
+      "cos_to_normalized_block_centroid_median": 0.5777,
+      "share_that_is_the_block_max_node_for_its_query": 0.537,
+      "rank_in_block_by_q.e_median": 1.0,
+      "gold_block_position_median (variant / QMAX)": [
+       5.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 1.6205828185545401e-65
+    },
+    "FPS_1": {
+     "lost_queries (QMAX covers, variant not)": 447,
+     "gained_queries (variant covers, QMAX not)": 9,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 640,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.647,
+      "centroid_distance_percentile_mean": 0.602,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.362,
+      "cos_to_normalized_block_centroid_median": 0.4828,
+      "share_that_is_the_block_max_node_for_its_query": 0.727,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.3008,
+      "gold_block_position_median (variant / QMAX)": [
+       221.0,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1306,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.363,
+      "centroid_distance_percentile_mean": 0.381,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.111,
+      "cos_to_normalized_block_centroid_median": 0.5878,
+      "share_that_is_the_block_max_node_for_its_query": 0.512,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.029,
+      "share_block_score_equal_to_QMAX": 0.054,
+      "block_score_gap_QMAX_minus_variant_median": 0.1477,
+      "gold_block_position_median (variant / QMAX)": [
+       5.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 1.4628277227055805e-56
+    },
+    "FPS_2": {
+     "lost_queries (QMAX covers, variant not)": 453,
+     "gained_queries (variant covers, QMAX not)": 15,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 652,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.585,
+      "centroid_distance_percentile_mean": 0.562,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.302,
+      "cos_to_normalized_block_centroid_median": 0.5064,
+      "share_that_is_the_block_max_node_for_its_query": 0.718,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2815,
+      "gold_block_position_median (variant / QMAX)": [
+       193.0,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1277,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.376,
+      "centroid_distance_percentile_mean": 0.407,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.149,
+      "cos_to_normalized_block_centroid_median": 0.5857,
+      "share_that_is_the_block_max_node_for_its_query": 0.516,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.052,
+      "share_block_score_equal_to_QMAX": 0.075,
+      "block_score_gap_QMAX_minus_variant_median": 0.138,
+      "gold_block_position_median (variant / QMAX)": [
+       5.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 3.6294177376461826e-30
+    },
+    "FPS_4": {
+     "lost_queries (QMAX covers, variant not)": 440,
+     "gained_queries (variant covers, QMAX not)": 17,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 642,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.537,
+      "centroid_distance_percentile_mean": 0.527,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.259,
+      "cos_to_normalized_block_centroid_median": 0.5163,
+      "share_that_is_the_block_max_node_for_its_query": 0.71,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.005,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2413,
+      "gold_block_position_median (variant / QMAX)": [
+       169.0,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1291,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.396,
+      "centroid_distance_percentile_mean": 0.429,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.176,
+      "cos_to_normalized_block_centroid_median": 0.5805,
+      "share_that_is_the_block_max_node_for_its_query": 0.527,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.075,
+      "share_block_score_equal_to_QMAX": 0.098,
+      "block_score_gap_QMAX_minus_variant_median": 0.125,
+      "gold_block_position_median (variant / QMAX)": [
+       5.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 1.8317889707118426e-13
+    },
+    "FPS_8": {
+     "lost_queries (QMAX covers, variant not)": 401,
+     "gained_queries (variant covers, QMAX not)": 18,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 578,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.515,
+      "centroid_distance_percentile_mean": 0.501,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.228,
+      "cos_to_normalized_block_centroid_median": 0.5254,
+      "share_that_is_the_block_max_node_for_its_query": 0.671,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.009,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2128,
+      "gold_block_position_median (variant / QMAX)": [
+       149.5,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1377,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.441,
+      "centroid_distance_percentile_mean": 0.453,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.204,
+      "cos_to_normalized_block_centroid_median": 0.5777,
+      "share_that_is_the_block_max_node_for_its_query": 0.556,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.121,
+      "share_block_score_equal_to_QMAX": 0.137,
+      "block_score_gap_QMAX_minus_variant_median": 0.1111,
+      "gold_block_position_median (variant / QMAX)": [
+       5.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.00038191203113412695
+    },
+    "FPS_16": {
+     "lost_queries (QMAX covers, variant not)": 322,
+     "gained_queries (variant covers, QMAX not)": 22,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 439,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.471,
+      "centroid_distance_percentile_mean": 0.466,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.159,
+      "cos_to_normalized_block_centroid_median": 0.5328,
+      "share_that_is_the_block_max_node_for_its_query": 0.692,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.014,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1878,
+      "gold_block_position_median (variant / QMAX)": [
+       143.0,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1552,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.473,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.235,
+      "cos_to_normalized_block_centroid_median": 0.567,
+      "share_that_is_the_block_max_node_for_its_query": 0.56,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.182,
+      "share_block_score_equal_to_QMAX": 0.198,
+      "block_score_gap_QMAX_minus_variant_median": 0.0793,
+      "gold_block_position_median (variant / QMAX)": [
+       4.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.8519680820081595
+    },
+    "FPS_32": {
+     "lost_queries (QMAX covers, variant not)": 198,
+     "gained_queries (variant covers, QMAX not)": 21,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 258,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.431,
+      "centroid_distance_percentile_mean": 0.464,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.202,
+      "cos_to_normalized_block_centroid_median": 0.5328,
+      "share_that_is_the_block_max_node_for_its_query": 0.713,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.054,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1553,
+      "gold_block_position_median (variant / QMAX)": [
+       102.5,
+       3.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1808,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.472,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.216,
+      "cos_to_normalized_block_centroid_median": 0.5601,
+      "share_that_is_the_block_max_node_for_its_query": 0.577,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.325,
+      "share_block_score_equal_to_QMAX": 0.335,
+      "block_score_gap_QMAX_minus_variant_median": 0.0389,
+      "gold_block_position_median (variant / QMAX)": [
+       3.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.7464175528856988
+    },
+    "RAND_1": {
+     "lost_queries (QMAX covers, variant not)": 530,
+     "gained_queries (variant covers, QMAX not)": 5,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 895,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.525,
+      "centroid_distance_percentile_mean": 0.515,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.276,
+      "cos_to_normalized_block_centroid_median": 0.5184,
+      "share_that_is_the_block_max_node_for_its_query": 0.638,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.001,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.3246,
+      "gold_block_position_median (variant / QMAX)": [
+       256.0,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1016,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.412,
+      "centroid_distance_percentile_mean": 0.408,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.127,
+      "cos_to_normalized_block_centroid_median": 0.5901,
+      "share_that_is_the_block_max_node_for_its_query": 0.536,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.041,
+      "share_block_score_equal_to_QMAX": 0.047,
+      "block_score_gap_QMAX_minus_variant_median": 0.1833,
+      "gold_block_position_median (variant / QMAX)": [
+       6.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 7.492110749193286e-15
+    },
+    "RAND_2": {
+     "lost_queries (QMAX covers, variant not)": 495,
+     "gained_queries (variant covers, QMAX not)": 12,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 769,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.554,
+      "centroid_distance_percentile_mean": 0.546,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.307,
+      "cos_to_normalized_block_centroid_median": 0.5076,
+      "share_that_is_the_block_max_node_for_its_query": 0.664,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.003,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2821,
+      "gold_block_position_median (variant / QMAX)": [
+       204.0,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1168,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.382,
+      "centroid_distance_percentile_mean": 0.401,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.125,
+      "cos_to_normalized_block_centroid_median": 0.5874,
+      "share_that_is_the_block_max_node_for_its_query": 0.532,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.05,
+      "share_block_score_equal_to_QMAX": 0.057,
+      "block_score_gap_QMAX_minus_variant_median": 0.151,
+      "gold_block_position_median (variant / QMAX)": [
+       6.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 1.3816054214070273e-26
+    },
+    "RAND_4": {
+     "lost_queries (QMAX covers, variant not)": 442,
+     "gained_queries (variant covers, QMAX not)": 9,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 669,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.578,
+      "centroid_distance_percentile_mean": 0.556,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.329,
+      "cos_to_normalized_block_centroid_median": 0.5074,
+      "share_that_is_the_block_max_node_for_its_query": 0.655,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.003,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.257,
+      "gold_block_position_median (variant / QMAX)": [
+       183.0,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1289,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.386,
+      "centroid_distance_percentile_mean": 0.405,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.123,
+      "cos_to_normalized_block_centroid_median": 0.5852,
+      "share_that_is_the_block_max_node_for_its_query": 0.546,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.066,
+      "share_block_score_equal_to_QMAX": 0.068,
+      "block_score_gap_QMAX_minus_variant_median": 0.1274,
+      "gold_block_position_median (variant / QMAX)": [
+       5.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 5.832697551020557e-27
+    },
+    "RAND_8": {
+     "lost_queries (QMAX covers, variant not)": 404,
+     "gained_queries (variant covers, QMAX not)": 19,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 555,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.614,
+      "centroid_distance_percentile_mean": 0.575,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.368,
+      "cos_to_normalized_block_centroid_median": 0.4925,
+      "share_that_is_the_block_max_node_for_its_query": 0.703,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.005,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2351,
+      "gold_block_position_median (variant / QMAX)": [
+       171.0,
+       1.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1424,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.396,
+      "centroid_distance_percentile_mean": 0.414,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.133,
+      "cos_to_normalized_block_centroid_median": 0.5801,
+      "share_that_is_the_block_max_node_for_its_query": 0.537,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.136,
+      "share_block_score_equal_to_QMAX": 0.128,
+      "block_score_gap_QMAX_minus_variant_median": 0.0935,
+      "gold_block_position_median (variant / QMAX)": [
+       4.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 1.389522634819909e-27
+    },
+    "RAND_16": {
+     "lost_queries (QMAX covers, variant not)": 318,
+     "gained_queries (variant covers, QMAX not)": 18,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 420,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.584,
+      "centroid_distance_percentile_mean": 0.565,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.331,
+      "cos_to_normalized_block_centroid_median": 0.5052,
+      "share_that_is_the_block_max_node_for_its_query": 0.733,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.012,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2015,
+      "gold_block_position_median (variant / QMAX)": [
+       158.0,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1592,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.422,
+      "centroid_distance_percentile_mean": 0.434,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.166,
+      "cos_to_normalized_block_centroid_median": 0.5726,
+      "share_that_is_the_block_max_node_for_its_query": 0.545,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.22,
+      "share_block_score_equal_to_QMAX": 0.22,
+      "block_score_gap_QMAX_minus_variant_median": 0.0641,
+      "gold_block_position_median (variant / QMAX)": [
+       3.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 5.250338619083509e-16
+    },
+    "RAND_32": {
+     "lost_queries (QMAX covers, variant not)": 238,
+     "gained_queries (variant covers, QMAX not)": 26,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 288,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.637,
+      "centroid_distance_percentile_mean": 0.584,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.375,
+      "cos_to_normalized_block_centroid_median": 0.5067,
+      "share_that_is_the_block_max_node_for_its_query": 0.74,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.038,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1749,
+      "gold_block_position_median (variant / QMAX)": [
+       127.5,
+       2.0
+      ]
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 1791,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.441,
+      "centroid_distance_percentile_mean": 0.445,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.18,
+      "cos_to_normalized_block_centroid_median": 0.5668,
+      "share_that_is_the_block_max_node_for_its_query": 0.567,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.393,
+      "share_block_score_equal_to_QMAX": 0.401,
+      "block_score_gap_QMAX_minus_variant_median": 0.0189,
+      "gold_block_position_median (variant / QMAX)": [
+       2.0,
+       1.0
+      ]
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 2.591981439934574e-13
+    }
+   },
+   "F0": {
+    "CENT_MEAN": {
+     "lost_queries (QMAX covers, variant not)": 58,
+     "gained_queries (variant covers, QMAX not)": 27,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 62,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.725,
+      "centroid_distance_percentile_mean": 0.653,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.468,
+      "cos_to_normalized_block_centroid_median": 0.4615,
+      "share_that_is_the_block_max_node_for_its_query": 0.79,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2170,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.466,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.208,
+      "cos_to_normalized_block_centroid_median": 0.5572,
+      "share_that_is_the_block_max_node_for_its_query": 0.577,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 1.0446496616001158e-06
+    },
+    "CENT_NORM": {
+     "lost_queries (QMAX covers, variant not)": 61,
+     "gained_queries (variant covers, QMAX not)": 16,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 66,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.778,
+      "centroid_distance_percentile_mean": 0.685,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.53,
+      "cos_to_normalized_block_centroid_median": 0.4762,
+      "share_that_is_the_block_max_node_for_its_query": 0.864,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2163,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.464,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.206,
+      "cos_to_normalized_block_centroid_median": 0.5568,
+      "share_that_is_the_block_max_node_for_its_query": 0.575,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 3.743970138534388e-09
+    },
+    "FPS_1": {
+     "lost_queries (QMAX covers, variant not)": 73,
+     "gained_queries (variant covers, QMAX not)": 15,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 80,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.773,
+      "centroid_distance_percentile_mean": 0.693,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.525,
+      "cos_to_normalized_block_centroid_median": 0.4587,
+      "share_that_is_the_block_max_node_for_its_query": 0.75,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2723
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2139,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.451,
+      "centroid_distance_percentile_mean": 0.462,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.203,
+      "cos_to_normalized_block_centroid_median": 0.5586,
+      "share_that_is_the_block_max_node_for_its_query": 0.577,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.017,
+      "share_block_score_equal_to_QMAX": 0.033,
+      "block_score_gap_QMAX_minus_variant_median": 0.1996
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 8.3598610054859e-12
+    },
+    "FPS_2": {
+     "lost_queries (QMAX covers, variant not)": 69,
+     "gained_queries (variant covers, QMAX not)": 25,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 75,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.696,
+      "centroid_distance_percentile_mean": 0.637,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.427,
+      "cos_to_normalized_block_centroid_median": 0.4788,
+      "share_that_is_the_block_max_node_for_its_query": 0.747,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2324
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2144,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.453,
+      "centroid_distance_percentile_mean": 0.465,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.207,
+      "cos_to_normalized_block_centroid_median": 0.558,
+      "share_that_is_the_block_max_node_for_its_query": 0.579,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.03,
+      "share_block_score_equal_to_QMAX": 0.047,
+      "block_score_gap_QMAX_minus_variant_median": 0.1876
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 5.117039893616954e-07
+    },
+    "FPS_4": {
+     "lost_queries (QMAX covers, variant not)": 69,
+     "gained_queries (variant covers, QMAX not)": 20,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 77,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.52,
+      "centroid_distance_percentile_mean": 0.544,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.299,
+      "cos_to_normalized_block_centroid_median": 0.5064,
+      "share_that_is_the_block_max_node_for_its_query": 0.714,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2022
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2143,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.468,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.211,
+      "cos_to_normalized_block_centroid_median": 0.5568,
+      "share_that_is_the_block_max_node_for_its_query": 0.579,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.047,
+      "share_block_score_equal_to_QMAX": 0.062,
+      "block_score_gap_QMAX_minus_variant_median": 0.1688
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.02127812915152532
+    },
+    "FPS_8": {
+     "lost_queries (QMAX covers, variant not)": 70,
+     "gained_queries (variant covers, QMAX not)": 22,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 77,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.49,
+      "centroid_distance_percentile_mean": 0.495,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.273,
+      "cos_to_normalized_block_centroid_median": 0.5403,
+      "share_that_is_the_block_max_node_for_its_query": 0.636,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.026,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1569
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2141,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.47,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.213,
+      "cos_to_normalized_block_centroid_median": 0.5558,
+      "share_that_is_the_block_max_node_for_its_query": 0.581,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.086,
+      "share_block_score_equal_to_QMAX": 0.094,
+      "block_score_gap_QMAX_minus_variant_median": 0.1412
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.46938034654276717
+    },
+    "FPS_16": {
+     "lost_queries (QMAX covers, variant not)": 59,
+     "gained_queries (variant covers, QMAX not)": 15,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 65,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.48,
+      "centroid_distance_percentile_mean": 0.495,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.246,
+      "cos_to_normalized_block_centroid_median": 0.5448,
+      "share_that_is_the_block_max_node_for_its_query": 0.646,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.031,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1314
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2159,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.215,
+      "cos_to_normalized_block_centroid_median": 0.5533,
+      "share_that_is_the_block_max_node_for_its_query": 0.583,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.141,
+      "share_block_score_equal_to_QMAX": 0.15,
+      "block_score_gap_QMAX_minus_variant_median": 0.1074
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.4921840329347962
+    },
+    "FPS_32": {
+     "lost_queries (QMAX covers, variant not)": 41,
+     "gained_queries (variant covers, QMAX not)": 13,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 45,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.48,
+      "centroid_distance_percentile_mean": 0.512,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.311,
+      "cos_to_normalized_block_centroid_median": 0.5197,
+      "share_that_is_the_block_max_node_for_its_query": 0.644,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.067,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1103
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2186,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.458,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.215,
+      "cos_to_normalized_block_centroid_median": 0.5522,
+      "share_that_is_the_block_max_node_for_its_query": 0.583,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.285,
+      "share_block_score_equal_to_QMAX": 0.291,
+      "block_score_gap_QMAX_minus_variant_median": 0.0503
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.358573727619689
+    },
+    "RAND_1": {
+     "lost_queries (QMAX covers, variant not)": 82,
+     "gained_queries (variant covers, QMAX not)": 15,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 90,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.672,
+      "centroid_distance_percentile_mean": 0.596,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.4,
+      "cos_to_normalized_block_centroid_median": 0.4793,
+      "share_that_is_the_block_max_node_for_its_query": 0.722,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2614
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2129,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.466,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.208,
+      "cos_to_normalized_block_centroid_median": 0.5579,
+      "share_that_is_the_block_max_node_for_its_query": 0.579,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.02,
+      "share_block_score_equal_to_QMAX": 0.023,
+      "block_score_gap_QMAX_minus_variant_median": 0.2479
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 3.811177497987025e-05
+    },
+    "RAND_2": {
+     "lost_queries (QMAX covers, variant not)": 67,
+     "gained_queries (variant covers, QMAX not)": 8,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 73,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.697,
+      "centroid_distance_percentile_mean": 0.638,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.452,
+      "cos_to_normalized_block_centroid_median": 0.4663,
+      "share_that_is_the_block_max_node_for_its_query": 0.671,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2235
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2143,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.464,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.206,
+      "cos_to_normalized_block_centroid_median": 0.5571,
+      "share_that_is_the_block_max_node_for_its_query": 0.581,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.028,
+      "share_block_score_equal_to_QMAX": 0.031,
+      "block_score_gap_QMAX_minus_variant_median": 0.2097
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 1.2972283187783965e-06
+    },
+    "RAND_4": {
+     "lost_queries (QMAX covers, variant not)": 73,
+     "gained_queries (variant covers, QMAX not)": 13,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 80,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.739,
+      "centroid_distance_percentile_mean": 0.665,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.5,
+      "cos_to_normalized_block_centroid_median": 0.4645,
+      "share_that_is_the_block_max_node_for_its_query": 0.675,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2051
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2142,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.451,
+      "centroid_distance_percentile_mean": 0.464,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.205,
+      "cos_to_normalized_block_centroid_median": 0.5576,
+      "share_that_is_the_block_max_node_for_its_query": 0.58,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.042,
+      "share_block_score_equal_to_QMAX": 0.043,
+      "block_score_gap_QMAX_minus_variant_median": 0.1714
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 4.218256153924446e-09
+    },
+    "RAND_8": {
+     "lost_queries (QMAX covers, variant not)": 66,
+     "gained_queries (variant covers, QMAX not)": 16,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 71,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.725,
+      "centroid_distance_percentile_mean": 0.642,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.479,
+      "cos_to_normalized_block_centroid_median": 0.4663,
+      "share_that_is_the_block_max_node_for_its_query": 0.789,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1899
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2157,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.466,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.207,
+      "cos_to_normalized_block_centroid_median": 0.5574,
+      "share_that_is_the_block_max_node_for_its_query": 0.577,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.099,
+      "share_block_score_equal_to_QMAX": 0.086,
+      "block_score_gap_QMAX_minus_variant_median": 0.1315
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 1.4385939269755082e-06
+    },
+    "RAND_16": {
+     "lost_queries (QMAX covers, variant not)": 61,
+     "gained_queries (variant covers, QMAX not)": 17,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 66,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.739,
+      "centroid_distance_percentile_mean": 0.647,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.5,
+      "cos_to_normalized_block_centroid_median": 0.4686,
+      "share_that_is_the_block_max_node_for_its_query": 0.758,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1687
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2168,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.466,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.208,
+      "cos_to_normalized_block_centroid_median": 0.5568,
+      "share_that_is_the_block_max_node_for_its_query": 0.578,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.174,
+      "share_block_score_equal_to_QMAX": 0.167,
+      "block_score_gap_QMAX_minus_variant_median": 0.0909
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 2.2981950907946347e-06
+    },
+    "RAND_32": {
+     "lost_queries (QMAX covers, variant not)": 41,
+     "gained_queries (variant covers, QMAX not)": 18,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 45,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.725,
+      "centroid_distance_percentile_mean": 0.623,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.444,
+      "cos_to_normalized_block_centroid_median": 0.5064,
+      "share_that_is_the_block_max_node_for_its_query": 0.733,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.122
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2198,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.468,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.212,
+      "cos_to_normalized_block_centroid_median": 0.5566,
+      "share_that_is_the_block_max_node_for_its_query": 0.582,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.344,
+      "share_block_score_equal_to_QMAX": 0.341,
+      "block_score_gap_QMAX_minus_variant_median": 0.0383
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.0005679337843566279
+    }
+   },
+   "SAFE": {
+    "CENT_MEAN": {
+     "lost_queries (QMAX covers, variant not)": 15,
+     "gained_queries (variant covers, QMAX not)": 18,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 17,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.782,
+      "centroid_distance_percentile_mean": 0.661,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.529,
+      "cos_to_normalized_block_centroid_median": 0.4254,
+      "share_that_is_the_block_max_node_for_its_query": 0.529,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2254,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.472,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.216,
+      "cos_to_normalized_block_centroid_median": 0.5536,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.012629954555010741
+    },
+    "CENT_NORM": {
+     "lost_queries (QMAX covers, variant not)": 19,
+     "gained_queries (variant covers, QMAX not)": 10,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 22,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.902,
+      "centroid_distance_percentile_mean": 0.722,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.591,
+      "cos_to_normalized_block_centroid_median": 0.44,
+      "share_that_is_the_block_max_node_for_its_query": 0.682,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2249,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.215,
+      "cos_to_normalized_block_centroid_median": 0.5525,
+      "share_that_is_the_block_max_node_for_its_query": 0.585,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.00013092380767867656
+    },
+    "FPS_1": {
+     "lost_queries (QMAX covers, variant not)": 22,
+     "gained_queries (variant covers, QMAX not)": 15,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 24,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.632,
+      "centroid_distance_percentile_mean": 0.64,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.417,
+      "cos_to_normalized_block_centroid_median": 0.482,
+      "share_that_is_the_block_max_node_for_its_query": 0.5,
+      "rank_in_block_by_q.e_median": 1.5,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2257
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2243,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.215,
+      "cos_to_normalized_block_centroid_median": 0.5539,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.016,
+      "share_block_score_equal_to_QMAX": 0.031,
+      "block_score_gap_QMAX_minus_variant_median": 0.2011
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.005132541535145802
+    },
+    "FPS_2": {
+     "lost_queries (QMAX covers, variant not)": 27,
+     "gained_queries (variant covers, QMAX not)": 21,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 29,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.588,
+      "centroid_distance_percentile_mean": 0.638,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.414,
+      "cos_to_normalized_block_centroid_median": 0.4852,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2207
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2238,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.458,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.214,
+      "cos_to_normalized_block_centroid_median": 0.5539,
+      "share_that_is_the_block_max_node_for_its_query": 0.585,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.029,
+      "share_block_score_equal_to_QMAX": 0.044,
+      "block_score_gap_QMAX_minus_variant_median": 0.1886
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.002209051911214616
+    },
+    "FPS_4": {
+     "lost_queries (QMAX covers, variant not)": 25,
+     "gained_queries (variant covers, QMAX not)": 18,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 26,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.512,
+      "centroid_distance_percentile_mean": 0.5,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.346,
+      "cos_to_normalized_block_centroid_median": 0.5274,
+      "share_that_is_the_block_max_node_for_its_query": 0.462,
+      "rank_in_block_by_q.e_median": 2.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1567
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2240,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.473,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.216,
+      "cos_to_normalized_block_centroid_median": 0.5534,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.044,
+      "share_block_score_equal_to_QMAX": 0.059,
+      "block_score_gap_QMAX_minus_variant_median": 0.1707
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.702252410900344
+    },
+    "FPS_8": {
+     "lost_queries (QMAX covers, variant not)": 32,
+     "gained_queries (variant covers, QMAX not)": 14,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 34,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.493,
+      "centroid_distance_percentile_mean": 0.49,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.324,
+      "cos_to_normalized_block_centroid_median": 0.53,
+      "share_that_is_the_block_max_node_for_its_query": 0.529,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.029,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1273
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2230,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.473,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.216,
+      "cos_to_normalized_block_centroid_median": 0.5529,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.083,
+      "share_block_score_equal_to_QMAX": 0.09,
+      "block_score_gap_QMAX_minus_variant_median": 0.1425
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.7782027371958937
+    },
+    "FPS_16": {
+     "lost_queries (QMAX covers, variant not)": 23,
+     "gained_queries (variant covers, QMAX not)": 14,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 25,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.515,
+      "centroid_distance_percentile_mean": 0.543,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.36,
+      "cos_to_normalized_block_centroid_median": 0.4788,
+      "share_that_is_the_block_max_node_for_its_query": 0.52,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.04,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1056
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2239,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.473,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.217,
+      "cos_to_normalized_block_centroid_median": 0.5525,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.138,
+      "share_block_score_equal_to_QMAX": 0.144,
+      "block_score_gap_QMAX_minus_variant_median": 0.108
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.2767830386682534
+    },
+    "FPS_32": {
+     "lost_queries (QMAX covers, variant not)": 15,
+     "gained_queries (variant covers, QMAX not)": 12,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 15,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.48,
+      "centroid_distance_percentile_mean": 0.511,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.333,
+      "cos_to_normalized_block_centroid_median": 0.4788,
+      "share_that_is_the_block_max_node_for_its_query": 0.467,
+      "rank_in_block_by_q.e_median": 2.0,
+      "share_that_is_a_representative": 0.133,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.0975
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2258,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.474,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.217,
+      "cos_to_normalized_block_centroid_median": 0.5524,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.279,
+      "share_block_score_equal_to_QMAX": 0.283,
+      "block_score_gap_QMAX_minus_variant_median": 0.053
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.6753576626637492
+    },
+    "RAND_1": {
+     "lost_queries (QMAX covers, variant not)": 39,
+     "gained_queries (variant covers, QMAX not)": 10,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 44,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.686,
+      "centroid_distance_percentile_mean": 0.608,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.455,
+      "cos_to_normalized_block_centroid_median": 0.4749,
+      "share_that_is_the_block_max_node_for_its_query": 0.5,
+      "rank_in_block_by_q.e_median": 1.5,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2348
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2222,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.213,
+      "cos_to_normalized_block_centroid_median": 0.5533,
+      "share_that_is_the_block_max_node_for_its_query": 0.587,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.02,
+      "share_block_score_equal_to_QMAX": 0.023,
+      "block_score_gap_QMAX_minus_variant_median": 0.2485
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.003963603694425828
+    },
+    "RAND_2": {
+     "lost_queries (QMAX covers, variant not)": 33,
+     "gained_queries (variant covers, QMAX not)": 10,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 37,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.676,
+      "centroid_distance_percentile_mean": 0.612,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.459,
+      "cos_to_normalized_block_centroid_median": 0.4788,
+      "share_that_is_the_block_max_node_for_its_query": 0.432,
+      "rank_in_block_by_q.e_median": 2.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.205
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2226,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.213,
+      "cos_to_normalized_block_centroid_median": 0.5534,
+      "share_that_is_the_block_max_node_for_its_query": 0.588,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.028,
+      "share_block_score_equal_to_QMAX": 0.031,
+      "block_score_gap_QMAX_minus_variant_median": 0.2114
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.007140293644744167
+    },
+    "RAND_4": {
+     "lost_queries (QMAX covers, variant not)": 40,
+     "gained_queries (variant covers, QMAX not)": 10,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 45,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.876,
+      "centroid_distance_percentile_mean": 0.638,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.511,
+      "cos_to_normalized_block_centroid_median": 0.4683,
+      "share_that_is_the_block_max_node_for_its_query": 0.4,
+      "rank_in_block_by_q.e_median": 2.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1677
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2221,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.455,
+      "centroid_distance_percentile_mean": 0.469,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.211,
+      "cos_to_normalized_block_centroid_median": 0.5561,
+      "share_that_is_the_block_max_node_for_its_query": 0.588,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.041,
+      "share_block_score_equal_to_QMAX": 0.043,
+      "block_score_gap_QMAX_minus_variant_median": 0.1748
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.0003437955708717271
+    },
+    "RAND_8": {
+     "lost_queries (QMAX covers, variant not)": 29,
+     "gained_queries (variant covers, QMAX not)": 14,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 32,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.837,
+      "centroid_distance_percentile_mean": 0.642,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.531,
+      "cos_to_normalized_block_centroid_median": 0.4542,
+      "share_that_is_the_block_max_node_for_its_query": 0.5,
+      "rank_in_block_by_q.e_median": 1.5,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1495
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2240,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.212,
+      "cos_to_normalized_block_centroid_median": 0.5551,
+      "share_that_is_the_block_max_node_for_its_query": 0.587,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.098,
+      "share_block_score_equal_to_QMAX": 0.085,
+      "block_score_gap_QMAX_minus_variant_median": 0.1369
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.002523645412385612
+    },
+    "RAND_16": {
+     "lost_queries (QMAX covers, variant not)": 20,
+     "gained_queries (variant covers, QMAX not)": 13,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 21,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.892,
+      "centroid_distance_percentile_mean": 0.644,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.571,
+      "cos_to_normalized_block_centroid_median": 0.4457,
+      "share_that_is_the_block_max_node_for_its_query": 0.476,
+      "rank_in_block_by_q.e_median": 2.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1177
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2248,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.472,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.214,
+      "cos_to_normalized_block_centroid_median": 0.5536,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.171,
+      "share_block_score_equal_to_QMAX": 0.164,
+      "block_score_gap_QMAX_minus_variant_median": 0.0935
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.013999605341886021
+    },
+    "RAND_32": {
+     "lost_queries (QMAX covers, variant not)": 17,
+     "gained_queries (variant covers, QMAX not)": 17,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 18,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.784,
+      "centroid_distance_percentile_mean": 0.655,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.5,
+      "cos_to_normalized_block_centroid_median": 0.4615,
+      "share_that_is_the_block_max_node_for_its_query": 0.5,
+      "rank_in_block_by_q.e_median": 1.5,
+      "share_that_is_a_representative": 0.056,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.0958
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2256,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.472,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.216,
+      "cos_to_normalized_block_centroid_median": 0.5529,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.341,
+      "share_block_score_equal_to_QMAX": 0.339,
+      "block_score_gap_QMAX_minus_variant_median": 0.0403
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.013044717825593398
+    }
+   },
+   "PRIMARY": {
+    "CENT_MEAN": {
+     "lost_queries (QMAX covers, variant not)": 13,
+     "gained_queries (variant covers, QMAX not)": 19,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 15,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.782,
+      "centroid_distance_percentile_mean": 0.638,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.533,
+      "cos_to_normalized_block_centroid_median": 0.4343,
+      "share_that_is_the_block_max_node_for_its_query": 0.533,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2270,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.472,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.216,
+      "cos_to_normalized_block_centroid_median": 0.5533,
+      "share_that_is_the_block_max_node_for_its_query": 0.585,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.04338540589102523
+    },
+    "CENT_NORM": {
+     "lost_queries (QMAX covers, variant not)": 18,
+     "gained_queries (variant covers, QMAX not)": 11,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 21,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.782,
+      "centroid_distance_percentile_mean": 0.68,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.524,
+      "cos_to_normalized_block_centroid_median": 0.4457,
+      "share_that_is_the_block_max_node_for_its_query": 0.667,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2264,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.472,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.216,
+      "cos_to_normalized_block_centroid_median": 0.5522,
+      "share_that_is_the_block_max_node_for_its_query": 0.584,
+      "rank_in_block_by_q.e_median": 1.0
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.0018821640500423815
+    },
+    "FPS_1": {
+     "lost_queries (QMAX covers, variant not)": 18,
+     "gained_queries (variant covers, QMAX not)": 15,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 20,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.586,
+      "centroid_distance_percentile_mean": 0.625,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.35,
+      "cos_to_normalized_block_centroid_median": 0.4864,
+      "share_that_is_the_block_max_node_for_its_query": 0.55,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.224
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2261,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.216,
+      "cos_to_normalized_block_centroid_median": 0.5536,
+      "share_that_is_the_block_max_node_for_its_query": 0.585,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.016,
+      "share_block_score_equal_to_QMAX": 0.031,
+      "block_score_gap_QMAX_minus_variant_median": 0.201
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.017051623837530852
+    },
+    "FPS_2": {
+     "lost_queries (QMAX covers, variant not)": 22,
+     "gained_queries (variant covers, QMAX not)": 21,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 24,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.586,
+      "centroid_distance_percentile_mean": 0.627,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.375,
+      "cos_to_normalized_block_centroid_median": 0.4864,
+      "share_that_is_the_block_max_node_for_its_query": 0.625,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2161
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2257,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.216,
+      "cos_to_normalized_block_centroid_median": 0.5537,
+      "share_that_is_the_block_max_node_for_its_query": 0.584,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.029,
+      "share_block_score_equal_to_QMAX": 0.044,
+      "block_score_gap_QMAX_minus_variant_median": 0.1882
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.00812373096918129
+    },
+    "FPS_4": {
+     "lost_queries (QMAX covers, variant not)": 20,
+     "gained_queries (variant covers, QMAX not)": 18,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 21,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.51,
+      "centroid_distance_percentile_mean": 0.499,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.333,
+      "cos_to_normalized_block_centroid_median": 0.5146,
+      "share_that_is_the_block_max_node_for_its_query": 0.524,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1498
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2258,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.473,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.216,
+      "cos_to_normalized_block_centroid_median": 0.5534,
+      "share_that_is_the_block_max_node_for_its_query": 0.585,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.044,
+      "share_block_score_equal_to_QMAX": 0.059,
+      "block_score_gap_QMAX_minus_variant_median": 0.17
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.7229721341807556
+    },
+    "FPS_8": {
+     "lost_queries (QMAX covers, variant not)": 28,
+     "gained_queries (variant covers, QMAX not)": 14,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 30,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.493,
+      "centroid_distance_percentile_mean": 0.492,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.333,
+      "cos_to_normalized_block_centroid_median": 0.5172,
+      "share_that_is_the_block_max_node_for_its_query": 0.567,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.033,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1311
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2248,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.473,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.217,
+      "cos_to_normalized_block_centroid_median": 0.5524,
+      "share_that_is_the_block_max_node_for_its_query": 0.585,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.084,
+      "share_block_score_equal_to_QMAX": 0.089,
+      "block_score_gap_QMAX_minus_variant_median": 0.1416
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.7593056886194081
+    },
+    "FPS_16": {
+     "lost_queries (QMAX covers, variant not)": 20,
+     "gained_queries (variant covers, QMAX not)": 15,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 22,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.493,
+      "centroid_distance_percentile_mean": 0.517,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.364,
+      "cos_to_normalized_block_centroid_median": 0.4926,
+      "share_that_is_the_block_max_node_for_its_query": 0.545,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.045,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1069
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2256,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.473,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.218,
+      "cos_to_normalized_block_centroid_median": 0.5522,
+      "share_that_is_the_block_max_node_for_its_query": 0.585,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.137,
+      "share_block_score_equal_to_QMAX": 0.143,
+      "block_score_gap_QMAX_minus_variant_median": 0.1079
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.5540684117569665
+    },
+    "FPS_32": {
+     "lost_queries (QMAX covers, variant not)": 14,
+     "gained_queries (variant covers, QMAX not)": 13,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 14,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.578,
+      "centroid_distance_percentile_mean": 0.544,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.429,
+      "cos_to_normalized_block_centroid_median": 0.4749,
+      "share_that_is_the_block_max_node_for_its_query": 0.5,
+      "rank_in_block_by_q.e_median": 1.5,
+      "share_that_is_a_representative": 0.071,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1013
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2271,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.473,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.218,
+      "cos_to_normalized_block_centroid_median": 0.5522,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.28,
+      "share_block_score_equal_to_QMAX": 0.283,
+      "block_score_gap_QMAX_minus_variant_median": 0.0526
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.4264924335643905
+    },
+    "RAND_1": {
+     "lost_queries (QMAX covers, variant not)": 35,
+     "gained_queries (variant covers, QMAX not)": 8,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 40,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.634,
+      "centroid_distance_percentile_mean": 0.597,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.45,
+      "cos_to_normalized_block_centroid_median": 0.4793,
+      "share_that_is_the_block_max_node_for_its_query": 0.525,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2348
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2240,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.472,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.215,
+      "cos_to_normalized_block_centroid_median": 0.5522,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.02,
+      "share_block_score_equal_to_QMAX": 0.023,
+      "block_score_gap_QMAX_minus_variant_median": 0.2475
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.011870241372186827
+    },
+    "RAND_2": {
+     "lost_queries (QMAX covers, variant not)": 29,
+     "gained_queries (variant covers, QMAX not)": 8,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 33,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.549,
+      "centroid_distance_percentile_mean": 0.569,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.424,
+      "cos_to_normalized_block_centroid_median": 0.5197,
+      "share_that_is_the_block_max_node_for_its_query": 0.424,
+      "rank_in_block_by_q.e_median": 2.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.2012
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2244,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.472,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.215,
+      "cos_to_normalized_block_centroid_median": 0.5524,
+      "share_that_is_the_block_max_node_for_its_query": 0.587,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.028,
+      "share_block_score_equal_to_QMAX": 0.031,
+      "block_score_gap_QMAX_minus_variant_median": 0.2107
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.09015036396560315
+    },
+    "RAND_4": {
+     "lost_queries (QMAX covers, variant not)": 33,
+     "gained_queries (variant covers, QMAX not)": 8,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 38,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.786,
+      "centroid_distance_percentile_mean": 0.617,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.5,
+      "cos_to_normalized_block_centroid_median": 0.4683,
+      "share_that_is_the_block_max_node_for_its_query": 0.421,
+      "rank_in_block_by_q.e_median": 2.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1688
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2242,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.458,
+      "centroid_distance_percentile_mean": 0.47,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.213,
+      "cos_to_normalized_block_centroid_median": 0.5539,
+      "share_that_is_the_block_max_node_for_its_query": 0.587,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.041,
+      "share_block_score_equal_to_QMAX": 0.042,
+      "block_score_gap_QMAX_minus_variant_median": 0.1734
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.0049095517981761075
+    },
+    "RAND_8": {
+     "lost_queries (QMAX covers, variant not)": 25,
+     "gained_queries (variant covers, QMAX not)": 11,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 28,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.739,
+      "centroid_distance_percentile_mean": 0.609,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.5,
+      "cos_to_normalized_block_centroid_median": 0.4733,
+      "share_that_is_the_block_max_node_for_its_query": 0.536,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1503
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2258,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.471,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.214,
+      "cos_to_normalized_block_centroid_median": 0.5538,
+      "share_that_is_the_block_max_node_for_its_query": 0.585,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.098,
+      "share_block_score_equal_to_QMAX": 0.085,
+      "block_score_gap_QMAX_minus_variant_median": 0.1366
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.025981004718528065
+    },
+    "RAND_16": {
+     "lost_queries (QMAX covers, variant not)": 18,
+     "gained_queries (variant covers, QMAX not)": 14,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 19,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.912,
+      "centroid_distance_percentile_mean": 0.639,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.579,
+      "cos_to_normalized_block_centroid_median": 0.4457,
+      "share_that_is_the_block_max_node_for_its_query": 0.474,
+      "rank_in_block_by_q.e_median": 2.0,
+      "share_that_is_a_representative": 0.0,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1062
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2264,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.472,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.215,
+      "cos_to_normalized_block_centroid_median": 0.5534,
+      "share_that_is_the_block_max_node_for_its_query": 0.586,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.17,
+      "share_block_score_equal_to_QMAX": 0.163,
+      "block_score_gap_QMAX_minus_variant_median": 0.0934
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.025578185470271773
+    },
+    "RAND_32": {
+     "lost_queries (QMAX covers, variant not)": 15,
+     "gained_queries (variant covers, QMAX not)": 19,
+     "dropped_gold_nodes (served by QMAX, not by the variant, in lost queries)": {
+      "n": 16,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.794,
+      "centroid_distance_percentile_mean": 0.649,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.5,
+      "cos_to_normalized_block_centroid_median": 0.4615,
+      "share_that_is_the_block_max_node_for_its_query": 0.562,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.062,
+      "share_block_score_equal_to_QMAX": 0.0,
+      "block_score_gap_QMAX_minus_variant_median": 0.1001
+     },
+     "retained_gold_nodes (served by both, all queries)": {
+      "n": 2272,
+      "centroid_distance_percentile_median (0 = most central node of its block, 1 = most peripheral)": 0.461,
+      "centroid_distance_percentile_mean": 0.473,
+      "share_in_peripheral_quartile (percentile >= 0.75)": 0.217,
+      "cos_to_normalized_block_centroid_median": 0.5524,
+      "share_that_is_the_block_max_node_for_its_query": 0.585,
+      "rank_in_block_by_q.e_median": 1.0,
+      "share_that_is_a_representative": 0.341,
+      "share_block_score_equal_to_QMAX": 0.338,
+      "block_score_gap_QMAX_minus_variant_median": 0.0404
+     },
+     "mann_whitney_p (centroid-distance percentile, dropped vs retained; two-sided, descriptive)": 0.025298825657273365
+    }
+   }
+  }
+ },
+ "cohesion": {
+  "global_resultant_length (all nodes; the anisotropy floor)": 0.3838,
+  "actual_partition": {
+   "resultant_length_size_weighted_mean (1 = identical vectors)": 0.5464,
+   "resultant_length_quartiles (blocks with >= 2 nodes)": [
+    0.5056,
+    0.5439,
+    0.5809
+   ],
+   "mean_pairwise_cosine_inside_a_block_size_weighted": 0.2949,
+   "fps_covering_radius_size_weighted_mean_by_m (Euclidean, stored vectors)": {
+    "1": 1.3183,
+    "2": 1.2775,
+    "4": 1.2347,
+    "8": 1.1858,
+    "16": 1.1244,
+    "32": 1.0458
+   },
+   "fps_mean_distance_to_nearest_representative_by_m": {
+    "1": 1.1049,
+    "2": 1.0793,
+    "4": 1.0365,
+    "8": 0.9647,
+    "16": 0.8452,
+    "32": 0.6457
+   },
+   "covering_radius_ratio_r_m_over_r_1_mean": {
+    "1": 1.0,
+    "2": 0.9692,
+    "4": 0.9367,
+    "8": 0.8987,
+    "16": 0.8521,
+    "32": 0.7921
+   }
+  },
+  "size_matched_random_partition (seed 20260926)": {
+   "resultant_length_size_weighted_mean (1 = identical vectors)": 0.3946,
+   "resultant_length_quartiles (blocks with >= 2 nodes)": [
+    0.3914,
+    0.3945,
+    0.3975
+   ],
+   "mean_pairwise_cosine_inside_a_block_size_weighted": 0.1472,
+   "fps_covering_radius_size_weighted_mean_by_m (Euclidean, stored vectors)": {
+    "1": 1.3708,
+    "2": 1.3469,
+    "4": 1.3221,
+    "8": 1.2952,
+    "16": 1.2643,
+    "32": 1.2261
+   },
+   "fps_mean_distance_to_nearest_representative_by_m": {
+    "1": 1.2573,
+    "2": 1.2343,
+    "4": 1.1954,
+    "8": 1.1289,
+    "16": 1.0117,
+    "32": 0.8002
+   },
+   "covering_radius_ratio_r_m_over_r_1_mean": {
+    "1": 1.0,
+    "2": 0.9827,
+    "4": 0.9645,
+    "8": 0.9442,
+    "16": 0.9216,
+    "32": 0.8931
+   }
+  }
+ },
+ "seconds_by_stage": {
+  "uL3_head_and_pinned_beam": 147.1,
+  "balanced_beam": 273.3,
+  "stage2_reference_streamed": 64.8,
+  "representatives_offline": 27.8,
+  "representative_scores_pass": 63.0,
+  "chains": 91.6,
+  "outlier_diagnostic": 13.0,
+  "cohesion": 27.9
+ },
+ "chain_seconds": {
+  "QMAX": 5.4,
+  "BASE": 5.5,
+  "CENT_MEAN": 2.9,
+  "CENT_NORM": 4.3,
+  "FPS_1": 5.5,
+  "FPS_2": 4.3,
+  "FPS_4": 3.1,
+  "FPS_8": 4.9,
+  "FPS_16": 3.2,
+  "FPS_32": 3.8,
+  "RAND_1": 3.8,
+  "RAND_2": 4.1,
+  "RAND_4": 2.8,
+  "RAND_8": 5.2,
+  "RAND_16": 5.1,
+  "RAND_32": 4.2
+ },
+ "seconds": 719.1,
+ "process_rss_mb_at_end": 729.1
+}

@@ -1,0 +1,47 @@
+{
+ "dataset": "squad",
+ "status": "COMPARED",
+ "legacy_cell": "H4_SPLIT_PRESERVE__SK",
+ "legacy_rows": 2000,
+ "canonical_rows": 1997,
+ "overlap": 1997,
+ "legacy_universe": {
+  "n_docs": null,
+  "npart": 190
+ },
+ "BASE": {
+  "legacy_ALL_on_overlap": 0.982,
+  "canonical_ALL_on_overlap": 0.989,
+  "legacy_only_covered": 10,
+  "canonical_only_covered": 24,
+  "net_canonical_minus_legacy": 14,
+  "mcnemar_p": 0.02431,
+  "sig": true
+ },
+ "SAFE": {
+  "legacy_ALL_on_overlap": 0.9915,
+  "canonical_ALL_on_overlap": 0.991,
+  "legacy_only_covered": 8,
+  "canonical_only_covered": 7,
+  "net_canonical_minus_legacy": -1,
+  "mcnemar_p": 1.0,
+  "sig": false
+ },
+ "agreement": {
+  "BASE_same_indicator": 0.983,
+  "SAFE_same_indicator": 0.9925
+ },
+ "full_population": {
+  "legacy_BASE_ALL": 0.982,
+  "legacy_SAFE_ALL": 0.9915,
+  "canonical_BASE_ALL": 0.989,
+  "canonical_SAFE_ALL": 0.991
+ },
+ "caveat": "different node universes (canonical is a strict superset), different partitions (both H4_SK, k = N // 100 of each universe) -- this is an outcome-level reproduction check, not a bit-parity claim",
+ "utc": "2026-09-13T13:10:52Z",
+ "legacy_cache_sha256": "76dc7c2ad90f0d678a77609bed4b7afc43589925f68ddbad0f1324100fab0700",
+ "canonical_cache": "data/l1_canonical/squad/replay_cache_legacyrows.npz",
+ "canonical_cache_sha256": "db80e5ee4e9dff30822dda40e3a09e967d170fa14325154b968a34524426619e",
+ "canonical_population": "COMPARISON_ONLY cache on the bridged legacy rows (comparison.py); not a production number",
+ "bridge_file": "data/l1_canonical/squad/legacy_bridge.json"
+}

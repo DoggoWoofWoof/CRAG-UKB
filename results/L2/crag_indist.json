@@ -1,0 +1,366 @@
+{
+  "_config": {
+    "kind": "in_distribution_universal",
+    "datasets": [
+      "webqsp",
+      "metaqa",
+      "2wiki_clean",
+      "musique_clean",
+      "hotpotqa_clean"
+    ],
+    "arms": [
+      "dropout_only",
+      "kl_dropout"
+    ],
+    "epochs": 10,
+    "seeds": 3,
+    "lam": 1.0,
+    "tau": 1.0,
+    "p_drop": 0.5,
+    "regimes": {
+      "full": [],
+      "no_edge_path": [
+        5,
+        6
+      ],
+      "no_graph_edge_path": [
+        4,
+        5,
+        6
+      ],
+      "no_splade": [
+        3
+      ],
+      "no_offset": [
+        1
+      ],
+      "dense_only": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "dense_splade": [
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "structure_heavy": [
+        0,
+        1
+      ]
+    },
+    "norm": "FROZEN present-only pooled mu/sd from the pooled train of ALL datasets (target INCLUDED)",
+    "note": "ONE universal checkpoint per arm, target-in-training; direct counterpart to run_lodo."
+  },
+  "results": {
+    "dropout_only": {
+      "per_dataset": {
+        "webqsp": {
+          "R@5": [
+            49.82,
+            0.77
+          ],
+          "R@20": [
+            67.38,
+            1.49
+          ],
+          "R@50": [
+            74.7,
+            0.95
+          ],
+          "Hit@5": [
+            68.25,
+            0.85
+          ],
+          "Hit@50": [
+            87.3,
+            1.28
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            67.92,
+            0.54
+          ],
+          "R@20": [
+            82.74,
+            1.31
+          ],
+          "R@50": [
+            90.72,
+            1.42
+          ],
+          "Hit@5": [
+            77.38,
+            1.69
+          ],
+          "Hit@50": [
+            95.95,
+            1.09
+          ]
+        },
+        "2wiki_clean": {
+          "R@5": [
+            80.31,
+            1.68
+          ],
+          "R@20": [
+            90.32,
+            1.01
+          ],
+          "R@50": [
+            93.54,
+            0.59
+          ],
+          "Hit@5": [
+            99.98,
+            0.03
+          ],
+          "Hit@50": [
+            100.0,
+            0.0
+          ]
+        },
+        "musique_clean": {
+          "R@5": [
+            68.66,
+            0.13
+          ],
+          "R@20": [
+            80.85,
+            0.25
+          ],
+          "R@50": [
+            87.35,
+            0.12
+          ],
+          "Hit@5": [
+            95.12,
+            0.09
+          ],
+          "Hit@50": [
+            99.08,
+            0.13
+          ]
+        },
+        "hotpotqa_clean": {
+          "R@5": [
+            66.85,
+            1.2
+          ],
+          "R@20": [
+            80.43,
+            1.09
+          ],
+          "R@50": [
+            87.24,
+            0.76
+          ],
+          "Hit@5": [
+            87.09,
+            1.09
+          ],
+          "Hit@50": [
+            96.96,
+            0.52
+          ]
+        }
+      },
+      "mean_alpha": {
+        "webqsp": {
+          "dense": 0.0026,
+          "offset": 0.9941,
+          "splade": 0.0013,
+          "relation": 0.0003,
+          "path": 0.0017
+        },
+        "metaqa": {
+          "dense": 0.0038,
+          "offset": 0.9912,
+          "splade": 0.0042,
+          "relation": 0.0009,
+          "path": 0.0
+        },
+        "2wiki_clean": {
+          "dense": 0.0189,
+          "offset": 0.9663,
+          "splade": 0.0115,
+          "relation": 0.002,
+          "path": 0.0014
+        },
+        "musique_clean": {
+          "dense": 0.0679,
+          "offset": 0.8987,
+          "splade": 0.0255,
+          "relation": 0.0049,
+          "path": 0.0029
+        },
+        "hotpotqa_clean": {
+          "dense": 0.0212,
+          "offset": 0.9666,
+          "splade": 0.0065,
+          "relation": 0.003,
+          "path": 0.0026
+        }
+      },
+      "xgb_gain_importance": null
+    },
+    "kl_dropout": {
+      "per_dataset": {
+        "webqsp": {
+          "R@5": [
+            48.71,
+            2.07
+          ],
+          "R@20": [
+            66.58,
+            1.41
+          ],
+          "R@50": [
+            74.19,
+            0.68
+          ],
+          "Hit@5": [
+            67.35,
+            1.67
+          ],
+          "Hit@50": [
+            86.85,
+            0.85
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            69.47,
+            0.8
+          ],
+          "R@20": [
+            84.98,
+            1.14
+          ],
+          "R@50": [
+            92.76,
+            0.99
+          ],
+          "Hit@5": [
+            79.0,
+            1.34
+          ],
+          "Hit@50": [
+            97.23,
+            0.62
+          ]
+        },
+        "2wiki_clean": {
+          "R@5": [
+            80.53,
+            0.61
+          ],
+          "R@20": [
+            90.04,
+            0.38
+          ],
+          "R@50": [
+            93.57,
+            0.14
+          ],
+          "Hit@5": [
+            100.0,
+            0.0
+          ],
+          "Hit@50": [
+            100.0,
+            0.0
+          ]
+        },
+        "musique_clean": {
+          "R@5": [
+            69.03,
+            0.93
+          ],
+          "R@20": [
+            81.58,
+            0.9
+          ],
+          "R@50": [
+            88.0,
+            0.68
+          ],
+          "Hit@5": [
+            95.37,
+            0.33
+          ],
+          "Hit@50": [
+            99.18,
+            0.13
+          ]
+        },
+        "hotpotqa_clean": {
+          "R@5": [
+            67.1,
+            0.34
+          ],
+          "R@20": [
+            80.76,
+            0.32
+          ],
+          "R@50": [
+            87.59,
+            0.33
+          ],
+          "Hit@5": [
+            87.99,
+            0.17
+          ],
+          "Hit@50": [
+            97.08,
+            0.27
+          ]
+        }
+      },
+      "mean_alpha": {
+        "webqsp": {
+          "dense": 0.1019,
+          "offset": 0.611,
+          "splade": 0.1113,
+          "relation": 0.1258,
+          "path": 0.05
+        },
+        "metaqa": {
+          "dense": 0.1279,
+          "offset": 0.5143,
+          "splade": 0.3105,
+          "relation": 0.0473,
+          "path": 0.0
+        },
+        "2wiki_clean": {
+          "dense": 0.1711,
+          "offset": 0.4826,
+          "splade": 0.2623,
+          "relation": 0.0801,
+          "path": 0.0038
+        },
+        "musique_clean": {
+          "dense": 0.1671,
+          "offset": 0.5248,
+          "splade": 0.2703,
+          "relation": 0.0336,
+          "path": 0.0041
+        },
+        "hotpotqa_clean": {
+          "dense": 0.1929,
+          "offset": 0.4605,
+          "splade": 0.2792,
+          "relation": 0.0574,
+          "path": 0.0098
+        }
+      },
+      "xgb_gain_importance": null
+    }
+  }
+}

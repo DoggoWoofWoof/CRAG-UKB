@@ -1,0 +1,604 @@
+{
+  "dataset": "2wiki_clean",
+  "ner_edges": false,
+  "hops": 2,
+  "path_cap": 8,
+  "reranker_R@5": {
+    "none": [
+      78.55,
+      0.12
+    ],
+    "+relation": [
+      79.18,
+      0.18
+    ],
+    "+relation+path": [
+      78.98,
+      0.05
+    ],
+    "gated_rescue": [
+      82.01,
+      0.01
+    ],
+    "gated_rescue_supervised": [
+      81.13,
+      0.2
+    ],
+    "gated_rescue_subset": {
+      "rescued": 180,
+      "rescuable": 433
+    },
+    "kl_router": [
+      75.15,
+      2.28
+    ]
+  },
+  "per_signal_R@5": {
+    "dense": 64.03,
+    "offset": 75.92,
+    "prototype": 63.92,
+    "splade": 67.9,
+    "graph": 1.67,
+    "relation_raw": 25.62,
+    "relation_trained": 25.25,
+    "path_raw": 0.23,
+    "relation_pair_raw": 25.32,
+    "relation_masked_raw": 25.42,
+    "relation_shuf_raw": 25.15
+  },
+  "oracle_R@5": {
+    "old": 78.58,
+    "+relation": 78.62,
+    "+relation+path": 78.62,
+    "+edge_pair": 78.62
+  },
+  "oracle_R@20": {
+    "old": 85.05,
+    "+relation": 85.08,
+    "+relation+path": 85.08,
+    "+edge_pair": 85.08
+  },
+  "oracle_R@5_by_hop": {
+    "1hop": {
+      "old": 68.94,
+      "+relation": 69.0,
+      "+relation+path": 69.0,
+      "+edge_pair": 69.0
+    },
+    "2hop": {
+      "old": 75.0,
+      "+relation": 75.0,
+      "+relation+path": 75.0,
+      "+edge_pair": 75.0
+    },
+    "unreach": {
+      "old": 90.81,
+      "+relation": 90.81,
+      "+relation+path": 90.81,
+      "+edge_pair": 90.81
+    }
+  },
+  "n_by_hop": {
+    "1hop": 837,
+    "2hop": 2,
+    "unreach": 661
+  },
+  "rank_movement": {
+    "into_top5": 599,
+    "stayed_top5": 370
+  },
+  "n_golds_with_relation": 989,
+  "reference": {
+    "prev_reranker_R@5": 38.8,
+    "prev_oracle_R@5": 39.1,
+    "benchmark": 29.7
+  },
+  "per_signal_R@1": {
+    "dense": 38.62,
+    "offset": 43.1,
+    "prototype": 38.87,
+    "splade": 41.78,
+    "graph": 0.2,
+    "relation_raw": 16.08,
+    "relation_trained": 14.95,
+    "path_raw": 0.17,
+    "relation_pair_raw": 15.35,
+    "relation_masked_raw": 15.73,
+    "relation_shuf_raw": 13.98
+  },
+  "oracle_R@1": {
+    "old": 44.5,
+    "+relation": 44.57,
+    "+relation+path": 44.57,
+    "+edge_pair": 44.57
+  },
+  "subset_R@5": {
+    "topic": {
+      "dense": 91.8,
+      "offset": 96.77,
+      "splade": 96.73,
+      "prototype": 91.8,
+      "relation_raw": 0.17,
+      "path_raw": 0.23,
+      "relation_pair_raw": 0.17,
+      "relation_masked_raw": 0.17,
+      "relation_shuf_raw": 0.17
+    },
+    "bridge": {
+      "dense": 11.11,
+      "offset": 35.39,
+      "splade": 12.04,
+      "prototype": 10.81,
+      "relation_raw": 75.47,
+      "path_raw": 0.2,
+      "relation_pair_raw": 74.58,
+      "relation_masked_raw": 74.88,
+      "relation_shuf_raw": 74.09
+    },
+    "all": {
+      "dense": 64.03,
+      "offset": 75.92,
+      "splade": 67.9,
+      "prototype": 63.92,
+      "relation_raw": 25.62,
+      "path_raw": 0.23,
+      "relation_pair_raw": 25.32,
+      "relation_masked_raw": 25.42,
+      "relation_shuf_raw": 25.15
+    }
+  },
+  "oracle_subset_R@5": {
+    "topic": {
+      "old": 98.93,
+      "+relation": 98.93,
+      "+relation+path": 98.93,
+      "+edge_pair": 98.93
+    },
+    "bridge": {
+      "old": 39.49,
+      "+relation": 82.03,
+      "+relation+path": 82.13,
+      "+edge_pair": 81.34
+    },
+    "all": {
+      "old": 78.58,
+      "+relation": 78.62,
+      "+relation+path": 78.62,
+      "+edge_pair": 78.62
+    }
+  },
+  "n_subset": {
+    "topic": 1500,
+    "bridge": 1013,
+    "all": 1500
+  },
+  "debug_examples_2wiki": [
+    {
+      "question": "Which film was released first, The Night Is Young or Alexander The Last?",
+      "topics": [
+        "The Night Is Young",
+        "Alexander the Last",
+        "Was"
+      ],
+      "source": "The Night Is Young",
+      "target": "Dudley Murphy",
+      "edge_sentence": "The movie is based on a story written by Vicki Baum and directed by Dudley Murphy.",
+      "edge_pair": "The Night Is Young \u2014 Dudley Murphy",
+      "edge_masked": "The movie is based on a story written by Vicki Baum and directed by [TGT].",
+      "is_gold": false
+    },
+    {
+      "question": "Which film has the director who was born first, Lianhua Symphony or Without Evidence?",
+      "topics": [
+        "Without Evidence",
+        "Lianhua Symphony",
+        "Was"
+      ],
+      "source": "Without Evidence",
+      "target": "Gill Dennis",
+      "edge_sentence": "Without Evidence is a 1996 thriller film directed by Gill Dennis and starring Scott Plank, Anna Gunn, Angelina Jolie, Paul Perri, and Andrew Prine.",
+      "edge_pair": "Without Evidence \u2014 Gill Dennis",
+      "edge_masked": "[SRC] is a 1996 thriller film directed by [TGT] and starring Scott Plank, Anna Gunn, Angelina Jolie, Paul Perri, and Andrew Prine.",
+      "is_gold": true
+    },
+    {
+      "question": "What is the date of birth of the director of film Champagne For Caesar?",
+      "topics": [
+        "Champagne for Caesar"
+      ],
+      "source": "Champagne for Caesar",
+      "target": "Richard Whorf",
+      "edge_sentence": "Champagne for Caesar is a 1950 American comedy film about a quiz show contestant, directed by Richard Whorf and written by Fred Brady and Hans Jacoby.",
+      "edge_pair": "Champagne for Caesar \u2014 Richard Whorf",
+      "edge_masked": "[SRC] is a 1950 American comedy film about a quiz show contestant, directed by [TGT] and written by Fred Brady and Hans Jacoby.",
+      "is_gold": true
+    },
+    {
+      "question": "When was the director of film Los Inundados born?",
+      "topics": [
+        "Los Inundados",
+        "Was"
+      ],
+      "source": "Los Inundados",
+      "target": "Fernando Birri",
+      "edge_sentence": "Los Inundados is a 1961 Argentine film directed by Fernando Birri.",
+      "edge_pair": "Los Inundados \u2014 Fernando Birri",
+      "edge_masked": "[SRC] is a 1961 Argentine film directed by [TGT].",
+      "is_gold": true
+    },
+    {
+      "question": "What is the date of death of Theuderic I's father?",
+      "topics": [
+        "Theuderic I"
+      ],
+      "source": "Theuderic I",
+      "target": "Clovis I",
+      "edge_sentence": "He was the son of Clovis I and one of his earlier wives or concubines (possibly a Franco-Rhenish Princess, Evochildis of Cologne).",
+      "edge_pair": "Theuderic I \u2014 Clovis I",
+      "edge_masked": "He was the son of [TGT] and one of his earlier wives or concubines (possibly a Franco-Rhenish Princess, Evochildis of Cologne).",
+      "is_gold": true
+    },
+    {
+      "question": "Do Ludwig Aschoff and Andronikos Doukas (General Under Leo Vi) have the same nationality?",
+      "topics": [
+        "Andronikos Doukas (general under Leo VI)",
+        "Ludwig Aschoff"
+      ],
+      "source": "Andronikos Doukas (general under Leo VI)",
+      "target": "Leo VI the Wise",
+      "edge_sentence": "Andronikos Doukas or Doux( died circa 910) was a Byzantine general and rebel in the reign of Emperor Leo VI the Wise( r.",
+      "edge_pair": "Andronikos Doukas (general under Leo VI) \u2014 Leo VI the Wise",
+      "edge_masked": "Andronikos Doukas or Doux( died circa 910) was a Byzantine general and rebel in the reign of Emperor [TGT]( r.",
+      "is_gold": false
+    },
+    {
+      "question": "Which film has the director who was born later, Invasion Of The Saucer Men or Enter Madame (1935 Film)?",
+      "topics": [
+        "Invasion of the Saucer Men",
+        "Enter Madame (1935 film)",
+        "Was"
+      ],
+      "source": "Invasion of the Saucer Men",
+      "target": "I Was a Teenage Werewolf",
+      "edge_sentence": "\" Invasion of the Saucer Men\" was released as a double feature with\" I Was a Teenage Werewolf\".",
+      "edge_pair": "Invasion of the Saucer Men \u2014 I Was a Teenage Werewolf",
+      "edge_masked": "\" [SRC]\" was released as a double feature with\" [TGT]\".",
+      "is_gold": false
+    },
+    {
+      "question": "Where did Max Uhlemann's father graduate from?",
+      "topics": [
+        "Max Uhlemann"
+      ],
+      "source": "Max Uhlemann",
+      "target": "Three Days",
+      "edge_sentence": "His \"Drei Tage in Memphis\" (1856) was an early attempt to describe everyday life in ancient Egypt for a general audience; an English translation, \"Three Days in Memphis\", appeared in 1858.",
+      "edge_pair": "Max Uhlemann \u2014 Three Days",
+      "edge_masked": "His \"Drei Tage in Memphis\" (1856) was an early attempt to describe everyday life in ancient Egypt for a general audience; an English translation, \"[TGT] in Memphis\", appeared in 1858.",
+      "is_gold": false
+    },
+    {
+      "question": "What is the place of birth of the performer of song The Key (Speech Debelle Song)?",
+      "topics": [
+        "The Key (Speech Debelle song)",
+        "Place of birth"
+      ],
+      "source": "The Key (Speech Debelle song)",
+      "target": "Speech Debelle",
+      "edge_sentence": "\"The Key\" was the second single from the album \"Speech Therapy\" by Speech Debelle.",
+      "edge_pair": "The Key (Speech Debelle song) \u2014 Speech Debelle",
+      "edge_masked": "\"The Key\" was the second single from the album \"Speech Therapy\" by [TGT].",
+      "is_gold": true
+    },
+    {
+      "question": "When is the performer of song On Fire (Lil Wayne Song) 's birthday?",
+      "topics": [
+        "On Fire (Lil Wayne song)"
+      ],
+      "source": "On Fire (Lil Wayne song)",
+      "target": "Lil Wayne",
+      "edge_sentence": "\"On Fire\" is a song performed by rapper Lil Wayne.",
+      "edge_pair": "On Fire (Lil Wayne song) \u2014 Lil Wayne",
+      "edge_masked": "\"On Fire\" is a song performed by rapper [TGT].",
+      "is_gold": true
+    },
+    {
+      "question": "When was the director of film The Woman In Red (1935 Film) born?",
+      "topics": [
+        "The Woman in Red (1935 film)",
+        "Was"
+      ],
+      "source": "The Woman in Red (1935 film)",
+      "target": "Robert Florey",
+      "edge_sentence": "The Woman in Red is a 1935 American drama film directed by Robert Florey and starring Barbara Stanwyck and Gene Raymond.",
+      "edge_pair": "The Woman in Red (1935 film) \u2014 Robert Florey",
+      "edge_masked": "The Woman in Red is a 1935 American drama film directed by [TGT] and starring Barbara Stanwyck and Gene Raymond.",
+      "is_gold": true
+    },
+    {
+      "question": "Are both directors of films Vaalu and Beloved Infidel from the same country?",
+      "topics": [
+        "Beloved Infidel",
+        "Vaalu"
+      ],
+      "source": "Beloved Infidel",
+      "target": "Gregory Peck",
+      "edge_sentence": "The film stars Gregory Peck and Deborah Kerr, with Eddie Albert and Philip Ober.",
+      "edge_pair": "Beloved Infidel \u2014 Gregory Peck",
+      "edge_masked": "The film stars [TGT] and Deborah Kerr, with Eddie Albert and Philip Ober.",
+      "is_gold": false
+    },
+    {
+      "question": "When did the director of film Uuno Turhapuro \u2013 Suomen Tasavallan Herra Presidentti die?",
+      "topics": [
+        "Uuno Turhapuro \u2013 Suomen tasavallan herra presidentti"
+      ],
+      "source": "Uuno Turhapuro \u2013 Suomen tasavallan herra presidentti",
+      "target": "Ere Kokkonen",
+      "edge_sentence": "Uuno Turhapuro \u2013 Suomen tasavallan herra presidentti is a 1992 Finnish comedy film written and directed by Ere Kokkonen.",
+      "edge_pair": "Uuno Turhapuro \u2013 Suomen tasavallan herra presidentti \u2014 Ere Kokkonen",
+      "edge_masked": "[SRC] is a 1992 Finnish comedy film written and directed by [TGT].",
+      "is_gold": true
+    },
+    {
+      "question": "What is the date of death of Augusta Victoria Of Hohenzollern's father?",
+      "topics": [
+        "Augusta Victoria of Hohenzollern"
+      ],
+      "source": "Augusta Victoria of Hohenzollern",
+      "target": "Princess Maria",
+      "edge_sentence": "Princess Augusta Victoria of Hohenzollern (19 August 1890 \u2013 29 August 1966) was the daughter of William, Prince of Hohenzollern and Princess Maria Teresa of Bourbon-Two Sicilies.",
+      "edge_pair": "Augusta Victoria of Hohenzollern \u2014 Princess Maria",
+      "edge_masked": "Princess [SRC] (19 August 1890 \u2013 29 August 1966) was the daughter of William, Prince of Hohenzollern and [TGT] Teresa of Bourbon-Two Sicilies.",
+      "is_gold": false
+    },
+    {
+      "question": "Do both films Party Husband and Brain Damage (Film) have the directors from the same country?",
+      "topics": [
+        "Brain Damage (film)",
+        "Party Husband"
+      ],
+      "source": "Brain Damage (film)",
+      "target": "Frank Henenlotter",
+      "edge_sentence": "Brain Damage is a 1988 American comedy horror film directed by Frank Henenlotter.",
+      "edge_pair": "Brain Damage (film) \u2014 Frank Henenlotter",
+      "edge_masked": "Brain Damage is a 1988 American comedy horror film directed by [TGT].",
+      "is_gold": true
+    },
+    {
+      "question": "Which film has the director who died later, All My Friends Part 2 or The Digger Earl?",
+      "topics": [
+        "All My Friends Part 2",
+        "The Digger Earl"
+      ],
+      "source": "All My Friends Part 2",
+      "target": "Nanni Loy",
+      "edge_sentence": "The last chapter of this saga is\" Amici miei- Atto III\", directed by Nanni Loy( 1985).",
+      "edge_pair": "All My Friends Part 2 \u2014 Nanni Loy",
+      "edge_masked": "The last chapter of this saga is\" Amici miei- Atto III\", directed by [TGT]( 1985).",
+      "is_gold": false
+    },
+    {
+      "question": "Are both directors of films My Dear Muthachan and The Mysterious X from the same country?",
+      "topics": [
+        "My Dear Muthachan",
+        "The Mysterious X"
+      ],
+      "source": "My Dear Muthachan",
+      "target": "Sathyan Anthikad",
+      "edge_sentence": "My Dear Muthachan is a 1992 Malayalam film written by Sreenivasan and directed by Sathyan Anthikad and produced by Joy Thomas.",
+      "edge_pair": "My Dear Muthachan \u2014 Sathyan Anthikad",
+      "edge_masked": "[SRC] is a 1992 Malayalam film written by Sreenivasan and directed by [TGT] and produced by Joy Thomas.",
+      "is_gold": true
+    },
+    {
+      "question": "Which film has the director born first, Kharij or Real Genius?",
+      "topics": [
+        "Real Genius",
+        "Kharij"
+      ],
+      "source": "Real Genius",
+      "target": "Martha Coolidge",
+      "edge_sentence": "Real Genius is a 1985 American science fiction comedy film directed by Martha Coolidge, written by Neal Israel, Pat Proft and Peter Torokvei, and starring Val Kilmer and Gabriel Jarret.",
+      "edge_pair": "Real Genius \u2014 Martha Coolidge",
+      "edge_masked": "[SRC] is a 1985 American science fiction comedy film directed by [TGT], written by Neal Israel, Pat Proft and Peter Torokvei, and starring Val Kilmer and Gabriel Jarret.",
+      "is_gold": true
+    },
+    {
+      "question": "What is the date of birth of the performer of song A Tear Fell?",
+      "topics": [
+        "A Tear Fell"
+      ],
+      "source": "A Tear Fell",
+      "target": "Teresa Brewer",
+      "edge_sentence": "The best-known version of the song was recorded by Teresa Brewer the same year, peaking at number two in the U.K.",
+      "edge_pair": "A Tear Fell \u2014 Teresa Brewer",
+      "edge_masked": "The best-known version of the song was recorded by [TGT] the same year, peaking at number two in the U.K.",
+      "is_gold": true
+    },
+    {
+      "question": "Who is the father of the composer of song Long Live Our State?",
+      "topics": [
+        "Long Live our State"
+      ],
+      "source": "Long Live our State",
+      "target": "Long Live",
+      "edge_sentence": "Long Live our State (/\"Da zdravstvuyet nasha derzhava\") is a patriotic song composed by Boris Alexandrovich Alexandrov in 1943.",
+      "edge_pair": "Long Live our State \u2014 Long Live",
+      "edge_masked": "[TGT] our State (/\"Da zdravstvuyet nasha derzhava\") is a patriotic song composed by Boris Alexandrovich Alexandrov in 1943.",
+      "is_gold": false
+    }
+  ],
+  "debug_edges_gold": [
+    {
+      "question": "Which film has the director who was born first, Lianhua Symphony or Without Evidence?",
+      "target": "Gill Dennis",
+      "rel_score": 0.478,
+      "is_gold": true,
+      "edge_sentence": "Without Evidence is a 1996 thriller film directed by Gill Dennis and starring Scott Plank, Anna Gunn, Angelina Jolie, Paul Perri, and Andrew Prine."
+    },
+    {
+      "question": "What is the date of birth of the director of film Champagne For Caesar?",
+      "target": "Richard Whorf",
+      "rel_score": 0.679,
+      "is_gold": true,
+      "edge_sentence": "Champagne for Caesar is a 1950 American comedy film about a quiz show contestant, directed by Richard Whorf and written by Fred Brady and Hans Jacoby."
+    },
+    {
+      "question": "When was the director of film Los Inundados born?",
+      "target": "Fernando Birri",
+      "rel_score": 0.789,
+      "is_gold": true,
+      "edge_sentence": "Los Inundados is a 1961 Argentine film directed by Fernando Birri."
+    },
+    {
+      "question": "What is the date of death of Theuderic I's father?",
+      "target": "Clovis I",
+      "rel_score": 0.574,
+      "is_gold": true,
+      "edge_sentence": "He was the son of Clovis I and one of his earlier wives or concubines (possibly a Franco-Rhenish Princess, Evochildis of Cologne)."
+    },
+    {
+      "question": "Which film has the director who was born later, Invasion Of The Saucer Men or Enter Madame (1935 Fil",
+      "target": "Elliott Nugent",
+      "rel_score": 0.502,
+      "is_gold": true,
+      "edge_sentence": "Enter Madame is an American romantic comedy film directed by Elliott Nugent, starring Elissa Landi and Cary Grant, and released by Paramount Pictures."
+    },
+    {
+      "question": "Where did Max Uhlemann's father graduate from?",
+      "target": "Friedrich Gottlob Uhlemann",
+      "rel_score": 0.644,
+      "is_gold": true,
+      "edge_sentence": "He was the son of Friedrich Gottlob Uhlemann, who taught theology at the universities of Berlin and Leipzig."
+    },
+    {
+      "question": "What is the place of birth of the performer of song The Key (Speech Debelle Song)?",
+      "target": "Speech Debelle",
+      "rel_score": 0.779,
+      "is_gold": true,
+      "edge_sentence": "\"The Key\" was the second single from the album \"Speech Therapy\" by Speech Debelle."
+    },
+    {
+      "question": "When is the performer of song On Fire (Lil Wayne Song) 's birthday?",
+      "target": "Lil Wayne",
+      "rel_score": 0.859,
+      "is_gold": true,
+      "edge_sentence": "\"On Fire\" is a song performed by rapper Lil Wayne."
+    },
+    {
+      "question": "When was the director of film The Woman In Red (1935 Film) born?",
+      "target": "Robert Florey",
+      "rel_score": 0.705,
+      "is_gold": true,
+      "edge_sentence": "The Woman in Red is a 1935 American drama film directed by Robert Florey and starring Barbara Stanwyck and Gene Raymond."
+    },
+    {
+      "question": "When did the director of film Uuno Turhapuro \u2013 Suomen Tasavallan Herra Presidentti die?",
+      "target": "Ere Kokkonen",
+      "rel_score": 0.833,
+      "is_gold": true,
+      "edge_sentence": "Uuno Turhapuro \u2013 Suomen tasavallan herra presidentti is a 1992 Finnish comedy film written and directed by Ere Kokkonen."
+    },
+    {
+      "question": "Do both films Party Husband and Brain Damage (Film) have the directors from the same country?",
+      "target": "Frank Henenlotter",
+      "rel_score": 0.558,
+      "is_gold": true,
+      "edge_sentence": "Brain Damage is a 1988 American comedy horror film directed by Frank Henenlotter."
+    },
+    {
+      "question": "Which film has the director who died later, All My Friends Part 2 or The Digger Earl?",
+      "target": "Beaumont Smith",
+      "rel_score": 0.58,
+      "is_gold": true,
+      "edge_sentence": "The Digger Earl is a 1924 Australian film comedy from director Beaumont Smith."
+    }
+  ],
+  "debug_edges_fp": [
+    {
+      "question": "Which film was released first, The Night Is Young or Alexander The Last?",
+      "target": "Justin Rice",
+      "rel_score": 0.557,
+      "is_gold": false,
+      "edge_sentence": "Alexander the Last is a 2009 American drama film directed by Joe Swanberg and starring Jess Weixler, Justin Rice, Barlow Jacobs, and Amy Seimetz."
+    },
+    {
+      "question": "Which film was released first, The Night Is Young or Alexander The Last?",
+      "target": "Joe Swanberg",
+      "rel_score": 0.557,
+      "is_gold": false,
+      "edge_sentence": "Alexander the Last is a 2009 American drama film directed by Joe Swanberg and starring Jess Weixler, Justin Rice, Barlow Jacobs, and Amy Seimetz."
+    },
+    {
+      "question": "Which film was released first, The Night Is Young or Alexander The Last?",
+      "target": "The Night",
+      "rel_score": 0.554,
+      "is_gold": false,
+      "edge_sentence": "The Night Is Young is a 1935 American romantic musical film starring Ramon Novarro and Evelyn Laye."
+    },
+    {
+      "question": "Which film was released first, The Night Is Young or Alexander The Last?",
+      "target": "Dudley Murphy",
+      "rel_score": 0.344,
+      "is_gold": false,
+      "edge_sentence": "The movie is based on a story written by Vicki Baum and directed by Dudley Murphy."
+    },
+    {
+      "question": "Which film has the director who was born first, Lianhua Symphony or Without Evidence?",
+      "target": "Angelina Jolie",
+      "rel_score": 0.478,
+      "is_gold": false,
+      "edge_sentence": "Without Evidence is a 1996 thriller film directed by Gill Dennis and starring Scott Plank, Anna Gunn, Angelina Jolie, Paul Perri, and Andrew Prine."
+    },
+    {
+      "question": "Which film has the director who was born first, Lianhua Symphony or Without Evidence?",
+      "target": "Cai Chusheng",
+      "rel_score": 0.435,
+      "is_gold": false,
+      "edge_sentence": "It consists of eight segments of various duration and genre, directed by eight prominent directors of the era: Cai Chusheng, Fei Mu, He Mengfu, Situ Huimin, She"
+    },
+    {
+      "question": "Which film has the director who was born first, Lianhua Symphony or Without Evidence?",
+      "target": "Fei Mu",
+      "rel_score": 0.435,
+      "is_gold": false,
+      "edge_sentence": "It consists of eight segments of various duration and genre, directed by eight prominent directors of the era: Cai Chusheng, Fei Mu, He Mengfu, Situ Huimin, She"
+    },
+    {
+      "question": "What is the date of birth of the director of film Champagne For Caesar?",
+      "target": "Richard Whorf",
+      "rel_score": 0.679,
+      "is_gold": false,
+      "edge_sentence": "Champagne for Caesar is a 1950 American comedy film about a quiz show contestant, directed by Richard Whorf and written by Fred Brady and Hans Jacoby."
+    },
+    {
+      "question": "What is the date of death of Theuderic I's father?",
+      "target": "Childebert I",
+      "rel_score": 0.495,
+      "is_gold": false,
+      "edge_sentence": "In accordance with Salian tradition, the kingdom was divided between Clovis's four surviving sons: Childebert I in Paris, Chlodomer in Orl\u00e9ans, and Clothar I in"
+    },
+    {
+      "question": "Are both Asrabad, Ardabil and Gachavi-Ye Mozaffarabad located in the same country?",
+      "target": "Ardabil Province",
+      "rel_score": 0.764,
+      "is_gold": false,
+      "edge_sentence": "Asrabad( also Romanized as \u02bf A\u1e63r\u0101b\u0101d) is a village in Meshgin -e Gharbi Rural District, in the Central District of Meshgin Shahr County, Ardabil Province, Iran."
+    },
+    {
+      "question": "Do Ludwig Aschoff and Andronikos Doukas (General Under Leo Vi) have the same nationality?",
+      "target": "Leo VI the Wise",
+      "rel_score": 0.651,
+      "is_gold": false,
+      "edge_sentence": "Andronikos Doukas or Doux( died circa 910) was a Byzantine general and rebel in the reign of Emperor Leo VI the Wise( r."
+    },
+    {
+      "question": "Which film has the director who was born later, Invasion Of The Saucer Men or Enter Madame (1935 Fil",
+      "target": "I Was a Teenage Werewolf",
+      "rel_score": 0.572,
+      "is_gold": false,
+      "edge_sentence": "\" Invasion of the Saucer Men\" was released as a double feature with\" I Was a Teenage Werewolf\"."
+    }
+  ]
+}

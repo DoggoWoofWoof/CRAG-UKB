@@ -1,0 +1,98 @@
+{
+ "rule": "H4_SPLIT_PRESERVE",
+ "famset": "SK",
+ "families": [
+  "STRUCT",
+  "KNN"
+ ],
+ "N": 20233,
+ "k": 500,
+ "k_rule": "max(1, N // 100)",
+ "target_block_size": 40,
+ "cap": 40,
+ "cap_rule": [
+  "blk",
+  1.0
+ ],
+ "mode": "split",
+ "weighted": true,
+ "weight_scale": 1000,
+ "hyperedges": 61244,
+ "pins": 1611930,
+ "pins_precap_total": 1581445,
+ "anchor_duplication_pins": 30485,
+ "pin_retention_total": 1.0,
+ "size_min": 2,
+ "size_max": 40,
+ "size_mean": 26.32,
+ "weight_min": 26,
+ "weight_max": 1000,
+ "weight_sum": 8434803,
+ "per_family": {
+  "STRUCT": {
+   "hyperedges_precap": 13884,
+   "pins_precap": 1503352,
+   "anchors_over_cap": 10222,
+   "hyperedges_out": 44369,
+   "pins_written": 1533837,
+   "anchor_duplication_pins": 30485,
+   "pins_discarded": 0,
+   "pin_retention": 1.0,
+   "size_max_out": 40
+  },
+  "KNN": {
+   "hyperedges_precap": 16875,
+   "pins_precap": 78093,
+   "anchors_over_cap": 0,
+   "hyperedges_out": 16875,
+   "pins_written": 78093,
+   "anchor_duplication_pins": 0,
+   "pins_discarded": 0,
+   "pin_retention": 1.0,
+   "size_max_out": 24
+  }
+ },
+ "dataset": "squad",
+ "file": "results/L1_HOST/parts/squad__H4_SK_k500.npz",
+ "bytes": 2675320,
+ "file_sha256": "076678f2675cbc4fc42a0e9aeac50676696407fbfb5e1ea858d59d95d4c5b156",
+ "content_digest": "d4a3e6bdf6dbfc6411f5c5223bce879a07417c8cbe3ce3a8861a715487490d72",
+ "built_utc": "2026-09-29T10:09:05Z",
+ "seconds": 4.0,
+ "inputs": {
+  "DATASET_json_RECORD_SHA256": "29976120cf085d2f776c9eea28da6363bc6c6d0be679cca550db7f714a151a23",
+  "keys_npz_sha256": "1a92c96f38341966f6430facf2d28e8d77e077e40f77a206c5171771b6566491",
+  "STRUCT": 744734,
+  "KNN": 30609
+ },
+ "scale": {
+  "K": 500,
+  "native_K": 202,
+  "block_size_round_N_over_K": 40,
+  "rule": "the frozen H4_SK rule with k = K (cap = round(N / K)); nothing else changed (as _l1d_scale_parts.py HG)"
+ },
+ "placement": {
+  "machine": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "cpu_count_os": 32,
+  "python": "3.13.5",
+  "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+  "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+  "numpy": "2.3.2",
+  "wsl_distro": "Ubuntu-24.04",
+  "rx_job": "260929-153818-crag-hg-squad-e5df",
+  "rx_cpus": "2",
+  "PYTHONHASHSEED": "0"
+ },
+ "code": {
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+  "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+  "scratchpad/_l1hu_build.py": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79",
+  "src/l1_lowmem/common.py": "18edea394b402ee1b6f5e8dac7b7cb7c474647145988ee60f18d3f947db98ff2",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_lowmem/phg_repair.py": "4c051e7a139abc19fd1b8433948a0d288858ac6a9c67dae40d7ef001839472b0",
+  "src/l1_lowmem/freight.py": "7adbe2a06146e9c60b99250cc1ac84beb1ef7115a23d96ea6930f87d298d0971"
+ }
+}

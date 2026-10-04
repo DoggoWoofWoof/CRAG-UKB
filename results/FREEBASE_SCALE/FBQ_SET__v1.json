@@ -1,0 +1,1086 @@
+{
+ "RECORD": "FBQ_SET",
+ "version": "v1",
+ "smoke": null,
+ "utc": "2026-10-03T21:34:49Z",
+ "purpose": "Multi-source Freebase question set mapped onto the frozen 302M-node Freebase canonical positions (topic MIDs + answer MIDs -> position/kind). Freebase has no queries of its own (DATASET.json n_queries = 0).",
+ "position_rule": "uid = hash(mid.encode('utf-8')) under PYTHONHASHSEED=0 (asserted); position = index in nodes/node_uid.npy with an equality check (merge-join, 64 MB blocks); kind = nodes/kind.npy (0 ENTITY_MID, 1 CVT_MEDIATOR, 2 SCHEMA_TYPE, 3 SCHEMA_PROPERTY, 4 SCHEMA_OTHER, 5 EXTERNAL_URI, 6 LITERAL)",
+ "held_out_handling": {
+  "parsed": [
+   "nsm_webqsp train_simple",
+   "nsm_webqsp dev_simple",
+   "nsm_cwq train_simple",
+   "nsm_cwq dev_simple"
+  ],
+  "sealed_not_read": {
+   "nsm_webqsp/test_simple.json": {
+    "file": "data/final_canonical/webqsp/_acquisition/nsm/extracted/webqsp/webqsp/test_simple.json",
+    "bytes": 167901026,
+    "newline_count_rows": 1639,
+    "sha256": "2a73d3e77d8cd755082eadc0439d9e98c1208b53b1ef1cfb1721c531c9eb2970",
+    "status": "sealed, not read (bytes counted and hashed only, never json-parsed, no id/question/answer touched)"
+   },
+   "nsm_cwq/test_simple.json": {
+    "file": "data/final_canonical/webqsp/_acquisition/nsm/extracted/CWQ/CWQ/test_simple.json",
+    "bytes": 357966601,
+    "newline_count_rows": 3531,
+    "sha256": "22d810c9c0967ad6fe4ccf9637b2ca9151dabbafe41f758313d9fd810ecea3b2",
+    "status": "sealed, not read (bytes counted and hashed only, never json-parsed, no id/question/answer touched)"
+   }
+  },
+  "rog_files_read": "train-* and validation-* parquets only, columns id/question/answer/q_entity/a_entity (graph column not requested); test-* parquets not opened",
+  "original_webqsp": "WebQSP.train.json only; WebQSP.test.json not opened",
+  "eval_flag_definition": {
+   "DEV_L3W": "WebQSP row whose id is in the 786-row KB-L3 development population results/L3_DEV/l3w_population_webqsp__v1.json (split A) -> eval-eligible",
+   "NSM_DEV": "row from the NSM dev_simple file (webqsp or cwq) that is not DEV_L3W -> eval-eligible",
+   "TRAIN_OTHER": "every other NSM train_simple row -> POOL ONLY, NOT cleared as dev-eligible"
+  },
+  "split_B_caveat": "The 717 sealed WebQSP split-B rows (parity of sha1(query_id)[:8] over the 1,549-row train_holdout carve, per the l3w population record) are in NSM train_simple/dev_simple and are NOT identifiable here without reading the sealed carve: they are inside TRAIN_OTHER (or NSM_DEV). TRAIN_OTHER is therefore not cleared for evaluation; only DEV_L3W and NSM_DEV rows are eval-eligible, and ALL remaining train rows are pool-only. No attempt was made to reconstruct split B. The relationship of the 250 NSM dev_simple rows to split B is unchecked (the user ruled them eval-eligible)."
+ },
+ "inputs": {
+  "nsm_files": {
+   "nsm_webqsp/train_simple.json": {
+    "file": "data/final_canonical/webqsp/_acquisition/nsm/extracted/webqsp/webqsp/train_simple.json",
+    "bytes": 284152781,
+    "lines_read": 2848,
+    "blank_lines": 0,
+    "rows_parsed": 2848,
+    "lines_without_subgraph_key": 0,
+    "sha256": "1503316ae1a623798e5e846752499712d6f20edf3a0af8a84144e5c62dd431ef",
+    "sha256_note": null
+   },
+   "nsm_webqsp/dev_simple.json": {
+    "file": "data/final_canonical/webqsp/_acquisition/nsm/extracted/webqsp/webqsp/dev_simple.json",
+    "bytes": 24810102,
+    "lines_read": 250,
+    "blank_lines": 0,
+    "rows_parsed": 250,
+    "lines_without_subgraph_key": 0,
+    "sha256": "c8f8d2a66c104f827e3d05e56a112b13c150a8857bd9543d88b1bd7b9650f7f4",
+    "sha256_note": null
+   },
+   "nsm_webqsp/entities.txt": {
+    "file": "data/final_canonical/webqsp/_acquisition/nsm/extracted/webqsp/webqsp/entities.txt",
+    "lines": 1441420,
+    "bytes": 14733713,
+    "sha256": "c52d1aa62307804f145a4717809e0b680febfdb7fab52eee67dea0b2b43ae41e"
+   },
+   "nsm_cwq/train_simple.json": {
+    "file": "data/final_canonical/webqsp/_acquisition/nsm/extracted/CWQ/CWQ/train_simple.json",
+    "bytes": 2585899447,
+    "lines_read": 27639,
+    "blank_lines": 0,
+    "rows_parsed": 27639,
+    "lines_without_subgraph_key": 0,
+    "sha256": "aa2732c8c8c33c2a8a835ecbdb3c0d5173f685e235d3f0f41a05852a594d1ae9",
+    "sha256_note": null
+   },
+   "nsm_cwq/dev_simple.json": {
+    "file": "data/final_canonical/webqsp/_acquisition/nsm/extracted/CWQ/CWQ/dev_simple.json",
+    "bytes": 349879370,
+    "lines_read": 3519,
+    "blank_lines": 0,
+    "rows_parsed": 3519,
+    "lines_without_subgraph_key": 0,
+    "sha256": "e6918ee11672e14b520079404d5ce3d8d1219ef610b23a02ce62608f31ed2ca0",
+    "sha256_note": null
+   },
+   "nsm_cwq/entities.txt": {
+    "file": "data/final_canonical/webqsp/_acquisition/nsm/extracted/CWQ/CWQ/entities.txt",
+    "lines": 2429346,
+    "bytes": 24812082,
+    "sha256": "24a1bf8930a5b63865912636361f45165f37251f95a60925914165d56d094f28"
+   }
+  },
+  "rog_parquets_read": {
+   "data/original/webqsp/rog_webqsp/train-00000-of-00002.parquet": {
+    "bytes": 154472902,
+    "sha256": "4d2d4520cffb87370fa7de408dc6730a1e8d90d0233e166117a377ca71b5f2e8"
+   },
+   "data/original/webqsp/rog_webqsp/train-00001-of-00002.parquet": {
+    "bytes": 155300860,
+    "sha256": "69fb1510e9990f8d0f62ab8f504ae3306130aec85c5f06fa772bce9d2db463a4"
+   },
+   "data/original/webqsp/rog_webqsp/validation-00000-of-00001.parquet": {
+    "bytes": 24340437,
+    "sha256": "8355b852e5aae75197d4220031f88a6b7627dfd457383edf29c7f9b9a92a272d"
+   },
+   "data/original/cwq/rog_cwq/train-00000-of-00018-e65d08d5970d44d1.parquet": {
+    "bytes": 129749424,
+    "sha256": "451968112b94ab3158b12b059157040bccbbf1a86830c048e7060a6ea13ea2e6"
+   },
+   "data/original/cwq/rog_cwq/train-00001-of-00018-c70342c196c07d6f.parquet": {
+    "bytes": 132324078,
+    "sha256": "515d995517ca30a8e2c1ca1db5f43da8873947f1bb2ae8d40b4663051dca68cb"
+   },
+   "data/original/cwq/rog_cwq/train-00002-of-00018-d52ad886cb9f05b0.parquet": {
+    "bytes": 128031478,
+    "sha256": "9701c9cf5d5910e3644fd88cdb9772fcb777a86af166303d8490e2df98776191"
+   },
+   "data/original/cwq/rog_cwq/train-00003-of-00018-6dac2fb592f087ab.parquet": {
+    "bytes": 157390521,
+    "sha256": "140bb91e39179bde79cf734c2e25d0e5307bb9285e3fbd2269842ed6a0449fd1"
+   },
+   "data/original/cwq/rog_cwq/train-00004-of-00018-0cc0e948945a78d1.parquet": {
+    "bytes": 156178983,
+    "sha256": "4af3e554d7ec45f3caa97692fb2081e7c78d5bf11432e311e4da5cd30c240a21"
+   },
+   "data/original/cwq/rog_cwq/train-00005-of-00018-670ef1ddceaf0282.parquet": {
+    "bytes": 154513290,
+    "sha256": "4b80a39fe0c9cc0ebe567349f9dcb48d0121d2a83b48f49f9a97150d22bf58b1"
+   },
+   "data/original/cwq/rog_cwq/train-00006-of-00018-bafa8e7c507f7466.parquet": {
+    "bytes": 160773869,
+    "sha256": "5d4a19c91e9c1150dd33bdf07a15dd27d63d2ac588cb5a35a929d6618fc4397a"
+   },
+   "data/original/cwq/rog_cwq/train-00007-of-00018-f09b37d41a3dd5cf.parquet": {
+    "bytes": 159248642,
+    "sha256": "424989ddb4d3088cccdfcd94cd1f650bf065715a401130a837992958f3ef86f1"
+   },
+   "data/original/cwq/rog_cwq/train-00008-of-00018-a0d99d326eeea855.parquet": {
+    "bytes": 171867158,
+    "sha256": "c953c0ef86c8048db5fbab98b5106f7a67f4910ce90da1ccd287b607aca90d74"
+   },
+   "data/original/cwq/rog_cwq/train-00009-of-00018-30aada2c957e36fc.parquet": {
+    "bytes": 160195917,
+    "sha256": "01f1f3d78a59b5a814af9e072a1a91899b98e183e4d4dbf3e4967590251eef07"
+   },
+   "data/original/cwq/rog_cwq/train-00010-of-00018-322b78f83914cdcc.parquet": {
+    "bytes": 157371318,
+    "sha256": "0fae2d14a2a8432cb71d3534d7bc4bd4ac5d8d7279798a37d0fc2c8016cb6729"
+   },
+   "data/original/cwq/rog_cwq/train-00011-of-00018-4ae82f3e51c9e51b.parquet": {
+    "bytes": 162087966,
+    "sha256": "41d5e9f9a3d5d0efc3d2576bb0eaa37f8e3b725cb74f7d65bb2faa5969e45afa"
+   },
+   "data/original/cwq/rog_cwq/train-00012-of-00018-953fbcdb2ee8831b.parquet": {
+    "bytes": 158607640,
+    "sha256": "d30ccda7572f31a6a48bea437019dedd8f5c3ab63fbf4295b5df789337525581"
+   },
+   "data/original/cwq/rog_cwq/train-00013-of-00018-69632202f264d5b6.parquet": {
+    "bytes": 162978983,
+    "sha256": "058b5cba1ac80c4c5b93f921c0c0e933c7329d37a6ae800a79ff46d4076c5c0e"
+   },
+   "data/original/cwq/rog_cwq/train-00014-of-00018-34c4028408816b01.parquet": {
+    "bytes": 146357600,
+    "sha256": "710b53a6a4c1d3040e5b567705f32b8829a7e36b7c5020a8e9a51a1d6c69b061"
+   },
+   "data/original/cwq/rog_cwq/train-00015-of-00018-115ba563c3d4c61f.parquet": {
+    "bytes": 165891535,
+    "sha256": "433a4da34d42be06dbbcdaef9afe94c67b10f88900b89dbedc49279d5a659cdd"
+   },
+   "data/original/cwq/rog_cwq/train-00016-of-00018-d793c0ad8fc13810.parquet": {
+    "bytes": 146191262,
+    "sha256": "dbd977ea5e14d367e41291178c38de136bbb6a6b40a50a96340d3adf6d748d18"
+   },
+   "data/original/cwq/rog_cwq/train-00017-of-00018-7c2e93b205805eae.parquet": {
+    "bytes": 160608891,
+    "sha256": "3c26bce1b36402e9cd7b28373fc830d296fed9f187c630aff0df5b39d7ae73e0"
+   },
+   "data/original/cwq/rog_cwq/validation-00000-of-00003-31d848ab55b07e8f.parquet": {
+    "bytes": 111322273,
+    "sha256": "0fd44afc8895da7e4c690c82f7d148cd8a7f2d7743d06de1b68c53f4cd793062"
+   },
+   "data/original/cwq/rog_cwq/validation-00001-of-00003-4fdfd3ea11c73388.parquet": {
+    "bytes": 129656227,
+    "sha256": "61c95744eaa52a32bfef4806a17ea483355efce0be9d4c4b6bcd0f402920ea34"
+   },
+   "data/original/cwq/rog_cwq/validation-00002-of-00003-fcbc480aec93c105.parquet": {
+    "bytes": 119923568,
+    "sha256": "5ec8ec2188226bfa794e180e8be4708bf3f8b1fafbcf8a0e0a24e68164b00e5e"
+   }
+  },
+  "original_webqsp_train_json": {
+   "file": "data/original/webqsp/WebQSP/data/WebQSP.train.json",
+   "bytes": 10408955,
+   "sha256": "a01f87fa7808d2e90ccdf758b8eefbb882f3f92a8f386058ad6fd153c1589ed0"
+  },
+  "l3w_population_json": {
+   "file": "results/L3_DEV/l3w_population_webqsp__v1.json",
+   "sha256": "7e67c9b116b2921cc243e2e664951984d985127191a320a4bfe70594a9016009"
+  },
+  "node_uid.npy": {
+   "bytes": 2415817176,
+   "sha256_computed": "f2bea3a75c5635d032a2b2b2a9a5a76209304af99a9a120d9c49a005239ec4d1",
+   "matches_pin": true
+  },
+  "kind.npy": {
+   "bytes": 301977259,
+   "sha256_computed": "957906b6de7362f1288e17584f83dbf7d2a47127dbe8d01673c2d7414824b0de",
+   "matches_pin": true
+  },
+  "dataset_json_pins": {
+   "node_uid.sha256": "f2bea3a75c5635d032a2b2b2a9a5a76209304af99a9a120d9c49a005239ec4d1",
+   "kind.sha256": "957906b6de7362f1288e17584f83dbf7d2a47127dbe8d01673c2d7414824b0de"
+  }
+ },
+ "counts": {
+  "rows_total": 34256,
+  "per_source_split": {
+   "nsm_cwq/dev": 3519,
+   "nsm_cwq/train": 27639,
+   "nsm_webqsp/dev": 250,
+   "nsm_webqsp/train": 2848
+  },
+  "per_source_split_eval_flag": {
+   "nsm_cwq/dev": {
+    "NSM_DEV": 3519
+   },
+   "nsm_cwq/train": {
+    "TRAIN_OTHER": 27639
+   },
+   "nsm_webqsp/dev": {
+    "NSM_DEV": 199,
+    "DEV_L3W": 51
+   },
+   "nsm_webqsp/train": {
+    "TRAIN_OTHER": 2113,
+    "DEV_L3W": 735
+   }
+  },
+  "per_eval_flag": {
+   "TRAIN_OTHER": 29752,
+   "DEV_L3W": 786,
+   "NSM_DEV": 3718
+  },
+  "eval_eligible_rows": 4504,
+  "pool_only_rows": 29752
+ },
+ "resolution": {
+  "nsm_cwq/dev": {
+   "questions": 3519,
+   "topic_mid_occurrences": 5434,
+   "topic_resolved": 5373,
+   "topic_resolved_rate": 0.988774,
+   "answer_mid_occurrences": 8168,
+   "answer_mid_resolved": 8155,
+   "answer_mid_resolved_rate": 0.998408,
+   "answer_literals": 0,
+   "answers_total": 8168,
+   "questions_with_zero_topics": 0,
+   "questions_with_zero_answers": 0,
+   "questions_all_topics_resolved": 3458,
+   "questions_any_literal_answer": 0,
+   "questions_fully_mappable": 3448,
+   "fully_mappable_rate": 0.979824
+  },
+  "nsm_cwq/train": {
+   "questions": 27639,
+   "topic_mid_occurrences": 42134,
+   "topic_resolved": 41706,
+   "topic_resolved_rate": 0.989842,
+   "answer_mid_occurrences": 61573,
+   "answer_mid_resolved": 61481,
+   "answer_mid_resolved_rate": 0.998506,
+   "answer_literals": 46,
+   "answers_total": 61619,
+   "questions_with_zero_topics": 8,
+   "questions_with_zero_answers": 0,
+   "questions_all_topics_resolved": 27203,
+   "questions_any_literal_answer": 14,
+   "questions_fully_mappable": 27127,
+   "fully_mappable_rate": 0.981475
+  },
+  "nsm_webqsp/dev": {
+   "questions": 250,
+   "topic_mid_occurrences": 254,
+   "topic_resolved": 254,
+   "topic_resolved_rate": 1.0,
+   "answer_mid_occurrences": 2990,
+   "answer_mid_resolved": 2959,
+   "answer_mid_resolved_rate": 0.989632,
+   "answer_literals": 5,
+   "answers_total": 2995,
+   "questions_with_zero_topics": 1,
+   "questions_with_zero_answers": 4,
+   "questions_all_topics_resolved": 249,
+   "questions_any_literal_answer": 5,
+   "questions_fully_mappable": 236,
+   "fully_mappable_rate": 0.944
+  },
+  "nsm_webqsp/train": {
+   "questions": 2848,
+   "topic_mid_occurrences": 2915,
+   "topic_resolved": 2915,
+   "topic_resolved_rate": 1.0,
+   "answer_mid_occurrences": 31731,
+   "answer_mid_resolved": 31450,
+   "answer_mid_resolved_rate": 0.991144,
+   "answer_literals": 110,
+   "answers_total": 31841,
+   "questions_with_zero_topics": 0,
+   "questions_with_zero_answers": 22,
+   "questions_all_topics_resolved": 2848,
+   "questions_any_literal_answer": 71,
+   "questions_fully_mappable": 2708,
+   "fully_mappable_rate": 0.950843
+  },
+  "nsm_webqsp/ALL": {
+   "questions": 3098,
+   "topic_resolved_rate": 1.0,
+   "answer_mid_resolved_rate": 0.991014,
+   "unique_topic_mids": 1719,
+   "unique_topic_mids_resolved": 1719,
+   "unique_answer_mids": 27930,
+   "unique_answer_mids_resolved": 27634,
+   "questions_fully_mappable": 2944,
+   "fully_mappable_rate": 0.950291
+  },
+  "nsm_cwq/ALL": {
+   "questions": 31158,
+   "topic_resolved_rate": 0.98972,
+   "answer_mid_resolved_rate": 0.998494,
+   "unique_topic_mids": 11063,
+   "unique_topic_mids_resolved": 10851,
+   "unique_answer_mids": 5774,
+   "unique_answer_mids_resolved": 5748,
+   "questions_fully_mappable": 30575,
+   "fully_mappable_rate": 0.981289
+  },
+  "ALL": {
+   "questions": 34256,
+   "questions_fully_mappable": 33519,
+   "fully_mappable_rate": 0.978486,
+   "unique_mids_looked_up": 39634,
+   "unique_mids_resolved": 39119
+  }
+ },
+ "resolve_join_info": {
+  "n_unique_mids": 39634,
+  "n_resolved": 39119,
+  "n_node_uid": 301977131,
+  "node_uid_strictly_increasing": true,
+  "uid_collisions_among_query_mids": 0,
+  "node_uid_sha256_computed": "f2bea3a75c5635d032a2b2b2a9a5a76209304af99a9a120d9c49a005239ec4d1"
+ },
+ "answer_set_size_distribution": {
+  "nsm_webqsp": {
+   "bins": {
+    "0": 26,
+    "1": 1587,
+    "2": 420,
+    "3": 278,
+    "4": 151,
+    "5": 100,
+    "6-10": 195,
+    "11-20": 135,
+    "21-50": 119,
+    "51-100": 50,
+    "101-500": 26,
+    ">500": 11
+   },
+   "mean": 11.2447,
+   "median": 1.0,
+   "p90": 12.0,
+   "max": 3688,
+   "strata": {
+    "single(1)": 1587,
+    "small(2-5)": 949,
+    "large(>5)": 536,
+    "zero": 26
+   }
+  },
+  "nsm_cwq": {
+   "bins": {
+    "0": 0,
+    "1": 22083,
+    "2": 2951,
+    "3": 1937,
+    "4": 1030,
+    "5": 661,
+    "6-10": 1369,
+    "11-20": 954,
+    "21-50": 173,
+    "51-100": 0,
+    "101-500": 0,
+    ">500": 0
+   },
+   "mean": 2.2398,
+   "median": 1.0,
+   "p90": 5.0,
+   "max": 29,
+   "strata": {
+    "single(1)": 22083,
+    "small(2-5)": 6579,
+    "large(>5)": 2496
+   }
+  },
+  "ALL": {
+   "bins": {
+    "0": 26,
+    "1": 23670,
+    "2": 3371,
+    "3": 2215,
+    "4": 1181,
+    "5": 761,
+    "6-10": 1564,
+    "11-20": 1089,
+    "21-50": 292,
+    "51-100": 50,
+    "101-500": 26,
+    ">500": 11
+   },
+   "mean": 3.0542,
+   "median": 1.0,
+   "p90": 5.0,
+   "max": 3688,
+   "strata": {
+    "single(1)": 23670,
+    "small(2-5)": 7528,
+    "large(>5)": 3032,
+    "zero": 26
+   }
+  }
+ },
+ "answer_kinds_distribution": {
+  "nsm_webqsp": {
+   "ENTITY_MID": 34370,
+   "UNRESOLVED_MID": 312,
+   "LITERAL_VALUE": 115,
+   "CVT_MEDIATOR": 39
+  },
+  "nsm_webqsp__topics": {
+   "CVT_MEDIATOR": 61,
+   "ENTITY_MID": 3108
+  },
+  "nsm_cwq": {
+   "ENTITY_MID": 69387,
+   "CVT_MEDIATOR": 249,
+   "UNRESOLVED_MID": 105,
+   "LITERAL_VALUE": 46
+  },
+  "nsm_cwq__topics": {
+   "ENTITY_MID": 46632,
+   "UNRESOLVED": 489,
+   "CVT_MEDIATOR": 447
+  },
+  "ALL": {
+   "ENTITY_MID": 103757,
+   "UNRESOLVED_MID": 417,
+   "LITERAL_VALUE": 161,
+   "CVT_MEDIATOR": 288
+  },
+  "ALL__topics": {
+   "CVT_MEDIATOR": 508,
+   "ENTITY_MID": 49740,
+   "UNRESOLVED": 489
+  }
+ },
+ "questions_with_answers_all_nonentity": {
+  "nsm_webqsp": {
+   "questions_with_no_ENTITY_MID_resolved_answer(all answers literal/unresolved/non-entity kind)": 81,
+   "of_which_all_literal": 75,
+   "of_which_all_unresolved_mid": 2,
+   "of_which_all_resolved_non_entity_kind(CVT etc)": 4,
+   "of_which_mixed_literal_unresolved_nonentity": 0,
+   "questions_with_at_least_one_resolved_non_entity_kind_answer": 27
+  },
+  "nsm_cwq": {
+   "questions_with_no_ENTITY_MID_resolved_answer(all answers literal/unresolved/non-entity kind)": 127,
+   "of_which_all_literal": 14,
+   "of_which_all_unresolved_mid": 8,
+   "of_which_all_resolved_non_entity_kind(CVT etc)": 105,
+   "of_which_mixed_literal_unresolved_nonentity": 0,
+   "questions_with_at_least_one_resolved_non_entity_kind_answer": 185
+  },
+  "ALL": {
+   "questions_with_no_ENTITY_MID_resolved_answer(all answers literal/unresolved/non-entity kind)": 208,
+   "of_which_all_literal": 89,
+   "of_which_all_unresolved_mid": 10,
+   "of_which_all_resolved_non_entity_kind(CVT etc)": 109,
+   "of_which_mixed_literal_unresolved_nonentity": 0,
+   "questions_with_at_least_one_resolved_non_entity_kind_answer": 212
+  }
+ },
+ "unresolved_mid_census": {
+  "answer/nsm_webqsp": {
+   "unique_unresolved_mids": 296,
+   "occurrences": 312,
+   "unique_prefix_m.": 89,
+   "unique_prefix_g.": 207,
+   "unique_in_entities_txt_but_absent_from_node_uid": 296,
+   "unique_not_in_entities_txt": 0,
+   "occurrences_prefix_m.": 95,
+   "occurrences_prefix_g.": 217
+  },
+  "answer/nsm_cwq": {
+   "unique_unresolved_mids": 26,
+   "occurrences": 105,
+   "unique_prefix_m.": 8,
+   "unique_prefix_g.": 18,
+   "unique_in_entities_txt_but_absent_from_node_uid": 26,
+   "unique_not_in_entities_txt": 0,
+   "occurrences_prefix_m.": 30,
+   "occurrences_prefix_g.": 75
+  },
+  "topic/nsm_webqsp": {
+   "unique_unresolved_mids": 0,
+   "occurrences": 0,
+   "unique_prefix_m.": 0,
+   "unique_prefix_g.": 0,
+   "unique_in_entities_txt_but_absent_from_node_uid": 0,
+   "unique_not_in_entities_txt": 0,
+   "occurrences_prefix_m.": 0,
+   "occurrences_prefix_g.": 0
+  },
+  "topic/nsm_cwq": {
+   "unique_unresolved_mids": 212,
+   "occurrences": 489,
+   "unique_prefix_m.": 16,
+   "unique_prefix_g.": 196,
+   "unique_in_entities_txt_but_absent_from_node_uid": 212,
+   "unique_not_in_entities_txt": 0,
+   "occurrences_prefix_m.": 54,
+   "occurrences_prefix_g.": 435
+  },
+  "answer_literal_forms": {
+   "date_like": 130,
+   "other_string": 29,
+   "numeric": 2
+  },
+  "top10_unresolved_answer_mids_by_occurrence": [
+   {
+    "source": "nsm_cwq",
+    "mid": "m.0134v4hd",
+    "occurrences": 10
+   },
+   {
+    "source": "nsm_cwq",
+    "mid": "g.11b6y9tkn4",
+    "occurrences": 10
+   },
+   {
+    "source": "nsm_cwq",
+    "mid": "g.11b7k0v3hq",
+    "occurrences": 9
+   },
+   {
+    "source": "nsm_cwq",
+    "mid": "m.0134yc8y",
+    "occurrences": 7
+   },
+   {
+    "source": "nsm_cwq",
+    "mid": "g.125_hzb47",
+    "occurrences": 6
+   },
+   {
+    "source": "nsm_cwq",
+    "mid": "g.120yrd_6",
+    "occurrences": 5
+   },
+   {
+    "source": "nsm_cwq",
+    "mid": "g.12245v14",
+    "occurrences": 5
+   },
+   {
+    "source": "nsm_cwq",
+    "mid": "g.11b6v7j7y9",
+    "occurrences": 5
+   },
+   {
+    "source": "nsm_cwq",
+    "mid": "g.11c3mrbyc8",
+    "occurrences": 4
+   },
+   {
+    "source": "nsm_cwq",
+    "mid": "g.121_5zdm",
+    "occurrences": 4
+   }
+  ]
+ },
+ "duplicate_groups": {
+  "exact_norm(lowercase/strip/collapse-whitespace)": {
+   "unique_normalised_questions": 34239,
+   "groups_with_size_gt1": 17,
+   "rows_in_groups_gt1": 34,
+   "max_group_size": 2,
+   "cross_source_groups(webqsp+cwq)": 0,
+   "cross_source_rows": 0,
+   "within_webqsp_groups": 0,
+   "within_cwq_groups": 17,
+   "groups_spanning_train_and_dev": 3,
+   "eval_eligible_rows_sharing_a_group_with_a_pool_only_row": 3,
+   "cross_source_examples": []
+  },
+  "loose_norm(+strip all non-alphanumerics, so a trailing '?' no longer separates NSM-WebQSP from CWQ)": {
+   "unique_normalised_questions": 34220,
+   "groups_with_size_gt1": 36,
+   "rows_in_groups_gt1": 72,
+   "max_group_size": 2,
+   "cross_source_groups(webqsp+cwq)": 11,
+   "cross_source_rows": 22,
+   "within_webqsp_groups": 0,
+   "within_cwq_groups": 25,
+   "groups_spanning_train_and_dev": 6,
+   "eval_eligible_rows_sharing_a_group_with_a_pool_only_row": 7,
+   "cross_source_examples": [
+    {
+     "norm": "where did jack johnson go to high school",
+     "members": [
+      [
+       "nsm_webqsp",
+       "train",
+       "WebQTrn-382"
+      ],
+      [
+       "nsm_cwq",
+       "train",
+       "WebQTrn-382_b1fc6ddebc631e0c45efddc9c43d2ea8"
+      ]
+     ]
+    },
+    {
+     "norm": "what position does vernon davis play",
+     "members": [
+      [
+       "nsm_webqsp",
+       "train",
+       "WebQTrn-462"
+      ],
+      [
+       "nsm_cwq",
+       "train",
+       "WebQTrn-462_fc11622544aadd141dc24cbcbbe72322"
+      ]
+     ]
+    },
+    {
+     "norm": "what kind of government does chile have today",
+     "members": [
+      [
+       "nsm_webqsp",
+       "train",
+       "WebQTrn-577"
+      ],
+      [
+       "nsm_cwq",
+       "dev",
+       "WebQTrn-577_00190585dba1ae6683ec8f49dcfb774e"
+      ]
+     ]
+    },
+    {
+     "norm": "who was the leader of the soviet union in 1945",
+     "members": [
+      [
+       "nsm_webqsp",
+       "train",
+       "WebQTrn-752"
+      ],
+      [
+       "nsm_cwq",
+       "train",
+       "WebQTrn-752_4b1e682354eabfd60ec9982220800931"
+      ]
+     ]
+    },
+    {
+     "norm": "who plays sarah wittle in jumanji",
+     "members": [
+      [
+       "nsm_webqsp",
+       "train",
+       "WebQTrn-1270"
+      ],
+      [
+       "nsm_cwq",
+       "train",
+       "WebQTrn-1270_2897c53015dff5c3a6ba8a1ddc52d019"
+      ]
+     ]
+    }
+   ]
+  },
+  "qid_duplicates_within_source": {
+   "nsm_webqsp": 0,
+   "nsm_cwq": 0
+  },
+  "webqsp_qids_in_both_train_and_dev": 0
+ },
+ "cwq_to_webqsp_parent": {
+  "id_scheme": "CWQ qid = '<WebQSP parent id>_<32 hex>' (regex ^(WebQ(Trn|Test)-\\d+)_[0-9a-f]+$)",
+  "ids_not_matching_scheme": 0,
+  "parent_kind_counts": {
+   "WebQTrn": 21689,
+   "WebQTest": 9469
+  },
+  "parent_kind_by_split": {
+   "train/WebQTrn": 19058,
+   "train/WebQTest": 8581,
+   "dev/WebQTrn": 2631,
+   "dev/WebQTest": 888
+  },
+  "parent_eval_flag_by_cwq_split": {
+   "train/TRAIN_OTHER": 13080,
+   "train/DEV_L3W": 4710,
+   "train/PARENT_WEBQSP_TEST_SEALED": 8581,
+   "train/NSM_DEV": 1268,
+   "dev/NSM_DEV": 226,
+   "dev/PARENT_WEBQSP_TEST_SEALED": 888,
+   "dev/DEV_L3W": 515,
+   "dev/TRAIN_OTHER": 1890
+  },
+  "distinct_parents": 3099,
+  "children_per_parent_max": 77,
+  "children_per_parent_mean": 10.054,
+  "parents_present_in_nsm_webqsp_train_or_dev_rows": 21689,
+  "verification_topic_mid_overlap_with_parent(NSM_topics)": {
+   "checked": 21689,
+   "overlap": 11345,
+   "rate": 0.523076
+  },
+  "verification_topic_mid_overlap_with_parent(original_WebQSP_TopicEntityMid)": {
+   "checked": 21689,
+   "overlap": 11345,
+   "rate": 0.523076
+  },
+  "verification_parent_topic_name_in_cwq_question(original_WebQSP_TopicEntityName, case-insensitive substring)": {
+   "checked": 21689,
+   "hit": 10309,
+   "rate": 0.47531
+  },
+  "note": "WebQTest parents can NOT be verified (that would read the sealed WebQSP test file); they are only counted from the id prefix."
+ },
+ "enrichment": {
+  "rog_meta": {
+   "nsm_webqsp": {
+    "rows_per_rog_split": {
+     "train": 2826,
+     "validation": 246
+    },
+    "duplicate_ids": 0
+   },
+   "nsm_cwq": {
+    "rows_per_rog_split": {
+     "train": 27639,
+     "validation": 3519
+    },
+    "duplicate_ids": 0
+   }
+  },
+  "orig_webqsp_train_json": {
+   "version": "1.0",
+   "freebase_version": "2015-08-09",
+   "questions": 3098
+  },
+  "rog_join": {
+   "nsm_cwq/dev": {
+    "rows": 3519,
+    "rog_present": 3519,
+    "rog_split_counts": {
+     "validation": 3519
+    }
+   },
+   "nsm_cwq/train": {
+    "rows": 27639,
+    "rog_present": 27639,
+    "rog_split_counts": {
+     "train": 27639
+    }
+   },
+   "nsm_webqsp/dev": {
+    "rows": 250,
+    "rog_present": 246,
+    "rog_split_counts": {
+     "validation": 246,
+     "": 4
+    }
+   },
+   "nsm_webqsp/train": {
+    "rows": 2848,
+    "rog_present": 2826,
+    "rog_split_counts": {
+     "train": 2826,
+     "": 22
+    }
+   },
+   "nsm_webqsp/rog_ids_not_in_nsm_train_dev": 0,
+   "nsm_webqsp/nsm_ids_not_in_rog_train_validation": 26,
+   "nsm_cwq/rog_ids_not_in_nsm_train_dev": 0,
+   "nsm_cwq/nsm_ids_not_in_rog_train_validation": 0
+  },
+  "orig_join": {
+   "train": {
+    "rows": 2848,
+    "orig_present": 2848,
+    "nsm_answers_equal_orig_union_of_parses": 2848,
+    "nsm_topic_overlaps_orig_topic": 2848
+   },
+   "dev": {
+    "rows": 250,
+    "orig_present": 250,
+    "nsm_answers_equal_orig_union_of_parses": 250,
+    "nsm_topic_overlaps_orig_topic": 249
+   }
+  },
+  "cwq_fields_not_available_locally": "RoG-cwq carries only id/question/answer/q_entity/a_entity/graph/choices (names, no MIDs); compositionality_type, SPARQL, machine_question, composition_answer and the original answer MIDs live only in the original ComplexWebQuestions release (see FBQ_EXTERNAL_SOURCES__v1.md)"
+ },
+ "probe_reproduction": {
+  "nsm_dev_simple_250": {
+   "questions": 250,
+   "topic_entities": 254,
+   "topic_resolved": 254,
+   "answer_mids": 2990,
+   "answer_mids_resolved": 2959,
+   "answers_non_mid_values": 5,
+   "questions_fully_mappable": 236,
+   "probe_expected": {
+    "questions": 250,
+    "topic_entities": 254,
+    "topic_resolved": 254,
+    "answer_mids": 2990,
+    "answer_mids_resolved": 2959,
+    "answers_non_mid_values": 5,
+    "questions_fully_mappable": 236
+   }
+  },
+  "l3w_786": {
+   "rows_joined": 786,
+   "rows_in_nsm_train": 735,
+   "rows_in_nsm_dev": 51,
+   "topic_entities": 806,
+   "topic_resolved": 806,
+   "answer_mids": 8263,
+   "answer_mids_resolved": 8195,
+   "questions_fully_mappable": 773,
+   "probe_expected": {
+    "rows_joined": 786,
+    "topic_entities": 806,
+    "topic_resolved": 806,
+    "answer_mids": 8263,
+    "answer_mids_resolved": 8195,
+    "questions_fully_mappable": 773
+   }
+  },
+  "nsm_dev_rows_also_in_l3w_786": 51,
+  "probe_reproduced": true
+ },
+ "subsets": {
+  "stratum_definition": "single = exactly 1 NSM answer; small = 2..5 answers; large = >=6 answers (zero = 0 answers); n_answers counts every NSM answer incl. literals",
+  "SET_ALL_MAPPABLE": {
+   "definition": "fully_mappable (all topic MIDs + all answer MIDs resolved to positions, >=1 topic, >=1 answer, no literal answers), any source/split",
+   "questions": 33519,
+   "by_source_split": {
+    "nsm_cwq/dev": 3448,
+    "nsm_cwq/train": 27127,
+    "nsm_webqsp/dev": 236,
+    "nsm_webqsp/train": 2708
+   },
+   "by_eval_flag": {
+    "TRAIN_OTHER": 29113,
+    "DEV_L3W": 773,
+    "NSM_DEV": 3633
+   },
+   "by_answer_stratum": {
+    "single(1)": 23171,
+    "small(2-5)": 7436,
+    "large(>5)": 2912
+   },
+   "by_source_stratum": {
+    "nsm_webqsp": {
+     "single(1)": 1518,
+     "small(2-5)": 936,
+     "large(>5)": 490
+    },
+    "nsm_cwq": {
+     "single(1)": 21653,
+     "small(2-5)": 6500,
+     "large(>5)": 2422
+    }
+   },
+   "distinct_normalised_questions": 33502,
+   "total_gold_answer_mids": 89142
+  },
+  "SET_EVAL_ELIGIBLE": {
+   "definition": "fully_mappable AND eval_eligible (eval_flag DEV_L3W or NSM_DEV)",
+   "questions": 4406,
+   "by_source_split": {
+    "nsm_cwq/dev": 3448,
+    "nsm_cwq/train": 0,
+    "nsm_webqsp/dev": 236,
+    "nsm_webqsp/train": 722
+   },
+   "by_eval_flag": {
+    "DEV_L3W": 773,
+    "NSM_DEV": 3633
+   },
+   "by_answer_stratum": {
+    "single(1)": 3007,
+    "large(>5)": 443,
+    "small(2-5)": 956
+   },
+   "by_source_stratum": {
+    "nsm_webqsp": {
+     "single(1)": 485,
+     "large(>5)": 174,
+     "small(2-5)": 299
+    },
+    "nsm_cwq": {
+     "single(1)": 2522,
+     "small(2-5)": 657,
+     "large(>5)": 269
+    }
+   },
+   "distinct_normalised_questions": 4406,
+   "total_gold_answer_mids": 16597
+  },
+  "SET_POOL_ONLY_MAPPABLE": {
+   "definition": "fully_mappable AND NOT eval_eligible (eval_flag TRAIN_OTHER; may contain sealed split-B rows)",
+   "questions": 29113,
+   "by_source_split": {
+    "nsm_cwq/dev": 0,
+    "nsm_cwq/train": 27127,
+    "nsm_webqsp/dev": 0,
+    "nsm_webqsp/train": 1986
+   },
+   "by_eval_flag": {
+    "TRAIN_OTHER": 29113
+   },
+   "by_answer_stratum": {
+    "single(1)": 20164,
+    "small(2-5)": 6480,
+    "large(>5)": 2469
+   },
+   "by_source_stratum": {
+    "nsm_webqsp": {
+     "single(1)": 1033,
+     "small(2-5)": 637,
+     "large(>5)": 316
+    },
+    "nsm_cwq": {
+     "single(1)": 19131,
+     "small(2-5)": 5843,
+     "large(>5)": 2153
+    }
+   },
+   "distinct_normalised_questions": 29099,
+   "total_gold_answer_mids": 72545
+  },
+  "SET_EVAL_ELIGIBLE_EXCL_CWQ_WEBQSP_TEST_PARENT": {
+   "definition": "informational: SET_EVAL_ELIGIBLE minus CWQ rows whose id-parent is a WebQTest-* question (leak-adjacent to the sealed WebQSP test)",
+   "questions": 3534,
+   "by_source_split": {
+    "nsm_cwq/dev": 2576,
+    "nsm_cwq/train": 0,
+    "nsm_webqsp/dev": 236,
+    "nsm_webqsp/train": 722
+   },
+   "by_eval_flag": {
+    "DEV_L3W": 773,
+    "NSM_DEV": 2761
+   },
+   "by_answer_stratum": {
+    "single(1)": 2394,
+    "large(>5)": 388,
+    "small(2-5)": 752
+   },
+   "by_source_stratum": {
+    "nsm_webqsp": {
+     "single(1)": 485,
+     "large(>5)": 174,
+     "small(2-5)": 299
+    },
+    "nsm_cwq": {
+     "single(1)": 1909,
+     "small(2-5)": 453,
+     "large(>5)": 214
+    }
+   },
+   "distinct_normalised_questions": 3534,
+   "total_gold_answer_mids": 14815
+  },
+  "SET_EVAL_ELIGIBLE_DEDUP_ACROSS_POOL": {
+   "definition": "informational: SET_EVAL_ELIGIBLE minus rows whose exact-normalised question also occurs in a pool-only row",
+   "questions": 4403,
+   "by_source_split": {
+    "nsm_cwq/dev": 3445,
+    "nsm_cwq/train": 0,
+    "nsm_webqsp/dev": 236,
+    "nsm_webqsp/train": 722
+   },
+   "by_eval_flag": {
+    "DEV_L3W": 773,
+    "NSM_DEV": 3630
+   },
+   "by_answer_stratum": {
+    "single(1)": 3005,
+    "large(>5)": 442,
+    "small(2-5)": 956
+   },
+   "by_source_stratum": {
+    "nsm_webqsp": {
+     "single(1)": 485,
+     "large(>5)": 174,
+     "small(2-5)": 299
+    },
+    "nsm_cwq": {
+     "single(1)": 2520,
+     "small(2-5)": 657,
+     "large(>5)": 268
+    }
+   },
+   "distinct_normalised_questions": 4403,
+   "total_gold_answer_mids": 16586
+  }
+ },
+ "output": {
+  "parquet": "results/FREEBASE_SCALE/FBQ_SET__v1.parquet",
+  "parquet_bytes": 4847833,
+  "parquet_sha256": "81595221a5512925a6cb5792bdb97c8c43a191cbf069d1dfcd5b11200bd4bd9c",
+  "rows": 34256,
+  "columns": [
+   "source",
+   "split",
+   "qid",
+   "question",
+   "topic_mids",
+   "topic_pos",
+   "topic_kinds",
+   "answer_values",
+   "answer_text",
+   "answer_is_mid",
+   "answer_pos",
+   "answer_kinds",
+   "n_topics",
+   "n_answers",
+   "n_answer_literals",
+   "n_unresolved_topic",
+   "n_unresolved_answer",
+   "n_unresolved",
+   "fully_mappable",
+   "eval_flag",
+   "eval_eligible",
+   "dup_group_id",
+   "dup_group_size",
+   "dup_cross_source",
+   "dup_group_loose_id",
+   "dup_group_loose_size",
+   "cwq_parent_id",
+   "cwq_parent_kind",
+   "parent_eval_flag",
+   "n_cwq_children",
+   "rog_present",
+   "rog_split",
+   "rog_q_entity",
+   "rog_a_entity",
+   "orig_present",
+   "orig_topic_mids",
+   "orig_topic_names",
+   "orig_answer_mids",
+   "orig_inferential_chain",
+   "orig_sparql",
+   "orig_n_parses",
+   "orig_n_constraints",
+   "answers_match_orig"
+  ],
+  "compression": "zstd"
+ },
+ "code": {
+  "scratchpad/_fbq_build_set.py": "8840639ac00ee3a32a2daf18e9075b5a2666baf03fe29623d2a99f59aebee7d6"
+ },
+ "seconds": 48.2,
+ "peak_rss_mb": 422.2
+}

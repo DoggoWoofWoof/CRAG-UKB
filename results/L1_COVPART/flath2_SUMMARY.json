@@ -1,0 +1,1068 @@
+{
+ "record": "FLAT_BALANCED_H2_SUMMARY",
+ "dry": false,
+ "utc": "2026-09-26T08:33:59Z",
+ "question (the user's ruling, verbatim)": "Are partitions actually necessary, or is the KB gain just graph expansion/co-location?",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_FLAT_BALANCED_H2.json",
+  "sha256": "f5f6741e899919534537ccb91aaefdfbf5dced8f7e4f91ae522b832cbd146901"
+ },
+ "code": {
+  "path": "scratchpad/_l1c_flath2_summary.py",
+  "sha256": "aa9b611f10263e1f5ef78f8937c85dd7cd7a3c00b91d319b3ee04d00e150022b"
+ },
+ "records_read (sha256)": {
+  "flath2_A_metaqa.json": "dbc681193a3c17d13a557785ab5b425cbc0228bd0c842e2e0aef350468cb6bbc",
+  "flath2_A_metaqa_phg.json": "cffe1a1f24d5ac57156221f82091e8539f6ea459c646214a71c73c54002dec10",
+  "flath2_A_squad.json": "da0f472be2d5402b27d10774745cee509499ba7fcfc9eff44cf9d81bee99c09f",
+  "flath2_A_squad_phg.json": "3578461788bc8977c9c454b13d21530d871298b077c9ed13bc2ce6a16048e1a8",
+  "flath2_A_musique.json": "9f416ee5b2424e7ad7d0ff670401886b495d51631d2bab4cc03c1d704786a7bd",
+  "flath2_E_webqsp.json": "43fd1d7666b1a3d8478949d2076988cc83412c8b514553f75712a10e2424de00",
+  "flath2_E_hotpotqa.json": "02be1c6466ee77fe48cfd4ebfc017066787b8f7a1b182a42071b4e6373f4c034",
+  "flath2_E_2wiki.json": "b603cfb320f2e3f7dc8b8f4121239521844f361d868bf9749d6dd199030ee7f7"
+ },
+ "produced_under_v1 (kept, not re-run; the v2 pre-registration's incident)": {
+  "datasets": [
+   "webqsp"
+  ],
+  "produced_under": {
+   "preregistration": {
+    "path": "results/L1_COVPART/_history/PREREGISTRATION_FLAT_BALANCED_H2__v1_2026-09-26T04-05-14Z.json",
+    "sha256": "b35f954a190ebc5fc84a9dbf0a467a82ca0890bcee1a289d673429896fa53572"
+   },
+   "code": {
+    "path": "results/L1_COVPART/_history/_l1c_flath2__v1_2ce6116b.py",
+    "sha256": "2ce6116bdb5613c5621a554689a06873a683ecd10db2b201c71b0bc56035c9d0"
+   }
+  }
+ },
+ "FRESH_VERDICT (pre-registered: D1 labels on the three untouched populations)": {
+  "verdict": "FLAT_BALANCED_H2_UNIVERSAL",
+  "reading": "no fresh corpus loses and the NAME_ONLY KB (webqsp) gains significantly: flat semantic retrieval + one block-equivalent of bounded real-edge expansion keeps the text advantage and rescues the KB without partitions",
+  "D1_labels": {
+   "webqsp": "GAIN",
+   "hotpotqa": "GAIN",
+   "2wiki": "GAIN"
+  }
+ },
+ "fresh (split A; split B sealed)": {
+  "webqsp": {
+   "eval_split": "train_holdout",
+   "n_split_A": 786,
+   "N": 2592894,
+   "D1": {
+    "reference": "FLAT@5000",
+    "arm": "FLAT_BALANCED_H2@5000",
+    "ALL_reference": 0.4962,
+    "ALL_arm": 0.7595,
+    "points_arm_minus_reference": 26.34,
+    "gained": 207,
+    "lost": 0,
+    "p": 9.723461371658034e-63,
+    "label": "GAIN",
+    "verdict": "GRAPH_PATCH_HELPS"
+   },
+   "curve (FLAT_ALL / FLAT_H2_ALL by M)": {
+    "500": [
+     0.3117,
+     0.6641
+    ],
+    "1000": [
+     0.369,
+     0.6947
+    ],
+    "2000": [
+     0.4275,
+     0.7239
+    ],
+    "5000": [
+     0.4962,
+     0.7595
+    ]
+   },
+   "patch_nodes_mean_at_M_MAIN": 72.66,
+   "gold_accounting_at_M_MAIN": {
+    "g_rescued (gold in the patch, not in FLAT@M)": 1088,
+    "g_displaced (gold in FLAT@M tail, not served)": 8,
+    "g_patch_already_in_FLAT_tail": 6
+   },
+   "strata_D1": {
+    "per_n_gold": {
+     "1": {
+      "n": 401,
+      "ALL_reference": 0.6708,
+      "ALL_arm": 0.9252,
+      "paired": {
+       "gained": 102,
+       "lost": 0,
+       "p": 3.944304526105059e-31
+      }
+     },
+     "2": {
+      "n": 100,
+      "ALL_reference": 0.52,
+      "ALL_arm": 0.9,
+      "paired": {
+       "gained": 38,
+       "lost": 0,
+       "p": 7.275957614183426e-12
+      }
+     },
+     "3": {
+      "n": 70,
+      "ALL_reference": 0.3571,
+      "ALL_arm": 0.6429,
+      "paired": {
+       "gained": 20,
+       "lost": 0,
+       "p": 1.9073486328125e-06
+      }
+     },
+     "4": {
+      "n": 38,
+      "ALL_reference": 0.4211,
+      "ALL_arm": 0.6842,
+      "paired": {
+       "gained": 10,
+       "lost": 0,
+       "p": 0.001953125
+      }
+     },
+     "5-10": {
+      "n": 89,
+      "ALL_reference": 0.2697,
+      "ALL_arm": 0.5843,
+      "paired": {
+       "gained": 28,
+       "lost": 0,
+       "p": 7.450580596923828e-09
+      }
+     },
+     "11+": {
+      "n": 88,
+      "ALL_reference": 0.0455,
+      "ALL_arm": 0.1477,
+      "paired": {
+       "gained": 9,
+       "lost": 0,
+       "p": 0.00390625
+      }
+     }
+    }
+   }
+  },
+  "hotpotqa": {
+   "eval_split": "validation",
+   "n_split_A": 1031,
+   "N": 5233329,
+   "D1": {
+    "reference": "FLAT@5000",
+    "arm": "FLAT_BALANCED_H2@5000",
+    "ALL_reference": 0.9331,
+    "ALL_arm": 0.9942,
+    "points_arm_minus_reference": 6.11,
+    "gained": 63,
+    "lost": 0,
+    "p": 2.168404344971009e-19,
+    "label": "GAIN",
+    "verdict": "GRAPH_PATCH_HELPS"
+   },
+   "curve (FLAT_ALL / FLAT_H2_ALL by M)": {
+    "500": [
+     0.8274,
+     0.9835
+    ],
+    "1000": [
+     0.8613,
+     0.9884
+    ],
+    "2000": [
+     0.8904,
+     0.9903
+    ],
+    "5000": [
+     0.9331,
+     0.9942
+    ]
+   },
+   "patch_nodes_mean_at_M_MAIN": 81.99,
+   "gold_accounting_at_M_MAIN": {
+    "g_rescued (gold in the patch, not in FLAT@M)": 63,
+    "g_displaced (gold in FLAT@M tail, not served)": 0,
+    "g_patch_already_in_FLAT_tail": 1
+   },
+   "strata_D1": {
+    "per_n_gold": {
+     "2": {
+      "n": 1031,
+      "ALL_reference": 0.9331,
+      "ALL_arm": 0.9942,
+      "paired": {
+       "gained": 63,
+       "lost": 0,
+       "p": 2.168404344971009e-19
+      }
+     }
+    }
+   }
+  },
+  "2wiki": {
+   "eval_split": "dev",
+   "n_split_A": 1004,
+   "N": 5989847,
+   "D1": {
+    "reference": "FLAT@5000",
+    "arm": "FLAT_BALANCED_H2@5000",
+    "ALL_reference": 0.6763,
+    "ALL_arm": 0.9213,
+    "points_arm_minus_reference": 24.5,
+    "gained": 246,
+    "lost": 0,
+    "p": 1.7686873200833423e-74,
+    "label": "GAIN",
+    "verdict": "GRAPH_PATCH_HELPS"
+   },
+   "curve (FLAT_ALL / FLAT_H2_ALL by M)": {
+    "500": [
+     0.5448,
+     0.9044
+    ],
+    "1000": [
+     0.5827,
+     0.9104
+    ],
+    "2000": [
+     0.6285,
+     0.9143
+    ],
+    "5000": [
+     0.6763,
+     0.9213
+    ]
+   },
+   "patch_nodes_mean_at_M_MAIN": 92.35,
+   "gold_accounting_at_M_MAIN": {
+    "g_rescued (gold in the patch, not in FLAT@M)": 328,
+    "g_displaced (gold in FLAT@M tail, not served)": 0,
+    "g_patch_already_in_FLAT_tail": 2
+   },
+   "strata_D1": {
+    "per_n_gold": {
+     "2": {
+      "n": 790,
+      "ALL_reference": 0.8241,
+      "ALL_arm": 0.9684,
+      "paired": {
+       "gained": 114,
+       "lost": 0,
+       "p": 9.62964972193618e-35
+      }
+     },
+     "4": {
+      "n": 214,
+      "ALL_reference": 0.1308,
+      "ALL_arm": 0.7477,
+      "paired": {
+       "gained": 132,
+       "lost": 0,
+       "p": 3.6734198463196485e-40
+      }
+     }
+    }
+   }
+  }
+ },
+ "DEV_A_KB_READING (non-selecting diagnostic: D2 on metaqa under both partitionings)": {
+  "reading": "PARTITIONS_BEAT_FLAT_H2_ON_THE_DEV_A_KB",
+  "D2_labels": {
+   "metaqa": "LOSS",
+   "metaqa_phg": "LOSS"
+  },
+  "matches": "the user's second scenario (flat+H2=0.60 while partition+H2=0.80): partitions do something genuinely important -- co-locating related answer sets so one retrieval unit exposes many graph-connected answers efficiently"
+ },
+ "DEV_A (non-selecting; no selection, no adoption)": {
+  "metaqa": {
+   "partition": "MTKAHYPAR",
+   "n_split_A": 1002,
+   "budget_B_q_mean": 5027.29,
+   "D2 (PRIMARY vs FLAT_H2 at B_q)": {
+    "reference": "PRIMARY (QMAX_BALANCED_H2_PATCH1, section-29 record)",
+    "arm": "FLAT_BALANCED_H2@B_q",
+    "ALL_reference": 0.7754,
+    "ALL_arm": 0.7016,
+    "points_arm_minus_reference": -7.39,
+    "gained": 19,
+    "lost": 93,
+    "p": 6.748136083040859e-13,
+    "label": "LOSS",
+    "verdict": "PARTITIONS_BEAT_FLAT_H2"
+   },
+   "D3 (FLAT vs FLAT_H2 at B_q)": {
+    "reference": "FLAT@B_q",
+    "arm": "FLAT_BALANCED_H2@B_q",
+    "ALL_reference": 0.3922,
+    "ALL_arm": 0.7016,
+    "points_arm_minus_reference": 30.94,
+    "gained": 310,
+    "lost": 0,
+    "p": 9.588073174409622e-94,
+    "label": "GAIN",
+    "verdict": "GRAPH_PATCH_HELPS"
+   },
+   "fixed_M (FLAT_ALL / FLAT_H2_ALL)": {
+    "500": [
+     0.1048,
+     0.5988
+    ],
+    "1000": [
+     0.1776,
+     0.6168
+    ],
+    "2000": [
+     0.2764,
+     0.6487
+    ],
+    "5000": [
+     0.3922,
+     0.7016
+    ]
+   },
+   "patch_nodes_mean_at_B_q": 82.34,
+   "patch_nodes_from_hop1_mean_at_B_q": 24.44,
+   "gold_accounting_at_B_q": {
+    "g_rescued (gold in the patch, not in FLAT@M)": 886,
+    "g_displaced (gold in FLAT@M tail, not served)": 21,
+    "g_patch_already_in_FLAT_tail": 3
+   },
+   "strata_D2": {
+    "per_hop": {
+     "hop1": {
+      "n": 326,
+      "ALL_reference": 0.9939,
+      "ALL_arm": 0.9877,
+      "paired": {
+       "gained": 0,
+       "lost": 2,
+       "p": 0.5
+      }
+     },
+     "hop2": {
+      "n": 344,
+      "ALL_reference": 0.8081,
+      "ALL_arm": 0.7645,
+      "paired": {
+       "gained": 1,
+       "lost": 16,
+       "p": 0.000274658203125
+      }
+     },
+     "hop3": {
+      "n": 332,
+      "ALL_reference": 0.5271,
+      "ALL_arm": 0.3554,
+      "paired": {
+       "gained": 18,
+       "lost": 75,
+       "p": 1.915369707081593e-09
+      }
+     }
+    },
+    "per_n_gold": {
+     "1": {
+      "n": 422,
+      "ALL_reference": 0.9905,
+      "ALL_arm": 0.9905,
+      "paired": {
+       "gained": 3,
+       "lost": 3,
+       "p": 1.0
+      }
+     },
+     "2": {
+      "n": 146,
+      "ALL_reference": 0.9384,
+      "ALL_arm": 0.9041,
+      "paired": {
+       "gained": 5,
+       "lost": 10,
+       "p": 0.30175781249999994
+      }
+     },
+     "3": {
+      "n": 82,
+      "ALL_reference": 0.878,
+      "ALL_arm": 0.7561,
+      "paired": {
+       "gained": 3,
+       "lost": 13,
+       "p": 0.021270751953125
+      }
+     },
+     "4": {
+      "n": 46,
+      "ALL_reference": 0.7174,
+      "ALL_arm": 0.6304,
+      "paired": {
+       "gained": 4,
+       "lost": 8,
+       "p": 0.3876953125
+      }
+     },
+     "5-10": {
+      "n": 137,
+      "ALL_reference": 0.562,
+      "ALL_arm": 0.3431,
+      "paired": {
+       "gained": 4,
+       "lost": 34,
+       "p": 6.038535502739251e-07
+      }
+     },
+     "11+": {
+      "n": 169,
+      "ALL_reference": 0.2367,
+      "ALL_arm": 0.0888,
+      "paired": {
+       "gained": 0,
+       "lost": 25,
+       "p": 5.960464477539063e-08
+      }
+     }
+    }
+   },
+   "strata_D3": {
+    "per_hop": {
+     "hop1": {
+      "n": 326,
+      "ALL_reference": 0.4847,
+      "ALL_arm": 0.9877,
+      "paired": {
+       "gained": 164,
+       "lost": 0,
+       "p": 8.552847072295026e-50
+      }
+     },
+     "hop2": {
+      "n": 344,
+      "ALL_reference": 0.4012,
+      "ALL_arm": 0.7645,
+      "paired": {
+       "gained": 125,
+       "lost": 0,
+       "p": 4.70197740328915e-38
+      }
+     },
+     "hop3": {
+      "n": 332,
+      "ALL_reference": 0.2922,
+      "ALL_arm": 0.3554,
+      "paired": {
+       "gained": 21,
+       "lost": 0,
+       "p": 9.5367431640625e-07
+      }
+     }
+    },
+    "per_n_gold": {
+     "1": {
+      "n": 422,
+      "ALL_reference": 0.6517,
+      "ALL_arm": 0.9905,
+      "paired": {
+       "gained": 143,
+       "lost": 0,
+       "p": 1.793662034335766e-43
+      }
+     },
+     "2": {
+      "n": 146,
+      "ALL_reference": 0.411,
+      "ALL_arm": 0.9041,
+      "paired": {
+       "gained": 72,
+       "lost": 0,
+       "p": 4.235164736271502e-22
+      }
+     },
+     "3": {
+      "n": 82,
+      "ALL_reference": 0.3049,
+      "ALL_arm": 0.7561,
+      "paired": {
+       "gained": 37,
+       "lost": 0,
+       "p": 1.4551915228366852e-11
+      }
+     },
+     "4": {
+      "n": 46,
+      "ALL_reference": 0.1522,
+      "ALL_arm": 0.6304,
+      "paired": {
+       "gained": 22,
+       "lost": 0,
+       "p": 4.76837158203125e-07
+      }
+     },
+     "5-10": {
+      "n": 137,
+      "ALL_reference": 0.1241,
+      "ALL_arm": 0.3431,
+      "paired": {
+       "gained": 30,
+       "lost": 0,
+       "p": 1.862645149230957e-09
+      }
+     },
+     "11+": {
+      "n": 169,
+      "ALL_reference": 0.0533,
+      "ALL_arm": 0.0888,
+      "paired": {
+       "gained": 6,
+       "lost": 0,
+       "p": 0.03125
+      }
+     }
+    }
+   }
+  },
+  "metaqa_phg": {
+   "partition": "PHG",
+   "n_split_A": 1002,
+   "budget_B_q_mean": 5085.75,
+   "D2 (PRIMARY vs FLAT_H2 at B_q)": {
+    "reference": "PRIMARY (QMAX_BALANCED_H2_PATCH1, section-29 record)",
+    "arm": "FLAT_BALANCED_H2@B_q",
+    "ALL_reference": 0.7964,
+    "ALL_arm": 0.7016,
+    "points_arm_minus_reference": -9.48,
+    "gained": 15,
+    "lost": 110,
+    "p": 4.919475646459964e-19,
+    "label": "LOSS",
+    "verdict": "PARTITIONS_BEAT_FLAT_H2"
+   },
+   "D3 (FLAT vs FLAT_H2 at B_q)": {
+    "reference": "FLAT@B_q",
+    "arm": "FLAT_BALANCED_H2@B_q",
+    "ALL_reference": 0.3922,
+    "ALL_arm": 0.7016,
+    "points_arm_minus_reference": 30.94,
+    "gained": 310,
+    "lost": 0,
+    "p": 9.588073174409622e-94,
+    "label": "GAIN",
+    "verdict": "GRAPH_PATCH_HELPS"
+   },
+   "fixed_M (FLAT_ALL / FLAT_H2_ALL)": {
+    "500": [
+     0.1048,
+     0.5988
+    ],
+    "1000": [
+     0.1776,
+     0.6168
+    ],
+    "2000": [
+     0.2764,
+     0.6487
+    ],
+    "5000": [
+     0.3922,
+     0.7016
+    ]
+   },
+   "patch_nodes_mean_at_B_q": 82.12,
+   "patch_nodes_from_hop1_mean_at_B_q": 24.39,
+   "gold_accounting_at_B_q": {
+    "g_rescued (gold in the patch, not in FLAT@M)": 882,
+    "g_displaced (gold in FLAT@M tail, not served)": 17,
+    "g_patch_already_in_FLAT_tail": 5
+   },
+   "strata_D2": {
+    "per_hop": {
+     "hop1": {
+      "n": 326,
+      "ALL_reference": 0.9969,
+      "ALL_arm": 0.9877,
+      "paired": {
+       "gained": 0,
+       "lost": 3,
+       "p": 0.25
+      }
+     },
+     "hop2": {
+      "n": 344,
+      "ALL_reference": 0.8198,
+      "ALL_arm": 0.7645,
+      "paired": {
+       "gained": 0,
+       "lost": 19,
+       "p": 3.814697265625e-06
+      }
+     },
+     "hop3": {
+      "n": 332,
+      "ALL_reference": 0.5753,
+      "ALL_arm": 0.3554,
+      "paired": {
+       "gained": 15,
+       "lost": 88,
+       "p": 9.654706383228215e-14
+      }
+     }
+    },
+    "per_n_gold": {
+     "1": {
+      "n": 422,
+      "ALL_reference": 0.9976,
+      "ALL_arm": 0.9905,
+      "paired": {
+       "gained": 1,
+       "lost": 4,
+       "p": 0.375
+      }
+     },
+     "2": {
+      "n": 146,
+      "ALL_reference": 0.9315,
+      "ALL_arm": 0.9041,
+      "paired": {
+       "gained": 5,
+       "lost": 9,
+       "p": 0.4239501953125
+      }
+     },
+     "3": {
+      "n": 82,
+      "ALL_reference": 0.8902,
+      "ALL_arm": 0.7561,
+      "paired": {
+       "gained": 4,
+       "lost": 15,
+       "p": 0.0192108154296875
+      }
+     },
+     "4": {
+      "n": 46,
+      "ALL_reference": 0.7174,
+      "ALL_arm": 0.6304,
+      "paired": {
+       "gained": 4,
+       "lost": 8,
+       "p": 0.3876953125
+      }
+     },
+     "5-10": {
+      "n": 137,
+      "ALL_reference": 0.6277,
+      "ALL_arm": 0.3431,
+      "paired": {
+       "gained": 1,
+       "lost": 40,
+       "p": 3.8198777474462986e-11
+      }
+     },
+     "11+": {
+      "n": 169,
+      "ALL_reference": 0.2899,
+      "ALL_arm": 0.0888,
+      "paired": {
+       "gained": 0,
+       "lost": 34,
+       "p": 1.1641532182693481e-10
+      }
+     }
+    }
+   },
+   "strata_D3": {
+    "per_hop": {
+     "hop1": {
+      "n": 326,
+      "ALL_reference": 0.4847,
+      "ALL_arm": 0.9877,
+      "paired": {
+       "gained": 164,
+       "lost": 0,
+       "p": 8.552847072295026e-50
+      }
+     },
+     "hop2": {
+      "n": 344,
+      "ALL_reference": 0.4012,
+      "ALL_arm": 0.7645,
+      "paired": {
+       "gained": 125,
+       "lost": 0,
+       "p": 4.70197740328915e-38
+      }
+     },
+     "hop3": {
+      "n": 332,
+      "ALL_reference": 0.2922,
+      "ALL_arm": 0.3554,
+      "paired": {
+       "gained": 21,
+       "lost": 0,
+       "p": 9.5367431640625e-07
+      }
+     }
+    },
+    "per_n_gold": {
+     "1": {
+      "n": 422,
+      "ALL_reference": 0.6517,
+      "ALL_arm": 0.9905,
+      "paired": {
+       "gained": 143,
+       "lost": 0,
+       "p": 1.793662034335766e-43
+      }
+     },
+     "2": {
+      "n": 146,
+      "ALL_reference": 0.411,
+      "ALL_arm": 0.9041,
+      "paired": {
+       "gained": 72,
+       "lost": 0,
+       "p": 4.235164736271502e-22
+      }
+     },
+     "3": {
+      "n": 82,
+      "ALL_reference": 0.3049,
+      "ALL_arm": 0.7561,
+      "paired": {
+       "gained": 37,
+       "lost": 0,
+       "p": 1.4551915228366852e-11
+      }
+     },
+     "4": {
+      "n": 46,
+      "ALL_reference": 0.1522,
+      "ALL_arm": 0.6304,
+      "paired": {
+       "gained": 22,
+       "lost": 0,
+       "p": 4.76837158203125e-07
+      }
+     },
+     "5-10": {
+      "n": 137,
+      "ALL_reference": 0.1241,
+      "ALL_arm": 0.3431,
+      "paired": {
+       "gained": 30,
+       "lost": 0,
+       "p": 1.862645149230957e-09
+      }
+     },
+     "11+": {
+      "n": 169,
+      "ALL_reference": 0.0533,
+      "ALL_arm": 0.0888,
+      "paired": {
+       "gained": 6,
+       "lost": 0,
+       "p": 0.03125
+      }
+     }
+    }
+   }
+  },
+  "squad": {
+   "partition": "MTKAHYPAR",
+   "n_split_A": 992,
+   "budget_B_q_mean": 5074.32,
+   "D2 (PRIMARY vs FLAT_H2 at B_q)": {
+    "reference": "PRIMARY (QMAX_BALANCED_H2_PATCH1, section-29 record)",
+    "arm": "FLAT_BALANCED_H2@B_q",
+    "ALL_reference": 0.995,
+    "ALL_arm": 0.999,
+    "points_arm_minus_reference": 0.4,
+    "gained": 5,
+    "lost": 1,
+    "p": 0.21875,
+    "label": "NEUTRAL",
+    "verdict": "NO_SIGNIFICANT_DIFFERENCE"
+   },
+   "D3 (FLAT vs FLAT_H2 at B_q)": {
+    "reference": "FLAT@B_q",
+    "arm": "FLAT_BALANCED_H2@B_q",
+    "ALL_reference": 0.999,
+    "ALL_arm": 0.999,
+    "points_arm_minus_reference": 0.0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL",
+    "verdict": "NO_SIGNIFICANT_DIFFERENCE"
+   },
+   "fixed_M (FLAT_ALL / FLAT_H2_ALL)": {
+    "500": [
+     0.996,
+     0.995
+    ],
+    "1000": [
+     0.998,
+     0.998
+    ],
+    "2000": [
+     0.998,
+     0.998
+    ],
+    "5000": [
+     0.999,
+     0.999
+    ]
+   },
+   "patch_nodes_mean_at_B_q": 51.77,
+   "patch_nodes_from_hop1_mean_at_B_q": 26.24,
+   "gold_accounting_at_B_q": {
+    "g_rescued (gold in the patch, not in FLAT@M)": 0,
+    "g_displaced (gold in FLAT@M tail, not served)": 0,
+    "g_patch_already_in_FLAT_tail": 0
+   },
+   "strata_D2": {
+    "per_n_gold": {
+     "1": {
+      "n": 992,
+      "ALL_reference": 0.995,
+      "ALL_arm": 0.999,
+      "paired": {
+       "gained": 5,
+       "lost": 1,
+       "p": 0.21875
+      }
+     }
+    }
+   },
+   "strata_D3": {
+    "per_n_gold": {
+     "1": {
+      "n": 992,
+      "ALL_reference": 0.999,
+      "ALL_arm": 0.999,
+      "paired": {
+       "gained": 0,
+       "lost": 0,
+       "p": 1.0
+      }
+     }
+    }
+   }
+  },
+  "squad_phg": {
+   "partition": "PHG",
+   "n_split_A": 992,
+   "budget_B_q_mean": 5071.85,
+   "D2 (PRIMARY vs FLAT_H2 at B_q)": {
+    "reference": "PRIMARY (QMAX_BALANCED_H2_PATCH1, section-29 record)",
+    "arm": "FLAT_BALANCED_H2@B_q",
+    "ALL_reference": 0.9899,
+    "ALL_arm": 0.999,
+    "points_arm_minus_reference": 0.91,
+    "gained": 9,
+    "lost": 0,
+    "p": 0.00390625,
+    "label": "GAIN",
+    "verdict": "FLAT_H2_BEATS_PARTITIONS"
+   },
+   "D3 (FLAT vs FLAT_H2 at B_q)": {
+    "reference": "FLAT@B_q",
+    "arm": "FLAT_BALANCED_H2@B_q",
+    "ALL_reference": 0.999,
+    "ALL_arm": 0.999,
+    "points_arm_minus_reference": 0.0,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL",
+    "verdict": "NO_SIGNIFICANT_DIFFERENCE"
+   },
+   "fixed_M (FLAT_ALL / FLAT_H2_ALL)": {
+    "500": [
+     0.996,
+     0.995
+    ],
+    "1000": [
+     0.998,
+     0.998
+    ],
+    "2000": [
+     0.998,
+     0.998
+    ],
+    "5000": [
+     0.999,
+     0.999
+    ]
+   },
+   "patch_nodes_mean_at_B_q": 51.82,
+   "patch_nodes_from_hop1_mean_at_B_q": 26.26,
+   "gold_accounting_at_B_q": {
+    "g_rescued (gold in the patch, not in FLAT@M)": 0,
+    "g_displaced (gold in FLAT@M tail, not served)": 0,
+    "g_patch_already_in_FLAT_tail": 0
+   },
+   "strata_D2": {
+    "per_n_gold": {
+     "1": {
+      "n": 992,
+      "ALL_reference": 0.9899,
+      "ALL_arm": 0.999,
+      "paired": {
+       "gained": 9,
+       "lost": 0,
+       "p": 0.00390625
+      }
+     }
+    }
+   },
+   "strata_D3": {
+    "per_n_gold": {
+     "1": {
+      "n": 992,
+      "ALL_reference": 0.999,
+      "ALL_arm": 0.999,
+      "paired": {
+       "gained": 0,
+       "lost": 0,
+       "p": 1.0
+      }
+     }
+    }
+   }
+  },
+  "musique": {
+   "partition": "PHG",
+   "n_split_A": 996,
+   "budget_B_q_mean": 5104.19,
+   "D2 (PRIMARY vs FLAT_H2 at B_q)": {
+    "reference": "PRIMARY (QMAX_BALANCED_H2_PATCH1, section-29 record)",
+    "arm": "FLAT_BALANCED_H2@B_q",
+    "ALL_reference": 0.76,
+    "ALL_arm": 0.9036,
+    "points_arm_minus_reference": 14.36,
+    "gained": 159,
+    "lost": 16,
+    "p": 8.455954229574323e-31,
+    "label": "GAIN",
+    "verdict": "FLAT_H2_BEATS_PARTITIONS"
+   },
+   "D3 (FLAT vs FLAT_H2 at B_q)": {
+    "reference": "FLAT@B_q",
+    "arm": "FLAT_BALANCED_H2@B_q",
+    "ALL_reference": 0.8815,
+    "ALL_arm": 0.9036,
+    "points_arm_minus_reference": 2.21,
+    "gained": 24,
+    "lost": 2,
+    "p": 1.049041748046875e-05,
+    "label": "GAIN",
+    "verdict": "GRAPH_PATCH_HELPS"
+   },
+   "fixed_M (FLAT_ALL / FLAT_H2_ALL)": {
+    "500": [
+     0.6596,
+     0.7259
+    ],
+    "1000": [
+     0.75,
+     0.7972
+    ],
+    "2000": [
+     0.8012,
+     0.8444
+    ],
+    "5000": [
+     0.8805,
+     0.9036
+    ]
+   },
+   "patch_nodes_mean_at_B_q": 87.63,
+   "patch_nodes_from_hop1_mean_at_B_q": 44.84,
+   "gold_accounting_at_B_q": {
+    "g_rescued (gold in the patch, not in FLAT@M)": 24,
+    "g_displaced (gold in FLAT@M tail, not served)": 2,
+    "g_patch_already_in_FLAT_tail": 0
+   },
+   "strata_D2": {
+    "per_n_gold": {
+     "2": {
+      "n": 543,
+      "ALL_reference": 0.8527,
+      "ALL_arm": 0.9632,
+      "paired": {
+       "gained": 64,
+       "lost": 4,
+       "p": 5.873990530091966e-15
+      }
+     },
+     "3": {
+      "n": 295,
+      "ALL_reference": 0.7695,
+      "ALL_arm": 0.8949,
+      "paired": {
+       "gained": 44,
+       "lost": 7,
+       "p": 1.2115257419509362e-07
+      }
+     },
+     "4": {
+      "n": 158,
+      "ALL_reference": 0.4241,
+      "ALL_arm": 0.7152,
+      "paired": {
+       "gained": 51,
+       "lost": 5,
+       "p": 1.170292474039769e-10
+      }
+     }
+    }
+   },
+   "strata_D3": {
+    "per_n_gold": {
+     "2": {
+      "n": 543,
+      "ALL_reference": 0.9337,
+      "ALL_arm": 0.9632,
+      "paired": {
+       "gained": 16,
+       "lost": 0,
+       "p": 3.0517578125e-05
+      }
+     },
+     "3": {
+      "n": 295,
+      "ALL_reference": 0.8847,
+      "ALL_arm": 0.8949,
+      "paired": {
+       "gained": 5,
+       "lost": 2,
+       "p": 0.453125
+      }
+     },
+     "4": {
+      "n": 158,
+      "ALL_reference": 0.6962,
+      "ALL_arm": 0.7152,
+      "paired": {
+       "gained": 3,
+       "lost": 0,
+       "p": 0.25
+      }
+     }
+    }
+   }
+  }
+ },
+ "not_done": [
+  "no partition arm on webqsp / hotpotqa / 2wiki (no canonical partition exists; not required by the ruling)",
+  "split B of every fresh population sealed; DEV_B not read",
+  "no adoption: any change to the frozen L1 is the user's ruling"
+ ]
+}

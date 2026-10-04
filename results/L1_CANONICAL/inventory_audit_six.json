@@ -1,0 +1,2332 @@
+{
+ "utc": "2026-09-13T09:02:19Z",
+ "verification_utc": "2026-09-13T00:10:16Z",
+ "verification_pass": true,
+ "verification_checks": 686,
+ "datasets": {
+  "metaqa": {
+   "record_self_hash_ok": true,
+   "frozen_utc": "2026-09-12T00:11:15Z",
+   "n_nodes": 43234,
+   "n_queries": 407513,
+   "queries_by_split": {
+    "train": 329282,
+    "dev": 39138,
+    "test": 39093
+   },
+   "pinned_files": {
+    "n": 52,
+    "missing": [],
+    "size_mismatch": [],
+    "n_size_mismatch": 0,
+    "modified_after_verification": [],
+    "n_modified_after_verification": 0
+   },
+   "nodes": {
+    "lines": 43234,
+    "lines_eq_n_nodes": true,
+    "distinct_node_ids": 43234,
+    "duplicate_ids": 0,
+    "rows_without_node_id": 0,
+    "empty_text_rows": 0,
+    "rows_without_text_field": 0,
+    "first_id": "metaqa:e00000",
+    "last_id": "metaqa:e43233"
+   },
+   "queries": {
+    "splits_in_row_order": [
+     "train",
+     "dev",
+     "test"
+    ],
+    "by_split": {
+     "train": {
+      "rows": 329282,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 2446161,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 329282,
+      "topic_refs_unresolved": 0
+     },
+     "dev": {
+      "rows": 39138,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 300980,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 39138,
+      "topic_refs_unresolved": 0
+     },
+     "test": {
+      "rows": 39093,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 302779,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 39093,
+      "topic_refs_unresolved": 0
+     }
+    },
+    "total_rows": 407513,
+    "distinct_query_ids": 407513,
+    "duplicate_query_ids": 0,
+    "query_ids_json_eq_concatenation": true,
+    "query_ids_json_len": 407513,
+    "lanes": {
+     "LEGACY_CONTINUITY.jsonl": {
+      "rows": 1998
+     },
+     "QUALITY_LOCKED.jsonl": {
+      "rows": 39093
+     },
+     "SCALE_ALL.ids.jsonl": {
+      "rows": 407513
+     }
+    },
+    "eval_subsets": {
+     "eval_1998.jsonl": {
+      "rows": 1998
+     }
+    }
+   },
+   "embeddings": {
+    "dense/docs": {
+     "n_files": 2,
+     "rows_from_headers": 43234,
+     "rows_expected": 43234,
+     "rows_match": true,
+     "manifest_n_rows": 43234,
+     "manifest_n_shards": 2,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "source_sha256": "7079e129667da2fa0681eaef20b10a2a19c1195bffa6089e04c7b4cbd6bb83e4"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row i is the dense vector of position i == line i of nodes.jsonl"
+    },
+    "dense/queries": {
+     "n_files": 11,
+     "rows_from_headers": 407513,
+     "rows_expected": 407513,
+     "rows_match": true,
+     "manifest_n_rows": 407513,
+     "manifest_n_shards": 11,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "source_sha256": null
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row j is the dense vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'dev', 'test'] concatenated in that order"
+    },
+    "splade/docs": {
+     "n_files": 2,
+     "rows_from_headers": 43234,
+     "rows_expected": 43234,
+     "rows_match": true,
+     "manifest_n_rows": 43234,
+     "manifest_n_shards": 2,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "source_sha256": "7079e129667da2fa0681eaef20b10a2a19c1195bffa6089e04c7b4cbd6bb83e4"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row i is the splade vector of position i == line i of nodes.jsonl"
+    },
+    "splade/queries": {
+     "n_files": 11,
+     "rows_from_headers": 407513,
+     "rows_expected": 407513,
+     "rows_match": true,
+     "manifest_n_rows": 407513,
+     "manifest_n_shards": 11,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "dim": null,
+      "dtype": null,
+      "source_sha256": null
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row j is the splade vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'dev', 'test'] concatenated in that order"
+    }
+   },
+   "graph": {
+    "families": {
+     "structural": {
+      "present": true,
+      "n_edges": 133582,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 43233,
+      "dst_min": 1,
+      "dst_max": 43232,
+      "endpoints_in_range": true,
+      "self_loops": 11,
+      "duplicate_rows_src_dst": 8902,
+      "duplicate_unordered_pairs": 8902,
+      "nodes_with_degree_0": 0,
+      "directed_flag": true,
+      "attributes": "rel(int16) + rel_vocab",
+      "keys": [
+       "src",
+       "dst",
+       "rel"
+      ],
+      "provenance": "official MetaQA kb.txt entity-relation triples",
+      "edge_subtype": null,
+      "rel_dtype": "int16",
+      "rel_distinct": 9,
+      "rel_vocab_size": 9,
+      "rel_max_lt_vocab": true,
+      "duplicate_rows_src_dst_rel": 0
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 5949,
+      "n_edges_eq_manifest": true,
+      "src_min": 1,
+      "src_max": 43224,
+      "dst_min": 28,
+      "dst_max": 43230,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 37552,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.03999999910593033,
+      "weight_max": 1.0,
+      "weight_nan": 0
+     },
+     "knn": {
+      "present": true,
+      "n_edges": 97920,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 43167,
+      "dst_min": 4,
+      "dst_max": 43233,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 0,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.41165798902511597,
+      "weight_max": 0.9922909736633301,
+      "weight_nan": 0
+     }
+    },
+    "nodes_with_degree_0_in_all_families": 0,
+    "families_absent": [],
+    "nodes_unrepresented_recorded": []
+   },
+   "retrieval_cache": {
+    "dense": {
+     "members": {
+      "ids": {
+       "shape": [
+        407513,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        407513,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 407513,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 43233,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": false
+    },
+    "splade": {
+     "members": {
+      "ids": {
+       "shape": [
+        407513,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        407513,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 407513,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 43233,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": false
+    }
+   },
+   "node_id_map_legacy": {
+    "top_keys": [
+     "legacy_to_canonical",
+     "_ambiguous",
+     "_note"
+    ],
+    "n_top": 3,
+    "sample": [
+     [
+      "legacy_to_canonical",
+      "{\"metaqa_ent_$\": \"metaqa:e22804\", \"metaqa_ent_$9.99\": \"metaqa:e10508\", \"metaqa_ent_'71\": \"metaqa:e36476\", \"metaqa_ent_'n"
+     ],
+     [
+      "_ambiguous",
+      "{}"
+     ],
+     [
+      "_note",
+      "legacy node_id (master_nodes_<legacy>.json doc node) -> canonical_v1 node_id; null = no canonical match; _ambiguous lists canonical candidates where the legacy identity merged several canonical entities"
+     ]
+    ],
+    "flat_values_resolve": 0,
+    "flat_n": 1,
+    "flat_distinct_values": 1
+   }
+  },
+  "2wiki": {
+   "record_self_hash_ok": true,
+   "frozen_utc": "2026-09-12T00:12:57Z",
+   "n_nodes": 5989847,
+   "n_queries": 192606,
+   "queries_by_split": {
+    "train": 167454,
+    "dev": 12576,
+    "test": 12576
+   },
+   "pinned_files": {
+    "n": 345,
+    "missing": [],
+    "size_mismatch": [],
+    "n_size_mismatch": 0,
+    "modified_after_verification": [],
+    "n_modified_after_verification": 0
+   },
+   "nodes": {
+    "lines": 5989847,
+    "lines_eq_n_nodes": true,
+    "distinct_node_ids": 5989847,
+    "duplicate_ids": 0,
+    "rows_without_node_id": 0,
+    "empty_text_rows": 0,
+    "rows_without_text_field": 0,
+    "first_id": "2wiki:c1000",
+    "last_id": "2wiki:c9999998"
+   },
+   "queries": {
+    "splits_in_row_order": [
+     "train",
+     "dev",
+     "test"
+    ],
+    "by_split": {
+     "train": {
+      "rows": 167454,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 404170,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     },
+     "dev": {
+      "rows": 12576,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 30654,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     },
+     "test": {
+      "rows": 12576,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 12576,
+      "gold_refs": 0,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     }
+    },
+    "total_rows": 192606,
+    "distinct_query_ids": 192606,
+    "duplicate_query_ids": 0,
+    "query_ids_json_eq_concatenation": true,
+    "query_ids_json_len": 192606,
+    "lanes": {
+     "LEGACY_CONTINUITY.jsonl": {
+      "rows": 2000
+     },
+     "QUALITY_LOCKED.jsonl": {
+      "rows": 12576
+     },
+     "SCALE_ALL.ids.jsonl": {
+      "rows": 192606
+     }
+    },
+    "eval_subsets": {
+     "eval_2000.jsonl": {
+      "rows": 2000
+     }
+    }
+   },
+   "node_id_map_legacy": {
+    "top_keys": [
+     "legacy_to_canonical",
+     "_ambiguous",
+     "_note"
+    ],
+    "n_top": 3,
+    "sample": [
+     [
+      "legacy_to_canonical",
+      "{\"2wiki_clean_doc_0\": \"2wiki:c5844643\", \"2wiki_clean_doc_48190\": \"2wiki:c5844643\", \"2wiki_clean_doc_1\": \"2wiki:c46395726"
+     ],
+     [
+      "_ambiguous",
+      "{\"2wiki_clean_doc_19012\": [\"2wiki:c62717110\", \"2wiki:c8073502\"], \"2wiki_clean_doc_26022\": [\"2wiki:c62717110\", \"2wiki:c80"
+     ],
+     [
+      "_note",
+      "legacy node_id (master_nodes_<legacy>.json doc node) -> canonical_v1 node_id; null = no canonical match; _ambiguous lists every canonical candidate where one legacy title now matches several curids"
+     ]
+    ],
+    "flat_values_resolve": 0,
+    "flat_n": 1,
+    "flat_distinct_values": 1
+   },
+   "embeddings": {
+    "dense/docs": {
+     "n_files": 150,
+     "rows_from_headers": 5989847,
+     "rows_expected": 5989847,
+     "rows_match": true,
+     "manifest_n_rows": 5989847,
+     "manifest_n_shards": 150,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "source_sha256": "728eff547c5e868d52e06c32cea4f059ff9d44f5723e7cc4496f25602c21bc29"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row i is the dense vector of position i == line i of nodes.jsonl"
+    },
+    "dense/queries": {
+     "n_files": 5,
+     "rows_from_headers": 192606,
+     "rows_expected": 192606,
+     "rows_match": true,
+     "manifest_n_rows": 192606,
+     "manifest_n_shards": 5,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "source_sha256": "f1d809824aa4d185af6f9b2da1ff394941d7e033c5f6f9b2cc42a8316b9e8500"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row j is the dense vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'dev', 'test'] concatenated in that order"
+    },
+    "splade/docs": {
+     "n_files": 150,
+     "rows_from_headers": 5989847,
+     "rows_expected": 5989847,
+     "rows_match": true,
+     "manifest_n_rows": 5989847,
+     "manifest_n_shards": 150,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "source_sha256": "728eff547c5e868d52e06c32cea4f059ff9d44f5723e7cc4496f25602c21bc29"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row i is the splade vector of position i == line i of nodes.jsonl"
+    },
+    "splade/queries": {
+     "n_files": 5,
+     "rows_from_headers": 192606,
+     "rows_expected": 192606,
+     "rows_match": true,
+     "manifest_n_rows": 192606,
+     "manifest_n_shards": 5,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "source_sha256": "f1d809824aa4d185af6f9b2da1ff394941d7e033c5f6f9b2cc42a8316b9e8500"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row j is the splade vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'dev', 'test'] concatenated in that order"
+    }
+   },
+   "graph": {
+    "families": {
+     "structural": {
+      "present": true,
+      "n_edges": 28963600,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 5989846,
+      "dst_min": 0,
+      "dst_max": 5989843,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 754743,
+      "nodes_with_degree_0": 515830,
+      "directed_flag": true,
+      "attributes": "rel(int16) + rel_vocab",
+      "keys": [
+       "src",
+       "dst",
+       "rel"
+      ],
+      "provenance": "official 2wiki para_with_hyperlink ref_ids (curid->curid), internal to universe",
+      "edge_subtype": "hyperlink",
+      "rel_dtype": "int16",
+      "rel_distinct": 1,
+      "rel_vocab_size": 1,
+      "rel_max_lt_vocab": true,
+      "duplicate_rows_src_dst_rel": 0
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 34067241,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 5989719,
+      "dst_min": 41,
+      "dst_max": 5989846,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 2114594,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.03999999910593033,
+      "weight_max": 35.33333206176758,
+      "weight_nan": 0
+     },
+     "knn": {
+      "present": true,
+      "n_edges": 13643063,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 5989841,
+      "dst_min": 3,
+      "dst_max": 5989846,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 0,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.4289373755455017,
+      "weight_max": 0.9999796748161316,
+      "weight_nan": 0
+     }
+    },
+    "nodes_with_degree_0_in_all_families": 0,
+    "families_absent": [],
+    "nodes_unrepresented_recorded": []
+   },
+   "retrieval_cache": {
+    "dense": {
+     "members": {
+      "ids": {
+       "shape": [
+        192606,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        192606,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 192606,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 5989846,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": true,
+     "meta": {
+      "n_queries": 192606,
+      "K": 1000,
+      "seconds": 36.6,
+      "score_min": 0.35107421875,
+      "score_max": 0.88427734375,
+      "top1_score_median": 0.62451171875,
+      "bytes": 1155636504,
+      "n_docs": 5989847,
+      "n_distinct": 5982725,
+      "duplicate_positions": 7122,
+      "backend": "modal H100, float32 TF32 GEMM",
+      "prefilter": "score >= exact k-th-best score; 2 blocks checked against naive topk, bit-identical"
+     }
+    },
+    "splade": {
+     "members": {
+      "ids": {
+       "shape": [
+        192606,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        192606,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 192606,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 5989846,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": true,
+     "meta": {
+      "n_queries": 192606,
+      "K": 1000,
+      "merged_from": 24,
+      "seconds_summed_over_shards": 56377.8,
+      "slowest_shard_seconds": 3317.7,
+      "score_min": 5.23046875,
+      "score_max": 73.5,
+      "top1_score_median": 21.671875,
+      "n_docs": 5989847,
+      "bytes": 1155636504,
+      "merged_locally": true,
+      "backend_by_part": {
+       "0": "modal cpu, scipy path identical to the local builder",
+       "1": "modal cpu, scipy path identical to the local builder",
+       "2": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17",
+       "3": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17",
+       "4": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17",
+       "5": "modal cpu, scipy path identical to the local builder",
+       "6": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17",
+       "7": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17",
+       "8": "modal cpu, scipy path identical to the local builder",
+       "9": "modal cpu, scipy path identical to the local builder",
+       "10": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17",
+       "11": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17",
+       "12": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17",
+       "13": "modal cpu, scipy path identical to the local builder",
+       "14": "modal cpu, scipy path identical to the local builder",
+       "15": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17",
+       "16": "modal cpu, scipy path identical to the local builder",
+       "17": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17",
+       "18": "modal cpu, scipy path identical to the local builder",
+       "19": "modal cpu, scipy path identical to the local builder",
+       "20": "modal cpu, scipy path identical to the local builder",
+       "21": "modal cpu, scipy path identical to the local builder",
+       "22": "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 22",
+       "23": "modal cpu, scipy path identical to the local builder"
+      },
+      "backend_row_counts": {
+       "modal cpu, scipy path identical to the local builder": 104327,
+       "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 2,3,4,6,7,10,11,12,15,17": 80254,
+       "local cpu, scipy sparse @ sparse, builder path, prefilter kernel; built in one shared pass with shards 22": 8025
+      },
+      "backend": "MIXED -- see backend_by_part"
+     }
+    }
+   }
+  },
+  "musique": {
+   "record_self_hash_ok": true,
+   "frozen_utc": "2026-09-12T00:11:29Z",
+   "n_nodes": 117534,
+   "n_queries": 24814,
+   "queries_by_split": {
+    "train": 19938,
+    "dev": 2417,
+    "test": 2459
+   },
+   "pinned_files": {
+    "n": 34,
+    "missing": [],
+    "size_mismatch": [],
+    "n_size_mismatch": 0,
+    "modified_after_verification": [],
+    "n_modified_after_verification": 0
+   },
+   "nodes": {
+    "lines": 117534,
+    "lines_eq_n_nodes": true,
+    "distinct_node_ids": 117534,
+    "duplicate_ids": 0,
+    "rows_without_node_id": 0,
+    "empty_text_rows": 0,
+    "rows_without_text_field": 0,
+    "first_id": "musique:0000c249ea24f44bb7c0adf1",
+    "last_id": "musique:fffd5f57bb22556662ab2c62"
+   },
+   "queries": {
+    "splits_in_row_order": [
+     "train",
+     "dev",
+     "test"
+    ],
+    "by_split": {
+     "train": {
+      "rows": 19938,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 46613,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     },
+     "dev": {
+      "rows": 2417,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 6404,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     },
+     "test": {
+      "rows": 2459,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 2459,
+      "gold_refs": 0,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     }
+    },
+    "total_rows": 24814,
+    "distinct_query_ids": 24814,
+    "duplicate_query_ids": 0,
+    "query_ids_json_eq_concatenation": true,
+    "query_ids_json_len": 24814,
+    "lanes": {
+     "LEGACY_CONTINUITY.jsonl": {
+      "rows": 2000
+     },
+     "QUALITY_LOCKED.jsonl": {
+      "rows": 2417
+     },
+     "SCALE_ALL.ids.jsonl": {
+      "rows": 24814
+     }
+    },
+    "eval_subsets": {
+     "eval_2000.jsonl": {
+      "rows": 2000
+     }
+    }
+   },
+   "node_id_map_legacy": {
+    "top_keys": [
+     "legacy_to_canonical",
+     "_ambiguous",
+     "_note"
+    ],
+    "n_top": 3,
+    "sample": [
+     [
+      "legacy_to_canonical",
+      "{\"musique_clean_doc_0\": \"musique:5954469f89d381d92368610c\", \"musique_clean_doc_1\": \"musique:d7fbe690b3cde7163fc3966f\", \""
+     ],
+     [
+      "_ambiguous",
+      "{}"
+     ],
+     [
+      "_note",
+      "legacy node_id (master_nodes_<legacy>.json doc node) -> canonical_v1 node_id; null = no canonical match; _ambiguous lists canonical candidates where the legacy identity merged several canonical entities"
+     ]
+    ],
+    "flat_values_resolve": 0,
+    "flat_n": 1,
+    "flat_distinct_values": 1
+   },
+   "embeddings": {
+    "dense/docs": {
+     "n_files": 3,
+     "rows_from_headers": 117534,
+     "rows_expected": 117534,
+     "rows_match": true,
+     "manifest_n_rows": 117534,
+     "manifest_n_shards": 3,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "source_sha256": "c4f60d974c267daad7ceeb301f5cbb95b1a18b3c27e14fe9d70fb7390d4939ee"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row i is the dense vector of position i == line i of nodes.jsonl"
+    },
+    "dense/queries": {
+     "n_files": 1,
+     "rows_from_headers": 24814,
+     "rows_expected": 24814,
+     "rows_match": true,
+     "manifest_n_rows": 24814,
+     "manifest_n_shards": 1,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "source_sha256": "248e4497ad3dc2b24efbd4d7e888fa8a30363f1f6cd9ebd6dbefb461e91c0208"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row j is the dense vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'dev', 'test'] concatenated in that order"
+    },
+    "splade/docs": {
+     "n_files": 3,
+     "rows_from_headers": 117534,
+     "rows_expected": 117534,
+     "rows_match": true,
+     "manifest_n_rows": 117534,
+     "manifest_n_shards": 3,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "source_sha256": "c4f60d974c267daad7ceeb301f5cbb95b1a18b3c27e14fe9d70fb7390d4939ee"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row i is the splade vector of position i == line i of nodes.jsonl"
+    },
+    "splade/queries": {
+     "n_files": 1,
+     "rows_from_headers": 24814,
+     "rows_expected": 24814,
+     "rows_match": true,
+     "manifest_n_rows": 24814,
+     "manifest_n_shards": 1,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "source_sha256": "248e4497ad3dc2b24efbd4d7e888fa8a30363f1f6cd9ebd6dbefb461e91c0208"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row j is the splade vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'dev', 'test'] concatenated in that order"
+    }
+   },
+   "graph": {
+    "families": {
+     "structural": {
+      "present": true,
+      "n_edges": 2744076,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 117533,
+      "dst_min": 1,
+      "dst_max": 117533,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 92796,
+      "nodes_with_degree_0": 9858,
+      "directed_flag": true,
+      "attributes": "rel(int16) + rel_vocab",
+      "keys": [
+       "src",
+       "dst",
+       "rel"
+      ],
+      "provenance": "derived: doc text contains another doc's title as a word-bounded phrase (no native graph available)",
+      "edge_subtype": "title_mention",
+      "rel_dtype": "int16",
+      "rel_distinct": 1,
+      "rel_vocab_size": 1,
+      "rel_max_lt_vocab": true,
+      "duplicate_rows_src_dst_rel": 0
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 800278,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 117531,
+      "dst_min": 0,
+      "dst_max": 117531,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 20677,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.03999999910593033,
+      "weight_max": 18.084524154663086,
+      "weight_nan": 0
+     },
+     "knn": {
+      "present": true,
+      "n_edges": 265366,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 117276,
+      "dst_min": 227,
+      "dst_max": 117533,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 0,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.3330640196800232,
+      "weight_max": 0.9999935626983643,
+      "weight_nan": 0
+     }
+    },
+    "nodes_with_degree_0_in_all_families": 0,
+    "families_absent": [],
+    "nodes_unrepresented_recorded": [
+     {
+      "canonical_position": 74545,
+      "canonical_title": "Adei Ad",
+      "phase_c_doc_id": "musique_846f6d0832a1fefb",
+      "phase_c_title": "Etz Efraim",
+      "kept_position": 8381
+     }
+    ]
+   },
+   "retrieval_cache": {
+    "dense": {
+     "members": {
+      "ids": {
+       "shape": [
+        24814,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        24814,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 24814,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 117533,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": false
+    },
+    "splade": {
+     "members": {
+      "ids": {
+       "shape": [
+        24814,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        24814,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 24814,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 117533,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": false
+    }
+   }
+  },
+  "hotpotqa": {
+   "record_self_hash_ok": true,
+   "frozen_utc": "2026-09-12T00:12:08Z",
+   "n_nodes": 5233329,
+   "n_queries": 105257,
+   "queries_by_split": {
+    "train": 90447,
+    "validation": 7405,
+    "test": 7405
+   },
+   "pinned_files": {
+    "n": 302,
+    "missing": [],
+    "size_mismatch": [],
+    "n_size_mismatch": 0,
+    "modified_after_verification": [],
+    "n_modified_after_verification": 0
+   },
+   "nodes": {
+    "lines": 5233329,
+    "lines_eq_n_nodes": true,
+    "distinct_node_ids": 5233329,
+    "duplicate_ids": 0,
+    "rows_without_node_id": 0,
+    "empty_text_rows": 0,
+    "rows_without_text_field": 0,
+    "first_id": "hotpotqa:c1000",
+    "last_id": "hotpotqa:c9999998"
+   },
+   "queries": {
+    "splits_in_row_order": [
+     "train",
+     "validation",
+     "test"
+    ],
+    "by_split": {
+     "train": {
+      "rows": 90447,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 180894,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     },
+     "validation": {
+      "rows": 7405,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 14810,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     },
+     "test": {
+      "rows": 7405,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 7405,
+      "gold_refs": 0,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     }
+    },
+    "total_rows": 105257,
+    "distinct_query_ids": 105257,
+    "duplicate_query_ids": 0,
+    "query_ids_json_eq_concatenation": true,
+    "query_ids_json_len": 105257,
+    "lanes": {
+     "LEGACY_CONTINUITY.jsonl": {
+      "rows": 2000
+     },
+     "QUALITY_LOCKED.jsonl": {
+      "rows": 7405
+     },
+     "SCALE_ALL.ids.jsonl": {
+      "rows": 105257
+     }
+    },
+    "eval_subsets": {
+     "eval_2000.jsonl": {
+      "rows": 2000
+     }
+    }
+   },
+   "node_id_map_legacy": {
+    "top_keys": [
+     "legacy_to_canonical",
+     "_ambiguous",
+     "_note"
+    ],
+    "n_top": 3,
+    "sample": [
+     [
+      "legacy_to_canonical",
+      "{\"hotpotqa_clean_doc_0\": \"hotpotqa:c528464\", \"hotpotqa_clean_doc_1\": \"hotpotqa:c2816539\", \"hotpotqa_clean_doc_2\": \"hotpo"
+     ],
+     [
+      "_ambiguous",
+      "{}"
+     ],
+     [
+      "_note",
+      "legacy node_id (master_nodes_<legacy>.json doc node) -> canonical_v1 node_id; null = no canonical match; _ambiguous lists every canonical candidate where one legacy title now matches several curids"
+     ]
+    ],
+    "flat_values_resolve": 0,
+    "flat_n": 1,
+    "flat_distinct_values": 1
+   },
+   "embeddings": {
+    "dense/docs": {
+     "n_files": 131,
+     "rows_from_headers": 5233329,
+     "rows_expected": 5233329,
+     "rows_match": true,
+     "manifest_n_rows": 5233329,
+     "manifest_n_shards": 131,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "source_sha256": "a43b3eb18bf5c2f7e8fc7c4c0476d02b35fed9d5f72e7fec7c81c3fcd39c357b"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row i is the dense vector of position i == line i of nodes.jsonl"
+    },
+    "dense/queries": {
+     "n_files": 3,
+     "rows_from_headers": 105257,
+     "rows_expected": 105257,
+     "rows_match": true,
+     "manifest_n_rows": 105257,
+     "manifest_n_shards": 3,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "source_sha256": "9a0038742a6776da2aef35c1b6f698b093a6358687661a191d56bf4200e2d48e"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row j is the dense vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'validation', 'test'] concatenated in that order"
+    },
+    "splade/docs": {
+     "n_files": 131,
+     "rows_from_headers": 5233329,
+     "rows_expected": 5233329,
+     "rows_match": true,
+     "manifest_n_rows": 5233329,
+     "manifest_n_shards": 131,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "source_sha256": "a43b3eb18bf5c2f7e8fc7c4c0476d02b35fed9d5f72e7fec7c81c3fcd39c357b"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row i is the splade vector of position i == line i of nodes.jsonl"
+    },
+    "splade/queries": {
+     "n_files": 3,
+     "rows_from_headers": 105257,
+     "rows_expected": 105257,
+     "rows_match": true,
+     "manifest_n_rows": 105257,
+     "manifest_n_shards": 3,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "source_sha256": "9a0038742a6776da2aef35c1b6f698b093a6358687661a191d56bf4200e2d48e"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row j is the splade vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'validation', 'test'] concatenated in that order"
+    }
+   },
+   "graph": {
+    "families": {
+     "structural": {
+      "present": true,
+      "n_edges": 15367541,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 5233328,
+      "dst_min": 0,
+      "dst_max": 5233314,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 272254,
+      "nodes_with_degree_0": 551848,
+      "directed_flag": true,
+      "attributes": "rel(int16) + rel_vocab",
+      "keys": [
+       "src",
+       "dst",
+       "rel"
+      ],
+      "provenance": "official enwiki-20171001 withlinks-abstracts intra-corpus hyperlinks",
+      "edge_subtype": "hyperlink",
+      "rel_dtype": "int16",
+      "rel_distinct": 1,
+      "rel_vocab_size": 1,
+      "rel_max_lt_vocab": true,
+      "duplicate_rows_src_dst_rel": 0
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 20369074,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 5233204,
+      "dst_min": 39,
+      "dst_max": 5233328,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 2136890,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.03999999910593033,
+      "weight_max": 8.346465110778809,
+      "weight_nan": 0
+     },
+     "knn": {
+      "present": true,
+      "n_edges": 11946289,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 5233323,
+      "dst_min": 2,
+      "dst_max": 5233328,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 0,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.37293580174446106,
+      "weight_max": 1.0000009536743164,
+      "weight_nan": 0
+     }
+    },
+    "nodes_with_degree_0_in_all_families": 0,
+    "families_absent": [],
+    "nodes_unrepresented_recorded": []
+   },
+   "retrieval_cache": {
+    "dense": {
+     "members": {
+      "ids": {
+       "shape": [
+        105257,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        105257,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 105257,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 5233328,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": true,
+     "meta": {
+      "n_queries": 105257,
+      "K": 1000,
+      "seconds": 21.2,
+      "score_min": 0.317626953125,
+      "score_max": 0.9736328125,
+      "top1_score_median": 0.69921875,
+      "bytes": 631542504,
+      "n_docs": 5233329,
+      "n_distinct": 5220748,
+      "duplicate_positions": 12581,
+      "backend": "modal H100, float32 TF32 GEMM",
+      "prefilter": "score >= exact k-th-best score; 2 blocks checked against naive topk, bit-identical"
+     }
+    },
+    "splade": {
+     "members": {
+      "ids": {
+       "shape": [
+        105257,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        105257,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 105257,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 5233328,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": true,
+     "meta": {
+      "n_queries": 105257,
+      "K": 1000,
+      "merged_from": 24,
+      "seconds_summed_over_shards": 22426.5,
+      "slowest_shard_seconds": 1005.5,
+      "score_min": 4.37890625,
+      "score_max": 131.75,
+      "top1_score_median": 23.421875,
+      "n_docs": 5233329,
+      "bytes": 631542504,
+      "merged_locally": true,
+      "backend": "modal cpu x24 across two workspaces; scipy path identical to the local builder"
+     }
+    }
+   }
+  },
+  "squad": {
+   "record_self_hash_ok": true,
+   "frozen_utc": "2026-09-12T00:11:26Z",
+   "n_nodes": 20233,
+   "n_queries": 142192,
+   "queries_by_split": {
+    "train": 130319,
+    "dev": 11873
+   },
+   "pinned_files": {
+    "n": 35,
+    "missing": [],
+    "size_mismatch": [],
+    "n_size_mismatch": 0,
+    "modified_after_verification": [],
+    "n_modified_after_verification": 0
+   },
+   "nodes": {
+    "lines": 20233,
+    "lines_eq_n_nodes": true,
+    "distinct_node_ids": 20233,
+    "duplicate_ids": 0,
+    "rows_without_node_id": 0,
+    "empty_text_rows": 0,
+    "rows_without_text_field": 0,
+    "first_id": "squad:0000a0b2e7013954a7e70e5e",
+    "last_id": "squad:fffecfe0d0241cf77ca86c6e"
+   },
+   "queries": {
+    "splits_in_row_order": [
+     "train",
+     "dev"
+    ],
+    "by_split": {
+     "train": {
+      "rows": 130319,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 130319,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     },
+     "dev": {
+      "rows": 11873,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 0,
+      "gold_refs": 11873,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 0,
+      "topic_refs_unresolved": 0
+     }
+    },
+    "total_rows": 142192,
+    "distinct_query_ids": 142192,
+    "duplicate_query_ids": 0,
+    "query_ids_json_eq_concatenation": true,
+    "query_ids_json_len": 142192,
+    "lanes": {
+     "LEGACY_CONTINUITY.jsonl": {
+      "rows": 2000
+     },
+     "QUALITY_LOCKED.jsonl": {
+      "rows": 11873
+     },
+     "SCALE_ALL.ids.jsonl": {
+      "rows": 142192
+     }
+    },
+    "eval_subsets": {
+     "eval_2000.jsonl": {
+      "rows": 2000
+     }
+    }
+   },
+   "node_id_map_legacy": {
+    "top_keys": [
+     "legacy_to_canonical",
+     "_ambiguous",
+     "_note"
+    ],
+    "n_top": 3,
+    "sample": [
+     [
+      "legacy_to_canonical",
+      "{\"squad_clean_doc_0\": \"squad:3bc4d3a28271f95029d86f9f\", \"squad_clean_doc_1\": \"squad:bdc1bb9be9c7528b069dcf0c\", \"squad_cl"
+     ],
+     [
+      "_ambiguous",
+      "{}"
+     ],
+     [
+      "_note",
+      "legacy node_id (master_nodes_<legacy>.json doc node) -> canonical_v1 node_id; null = no canonical match; _ambiguous lists canonical candidates where the legacy identity merged several canonical entities"
+     ]
+    ],
+    "flat_values_resolve": 0,
+    "flat_n": 1,
+    "flat_distinct_values": 1
+   },
+   "embeddings": {
+    "dense/docs": {
+     "n_files": 1,
+     "rows_from_headers": 20233,
+     "rows_expected": 20233,
+     "rows_match": true,
+     "manifest_n_rows": 20233,
+     "manifest_n_shards": 1,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "source_sha256": "fcb80a8192f6bb1b8571145c00448ab511a059846da519aeae45d5be35fd1361"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row i is the dense vector of position i == line i of nodes.jsonl"
+    },
+    "dense/queries": {
+     "n_files": 4,
+     "rows_from_headers": 142192,
+     "rows_expected": 142192,
+     "rows_match": true,
+     "manifest_n_rows": 142192,
+     "manifest_n_shards": 4,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "source_sha256": "a23236b17e57190814f985b82b1aa9424394cc50398eaf5bd1864eb315afe892"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row j is the dense vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'dev'] concatenated in that order"
+    },
+    "splade/docs": {
+     "n_files": 1,
+     "rows_from_headers": 20233,
+     "rows_expected": 20233,
+     "rows_match": true,
+     "manifest_n_rows": 20233,
+     "manifest_n_shards": 1,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "source_sha256": "fcb80a8192f6bb1b8571145c00448ab511a059846da519aeae45d5be35fd1361"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row i is the splade vector of position i == line i of nodes.jsonl"
+    },
+    "splade/queries": {
+     "n_files": 4,
+     "rows_from_headers": 142192,
+     "rows_expected": 142192,
+     "rows_match": true,
+     "manifest_n_rows": 142192,
+     "manifest_n_shards": 4,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "source_sha256": "a23236b17e57190814f985b82b1aa9424394cc50398eaf5bd1864eb315afe892"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row j is the splade vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'dev'] concatenated in that order"
+    }
+   },
+   "graph": {
+    "families": {
+     "structural": {
+      "present": true,
+      "n_edges": 874190,
+      "n_edges_eq_manifest": true,
+      "src_min": 2,
+      "src_max": 20231,
+      "dst_min": 5,
+      "dst_max": 20231,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 129456,
+      "nodes_with_degree_0": 6349,
+      "directed_flag": true,
+      "attributes": "rel(int16) + rel_vocab",
+      "keys": [
+       "src",
+       "dst",
+       "rel"
+      ],
+      "provenance": "derived: doc text contains another doc's title as a word-bounded phrase (no native graph available)",
+      "edge_subtype": "title_mention",
+      "rel_dtype": "int16",
+      "rel_distinct": 1,
+      "rel_vocab_size": 1,
+      "rel_max_lt_vocab": true,
+      "duplicate_rows_src_dst_rel": 0
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 156130,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 20232,
+      "dst_min": 1,
+      "dst_max": 20232,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 4391,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.03999999910593033,
+      "weight_max": 9.333333015441895,
+      "weight_nan": 0
+     },
+     "knn": {
+      "present": true,
+      "n_edges": 42969,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 20232,
+      "dst_min": 0,
+      "dst_max": 20232,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 0,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.3993209898471832,
+      "weight_max": 0.999925971031189,
+      "weight_nan": 0
+     }
+    },
+    "nodes_with_degree_0_in_all_families": 0,
+    "families_absent": [],
+    "nodes_unrepresented_recorded": []
+   },
+   "retrieval_cache": {
+    "dense": {
+     "members": {
+      "ids": {
+       "shape": [
+        142192,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        142192,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 142192,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 20232,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": false
+    },
+    "splade": {
+     "members": {
+      "ids": {
+       "shape": [
+        142192,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        142192,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 142192,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 20232,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": false
+    }
+   }
+  },
+  "webqsp": {
+   "record_self_hash_ok": true,
+   "frozen_utc": "2026-09-12T00:13:18Z",
+   "n_nodes": 2592894,
+   "n_queries": 4737,
+   "queries_by_split": {
+    "train": 3098,
+    "test": 1639
+   },
+   "pinned_files": {
+    "n": 217,
+    "missing": [],
+    "size_mismatch": [],
+    "n_size_mismatch": 0,
+    "modified_after_verification": [],
+    "n_modified_after_verification": 0
+   },
+   "nodes": {
+    "lines": 2592894,
+    "lines_eq_n_nodes": true,
+    "distinct_node_ids": 2592894,
+    "duplicate_ids": 0,
+    "rows_without_node_id": 0,
+    "empty_text_rows": 0,
+    "rows_without_text_field": 0,
+    "first_id": "webqsp:n0",
+    "last_id": "webqsp:n2592893",
+    "id_ne_position_pattern": 0
+   },
+   "queries": {
+    "splits_in_row_order": [
+     "train",
+     "test"
+    ],
+    "by_split": {
+     "train": {
+      "rows": 3098,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 88,
+      "gold_refs": 21343,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 3157,
+      "topic_refs_unresolved": 0
+     },
+     "test": {
+      "rows": 1639,
+      "rows_eq_recorded": true,
+      "zero_gold_rows": 55,
+      "gold_refs": 10763,
+      "gold_refs_unresolved": 0,
+      "topic_refs": 1668,
+      "topic_refs_unresolved": 0
+     }
+    },
+    "total_rows": 4737,
+    "distinct_query_ids": 4737,
+    "duplicate_query_ids": 0,
+    "query_ids_json_eq_concatenation": true,
+    "query_ids_json_len": 4737,
+    "lanes": {},
+    "eval_subsets": {}
+   },
+   "embeddings": {
+    "dense/docs": {
+     "n_files": 65,
+     "rows_from_headers": 2592894,
+     "rows_expected": 2592894,
+     "rows_match": true,
+     "manifest_n_rows": 2592894,
+     "manifest_n_shards": 65,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "record": "webqsp/ENCODING_ASSEMBLY.json"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row i is the dense vector of position i == line i of nodes.jsonl"
+    },
+    "dense/queries": {
+     "n_files": 1,
+     "rows_from_headers": 4737,
+     "rows_expected": 4737,
+     "rows_match": true,
+     "manifest_n_rows": 4737,
+     "manifest_n_shards": 1,
+     "dims": [
+      "1536"
+     ],
+     "dtypes": [
+      "float16"
+     ],
+     "encoder": {
+      "encoder": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "dim": 1536,
+      "dtype": "float16",
+      "query_instruction": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+      "record": "webqsp/ENCODING_ASSEMBLY.json"
+     },
+     "format": {
+      "file": "shard_%05d.npy",
+      "dtype": "float16",
+      "shape": "(rows, 1536)",
+      "normalised": "unit L2 (|norm-1| <= 0.01)"
+     },
+     "row_semantics": "row j is the dense vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'test'] concatenated in that order"
+    },
+    "splade/docs": {
+     "n_files": 65,
+     "rows_from_headers": 2592894,
+     "rows_expected": 2592894,
+     "rows_match": true,
+     "manifest_n_rows": 2592894,
+     "manifest_n_shards": 65,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "record": "webqsp/ENCODING_ASSEMBLY.json"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row i is the splade vector of position i == line i of nodes.jsonl"
+    },
+    "splade/queries": {
+     "n_files": 1,
+     "rows_from_headers": 4737,
+     "rows_expected": 4737,
+     "rows_match": true,
+     "manifest_n_rows": 4737,
+     "manifest_n_shards": 1,
+     "dims": [
+      "shape-array"
+     ],
+     "dtypes": [
+      "float32"
+     ],
+     "encoder": {
+      "encoder": "naver/splade-cocondenser-ensembledistil",
+      "record": "webqsp/ENCODING_ASSEMBLY.json"
+     },
+     "format": {
+      "file": "shard_%05d.npz",
+      "keys": {
+       "indices": "int32",
+       "indptr": "int32",
+       "data": "float32",
+       "shape": "int64 [rows, 30522]",
+       "format": "S3 b'csr'"
+      }
+     },
+     "row_semantics": "row j is the splade vector of query j == queries/query_ids.json[j] == the j-th line of the split files ['train', 'test'] concatenated in that order"
+    }
+   },
+   "graph": {
+    "families": {
+     "structural": {
+      "present": true,
+      "n_edges": 8309195,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 2592887,
+      "dst_min": 0,
+      "dst_max": 2592893,
+      "endpoints_in_range": true,
+      "self_loops": 93692,
+      "duplicate_rows_src_dst": 333124,
+      "duplicate_unordered_pairs": 2375120,
+      "nodes_with_degree_0": 0,
+      "directed_flag": true,
+      "attributes": "rel(int16) + relation_vocabulary",
+      "keys": [
+       "src",
+       "dst",
+       "rel"
+      ],
+      "provenance": "RoG WebQSP+CWQ graph triples, V1-resolved",
+      "edge_subtype": "kb_relation",
+      "rel_dtype": "int16",
+      "rel_distinct": 7058,
+      "rel_vocab_size": 7058,
+      "rel_max_lt_vocab": true,
+      "duplicate_rows_src_dst_rel": 0
+     },
+     "ner": {
+      "present": true,
+      "n_edges": 2994802,
+      "n_edges_eq_manifest": true,
+      "src_min": 2,
+      "src_max": 2592859,
+      "dst_min": 4,
+      "dst_max": 2592859,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 1797723,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.03999999910593033,
+      "weight_max": 18.32463836669922,
+      "weight_nan": 0
+     },
+     "knn": {
+      "present": true,
+      "n_edges": 6470520,
+      "n_edges_eq_manifest": true,
+      "src_min": 0,
+      "src_max": 2592879,
+      "dst_min": 3,
+      "dst_max": 2592893,
+      "endpoints_in_range": true,
+      "self_loops": 0,
+      "duplicate_rows_src_dst": 0,
+      "duplicate_unordered_pairs": 0,
+      "nodes_with_degree_0": 0,
+      "directed_flag": false,
+      "attributes": "weight(float32)",
+      "keys": [
+       "src",
+       "dst",
+       "weight"
+      ],
+      "provenance": null,
+      "edge_subtype": null,
+      "weight_dtype": "float32",
+      "weight_min": 0.4065406024456024,
+      "weight_max": 1.0000007152557373,
+      "weight_nan": 0
+     }
+    },
+    "nodes_with_degree_0_in_all_families": 0,
+    "families_absent": [],
+    "nodes_unrepresented_recorded": []
+   },
+   "retrieval_cache": {
+    "dense": {
+     "members": {
+      "ids": {
+       "shape": [
+        4737,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        4737,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 4737,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 0,
+     "ids_max": 2592890,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": false
+    },
+    "splade": {
+     "members": {
+      "ids": {
+       "shape": [
+        4737,
+        1000
+       ],
+       "dtype": "int32",
+       "stored": true
+      },
+      "scores": {
+       "shape": [
+        4737,
+        1000
+       ],
+       "dtype": "float16",
+       "stored": true
+      }
+     },
+     "rows": 4737,
+     "rows_eq_n_queries": true,
+     "K": 1000,
+     "ids_min": 1,
+     "ids_max": 2592874,
+     "ids_in_range": true,
+     "sample_rows_with_1000_distinct_ids": 2000,
+     "sample_rows": 2000,
+     "sample_scores_nonincreasing_rows": 2000,
+     "scores_dtype": "float16",
+     "meta_json_present": false
+    }
+   }
+  }
+ },
+ "seconds": 1201.2
+}

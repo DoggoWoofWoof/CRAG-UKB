@@ -1,0 +1,723 @@
+{
+ "RECORD": "L1_TYPED_SELECT_CANDIDATE",
+ "version": 2,
+ "date": "2026-10-02",
+ "supersedes": {
+  "path": "results/L1_X/L1_TYPED_SELECT_CANDIDATE__v1.json",
+  "sha256": "15b7e799415ab1e7a41c49c2368a410a8c0366a4d1f23ad035c531807c196a63"
+ },
+ "STATUS": "DEV_CANDIDATE (descriptive; half A selects, half B reports; NOT held-out confirmed; no held-out row read; adoption = a contract ruling). v1 is unchanged and still the full spec; v2 adds ONE constant.",
+ "ruling": {
+  "user_verbatim_2026-10-02": "try expanding metaqa oracle and improving the all coverage",
+  "standing": "L1 = parameter-free routing and selection only -- no traversal (user 2026-10-01); v2 changes only how many FLAT hits the same single A^T x is fed"
+ },
+ "spec_delta_vs_v1": {
+  "typed_graph_regime_only": "n_relations > 1 (MetaQA 9, WebQSP 7,058); text graphs are untouched",
+  "ACT": "the IR_L1 hit budget of the typed-graph regime is 6000 (v1 and the shipped L1: 200); hit weight 1/(rank+1) * g(hit) and every other rule are exactly v1's",
+  "POOL": "5000 (unchanged); the router order ES_c, the count B_P(q,K), TYP = RRF(Sro, Sri, Tin) over the pool and the shipped tail are exactly v1's, now computed from the larger hit set",
+  "webqsp": "NOT measured at ACT > 200 (N = 2.59M; host job); v1's WebQSP numbers stand and the v2 constant is NOT claimed for WebQSP"
+ },
+ "selection_log": {
+  "protocol": "L1X -- L1_TYPED_SELECT_CANDIDATE v2 (write-once; SUPERSEDES v1 by addition, v1 is not edited): the typed-graph regime also feeds the one static A^T x a larger FLAT hit budget.\nAssembles results/L1_X/L1_TYPED_SELECT_CANDIDATE__v2.json from the two stored ACT/POOL records (actserve_metaqa__v1, __v2; no new measurement).\n\nSelection (declared before the pick is read): configurations (ACT, POOL) measured in either record, served rule TYP, router ES_c, count 'own'; objective = mean routed ALL on HALF A (even rows) over the five MetaQA cells\nK 100/250/432/500/1000 and B_N 100/250/500/1000; the winner is the SMALLEST configuration (ACT, then POOL) whose objective is within tolerance .003 of the best.  Half B only reports.\n  python scratchpad/_l1x_candidate_v2.py",
+  "tolerance": 0.003,
+  "configs": [
+   {
+    "ACT": 200,
+    "POOL": 5000,
+    "half_A_objective": 0.5165,
+    "within_tolerance_of_best": false
+   },
+   {
+    "ACT": 500,
+    "POOL": 5000,
+    "half_A_objective": 0.5417,
+    "within_tolerance_of_best": false
+   },
+   {
+    "ACT": 1000,
+    "POOL": 5000,
+    "half_A_objective": 0.5531,
+    "within_tolerance_of_best": false
+   },
+   {
+    "ACT": 1000,
+    "POOL": 10000,
+    "half_A_objective": 0.5513,
+    "within_tolerance_of_best": false
+   },
+   {
+    "ACT": 3000,
+    "POOL": 5000,
+    "half_A_objective": 0.5661,
+    "within_tolerance_of_best": false
+   },
+   {
+    "ACT": 3000,
+    "POOL": 20000,
+    "half_A_objective": 0.5629,
+    "within_tolerance_of_best": false
+   },
+   {
+    "ACT": 6000,
+    "POOL": 5000,
+    "half_A_objective": 0.5698,
+    "within_tolerance_of_best": true
+   },
+   {
+    "ACT": 6000,
+    "POOL": 10000,
+    "half_A_objective": 0.5689,
+    "within_tolerance_of_best": false
+   },
+   {
+    "ACT": 10000,
+    "POOL": 5000,
+    "half_A_objective": 0.5719,
+    "within_tolerance_of_best": true
+   },
+   {
+    "ACT": 10000,
+    "POOL": 20000,
+    "half_A_objective": 0.5676,
+    "within_tolerance_of_best": false
+   }
+  ],
+  "picked": {
+   "ACT": 6000,
+   "POOL": 5000,
+   "half_A_objective": 0.5698
+  },
+  "best_half_A_objective": 0.5719
+ },
+ "evidence_half_B_metaqa": {
+  "n_half_B": 991,
+  "per_K": {
+   "100": [
+    {
+     "B_N": 100,
+     "shipped_ALL_B": 0.3633,
+     "candidate_v1_ALL_B": 0.4531,
+     "candidate_v2_ALL_B": 0.4823,
+     "v2_vs_v1": {
+      "gained": 34,
+      "lost": 5,
+      "mcnemar_p_exact": 2.4299079086631536e-06
+     },
+     "v2_vs_shipped": {
+      "gained": 126,
+      "lost": 8,
+      "mcnemar_p_exact": 2.0409929932289558e-28
+     }
+    },
+    {
+     "B_N": 250,
+     "shipped_ALL_B": 0.4067,
+     "candidate_v1_ALL_B": 0.4934,
+     "candidate_v2_ALL_B": 0.5419,
+     "v2_vs_v1": {
+      "gained": 52,
+      "lost": 4,
+      "mcnemar_p_exact": 1.1008055578187737e-11
+     },
+     "v2_vs_shipped": {
+      "gained": 144,
+      "lost": 10,
+      "mcnemar_p_exact": 1.4422596333525145e-31
+     }
+    },
+    {
+     "B_N": 500,
+     "shipped_ALL_B": 0.4601,
+     "candidate_v1_ALL_B": 0.5197,
+     "candidate_v2_ALL_B": 0.5832,
+     "v2_vs_v1": {
+      "gained": 69,
+      "lost": 6,
+      "mcnemar_p_exact": 1.1641661378765454e-14
+     },
+     "v2_vs_shipped": {
+      "gained": 137,
+      "lost": 15,
+      "mcnemar_p_exact": 7.854293204336358e-26
+     }
+    },
+    {
+     "B_N": 1000,
+     "shipped_ALL_B": 0.4945,
+     "candidate_v1_ALL_B": 0.5419,
+     "candidate_v2_ALL_B": 0.6115,
+     "v2_vs_v1": {
+      "gained": 75,
+      "lost": 6,
+      "mcnemar_p_exact": 2.91096598559025e-16
+     },
+     "v2_vs_shipped": {
+      "gained": 131,
+      "lost": 15,
+      "mcnemar_p_exact": 2.679769781117354e-24
+     }
+    },
+    {
+     "B_N": 2000,
+     "shipped_ALL_B": 0.5409,
+     "candidate_v1_ALL_B": 0.5843,
+     "candidate_v2_ALL_B": 0.6246,
+     "v2_vs_v1": {
+      "gained": 46,
+      "lost": 6,
+      "mcnemar_p_exact": 1.0325821975243343e-08
+     },
+     "v2_vs_shipped": {
+      "gained": 101,
+      "lost": 18,
+      "mcnemar_p_exact": 3.3657704323663983e-15
+     }
+    },
+    {
+     "B_N": 5000,
+     "shipped_ALL_B": 0.5873,
+     "candidate_v1_ALL_B": 0.6347,
+     "candidate_v2_ALL_B": 0.669,
+     "v2_vs_v1": {
+      "gained": 52,
+      "lost": 18,
+      "mcnemar_p_exact": 5.849547318695842e-05
+     },
+     "v2_vs_shipped": {
+      "gained": 109,
+      "lost": 28,
+      "mcnemar_p_exact": 1.7449187258294399e-12
+     }
+    }
+   ],
+   "250": [
+    {
+     "B_N": 100,
+     "shipped_ALL_B": 0.3905,
+     "candidate_v1_ALL_B": 0.4642,
+     "candidate_v2_ALL_B": 0.4844,
+     "v2_vs_v1": {
+      "gained": 23,
+      "lost": 3,
+      "mcnemar_p_exact": 8.797645568847656e-05
+     },
+     "v2_vs_shipped": {
+      "gained": 97,
+      "lost": 4,
+      "mcnemar_p_exact": 3.35638779268828e-24
+     }
+    },
+    {
+     "B_N": 250,
+     "shipped_ALL_B": 0.444,
+     "candidate_v1_ALL_B": 0.5106,
+     "candidate_v2_ALL_B": 0.554,
+     "v2_vs_v1": {
+      "gained": 47,
+      "lost": 4,
+      "mcnemar_p_exact": 2.4163071543625847e-10
+     },
+     "v2_vs_shipped": {
+      "gained": 114,
+      "lost": 5,
+      "mcnemar_p_exact": 5.743453631889443e-28
+     }
+    },
+    {
+     "B_N": 500,
+     "shipped_ALL_B": 0.5005,
+     "candidate_v1_ALL_B": 0.5378,
+     "candidate_v2_ALL_B": 0.6044,
+     "v2_vs_v1": {
+      "gained": 69,
+      "lost": 3,
+      "mcnemar_p_exact": 2.6371947296289014e-17
+     },
+     "v2_vs_shipped": {
+      "gained": 111,
+      "lost": 8,
+      "mcnemar_p_exact": 2.5395880340833756e-24
+     }
+    },
+    {
+     "B_N": 1000,
+     "shipped_ALL_B": 0.5459,
+     "candidate_v1_ALL_B": 0.5671,
+     "candidate_v2_ALL_B": 0.6327,
+     "v2_vs_v1": {
+      "gained": 69,
+      "lost": 4,
+      "mcnemar_p_exact": 2.4422670374772693e-16
+     },
+     "v2_vs_shipped": {
+      "gained": 93,
+      "lost": 7,
+      "mcnemar_p_exact": 2.726143732806038e-20
+     }
+    },
+    {
+     "B_N": 2000,
+     "shipped_ALL_B": 0.5923,
+     "candidate_v1_ALL_B": 0.6085,
+     "candidate_v2_ALL_B": 0.6488,
+     "v2_vs_v1": {
+      "gained": 45,
+      "lost": 5,
+      "mcnemar_p_exact": 4.209852022540872e-09
+     },
+     "v2_vs_shipped": {
+      "gained": 65,
+      "lost": 9,
+      "mcnemar_p_exact": 1.3509940352772296e-11
+     }
+    },
+    {
+     "B_N": 5000,
+     "shipped_ALL_B": 0.6438,
+     "candidate_v1_ALL_B": 0.665,
+     "candidate_v2_ALL_B": 0.6842,
+     "v2_vs_v1": {
+      "gained": 36,
+      "lost": 17,
+      "mcnemar_p_exact": 0.012660335802414213
+     },
+     "v2_vs_shipped": {
+      "gained": 63,
+      "lost": 23,
+      "mcnemar_p_exact": 1.876279690007309e-05
+     }
+    }
+   ],
+   "432": [
+    {
+     "B_N": 100,
+     "shipped_ALL_B": 0.3915,
+     "candidate_v1_ALL_B": 0.4642,
+     "candidate_v2_ALL_B": 0.4844,
+     "v2_vs_v1": {
+      "gained": 23,
+      "lost": 3,
+      "mcnemar_p_exact": 8.797645568847656e-05
+     },
+     "v2_vs_shipped": {
+      "gained": 96,
+      "lost": 4,
+      "mcnemar_p_exact": 6.449688895763542e-24
+     }
+    },
+    {
+     "B_N": 250,
+     "shipped_ALL_B": 0.449,
+     "candidate_v1_ALL_B": 0.5106,
+     "candidate_v2_ALL_B": 0.558,
+     "v2_vs_v1": {
+      "gained": 48,
+      "lost": 1,
+      "mcnemar_p_exact": 1.7763568394002505e-13
+     },
+     "v2_vs_shipped": {
+      "gained": 111,
+      "lost": 3,
+      "mcnemar_p_exact": 2.378716074312675e-29
+     }
+    },
+    {
+     "B_N": 500,
+     "shipped_ALL_B": 0.5076,
+     "candidate_v1_ALL_B": 0.5429,
+     "candidate_v2_ALL_B": 0.6125,
+     "v2_vs_v1": {
+      "gained": 70,
+      "lost": 1,
+      "mcnemar_p_exact": 6.098637220230962e-20
+     },
+     "v2_vs_shipped": {
+      "gained": 110,
+      "lost": 6,
+      "mcnemar_p_exact": 7.547275303719452e-26
+     }
+    },
+    {
+     "B_N": 1000,
+     "shipped_ALL_B": 0.557,
+     "candidate_v1_ALL_B": 0.5843,
+     "candidate_v2_ALL_B": 0.6387,
+     "v2_vs_v1": {
+      "gained": 60,
+      "lost": 6,
+      "mcnemar_p_exact": 2.72580319860688e-12
+     },
+     "v2_vs_shipped": {
+      "gained": 88,
+      "lost": 7,
+      "mcnemar_p_exact": 6.048586330822969e-19
+     }
+    },
+    {
+     "B_N": 2000,
+     "shipped_ALL_B": 0.5943,
+     "candidate_v1_ALL_B": 0.6105,
+     "candidate_v2_ALL_B": 0.6559,
+     "v2_vs_v1": {
+      "gained": 47,
+      "lost": 2,
+      "mcnemar_p_exact": 4.355626970209414e-12
+     },
+     "v2_vs_shipped": {
+      "gained": 66,
+      "lost": 5,
+      "mcnemar_p_exact": 1.1901876782304671e-14
+     }
+    },
+    {
+     "B_N": 5000,
+     "shipped_ALL_B": 0.6458,
+     "candidate_v1_ALL_B": 0.665,
+     "candidate_v2_ALL_B": 0.6912,
+     "v2_vs_v1": {
+      "gained": 38,
+      "lost": 12,
+      "mcnemar_p_exact": 0.00030586400160359517
+     },
+     "v2_vs_shipped": {
+      "gained": 62,
+      "lost": 17,
+      "mcnemar_p_exact": 3.5883588815862875e-07
+     }
+    }
+   ],
+   "500": [
+    {
+     "B_N": 100,
+     "shipped_ALL_B": 0.3915,
+     "candidate_v1_ALL_B": 0.4642,
+     "candidate_v2_ALL_B": 0.4844,
+     "v2_vs_v1": {
+      "gained": 23,
+      "lost": 3,
+      "mcnemar_p_exact": 8.797645568847656e-05
+     },
+     "v2_vs_shipped": {
+      "gained": 96,
+      "lost": 4,
+      "mcnemar_p_exact": 6.449688895763542e-24
+     }
+    },
+    {
+     "B_N": 250,
+     "shipped_ALL_B": 0.446,
+     "candidate_v1_ALL_B": 0.5096,
+     "candidate_v2_ALL_B": 0.552,
+     "v2_vs_v1": {
+      "gained": 43,
+      "lost": 1,
+      "mcnemar_p_exact": 5.115907697472721e-12
+     },
+     "v2_vs_shipped": {
+      "gained": 108,
+      "lost": 3,
+      "mcnemar_p_exact": 1.7566946283140407e-28
+     }
+    },
+    {
+     "B_N": 500,
+     "shipped_ALL_B": 0.5045,
+     "candidate_v1_ALL_B": 0.5409,
+     "candidate_v2_ALL_B": 0.6095,
+     "v2_vs_v1": {
+      "gained": 69,
+      "lost": 1,
+      "mcnemar_p_exact": 1.2027867851011065e-19
+     },
+     "v2_vs_shipped": {
+      "gained": 113,
+      "lost": 9,
+      "mcnemar_p_exact": 4.976849729843443e-24
+     }
+    },
+    {
+     "B_N": 1000,
+     "shipped_ALL_B": 0.558,
+     "candidate_v1_ALL_B": 0.5762,
+     "candidate_v2_ALL_B": 0.6347,
+     "v2_vs_v1": {
+      "gained": 63,
+      "lost": 5,
+      "mcnemar_p_exact": 7.651062942926057e-14
+     },
+     "v2_vs_shipped": {
+      "gained": 87,
+      "lost": 11,
+      "mcnemar_p_exact": 8.065094010420559e-16
+     }
+    },
+    {
+     "B_N": 2000,
+     "shipped_ALL_B": 0.6095,
+     "candidate_v1_ALL_B": 0.6115,
+     "candidate_v2_ALL_B": 0.6569,
+     "v2_vs_v1": {
+      "gained": 49,
+      "lost": 4,
+      "mcnemar_p_exact": 7.053979622639872e-11
+     },
+     "v2_vs_shipped": {
+      "gained": 57,
+      "lost": 10,
+      "mcnemar_p_exact": 4.042104433067337e-09
+     }
+    },
+    {
+     "B_N": 5000,
+     "shipped_ALL_B": 0.6519,
+     "candidate_v1_ALL_B": 0.6589,
+     "candidate_v2_ALL_B": 0.6902,
+     "v2_vs_v1": {
+      "gained": 41,
+      "lost": 10,
+      "mcnemar_p_exact": 1.4737715885004832e-05
+     },
+     "v2_vs_shipped": {
+      "gained": 55,
+      "lost": 17,
+      "mcnemar_p_exact": 8.14003082672391e-06
+     }
+    }
+   ],
+   "1000": [
+    {
+     "B_N": 100,
+     "shipped_ALL_B": 0.3915,
+     "candidate_v1_ALL_B": 0.4652,
+     "candidate_v2_ALL_B": 0.4844,
+     "v2_vs_v1": {
+      "gained": 22,
+      "lost": 3,
+      "mcnemar_p_exact": 0.00015652179718017578
+     },
+     "v2_vs_shipped": {
+      "gained": 96,
+      "lost": 4,
+      "mcnemar_p_exact": 6.449688895763542e-24
+     }
+    },
+    {
+     "B_N": 250,
+     "shipped_ALL_B": 0.441,
+     "candidate_v1_ALL_B": 0.4995,
+     "candidate_v2_ALL_B": 0.5388,
+     "v2_vs_v1": {
+      "gained": 39,
+      "lost": 0,
+      "mcnemar_p_exact": 3.637978807091713e-12
+     },
+     "v2_vs_shipped": {
+      "gained": 99,
+      "lost": 2,
+      "mcnemar_p_exact": 4.064211383698653e-27
+     }
+    },
+    {
+     "B_N": 500,
+     "shipped_ALL_B": 0.4945,
+     "candidate_v1_ALL_B": 0.5358,
+     "candidate_v2_ALL_B": 0.6014,
+     "v2_vs_v1": {
+      "gained": 68,
+      "lost": 3,
+      "mcnemar_p_exact": 5.057803134644878e-17
+     },
+     "v2_vs_shipped": {
+      "gained": 112,
+      "lost": 6,
+      "mcnemar_p_exact": 2.0932787880057794e-26
+     }
+    },
+    {
+     "B_N": 1000,
+     "shipped_ALL_B": 0.5479,
+     "candidate_v1_ALL_B": 0.5711,
+     "candidate_v2_ALL_B": 0.6266,
+     "v2_vs_v1": {
+      "gained": 62,
+      "lost": 7,
+      "mcnemar_p_exact": 4.102799046681871e-12
+     },
+     "v2_vs_shipped": {
+      "gained": 85,
+      "lost": 7,
+      "mcnemar_p_exact": 3.8474091166397966e-18
+     }
+    },
+    {
+     "B_N": 2000,
+     "shipped_ALL_B": 0.5923,
+     "candidate_v1_ALL_B": 0.5984,
+     "candidate_v2_ALL_B": 0.6428,
+     "v2_vs_v1": {
+      "gained": 53,
+      "lost": 9,
+      "mcnemar_p_exact": 1.0507232717140574e-08
+     },
+     "v2_vs_shipped": {
+      "gained": 62,
+      "lost": 12,
+      "mcnemar_p_exact": 2.8555486161534817e-09
+     }
+    },
+    {
+     "B_N": 5000,
+     "shipped_ALL_B": 0.6377,
+     "candidate_v1_ALL_B": 0.6468,
+     "candidate_v2_ALL_B": 0.6741,
+     "v2_vs_v1": {
+      "gained": 41,
+      "lost": 14,
+      "mcnemar_p_exact": 0.0003552811186314786
+     },
+     "v2_vs_shipped": {
+      "gained": 54,
+      "lost": 18,
+      "mcnemar_p_exact": 2.568720337924735e-05
+     }
+    }
+   ]
+  },
+  "per_hop_all_rows_K432": {
+   "shipped": {
+    "1": [
+     0.985,
+     0.994,
+     0.997,
+     0.997,
+     0.997,
+     0.997
+    ],
+    "2": [
+     0.0631,
+     0.1727,
+     0.2613,
+     0.3303,
+     0.3769,
+     0.4474
+    ],
+    "3": [
+     0.0976,
+     0.1486,
+     0.2417,
+     0.3423,
+     0.4399,
+     0.4985
+    ]
+   },
+   "v1": {
+    "1": [
+     0.9955,
+     0.9985,
+     0.9985,
+     0.9985,
+     0.9985,
+     0.9985
+    ],
+    "2": [
+     0.2267,
+     0.3003,
+     0.3408,
+     0.3724,
+     0.4024,
+     0.479
+    ],
+    "3": [
+     0.1441,
+     0.2147,
+     0.2988,
+     0.3844,
+     0.4489,
+     0.5075
+    ]
+   },
+   "v2": {
+    "1": [
+     0.9925,
+     0.9985,
+     0.9985,
+     0.9985,
+     0.9985,
+     0.9985
+    ],
+    "2": [
+     0.2613,
+     0.3619,
+     0.3889,
+     0.4084,
+     0.4249,
+     0.485
+    ],
+    "3": [
+     0.1757,
+     0.3033,
+     0.464,
+     0.5285,
+     0.5541,
+     0.5856
+    ]
+   }
+  }
+ },
+ "reach_ceiling": {
+  "single_product_support_ALL_gold": {
+   "ACT_200": 0.543,
+   "ACT_500": 0.642,
+   "ACT_1000": 0.696,
+   "ACT_3000": 0.771,
+   "source": "probe_reach_full.log (diagnostic, all 1,998 rows)"
+  },
+  "pool_all_gold_by_config": {
+   "200|5000": 0.6361,
+   "500|5000": 0.6627,
+   "1000|5000": 0.6702,
+   "1000|10000": 0.7162,
+   "3000|5000": 0.6777,
+   "3000|20000": 0.7913,
+   "6000|5000": 0.6802,
+   "6000|10000": 0.7222,
+   "10000|5000": 0.6822,
+   "10000|20000": 0.7998
+  },
+  "statement": "hop 2 / hop 3 golds are 2 / 3 hops from the question entity; a single static product reaches them only through the FLAT fill and the 1-hop support of the hit set, so every ranker saturates near ALL .69 at B_N 5000. 90+ needs the second hop (L3: typed walk 1,967/1,998 @1000)."
+ },
+ "pins": {
+  "actserve_metaqa__v1": {
+   "path": "results/L1_X/actserve_metaqa__v1.json",
+   "sha256": "879f2920b3f8a8bb142da3aecc11b5132b475df689144423b358e5e5fbd6dd45"
+  },
+  "actserve_metaqa__v2": {
+   "path": "results/L1_X/actserve_metaqa__v2.json",
+   "sha256": "0a5c2273ce75dbca137703cc37221921f5cfdc6d5efa1838d0b80dfe6d30284e"
+  }
+ },
+ "code": {
+  "_l1x_actserve.py": {
+   "path": "scratchpad/_l1x_actserve.py",
+   "sha256": "db0a69a922bbd94ba6e7681c9bd927645c466fd9c695e74531358f5a0045664d"
+  },
+  "_l1x_actserve_big.py": {
+   "path": "scratchpad/_l1x_actserve_big.py",
+   "sha256": "7ad289d750de84c92517385a37abfdae94b856c2ec4c20e4fbb0b95b432cb788"
+  },
+  "_l1x_candidate_v2.py": {
+   "path": "scratchpad/_l1x_candidate_v2.py",
+   "sha256": "6ad13f0de0c2bc8d19d31d58ff17ba1b52766cd568717c718e293abd18b778f7"
+  },
+  "_l1x_rrt_route_sig.py": {
+   "path": "scratchpad/_l1x_rrt_route_sig.py",
+   "sha256": "947d8e3297ad4ea0959693e7ca04708870e85c378a9a23a2617299a737c2e20f"
+  }
+ },
+ "held_out_plan": "UNCHANGED from L1_TYPED_SELECT_CANDIDATE__v1 / L1_ROUTING_CARRY_FORWARD__v1: read once the full L1 -> L2 -> L3 system is stable, naming the candidate as is.",
+ "guards": {
+  "held_out_rows_read": 0,
+  "split_B_rows_read": 0,
+  "TEST_rows_read": 0
+ }
+}

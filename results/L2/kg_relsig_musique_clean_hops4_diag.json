@@ -1,0 +1,642 @@
+{
+  "dataset": "musique_clean",
+  "reranker_R@5": {
+    "none": [
+      73.2,
+      0.05
+    ],
+    "+relation": [
+      72.95,
+      0.75
+    ],
+    "+relation+path": [
+      73.66,
+      0.35
+    ],
+    "gated_rescue": [
+      71.28,
+      0.02
+    ],
+    "gated_rescue_supervised": [
+      71.1,
+      0.71
+    ],
+    "gated_rescue_subset": {
+      "rescued": 17,
+      "rescuable": 86
+    },
+    "kl_router": [
+      71.17,
+      0.07
+    ]
+  },
+  "per_signal_R@5": {
+    "dense": 66.6,
+    "offset": 71.08,
+    "prototype": 54.83,
+    "splade": 0.0,
+    "graph": 2.04,
+    "relation_raw": 5.16,
+    "relation_trained": 4.98,
+    "path_raw": 0.15,
+    "relation_pair_raw": 5.08,
+    "relation_masked_raw": 5.02,
+    "relation_shuf_raw": 4.81
+  },
+  "oracle_R@5": {
+    "old": 81.24,
+    "+relation": 81.24,
+    "+relation+path": 81.24,
+    "+edge_pair": 81.24
+  },
+  "oracle_R@20": {
+    "old": 90.68,
+    "+relation": 90.69,
+    "+relation+path": 90.71,
+    "+edge_pair": 90.69
+  },
+  "oracle_R@5_by_hop": {
+    "2hop": {
+      "old": 87.68,
+      "+relation": 87.68,
+      "+relation+path": 87.68,
+      "+edge_pair": 87.68
+    },
+    "3hop": {
+      "old": 64.53,
+      "+relation": 64.53,
+      "+relation+path": 64.53,
+      "+edge_pair": 64.53
+    },
+    "4hop": {
+      "old": 63.67,
+      "+relation": 63.67,
+      "+relation+path": 63.67,
+      "+edge_pair": 63.67
+    },
+    "unreach": {
+      "old": null,
+      "+relation": null,
+      "+relation+path": null,
+      "+edge_pair": null
+    }
+  },
+  "n_by_hop": {
+    "2hop": 1445,
+    "3hop": 422,
+    "4hop": 128,
+    "unreach": 0
+  },
+  "rank_movement": {
+    "stayed_top5": 164,
+    "into_top5": 59
+  },
+  "n_golds_with_relation": 295,
+  "reference": {
+    "prev_reranker_R@5": 38.8,
+    "prev_oracle_R@5": 39.1,
+    "benchmark": 29.7
+  },
+  "per_signal_R@1": {
+    "dense": 37.18,
+    "offset": 38.72,
+    "prototype": 32.59,
+    "splade": 0.0,
+    "graph": 0.5,
+    "relation_raw": 3.63,
+    "relation_trained": 3.17,
+    "path_raw": 0.08,
+    "relation_pair_raw": 3.3,
+    "relation_masked_raw": 3.43,
+    "relation_shuf_raw": 2.97
+  },
+  "oracle_R@1": {
+    "old": 41.27,
+    "+relation": 41.3,
+    "+relation+path": 41.3,
+    "+edge_pair": 41.3
+  },
+  "subset_R@5": {
+    "topic": {
+      "dense": 90.02,
+      "offset": 95.37,
+      "splade": 0.0,
+      "prototype": 81.0,
+      "relation_raw": 0.0,
+      "path_raw": 0.0,
+      "relation_pair_raw": 0.04,
+      "relation_masked_raw": 0.0,
+      "relation_shuf_raw": 0.04
+    },
+    "bridge": {
+      "dense": 54.71,
+      "offset": 61.56,
+      "splade": 0.0,
+      "prototype": 42.43,
+      "relation_raw": 10.03,
+      "path_raw": 0.23,
+      "relation_pair_raw": 9.82,
+      "relation_masked_raw": 9.75,
+      "relation_shuf_raw": 9.31
+    },
+    "all": {
+      "dense": 66.6,
+      "offset": 71.08,
+      "splade": 0.0,
+      "prototype": 54.83,
+      "relation_raw": 5.16,
+      "path_raw": 0.15,
+      "relation_pair_raw": 5.08,
+      "relation_masked_raw": 5.02,
+      "relation_shuf_raw": 4.81
+    }
+  },
+  "oracle_subset_R@5": {
+    "topic": {
+      "old": 98.51,
+      "+relation": 98.51,
+      "+relation+path": 98.51,
+      "+edge_pair": 98.51
+    },
+    "bridge": {
+      "old": 75.45,
+      "+relation": 77.87,
+      "+relation+path": 77.89,
+      "+edge_pair": 77.76
+    },
+    "all": {
+      "old": 81.24,
+      "+relation": 81.24,
+      "+relation+path": 81.24,
+      "+edge_pair": 81.24
+    }
+  },
+  "n_subset": {
+    "topic": 1242,
+    "bridge": 1941,
+    "all": 1995
+  },
+  "debug_examples_2wiki": [
+    {
+      "question": "When did the Soviet Union seal off the city where the director of The Man from Morocco was born?",
+      "topics": [
+        "The Man from Morocco",
+        "Soviet Union"
+      ],
+      "source": "The Man from Morocco",
+      "target": "Mutz Greenbaum",
+      "edge_sentence": "The Man from Morocco is a 1945 action adventure film directed by Mutz Greenbaum as Max Greene.",
+      "edge_pair": "The Man from Morocco \u2014 Mutz Greenbaum",
+      "edge_masked": "[SRC] is a 1945 action adventure film directed by [TGT] as Max Greene.",
+      "is_gold": true
+    },
+    {
+      "question": "Who is the cuban legend born in 1925 in the city Leon Ichaso was born?",
+      "topics": [
+        "Leon Ichaso"
+      ],
+      "source": "Leon Ichaso",
+      "target": "Havana",
+      "edge_sentence": "Leon Ichaso was born in Havana August 3, 1948, into a family of well-known writers, journalists and artists.",
+      "edge_pair": "Leon Ichaso \u2014 Havana",
+      "edge_masked": "[SRC] was born in [TGT] August 3, 1948, into a family of well-known writers, journalists and artists.",
+      "is_gold": false
+    },
+    {
+      "question": "What is the biggest attack by the group Bush said the 'war on terror' began with, on the country containing the Federal Detention Center, in the birthplace of George Pocheptsov?",
+      "topics": [
+        "George Pocheptsov",
+        "War on Terror"
+      ],
+      "source": "George Pocheptsov",
+      "target": "Philadelphia",
+      "edge_sentence": "George Pocheptsov, who is sometimes also referred to as \"Georgie\", was born in Philadelphia, Pennsylvania, in 1992 to Ukrainian parents.",
+      "edge_pair": "George Pocheptsov \u2014 Philadelphia",
+      "edge_masked": "[SRC], who is sometimes also referred to as \"Georgie\", was born in [TGT], Pennsylvania, in 1992 to Ukrainian parents.",
+      "is_gold": false
+    },
+    {
+      "question": "Who formed and first came to the colony where Jacob Highbarger House is located?",
+      "topics": [
+        "Jacob Highbarger House"
+      ],
+      "source": "Jacob Highbarger House",
+      "target": "United States",
+      "edge_sentence": "The Jacob Highbarger House was built \"circa\" 1832 in Sharpsburg, Maryland, United States.",
+      "edge_pair": "Jacob Highbarger House \u2014 United States",
+      "edge_masked": "The [SRC] was built \"circa\" 1832 in Sharpsburg, Maryland, [TGT].",
+      "is_gold": false
+    },
+    {
+      "question": "When does the monsoon season occur in the city which is the fashion capital of India?",
+      "topics": [
+        "Fashion capital"
+      ],
+      "source": "Fashion capital",
+      "target": "Houston",
+      "edge_sentence": "54 33 22 Moscow 22 23 Tokyo 10 13 24 Santiago 43 19 25 Vienna 34 9 26 Shanghai 15 11 27 Mumbai 38 11 28 Melbourne 49 21 29 Stockholm 46 23 30 Bangkok 50 20 31 Warsaw 42 11 32 Copenhagen 36 33 San Francisco 37 34 Sydney 13 21 35 S\u00e3o Paulo 16 19 36 Antwerpen 25 11 37 Johannesburg 48 11 38 Dallas 20 18 39 Austin 45 6 40 Abu Dhabi Debut 41 St Petersburg 35 6 42 Cape Town 41 43 Mexico City 53 10 44 Portland, Oregon Debut 45 Frankfurt 51 6 46 Boston 24 18 47 Kuala Lumpur Debut 48 Johannesburg 37 11 49 Monaco 21 28 50 Atlanta 47 51 New Delhi 39 12 52 Vancouver 52 53 Chicago, Illinois 27 26 54 Houston, Texas 30 24 55 Montreal 47 8 56 Dakar Debut 57 Beirut Debut 58 Krak\u00f3w 44 14 59 Toronto 28 31 60 Lagos Debut 61 Columbus Debut 62 Accra Debut 63 Caracas Hiatus",
+      "edge_pair": "Fashion capital \u2014 Houston",
+      "edge_masked": "54 33 22 Moscow 22 23 Tokyo 10 13 24 Santiago 43 19 25 Vienna 34 9 26 Shanghai 15 11 27 Mumbai 38 11 28 Melbourne 49 21 29 Stockholm 46 23 30 Bangkok 50 20 31 Warsaw 42 11 32 Copenhagen 36 33 San Francisco 37 34 Sydney 13 21 35 S\u00e3o Paulo 16 19 36 Antwerpen 25 11 37 Johannesburg 48 11 38 Dallas 20 18 39 Austin 45 6 40 Abu Dhabi Debut 41 St Petersburg 35 6 42 Cape Town 41 43 Mexico City 53 10 44 Portland, Oregon Debut 45 Frankfurt 51 6 46 Boston 24 18 47 Kuala Lumpur Debut 48 Johannesburg 37 11 49 Monaco 21 28 50 Atlanta 47 51 New Delhi 39 12 52 Vancouver 52 53 Chicago, Illinois 27 26 54 [TGT], Texas 30 24 55 Montreal 47 8 56 Dakar Debut 57 Beirut Debut 58 Krak\u00f3w 44 14 59 Toronto 28 31 60 Lagos Debut 61 Columbus Debut 62 Accra Debut 63 Caracas Hiatus",
+      "is_gold": false
+    },
+    {
+      "question": "Who is a cast member in the work David Brandner is present in?",
+      "topics": [
+        "David Brandner"
+      ],
+      "source": "David Brandner",
+      "target": "David",
+      "edge_sentence": "David Brandner is a fictional character on the German soap opera \"Verbotene Liebe (Forbidden Love)\" portrayed by actor Sven Koller from September 11, 2008 to June 15, 2010.",
+      "edge_pair": "David Brandner \u2014 David",
+      "edge_masked": "[TGT] Brandner is a fictional character on the German soap opera \"Verbotene Liebe (Forbidden Love)\" portrayed by actor Sven Koller from September 11, 2008 to June 15, 2010.",
+      "is_gold": false
+    },
+    {
+      "question": "Who is We Belong Together, by the artist who performed Up Out My Face, about?",
+      "topics": [
+        "We Belong Together",
+        "Up Out My Face"
+      ],
+      "source": "We Belong Together",
+      "target": "Europe",
+      "edge_sentence": "In Europe the song was performed at the Live 8 charity concert, the Fashion Rocks in Monaco, and the German Bambi Awards.",
+      "edge_pair": "We Belong Together \u2014 Europe",
+      "edge_masked": "In [TGT] the song was performed at the Live 8 charity concert, the Fashion Rocks in Monaco, and the German Bambi Awards.",
+      "is_gold": false
+    },
+    {
+      "question": "Weardale is the same type of geographical feature as the one of Ten Thousand Smokes in the state purchased from Russia. Which country is the National Historic Site named after the president who made that purchase located in?",
+      "topics": [
+        "Weardale",
+        "Russia"
+      ],
+      "source": "Weardale",
+      "target": "England",
+      "edge_sentence": "Weardale is a dale, or valley, of the east side of the Pennines in County Durham, England.",
+      "edge_pair": "Weardale \u2014 England",
+      "edge_masked": "[SRC] is a dale, or valley, of the east side of the Pennines in County Durham, [TGT].",
+      "is_gold": false
+    },
+    {
+      "question": "How many square miles is the country that provided the most legal immigrants to the city where most Jamaicans live in the U.S. from the region serving as the middle leg of the journey from England to Africa to the Americas?",
+      "topics": [
+        "England",
+        "Africa"
+      ],
+      "source": "England",
+      "target": "London",
+      "edge_sentence": "Some of the best-known of these are: Hadrian's Wall, Stonehenge, Avebury and Associated Sites, Tower of London, Jurassic Coast, Saltaire, Ironbridge Gorge, Studley Royal Park and various others.There are many museums in England, but perhaps the most notable is London's British Museum.",
+      "edge_pair": "England \u2014 London",
+      "edge_masked": "Some of the best-known of these are: Hadrian's Wall, Stonehenge, Avebury and Associated Sites, Tower of [TGT], Jurassic Coast, Saltaire, Ironbridge Gorge, Studley Royal Park and various others.There are many museums in [SRC], but perhaps the most notable is [TGT]'s British Museum.",
+      "is_gold": false
+    },
+    {
+      "question": "Who was ordered to force a Tibetan assault into the birthplace of Li Shuoxun?",
+      "topics": [
+        "Li Shuoxun",
+        "Force"
+      ],
+      "source": "Li Shuoxun",
+      "target": "Sichuan",
+      "edge_sentence": "Li Shuoxun (; 1903 Sichuan \u2013 1931 Hainan).",
+      "edge_pair": "Li Shuoxun \u2014 Sichuan",
+      "edge_masked": "[SRC] (; 1903 [TGT] \u2013 1931 Hainan).",
+      "is_gold": false
+    },
+    {
+      "question": "The speaker of the governing body in India controlling the Prime Minister of India is elected by whom?",
+      "topics": [
+        "Prime Minister of India"
+      ],
+      "source": "Prime Minister of India",
+      "target": "Lok Sabha",
+      "edge_sentence": "Union cabinet is collectively responsible to the Lok Sabha as per article 75 (3) of the Constitution of India.",
+      "edge_pair": "Prime Minister of India \u2014 Lok Sabha",
+      "edge_masked": "Union cabinet is collectively responsible to the [TGT] as per article 75 (3) of the Constitution of India.",
+      "is_gold": false
+    },
+    {
+      "question": "Where did the first team to play in three consecutive Fall Classics play before Wrigley Field?",
+      "topics": [
+        "Wrigley Field"
+      ],
+      "source": "Wrigley Field",
+      "target": "Chicago Cubs",
+      "edge_sentence": "to buy the Chicago Cubs from Charles P.",
+      "edge_pair": "Wrigley Field \u2014 Chicago Cubs",
+      "edge_masked": "to buy the [TGT] from Charles P.",
+      "is_gold": true
+    },
+    {
+      "question": "How many times did Eddie Newton's team win Premier League?",
+      "topics": [
+        "Premier League",
+        "Eddie Newton"
+      ],
+      "source": "Premier League",
+      "target": "Cristiano Ronaldo",
+      "edge_sentence": "The three highest transfer in the sport's history had a Premier League club on the selling end, with Tottenham Hotspur selling Gareth Bale to Real Madrid for \u00a385 million in 2013, Manchester United's sale of Cristiano Ronaldo to Real Madrid for \u00a380 million in 2009, and Liverpool selling Luis Su\u00e1rez to Barcelona for \u00a375 million in 2014.",
+      "edge_pair": "Premier League \u2014 Cristiano Ronaldo",
+      "edge_masked": "The three highest transfer in the sport's history had a [SRC] club on the selling end, with Tottenham Hotspur selling Gareth Bale to Real Madrid for \u00a385 million in 2013, Manchester United's sale of [TGT] to Real Madrid for \u00a380 million in 2009, and Liverpool selling Luis Su\u00e1rez to Barcelona for \u00a375 million in 2014.",
+      "is_gold": false
+    },
+    {
+      "question": "What is the record label for the singer of Vinternatten?",
+      "topics": [
+        "Vinternatten"
+      ],
+      "source": "Vinternatten",
+      "target": "Sweden",
+      "edge_sentence": "Vinternatten () is a Christmas album by Swedish singer Sanna Nielsen, released in Sweden on November 19, 2012.",
+      "edge_pair": "Vinternatten \u2014 Sweden",
+      "edge_masked": "[SRC] () is a Christmas album by Swedish singer Sanna Nielsen, released in [TGT] on November 19, 2012.",
+      "is_gold": false
+    },
+    {
+      "question": "When did the country where Nyelutong is located gain independence from Great Britain?",
+      "topics": [
+        "Nyelutong"
+      ],
+      "source": "Nyelutong",
+      "target": "Malaysia",
+      "edge_sentence": "Nyelutong is a settlement in the Betong division of Sarawak, Malaysia.",
+      "edge_pair": "Nyelutong \u2014 Malaysia",
+      "edge_masked": "[SRC] is a settlement in the Betong division of Sarawak, [TGT].",
+      "is_gold": false
+    },
+    {
+      "question": "Who has been appointed new prime minister of the country where Cornetu is located?",
+      "topics": [
+        "Prime minister",
+        "Cornetu"
+      ],
+      "source": "Prime minister",
+      "target": "United Kingdom",
+      "edge_sentence": "The United Kingdom's constitution, being uncodified and largely unwritten, makes no mention of a prime minister.",
+      "edge_pair": "Prime minister \u2014 United Kingdom",
+      "edge_masked": "The [TGT]'s constitution, being uncodified and largely unwritten, makes no mention of a prime minister.",
+      "is_gold": false
+    },
+    {
+      "question": "Who is the father of the director of Seemabaddha?",
+      "topics": [
+        "Seemabaddha"
+      ],
+      "source": "Seemabaddha",
+      "target": "Jana Aranya",
+      "edge_sentence": "The film was the second entry in Ray's Calcutta trilogy, which included \"Pratidwandi\" (\"The Adversary\") (1970) and \"Jana Aranya\" (\"The Middleman\") (1976).",
+      "edge_pair": "Seemabaddha \u2014 Jana Aranya",
+      "edge_masked": "The film was the second entry in Ray's Calcutta trilogy, which included \"Pratidwandi\" (\"The Adversary\") (1970) and \"[TGT]\" (\"The Middleman\") (1976).",
+      "is_gold": false
+    },
+    {
+      "question": "Which verse in Luke states that Mary had \"no relations with man\" before the birth of the sower in the parable of the sower?",
+      "topics": [
+        "Parable of the Sower"
+      ],
+      "source": "Parable of the Sower",
+      "target": "Jesus",
+      "edge_sentence": "The Parable of the Sower (sometimes called the Parable of the Soils) is a parable of Jesus found in the three Synoptic Gospels in Matthew 13: 1 - 23, Mark 4: 1 - 20, and Luke 8: 1 - 15.",
+      "edge_pair": "Parable of the Sower \u2014 Jesus",
+      "edge_masked": "The [SRC] (sometimes called the Parable of the Soils) is a parable of [TGT] found in the three Synoptic Gospels in Matthew 13: 1 - 23, Mark 4: 1 - 20, and Luke 8: 1 - 15.",
+      "is_gold": false
+    },
+    {
+      "question": "What term is used in the country where Philippeville is found, as well as the nation where Dutch is spoken, to refer to an institution like a German Fachhochschule?",
+      "topics": [
+        "Philippeville"
+      ],
+      "source": "Philippeville",
+      "target": "Belgium",
+      "edge_sentence": "Philippeville () is a Walloon city and municipality located in Belgium in the province of Namur.",
+      "edge_pair": "Philippeville \u2014 Belgium",
+      "edge_masked": "[SRC] () is a Walloon city and municipality located in [TGT] in the province of Namur.",
+      "is_gold": false
+    },
+    {
+      "question": "What percentage of students feel they are Christian at the university that awarded Lee an honorary doctorate in 2006?",
+      "topics": [
+        "Christian"
+      ],
+      "source": "Christian",
+      "target": "Jesus",
+      "edge_sentence": "A Christian ( pronunciation (help\u00b7info)) is a person who adheres to Christianity, an Abrahamic, monotheistic religion based on the life and teachings of Jesus Christ.",
+      "edge_pair": "Christian \u2014 Jesus",
+      "edge_masked": "A [SRC] ( pronunciation (help\u00b7info)) is a person who adheres to [SRC]ity, an Abrahamic, monotheistic religion based on the life and teachings of [TGT] Christ.",
+      "is_gold": false
+    }
+  ],
+  "debug_edges_gold": [
+    {
+      "question": "When did the Soviet Union seal off the city where the director of The Man from Morocco was born?",
+      "target": "Mutz Greenbaum",
+      "rel_score": 0.539,
+      "is_gold": true,
+      "edge_sentence": "The Man from Morocco is a 1945 action adventure film directed by Mutz Greenbaum as Max Greene."
+    },
+    {
+      "question": "Under which amendment was the state encompassing the pangolakha wildlife sanctuary (pws) made an int",
+      "target": "Sikkim",
+      "rel_score": 0.709,
+      "is_gold": true,
+      "edge_sentence": "Pangolakha Wildlife Sanctuary (Pron: p\u01fdng\u00f3l\u0251\u0301kha, Nepali: \u092a\u093e\u0919\u094d\u0932\u0916\u093e) is a wildlife reserve in the East Sikkim district of the state of Sikkim in India."
+    },
+    {
+      "question": "What is the population of the state where the Battle of Mine Creek was fought?",
+      "target": "Kansas",
+      "rel_score": 0.702,
+      "is_gold": true,
+      "edge_sentence": "The Battle of Mine Creek, also known as the Battle of the Osage, was a battle that occurred on October 25, 1864, in Kansas as part of Price's Raid during the Am"
+    },
+    {
+      "question": "Who was the mother of the performer of 'Til Tomorrow?",
+      "target": "Marvin Gaye",
+      "rel_score": 0.66,
+      "is_gold": true,
+      "edge_sentence": "\"'Til Tomorrow\" is a 1982 R&B/soul quiet storm-styled song recorded by American singer Marvin Gaye."
+    },
+    {
+      "question": "At what age did the performer of Breakout start on Hannah Montana?",
+      "target": "Miley Cyrus",
+      "rel_score": 0.537,
+      "is_gold": true,
+      "edge_sentence": "It focuses on Miley Stewart (portrayed by Miley Cyrus), who is a teenager living a double life as an average schoolgirl by day and as the famous recording artis"
+    },
+    {
+      "question": "Where on a map is the river Petroleum Street Bridge crosses over?",
+      "target": "Allegheny River",
+      "rel_score": 0.733,
+      "is_gold": true,
+      "edge_sentence": "The Petroleum Street Bridge is a girder bridge connecting the North Side and South Side neighborhoods of Oil City, Pennsylvania and crosses the Allegheny River."
+    },
+    {
+      "question": "On what did the publisher of EarthBound primarily rely on for support?",
+      "target": "Nintendo Entertainment System",
+      "rel_score": 0.465,
+      "is_gold": true,
+      "edge_sentence": "and HAL Laboratory and published by Nintendo for the Super Nintendo Entertainment System."
+    },
+    {
+      "question": "Who did the baseball team that formerly had Joaqu\u00edn And\u00fajar as a member, face in the 2017 playoffs?",
+      "target": "Houston Astros",
+      "rel_score": 0.711,
+      "is_gold": true,
+      "edge_sentence": "Joaqu\u00edn And\u00fajar (; December 21, 1952 \u2013 September 8, 2015) was a Dominican professional baseball pitcher who played in Major League Baseball (MLB) for the Housto"
+    },
+    {
+      "question": "Do non-Christians agree that the cause of death of the person speaking the Sermon on the Mount happe",
+      "target": "Jesus",
+      "rel_score": 0.508,
+      "is_gold": true,
+      "edge_sentence": "The Sermon is the longest continuous section of Jesus speaking found in the New Testament, and has been one of the most widely quoted elements of the Canonical "
+    },
+    {
+      "question": "When did the name black death officially take root in the country where Albert Cox was born?",
+      "target": "Treeton",
+      "rel_score": 0.504,
+      "is_gold": true,
+      "edge_sentence": "Albert Edward Harrison Cox (24 June 1917 in Treeton, Rotherham \u2013 April 2003) was a footballer who played as a left-back for Sheffield United and Halifax Town."
+    },
+    {
+      "question": "In what year did the performers of Seventh Brings Return: A Tribute to Syd Barrett form?",
+      "target": "Violeta de Outono",
+      "rel_score": 0.736,
+      "is_gold": true,
+      "edge_sentence": "Seventh Brings Return: A Tribute to Syd Barrett is a live video by Brazilian psychedelic rock band Violeta de Outono, released by Voiceprint Records in 2009."
+    },
+    {
+      "question": "What's one of the primary rags of the city Efren Carrillo's from?",
+      "target": "Mexico City",
+      "rel_score": 0.727,
+      "is_gold": true,
+      "edge_sentence": "Efren Carrillo was born in North Hollywood in Los Angeles, California, and moved to Mexico City, Mexico at the age of one."
+    }
+  ],
+  "debug_edges_fp": [
+    {
+      "question": "When did the Soviet Union seal off the city where the director of The Man from Morocco was born?",
+      "target": "Western world",
+      "rel_score": 0.414,
+      "is_gold": false,
+      "edge_sentence": "Once denied diplomatic recognition by the Western world, the Soviet Union had official relations with practically every nation by the late 1940s."
+    },
+    {
+      "question": "When did the Soviet Union seal off the city where the director of The Man from Morocco was born?",
+      "target": "United States",
+      "rel_score": 0.363,
+      "is_gold": false,
+      "edge_sentence": "During the war, the Soviet Union together with the United States, the United Kingdom and China were considered as the Big Four of Allied powers in World War II "
+    },
+    {
+      "question": "When did the Soviet Union seal off the city where the director of The Man from Morocco was born?",
+      "target": "United Nations Security Council",
+      "rel_score": 0.363,
+      "is_gold": false,
+      "edge_sentence": "During the war, the Soviet Union together with the United States, the United Kingdom and China were considered as the Big Four of Allied powers in World War II "
+    },
+    {
+      "question": "Who is the cuban legend born in 1925 in the city Leon Ichaso was born?",
+      "target": "Havana",
+      "rel_score": 0.81,
+      "is_gold": false,
+      "edge_sentence": "Leon Ichaso was born in Havana August 3, 1948, into a family of well-known writers, journalists and artists."
+    },
+    {
+      "question": "What is the biggest attack by the group Bush said the 'war on terror' began with, on the country con",
+      "target": "Philadelphia",
+      "rel_score": 0.514,
+      "is_gold": false,
+      "edge_sentence": "George Pocheptsov, who is sometimes also referred to as \"Georgie\", was born in Philadelphia, Pennsylvania, in 1992 to Ukrainian parents."
+    },
+    {
+      "question": "What is the biggest attack by the group Bush said the 'war on terror' began with, on the country con",
+      "target": "Philadelphia",
+      "rel_score": 0.514,
+      "is_gold": false,
+      "edge_sentence": "George Pocheptsov, who is sometimes also referred to as \"Georgie\", was born in Philadelphia, Pennsylvania, in 1992 to Ukrainian parents."
+    },
+    {
+      "question": "What is the biggest attack by the group Bush said the 'war on terror' began with, on the country con",
+      "target": "Philadelphia",
+      "rel_score": 0.514,
+      "is_gold": false,
+      "edge_sentence": "George Pocheptsov, who is sometimes also referred to as \"Georgie\", was born in Philadelphia, Pennsylvania, in 1992 to Ukrainian parents."
+    },
+    {
+      "question": "What is the biggest attack by the group Bush said the 'war on terror' began with, on the country con",
+      "target": "Gulf War",
+      "rel_score": 0.364,
+      "is_gold": false,
+      "edge_sentence": "Following the ceasefire agreement that suspended hostilities (but not officially ended) in the 1991 Gulf War, the United States and its allies instituted and be"
+    },
+    {
+      "question": "Who formed and first came to the colony where Jacob Highbarger House is located?",
+      "target": "United States",
+      "rel_score": 0.671,
+      "is_gold": false,
+      "edge_sentence": "The Jacob Highbarger House was built \"circa\" 1832 in Sharpsburg, Maryland, United States."
+    },
+    {
+      "question": "When does the monsoon season occur in the city which is the fashion capital of India?",
+      "target": "New Delhi",
+      "rel_score": 0.417,
+      "is_gold": false,
+      "edge_sentence": "54 33 22 Moscow 22 23 Tokyo 10 13 24 Santiago 43 19 25 Vienna 34 9 26 Shanghai 15 11 27 Mumbai 38 11 28 Melbourne 49 21 29 Stockholm 46 23 30 Bangkok 50 20 31 W"
+    },
+    {
+      "question": "When does the monsoon season occur in the city which is the fashion capital of India?",
+      "target": "New Delhi",
+      "rel_score": 0.417,
+      "is_gold": false,
+      "edge_sentence": "54 33 22 Moscow 22 23 Tokyo 10 13 24 Santiago 43 19 25 Vienna 34 9 26 Shanghai 15 11 27 Mumbai 38 11 28 Melbourne 49 21 29 Stockholm 46 23 30 Bangkok 50 20 31 W"
+    },
+    {
+      "question": "When does the monsoon season occur in the city which is the fashion capital of India?",
+      "target": "New Delhi",
+      "rel_score": 0.417,
+      "is_gold": false,
+      "edge_sentence": "54 33 22 Moscow 22 23 Tokyo 10 13 24 Santiago 43 19 25 Vienna 34 9 26 Shanghai 15 11 27 Mumbai 38 11 28 Melbourne 49 21 29 Stockholm 46 23 30 Bangkok 50 20 31 W"
+    }
+  ],
+  "per_signal_R@5_by_hop": {
+    "2hop": {
+      "dense": 73.6,
+      "offset": 76.4,
+      "prototype": 62.42,
+      "splade": 0.0,
+      "graph": 2.04,
+      "relation_raw": 5.54,
+      "relation_trained": 5.4,
+      "path_raw": 0.03,
+      "relation_pair_raw": 5.47,
+      "relation_masked_raw": 5.43,
+      "relation_shuf_raw": 5.22
+    },
+    "3hop": {
+      "dense": 50.16,
+      "offset": 56.64,
+      "prototype": 38.23,
+      "splade": 0.0,
+      "graph": 1.9,
+      "relation_raw": 4.66,
+      "relation_trained": 4.42,
+      "path_raw": 0.24,
+      "relation_pair_raw": 4.58,
+      "relation_masked_raw": 4.34,
+      "relation_shuf_raw": 4.19
+    },
+    "4hop": {
+      "dense": 41.8,
+      "offset": 58.59,
+      "prototype": 23.83,
+      "splade": 0.0,
+      "graph": 2.54,
+      "relation_raw": 2.54,
+      "relation_trained": 2.15,
+      "path_raw": 1.17,
+      "relation_pair_raw": 2.34,
+      "relation_masked_raw": 2.54,
+      "relation_shuf_raw": 2.15
+    }
+  }
+}

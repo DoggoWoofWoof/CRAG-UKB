@@ -1,0 +1,502 @@
+{
+ "RECORD": "R2_LEGACY_ROUTER_REPLAY",
+ "dataset": "musique",
+ "cache": "musique",
+ "contrast_cache": null,
+ "utc": "2026-09-15T19:16:42Z",
+ "DEV": "A",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_R2_LEGACY_ROUTER.json",
+  "sha256": "3f18a7fc24b61611f8d19d5ea6c9fc8cd4084118137833b0fbb0efb91d67dc8f",
+  "bytes": 26236
+ },
+ "substrate": {
+  "path": "results/L1_COVPART/parts/musique__BR2_k2350__R2.npz",
+  "sha256": "7b7c1304374f076115d7d632aa42efcf7bfee4da0ad8bfeec38dde1acc58871d",
+  "bytes": 405103
+ },
+ "substrate_record": {
+  "path": "results/L1_COVPART/parts/musique__BR2_k2350__R2.json",
+  "sha256": "28536d2d021cb8cdeb4c7c6f86ab6d7a93fb80ebdd6693c39c92c75bbd1a7919",
+  "bytes": 6908
+ },
+ "code": {
+  "path": "scratchpad/_l1c_r2router.py",
+  "sha256": "6dc257c890ae05386369ade1c4de5e539085408addf04500ffb0f073ce4735cb",
+  "bytes": 24691
+ },
+ "spread_and_reach_functions": {
+  "path": "scratchpad/_l1c_br2_why.py",
+  "sha256": "4912b60d34fe6fef8b04365983d16021e74ed95c01a00a61d283a52fed9c89b1",
+  "bytes": 11130
+ },
+ "lib": {
+  "path": "scratchpad/_l1c_br2_lib.py",
+  "sha256": "909b7109d233a894516cc1c1620272bb395bbff6e53629600e993838484b426d",
+  "bytes": 11101
+ },
+ "n_DEV_A": 996,
+ "hop_counts_A": {
+  "all": 996
+ },
+ "representation": {
+  "k": 2350,
+  "C": 100,
+  "R": 2,
+  "RF": 1.5299,
+  "hubs": 9727,
+  "degree_0": 9858,
+  "vote_table_entries": {
+   "legacy_hard (gate)": 522798,
+   "R2_MEMBERSHIP_VOTE (section 22)": 170088,
+   "R2_LEGACY_ROUTER": 813611,
+   "OWNERS_LEGACY": 718039
+  },
+  "membership_entries": 179813,
+  "block_size": {
+   "mean": 76.52,
+   "max": 100,
+   "min": 31
+  },
+  "router": "spread_table(mem_vc, xo, ao, N, k): own vote set (hub -> H(v), non-hub -> M(v)) + the vote sets of the directed STRUCT out-neighbours, deduped; identical rule to _l1s_core.Data.legacy_mem (asserted on the hard partition)"
+ },
+ "cells": {
+  "R2ROUTER_P50 (primary)": {
+   "ALL": {
+    "all": 0.5853
+   },
+   "ANY": {
+    "all": 0.9669
+   },
+   "vs_HARD_PHG_BASE": {
+    "all": {
+     "n": 996,
+     "base_ALL": 0.6596,
+     "cell_ALL": 0.5853,
+     "delta_pts": -7.43,
+     "gained": 61,
+     "lost": 135,
+     "p": 1.3240945319970203e-07
+    }
+   },
+   "exposure_unique_A": {
+    "mean": 4366.46,
+    "p50": 4383.0,
+    "p90": 4583.5,
+    "min": 3802,
+    "max": 4866
+   },
+   "exposure_nominal_A": {
+    "mean": 4769.89,
+    "p50": 4793.0,
+    "p90": 4910.0,
+    "min": 4224,
+    "max": 5000
+   },
+   "blocks": 50,
+   "queries_A_with_unique_lt_hard": 996,
+   "unique_over_hard_ratio_A": 0.8534,
+   "vs_R2_MEMBERSHIP_VOTE_P50 (the router's value on the same substrate; informational)": {
+    "all": {
+     "n": 996,
+     "base_ALL": 0.6647,
+     "cell_ALL": 0.5853,
+     "delta_pts": -7.93,
+     "gained": 62,
+     "lost": 141,
+     "p": 2.9666702983631053e-08
+    }
+   },
+   "vs_OWNERS_LEGACY_P50 (the alternates' value under the router; informational)": {
+    "all": {
+     "n": 996,
+     "base_ALL": 0.488,
+     "cell_ALL": 0.5853,
+     "delta_pts": 9.74,
+     "gained": 107,
+     "lost": 10,
+     "p": 1.1819170779356622e-21
+    }
+   }
+  },
+  "R2ROUTER_MATCHED_LE (secondary)": {
+   "ALL": {
+    "all": 0.6135
+   },
+   "ANY": {
+    "all": 0.9719
+   },
+   "vs_HARD_PHG_BASE": {
+    "all": {
+     "n": 996,
+     "base_ALL": 0.6596,
+     "cell_ALL": 0.6135,
+     "delta_pts": -4.62,
+     "gained": 67,
+     "lost": 113,
+     "p": 0.0007506289280746464
+    }
+   },
+   "blocks_used_A": {
+    "mean": 58.64,
+    "p50": 58.0,
+    "p90": 62.0,
+    "min": 52,
+    "max": 68
+   },
+   "exposure_unique_A": {
+    "mean": 5074.99,
+    "p50": 5081.0,
+    "p90": 5119.0,
+    "min": 4577,
+    "max": 5140
+   },
+   "rule": "largest fused prefix with unique exposure <= the HARD_PHG_BASE P50 exposure of the same query",
+   "vs_OWNERS_LEGACY_MATCHED_LE (the alternates' value under the router at equal exposure; informational)": {
+    "all": {
+     "n": 996,
+     "base_ALL": 0.6104,
+     "cell_ALL": 0.6135,
+     "delta_pts": 0.3,
+     "gained": 67,
+     "lost": 64,
+     "p": 0.8613689310511564
+    }
+   }
+  },
+  "R2ROUTER_MATCHED_GE (informational)": {
+   "ALL": {
+    "all": 0.6145
+   },
+   "ANY": {
+    "all": 0.9729
+   },
+   "vs_HARD_PHG_BASE": {
+    "all": {
+     "n": 996,
+     "base_ALL": 0.6596,
+     "cell_ALL": 0.6145,
+     "delta_pts": -4.52,
+     "gained": 68,
+     "lost": 113,
+     "p": 0.0010183334172664939
+    }
+   },
+   "blocks_used_A": {
+    "mean": 59.61,
+    "p50": 59.0,
+    "p90": 63.0,
+    "min": 53,
+    "max": 69
+   },
+   "exposure_unique_A": {
+    "mean": 5159.48,
+    "p50": 5161.0,
+    "p90": 5206.0,
+    "min": 4677,
+    "max": 5236
+   },
+   "overshoot_nodes_A": {
+    "mean": 42.64,
+    "p50": 42.5,
+    "p90": 80.0,
+    "min": 0,
+    "max": 98
+   }
+  },
+  "R2_MEMBERSHIP_VOTE_P50 (section 22 reproduced)": {
+   "ALL": {
+    "all": 0.6647
+   },
+   "ANY": {
+    "all": 0.9859
+   },
+   "vs_HARD_PHG_BASE": {
+    "all": {
+     "n": 996,
+     "base_ALL": 0.6596,
+     "cell_ALL": 0.6647,
+     "delta_pts": 0.5,
+     "gained": 116,
+     "lost": 111,
+     "p": 0.7907027887267079
+    }
+   },
+   "exposure_unique_A": {
+    "mean": 3813.59,
+    "p50": 3839.0,
+    "p90": 4090.5,
+    "min": 2913,
+    "max": 4350
+   },
+   "reproduced": {
+    "R2_P50_ALL_all": 0.6647,
+    "R2_P50_unique_mean": 3813.59
+   },
+   "record": "br2_replay_A_musique.json / R2_P50"
+  },
+  "OWNERS_LEGACY_P50 (R = 1 control)": {
+   "ALL": {
+    "all": 0.488
+   },
+   "ANY": {
+    "all": 0.9468
+   },
+   "vs_HARD_PHG_BASE": {
+    "all": {
+     "n": 996,
+     "base_ALL": 0.6596,
+     "cell_ALL": 0.488,
+     "delta_pts": -17.17,
+     "gained": 36,
+     "lost": 207,
+     "p": 2.284488012178139e-30
+    }
+   },
+   "exposure_unique_A": {
+    "mean": 2535.27,
+    "p50": 2536.0,
+    "p90": 2584.0,
+    "min": 2436,
+    "max": 2666
+   },
+   "blocks": 50,
+   "note": "the same owner partition (k = 2 k_f, degree-0 placed) without alternates, voted through the same legacy spread; home serving; owner blocks for exposure"
+  },
+  "OWNERS_LEGACY_MATCHED_LE (R = 1 control)": {
+   "ALL": {
+    "all": 0.6104
+   },
+   "ANY": {
+    "all": 0.9799
+   },
+   "vs_HARD_PHG_BASE": {
+    "all": {
+     "n": 996,
+     "base_ALL": 0.6596,
+     "cell_ALL": 0.6104,
+     "delta_pts": -4.92,
+     "gained": 72,
+     "lost": 121,
+     "p": 0.0005169679130211706
+    }
+   },
+   "blocks_used_A": {
+    "mean": 100.7,
+    "p50": 101.0,
+    "p90": 102.0,
+    "min": 93,
+    "max": 104
+   },
+   "exposure_unique_A": {
+    "mean": 5092.42,
+    "p50": 5098.0,
+    "p90": 5125.0,
+    "min": 4605,
+    "max": 5142
+   }
+  },
+  "HARD_PHG_BASE": {
+   "ALL": {
+    "all": 0.6596
+   },
+   "exposure_A": {
+    "mean": 5116.84,
+    "p50": 5126.0,
+    "p90": 5138.0,
+    "min": 4631,
+    "max": 5145
+   },
+   "npart": 1175,
+   "cache": "musique",
+   "role": "GATE"
+  }
+ },
+ "reach_tables": {
+  "HARD_LEGACY (gate table)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 5.772,
+    "splade_top100": 5.735
+   },
+   "vote_table_entries": 522798,
+   "membership_entries": 117534,
+   "lambda_mean_all_nodes (membership)": 1.0,
+   "lambda_mean_gold_nodes_A (membership)": 1.0,
+   "blocks_with_evidence_per_query_mean": 227.2,
+   "reached_all_gold_rate": {
+    "all": 0.8896
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.955
+   },
+   "gold_node_reached_rate_A_by_hubness": {
+    "hub": 0.9881,
+    "non_hub": 0.9423,
+    "hub_gold_nodes": 421,
+    "non_hub_gold_nodes": 2182
+   }
+  },
+  "R2_MEMBERSHIP_VOTE (section 22 table)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 1.514,
+    "splade_top100": 1.503
+   },
+   "vote_table_entries": 170088,
+   "membership_entries": 179813,
+   "lambda_mean_all_nodes (membership)": 1.53,
+   "lambda_mean_gold_nodes_A (membership)": 1.7,
+   "blocks_with_evidence_per_query_mean": 168.8,
+   "reached_all_gold_rate": {
+    "all": 0.8012
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.915
+   },
+   "gold_node_reached_rate_A_by_hubness": {
+    "hub": 0.9216,
+    "non_hub": 0.9074,
+    "hub_gold_nodes": 421,
+    "non_hub_gold_nodes": 2182
+   }
+  },
+  "R2_LEGACY_ROUTER": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 8.782,
+    "splade_top100": 8.884
+   },
+   "vote_table_entries": 813611,
+   "membership_entries": 179813,
+   "lambda_mean_all_nodes (membership)": 1.53,
+   "lambda_mean_gold_nodes_A (membership)": 1.7,
+   "blocks_with_evidence_per_query_mean": 468.5,
+   "reached_all_gold_rate": {
+    "all": 0.8815
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.9514
+   },
+   "gold_node_reached_rate_A_by_hubness": {
+    "hub": 0.9905,
+    "non_hub": 0.9404,
+    "hub_gold_nodes": 421,
+    "non_hub_gold_nodes": 2182
+   }
+  },
+  "OWNERS_LEGACY (R = 1 control)": {
+   "votes_per_hit_mean (distinct blocks)": {
+    "dense_top100": 7.634,
+    "splade_top100": 7.753
+   },
+   "vote_table_entries": 718039,
+   "membership_entries": 117534,
+   "lambda_mean_all_nodes (membership)": 1.0,
+   "lambda_mean_gold_nodes_A (membership)": 1.0,
+   "blocks_with_evidence_per_query_mean": 400.0,
+   "reached_all_gold_rate": {
+    "all": 0.8163
+   },
+   "gold_nodes_reached_fraction_mean": {
+    "all": 0.922
+   },
+   "gold_node_reached_rate_A_by_hubness": {
+    "hub": 0.981,
+    "non_hub": 0.9033,
+    "hub_gold_nodes": 421,
+    "non_hub_gold_nodes": 2182
+   }
+  }
+ },
+ "reach_reproduced_on_metaqa": false,
+ "reach_decomposition_R2ROUTER_P50": {
+  "failures_A": 413,
+  "UNREACHED": 118,
+  "REACHED_WEAK": 295,
+  "reached_rate_A": 0.8815,
+  "worst_gold_position_among_failures": {
+   "mean": 493.99,
+   "p50": 211.0,
+   "p90": 1597.6000000000001,
+   "min": 50,
+   "max": 2278
+  },
+  "failures_with_worst_le_100": 109,
+  "failures_with_worst_le_200": 203,
+  "failures_with_hub_gold": 140,
+  "failures_with_degree_0_gold": 53,
+  "gold_nodes_per_query_A": {
+   "mean": 2.61,
+   "p50": 2.0,
+   "p90": 4.0,
+   "min": 2,
+   "max": 4
+  }
+ },
+ "failure_overlap_with_gate_A": {
+  "R2ROUTER_P50": {
+   "fail_both": 278,
+   "fail_router_only": 135,
+   "fail_hard_only": 61
+  },
+  "R2ROUTER_MATCHED_LE": {
+   "fail_both": 272,
+   "fail_router_only": 113,
+   "fail_hard_only": 67
+  }
+ },
+ "ladder_ALL_DEV_A": {
+  "HARD_OWN_BLOCK_VOTE": 0.6446,
+  "OWNERS_ONLY_P50 (section 22)": 0.5823,
+  "R2_P50 (section 22)": 0.6647,
+  "R2_MATCHED_LE (section 22)": 0.6978,
+  "HARD_PHG_BASE (legacy spread)": 0.6596,
+  "OWNERS_LEGACY_P50 (this record)": 0.488,
+  "OWNERS_LEGACY_MATCHED_LE (this record)": 0.6104,
+  "R2ROUTER_P50 (this record)": 0.5853,
+  "R2ROUTER_MATCHED_LE (this record)": 0.6135
+ },
+ "verdict": {
+  "VERDICT": "LOSS_EXPOSURE_BELOW_HARD|MATCHED_LOSS",
+  "primary_label_R2ROUTER_P50": "LOSS",
+  "exposure_flag": "EXPOSURE_BELOW_HARD",
+  "matched_label_R2ROUTER_MATCHED_LE": "LOSS",
+  "alpha": 0.01,
+  "gate": "HARD_PHG_BASE",
+  "R2ROUTER_P50_vs_gate": {
+   "n": 996,
+   "base_ALL": 0.6596,
+   "cell_ALL": 0.5853,
+   "delta_pts": -7.43,
+   "gained": 61,
+   "lost": 135,
+   "p": 1.3240945319970203e-07
+  },
+  "R2ROUTER_MATCHED_LE_vs_gate": {
+   "n": 996,
+   "base_ALL": 0.6596,
+   "cell_ALL": 0.6135,
+   "delta_pts": -4.62,
+   "gained": 67,
+   "lost": 113,
+   "p": 0.0007506289280746464
+  },
+  "router_mean_unique_exposure_P50": 4366.46,
+  "hard_mean_exposure": 5116.84,
+  "unique_over_hard_ratio": 0.8534,
+  "router_value_vs_section22_R2_P50 (informational)": "LOSS",
+  "alternates_value_under_router_P50 (informational)": "GAIN",
+  "alternates_value_under_router_matched (informational)": "NEUTRAL",
+  "status": "post-hoc mechanism result on DEV_A; not a confirmation; not promotable; served L1 unchanged; no composition",
+  "SAFE": false,
+  "role": "text: SAFE iff R2ROUTER_P50 vs gate != LOSS AND R2ROUTER_MATCHED_LE vs gate != LOSS"
+ },
+ "constants": {
+  "K0": 60,
+  "K_LOCK": 100,
+  "P_MAIN": 50,
+  "R": 2,
+  "C": 100,
+  "k": 2350,
+  "alpha": 0.01
+ },
+ "seconds": 117.2
+}

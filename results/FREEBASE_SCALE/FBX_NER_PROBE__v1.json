@@ -1,0 +1,36 @@
+{
+ "RECORD": "FBX_NER_PROBE",
+ "utc": "2026-09-30T11:51:28Z",
+ "tree": "data/final_canonical/freebase (read-only)",
+ "shard": 10,
+ "names": 100000,
+ "recipe": "spaCy en_core_web_sm (parser, lemmatizer disabled), ENT_LABELS whitelist, len > 2, lower().strip(); batch 256, 1 process, 1 thread-equivalent",
+ "seconds": 148.92,
+ "names_per_second_1_process": 671.5,
+ "chars_per_name_mean": 50.72,
+ "names_with_an_entity": 47898,
+ "entity_mentions": 77483,
+ "distinct_entity_keys": 45152,
+ "kind_counts_in_sample": [
+  23194,
+  17588,
+  1,
+  5,
+  13,
+  24591,
+  34608
+ ],
+ "entity_df_in_sample": {
+  "df1": 42356,
+  "df2_25": 2663,
+  "df_gt_25": 133
+ },
+ "sample_pairs_with_2<=df<=25": 29354,
+ "note": "df and pairs are counted INSIDE the sample: an entity's full-graph df is about df_sample / (sample / 301,977,131) for a frequent entity and unknowable for a rare one, so no full-graph edge count is inferred here; the probe measures per-name cost (throughput) and mention yield only",
+ "projection": {
+  "full_graph_names": 301977131,
+  "single_process_hours": 124.9,
+  "hours_at_8_processes": 15.61,
+  "hours_at_24_processes": 5.2
+ }
+}

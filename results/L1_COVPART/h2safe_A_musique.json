@@ -1,0 +1,123 @@
+{
+ "cache": "musique",
+ "partition": "PHG",
+ "n_DEV_A": 996,
+ "status": "POSTHOC_MECHANISM_TEST",
+ "beam_module_sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+ "selector": {
+  "cfg": {
+   "B": 6,
+   "M_struct": 64,
+   "M_ret": 32,
+   "agg": "S4",
+   "fusion": "F6",
+   "T": 1,
+   "tag": "F6"
+  },
+  "code": "_l1ps_router.build_cache + _l1kb_core.contexts / f6_select (unchanged)"
+ },
+ "SAFE_record": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json",
+ "identical_beam_check": {
+  "MICRO_L3_H2_rebuilt": 0.501,
+  "gained": 15,
+  "lost": 173
+ },
+ "H2_source": "own blocks of the beam's visited nodes in first-visit order (hop-1 beam then hop-2 beam, seeds excluded); spos'[b] = min(static structural rank, H2 block rank); no fourth channel",
+ "H2_blocks_per_query_mean": 52.0,
+ "static_structural_blocks_per_query_mean": 38.1,
+ "retrieval_challenger_blocks_per_query_mean": 18.5,
+ "arms": {
+  "L1": {
+   "arm": "L1",
+   "BASE_ALL": 0.6596,
+   "ANY": 0.99,
+   "churn_per_query_mean": 0.0,
+   "queries_with_zero_churn": 996,
+   "gold_blocks_admitted_vs_base50": 0,
+   "gold_blocks_evicted_vs_base50": 0,
+   "per_hop": {}
+  },
+  "SAFE": {
+   "arm": "SAFE",
+   "BASE_ALL": 0.7118,
+   "ANY": 0.991,
+   "churn_per_query_mean": 4.72,
+   "queries_with_zero_churn": 1,
+   "gold_blocks_admitted_vs_base50": 93,
+   "gold_blocks_evicted_vs_base50": 11,
+   "per_hop": {},
+   "BASE_ALL_vs_L1": {
+    "gained": 56,
+    "lost": 4,
+    "p": 9.084503982403902e-13
+   }
+  },
+  "SAFE_H2": {
+   "arm": "SAFE_H2",
+   "BASE_ALL": 0.7129,
+   "ANY": 0.991,
+   "churn_per_query_mean": 4.55,
+   "queries_with_zero_churn": 0,
+   "gold_blocks_admitted_vs_base50": 88,
+   "gold_blocks_evicted_vs_base50": 7,
+   "per_hop": {},
+   "H2_credited_admissions_per_query_mean": 1.38,
+   "queries_with_any_H2_credited_admission": 741,
+   "H2_only_admissions_per_query_mean": 0.55,
+   "BASE_ALL_vs_L1": {
+    "gained": 55,
+    "lost": 2,
+    "p": 2.295386103412511e-14
+   },
+   "BASE_ALL_vs_SAFE": {
+    "gained": 7,
+    "lost": 6,
+    "p": 1.0
+   },
+   "significant_loss_vs_SAFE": false
+  }
+ },
+ "attribution_flips": {
+  "newly_covered_vs_SAFE": {
+   "n": 7,
+   "gold_blocks_entering": {
+    "H2_credited": 7,
+    "static_structural": 0,
+    "retrieval": 0,
+    "boundary_reorder": 0
+   }
+  },
+  "newly_lost_vs_SAFE": {
+   "n": 6,
+   "gold_blocks_evicted": 6,
+   "displacing_blocks": {
+    "H2_credited": 11,
+    "static_or_retrieval": 0
+   }
+  }
+ },
+ "candidate_generator_recall": {
+  "all": {
+   "n_queries_with_gold_outside_P50": 339,
+   "worst_missing_gold_block": {
+    "proposed_by_static_structural": 57,
+    "proposed_by_retrieval": 75,
+    "proposed_by_H2": 71,
+    "proposed_by_none": 184,
+    "H2_position": {
+     "0-5": 3,
+     "6-24": 29,
+     "25-49": 31,
+     "50+": 8
+    }
+   },
+   "all_missing_gold_blocks_proposed_by_H2": 66,
+   "static_structural_rank_of_worst_missing": {
+    "0-5": 6,
+    "6-24": 33,
+    "25-49": 18,
+    "50+": 0
+   }
+  }
+ }
+}

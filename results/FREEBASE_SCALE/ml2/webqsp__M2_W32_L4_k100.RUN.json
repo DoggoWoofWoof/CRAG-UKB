@@ -1,0 +1,373 @@
+{
+ "RECORD": "ML2_CELL",
+ "dataset": "webqsp",
+ "candidate": "M2_W32_L4",
+ "method": "M2",
+ "rating": "span",
+ "schedule": "flat",
+ "Wmax": 32,
+ "level": 4,
+ "K": 100,
+ "utc": "2026-09-30T13:07:42Z",
+ "refine_params": {
+  "sweeps": 10,
+  "T": 4,
+  "dmax": 5000,
+  "layers": [
+   "STRUCT",
+   "KNN"
+  ],
+  "anchor_weights": "max(1, rint(1000 / deg_family(u))) = the frozen H4 net weight of the anchor's closed neighbourhood",
+  "repair": "cheapest-first out of every block above ceil(1.03 N / K) before the sweeps"
+ },
+ "clusters": {
+  "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W32_L4.npy",
+  "sha256": "48192edbdf30c2fb7c683b44fb42602f415fdae2315ba0d5234bc63863f1b25a",
+  "n_clusters": 94309,
+  "cluster_size": {
+   "max": 32,
+   "mean": 27.494,
+   "p50": 29.0,
+   "singletons": 0
+  },
+  "coarsen_record_sha256": "02977b370ce04c1c9462ffe24ad4de93e5d1b5417c410434d453c57bceed6c33"
+ },
+ "fine_hypergraph": {
+  "file": "results/L1_HOST/parts/webqsp__H4_SK_k100.npz",
+  "npz_sha256": "01d5ccb5574d42c5b8635b8a75f9e5e3dc2f14a04a78b0e3ae6ac3bf572eca13",
+  "content_digest": "ae11bd0dde39f1df2132d4af0719aa89282fe579ce91970e75512b0dbe489981",
+  "N": 2592894,
+  "M": 5181621,
+  "P": 29574371
+ },
+ "coarse_hypergraph": {
+  "V": 94309,
+  "M_in": 5181621,
+  "P_in": 29574371,
+  "nets_dropped_singleton": 1367138,
+  "nets_merged_identical": 1512619,
+  "M": 2301864,
+  "P": 12331092,
+  "weight_conserved_vertex": true,
+  "pin_reduction": 2.3984,
+  "vertex_weight_max": 32
+ },
+ "driver": {
+  "binary": {
+   "path": "/home/student2/phg_build_crag/phg_driver_vw",
+   "sha256": "9c1046e1539a7a392a897201d03d477bb3eb2e60bd331bdc34c6113fbc63421e"
+  },
+  "source_sha256": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4",
+  "parameters": [
+   [
+    "DEBUG_LEVEL",
+    "0"
+   ],
+   [
+    "NUM_GID_ENTRIES",
+    "1"
+   ],
+   [
+    "NUM_LID_ENTRIES",
+    "1"
+   ],
+   [
+    "OBJ_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "EDGE_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "DETERMINISTIC",
+    "1"
+   ],
+   [
+    "RETURN_LISTS",
+    "PARTS"
+   ],
+   [
+    "REMAP",
+    "0"
+   ],
+   [
+    "LB_METHOD",
+    "HYPERGRAPH"
+   ],
+   [
+    "HYPERGRAPH_PACKAGE",
+    "PHG"
+   ],
+   [
+    "LB_APPROACH",
+    "PARTITION"
+   ],
+   [
+    "IMBALANCE_TOL",
+    "1.03"
+   ],
+   [
+    "PHG_CUT_OBJECTIVE",
+    "CONNECTIVITY"
+   ],
+   [
+    "PHG_EDGE_SIZE_THRESHOLD",
+    "1.0"
+   ],
+   [
+    "PHG_RANDOMIZE_INPUT",
+    "0"
+   ],
+   [
+    "PHG_MULTILEVEL",
+    "1"
+   ],
+   [
+    "PHG_COARSENING_METHOD",
+    "AGG"
+   ],
+   [
+    "PHG_COARSEPARTITION_METHOD",
+    "AUTO"
+   ],
+   [
+    "PHG_REFINEMENT_METHOD",
+    "FM"
+   ],
+   [
+    "PHG_REFINEMENT_QUALITY",
+    "1"
+   ],
+   [
+    "PHG_EDGE_WEIGHT_OPERATION",
+    "ERROR"
+   ],
+   [
+    "PHG_PROCESSOR_REDUCTION_LIMIT",
+    "0.5"
+   ],
+   [
+    "PHG_REPART_MULTIPLIER",
+    "100"
+   ],
+   [
+    "CHECK_HYPERGRAPH",
+    "1"
+   ],
+   [
+    "PHG_OUTPUT_LEVEL",
+    "1"
+   ]
+  ],
+  "NP": 4
+ },
+ "phg_coarse": {
+  "name": "R1_ML2_M2_W32_L4_k100",
+  "mode": "partition",
+  "np": 4,
+  "rc": 0,
+  "wall_seconds_outer": 187.49,
+  "memory": {
+   "peak_rss_kb_per_rank_time_v": [
+    407716,
+    516400,
+    368304,
+    497072
+   ],
+   "ru_maxrss_kb_per_rank": [
+    407716,
+    516400,
+    368304,
+    497072
+   ],
+   "max_rank_peak_kb": 516400,
+   "sum_of_rank_peaks_kb": 1789492,
+   "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+  },
+  "timing": {
+   "partition_wall_seconds": 96.437,
+   "driver_total_seconds_rank0": 186.95,
+   "load_seconds_per_rank": [
+    6.113,
+    14.704,
+    17.712,
+    28.627
+   ],
+   "job_wall_seconds": 187.4
+  },
+  "zoltan_eval": {
+   "cutl_global": 1130825856.0,
+   "cutn_global": 720802112.0,
+   "imbalance": 1.029969,
+   "obj_imbalance": 1.086853,
+   "nobj_min": 276.0,
+   "nobj_max": 1025.0,
+   "nobj_sum": 94309.0
+  },
+  "zoltan_removed_or_warning_lines": []
+ },
+ "coarse_km1": 1130825919,
+ "empty_block_repair": null,
+ "projection": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 26706,
+   "contract_bound_ceil_1.03_N_over_k": 26707,
+   "zoltan_tolerance_bound_1.03_x_mean": 26706.808,
+   "gate": "PASS"
+  },
+  "km1_weighted": 1130825919,
+  "lambda_mean": 2.0504,
+  "blocks": {
+   "k": 100,
+   "used": 100,
+   "empty": 0,
+   "min": 6950,
+   "p50": 26662.5,
+   "p95": 26705.0,
+   "max": 26706,
+   "mean": 25928.94,
+   "ceil_N_over_k": 25929,
+   "max_over_mean": 1.03,
+   "eps_actual(max/ceil(N/k)-1)": 0.03,
+   "freight_upper_bound": 26707,
+   "within_eps_0.03": true
+  },
+  "blocks_per_net_unweighted": 2.0504
+ },
+ "refinement": {
+  "cn_info": {
+   "mode": "ml2_cn",
+   "layers": 2,
+   "weighted": 1,
+   "N": 2592894,
+   "K": 100,
+   "cap": 26707,
+   "lo": 25151,
+   "T": 4,
+   "dmax": 5000,
+   "hubs_skipped": 86,
+   "sweeps_run": 4,
+   "seconds": 9.756,
+   "size_min": 7150,
+   "size_max": 26707,
+   "km1_before": 1130823423,
+   "km1_after_repair": 1130823423,
+   "km1_after": 1060260244,
+   "km1_bookkeeping_consistent": 1,
+   "repair": {
+    "overfull_blocks_before": 0,
+    "max_load_before": 26706,
+    "moves": 0,
+    "km1_delta": 0,
+    "passes": 0,
+    "overfull_blocks_after": 0,
+    "stuck": 0,
+    "seconds": 0.0
+   },
+   "moved_per_sweep": [
+    124452,
+    28659,
+    7754,
+    2521
+   ],
+   "km1_delta_per_sweep": [
+    -56149654,
+    -10910258,
+    -2625080,
+    -878187
+   ],
+   "seconds_per_sweep": [
+    2.613,
+    2.478,
+    2.377,
+    2.285
+   ],
+   "pool_bytes": 203784760,
+   "peak_rss_kb": 437484,
+   "c_source_sha12": "dcdc99a5ea14"
+  },
+  "seconds": 20.0,
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 26707,
+   "contract_bound_ceil_1.03_N_over_k": 26707,
+   "zoltan_tolerance_bound_1.03_x_mean": 26706.808,
+   "gate": "PASS"
+  },
+  "km1_weighted": 1060262736,
+  "lambda_mean": 1.9995,
+  "blocks": {
+   "k": 100,
+   "used": 100,
+   "empty": 0,
+   "min": 7150,
+   "p50": 26678.5,
+   "p95": 26707.0,
+   "max": 26707,
+   "mean": 25928.94,
+   "ceil_N_over_k": 25929,
+   "max_over_mean": 1.03,
+   "eps_actual(max/ceil(N/k)-1)": 0.03,
+   "freight_upper_bound": 26707,
+   "within_eps_0.03": true
+  },
+  "blocks_per_net_unweighted": 1.9995
+ },
+ "STATUS": "OK",
+ "balance": {
+  "length_ok": true,
+  "ids_in_range": true,
+  "blocks_used": 100,
+  "every_block_used": true,
+  "size_min": 7150,
+  "size_max": 26707,
+  "size_mean": 25928.94,
+  "ceil_N_over_K": 25929,
+  "within_ceil_1.03_N_over_K": true
+ },
+ "wall_seconds": 283.7,
+ "peak_rss_mb_python": 2231.9,
+ "output": {
+  "file": "results/FREEBASE_SCALE/ml2/webqsp__M2_W32_L4_k100.npy",
+  "sha256": "9c2c260c87b160048d3d06113bf445762479cbdd191cf4c2d346b62fa3b8a8cc",
+  "n": 2592894
+ },
+ "projection_map": {
+  "file": "results/FREEBASE_SCALE/ml2/webqsp__M2_W32_L4_k100_proj.npy",
+  "sha256": "8d199234fb0c8f915a0aab54cb28766a150f2d83952546144d66d02c14eb8d17"
+ },
+ "placement": {
+  "machine": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "cpu_count_os": 32,
+  "python": "3.13.5",
+  "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+  "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+  "numpy": "2.3.2",
+  "wsl_distro": "Ubuntu-24.04",
+  "rx_job": "260930-174422-fbx-ml2-cell-M2-W32-L4-3b56",
+  "rx_cpus": "4",
+  "PYTHONHASHSEED": "0"
+ },
+ "code": {
+  "scratchpad/_ml2_cell.py": "f63d5ed5b29f9c9b3a9247ac56ef7100ef5cd5d902b36237e843f59d2f331521",
+  "scratchpad/_ml2_cn.py": "3421e6ad69f263a8e935389ef588dd0436b28f2538187564deb154b5cece8206",
+  "scratchpad/_ml2_cn.c": "dcdc99a5ea140410393edcf5a8904565582e36a3bb4c60a910b0bb7f9b99d1a1",
+  "scratchpad/_ml2_run.py": "6c06034cb0d055c43b35b5c0774ef056da7240502190033d8849ae720169dfea",
+  "scratchpad/_ml2_coarsen.py": "33561ca386667bb3053389ba902d87e067aac08985b6839dd17a243ff05b7b05",
+  "scratchpad/_ml_run.py": "7f98670670d437712d1f6c81863752d3eef841ac02aa576441ff490372766e26",
+  "scratchpad/_ml_coarsen.py": "19ad42f5ac74dcfe6384c1d34d2d9821fec6b75cc1202c8d5fd9723f31ee3978",
+  "scratchpad/_fbx_part.py": "6e3113645af5de676f9221a0b0591e898ca373c29a25d4ef2cf676b5aff85d61",
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_lowmem/phg_driver/phg_driver_vw.c": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262"
+ }
+}

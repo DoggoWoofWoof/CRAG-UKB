@@ -1,0 +1,84 @@
+{
+  "schema": "V1_ALL_NODE_COST_TABLE/v1",
+  "generated_utc": "2026-09-06T08:17:57Z",
+  "purpose": "Inputs to the ALL_NODE retrieval_role decision, measured before the decision is written into nodes.parquet. This file ranks nothing and prefers no arm.",
+  "TOTAL_CANONICAL_NODES": 2592894,
+  "DETERMINISTIC_TEXT_CONDITION": {
+    "question": "the policy admits UNRESOLVED_OTHER 'if deterministic semantic/structural text exists'. Which nodes fail that test?",
+    "contentless_fallback_texts": [
+      "unlabelled record",
+      "unnamed entity"
+    ],
+    "nodes_with_contentless_text_by_kind": {},
+    "nodes_with_contentless_text_total": 0,
+    "cvt_header_only_no_arguments": 900,
+    "entity_with_no_facts_beyond_its_name": 405054,
+    "reading": "A header-only CVT still asserts its Freebase type, which is deterministic signal; it is weak text, not absent text. Only the contentless fallbacks carry nothing at all."
+  },
+  "node_kind_counts": {
+    "CVT_MEDIATOR": 1588085,
+    "READABLE_ENTITY": 925761,
+    "MID_NAMED_ENTITY": 62375,
+    "VALUE_LITERAL": 14515,
+    "UNRESOLVED_OTHER": 2158
+  },
+  "ABLATION_ARMS_PREREGISTERED": [
+    {
+      "arm": "ALL_NODE__entity_NAME_ONLY",
+      "nodes": 2592894,
+      "chars": 229212135,
+      "est_tokens_chars_over_4": 57303034,
+      "note": "DEFAULT under the ALL_NODE decision. CVT records carry composition, so entity text does not also need to carry the same arguments.",
+      "ratio_vs_ALL_NODE_entity_NAME_ONLY": 1.0
+    },
+    {
+      "arm": "ALL_NODE__entity_NAME_PLUS_FACTS",
+      "nodes": 2592894,
+      "chars": 585353738,
+      "est_tokens_chars_over_4": 146338434,
+      "note": "every CVT argument is serialised twice, once in the CVT record and again inside each adjacent entity. Redundant by construction under ALL_NODE.",
+      "ratio_vs_ALL_NODE_entity_NAME_ONLY": 2.554
+    },
+    {
+      "arm": "NO_CVT_RETRIEVAL__entity_NAME_PLUS_FACTS",
+      "nodes": 1004809,
+      "chars": 382916274,
+      "est_tokens_chars_over_4": 95729068,
+      "note": "the substitution arm: CVT information is flattened into entity text instead of being retrievable as its own unit.",
+      "ratio_vs_ALL_NODE_entity_NAME_ONLY": 1.671
+    },
+    {
+      "arm": "NO_CVT_RETRIEVAL__entity_NAME_ONLY",
+      "nodes": 1004809,
+      "chars": 26774671,
+      "est_tokens_chars_over_4": 6693668,
+      "note": "strict exclusion with no compensation. Lower bound on corpus cost.",
+      "ratio_vs_ALL_NODE_entity_NAME_ONLY": 0.117
+    },
+    {
+      "arm": "ENTITY_ONLY",
+      "nodes": 990294,
+      "chars": 26651590,
+      "est_tokens_chars_over_4": 6662898,
+      "note": "no CVT, no literal.",
+      "ratio_vs_ALL_NODE_entity_NAME_ONLY": 0.116
+    },
+    {
+      "arm": "ENTITY_ONLY__NAME_PLUS_FACTS",
+      "nodes": 990294,
+      "chars": 381857427,
+      "est_tokens_chars_over_4": 95464357,
+      "note": "no CVT, no literal, flattened facts.",
+      "ratio_vs_ALL_NODE_entity_NAME_ONLY": 1.666
+    },
+    {
+      "arm": "ALL_NODE_MINUS_LITERAL",
+      "nodes": 2578379,
+      "chars": 229089054,
+      "est_tokens_chars_over_4": 57272264,
+      "note": "literals excluded from retrieval but retained in the graph and its partitions.",
+      "ratio_vs_ALL_NODE_entity_NAME_ONLY": 0.999
+    }
+  ],
+  "elapsed_s": 14.5
+}

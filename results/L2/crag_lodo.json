@@ -1,0 +1,561 @@
+{
+  "_config": {
+    "kind": "true_LODO",
+    "datasets": [
+      "hotpotqa_clean",
+      "webqsp",
+      "metaqa",
+      "2wiki_clean",
+      "musique_clean"
+    ],
+    "arms": [
+      "dropout_only",
+      "kl_dropout"
+    ],
+    "epochs": 10,
+    "seeds": 3,
+    "lam": 1.0,
+    "tau": 1.0,
+    "p_drop": 0.5,
+    "regimes": {
+      "full": [],
+      "no_edge_path": [
+        5,
+        6
+      ],
+      "no_graph_edge_path": [
+        4,
+        5,
+        6
+      ],
+      "no_splade": [
+        3
+      ],
+      "no_offset": [
+        1
+      ],
+      "dense_only": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "dense_splade": [
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "structure_heavy": [
+        0,
+        1
+      ]
+    },
+    "norm": "FROZEN present-only pooled mu/sd from the 4 TRAIN datasets (held-out never used)",
+    "controller": "hard-masked alpha (unavail->-inf) + KL(pi*||alpha) over available experts",
+    "scorer": "MLP[s, alpha, alpha*s, state, availability]"
+  },
+  "hotpotqa_clean": {
+    "dropout_only": {
+      "held_out": {
+        "R@5": [
+          62.14,
+          0.26
+        ],
+        "R@20": [
+          77.37,
+          0.56
+        ],
+        "R@50": [
+          85.28,
+          0.36
+        ],
+        "Hit@5": [
+          84.06,
+          0.29
+        ],
+        "Hit@50": [
+          95.62,
+          0.21
+        ]
+      },
+      "train_ref": {
+        "webqsp": [
+          50.78,
+          1.25
+        ],
+        "metaqa": [
+          69.31,
+          0.18
+        ],
+        "2wiki_clean": [
+          81.47,
+          0.42
+        ],
+        "musique_clean": [
+          68.85,
+          0.89
+        ]
+      },
+      "held_out_mean_alpha": {
+        "dense": 0.0008,
+        "offset": 0.9965,
+        "splade": 0.0015,
+        "relation": 0.0005,
+        "path": 0.0005
+      }
+    },
+    "kl_dropout": {
+      "held_out": {
+        "R@5": [
+          64.33,
+          1.5
+        ],
+        "R@20": [
+          78.51,
+          1.11
+        ],
+        "R@50": [
+          86.02,
+          0.68
+        ],
+        "Hit@5": [
+          85.29,
+          1.12
+        ],
+        "Hit@50": [
+          96.02,
+          0.41
+        ]
+      },
+      "train_ref": {
+        "webqsp": [
+          51.2,
+          1.22
+        ],
+        "metaqa": [
+          69.29,
+          0.84
+        ],
+        "2wiki_clean": [
+          81.15,
+          1.17
+        ],
+        "musique_clean": [
+          69.53,
+          0.4
+        ]
+      },
+      "held_out_mean_alpha": {
+        "dense": 0.1869,
+        "offset": 0.4666,
+        "splade": 0.2555,
+        "relation": 0.0752,
+        "path": 0.0158
+      }
+    }
+  },
+  "webqsp": {
+    "dropout_only": {
+      "held_out": {
+        "R@5": [
+          30.92,
+          1.57
+        ],
+        "R@20": [
+          47.13,
+          1.53
+        ],
+        "R@50": [
+          61.12,
+          1.27
+        ],
+        "Hit@5": [
+          46.71,
+          1.4
+        ],
+        "Hit@50": [
+          79.37,
+          1.79
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          68.99,
+          1.21
+        ],
+        "metaqa": [
+          71.03,
+          0.86
+        ],
+        "2wiki_clean": [
+          82.74,
+          0.52
+        ],
+        "musique_clean": [
+          71.05,
+          0.68
+        ]
+      },
+      "held_out_mean_alpha": {
+        "dense": 0.0233,
+        "offset": 0.9482,
+        "splade": 0.0106,
+        "relation": 0.0109,
+        "path": 0.007
+      }
+    },
+    "kl_dropout": {
+      "held_out": {
+        "R@5": [
+          32.95,
+          3.01
+        ],
+        "R@20": [
+          49.29,
+          0.71
+        ],
+        "R@50": [
+          63.82,
+          0.93
+        ],
+        "Hit@5": [
+          48.98,
+          2.89
+        ],
+        "Hit@50": [
+          81.63,
+          1.47
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          67.92,
+          1.36
+        ],
+        "metaqa": [
+          71.37,
+          0.43
+        ],
+        "2wiki_clean": [
+          82.09,
+          0.47
+        ],
+        "musique_clean": [
+          70.16,
+          0.4
+        ]
+      },
+      "held_out_mean_alpha": {
+        "dense": 0.147,
+        "offset": 0.5765,
+        "splade": 0.2102,
+        "relation": 0.0631,
+        "path": 0.0031
+      }
+    }
+  },
+  "metaqa": {
+    "dropout_only": {
+      "held_out": {
+        "R@5": [
+          75.5,
+          2.71
+        ],
+        "R@20": [
+          91.23,
+          1.84
+        ],
+        "R@50": [
+          96.01,
+          0.88
+        ],
+        "Hit@5": [
+          89.09,
+          2.51
+        ],
+        "Hit@50": [
+          98.73,
+          0.25
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          65.7,
+          1.44
+        ],
+        "webqsp": [
+          51.05,
+          1.32
+        ],
+        "2wiki_clean": [
+          84.04,
+          1.25
+        ],
+        "musique_clean": [
+          70.07,
+          1.1
+        ]
+      },
+      "held_out_mean_alpha": {
+        "dense": 0.2254,
+        "offset": 0.5956,
+        "splade": 0.1092,
+        "relation": 0.0698,
+        "path": 0.0
+      }
+    },
+    "kl_dropout": {
+      "held_out": {
+        "R@5": [
+          74.7,
+          0.47
+        ],
+        "R@20": [
+          90.5,
+          0.4
+        ],
+        "R@50": [
+          96.02,
+          0.15
+        ],
+        "Hit@5": [
+          87.9,
+          0.43
+        ],
+        "Hit@50": [
+          98.8,
+          0.04
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          66.66,
+          1.82
+        ],
+        "webqsp": [
+          51.65,
+          1.2
+        ],
+        "2wiki_clean": [
+          83.66,
+          0.32
+        ],
+        "musique_clean": [
+          69.26,
+          1.41
+        ]
+      },
+      "held_out_mean_alpha": {
+        "dense": 0.149,
+        "offset": 0.3914,
+        "splade": 0.206,
+        "relation": 0.2536,
+        "path": 0.0
+      }
+    }
+  },
+  "2wiki_clean": {
+    "dropout_only": {
+      "held_out": {
+        "R@5": [
+          76.93,
+          2.31
+        ],
+        "R@20": [
+          86.81,
+          2.22
+        ],
+        "R@50": [
+          91.21,
+          1.52
+        ],
+        "Hit@5": [
+          99.89,
+          0.03
+        ],
+        "Hit@50": [
+          100.0,
+          0.0
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          64.21,
+          2.5
+        ],
+        "webqsp": [
+          52.21,
+          1.08
+        ],
+        "metaqa": [
+          66.25,
+          1.04
+        ],
+        "musique_clean": [
+          67.31,
+          1.63
+        ]
+      },
+      "held_out_mean_alpha": {
+        "dense": 0.0298,
+        "offset": 0.941,
+        "splade": 0.023,
+        "relation": 0.0015,
+        "path": 0.0048
+      }
+    },
+    "kl_dropout": {
+      "held_out": {
+        "R@5": [
+          77.94,
+          2.18
+        ],
+        "R@20": [
+          87.26,
+          1.93
+        ],
+        "R@50": [
+          91.51,
+          1.32
+        ],
+        "Hit@5": [
+          99.93,
+          0.0
+        ],
+        "Hit@50": [
+          100.0,
+          0.0
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          66.69,
+          0.61
+        ],
+        "webqsp": [
+          52.58,
+          0.28
+        ],
+        "metaqa": [
+          67.84,
+          1.3
+        ],
+        "musique_clean": [
+          68.37,
+          0.33
+        ]
+      },
+      "held_out_mean_alpha": {
+        "dense": 0.1683,
+        "offset": 0.5001,
+        "splade": 0.2797,
+        "relation": 0.0495,
+        "path": 0.0024
+      }
+    }
+  },
+  "musique_clean": {
+    "dropout_only": {
+      "held_out": {
+        "R@5": [
+          67.89,
+          0.21
+        ],
+        "R@20": [
+          80.23,
+          0.37
+        ],
+        "R@50": [
+          86.15,
+          0.56
+        ],
+        "Hit@5": [
+          94.73,
+          0.25
+        ],
+        "Hit@50": [
+          98.78,
+          0.23
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          69.4,
+          1.36
+        ],
+        "webqsp": [
+          52.74,
+          0.79
+        ],
+        "metaqa": [
+          70.65,
+          0.67
+        ],
+        "2wiki_clean": [
+          85.29,
+          1.11
+        ]
+      },
+      "held_out_mean_alpha": {
+        "dense": 0.0004,
+        "offset": 0.9995,
+        "splade": 0.0,
+        "relation": 0.0,
+        "path": 0.0
+      }
+    },
+    "kl_dropout": {
+      "held_out": {
+        "R@5": [
+          68.44,
+          0.48
+        ],
+        "R@20": [
+          81.19,
+          0.39
+        ],
+        "R@50": [
+          86.84,
+          0.4
+        ],
+        "Hit@5": [
+          95.05,
+          0.1
+        ],
+        "Hit@50": [
+          98.95,
+          0.08
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          69.83,
+          1.71
+        ],
+        "webqsp": [
+          53.61,
+          0.46
+        ],
+        "metaqa": [
+          71.64,
+          4.64
+        ],
+        "2wiki_clean": [
+          83.79,
+          3.04
+        ]
+      },
+      "held_out_mean_alpha": {
+        "dense": 0.1544,
+        "offset": 0.5055,
+        "splade": 0.2906,
+        "relation": 0.0468,
+        "path": 0.0027
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "V1_NODE_KIND_FROZEN/v1",
+  "frozen_utc": "2026-09-06T06:34:16Z",
+  "step": "user step 4 -- freeze node_kind before any rendering",
+  "rule_version": "webqsp_v1_section3/v1",
+  "NODE_KIND_HASH": "5ea22695603972c00faa9cd5f1e36f1c6727bda495bc82b338a7b9b4b4f7ef04",
+  "matches_classification_report": true,
+  "counts": {
+    "CVT_MEDIATOR": 1588085,
+    "READABLE_ENTITY": 925761,
+    "MID_NAMED_ENTITY": 62375,
+    "VALUE_LITERAL": 14515,
+    "UNRESOLVED_OTHER": 2158
+  },
+  "nodes": 2592894,
+  "audited_by": "data/final_canonical/webqsp/V1_CLASSIFICATION_AUDIT.json",
+  "audit_outcome": {
+    "control_false_positive_pct": 0.0446,
+    "independent_reproduction_vs_prior_audit_pct": 100.0,
+    "band_reproduced": [
+      19566,
+      62375
+    ]
+  },
+  "meaning": "node_kind is now IMMUTABLE for V1. Rendering, the gold gate and any retrieval_role decision read it and must never write it. Any future change requires a new rule_version and a new hash recorded beside this one, never an in-place edit.",
+  "what_may_still_change": [
+    "canonical_name",
+    "display_name",
+    "display_name_disambiguated",
+    "display_source",
+    "retrieval_role"
+  ],
+  "retrieval_role_still_undecided": false,
+  "RETRIEVAL_ROLE_RESOLVED_2026_09_06": {
+    "resolved_utc": "2026-09-06T08:21:26Z",
+    "resolution": "ALL_NODE. Every canonical node is RETRIEVAL_ELIGIBLE.",
+    "decided_by": "user, 2026-09-06",
+    "record": "data/final_canonical/webqsp/V1_RETRIEVAL_ROLE_DECISION.json",
+    "supersedes_in_this_document": "the field retrieval_role_still_undecided, which was true when this document was written and is now false. node_kind itself is unchanged and its hash still verifies.",
+    "prior_field_value": true
+  }
+}

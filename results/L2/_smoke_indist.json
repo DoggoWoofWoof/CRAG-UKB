@@ -1,0 +1,123 @@
+{
+  "_config": {
+    "kind": "in_distribution_universal",
+    "datasets": [
+      "webqsp",
+      "metaqa"
+    ],
+    "arms": [
+      "dropout_only"
+    ],
+    "epochs": 1,
+    "seeds": 1,
+    "lam": 1.0,
+    "tau": 1.0,
+    "p_drop": 0.5,
+    "regimes": {
+      "full": [],
+      "no_edge_path": [
+        5,
+        6
+      ],
+      "no_graph_edge_path": [
+        4,
+        5,
+        6
+      ],
+      "no_splade": [
+        3
+      ],
+      "no_offset": [
+        1
+      ],
+      "dense_only": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "dense_splade": [
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "structure_heavy": [
+        0,
+        1
+      ]
+    },
+    "norm": "FROZEN present-only pooled mu/sd from the pooled train of ALL datasets (target INCLUDED)",
+    "note": "ONE universal checkpoint per arm, target-in-training; direct counterpart to run_lodo."
+  },
+  "results": {
+    "dropout_only": {
+      "per_dataset": {
+        "webqsp": {
+          "R@5": [
+            52.13,
+            0.0
+          ],
+          "R@20": [
+            65.66,
+            0.0
+          ],
+          "R@50": [
+            76.34,
+            0.0
+          ],
+          "Hit@5": [
+            70.75,
+            0.0
+          ],
+          "Hit@50": [
+            91.16,
+            0.0
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            77.33,
+            0.0
+          ],
+          "R@20": [
+            91.73,
+            0.0
+          ],
+          "R@50": [
+            96.39,
+            0.0
+          ],
+          "Hit@5": [
+            91.34,
+            0.0
+          ],
+          "Hit@50": [
+            98.8,
+            0.0
+          ]
+        }
+      },
+      "mean_alpha": {
+        "webqsp": {
+          "dense": 0.0,
+          "offset": 0.9886,
+          "splade": 0.0002,
+          "relation": 0.0,
+          "path": 0.0112
+        },
+        "metaqa": {
+          "dense": 0.0,
+          "offset": 1.0,
+          "splade": 0.0,
+          "relation": 0.0,
+          "path": 0.0
+        }
+      },
+      "xgb_gain_importance": null
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+ "stage": "FBX_SCALE / addendum 21: level-0 chain job launch failure (job 261004-190517-ooc-fb-vc0-0705, 27 s): a host workspace input was missing; fixed in the push list; regression re-verified stand-alone",
+ "declared": "2026-10-04T19:21:05+0530",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_19.json": "71c4980cc45416509af3f51e8bec8b1fb043611d68146305b54cb1936b4ed824"
+ },
+ "measured": {
+  "window": "the capacity gate admitted the 51 GB job at 2026-10-04 19:05 (scheduler 57.7 GB free) and submitted job 261004-190517-ooc-fb-vc0-0705 (4 cpu / 51 GB, anon_gb 50, --mem-hard 63)",
+  "failure": "rc 1 after 27 s in step 1 of scratchpad/_vc0_chain.py (the WebQSP regression, _ooc_wq_chain.py VC): FileNotFoundError for results/FREEBASE_SCALE/ml2/clusters__M2_W512_L1.npy in the host workspace (log results/FREEBASE_SCALE/E_VC0_LAUNCH_FAIL__fbx_ooc.log, sha 86c07538095cf442d274e39a86a9f10f2b4e253c891d949c3f2b1518b578be6c). The Freebase level was NOT run (the chain's stop rule worked as declared); no engine, no cap and no memory result exists from this job; peak memory was not reached",
+  "second_finding": "stand-alone retry 261004-191009-ooc-wq-vc-pre-37eb (3 cpu / 4 GB, 1m11s, rc 1): after the ml2 files were declared, the pushed record results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LTOP_k25.json made _l1h_host.cmd_hg assert the hash of the stored top-hypergraph npz (which is not kept; the npz is REBUILT when its record is absent, as on 2026-10-03) -> FileNotFoundError; the record was removed from the push list and from the host workspace",
+  "regression_verified_standalone": {
+   "job": "261004-191245-ooc-wq-vc-pre2-6346",
+   "reservation": "3 cpu / 4 GB, --mem-hard 8",
+   "runtime": "7m06s",
+   "peak_mem_gb": 1.04,
+   "rc": 0,
+   "results": "E4 PASS (surrogate shards byte-identical; Zoltan top reproduces the stored top map sha d9c3c4aab8b9), E6 PASS (the V-cycle reproduces the stored top map byte for byte, sha 4c043f0cd704, and the D1 trajectory and V / P of levels 1..4), validity PASS (max block 104,752 <= bound 106,828), WQ_CHAIN PASS: VC",
+   "on_the_patched_binary": "compiled source hash d7d48c711233 (addendum 19)",
+   "log": "results/FREEBASE_SCALE/E_WQVC_PRE__fbx_ooc.log",
+   "log_sha256": "bc04e7846d21ab98b9bf57bdaed6115cb026fcf5428269d271555476ca69cd59"
+  }
+ },
+ "cause": {
+  "what": "the host workspace did not contain the stored WebQSP records that scratchpad/_ooc_vc.py test_webqsp_vc compares against (results/FREEBASE_SCALE/ml2/clusters__M2_W512_L1..4.npy; results/FREEBASE_SCALE/h2l/parts/webqsp__H4_H2LT_Q512L4N4_top_k25__PHG_con.{RUN.json,npy}); they were not in the rx push list (the 2026-10-03 regression runs had them present, evidently pushed per job), and addendum 19 did not verify the chain's inputs on the host before arming the 51 GB window",
+  "lesson": "a heavy stage's PRE-STEP inputs are verified by a cheap stand-alone run of that pre-step on the host before the heavy window is spent; done here before the re-arm"
+ },
+ "fix": {
+  "what": "rx.toml push list only: the four ml2 cluster maps, COARSEN__M2_W512.json, the Q512L4N4 top RUN.json / npy and the vc/ D1.json / npy the test reads (the top-hypergraph record is deliberately NOT pushed)",
+  "no_change_to": [
+   "the engine source",
+   "the chain script",
+   "the algorithm",
+   "any gate",
+   "the reservation (rx 4 cpu / 51 GB, anon_gb 50, --mem-hard 63)",
+   "any earlier record"
+  ]
+ },
+ "rearmed": "scratchpad/_rx_gate.py --name ooc-fb-vc0 --mem 51 --cpus 4 --hard 63 -- python -u scratchpad/_vc0_chain.py anon_gb=50 (gate log work/_vc0_gate3.log); the chain still re-runs the regression itself before level 0 (addendum 19 stop rule)",
+ "stop_rules": "unchanged from addendum 19: peak RSS above 70 GB stops and reports; a further failure of the stage is diagnosed from the per-pass peak-RSS lines and enlarged only by a new addendum; a regression failure blocks the Freebase level; no gate is relaxed",
+ "not_done_here": [
+  "any Freebase level-0 result",
+  "any change to the algorithm or the reservation",
+  "any claim of recall at Freebase scale"
+ ],
+ "code_pinned": {
+  "scratchpad/_ooc2.cpp": "36a2c8c0e4973a644ee089819ab5a7aa38875de179a3b41b7f5608574d23ff47",
+  "scratchpad/_ooc_vc.py": "bc2442e61644f193d513600f24710dc4fc0852c0a9693e0e801dbfea840e6f79",
+  "scratchpad/_ooc_wq_chain.py": "a5cb68445f0ab728455c9178d0b6c26353bd060404177f8155b26139960c5e9f",
+  "scratchpad/_vc0_chain.py": "31cf2155b00e7d40e60a50f098f6b70d24a045baa655f6779c6b5e9c48c6fc77",
+  "scratchpad/_host_yield.py": "b96c2bb8eaea5fd5a5bf5f54e9812d5eb2012c3d1f546544028855bec795fa81",
+  "scratchpad/_rx_gate.py": "1d0f37668d3448cb7035c365aee1d9fe58e9a1e49d899ce1077a59c11304fe34"
+ }
+}

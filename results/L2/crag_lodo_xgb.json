@@ -1,0 +1,495 @@
+{
+  "_config": {
+    "kind": "true_LODO",
+    "datasets": [
+      "hotpotqa_clean",
+      "webqsp",
+      "metaqa",
+      "2wiki_clean",
+      "musique_clean"
+    ],
+    "arms": [
+      "xgb_kl"
+    ],
+    "epochs": 10,
+    "seeds": 3,
+    "lam": 1.0,
+    "tau": 1.0,
+    "p_drop": 0.5,
+    "regimes": {
+      "full": [],
+      "no_edge_path": [
+        5,
+        6
+      ],
+      "no_graph_edge_path": [
+        4,
+        5,
+        6
+      ],
+      "no_splade": [
+        3
+      ],
+      "no_offset": [
+        1
+      ],
+      "dense_only": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "dense_splade": [
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "structure_heavy": [
+        0,
+        1
+      ]
+    },
+    "norm": "FROZEN present-only pooled mu/sd from the 4 TRAIN datasets (held-out never used)",
+    "controller": "hard-masked alpha (unavail->-inf) + KL(pi*||alpha) over available experts",
+    "scorer": "MLP[s, alpha, alpha*s, state, availability]"
+  },
+  "hotpotqa_clean": {
+    "xgb_kl": {
+      "held_out": {
+        "R@5": [
+          64.69,
+          0.56
+        ],
+        "R@20": [
+          78.34,
+          0.52
+        ],
+        "R@50": [
+          86.02,
+          0.35
+        ],
+        "Hit@5": [
+          85.37,
+          0.64
+        ],
+        "Hit@50": [
+          96.02,
+          0.27
+        ]
+      },
+      "train_ref": {
+        "webqsp": [
+          50.19,
+          0.53
+        ],
+        "metaqa": [
+          72.73,
+          0.97
+        ],
+        "2wiki_clean": [
+          81.77,
+          0.51
+        ],
+        "musique_clean": [
+          70.33,
+          0.41
+        ]
+      },
+      "held_out_mean_alpha": null,
+      "xgb_gain_importance": {
+        "dense": {
+          "avail[splade]": 32.55,
+          "avail[offset]": 8.75,
+          "avail[dense]": 2.38,
+          "avail[relation]": 0.9,
+          "margin[offset]": 0.8,
+          "entropy[splade]": 0.33
+        },
+        "offset": {
+          "avail[offset]": 60.27,
+          "margin[offset]": 3.02,
+          "agree[offset]": 0.65,
+          "agree[relation]": 0.49,
+          "margin[splade]": 0.37,
+          "entropy[offset]": 0.34
+        },
+        "splade": {
+          "avail[dense]": 10.52,
+          "avail[splade]": 7.56,
+          "avail[offset]": 7.06,
+          "agree[splade]": 1.39,
+          "entropy[path]": 0.84,
+          "entropy[relation]": 0.78
+        },
+        "relation": {
+          "avail[offset]": 2.54,
+          "avail[path]": 1.2,
+          "avail[relation]": 1.1,
+          "agree[relation]": 1.0,
+          "entropy[relation]": 0.93,
+          "avail[dense]": 0.73
+        },
+        "path": {
+          "avail[offset]": 0.77,
+          "avail[path]": 0.43,
+          "margin[splade]": 0.2,
+          "agree[path]": 0.19,
+          "agree[relation]": 0.19,
+          "avail[dense]": 0.17
+        }
+      }
+    }
+  },
+  "webqsp": {
+    "xgb_kl": {
+      "held_out": {
+        "R@5": [
+          34.29,
+          1.17
+        ],
+        "R@20": [
+          51.49,
+          0.48
+        ],
+        "R@50": [
+          64.86,
+          1.94
+        ],
+        "Hit@5": [
+          53.06,
+          0.56
+        ],
+        "Hit@50": [
+          82.31,
+          1.92
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          67.1,
+          1.01
+        ],
+        "metaqa": [
+          72.32,
+          0.39
+        ],
+        "2wiki_clean": [
+          81.89,
+          0.42
+        ],
+        "musique_clean": [
+          71.31,
+          0.27
+        ]
+      },
+      "held_out_mean_alpha": null,
+      "xgb_gain_importance": {
+        "dense": {
+          "avail[splade]": 29.33,
+          "avail[offset]": 8.45,
+          "avail[dense]": 2.83,
+          "margin[offset]": 0.91,
+          "agree[relation]": 0.65,
+          "entropy[splade]": 0.37
+        },
+        "offset": {
+          "avail[offset]": 62.81,
+          "margin[offset]": 2.27,
+          "agree[offset]": 0.48,
+          "margin[splade]": 0.47,
+          "agree[relation]": 0.44,
+          "entropy[offset]": 0.37
+        },
+        "splade": {
+          "avail[splade]": 36.16,
+          "avail[dense]": 18.37,
+          "avail[offset]": 9.78,
+          "margin[offset]": 0.67,
+          "agree[splade]": 0.39,
+          "margin[splade]": 0.38
+        },
+        "relation": {
+          "avail[relation]": 0.96,
+          "agree[relation]": 0.92,
+          "avail[dense]": 0.69,
+          "agree[offset]": 0.46,
+          "avail[path]": 0.34,
+          "agree[dense]": 0.32
+        },
+        "path": {
+          "margin[offset]": 0.01,
+          "agree[dense]": 0.0,
+          "entropy[dense]": 0.0,
+          "agree[relation]": 0.0,
+          "entropy[splade]": 0.0,
+          "agree[path]": 0.0
+        }
+      }
+    }
+  },
+  "metaqa": {
+    "xgb_kl": {
+      "held_out": {
+        "R@5": [
+          74.57,
+          1.14
+        ],
+        "R@20": [
+          89.59,
+          0.76
+        ],
+        "R@50": [
+          95.18,
+          0.47
+        ],
+        "Hit@5": [
+          87.62,
+          0.95
+        ],
+        "Hit@50": [
+          98.4,
+          0.19
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          67.16,
+          0.49
+        ],
+        "webqsp": [
+          52.21,
+          1.53
+        ],
+        "2wiki_clean": [
+          82.57,
+          0.39
+        ],
+        "musique_clean": [
+          69.9,
+          0.28
+        ]
+      },
+      "held_out_mean_alpha": null,
+      "xgb_gain_importance": {
+        "dense": {
+          "avail[splade]": 25.78,
+          "avail[offset]": 8.16,
+          "avail[dense]": 2.6,
+          "avail[relation]": 1.06,
+          "margin[offset]": 0.51,
+          "entropy[offset]": 0.34
+        },
+        "offset": {
+          "avail[offset]": 42.25,
+          "margin[offset]": 1.74,
+          "agree[offset]": 1.58,
+          "agree[relation]": 0.65,
+          "margin[splade]": 0.55,
+          "agree[splade]": 0.21
+        },
+        "splade": {
+          "avail[splade]": 10.22,
+          "avail[offset]": 7.55,
+          "avail[dense]": 1.41,
+          "margin[splade]": 1.17,
+          "avail[relation]": 1.02,
+          "margin[offset]": 0.74
+        },
+        "relation": {
+          "agree[relation]": 2.23,
+          "avail[relation]": 1.49,
+          "avail[offset]": 1.48,
+          "avail[dense]": 1.47,
+          "entropy[relation]": 0.34,
+          "agree[offset]": 0.32
+        },
+        "path": {
+          "avail[offset]": 0.53,
+          "avail[dense]": 0.24,
+          "agree[relation]": 0.24,
+          "margin[splade]": 0.17,
+          "agree[path]": 0.16,
+          "margin[offset]": 0.13
+        }
+      }
+    }
+  },
+  "2wiki_clean": {
+    "xgb_kl": {
+      "held_out": {
+        "R@5": [
+          76.42,
+          0.55
+        ],
+        "R@20": [
+          86.08,
+          0.66
+        ],
+        "R@50": [
+          90.19,
+          0.49
+        ],
+        "Hit@5": [
+          99.93,
+          0.0
+        ],
+        "Hit@50": [
+          100.0,
+          0.0
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          66.06,
+          1.18
+        ],
+        "webqsp": [
+          53.13,
+          0.97
+        ],
+        "metaqa": [
+          67.32,
+          0.24
+        ],
+        "musique_clean": [
+          68.24,
+          0.75
+        ]
+      },
+      "held_out_mean_alpha": null,
+      "xgb_gain_importance": {
+        "dense": {
+          "avail[splade]": 26.85,
+          "avail[offset]": 8.07,
+          "avail[dense]": 2.95,
+          "margin[offset]": 0.71,
+          "avail[relation]": 0.47,
+          "entropy[offset]": 0.39
+        },
+        "offset": {
+          "avail[offset]": 80.9,
+          "margin[offset]": 2.99,
+          "margin[splade]": 0.61,
+          "agree[offset]": 0.52,
+          "avail[path]": 0.42,
+          "agree[splade]": 0.34
+        },
+        "splade": {
+          "avail[dense]": 12.12,
+          "avail[offset]": 8.59,
+          "avail[splade]": 7.22,
+          "agree[splade]": 1.58,
+          "avail[path]": 1.1,
+          "margin[offset]": 0.84
+        },
+        "relation": {
+          "avail[path]": 2.38,
+          "avail[offset]": 1.4,
+          "agree[relation]": 0.51,
+          "agree[dense]": 0.25,
+          "entropy[path]": 0.23,
+          "margin[offset]": 0.2
+        },
+        "path": {
+          "avail[offset]": 0.99,
+          "avail[dense]": 0.23,
+          "agree[path]": 0.22,
+          "agree[relation]": 0.21,
+          "margin[splade]": 0.19,
+          "margin[offset]": 0.13
+        }
+      }
+    }
+  },
+  "musique_clean": {
+    "xgb_kl": {
+      "held_out": {
+        "R@5": [
+          68.74,
+          0.79
+        ],
+        "R@20": [
+          81.28,
+          0.52
+        ],
+        "R@50": [
+          86.4,
+          0.45
+        ],
+        "Hit@5": [
+          94.92,
+          0.09
+        ],
+        "Hit@50": [
+          98.73,
+          0.05
+        ]
+      },
+      "train_ref": {
+        "hotpotqa_clean": [
+          69.74,
+          0.74
+        ],
+        "webqsp": [
+          54.12,
+          0.35
+        ],
+        "metaqa": [
+          69.4,
+          0.61
+        ],
+        "2wiki_clean": [
+          82.85,
+          0.47
+        ]
+      },
+      "held_out_mean_alpha": null,
+      "xgb_gain_importance": {
+        "dense": {
+          "avail[splade]": 28.12,
+          "avail[offset]": 7.95,
+          "avail[dense]": 2.85,
+          "margin[offset]": 0.7,
+          "avail[relation]": 0.59,
+          "entropy[offset]": 0.49
+        },
+        "offset": {
+          "avail[offset]": 55.18,
+          "margin[offset]": 3.14,
+          "agree[offset]": 0.76,
+          "agree[relation]": 0.45,
+          "margin[splade]": 0.45,
+          "entropy[offset]": 0.32
+        },
+        "splade": {
+          "avail[splade]": 22.65,
+          "avail[offset]": 9.17,
+          "avail[dense]": 4.92,
+          "agree[splade]": 1.46,
+          "margin[offset]": 0.88,
+          "agree[relation]": 0.69
+        },
+        "relation": {
+          "avail[offset]": 2.42,
+          "agree[relation]": 1.08,
+          "avail[path]": 1.01,
+          "avail[relation]": 0.98,
+          "agree[dense]": 0.65,
+          "entropy[relation]": 0.61
+        },
+        "path": {
+          "avail[offset]": 0.43,
+          "agree[path]": 0.23,
+          "agree[relation]": 0.23,
+          "margin[offset]": 0.2,
+          "margin[splade]": 0.18,
+          "avail[dense]": 0.13
+        }
+      }
+    }
+  }
+}

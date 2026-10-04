@@ -1,0 +1,1363 @@
+{
+ "cache": "metaqa_phg",
+ "partition": "PHG",
+ "n_DEV_A": 1002,
+ "status": "PREREGISTERED_SUCCESSOR_TEST_DEV_A",
+ "arm": "BALANCED_H3_PATCH1",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_BALANCED_H3_PATCH1.json",
+  "sha256": "471e6918808520d47dc11695400c32df8096e9fbcc95f48d28a355bd65e962eb"
+ },
+ "code": {
+  "path": "scratchpad/_l1c_h3bal.py",
+  "sha256": "e0b12a7a8856b7ea45bf01ba1e478b271321efbe40c0d254d43e224e2c8fffc2"
+ },
+ "pinned": {
+  "_l1c_microl3.py": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+  "_l1c_h2patch.py": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d",
+  "_l1c_h2balanced.py": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe"
+ },
+ "head_substitutions": [
+  [
+   "name = sys.argv[1]",
+   "name = 'metaqa_phg'"
+  ],
+  [
+   "LATENT = \"--latent\" in sys.argv",
+   "LATENT = False"
+  ],
+  [
+   "DEPTH = 2",
+   "DEPTH = 3"
+  ],
+  [
+   "beams1, beams2 = [[] for _ in range(nq)], [[] for _ in range(nq)]",
+   "beams1, beams2, beams3 = [[] for _ in range(nq)], [[] for _ in range(nq)], [[] for _ in range(nq)]"
+  ],
+  [
+   "beams1[qi], beams2[qi] = beams[0], beams[1]",
+   "beams1[qi], beams2[qi], beams3[qi] = beams[0], beams[1], beams[2]"
+  ]
+ ],
+ "selector": {
+  "cfg": {
+   "B": 6,
+   "M_struct": 64,
+   "M_ret": 32,
+   "agg": "S4",
+   "fusion": "F6",
+   "T": 1,
+   "tag": "F6"
+  },
+  "code": "_l1ps_router.build_cache + _l1kb_core.contexts / f6_select (unchanged)"
+ },
+ "SAFE_record": "results/L1_LOWMEM/L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json",
+ "definition": {
+  "beam": "pinned uL3 beam exec'd at DEPTH = 3 exactly as section 17 (frozen admissibility, transition geometry, RRF fused order, BEAM = 100, seeds = frozen top-5)",
+  "compression_pinned": "first 100 distinct unvisited targets in the global fused order (H2_PATCH1 / H3_PATCH1)",
+  "compression_balanced": "section 21 verbatim at every hop: (parent, target) pairs in fused order (first occurrence), within-parent rank r, sequence sorted by (r, frontier position) = A1 B1 C1 ... A2 B2 C2 ... (BALANCED_H2_PATCH1 / BALANCED_H3_PATCH1); one rule, no hop branch",
+  "patch": "section 16 / 17 verbatim: SAFE minus its weakest admitted block + one query-local block of the same size = the beam's visited nodes not exposed by the 49 kept blocks in first-visit order (hop 1, hop 2, hop 3, each in beam order), topped up from the removed block (ret_rrf position, then node id)",
+  "metric": "ALL-gold under matched unique-node exposure; node-level == block-level for L1 / SAFE (asserted)"
+ },
+ "beam_diversity_DEV_A (hops 1-2; == section 21)": {
+  "n_DEV_A": 1002,
+  "wall_clock_ms_per_query": {
+   "pinned": 51.5,
+   "balanced": 54.0
+  },
+  "transitions_scored_per_query_mean (hop1 / hop2)": {
+   "pinned": [
+    37.8,
+    334.9
+   ],
+   "balanced": [
+    37.8,
+    334.9
+   ]
+  },
+  "candidates_unique_per_query_mean (hop1 / hop2)": {
+   "pinned": [
+    32.5,
+    263.9
+   ],
+   "balanced": [
+    32.5,
+    263.9
+   ]
+  },
+  "beam_size_mean (hop1 / hop2)": {
+   "pinned": [
+    32.5,
+    95.6
+   ],
+   "balanced": [
+    32.5,
+    95.6
+   ]
+  },
+  "queries_truncated_at_hop (hop1 / hop2) balanced": [
+   1,
+   866
+  ],
+  "same_kept_set_as_pinned (queries; hop1 / hop2)": [
+   1001,
+   138
+  ],
+  "jaccard_kept_vs_pinned_mean (hop1 / hop2)": [
+   1.0,
+   0.595
+  ],
+  "distinct_parents_in_kept_beam_mean (hop1 / hop2)": {
+   "pinned": [
+    5.0,
+    19.1
+   ],
+   "balanced": [
+    5.0,
+    24.0
+   ]
+  },
+  "largest_single_parent_share_mean (hop1 / hop2)": {
+   "pinned": [
+    0.404,
+    0.234
+   ],
+   "balanced": [
+    0.397,
+    0.105
+   ]
+  },
+  "balanced_compression_stats_mean": {
+   "hop1": {
+    "parents": 5.0,
+    "parents_with_candidates": 4.99,
+    "candidates_unique": 32.49,
+    "pairs": 34.51,
+    "kept": 32.47,
+    "truncated": 0.0,
+    "rounds_used": 13.23,
+    "largest_parent_candidate_list": 13.33
+   },
+   "hop2": {
+    "parents": 32.47,
+    "parents_with_candidates": 24.77,
+    "candidates_unique": 263.87,
+    "pairs": 317.7,
+    "kept": 95.56,
+    "truncated": 0.86,
+    "rounds_used": 9.55,
+    "largest_parent_candidate_list": 53.6
+   }
+  }
+ },
+ "depth3_beams_DEV_A (gold-free)": {
+  "wall_clock_ms_per_query": {
+   "pinned": 51.5,
+   "balanced": 54.0
+  },
+  "transitions_scored_per_query_mean (hop1 / hop2 / hop3)": {
+   "pinned": [
+    37.8,
+    334.9,
+    1020.2
+   ],
+   "balanced": [
+    37.8,
+    334.9,
+    965.0
+   ]
+  },
+  "candidates_unique_per_query_mean (hop1 / hop2 / hop3)": {
+   "pinned": [
+    32.5,
+    263.9,
+    763.6
+   ],
+   "balanced": [
+    32.5,
+    263.9,
+    745.7
+   ]
+  },
+  "beam_size_mean (hop1 / hop2 / hop3)": {
+   "pinned": [
+    32.5,
+    95.6,
+    100.0
+   ],
+   "balanced": [
+    32.5,
+    95.6,
+    100.0
+   ]
+  },
+  "queries_truncated_at_hop (hop1 / hop2 / hop3) balanced": [
+   1,
+   866,
+   1001
+  ],
+  "same_kept_set_as_pinned (queries; hop1 / hop2 / hop3)": [
+   1001,
+   138,
+   1
+  ],
+  "jaccard_kept_vs_pinned_mean (hop1 / hop2 / hop3)": [
+   1.0,
+   0.595,
+   0.29
+  ],
+  "distinct_parents_in_kept_beam_mean (hop1 / hop2 / hop3)": {
+   "pinned": [
+    5.0,
+    19.1,
+    47.3
+   ],
+   "balanced": [
+    5.0,
+    24.0,
+    77.2
+   ]
+  },
+  "largest_single_parent_share_mean (hop1 / hop2 / hop3)": {
+   "pinned": [
+    0.404,
+    0.234,
+    0.095
+   ],
+   "balanced": [
+    0.397,
+    0.105,
+    0.024
+   ]
+  },
+  "balanced_compression_stats_mean": {
+   "hop1": {
+    "parents": 5.0,
+    "parents_with_candidates": 4.99,
+    "candidates_unique": 32.49,
+    "pairs": 34.51,
+    "kept": 32.47,
+    "truncated": 0.0,
+    "rounds_used": 13.23,
+    "largest_parent_candidate_list": 13.33
+   },
+   "hop2": {
+    "parents": 32.47,
+    "parents_with_candidates": 24.77,
+    "candidates_unique": 263.87,
+    "pairs": 317.7,
+    "kept": 95.56,
+    "truncated": 0.86,
+    "rounds_used": 9.55,
+    "largest_parent_candidate_list": 53.6
+   },
+   "hop3": {
+    "parents": 95.56,
+    "parents_with_candidates": 85.35,
+    "candidates_unique": 745.74,
+    "pairs": 921.6,
+    "kept": 99.97,
+    "truncated": 1.0,
+    "rounds_used": 2.39,
+    "largest_parent_candidate_list": 53.42
+   }
+  },
+  "hop3_rounds_used_histogram_balanced": {
+   "2": 902,
+   "3": 48,
+   "4": 14,
+   "5": 7,
+   "6": 7,
+   "7": 3,
+   "8": 7,
+   "9": 2,
+   "10": 2,
+   "11": 1,
+   "12": 2,
+   "14": 1,
+   "16": 2,
+   "17": 2,
+   "22": 1,
+   "61": 1
+  }
+ },
+ "balanced_depth3_patch_capacity (gold-free)": {
+  "novel_per_hop_mean (1 / 2 / 3)": [
+   8.3,
+   66.1,
+   64.3
+  ],
+  "novel_total_depth3_mean": 138.7,
+  "queries_truncated_depth3": 960,
+  "queries_truncated_depth2": 35,
+  "hop3_novel_admitted_per_query_mean": 26.5,
+  "hop3_novel_cut_per_query_mean": 37.8,
+  "hop2_novel_cut_per_query_mean": 0.5,
+  "queries_admitting_no_hop3_node": 38,
+  "patch_size_mean": 101.2
+ },
+ "arms": {
+  "L1": {
+   "arm": "L1",
+   "ALL": 0.6727,
+   "ANY": 0.9261,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9172,
+     "ANY": 0.9693
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.5291,
+     "ANY": 0.8372
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5813,
+     "ANY": 0.9759
+    }
+   }
+  },
+  "SAFE": {
+   "arm": "SAFE",
+   "ALL": 0.6747,
+   "ANY": 0.9251,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9172,
+     "ANY": 0.9663,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.5291,
+     "ANY": 0.8372,
+     "vs_L1": {
+      "gained": 1,
+      "lost": 1,
+      "p": 1.0
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5873,
+     "ANY": 0.9759,
+     "vs_L1": {
+      "gained": 3,
+      "lost": 1,
+      "p": 0.625
+     }
+    }
+   },
+   "ALL_vs_L1": {
+    "gained": 4,
+    "lost": 2,
+    "p": 0.6875,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_L1": {
+    "gained": 2,
+    "lost": 3,
+    "p": 1.0
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 4,
+    "lost": 2,
+    "p": 0.6875,
+    "pooled_ref": 0.5547,
+    "pooled": 0.5577
+   }
+  },
+  "H2_PATCH1": {
+   "arm": "H2_PATCH1",
+   "ALL": 0.7735,
+   "ANY": 0.983,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9969,
+     "ANY": 1.0,
+     "vs_L1": {
+      "gained": 26,
+      "lost": 0,
+      "p": 2.9802322387695312e-08
+     },
+     "vs_SAFE": {
+      "gained": 26,
+      "lost": 0,
+      "p": 2.9802322387695312e-08
+     },
+     "gold_nodes_gained": 100,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      100,
+      0,
+      0
+     ],
+     "gold_nodes_lost_with_removed_block": 0
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.7442,
+     "ANY": 0.9738,
+     "vs_L1": {
+      "gained": 74,
+      "lost": 0,
+      "p": 1.0587911840678754e-22
+     },
+     "vs_SAFE": {
+      "gained": 74,
+      "lost": 0,
+      "p": 1.0587911840678754e-22
+     },
+     "gold_nodes_gained": 509,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      1,
+      508,
+      0
+     ],
+     "gold_nodes_lost_with_removed_block": 2
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5843,
+     "ANY": 0.9759,
+     "vs_L1": {
+      "gained": 2,
+      "lost": 1,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 0,
+      "lost": 1,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 4,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      0,
+      4,
+      0
+     ],
+     "gold_nodes_lost_with_removed_block": 4
+    }
+   },
+   "exposure": "matched: |served nodes| equal to canonical SAFE per query (asserted)",
+   "depth": 2,
+   "novel_nodes_per_query_mean": 78.0,
+   "novel_per_hop_mean": [
+    8.3,
+    69.7,
+    0.0
+   ],
+   "patch_size_mean": 101.2,
+   "patch_composition_mean (hop-1 / hop-2 / hop-3 novel / fill from removed block)": [
+    8.3,
+    69.1,
+    0.0,
+    23.8
+   ],
+   "queries_truncated": 47,
+   "queries_with_no_novel_node (patch == removed block)": 0,
+   "gold_nodes_gained_vs_SAFE": 613,
+   "gold_nodes_gained_vs_SAFE_by_hop (1 / 2 / 3)": [
+    101,
+    512,
+    0
+   ],
+   "queries_with_gold_node_gained_vs_SAFE": 174,
+   "gold_nodes_lost_with_removed_block": 6,
+   "queries_with_gold_node_lost_with_removed_block": 6,
+   "ALL_vs_L1": {
+    "gained": 102,
+    "lost": 1,
+    "p": 2.0510383535746307e-29,
+    "label": "GAIN"
+   },
+   "ANY_vs_L1": {
+    "gained": 57,
+    "lost": 0,
+    "p": 1.3877787807814457e-17
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 76,
+    "lost": 1,
+    "p": 1.0323214044661785e-21,
+    "pooled_ref": 0.5547,
+    "pooled": 0.6657
+   },
+   "ALL_vs_SAFE": {
+    "gained": 100,
+    "lost": 1,
+    "p": 8.04638123325432e-29,
+    "label": "GAIN"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 58,
+    "lost": 0,
+    "p": 6.938893903907228e-18
+   },
+   "hop2_hop3_pooled_vs_SAFE": {
+    "n": 676,
+    "gained": 74,
+    "lost": 1,
+    "p": 4.0234064994579266e-21,
+    "pooled_ref": 0.5577,
+    "pooled": 0.6657
+   },
+   "significant_loss_vs_SAFE": false
+  },
+  "H3_PATCH1": {
+   "arm": "H3_PATCH1",
+   "ALL": 0.7735,
+   "ANY": 0.983,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9969,
+     "ANY": 1.0,
+     "vs_L1": {
+      "gained": 26,
+      "lost": 0,
+      "p": 2.9802322387695312e-08
+     },
+     "vs_SAFE": {
+      "gained": 26,
+      "lost": 0,
+      "p": 2.9802322387695312e-08
+     },
+     "vs_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 100,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      100,
+      0,
+      0
+     ],
+     "gold_nodes_lost_with_removed_block": 0
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.7442,
+     "ANY": 0.9738,
+     "vs_L1": {
+      "gained": 74,
+      "lost": 0,
+      "p": 1.0587911840678754e-22
+     },
+     "vs_SAFE": {
+      "gained": 74,
+      "lost": 0,
+      "p": 1.0587911840678754e-22
+     },
+     "vs_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 509,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      1,
+      508,
+      0
+     ],
+     "gold_nodes_lost_with_removed_block": 2
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5843,
+     "ANY": 0.9759,
+     "vs_L1": {
+      "gained": 2,
+      "lost": 1,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 0,
+      "lost": 1,
+      "p": 1.0
+     },
+     "vs_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 105,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      0,
+      4,
+      101
+     ],
+     "gold_nodes_lost_with_removed_block": 10
+    }
+   },
+   "exposure": "matched: |served nodes| equal to canonical SAFE per query (asserted)",
+   "depth": 3,
+   "novel_nodes_per_query_mean": 140.6,
+   "novel_per_hop_mean": [
+    8.3,
+    69.7,
+    62.6
+   ],
+   "patch_size_mean": 101.2,
+   "patch_composition_mean (hop-1 / hop-2 / hop-3 novel / fill from removed block)": [
+    8.3,
+    69.1,
+    22.9,
+    0.8
+   ],
+   "queries_truncated": 964,
+   "queries_with_no_novel_node (patch == removed block)": 0,
+   "gold_nodes_gained_vs_SAFE": 714,
+   "gold_nodes_gained_vs_SAFE_by_hop (1 / 2 / 3)": [
+    101,
+    512,
+    101
+   ],
+   "queries_with_gold_node_gained_vs_SAFE": 226,
+   "gold_nodes_lost_with_removed_block": 12,
+   "queries_with_gold_node_lost_with_removed_block": 11,
+   "ALL_vs_L1": {
+    "gained": 102,
+    "lost": 1,
+    "p": 2.0510383535746307e-29,
+    "label": "GAIN"
+   },
+   "ANY_vs_L1": {
+    "gained": 57,
+    "lost": 0,
+    "p": 1.3877787807814457e-17
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 76,
+    "lost": 1,
+    "p": 1.0323214044661785e-21,
+    "pooled_ref": 0.5547,
+    "pooled": 0.6657
+   },
+   "ALL_vs_SAFE": {
+    "gained": 100,
+    "lost": 1,
+    "p": 8.04638123325432e-29,
+    "label": "GAIN"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 58,
+    "lost": 0,
+    "p": 6.938893903907228e-18
+   },
+   "hop2_hop3_pooled_vs_SAFE": {
+    "n": 676,
+    "gained": 74,
+    "lost": 1,
+    "p": 4.0234064994579266e-21,
+    "pooled_ref": 0.5577,
+    "pooled": 0.6657
+   },
+   "ALL_vs_H2_PATCH1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_H2_PATCH1": {
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0
+   },
+   "hop2_hop3_pooled_vs_H2_PATCH1": {
+    "n": 676,
+    "gained": 0,
+    "lost": 0,
+    "p": 1.0,
+    "pooled_ref": 0.6657,
+    "pooled": 0.6657
+   },
+   "significant_loss_vs_SAFE": false,
+   "significant_loss_vs_H2_PATCH1": false
+  },
+  "BALANCED_H2_PATCH1": {
+   "arm": "BALANCED_H2_PATCH1",
+   "ALL": 0.7984,
+   "ANY": 0.991,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9969,
+     "ANY": 1.0,
+     "vs_L1": {
+      "gained": 26,
+      "lost": 0,
+      "p": 2.9802322387695312e-08
+     },
+     "vs_SAFE": {
+      "gained": 26,
+      "lost": 0,
+      "p": 2.9802322387695312e-08
+     },
+     "vs_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 100,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      100,
+      0,
+      0
+     ],
+     "gold_nodes_lost_with_removed_block": 0
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.8169,
+     "ANY": 0.9971,
+     "vs_L1": {
+      "gained": 99,
+      "lost": 0,
+      "p": 3.1554436208840472e-30
+     },
+     "vs_SAFE": {
+      "gained": 99,
+      "lost": 0,
+      "p": 3.1554436208840472e-30
+     },
+     "vs_H2_PATCH1": {
+      "gained": 31,
+      "lost": 6,
+      "p": 4.12575900554657e-05
+     },
+     "gold_nodes_gained": 605,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      1,
+      604,
+      0
+     ],
+     "gold_nodes_lost_with_removed_block": 2
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5843,
+     "ANY": 0.9759,
+     "vs_L1": {
+      "gained": 2,
+      "lost": 1,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 0,
+      "lost": 1,
+      "p": 1.0
+     },
+     "vs_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 5,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      0,
+      5,
+      0
+     ],
+     "gold_nodes_lost_with_removed_block": 5
+    }
+   },
+   "exposure": "matched: |served nodes| equal to canonical SAFE per query (asserted)",
+   "depth": 2,
+   "novel_nodes_per_query_mean": 74.4,
+   "novel_per_hop_mean": [
+    8.3,
+    66.1,
+    0.0
+   ],
+   "patch_size_mean": 101.2,
+   "patch_composition_mean (hop-1 / hop-2 / hop-3 novel / fill from removed block)": [
+    8.3,
+    65.6,
+    0.0,
+    27.3
+   ],
+   "queries_truncated": 35,
+   "queries_with_no_novel_node (patch == removed block)": 0,
+   "gold_nodes_gained_vs_SAFE": 710,
+   "gold_nodes_gained_vs_SAFE_by_hop (1 / 2 / 3)": [
+    101,
+    609,
+    0
+   ],
+   "queries_with_gold_node_gained_vs_SAFE": 190,
+   "gold_nodes_lost_with_removed_block": 7,
+   "queries_with_gold_node_lost_with_removed_block": 7,
+   "ALL_vs_L1": {
+    "gained": 127,
+    "lost": 1,
+    "p": 7.581938562803754e-37,
+    "label": "GAIN"
+   },
+   "ANY_vs_L1": {
+    "gained": 65,
+    "lost": 0,
+    "p": 5.421010862427522e-20
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 101,
+    "lost": 1,
+    "p": 4.062633661888211e-29,
+    "pooled_ref": 0.5547,
+    "pooled": 0.7027
+   },
+   "ALL_vs_SAFE": {
+    "gained": 125,
+    "lost": 1,
+    "p": 2.9857556510886103e-36,
+    "label": "GAIN"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 66,
+    "lost": 0,
+    "p": 2.710505431213761e-20
+   },
+   "hop2_hop3_pooled_vs_SAFE": {
+    "n": 676,
+    "gained": 99,
+    "lost": 1,
+    "p": 1.5934990285464438e-28,
+    "pooled_ref": 0.5577,
+    "pooled": 0.7027
+   },
+   "ALL_vs_H2_PATCH1": {
+    "gained": 31,
+    "lost": 6,
+    "p": 4.12575900554657e-05,
+    "label": "GAIN"
+   },
+   "ANY_vs_H2_PATCH1": {
+    "gained": 8,
+    "lost": 0,
+    "p": 0.0078125
+   },
+   "hop2_hop3_pooled_vs_H2_PATCH1": {
+    "n": 676,
+    "gained": 31,
+    "lost": 6,
+    "p": 4.12575900554657e-05,
+    "pooled_ref": 0.6657,
+    "pooled": 0.7027
+   },
+   "significant_loss_vs_SAFE": false,
+   "significant_loss_vs_H2_PATCH1": false
+  },
+  "BALANCED_H3_PATCH1": {
+   "arm": "BALANCED_H3_PATCH1",
+   "ALL": 0.8024,
+   "ANY": 0.995,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9969,
+     "ANY": 1.0,
+     "vs_L1": {
+      "gained": 26,
+      "lost": 0,
+      "p": 2.9802322387695312e-08
+     },
+     "vs_SAFE": {
+      "gained": 26,
+      "lost": 0,
+      "p": 2.9802322387695312e-08
+     },
+     "vs_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "vs_H3_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "vs_BALANCED_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 100,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      100,
+      0,
+      0
+     ],
+     "gold_nodes_lost_with_removed_block": 0
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.8169,
+     "ANY": 0.9971,
+     "vs_L1": {
+      "gained": 99,
+      "lost": 0,
+      "p": 3.1554436208840472e-30
+     },
+     "vs_SAFE": {
+      "gained": 99,
+      "lost": 0,
+      "p": 3.1554436208840472e-30
+     },
+     "vs_H2_PATCH1": {
+      "gained": 31,
+      "lost": 6,
+      "p": 4.12575900554657e-05
+     },
+     "vs_H3_PATCH1": {
+      "gained": 31,
+      "lost": 6,
+      "p": 4.12575900554657e-05
+     },
+     "vs_BALANCED_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 605,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      1,
+      604,
+      0
+     ],
+     "gold_nodes_lost_with_removed_block": 2
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5964,
+     "ANY": 0.988,
+     "vs_L1": {
+      "gained": 6,
+      "lost": 1,
+      "p": 0.125
+     },
+     "vs_SAFE": {
+      "gained": 4,
+      "lost": 1,
+      "p": 0.375
+     },
+     "vs_H2_PATCH1": {
+      "gained": 4,
+      "lost": 0,
+      "p": 0.125
+     },
+     "vs_H3_PATCH1": {
+      "gained": 4,
+      "lost": 0,
+      "p": 0.125
+     },
+     "vs_BALANCED_H2_PATCH1": {
+      "gained": 4,
+      "lost": 0,
+      "p": 0.125
+     },
+     "gold_nodes_gained": 109,
+     "gold_nodes_gained_by_hop (1 / 2 / 3)": [
+      0,
+      5,
+      104
+     ],
+     "gold_nodes_lost_with_removed_block": 10
+    }
+   },
+   "exposure": "matched: |served nodes| equal to canonical SAFE per query (asserted)",
+   "depth": 3,
+   "novel_nodes_per_query_mean": 138.7,
+   "novel_per_hop_mean": [
+    8.3,
+    66.1,
+    64.3
+   ],
+   "patch_size_mean": 101.2,
+   "patch_composition_mean (hop-1 / hop-2 / hop-3 novel / fill from removed block)": [
+    8.3,
+    65.6,
+    26.5,
+    0.7
+   ],
+   "queries_truncated": 960,
+   "queries_with_no_novel_node (patch == removed block)": 0,
+   "gold_nodes_gained_vs_SAFE": 814,
+   "gold_nodes_gained_vs_SAFE_by_hop (1 / 2 / 3)": [
+    101,
+    609,
+    104
+   ],
+   "queries_with_gold_node_gained_vs_SAFE": 258,
+   "gold_nodes_lost_with_removed_block": 12,
+   "queries_with_gold_node_lost_with_removed_block": 11,
+   "ALL_vs_L1": {
+    "gained": 131,
+    "lost": 1,
+    "p": 4.885648395605132e-38,
+    "label": "GAIN"
+   },
+   "ANY_vs_L1": {
+    "gained": 69,
+    "lost": 0,
+    "p": 3.3881317890172014e-21
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 105,
+    "lost": 1,
+    "p": 2.6377536518327582e-30,
+    "pooled_ref": 0.5547,
+    "pooled": 0.7086
+   },
+   "ALL_vs_SAFE": {
+    "gained": 129,
+    "lost": 1,
+    "p": 1.924871999471496e-37,
+    "label": "GAIN"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 70,
+    "lost": 0,
+    "p": 1.6940658945086007e-21
+   },
+   "hop2_hop3_pooled_vs_SAFE": {
+    "n": 676,
+    "gained": 103,
+    "lost": 1,
+    "p": 1.035379938102578e-29,
+    "pooled_ref": 0.5577,
+    "pooled": 0.7086
+   },
+   "ALL_vs_H2_PATCH1": {
+    "gained": 35,
+    "lost": 6,
+    "p": 4.873598300036974e-06,
+    "label": "GAIN"
+   },
+   "ANY_vs_H2_PATCH1": {
+    "gained": 12,
+    "lost": 0,
+    "p": 0.00048828125
+   },
+   "hop2_hop3_pooled_vs_H2_PATCH1": {
+    "n": 676,
+    "gained": 35,
+    "lost": 6,
+    "p": 4.873598300036974e-06,
+    "pooled_ref": 0.6657,
+    "pooled": 0.7086
+   },
+   "ALL_vs_H3_PATCH1": {
+    "gained": 35,
+    "lost": 6,
+    "p": 4.873598300036974e-06,
+    "label": "GAIN"
+   },
+   "ANY_vs_H3_PATCH1": {
+    "gained": 12,
+    "lost": 0,
+    "p": 0.00048828125
+   },
+   "hop2_hop3_pooled_vs_H3_PATCH1": {
+    "n": 676,
+    "gained": 35,
+    "lost": 6,
+    "p": 4.873598300036974e-06,
+    "pooled_ref": 0.6657,
+    "pooled": 0.7086
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 4,
+    "lost": 0,
+    "p": 0.125,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_BALANCED_H2_PATCH1": {
+    "gained": 4,
+    "lost": 0,
+    "p": 0.125
+   },
+   "hop2_hop3_pooled_vs_BALANCED_H2_PATCH1": {
+    "n": 676,
+    "gained": 4,
+    "lost": 0,
+    "p": 0.125,
+    "pooled_ref": 0.7027,
+    "pooled": 0.7086
+   },
+   "significant_loss_vs_SAFE": false,
+   "significant_loss_vs_H2_PATCH1": false,
+   "significant_loss_vs_H3_PATCH1": false,
+   "significant_loss_vs_BALANCED_H2_PATCH1": false
+  }
+ },
+ "reference_arms_reproduced": "H2_PATCH1 == h2patch_A_metaqa_phg.json, H3_PATCH1 == h3patch_A_metaqa_phg.json and BALANCED_H2_PATCH1 == h2balanced_A_metaqa_phg.json (ALL, ANY, vs SAFE / H2_PATCH1 / L1, per hop, novel counts, gold gained / lost, patch size and composition)",
+ "attribution_flips": {
+  "BALANCED_H3_vs_BALANCED_H2_PATCH1": {
+   "newly_covered": {
+    "n": 4,
+    "gold_nodes_newly_served": 5,
+    "of_which_entering_via_hop3_positions": 5,
+    "of_which_entering_via_hop1_or_hop2_positions": 0,
+    "of_which_newly_visited_by_the_new_beam": 5,
+    "of_which_visited_by_both_beams_but_cut_by_the_reference_patch": 0,
+    "queries_needing_more_than_one_new_node": 1
+   },
+   "newly_lost": {
+    "n": 0,
+    "gold_nodes_dropped": 0,
+    "of_which_were_fill_under_the_reference": 0,
+    "of_which_were_novel_positions_under_the_reference": 0,
+    "of_which_no_longer_visited_by_the_new_beam": 0,
+    "of_which_visited_but_beyond_the_patch_capacity": 0
+   }
+  },
+  "BALANCED_H3_vs_H3_PATCH1": {
+   "newly_covered": {
+    "n": 35,
+    "gold_nodes_newly_served": 66,
+    "of_which_entering_via_hop3_positions": 5,
+    "of_which_entering_via_hop1_or_hop2_positions": 61,
+    "of_which_newly_visited_by_the_new_beam": 65,
+    "of_which_visited_by_both_beams_but_cut_by_the_reference_patch": 1,
+    "queries_needing_more_than_one_new_node": 14
+   },
+   "newly_lost": {
+    "n": 6,
+    "gold_nodes_dropped": 9,
+    "of_which_were_fill_under_the_reference": 0,
+    "of_which_were_novel_positions_under_the_reference": 9,
+    "of_which_no_longer_visited_by_the_new_beam": 9,
+    "of_which_visited_but_beyond_the_patch_capacity": 0
+   }
+  },
+  "BALANCED_H3_vs_H2_PATCH1": {
+   "newly_covered": {
+    "n": 35,
+    "gold_nodes_newly_served": 66,
+    "of_which_entering_via_hop3_positions": 5,
+    "of_which_entering_via_hop1_or_hop2_positions": 61,
+    "of_which_newly_visited_by_the_new_beam": 66,
+    "of_which_visited_by_both_beams_but_cut_by_the_reference_patch": 0,
+    "queries_needing_more_than_one_new_node": 14
+   },
+   "newly_lost": {
+    "n": 6,
+    "gold_nodes_dropped": 9,
+    "of_which_were_fill_under_the_reference": 0,
+    "of_which_were_novel_positions_under_the_reference": 9,
+    "of_which_no_longer_visited_by_the_new_beam": 9,
+    "of_which_visited_but_beyond_the_patch_capacity": 0
+   }
+  }
+ },
+ "diagnostic_depth3_reach_vs_gold": {
+  "hop1": {
+   "SAFE_failures": 27,
+   "missing_gold_nodes": 101,
+   "pinned_depth3": {
+    "missing_gold_visited (first at hop 1 / 2 / 3)": [
+     100,
+     0,
+     0
+    ],
+    "missing_gold_scored_but_cut (first at hop 1 / 2 / 3)": [
+     0,
+     0,
+     0
+    ],
+    "missing_gold_never_scored_within_depth3": 1,
+    "missing_gold_visited_fraction_mean": 0.963,
+    "gold_bearing_hop1_parents (parents with a missing gold node among their hop-2 candidates)": 0,
+    "gold_bearing_hop1_parents_with_a_gold_child_kept": 0,
+    "gold_bearing_hop2_parents (parents with a missing gold node among their hop-3 candidates)": 0,
+    "gold_bearing_hop2_parents_with_a_gold_child_kept": 0,
+    "failures_with_no_missing_gold_node_visited": 1,
+    "failures_with_every_missing_gold_node_scored_within_depth3": 26,
+    "failures_with_all_missing_nodes_visited": 26,
+    "of_which_covered_by_the_arm": 26,
+    "of_which_not_covered__beyond_the_patch_capacity": 0,
+    "of_which_not_covered__dropped_with_removed_block": 0,
+    "of_which_not_covered__other": 0,
+    "failures_covered_by_the_arm": 26
+   },
+   "balanced_depth3": {
+    "missing_gold_visited (first at hop 1 / 2 / 3)": [
+     100,
+     0,
+     0
+    ],
+    "missing_gold_scored_but_cut (first at hop 1 / 2 / 3)": [
+     0,
+     0,
+     0
+    ],
+    "missing_gold_never_scored_within_depth3": 1,
+    "missing_gold_visited_fraction_mean": 0.963,
+    "gold_bearing_hop1_parents (parents with a missing gold node among their hop-2 candidates)": 0,
+    "gold_bearing_hop1_parents_with_a_gold_child_kept": 0,
+    "gold_bearing_hop2_parents (parents with a missing gold node among their hop-3 candidates)": 0,
+    "gold_bearing_hop2_parents_with_a_gold_child_kept": 0,
+    "failures_with_no_missing_gold_node_visited": 1,
+    "failures_with_every_missing_gold_node_scored_within_depth3": 26,
+    "failures_with_all_missing_nodes_visited": 26,
+    "of_which_covered_by_the_arm": 26,
+    "of_which_not_covered__beyond_the_patch_capacity": 0,
+    "of_which_not_covered__dropped_with_removed_block": 0,
+    "of_which_not_covered__other": 0,
+    "failures_covered_by_the_arm": 26
+   }
+  },
+  "hop2": {
+   "SAFE_failures": 162,
+   "missing_gold_nodes": 1139,
+   "pinned_depth3": {
+    "missing_gold_visited (first at hop 1 / 2 / 3)": [
+     1,
+     511,
+     0
+    ],
+    "missing_gold_scored_but_cut (first at hop 1 / 2 / 3)": [
+     0,
+     624,
+     0
+    ],
+    "missing_gold_never_scored_within_depth3": 3,
+    "missing_gold_visited_fraction_mean": 0.65,
+    "gold_bearing_hop1_parents (parents with a missing gold node among their hop-2 candidates)": 420,
+    "gold_bearing_hop1_parents_with_a_gold_child_kept": 330,
+    "gold_bearing_hop2_parents (parents with a missing gold node among their hop-3 candidates)": 21,
+    "gold_bearing_hop2_parents_with_a_gold_child_kept": 0,
+    "failures_with_no_missing_gold_node_visited": 18,
+    "failures_with_every_missing_gold_node_scored_within_depth3": 160,
+    "failures_with_all_missing_nodes_visited": 74,
+    "of_which_covered_by_the_arm": 74,
+    "of_which_not_covered__beyond_the_patch_capacity": 0,
+    "of_which_not_covered__dropped_with_removed_block": 0,
+    "of_which_not_covered__other": 0,
+    "failures_covered_by_the_arm": 74
+   },
+   "balanced_depth3": {
+    "missing_gold_visited (first at hop 1 / 2 / 3)": [
+     1,
+     610,
+     0
+    ],
+    "missing_gold_scored_but_cut (first at hop 1 / 2 / 3)": [
+     0,
+     525,
+     0
+    ],
+    "missing_gold_never_scored_within_depth3": 3,
+    "missing_gold_visited_fraction_mean": 0.804,
+    "gold_bearing_hop1_parents (parents with a missing gold node among their hop-2 candidates)": 420,
+    "gold_bearing_hop1_parents_with_a_gold_child_kept": 384,
+    "gold_bearing_hop2_parents (parents with a missing gold node among their hop-3 candidates)": 18,
+    "gold_bearing_hop2_parents_with_a_gold_child_kept": 0,
+    "failures_with_no_missing_gold_node_visited": 2,
+    "failures_with_every_missing_gold_node_scored_within_depth3": 160,
+    "failures_with_all_missing_nodes_visited": 99,
+    "of_which_covered_by_the_arm": 99,
+    "of_which_not_covered__beyond_the_patch_capacity": 0,
+    "of_which_not_covered__dropped_with_removed_block": 0,
+    "of_which_not_covered__other": 0,
+    "failures_covered_by_the_arm": 99
+   }
+  },
+  "hop3": {
+   "SAFE_failures": 137,
+   "missing_gold_nodes": 2371,
+   "pinned_depth3": {
+    "missing_gold_visited (first at hop 1 / 2 / 3)": [
+     0,
+     4,
+     207
+    ],
+    "missing_gold_scored_but_cut (first at hop 1 / 2 / 3)": [
+     0,
+     2,
+     621
+    ],
+    "missing_gold_never_scored_within_depth3": 1537,
+    "missing_gold_visited_fraction_mean": 0.108,
+    "gold_bearing_hop1_parents (parents with a missing gold node among their hop-2 candidates)": 6,
+    "gold_bearing_hop1_parents_with_a_gold_child_kept": 4,
+    "gold_bearing_hop2_parents (parents with a missing gold node among their hop-3 candidates)": 650,
+    "gold_bearing_hop2_parents_with_a_gold_child_kept": 235,
+    "failures_with_no_missing_gold_node_visited": 58,
+    "failures_with_every_missing_gold_node_scored_within_depth3": 21,
+    "failures_with_all_missing_nodes_visited": 1,
+    "of_which_covered_by_the_arm": 0,
+    "of_which_not_covered__beyond_the_patch_capacity": 1,
+    "of_which_not_covered__dropped_with_removed_block": 0,
+    "of_which_not_covered__other": 0,
+    "failures_covered_by_the_arm": 0
+   },
+   "balanced_depth3": {
+    "missing_gold_visited (first at hop 1 / 2 / 3)": [
+     0,
+     5,
+     256
+    ],
+    "missing_gold_scored_but_cut (first at hop 1 / 2 / 3)": [
+     0,
+     1,
+     747
+    ],
+    "missing_gold_never_scored_within_depth3": 1362,
+    "missing_gold_visited_fraction_mean": 0.199,
+    "gold_bearing_hop1_parents (parents with a missing gold node among their hop-2 candidates)": 6,
+    "gold_bearing_hop1_parents_with_a_gold_child_kept": 5,
+    "gold_bearing_hop2_parents (parents with a missing gold node among their hop-3 candidates)": 727,
+    "gold_bearing_hop2_parents_with_a_gold_child_kept": 289,
+    "failures_with_no_missing_gold_node_visited": 35,
+    "failures_with_every_missing_gold_node_scored_within_depth3": 46,
+    "failures_with_all_missing_nodes_visited": 6,
+    "of_which_covered_by_the_arm": 4,
+    "of_which_not_covered__beyond_the_patch_capacity": 2,
+    "of_which_not_covered__dropped_with_removed_block": 0,
+    "of_which_not_covered__other": 0,
+    "failures_covered_by_the_arm": 4
+   }
+  }
+ },
+ "per_cache_labels": {
+  "ALL_vs_BALANCED_H2_PATCH1": "NEUTRAL",
+  "ALL_vs_H3_PATCH1": "GAIN",
+  "ALL_vs_H2_PATCH1": "GAIN",
+  "ALL_vs_SAFE": "GAIN",
+  "text_safe_vs_BALANCED_H2_PATCH1 (not (lost > gained and p < 0.05))": true,
+  "text_safe_vs_H2_PATCH1": true,
+  "text_safe_vs_SAFE": true,
+  "hop_regressions_vs_BALANCED_H2_PATCH1 (lost > gained and p < 0.05)": {
+   "hop1": false,
+   "hop2": false,
+   "hop3": false
+  },
+  "hop3_vs_BALANCED_H2_PATCH1": {
+   "gained": 4,
+   "lost": 0,
+   "p": 0.125,
+   "label": "NEUTRAL"
+  },
+  "hop3_vs_H3_PATCH1": {
+   "gained": 4,
+   "lost": 0,
+   "p": 0.125,
+   "label": "NEUTRAL"
+  }
+ },
+ "seconds": 173.9
+}

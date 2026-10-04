@@ -1,0 +1,126 @@
+{
+ "stage": "L3_HOST",
+ "authorized": "2026-09-29T18:19:52+05:30",
+ "user_direction (verbatim, chat, 2026-09-29)": [
+  "gpu and a better cpu as promised use with contention on medium priority but if resources available i want full utilization, use this for the partitioning and create for the rest",
+  "make sure we have complete utilization of cpu and gpu at all times either irrespective of project but mpr has the priority wherever possible",
+  "is authorized bro i authorize everything just use the damn resources"
+ ],
+ "declaration": {
+  "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1.json",
+  "sha256": "37ff06f7bb0ae203923e0956ec767df9e8fc2f20753a3ecf945d6d714e2cd9a9"
+ },
+ "addenda": [
+  {
+   "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_1.json",
+   "sha256": "12642119363d99e1851eefe3b43d92414cb3d53be3ea0a32e8a0361116f75b9c"
+  },
+  {
+   "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_2.json",
+   "sha256": "c12815c69a5372337a755512f8a590e843241d0252a923244eb35539676cfcd9"
+  }
+ ],
+ "placement_test": {
+  "path": "results/L3_HOST/PLACEMENT_TEST__L3_HOST__v1.json",
+  "sha256": "62135f84423af1653953fd2d0850fa27c127e17e80e55bf345e84e351b512693",
+  "verdict": "BIT_IDENTICAL",
+  "npz_members": 101,
+  "npz_file_bytes_identical": true,
+  "json_differences_total": 0,
+  "laptop": {
+   "stem": "results/L3_DEV/l3typed_metaqa__v1",
+   "json_sha256": "a6e80216a802d12ec91ded5d5a7d6c59f24e7339a2efd34f6e447486cc7b90a4",
+   "npz_sha256": "0ee65e76660223d0378708582e8bd19142e58595ff495340705d5112d29e1355",
+   "platform": {
+    "python": "3.13.5",
+    "numpy": "2.3.2"
+   },
+   "host": null
+  },
+  "host": {
+   "stem": "results/L3_DEV/l3typed_metaqa__h1",
+   "json_sha256": "ede52ec0770740c143b32badb3b885068adaa9e4cbfe7236607e801d9db3e802",
+   "npz_sha256": "0ee65e76660223d0378708582e8bd19142e58595ff495340705d5112d29e1355",
+   "platform": {
+    "python": "3.13.5",
+    "numpy": "2.3.2"
+   },
+   "host": null
+  }
+ },
+ "host_run_sidecar": {
+  "path": "results/L3_HOST/runs/_l3d_typed__RUN__metaqa__h1.3.run.json",
+  "sha256": "588e6d5d724cf79bd419d30de5f0ad6df70982464be1e1415de2141463032b2c",
+  "priority": "BELOW_NORMAL_PRIORITY_CLASS (16384)",
+  "seconds": 272.8,
+  "bundles_served": {
+   "metaqa": {
+    "npz": "results/L3_HOST/bundle_metaqa__L1DEV.npz",
+    "sha256": "8479d7a2a8a697fac609f6b44b164ba0d9be38741ea3155153af256f5d047127",
+    "record_sha256": "35aa1b061c3c3691f6230c20e3e1840e50295f458fa79f66fdfba4e30acee797",
+    "n_rows": 1998,
+    "sources": {
+     "dense": "1424fb93f34ad2b34d2eb4d7858f91a82d8425c43276131ae19104f2ab61e2bf",
+     "splade": "04c2e321f1151d5cf79e83abb8654eb38641893104fa8de0479734613ec0233c"
+    }
+   }
+  },
+  "cache_views_served": [
+   "metaqa/dense",
+   "metaqa/splade"
+  ]
+ },
+ "first_attempt (addendum 1)": {
+  "path": "results/L3_HOST/runs/_l3d_typed__RUN__metaqa__h1.run.json",
+  "sha256": "e4e5a52d5e707bfa1ed7cb87b6888128a20c9f843c6f9d33d7323ddabb09bc0e",
+  "rc": 1,
+  "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\Student2\\\\rx\\\\projects\\\\crag\\\\ws\\\\data\\\\final_canonical\\\\metaqa\\\\embeddings\\\\dense\\\\queries\\\\shard_00009.npy'",
+  "seconds": 1.0
+ },
+ "second_attempt (addendum 2)": {
+  "path": "results/L3_HOST/runs/_l3d_typed__RUN__metaqa__h1.2.run.json",
+  "sha256": "5ef1d7c3cb329a74159dcc96960dd81f355438b8c4eeb0707b16822e3ace83b5",
+  "rc": 1,
+  "error": "AssertionError: FLAT positions differ from the v1 record",
+  "seconds": 266.7,
+  "cause": "rx sets OPENBLAS_NUM_THREADS (and OMP/MKL/NUMEXPR/...) to the job's --cpus; the float32 sgemm of the FLAT dense score depends on the BLAS thread count, and the laptop records use 12"
+ },
+ "blas_probes": {
+  "laptop": {
+   "path": "results/L3_HOST/BLAS_PROBE__laptop.json",
+   "sha256": "6774d25f0745d94ea4657b16d6a49fbba8e6d6ed655817d72d1ce04ceedb333c"
+  },
+  "host (OPENBLAS_NUM_THREADS=12)": {
+   "path": "results/L3_HOST/BLAS_PROBE__host_t12.json",
+   "sha256": "2b1559cbcd9557b5532e7870719e68c6621ed37b53c634d1f72df5dc8236f936"
+  },
+  "host_sidecar": {
+   "path": "results/L3_HOST/runs/_l3h_blasprobe__host_t12.run.json",
+   "sha256": "d6e4633728a7fbe15833ed1b81b736949cd86ca4b0cc990812a784eeef5bdf99"
+  },
+  "result": "same inputs, same default product sha 5db3e5817cbfc683, and the same product sha at every thread count 1, 2, 4, 8, 12, 16, 32 on both machines (same OpenBLAS 0.3.30 DLL, Haswell kernel): only the thread count differed"
+ },
+ "authorizes": [
+  "L3 development runs of the L1_DEV MetaQA population (1,998 rows) on the host 'gpu' through rx, project crag, each job through scratchpad/_l3h_run.py (bundle-served caches, BELOW_NORMAL priority) with --var OPENBLAS_NUM_THREADS=12 (addendum 2), --cpus 2 --mem 3 unless a record measures more, no GPU",
+  "harnesses: scratchpad/_l3d_typed.py (this placement test) and scratchpad/_l3d_hop.py (its import; its own records are asserted inside every typed run)",
+  "a new harness joins only after its first host run is BIT_IDENTICAL to its laptop run of the same population (recorded under results/L3_HOST/) and a dated addendum names it (the v1 declaration's new_harnesses rule)"
+ ],
+ "pins (a functional change voids this authorization)": {
+  "scratchpad/_l3h_run.py": "757df4b7def3964cc74502ed8551e8ac416605b9f409e930e8e35b712a8adb78",
+  "scratchpad/_l3h_place.py": "3ca471a1a0b515478a442d0ec4390542b701aab96b93376c0b51c3fa9156b55f",
+  "scratchpad/_l3h_bundle.py": "ec720a407703bae89443fe56aa9b3b5b9495d35182933ce4f1ab40c73f42ade2",
+  "scratchpad/_l3d_typed.py": "8eb4cbde3cc54c147f519a7aa0ae9974ae910ac6b32ad90ee673e53064266ac9",
+  "scratchpad/_l3d_hop.py": "70777dd9770918cf119b8b8bb9c9bb779e4ba0ec0a7d0ad2e773a72f3dcf6e2b",
+  "results/L3_HOST/bundle_metaqa__L1DEV.npz": "8479d7a2a8a697fac609f6b44b164ba0d9be38741ea3155153af256f5d047127"
+ },
+ "never (unchanged from the declaration)": [
+  "cancel, rerun or gc another project's job",
+  "touch another project's processes",
+  "edit mpr's [envs.*]",
+  "rx gc",
+  "put a credential or token on the host (no --var secrets)",
+  "push data that no declaration names",
+  "read TEST, split B or the reserved held-out rows",
+  "write under data/"
+ ]
+}

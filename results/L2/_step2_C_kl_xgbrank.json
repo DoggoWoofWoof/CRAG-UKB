@@ -1,0 +1,112 @@
+{
+  "_config": {
+    "datasets": [
+      "webqsp",
+      "metaqa"
+    ],
+    "heldout": null,
+    "arms": [
+      "C_kl_xgbrank"
+    ],
+    "epochs": 12,
+    "seeds": 3,
+    "p_drop": 0.2,
+    "lam": 1.0,
+    "neg_cap": 150,
+    "note": "in-dist (target in training) + optional transfer sanity on heldout (never trained)."
+  },
+  "oracle": {
+    "webqsp": {
+      "standalone_R@5": {
+        "dense": 9.48,
+        "offset": 43.07,
+        "splade": 10.61,
+        "relation": 24.39,
+        "path": 8.39
+      },
+      "semantic_anchor_R@5": 9.93,
+      "per_query_expert_oracle_R@5": 59.38,
+      "n": 147
+    },
+    "metaqa": {
+      "standalone_R@5": {
+        "dense": 19.43,
+        "offset": 59.34,
+        "splade": 77.11,
+        "relation": 27.16
+      },
+      "semantic_anchor_R@5": 62.84,
+      "per_query_expert_oracle_R@5": 91.47,
+      "n": 1998
+    }
+  },
+  "results": {
+    "C_kl_xgbrank": {
+      "in_dist": {
+        "webqsp": {
+          "R@5": [
+            52.04,
+            0.63
+          ],
+          "R@20": [
+            69.57,
+            0.71
+          ],
+          "R@50": [
+            76.89,
+            0.67
+          ],
+          "Hit@5": [
+            70.98,
+            1.16
+          ],
+          "Hit@50": [
+            89.12,
+            0.56
+          ]
+        },
+        "metaqa": {
+          "R@5": [
+            65.29,
+            0.2
+          ],
+          "R@20": [
+            77.34,
+            0.59
+          ],
+          "R@50": [
+            82.5,
+            0.57
+          ],
+          "Hit@5": [
+            77.34,
+            0.4
+          ],
+          "Hit@50": [
+            90.92,
+            0.73
+          ]
+        }
+      }
+    }
+  },
+  "importance": {
+    "C_kl_xgbrank": {
+      "top5[offset]": 1067.0,
+      "pct[offset]": 135.3,
+      "score[offset]": 17.2,
+      "alpha_x_score[relation]": 15.0,
+      "q_avail[path]": 14.1,
+      "avail[path]": 9.1,
+      "q_margin[offset]": 8.8,
+      "avail[relation]": 8.2,
+      "q_pmax[offset]": 8.1,
+      "offset_evidence_adv": 7.7,
+      "alpha_x_score[splade]": 6.4,
+      "alpha_x_score[path]": 6.2,
+      "pct[path]": 5.7,
+      "both_dense_splade": 4.8,
+      "pct[relation]": 4.2
+    }
+  }
+}

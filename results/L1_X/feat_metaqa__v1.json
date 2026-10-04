@@ -1,0 +1,213 @@
+{
+ "mode": "L1X_SELECT_FEATURE_DUMP (development; gold-aware diagnostic, never a candidate)",
+ "definitions": "L1X -- SELECT lane, step 1: the candidate FEATURE DUMP of the carried-forward node-level L1 (development only; gold-aware diagnostic, never a\ncandidate).  (User ruling 2026-10-01: \"l1 should only be parametric free routing and selection it cant have traversals\" -- so the lane may\nonly re-ORDER what the one static application of A^T already supplies: no walk, no second hop, no fitted or learned weight in any L1 rule.)\n\nWhat it records.  For every population row the L1a evidence of the shipped node-level L1 is recomputed with the arithmetic of\n_l1d_node1h.py / _l1d_scale.py (hits H_q = FLAT_RRF[:200]; IR_L1 = one static one-hop localisation over STRUCT_out u STRUCT_in u KNN u NER with\nhit weight 1/(FLAT rank + 1) and g = 1/log2(1 + deg^+(s)); the served order O = RRF(FLAT, LOC), K0 = 60) and the POOL P_q = O[:POOL] (POOL =\n5000 = the largest node budget B_N) is written with per-candidate features and the gold flag:\n    0 fpos      position in O (0 .. POOL-1)                      10 Ssum    the IR_L1 score L(u)\n    1 frank     FLAT rank (capped 2**24)                         11 nseed   distinct supporting hits (top-200)\n    2 drank     dense rank                                       12 nfam    supporting families (0 .. 4)\n    3 srank     SPLADE rank (npos if no overlap)                 13 minhit  best supporting hit rank (200 if none)\n    4 dsc       dense score                                      14 maxc    largest single contribution w(s) g(s)\n    5 ssc       SPLADE score                                     15 incs    incident edges of u summed over the families\n    6-9 S_f     per-family IR_L1 score (S_out,S_in,KNN,NER)      16 lrank   rank in the LOC order (-1: unscored)\n                                                                 17 top10   the part of L(u) due to the top-10 hits\n    18 gold     1 if u is a gold node of the query\nand per query: dmax, smax (largest dense / SPLADE score), nsupp (|LOC order|), ngold, and the gold nodes' positions in O (pos_O, capped).\nNothing here selects, tunes or confirms a rule: it is the input of the offline rule search (_l1x_rules.py) and of the information-ceiling\ndiagnostic.  Development rows only (the L1_DEV population; WebQSP split A); no sealed split-B row, no TEST row is read.\n\nIdentity checks (CHECK mode / always on the first rows when a stored record exists): the baseline positions of the gold nodes equal\nresults/L1_DEV/kscale_<ds>__v1.npz  pos_FLATLOC__IR_L1  (clipped at POOL) on every gold node.\n\nUsage: python -u scratchpad/_l1x_feat.py RUN <dataset> <tag> [--rows=K] [--out=<dir>]   -> <out or results/L1_X>/feat_<ds>__<tag>.{json,npz} (write-once)\n",
+ "dataset": "metaqa",
+ "tag": "v1",
+ "N": 43234,
+ "n_rows": 1998,
+ "n_gold_nodes": 14489,
+ "pool": 5000,
+ "features": [
+  "fpos",
+  "frank",
+  "drank",
+  "srank",
+  "dsc",
+  "ssc",
+  "S_out",
+  "S_in",
+  "S_knn",
+  "S_ner",
+  "Ssum",
+  "nseed",
+  "nfam",
+  "minhit",
+  "maxc",
+  "incs",
+  "lrank",
+  "top10",
+  "gold"
+ ],
+ "population": {
+  "file": {
+   "path": "results/L1_DEV/loc_population.json",
+   "sha256": "c7f7080639d66f1e8f5c2fb90aff7da49dfda5f63a5fe558fe8c266bd5fef47e"
+  },
+  "n": 1998,
+  "first_rows_only": null,
+  "query_ids_sha256": "07ec3d7a46ee975c05197768ae792499f7ab51aef3ca75579b926f5ca5fe85b6",
+  "label": "development population (historically exposed; not held-out; freely reusable)"
+ },
+ "identity_check": "baseline O positions (clipped at 5000) == results/L1_DEV/kscale_metaqa__v1.npz on all 14489 gold nodes",
+ "baseline_ALL": {
+  "100": {
+   "ALL": 0.3819,
+   "n_ALL": 763
+  },
+  "250": {
+   "ALL": 0.4279,
+   "n_ALL": 855
+  },
+  "500": {
+   "ALL": 0.46,
+   "n_ALL": 919
+  },
+  "1000": {
+   "ALL": 0.508,
+   "n_ALL": 1015
+  },
+  "2000": {
+   "ALL": 0.5556,
+   "n_ALL": 1110
+  },
+  "5000": {
+   "ALL": 0.6361,
+   "n_ALL": 1271
+  }
+ },
+ "families": {
+  "STRUCT_out": {
+   "kind": "dir",
+   "entries": 124669,
+   "pairs": 124669,
+   "row_length deg_f^+": {
+    "mean": 2.88,
+    "median": 0.0,
+    "min": 0.0,
+    "max": 56.0
+   },
+   "incident_degree deg_f (nodes with edges)": {
+    "mean": 5.77,
+    "median": 3.0,
+    "min": 1.0,
+    "max": 4176.0
+   },
+   "nodes_with_out_rows": 16427,
+   "index_bytes (xadj + adj + g + h)": 1536300
+  },
+  "STRUCT_in": {
+   "kind": "dir",
+   "entries": 124669,
+   "pairs": 124669,
+   "row_length deg_f^+": {
+    "mean": 2.88,
+    "median": 1.0,
+    "min": 0.0,
+    "max": 4176.0
+   },
+   "incident_degree deg_f (nodes with edges)": {
+    "mean": 5.77,
+    "median": 3.0,
+    "min": 1.0,
+    "max": 4176.0
+   },
+   "nodes_with_out_rows": 26841,
+   "index_bytes (xadj + adj + g + h)": 1536300
+  },
+  "KNN": {
+   "kind": "und",
+   "entries": 195840,
+   "pairs": 97920,
+   "row_length deg_f^+": {
+    "mean": 4.53,
+    "median": 4.0,
+    "min": 3.0,
+    "max": 95.0
+   },
+   "incident_degree deg_f (nodes with edges)": {
+    "mean": 4.53,
+    "median": 4.0,
+    "min": 3.0,
+    "max": 95.0
+   },
+   "nodes_with_out_rows": 43234,
+   "index_bytes (xadj + adj + g + h)": 1820984
+  },
+  "NER": {
+   "kind": "und",
+   "entries": 11898,
+   "pairs": 5949,
+   "row_length deg_f^+": {
+    "mean": 0.28,
+    "median": 0.0,
+    "min": 0.0,
+    "max": 29.0
+   },
+   "incident_degree deg_f (nodes with edges)": {
+    "mean": 2.09,
+    "median": 1.0,
+    "min": 1.0,
+    "max": 29.0
+   },
+   "nodes_with_out_rows": 5682,
+   "index_bytes (xadj + adj + g + h)": 1085216
+  }
+ },
+ "seconds": 168.2,
+ "code": {
+  "path": "scratchpad/_l1x_feat.py",
+  "sha256": "c5ce790c5376be74a82b2fcf4a97e3da491fedbe55e170c0e718252217764e3c"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "constants": {
+  "K0": 60,
+  "ACT": 200,
+  "DEG_CAP": 300,
+  "CQ": 200,
+  "BLOCK": 40000,
+  "M_CURVE": [
+   100,
+   250,
+   500,
+   1000,
+   2000,
+   5000
+  ],
+  "N_AGREE": 100,
+  "AGREE_MIN": 0.9,
+  "NG_BUCKETS": [
+   [
+    "1",
+    1,
+    1
+   ],
+   [
+    "2",
+    2,
+    2
+   ],
+   [
+    "3",
+    3,
+    3
+   ],
+   [
+    "4",
+    4,
+    4
+   ],
+   [
+    "5-10",
+    5,
+    10
+   ],
+   [
+    "11+",
+    11,
+    1099511627776
+   ]
+  ]
+ },
+ "npz": {
+  "path": "feat_metaqa__v1.npz",
+  "sha256": "543b77e0a5f4f60a43d9592d5afabbaaa54efbc2e504a3f97d73c540ee6602e8",
+  "candidates": 9990000
+ }
+}

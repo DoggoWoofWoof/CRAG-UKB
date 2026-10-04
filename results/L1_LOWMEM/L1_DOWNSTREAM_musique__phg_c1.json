@@ -1,0 +1,69 @@
+{
+ "RECORD": "L1_LOWMEM_DOWNSTREAM",
+ "dataset": "musique",
+ "utc": "2026-09-13T19:16:03Z",
+ "arms": {
+  "A": "canonical Mt-KaHyPar H4_SK (results/L1_CANONICAL/L1_REPLAY_musique.json)",
+  "B": "PHG connectivity (LOWMEM__PHG_C1_con)"
+ },
+ "B": {
+  "BASE_ALL_P50": 0.6415,
+  "BASE_ANY_P50": 0.9905,
+  "BASE_SCOPE_NODES": 5115.5,
+  "SAFE_ALL_P50": 0.6965,
+  "SAFE_ANY_P50": 0.992,
+  "SAFE_SCOPE_NODES": 5112.8,
+  "BND_ALL_P50": 0.6415,
+  "CORR": {
+   "dALL": 0.055,
+   "gained": 121,
+   "lost": 11,
+   "net": 110,
+   "mcnemar_p": 0.0,
+   "sig": true,
+   "gold_admitted": 185,
+   "gold_evicted": 26,
+   "churn_per_query": 4.707,
+   "churn_max": 6,
+   "queries_with_zero_churn": 5
+  },
+  "BALANCE": {
+   "npart": 1175,
+   "blocks_used": 1175,
+   "size_min": 1,
+   "size_max": 104,
+   "size_median": 103.0,
+   "size_mean": 100.03,
+   "size_p90": 103.0,
+   "size_p99": 103.0,
+   "size_cv": 0.1146,
+   "max_over_mean": 1.0397,
+   "ELIGIBLE": true
+  },
+  "CUT": {
+   "STRUCT": {
+    "edges": 2651280,
+    "cut": 2561853,
+    "edge_cut_fraction": 0.9663
+   },
+   "KNN": {
+    "edges": 230823,
+    "cut": 95983,
+    "edge_cut_fraction": 0.4158
+   },
+   "NERX": {
+    "edges": 733541,
+    "cut": 647845,
+    "edge_cut_fraction": 0.8832
+   }
+  }
+ },
+ "population_B": {
+  "eval_split": "dev",
+  "sample_rule": "EVAL_SPLITS dev",
+  "nq": 2000,
+  "row_query_ids_sha256": "f3cffcf9050279448d2eef8aeccc1cc53d07f341ca4edb134e78b7fec378afbb"
+ },
+ "status": "BASELINE_ABSENT",
+ "note": "no production replay for musique (the canonical Mt-KaHyPar H4_SK partition FAILED / is absent locally); PHG-arm numbers only"
+}

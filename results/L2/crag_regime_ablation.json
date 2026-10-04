@@ -1,0 +1,552 @@
+{
+  "_config": {
+    "kind": "regime_ablation_R0R3",
+    "episodes": {
+      "A": {
+        "train": [
+          "metaqa",
+          "squad_clean"
+        ],
+        "val": "webqsp"
+      },
+      "B": {
+        "train": [
+          "webqsp",
+          "squad_clean"
+        ],
+        "val": "metaqa"
+      },
+      "C": {
+        "train": [
+          "webqsp",
+          "metaqa"
+        ],
+        "val": "squad_clean"
+      }
+    },
+    "samplers": {
+      "R0": "natural",
+      "R1": "dataset-balanced",
+      "R2": "regime-balanced",
+      "R3": "dataset x regime (cap5x)"
+    },
+    "max_steps": 16000,
+    "select_on": "held-out-domain MRR",
+    "note": "identical arch/loss/opt; TRAIN-only regime thresholds; no dataset-ID; no final-test"
+  },
+  "episodes": {
+    "A": {
+      "train": [
+        "metaqa",
+        "squad_clean"
+      ],
+      "held_out": "webqsp",
+      "n_train": 2179,
+      "n_ho": 147,
+      "cell_counts": {
+        "metaqa|conflict": 627,
+        "metaqa|redundant": 274,
+        "metaqa|hard": 36,
+        "metaqa|single_rescue": 154,
+        "squad_clean|missing_structure": 909,
+        "squad_clean|single_rescue": 72,
+        "squad_clean|conflict": 34,
+        "squad_clean|redundant": 52,
+        "squad_clean|hard": 21
+      },
+      "samplers": {
+        "R0": {
+          "best_step": 3000,
+          "held_out_metrics": {
+            "R@1": 10.14,
+            "R@5": 16.72,
+            "MRR": 0.2257,
+            "NDCG@5": 0.1831
+          },
+          "gates_by_regime": {
+            "conflict": {
+              "offset": 0.971,
+              "splade": 0.572,
+              "n": 59
+            },
+            "mixed_coop": {
+              "offset": 0.971,
+              "splade": 0.573,
+              "n": 17
+            },
+            "redundant": {
+              "offset": 0.971,
+              "splade": 0.558,
+              "n": 13
+            },
+            "single_rescue": {
+              "offset": 0.971,
+              "splade": 0.558,
+              "n": 33
+            },
+            "hard": {
+              "offset": 0.969,
+              "splade": 0.566,
+              "n": 23
+            },
+            "relational": {
+              "offset": 0.967,
+              "splade": 0.562,
+              "n": 2
+            }
+          },
+          "runtime_s": 160.6
+        },
+        "R1": {
+          "best_step": 13500,
+          "held_out_metrics": {
+            "R@1": 10.14,
+            "R@5": 16.77,
+            "MRR": 0.2259,
+            "NDCG@5": 0.1848
+          },
+          "gates_by_regime": {
+            "conflict": {
+              "offset": 0.404,
+              "splade": 0.366,
+              "n": 59
+            },
+            "mixed_coop": {
+              "offset": 0.424,
+              "splade": 0.341,
+              "n": 17
+            },
+            "redundant": {
+              "offset": 0.368,
+              "splade": 0.35,
+              "n": 13
+            },
+            "single_rescue": {
+              "offset": 0.438,
+              "splade": 0.333,
+              "n": 33
+            },
+            "hard": {
+              "offset": 0.44,
+              "splade": 0.344,
+              "n": 23
+            },
+            "relational": {
+              "offset": 0.5,
+              "splade": 0.341,
+              "n": 2
+            }
+          },
+          "runtime_s": 161.6
+        },
+        "R2": {
+          "best_step": 5000,
+          "held_out_metrics": {
+            "R@1": 10.14,
+            "R@5": 16.73,
+            "MRR": 0.226,
+            "NDCG@5": 0.1839
+          },
+          "gates_by_regime": {
+            "conflict": {
+              "offset": 0.991,
+              "splade": 0.247,
+              "n": 59
+            },
+            "mixed_coop": {
+              "offset": 0.99,
+              "splade": 0.22,
+              "n": 17
+            },
+            "redundant": {
+              "offset": 0.991,
+              "splade": 0.223,
+              "n": 13
+            },
+            "single_rescue": {
+              "offset": 0.99,
+              "splade": 0.229,
+              "n": 33
+            },
+            "hard": {
+              "offset": 0.989,
+              "splade": 0.248,
+              "n": 23
+            },
+            "relational": {
+              "offset": 0.99,
+              "splade": 0.253,
+              "n": 2
+            }
+          },
+          "runtime_s": 151.7
+        },
+        "R3": {
+          "best_step": 8500,
+          "held_out_metrics": {
+            "R@1": 10.14,
+            "R@5": 16.73,
+            "MRR": 0.226,
+            "NDCG@5": 0.1839
+          },
+          "gates_by_regime": {
+            "conflict": {
+              "offset": 0.934,
+              "splade": 0.295,
+              "n": 59
+            },
+            "mixed_coop": {
+              "offset": 0.938,
+              "splade": 0.255,
+              "n": 17
+            },
+            "redundant": {
+              "offset": 0.931,
+              "splade": 0.24,
+              "n": 13
+            },
+            "single_rescue": {
+              "offset": 0.932,
+              "splade": 0.234,
+              "n": 33
+            },
+            "hard": {
+              "offset": 0.933,
+              "splade": 0.239,
+              "n": 23
+            },
+            "relational": {
+              "offset": 0.926,
+              "splade": 0.25,
+              "n": 2
+            }
+          },
+          "runtime_s": 146.3
+        }
+      }
+    },
+    "B": {
+      "train": [
+        "webqsp",
+        "squad_clean"
+      ],
+      "held_out": "metaqa",
+      "n_train": 2103,
+      "n_ho": 1998,
+      "cell_counts": {
+        "webqsp|redundant": 105,
+        "webqsp|conflict": 225,
+        "webqsp|single_rescue": 282,
+        "webqsp|relational": 244,
+        "webqsp|hard": 159,
+        "squad_clean|missing_structure": 984,
+        "squad_clean|single_rescue": 65,
+        "squad_clean|redundant": 20,
+        "squad_clean|hard": 19
+      },
+      "samplers": {
+        "R0": {
+          "best_step": 500,
+          "held_out_metrics": {
+            "R@1": 9.22,
+            "R@5": 85.51,
+            "MRR": 0.5631,
+            "NDCG@5": 0.6407
+          },
+          "gates_by_regime": {
+            "single_rescue": {
+              "offset": 0.952,
+              "splade": 0.827,
+              "n": 767
+            },
+            "hard": {
+              "offset": 0.951,
+              "splade": 0.819,
+              "n": 292
+            },
+            "redundant": {
+              "offset": 0.95,
+              "splade": 0.825,
+              "n": 445
+            },
+            "conflict": {
+              "offset": 0.947,
+              "splade": 0.824,
+              "n": 494
+            }
+          },
+          "runtime_s": 600.7
+        },
+        "R1": {
+          "best_step": 500,
+          "held_out_metrics": {
+            "R@1": 9.61,
+            "R@5": 86.17,
+            "MRR": 0.5746,
+            "NDCG@5": 0.6521
+          },
+          "gates_by_regime": {
+            "single_rescue": {
+              "offset": 0.806,
+              "splade": 0.798,
+              "n": 767
+            },
+            "hard": {
+              "offset": 0.804,
+              "splade": 0.786,
+              "n": 292
+            },
+            "redundant": {
+              "offset": 0.801,
+              "splade": 0.8,
+              "n": 445
+            },
+            "conflict": {
+              "offset": 0.786,
+              "splade": 0.792,
+              "n": 494
+            }
+          },
+          "runtime_s": 619.8
+        },
+        "R2": {
+          "best_step": 500,
+          "held_out_metrics": {
+            "R@1": 8.23,
+            "R@5": 85.97,
+            "MRR": 0.5563,
+            "NDCG@5": 0.6417
+          },
+          "gates_by_regime": {
+            "single_rescue": {
+              "offset": 0.789,
+              "splade": 0.796,
+              "n": 767
+            },
+            "hard": {
+              "offset": 0.783,
+              "splade": 0.781,
+              "n": 292
+            },
+            "redundant": {
+              "offset": 0.781,
+              "splade": 0.789,
+              "n": 445
+            },
+            "conflict": {
+              "offset": 0.766,
+              "splade": 0.795,
+              "n": 494
+            }
+          },
+          "runtime_s": 607.5
+        },
+        "R3": {
+          "best_step": 500,
+          "held_out_metrics": {
+            "R@1": 8.56,
+            "R@5": 84.15,
+            "MRR": 0.5594,
+            "NDCG@5": 0.6292
+          },
+          "gates_by_regime": {
+            "single_rescue": {
+              "offset": 0.695,
+              "splade": 0.574,
+              "n": 767
+            },
+            "hard": {
+              "offset": 0.682,
+              "splade": 0.557,
+              "n": 292
+            },
+            "redundant": {
+              "offset": 0.678,
+              "splade": 0.583,
+              "n": 445
+            },
+            "conflict": {
+              "offset": 0.676,
+              "splade": 0.571,
+              "n": 494
+            }
+          },
+          "runtime_s": 605.9
+        }
+      }
+    },
+    "C": {
+      "train": [
+        "webqsp",
+        "metaqa"
+      ],
+      "held_out": "squad_clean",
+      "n_train": 2106,
+      "n_ho": 1982,
+      "cell_counts": {
+        "webqsp|single_rescue": 228,
+        "webqsp|conflict": 260,
+        "webqsp|mixed_coop": 234,
+        "webqsp|redundant": 103,
+        "webqsp|hard": 178,
+        "webqsp|relational": 12,
+        "metaqa|conflict": 269,
+        "metaqa|single_rescue": 151,
+        "metaqa|mixed_coop": 565,
+        "metaqa|relational": 62,
+        "metaqa|hard": 34,
+        "metaqa|redundant": 10
+      },
+      "samplers": {
+        "R0": {
+          "best_step": 3000,
+          "held_out_metrics": {
+            "R@1": 72.55,
+            "R@5": 91.83,
+            "MRR": 0.8093,
+            "NDCG@5": 0.8327
+          },
+          "gates_by_regime": {
+            "conflict": {
+              "offset": 0.328,
+              "splade": 0.019,
+              "n": 236
+            },
+            "redundant": {
+              "offset": 0.325,
+              "splade": 0.018,
+              "n": 1298
+            },
+            "hard": {
+              "offset": 0.289,
+              "splade": 0.017,
+              "n": 143
+            },
+            "missing_structure": {
+              "offset": 0.303,
+              "splade": 0.02,
+              "n": 294
+            },
+            "single_rescue": {
+              "offset": 0.326,
+              "splade": 0.019,
+              "n": 11
+            }
+          },
+          "runtime_s": 693.2
+        },
+        "R1": {
+          "best_step": 4500,
+          "held_out_metrics": {
+            "R@1": 72.15,
+            "R@5": 91.07,
+            "MRR": 0.8041,
+            "NDCG@5": 0.8268
+          },
+          "gates_by_regime": {
+            "conflict": {
+              "offset": 0.189,
+              "splade": 0.277,
+              "n": 236
+            },
+            "redundant": {
+              "offset": 0.166,
+              "splade": 0.364,
+              "n": 1298
+            },
+            "hard": {
+              "offset": 0.164,
+              "splade": 0.28,
+              "n": 143
+            },
+            "missing_structure": {
+              "offset": 0.169,
+              "splade": 0.268,
+              "n": 294
+            },
+            "single_rescue": {
+              "offset": 0.199,
+              "splade": 0.24,
+              "n": 11
+            }
+          },
+          "runtime_s": 692.2
+        },
+        "R2": {
+          "best_step": 1000,
+          "held_out_metrics": {
+            "R@1": 71.85,
+            "R@5": 91.62,
+            "MRR": 0.804,
+            "NDCG@5": 0.828
+          },
+          "gates_by_regime": {
+            "conflict": {
+              "offset": 0.312,
+              "splade": 0.402,
+              "n": 236
+            },
+            "redundant": {
+              "offset": 0.309,
+              "splade": 0.467,
+              "n": 1298
+            },
+            "hard": {
+              "offset": 0.284,
+              "splade": 0.407,
+              "n": 143
+            },
+            "missing_structure": {
+              "offset": 0.299,
+              "splade": 0.405,
+              "n": 294
+            },
+            "single_rescue": {
+              "offset": 0.316,
+              "splade": 0.382,
+              "n": 11
+            }
+          },
+          "runtime_s": 679.5
+        },
+        "R3": {
+          "best_step": 10500,
+          "held_out_metrics": {
+            "R@1": 71.75,
+            "R@5": 90.82,
+            "MRR": 0.8003,
+            "NDCG@5": 0.823
+          },
+          "gates_by_regime": {
+            "conflict": {
+              "offset": 0.265,
+              "splade": 0.118,
+              "n": 236
+            },
+            "redundant": {
+              "offset": 0.396,
+              "splade": 0.252,
+              "n": 1298
+            },
+            "hard": {
+              "offset": 0.23,
+              "splade": 0.138,
+              "n": 143
+            },
+            "missing_structure": {
+              "offset": 0.251,
+              "splade": 0.147,
+              "n": 294
+            },
+            "single_rescue": {
+              "offset": 0.241,
+              "splade": 0.095,
+              "n": 11
+            }
+          },
+          "runtime_s": 705.4
+        }
+      }
+    }
+  }
+}

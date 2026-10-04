@@ -1,0 +1,161 @@
+{
+ "generated": "2026-08-26",
+ "name": "L2 five-expert Shapley-ready matrix (C/P50, canonical Qwen relation)",
+ "test_frozen": true,
+ "pilots": [
+  "2wiki_clean",
+  "musique_clean"
+ ],
+ "splits_built": [
+  "train",
+  "val"
+ ],
+ "canonical_order": "dense-desc within each query scope (unchanged from L2 CSR)",
+ "EXPERT_MATRIX_TRAIN_READY": "YES",
+ "EXPERT_MATRIX_VAL_READY": "YES",
+ "experts": {
+  "dense": {
+   "file": "dense_score.npy",
+   "dtype": "float16",
+   "semantics": "gte-Qwen2 query-doc cosine/IP (instructed query / raw doc)",
+   "mask": null
+  },
+  "splade": {
+   "file": "splade_scope_score.npy",
+   "dtype": "float32",
+   "semantics": "exact SPLADE sparse lexical dot over P50 scope",
+   "mask": null
+  },
+  "offset": {
+   "file": "offset_score.npy",
+   "dtype": "float16",
+   "semantics": "learned dense-space score: cos(doc, seed+MLP(q)) \u2014 OffsetHead cp50",
+   "mask": null
+  },
+  "mixture": {
+   "file": "mixture_score.npy",
+   "dtype": "float16",
+   "semantics": "learned dense-space max-over-K mixture score \u2014 MixtureHead(K=8) cp50",
+   "mask": null
+  },
+  "relation": {
+   "file": "relation_qwen_score.npy",
+   "dtype": "float32",
+   "mask_file": "relation_mask.npy(bool)",
+   "semantics": "masked canonical gte-Qwen2 cosine cos(E(query), E(connecting_sentence)); RAW sentence encoding",
+   "SPARSE_SEMANTICS": "mask=1 -> eligible/ranked; mask=0 -> ABSTAIN (no rank, no RRF vote, NEVER a bottom rank). This must persist through Shapley AND controller."
+  }
+ },
+ "per_pair_aligned": [
+  "dense_score",
+  "splade_scope_score",
+  "offset_score",
+  "mixture_score",
+  "relation_qwen_score",
+  "relation_mask",
+  "labels",
+  "cand_ids"
+ ],
+ "per_query_meta": {
+  "file": "expert_meta.npz",
+  "fields": [
+   "row_all",
+   "gold_count",
+   "L1_status(0=ANY_FAIL,1=PARTIAL,2=ALL_SUCCESS)",
+   "dense_splade_disagreement(1-Jaccard@20)",
+   "relation_any_signal_present",
+   "relation_gold_present",
+   "relation_num_candidates"
+  ]
+ },
+ "NOT_prefused": true,
+ "no_hard_classes": true,
+ "splits": {
+  "2wiki_clean/train": {
+   "dir": "data/l2_corpus/2wiki_clean/train",
+   "n_pairs": 52809678,
+   "n_queries": 10500,
+   "relation_eligible_pairs": 18269
+  },
+  "2wiki_clean/val": {
+   "dir": "data/l2_corpus/2wiki_clean/val",
+   "n_pairs": 15086505,
+   "n_queries": 3000,
+   "relation_eligible_pairs": 5284
+  },
+  "musique_clean/train": {
+   "dir": "data/l2_corpus/musique_clean/train",
+   "n_pairs": 70362633,
+   "n_queries": 13956,
+   "relation_eligible_pairs": 38321
+  },
+  "musique_clean/val": {
+   "dir": "data/l2_corpus/musique_clean/val",
+   "n_pairs": 20101830,
+   "n_queries": 3987,
+   "relation_eligible_pairs": 10633
+  }
+ },
+ "NORMALIZATION_METADATA": {
+  "note": "The five expert score SCALES differ (cosine vs sparse dot vs learned IP). A Shapley/controller utility must NOT sum raw scores across experts without an explicit transform.",
+  "per_expert_scale": {
+   "dense": "cosine [-1,1]",
+   "splade": "nonneg sparse dot (unbounded)",
+   "offset": "dense IP ~[-1,1]",
+   "mixture": "dense IP ~[-1,1]",
+   "relation": "cosine [-1,1] on mask=1 only"
+  },
+  "RECOMMENDED_UTILITY_BASIS": "RANK/RRF utility (scale-free) for Shapley coalitions \u2014 matches the locked L2 fusion (RRF k0=60) and the masked-abstain semantics; a normalized-score (per-query z-norm) basis is the documented alternative but must handle the sparse mask explicitly. DECISION RECORDED, not silent: primary = RRF-rank utility."
+ },
+ "EXACT_SHAPLEY_DESIGN_PROPOSAL": {
+  "status": "PROPOSED ONLY \u2014 not run",
+  "feasibility": "5 experts -> 2^5=32 coalitions per query; EXACT enumeration (no Monte-Carlo needed on the pilot).",
+  "value_function": "v(S) = utility of the RRF fusion of coalition S (masked-RRF; relation abstains on mask=0). Per-query, then averaged over the denominator.",
+  "shapley_formula": "phi_i = sum_{S subset N\\{i}} |S|!(n-|S|-1)!/n! * (v(S+i)-v(S)); computed per query then aggregated.",
+  "coalition_mask_rule": "Any coalition containing relation uses masked-RRF: relation contributes 1/(k0+rank_among_eligible) on mask=1, 0 on mask=0. Empty coalition v({})=0 (or a no-retrieval floor).",
+  "UTILITY_CHOICES": [
+   {
+    "name": "U1_bestgold_MRR",
+    "def": "1/(best_gold_rank+1)",
+    "captures": "top precision",
+    "consequence": "rewards the FIRST gold only; on 2wiki the easy first-hop gold saturates it -> would UNDER-credit relation (whose value is deep bridge golds). Not sufficient alone for multi-gold."
+   },
+   {
+    "name": "U2_ALLgold_at_K",
+    "def": "fraction of queries with ALL golds in top-K (K in {10,20,50}) OR mean recall@K",
+    "captures": "multi-gold recovery / deep recall",
+    "consequence": "directly rewards relation bridge rescue on 2wiki; the honest primary given multi-gold (~2.3 golds/q). Choose K per report (K=10 top-heavy, K=50 recall)."
+   },
+   {
+    "name": "U3_multipos_nDCG",
+    "def": "nDCG over ALL golds (multi-positive gains, log discount)",
+    "captures": "top precision + multi-gold + graded depth in ONE scalar",
+    "consequence": "balances U1 and U2; discounts deep golds so relation gets partial (not full) credit; smoothest single objective for attribution. Recommended headline utility."
+   }
+  ],
+  "RECOMMENDED": "Report Shapley under BOTH U2_ALLgold@{10,50} and U3_multipos_nDCG (do not collapse to best-gold MRR alone). U1 reported only as a top-precision cross-check.",
+  "denominators": "per the L2 evaluator: ALL_EVAL_QUERIES / COND_ANY_GOLD_IN_SCOPE / COND_ALL_GOLD_IN_SCOPE (COND_ALL for ALL-gold utilities).",
+  "train_val": "compute Shapley on TRAIN (attribution/regime) and VAL (generalization check); TEST never used."
+ },
+ "SHAPLEY_ROLE": "Shapley values are TEACHER/ATTRIBUTION/REGIME signal (expert-importance targets, regime discovery, expert-collapse diagnostics, interpretability, auxiliary controller supervision). They are NOT automatically the final retrieval weights; the controller still optimizes ranking performance directly.",
+ "FUTURE_CONTROLLER": {
+  "status": "NOT trained",
+  "target": "query/candidate-aware SOFT expert gating (no hard router)",
+  "inputs": [
+   "query emb",
+   "candidate emb",
+   "expert scores",
+   "expert ranks",
+   "expert disagreement",
+   "relation mask",
+   "optional Shapley expert-usefulness targets"
+  ],
+  "outputs": [
+   "w_dense",
+   "w_splade",
+   "w_offset",
+   "w_mixture",
+   "w_relation"
+  ]
+ }
+}

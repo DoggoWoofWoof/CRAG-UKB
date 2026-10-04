@@ -1,0 +1,142 @@
+{
+ "RECORD": "DATA_FREEZE_VFINAL",
+ "version": 1,
+ "date": "2026-09-30",
+ "status": "FINAL",
+ "declared_on": "the user's ruling of 2026-09-30 (fetch the seven HotpotQA maps; write the manifest; run the full local SHA-256 verification; declare VFINAL only after all three pass), given in chat",
+ "DECLARATION": "Corpus cleaning, canonical encodings, graph construction, graph families, and canonical partition maps for all six datasets (metaqa, squad, musique, hotpotqa, 2wiki, webqsp) are permanently closed. Future L2/L3 work may add derived experiment artifacts, but may not modify the frozen canonical substrate. The two invalid partition cells are part of the freeze state, not unfinished work.",
+ "closure_criterion_met": "the laptop validates every canonical substrate of the six datasets from its own files and one manifest, with the host disconnected (the verifier performs local file reads only: no rx call, no network)",
+ "evidence": {
+  "manifest": {
+   "path": "results/DATA_FREEZE/DATA_FREEZE_2026-09-30__v1.json",
+   "bytes": 628299,
+   "sha256": "a49efff6b55f6bec0f0ccf8b9b35671ebdb55cf0aacf8ef2a0d4c1ea0e6a44b2",
+   "RECORD_SHA256": "5e11ca92ff7de57359c8cc52558b23f84598061b39bee1a5ac3da05d485b27f8",
+   "RECORD_SHA256_LF": "7ad3281db281cc18067de99688027a2aa28bb18dff383a7808bfad1f93bc02d1"
+  },
+  "verification_record": {
+   "path": "results/DATA_FREEZE/DATA_FREEZE_VERIFICATION_2026-09-30__v1.json",
+   "bytes": 2263,
+   "sha256": "0c06b98842a622624afbc195fc8c0cf6f5c34850bbae54936830c63c8c5cb565",
+   "RECORD_SHA256": "0c418e0636aac3318aa06370ae4962d726bd7dced2f6812029439ba4c3d75ac0",
+   "RECORD_SHA256_LF": "28869f5a1963869d44353cf323de496ecddf4951c3398ffdb3aaff941b3c5793"
+  },
+  "verifier_script": {
+   "path": "scratchpad/_data_freeze.py",
+   "bytes": 25134,
+   "sha256": "175c550fd8bded19ed3258f5b2ef57a436bd92e3ff30f1f1f2891fc0bec4a981"
+  },
+  "canonical_freeze_record": {
+   "path": "data/final_canonical/CANONICAL_FREEZE.json",
+   "RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+   "RECORD_SHA256_LF": "ed369b48f9ed65ccf5f519fc191b2387ee0320d66c23bee371f13c119e134f57",
+   "self_hash_recomputed_equal": true
+  },
+  "full_pass": {
+   "files": 1179,
+   "bytes": 91234120670,
+   "seconds": 98.1,
+   "problems": 0
+  },
+  "second_full_pass": "python scratchpad/_data_freeze.py VERIFY --full -> 1,221 entries, 0 missing, 0 resized, 0 sha mismatches, invalid cells explicit: PASS (52 s)",
+  "canonical_tree_files": {
+   "files": 991,
+   "equal_to_an_earlier_pin": 991,
+   "without_an_earlier_pin": 0
+  },
+  "partition_maps": {
+   "valid": 40,
+   "invalid": 2,
+   "by_dataset": {
+    "2wiki": {
+     "VALID": 6,
+     "PARTITION_INVALID": 1
+    },
+    "hotpotqa": {
+     "VALID": 7
+    },
+    "metaqa": {
+     "VALID": 6,
+     "PARTITION_INVALID": 1
+    },
+    "musique": {
+     "VALID": 7
+    },
+    "squad": {
+     "VALID": 7
+    },
+    "webqsp": {
+     "VALID": 7
+    }
+   },
+   "every_valid_map_sha_equal_to_its_RUN_record_pin": true
+  }
+ },
+ "closure_actions_2026-09-30": [
+  "the seven HotpotQA PHG maps (K 100, 250, 500, 1000, 2000, 5000, 52333; 41,866,760 bytes each, about 279.5 MB) were fetched from the host with rx fetch --glob results/L1_HOST/parts/hotpotqa__*.npy and each verified against its RUN.json output.sha256 (7 of 7); they were the only host-only canonical artifacts",
+  "the manifest and the verification record were written under results/DATA_FREEZE/ (nothing under data/ was written; verify_canonical.py was not run, because it overwrites data/final_canonical/VERIFICATION.json)"
+ ],
+ "invalid_partition_cells": [
+  {
+   "dataset": "2wiki",
+   "K": 5000,
+   "status": "PARTITION_INVALID",
+   "artifact": null,
+   "reason": "max_block 1235 > contract bound 1234 (ceil(1.03 N / K)); 45 empty blocks"
+  },
+  {
+   "dataset": "metaqa",
+   "K": 5000,
+   "status": "PARTITION_INVALID",
+   "artifact": null,
+   "reason": "max_block 10 > contract bound 9 (ceil(1.03 N / K)); 52 empty blocks"
+  }
+ ],
+ "invalid_cells_meaning": "by the PHG contract (NP 4, same PARAMS, PHG_NONEMPTY_REPAIR_V1, no tuning) a PARTITION_INVALID cell is absent; it is never retried, repaired or tuned; every consumer treats it as not existing",
+ "partition_asset_scope": {
+  "phg_contract_maps": "results/L1_HOST/parts/<ds>__H4_SK_k<K>__PHG_con.npy (with RUN.json); 40 valid cells across the six datasets",
+  "older_assets": "data/l1_canonical/ holds the older Mt-KaHyPar / low-memory maps and hypergraphs only for metaqa, squad and musique; hotpotqa, 2wiki and webqsp hold keys / query_index / legacy_bridge only there",
+  "hypergraph_npz_of_the_PHG_cells": "the per-cell hypergraph .npz files are host-side inputs of the partitioner (pinned by sha in each RUN.json); they are reconstructible from the frozen graphs and the pinned code and are not part of the retained substrate"
+ },
+ "may_be_added": [
+  "L2 features",
+  "L3 relation encodings",
+  "retrieval / replay caches",
+  "experiment results and records"
+ ],
+ "may_not_be_done": [
+  "modify any file listed in the manifest",
+  "re-clean a corpus, re-encode, rebuild a graph family or re-partition a cell of the six datasets",
+  "reopen a PARTITION_INVALID cell",
+  "silently swap the partitioner"
+ ],
+ "how_to_change_it": "only a new superseding record on a new user ruling (originals kept, never edited)",
+ "does_not_block_the_freeze": [
+  "text-L3 relation encodings (derived, added later under a dated addendum)",
+  "the frozen-L2 substrate that exists only for the 2wiki+musique dev pair (a derived artifact, not a canonical one)"
+ ],
+ "limitations_unchanged": "the KNOWN_LIMITATIONS of CANONICAL_FREEZE.json stand as published (SPLADE pooled over padding for the five text datasets; KB corpora encoded NAME_ONLY; WebQSP = WEBQSP_ROG_RESOLVED / BENCHMARK_CONDITIONED); nothing in this freeze repairs or hides them",
+ "freebase": {
+  "role": "FREEBASE_SCALE: a separate, source-derived, query-independent scale substrate; not a seventh benchmark dataset, not a replacement for the WebQSP ROG_RESOLVED lane, and it does not reopen the six datasets",
+  "served_tree": "data/final_canonical/freebase/ (302M nodes, 79 GB), pinned by CANONICAL_FREEZE.json FREEBASE; not hashed in this pass (its gate is verify_freebase.py --full)",
+  "freebase_v3_canonical": {
+   "path": "data/final_canonical/freebase_v3/canonical/",
+   "status": "RETAINED, NOT DELETED",
+   "reason": "builder input of the Freebase pipeline; kept for the FREEBASE_SCALE lane (user ruling 2026-09-30: do not delete it yet)"
+  },
+  "next": "a dedicated Freebase build/audit lane after this freeze; first objective is systems validation (graph size, partition feasibility and balance, build memory/time, localization latency, shards contacted, load skew, local scan volume, cross-partition edge rate), not QA accuracy"
+ },
+ "cleanup": {
+  "deleted_by_this_action": null,
+  "reflog_only_blobs": "the 24 reflog-only blobs are untouched; to be listed (sizes, commits, files) as a separate repo-cleanup step, not mixed with this freeze",
+  "freebase_v3_canonical": "kept"
+ },
+ "next_after_freeze": [
+  "WebQSP KB-L3 transfer (dev population = all scoreable non-held-out WebQSP dev rows; excludes only sealed split B, TEST and malformed / unscoreable rows; no random 2,000-row sample)",
+  "MuSiQue text-L3",
+  "FREEBASE_SCALE lane in parallel, without delaying the WebQSP L3 experiment"
+ ],
+ "declared": "2026-09-30T00:15:57+05:30",
+ "RECORD_SHA256": "15156a35f1a12b7f71b0972843ed153c272f3814e7dc33b421dfd44ab0fb153f",
+ "RECORD_SHA256_LF": "8315b428ea2d6d076a5ef7b2f9a5751c1e91c862feccc57e4614981f459aa7eb"
+}

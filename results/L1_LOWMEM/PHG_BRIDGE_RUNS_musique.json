@@ -1,0 +1,3012 @@
+{
+ "RECORD": "PHG_BRIDGE_RUNS",
+ "classification": "PHG_SCALE_BRIDGE",
+ "arm": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4 + PHG_NONEMPTY_REPAIR_V1",
+ "dataset": "musique",
+ "utc": "2026-09-13T19:03:43Z",
+ "preregistration": {
+  "path": "results/L1_LOWMEM/PHG_BRIDGE_PREREG.json",
+  "bytes": 20761,
+  "sha256": "7cb6cbe2fc29c7497849e1391ff9751bad848354d84cebb2ced2c80bf7bea95b"
+ },
+ "ruling": {
+  "path": "results/L1_LOWMEM/PHG_SMALL_DATASET_VALIDATION_RULING.json",
+  "bytes": 17869,
+  "sha256": "f7cc6337f009ecd4ac889a19d7ef2397aacc6e1f504be116331fc0d357e2a182"
+ },
+ "program": {
+  "path": "src/l1_lowmem/phg_bridge.py",
+  "bytes": 51740,
+  "sha256": "836d1f69a69f10fb4c86dc2f5efa38b658cc057ced318b44c77c1e9d6f671f2e"
+ },
+ "host_before": {
+  "utc": "2026-09-13T19:03:45Z",
+  "host_total_mb": 16069,
+  "host_available_mb": 1759,
+  "foreign_python_processes_over_1GB_rss_untouched": [
+   {
+    "pid": 8628,
+    "name": "python.exe",
+    "rss_mb": 4374,
+    "started": "2026-09-13T20:29:08"
+   }
+  ]
+ },
+ "contract": {
+  "parameters": [
+   [
+    "DEBUG_LEVEL",
+    "0"
+   ],
+   [
+    "NUM_GID_ENTRIES",
+    "1"
+   ],
+   [
+    "NUM_LID_ENTRIES",
+    "1"
+   ],
+   [
+    "OBJ_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "EDGE_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "DETERMINISTIC",
+    "1"
+   ],
+   [
+    "RETURN_LISTS",
+    "PARTS"
+   ],
+   [
+    "REMAP",
+    "0"
+   ],
+   [
+    "LB_METHOD",
+    "HYPERGRAPH"
+   ],
+   [
+    "HYPERGRAPH_PACKAGE",
+    "PHG"
+   ],
+   [
+    "LB_APPROACH",
+    "PARTITION"
+   ],
+   [
+    "IMBALANCE_TOL",
+    "1.03"
+   ],
+   [
+    "PHG_CUT_OBJECTIVE",
+    "CONNECTIVITY"
+   ],
+   [
+    "PHG_EDGE_SIZE_THRESHOLD",
+    "1.0"
+   ],
+   [
+    "PHG_RANDOMIZE_INPUT",
+    "0"
+   ],
+   [
+    "PHG_MULTILEVEL",
+    "1"
+   ],
+   [
+    "PHG_COARSENING_METHOD",
+    "AGG"
+   ],
+   [
+    "PHG_COARSEPARTITION_METHOD",
+    "AUTO"
+   ],
+   [
+    "PHG_REFINEMENT_METHOD",
+    "FM"
+   ],
+   [
+    "PHG_REFINEMENT_QUALITY",
+    "1"
+   ],
+   [
+    "PHG_EDGE_WEIGHT_OPERATION",
+    "ERROR"
+   ],
+   [
+    "PHG_PROCESSOR_REDUCTION_LIMIT",
+    "0.5"
+   ],
+   [
+    "PHG_REPART_MULTIPLIER",
+    "100"
+   ],
+   [
+    "CHECK_HYPERGRAPH",
+    "1"
+   ],
+   [
+    "PHG_OUTPUT_LEVEL",
+    "1"
+   ]
+  ],
+  "mpi_ranks": 4,
+  "driver": {
+   "path": "/home/swastik/phg_build/phg_driver",
+   "sha256": "a36e1b3dbcef2cf5f20c09cc6ab014ab13ce2dcfeb3ec7c1041aa00d14d7ccb9"
+  },
+  "driver_source": {
+   "path": "src/l1_lowmem/phg_driver/phg_driver.c",
+   "bytes": 18529,
+   "sha256": "cf5099851282444d0b6c87b399210ae3dd6bc09f8fe2a5f7b49d315ce4b133b4"
+  },
+  "packages": {
+   "libopenmpi-dev:amd64": "4.1.2-2ubuntu1",
+   "libtrilinos-zoltan-13.2:amd64": "13.2.0-1ubuntu1",
+   "libtrilinos-zoltan-dev:amd64": "13.2.0-1ubuntu1",
+   "openmpi-bin": "4.1.2-2ubuntu1"
+  },
+  "repair": "PHG_NONEMPTY_REPAIR_V1"
+ },
+ "stages": {
+  "1_input_verified": {
+   "stage": "1_H4_SK_input_verified",
+   "utc": "2026-09-13T19:03:50Z",
+   "N": 117534,
+   "M": 250732,
+   "P": 6014938,
+   "k": 1175,
+   "ORIGINAL_STRUCTURE_SHA256": "27628d1c0319dcbbdf3fa932b647ce2a9b21859cea716402b11da3067e281a75",
+   "structure_digest_recomputed": "27628d1c0319dcbbdf3fa932b647ce2a9b21859cea716402b11da3067e281a75",
+   "structure_stats": {
+    "N": 117534,
+    "M": 250732,
+    "P": 6014938,
+    "weight_sum": 57430819,
+    "weight_min": 10,
+    "weight_max": 1000,
+    "size_min": 2,
+    "size_max": 100,
+    "node_weights": "unit",
+    "isolated_nodes": 0
+   },
+   "hypergraph_content_digest": "b19fd504bad7997cd254876ed7294128ab1724a95ccc52a18aed3b2a3e5d27bc",
+   "H4_SK_npz_sha256": "2b1edc6dfcb045b7799459c4582bb2fbbe6d591825a48db45366597a97c1cd72",
+   "reconstruction_gate": {
+    "gate_digest": "PASS",
+    "gate_bytes": "PASS"
+   },
+   "shards": [
+    {
+     "index": 0,
+     "sha256": "e9ed3305d5458771e0e6986c31b5b014f51ba5de3b6752fb9c1fe78e0b40acb6",
+     "nodes": 5000,
+     "pins": 225980
+    },
+    {
+     "index": 1,
+     "sha256": "e01d216518f8c3a4fea8b801bdcb02cba94e61e0f93c33ec67e96864b8bfae25",
+     "nodes": 5000,
+     "pins": 259695
+    },
+    {
+     "index": 2,
+     "sha256": "506ae942a281067951fe86f2b3c53fbb3914b7076366d961e5e4b9db99918d04",
+     "nodes": 5000,
+     "pins": 270847
+    },
+    {
+     "index": 3,
+     "sha256": "4d62180c0422a375e3750bc29ed1b547cc3873ecd2056ed55c259e6771b26eb5",
+     "nodes": 5000,
+     "pins": 237280
+    },
+    {
+     "index": 4,
+     "sha256": "19056a35bc42b7b93cf27ea0ba42c2d02d9800f9e3a4fff821f01fc25020bfa0",
+     "nodes": 5000,
+     "pins": 255412
+    },
+    {
+     "index": 5,
+     "sha256": "94c0f48e84ff28f5b9d1108b6d4278e78c9af0fd147fa655cbcfc2fa21029bdc",
+     "nodes": 5000,
+     "pins": 257633
+    },
+    {
+     "index": 6,
+     "sha256": "59a03fbdf3ed25d515762787b2d221f656c285c3a80b3217ca5853f72007bbb9",
+     "nodes": 5000,
+     "pins": 241123
+    },
+    {
+     "index": 7,
+     "sha256": "838f4a58d2e612f656bce74a3b5f17ea1a4766095f66f49d75232178085faf3b",
+     "nodes": 5000,
+     "pins": 278706
+    },
+    {
+     "index": 8,
+     "sha256": "bcda34a305874008bf0ee35446258010f02b79272cc6b924bcdaf8cdc1dd09ed",
+     "nodes": 5000,
+     "pins": 240075
+    },
+    {
+     "index": 9,
+     "sha256": "905aac60f78ada08422cf57588c664676e596f0c1281611f371a03b801a4cea3",
+     "nodes": 5000,
+     "pins": 227894
+    },
+    {
+     "index": 10,
+     "sha256": "3107f565613fe929c6bd33542a335f99735631a6e579c80b12e3ad466bf5b5d3",
+     "nodes": 5000,
+     "pins": 259193
+    },
+    {
+     "index": 11,
+     "sha256": "f802af9ec645f3ec25e5ef08f0418b5a650dee8f82f273863f6a7583f128022e",
+     "nodes": 5000,
+     "pins": 249461
+    },
+    {
+     "index": 12,
+     "sha256": "1a3994ef9798568c9b2b22c18a20d249bb47481f6607278d5c5f01999a55bc86",
+     "nodes": 5000,
+     "pins": 254847
+    },
+    {
+     "index": 13,
+     "sha256": "30695c53a5cf56f77236a367b19ba67b6460ddca12e0fdd475a14c140005d4e1",
+     "nodes": 5000,
+     "pins": 243329
+    },
+    {
+     "index": 14,
+     "sha256": "afdd8b1584f7d84884d07e9d22e50c663066290e1560999ee7e68640969059c5",
+     "nodes": 5000,
+     "pins": 252276
+    },
+    {
+     "index": 15,
+     "sha256": "d2ee36b8209c7f19ca512245490649c60e2debe60d46dc28a3715a4d4d329f56",
+     "nodes": 5000,
+     "pins": 263414
+    },
+    {
+     "index": 16,
+     "sha256": "df429f33dc2db4863682942b7d05f5f40ae4db1ea29ac87d4b4cd8f6e46945fc",
+     "nodes": 5000,
+     "pins": 254133
+    },
+    {
+     "index": 17,
+     "sha256": "f01c868a254dbf45cb038b499bb286e3703ba6861ece26f4a0b64b81ca814875",
+     "nodes": 5000,
+     "pins": 270373
+    },
+    {
+     "index": 18,
+     "sha256": "5d0f39a121193e10ceff1f1702f8222a06ea83b9243104deb3d82a802d5b6c16",
+     "nodes": 5000,
+     "pins": 262040
+    },
+    {
+     "index": 19,
+     "sha256": "66231dceb57eb7dff03faa2136526131d43b76618a3dc6f28597294479599ed3",
+     "nodes": 5000,
+     "pins": 263756
+    },
+    {
+     "index": 20,
+     "sha256": "ce30415b1d8ead26d28d8d5ba0464f46ebaa94089ba67e983915e75e3229f344",
+     "nodes": 5000,
+     "pins": 284695
+    },
+    {
+     "index": 21,
+     "sha256": "7baa142747939a730871e96ed1e9baee9c434e14babd968fde50a2673a28db81",
+     "nodes": 5000,
+     "pins": 292730
+    },
+    {
+     "index": 22,
+     "sha256": "99abd3fb4b189200d65a6725dc4a1b5759c2fb6d95af4ec1fb09274c28525d07",
+     "nodes": 5000,
+     "pins": 250580
+    },
+    {
+     "index": 23,
+     "sha256": "40d7efd87a3e0f57868606d9f14ff7afd787bba3b0fb9e70f284b15328811e86",
+     "nodes": 2534,
+     "pins": 119466
+    }
+   ],
+   "stream_manifest": {
+    "path": "data/l1_lowmem/musique/freight/stream_manifest.txt",
+    "sha256": "25f03c1aae16d0406ad22027b588ebbb463d0f17971aa87564f5e60a09c5271b",
+    "H4_SK_STREAM_V1_manifest_sha256": "1cc3700e0de7a53b9cd6d4641f2b2d47298d31afb23e0884fa9e88d74dd7c236",
+    "shards": 24,
+    "shard_nodes": 5000
+   },
+   "official_netl_sha256": "f8ad7b5d61ddda32ad200f88c2c5ff68ad846c76162e5c0d654aee2690a6aa32",
+   "seconds": 5.4,
+   "py_peak_mb": 317.3
+  },
+  "2_structure_gate": {
+   "gate": "PASS",
+   "problems": [],
+   "per_rank": [
+    {
+     "rank": 0,
+     "objects": 30000,
+     "pins": 1506847,
+     "edge_weight_entries": 207926
+    },
+    {
+     "rank": 1,
+     "objects": 30000,
+     "pins": 1496452,
+     "edge_weight_entries": 205872
+    },
+    {
+     "rank": 2,
+     "objects": 30000,
+     "pins": 1538372,
+     "edge_weight_entries": 207918
+    },
+    {
+     "rank": 3,
+     "objects": 27534,
+     "pins": 1473267,
+     "edge_weight_entries": 202377
+    }
+   ],
+   "weight_reception": {
+    "python_weighted_km1_of_rank_ownership": 93620462,
+    "zoltan_cutl_gate_mode": 93620464.0,
+    "relative_diff": 2.1e-08,
+    "tolerance_relative": 0.0001
+   },
+   "N_returned": 117534,
+   "M_with_pins": 250732,
+   "P_returned": 6014938,
+   "weight_sum": 57430819,
+   "weight_min": 10,
+   "weight_max": 1000,
+   "vertex_weights": "unit",
+   "digest_from_queries": "27628d1c0319dcbbdf3fa932b647ce2a9b21859cea716402b11da3067e281a75",
+   "ORIGINAL_STRUCTURE_SHA256": "27628d1c0319dcbbdf3fa932b647ce2a9b21859cea716402b11da3067e281a75",
+   "expected": {
+    "N": 117534,
+    "M": 250732,
+    "P": 6014938
+   },
+   "stage": "2_PHG_input_callback_manifest",
+   "run": "G",
+   "dump_sha256": {
+    "cs_rank0.bin": "f1019f231b380a791f2dbc04fd53050356c1266e09ec3e2f05f19b67d8eaab4e",
+    "cs_rank1.bin": "85b0c04a769d69b14fa74a3f7ac368fa3f240b7506720cfc8d0dbeced88dabb2",
+    "cs_rank2.bin": "dc81da18d3361dc0b41efc1117761f66fc98d6127bcfae1f603050c9e27e715e",
+    "cs_rank3.bin": "1d39702d50104bd58fcb33d79799b49cb84ecb591a949f0011ca48beb9165cf9",
+    "ewts_rank0.bin": "6353dd87eb2703515e6ff16cc5a85a6a78853cc7fdf5a86684316b638f6b7a61",
+    "ewts_rank1.bin": "49f7907a5f6111a7bae90f2ff419e59f8ca909fc66830df031a7df44383eefb4",
+    "ewts_rank2.bin": "0a64ee4df56afe3240ac26c206c9075ed8564e656750b957a0c0f9d679abbd97",
+    "ewts_rank3.bin": "d74e216158c12ac508f055858dbb65125a07b1140dbe07fc5d457417187d3a3c",
+    "objs_rank0.bin": "8c68c3304680b6a026d1ce66fd57383c2ab56a7b7fe1c33c09c797c9d7b6c3e2",
+    "objs_rank1.bin": "a0a331445d22e8e4569f30d3dcaf3143db3ac29c6812b496ef4bfd3faf60795a",
+    "objs_rank2.bin": "27bdccc882a7e7c488568288069d68b34de55ac7d9076c20fb88f45e8b9ef1e2",
+    "objs_rank3.bin": "43e207e8c06bcd30dc8b5c5a7377b9a08136b5223a27e089fa50da49d3c2881e"
+   },
+   "global_from_queries": {
+    "objects": 117534,
+    "pins": 6014938,
+    "edge_weight_entries": 824093
+   },
+   "zoltan_removed_or_warning_lines": [],
+   "partition_run_dumps_identical": true
+  },
+  "3_partition": {
+   "stage": "3_completed_PHG_partition",
+   "run": "R1",
+   "validity_raw": {
+    "length_ok": true,
+    "ids_in_range": true,
+    "empty_blocks": 9,
+    "max_block": 104,
+    "contract_bound_ceil_1.03_N_over_k": 104,
+    "zoltan_tolerance_bound_1.03_x_mean": 103.03,
+    "gate": "PARTITION_INVALID"
+   },
+   "metrics_raw": {
+    "km1_weighted": 85311179,
+    "cut_weighted": 38563215,
+    "cut_nets": 211235,
+    "nets": 250732,
+    "cut_net_fraction": 0.842473,
+    "lambda_mean": 8.9773,
+    "lambda_max": 97,
+    "blocks": {
+     "k": 1175,
+     "used": 1166,
+     "empty": 9,
+     "min": 0,
+     "p50": 103.0,
+     "p95": 103.0,
+     "max": 104,
+     "mean": 100.029,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0397,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "per_family_note": {
+     "STRUCT": {
+      "hyperedges_precap": 107676,
+      "pins_precap": 5410236,
+      "anchors_over_cap": 9727,
+      "hyperedges_out": 136125,
+      "pins_written": 5438685,
+      "anchor_duplication_pins": 28449,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 100
+     },
+     "KNN": {
+      "hyperedges_precap": 114607,
+      "pins_precap": 576253,
+      "anchors_over_cap": 0,
+      "hyperedges_out": 114607,
+      "pins_written": 576253,
+      "anchor_duplication_pins": 0,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 41
+     }
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 2651280,
+      "cut": 2561853,
+      "edge_cut_fraction": 0.9663
+     },
+     "KNN": {
+      "edges": 230823,
+      "cut": 95983,
+      "edge_cut_fraction": 0.4158
+     },
+     "NERX": {
+      "edges": 733541,
+      "cut": 647844,
+      "edge_cut_fraction": 0.8832
+     }
+    }
+   },
+   "partition_sha256_txt": {
+    "0": "fcb68c842506c4340714f5e20475ad0b3bdb4ae0a3bb94ced5c248c37c2e1fa4",
+    "1": "53abfe0e4adb6df45aa12172277d4e07492cb9217538887176550da6fe5288a6",
+    "2": "7ce35918fbb791254c70b8a13caf800ed9a2fa80f25eae7d1e0864375d0ab436",
+    "3": "ab21dfaabe5c7be9358c5bd42104cf10f55b3266ca51156671e1ba366baf273f"
+   },
+   "vector_sha256_raw": "6d20c3a0a594c358ddbc01f909b51554fe204a79743acbd8cecbf3a43c54ec2d",
+   "zoltan_eval": {
+    "cutl_global": 85311176.0,
+    "cutn_global": 38563216.0,
+    "imbalance": 1.039699,
+    "obj_imbalance": 1.039699,
+    "nobj_min": 0.0,
+    "nobj_max": 104.0,
+    "nobj_sum": 117534.0
+   },
+   "python_km1_vs_zoltan_cutl": {
+    "python_km1": 85311179,
+    "zoltan_cutl_float": 85311176.0,
+    "relative_diff": 4e-08,
+    "consistent_within_float32": true
+   },
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     182152,
+     167036,
+     169744,
+     168088
+    ],
+    "ru_maxrss_kb_per_rank": [
+     182152,
+     167036,
+     169744,
+     168088
+    ],
+    "max_rank_peak_kb": 182152,
+    "sum_of_rank_peaks_kb": 687020,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 34.824,
+    "driver_total_seconds_rank0": 65.71,
+    "load_seconds_per_rank": [
+     26.981,
+     26.69,
+     27.501,
+     26.441
+    ],
+    "job_wall_seconds": 76.87
+   },
+   "repeat": {
+    "identical_partition": true,
+    "n_diff": 0,
+    "km1_repeat": 85311179,
+    "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+   },
+   "mpi_ranks": 4,
+   "py_peak_mb": 450.4
+  },
+  "3b_repair": {
+   "stage": "3b_PHG_NONEMPTY_REPAIR_V1",
+   "noop": false,
+   "empty_blocks": [
+    330,
+    358,
+    365,
+    366,
+    367,
+    1164,
+    1165,
+    1171,
+    1173
+   ],
+   "moves": [
+    {
+     "empty_block": 330,
+     "node_position": 663,
+     "donor_block": 866,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 396,
+     "incident_nets": 68,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117534
+    },
+    {
+     "empty_block": 358,
+     "node_position": 692,
+     "donor_block": 1041,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 395,
+     "incident_nets": 12,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117533
+    },
+    {
+     "empty_block": 365,
+     "node_position": 800,
+     "donor_block": 684,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 394,
+     "incident_nets": 22,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117532
+    },
+    {
+     "empty_block": 366,
+     "node_position": 823,
+     "donor_block": 2,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 393,
+     "incident_nets": 10,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117531
+    },
+    {
+     "empty_block": 367,
+     "node_position": 1205,
+     "donor_block": 189,
+     "donor_size_before": 104,
+     "donor_size_after": 103,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 392,
+     "incident_nets": 4,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117530
+    },
+    {
+     "empty_block": 1164,
+     "node_position": 1225,
+     "donor_block": 411,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 391,
+     "incident_nets": 5,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117529
+    },
+    {
+     "empty_block": 1165,
+     "node_position": 1391,
+     "donor_block": 68,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 390,
+     "incident_nets": 9,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117528
+    },
+    {
+     "empty_block": 1171,
+     "node_position": 1713,
+     "donor_block": 412,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 389,
+     "incident_nets": 4,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117527
+    },
+    {
+     "empty_block": 1173,
+     "node_position": 2051,
+     "donor_block": 593,
+     "donor_size_before": 104,
+     "donor_size_after": 103,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 388,
+     "incident_nets": 12,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117526
+    }
+   ],
+   "postconditions": {
+    "same_N": true,
+    "assigned_once": true,
+    "same_k": true,
+    "empty_blocks_after": 0,
+    "max_block_after": 104,
+    "contract_bound": 104,
+    "H4_SK_unchanged": true,
+    "moves": 9,
+    "empty_blocks_before": 9,
+    "moves_equal_empties": true,
+    "nodes_changed": 9,
+    "nodes_changed_equal_moves": true,
+    "km1_consistent": true,
+    "PASS": true
+   },
+   "before": {
+    "validity": {
+     "length_ok": true,
+     "ids_in_range": true,
+     "empty_blocks": 9,
+     "max_block": 104,
+     "contract_bound_ceil_1.03_N_over_k": 104,
+     "zoltan_tolerance_bound_1.03_x_mean": 103.03,
+     "gate": "PARTITION_INVALID"
+    },
+    "km1_weighted": 85311179,
+    "cut_weighted": 38563215,
+    "blocks": {
+     "k": 1175,
+     "used": 1166,
+     "empty": 9,
+     "min": 0,
+     "p50": 103.0,
+     "p95": 103.0,
+     "max": 104,
+     "mean": 100.029,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0397,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 2651280,
+      "cut": 2561853,
+      "edge_cut_fraction": 0.9663
+     },
+     "KNN": {
+      "edges": 230823,
+      "cut": 95983,
+      "edge_cut_fraction": 0.4158
+     },
+     "NERX": {
+      "edges": 733541,
+      "cut": 647844,
+      "edge_cut_fraction": 0.8832
+     }
+    },
+    "vector_sha256": "6d20c3a0a594c358ddbc01f909b51554fe204a79743acbd8cecbf3a43c54ec2d"
+   },
+   "after": {
+    "validity": {
+     "length_ok": true,
+     "ids_in_range": true,
+     "empty_blocks": 0,
+     "max_block": 104,
+     "contract_bound_ceil_1.03_N_over_k": 104,
+     "zoltan_tolerance_bound_1.03_x_mean": 103.03,
+     "gate": "PASS"
+    },
+    "km1_weighted": 85311179,
+    "cut_weighted": 38563215,
+    "blocks": {
+     "k": 1175,
+     "used": 1175,
+     "empty": 0,
+     "min": 1,
+     "p50": 103.0,
+     "p95": 103.0,
+     "max": 104,
+     "mean": 100.029,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0397,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 2651280,
+      "cut": 2561853,
+      "edge_cut_fraction": 0.9663
+     },
+     "KNN": {
+      "edges": 230823,
+      "cut": 95983,
+      "edge_cut_fraction": 0.4158
+     },
+     "NERX": {
+      "edges": 733541,
+      "cut": 647845,
+      "edge_cut_fraction": 0.8832
+     }
+    },
+    "vector_sha256": "a62d040d2d60412765fba065ac9b630b58e60de79fa9a69c1ff586eff82637c8",
+    "delta_km1_total": 0,
+    "struct_cut_delta": 0.0,
+    "knn_cut_delta": 0.0,
+    "repaired_npy": {
+     "path": "data/l1_lowmem/musique/phg_repair1/repaired.npy",
+     "bytes": 940400,
+     "sha256": "5886ddb62c0eba6b841b9f429444c51782f1bb9413feab4041c01d14e69a51c7"
+    }
+   },
+   "seconds": 43.7,
+   "py_peak_mb": 591.9
+  }
+ },
+ "runs": {
+  "G": {
+   "name": "G",
+   "mode": "gate",
+   "np": 4,
+   "rc": 0,
+   "wall_seconds_outer": 35.4,
+   "job_time_v": {
+    "user_seconds": 22.01,
+    "wall_seconds": 35.01,
+    "peak_rss_kb": 148108,
+    "exit_status": 0
+   },
+   "dir": "data/l1_lowmem/musique/phg/G",
+   "ranks": [
+    {
+     "rank": 0,
+     "json": {
+      "rank": 0,
+      "nprocs": 4,
+      "mode": "gate",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       0,
+       6
+      ],
+      "shard_count": 24,
+      "first_gid": 0,
+      "nloc": 30000,
+      "npins_loc": 1506847,
+      "nedge_loc": 207926,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 28.289,
+       "partition_wall": 0.0,
+       "total": 34.193
+      },
+      "partition_rc": 0,
+      "changes": 0,
+      "num_export": 0,
+      "num_import": 0,
+      "ru_maxrss_kb": 140268,
+      "calls": {
+       "num_obj": 1,
+       "obj_list": 1,
+       "hg_size_cs": 1,
+       "hg_cs": 1,
+       "hg_size_edge_wts": 1,
+       "hg_edge_wts": 1,
+       "part_multi": 1
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 93620464.0,
+       "cutn_global": 53047860.0,
+       "imbalance": 299.913239,
+       "obj_imbalance": 299.913239,
+       "nobj_min": 27534.0,
+       "nobj_max": 30000.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 5.52,
+      "wall_seconds": 34.64,
+      "peak_rss_kb": 140268,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 1,
+     "json": {
+      "rank": 1,
+      "nprocs": 4,
+      "mode": "gate",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       6,
+       12
+      ],
+      "shard_count": 24,
+      "first_gid": 30000,
+      "nloc": 30000,
+      "npins_loc": 1496452,
+      "nedge_loc": 205872,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 28.193,
+       "partition_wall": 0.0,
+       "total": 34.197
+      },
+      "partition_rc": 0,
+      "changes": 0,
+      "num_export": 0,
+      "num_import": 0,
+      "ru_maxrss_kb": 143564,
+      "calls": {
+       "num_obj": 1,
+       "obj_list": 1,
+       "hg_size_cs": 1,
+       "hg_cs": 1,
+       "hg_size_edge_wts": 1,
+       "hg_edge_wts": 1,
+       "part_multi": 1
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 93620464.0,
+       "cutn_global": 53047860.0,
+       "imbalance": 299.913239,
+       "obj_imbalance": 299.913239,
+       "nobj_min": 27534.0,
+       "nobj_max": 30000.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 5.6,
+      "wall_seconds": 34.62,
+      "peak_rss_kb": 143564,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 2,
+     "json": {
+      "rank": 2,
+      "nprocs": 4,
+      "mode": "gate",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       12,
+       18
+      ],
+      "shard_count": 24,
+      "first_gid": 60000,
+      "nloc": 30000,
+      "npins_loc": 1538372,
+      "nedge_loc": 207918,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 29.174,
+       "partition_wall": 0.0,
+       "total": 34.197
+      },
+      "partition_rc": 0,
+      "changes": 0,
+      "num_export": 0,
+      "num_import": 0,
+      "ru_maxrss_kb": 148108,
+      "calls": {
+       "num_obj": 1,
+       "obj_list": 1,
+       "hg_size_cs": 1,
+       "hg_cs": 1,
+       "hg_size_edge_wts": 1,
+       "hg_edge_wts": 1,
+       "part_multi": 1
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 93620464.0,
+       "cutn_global": 53047860.0,
+       "imbalance": 299.913239,
+       "obj_imbalance": 299.913239,
+       "nobj_min": 27534.0,
+       "nobj_max": 30000.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 4.72,
+      "wall_seconds": 34.62,
+      "peak_rss_kb": 148108,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 3,
+     "json": {
+      "rank": 3,
+      "nprocs": 4,
+      "mode": "gate",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       18,
+       24
+      ],
+      "shard_count": 24,
+      "first_gid": 90000,
+      "nloc": 27534,
+      "npins_loc": 1473267,
+      "nedge_loc": 202377,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 27.943,
+       "partition_wall": 0.0,
+       "total": 34.197
+      },
+      "partition_rc": 0,
+      "changes": 0,
+      "num_export": 0,
+      "num_import": 0,
+      "ru_maxrss_kb": 145080,
+      "calls": {
+       "num_obj": 1,
+       "obj_list": 1,
+       "hg_size_cs": 1,
+       "hg_cs": 1,
+       "hg_size_edge_wts": 1,
+       "hg_edge_wts": 1,
+       "part_multi": 1
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 93620464.0,
+       "cutn_global": 53047860.0,
+       "imbalance": 299.913239,
+       "obj_imbalance": 299.913239,
+       "nobj_min": 27534.0,
+       "nobj_max": 30000.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 6.09,
+      "wall_seconds": 34.61,
+      "peak_rss_kb": 145080,
+      "exit_status": 0
+     }
+    }
+   ],
+   "zoltan_stdout_lines": [
+    "phg_driver gate: nprocs 4 k 1175 N 117534 M 250732 | queries returned objects 117534 pins 6014938 edge-weight entries 824093 | partition_wall 0.000s total 34.193s | eval cutl 93620464.0 cutn 53047860.0 imbalance 299.9132"
+   ],
+   "stderr_tail": [],
+   "zoltan_removed_or_warning_lines": [],
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     140268,
+     143564,
+     148108,
+     145080
+    ],
+    "ru_maxrss_kb_per_rank": [
+     140268,
+     143564,
+     148108,
+     145080
+    ],
+    "max_rank_peak_kb": 148108,
+    "sum_of_rank_peaks_kb": 577020,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 0.0,
+    "driver_total_seconds_rank0": 34.193,
+    "load_seconds_per_rank": [
+     28.289,
+     28.193,
+     29.174,
+     27.943
+    ],
+    "job_wall_seconds": 35.01
+   },
+   "global_from_queries": {
+    "objects": 117534,
+    "pins": 6014938,
+    "edge_weight_entries": 824093
+   },
+   "params_applied_rank0": {
+    "DEBUG_LEVEL": "0",
+    "NUM_GID_ENTRIES": "1",
+    "NUM_LID_ENTRIES": "1",
+    "OBJ_WEIGHT_DIM": "1",
+    "EDGE_WEIGHT_DIM": "1",
+    "DETERMINISTIC": "1",
+    "RETURN_LISTS": "PARTS",
+    "REMAP": "0",
+    "LB_METHOD": "HYPERGRAPH",
+    "HYPERGRAPH_PACKAGE": "PHG",
+    "LB_APPROACH": "PARTITION",
+    "IMBALANCE_TOL": "1.03",
+    "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+    "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+    "PHG_RANDOMIZE_INPUT": "0",
+    "PHG_MULTILEVEL": "1",
+    "PHG_COARSENING_METHOD": "AGG",
+    "PHG_COARSEPARTITION_METHOD": "AUTO",
+    "PHG_REFINEMENT_METHOD": "FM",
+    "PHG_REFINEMENT_QUALITY": "1",
+    "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+    "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+    "PHG_REPART_MULTIPLIER": "100",
+    "CHECK_HYPERGRAPH": "1",
+    "PHG_OUTPUT_LEVEL": "1",
+    "NUM_GLOBAL_PARTS": "1175"
+   },
+   "zoltan_eval": {
+    "cutl_global": 93620464.0,
+    "cutn_global": 53047860.0,
+    "imbalance": 299.913239,
+    "obj_imbalance": 299.913239,
+    "nobj_min": 27534.0,
+    "nobj_max": 30000.0,
+    "nobj_sum": 117534.0
+   },
+   "dump_sha256": {
+    "cs_rank0.bin": "f1019f231b380a791f2dbc04fd53050356c1266e09ec3e2f05f19b67d8eaab4e",
+    "cs_rank1.bin": "85b0c04a769d69b14fa74a3f7ac368fa3f240b7506720cfc8d0dbeced88dabb2",
+    "cs_rank2.bin": "dc81da18d3361dc0b41efc1117761f66fc98d6127bcfae1f603050c9e27e715e",
+    "cs_rank3.bin": "1d39702d50104bd58fcb33d79799b49cb84ecb591a949f0011ca48beb9165cf9",
+    "ewts_rank0.bin": "6353dd87eb2703515e6ff16cc5a85a6a78853cc7fdf5a86684316b638f6b7a61",
+    "ewts_rank1.bin": "49f7907a5f6111a7bae90f2ff419e59f8ca909fc66830df031a7df44383eefb4",
+    "ewts_rank2.bin": "0a64ee4df56afe3240ac26c206c9075ed8564e656750b957a0c0f9d679abbd97",
+    "ewts_rank3.bin": "d74e216158c12ac508f055858dbb65125a07b1140dbe07fc5d457417187d3a3c",
+    "objs_rank0.bin": "8c68c3304680b6a026d1ce66fd57383c2ab56a7b7fe1c33c09c797c9d7b6c3e2",
+    "objs_rank1.bin": "a0a331445d22e8e4569f30d3dcaf3143db3ac29c6812b496ef4bfd3faf60795a",
+    "objs_rank2.bin": "27bdccc882a7e7c488568288069d68b34de55ac7d9076c20fb88f45e8b9ef1e2",
+    "objs_rank3.bin": "43e207e8c06bcd30dc8b5c5a7377b9a08136b5223a27e089fa50da49d3c2881e"
+   }
+  },
+  "R1": {
+   "name": "R1",
+   "mode": "partition",
+   "np": 4,
+   "rc": 0,
+   "wall_seconds_outer": 88.28,
+   "job_time_v": {
+    "user_seconds": 150.14,
+    "wall_seconds": 76.87,
+    "peak_rss_kb": 182152,
+    "exit_status": 0
+   },
+   "dir": "data/l1_lowmem/musique/phg/R1",
+   "ranks": [
+    {
+     "rank": 0,
+     "json": {
+      "rank": 0,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       0,
+       6
+      ],
+      "shard_count": 24,
+      "first_gid": 0,
+      "nloc": 30000,
+      "npins_loc": 1506847,
+      "nedge_loc": 207926,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 26.981,
+       "partition_wall": 34.824,
+       "total": 65.71
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 30000,
+      "num_import": -1,
+      "ru_maxrss_kb": 182152,
+      "calls": {
+       "num_obj": 4,
+       "obj_list": 3,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 3
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 85311176.0,
+       "cutn_global": 38563216.0,
+       "imbalance": 1.039699,
+       "obj_imbalance": 1.039699,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 37.4,
+      "wall_seconds": 66.43,
+      "peak_rss_kb": 182152,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 1,
+     "json": {
+      "rank": 1,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       6,
+       12
+      ],
+      "shard_count": 24,
+      "first_gid": 30000,
+      "nloc": 30000,
+      "npins_loc": 1496452,
+      "nedge_loc": 205872,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 26.69,
+       "partition_wall": 34.824,
+       "total": 65.711
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 30000,
+      "num_import": -1,
+      "ru_maxrss_kb": 167036,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 85311176.0,
+       "cutn_global": 38563216.0,
+       "imbalance": 1.039699,
+       "obj_imbalance": 1.039699,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 37.37,
+      "wall_seconds": 66.43,
+      "peak_rss_kb": 167036,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 2,
+     "json": {
+      "rank": 2,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       12,
+       18
+      ],
+      "shard_count": 24,
+      "first_gid": 60000,
+      "nloc": 30000,
+      "npins_loc": 1538372,
+      "nedge_loc": 207918,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 27.501,
+       "partition_wall": 34.824,
+       "total": 65.71
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 30000,
+      "num_import": -1,
+      "ru_maxrss_kb": 169744,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 85311176.0,
+       "cutn_global": 38563216.0,
+       "imbalance": 1.039699,
+       "obj_imbalance": 1.039699,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 36.87,
+      "wall_seconds": 66.43,
+      "peak_rss_kb": 169744,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 3,
+     "json": {
+      "rank": 3,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       18,
+       24
+      ],
+      "shard_count": 24,
+      "first_gid": 90000,
+      "nloc": 27534,
+      "npins_loc": 1473267,
+      "nedge_loc": 202377,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 26.441,
+       "partition_wall": 34.824,
+       "total": 65.71
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 27534,
+      "num_import": -1,
+      "ru_maxrss_kb": 168088,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 85311176.0,
+       "cutn_global": 38563216.0,
+       "imbalance": 1.039699,
+       "obj_imbalance": 1.039699,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 38.1,
+      "wall_seconds": 66.42,
+      "peak_rss_kb": 168088,
+      "exit_status": 0
+     }
+    }
+   ],
+   "zoltan_stdout_lines": [
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   0 |V|= 58767 |E|=125366 #pins=1529655 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   0 |V|= 58767 |E|=125366 #pins=1475723 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   0 |V|= 58767 |E|=125366 #pins=1536168 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   0 |V|= 58767 |E|=125366 #pins=1473392 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   1 |V|= 26196 |E|=116005 #pins=1003734 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   1 |V|= 26196 |E|=116486 #pins=1004722 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   1 |V|= 26207 |E|=116005 #pins=1072660 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   1 |V|= 26207 |E|=116486 #pins=1071418 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   2 |V|= 11717 |E|=107137 #pins=823083 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   2 |V|= 11617 |E|=107137 #pins=770831 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   2 |V|= 11717 |E|=107287 #pins=828565 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   2 |V|= 11617 |E|=107287 #pins=774198 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   3 |V|= 10335 |E|= 99577 #pins=1317914 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   3 |V|= 10335 |E|= 99577 #pins=1296087 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   4 |V|=  4566 |E|= 93468 #pins=1106465 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   4 |V|=  4566 |E|= 93276 #pins=1105861 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   5 |V|=  1982 |E|= 87486 #pins=948801 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   5 |V|=  1982 |E|= 87013 #pins=938053 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->Local Ratio Cut= 15795390.00   Global Ratio Cut= 15795390.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->Local Ratio Cut= 16189840.00   Global Ratio Cut= 15795390.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->FINAL   5 |V|=  1982 |E|= 87013 #pins=938053 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=15008442.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->FINAL   5 |V|=  1982 |E|= 87486 #pins=948801 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=15008442.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->FINAL   4 |V|=  4566 |E|= 93468 #pins=1106465 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=13965936.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->FINAL   4 |V|=  4566 |E|= 93276 #pins=1105861 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=13965936.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->FINAL   3 |V|= 10335 |E|= 99577 #pins=1317914 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=12795478.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->FINAL   3 |V|= 10335 |E|= 99577 #pins=1296087 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=12795478.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   2 |V|= 11617 |E|=107287 #pins=774198 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=11535260.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   2 |V|= 11617 |E|=107137 #pins=770831 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=11535260.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   2 |V|= 11717 |E|=107137 #pins=823083 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=11535260.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   2 |V|= 11717 |E|=107287 #pins=828565 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=11535260.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   1 |V|= 26196 |E|=116486 #pins=1004722 2350/AGG/AUTO/FM p=2 bal=1.01 cutl=10342259.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   1 |V|= 26196 |E|=116005 #pins=1003734 2350/AGG/AUTO/FM p=2 bal=1.01 cutl=10342259.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   1 |V|= 26207 |E|=116486 #pins=1071418 2350/AGG/AUTO/FM p=2 bal=1.01 cutl=10342259.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   1 |V|= 26207 |E|=116005 #pins=1072660 2350/AGG/AUTO/FM p=2 bal=1.01 cutl=10342259.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   0 |V|= 58767 |E|=125366 #pins=1529655 2350/AGG/AUTO/FM p=2 bal=1.00 cutl=9279856.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   0 |V|= 58767 |E|=125366 #pins=1475723 2350/AGG/AUTO/FM p=2 bal=1.00 cutl=9279856.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   0 |V|= 58767 |E|=125366 #pins=1473392 2350/AGG/AUTO/FM p=2 bal=1.00 cutl=9279856.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   0 |V|= 58767 |E|=125366 #pins=1536168 2350/AGG/AUTO/FM p=2 bal=1.00 cutl=9279856.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Rdivide(0, 1174): 9279856.0",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Rdivide(0, 1174): 9279856.0",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Rdivide(0, 1174): 9279856.0",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Rdivide(0, 1174): 9279856.0",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Left: H(29566, 80241, 586562) ----> H(0, 0, 0) Weights=(58834.00, 58700.00)",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Left: H(29268, 80241, 574108) ----> H(0, 0, 0) Weights=(58834.00, 58700.00)",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Left: H(29268, 80248, 568611) ----> H(58834, 80245, 1154688) Weights=(58834.00, 58700.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Left: H(29566, 80248, 578159) ----> H(58834, 80244, 1152752) Weights=(58834.00, 58700.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Right: H(29201, 83970, 945484) ----> H(0, 0, 0) Weights=(58834.00, 58700.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Left: H(58834, 80244, 1152752) OldI: 1.03 NewI: 1.03",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Right: H(29499, 83970, 898364) ----> H(0, 0, 0) Weights=(58834.00, 58700.00)",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Left: H(58834, 80245, 1154688) OldI: 1.03 NewI: 1.03",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   0 |V|= 58834 |E|= 80244 #pins=1152752 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   0 |V|= 58834 |E|= 80245 #pins=1154688 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Right: H(29201, 83832, 943779) ----> H(58700, 83901, 1830476) Weights=(58834.00, 58700.00)",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Right: H(58700, 83901, 1830476) OldI: 1.03 NewI: 1.03",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Right: H(29499, 83832, 895175) ----> H(58700, 83901, 1852326) Weights=(58834.00, 58700.00)",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Right: H(58700, 83901, 1852326) OldI: 1.03 NewI: 1.03",
+    "| 2/ 4|: ( 0, 0)/[ 1, 2] ->START   0 |V|= 58700 |E|= 83901 #pins=1852326 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 0, 1)/[ 1, 2] ->START   0 |V|= 58700 |E|= 83901 #pins=1830476 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   1 |V|= 25974 |E|= 65437 #pins=722626 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   1 |V|= 25974 |E|= 66356 #pins=728742 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->START   2 |V|= 11415 |E|=120424 #pins=1140875 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 0, 1)/[ 1, 2] ->START   1 |V|= 26046 |E|= 69767 #pins=1168634 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 0)/[ 1, 2] ->START   1 |V|= 26046 |E|= 69521 #pins=1159573 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->START   3 |V|=  5013 |E|=111008 #pins=949090 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->START   4 |V|=  2181 |E|=102902 #pins=825845 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 0)/[ 1, 1] ->START   2 |V|= 11485 |E|=126525 #pins=1752395 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->Local Ratio Cut= 7318165.00   Global Ratio Cut= 7318165.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->FINAL   4 |V|=  2181 |E|=102902 #pins=825845 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=7074850.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->FINAL   3 |V|=  5013 |E|=111008 #pins=949090 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=6371113.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->FINAL   2 |V|= 11415 |E|=120424 #pins=1140875 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=5718253.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->FINAL   1 |V|= 25974 |E|= 65437 #pins=722626 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=5181247.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->FINAL   1 |V|= 25974 |E|= 66356 #pins=728742 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=5181247.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->FINAL   0 |V|= 58834 |E|= 80244 #pins=1152752 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=4670258.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->FINAL   0 |V|= 58834 |E|= 80245 #pins=1154688 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=4670258.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->Rdivide(0, 587): 4670258.0",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->Rdivide(0, 587): 4670258.0",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->Left: H(30028, 51380, 532983) ----> H(0, 0, 0) Weights=(30028.00, 28806.00)",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->Left: H(30028, 51559, 531748) ----> H(30028, 102939, 1064731) Weights=(30028.00, 28806.00)",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->Right: H(28806, 48717, 611792) ----> H(0, 0, 0) Weights=(30028.00, 28806.00)",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->Left: H(30028, 102939, 1064731) OldI: 1.03 NewI: 1.01"
+   ],
+   "stderr_tail": [],
+   "zoltan_removed_or_warning_lines": [],
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     182152,
+     167036,
+     169744,
+     168088
+    ],
+    "ru_maxrss_kb_per_rank": [
+     182152,
+     167036,
+     169744,
+     168088
+    ],
+    "max_rank_peak_kb": 182152,
+    "sum_of_rank_peaks_kb": 687020,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 34.824,
+    "driver_total_seconds_rank0": 65.71,
+    "load_seconds_per_rank": [
+     26.981,
+     26.69,
+     27.501,
+     26.441
+    ],
+    "job_wall_seconds": 76.87
+   },
+   "global_from_queries": {
+    "objects": 117534,
+    "pins": 6014938,
+    "edge_weight_entries": 824093
+   },
+   "params_applied_rank0": {
+    "DEBUG_LEVEL": "0",
+    "NUM_GID_ENTRIES": "1",
+    "NUM_LID_ENTRIES": "1",
+    "OBJ_WEIGHT_DIM": "1",
+    "EDGE_WEIGHT_DIM": "1",
+    "DETERMINISTIC": "1",
+    "RETURN_LISTS": "PARTS",
+    "REMAP": "0",
+    "LB_METHOD": "HYPERGRAPH",
+    "HYPERGRAPH_PACKAGE": "PHG",
+    "LB_APPROACH": "PARTITION",
+    "IMBALANCE_TOL": "1.03",
+    "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+    "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+    "PHG_RANDOMIZE_INPUT": "0",
+    "PHG_MULTILEVEL": "1",
+    "PHG_COARSENING_METHOD": "AGG",
+    "PHG_COARSEPARTITION_METHOD": "AUTO",
+    "PHG_REFINEMENT_METHOD": "FM",
+    "PHG_REFINEMENT_QUALITY": "1",
+    "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+    "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+    "PHG_REPART_MULTIPLIER": "100",
+    "CHECK_HYPERGRAPH": "1",
+    "PHG_OUTPUT_LEVEL": "1",
+    "NUM_GLOBAL_PARTS": "1175"
+   },
+   "zoltan_eval": {
+    "cutl_global": 85311176.0,
+    "cutn_global": 38563216.0,
+    "imbalance": 1.039699,
+    "obj_imbalance": 1.039699,
+    "nobj_min": 0.0,
+    "nobj_max": 104.0,
+    "nobj_sum": 117534.0
+   },
+   "dump_sha256": {
+    "cs_rank0.bin": "f1019f231b380a791f2dbc04fd53050356c1266e09ec3e2f05f19b67d8eaab4e",
+    "cs_rank1.bin": "85b0c04a769d69b14fa74a3f7ac368fa3f240b7506720cfc8d0dbeced88dabb2",
+    "cs_rank2.bin": "dc81da18d3361dc0b41efc1117761f66fc98d6127bcfae1f603050c9e27e715e",
+    "cs_rank3.bin": "1d39702d50104bd58fcb33d79799b49cb84ecb591a949f0011ca48beb9165cf9",
+    "ewts_rank0.bin": "6353dd87eb2703515e6ff16cc5a85a6a78853cc7fdf5a86684316b638f6b7a61",
+    "ewts_rank1.bin": "49f7907a5f6111a7bae90f2ff419e59f8ca909fc66830df031a7df44383eefb4",
+    "ewts_rank2.bin": "0a64ee4df56afe3240ac26c206c9075ed8564e656750b957a0c0f9d679abbd97",
+    "ewts_rank3.bin": "d74e216158c12ac508f055858dbb65125a07b1140dbe07fc5d457417187d3a3c",
+    "objs_rank0.bin": "8c68c3304680b6a026d1ce66fd57383c2ab56a7b7fe1c33c09c797c9d7b6c3e2",
+    "objs_rank1.bin": "a0a331445d22e8e4569f30d3dcaf3143db3ac29c6812b496ef4bfd3faf60795a",
+    "objs_rank2.bin": "27bdccc882a7e7c488568288069d68b34de55ac7d9076c20fb88f45e8b9ef1e2",
+    "objs_rank3.bin": "43e207e8c06bcd30dc8b5c5a7377b9a08136b5223a27e089fa50da49d3c2881e"
+   },
+   "dumps_identical_to_gate_run": true
+  },
+  "R1_repeat": {
+   "name": "R1_repeat",
+   "mode": "partition",
+   "np": 4,
+   "rc": 0,
+   "wall_seconds_outer": 67.78,
+   "job_time_v": {
+    "user_seconds": 153.5,
+    "wall_seconds": 67.22,
+    "peak_rss_kb": 186104,
+    "exit_status": 0
+   },
+   "dir": "data/l1_lowmem/musique/phg/R1_repeat",
+   "ranks": [
+    {
+     "rank": 0,
+     "json": {
+      "rank": 0,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       0,
+       6
+      ],
+      "shard_count": 24,
+      "first_gid": 0,
+      "nloc": 30000,
+      "npins_loc": 1506847,
+      "nedge_loc": 207926,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 26.98,
+       "partition_wall": 33.623,
+       "total": 66.103
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 30000,
+      "num_import": -1,
+      "ru_maxrss_kb": 186104,
+      "calls": {
+       "num_obj": 4,
+       "obj_list": 3,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 3
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 85311176.0,
+       "cutn_global": 38563216.0,
+       "imbalance": 1.039699,
+       "obj_imbalance": 1.039699,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 38.24,
+      "wall_seconds": 66.65,
+      "peak_rss_kb": 186104,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 1,
+     "json": {
+      "rank": 1,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       6,
+       12
+      ],
+      "shard_count": 24,
+      "first_gid": 30000,
+      "nloc": 30000,
+      "npins_loc": 1496452,
+      "nedge_loc": 205872,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 26.87,
+       "partition_wall": 33.623,
+       "total": 66.108
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 30000,
+      "num_import": -1,
+      "ru_maxrss_kb": 166808,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 85311176.0,
+       "cutn_global": 38563216.0,
+       "imbalance": 1.039699,
+       "obj_imbalance": 1.039699,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 38.49,
+      "wall_seconds": 66.65,
+      "peak_rss_kb": 166808,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 2,
+     "json": {
+      "rank": 2,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       12,
+       18
+      ],
+      "shard_count": 24,
+      "first_gid": 60000,
+      "nloc": 30000,
+      "npins_loc": 1538372,
+      "nedge_loc": 207918,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 27.575,
+       "partition_wall": 33.623,
+       "total": 66.107
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 30000,
+      "num_import": -1,
+      "ru_maxrss_kb": 176216,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 85311176.0,
+       "cutn_global": 38563216.0,
+       "imbalance": 1.039699,
+       "obj_imbalance": 1.039699,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 37.41,
+      "wall_seconds": 66.64,
+      "peak_rss_kb": 176216,
+      "exit_status": 0
+     }
+    },
+    {
+     "rank": 3,
+     "json": {
+      "rank": 3,
+      "nprocs": 4,
+      "mode": "partition",
+      "zoltan_version": 3.9,
+      "k": 1175,
+      "N": 117534,
+      "M": 250732,
+      "shards": [
+       18,
+       24
+      ],
+      "shard_count": 24,
+      "first_gid": 90000,
+      "nloc": 27534,
+      "npins_loc": 1473267,
+      "nedge_loc": 202377,
+      "global_from_queries": {
+       "objects": 117534,
+       "pins": 6014938,
+       "edge_weight_entries": 824093
+      },
+      "params_applied": {
+       "DEBUG_LEVEL": "0",
+       "NUM_GID_ENTRIES": "1",
+       "NUM_LID_ENTRIES": "1",
+       "OBJ_WEIGHT_DIM": "1",
+       "EDGE_WEIGHT_DIM": "1",
+       "DETERMINISTIC": "1",
+       "RETURN_LISTS": "PARTS",
+       "REMAP": "0",
+       "LB_METHOD": "HYPERGRAPH",
+       "HYPERGRAPH_PACKAGE": "PHG",
+       "LB_APPROACH": "PARTITION",
+       "IMBALANCE_TOL": "1.03",
+       "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+       "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+       "PHG_RANDOMIZE_INPUT": "0",
+       "PHG_MULTILEVEL": "1",
+       "PHG_COARSENING_METHOD": "AGG",
+       "PHG_COARSEPARTITION_METHOD": "AUTO",
+       "PHG_REFINEMENT_METHOD": "FM",
+       "PHG_REFINEMENT_QUALITY": "1",
+       "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+       "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+       "PHG_REPART_MULTIPLIER": "100",
+       "CHECK_HYPERGRAPH": "1",
+       "PHG_OUTPUT_LEVEL": "1",
+       "NUM_GLOBAL_PARTS": "1175"
+      },
+      "nparams": 26,
+      "seconds": {
+       "load": 26.51,
+       "partition_wall": 33.623,
+       "total": 66.106
+      },
+      "partition_rc": 0,
+      "changes": 1,
+      "num_export": 27534,
+      "num_import": -1,
+      "ru_maxrss_kb": 172256,
+      "calls": {
+       "num_obj": 3,
+       "obj_list": 2,
+       "hg_size_cs": 2,
+       "hg_cs": 2,
+       "hg_size_edge_wts": 2,
+       "hg_edge_wts": 2,
+       "part_multi": 2
+      },
+      "eval_rc": 0,
+      "eval": {
+       "cutl_global": 85311176.0,
+       "cutn_global": 38563216.0,
+       "imbalance": 1.039699,
+       "obj_imbalance": 1.039699,
+       "nobj_min": 0.0,
+       "nobj_max": 104.0,
+       "nobj_sum": 117534.0
+      }
+     },
+     "time_v": {
+      "user_seconds": 38.85,
+      "wall_seconds": 66.64,
+      "peak_rss_kb": 172256,
+      "exit_status": 0
+     }
+    }
+   ],
+   "zoltan_stdout_lines": [
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   0 |V|= 58767 |E|=125366 #pins=1529655 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   0 |V|= 58767 |E|=125366 #pins=1475723 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   0 |V|= 58767 |E|=125366 #pins=1536168 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   0 |V|= 58767 |E|=125366 #pins=1473392 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   1 |V|= 26196 |E|=116486 #pins=1004722 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   1 |V|= 26207 |E|=116005 #pins=1072660 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   1 |V|= 26207 |E|=116486 #pins=1071418 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   1 |V|= 26196 |E|=116005 #pins=1003734 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->START   2 |V|= 11617 |E|=107287 #pins=774198 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->START   2 |V|= 11717 |E|=107137 #pins=823083 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->START   2 |V|= 11717 |E|=107287 #pins=828565 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->START   2 |V|= 11617 |E|=107137 #pins=770831 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   3 |V|= 10335 |E|= 99577 #pins=1296087 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   3 |V|= 10335 |E|= 99577 #pins=1317914 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   4 |V|=  4566 |E|= 93276 #pins=1105861 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   4 |V|=  4566 |E|= 93468 #pins=1106465 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   5 |V|=  1982 |E|= 87486 #pins=948801 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   5 |V|=  1982 |E|= 87013 #pins=938053 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->Local Ratio Cut= 16189840.00   Global Ratio Cut= 15795390.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->Local Ratio Cut= 15795390.00   Global Ratio Cut= 15795390.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->FINAL   5 |V|=  1982 |E|= 87013 #pins=938053 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=15008442.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->FINAL   5 |V|=  1982 |E|= 87486 #pins=948801 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=15008442.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->FINAL   4 |V|=  4566 |E|= 93276 #pins=1105861 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=13965936.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->FINAL   4 |V|=  4566 |E|= 93468 #pins=1106465 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=13965936.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->FINAL   3 |V|= 10335 |E|= 99577 #pins=1296087 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=12795478.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->FINAL   3 |V|= 10335 |E|= 99577 #pins=1317914 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=12795478.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   2 |V|= 11717 |E|=107287 #pins=828565 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=11535260.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   2 |V|= 11717 |E|=107137 #pins=823083 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=11535260.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   2 |V|= 11617 |E|=107287 #pins=774198 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=11535260.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   2 |V|= 11617 |E|=107137 #pins=770831 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=11535260.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   1 |V|= 26207 |E|=116005 #pins=1072660 2350/AGG/AUTO/FM p=2 bal=1.01 cutl=10342259.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   1 |V|= 26207 |E|=116486 #pins=1071418 2350/AGG/AUTO/FM p=2 bal=1.01 cutl=10342259.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   1 |V|= 26196 |E|=116005 #pins=1003734 2350/AGG/AUTO/FM p=2 bal=1.01 cutl=10342259.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   1 |V|= 26196 |E|=116486 #pins=1004722 2350/AGG/AUTO/FM p=2 bal=1.01 cutl=10342259.00",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->FINAL   0 |V|= 58767 |E|=125366 #pins=1475723 2350/AGG/AUTO/FM p=2 bal=1.00 cutl=9279856.00",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->FINAL   0 |V|= 58767 |E|=125366 #pins=1529655 2350/AGG/AUTO/FM p=2 bal=1.00 cutl=9279856.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->FINAL   0 |V|= 58767 |E|=125366 #pins=1536168 2350/AGG/AUTO/FM p=2 bal=1.00 cutl=9279856.00",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->FINAL   0 |V|= 58767 |E|=125366 #pins=1473392 2350/AGG/AUTO/FM p=2 bal=1.00 cutl=9279856.00",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Rdivide(0, 1174): 9279856.0",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Rdivide(0, 1174): 9279856.0",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Rdivide(0, 1174): 9279856.0",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Rdivide(0, 1174): 9279856.0",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Left: H(29566, 80241, 586562) ----> H(0, 0, 0) Weights=(58834.00, 58700.00)",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Left: H(29268, 80241, 574108) ----> H(0, 0, 0) Weights=(58834.00, 58700.00)",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Left: H(29268, 80248, 568611) ----> H(58834, 80245, 1154688) Weights=(58834.00, 58700.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Left: H(29566, 80248, 578159) ----> H(58834, 80244, 1152752) Weights=(58834.00, 58700.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Right: H(29201, 83970, 945484) ----> H(0, 0, 0) Weights=(58834.00, 58700.00)",
+    "| 1/ 4|: ( 1, 0)/[ 2, 2] ->Left: H(58834, 80244, 1152752) OldI: 1.03 NewI: 1.03",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Right: H(29499, 83970, 898364) ----> H(0, 0, 0) Weights=(58834.00, 58700.00)",
+    "| 0/ 4|: ( 0, 0)/[ 2, 2] ->Left: H(58834, 80245, 1154688) OldI: 1.03 NewI: 1.03",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   0 |V|= 58834 |E|= 80245 #pins=1154688 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   0 |V|= 58834 |E|= 80244 #pins=1152752 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Right: H(29201, 83832, 943779) ----> H(58700, 83901, 1830476) Weights=(58834.00, 58700.00)",
+    "| 3/ 4|: ( 1, 1)/[ 2, 2] ->Right: H(58700, 83901, 1830476) OldI: 1.03 NewI: 1.03",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Right: H(29499, 83832, 895175) ----> H(58700, 83901, 1852326) Weights=(58834.00, 58700.00)",
+    "| 2/ 4|: ( 0, 1)/[ 2, 2] ->Right: H(58700, 83901, 1852326) OldI: 1.03 NewI: 1.03",
+    "| 3/ 4|: ( 0, 1)/[ 1, 2] ->START   0 |V|= 58700 |E|= 83901 #pins=1830476 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 0)/[ 1, 2] ->START   0 |V|= 58700 |E|= 83901 #pins=1852326 2350/AGG/AUTO/FM p=2...",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->START   1 |V|= 25974 |E|= 66356 #pins=728742 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->START   1 |V|= 25974 |E|= 65437 #pins=722626 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->START   2 |V|= 11415 |E|=120424 #pins=1140875 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 0)/[ 1, 2] ->START   1 |V|= 26046 |E|= 69521 #pins=1159573 2350/AGG/AUTO/FM p=2...",
+    "| 3/ 4|: ( 0, 1)/[ 1, 2] ->START   1 |V|= 26046 |E|= 69767 #pins=1168634 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->START   3 |V|=  5013 |E|=111008 #pins=949090 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->START   4 |V|=  2181 |E|=102902 #pins=825845 2350/AGG/AUTO/FM p=2...",
+    "| 2/ 4|: ( 0, 0)/[ 1, 1] ->START   2 |V|= 11485 |E|=126525 #pins=1752395 2350/AGG/AUTO/FM p=2...",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->Local Ratio Cut= 7318165.00   Global Ratio Cut= 7318165.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->FINAL   4 |V|=  2181 |E|=102902 #pins=825845 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=7074850.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->FINAL   3 |V|=  5013 |E|=111008 #pins=949090 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=6371113.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 1] ->FINAL   2 |V|= 11415 |E|=120424 #pins=1140875 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=5718253.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->FINAL   1 |V|= 25974 |E|= 65437 #pins=722626 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=5181247.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->FINAL   1 |V|= 25974 |E|= 66356 #pins=728742 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=5181247.00",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->FINAL   0 |V|= 58834 |E|= 80245 #pins=1154688 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=4670258.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->FINAL   0 |V|= 58834 |E|= 80244 #pins=1152752 2350/AGG/AUTO/FM p=2 bal=1.02 cutl=4670258.00",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->Rdivide(0, 587): 4670258.0",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->Rdivide(0, 587): 4670258.0",
+    "| 1/ 4|: ( 0, 1)/[ 1, 2] ->Left: H(30028, 51380, 532983) ----> H(0, 0, 0) Weights=(30028.00, 28806.00)",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->Left: H(30028, 51559, 531748) ----> H(30028, 102939, 1064731) Weights=(30028.00, 28806.00)",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->Right: H(28806, 48717, 611792) ----> H(0, 0, 0) Weights=(30028.00, 28806.00)",
+    "| 0/ 4|: ( 0, 0)/[ 1, 2] ->Left: H(30028, 102939, 1064731) OldI: 1.03 NewI: 1.01"
+   ],
+   "stderr_tail": [],
+   "zoltan_removed_or_warning_lines": [],
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     186104,
+     166808,
+     176216,
+     172256
+    ],
+    "ru_maxrss_kb_per_rank": [
+     186104,
+     166808,
+     176216,
+     172256
+    ],
+    "max_rank_peak_kb": 186104,
+    "sum_of_rank_peaks_kb": 701384,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 33.623,
+    "driver_total_seconds_rank0": 66.103,
+    "load_seconds_per_rank": [
+     26.98,
+     26.87,
+     27.575,
+     26.51
+    ],
+    "job_wall_seconds": 67.22
+   },
+   "global_from_queries": {
+    "objects": 117534,
+    "pins": 6014938,
+    "edge_weight_entries": 824093
+   },
+   "params_applied_rank0": {
+    "DEBUG_LEVEL": "0",
+    "NUM_GID_ENTRIES": "1",
+    "NUM_LID_ENTRIES": "1",
+    "OBJ_WEIGHT_DIM": "1",
+    "EDGE_WEIGHT_DIM": "1",
+    "DETERMINISTIC": "1",
+    "RETURN_LISTS": "PARTS",
+    "REMAP": "0",
+    "LB_METHOD": "HYPERGRAPH",
+    "HYPERGRAPH_PACKAGE": "PHG",
+    "LB_APPROACH": "PARTITION",
+    "IMBALANCE_TOL": "1.03",
+    "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+    "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+    "PHG_RANDOMIZE_INPUT": "0",
+    "PHG_MULTILEVEL": "1",
+    "PHG_COARSENING_METHOD": "AGG",
+    "PHG_COARSEPARTITION_METHOD": "AUTO",
+    "PHG_REFINEMENT_METHOD": "FM",
+    "PHG_REFINEMENT_QUALITY": "1",
+    "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+    "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+    "PHG_REPART_MULTIPLIER": "100",
+    "CHECK_HYPERGRAPH": "1",
+    "PHG_OUTPUT_LEVEL": "1",
+    "NUM_GLOBAL_PARTS": "1175"
+   },
+   "zoltan_eval": {
+    "cutl_global": 85311176.0,
+    "cutn_global": 38563216.0,
+    "imbalance": 1.039699,
+    "obj_imbalance": 1.039699,
+    "nobj_min": 0.0,
+    "nobj_max": 104.0,
+    "nobj_sum": 117534.0
+   },
+   "dump_sha256": {
+    "cs_rank0.bin": "f1019f231b380a791f2dbc04fd53050356c1266e09ec3e2f05f19b67d8eaab4e",
+    "cs_rank1.bin": "85b0c04a769d69b14fa74a3f7ac368fa3f240b7506720cfc8d0dbeced88dabb2",
+    "cs_rank2.bin": "dc81da18d3361dc0b41efc1117761f66fc98d6127bcfae1f603050c9e27e715e",
+    "cs_rank3.bin": "1d39702d50104bd58fcb33d79799b49cb84ecb591a949f0011ca48beb9165cf9",
+    "ewts_rank0.bin": "6353dd87eb2703515e6ff16cc5a85a6a78853cc7fdf5a86684316b638f6b7a61",
+    "ewts_rank1.bin": "49f7907a5f6111a7bae90f2ff419e59f8ca909fc66830df031a7df44383eefb4",
+    "ewts_rank2.bin": "0a64ee4df56afe3240ac26c206c9075ed8564e656750b957a0c0f9d679abbd97",
+    "ewts_rank3.bin": "d74e216158c12ac508f055858dbb65125a07b1140dbe07fc5d457417187d3a3c",
+    "objs_rank0.bin": "8c68c3304680b6a026d1ce66fd57383c2ab56a7b7fe1c33c09c797c9d7b6c3e2",
+    "objs_rank1.bin": "a0a331445d22e8e4569f30d3dcaf3143db3ac29c6812b496ef4bfd3faf60795a",
+    "objs_rank2.bin": "27bdccc882a7e7c488568288069d68b34de55ac7d9076c20fb88f45e8b9ef1e2",
+    "objs_rank3.bin": "43e207e8c06bcd30dc8b5c5a7377b9a08136b5223a27e089fa50da49d3c2881e"
+   }
+  }
+ },
+ "timing_seconds": {
+  "1_input_verified": 5.4,
+  "2_structure_gate": 53.7,
+  "3_partition_R1_and_repeat": 167.6,
+  "3b_repair": 43.7,
+  "4_5_import_replay_cache_L1": 468.2
+ },
+ "inputs": {
+  "N": 117534,
+  "M": 250732,
+  "P": 6014938,
+  "k": 1175,
+  "ORIGINAL_STRUCTURE_SHA256": "27628d1c0319dcbbdf3fa932b647ce2a9b21859cea716402b11da3067e281a75",
+  "official_netl": {
+   "path": "data/l1_lowmem/musique/H4_SK.official.netl",
+   "bytes": 56625086,
+   "sha256": "f8ad7b5d61ddda32ad200f88c2c5ff68ad846c76162e5c0d654aee2690a6aa32"
+  },
+  "stream_manifest": {
+   "path": "data/l1_lowmem/musique/freight/stream_manifest.txt",
+   "sha256": "25f03c1aae16d0406ad22027b588ebbb463d0f17971aa87564f5e60a09c5271b",
+   "H4_SK_STREAM_V1_manifest_sha256": "1cc3700e0de7a53b9cd6d4641f2b2d47298d31afb23e0884fa9e88d74dd7c236",
+   "shards": 24,
+   "shard_nodes": 5000
+  }
+ },
+ "repeat": {
+  "identical_partition": true,
+  "n_diff": 0,
+  "km1_repeat": 85311179,
+  "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+ },
+ "metrics": {
+  "km1_weighted": 85311179,
+  "cut_weighted": 38563215,
+  "cut_nets": 211235,
+  "nets": 250732,
+  "cut_net_fraction": 0.842473,
+  "lambda_mean": 8.9773,
+  "lambda_max": 97,
+  "blocks": {
+   "k": 1175,
+   "used": 1175,
+   "empty": 0,
+   "min": 1,
+   "p50": 103.0,
+   "p95": 103.0,
+   "max": 104,
+   "mean": 100.029,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0397,
+   "eps_actual(max/ceil(N/k)-1)": 0.0297,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "per_family_note": {
+   "STRUCT": {
+    "hyperedges_precap": 107676,
+    "pins_precap": 5410236,
+    "anchors_over_cap": 9727,
+    "hyperedges_out": 136125,
+    "pins_written": 5438685,
+    "anchor_duplication_pins": 28449,
+    "pins_discarded": 0,
+    "pin_retention": 1.0,
+    "size_max_out": 100
+   },
+   "KNN": {
+    "hyperedges_precap": 114607,
+    "pins_precap": 576253,
+    "anchors_over_cap": 0,
+    "hyperedges_out": 114607,
+    "pins_written": 576253,
+    "anchor_duplication_pins": 0,
+    "pins_discarded": 0,
+    "pin_retention": 1.0,
+    "size_max_out": 41
+   }
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 2651280,
+    "cut": 2561853,
+    "edge_cut_fraction": 0.9663
+   },
+   "KNN": {
+    "edges": 230823,
+    "cut": 95983,
+    "edge_cut_fraction": 0.4158
+   },
+   "NERX": {
+    "edges": 733541,
+    "cut": 647845,
+    "edge_cut_fraction": 0.8832
+   }
+  }
+ },
+ "mtkahypar_baseline": {
+  "status": "RESOURCE_INFEASIBLE_LOCAL",
+  "record": {
+   "path": "data/l1_canonical/musique/parts/H4_SK.FAILED.json",
+   "bytes": 1838,
+   "sha256": "e57b84b033980b4afe8cebeda91a69a598a86bb564b7c9a7d9c6b77bde3b017e"
+  },
+  "peak_rss_kb_at_kill": 6002748,
+  "rss_cap_gb": 6.0,
+  "wall_seconds_at_kill": 1132.0,
+  "threads": 4,
+  "km1_weighted": null,
+  "note": "no partition exists; nothing to compare against; resources only"
+ },
+ "freight_one_pass_frozen": {
+  "km1_weighted": 167482101,
+  "cut_weighted": 53050984,
+  "blocks": {
+   "k": 1175,
+   "used": 1175,
+   "empty": 0,
+   "min": 57,
+   "p50": 104.0,
+   "p95": 104.0,
+   "max": 104,
+   "mean": 100.029,
+   "ceil_N_over_k": 101,
+   "max_over_mean": 1.0397,
+   "eps_actual(max/ceil(N/k)-1)": 0.0297,
+   "freight_upper_bound": 104,
+   "within_eps_0.03": true
+  },
+  "family_cuts": {
+   "STRUCT": {
+    "edges": 2651280,
+    "cut": 2593202,
+    "edge_cut_fraction": 0.9781
+   },
+   "KNN": {
+    "edges": 230823,
+    "cut": 175042,
+    "edge_cut_fraction": 0.7583
+   },
+   "NERX": {
+    "edges": 733541,
+    "cut": 706337,
+    "edge_cut_fraction": 0.9629
+   }
+  },
+  "status": "FREIGHT_CLOSED; context only, not a reference partitioner"
+ },
+ "diagnostic_context": {
+  "km1_ratio_vs_freight_one_pass": 0.5094,
+  "blocker_resources": {
+   "mtkahypar_retry_peak_rss_mb_at_kill": 5862.1,
+   "mtkahypar_retry_wall_seconds_at_kill": 1132.0,
+   "phg_peak_rss_mb_max_rank": 177.9,
+   "phg_peak_rss_mb_sum_ranks_upper_bound": 670.9,
+   "phg_partition_wall_seconds": 34.824,
+   "phg_job_wall_seconds": 76.87
+  }
+ },
+ "import": {
+  "dataset": "musique",
+  "utc": "2026-09-13T19:08:15Z",
+  "EXPERIMENTAL": true,
+  "arm": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4 + PHG_NONEMPTY_REPAIR_V1",
+  "not_canonical": "L1_LOWMEM validation arm (Zoltan-PHG); the canonical partition is parts/H4_SK.*; nothing canonical was modified",
+  "contract": {
+   "partitioner": "Zoltan-PHG (Trilinos 13.2.0-1ubuntu1, ZOLTAN_VERSION_NUMBER 3.90, Ubuntu 22.04 apt libtrilinos-zoltan-dev)",
+   "mpi": "Open MPI 4.1.2-2ubuntu1, 4 ranks (contract element)",
+   "worker": "/home/swastik/phg_build/phg_driver",
+   "worker_sha256": "a36e1b3dbcef2cf5f20c09cc6ab014ab13ce2dcfeb3ec7c1041aa00d14d7ccb9",
+   "worker_note": "src/l1_lowmem/phg_driver/phg_driver.c (sha cf5099851282444d) driven by src/l1_lowmem/phg.py; rank r owns a contiguous H4_SK_STREAM_V1 shard range",
+   "algorithm": "multilevel PHG: agglomerative coarsening (AGG), AUTO coarse partition, FM refinement quality 1, recursive scheme as shipped",
+   "objective": "connectivity (lambda-1) = weighted KM1 (PHG_CUT_OBJECTIVE=CONNECTIVITY)",
+   "epsilon": 0.03,
+   "imbalance_percent": 3,
+   "IMBALANCE_TOL": "1.03",
+   "seed": "none exposed by Zoltan; DETERMINISTIC=1; repeat-run diagnostic recorded",
+   "num_streams_passes": null,
+   "restream_vcycle": null,
+   "parameters": {
+    "DEBUG_LEVEL": "0",
+    "NUM_GID_ENTRIES": "1",
+    "NUM_LID_ENTRIES": "1",
+    "OBJ_WEIGHT_DIM": "1",
+    "EDGE_WEIGHT_DIM": "1",
+    "DETERMINISTIC": "1",
+    "RETURN_LISTS": "PARTS",
+    "REMAP": "0",
+    "LB_METHOD": "HYPERGRAPH",
+    "HYPERGRAPH_PACKAGE": "PHG",
+    "LB_APPROACH": "PARTITION",
+    "IMBALANCE_TOL": "1.03",
+    "PHG_CUT_OBJECTIVE": "CONNECTIVITY",
+    "PHG_EDGE_SIZE_THRESHOLD": "1.0",
+    "PHG_RANDOMIZE_INPUT": "0",
+    "PHG_MULTILEVEL": "1",
+    "PHG_COARSENING_METHOD": "AGG",
+    "PHG_COARSEPARTITION_METHOD": "AUTO",
+    "PHG_REFINEMENT_METHOD": "FM",
+    "PHG_REFINEMENT_QUALITY": "1",
+    "PHG_EDGE_WEIGHT_OPERATION": "ERROR",
+    "PHG_PROCESSOR_REDUCTION_LIMIT": "0.5",
+    "PHG_REPART_MULTIPLIER": "100",
+    "CHECK_HYPERGRAPH": "1",
+    "PHG_OUTPUT_LEVEL": "1"
+   },
+   "NUM_GLOBAL_PARTS": 1175,
+   "mpi_ranks": 4,
+   "vertex_weights": "unit",
+   "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+   "k": 1175,
+   "k_rule": "max(1, N // 100)",
+   "hypergraph_rule": "H4_SPLIT_PRESERVE",
+   "families": [
+    "STRUCT",
+    "KNN"
+   ],
+   "node_distribution": "contiguous canonical position ranges (H4_SK_STREAM_V1 shards) per rank; PHG_RANDOMIZE_INPUT=0",
+   "repair": "PHG_NONEMPTY_REPAIR_V1 applied to the PHG R1 vector (9 empty block(s), 9 move(s)); no-op when no block is empty"
+  },
+  "inputs": {
+   "DATASET_json_RECORD_SHA256": "67fa637183fb02c4762fc80f6f4d2e21e14e2c665977e89adfcd6d32ed6d683f",
+   "hypergraph_file": "data/l1_canonical/musique/hypergraph/H4_SK.npz",
+   "hypergraph_sha256": "2b1edc6dfcb045b7799459c4582bb2fbbe6d591825a48db45366597a97c1cd72",
+   "hypergraph_content_digest": "b19fd504bad7997cd254876ed7294128ab1724a95ccc52a18aed3b2a3e5d27bc",
+   "ORIGINAL_STRUCTURE_SHA256": "27628d1c0319dcbbdf3fa932b647ce2a9b21859cea716402b11da3067e281a75",
+   "official_netl_sha256": "f8ad7b5d61ddda32ad200f88c2c5ff68ad846c76162e5c0d654aee2690a6aa32",
+   "stream_manifest_sha256": "25f03c1aae16d0406ad22027b588ebbb463d0f17971aa87564f5e60a09c5271b",
+   "structure_gate": "PASS",
+   "digest_from_queries": "27628d1c0319dcbbdf3fa932b647ce2a9b21859cea716402b11da3067e281a75",
+   "hyperedges": 250732,
+   "pins": 6014938,
+   "N": 117534
+  },
+  "STATUS": "OK",
+  "worker_stats": {
+   "N": 117534,
+   "k": 1175,
+   "hyperedges": 250732,
+   "pins": 6014938,
+   "objective_km1": 85311179,
+   "objective_cut": 38563215,
+   "zoltan_eval_cutl": 85311176.0,
+   "mpi_ranks": 4,
+   "peak_rss_mb_max_rank": 177.9,
+   "peak_rss_mb_sum_ranks": 670.9,
+   "wall_seconds_partition": 34.824,
+   "wall_seconds_job": 76.87,
+   "ran_on": "local_wsl"
+  },
+  "post_checks": {
+   "length_ok": true,
+   "min_block": 0,
+   "max_block": 1174,
+   "blocks_used": 1175,
+   "k": 1175,
+   "every_block_used": true,
+   "size_min": 1,
+   "size_max": 104,
+   "size_mean": 100.029,
+   "ceil_N_over_k": 101,
+   "balance_max_over_mean": 1.0397,
+   "balance_within_eps": true
+  },
+  "repeatability": {
+   "identical_partition": true,
+   "n_diff": 0,
+   "km1_repeat": 85311179,
+   "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+  },
+  "output": {
+   "file": "data/l1_canonical/musique/parts/LOWMEM__PHG_C1_con.npy",
+   "bytes": 940400,
+   "sha256": "5886ddb62c0eba6b841b9f429444c51782f1bb9413feab4041c01d14e69a51c7",
+   "dtype": "int64",
+   "n": 117534
+  },
+  "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+  "repair": {
+   "adapter": "PHG_NONEMPTY_REPAIR_V1",
+   "noop": false,
+   "empty_blocks": [
+    330,
+    358,
+    365,
+    366,
+    367,
+    1164,
+    1165,
+    1171,
+    1173
+   ],
+   "moves": [
+    {
+     "empty_block": 330,
+     "node_position": 663,
+     "donor_block": 866,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 396,
+     "incident_nets": 68,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117534
+    },
+    {
+     "empty_block": 358,
+     "node_position": 692,
+     "donor_block": 1041,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 395,
+     "incident_nets": 12,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117533
+    },
+    {
+     "empty_block": 365,
+     "node_position": 800,
+     "donor_block": 684,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 394,
+     "incident_nets": 22,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117532
+    },
+    {
+     "empty_block": 366,
+     "node_position": 823,
+     "donor_block": 2,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 393,
+     "incident_nets": 10,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117531
+    },
+    {
+     "empty_block": 367,
+     "node_position": 1205,
+     "donor_block": 189,
+     "donor_size_before": 104,
+     "donor_size_after": 103,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 392,
+     "incident_nets": 4,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117530
+    },
+    {
+     "empty_block": 1164,
+     "node_position": 1225,
+     "donor_block": 411,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 391,
+     "incident_nets": 5,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117529
+    },
+    {
+     "empty_block": 1165,
+     "node_position": 1391,
+     "donor_block": 68,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 390,
+     "incident_nets": 9,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117528
+    },
+    {
+     "empty_block": 1171,
+     "node_position": 1713,
+     "donor_block": 412,
+     "donor_size_before": 103,
+     "donor_size_after": 102,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 389,
+     "incident_nets": 4,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117527
+    },
+    {
+     "empty_block": 1173,
+     "node_position": 2051,
+     "donor_block": 593,
+     "donor_size_before": 104,
+     "donor_size_after": 103,
+     "delta_km1_weighted": 0,
+     "min_delta_candidates_tied": 388,
+     "incident_nets": 12,
+     "km1_before": 85311179,
+     "km1_after": 85311179,
+     "candidates": 117526
+    }
+   ],
+   "km1_before": 85311179,
+   "km1_after": 85311179,
+   "postconditions": {
+    "same_N": true,
+    "assigned_once": true,
+    "same_k": true,
+    "empty_blocks_after": 0,
+    "max_block_after": 104,
+    "contract_bound": 104,
+    "H4_SK_unchanged": true,
+    "moves": 9,
+    "empty_blocks_before": 9,
+    "moves_equal_empties": true,
+    "nodes_changed": 9,
+    "nodes_changed_equal_moves": true,
+    "km1_consistent": true,
+    "PASS": true
+   },
+   "vector_sha256_in": "6d20c3a0a594c358ddbc01f909b51554fe204a79743acbd8cecbf3a43c54ec2d",
+   "vector_sha256_out": "a62d040d2d60412765fba065ac9b630b58e60de79fa9a69c1ff586eff82637c8"
+  },
+  "bridge": {
+   "classification": "PHG_SCALE_BRIDGE",
+   "preregistration": {
+    "path": "results/L1_LOWMEM/PHG_BRIDGE_PREREG.json",
+    "bytes": 20761,
+    "sha256": "7cb6cbe2fc29c7497849e1391ff9751bad848354d84cebb2ced2c80bf7bea95b"
+   },
+   "ruling": {
+    "path": "results/L1_LOWMEM/PHG_SMALL_DATASET_VALIDATION_RULING.json",
+    "bytes": 17869,
+    "sha256": "f7cc6337f009ecd4ac889a19d7ef2397aacc6e1f504be116331fc0d357e2a182"
+   },
+   "program": {
+    "path": "src/l1_lowmem/phg_bridge.py",
+    "bytes": 51740,
+    "sha256": "836d1f69a69f10fb4c86dc2f5efa38b658cc057ced318b44c77c1e9d6f671f2e"
+   },
+   "note": "PHG_SCALE_BRIDGE: no Mt-KaHyPar reference exists for this corpus (RESOURCE_INFEASIBLE_LOCAL); absolute L1 numbers only, no equivalence claim"
+  }
+ },
+ "downstream": {
+  "status": "BASELINE_ABSENT",
+  "record": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_musique__phg_c1.json",
+   "bytes": 1593,
+   "sha256": "a7197129a4f80aa51feba465c1133c120b8c52c2df8be200f69fe7f266be2f43"
+  },
+  "B_phg": {
+   "BASE_ALL_P50": 0.6415,
+   "BASE_ANY_P50": 0.9905,
+   "BASE_SCOPE_NODES": 5115.5,
+   "SAFE_ALL_P50": 0.6965,
+   "SAFE_ANY_P50": 0.992,
+   "SAFE_SCOPE_NODES": 5112.8,
+   "BND_ALL_P50": 0.6415,
+   "CORR": {
+    "dALL": 0.055,
+    "gained": 121,
+    "lost": 11,
+    "net": 110,
+    "mcnemar_p": 0.0,
+    "sig": true,
+    "gold_admitted": 185,
+    "gold_evicted": 26,
+    "churn_per_query": 4.707,
+    "churn_max": 6,
+    "queries_with_zero_churn": 5
+   },
+   "BALANCE": {
+    "npart": 1175,
+    "blocks_used": 1175,
+    "size_min": 1,
+    "size_max": 104,
+    "size_median": 103.0,
+    "size_mean": 100.03,
+    "size_p90": 103.0,
+    "size_p99": 103.0,
+    "size_cv": 0.1146,
+    "max_over_mean": 1.0397,
+    "ELIGIBLE": true
+   },
+   "CUT": {
+    "STRUCT": {
+     "edges": 2651280,
+     "cut": 2561853,
+     "edge_cut_fraction": 0.9663
+    },
+    "KNN": {
+     "edges": 230823,
+     "cut": 95983,
+     "edge_cut_fraction": 0.4158
+    },
+    "NERX": {
+     "edges": 733541,
+     "cut": 647845,
+     "edge_cut_fraction": 0.8832
+    }
+   }
+  },
+  "population": {
+   "eval_split": "dev",
+   "sample_rule": "EVAL_SPLITS dev",
+   "nq": 2000,
+   "row_query_ids_sha256": "f3cffcf9050279448d2eef8aeccc1cc53d07f341ca4edb134e78b7fec378afbb"
+  },
+  "replay_record": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json",
+   "bytes": 35090,
+   "sha256": "207ad4bb3b292f7930bafba94551881896d54e80edc89974bc28c6bad71dac76"
+  },
+  "cache": {
+   "manifest": {
+    "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.json",
+    "bytes": 6165,
+    "sha256": "d444b9e6b3bdcc01b50612747b6a749b3c40e7d69b5f86b3cd0a849341d214cc"
+   },
+   "bytes": 6183023,
+   "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5",
+   "predicted_peak_gb": 0.75,
+   "COST": {
+    "BASE_sec": 22.5,
+    "STRUCT_sec": 415.1,
+    "STRUCT_edges": 17432431,
+    "STRUCT_x_BASE": 18.4
+   },
+   "fp16_path": false
+  },
+  "eval_seconds": 4.0,
+  "py_peak_mb": 1498.8,
+  "by_hop": null
+ },
+ "sanity_checks": {
+  "S1_downstream_executed": {
+   "status": "BASELINE_ABSENT",
+   "pass": true,
+   "expected": "BASELINE_ABSENT"
+  },
+  "S2_population": {
+   "nq": 2000,
+   "row_query_ids_sha256": "f3cffcf9050279448d2eef8aeccc1cc53d07f341ca4edb134e78b7fec378afbb",
+   "expected_nq": 2000,
+   "expected_sha256": "f3cffcf9050279448d2eef8aeccc1cc53d07f341ca4edb134e78b7fec378afbb",
+   "pass": true
+  },
+  "S3_canonical_eligibility": {
+   "ELIGIBLE": true,
+   "max_over_mean": 1.0397,
+   "blocks_used": 1175,
+   "npart": 1175,
+   "pass": true
+  },
+  "S4_definitional_consistency": {
+   "n_docs": 117534,
+   "N": 117534,
+   "npart": 1175,
+   "k": 1175,
+   "finite": true,
+   "BASE_ALL_le_ANY": true,
+   "SAFE_ALL_le_ANY": true,
+   "scope_positive": true,
+   "CORR_present": true,
+   "pass": true
+  },
+  "S5_no_numeric_retrieval_threshold": {
+   "pass": true,
+   "note": "no threshold exists; numbers recorded as they come"
+  },
+  "ALL_PASS": true
+ },
+ "diagnostic_vs_freight_closed_arm": {
+  "note": "diagnostic only: FREIGHT is a closed arm (FREIGHT_CLOSED), not a reference partitioner; no decision depends on this; no claim is made",
+  "nq": 2000,
+  "SAFE_ALL_P50": {
+   "FREIGHT": 0.473,
+   "PHG": 0.6965,
+   "delta_PHG_minus_FREIGHT": 0.2235,
+   "PHG_only_covered": 487,
+   "FREIGHT_only_covered": 40,
+   "mcnemar_p_reporter": 0.0,
+   "exact_p": 9.921380551204892e-99
+  },
+  "BASE_ALL_P50": {
+   "FREIGHT": 0.371,
+   "PHG": 0.6415,
+   "delta_PHG_minus_FREIGHT": 0.2705,
+   "PHG_only_covered": 581,
+   "FREIGHT_only_covered": 40,
+   "mcnemar_p_reporter": 0.0,
+   "exact_p": 4.434490698790262e-124
+  },
+  "freight_absolute": {
+   "BASE_ALL_P50": 0.371,
+   "BASE_ANY_P50": 0.9045,
+   "BASE_SCOPE_NODES": 5176.0,
+   "SAFE_ALL_P50": 0.473,
+   "SAFE_ANY_P50": 0.96,
+   "SAFE_SCOPE_NODES": 5169.1,
+   "BND_ALL_P50": 0.371
+  },
+  "freight_CORR": {
+   "dALL": 0.102,
+   "gained": 217,
+   "lost": 13,
+   "net": 204,
+   "mcnemar_p": 0.0,
+   "sig": true,
+   "gold_admitted": 557,
+   "gold_evicted": 46,
+   "churn_per_query": 5.188,
+   "churn_max": 6,
+   "queries_with_zero_churn": 1
+  },
+  "freight_BALANCE": {
+   "npart": 1175,
+   "blocks_used": 1175,
+   "size_min": 57,
+   "size_max": 104,
+   "size_median": 104.0,
+   "size_mean": 100.03,
+   "size_p90": 104.0,
+   "size_p99": 104.0,
+   "size_cv": 0.111,
+   "max_over_mean": 1.0397,
+   "ELIGIBLE": true
+  }
+ },
+ "host_after": {
+  "utc": "2026-09-13T19:16:06Z",
+  "host_total_mb": 16069,
+  "host_available_mb": 1451,
+  "foreign_python_processes_over_1GB_rss_untouched": [
+   {
+    "pid": 8628,
+    "name": "python.exe",
+    "rss_mb": 6080,
+    "started": "2026-09-13T20:29:08"
+   }
+  ]
+ },
+ "DECISION": "PHG_SCALE_BRIDGE_COMPLETE",
+ "claim": "feasibility only: the chain completed locally under the frozen experimental PHG contract; absolute L1 numbers recorded; no comparative quality claim against Mt-KaHyPar (no reference exists for this corpus)"
+}

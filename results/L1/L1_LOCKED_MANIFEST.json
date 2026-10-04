@@ -1,0 +1,727 @@
+{
+  "STATUS": {
+    "L1_FROZEN": true,
+    "L1_DOCUMENTED": true,
+    "L1_RECOMPUTE_REQUIRED": false
+  },
+  "ARCHITECTURE": {
+    "MASTER_TOPOLOGY": "C",
+    "C_EDGE_FAMILIES": [
+      "STRUCT",
+      "NER",
+      "QWEN_KNN"
+    ],
+    "L1_PARTITION_TOPOLOGY": "C",
+    "ROUTER": "Dense+SPLADE",
+    "DENSE_MODEL": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "DENSE_EXACT_CEILING": "FAISS IndexFlatIP (top200)",
+    "SPARSE": "SPLADE exact (naver/splade-cocondenser-ensembledistil, top200)",
+    "FUSION": "partition-level RRF, K0=60",
+    "K": 100,
+    "P_MAIN": 50,
+    "P20_ROLE": "aggressive-pruning / efficiency ablation only",
+    "P100_ROLE": "high-recall ceiling only",
+    "SELECTION_RATIONALE": "C selected for ARCHITECTURAL CONSISTENCY + FUTURE L2/L3 SIGNAL AVAILABILITY, NOT universal L1 dominance. A and C have ~equal aggregate L1 quality (~+/-1pp at K100/fusion/P50); C wins some datasets, A wins others; scopes ~identical (~5k) but candidate sets differ (Jaccard 0.09-0.38, ~0% identical) and mutually rescue different queries. C is the superset graph (STRUCT+NER+QWEN_KNN) giving one unified representation from which downstream stages selectively consume edge families; L3 need not blindly traverse all C edges."
+  },
+  "INTEGRITY": {
+    "CACHE_INTEGRITY": "PASS",
+    "EDGE_FAMILY_RECONSTRUCTION": "PASS",
+    "C_PARITY": "PASS (C == A U NER, verified 4 text substrates)",
+    "B_PARITY": "PASS",
+    "ALIGNMENT_GATE": "PASS (eng.nodes order == load_nodes doc order)",
+    "note": "STRUCT \u2229 KNN = 0 (A = STRUCT \u2294 KNN); big npy/graph hashes are full sha256."
+  },
+  "P50_DECISION": "P20 too aggressive as L1->L2 boundary; K100/fusion P20->P50 recovered ~5-10pp primary gold cov for ~2.5x scope; P_MAIN=50 (~5k cand/query) is the frozen L1->L2 interface. Do not retune P during L2.",
+  "ANY_VS_ALL": "ANY_GOLD_COV = >=1 gold survives L1; ALL_GOLD_COV = all supporting golds survive. High ANY / lower ALL => partial evidence. Distinguish (A) within-scope reasoning failure from (B) L1 pruning failure. Under strict induced-P50, a gold pruned by L1 is UNRECOVERABLE; L3 must not silently reintroduce the full corpus. Bounded frontier expansion = explicit future L3 experiment.",
+  "datasets": {
+    "2wiki_clean": {
+      "C_STATUS": "CANONICAL",
+      "N_docs": 65865,
+      "N_all_queries": 15000,
+      "N_eval": 1500,
+      "eval_population": "DERIVED_TEST",
+      "gold_semantics": "supporting passages (ALL primary); 2-hop",
+      "PRIMARY_METRIC": "ALL",
+      "npart_C": 658,
+      "edge_families_undirected": {
+        "STRUCT": 126070,
+        "NER": 523194,
+        "QWEN_KNN": 134737,
+        "A_undirected": 260807,
+        "B_undirected": 620374,
+        "C_undirected": 728689,
+        "C_PARITY": "PASS",
+        "ALIGNMENT_GATE": "PASS"
+      },
+      "paths": {
+        "C_partition_map": "scratchpad/ablation_qwen/2wiki_clean/variant_C/partition_map.json",
+        "C_graph": "scratchpad/ablation_qwen/2wiki_clean/variant_C/graph.pt",
+        "A_partition_map": "data/ukb_storage/2wiki_clean/gte_qwen/partition_map.json",
+        "query_ids_all": "data/ukb_storage/2wiki_clean/gte_qwen/query_ids_all.json",
+        "dense_cache": "data/ukb_storage/2wiki_clean/gte_qwen/dense_top200_all.npy",
+        "splade_cache": "data/ukb_storage/2wiki_clean/gte_qwen/splade_top200_all.npy",
+        "ner_edges_pkl": "data/ukb_storage/2wiki_clean/ner_edges_w_df25.pkl"
+      },
+      "hashes": {
+        "C_partition_map": {
+          "sha256": "d32fb4d103771dc5016bb9afc79983ccf0b2ac010a7b13bb6c07af1319081606",
+          "bytes": 2151485,
+          "capped": false
+        },
+        "C_graph": {
+          "sha256": "5efbb193c260f1389848a4435b5f42a728c4ac8286b06e62a973cfc40f894240",
+          "bytes": 23319899,
+          "capped": false
+        },
+        "A_partition_map": {
+          "sha256": "71049a6c9e3cfee67a89349046ef422bee1b452c22eb7a2d17a31a994f021a82",
+          "bytes": 1953840,
+          "capped": false
+        },
+        "query_ids_all": {
+          "sha256": "3e7c2f6410147117bc0f8eddbc0f4ec6b1505caaa550f9a2b9449d6c7c2a4325",
+          "bytes": 2426513,
+          "capped": false
+        },
+        "ner_edges_pkl": {
+          "sha256": "81a09bf7231d39e7305ab198809a23a5a2539834da30d7dbc920ef92f4c1556e",
+          "bytes": 8635006,
+          "capped": false
+        },
+        "dense_cache": {
+          "shape": [
+            15000,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 24000128,
+          "sha256": "6fff519a50fd5227ca056dc30cba4ddd329eb78b4e791b2490c4f37015fd46ad"
+        },
+        "splade_cache": {
+          "shape": [
+            15000,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 24000128,
+          "sha256": "2b77ec4cb781d425f281ac3e1bd5dd83c4c9c789aa32406d5692826bcd4ab041"
+        }
+      },
+      "L1_operating_point": {
+        "C_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 100.0,
+          "ALL_GOLD_COV": 93.6,
+          "GOLD_FRAC": 97.65,
+          "mean_scope": 5029.2,
+          "reduction": 13.1,
+          "PRIMARY": "ALL",
+          "PRIMARY_VALUE": 93.6
+        },
+        "A_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 100.0,
+          "ALL_GOLD_COV": 93.27,
+          "GOLD_FRAC": 97.48,
+          "mean_scope": 5027.7,
+          "reduction": 13.1,
+          "PRIMARY": "ALL",
+          "PRIMARY_VALUE": 93.27
+        },
+        "source_json": "results/L1/phase1_2wiki.json",
+        "source_sha256": "e806cd076d9a428cca4fc56bc2571063c59b5ad662216ea4ca749fff31e124e0"
+      }
+    },
+    "musique_clean": {
+      "C_STATUS": "CANONICAL",
+      "N_docs": 13672,
+      "N_all_queries": 19938,
+      "N_eval": 1995,
+      "eval_population": "DERIVED_TEST",
+      "gold_semantics": "supporting passages (ALL primary); 2-4 hop",
+      "PRIMARY_METRIC": "ALL",
+      "npart_C": 136,
+      "edge_families_undirected": {
+        "STRUCT": 51543,
+        "NER": 99656,
+        "QWEN_KNN": 27406,
+        "A_undirected": 78949,
+        "B_undirected": 145043,
+        "C_undirected": 163723,
+        "C_PARITY": "PASS",
+        "ALIGNMENT_GATE": "PASS"
+      },
+      "paths": {
+        "C_partition_map": "scratchpad/ablation_qwen/musique_clean/variant_C/partition_map.json",
+        "C_graph": "scratchpad/ablation_qwen/musique_clean/variant_C/graph.pt",
+        "A_partition_map": "data/ukb_storage/musique_clean/gte_qwen/partition_map.json",
+        "query_ids_all": "data/ukb_storage/musique_clean/gte_qwen/query_ids_all.json",
+        "dense_cache": "data/ukb_storage/musique_clean/gte_qwen/dense_top200_all.npy",
+        "splade_cache": "data/ukb_storage/musique_clean/gte_qwen/splade_top200_all.npy",
+        "ner_edges_pkl": "data/ukb_storage/musique_clean/ner_edges_w_df25.pkl"
+      },
+      "hashes": {
+        "C_partition_map": {
+          "sha256": "5ee20dedfdaae07ab8b8fc6759a3d4f33cc0fa66f43c1531c6f52222db45a6ce",
+          "bytes": 456376,
+          "capped": false
+        },
+        "C_graph": {
+          "sha256": "5d1803b21b1a710e2415793d4ab108922604e9aaee5cbc23527674fea8b95a63",
+          "bytes": 5240987,
+          "capped": false
+        },
+        "A_partition_map": {
+          "sha256": "875eb68144bf3a36ab5f69f66fb483d6f5c9090e4a5bf5eae9718b632509641d",
+          "bytes": 415316,
+          "capped": false
+        },
+        "query_ids_all": {
+          "sha256": "cf592554df9991c1592337137344d18b022ab74fe211edec8f272ab741848694",
+          "bytes": 3290938,
+          "capped": false
+        },
+        "ner_edges_pkl": {
+          "sha256": "9ae593e2d9fe391cad68d7d3570d0f4912e84dd0f61d25c926483a4ba2fb5e9b",
+          "bytes": 1649611,
+          "capped": false
+        },
+        "dense_cache": {
+          "shape": [
+            19938,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 31900928,
+          "sha256": "618bd5347e21f3e1686900847d0598fbf11beabcc6c3a47abe8eebefb7d11801"
+        },
+        "splade_cache": {
+          "shape": [
+            19938,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 31900928,
+          "sha256": "92af7a24bcd43feed4927574eaf4afed21318f8797347b15e0edd18223567dc5"
+        }
+      },
+      "L1_operating_point": {
+        "C_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 99.95,
+          "ALL_GOLD_COV": 96.14,
+          "GOLD_FRAC": 98.39,
+          "mean_scope": 5041.8,
+          "reduction": 2.71,
+          "PRIMARY": "ALL",
+          "PRIMARY_VALUE": 96.14
+        },
+        "A_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 99.95,
+          "ALL_GOLD_COV": 94.99,
+          "GOLD_FRAC": 98.02,
+          "mean_scope": 5041.3,
+          "reduction": 2.71,
+          "PRIMARY": "ALL",
+          "PRIMARY_VALUE": 94.99
+        },
+        "source_json": "results/L1/phase1_musique.json",
+        "source_sha256": "8dc4ac98ef2ba4474def596ce9077facd6a8a95f09f21cfaf329248e117b9591"
+      }
+    },
+    "hotpotqa_clean": {
+      "C_STATUS": "CANONICAL",
+      "N_docs": 507494,
+      "N_all_queries": 97852,
+      "N_eval": 9786,
+      "eval_population": "DERIVED_TEST",
+      "gold_semantics": "2 supporting passages (ALL primary)",
+      "PRIMARY_METRIC": "ALL",
+      "npart_C": 5074,
+      "edge_families_undirected": {
+        "STRUCT": 3426945,
+        "NER": 4342365,
+        "QWEN_KNN": 1166652,
+        "A_undirected": 4559172,
+        "B_undirected": 7485652,
+        "C_undirected": 8440280,
+        "C_PARITY": "PASS",
+        "ALIGNMENT_GATE": "PASS"
+      },
+      "paths": {
+        "C_partition_map": "scratchpad/ablation_qwen/hotpotqa_clean/variant_C/partition_map.json",
+        "C_graph": "scratchpad/ablation_qwen/hotpotqa_clean/variant_C/graph.pt",
+        "A_partition_map": "data/ukb_storage/hotpotqa_clean/gte_qwen/partition_map.json",
+        "query_ids_all": "data/ukb_storage/hotpotqa_clean/gte_qwen/query_ids_all.json",
+        "dense_cache": "data/ukb_storage/hotpotqa_clean/gte_qwen/dense_top200_all.npy",
+        "splade_cache": "data/ukb_storage/hotpotqa_clean/gte_qwen/splade_top200_all.npy",
+        "ner_edges_pkl": "data/ukb_storage/hotpotqa_clean/ner_edges_w_df25.pkl"
+      },
+      "hashes": {
+        "C_partition_map": {
+          "sha256": "1a60b7d888bad7d7442be4f41b2a4278316f143f8f23ed4c02bc7165281bb2cf",
+          "bytes": 19062681,
+          "capped": false
+        },
+        "C_graph": {
+          "sha256": "475f4594127e16484bc4a8fbc4f9208bb5bca62f8ccdadc2d5657f2aaa4b13ee",
+          "bytes": 266830619,
+          "capped": false
+        },
+        "A_partition_map": {
+          "sha256": "2da3a87ec0d02fe48b2bee78cbef5fddf1798749046a0731ceebdb83ae76aa4c",
+          "bytes": 17539686,
+          "capped": false
+        },
+        "query_ids_all": {
+          "sha256": "a2cba98606202119a3d1b6934588a1efe8dfc24cd4badf42922038a43454bd5b",
+          "bytes": 16241972,
+          "capped": false
+        },
+        "ner_edges_pkl": {
+          "sha256": "65048e96264b6a9116876ed7f3edb7b2da44f87e7d77204ab11f2e0253f5bd6d",
+          "bytes": 71508257,
+          "capped": false
+        },
+        "dense_cache": {
+          "shape": [
+            97852,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 156563328,
+          "sha256": "6eb78fd9657682a1748a69ef2348f6151b3b37b5c094997ecb04cd35737cefdf"
+        },
+        "splade_cache": {
+          "shape": [
+            97852,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 156563328,
+          "sha256": "a0891aedfb114cea7e6551ade407c78bc17943834249f507dfd734c4a2ee34ae"
+        }
+      },
+      "L1_operating_point": {
+        "C_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 98.92,
+          "ALL_GOLD_COV": 92.2,
+          "GOLD_FRAC": 95.56,
+          "mean_scope": 5081.4,
+          "reduction": 99.87,
+          "PRIMARY": "ALL",
+          "PRIMARY_VALUE": 92.2
+        },
+        "A_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 99.09,
+          "ALL_GOLD_COV": 93.48,
+          "GOLD_FRAC": 96.29,
+          "mean_scope": 5077.5,
+          "reduction": 99.95,
+          "PRIMARY": "ALL",
+          "PRIMARY_VALUE": 93.48
+        },
+        "source_json": "results/L1/phase1_hotpot.json",
+        "source_sha256": "b71bc92528922040d15337935220b2ff9cf1517d827134e23fa1d7ccee6c0ad8"
+      }
+    },
+    "squad_clean": {
+      "C_STATUS": "CANONICAL",
+      "N_docs": 19029,
+      "N_all_queries": 130319,
+      "N_eval": 13033,
+      "eval_population": "DERIVED_TEST",
+      "gold_semantics": "single gold passage (ANY primary)",
+      "PRIMARY_METRIC": "ANY",
+      "npart_C": 190,
+      "edge_families_undirected": {
+        "STRUCT": 694580,
+        "NER": 145515,
+        "QWEN_KNN": 28276,
+        "A_undirected": 722856,
+        "B_undirected": 821068,
+        "C_undirected": 841351,
+        "C_PARITY": "PASS",
+        "ALIGNMENT_GATE": "PASS"
+      },
+      "paths": {
+        "C_partition_map": "scratchpad/ablation_qwen/squad_clean/variant_C/partition_map.json",
+        "C_graph": "scratchpad/ablation_qwen/squad_clean/variant_C/graph.pt",
+        "A_partition_map": "data/ukb_storage/squad_clean/gte_qwen/partition_map.json",
+        "query_ids_all": "data/ukb_storage/squad_clean/gte_qwen/query_ids_all.json",
+        "dense_cache": "data/ukb_storage/squad_clean/gte_qwen/dense_top200_all.npy",
+        "splade_cache": "data/ukb_storage/squad_clean/gte_qwen/splade_top200_all.npy",
+        "ner_edges_pkl": "data/ukb_storage/squad_clean/ner_edges_w_df25.pkl"
+      },
+      "hashes": {
+        "C_partition_map": {
+          "sha256": "e6b5765b08682ded3551ddbe4e034119c8a7ea18eadc30ce6f36ccec3cd2cc45",
+          "bytes": 605846,
+          "capped": false
+        },
+        "C_graph": {
+          "sha256": "9665fadc0471b94f057c58978c004520b8c8d54d4749e48f8feb3bd0eaf4b3a8",
+          "bytes": 26925083,
+          "capped": false
+        },
+        "A_partition_map": {
+          "sha256": "ece4be11aaf8d3e535c8d20cf4e1c323f956f6d3863450a7f33f01f40af4c27a",
+          "bytes": 548708,
+          "capped": false
+        },
+        "query_ids_all": {
+          "sha256": "0ab91260c4926e71fcba6735894b1b4d83b3b4a7e3b131aa07e4119fb9543d8b",
+          "bytes": 13798541,
+          "capped": false
+        },
+        "ner_edges_pkl": {
+          "sha256": "78ac1ea411743d40a9d4a9993f5573ec4bb8ea761c116bad8581c39e7cc8b5a8",
+          "bytes": 2404792,
+          "capped": false
+        },
+        "dense_cache": {
+          "shape": [
+            130319,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 208510528,
+          "sha256": "7fd8f7fa0d29ea7dec88c1be31b97b06b8b311b5ec6764e91428a510a2245a83"
+        },
+        "splade_cache": {
+          "shape": [
+            130319,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 208510528,
+          "sha256": "0ce93bed82befbaa1b4e64a31917f17ef8c9170205b24d21554c09c19f077c07"
+        }
+      },
+      "L1_operating_point": {
+        "C_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 97.95,
+          "ALL_GOLD_COV": 97.95,
+          "GOLD_FRAC": 97.95,
+          "mean_scope": 5038.6,
+          "reduction": 3.78,
+          "PRIMARY": "ANY",
+          "PRIMARY_VALUE": 97.95
+        },
+        "A_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 97.96,
+          "ALL_GOLD_COV": 97.96,
+          "GOLD_FRAC": 97.96,
+          "mean_scope": 5052.1,
+          "reduction": 3.77,
+          "PRIMARY": "ANY",
+          "PRIMARY_VALUE": 97.96
+        },
+        "source_json": "results/L1/phase1_squad.json",
+        "source_sha256": "0788110243b30f737ef7224923f1472f444040723a6ea38fe2746bc8f397efd5"
+      }
+    },
+    "metaqa": {
+      "C_STATUS": "LEGACY_EXPLORATORY",
+      "N_docs": 40151,
+      "N_all_queries": 407513,
+      "N_eval": 39093,
+      "eval_population": "NATIVE_TEST",
+      "gold_semantics": "KB answer-entity nodes (ANY primary); per-hop 1/2/3",
+      "PRIMARY_METRIC": "ANY",
+      "npart_C": 401,
+      "edge_families_undirected": null,
+      "paths": {
+        "C_partition_map": "scratchpad/ablation_qwen/metaqa/variant_C/partition_map.json",
+        "C_graph": "scratchpad/ablation_qwen/metaqa/variant_C/graph.pt",
+        "A_partition_map": "data/ukb_storage/metaqa/gte_qwen/partition_map.json",
+        "query_ids_all": "data/ukb_storage/metaqa/gte_qwen/query_ids_all.json",
+        "dense_cache": "data/ukb_storage/metaqa/gte_qwen/dense_top200_all.npy",
+        "splade_cache": "data/ukb_storage/metaqa/gte_qwen/splade_top200_all.npy",
+        "ner_edges_pkl": "data/ukb_storage/metaqa/ner_edges_w_df25.pkl"
+      },
+      "hashes": {
+        "C_partition_map": {
+          "sha256": "3935952e0c82e86932a2a3cd78e47d669434a9d6802427f321f5bc8499ec30a0",
+          "bytes": 1464503,
+          "capped": false
+        },
+        "C_graph": {
+          "sha256": "76a64975b039d682d86cd5d6476b85fe91cdbe5b511bd8f29ae9e99c592aa24c",
+          "bytes": 12411035,
+          "capped": false
+        },
+        "A_partition_map": {
+          "sha256": "7aa46a6ca87cc23f1061a16fa1d559cd04af00f3b0f952ce2a85bb36285711b2",
+          "bytes": 1344111,
+          "capped": false
+        },
+        "query_ids_all": {
+          "sha256": "7ad3ba04802e5ad5aa86409d3baf7004938aa8cc5e714708cb856d402a7b7283",
+          "bytes": 131470112,
+          "capped": false
+        },
+        "ner_edges_pkl": {
+          "sha256": "332031b11f9ffe215bf072c721322fc8610d1362c9211248fa2e8c0279d4d802",
+          "bytes": 4831568,
+          "capped": false
+        },
+        "dense_cache": {
+          "shape": [
+            407513,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 652020928,
+          "sha256": "79280b072bc0bc91c238e0437c84b7a4367dafb68129ac6c0b78126cfd70e229"
+        },
+        "splade_cache": {
+          "shape": [
+            407513,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 652020928,
+          "sha256": "8ca89fc9e6999677b8257d934eafa5224e903708c6c260a70f11ae290dd64456"
+        }
+      },
+      "L1_operating_point": {
+        "C_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 96.52,
+          "ALL_GOLD_COV": 61.76,
+          "GOLD_FRAC": 80.02,
+          "mean_scope": 5037.9,
+          "reduction": 7.97,
+          "PRIMARY": "ANY",
+          "PRIMARY_VALUE": 96.52
+        },
+        "A_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 95.52,
+          "ALL_GOLD_COV": 59.65,
+          "GOLD_FRAC": 77.57,
+          "mean_scope": 5024.0,
+          "reduction": 7.99,
+          "PRIMARY": "ANY",
+          "PRIMARY_VALUE": 95.52
+        },
+        "source_json": "results/L1/phase1_metaqa.json",
+        "source_sha256": "86f974cc7421f2f460ac2d61d58d225edebe07623232527b9c1b6c5aafaaf0c6"
+      }
+    },
+    "webqsp": {
+      "C_STATUS": "LEGACY_EXPLORATORY",
+      "N_docs": 781485,
+      "N_all_queries": 1578,
+      "N_eval": 1578,
+      "eval_population": "ALL_EVALUABLE",
+      "gold_semantics": "KB answer-entity nodes (ANY primary)",
+      "PRIMARY_METRIC": "ANY",
+      "npart_C": 7814,
+      "edge_families_undirected": null,
+      "paths": {
+        "C_partition_map": "scratchpad/ablation_qwen/webqsp/variant_C/partition_map.json",
+        "C_graph": "scratchpad/ablation_qwen/webqsp/variant_C/graph.pt",
+        "A_partition_map": "data/ukb_storage/webqsp/gte_qwen/partition_map.json",
+        "query_ids_all": "data/ukb_storage/webqsp/gte_qwen/query_ids_all.json",
+        "dense_cache": "data/ukb_storage/webqsp/gte_qwen/dense_top200_all.npy",
+        "splade_cache": "data/ukb_storage/webqsp/gte_qwen/splade_top200_all.npy",
+        "ner_edges_pkl": "data/ukb_storage/webqsp/ner_edges_w_df25.pkl"
+      },
+      "hashes": {
+        "C_partition_map": {
+          "sha256": "cebde9e87f1a55e08d28d14c8a58553f7d91f854fe8ee8c3b9e4bee9b1c16afb",
+          "bytes": 23222338,
+          "capped": false
+        },
+        "C_graph": {
+          "sha256": "7a9ec318876a15b94888b2089529e5a84cf84f2924199c51ea3075bde56bfc2c",
+          "bytes": 132948251,
+          "capped": false
+        },
+        "A_partition_map": {
+          "sha256": "06433e0c95877fe8c82e4c4d71609c63b739ea04293d31f461e626423e2bdca6",
+          "bytes": 20877973,
+          "capped": false
+        },
+        "query_ids_all": {
+          "sha256": "c064016b578ab6c642fd6cd7ace13eae844f54bb27ea7fa0c0c6e68ec30d860a",
+          "bytes": 406272,
+          "capped": false
+        },
+        "ner_edges_pkl": {
+          "sha256": "16f5b1e88bbebe171753e98e45ed8ce6800b58997108e4aef78dd1ba0c6085b8",
+          "bytes": 22590061,
+          "capped": false
+        },
+        "dense_cache": {
+          "shape": [
+            1578,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 2524928,
+          "sha256": "32c653d4d7cee6b8180fb983ec05ccb5534292037e31d0bd72ce2fc7114553d9"
+        },
+        "splade_cache": {
+          "shape": [
+            1578,
+            200
+          ],
+          "dtype": "int64",
+          "bytes": 2524928,
+          "sha256": "1d3b2a8070c5f3f66a188fe8966dee7464cc18eb9d713b20e4d9025a25009c97"
+        }
+      },
+      "L1_operating_point": {
+        "C_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 94.3,
+          "ALL_GOLD_COV": 76.24,
+          "GOLD_FRAC": 87.36,
+          "mean_scope": 5023.3,
+          "reduction": 155.57,
+          "PRIMARY": "ANY",
+          "PRIMARY_VALUE": 94.3
+        },
+        "A_dense+splade_K100_P50": {
+          "ANY_GOLD_COV": 95.31,
+          "ALL_GOLD_COV": 79.28,
+          "GOLD_FRAC": 89.35,
+          "mean_scope": 5027.3,
+          "reduction": 155.45,
+          "PRIMARY": "ANY",
+          "PRIMARY_VALUE": 95.31
+        },
+        "source_json": "results/L1/phase1_webqsp_corrected.json",
+        "source_sha256": "c1f97f8acc4548f82695cf8b07af47226357b6f2f558f64e41add1916973bb34"
+      }
+    }
+  },
+  "L1_RESULT_ARTIFACTS": {
+    "L1_FULL_TABLE": {
+      "path": "results/L1/L1_FULL_TABLE.md",
+      "sha256": "f0dcf435ffcf02e64afd6b10ef9037215905b6bcfb9ca3bd8e23afbe07338b18",
+      "bytes": 56214,
+      "capped": false
+    },
+    "L1_STOP_OUTPUTS": {
+      "path": "results/L1/L1_STOP_OUTPUTS.md",
+      "sha256": "3e40533316093250cbcc8b9f66a045bc0598869cfcb8d3fce49994e2404ba83c",
+      "bytes": 4421,
+      "capped": false
+    },
+    "phase1_2wiki": {
+      "path": "results/L1/phase1_2wiki.json",
+      "sha256": "e806cd076d9a428cca4fc56bc2571063c59b5ad662216ea4ca749fff31e124e0",
+      "bytes": 38275,
+      "capped": false
+    },
+    "phase1_musique": {
+      "path": "results/L1/phase1_musique.json",
+      "sha256": "8dc4ac98ef2ba4474def596ce9077facd6a8a95f09f21cfaf329248e117b9591",
+      "bytes": 38430,
+      "capped": false
+    },
+    "phase1_hotpot": {
+      "path": "results/L1/phase1_hotpot.json",
+      "sha256": "b71bc92528922040d15337935220b2ff9cf1517d827134e23fa1d7ccee6c0ad8",
+      "bytes": 38599,
+      "capped": false
+    },
+    "phase1_squad": {
+      "path": "results/L1/phase1_squad.json",
+      "sha256": "0788110243b30f737ef7224923f1472f444040723a6ea38fe2746bc8f397efd5",
+      "bytes": 38329,
+      "capped": false
+    },
+    "phase1_metaqa": {
+      "path": "results/L1/phase1_metaqa.json",
+      "sha256": "86f974cc7421f2f460ac2d61d58d225edebe07623232527b9c1b6c5aafaaf0c6",
+      "bytes": 64969,
+      "capped": false
+    },
+    "phase1_webqsp_corrected": {
+      "path": "results/L1/phase1_webqsp_corrected.json",
+      "sha256": "c1f97f8acc4548f82695cf8b07af47226357b6f2f558f64e41add1916973bb34",
+      "bytes": 37882,
+      "capped": false
+    }
+  },
+  "AC_DIAGNOSTIC_ARTIFACTS": {
+    "ac_scope_analysis": {
+      "path": "results/L1/ac_scope_analysis.json",
+      "sha256": "ecc00d44794ef70a5fb11e1269fadd5d4ae95e15b0dcecdf7845339f4420fd02",
+      "bytes": 7105,
+      "capped": false
+    },
+    "ac_scope_hotpot": {
+      "path": "results/L1/ac_scope_hotpot.json",
+      "sha256": "b69cea4821e53e0378aab2d72135cbe5c117ef8f406774030aba45e7639da974",
+      "bytes": 2382,
+      "capped": false
+    },
+    "ac_scope_legacy": {
+      "path": "results/L1/ac_scope_legacy.json",
+      "sha256": "651ae40f899f634e7618efcdf3619fd31a2cd55422776a47761f8d1e4d005360",
+      "bytes": 4740,
+      "capped": false
+    },
+    "ac_graph_diagnostic": {
+      "path": "results/L1/ac_graph_diagnostic.json",
+      "sha256": "400ae833de105f34aecd70e553a75f213bb5a72b0ab1ed54ee2a5ee6b9963afa",
+      "bytes": 19738,
+      "capped": false
+    },
+    "ac_graph_diagnostic_md": {
+      "path": "results/L1/ac_graph_diagnostic.md",
+      "sha256": "4bab19c9b4566b804e3f04957e4a555bf3caeaf25b43acc7313f54286f101bd4",
+      "bytes": 9485,
+      "capped": false
+    },
+    "ac_edge_recon": {
+      "path": "results/L1/ac_edge_recon.json",
+      "sha256": "989afcbcb9cd48eb820f43c660ba233158912342e6c8b23bc4f13bc40e5856f9",
+      "bytes": 1964,
+      "capped": false
+    }
+  },
+  "SCRIPT_HASHES": {
+    "phase1_l1_allq": {
+      "path": "scratchpad/phase1_l1_allq.py",
+      "sha256": "d3449fc60f2021227456c266912d70d222ecfc228fe3b6ffef17bb1c5a83a998",
+      "bytes": 31112,
+      "capped": false
+    },
+    "l1_eval_phase1": {
+      "path": "scratchpad/l1_eval_phase1.py",
+      "sha256": "5f82ea926de7dc4bd217a9cff2a70b3dd41a0a47d108bc5b15bde4d26ae44932",
+      "bytes": 21880,
+      "capped": false
+    },
+    "ac_scope_analysis_py": {
+      "path": "scratchpad/ac_scope_analysis.py",
+      "sha256": "b36389cf375f2065cef634a138703da044b58ed9e28361878717eabc462a7691",
+      "bytes": 8589,
+      "capped": false
+    },
+    "ac_edge_recon_py": {
+      "path": "scratchpad/ac_edge_recon.py",
+      "sha256": "86bcdc0eaee5d91af2c87b7733b9f4a8d46a7f3b8763dacc4597ce5ed813343e",
+      "bytes": 4702,
+      "capped": false
+    },
+    "ac_graph_diagnostic_py": {
+      "path": "scratchpad/ac_graph_diagnostic.py",
+      "sha256": "0b07d869f02a911ec7b92675bba4ab5f4b82d84f6f76211be2a4f157ba4de540",
+      "bytes": 11986,
+      "capped": false
+    },
+    "build_l1_manifest_py": {
+      "path": "scratchpad/build_l1_manifest.py",
+      "sha256": "520945b5634b9dd8aa8082ea097311b9ceca99daff773014dc0588be49fe0134",
+      "bytes": 11029,
+      "capped": false
+    }
+  },
+  "CAVEATS": [
+    "C is ARCHITECTURALLY selected; C is NOT a universal empirical L1 winner (A wins hotpot on scope; C wins 2wiki/musique/squad marginally).",
+    "MetaQA/WebQSP B/C NER variants remain LEGACY_EXPLORATORY: their entity-node substrate makes current NER provenance noncanonical; canonical L1 for metaqa/webqsp stays topology-A (metaqa winner = SPLADE-alone; webqsp = A-fusion). C partition_maps exist for them but are not the canonical operating topology.",
+    "Hotpot/SQuAD A/C graph diagnostic used strided sampling (2500 of 9786/13033 queries); 2wiki/musique were full-N. The 648-cell L1 sweep itself is full-population (no sampling)."
+  ]
+}

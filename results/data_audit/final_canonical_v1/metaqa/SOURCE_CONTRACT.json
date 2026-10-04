@@ -1,0 +1,34 @@
+{
+  "DATASET": "metaqa",
+  "CANONICAL_CORPUS_SOURCE": "Official MetaQA WikiMovies KB entity dictionary: data/original/metaqa/entity/kb_entity_dict.txt (the KB node vocabulary), cross-checked against the KB triple file kb.txt.",
+  "SOURCE_VERSION": "MetaQA 'vanilla' release (Zhang et al., AAAI 2018), github.com/yuyuz/MetaQA; immutable copy under data/original/metaqa (data/raw/metaqa is sha-identical).",
+  "SOURCE_PATHS": [
+    "data/original/metaqa/entity/kb_entity_dict.txt",
+    "data/original/metaqa/kb.txt"
+  ],
+  "SOURCE_HASHES": {
+    "data/original/metaqa/entity/kb_entity_dict.txt": {
+      "sha256": "9c15b4b7d5b0bf4fe035361fa8a8737722c0019ad8296c9c7e57f540c8741661",
+      "bytes": 877185,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    },
+    "data/original/metaqa/kb.txt": {
+      "sha256": "9b4d3b3066266075ad1577b4beed68e6e112e76e1a29ed2cb00a2896d2b792af",
+      "bytes": 5220771,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    }
+  },
+  "WHY_THIS_IS_THE_FULL_RETRIEVAL_UNIVERSE": "kb_entity_dict.txt IS the KB's own complete node vocabulary, a KB artifact with no question content in it: each line is '<index>\\t<entity name>' and no question id, question string, answer annotation or split marker appears anywhere in the file. Independence is verifiable in both directions: (a) every one of the 134,741 kb.txt triples' endpoints is present in the dict (kb_entities_missing_from_dict = 0, recorded in data/final_canonical/metaqa/integrity_report.json -> corpus_accounting_detail.kb_txt_cross_check), so the dict is a superset of everything the KB graph can reach; (b) the QA files (N-hop/vanilla/qa_{split}.txt) are read only in the query stage and never contribute a node. MetaQA has no documents -- the retrieval universe IS the KB entity set -- so there is no larger corpus this could be a subset of. Evaluating 1 question or all 407,513 yields the same 43,234 nodes.",
+  "RAW_SOURCE_RECORDS": 43234,
+  "CANONICAL_NODE_IDENTITY_RULE": "official kb_entity_dict.txt row index; entity name kept EXACT (case preserved); node_id = 'metaqa:e<index zero-padded to 5>'.",
+  "NORMALIZATION_RULE": "Stored text = the EXACT official entity name. No NFC/NFKC, no casefolding, no whitespace collapsing, no stripping, no '_'->' '. text == title == entity name. The legacy lossy collapse (strip().lower().replace('_',' '), which merged 3,083 distinct-case entities down to 40,151) is NOT reproduced; it is quantified only, in identity_normalization_diagnostics. Triple verbalization (display name + up to 10 kb.txt triples) is a downstream ENCODING choice, not corpus identity.",
+  "DEDUP_RULE": "identity = exact entity name; a repeated name would be dropped as duplicate_entity_name. 0 duplicates occur (43,234 rows -> 43,234 distinct names).",
+  "EXPECTED_NODE_COUNT": 43234,
+  "DERIVED_NODE_COUNT": 43234,
+  "QUERY_DEPENDENT_CORPUS": false,
+  "QUALITY_LOCKED_QUERY_SOURCE": "official MetaQA TEST split, all 3 hop families (vanilla), 39,093 questions -- test labels are PUBLIC for MetaQA (results/data_audit: official_test_labels='public').",
+  "SCALE_ALL_QUERY_SOURCE": "every official MetaQA vanilla question in all splits x all hops = 407,513 (train 329,282 + dev 39,138 + test 39,093).",
+  "SOURCE_CONTRACT_STATUS": "BUILT_AND_ACCEPTED (derived retroactively from the accepted canonical_v1 build)"
+}

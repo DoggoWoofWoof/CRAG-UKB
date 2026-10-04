@@ -1,0 +1,60 @@
+{
+ "stage": "FBX_SCALE / addendum 7: two-level (hierarchical) PHG on WebQSP (Track B), declared before any H2L arm is partitioned or scored",
+ "declared": "2026-10-01T01:09:00+0530",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_3.json": "23b186b9c631541af5fa45e7236c20937209cd7d2aa8971aeaaaccff31a883a3",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_4.json": "6dd584733ea134dba79b8d9a7f9b45097363ae0dd3a0c3bfc807821b7f1b9920",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_5.json": "ddff074cc11de999c8d70e720880271d67af47ef4b7ba65c9c4d875f48c0f4e2",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6.json": "5ca94fa0ca8b07dd94fe69236a8f902ef269ee8a4d7fc66463a01ce8487eea10",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6A.json": "f2ada7fc164e6ce54e83e3066498133a5a5ef1132aab53ea71c157eb538c7c52"
+ },
+ "status": "DEVELOPMENT (calibration of a systems substrate); nothing here selects a retrieval mechanism",
+ "question": "does replacing the flat K-way PHG by a nested partition (top S-way PHG, then independent K/S-way PHGs on the net-split blocks) preserve ALL-gold recall under the addendum-1 gate?  What it buys at scale: the K-way stage's memory becomes the largest block's pins (about (pins + split-net pins) / S) instead of all pins.  What it does not buy: the top S-way stage still reads the whole hypergraph (addendum 8).",
+ "not_claimed": [
+  "no bit-for-bit reproduction of the flat partition: a different algorithm cannot reproduce it and none is expected; 'equivalent' means the addendum-1 gate, stated below",
+  "nothing about Freebase feasibility: the top level is flat and in memory here; the per-block memory and time constants are measured for the extrapolation only",
+  "no M2 coarsening, no projection, no refinement in this addendum"
+ ],
+ "arms": {
+  "reference": "PHG_SK = the frozen flat WebQSP maps on H4_SK at K in {100, 250, 500} (Zoltan PHG, NP 4); their cells must reproduce the earlier EVAL bit for bit (control)",
+  "H2L5, H2L25": "S = 5 and S = 25 top blocks; both divide every gate K (K/S = 20/50/100 and 4/10/20 blocks per top block); these two S bracket the Freebase ratio (pins / S fitting RAM) on the WebQSP scale",
+  "TOP": "the frozen H4_SK hypergraph rule with k = S (cap = round(N/S); nothing else changed) partitioned by the frozen driver (NP 4) into S blocks with every frozen parameter unchanged EXCEPT IMBALANCE_TOL = 1.01 (declared: the top level keeps slack so the K-way bound 1.03 is still reachable below it); the frozen validity rule applies (largest top block <= ceil(1.03 N / S), else PARTITION_INVALID, no map); a top block within 1.01 N / S leaves every sub-problem a tolerance of at least 1.03 / 1.01 = 1.0198",
+  "SUB": "for each top block b: the K-way hypergraph H4_SK_K (the frozen rule, verified to have the frozen content digest, CONTROL) restricted to the block's vertices; every net keeps only its pins inside the block, nets left with < 2 pins are dropped, every kept net keeps its weight; vertex weights unit; partitioned by the frozen driver (NP 4) into K/S blocks with IMBALANCE_TOL = floor_4dp(1.03 (N/K) (K/S) / n_b) where n_b is the block's vertex count, so Zoltan's own bound max-part <= tol x n_b/(K/S) equals the contract bound 1.03 N/K; a block with n_b > 1.03 N/S has no tolerance >= 1 and the cell is PARTITION_INVALID",
+  "combination": "global block id = b x (K/S) + local id; the K-way map is validated by the frozen rule (length, ids in range, largest block <= ceil(1.03 N / K)); empty blocks are repaired by the frozen PHG_NONEMPTY_REPAIR_V1 on the K-way hypergraph; a map that violates the size bound is REFUSED (PARTITION_INVALID, no map written, never relaxed or replaced)",
+  "identity_used": "K-way KM1 of the combined map = KM1 of the top partition on the K-way nets + the sum of the sub-problems' KM1 (net splitting preserves connectivity exactly); checked in scratchpad/_h2l.py TEST"
+ },
+ "gates": {
+  "end_to_end (the only accepting gate)": "addendum 1's verdict rule, unchanged, via scratchpad/_h2l_eval.py (scratchpad/_ml2_eval.py's arithmetic, the 786-row population, matched-B_P comparison): rows below PHG_SK's ALL-gold count at matched B_P over every B_N in {100, 250, 500, 1000, 2000, 5000}, at each of K in {100, 250, 500}: at most 7 of 786 = RECALL_PRESERVING, at least 24 = FAILED, else BORDERLINE; also FAILED if B_P = K on more than half the rows",
+  "diagnostics (not gating)": "KM1 of the combined map on H4_SK_K versus the flat PHG's KM1 (ratio); per-sub-problem pins, nets dropped by splitting, seconds and peak RSS per rank; the top-level KM1 share; sizes of the K blocks (min/max)"
+ },
+ "decision_table": {
+  "both H2L5 and H2L25 RECALL_PRESERVING at K 100, 250, 500": "the nested decomposition is accepted as the K-way stage of the out-of-core partitioner; addendum 8 then declares the top-level (M2 coarsening ~2x -> top PHG on the coarse hypergraph -> projection + refinement) arms against the in-memory H2L top map",
+  "exactly one of the two RECALL_PRESERVING": "reported; the passing S bounds the design (S is the number of independently loadable blocks); the failing S is not used; addendum 8 proceeds with the passing S",
+  "neither RECALL_PRESERVING (FAILED or BORDERLINE)": "reported with the tables; BORDERLINE goes to the user; FAILED rejects the nested decomposition at these S (the flat K-way stage cannot be cut into independent blocks without losing recall) and the out-of-core design must change (no relaxation of the gate, no re-run with other S after seeing the result)",
+  "PARTITION_INVALID cells": "counted as not scored (as addendum 1); a K-way cell that is invalid at both S is reported, never relaxed"
+ },
+ "measured_constants_carried_in": {
+  "zoltan_bytes_per_pin_rss": "~129 (WebQSP H4_SK, NP 4, 29.57M pins)",
+  "zoltan_seconds": "partition ~187 s + load 50-95 s per K at 29.57M pins, roughly flat in K",
+  "freebase_h4_sk_pins": "~6e9 (STRUCT 4.25e9 + KNN ~1.8e9), ~775 GB Zoltan flat, ~390 GB after a 2x M2 coarsening; host 81.6 GB usable RAM, 285 GB disk"
+ },
+ "not_done_here": [
+  "the top-level surrogate (M2 coarsening + OOC top PHG + projection + refinement): addendum 8, declared only after this result",
+  "any Freebase partition",
+  "K above 500 (the WebQSP gate K set is 100/250/500 by addendum 1)"
+ ],
+ "code_pinned": {
+  "scratchpad/_h2l.py": "e578fc4b01ff29ec9a96047a7a0875fd19cff9d0e63b862a019ee48d34a46dd1",
+  "scratchpad/_h2l_eval.py": "e9d9075027e332bad7ca2c8de11b4c306314e25ca15586089b45a47f67b627c4",
+  "scratchpad/_ml2_eval.py": "318c7b416985d1a301fda733186d735ca071f1499a727778b3554c0aeecfe263",
+  "scratchpad/_fbx_calib.py": "a46001f57ac56e725723a77c8eecaacc067aedf883a39ba29b1f236e9828ed7f",
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_lowmem/phg_repair.py": "4c051e7a139abc19fd1b8433948a0d288858ac6a9c67dae40d7ef001839472b0",
+  "src/l1_lowmem/freight.py": "7adbe2a06146e9c60b99250cc1ac84beb1ef7115a23d96ea6930f87d298d0971",
+  "src/l1_lowmem/phg_driver/phg_driver.c": "cf5099851282444d0b6c87b399210ae3dd6bc09f8fe2a5f7b49d315ce4b133b4"
+ }
+}

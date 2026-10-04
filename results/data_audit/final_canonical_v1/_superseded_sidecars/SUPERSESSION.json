@@ -1,0 +1,33 @@
+{
+  "SUPERSEDED": true,
+  "superseded_on": "2026-09-05T18:47:38",
+  "files": {
+    "GOLD_SEMANTICS_preSourceFix.json": {
+      "was": "data/final_canonical/GOLD_SEMANTICS.json",
+      "what_it_was": "a PERMANENT SIDECAR holding per-reference gold statistics, written by an audit that explicitly declined to touch the builder ('This audit does NOT rewrite integrity_report.json; the corrected fields live here').",
+      "why_superseded": "the directive required folding it into the regular integrity outputs. Both builders now compute per-reference gold semantics natively and emit them as integrity_report.json -> GOLD_SEMANTICS, plus top-level ALL_GOLD_REFS_RESOLVE / MISSING_GOLD_REFS / AMBIGUOUS_GOLD_REFS. A sidecar describing a check the builder did not perform is exactly the drift this removes.",
+      "numbers_that_CHANGED_and_why": {
+        "2wiki.AMBIGUOUS_GOLD_REFS": {
+          "sidecar": 8,
+          "now": 0,
+          "reason": "the sidecar could only OBSERVE that 8 train refs to the title 'Unconquered' hit 2 candidate nodes. The patched builder RESOLVES them from each question's own official context paragraph: all 8 map uniquely to 2wiki:c8073502 (the 1947 DeMille film); the rival 2wiki:c62717110 is a disambiguation page. Ambiguity that is resolvable from the source is not ambiguity."
+        },
+        "2wiki.per_split.train.AMBIGUOUS_GOLD_REFS": {
+          "sidecar": 8,
+          "now": 0,
+          "reason": "same"
+        }
+      },
+      "numbers_that_are_UNCHANGED": "GOLD_REFS_TOTAL and MISSING_GOLD_REFS for all five datasets, and every CORPUS_HASH (CORPUS_HASH_UNCHANGED was true then and is true now).",
+      "stale_line_reference_inside_it": "its _supersedes string cites 'build.py:344,564,570,580'. Those line numbers were correct for build.py, but build.py does NOT build the live 2wiki corpus -- build_kb.py does, carrying the identical cardinality defect at 495/497/579/980/986/997. Both builders were patched; see _WEBQSP_ACCEPTANCE_GATE.json -> 2WIKI_FIX_AT_SOURCE._RESOLVED_2026_09_05._SCOPE_CORRECTION.",
+      "kept_because": "it is the pre-fix measurement and the independent re-derivation record (188,350/188,350 titles matched, 0 disagreeing records). Do not delete."
+    }
+  },
+  "where_the_live_numbers_are_now": {
+    "metaqa": "data/final_canonical/metaqa/integrity_report.json -> GOLD_SEMANTICS",
+    "2wiki": "data/final_canonical/2wiki/integrity_report.json -> GOLD_SEMANTICS",
+    "musique": "data/final_canonical/musique/integrity_report.json -> GOLD_SEMANTICS",
+    "squad": "data/final_canonical/squad/integrity_report.json -> GOLD_SEMANTICS",
+    "hotpotqa": "data/final_canonical/hotpotqa/integrity_report.json -> GOLD_SEMANTICS"
+  }
+}

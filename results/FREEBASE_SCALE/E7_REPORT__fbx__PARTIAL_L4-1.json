@@ -1,0 +1,228 @@
+{
+ "stage": "FBX_SCALE addendum 17 / E7: Freebase STRUCT-only V-cycle systems measurement (VCQ512L4N4FM2)",
+ "status": "PARTIAL: levels [4, 3, 2, 1] done, level 0 pending (waiting for a 41 GB scheduler slot; mpr has priority)",
+ "N": 301977131,
+ "S": 25,
+ "cap_per_block": 12199876,
+ "levels": {
+  "0": {
+   "V": 301977131,
+   "M": 301926705,
+   "P": 4253534391,
+   "source": "E1 (implicit level 0: net u = {u} U N(u))",
+   "V_reduction_vs_level0": 1.0,
+   "P_reduction_vs_level0": 1.0
+  },
+  "1": {
+   "V": 178333613,
+   "M": 176520867,
+   "P": 1690890784,
+   "source_vertices_V_in": null,
+   "nets_dropped_singleton": 0,
+   "nets_merged_identical": 125405838,
+   "max_vertex_weight": 512,
+   "weight_conserved_vertex": true,
+   "V_reduction_vs_level0": 1.693,
+   "P_reduction_vs_level0": 2.516
+  },
+  "2": {
+   "V": 59213072,
+   "M": 121250920,
+   "P": 1251065170,
+   "source_vertices_V_in": 178333613,
+   "nets_dropped_singleton": 54323775,
+   "nets_merged_identical": 946172,
+   "max_vertex_weight": 512,
+   "weight_conserved_vertex": true,
+   "V_reduction_vs_level0": 5.1,
+   "P_reduction_vs_level0": 3.4
+  },
+  "3": {
+   "V": 23474979,
+   "M": 103777069,
+   "P": 937114098,
+   "source_vertices_V_in": 59213072,
+   "nets_dropped_singleton": 1549513,
+   "nets_merged_identical": 15924338,
+   "max_vertex_weight": 512,
+   "weight_conserved_vertex": true,
+   "V_reduction_vs_level0": 12.864,
+   "P_reduction_vs_level0": 4.539
+  },
+  "4": {
+   "V": 11664088,
+   "M": 84930375,
+   "P": 712838071,
+   "source_vertices_V_in": 23474979,
+   "nets_dropped_singleton": 1334548,
+   "nets_merged_identical": 17512146,
+   "max_vertex_weight": 512,
+   "weight_conserved_vertex": true,
+   "V_reduction_vs_level0": 25.889,
+   "P_reduction_vs_level0": 5.967
+  }
+ },
+ "surrogate": {
+  "V": 11664088,
+  "M": 9356116,
+  "P": 21714432,
+  "pins_budget": 390000000.0,
+  "pins_stop_rule": 450000000.0,
+  "budget_ratio": 0.0557,
+  "stop_rule_triggered": false,
+  "within_budget": true,
+  "shards": 2333,
+  "shard_bytes": 287965360,
+  "zoltan": {
+   "np": 4,
+   "rc": 0,
+   "wall_seconds_job": 948.47,
+   "partition_wall_seconds": 478.039,
+   "peak_rss_gb_max_rank": 3.643,
+   "peak_rss_gb_sum_of_rank_peaks": 9.324,
+   "cutl_global_surrogate": 2247078656.0,
+   "imbalance": 1.009999
+  }
+ },
+ "stages": [
+  {
+   "stage": "E1 twins (level-1 contraction)",
+   "wall_s": 82.4,
+   "peak_rss_gb": 24.85
+  },
+  {
+   "stage": "E1 quotient level 1",
+   "wall_s": 72.1,
+   "peak_rss_gb": 30.72
+  },
+  {
+   "stage": "E1 surrogate-at-level-1 census",
+   "wall_s": 39.6,
+   "peak_rss_gb": 25.67
+  },
+  {
+   "stage": "E2/E3 ladder level 1 quotient",
+   "wall_s": 149.0,
+   "peak_rss_gb": 30.8
+  },
+  {
+   "stage": "E2/E3 ladder level 2 quotient",
+   "wall_s": 33.1,
+   "peak_rss_gb": 16.79
+  },
+  {
+   "stage": "E3 ladder level 2 aggregation pass",
+   "wall_s": 992.2,
+   "peak_rss_gb": 24.03
+  },
+  {
+   "stage": "E2/E3 ladder level 3 quotient",
+   "wall_s": 28.3,
+   "peak_rss_gb": 12.04
+  },
+  {
+   "stage": "E3 ladder level 3 aggregation pass",
+   "wall_s": 515.9,
+   "peak_rss_gb": 14.05
+  },
+  {
+   "stage": "E2/E3 ladder level 4 quotient",
+   "wall_s": 19.7,
+   "peak_rss_gb": 9.38
+  },
+  {
+   "stage": "E3 ladder level 4 aggregation pass",
+   "wall_s": 399.2,
+   "peak_rss_gb": 9.69
+  },
+  {
+   "stage": "E4 surrogate quotient (cap 4, level 4)",
+   "wall_s": 43.8,
+   "peak_rss_gb": 26.08
+  },
+  {
+   "stage": "E4 Zoltan-PHG top (NP 4)",
+   "wall_s": 948.47,
+   "peak_rss_gb_sum_of_ranks": 9.324
+  },
+  {
+   "stage": "E5/E6 level 4: quotient + transpose + FM2 refine",
+   "wall_s": 888.8,
+   "fm_peak_rss_gb": 14.3,
+   "disk_bytes_work": 7832139191
+  },
+  {
+   "stage": "E5/E6 level 3: quotient + transpose + FM2 refine",
+   "wall_s": 283.8,
+   "fm_peak_rss_gb": 14.58,
+   "disk_bytes_work": 10277093567
+  },
+  {
+   "stage": "E5/E6 level 2: quotient + transpose + FM2 refine",
+   "wall_s": 429.7,
+   "fm_peak_rss_gb": 21.14,
+   "disk_bytes_work": 13684589836
+  },
+  {
+   "stage": "E5/E6 level 1: quotient + transpose + FM2 refine",
+   "wall_s": 1042.2,
+   "fm_peak_rss_gb": 40.53,
+   "disk_bytes_work": 20092297625
+  }
+ ],
+ "peaks": {
+  "max_stage_rss_gb": 40.53,
+  "ram_budget_gb": 70.0,
+  "ram_ok": true,
+  "max_work_disk_gb": 20.09,
+  "disk_budget_gb": 55.0,
+  "disk_ok": true
+ },
+ "km1_trajectory": [
+  {
+   "level": 4,
+   "V": 11664088,
+   "km1_in": 28478946950,
+   "km1_out": 20237287414,
+   "moves": 1390265,
+   "passes_run": 6,
+   "max_load_after": 12199876,
+   "min_load_after": 10138875
+  },
+  {
+   "level": 3,
+   "V": 23474979,
+   "km1_in": 20237287414,
+   "km1_out": 19746631790,
+   "moves": 1071200,
+   "passes_run": 6,
+   "max_load_after": 12199876,
+   "min_load_after": 10151540
+  },
+  {
+   "level": 2,
+   "V": 59213072,
+   "km1_in": 19746631790,
+   "km1_out": 19109099473,
+   "moves": 773478,
+   "passes_run": 6,
+   "max_load_after": 12199876,
+   "min_load_after": 10126697
+  },
+  {
+   "level": 1,
+   "V": 178333613,
+   "km1_in": 19109099473,
+   "km1_out": 17903248768,
+   "moves": 2640732,
+   "passes_run": 6,
+   "max_load_after": 12199876,
+   "min_load_after": 10154795
+  }
+ ],
+ "km1_first_in": 28478946950,
+ "km1_last_out": 17903248768,
+ "km1_last_over_first": 0.6286,
+ "validity": null,
+ "not_claimed": "no recall at Freebase scale (no Freebase gold; the WebQSP bridge proxy is a later addendum), no K-way sub-partition, no SK arm; the verdict transferred from WebQSP is ON the pass line (7 rows, F = 8), one Zoltan seed"
+}

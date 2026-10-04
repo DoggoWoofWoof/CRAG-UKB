@@ -1,0 +1,73 @@
+{
+ "stage": "FBX_SCALE / addendum 15: block-level resume of the nested K-way stage (orchestration only), declared before any arm of addendum 14 that needs it is completed",
+ "declared": "2026-10-02T12:22:14+0530",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_3.json": "23b186b9c631541af5fa45e7236c20937209cd7d2aa8971aeaaaccff31a883a3",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_4.json": "6dd584733ea134dba79b8d9a7f9b45097363ae0dd3a0c3bfc807821b7f1b9920",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_5.json": "ddff074cc11de999c8d70e720880271d67af47ef4b7ba65c9c4d875f48c0f4e2",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6.json": "5ca94fa0ca8b07dd94fe69236a8f902ef269ee8a4d7fc66463a01ce8487eea10",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6A.json": "f2ada7fc164e6ce54e83e3066498133a5a5ef1132aab53ea71c157eb538c7c52",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_7.json": "a386758079a1aa128a7d06264af3911f189cab6e1d2e1905c6bde3ea92e93549",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_8.json": "47838cec49fa417ce27d1bfed6cc900f7bdcadb98e000034d8601e1a57bf0bed",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_9.json": "572a62c51f5a80840bab9731ef7b36ec1b566191115702c15078814c41dd0ea8",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_10.json": "decf737e177259d62521940d0d559dcd599129f7e583dd75e72ac13615199b0f",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_11.json": "00a5558a57c393209dae0693586758617a2755b84df8437071b2a38e1293e264",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_12.json": "01aee835267c20be19e16afe6a39987a33383f7a52e9610e549b7c8c71c90f9d",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_13.json": "3bb657c2d9cac2d8281098e32c5a5019a049088e0f547cd8ffe51d4dae8b7858",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_14.json": "67c99b68dc79dca413b0268c0cdd878f51cac95dfd86764411fbbd8318d062d8"
+ },
+ "status": "ORCHESTRATION (no science): nothing here selects a mechanism, changes a gate, a threshold, a parameter or a record",
+ "user_ruling": "2026-10-02, in chat: 'cancel the waiter and make blocks resumable' (answer to the proposal of the previous turn)",
+ "problem": "scratchpad/_h2l.py cmd_sub(S, K) loops over the S top blocks, partitions each one with the frozen Zoltan-PHG driver and writes the arm's RUN record only after the last block, so a preempted job (rc 75 / 15) loses every completed block and the requeued job starts at block 0.  The vc-sub K = 500 job (arms VCQ512L6FM2 and VCQ512L6N4LP2 outstanding; about 87 minutes of uninterrupted compute per arm) was preempted in every attempt; its last attempt had 3 of 25 blocks done after 13 m 42 s.  The gate of addendum 14 cannot be evaluated until the K = 500 maps exist.",
+ "change": {
+  "file": "scratchpad/_h2l.py (cmd_sub and three helpers: ckpt_dir, ckpt_save, ckpt_load; _test extended)",
+  "rule": "after block b is partitioned and its record built, save (local block ids hb, the block record) to results/FREEBASE_SCALE/h2l/parts/_blockckpt/<arm output name>/b<NN>.npz (written to a temp name and os.replace'd); before partitioning a block, load that file and reuse it iff its stored KEY equals the key of this call.  KEY = top-map sha256, hypergraph content digest, S, K, block index, block N / M / pins, the Zoltan tolerance, kb, NP and the full driver parameter list (with the block's tolerance applied).  Any mismatch, a torn or unreadable file, a wrong length or an id outside [0, kb) is a MISS and the block is computed as before.  The checkpoint directory is named after the arm's own output file, so two arms never share one; it is deleted when the arm's RUN or FAILED record has been written.",
+  "record_additions": "the arm record gains 'blocks_resumed_from_checkpoint' (the block indices reused) and every reused block record carries 'resumed': true; 'wall_seconds' of an arm that was resumed counts only the final job, and a reused block's 'seconds' / 'peak_rss_kb_per_rank' are those of the run that computed it."
+ },
+ "unchanged": [
+  "the top maps and their records",
+  "restrict() (net splitting)",
+  "tol_for() and the Zoltan tolerance of every block",
+  "the driver, its parameters and NP",
+  "the validity rule, the empty-block repair, the balance check",
+  "the arm record's other fields",
+  "_vc_sub.py, _vc_subk.py, _h2lt.py, _vc_eval.py (not edited)",
+  "addendum 14's gate, its decision table and its four arms"
+ ],
+ "why_this_does_not_change_a_measurement": "block b's partition is a function of its inputs only (the sub-hypergraph, kb, the tolerance, the driver parameters, NP) and blocks do not share state: hard[vertices_b] = b * kb + hb is the only coupling and it is applied identically to a computed or a restored hb.  The sub-hypergraph itself is determined by the top map, the hypergraph and S, all of which are in the key.  A restored block is therefore the stored output of the SAME call made in an earlier job; an uninterrupted job is one run of that call and nothing in the pipeline assumes Zoltan is bit-reproducible across runs (the earlier arms were produced by single uninterrupted jobs).  The gate reads the final map only.",
+ "verification": {
+  "local": "python scratchpad/_h2l.py TEST (restriction identities and the KM1 identity, unchanged) now also asserts: exact save / load round trip of (hb, record); a miss on a changed top sha, tolerance, N, kb, parameters or K; a miss on an out-of-range id and on a torn file.  PASS on the laptop before the file was installed.",
+  "host": "the first resumed arm is checked from its own record: 'blocks_resumed_from_checkpoint', the per-block 'resumed' flags, and the final KM1 / validity lines in its log."
+ },
+ "records_and_code_pins": {
+  "old_sha_of__h2l.py": "e578fc4b01ff29ec9a96047a7a0875fd19cff9d0e63b862a019ee48d34a46dd1",
+  "scope": "arm records written before this addendum (K = 100 and 250 for all four arms, K = 500 for VCQ512L6N4FM2 and VCQ512L6N8FM2) carry the old sha in their code pins; arm records written after it carry the new one.  Both are listed here and in addendum 14's pin table; neither record set is edited.",
+  "discarded": "the blocks computed by the preempted K = 500 attempts before this change are lost (they were never saved); the arms restart at block 0 once."
+ },
+ "not_claimed": [
+  "no change to any result already written",
+  "no claim that a resumed arm is bit-identical to an uninterrupted one (it is not claimed for two uninterrupted runs either)",
+  "nothing about preemption policy or priorities"
+ ],
+ "rollback": "restore results/FREEBASE_SCALE/_history/_h2l.py.pre_addendum15__e578fc4b (sha256 = old_sha_of__h2l.py; the file was untracked, so this copy was rebuilt by undoing the edits and accepted only on an exact sha match) -- not needed unless a resumed arm fails its own checks",
+ "execution_order": [
+  "cancel the vc-sub k500 waiter (done, user-approved) so no job runs the old file against the new one",
+  "python scratchpad/_h2l.py TEST",
+  "write this addendum",
+  "rx run (under _host_yield.py): python -u scratchpad/_vc_subk.py 500 25 VCQ512L6N4FM2 VCQ512L6N8FM2 VCQ512L6FM2 VCQ512L6N4LP2   (arms 1 and 2 are skipped as 'exists')",
+  "python -u scratchpad/_vc_eval.py EVAL vc_v1 v1 top_v1 H2LT_VCQ512L6N4FM2_25,H2LT_VCQ512L6N8FM2_25,H2LT_VCQ512L6FM2_25,H2LT_VCQ512L6N4LP2_25   (the only step that reads gold)"
+ ],
+ "code_pinned": {
+  "scratchpad/_h2l.py": "d7c47917d9546794c401b9926871e9b4ca725ab1e4837286e7e72389863888b6",
+  "scratchpad/_vc_sub.py": "8679f7a0d18e40508bad09bc93f844c52ea8f12d29a9a3256773d61f80889709",
+  "scratchpad/_vc_subk.py": "6a6c31e61315a209b8c3fcdc98ae2076c7089f3b0a1eebeb0c413703518a0e0d",
+  "scratchpad/_vc_eval.py": "edc9fca788cc972f2fbf609d51aa6901a240f0cbdfe0cf40384cedc440aa8366",
+  "scratchpad/_h2lt.py": "45375e339b005b21b443b237cf0f32f0c384fb3ed346be0ab12afcb336b9637e",
+  "scratchpad/_host_yield.py": "b96c2bb8eaea5fd5a5bf5f54e9812d5eb2012c3d1f546544028855bec795fa81",
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_lowmem/phg_repair.py": "4c051e7a139abc19fd1b8433948a0d288858ac6a9c67dae40d7ef001839472b0"
+ }
+}

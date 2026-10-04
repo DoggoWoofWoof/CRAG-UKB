@@ -1,0 +1,145 @@
+{
+ "PHASE": "L1 BACKWARD CAUSAL OPTIMIZATION",
+ "CONTRACT": "parameter-free, no LLM/MLP/learned router/new encoder, same substrate, P=EXACTLY 50",
+ "REPLAY_PARITY": "EXACT on all 6 corpora",
+ "P50_CAPACITY_LIMITED": "NO",
+ "REACH_LIMITED": "YES but KB-only, and smaller than first reported: webqsp O5-O4 = 0.0620 (corrected from 0.1184), UNREACHABLE 26.1% of its missing partitions (corrected from 44.5%); text corpora <= 0.0085",
+ "B_LIMITED": "NO under the CURRENT universe (O2-O1 = 0.0000 on 5/6, 0.0010 metaqa ALL, 0.0030 hop3). The 0.0770 figure previously filed under B_CAPACITY is O4-O3, the AFTER-repair headroom -- a different question. See ../L1_ADMISSION/FINAL_REPORT.md STEP 0.",
+ "POINTWISE_RANKING_LIMITED": "NO",
+ "REDUNDANCY_LIMITED": "NO",
+ "GLOBAL_SET_SELECTION_LIMITED": "NO",
+ "PRIMARY_LIMITER": "NOT_IN_CANDIDATE_UNIVERSE",
+ "BEST_SET_METHOD": "G4_ASSIGNMENT",
+ "SAFE_METAQA_HOP2": 0.7297,
+ "BEST_METAQA_HOP2": 0.7222,
+ "SAFE_METAQA_HOP3": 0.2583,
+ "BEST_METAQA_HOP3": 0.2778,
+ "BEST_METAQA_HOP3_P": 0.0044,
+ "BEST_METAQA_HOP3_SIG": true,
+ "BEST_METAQA_ALL": 0.6652,
+ "SAFE_METAQA_ALL": 0.6612,
+ "MAX_METAQA_HOP2_ANY_METHOD": 0.7312,
+ "REPAIR6_SAFE": 0.0,
+ "REPAIR6_BEST": 0.0528,
+ "REPAIR6_BEST_HOP3": 0.0535,
+ "SET_SELECTION_OVERHEAD_MS": 0.099,
+ "SET_SELECTION_OVERHEAD_PCT_OF_L1": 0.63,
+ "L1_FROZEN_TOTAL_MS": 15.565,
+ "SIGNIFICANT_REGRESSIONS_OTHER_CORPORA": [
+  "musique_clean/G3_SUBMODULAR net -7 p=0.0391",
+  "musique_clean/G4_ASSIGNMENT net -7 p=0.0391",
+  "hotpotqa_clean/G3_SUBMODULAR net -13 p=0.0072",
+  "hotpotqa_clean/G4_ASSIGNMENT net -11 p=0.0266"
+ ],
+ "MISSING_GOLD_ON_PARETO_FRONT": 0.6671,
+ "NUISANCE_ON_PARETO_FRONT": 0.5468,
+ "AUC_NOVELTY_ATOMS_MACRO": 0.4998,
+ "SET_OBJECTIVE_VERDICT": "B. GLOBAL_SET_OBJECTIVE_PARTIAL -- real and significant on MetaQA hop3 only, fails the universality gate",
+ "PROMOTED": "NONE",
+ "L1_FROZEN": "NO",
+ "REACH_CORRECTION_2026_09_03": {
+  "bug": "base_rank is a PARTITION ranking; the identity test meant to distinguish it from the NODE rankings was always true (re-indexing builds a fresh view), so canonical partition ids were mapped through hard[] as document ids",
+  "effect": "reach contained spurious partitions and omitted offered candidates (metaqa 251, webqsp 2476, 2wiki 2311, musique 243); O1<=O3 failed per query on 3 corpora",
+  "fix": "explicit is_part flag + assertion that reach is a superset of prot|bnd|chal; all 6 substrates rebuilt",
+  "status": "chain now monotone per query on all 6; O3/O4/REACH/UNREACHABLE/CANDIDATE_UNIVERSE are corrected below",
+  "before_after_metaqa_ALL": {
+   "O3": [
+    0.8609,
+    0.8679
+   ],
+   "O4": [
+    0.9379,
+    0.9449
+   ],
+   "CANDIDATE_UNIVERSE_O3_O1": [
+    0.1397,
+    0.1467
+   ],
+   "REACH_O5_O4": [
+    0.0491,
+    0.0421
+   ]
+  },
+  "before_after_webqsp": {
+   "REACH_O5_O4": [
+    0.1184,
+    0.062
+   ],
+   "UNREACHABLE_pct": [
+    44.5,
+    26.1
+   ]
+  }
+ },
+ "CORRECTED_CHAIN_METAQA_ALL": {
+  "SELECTION_O1_O0": 0.06,
+  "CANDIDATE_UNIVERSE_O3_O1": 0.1467,
+  "B_CAPACITY_O4_O3": 0.077,
+  "REACH_O5_O4": 0.0421,
+  "P50_CAPACITY_1_O5": 0.013,
+  "B50_IN_UNIVERSE_O2_O1": 0.001,
+  "TOTAL_1_O0": 0.3388
+ },
+ "CORRECTED_CHAIN_WEBQSP_ALL": {
+  "SELECTION_O1_O0": 0.024,
+  "CANDIDATE_UNIVERSE_O3_O1": 0.1275,
+  "B_CAPACITY_O4_O3": 0.017,
+  "REACH_O5_O4": 0.062,
+  "P50_CAPACITY_1_O5": 0.0049,
+  "B50_IN_UNIVERSE_O2_O1": 0.0,
+  "TOTAL_1_O0": 0.2354
+ },
+ "CORRECTED_ORACLE_METAQA": {
+  "hop1": {
+   "O0": 0.9955,
+   "O1": 0.997,
+   "O2": 0.997,
+   "O3": 1.0,
+   "O4": 1.0,
+   "O5": 1.0
+  },
+  "hop2": {
+   "O0": 0.7297,
+   "O1": 0.8033,
+   "O2": 0.8033,
+   "O3": 0.9489,
+   "O4": 0.994,
+   "O5": 0.997
+  },
+  "hop3": {
+   "O0": 0.2583,
+   "O1": 0.3634,
+   "O2": 0.3664,
+   "O3": 0.6547,
+   "O4": 0.8408,
+   "O5": 0.964
+  },
+  "ALL": {
+   "O0": 0.6612,
+   "O1": 0.7212,
+   "O2": 0.7222,
+   "O3": 0.8679,
+   "O4": 0.9449,
+   "O5": 0.987
+  }
+ },
+ "B_AFTER_FULL_VISITED_HEADROOM_O4_O3": {
+  "metaqa_ALL": 0.0771,
+  "metaqa_hop2": 0.045,
+  "metaqa_hop3": 0.1862,
+  "webqsp": 0.0169,
+  "musique_clean": 0.0,
+  "2wiki_clean": 0.0,
+  "hotpotqa_clean": 0.0,
+  "squad_clean": 0.0
+ },
+ "PRIMARY_LIMITER_PCT_CORRECTED": {
+  "metaqa": 64.5,
+  "webqsp": 59.3,
+  "musique_clean": 68.0,
+  "2wiki_clean": 69.2,
+  "hotpotqa_clean": 54.8,
+  "squad_clean": 44.0
+ },
+ "SUPERSEDED_BY": "../L1_ADMISSION/ -- the candidate-admission follow-up returns verdict C"
+}

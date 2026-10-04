@@ -1,0 +1,227 @@
+{
+  "schema": "ROG_UNION_REBUILD/v1",
+  "generated_utc": "2026-09-05T22:42:41Z",
+  "purpose": "V1 \u00a71 hard consistency check on the released RoG WebQSP union CWQ graph",
+  "sources": {
+    "webqsp": {
+      "dir": "data/original/webqsp/rog_webqsp",
+      "shards": 5,
+      "bytes": 518205557
+    },
+    "cwq": {
+      "dir": "data/original/cwq/rog_cwq",
+      "shards": 24,
+      "bytes": 3504045643
+    }
+  },
+  "measured": {
+    "triples": 8309195,
+    "relations": 7058,
+    "endpoints": 2592894,
+    "examples": 39389,
+    "raw_triple_occurrences": 158771837,
+    "malformed_triples": 0,
+    "duplication_factor": 19.108
+  },
+  "targets": {
+    "triples": 8309195,
+    "relations": 7058
+  },
+  "deltas": {
+    "triples": 0,
+    "relations": 0,
+    "endpoints_vs_prior_audit": 0
+  },
+  "per_dataset": {
+    "webqsp": {
+      "examples": 4700,
+      "distinct_triples": 3791303,
+      "new_triples_contributed": 3791303
+    },
+    "cwq": {
+      "examples": 34689,
+      "distinct_triples": 7269449,
+      "new_triples_contributed": 4517892
+    }
+  },
+  "endpoints_note": "Endpoints are REPORTED, never an acceptance criterion. The paper's 2,566,291 and the prior audit's measured 2,592,894 differ by +1.04% and no counting convention explains it (strip / whitespace / NFC / casefold / drop-literals / head-only all tested and rejected).",
+  "HARD_CHECK_EXACT": true,
+  "VERDICT": "REPRODUCED -- proceed to V1 \u00a72",
+  "elapsed_s": 1111.8,
+  "shard_log": [
+    {
+      "dataset": "webqsp",
+      "shard": "test-00000-of-00002.parquet",
+      "bytes": 90854720,
+      "cumulative_distinct_triples": 1515040
+    },
+    {
+      "dataset": "webqsp",
+      "shard": "test-00001-of-00002.parquet",
+      "bytes": 93236638,
+      "cumulative_distinct_triples": 2277228
+    },
+    {
+      "dataset": "webqsp",
+      "shard": "train-00000-of-00002.parquet",
+      "bytes": 154472902,
+      "cumulative_distinct_triples": 3110906
+    },
+    {
+      "dataset": "webqsp",
+      "shard": "train-00001-of-00002.parquet",
+      "bytes": 155300860,
+      "cumulative_distinct_triples": 3718167
+    },
+    {
+      "dataset": "webqsp",
+      "shard": "validation-00000-of-00001.parquet",
+      "bytes": 24340437,
+      "cumulative_distinct_triples": 3791303
+    },
+    {
+      "dataset": "cwq",
+      "shard": "test-00000-of-00003-e62a559c5d2b56ca.parquet",
+      "bytes": 113626504,
+      "cumulative_distinct_triples": 4269709
+    },
+    {
+      "dataset": "cwq",
+      "shard": "test-00001-of-00003-2fa9a898639e7d1e.parquet",
+      "bytes": 127812388,
+      "cumulative_distinct_triples": 4646036
+    },
+    {
+      "dataset": "cwq",
+      "shard": "test-00002-of-00003-c659cd388440c4ae.parquet",
+      "bytes": 131336128,
+      "cumulative_distinct_triples": 4993009
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00000-of-00018-e65d08d5970d44d1.parquet",
+      "bytes": 129749424,
+      "cumulative_distinct_triples": 5273830
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00001-of-00018-c70342c196c07d6f.parquet",
+      "bytes": 132324078,
+      "cumulative_distinct_triples": 5437541
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00002-of-00018-d52ad886cb9f05b0.parquet",
+      "bytes": 128031478,
+      "cumulative_distinct_triples": 5548704
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00003-of-00018-6dac2fb592f087ab.parquet",
+      "bytes": 157390521,
+      "cumulative_distinct_triples": 5883540
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00004-of-00018-0cc0e948945a78d1.parquet",
+      "bytes": 156178983,
+      "cumulative_distinct_triples": 6175106
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00005-of-00018-670ef1ddceaf0282.parquet",
+      "bytes": 154513290,
+      "cumulative_distinct_triples": 6426992
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00006-of-00018-bafa8e7c507f7466.parquet",
+      "bytes": 160773869,
+      "cumulative_distinct_triples": 6643487
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00007-of-00018-f09b37d41a3dd5cf.parquet",
+      "bytes": 159248642,
+      "cumulative_distinct_triples": 6802105
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00008-of-00018-a0d99d326eeea855.parquet",
+      "bytes": 171867158,
+      "cumulative_distinct_triples": 6972572
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00009-of-00018-30aada2c957e36fc.parquet",
+      "bytes": 160195917,
+      "cumulative_distinct_triples": 7109225
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00010-of-00018-322b78f83914cdcc.parquet",
+      "bytes": 157371318,
+      "cumulative_distinct_triples": 7253716
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00011-of-00018-4ae82f3e51c9e51b.parquet",
+      "bytes": 162087966,
+      "cumulative_distinct_triples": 7389937
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00012-of-00018-953fbcdb2ee8831b.parquet",
+      "bytes": 158607640,
+      "cumulative_distinct_triples": 7514622
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00013-of-00018-69632202f264d5b6.parquet",
+      "bytes": 162978983,
+      "cumulative_distinct_triples": 7641589
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00014-of-00018-34c4028408816b01.parquet",
+      "bytes": 146357600,
+      "cumulative_distinct_triples": 7734671
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00015-of-00018-115ba563c3d4c61f.parquet",
+      "bytes": 165891535,
+      "cumulative_distinct_triples": 7864642
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00016-of-00018-d793c0ad8fc13810.parquet",
+      "bytes": 146191262,
+      "cumulative_distinct_triples": 7933049
+    },
+    {
+      "dataset": "cwq",
+      "shard": "train-00017-of-00018-7c2e93b205805eae.parquet",
+      "bytes": 160608891,
+      "cumulative_distinct_triples": 8061385
+    },
+    {
+      "dataset": "cwq",
+      "shard": "validation-00000-of-00003-31d848ab55b07e8f.parquet",
+      "bytes": 111322273,
+      "cumulative_distinct_triples": 8150730
+    },
+    {
+      "dataset": "cwq",
+      "shard": "validation-00001-of-00003-4fdfd3ea11c73388.parquet",
+      "bytes": 129656227,
+      "cumulative_distinct_triples": 8231469
+    },
+    {
+      "dataset": "cwq",
+      "shard": "validation-00002-of-00003-fcbc480aec93c105.parquet",
+      "bytes": 119923568,
+      "cumulative_distinct_triples": 8309195
+    }
+  ]
+}

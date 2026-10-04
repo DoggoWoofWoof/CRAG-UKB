@@ -1,0 +1,8341 @@
+{
+ "dataset": "metaqa",
+ "tag": "v1",
+ "mode": "L1_DEVELOPMENT_LOC",
+ "status": "DEVELOPMENT (not confirmatory; p-values descriptive)",
+ "eval_split": "dev",
+ "N": 43234,
+ "n_rows": 1998,
+ "n_gold_nodes": 14489,
+ "population": {
+  "file": {
+   "path": "results/L1_DEV/loc_population.json",
+   "sha256": "c7f7080639d66f1e8f5c2fb90aff7da49dfda5f63a5fe558fe8c266bd5fef47e"
+  },
+  "n": 1998,
+  "smoke_first_rows": null,
+  "query_ids_sha256": "07ec3d7a46ee975c05197768ae792499f7ab51aef3ca75579b926f5ca5fe85b6",
+  "label": "development population (historically exposed; not held-out; freely reusable)"
+ },
+ "cells": [
+  "metaqa",
+  "metaqa_phg"
+ ],
+ "gold_nodes_per_query": {
+  "mean": 7.25,
+  "median": 2.0,
+  "min": 1.0,
+  "max": 160.0
+ },
+ "hops_available": [
+  1,
+  2,
+  3
+ ],
+ "FLAT": {
+  "100": {
+   "ALL": 0.025,
+   "ANY": 0.1181,
+   "FRAC": 0.0415,
+   "nodes_exposed": 100,
+   "strata": {
+    "per_hop": {
+     "hop1": {
+      "n": 666,
+      "ALL": 0.0586,
+      "ANY": 0.1141,
+      "FRAC": 0.0731
+     },
+     "hop2": {
+      "n": 666,
+      "ALL": 0.0165,
+      "ANY": 0.1096,
+      "FRAC": 0.0352
+     },
+     "hop3": {
+      "n": 666,
+      "ALL": 0.0,
+      "ANY": 0.1306,
+      "FRAC": 0.0163
+     }
+    },
+    "per_n_gold": {
+     "1": {
+      "n": 819,
+      "ALL": 0.0562,
+      "ANY": 0.0562,
+      "FRAC": 0.0562
+     },
+     "2": {
+      "n": 286,
+      "ALL": 0.007,
+      "ANY": 0.0629,
+      "FRAC": 0.035
+     },
+     "3": {
+      "n": 180,
+      "ALL": 0.0056,
+      "ANY": 0.0833,
+      "FRAC": 0.0352
+     },
+     "4": {
+      "n": 87,
+      "ALL": 0.0,
+      "ANY": 0.1379,
+      "FRAC": 0.0374
+     },
+     "5-10": {
+      "n": 287,
+      "ALL": 0.0035,
+      "ANY": 0.1394,
+      "FRAC": 0.0286
+     },
+     "11+": {
+      "n": 339,
+      "ALL": 0.0,
+      "ANY": 0.3097,
+      "FRAC": 0.0271
+     }
+    }
+   }
+  },
+  "250": {
+   "ALL": 0.0551,
+   "ANY": 0.1997,
+   "FRAC": 0.0853,
+   "nodes_exposed": 250,
+   "strata": {
+    "per_hop": {
+     "hop1": {
+      "n": 666,
+      "ALL": 0.1021,
+      "ANY": 0.1727,
+      "FRAC": 0.1237
+     },
+     "hop2": {
+      "n": 666,
+      "ALL": 0.045,
+      "ANY": 0.1832,
+      "FRAC": 0.0752
+     },
+     "hop3": {
+      "n": 666,
+      "ALL": 0.018,
+      "ANY": 0.2432,
+      "FRAC": 0.0571
+     }
+    },
+    "per_n_gold": {
+     "1": {
+      "n": 819,
+      "ALL": 0.1233,
+      "ANY": 0.1233,
+      "FRAC": 0.1233
+     },
+     "2": {
+      "n": 286,
+      "ALL": 0.021,
+      "ANY": 0.1329,
+      "FRAC": 0.0769
+     },
+     "3": {
+      "n": 180,
+      "ALL": 0.0056,
+      "ANY": 0.1389,
+      "FRAC": 0.0593
+     },
+     "4": {
+      "n": 87,
+      "ALL": 0.0115,
+      "ANY": 0.2299,
+      "FRAC": 0.0718
+     },
+     "5-10": {
+      "n": 287,
+      "ALL": 0.0035,
+      "ANY": 0.23,
+      "FRAC": 0.0521
+     },
+     "11+": {
+      "n": 339,
+      "ALL": 0.0,
+      "ANY": 0.4395,
+      "FRAC": 0.0461
+     }
+    }
+   }
+  },
+  "500": {
+   "ALL": 0.1026,
+   "ANY": 0.3298,
+   "FRAC": 0.1593,
+   "nodes_exposed": 500,
+   "strata": {
+    "per_hop": {
+     "hop1": {
+      "n": 666,
+      "ALL": 0.1682,
+      "ANY": 0.2568,
+      "FRAC": 0.1978
+     },
+     "hop2": {
+      "n": 666,
+      "ALL": 0.0811,
+      "ANY": 0.2808,
+      "FRAC": 0.1296
+     },
+     "hop3": {
+      "n": 666,
+      "ALL": 0.0586,
+      "ANY": 0.452,
+      "FRAC": 0.1507
+     }
+    },
+    "per_n_gold": {
+     "1": {
+      "n": 819,
+      "ALL": 0.2137,
+      "ANY": 0.2137,
+      "FRAC": 0.2137
+     },
+     "2": {
+      "n": 286,
+      "ALL": 0.0699,
+      "ANY": 0.2378,
+      "FRAC": 0.1538
+     },
+     "3": {
+      "n": 180,
+      "ALL": 0.0333,
+      "ANY": 0.3056,
+      "FRAC": 0.1407
+     },
+     "4": {
+      "n": 87,
+      "ALL": 0.023,
+      "ANY": 0.3793,
+      "FRAC": 0.1695
+     },
+     "5-10": {
+      "n": 287,
+      "ALL": 0.007,
+      "ANY": 0.3937,
+      "FRAC": 0.1069
+     },
+     "11+": {
+      "n": 339,
+      "ALL": 0.0,
+      "ANY": 0.6342,
+      "FRAC": 0.0844
+     }
+    }
+   }
+  },
+  "1000": {
+   "ALL": 0.1792,
+   "ANY": 0.4965,
+   "FRAC": 0.2813,
+   "nodes_exposed": 1000,
+   "strata": {
+    "per_hop": {
+     "hop1": {
+      "n": 666,
+      "ALL": 0.2613,
+      "ANY": 0.3649,
+      "FRAC": 0.2988
+     },
+     "hop2": {
+      "n": 666,
+      "ALL": 0.1471,
+      "ANY": 0.4384,
+      "FRAC": 0.2392
+     },
+     "hop3": {
+      "n": 666,
+      "ALL": 0.1291,
+      "ANY": 0.6862,
+      "FRAC": 0.3059
+     }
+    },
+    "per_n_gold": {
+     "1": {
+      "n": 819,
+      "ALL": 0.3468,
+      "ANY": 0.3468,
+      "FRAC": 0.3468
+     },
+     "2": {
+      "n": 286,
+      "ALL": 0.1573,
+      "ANY": 0.4126,
+      "FRAC": 0.285
+     },
+     "3": {
+      "n": 180,
+      "ALL": 0.0833,
+      "ANY": 0.4778,
+      "FRAC": 0.2611
+     },
+     "4": {
+      "n": 87,
+      "ALL": 0.0805,
+      "ANY": 0.5287,
+      "FRAC": 0.2787
+     },
+     "5-10": {
+      "n": 287,
+      "ALL": 0.0174,
+      "ANY": 0.6481,
+      "FRAC": 0.2268
+     },
+     "11+": {
+      "n": 339,
+      "ALL": 0.0059,
+      "ANY": 0.8024,
+      "FRAC": 0.1776
+     }
+    }
+   }
+  },
+  "2000": {
+   "ALL": 0.2543,
+   "ANY": 0.6401,
+   "FRAC": 0.4009,
+   "nodes_exposed": 2000,
+   "strata": {
+    "per_hop": {
+     "hop1": {
+      "n": 666,
+      "ALL": 0.3333,
+      "ANY": 0.476,
+      "FRAC": 0.3901
+     },
+     "hop2": {
+      "n": 666,
+      "ALL": 0.2237,
+      "ANY": 0.6081,
+      "FRAC": 0.359
+     },
+     "hop3": {
+      "n": 666,
+      "ALL": 0.2057,
+      "ANY": 0.8363,
+      "FRAC": 0.4535
+     }
+    },
+    "per_n_gold": {
+     "1": {
+      "n": 819,
+      "ALL": 0.4591,
+      "ANY": 0.4591,
+      "FRAC": 0.4591
+     },
+     "2": {
+      "n": 286,
+      "ALL": 0.2552,
+      "ANY": 0.5664,
+      "FRAC": 0.4108
+     },
+     "3": {
+      "n": 180,
+      "ALL": 0.1556,
+      "ANY": 0.6556,
+      "FRAC": 0.3759
+     },
+     "4": {
+      "n": 87,
+      "ALL": 0.1379,
+      "ANY": 0.6782,
+      "FRAC": 0.4052
+     },
+     "5-10": {
+      "n": 287,
+      "ALL": 0.0418,
+      "ANY": 0.8537,
+      "FRAC": 0.3652
+     },
+     "11+": {
+      "n": 339,
+      "ALL": 0.0206,
+      "ANY": 0.941,
+      "FRAC": 0.294
+     }
+    }
+   }
+  },
+  "5000": {
+   "ALL": 0.3649,
+   "ANY": 0.7648,
+   "FRAC": 0.5526,
+   "nodes_exposed": 5000,
+   "strata": {
+    "per_hop": {
+     "hop1": {
+      "n": 666,
+      "ALL": 0.4369,
+      "ANY": 0.6171,
+      "FRAC": 0.5153
+     },
+     "hop2": {
+      "n": 666,
+      "ALL": 0.3408,
+      "ANY": 0.7538,
+      "FRAC": 0.5143
+     },
+     "hop3": {
+      "n": 666,
+      "ALL": 0.3168,
+      "ANY": 0.9234,
+      "FRAC": 0.6281
+     }
+    },
+    "per_n_gold": {
+     "1": {
+      "n": 819,
+      "ALL": 0.5971,
+      "ANY": 0.5971,
+      "FRAC": 0.5971
+     },
+     "2": {
+      "n": 286,
+      "ALL": 0.3986,
+      "ANY": 0.7517,
+      "FRAC": 0.5752
+     },
+     "3": {
+      "n": 180,
+      "ALL": 0.2778,
+      "ANY": 0.7944,
+      "FRAC": 0.5222
+     },
+     "4": {
+      "n": 87,
+      "ALL": 0.2069,
+      "ANY": 0.8966,
+      "FRAC": 0.5575
+     },
+     "5-10": {
+      "n": 287,
+      "ALL": 0.1289,
+      "ANY": 0.9338,
+      "FRAC": 0.5236
+     },
+     "11+": {
+      "n": 339,
+      "ALL": 0.0619,
+      "ANY": 0.9882,
+      "FRAC": 0.4654
+     }
+    }
+   }
+  }
+ },
+ "cells_result": {
+  "metaqa": {
+   "partition": {
+    "tag": "H4_SK",
+    "path": "data/l1_canonical/metaqa/parts/H4_SK.npy",
+    "sha256": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062",
+    "npart": 432,
+    "block_size": {
+     "mean": 100.08,
+     "median": 102.0,
+     "min": 14.0,
+     "max": 104.0
+    }
+   },
+   "loc_gold_free": {
+    "blocks_activated_per_query": {
+     "mean": 121.5,
+     "median": 123.0,
+     "min": 68.0,
+     "max": 154.0
+    },
+    "loc_order_length": {
+     "mean": 12186.49,
+     "median": 12334.0,
+     "min": 6850.0,
+     "max": 15422.0
+    },
+    "strongest_block_share_of_total_A": {
+     "mean": 0.07,
+     "median": 0.05914582762819315,
+     "min": 0.021967762213101986,
+     "max": 0.2828388926101974
+    },
+    "flat_top200_nodes_in_the_strongest_block": {
+     "mean": 10.59,
+     "median": 9.0,
+     "min": 2.0,
+     "max": 44.0
+    },
+    "gold_nodes_in_an_activated_block": 0.3409
+   },
+   "arms": {
+    "LOC": {
+     "100": {
+      "ALL": 0.0315,
+      "ANY": 0.1006,
+      "FRAC": 0.048,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 51,
+       "lost": 38,
+       "p": 0.20311681873649565
+      },
+      "gold_nodes_gained_vs_FLAT": 217,
+      "gold_nodes_lost_vs_FLAT": 263,
+      "nodes_exposed": 100,
+      "FLAT_budget_matching_this_ALL": 139,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.0736,
+         "ANY": 0.1336,
+         "FRAC": 0.0961,
+         "paired_vs_FLAT": {
+          "gained": 39,
+          "lost": 29,
+          "p": 0.2749903961710005
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.0165,
+         "ANY": 0.0886,
+         "FRAC": 0.035,
+         "paired_vs_FLAT": {
+          "gained": 9,
+          "lost": 9,
+          "p": 1.0
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.0045,
+         "ANY": 0.0796,
+         "FRAC": 0.0128,
+         "paired_vs_FLAT": {
+          "gained": 3,
+          "lost": 0,
+          "p": 0.25
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.0733,
+         "ANY": 0.0733,
+         "FRAC": 0.0733,
+         "paired_vs_FLAT": {
+          "gained": 48,
+          "lost": 34,
+          "p": 0.15067520762630385
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0105,
+         "ANY": 0.0594,
+         "FRAC": 0.035,
+         "paired_vs_FLAT": {
+          "gained": 3,
+          "lost": 2,
+          "p": 1.0
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0,
+         "ANY": 0.0944,
+         "FRAC": 0.0426,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0,
+         "ANY": 0.1264,
+         "FRAC": 0.0431,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0,
+         "ANY": 0.101,
+         "FRAC": 0.0271,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0,
+         "ANY": 0.1976,
+         "FRAC": 0.0196,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "250": {
+      "ALL": 0.0611,
+      "ANY": 0.1782,
+      "FRAC": 0.0901,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 94,
+       "lost": 82,
+       "p": 0.40708723450395573
+      },
+      "gold_nodes_gained_vs_FLAT": 386,
+      "gold_nodes_lost_vs_FLAT": 483,
+      "nodes_exposed": 250,
+      "FLAT_budget_matching_this_ALL": 282,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.1441,
+         "ANY": 0.2327,
+         "FRAC": 0.1781,
+         "paired_vs_FLAT": {
+          "gained": 75,
+          "lost": 47,
+          "p": 0.01417049059715433
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.03,
+         "ANY": 0.1471,
+         "FRAC": 0.0613,
+         "paired_vs_FLAT": {
+          "gained": 13,
+          "lost": 23,
+          "p": 0.13249816396273675
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.009,
+         "ANY": 0.1547,
+         "FRAC": 0.0311,
+         "paired_vs_FLAT": {
+          "gained": 6,
+          "lost": 12,
+          "p": 0.237884521484375
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.1319,
+         "ANY": 0.1319,
+         "FRAC": 0.1319,
+         "paired_vs_FLAT": {
+          "gained": 83,
+          "lost": 76,
+          "p": 0.6343339062839174
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0385,
+         "ANY": 0.1399,
+         "FRAC": 0.0892,
+         "paired_vs_FLAT": {
+          "gained": 9,
+          "lost": 4,
+          "p": 0.266845703125
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0167,
+         "ANY": 0.1722,
+         "FRAC": 0.0852,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 0,
+          "p": 0.5
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0,
+         "ANY": 0.1839,
+         "FRAC": 0.069,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0,
+         "ANY": 0.1707,
+         "FRAC": 0.048,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0,
+         "ANY": 0.3304,
+         "FRAC": 0.0339,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "ALL": 0.0881,
+      "ANY": 0.2422,
+      "FRAC": 0.1273,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 127,
+       "lost": 156,
+       "p": 0.09585370343342772
+      },
+      "gold_nodes_gained_vs_FLAT": 546,
+      "gold_nodes_lost_vs_FLAT": 1009,
+      "nodes_exposed": 500,
+      "FLAT_budget_matching_this_ALL": 438,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.2027,
+         "ANY": 0.3063,
+         "FRAC": 0.2431,
+         "paired_vs_FLAT": {
+          "gained": 99,
+          "lost": 76,
+          "p": 0.09602353131253603
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.0495,
+         "ANY": 0.2072,
+         "FRAC": 0.0938,
+         "paired_vs_FLAT": {
+          "gained": 21,
+          "lost": 42,
+          "p": 0.011141407415305074
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.012,
+         "ANY": 0.2132,
+         "FRAC": 0.045,
+         "paired_vs_FLAT": {
+          "gained": 7,
+          "lost": 38,
+          "p": 3.1213096463034162e-06
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.1868,
+         "ANY": 0.1868,
+         "FRAC": 0.1868,
+         "paired_vs_FLAT": {
+          "gained": 112,
+          "lost": 134,
+          "p": 0.18048300597157854
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0559,
+         "ANY": 0.1888,
+         "FRAC": 0.1224,
+         "paired_vs_FLAT": {
+          "gained": 12,
+          "lost": 16,
+          "p": 0.5715881884098053
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0222,
+         "ANY": 0.2333,
+         "FRAC": 0.1259,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 4,
+          "p": 0.6875
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0115,
+         "ANY": 0.2184,
+         "FRAC": 0.0891,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.007,
+         "ANY": 0.223,
+         "FRAC": 0.0681,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0,
+         "ANY": 0.4484,
+         "FRAC": 0.0484,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "1000": {
+      "ALL": 0.1246,
+      "ANY": 0.3183,
+      "FRAC": 0.1738,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 172,
+       "lost": 281,
+       "p": 3.4349161904382174e-07
+      },
+      "gold_nodes_gained_vs_FLAT": 716,
+      "gold_nodes_lost_vs_FLAT": 2145,
+      "nodes_exposed": 1000,
+      "FLAT_budget_matching_this_ALL": 604,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.2748,
+         "ANY": 0.4009,
+         "FRAC": 0.3248,
+         "paired_vs_FLAT": {
+          "gained": 129,
+          "lost": 120,
+          "p": 0.6122584257423305
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.0841,
+         "ANY": 0.2838,
+         "FRAC": 0.1387,
+         "paired_vs_FLAT": {
+          "gained": 36,
+          "lost": 78,
+          "p": 0.00010423670561637987
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.015,
+         "ANY": 0.2703,
+         "FRAC": 0.058,
+         "paired_vs_FLAT": {
+          "gained": 7,
+          "lost": 83,
+          "p": 1.3151874833452022e-17
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.2601,
+         "ANY": 0.2601,
+         "FRAC": 0.2601,
+         "paired_vs_FLAT": {
+          "gained": 148,
+          "lost": 219,
+          "p": 0.0002479627901277875
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0804,
+         "ANY": 0.2448,
+         "FRAC": 0.1626,
+         "paired_vs_FLAT": {
+          "gained": 18,
+          "lost": 40,
+          "p": 0.005354859650800294
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.05,
+         "ANY": 0.3,
+         "FRAC": 0.1704,
+         "paired_vs_FLAT": {
+          "gained": 6,
+          "lost": 12,
+          "p": 0.237884521484375
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0115,
+         "ANY": 0.2989,
+         "FRAC": 0.1207,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 6,
+          "p": 0.03125
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0105,
+         "ANY": 0.2753,
+         "FRAC": 0.0834,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 2,
+          "p": 0.5
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0,
+         "ANY": 0.5723,
+         "FRAC": 0.067,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 2,
+          "p": 0.5
+         }
+        }
+       }
+      }
+     },
+     "2000": {
+      "ALL": 0.1637,
+      "ANY": 0.4164,
+      "FRAC": 0.2335,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 218,
+       "lost": 399,
+       "p": 2.9086200181199333e-13
+      },
+      "gold_nodes_gained_vs_FLAT": 955,
+      "gold_nodes_lost_vs_FLAT": 3429,
+      "nodes_exposed": 2000,
+      "FLAT_budget_matching_this_ALL": 860,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.3604,
+         "ANY": 0.5225,
+         "FRAC": 0.4283,
+         "paired_vs_FLAT": {
+          "gained": 163,
+          "lost": 145,
+          "p": 0.33272104531876834
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.1126,
+         "ANY": 0.3904,
+         "FRAC": 0.1933,
+         "paired_vs_FLAT": {
+          "gained": 48,
+          "lost": 122,
+          "p": 1.2833414237744727e-08
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.018,
+         "ANY": 0.3363,
+         "FRAC": 0.079,
+         "paired_vs_FLAT": {
+          "gained": 7,
+          "lost": 132,
+          "p": 5.166045778807018e-31
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.3431,
+         "ANY": 0.3431,
+         "FRAC": 0.3431,
+         "paired_vs_FLAT": {
+          "gained": 186,
+          "lost": 281,
+          "p": 1.2775284374824364e-05
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.1014,
+         "ANY": 0.3287,
+         "FRAC": 0.215,
+         "paired_vs_FLAT": {
+          "gained": 23,
+          "lost": 67,
+          "p": 3.7950491781678e-06
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0611,
+         "ANY": 0.4056,
+         "FRAC": 0.2222,
+         "paired_vs_FLAT": {
+          "gained": 7,
+          "lost": 24,
+          "p": 0.003326892852783203
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0115,
+         "ANY": 0.3563,
+         "FRAC": 0.1523,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 11,
+          "p": 0.0009765625
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0139,
+         "ANY": 0.3972,
+         "FRAC": 0.1299,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 9,
+          "p": 0.021484375
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0029,
+         "ANY": 0.705,
+         "FRAC": 0.0991,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 7,
+          "p": 0.0703125
+         }
+        }
+       }
+      }
+     },
+     "5000": {
+      "ALL": 0.1917,
+      "ANY": 0.4935,
+      "FRAC": 0.2879,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 209,
+       "lost": 555,
+       "p": 5.224347458510771e-37
+      },
+      "gold_nodes_gained_vs_FLAT": 1204,
+      "gold_nodes_lost_vs_FLAT": 4917,
+      "nodes_exposed": 5000,
+      "FLAT_budget_matching_this_ALL": 1101,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.4054,
+         "ANY": 0.5796,
+         "FRAC": 0.483,
+         "paired_vs_FLAT": {
+          "gained": 152,
+          "lost": 173,
+          "p": 0.2672296304683127
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.1366,
+         "ANY": 0.485,
+         "FRAC": 0.2493,
+         "paired_vs_FLAT": {
+          "gained": 47,
+          "lost": 183,
+          "p": 3.8446005130803524e-20
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.033,
+         "ANY": 0.4159,
+         "FRAC": 0.1314,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 199,
+          "p": 9.008547082637104e-47
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.3834,
+         "ANY": 0.3834,
+         "FRAC": 0.3834,
+         "paired_vs_FLAT": {
+          "gained": 170,
+          "lost": 345,
+          "p": 9.772215593387583e-15
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.1608,
+         "ANY": 0.4021,
+         "FRAC": 0.2815,
+         "paired_vs_FLAT": {
+          "gained": 27,
+          "lost": 95,
+          "p": 4.563546874350736e-10
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0778,
+         "ANY": 0.4833,
+         "FRAC": 0.2685,
+         "paired_vs_FLAT": {
+          "gained": 9,
+          "lost": 45,
+          "p": 7.288430776686282e-07
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.023,
+         "ANY": 0.4828,
+         "FRAC": 0.204,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 16,
+          "p": 3.0517578125e-05
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0139,
+         "ANY": 0.5261,
+         "FRAC": 0.1887,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 34,
+          "p": 2.0954757928848267e-09
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0088,
+         "ANY": 0.8171,
+         "FRAC": 0.1783,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 20,
+          "p": 0.00012111663818359375
+         }
+        }
+       }
+      }
+     }
+    },
+    "FLAT+LOC": {
+     "100": {
+      "ALL": 0.0335,
+      "ANY": 0.1341,
+      "FRAC": 0.0549,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 33,
+       "lost": 16,
+       "p": 0.021294114141387155
+      },
+      "gold_nodes_gained_vs_FLAT": 151,
+      "gold_nodes_lost_vs_FLAT": 85,
+      "nodes_exposed": 100,
+      "FLAT_budget_matching_this_ALL": 149,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.0796,
+         "ANY": 0.1471,
+         "FRAC": 0.1027,
+         "paired_vs_FLAT": {
+          "gained": 24,
+          "lost": 10,
+          "p": 0.024306510109454393
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.0195,
+         "ANY": 0.1201,
+         "FRAC": 0.0431,
+         "paired_vs_FLAT": {
+          "gained": 8,
+          "lost": 6,
+          "p": 0.79052734375
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.0015,
+         "ANY": 0.1351,
+         "FRAC": 0.019,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.0769,
+         "ANY": 0.0769,
+         "FRAC": 0.0769,
+         "paired_vs_FLAT": {
+          "gained": 31,
+          "lost": 14,
+          "p": 0.016094360031274842
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0105,
+         "ANY": 0.0944,
+         "FRAC": 0.0524,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0056,
+         "ANY": 0.1056,
+         "FRAC": 0.0463,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0,
+         "ANY": 0.1379,
+         "FRAC": 0.046,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0,
+         "ANY": 0.1324,
+         "FRAC": 0.0322,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0,
+         "ANY": 0.3215,
+         "FRAC": 0.0298,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "250": {
+      "ALL": 0.0661,
+      "ANY": 0.2047,
+      "FRAC": 0.0974,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 61,
+       "lost": 39,
+       "p": 0.03520020021770479
+      },
+      "gold_nodes_gained_vs_FLAT": 242,
+      "gold_nodes_lost_vs_FLAT": 217,
+      "nodes_exposed": 250,
+      "FLAT_budget_matching_this_ALL": 303,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.1441,
+         "ANY": 0.2447,
+         "FRAC": 0.1785,
+         "paired_vs_FLAT": {
+          "gained": 45,
+          "lost": 17,
+          "p": 0.0004970915863810334
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.0435,
+         "ANY": 0.1877,
+         "FRAC": 0.0772,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 11,
+          "p": 1.0
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.0105,
+         "ANY": 0.1817,
+         "FRAC": 0.0366,
+         "paired_vs_FLAT": {
+          "gained": 6,
+          "lost": 11,
+          "p": 0.332305908203125
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.1453,
+         "ANY": 0.1453,
+         "FRAC": 0.1453,
+         "paired_vs_FLAT": {
+          "gained": 55,
+          "lost": 37,
+          "p": 0.07576023576406513
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.035,
+         "ANY": 0.1259,
+         "FRAC": 0.0804,
+         "paired_vs_FLAT": {
+          "gained": 6,
+          "lost": 2,
+          "p": 0.2890625
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0056,
+         "ANY": 0.1611,
+         "FRAC": 0.0722,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0115,
+         "ANY": 0.2414,
+         "FRAC": 0.0891,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0035,
+         "ANY": 0.2091,
+         "FRAC": 0.0577,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0,
+         "ANY": 0.4248,
+         "FRAC": 0.0453,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "ALL": 0.1036,
+      "ANY": 0.2998,
+      "FRAC": 0.1536,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 89,
+       "lost": 87,
+       "p": 0.939942557338781
+      },
+      "gold_nodes_gained_vs_FLAT": 375,
+      "gold_nodes_lost_vs_FLAT": 546,
+      "nodes_exposed": 500,
+      "FLAT_budget_matching_this_ALL": 507,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.2192,
+         "ANY": 0.3363,
+         "FRAC": 0.2633,
+         "paired_vs_FLAT": {
+          "gained": 71,
+          "lost": 37,
+          "p": 0.0013816410213383502
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.0631,
+         "ANY": 0.2583,
+         "FRAC": 0.1166,
+         "paired_vs_FLAT": {
+          "gained": 11,
+          "lost": 23,
+          "p": 0.05761267291381955
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.0285,
+         "ANY": 0.3048,
+         "FRAC": 0.081,
+         "paired_vs_FLAT": {
+          "gained": 7,
+          "lost": 27,
+          "p": 0.0008213953115046024
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.2234,
+         "ANY": 0.2234,
+         "FRAC": 0.2234,
+         "paired_vs_FLAT": {
+          "gained": 78,
+          "lost": 70,
+          "p": 0.565171909988344
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0559,
+         "ANY": 0.2203,
+         "FRAC": 0.1381,
+         "paired_vs_FLAT": {
+          "gained": 8,
+          "lost": 12,
+          "p": 0.5034446716308594
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0167,
+         "ANY": 0.2833,
+         "FRAC": 0.1352,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 4,
+          "p": 0.375
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.023,
+         "ANY": 0.3448,
+         "FRAC": 0.1236,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0105,
+         "ANY": 0.3101,
+         "FRAC": 0.0908,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0,
+         "ANY": 0.5398,
+         "FRAC": 0.0687,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "1000": {
+      "ALL": 0.1772,
+      "ANY": 0.4595,
+      "FRAC": 0.2584,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 124,
+       "lost": 128,
+       "p": 0.850154248703587
+      },
+      "gold_nodes_gained_vs_FLAT": 506,
+      "gold_nodes_lost_vs_FLAT": 1180,
+      "nodes_exposed": 1000,
+      "FLAT_budget_matching_this_ALL": 957,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.3303,
+         "ANY": 0.476,
+         "FRAC": 0.3899,
+         "paired_vs_FLAT": {
+          "gained": 94,
+          "lost": 48,
+          "p": 0.00014076286839269288
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.1246,
+         "ANY": 0.3979,
+         "FRAC": 0.2042,
+         "paired_vs_FLAT": {
+          "gained": 23,
+          "lost": 38,
+          "p": 0.07217743850092258
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.0766,
+         "ANY": 0.5045,
+         "FRAC": 0.1811,
+         "paired_vs_FLAT": {
+          "gained": 7,
+          "lost": 42,
+          "p": 3.6245783263666453e-07
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.3687,
+         "ANY": 0.3687,
+         "FRAC": 0.3687,
+         "paired_vs_FLAT": {
+          "gained": 109,
+          "lost": 91,
+          "p": 0.22924659725971616
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.1119,
+         "ANY": 0.3671,
+         "FRAC": 0.2395,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 23,
+          "p": 0.03508203336969018
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0667,
+         "ANY": 0.4667,
+         "FRAC": 0.2481,
+         "paired_vs_FLAT": {
+          "gained": 4,
+          "lost": 7,
+          "p": 0.548828125
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.046,
+         "ANY": 0.4828,
+         "FRAC": 0.2328,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 4,
+          "p": 0.375
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0105,
+         "ANY": 0.4983,
+         "FRAC": 0.1482,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 2,
+          "p": 0.5
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0029,
+         "ANY": 0.7139,
+         "FRAC": 0.1129,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "2000": {
+      "ALL": 0.2713,
+      "ANY": 0.6436,
+      "FRAC": 0.4011,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 171,
+       "lost": 137,
+       "p": 0.059884469070122265
+      },
+      "gold_nodes_gained_vs_FLAT": 662,
+      "gold_nodes_lost_vs_FLAT": 1446,
+      "nodes_exposed": 2000,
+      "FLAT_budget_matching_this_ALL": 2293,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.4625,
+         "ANY": 0.6276,
+         "FRAC": 0.5338,
+         "paired_vs_FLAT": {
+          "gained": 126,
+          "lost": 40,
+          "p": 1.4425079165850288e-11
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.2117,
+         "ANY": 0.5706,
+         "FRAC": 0.3335,
+         "paired_vs_FLAT": {
+          "gained": 37,
+          "lost": 45,
+          "p": 0.439705429185822
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.1396,
+         "ANY": 0.7327,
+         "FRAC": 0.336,
+         "paired_vs_FLAT": {
+          "gained": 8,
+          "lost": 52,
+          "p": 5.205691473372798e-09
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.525,
+         "ANY": 0.525,
+         "FRAC": 0.525,
+         "paired_vs_FLAT": {
+          "gained": 138,
+          "lost": 84,
+          "p": 0.0003528942309650209
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.2448,
+         "ANY": 0.5874,
+         "FRAC": 0.4161,
+         "paired_vs_FLAT": {
+          "gained": 21,
+          "lost": 24,
+          "p": 0.765991824244793
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.1389,
+         "ANY": 0.6444,
+         "FRAC": 0.3796,
+         "paired_vs_FLAT": {
+          "gained": 8,
+          "lost": 11,
+          "p": 0.6476058959960938
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.1034,
+         "ANY": 0.6667,
+         "FRAC": 0.3563,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 5,
+          "p": 0.453125
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0209,
+         "ANY": 0.7456,
+         "FRAC": 0.2797,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 7,
+          "p": 0.0703125
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0059,
+         "ANY": 0.885,
+         "FRAC": 0.2148,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 6,
+          "p": 0.125
+         }
+        }
+       }
+      }
+     },
+     "5000": {
+      "ALL": 0.3949,
+      "ANY": 0.8193,
+      "FRAC": 0.5806,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 207,
+       "lost": 147,
+       "p": 0.0016756856574744817
+      },
+      "gold_nodes_gained_vs_FLAT": 835,
+      "gold_nodes_lost_vs_FLAT": 1513,
+      "nodes_exposed": 5000,
+      "FLAT_budget_matching_this_ALL": 6316,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.6051,
+         "ANY": 0.7943,
+         "FRAC": 0.6963,
+         "paired_vs_FLAT": {
+          "gained": 150,
+          "lost": 38,
+          "p": 6.12345607492297e-17
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.3408,
+         "ANY": 0.7688,
+         "FRAC": 0.5137,
+         "paired_vs_FLAT": {
+          "gained": 46,
+          "lost": 46,
+          "p": 1.0
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.2387,
+         "ANY": 0.8949,
+         "FRAC": 0.5319,
+         "paired_vs_FLAT": {
+          "gained": 11,
+          "lost": 63,
+          "p": 5.321301366667703e-10
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.7057,
+         "ANY": 0.7057,
+         "FRAC": 0.7057,
+         "paired_vs_FLAT": {
+          "gained": 162,
+          "lost": 73,
+          "p": 6.281591937857457e-09
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.3986,
+         "ANY": 0.8007,
+         "FRAC": 0.5997,
+         "paired_vs_FLAT": {
+          "gained": 28,
+          "lost": 28,
+          "p": 1.0
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.2444,
+         "ANY": 0.8667,
+         "FRAC": 0.55,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 16,
+          "p": 0.32693958282470703
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.1954,
+         "ANY": 0.8621,
+         "FRAC": 0.5402,
+         "paired_vs_FLAT": {
+          "gained": 3,
+          "lost": 4,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0836,
+         "ANY": 0.9164,
+         "FRAC": 0.4621,
+         "paired_vs_FLAT": {
+          "gained": 3,
+          "lost": 16,
+          "p": 0.004425048828125
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0354,
+         "ANY": 0.9912,
+         "FRAC": 0.3892,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 10,
+          "p": 0.01171875
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "SLOT_C_at_M5000 (ruling-1 interface)": {
+    "25": {
+     "ALL": 0.3739,
+     "ANY": 0.7743,
+     "FRAC": 0.5631,
+     "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+      "gained": 20,
+      "lost": 2,
+      "p": 0.00012111663818359375
+     },
+     "gold_nodes_gained_vs_FLAT": 42,
+     "gold_nodes_lost_vs_FLAT": 12,
+     "nodes_exposed": 5000,
+     "strata": {
+      "per_hop": {
+       "hop1": {
+        "n": 666,
+        "ALL": 0.4595,
+        "ANY": 0.6396,
+        "FRAC": 0.5397,
+        "paired_vs_FLAT": {
+         "gained": 15,
+         "lost": 0,
+         "p": 6.103515625e-05
+        }
+       },
+       "hop2": {
+        "n": 666,
+        "ALL": 0.3453,
+        "ANY": 0.7583,
+        "FRAC": 0.5202,
+        "paired_vs_FLAT": {
+         "gained": 4,
+         "lost": 1,
+         "p": 0.375
+        }
+       },
+       "hop3": {
+        "n": 666,
+        "ALL": 0.3168,
+        "ANY": 0.9249,
+        "FRAC": 0.6294,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 1,
+         "p": 1.0
+        }
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n": 819,
+        "ALL": 0.6178,
+        "ANY": 0.6178,
+        "FRAC": 0.6178,
+        "paired_vs_FLAT": {
+         "gained": 17,
+         "lost": 0,
+         "p": 1.52587890625e-05
+        }
+       },
+       "2": {
+        "n": 286,
+        "ALL": 0.4056,
+        "ANY": 0.7587,
+        "FRAC": 0.5822,
+        "paired_vs_FLAT": {
+         "gained": 3,
+         "lost": 1,
+         "p": 0.625
+        }
+       },
+       "3": {
+        "n": 180,
+        "ALL": 0.2778,
+        "ANY": 0.8,
+        "FRAC": 0.5278,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 0,
+         "p": 1.0
+        }
+       },
+       "4": {
+        "n": 87,
+        "ALL": 0.1954,
+        "ANY": 0.8966,
+        "FRAC": 0.5603,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "5-10": {
+        "n": 287,
+        "ALL": 0.1289,
+        "ANY": 0.9303,
+        "FRAC": 0.5257,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 0,
+         "p": 1.0
+        }
+       },
+       "11+": {
+        "n": 339,
+        "ALL": 0.0619,
+        "ANY": 0.9882,
+        "FRAC": 0.4658,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 0,
+         "p": 1.0
+        }
+       }
+      }
+     }
+    },
+    "50": {
+     "ALL": 0.3799,
+     "ANY": 0.7813,
+     "FRAC": 0.5703,
+     "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+      "gained": 33,
+      "lost": 3,
+      "p": 2.2721360437572002e-07
+     },
+     "gold_nodes_gained_vs_FLAT": 80,
+     "gold_nodes_lost_vs_FLAT": 19,
+     "nodes_exposed": 5000,
+     "strata": {
+      "per_hop": {
+       "hop1": {
+        "n": 666,
+        "ALL": 0.4745,
+        "ANY": 0.6547,
+        "FRAC": 0.5547,
+        "paired_vs_FLAT": {
+         "gained": 25,
+         "lost": 0,
+         "p": 5.960464477539063e-08
+        }
+       },
+       "hop2": {
+        "n": 666,
+        "ALL": 0.3468,
+        "ANY": 0.7598,
+        "FRAC": 0.5231,
+        "paired_vs_FLAT": {
+         "gained": 5,
+         "lost": 1,
+         "p": 0.21875
+        }
+       },
+       "hop3": {
+        "n": 666,
+        "ALL": 0.3183,
+        "ANY": 0.9294,
+        "FRAC": 0.633,
+        "paired_vs_FLAT": {
+         "gained": 3,
+         "lost": 2,
+         "p": 1.0
+        }
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n": 819,
+        "ALL": 0.63,
+        "ANY": 0.63,
+        "FRAC": 0.63,
+        "paired_vs_FLAT": {
+         "gained": 27,
+         "lost": 0,
+         "p": 1.4901161193847656e-08
+        }
+       },
+       "2": {
+        "n": 286,
+        "ALL": 0.4056,
+        "ANY": 0.7587,
+        "FRAC": 0.5822,
+        "paired_vs_FLAT": {
+         "gained": 3,
+         "lost": 1,
+         "p": 0.625
+        }
+       },
+       "3": {
+        "n": 180,
+        "ALL": 0.2833,
+        "ANY": 0.8056,
+        "FRAC": 0.5389,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 0,
+         "p": 1.0
+        }
+       },
+       "4": {
+        "n": 87,
+        "ALL": 0.2069,
+        "ANY": 0.908,
+        "FRAC": 0.569,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "5-10": {
+        "n": 287,
+        "ALL": 0.1324,
+        "ANY": 0.9373,
+        "FRAC": 0.5302,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 0,
+         "p": 1.0
+        }
+       },
+       "11+": {
+        "n": 339,
+        "ALL": 0.059,
+        "ANY": 0.9882,
+        "FRAC": 0.4668,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 1,
+         "p": 1.0
+        }
+       }
+      }
+     }
+    },
+    "100": {
+     "ALL": 0.3874,
+     "ANY": 0.7888,
+     "FRAC": 0.5777,
+     "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+      "gained": 49,
+      "lost": 4,
+      "p": 7.053979622639872e-11
+     },
+     "gold_nodes_gained_vs_FLAT": 119,
+     "gold_nodes_lost_vs_FLAT": 52,
+     "nodes_exposed": 5000,
+     "strata": {
+      "per_hop": {
+       "hop1": {
+        "n": 666,
+        "ALL": 0.4955,
+        "ANY": 0.6772,
+        "FRAC": 0.577,
+        "paired_vs_FLAT": {
+         "gained": 39,
+         "lost": 0,
+         "p": 3.637978807091713e-12
+        }
+       },
+       "hop2": {
+        "n": 666,
+        "ALL": 0.3483,
+        "ANY": 0.7598,
+        "FRAC": 0.5239,
+        "paired_vs_FLAT": {
+         "gained": 7,
+         "lost": 2,
+         "p": 0.1796875
+        }
+       },
+       "hop3": {
+        "n": 666,
+        "ALL": 0.3183,
+        "ANY": 0.9294,
+        "FRAC": 0.6321,
+        "paired_vs_FLAT": {
+         "gained": 3,
+         "lost": 2,
+         "p": 1.0
+        }
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n": 819,
+        "ALL": 0.641,
+        "ANY": 0.641,
+        "FRAC": 0.641,
+        "paired_vs_FLAT": {
+         "gained": 37,
+         "lost": 1,
+         "p": 2.837623469531536e-10
+        }
+       },
+       "2": {
+        "n": 286,
+        "ALL": 0.4196,
+        "ANY": 0.7727,
+        "FRAC": 0.5962,
+        "paired_vs_FLAT": {
+         "gained": 7,
+         "lost": 1,
+         "p": 0.0703125
+        }
+       },
+       "3": {
+        "n": 180,
+        "ALL": 0.2944,
+        "ANY": 0.8167,
+        "FRAC": 0.55,
+        "paired_vs_FLAT": {
+         "gained": 3,
+         "lost": 0,
+         "p": 0.25
+        }
+       },
+       "4": {
+        "n": 87,
+        "ALL": 0.2069,
+        "ANY": 0.908,
+        "FRAC": 0.5718,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "5-10": {
+        "n": 287,
+        "ALL": 0.1324,
+        "ANY": 0.9373,
+        "FRAC": 0.5301,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 0,
+         "p": 1.0
+        }
+       },
+       "11+": {
+        "n": 339,
+        "ALL": 0.059,
+        "ANY": 0.9882,
+        "FRAC": 0.4655,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 1,
+         "p": 1.0
+        }
+       }
+      }
+     }
+    },
+    "200": {
+     "ALL": 0.3994,
+     "ANY": 0.7988,
+     "FRAC": 0.5886,
+     "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+      "gained": 80,
+      "lost": 11,
+      "p": 4.412960319286535e-14
+     },
+     "gold_nodes_gained_vs_FLAT": 199,
+     "gold_nodes_lost_vs_FLAT": 112,
+     "nodes_exposed": 5000,
+     "strata": {
+      "per_hop": {
+       "hop1": {
+        "n": 666,
+        "ALL": 0.5225,
+        "ANY": 0.6997,
+        "FRAC": 0.6035,
+        "paired_vs_FLAT": {
+         "gained": 60,
+         "lost": 3,
+         "p": 9.048317650695026e-15
+        }
+       },
+       "hop2": {
+        "n": 666,
+        "ALL": 0.3559,
+        "ANY": 0.7673,
+        "FRAC": 0.5307,
+        "paired_vs_FLAT": {
+         "gained": 14,
+         "lost": 4,
+         "p": 0.0308837890625
+        }
+       },
+       "hop3": {
+        "n": 666,
+        "ALL": 0.3198,
+        "ANY": 0.9294,
+        "FRAC": 0.6316,
+        "paired_vs_FLAT": {
+         "gained": 6,
+         "lost": 4,
+         "p": 0.75390625
+        }
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n": 819,
+        "ALL": 0.6618,
+        "ANY": 0.6618,
+        "FRAC": 0.6618,
+        "paired_vs_FLAT": {
+         "gained": 58,
+         "lost": 5,
+         "p": 1.6623508125590547e-12
+        }
+       },
+       "2": {
+        "n": 286,
+        "ALL": 0.4336,
+        "ANY": 0.7797,
+        "FRAC": 0.6066,
+        "paired_vs_FLAT": {
+         "gained": 12,
+         "lost": 2,
+         "p": 0.012939453125
+        }
+       },
+       "3": {
+        "n": 180,
+        "ALL": 0.3111,
+        "ANY": 0.8167,
+        "FRAC": 0.563,
+        "paired_vs_FLAT": {
+         "gained": 7,
+         "lost": 1,
+         "p": 0.0703125
+        }
+       },
+       "4": {
+        "n": 87,
+        "ALL": 0.2184,
+        "ANY": 0.9195,
+        "FRAC": 0.5776,
+        "paired_vs_FLAT": {
+         "gained": 2,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "5-10": {
+        "n": 287,
+        "ALL": 0.1289,
+        "ANY": 0.9373,
+        "FRAC": 0.528,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "11+": {
+        "n": 339,
+        "ALL": 0.059,
+        "ANY": 0.9882,
+        "FRAC": 0.4642,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 1,
+         "p": 1.0
+        }
+       }
+      }
+     }
+    },
+    "500": {
+     "ALL": 0.4184,
+     "ANY": 0.8213,
+     "FRAC": 0.6092,
+     "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+      "gained": 131,
+      "lost": 24,
+      "p": 4.865205287840847e-19
+     },
+     "gold_nodes_gained_vs_FLAT": 350,
+     "gold_nodes_lost_vs_FLAT": 262,
+     "nodes_exposed": 5000,
+     "strata": {
+      "per_hop": {
+       "hop1": {
+        "n": 666,
+        "ALL": 0.5676,
+        "ANY": 0.7417,
+        "FRAC": 0.6491,
+        "paired_vs_FLAT": {
+         "gained": 93,
+         "lost": 6,
+         "p": 3.773842968353187e-21
+        }
+       },
+       "hop2": {
+        "n": 666,
+        "ALL": 0.3754,
+        "ANY": 0.7868,
+        "FRAC": 0.5486,
+        "paired_vs_FLAT": {
+         "gained": 30,
+         "lost": 7,
+         "p": 0.00019107642583549023
+        }
+       },
+       "hop3": {
+        "n": 666,
+        "ALL": 0.3123,
+        "ANY": 0.9354,
+        "FRAC": 0.6299,
+        "paired_vs_FLAT": {
+         "gained": 8,
+         "lost": 11,
+         "p": 0.6476058959960938
+        }
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n": 819,
+        "ALL": 0.6996,
+        "ANY": 0.6996,
+        "FRAC": 0.6996,
+        "paired_vs_FLAT": {
+         "gained": 93,
+         "lost": 9,
+         "p": 9.977557876076285e-19
+        }
+       },
+       "2": {
+        "n": 286,
+        "ALL": 0.4545,
+        "ANY": 0.8042,
+        "FRAC": 0.6294,
+        "paired_vs_FLAT": {
+         "gained": 22,
+         "lost": 6,
+         "p": 0.0037191659212112427
+        }
+       },
+       "3": {
+        "n": 180,
+        "ALL": 0.3278,
+        "ANY": 0.8444,
+        "FRAC": 0.587,
+        "paired_vs_FLAT": {
+         "gained": 11,
+         "lost": 2,
+         "p": 0.0224609375
+        }
+       },
+       "4": {
+        "n": 87,
+        "ALL": 0.2184,
+        "ANY": 0.931,
+        "FRAC": 0.5948,
+        "paired_vs_FLAT": {
+         "gained": 2,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "5-10": {
+        "n": 287,
+        "ALL": 0.1289,
+        "ANY": 0.9373,
+        "FRAC": 0.5283,
+        "paired_vs_FLAT": {
+         "gained": 3,
+         "lost": 3,
+         "p": 1.0
+        }
+       },
+       "11+": {
+        "n": 339,
+        "ALL": 0.0531,
+        "ANY": 0.9912,
+        "FRAC": 0.4577,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 3,
+         "p": 0.25
+        }
+       }
+      }
+     }
+    }
+   },
+   "audit_ABC (FLAT@M misses vs the LOC order at M)": {
+    "100": {
+     "n_FLAT@M_missed_gold_nodes": 14131,
+     "counts": {
+      "LOC_SERVES": 217,
+      "TYPE_A": 9550,
+      "TYPE_B": 4339,
+      "TYPE_C": 25
+     },
+     "shares": {
+      "LOC_SERVES": 0.0154,
+      "TYPE_A": 0.6758,
+      "TYPE_B": 0.3071,
+      "TYPE_C": 0.0018
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 151,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 8303.35,
+      "median": 2794.0,
+      "min": 103.0,
+      "max": 42782.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 3024.13,
+      "median": 957.0,
+      "min": 103.0,
+      "max": 22013.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 26,
+      "(2M,10M]": 49,
+      ">10M": 142
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 51.79,
+      "median": 47.0,
+      "min": 2.0,
+      "max": 139.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 4999.5,
+      "median": 4506.0,
+      "min": 0.0,
+      "max": 13798.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 49.64,
+      "median": 42.0,
+      "min": 10.0,
+      "max": 103.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 1241,
+        "LOC_SERVES": 78,
+        "TYPE_A": 618,
+        "TYPE_B": 527,
+        "TYPE_C": 18,
+        "FLAT+LOC_serves": 47
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 4489,
+        "LOC_SERVES": 66,
+        "TYPE_A": 2978,
+        "TYPE_B": 1440,
+        "TYPE_C": 5,
+        "FLAT+LOC_serves": 49
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 8401,
+        "LOC_SERVES": 73,
+        "TYPE_A": 5954,
+        "TYPE_B": 2372,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 55
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 773,
+        "LOC_SERVES": 48,
+        "TYPE_A": 427,
+        "TYPE_B": 291,
+        "TYPE_C": 7,
+        "FLAT+LOC_serves": 31
+       },
+       "2": {
+        "n_missed_gold_nodes": 552,
+        "LOC_SERVES": 16,
+        "TYPE_A": 331,
+        "TYPE_B": 202,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 14
+       },
+       "3": {
+        "n_missed_gold_nodes": 521,
+        "LOC_SERVES": 14,
+        "TYPE_A": 333,
+        "TYPE_B": 169,
+        "TYPE_C": 5,
+        "FLAT+LOC_serves": 8
+       },
+       "4": {
+        "n_missed_gold_nodes": 335,
+        "LOC_SERVES": 12,
+        "TYPE_A": 220,
+        "TYPE_B": 103,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 7
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 1885,
+        "LOC_SERVES": 37,
+        "TYPE_A": 1346,
+        "TYPE_B": 499,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 22
+       },
+       "11+": {
+        "n_missed_gold_nodes": 10065,
+        "LOC_SERVES": 90,
+        "TYPE_A": 6893,
+        "TYPE_B": 3075,
+        "TYPE_C": 7,
+        "FLAT+LOC_serves": 69
+       }
+      }
+     }
+    },
+    "250": {
+     "n_FLAT@M_missed_gold_nodes": 13791,
+     "counts": {
+      "LOC_SERVES": 386,
+      "TYPE_A": 9495,
+      "TYPE_B": 3863,
+      "TYPE_C": 47
+     },
+     "shares": {
+      "LOC_SERVES": 0.028,
+      "TYPE_A": 0.6885,
+      "TYPE_B": 0.2801,
+      "TYPE_C": 0.0034
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 242,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 8690.11,
+      "median": 3369.5,
+      "min": 254.0,
+      "max": 42782.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 8096.71,
+      "median": 2706.0,
+      "min": 254.0,
+      "max": 42782.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 46,
+      "(2M,10M]": 118,
+      ">10M": 222
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 54.8,
+      "median": 50.0,
+      "min": 4.0,
+      "max": 139.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 5151.53,
+      "median": 4665.0,
+      "min": 35.0,
+      "max": 13648.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 68.74,
+      "median": 67.0,
+      "min": 43.0,
+      "max": 101.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 1190,
+        "LOC_SERVES": 138,
+        "TYPE_A": 610,
+        "TYPE_B": 432,
+        "TYPE_C": 10,
+        "FLAT+LOC_serves": 91
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 4395,
+        "LOC_SERVES": 116,
+        "TYPE_A": 2966,
+        "TYPE_B": 1296,
+        "TYPE_C": 17,
+        "FLAT+LOC_serves": 71
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 8206,
+        "LOC_SERVES": 132,
+        "TYPE_A": 5919,
+        "TYPE_B": 2135,
+        "TYPE_C": 20,
+        "FLAT+LOC_serves": 80
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 718,
+        "LOC_SERVES": 83,
+        "TYPE_A": 415,
+        "TYPE_B": 212,
+        "TYPE_C": 8,
+        "FLAT+LOC_serves": 55
+       },
+       "2": {
+        "n_missed_gold_nodes": 528,
+        "LOC_SERVES": 34,
+        "TYPE_A": 327,
+        "TYPE_B": 164,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 19
+       },
+       "3": {
+        "n_missed_gold_nodes": 508,
+        "LOC_SERVES": 32,
+        "TYPE_A": 328,
+        "TYPE_B": 144,
+        "TYPE_C": 4,
+        "FLAT+LOC_serves": 18
+       },
+       "4": {
+        "n_missed_gold_nodes": 323,
+        "LOC_SERVES": 16,
+        "TYPE_A": 217,
+        "TYPE_B": 90,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 11
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 1840,
+        "LOC_SERVES": 56,
+        "TYPE_A": 1334,
+        "TYPE_B": 444,
+        "TYPE_C": 6,
+        "FLAT+LOC_serves": 41
+       },
+       "11+": {
+        "n_missed_gold_nodes": 9874,
+        "LOC_SERVES": 165,
+        "TYPE_A": 6874,
+        "TYPE_B": 2809,
+        "TYPE_C": 26,
+        "FLAT+LOC_serves": 98
+       }
+      }
+     }
+    },
+    "500": {
+     "n_FLAT@M_missed_gold_nodes": 13148,
+     "counts": {
+      "LOC_SERVES": 546,
+      "TYPE_A": 9146,
+      "TYPE_B": 3444,
+      "TYPE_C": 12
+     },
+     "shares": {
+      "LOC_SERVES": 0.0415,
+      "TYPE_A": 0.6956,
+      "TYPE_B": 0.2619,
+      "TYPE_C": 0.0009
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 375,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 11285.14,
+      "median": 5582.5,
+      "min": 504.0,
+      "max": 42945.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 9042.94,
+      "median": 3899.0,
+      "min": 504.0,
+      "max": 42782.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 75,
+      "(2M,10M]": 186,
+      ">10M": 285
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 57.7,
+      "median": 55.0,
+      "min": 6.0,
+      "max": 139.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 5193.28,
+      "median": 4899.5,
+      "min": 2.0,
+      "max": 13398.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 43.5,
+      "median": 35.5,
+      "min": 3.0,
+      "max": 103.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 1116,
+        "LOC_SERVES": 176,
+        "TYPE_A": 573,
+        "TYPE_B": 362,
+        "TYPE_C": 5,
+        "FLAT+LOC_serves": 130
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 4249,
+        "LOC_SERVES": 173,
+        "TYPE_A": 2898,
+        "TYPE_B": 1175,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 114
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 7783,
+        "LOC_SERVES": 197,
+        "TYPE_A": 5675,
+        "TYPE_B": 1907,
+        "TYPE_C": 4,
+        "FLAT+LOC_serves": 131
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 644,
+        "LOC_SERVES": 112,
+        "TYPE_A": 369,
+        "TYPE_B": 162,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 78
+       },
+       "2": {
+        "n_missed_gold_nodes": 484,
+        "LOC_SERVES": 48,
+        "TYPE_A": 301,
+        "TYPE_B": 133,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 31
+       },
+       "3": {
+        "n_missed_gold_nodes": 464,
+        "LOC_SERVES": 50,
+        "TYPE_A": 299,
+        "TYPE_B": 111,
+        "TYPE_C": 4,
+        "FLAT+LOC_serves": 32
+       },
+       "4": {
+        "n_missed_gold_nodes": 289,
+        "LOC_SERVES": 21,
+        "TYPE_A": 194,
+        "TYPE_B": 74,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 16
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 1739,
+        "LOC_SERVES": 75,
+        "TYPE_A": 1274,
+        "TYPE_B": 390,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 58
+       },
+       "11+": {
+        "n_missed_gold_nodes": 9528,
+        "LOC_SERVES": 240,
+        "TYPE_A": 6709,
+        "TYPE_B": 2574,
+        "TYPE_C": 5,
+        "FLAT+LOC_serves": 160
+       }
+      }
+     }
+    },
+    "1000": {
+     "n_FLAT@M_missed_gold_nodes": 11828,
+     "counts": {
+      "LOC_SERVES": 716,
+      "TYPE_A": 8250,
+      "TYPE_B": 2856,
+      "TYPE_C": 6
+     },
+     "shares": {
+      "LOC_SERVES": 0.0605,
+      "TYPE_A": 0.6975,
+      "TYPE_B": 0.2415,
+      "TYPE_C": 0.0005
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 506,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 13134.54,
+      "median": 8392.5,
+      "min": 1001.0,
+      "max": 42945.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 11771.75,
+      "median": 6672.0,
+      "min": 1001.0,
+      "max": 42945.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 115,
+      "(2M,10M]": 281,
+      ">10M": 320
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 62.23,
+      "median": 60.0,
+      "min": 11.0,
+      "max": 139.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 5147.06,
+      "median": 4947.0,
+      "min": 0.0,
+      "max": 12898.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 65.5,
+      "median": 78.0,
+      "min": 12.0,
+      "max": 90.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 1010,
+        "LOC_SERVES": 226,
+        "TYPE_A": 521,
+        "TYPE_B": 261,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 167
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 3975,
+        "LOC_SERVES": 218,
+        "TYPE_A": 2740,
+        "TYPE_B": 1014,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 161
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 6843,
+        "LOC_SERVES": 272,
+        "TYPE_A": 4989,
+        "TYPE_B": 1581,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 178
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 535,
+        "LOC_SERVES": 148,
+        "TYPE_A": 290,
+        "TYPE_B": 95,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 109
+       },
+       "2": {
+        "n_missed_gold_nodes": 409,
+        "LOC_SERVES": 66,
+        "TYPE_A": 248,
+        "TYPE_B": 95,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 46
+       },
+       "3": {
+        "n_missed_gold_nodes": 399,
+        "LOC_SERVES": 61,
+        "TYPE_A": 255,
+        "TYPE_B": 82,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 49
+       },
+       "4": {
+        "n_missed_gold_nodes": 251,
+        "LOC_SERVES": 24,
+        "TYPE_A": 162,
+        "TYPE_B": 65,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 20
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 1492,
+        "LOC_SERVES": 76,
+        "TYPE_A": 1088,
+        "TYPE_B": 328,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 59
+       },
+       "11+": {
+        "n_missed_gold_nodes": 8742,
+        "LOC_SERVES": 341,
+        "TYPE_A": 6207,
+        "TYPE_B": 2191,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 223
+       }
+      }
+     }
+    },
+    "2000": {
+     "n_FLAT@M_missed_gold_nodes": 10221,
+     "counts": {
+      "LOC_SERVES": 955,
+      "TYPE_A": 7091,
+      "TYPE_B": 2164,
+      "TYPE_C": 11
+     },
+     "shares": {
+      "LOC_SERVES": 0.0934,
+      "TYPE_A": 0.6938,
+      "TYPE_B": 0.2117,
+      "TYPE_C": 0.0011
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 662,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 15004.15,
+      "median": 10788.0,
+      "min": 2011.0,
+      "max": 42945.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 14175.88,
+      "median": 9473.0,
+      "min": 2011.0,
+      "max": 42945.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 199,
+      "(2M,10M]": 464,
+      ">10M": 292
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 70.59,
+      "median": 69.0,
+      "min": 21.0,
+      "max": 139.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 4986.73,
+      "median": 4848.0,
+      "min": 5.0,
+      "max": 11898.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 46.18,
+      "median": 38.0,
+      "min": 9.0,
+      "max": 98.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 895,
+        "LOC_SERVES": 290,
+        "TYPE_A": 454,
+        "TYPE_B": 151,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 218
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 3608,
+        "LOC_SERVES": 305,
+        "TYPE_A": 2491,
+        "TYPE_B": 810,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 206
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 5718,
+        "LOC_SERVES": 360,
+        "TYPE_A": 4146,
+        "TYPE_B": 1203,
+        "TYPE_C": 9,
+        "FLAT+LOC_serves": 238
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 443,
+        "LOC_SERVES": 186,
+        "TYPE_A": 220,
+        "TYPE_B": 37,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 138
+       },
+       "2": {
+        "n_missed_gold_nodes": 337,
+        "LOC_SERVES": 85,
+        "TYPE_A": 192,
+        "TYPE_B": 60,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 65
+       },
+       "3": {
+        "n_missed_gold_nodes": 337,
+        "LOC_SERVES": 74,
+        "TYPE_A": 207,
+        "TYPE_B": 56,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 59
+       },
+       "4": {
+        "n_missed_gold_nodes": 207,
+        "LOC_SERVES": 30,
+        "TYPE_A": 129,
+        "TYPE_B": 48,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 22
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 1227,
+        "LOC_SERVES": 121,
+        "TYPE_A": 883,
+        "TYPE_B": 223,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 80
+       },
+       "11+": {
+        "n_missed_gold_nodes": 7670,
+        "LOC_SERVES": 459,
+        "TYPE_A": 5460,
+        "TYPE_B": 1740,
+        "TYPE_C": 11,
+        "FLAT+LOC_serves": 298
+       }
+      }
+     }
+    },
+    "5000": {
+     "n_FLAT@M_missed_gold_nodes": 7908,
+     "counts": {
+      "LOC_SERVES": 1204,
+      "TYPE_A": 5515,
+      "TYPE_B": 1181,
+      "TYPE_C": 8
+     },
+     "shares": {
+      "LOC_SERVES": 0.1523,
+      "TYPE_A": 0.6974,
+      "TYPE_B": 0.1493,
+      "TYPE_C": 0.001
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 835,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 19399.16,
+      "median": 17121.0,
+      "min": 5023.0,
+      "max": 43104.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 18393.19,
+      "median": 15703.0,
+      "min": 5023.0,
+      "max": 42945.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 346,
+      "(2M,10M]": 858,
+      ">10M": 0
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 86.76,
+      "median": 87.0,
+      "min": 51.0,
+      "max": 136.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 3610.62,
+      "median": 3636.0,
+      "min": 5.0,
+      "max": 8544.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 70.75,
+      "median": 68.5,
+      "min": 48.0,
+      "max": 96.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 734,
+        "LOC_SERVES": 278,
+        "TYPE_A": 375,
+        "TYPE_B": 80,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 247
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 3061,
+        "LOC_SERVES": 427,
+        "TYPE_A": 2146,
+        "TYPE_B": 483,
+        "TYPE_C": 5,
+        "FLAT+LOC_serves": 273
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 4113,
+        "LOC_SERVES": 499,
+        "TYPE_A": 2994,
+        "TYPE_B": 618,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 315
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 330,
+        "LOC_SERVES": 170,
+        "TYPE_A": 140,
+        "TYPE_B": 20,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 162
+       },
+       "2": {
+        "n_missed_gold_nodes": 243,
+        "LOC_SERVES": 78,
+        "TYPE_A": 139,
+        "TYPE_B": 25,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 65
+       },
+       "3": {
+        "n_missed_gold_nodes": 258,
+        "LOC_SERVES": 72,
+        "TYPE_A": 155,
+        "TYPE_B": 31,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 61
+       },
+       "4": {
+        "n_missed_gold_nodes": 154,
+        "LOC_SERVES": 38,
+        "TYPE_A": 90,
+        "TYPE_B": 26,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 31
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 924,
+        "LOC_SERVES": 130,
+        "TYPE_A": 672,
+        "TYPE_B": 122,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 88
+       },
+       "11+": {
+        "n_missed_gold_nodes": 5999,
+        "LOC_SERVES": 716,
+        "TYPE_A": 4319,
+        "TYPE_B": 957,
+        "TYPE_C": 7,
+        "FLAT+LOC_serves": 428
+       }
+      }
+     }
+    }
+   },
+   "latency_ms": {
+    "loc (activation + LOC order)": {
+     "mean_ms": 7.676,
+     "median_ms": 5.402,
+     "p95_ms": 22.041
+    },
+    "fusion (f + lexsort over N)": {
+     "mean_ms": 22.939,
+     "median_ms": 15.61,
+     "p95_ms": 68.815
+    }
+   },
+   "structure_bytes": {
+    "hard_int32": 172936,
+    "order_int32": 172936,
+    "ptr_int64": 3464,
+    "partition_file": 346000
+   }
+  },
+  "metaqa_phg": {
+   "partition": {
+    "tag": "LOWMEM__PHG_REPAIR1_con",
+    "path": "data/l1_canonical/metaqa/parts/LOWMEM__PHG_REPAIR1_con.npy",
+    "sha256": "b06beef6f3f493a43e6a798da694dde4a94bdc1d9b3056e8906085a4bf592daf",
+    "npart": 432,
+    "block_size": {
+     "mean": 100.08,
+     "median": 103.0,
+     "min": 1.0,
+     "max": 104.0
+    }
+   },
+   "loc_gold_free": {
+    "blocks_activated_per_query": {
+     "mean": 127.68,
+     "median": 129.0,
+     "min": 69.0,
+     "max": 158.0
+    },
+    "loc_order_length": {
+     "mean": 12952.67,
+     "median": 13108.0,
+     "min": 6984.0,
+     "max": 16003.0
+    },
+    "strongest_block_share_of_total_A": {
+     "mean": 0.05,
+     "median": 0.045772484878693884,
+     "min": 0.0203534865579216,
+     "max": 0.28153403463191434
+    },
+    "flat_top200_nodes_in_the_strongest_block": {
+     "mean": 8.14,
+     "median": 7.0,
+     "min": 2.0,
+     "max": 47.0
+    },
+    "gold_nodes_in_an_activated_block": 0.3835
+   },
+   "arms": {
+    "LOC": {
+     "100": {
+      "ALL": 0.028,
+      "ANY": 0.0916,
+      "FRAC": 0.042,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 48,
+       "lost": 42,
+       "p": 0.5984117182335191
+      },
+      "gold_nodes_gained_vs_FLAT": 238,
+      "gold_nodes_lost_vs_FLAT": 269,
+      "nodes_exposed": 100,
+      "FLAT_budget_matching_this_ALL": 120,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.0541,
+         "ANY": 0.1021,
+         "FRAC": 0.0705,
+         "paired_vs_FLAT": {
+          "gained": 30,
+          "lost": 33,
+          "p": 0.8013064925040663
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.021,
+         "ANY": 0.0751,
+         "FRAC": 0.0357,
+         "paired_vs_FLAT": {
+          "gained": 12,
+          "lost": 9,
+          "p": 0.6636238098144531
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.009,
+         "ANY": 0.0976,
+         "FRAC": 0.0198,
+         "paired_vs_FLAT": {
+          "gained": 6,
+          "lost": 0,
+          "p": 0.03125
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.0574,
+         "ANY": 0.0574,
+         "FRAC": 0.0574,
+         "paired_vs_FLAT": {
+          "gained": 41,
+          "lost": 40,
+          "p": 1.0
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0245,
+         "ANY": 0.0594,
+         "FRAC": 0.042,
+         "paired_vs_FLAT": {
+          "gained": 6,
+          "lost": 1,
+          "p": 0.125
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0111,
+         "ANY": 0.0944,
+         "FRAC": 0.0426,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0,
+         "ANY": 0.1034,
+         "FRAC": 0.0489,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0,
+         "ANY": 0.0906,
+         "FRAC": 0.021,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0,
+         "ANY": 0.1976,
+         "FRAC": 0.0206,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "250": {
+      "ALL": 0.0561,
+      "ANY": 0.1707,
+      "FRAC": 0.0816,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 81,
+       "lost": 79,
+       "p": 0.9370201692131983
+      },
+      "gold_nodes_gained_vs_FLAT": 443,
+      "gold_nodes_lost_vs_FLAT": 492,
+      "nodes_exposed": 250,
+      "FLAT_budget_matching_this_ALL": 260,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.1081,
+         "ANY": 0.1862,
+         "FRAC": 0.1364,
+         "paired_vs_FLAT": {
+          "gained": 53,
+          "lost": 49,
+          "p": 0.7666042612518517
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.048,
+         "ANY": 0.1502,
+         "FRAC": 0.0748,
+         "paired_vs_FLAT": {
+          "gained": 20,
+          "lost": 18,
+          "p": 0.8714146793645341
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.012,
+         "ANY": 0.1757,
+         "FRAC": 0.0337,
+         "paired_vs_FLAT": {
+          "gained": 8,
+          "lost": 12,
+          "p": 0.5034446716308594
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.1136,
+         "ANY": 0.1136,
+         "FRAC": 0.1136,
+         "paired_vs_FLAT": {
+          "gained": 67,
+          "lost": 75,
+          "p": 0.5570709871103278
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0385,
+         "ANY": 0.1364,
+         "FRAC": 0.0874,
+         "paired_vs_FLAT": {
+          "gained": 8,
+          "lost": 3,
+          "p": 0.2265625
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0278,
+         "ANY": 0.1722,
+         "FRAC": 0.0815,
+         "paired_vs_FLAT": {
+          "gained": 4,
+          "lost": 0,
+          "p": 0.125
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0115,
+         "ANY": 0.1379,
+         "FRAC": 0.0661,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0035,
+         "ANY": 0.1603,
+         "FRAC": 0.0382,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0029,
+         "ANY": 0.354,
+         "FRAC": 0.0405,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "ALL": 0.0871,
+      "ANY": 0.2407,
+      "FRAC": 0.125,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 125,
+       "lost": 156,
+       "p": 0.07332187376475027
+      },
+      "gold_nodes_gained_vs_FLAT": 658,
+      "gold_nodes_lost_vs_FLAT": 1003,
+      "nodes_exposed": 500,
+      "FLAT_budget_matching_this_ALL": 428,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.1832,
+         "ANY": 0.2853,
+         "FRAC": 0.2198,
+         "paired_vs_FLAT": {
+          "gained": 88,
+          "lost": 78,
+          "p": 0.48495656084228106
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.0631,
+         "ANY": 0.2042,
+         "FRAC": 0.104,
+         "paired_vs_FLAT": {
+          "gained": 27,
+          "lost": 39,
+          "p": 0.17528579444303533
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.015,
+         "ANY": 0.2327,
+         "FRAC": 0.0511,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 39,
+          "p": 3.845911694355664e-05
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.1795,
+         "ANY": 0.1795,
+         "FRAC": 0.1795,
+         "paired_vs_FLAT": {
+          "gained": 105,
+          "lost": 133,
+          "p": 0.07987403491087836
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0594,
+         "ANY": 0.1923,
+         "FRAC": 0.1259,
+         "paired_vs_FLAT": {
+          "gained": 13,
+          "lost": 16,
+          "p": 0.711071103811264
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0278,
+         "ANY": 0.25,
+         "FRAC": 0.113,
+         "paired_vs_FLAT": {
+          "gained": 4,
+          "lost": 5,
+          "p": 1.0
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0115,
+         "ANY": 0.1839,
+         "FRAC": 0.0833,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0105,
+         "ANY": 0.2439,
+         "FRAC": 0.0685,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0029,
+         "ANY": 0.4366,
+         "FRAC": 0.0574,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "1000": {
+      "ALL": 0.1306,
+      "ANY": 0.3443,
+      "FRAC": 0.189,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 172,
+       "lost": 269,
+       "p": 4.4554788839615735e-06
+      },
+      "gold_nodes_gained_vs_FLAT": 928,
+      "gold_nodes_lost_vs_FLAT": 2029,
+      "nodes_exposed": 1000,
+      "FLAT_budget_matching_this_ALL": 628,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.2748,
+         "ANY": 0.4219,
+         "FRAC": 0.3302,
+         "paired_vs_FLAT": {
+          "gained": 122,
+          "lost": 113,
+          "p": 0.6018606672387032
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.0931,
+         "ANY": 0.2913,
+         "FRAC": 0.1497,
+         "paired_vs_FLAT": {
+          "gained": 40,
+          "lost": 76,
+          "p": 0.001065074273263918
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.024,
+         "ANY": 0.3198,
+         "FRAC": 0.087,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 80,
+          "p": 1.0521598690598086e-14
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.2747,
+         "ANY": 0.2747,
+         "FRAC": 0.2747,
+         "paired_vs_FLAT": {
+          "gained": 150,
+          "lost": 209,
+          "p": 0.0021612733742205708
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0699,
+         "ANY": 0.2832,
+         "FRAC": 0.1766,
+         "paired_vs_FLAT": {
+          "gained": 13,
+          "lost": 38,
+          "p": 0.0006210434562277101
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0556,
+         "ANY": 0.3833,
+         "FRAC": 0.1852,
+         "paired_vs_FLAT": {
+          "gained": 8,
+          "lost": 13,
+          "p": 0.38331031799316406
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0115,
+         "ANY": 0.2874,
+         "FRAC": 0.1178,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 6,
+          "p": 0.03125
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0139,
+         "ANY": 0.324,
+         "FRAC": 0.0956,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 2,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0029,
+         "ANY": 0.5752,
+         "FRAC": 0.0915,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "2000": {
+      "ALL": 0.1662,
+      "ANY": 0.4364,
+      "FRAC": 0.2446,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 215,
+       "lost": 391,
+       "p": 8.136554627318382e-13
+      },
+      "gold_nodes_gained_vs_FLAT": 1185,
+      "gold_nodes_lost_vs_FLAT": 3221,
+      "nodes_exposed": 2000,
+      "FLAT_budget_matching_this_ALL": 875,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.3453,
+         "ANY": 0.518,
+         "FRAC": 0.4132,
+         "paired_vs_FLAT": {
+          "gained": 153,
+          "lost": 145,
+          "p": 0.6851807103646124
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.1246,
+         "ANY": 0.3874,
+         "FRAC": 0.2001,
+         "paired_vs_FLAT": {
+          "gained": 52,
+          "lost": 118,
+          "p": 4.490499335443708e-07
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.0285,
+         "ANY": 0.4039,
+         "FRAC": 0.1205,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 128,
+          "p": 3.0736620665074263e-27
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.3431,
+         "ANY": 0.3431,
+         "FRAC": 0.3431,
+         "paired_vs_FLAT": {
+          "gained": 181,
+          "lost": 276,
+          "p": 1.023892821083768e-05
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.1119,
+         "ANY": 0.3566,
+         "FRAC": 0.2343,
+         "paired_vs_FLAT": {
+          "gained": 23,
+          "lost": 64,
+          "p": 1.2653512115621955e-05
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0667,
+         "ANY": 0.4833,
+         "FRAC": 0.2389,
+         "paired_vs_FLAT": {
+          "gained": 9,
+          "lost": 25,
+          "p": 0.00904118549078703
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.023,
+         "ANY": 0.3793,
+         "FRAC": 0.1638,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 11,
+          "p": 0.00634765625
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0139,
+         "ANY": 0.4286,
+         "FRAC": 0.1309,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 9,
+          "p": 0.021484375
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0029,
+         "ANY": 0.7257,
+         "FRAC": 0.1356,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 6,
+          "p": 0.03125
+         }
+        }
+       }
+      }
+     },
+     "5000": {
+      "ALL": 0.2007,
+      "ANY": 0.534,
+      "FRAC": 0.3108,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 209,
+       "lost": 537,
+       "p": 4.106996481549565e-34
+      },
+      "gold_nodes_gained_vs_FLAT": 1318,
+      "gold_nodes_lost_vs_FLAT": 4540,
+      "nodes_exposed": 5000,
+      "FLAT_budget_matching_this_ALL": 1195,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.3934,
+         "ANY": 0.5781,
+         "FRAC": 0.4734,
+         "paired_vs_FLAT": {
+          "gained": 145,
+          "lost": 174,
+          "p": 0.11681202012222948
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.1562,
+         "ANY": 0.5045,
+         "FRAC": 0.2686,
+         "paired_vs_FLAT": {
+          "gained": 50,
+          "lost": 173,
+          "p": 4.613318741922933e-17
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.0526,
+         "ANY": 0.5195,
+         "FRAC": 0.1903,
+         "paired_vs_FLAT": {
+          "gained": 14,
+          "lost": 190,
+          "p": 1.3183499096659265e-40
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.3993,
+         "ANY": 0.3993,
+         "FRAC": 0.3993,
+         "paired_vs_FLAT": {
+          "gained": 168,
+          "lost": 330,
+          "p": 3.371341626512206e-13
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.1469,
+         "ANY": 0.4476,
+         "FRAC": 0.2972,
+         "paired_vs_FLAT": {
+          "gained": 23,
+          "lost": 95,
+          "p": 1.3814108903466336e-11
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.1111,
+         "ANY": 0.5667,
+         "FRAC": 0.3019,
+         "paired_vs_FLAT": {
+          "gained": 14,
+          "lost": 44,
+          "p": 0.00010049669926914809
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0345,
+         "ANY": 0.5172,
+         "FRAC": 0.2414,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 15,
+          "p": 6.103515625e-05
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0209,
+         "ANY": 0.5993,
+         "FRAC": 0.2067,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 33,
+          "p": 3.6729034036397934e-08
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0088,
+         "ANY": 0.8643,
+         "FRAC": 0.219,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 20,
+          "p": 0.00012111663818359375
+         }
+        }
+       }
+      }
+     }
+    },
+    "FLAT+LOC": {
+     "100": {
+      "ALL": 0.0345,
+      "ANY": 0.1301,
+      "FRAC": 0.0544,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 32,
+       "lost": 13,
+       "p": 0.006608822842281368
+      },
+      "gold_nodes_gained_vs_FLAT": 154,
+      "gold_nodes_lost_vs_FLAT": 84,
+      "nodes_exposed": 100,
+      "FLAT_budget_matching_this_ALL": 152,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.0721,
+         "ANY": 0.1321,
+         "FRAC": 0.091,
+         "paired_vs_FLAT": {
+          "gained": 18,
+          "lost": 9,
+          "p": 0.12207812070846558
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.027,
+         "ANY": 0.1156,
+         "FRAC": 0.0489,
+         "paired_vs_FLAT": {
+          "gained": 11,
+          "lost": 4,
+          "p": 0.11846923828124999
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.0045,
+         "ANY": 0.1426,
+         "FRAC": 0.0233,
+         "paired_vs_FLAT": {
+          "gained": 3,
+          "lost": 0,
+          "p": 0.25
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.0769,
+         "ANY": 0.0769,
+         "FRAC": 0.0769,
+         "paired_vs_FLAT": {
+          "gained": 28,
+          "lost": 11,
+          "p": 0.009475304279476404
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0175,
+         "ANY": 0.0909,
+         "FRAC": 0.0542,
+         "paired_vs_FLAT": {
+          "gained": 4,
+          "lost": 1,
+          "p": 0.375
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0056,
+         "ANY": 0.0889,
+         "FRAC": 0.0389,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0,
+         "ANY": 0.1379,
+         "FRAC": 0.0517,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0,
+         "ANY": 0.1394,
+         "FRAC": 0.0302,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0,
+         "ANY": 0.3038,
+         "FRAC": 0.0296,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "250": {
+      "ALL": 0.0636,
+      "ANY": 0.1987,
+      "FRAC": 0.0942,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 51,
+       "lost": 34,
+       "p": 0.08205429958748713
+      },
+      "gold_nodes_gained_vs_FLAT": 259,
+      "gold_nodes_lost_vs_FLAT": 199,
+      "nodes_exposed": 250,
+      "FLAT_budget_matching_this_ALL": 291,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.1336,
+         "ANY": 0.2282,
+         "FRAC": 0.1641,
+         "paired_vs_FLAT": {
+          "gained": 35,
+          "lost": 14,
+          "p": 0.003801654409748778
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.045,
+         "ANY": 0.1742,
+         "FRAC": 0.0786,
+         "paired_vs_FLAT": {
+          "gained": 9,
+          "lost": 9,
+          "p": 1.0
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.012,
+         "ANY": 0.1937,
+         "FRAC": 0.0401,
+         "paired_vs_FLAT": {
+          "gained": 7,
+          "lost": 11,
+          "p": 0.480682373046875
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.1355,
+         "ANY": 0.1355,
+         "FRAC": 0.1355,
+         "paired_vs_FLAT": {
+          "gained": 42,
+          "lost": 32,
+          "p": 0.29541328065567
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.035,
+         "ANY": 0.1364,
+         "FRAC": 0.0857,
+         "paired_vs_FLAT": {
+          "gained": 6,
+          "lost": 2,
+          "p": 0.2890625
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0167,
+         "ANY": 0.1722,
+         "FRAC": 0.0778,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 0,
+          "p": 0.5
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0115,
+         "ANY": 0.2069,
+         "FRAC": 0.0862,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0035,
+         "ANY": 0.2125,
+         "FRAC": 0.0518,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 0,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0029,
+         "ANY": 0.4041,
+         "FRAC": 0.0485,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "ALL": 0.1021,
+      "ANY": 0.2893,
+      "FRAC": 0.15,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 79,
+       "lost": 80,
+       "p": 1.0
+      },
+      "gold_nodes_gained_vs_FLAT": 437,
+      "gold_nodes_lost_vs_FLAT": 533,
+      "nodes_exposed": 500,
+      "FLAT_budget_matching_this_ALL": 489,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.1922,
+         "ANY": 0.3063,
+         "FRAC": 0.2343,
+         "paired_vs_FLAT": {
+          "gained": 51,
+          "lost": 35,
+          "p": 0.10522535125694396
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.0811,
+         "ANY": 0.2447,
+         "FRAC": 0.1264,
+         "paired_vs_FLAT": {
+          "gained": 19,
+          "lost": 19,
+          "p": 1.0
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.033,
+         "ANY": 0.3168,
+         "FRAC": 0.0892,
+         "paired_vs_FLAT": {
+          "gained": 9,
+          "lost": 26,
+          "p": 0.005988120567053557
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.2112,
+         "ANY": 0.2112,
+         "FRAC": 0.2112,
+         "paired_vs_FLAT": {
+          "gained": 62,
+          "lost": 64,
+          "p": 0.9290596866317958
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.0664,
+         "ANY": 0.2413,
+         "FRAC": 0.1538,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 11,
+          "p": 1.0
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0333,
+         "ANY": 0.2389,
+         "FRAC": 0.1222,
+         "paired_vs_FLAT": {
+          "gained": 4,
+          "lost": 4,
+          "p": 1.0
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.0115,
+         "ANY": 0.2759,
+         "FRAC": 0.1092,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0139,
+         "ANY": 0.3101,
+         "FRAC": 0.0893,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 0,
+          "p": 0.5
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0029,
+         "ANY": 0.531,
+         "FRAC": 0.0752,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 0,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "1000": {
+      "ALL": 0.1752,
+      "ANY": 0.4515,
+      "FRAC": 0.2558,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 117,
+       "lost": 125,
+       "p": 0.6528167751549677
+      },
+      "gold_nodes_gained_vs_FLAT": 620,
+      "gold_nodes_lost_vs_FLAT": 1123,
+      "nodes_exposed": 1000,
+      "FLAT_budget_matching_this_ALL": 949,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.3108,
+         "ANY": 0.4565,
+         "FRAC": 0.3671,
+         "paired_vs_FLAT": {
+          "gained": 80,
+          "lost": 47,
+          "p": 0.004330818115086324
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.1306,
+         "ANY": 0.3739,
+         "FRAC": 0.2027,
+         "paired_vs_FLAT": {
+          "gained": 28,
+          "lost": 39,
+          "p": 0.22154872964481104
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.0841,
+         "ANY": 0.524,
+         "FRAC": 0.1978,
+         "paired_vs_FLAT": {
+          "gained": 9,
+          "lost": 39,
+          "p": 1.5221826110689564e-05
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.3565,
+         "ANY": 0.3565,
+         "FRAC": 0.3565,
+         "paired_vs_FLAT": {
+          "gained": 98,
+          "lost": 90,
+          "p": 0.6098003976284784
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.1294,
+         "ANY": 0.3531,
+         "FRAC": 0.2413,
+         "paired_vs_FLAT": {
+          "gained": 12,
+          "lost": 20,
+          "p": 0.21532714972272515
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.0667,
+         "ANY": 0.4889,
+         "FRAC": 0.237,
+         "paired_vs_FLAT": {
+          "gained": 5,
+          "lost": 8,
+          "p": 0.5810546875
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.046,
+         "ANY": 0.4138,
+         "FRAC": 0.2213,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 4,
+          "p": 0.375
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0139,
+         "ANY": 0.4878,
+         "FRAC": 0.1537,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 2,
+          "p": 1.0
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0029,
+         "ANY": 0.7227,
+         "FRAC": 0.1303,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 1,
+          "p": 1.0
+         }
+        }
+       }
+      }
+     },
+     "2000": {
+      "ALL": 0.2793,
+      "ANY": 0.6507,
+      "FRAC": 0.4127,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 173,
+       "lost": 123,
+       "p": 0.004319633280679791
+      },
+      "gold_nodes_gained_vs_FLAT": 805,
+      "gold_nodes_lost_vs_FLAT": 1343,
+      "nodes_exposed": 2000,
+      "FLAT_budget_matching_this_ALL": 2470,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.464,
+         "ANY": 0.6456,
+         "FRAC": 0.5392,
+         "paired_vs_FLAT": {
+          "gained": 123,
+          "lost": 36,
+          "p": 2.5008747402060082e-12
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.2192,
+         "ANY": 0.5601,
+         "FRAC": 0.3384,
+         "paired_vs_FLAT": {
+          "gained": 40,
+          "lost": 43,
+          "p": 0.8264047244491923
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.1547,
+         "ANY": 0.7462,
+         "FRAC": 0.3603,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 44,
+          "p": 3.3856859533720747e-06
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.5385,
+         "ANY": 0.5385,
+         "FRAC": 0.5385,
+         "paired_vs_FLAT": {
+          "gained": 143,
+          "lost": 78,
+          "p": 1.4611159110712376e-05
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.2448,
+         "ANY": 0.5874,
+         "FRAC": 0.4161,
+         "paired_vs_FLAT": {
+          "gained": 18,
+          "lost": 21,
+          "p": 0.7492586247608418
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.1611,
+         "ANY": 0.7,
+         "FRAC": 0.4019,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 9,
+          "p": 1.0
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.092,
+         "ANY": 0.6552,
+         "FRAC": 0.3592,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 5,
+          "p": 0.21875
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0279,
+         "ANY": 0.7456,
+         "FRAC": 0.2843,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 5,
+          "p": 0.21875
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0059,
+         "ANY": 0.8673,
+         "FRAC": 0.234,
+         "paired_vs_FLAT": {
+          "gained": 0,
+          "lost": 5,
+          "p": 0.0625
+         }
+        }
+       }
+      }
+     },
+     "5000": {
+      "ALL": 0.3999,
+      "ANY": 0.8228,
+      "FRAC": 0.5903,
+      "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+       "gained": 206,
+       "lost": 136,
+       "p": 0.00018182502517752192
+      },
+      "gold_nodes_gained_vs_FLAT": 952,
+      "gold_nodes_lost_vs_FLAT": 1388,
+      "nodes_exposed": 5000,
+      "FLAT_budget_matching_this_ALL": 6536,
+      "strata": {
+       "per_hop": {
+        "hop1": {
+         "n": 666,
+         "ALL": 0.6006,
+         "ANY": 0.7943,
+         "FRAC": 0.6924,
+         "paired_vs_FLAT": {
+          "gained": 145,
+          "lost": 36,
+          "p": 1.0482051723334998e-16
+         }
+        },
+        "hop2": {
+         "n": 666,
+         "ALL": 0.3483,
+         "ANY": 0.7703,
+         "FRAC": 0.5203,
+         "paired_vs_FLAT": {
+          "gained": 51,
+          "lost": 46,
+          "p": 0.6848587772144034
+         }
+        },
+        "hop3": {
+         "n": 666,
+         "ALL": 0.2508,
+         "ANY": 0.9039,
+         "FRAC": 0.5582,
+         "paired_vs_FLAT": {
+          "gained": 10,
+          "lost": 54,
+          "p": 1.9964982237862146e-08
+         }
+        }
+       },
+       "per_n_gold": {
+        "1": {
+         "n": 819,
+         "ALL": 0.7118,
+         "ANY": 0.7118,
+         "FRAC": 0.7118,
+         "paired_vs_FLAT": {
+          "gained": 159,
+          "lost": 65,
+          "p": 2.8502631991312344e-10
+         }
+        },
+        "2": {
+         "n": 286,
+         "ALL": 0.4056,
+         "ANY": 0.7832,
+         "FRAC": 0.5944,
+         "paired_vs_FLAT": {
+          "gained": 29,
+          "lost": 27,
+          "p": 0.8938530948350216
+         }
+        },
+        "3": {
+         "n": 180,
+         "ALL": 0.2667,
+         "ANY": 0.8889,
+         "FRAC": 0.5648,
+         "paired_vs_FLAT": {
+          "gained": 12,
+          "lost": 14,
+          "p": 0.8450189828872681
+         }
+        },
+        "4": {
+         "n": 87,
+         "ALL": 0.2069,
+         "ANY": 0.8851,
+         "FRAC": 0.5575,
+         "paired_vs_FLAT": {
+          "gained": 3,
+          "lost": 3,
+          "p": 1.0
+         }
+        },
+        "5-10": {
+         "n": 287,
+         "ALL": 0.0732,
+         "ANY": 0.9303,
+         "FRAC": 0.4776,
+         "paired_vs_FLAT": {
+          "gained": 2,
+          "lost": 18,
+          "p": 0.0004024505615234375
+         }
+        },
+        "11+": {
+         "n": 339,
+         "ALL": 0.0383,
+         "ANY": 0.9823,
+         "FRAC": 0.4104,
+         "paired_vs_FLAT": {
+          "gained": 1,
+          "lost": 9,
+          "p": 0.021484375
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "SLOT_C_at_M5000 (ruling-1 interface)": {
+    "25": {
+     "ALL": 0.3699,
+     "ANY": 0.7703,
+     "FRAC": 0.5591,
+     "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+      "gained": 12,
+      "lost": 2,
+      "p": 0.012939453125
+     },
+     "gold_nodes_gained_vs_FLAT": 50,
+     "gold_nodes_lost_vs_FLAT": 13,
+     "nodes_exposed": 5000,
+     "strata": {
+      "per_hop": {
+       "hop1": {
+        "n": 666,
+        "ALL": 0.4459,
+        "ANY": 0.6291,
+        "FRAC": 0.5264,
+        "paired_vs_FLAT": {
+         "gained": 6,
+         "lost": 0,
+         "p": 0.03125
+        }
+       },
+       "hop2": {
+        "n": 666,
+        "ALL": 0.3453,
+        "ANY": 0.7568,
+        "FRAC": 0.5195,
+        "paired_vs_FLAT": {
+         "gained": 4,
+         "lost": 1,
+         "p": 0.375
+        }
+       },
+       "hop3": {
+        "n": 666,
+        "ALL": 0.3183,
+        "ANY": 0.9249,
+        "FRAC": 0.6314,
+        "paired_vs_FLAT": {
+         "gained": 2,
+         "lost": 1,
+         "p": 1.0
+        }
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n": 819,
+        "ALL": 0.6081,
+        "ANY": 0.6081,
+        "FRAC": 0.6081,
+        "paired_vs_FLAT": {
+         "gained": 9,
+         "lost": 0,
+         "p": 0.00390625
+        }
+       },
+       "2": {
+        "n": 286,
+        "ALL": 0.4021,
+        "ANY": 0.7622,
+        "FRAC": 0.5822,
+        "paired_vs_FLAT": {
+         "gained": 2,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "3": {
+        "n": 180,
+        "ALL": 0.2833,
+        "ANY": 0.8,
+        "FRAC": 0.5296,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 0,
+         "p": 1.0
+        }
+       },
+       "4": {
+        "n": 87,
+        "ALL": 0.1954,
+        "ANY": 0.8966,
+        "FRAC": 0.5575,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "5-10": {
+        "n": 287,
+        "ALL": 0.1289,
+        "ANY": 0.9268,
+        "FRAC": 0.5246,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 0,
+         "p": 1.0
+        }
+       },
+       "11+": {
+        "n": 339,
+        "ALL": 0.0619,
+        "ANY": 0.9882,
+        "FRAC": 0.4665,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 0,
+         "p": 1.0
+        }
+       }
+      }
+     }
+    },
+    "50": {
+     "ALL": 0.3764,
+     "ANY": 0.7778,
+     "FRAC": 0.5666,
+     "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+      "gained": 26,
+      "lost": 3,
+      "p": 1.5236437320709229e-05
+     },
+     "gold_nodes_gained_vs_FLAT": 86,
+     "gold_nodes_lost_vs_FLAT": 20,
+     "nodes_exposed": 5000,
+     "strata": {
+      "per_hop": {
+       "hop1": {
+        "n": 666,
+        "ALL": 0.461,
+        "ANY": 0.6486,
+        "FRAC": 0.5448,
+        "paired_vs_FLAT": {
+         "gained": 16,
+         "lost": 0,
+         "p": 3.0517578125e-05
+        }
+       },
+       "hop2": {
+        "n": 666,
+        "ALL": 0.3498,
+        "ANY": 0.7583,
+        "FRAC": 0.5221,
+        "paired_vs_FLAT": {
+         "gained": 7,
+         "lost": 1,
+         "p": 0.0703125
+        }
+       },
+       "hop3": {
+        "n": 666,
+        "ALL": 0.3183,
+        "ANY": 0.9264,
+        "FRAC": 0.633,
+        "paired_vs_FLAT": {
+         "gained": 3,
+         "lost": 2,
+         "p": 1.0
+        }
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n": 819,
+        "ALL": 0.6215,
+        "ANY": 0.6215,
+        "FRAC": 0.6215,
+        "paired_vs_FLAT": {
+         "gained": 20,
+         "lost": 0,
+         "p": 1.9073486328125e-06
+        }
+       },
+       "2": {
+        "n": 286,
+        "ALL": 0.4056,
+        "ANY": 0.7692,
+        "FRAC": 0.5874,
+        "paired_vs_FLAT": {
+         "gained": 3,
+         "lost": 1,
+         "p": 0.625
+        }
+       },
+       "3": {
+        "n": 180,
+        "ALL": 0.2889,
+        "ANY": 0.8056,
+        "FRAC": 0.5389,
+        "paired_vs_FLAT": {
+         "gained": 2,
+         "lost": 0,
+         "p": 0.5
+        }
+       },
+       "4": {
+        "n": 87,
+        "ALL": 0.1954,
+        "ANY": 0.908,
+        "FRAC": 0.5603,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "5-10": {
+        "n": 287,
+        "ALL": 0.1324,
+        "ANY": 0.9268,
+        "FRAC": 0.5258,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 0,
+         "p": 1.0
+        }
+       },
+       "11+": {
+        "n": 339,
+        "ALL": 0.059,
+        "ANY": 0.9882,
+        "FRAC": 0.4674,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 1,
+         "p": 1.0
+        }
+       }
+      }
+     }
+    },
+    "100": {
+     "ALL": 0.3829,
+     "ANY": 0.7848,
+     "FRAC": 0.574,
+     "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+      "gained": 40,
+      "lost": 4,
+      "p": 1.7051434042514302e-08
+     },
+     "gold_nodes_gained_vs_FLAT": 132,
+     "gold_nodes_lost_vs_FLAT": 53,
+     "nodes_exposed": 5000,
+     "strata": {
+      "per_hop": {
+       "hop1": {
+        "n": 666,
+        "ALL": 0.476,
+        "ANY": 0.6682,
+        "FRAC": 0.5627,
+        "paired_vs_FLAT": {
+         "gained": 26,
+         "lost": 0,
+         "p": 2.9802322387695312e-08
+        }
+       },
+       "hop2": {
+        "n": 666,
+        "ALL": 0.3529,
+        "ANY": 0.7583,
+        "FRAC": 0.5255,
+        "paired_vs_FLAT": {
+         "gained": 10,
+         "lost": 2,
+         "p": 0.03857421875
+        }
+       },
+       "hop3": {
+        "n": 666,
+        "ALL": 0.3198,
+        "ANY": 0.9279,
+        "FRAC": 0.6339,
+        "paired_vs_FLAT": {
+         "gained": 4,
+         "lost": 2,
+         "p": 0.6875
+        }
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n": 819,
+        "ALL": 0.6325,
+        "ANY": 0.6325,
+        "FRAC": 0.6325,
+        "paired_vs_FLAT": {
+         "gained": 30,
+         "lost": 1,
+         "p": 2.9802322387695312e-08
+        }
+       },
+       "2": {
+        "n": 286,
+        "ALL": 0.4126,
+        "ANY": 0.7832,
+        "FRAC": 0.5979,
+        "paired_vs_FLAT": {
+         "gained": 5,
+         "lost": 1,
+         "p": 0.21875
+        }
+       },
+       "3": {
+        "n": 180,
+        "ALL": 0.3,
+        "ANY": 0.8167,
+        "FRAC": 0.5537,
+        "paired_vs_FLAT": {
+         "gained": 4,
+         "lost": 0,
+         "p": 0.125
+        }
+       },
+       "4": {
+        "n": 87,
+        "ALL": 0.1954,
+        "ANY": 0.908,
+        "FRAC": 0.5632,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "5-10": {
+        "n": 287,
+        "ALL": 0.1324,
+        "ANY": 0.9233,
+        "FRAC": 0.5259,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 0,
+         "p": 1.0
+        }
+       },
+       "11+": {
+        "n": 339,
+        "ALL": 0.059,
+        "ANY": 0.9882,
+        "FRAC": 0.467,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 1,
+         "p": 1.0
+        }
+       }
+      }
+     }
+    },
+    "200": {
+     "ALL": 0.3904,
+     "ANY": 0.7923,
+     "FRAC": 0.5821,
+     "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+      "gained": 62,
+      "lost": 11,
+      "p": 9.089007009078587e-10
+     },
+     "gold_nodes_gained_vs_FLAT": 206,
+     "gold_nodes_lost_vs_FLAT": 112,
+     "nodes_exposed": 5000,
+     "strata": {
+      "per_hop": {
+       "hop1": {
+        "n": 666,
+        "ALL": 0.4955,
+        "ANY": 0.6817,
+        "FRAC": 0.5803,
+        "paired_vs_FLAT": {
+         "gained": 42,
+         "lost": 3,
+         "p": 8.654978955746628e-10
+        }
+       },
+       "hop2": {
+        "n": 666,
+        "ALL": 0.3589,
+        "ANY": 0.7658,
+        "FRAC": 0.5319,
+        "paired_vs_FLAT": {
+         "gained": 16,
+         "lost": 4,
+         "p": 0.01181793212890625
+        }
+       },
+       "hop3": {
+        "n": 666,
+        "ALL": 0.3168,
+        "ANY": 0.9294,
+        "FRAC": 0.6341,
+        "paired_vs_FLAT": {
+         "gained": 4,
+         "lost": 4,
+         "p": 1.0
+        }
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n": 819,
+        "ALL": 0.6471,
+        "ANY": 0.6471,
+        "FRAC": 0.6471,
+        "paired_vs_FLAT": {
+         "gained": 46,
+         "lost": 5,
+         "p": 2.3280151140170346e-09
+        }
+       },
+       "2": {
+        "n": 286,
+        "ALL": 0.4231,
+        "ANY": 0.7902,
+        "FRAC": 0.6066,
+        "paired_vs_FLAT": {
+         "gained": 9,
+         "lost": 2,
+         "p": 0.0654296875
+        }
+       },
+       "3": {
+        "n": 180,
+        "ALL": 0.3,
+        "ANY": 0.8167,
+        "FRAC": 0.5593,
+        "paired_vs_FLAT": {
+         "gained": 5,
+         "lost": 1,
+         "p": 0.21875
+        }
+       },
+       "4": {
+        "n": 87,
+        "ALL": 0.2069,
+        "ANY": 0.908,
+        "FRAC": 0.5661,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "5-10": {
+        "n": 287,
+        "ALL": 0.1289,
+        "ANY": 0.9268,
+        "FRAC": 0.5285,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 1,
+         "p": 1.0
+        }
+       },
+       "11+": {
+        "n": 339,
+        "ALL": 0.059,
+        "ANY": 0.9882,
+        "FRAC": 0.466,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 1,
+         "p": 1.0
+        }
+       }
+      }
+     }
+    },
+    "500": {
+     "ALL": 0.4149,
+     "ANY": 0.8193,
+     "FRAC": 0.6082,
+     "paired_vs_FLAT (gained = arm serves ALL gold, FLAT does not; McNemar p descriptive)": {
+      "gained": 126,
+      "lost": 26,
+      "p": 6.020356926000022e-17
+     },
+     "gold_nodes_gained_vs_FLAT": 376,
+     "gold_nodes_lost_vs_FLAT": 253,
+     "nodes_exposed": 5000,
+     "strata": {
+      "per_hop": {
+       "hop1": {
+        "n": 666,
+        "ALL": 0.5601,
+        "ANY": 0.7477,
+        "FRAC": 0.6472,
+        "paired_vs_FLAT": {
+         "gained": 90,
+         "lost": 8,
+         "p": 1.0875246615051457e-18
+        }
+       },
+       "hop2": {
+        "n": 666,
+        "ALL": 0.3724,
+        "ANY": 0.7763,
+        "FRAC": 0.5444,
+        "paired_vs_FLAT": {
+         "gained": 28,
+         "lost": 7,
+         "p": 0.0005082604475319386
+        }
+       },
+       "hop3": {
+        "n": 666,
+        "ALL": 0.3123,
+        "ANY": 0.9339,
+        "FRAC": 0.6331,
+        "paired_vs_FLAT": {
+         "gained": 8,
+         "lost": 11,
+         "p": 0.6476058959960938
+        }
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n": 819,
+        "ALL": 0.7009,
+        "ANY": 0.7009,
+        "FRAC": 0.7009,
+        "paired_vs_FLAT": {
+         "gained": 96,
+         "lost": 11,
+         "p": 4.300826607582504e-18
+        }
+       },
+       "2": {
+        "n": 286,
+        "ALL": 0.4301,
+        "ANY": 0.7972,
+        "FRAC": 0.6136,
+        "paired_vs_FLAT": {
+         "gained": 15,
+         "lost": 6,
+         "p": 0.0783538818359375
+        }
+       },
+       "3": {
+        "n": 180,
+        "ALL": 0.3278,
+        "ANY": 0.8556,
+        "FRAC": 0.5926,
+        "paired_vs_FLAT": {
+         "gained": 11,
+         "lost": 2,
+         "p": 0.0224609375
+        }
+       },
+       "4": {
+        "n": 87,
+        "ALL": 0.2299,
+        "ANY": 0.908,
+        "FRAC": 0.5805,
+        "paired_vs_FLAT": {
+         "gained": 3,
+         "lost": 1,
+         "p": 0.625
+        }
+       },
+       "5-10": {
+        "n": 287,
+        "ALL": 0.122,
+        "ANY": 0.9303,
+        "FRAC": 0.5318,
+        "paired_vs_FLAT": {
+         "gained": 1,
+         "lost": 3,
+         "p": 0.625
+        }
+       },
+       "11+": {
+        "n": 339,
+        "ALL": 0.0531,
+        "ANY": 0.9882,
+        "FRAC": 0.4601,
+        "paired_vs_FLAT": {
+         "gained": 0,
+         "lost": 3,
+         "p": 0.25
+        }
+       }
+      }
+     }
+    }
+   },
+   "audit_ABC (FLAT@M misses vs the LOC order at M)": {
+    "100": {
+     "n_FLAT@M_missed_gold_nodes": 14131,
+     "counts": {
+      "LOC_SERVES": 238,
+      "TYPE_A": 8932,
+      "TYPE_B": 4955,
+      "TYPE_C": 6
+     },
+     "shares": {
+      "LOC_SERVES": 0.0168,
+      "TYPE_A": 0.6321,
+      "TYPE_B": 0.3506,
+      "TYPE_C": 0.0004
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 154,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 7198.08,
+      "median": 2633.5,
+      "min": 103.0,
+      "max": 39877.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 2537.1,
+      "median": 911.5,
+      "min": 103.0,
+      "max": 21212.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 30,
+      "(2M,10M]": 53,
+      ">10M": 155
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 49.11,
+      "median": 41.0,
+      "min": 2.0,
+      "max": 145.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 4789.73,
+      "median": 3950.0,
+      "min": 0.0,
+      "max": 14466.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 76.83,
+      "median": 100.5,
+      "min": 20.0,
+      "max": 101.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 1241,
+        "LOC_SERVES": 60,
+        "TYPE_A": 584,
+        "TYPE_B": 592,
+        "TYPE_C": 5,
+        "FLAT+LOC_serves": 34
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 4489,
+        "LOC_SERVES": 60,
+        "TYPE_A": 2960,
+        "TYPE_B": 1468,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 44
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 8401,
+        "LOC_SERVES": 118,
+        "TYPE_A": 5388,
+        "TYPE_B": 2895,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 76
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 773,
+        "LOC_SERVES": 41,
+        "TYPE_A": 386,
+        "TYPE_B": 344,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 28
+       },
+       "2": {
+        "n_missed_gold_nodes": 552,
+        "LOC_SERVES": 18,
+        "TYPE_A": 325,
+        "TYPE_B": 208,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 14
+       },
+       "3": {
+        "n_missed_gold_nodes": 521,
+        "LOC_SERVES": 13,
+        "TYPE_A": 311,
+        "TYPE_B": 196,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 6
+       },
+       "4": {
+        "n_missed_gold_nodes": 335,
+        "LOC_SERVES": 12,
+        "TYPE_A": 201,
+        "TYPE_B": 122,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 9
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 1885,
+        "LOC_SERVES": 31,
+        "TYPE_A": 1245,
+        "TYPE_B": 607,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 18
+       },
+       "11+": {
+        "n_missed_gold_nodes": 10065,
+        "LOC_SERVES": 123,
+        "TYPE_A": 6464,
+        "TYPE_B": 3478,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 79
+       }
+      }
+     }
+    },
+    "250": {
+     "n_FLAT@M_missed_gold_nodes": 13791,
+     "counts": {
+      "LOC_SERVES": 443,
+      "TYPE_A": 8888,
+      "TYPE_B": 4404,
+      "TYPE_C": 56
+     },
+     "shares": {
+      "LOC_SERVES": 0.0321,
+      "TYPE_A": 0.6445,
+      "TYPE_B": 0.3193,
+      "TYPE_C": 0.0041
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 259,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 7733.37,
+      "median": 3076.0,
+      "min": 254.0,
+      "max": 42782.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 7585.34,
+      "median": 3212.0,
+      "min": 252.0,
+      "max": 42782.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 47,
+      "(2M,10M]": 160,
+      ">10M": 236
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 52.56,
+      "median": 46.0,
+      "min": 4.0,
+      "max": 145.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 4990.41,
+      "median": 4352.0,
+      "min": 6.0,
+      "max": 14316.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 65.57,
+      "median": 61.0,
+      "min": 44.0,
+      "max": 101.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 1190,
+        "LOC_SERVES": 109,
+        "TYPE_A": 579,
+        "TYPE_B": 488,
+        "TYPE_C": 14,
+        "FLAT+LOC_serves": 73
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 4395,
+        "LOC_SERVES": 106,
+        "TYPE_A": 2948,
+        "TYPE_B": 1330,
+        "TYPE_C": 11,
+        "FLAT+LOC_serves": 61
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 8206,
+        "LOC_SERVES": 228,
+        "TYPE_A": 5361,
+        "TYPE_B": 2586,
+        "TYPE_C": 31,
+        "FLAT+LOC_serves": 125
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 718,
+        "LOC_SERVES": 67,
+        "TYPE_A": 379,
+        "TYPE_B": 260,
+        "TYPE_C": 12,
+        "FLAT+LOC_serves": 42
+       },
+       "2": {
+        "n_missed_gold_nodes": 528,
+        "LOC_SERVES": 36,
+        "TYPE_A": 321,
+        "TYPE_B": 169,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 22
+       },
+       "3": {
+        "n_missed_gold_nodes": 508,
+        "LOC_SERVES": 30,
+        "TYPE_A": 307,
+        "TYPE_B": 168,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 21
+       },
+       "4": {
+        "n_missed_gold_nodes": 323,
+        "LOC_SERVES": 12,
+        "TYPE_A": 198,
+        "TYPE_B": 112,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 10
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 1840,
+        "LOC_SERVES": 54,
+        "TYPE_A": 1237,
+        "TYPE_B": 545,
+        "TYPE_C": 4,
+        "FLAT+LOC_serves": 31
+       },
+       "11+": {
+        "n_missed_gold_nodes": 9874,
+        "LOC_SERVES": 244,
+        "TYPE_A": 6446,
+        "TYPE_B": 3150,
+        "TYPE_C": 34,
+        "FLAT+LOC_serves": 133
+       }
+      }
+     }
+    },
+    "500": {
+     "n_FLAT@M_missed_gold_nodes": 13148,
+     "counts": {
+      "LOC_SERVES": 658,
+      "TYPE_A": 8571,
+      "TYPE_B": 3911,
+      "TYPE_C": 8
+     },
+     "shares": {
+      "LOC_SERVES": 0.05,
+      "TYPE_A": 0.6519,
+      "TYPE_B": 0.2975,
+      "TYPE_C": 0.0006
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 437,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 9405.08,
+      "median": 4215.5,
+      "min": 501.0,
+      "max": 42782.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 7888.84,
+      "median": 3297.0,
+      "min": 501.0,
+      "max": 42782.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 96,
+      "(2M,10M]": 257,
+      ">10M": 305
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 55.27,
+      "median": 50.0,
+      "min": 6.0,
+      "max": 144.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 5015.73,
+      "median": 4476.0,
+      "min": 0.0,
+      "max": 14054.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 70.0,
+      "median": 77.5,
+      "min": 17.0,
+      "max": 100.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 1116,
+        "LOC_SERVES": 158,
+        "TYPE_A": 546,
+        "TYPE_B": 409,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 101
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 4249,
+        "LOC_SERVES": 157,
+        "TYPE_A": 2879,
+        "TYPE_B": 1208,
+        "TYPE_C": 5,
+        "FLAT+LOC_serves": 101
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 7783,
+        "LOC_SERVES": 343,
+        "TYPE_A": 5146,
+        "TYPE_B": 2294,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 235
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 644,
+        "LOC_SERVES": 105,
+        "TYPE_A": 343,
+        "TYPE_B": 195,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 62
+       },
+       "2": {
+        "n_missed_gold_nodes": 484,
+        "LOC_SERVES": 49,
+        "TYPE_A": 297,
+        "TYPE_B": 138,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 36
+       },
+       "3": {
+        "n_missed_gold_nodes": 464,
+        "LOC_SERVES": 44,
+        "TYPE_A": 281,
+        "TYPE_B": 134,
+        "TYPE_C": 5,
+        "FLAT+LOC_serves": 28
+       },
+       "4": {
+        "n_missed_gold_nodes": 289,
+        "LOC_SERVES": 16,
+        "TYPE_A": 176,
+        "TYPE_B": 97,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 12
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 1739,
+        "LOC_SERVES": 83,
+        "TYPE_A": 1179,
+        "TYPE_B": 476,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 54
+       },
+       "11+": {
+        "n_missed_gold_nodes": 9528,
+        "LOC_SERVES": 361,
+        "TYPE_A": 6295,
+        "TYPE_B": 2871,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 245
+       }
+      }
+     }
+    },
+    "1000": {
+     "n_FLAT@M_missed_gold_nodes": 11828,
+     "counts": {
+      "LOC_SERVES": 928,
+      "TYPE_A": 7743,
+      "TYPE_B": 3150,
+      "TYPE_C": 7
+     },
+     "shares": {
+      "LOC_SERVES": 0.0785,
+      "TYPE_A": 0.6546,
+      "TYPE_B": 0.2663,
+      "TYPE_C": 0.0006
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 620,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 10948.66,
+      "median": 5715.0,
+      "min": 1002.0,
+      "max": 43232.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 9839.73,
+      "median": 4811.0,
+      "min": 1002.0,
+      "max": 42782.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 177,
+      "(2M,10M]": 421,
+      ">10M": 330
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 61.41,
+      "median": 58.0,
+      "min": 11.0,
+      "max": 144.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 5140.35,
+      "median": 4788.5,
+      "min": 1.0,
+      "max": 13554.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 77.0,
+      "median": 84.0,
+      "min": 27.0,
+      "max": 96.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 1010,
+        "LOC_SERVES": 222,
+        "TYPE_A": 490,
+        "TYPE_B": 294,
+        "TYPE_C": 4,
+        "FLAT+LOC_serves": 145
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 3975,
+        "LOC_SERVES": 216,
+        "TYPE_A": 2718,
+        "TYPE_B": 1040,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 145
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 6843,
+        "LOC_SERVES": 490,
+        "TYPE_A": 4535,
+        "TYPE_B": 1816,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 330
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 535,
+        "LOC_SERVES": 150,
+        "TYPE_A": 264,
+        "TYPE_B": 117,
+        "TYPE_C": 4,
+        "FLAT+LOC_serves": 98
+       },
+       "2": {
+        "n_missed_gold_nodes": 409,
+        "LOC_SERVES": 64,
+        "TYPE_A": 243,
+        "TYPE_B": 102,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 44
+       },
+       "3": {
+        "n_missed_gold_nodes": 399,
+        "LOC_SERVES": 69,
+        "TYPE_A": 237,
+        "TYPE_B": 93,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 43
+       },
+       "4": {
+        "n_missed_gold_nodes": 251,
+        "LOC_SERVES": 24,
+        "TYPE_A": 145,
+        "TYPE_B": 82,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 16
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 1492,
+        "LOC_SERVES": 97,
+        "TYPE_A": 1001,
+        "TYPE_B": 394,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 73
+       },
+       "11+": {
+        "n_missed_gold_nodes": 8742,
+        "LOC_SERVES": 524,
+        "TYPE_A": 5853,
+        "TYPE_B": 2362,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 346
+       }
+      }
+     }
+    },
+    "2000": {
+     "n_FLAT@M_missed_gold_nodes": 10221,
+     "counts": {
+      "LOC_SERVES": 1185,
+      "TYPE_A": 6760,
+      "TYPE_B": 2264,
+      "TYPE_C": 12
+     },
+     "shares": {
+      "LOC_SERVES": 0.1159,
+      "TYPE_A": 0.6614,
+      "TYPE_B": 0.2215,
+      "TYPE_C": 0.0012
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 805,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 13052.43,
+      "median": 8424.0,
+      "min": 2011.0,
+      "max": 43232.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 12439.63,
+      "median": 7402.0,
+      "min": 2011.0,
+      "max": 43232.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 292,
+      "(2M,10M]": 594,
+      ">10M": 299
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 71.05,
+      "median": 68.0,
+      "min": 21.0,
+      "max": 144.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 5120.6,
+      "median": 4842.5,
+      "min": 23.0,
+      "max": 12554.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 69.0,
+      "median": 69.0,
+      "min": 54.0,
+      "max": 89.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 895,
+        "LOC_SERVES": 280,
+        "TYPE_A": 435,
+        "TYPE_B": 179,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 215
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 3608,
+        "LOC_SERVES": 280,
+        "TYPE_A": 2497,
+        "TYPE_B": 829,
+        "TYPE_C": 2,
+        "FLAT+LOC_serves": 192
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 5718,
+        "LOC_SERVES": 625,
+        "TYPE_A": 3828,
+        "TYPE_B": 1256,
+        "TYPE_C": 9,
+        "FLAT+LOC_serves": 398
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 443,
+        "LOC_SERVES": 181,
+        "TYPE_A": 206,
+        "TYPE_B": 56,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 143
+       },
+       "2": {
+        "n_missed_gold_nodes": 337,
+        "LOC_SERVES": 84,
+        "TYPE_A": 194,
+        "TYPE_B": 59,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 64
+       },
+       "3": {
+        "n_missed_gold_nodes": 337,
+        "LOC_SERVES": 81,
+        "TYPE_A": 198,
+        "TYPE_B": 58,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 66
+       },
+       "4": {
+        "n_missed_gold_nodes": 207,
+        "LOC_SERVES": 30,
+        "TYPE_A": 119,
+        "TYPE_B": 58,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 21
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 1227,
+        "LOC_SERVES": 116,
+        "TYPE_A": 829,
+        "TYPE_B": 279,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 80
+       },
+       "11+": {
+        "n_missed_gold_nodes": 7670,
+        "LOC_SERVES": 693,
+        "TYPE_A": 5214,
+        "TYPE_B": 1754,
+        "TYPE_C": 9,
+        "FLAT+LOC_serves": 431
+       }
+      }
+     }
+    },
+    "5000": {
+     "n_FLAT@M_missed_gold_nodes": 7908,
+     "counts": {
+      "LOC_SERVES": 1318,
+      "TYPE_A": 5337,
+      "TYPE_B": 1246,
+      "TYPE_C": 7
+     },
+     "shares": {
+      "LOC_SERVES": 0.1667,
+      "TYPE_A": 0.6749,
+      "TYPE_B": 0.1576,
+      "TYPE_C": 0.0009
+     },
+     "FLAT+LOC@M serves (of the FLAT@M misses)": 952,
+     "FLAT_rank_1based_of_golds_LOC@M_serves": {
+      "mean": 18186.65,
+      "median": 15074.5,
+      "min": 5001.0,
+      "max": 43232.0
+     },
+     "FLAT_rank_1based_of_golds_FLAT+LOC@M_serves": {
+      "mean": 17099.37,
+      "median": 13482.5,
+      "min": 5001.0,
+      "max": 43232.0
+     },
+     "FLAT_rank_bins_of_golds_LOC@M_serves": {
+      "(M,2M]": 429,
+      "(2M,10M]": 889,
+      ">10M": 0
+     },
+     "TYPE_B_block_rank_by_A": {
+      "mean": 88.09,
+      "median": 88.0,
+      "min": 50.0,
+      "max": 144.0
+     },
+     "TYPE_B_block_first_LOC_position_minus_M": {
+      "mean": 3849.53,
+      "median": 3810.5,
+      "min": 0.0,
+      "max": 9554.0
+     },
+     "TYPE_C_gold_LOC_position_minus_block_first": {
+      "mean": 53.57,
+      "median": 47.0,
+      "min": 23.0,
+      "max": 87.0
+     },
+     "by_stratum": {
+      "per_hop": {
+       "hop1": {
+        "n_missed_gold_nodes": 734,
+        "LOC_SERVES": 287,
+        "TYPE_A": 359,
+        "TYPE_B": 88,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 250
+       },
+       "hop2": {
+        "n_missed_gold_nodes": 3061,
+        "LOC_SERVES": 409,
+        "TYPE_A": 2148,
+        "TYPE_B": 500,
+        "TYPE_C": 4,
+        "FLAT+LOC_serves": 263
+       },
+       "hop3": {
+        "n_missed_gold_nodes": 4113,
+        "LOC_SERVES": 622,
+        "TYPE_A": 2830,
+        "TYPE_B": 658,
+        "TYPE_C": 3,
+        "FLAT+LOC_serves": 439
+       }
+      },
+      "per_n_gold": {
+       "1": {
+        "n_missed_gold_nodes": 330,
+        "LOC_SERVES": 168,
+        "TYPE_A": 136,
+        "TYPE_B": 26,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 159
+       },
+       "2": {
+        "n_missed_gold_nodes": 243,
+        "LOC_SERVES": 79,
+        "TYPE_A": 139,
+        "TYPE_B": 24,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 65
+       },
+       "3": {
+        "n_missed_gold_nodes": 258,
+        "LOC_SERVES": 77,
+        "TYPE_A": 151,
+        "TYPE_B": 30,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 64
+       },
+       "4": {
+        "n_missed_gold_nodes": 154,
+        "LOC_SERVES": 34,
+        "TYPE_A": 86,
+        "TYPE_B": 34,
+        "TYPE_C": 0,
+        "FLAT+LOC_serves": 26
+       },
+       "5-10": {
+        "n_missed_gold_nodes": 924,
+        "LOC_SERVES": 143,
+        "TYPE_A": 647,
+        "TYPE_B": 133,
+        "TYPE_C": 1,
+        "FLAT+LOC_serves": 102
+       },
+       "11+": {
+        "n_missed_gold_nodes": 5999,
+        "LOC_SERVES": 817,
+        "TYPE_A": 4178,
+        "TYPE_B": 999,
+        "TYPE_C": 5,
+        "FLAT+LOC_serves": 536
+       }
+      }
+     }
+    }
+   },
+   "latency_ms": {
+    "loc (activation + LOC order)": {
+     "mean_ms": 8.661,
+     "median_ms": 5.834,
+     "p95_ms": 25.22
+    },
+    "fusion (f + lexsort over N)": {
+     "mean_ms": 24.278,
+     "median_ms": 16.562,
+     "p95_ms": 70.294
+    }
+   },
+   "structure_bytes": {
+    "hard_int32": 172936,
+    "order_int32": 172936,
+    "ptr_int64": 3464,
+    "partition_file": 346000
+   }
+  }
+ },
+ "served_list_agreement": {
+  "dense_top100_set_overlap_with_served_mean": 1.0,
+  "dense_top100_set_overlap_min": 1.0,
+  "splade_top100_set_overlap_with_served_mean": 1.0,
+  "splade_top100_set_overlap_min": 1.0,
+  "served_lists": "the frozen retrieval caches (TF32 products); the exhaustive lists here are fp32",
+  "splade_positive_nodes_per_query": {
+   "mean": 38823.84,
+   "median": 39355.0,
+   "min": 22113.0,
+   "max": 42634.0
+  }
+ },
+ "latency_ms (this exhaustive CPU implementation, per query)": {
+  "flat_products_amortized (dense + SPLADE over all N)": {
+   "mean_ms": 13.275,
+   "median_ms": 12.348,
+   "p95_ms": 20.097
+  },
+  "flat_rrf (full sort)": {
+   "mean_ms": 55.021,
+   "median_ms": 40.097,
+   "p95_ms": 155.133
+  }
+ },
+ "index_bytes": {
+  "dense_fp16 (N x dim x 2)": 132814848,
+  "splade_csr (nnz x 8 + (N + 1) x 8)": 14462104,
+  "dim": 1536,
+  "splade_nnz": 1764528
+ },
+ "loc_cross_check": "vectorised LOC order == an independent pure-Python implementation on 580 row-cell pairs (rows < 100 and every 10th)",
+ "definitions": {
+  "ALL": "every gold node of the query served",
+  "ANY": ">= 1 gold node served",
+  "FRAC": "mean over queries of the served fraction of gold nodes",
+  "LOC_SERVES": "FLAT@M misses the gold but its LOC-order position < M",
+  "TYPE_A": "A(P(g)) = 0: no FLAT top-200 node in the gold's block",
+  "TYPE_B": "the block is activated but its first node sits at LOC position >= M (the region ranks too weakly for budget M)",
+  "TYPE_C": "the block has >= 1 node inside LOC[:M] but the gold is deeper in the block's FLAT order",
+  "FLAT_budget_matching_this_ALL": "the smallest M' with ALL(FLAT@M') >= the arm's ALL at M"
+ },
+ "_row_query_ids": [
+  "metaqa:1hop:dev:0",
+  "metaqa:1hop:dev:5",
+  "metaqa:1hop:dev:6",
+  "metaqa:1hop:dev:20",
+  "metaqa:1hop:dev:25",
+  "metaqa:1hop:dev:41",
+  "metaqa:1hop:dev:59",
+  "metaqa:1hop:dev:84",
+  "metaqa:1hop:dev:116",
+  "metaqa:1hop:dev:143",
+  "metaqa:1hop:dev:158",
+  "metaqa:1hop:dev:191",
+  "metaqa:1hop:dev:257",
+  "metaqa:1hop:dev:264",
+  "metaqa:1hop:dev:266",
+  "metaqa:1hop:dev:300",
+  "metaqa:1hop:dev:310",
+  "metaqa:1hop:dev:311",
+  "metaqa:1hop:dev:321",
+  "metaqa:1hop:dev:337",
+  "metaqa:1hop:dev:352",
+  "metaqa:1hop:dev:363",
+  "metaqa:1hop:dev:364",
+  "metaqa:1hop:dev:378",
+  "metaqa:1hop:dev:384",
+  "metaqa:1hop:dev:412",
+  "metaqa:1hop:dev:425",
+  "metaqa:1hop:dev:430",
+  "metaqa:1hop:dev:448",
+  "metaqa:1hop:dev:458",
+  "metaqa:1hop:dev:466",
+  "metaqa:1hop:dev:478",
+  "metaqa:1hop:dev:479",
+  "metaqa:1hop:dev:485",
+  "metaqa:1hop:dev:498",
+  "metaqa:1hop:dev:500",
+  "metaqa:1hop:dev:503",
+  "metaqa:1hop:dev:517",
+  "metaqa:1hop:dev:524",
+  "metaqa:1hop:dev:527",
+  "metaqa:1hop:dev:532",
+  "metaqa:1hop:dev:554",
+  "metaqa:1hop:dev:583",
+  "metaqa:1hop:dev:591",
+  "metaqa:1hop:dev:601",
+  "metaqa:1hop:dev:610",
+  "metaqa:1hop:dev:625",
+  "metaqa:1hop:dev:646",
+  "metaqa:1hop:dev:650",
+  "metaqa:1hop:dev:654",
+  "metaqa:1hop:dev:712",
+  "metaqa:1hop:dev:720",
+  "metaqa:1hop:dev:734",
+  "metaqa:1hop:dev:745",
+  "metaqa:1hop:dev:752",
+  "metaqa:1hop:dev:788",
+  "metaqa:1hop:dev:835",
+  "metaqa:1hop:dev:839",
+  "metaqa:1hop:dev:865",
+  "metaqa:1hop:dev:892",
+  "metaqa:1hop:dev:915",
+  "metaqa:1hop:dev:917",
+  "metaqa:1hop:dev:922",
+  "metaqa:1hop:dev:934",
+  "metaqa:1hop:dev:954",
+  "metaqa:1hop:dev:960",
+  "metaqa:1hop:dev:961",
+  "metaqa:1hop:dev:980",
+  "metaqa:1hop:dev:1028",
+  "metaqa:1hop:dev:1030",
+  "metaqa:1hop:dev:1052",
+  "metaqa:1hop:dev:1055",
+  "metaqa:1hop:dev:1072",
+  "metaqa:1hop:dev:1078",
+  "metaqa:1hop:dev:1120",
+  "metaqa:1hop:dev:1122",
+  "metaqa:1hop:dev:1130",
+  "metaqa:1hop:dev:1142",
+  "metaqa:1hop:dev:1151",
+  "metaqa:1hop:dev:1152",
+  "metaqa:1hop:dev:1154",
+  "metaqa:1hop:dev:1187",
+  "metaqa:1hop:dev:1206",
+  "metaqa:1hop:dev:1228",
+  "metaqa:1hop:dev:1243",
+  "metaqa:1hop:dev:1269",
+  "metaqa:1hop:dev:1283",
+  "metaqa:1hop:dev:1284",
+  "metaqa:1hop:dev:1305",
+  "metaqa:1hop:dev:1319",
+  "metaqa:1hop:dev:1328",
+  "metaqa:1hop:dev:1335",
+  "metaqa:1hop:dev:1338",
+  "metaqa:1hop:dev:1361",
+  "metaqa:1hop:dev:1391",
+  "metaqa:1hop:dev:1402",
+  "metaqa:1hop:dev:1414",
+  "metaqa:1hop:dev:1433",
+  "metaqa:1hop:dev:1456",
+  "metaqa:1hop:dev:1471",
+  "metaqa:1hop:dev:1508",
+  "metaqa:1hop:dev:1530",
+  "metaqa:1hop:dev:1543",
+  "metaqa:1hop:dev:1544",
+  "metaqa:1hop:dev:1555",
+  "metaqa:1hop:dev:1566",
+  "metaqa:1hop:dev:1572",
+  "metaqa:1hop:dev:1580",
+  "metaqa:1hop:dev:1582",
+  "metaqa:1hop:dev:1606",
+  "metaqa:1hop:dev:1647",
+  "metaqa:1hop:dev:1666",
+  "metaqa:1hop:dev:1694",
+  "metaqa:1hop:dev:1745",
+  "metaqa:1hop:dev:1828",
+  "metaqa:1hop:dev:1830",
+  "metaqa:1hop:dev:1843",
+  "metaqa:1hop:dev:1886",
+  "metaqa:1hop:dev:1911",
+  "metaqa:1hop:dev:1919",
+  "metaqa:1hop:dev:1925",
+  "metaqa:1hop:dev:1951",
+  "metaqa:1hop:dev:1978",
+  "metaqa:1hop:dev:1985",
+  "metaqa:1hop:dev:2001",
+  "metaqa:1hop:dev:2023",
+  "metaqa:1hop:dev:2050",
+  "metaqa:1hop:dev:2061",
+  "metaqa:1hop:dev:2079",
+  "metaqa:1hop:dev:2086",
+  "metaqa:1hop:dev:2101",
+  "metaqa:1hop:dev:2111",
+  "metaqa:1hop:dev:2118",
+  "metaqa:1hop:dev:2120",
+  "metaqa:1hop:dev:2139",
+  "metaqa:1hop:dev:2152",
+  "metaqa:1hop:dev:2164",
+  "metaqa:1hop:dev:2169",
+  "metaqa:1hop:dev:2194",
+  "metaqa:1hop:dev:2232",
+  "metaqa:1hop:dev:2259",
+  "metaqa:1hop:dev:2262",
+  "metaqa:1hop:dev:2305",
+  "metaqa:1hop:dev:2316",
+  "metaqa:1hop:dev:2317",
+  "metaqa:1hop:dev:2335",
+  "metaqa:1hop:dev:2350",
+  "metaqa:1hop:dev:2399",
+  "metaqa:1hop:dev:2407",
+  "metaqa:1hop:dev:2410",
+  "metaqa:1hop:dev:2423",
+  "metaqa:1hop:dev:2431",
+  "metaqa:1hop:dev:2469",
+  "metaqa:1hop:dev:2536",
+  "metaqa:1hop:dev:2548",
+  "metaqa:1hop:dev:2595",
+  "metaqa:1hop:dev:2597",
+  "metaqa:1hop:dev:2609",
+  "metaqa:1hop:dev:2631",
+  "metaqa:1hop:dev:2650",
+  "metaqa:1hop:dev:2652",
+  "metaqa:1hop:dev:2658",
+  "metaqa:1hop:dev:2684",
+  "metaqa:1hop:dev:2698",
+  "metaqa:1hop:dev:2705",
+  "metaqa:1hop:dev:2716",
+  "metaqa:1hop:dev:2729",
+  "metaqa:1hop:dev:2739",
+  "metaqa:1hop:dev:2747",
+  "metaqa:1hop:dev:2752",
+  "metaqa:1hop:dev:2758",
+  "metaqa:1hop:dev:2775",
+  "metaqa:1hop:dev:2811",
+  "metaqa:1hop:dev:2815",
+  "metaqa:1hop:dev:2835",
+  "metaqa:1hop:dev:2849",
+  "metaqa:1hop:dev:2857",
+  "metaqa:1hop:dev:2864",
+  "metaqa:1hop:dev:2887",
+  "metaqa:1hop:dev:2900",
+  "metaqa:1hop:dev:2918",
+  "metaqa:1hop:dev:2927",
+  "metaqa:1hop:dev:2962",
+  "metaqa:1hop:dev:2979",
+  "metaqa:1hop:dev:3007",
+  "metaqa:1hop:dev:3017",
+  "metaqa:1hop:dev:3039",
+  "metaqa:1hop:dev:3060",
+  "metaqa:1hop:dev:3067",
+  "metaqa:1hop:dev:3159",
+  "metaqa:1hop:dev:3164",
+  "metaqa:1hop:dev:3196",
+  "metaqa:1hop:dev:3200",
+  "metaqa:1hop:dev:3202",
+  "metaqa:1hop:dev:3212",
+  "metaqa:1hop:dev:3214",
+  "metaqa:1hop:dev:3220",
+  "metaqa:1hop:dev:3236",
+  "metaqa:1hop:dev:3251",
+  "metaqa:1hop:dev:3259",
+  "metaqa:1hop:dev:3292",
+  "metaqa:1hop:dev:3349",
+  "metaqa:1hop:dev:3354",
+  "metaqa:1hop:dev:3377",
+  "metaqa:1hop:dev:3391",
+  "metaqa:1hop:dev:3398",
+  "metaqa:1hop:dev:3412",
+  "metaqa:1hop:dev:3425",
+  "metaqa:1hop:dev:3433",
+  "metaqa:1hop:dev:3462",
+  "metaqa:1hop:dev:3467",
+  "metaqa:1hop:dev:3474",
+  "metaqa:1hop:dev:3489",
+  "metaqa:1hop:dev:3490",
+  "metaqa:1hop:dev:3496",
+  "metaqa:1hop:dev:3502",
+  "metaqa:1hop:dev:3503",
+  "metaqa:1hop:dev:3536",
+  "metaqa:1hop:dev:3537",
+  "metaqa:1hop:dev:3557",
+  "metaqa:1hop:dev:3564",
+  "metaqa:1hop:dev:3592",
+  "metaqa:1hop:dev:3596",
+  "metaqa:1hop:dev:3611",
+  "metaqa:1hop:dev:3641",
+  "metaqa:1hop:dev:3651",
+  "metaqa:1hop:dev:3667",
+  "metaqa:1hop:dev:3712",
+  "metaqa:1hop:dev:3719",
+  "metaqa:1hop:dev:3755",
+  "metaqa:1hop:dev:3759",
+  "metaqa:1hop:dev:3769",
+  "metaqa:1hop:dev:3789",
+  "metaqa:1hop:dev:3799",
+  "metaqa:1hop:dev:3872",
+  "metaqa:1hop:dev:3879",
+  "metaqa:1hop:dev:3882",
+  "metaqa:1hop:dev:3912",
+  "metaqa:1hop:dev:3920",
+  "metaqa:1hop:dev:3924",
+  "metaqa:1hop:dev:3926",
+  "metaqa:1hop:dev:3961",
+  "metaqa:1hop:dev:3976",
+  "metaqa:1hop:dev:3980",
+  "metaqa:1hop:dev:3981",
+  "metaqa:1hop:dev:4004",
+  "metaqa:1hop:dev:4011",
+  "metaqa:1hop:dev:4099",
+  "metaqa:1hop:dev:4111",
+  "metaqa:1hop:dev:4127",
+  "metaqa:1hop:dev:4135",
+  "metaqa:1hop:dev:4148",
+  "metaqa:1hop:dev:4160",
+  "metaqa:1hop:dev:4167",
+  "metaqa:1hop:dev:4211",
+  "metaqa:1hop:dev:4212",
+  "metaqa:1hop:dev:4219",
+  "metaqa:1hop:dev:4222",
+  "metaqa:1hop:dev:4226",
+  "metaqa:1hop:dev:4256",
+  "metaqa:1hop:dev:4263",
+  "metaqa:1hop:dev:4292",
+  "metaqa:1hop:dev:4319",
+  "metaqa:1hop:dev:4325",
+  "metaqa:1hop:dev:4352",
+  "metaqa:1hop:dev:4366",
+  "metaqa:1hop:dev:4374",
+  "metaqa:1hop:dev:4377",
+  "metaqa:1hop:dev:4390",
+  "metaqa:1hop:dev:4395",
+  "metaqa:1hop:dev:4401",
+  "metaqa:1hop:dev:4405",
+  "metaqa:1hop:dev:4410",
+  "metaqa:1hop:dev:4423",
+  "metaqa:1hop:dev:4453",
+  "metaqa:1hop:dev:4485",
+  "metaqa:1hop:dev:4550",
+  "metaqa:1hop:dev:4553",
+  "metaqa:1hop:dev:4583",
+  "metaqa:1hop:dev:4596",
+  "metaqa:1hop:dev:4614",
+  "metaqa:1hop:dev:4627",
+  "metaqa:1hop:dev:4659",
+  "metaqa:1hop:dev:4666",
+  "metaqa:1hop:dev:4679",
+  "metaqa:1hop:dev:4681",
+  "metaqa:1hop:dev:4697",
+  "metaqa:1hop:dev:4700",
+  "metaqa:1hop:dev:4711",
+  "metaqa:1hop:dev:4727",
+  "metaqa:1hop:dev:4737",
+  "metaqa:1hop:dev:4740",
+  "metaqa:1hop:dev:4791",
+  "metaqa:1hop:dev:4793",
+  "metaqa:1hop:dev:4795",
+  "metaqa:1hop:dev:4801",
+  "metaqa:1hop:dev:4807",
+  "metaqa:1hop:dev:4842",
+  "metaqa:1hop:dev:4844",
+  "metaqa:1hop:dev:4865",
+  "metaqa:1hop:dev:4878",
+  "metaqa:1hop:dev:4887",
+  "metaqa:1hop:dev:4888",
+  "metaqa:1hop:dev:4892",
+  "metaqa:1hop:dev:4903",
+  "metaqa:1hop:dev:4927",
+  "metaqa:1hop:dev:4947",
+  "metaqa:1hop:dev:4953",
+  "metaqa:1hop:dev:4973",
+  "metaqa:1hop:dev:5008",
+  "metaqa:1hop:dev:5017",
+  "metaqa:1hop:dev:5052",
+  "metaqa:1hop:dev:5055",
+  "metaqa:1hop:dev:5062",
+  "metaqa:1hop:dev:5064",
+  "metaqa:1hop:dev:5082",
+  "metaqa:1hop:dev:5105",
+  "metaqa:1hop:dev:5107",
+  "metaqa:1hop:dev:5109",
+  "metaqa:1hop:dev:5113",
+  "metaqa:1hop:dev:5126",
+  "metaqa:1hop:dev:5142",
+  "metaqa:1hop:dev:5146",
+  "metaqa:1hop:dev:5149",
+  "metaqa:1hop:dev:5177",
+  "metaqa:1hop:dev:5187",
+  "metaqa:1hop:dev:5193",
+  "metaqa:1hop:dev:5196",
+  "metaqa:1hop:dev:5210",
+  "metaqa:1hop:dev:5235",
+  "metaqa:1hop:dev:5238",
+  "metaqa:1hop:dev:5242",
+  "metaqa:1hop:dev:5246",
+  "metaqa:1hop:dev:5247",
+  "metaqa:1hop:dev:5249",
+  "metaqa:1hop:dev:5261",
+  "metaqa:1hop:dev:5265",
+  "metaqa:1hop:dev:5286",
+  "metaqa:1hop:dev:5288",
+  "metaqa:1hop:dev:5295",
+  "metaqa:1hop:dev:5341",
+  "metaqa:1hop:dev:5359",
+  "metaqa:1hop:dev:5370",
+  "metaqa:1hop:dev:5375",
+  "metaqa:1hop:dev:5380",
+  "metaqa:1hop:dev:5392",
+  "metaqa:1hop:dev:5404",
+  "metaqa:1hop:dev:5416",
+  "metaqa:1hop:dev:5439",
+  "metaqa:1hop:dev:5463",
+  "metaqa:1hop:dev:5471",
+  "metaqa:1hop:dev:5478",
+  "metaqa:1hop:dev:5490",
+  "metaqa:1hop:dev:5526",
+  "metaqa:1hop:dev:5527",
+  "metaqa:1hop:dev:5532",
+  "metaqa:1hop:dev:5536",
+  "metaqa:1hop:dev:5549",
+  "metaqa:1hop:dev:5551",
+  "metaqa:1hop:dev:5564",
+  "metaqa:1hop:dev:5567",
+  "metaqa:1hop:dev:5571",
+  "metaqa:1hop:dev:5576",
+  "metaqa:1hop:dev:5577",
+  "metaqa:1hop:dev:5583",
+  "metaqa:1hop:dev:5599",
+  "metaqa:1hop:dev:5610",
+  "metaqa:1hop:dev:5645",
+  "metaqa:1hop:dev:5646",
+  "metaqa:1hop:dev:5689",
+  "metaqa:1hop:dev:5690",
+  "metaqa:1hop:dev:5694",
+  "metaqa:1hop:dev:5697",
+  "metaqa:1hop:dev:5700",
+  "metaqa:1hop:dev:5718",
+  "metaqa:1hop:dev:5719",
+  "metaqa:1hop:dev:5726",
+  "metaqa:1hop:dev:5744",
+  "metaqa:1hop:dev:5749",
+  "metaqa:1hop:dev:5777",
+  "metaqa:1hop:dev:5782",
+  "metaqa:1hop:dev:5794",
+  "metaqa:1hop:dev:5802",
+  "metaqa:1hop:dev:5810",
+  "metaqa:1hop:dev:5838",
+  "metaqa:1hop:dev:5856",
+  "metaqa:1hop:dev:5858",
+  "metaqa:1hop:dev:5874",
+  "metaqa:1hop:dev:5878",
+  "metaqa:1hop:dev:5899",
+  "metaqa:1hop:dev:5919",
+  "metaqa:1hop:dev:5920",
+  "metaqa:1hop:dev:5993",
+  "metaqa:1hop:dev:6001",
+  "metaqa:1hop:dev:6013",
+  "metaqa:1hop:dev:6025",
+  "metaqa:1hop:dev:6065",
+  "metaqa:1hop:dev:6077",
+  "metaqa:1hop:dev:6080",
+  "metaqa:1hop:dev:6113",
+  "metaqa:1hop:dev:6127",
+  "metaqa:1hop:dev:6129",
+  "metaqa:1hop:dev:6130",
+  "metaqa:1hop:dev:6134",
+  "metaqa:1hop:dev:6140",
+  "metaqa:1hop:dev:6164",
+  "metaqa:1hop:dev:6168",
+  "metaqa:1hop:dev:6177",
+  "metaqa:1hop:dev:6220",
+  "metaqa:1hop:dev:6229",
+  "metaqa:1hop:dev:6272",
+  "metaqa:1hop:dev:6274",
+  "metaqa:1hop:dev:6277",
+  "metaqa:1hop:dev:6287",
+  "metaqa:1hop:dev:6292",
+  "metaqa:1hop:dev:6309",
+  "metaqa:1hop:dev:6317",
+  "metaqa:1hop:dev:6322",
+  "metaqa:1hop:dev:6325",
+  "metaqa:1hop:dev:6341",
+  "metaqa:1hop:dev:6345",
+  "metaqa:1hop:dev:6352",
+  "metaqa:1hop:dev:6370",
+  "metaqa:1hop:dev:6374",
+  "metaqa:1hop:dev:6407",
+  "metaqa:1hop:dev:6425",
+  "metaqa:1hop:dev:6440",
+  "metaqa:1hop:dev:6447",
+  "metaqa:1hop:dev:6470",
+  "metaqa:1hop:dev:6476",
+  "metaqa:1hop:dev:6484",
+  "metaqa:1hop:dev:6492",
+  "metaqa:1hop:dev:6494",
+  "metaqa:1hop:dev:6503",
+  "metaqa:1hop:dev:6512",
+  "metaqa:1hop:dev:6535",
+  "metaqa:1hop:dev:6547",
+  "metaqa:1hop:dev:6556",
+  "metaqa:1hop:dev:6560",
+  "metaqa:1hop:dev:6561",
+  "metaqa:1hop:dev:6565",
+  "metaqa:1hop:dev:6571",
+  "metaqa:1hop:dev:6580",
+  "metaqa:1hop:dev:6583",
+  "metaqa:1hop:dev:6589",
+  "metaqa:1hop:dev:6641",
+  "metaqa:1hop:dev:6648",
+  "metaqa:1hop:dev:6651",
+  "metaqa:1hop:dev:6656",
+  "metaqa:1hop:dev:6668",
+  "metaqa:1hop:dev:6672",
+  "metaqa:1hop:dev:6681",
+  "metaqa:1hop:dev:6704",
+  "metaqa:1hop:dev:6738",
+  "metaqa:1hop:dev:6745",
+  "metaqa:1hop:dev:6756",
+  "metaqa:1hop:dev:6765",
+  "metaqa:1hop:dev:6771",
+  "metaqa:1hop:dev:6781",
+  "metaqa:1hop:dev:6785",
+  "metaqa:1hop:dev:6802",
+  "metaqa:1hop:dev:6809",
+  "metaqa:1hop:dev:6813",
+  "metaqa:1hop:dev:6846",
+  "metaqa:1hop:dev:6869",
+  "metaqa:1hop:dev:6881",
+  "metaqa:1hop:dev:6884",
+  "metaqa:1hop:dev:6902",
+  "metaqa:1hop:dev:6937",
+  "metaqa:1hop:dev:6950",
+  "metaqa:1hop:dev:6953",
+  "metaqa:1hop:dev:6980",
+  "metaqa:1hop:dev:6985",
+  "metaqa:1hop:dev:6996",
+  "metaqa:1hop:dev:7004",
+  "metaqa:1hop:dev:7015",
+  "metaqa:1hop:dev:7017",
+  "metaqa:1hop:dev:7036",
+  "metaqa:1hop:dev:7047",
+  "metaqa:1hop:dev:7049",
+  "metaqa:1hop:dev:7071",
+  "metaqa:1hop:dev:7072",
+  "metaqa:1hop:dev:7078",
+  "metaqa:1hop:dev:7079",
+  "metaqa:1hop:dev:7097",
+  "metaqa:1hop:dev:7138",
+  "metaqa:1hop:dev:7151",
+  "metaqa:1hop:dev:7155",
+  "metaqa:1hop:dev:7160",
+  "metaqa:1hop:dev:7186",
+  "metaqa:1hop:dev:7189",
+  "metaqa:1hop:dev:7193",
+  "metaqa:1hop:dev:7197",
+  "metaqa:1hop:dev:7251",
+  "metaqa:1hop:dev:7264",
+  "metaqa:1hop:dev:7266",
+  "metaqa:1hop:dev:7332",
+  "metaqa:1hop:dev:7334",
+  "metaqa:1hop:dev:7342",
+  "metaqa:1hop:dev:7426",
+  "metaqa:1hop:dev:7450",
+  "metaqa:1hop:dev:7459",
+  "metaqa:1hop:dev:7466",
+  "metaqa:1hop:dev:7468",
+  "metaqa:1hop:dev:7484",
+  "metaqa:1hop:dev:7501",
+  "metaqa:1hop:dev:7512",
+  "metaqa:1hop:dev:7550",
+  "metaqa:1hop:dev:7554",
+  "metaqa:1hop:dev:7569",
+  "metaqa:1hop:dev:7585",
+  "metaqa:1hop:dev:7590",
+  "metaqa:1hop:dev:7591",
+  "metaqa:1hop:dev:7609",
+  "metaqa:1hop:dev:7612",
+  "metaqa:1hop:dev:7641",
+  "metaqa:1hop:dev:7646",
+  "metaqa:1hop:dev:7681",
+  "metaqa:1hop:dev:7692",
+  "metaqa:1hop:dev:7709",
+  "metaqa:1hop:dev:7712",
+  "metaqa:1hop:dev:7717",
+  "metaqa:1hop:dev:7718",
+  "metaqa:1hop:dev:7730",
+  "metaqa:1hop:dev:7735",
+  "metaqa:1hop:dev:7741",
+  "metaqa:1hop:dev:7748",
+  "metaqa:1hop:dev:7752",
+  "metaqa:1hop:dev:7757",
+  "metaqa:1hop:dev:7761",
+  "metaqa:1hop:dev:7777",
+  "metaqa:1hop:dev:7782",
+  "metaqa:1hop:dev:7804",
+  "metaqa:1hop:dev:7815",
+  "metaqa:1hop:dev:7831",
+  "metaqa:1hop:dev:7839",
+  "metaqa:1hop:dev:7841",
+  "metaqa:1hop:dev:7876",
+  "metaqa:1hop:dev:7883",
+  "metaqa:1hop:dev:7910",
+  "metaqa:1hop:dev:7911",
+  "metaqa:1hop:dev:7942",
+  "metaqa:1hop:dev:7958",
+  "metaqa:1hop:dev:7963",
+  "metaqa:1hop:dev:7984",
+  "metaqa:1hop:dev:7993",
+  "metaqa:1hop:dev:7996",
+  "metaqa:1hop:dev:8030",
+  "metaqa:1hop:dev:8031",
+  "metaqa:1hop:dev:8043",
+  "metaqa:1hop:dev:8059",
+  "metaqa:1hop:dev:8114",
+  "metaqa:1hop:dev:8142",
+  "metaqa:1hop:dev:8145",
+  "metaqa:1hop:dev:8170",
+  "metaqa:1hop:dev:8181",
+  "metaqa:1hop:dev:8186",
+  "metaqa:1hop:dev:8210",
+  "metaqa:1hop:dev:8215",
+  "metaqa:1hop:dev:8221",
+  "metaqa:1hop:dev:8225",
+  "metaqa:1hop:dev:8240",
+  "metaqa:1hop:dev:8254",
+  "metaqa:1hop:dev:8256",
+  "metaqa:1hop:dev:8269",
+  "metaqa:1hop:dev:8278",
+  "metaqa:1hop:dev:8286",
+  "metaqa:1hop:dev:8293",
+  "metaqa:1hop:dev:8365",
+  "metaqa:1hop:dev:8371",
+  "metaqa:1hop:dev:8397",
+  "metaqa:1hop:dev:8399",
+  "metaqa:1hop:dev:8437",
+  "metaqa:1hop:dev:8441",
+  "metaqa:1hop:dev:8444",
+  "metaqa:1hop:dev:8473",
+  "metaqa:1hop:dev:8478",
+  "metaqa:1hop:dev:8479",
+  "metaqa:1hop:dev:8483",
+  "metaqa:1hop:dev:8490",
+  "metaqa:1hop:dev:8519",
+  "metaqa:1hop:dev:8525",
+  "metaqa:1hop:dev:8569",
+  "metaqa:1hop:dev:8579",
+  "metaqa:1hop:dev:8584",
+  "metaqa:1hop:dev:8622",
+  "metaqa:1hop:dev:8632",
+  "metaqa:1hop:dev:8666",
+  "metaqa:1hop:dev:8744",
+  "metaqa:1hop:dev:8779",
+  "metaqa:1hop:dev:8783",
+  "metaqa:1hop:dev:8791",
+  "metaqa:1hop:dev:8793",
+  "metaqa:1hop:dev:8795",
+  "metaqa:1hop:dev:8799",
+  "metaqa:1hop:dev:8803",
+  "metaqa:1hop:dev:8850",
+  "metaqa:1hop:dev:8852",
+  "metaqa:1hop:dev:8862",
+  "metaqa:1hop:dev:8886",
+  "metaqa:1hop:dev:8892",
+  "metaqa:1hop:dev:8895",
+  "metaqa:1hop:dev:8907",
+  "metaqa:1hop:dev:8909",
+  "metaqa:1hop:dev:8963",
+  "metaqa:1hop:dev:8965",
+  "metaqa:1hop:dev:9004",
+  "metaqa:1hop:dev:9008",
+  "metaqa:1hop:dev:9018",
+  "metaqa:1hop:dev:9028",
+  "metaqa:1hop:dev:9036",
+  "metaqa:1hop:dev:9041",
+  "metaqa:1hop:dev:9058",
+  "metaqa:1hop:dev:9071",
+  "metaqa:1hop:dev:9101",
+  "metaqa:1hop:dev:9135",
+  "metaqa:1hop:dev:9137",
+  "metaqa:1hop:dev:9146",
+  "metaqa:1hop:dev:9156",
+  "metaqa:1hop:dev:9167",
+  "metaqa:1hop:dev:9186",
+  "metaqa:1hop:dev:9207",
+  "metaqa:1hop:dev:9216",
+  "metaqa:1hop:dev:9238",
+  "metaqa:1hop:dev:9252",
+  "metaqa:1hop:dev:9255",
+  "metaqa:1hop:dev:9314",
+  "metaqa:1hop:dev:9341",
+  "metaqa:1hop:dev:9350",
+  "metaqa:1hop:dev:9360",
+  "metaqa:1hop:dev:9376",
+  "metaqa:1hop:dev:9381",
+  "metaqa:1hop:dev:9399",
+  "metaqa:1hop:dev:9453",
+  "metaqa:1hop:dev:9493",
+  "metaqa:1hop:dev:9520",
+  "metaqa:1hop:dev:9529",
+  "metaqa:1hop:dev:9541",
+  "metaqa:1hop:dev:9568",
+  "metaqa:1hop:dev:9600",
+  "metaqa:1hop:dev:9615",
+  "metaqa:1hop:dev:9619",
+  "metaqa:1hop:dev:9628",
+  "metaqa:1hop:dev:9642",
+  "metaqa:1hop:dev:9673",
+  "metaqa:1hop:dev:9677",
+  "metaqa:1hop:dev:9680",
+  "metaqa:1hop:dev:9690",
+  "metaqa:1hop:dev:9709",
+  "metaqa:1hop:dev:9712",
+  "metaqa:1hop:dev:9731",
+  "metaqa:1hop:dev:9764",
+  "metaqa:1hop:dev:9771",
+  "metaqa:1hop:dev:9778",
+  "metaqa:1hop:dev:9800",
+  "metaqa:1hop:dev:9804",
+  "metaqa:1hop:dev:9824",
+  "metaqa:1hop:dev:9842",
+  "metaqa:1hop:dev:9849",
+  "metaqa:1hop:dev:9864",
+  "metaqa:1hop:dev:9876",
+  "metaqa:1hop:dev:9879",
+  "metaqa:1hop:dev:9887",
+  "metaqa:1hop:dev:9920",
+  "metaqa:1hop:dev:9935",
+  "metaqa:1hop:dev:9961",
+  "metaqa:2hop:dev:5",
+  "metaqa:2hop:dev:71",
+  "metaqa:2hop:dev:94",
+  "metaqa:2hop:dev:97",
+  "metaqa:2hop:dev:100",
+  "metaqa:2hop:dev:124",
+  "metaqa:2hop:dev:127",
+  "metaqa:2hop:dev:142",
+  "metaqa:2hop:dev:159",
+  "metaqa:2hop:dev:166",
+  "metaqa:2hop:dev:173",
+  "metaqa:2hop:dev:180",
+  "metaqa:2hop:dev:214",
+  "metaqa:2hop:dev:226",
+  "metaqa:2hop:dev:297",
+  "metaqa:2hop:dev:303",
+  "metaqa:2hop:dev:311",
+  "metaqa:2hop:dev:342",
+  "metaqa:2hop:dev:350",
+  "metaqa:2hop:dev:354",
+  "metaqa:2hop:dev:402",
+  "metaqa:2hop:dev:406",
+  "metaqa:2hop:dev:415",
+  "metaqa:2hop:dev:482",
+  "metaqa:2hop:dev:497",
+  "metaqa:2hop:dev:580",
+  "metaqa:2hop:dev:593",
+  "metaqa:2hop:dev:639",
+  "metaqa:2hop:dev:664",
+  "metaqa:2hop:dev:678",
+  "metaqa:2hop:dev:715",
+  "metaqa:2hop:dev:718",
+  "metaqa:2hop:dev:733",
+  "metaqa:2hop:dev:742",
+  "metaqa:2hop:dev:781",
+  "metaqa:2hop:dev:796",
+  "metaqa:2hop:dev:819",
+  "metaqa:2hop:dev:852",
+  "metaqa:2hop:dev:933",
+  "metaqa:2hop:dev:949",
+  "metaqa:2hop:dev:961",
+  "metaqa:2hop:dev:992",
+  "metaqa:2hop:dev:1027",
+  "metaqa:2hop:dev:1041",
+  "metaqa:2hop:dev:1055",
+  "metaqa:2hop:dev:1069",
+  "metaqa:2hop:dev:1149",
+  "metaqa:2hop:dev:1150",
+  "metaqa:2hop:dev:1202",
+  "metaqa:2hop:dev:1215",
+  "metaqa:2hop:dev:1217",
+  "metaqa:2hop:dev:1224",
+  "metaqa:2hop:dev:1230",
+  "metaqa:2hop:dev:1237",
+  "metaqa:2hop:dev:1264",
+  "metaqa:2hop:dev:1305",
+  "metaqa:2hop:dev:1322",
+  "metaqa:2hop:dev:1349",
+  "metaqa:2hop:dev:1387",
+  "metaqa:2hop:dev:1391",
+  "metaqa:2hop:dev:1402",
+  "metaqa:2hop:dev:1412",
+  "metaqa:2hop:dev:1420",
+  "metaqa:2hop:dev:1450",
+  "metaqa:2hop:dev:1451",
+  "metaqa:2hop:dev:1517",
+  "metaqa:2hop:dev:1521",
+  "metaqa:2hop:dev:1628",
+  "metaqa:2hop:dev:1629",
+  "metaqa:2hop:dev:1668",
+  "metaqa:2hop:dev:1684",
+  "metaqa:2hop:dev:1685",
+  "metaqa:2hop:dev:1703",
+  "metaqa:2hop:dev:1707",
+  "metaqa:2hop:dev:1740",
+  "metaqa:2hop:dev:1785",
+  "metaqa:2hop:dev:1825",
+  "metaqa:2hop:dev:1826",
+  "metaqa:2hop:dev:1852",
+  "metaqa:2hop:dev:1865",
+  "metaqa:2hop:dev:1921",
+  "metaqa:2hop:dev:1951",
+  "metaqa:2hop:dev:1966",
+  "metaqa:2hop:dev:2006",
+  "metaqa:2hop:dev:2042",
+  "metaqa:2hop:dev:2064",
+  "metaqa:2hop:dev:2069",
+  "metaqa:2hop:dev:2088",
+  "metaqa:2hop:dev:2093",
+  "metaqa:2hop:dev:2111",
+  "metaqa:2hop:dev:2115",
+  "metaqa:2hop:dev:2150",
+  "metaqa:2hop:dev:2151",
+  "metaqa:2hop:dev:2153",
+  "metaqa:2hop:dev:2204",
+  "metaqa:2hop:dev:2216",
+  "metaqa:2hop:dev:2256",
+  "metaqa:2hop:dev:2281",
+  "metaqa:2hop:dev:2284",
+  "metaqa:2hop:dev:2325",
+  "metaqa:2hop:dev:2359",
+  "metaqa:2hop:dev:2480",
+  "metaqa:2hop:dev:2488",
+  "metaqa:2hop:dev:2492",
+  "metaqa:2hop:dev:2502",
+  "metaqa:2hop:dev:2552",
+  "metaqa:2hop:dev:2569",
+  "metaqa:2hop:dev:2585",
+  "metaqa:2hop:dev:2626",
+  "metaqa:2hop:dev:2668",
+  "metaqa:2hop:dev:2701",
+  "metaqa:2hop:dev:2765",
+  "metaqa:2hop:dev:2768",
+  "metaqa:2hop:dev:2774",
+  "metaqa:2hop:dev:2800",
+  "metaqa:2hop:dev:2805",
+  "metaqa:2hop:dev:2833",
+  "metaqa:2hop:dev:2874",
+  "metaqa:2hop:dev:2908",
+  "metaqa:2hop:dev:2912",
+  "metaqa:2hop:dev:2915",
+  "metaqa:2hop:dev:2940",
+  "metaqa:2hop:dev:2960",
+  "metaqa:2hop:dev:2973",
+  "metaqa:2hop:dev:2976",
+  "metaqa:2hop:dev:3013",
+  "metaqa:2hop:dev:3017",
+  "metaqa:2hop:dev:3032",
+  "metaqa:2hop:dev:3081",
+  "metaqa:2hop:dev:3093",
+  "metaqa:2hop:dev:3157",
+  "metaqa:2hop:dev:3226",
+  "metaqa:2hop:dev:3230",
+  "metaqa:2hop:dev:3246",
+  "metaqa:2hop:dev:3258",
+  "metaqa:2hop:dev:3259",
+  "metaqa:2hop:dev:3310",
+  "metaqa:2hop:dev:3324",
+  "metaqa:2hop:dev:3428",
+  "metaqa:2hop:dev:3470",
+  "metaqa:2hop:dev:3472",
+  "metaqa:2hop:dev:3498",
+  "metaqa:2hop:dev:3501",
+  "metaqa:2hop:dev:3503",
+  "metaqa:2hop:dev:3675",
+  "metaqa:2hop:dev:3707",
+  "metaqa:2hop:dev:3726",
+  "metaqa:2hop:dev:3728",
+  "metaqa:2hop:dev:3740",
+  "metaqa:2hop:dev:3748",
+  "metaqa:2hop:dev:3754",
+  "metaqa:2hop:dev:3790",
+  "metaqa:2hop:dev:3825",
+  "metaqa:2hop:dev:3841",
+  "metaqa:2hop:dev:3845",
+  "metaqa:2hop:dev:3891",
+  "metaqa:2hop:dev:3944",
+  "metaqa:2hop:dev:3955",
+  "metaqa:2hop:dev:3982",
+  "metaqa:2hop:dev:4017",
+  "metaqa:2hop:dev:4169",
+  "metaqa:2hop:dev:4188",
+  "metaqa:2hop:dev:4221",
+  "metaqa:2hop:dev:4266",
+  "metaqa:2hop:dev:4268",
+  "metaqa:2hop:dev:4282",
+  "metaqa:2hop:dev:4302",
+  "metaqa:2hop:dev:4332",
+  "metaqa:2hop:dev:4349",
+  "metaqa:2hop:dev:4390",
+  "metaqa:2hop:dev:4432",
+  "metaqa:2hop:dev:4447",
+  "metaqa:2hop:dev:4474",
+  "metaqa:2hop:dev:4481",
+  "metaqa:2hop:dev:4486",
+  "metaqa:2hop:dev:4498",
+  "metaqa:2hop:dev:4499",
+  "metaqa:2hop:dev:4541",
+  "metaqa:2hop:dev:4588",
+  "metaqa:2hop:dev:4623",
+  "metaqa:2hop:dev:4638",
+  "metaqa:2hop:dev:4681",
+  "metaqa:2hop:dev:4695",
+  "metaqa:2hop:dev:4697",
+  "metaqa:2hop:dev:4703",
+  "metaqa:2hop:dev:4714",
+  "metaqa:2hop:dev:4726",
+  "metaqa:2hop:dev:4734",
+  "metaqa:2hop:dev:4741",
+  "metaqa:2hop:dev:4748",
+  "metaqa:2hop:dev:4750",
+  "metaqa:2hop:dev:4756",
+  "metaqa:2hop:dev:4759",
+  "metaqa:2hop:dev:4782",
+  "metaqa:2hop:dev:4794",
+  "metaqa:2hop:dev:4808",
+  "metaqa:2hop:dev:4838",
+  "metaqa:2hop:dev:4842",
+  "metaqa:2hop:dev:4845",
+  "metaqa:2hop:dev:4850",
+  "metaqa:2hop:dev:4897",
+  "metaqa:2hop:dev:4938",
+  "metaqa:2hop:dev:4994",
+  "metaqa:2hop:dev:5008",
+  "metaqa:2hop:dev:5032",
+  "metaqa:2hop:dev:5043",
+  "metaqa:2hop:dev:5049",
+  "metaqa:2hop:dev:5083",
+  "metaqa:2hop:dev:5094",
+  "metaqa:2hop:dev:5106",
+  "metaqa:2hop:dev:5111",
+  "metaqa:2hop:dev:5119",
+  "metaqa:2hop:dev:5166",
+  "metaqa:2hop:dev:5189",
+  "metaqa:2hop:dev:5191",
+  "metaqa:2hop:dev:5200",
+  "metaqa:2hop:dev:5205",
+  "metaqa:2hop:dev:5210",
+  "metaqa:2hop:dev:5216",
+  "metaqa:2hop:dev:5254",
+  "metaqa:2hop:dev:5258",
+  "metaqa:2hop:dev:5270",
+  "metaqa:2hop:dev:5276",
+  "metaqa:2hop:dev:5297",
+  "metaqa:2hop:dev:5312",
+  "metaqa:2hop:dev:5321",
+  "metaqa:2hop:dev:5329",
+  "metaqa:2hop:dev:5330",
+  "metaqa:2hop:dev:5343",
+  "metaqa:2hop:dev:5348",
+  "metaqa:2hop:dev:5362",
+  "metaqa:2hop:dev:5372",
+  "metaqa:2hop:dev:5475",
+  "metaqa:2hop:dev:5493",
+  "metaqa:2hop:dev:5551",
+  "metaqa:2hop:dev:5557",
+  "metaqa:2hop:dev:5590",
+  "metaqa:2hop:dev:5597",
+  "metaqa:2hop:dev:5638",
+  "metaqa:2hop:dev:5667",
+  "metaqa:2hop:dev:5689",
+  "metaqa:2hop:dev:5717",
+  "metaqa:2hop:dev:5776",
+  "metaqa:2hop:dev:5791",
+  "metaqa:2hop:dev:5793",
+  "metaqa:2hop:dev:5810",
+  "metaqa:2hop:dev:5830",
+  "metaqa:2hop:dev:5844",
+  "metaqa:2hop:dev:5873",
+  "metaqa:2hop:dev:5947",
+  "metaqa:2hop:dev:5957",
+  "metaqa:2hop:dev:5962",
+  "metaqa:2hop:dev:5967",
+  "metaqa:2hop:dev:5968",
+  "metaqa:2hop:dev:5984",
+  "metaqa:2hop:dev:5994",
+  "metaqa:2hop:dev:6009",
+  "metaqa:2hop:dev:6016",
+  "metaqa:2hop:dev:6019",
+  "metaqa:2hop:dev:6037",
+  "metaqa:2hop:dev:6087",
+  "metaqa:2hop:dev:6109",
+  "metaqa:2hop:dev:6177",
+  "metaqa:2hop:dev:6188",
+  "metaqa:2hop:dev:6194",
+  "metaqa:2hop:dev:6243",
+  "metaqa:2hop:dev:6283",
+  "metaqa:2hop:dev:6305",
+  "metaqa:2hop:dev:6307",
+  "metaqa:2hop:dev:6308",
+  "metaqa:2hop:dev:6323",
+  "metaqa:2hop:dev:6331",
+  "metaqa:2hop:dev:6349",
+  "metaqa:2hop:dev:6351",
+  "metaqa:2hop:dev:6353",
+  "metaqa:2hop:dev:6382",
+  "metaqa:2hop:dev:6394",
+  "metaqa:2hop:dev:6395",
+  "metaqa:2hop:dev:6396",
+  "metaqa:2hop:dev:6398",
+  "metaqa:2hop:dev:6416",
+  "metaqa:2hop:dev:6446",
+  "metaqa:2hop:dev:6455",
+  "metaqa:2hop:dev:6464",
+  "metaqa:2hop:dev:6507",
+  "metaqa:2hop:dev:6558",
+  "metaqa:2hop:dev:6591",
+  "metaqa:2hop:dev:6598",
+  "metaqa:2hop:dev:6656",
+  "metaqa:2hop:dev:6690",
+  "metaqa:2hop:dev:6739",
+  "metaqa:2hop:dev:6805",
+  "metaqa:2hop:dev:6807",
+  "metaqa:2hop:dev:6823",
+  "metaqa:2hop:dev:6859",
+  "metaqa:2hop:dev:6868",
+  "metaqa:2hop:dev:6881",
+  "metaqa:2hop:dev:6891",
+  "metaqa:2hop:dev:6906",
+  "metaqa:2hop:dev:6921",
+  "metaqa:2hop:dev:6955",
+  "metaqa:2hop:dev:6972",
+  "metaqa:2hop:dev:6982",
+  "metaqa:2hop:dev:6995",
+  "metaqa:2hop:dev:7006",
+  "metaqa:2hop:dev:7015",
+  "metaqa:2hop:dev:7040",
+  "metaqa:2hop:dev:7047",
+  "metaqa:2hop:dev:7123",
+  "metaqa:2hop:dev:7128",
+  "metaqa:2hop:dev:7131",
+  "metaqa:2hop:dev:7147",
+  "metaqa:2hop:dev:7150",
+  "metaqa:2hop:dev:7153",
+  "metaqa:2hop:dev:7160",
+  "metaqa:2hop:dev:7171",
+  "metaqa:2hop:dev:7174",
+  "metaqa:2hop:dev:7178",
+  "metaqa:2hop:dev:7181",
+  "metaqa:2hop:dev:7189",
+  "metaqa:2hop:dev:7197",
+  "metaqa:2hop:dev:7211",
+  "metaqa:2hop:dev:7217",
+  "metaqa:2hop:dev:7243",
+  "metaqa:2hop:dev:7250",
+  "metaqa:2hop:dev:7277",
+  "metaqa:2hop:dev:7278",
+  "metaqa:2hop:dev:7287",
+  "metaqa:2hop:dev:7294",
+  "metaqa:2hop:dev:7301",
+  "metaqa:2hop:dev:7359",
+  "metaqa:2hop:dev:7364",
+  "metaqa:2hop:dev:7417",
+  "metaqa:2hop:dev:7450",
+  "metaqa:2hop:dev:7472",
+  "metaqa:2hop:dev:7481",
+  "metaqa:2hop:dev:7503",
+  "metaqa:2hop:dev:7510",
+  "metaqa:2hop:dev:7543",
+  "metaqa:2hop:dev:7575",
+  "metaqa:2hop:dev:7583",
+  "metaqa:2hop:dev:7607",
+  "metaqa:2hop:dev:7608",
+  "metaqa:2hop:dev:7659",
+  "metaqa:2hop:dev:7677",
+  "metaqa:2hop:dev:7723",
+  "metaqa:2hop:dev:7730",
+  "metaqa:2hop:dev:7748",
+  "metaqa:2hop:dev:7787",
+  "metaqa:2hop:dev:7834",
+  "metaqa:2hop:dev:7837",
+  "metaqa:2hop:dev:7875",
+  "metaqa:2hop:dev:7889",
+  "metaqa:2hop:dev:7906",
+  "metaqa:2hop:dev:7917",
+  "metaqa:2hop:dev:7974",
+  "metaqa:2hop:dev:8058",
+  "metaqa:2hop:dev:8070",
+  "metaqa:2hop:dev:8090",
+  "metaqa:2hop:dev:8093",
+  "metaqa:2hop:dev:8098",
+  "metaqa:2hop:dev:8116",
+  "metaqa:2hop:dev:8172",
+  "metaqa:2hop:dev:8183",
+  "metaqa:2hop:dev:8199",
+  "metaqa:2hop:dev:8229",
+  "metaqa:2hop:dev:8266",
+  "metaqa:2hop:dev:8309",
+  "metaqa:2hop:dev:8313",
+  "metaqa:2hop:dev:8324",
+  "metaqa:2hop:dev:8355",
+  "metaqa:2hop:dev:8420",
+  "metaqa:2hop:dev:8466",
+  "metaqa:2hop:dev:8468",
+  "metaqa:2hop:dev:8529",
+  "metaqa:2hop:dev:8602",
+  "metaqa:2hop:dev:8670",
+  "metaqa:2hop:dev:8693",
+  "metaqa:2hop:dev:8716",
+  "metaqa:2hop:dev:8737",
+  "metaqa:2hop:dev:8744",
+  "metaqa:2hop:dev:8746",
+  "metaqa:2hop:dev:8831",
+  "metaqa:2hop:dev:8846",
+  "metaqa:2hop:dev:8909",
+  "metaqa:2hop:dev:8912",
+  "metaqa:2hop:dev:8926",
+  "metaqa:2hop:dev:8932",
+  "metaqa:2hop:dev:8974",
+  "metaqa:2hop:dev:8991",
+  "metaqa:2hop:dev:9036",
+  "metaqa:2hop:dev:9038",
+  "metaqa:2hop:dev:9067",
+  "metaqa:2hop:dev:9076",
+  "metaqa:2hop:dev:9093",
+  "metaqa:2hop:dev:9099",
+  "metaqa:2hop:dev:9111",
+  "metaqa:2hop:dev:9148",
+  "metaqa:2hop:dev:9168",
+  "metaqa:2hop:dev:9223",
+  "metaqa:2hop:dev:9225",
+  "metaqa:2hop:dev:9226",
+  "metaqa:2hop:dev:9229",
+  "metaqa:2hop:dev:9255",
+  "metaqa:2hop:dev:9257",
+  "metaqa:2hop:dev:9261",
+  "metaqa:2hop:dev:9281",
+  "metaqa:2hop:dev:9282",
+  "metaqa:2hop:dev:9283",
+  "metaqa:2hop:dev:9287",
+  "metaqa:2hop:dev:9299",
+  "metaqa:2hop:dev:9316",
+  "metaqa:2hop:dev:9321",
+  "metaqa:2hop:dev:9324",
+  "metaqa:2hop:dev:9413",
+  "metaqa:2hop:dev:9440",
+  "metaqa:2hop:dev:9447",
+  "metaqa:2hop:dev:9513",
+  "metaqa:2hop:dev:9539",
+  "metaqa:2hop:dev:9566",
+  "metaqa:2hop:dev:9568",
+  "metaqa:2hop:dev:9570",
+  "metaqa:2hop:dev:9571",
+  "metaqa:2hop:dev:9574",
+  "metaqa:2hop:dev:9577",
+  "metaqa:2hop:dev:9605",
+  "metaqa:2hop:dev:9638",
+  "metaqa:2hop:dev:9647",
+  "metaqa:2hop:dev:9690",
+  "metaqa:2hop:dev:9709",
+  "metaqa:2hop:dev:9713",
+  "metaqa:2hop:dev:9718",
+  "metaqa:2hop:dev:9720",
+  "metaqa:2hop:dev:9727",
+  "metaqa:2hop:dev:9730",
+  "metaqa:2hop:dev:9742",
+  "metaqa:2hop:dev:9746",
+  "metaqa:2hop:dev:9753",
+  "metaqa:2hop:dev:9800",
+  "metaqa:2hop:dev:9830",
+  "metaqa:2hop:dev:9833",
+  "metaqa:2hop:dev:9872",
+  "metaqa:2hop:dev:9879",
+  "metaqa:2hop:dev:9963",
+  "metaqa:2hop:dev:9975",
+  "metaqa:2hop:dev:10004",
+  "metaqa:2hop:dev:10112",
+  "metaqa:2hop:dev:10121",
+  "metaqa:2hop:dev:10158",
+  "metaqa:2hop:dev:10168",
+  "metaqa:2hop:dev:10177",
+  "metaqa:2hop:dev:10248",
+  "metaqa:2hop:dev:10254",
+  "metaqa:2hop:dev:10295",
+  "metaqa:2hop:dev:10296",
+  "metaqa:2hop:dev:10313",
+  "metaqa:2hop:dev:10349",
+  "metaqa:2hop:dev:10365",
+  "metaqa:2hop:dev:10368",
+  "metaqa:2hop:dev:10369",
+  "metaqa:2hop:dev:10371",
+  "metaqa:2hop:dev:10380",
+  "metaqa:2hop:dev:10386",
+  "metaqa:2hop:dev:10483",
+  "metaqa:2hop:dev:10495",
+  "metaqa:2hop:dev:10509",
+  "metaqa:2hop:dev:10512",
+  "metaqa:2hop:dev:10517",
+  "metaqa:2hop:dev:10522",
+  "metaqa:2hop:dev:10539",
+  "metaqa:2hop:dev:10590",
+  "metaqa:2hop:dev:10598",
+  "metaqa:2hop:dev:10608",
+  "metaqa:2hop:dev:10614",
+  "metaqa:2hop:dev:10638",
+  "metaqa:2hop:dev:10716",
+  "metaqa:2hop:dev:10738",
+  "metaqa:2hop:dev:10763",
+  "metaqa:2hop:dev:10769",
+  "metaqa:2hop:dev:10777",
+  "metaqa:2hop:dev:10800",
+  "metaqa:2hop:dev:10822",
+  "metaqa:2hop:dev:10832",
+  "metaqa:2hop:dev:10851",
+  "metaqa:2hop:dev:10858",
+  "metaqa:2hop:dev:10871",
+  "metaqa:2hop:dev:10888",
+  "metaqa:2hop:dev:10900",
+  "metaqa:2hop:dev:10920",
+  "metaqa:2hop:dev:10929",
+  "metaqa:2hop:dev:10937",
+  "metaqa:2hop:dev:10948",
+  "metaqa:2hop:dev:10974",
+  "metaqa:2hop:dev:11020",
+  "metaqa:2hop:dev:11053",
+  "metaqa:2hop:dev:11131",
+  "metaqa:2hop:dev:11147",
+  "metaqa:2hop:dev:11192",
+  "metaqa:2hop:dev:11216",
+  "metaqa:2hop:dev:11228",
+  "metaqa:2hop:dev:11247",
+  "metaqa:2hop:dev:11267",
+  "metaqa:2hop:dev:11277",
+  "metaqa:2hop:dev:11313",
+  "metaqa:2hop:dev:11319",
+  "metaqa:2hop:dev:11322",
+  "metaqa:2hop:dev:11323",
+  "metaqa:2hop:dev:11348",
+  "metaqa:2hop:dev:11388",
+  "metaqa:2hop:dev:11434",
+  "metaqa:2hop:dev:11435",
+  "metaqa:2hop:dev:11504",
+  "metaqa:2hop:dev:11508",
+  "metaqa:2hop:dev:11527",
+  "metaqa:2hop:dev:11599",
+  "metaqa:2hop:dev:11607",
+  "metaqa:2hop:dev:11682",
+  "metaqa:2hop:dev:11701",
+  "metaqa:2hop:dev:11732",
+  "metaqa:2hop:dev:11746",
+  "metaqa:2hop:dev:11834",
+  "metaqa:2hop:dev:11846",
+  "metaqa:2hop:dev:11848",
+  "metaqa:2hop:dev:11868",
+  "metaqa:2hop:dev:11877",
+  "metaqa:2hop:dev:11884",
+  "metaqa:2hop:dev:11911",
+  "metaqa:2hop:dev:11912",
+  "metaqa:2hop:dev:11914",
+  "metaqa:2hop:dev:11939",
+  "metaqa:2hop:dev:11960",
+  "metaqa:2hop:dev:11977",
+  "metaqa:2hop:dev:11980",
+  "metaqa:2hop:dev:12009",
+  "metaqa:2hop:dev:12047",
+  "metaqa:2hop:dev:12059",
+  "metaqa:2hop:dev:12063",
+  "metaqa:2hop:dev:12110",
+  "metaqa:2hop:dev:12169",
+  "metaqa:2hop:dev:12224",
+  "metaqa:2hop:dev:12279",
+  "metaqa:2hop:dev:12280",
+  "metaqa:2hop:dev:12299",
+  "metaqa:2hop:dev:12329",
+  "metaqa:2hop:dev:12342",
+  "metaqa:2hop:dev:12369",
+  "metaqa:2hop:dev:12458",
+  "metaqa:2hop:dev:12483",
+  "metaqa:2hop:dev:12499",
+  "metaqa:2hop:dev:12544",
+  "metaqa:2hop:dev:12550",
+  "metaqa:2hop:dev:12566",
+  "metaqa:2hop:dev:12588",
+  "metaqa:2hop:dev:12599",
+  "metaqa:2hop:dev:12651",
+  "metaqa:2hop:dev:12652",
+  "metaqa:2hop:dev:12681",
+  "metaqa:2hop:dev:12691",
+  "metaqa:2hop:dev:12695",
+  "metaqa:2hop:dev:12707",
+  "metaqa:2hop:dev:12714",
+  "metaqa:2hop:dev:12718",
+  "metaqa:2hop:dev:12736",
+  "metaqa:2hop:dev:12761",
+  "metaqa:2hop:dev:12773",
+  "metaqa:2hop:dev:12774",
+  "metaqa:2hop:dev:12777",
+  "metaqa:2hop:dev:12815",
+  "metaqa:2hop:dev:12835",
+  "metaqa:2hop:dev:12842",
+  "metaqa:2hop:dev:12909",
+  "metaqa:2hop:dev:12927",
+  "metaqa:2hop:dev:12930",
+  "metaqa:2hop:dev:12940",
+  "metaqa:2hop:dev:12946",
+  "metaqa:2hop:dev:12956",
+  "metaqa:2hop:dev:12957",
+  "metaqa:2hop:dev:12961",
+  "metaqa:2hop:dev:12972",
+  "metaqa:2hop:dev:12982",
+  "metaqa:2hop:dev:12983",
+  "metaqa:2hop:dev:12997",
+  "metaqa:2hop:dev:13021",
+  "metaqa:2hop:dev:13040",
+  "metaqa:2hop:dev:13050",
+  "metaqa:2hop:dev:13055",
+  "metaqa:2hop:dev:13063",
+  "metaqa:2hop:dev:13130",
+  "metaqa:2hop:dev:13166",
+  "metaqa:2hop:dev:13186",
+  "metaqa:2hop:dev:13195",
+  "metaqa:2hop:dev:13210",
+  "metaqa:2hop:dev:13219",
+  "metaqa:2hop:dev:13236",
+  "metaqa:2hop:dev:13244",
+  "metaqa:2hop:dev:13263",
+  "metaqa:2hop:dev:13266",
+  "metaqa:2hop:dev:13283",
+  "metaqa:2hop:dev:13284",
+  "metaqa:2hop:dev:13315",
+  "metaqa:2hop:dev:13353",
+  "metaqa:2hop:dev:13366",
+  "metaqa:2hop:dev:13387",
+  "metaqa:2hop:dev:13398",
+  "metaqa:2hop:dev:13475",
+  "metaqa:2hop:dev:13476",
+  "metaqa:2hop:dev:13482",
+  "metaqa:2hop:dev:13509",
+  "metaqa:2hop:dev:13515",
+  "metaqa:2hop:dev:13522",
+  "metaqa:2hop:dev:13550",
+  "metaqa:2hop:dev:13551",
+  "metaqa:2hop:dev:13665",
+  "metaqa:2hop:dev:13704",
+  "metaqa:2hop:dev:13722",
+  "metaqa:2hop:dev:13777",
+  "metaqa:2hop:dev:13795",
+  "metaqa:2hop:dev:13812",
+  "metaqa:2hop:dev:13822",
+  "metaqa:2hop:dev:13843",
+  "metaqa:2hop:dev:13873",
+  "metaqa:2hop:dev:13877",
+  "metaqa:2hop:dev:13881",
+  "metaqa:2hop:dev:13901",
+  "metaqa:2hop:dev:13979",
+  "metaqa:2hop:dev:13990",
+  "metaqa:2hop:dev:14025",
+  "metaqa:2hop:dev:14058",
+  "metaqa:2hop:dev:14076",
+  "metaqa:2hop:dev:14083",
+  "metaqa:2hop:dev:14113",
+  "metaqa:2hop:dev:14165",
+  "metaqa:2hop:dev:14181",
+  "metaqa:2hop:dev:14218",
+  "metaqa:2hop:dev:14222",
+  "metaqa:2hop:dev:14229",
+  "metaqa:2hop:dev:14255",
+  "metaqa:2hop:dev:14278",
+  "metaqa:2hop:dev:14285",
+  "metaqa:2hop:dev:14338",
+  "metaqa:2hop:dev:14341",
+  "metaqa:2hop:dev:14342",
+  "metaqa:2hop:dev:14345",
+  "metaqa:2hop:dev:14366",
+  "metaqa:2hop:dev:14371",
+  "metaqa:2hop:dev:14390",
+  "metaqa:2hop:dev:14491",
+  "metaqa:2hop:dev:14495",
+  "metaqa:2hop:dev:14505",
+  "metaqa:2hop:dev:14524",
+  "metaqa:2hop:dev:14531",
+  "metaqa:2hop:dev:14570",
+  "metaqa:2hop:dev:14575",
+  "metaqa:2hop:dev:14621",
+  "metaqa:2hop:dev:14655",
+  "metaqa:2hop:dev:14681",
+  "metaqa:2hop:dev:14691",
+  "metaqa:2hop:dev:14811",
+  "metaqa:2hop:dev:14820",
+  "metaqa:2hop:dev:14827",
+  "metaqa:2hop:dev:14832",
+  "metaqa:2hop:dev:14840",
+  "metaqa:2hop:dev:14843",
+  "metaqa:2hop:dev:14852",
+  "metaqa:2hop:dev:14854",
+  "metaqa:2hop:dev:14857",
+  "metaqa:3hop:dev:9",
+  "metaqa:3hop:dev:30",
+  "metaqa:3hop:dev:84",
+  "metaqa:3hop:dev:95",
+  "metaqa:3hop:dev:108",
+  "metaqa:3hop:dev:122",
+  "metaqa:3hop:dev:140",
+  "metaqa:3hop:dev:141",
+  "metaqa:3hop:dev:156",
+  "metaqa:3hop:dev:176",
+  "metaqa:3hop:dev:192",
+  "metaqa:3hop:dev:263",
+  "metaqa:3hop:dev:292",
+  "metaqa:3hop:dev:298",
+  "metaqa:3hop:dev:307",
+  "metaqa:3hop:dev:338",
+  "metaqa:3hop:dev:346",
+  "metaqa:3hop:dev:402",
+  "metaqa:3hop:dev:404",
+  "metaqa:3hop:dev:411",
+  "metaqa:3hop:dev:434",
+  "metaqa:3hop:dev:492",
+  "metaqa:3hop:dev:529",
+  "metaqa:3hop:dev:574",
+  "metaqa:3hop:dev:587",
+  "metaqa:3hop:dev:620",
+  "metaqa:3hop:dev:625",
+  "metaqa:3hop:dev:657",
+  "metaqa:3hop:dev:706",
+  "metaqa:3hop:dev:713",
+  "metaqa:3hop:dev:719",
+  "metaqa:3hop:dev:724",
+  "metaqa:3hop:dev:734",
+  "metaqa:3hop:dev:761",
+  "metaqa:3hop:dev:789",
+  "metaqa:3hop:dev:812",
+  "metaqa:3hop:dev:839",
+  "metaqa:3hop:dev:848",
+  "metaqa:3hop:dev:855",
+  "metaqa:3hop:dev:874",
+  "metaqa:3hop:dev:892",
+  "metaqa:3hop:dev:927",
+  "metaqa:3hop:dev:944",
+  "metaqa:3hop:dev:945",
+  "metaqa:3hop:dev:959",
+  "metaqa:3hop:dev:1023",
+  "metaqa:3hop:dev:1035",
+  "metaqa:3hop:dev:1036",
+  "metaqa:3hop:dev:1045",
+  "metaqa:3hop:dev:1050",
+  "metaqa:3hop:dev:1076",
+  "metaqa:3hop:dev:1085",
+  "metaqa:3hop:dev:1145",
+  "metaqa:3hop:dev:1146",
+  "metaqa:3hop:dev:1185",
+  "metaqa:3hop:dev:1191",
+  "metaqa:3hop:dev:1206",
+  "metaqa:3hop:dev:1212",
+  "metaqa:3hop:dev:1227",
+  "metaqa:3hop:dev:1282",
+  "metaqa:3hop:dev:1297",
+  "metaqa:3hop:dev:1316",
+  "metaqa:3hop:dev:1321",
+  "metaqa:3hop:dev:1332",
+  "metaqa:3hop:dev:1344",
+  "metaqa:3hop:dev:1367",
+  "metaqa:3hop:dev:1383",
+  "metaqa:3hop:dev:1384",
+  "metaqa:3hop:dev:1392",
+  "metaqa:3hop:dev:1401",
+  "metaqa:3hop:dev:1413",
+  "metaqa:3hop:dev:1454",
+  "metaqa:3hop:dev:1465",
+  "metaqa:3hop:dev:1495",
+  "metaqa:3hop:dev:1505",
+  "metaqa:3hop:dev:1552",
+  "metaqa:3hop:dev:1581",
+  "metaqa:3hop:dev:1613",
+  "metaqa:3hop:dev:1614",
+  "metaqa:3hop:dev:1676",
+  "metaqa:3hop:dev:1683",
+  "metaqa:3hop:dev:1693",
+  "metaqa:3hop:dev:1724",
+  "metaqa:3hop:dev:1732",
+  "metaqa:3hop:dev:1808",
+  "metaqa:3hop:dev:1838",
+  "metaqa:3hop:dev:1909",
+  "metaqa:3hop:dev:2036",
+  "metaqa:3hop:dev:2074",
+  "metaqa:3hop:dev:2076",
+  "metaqa:3hop:dev:2078",
+  "metaqa:3hop:dev:2082",
+  "metaqa:3hop:dev:2100",
+  "metaqa:3hop:dev:2103",
+  "metaqa:3hop:dev:2104",
+  "metaqa:3hop:dev:2106",
+  "metaqa:3hop:dev:2112",
+  "metaqa:3hop:dev:2135",
+  "metaqa:3hop:dev:2143",
+  "metaqa:3hop:dev:2212",
+  "metaqa:3hop:dev:2232",
+  "metaqa:3hop:dev:2236",
+  "metaqa:3hop:dev:2270",
+  "metaqa:3hop:dev:2281",
+  "metaqa:3hop:dev:2289",
+  "metaqa:3hop:dev:2292",
+  "metaqa:3hop:dev:2319",
+  "metaqa:3hop:dev:2358",
+  "metaqa:3hop:dev:2371",
+  "metaqa:3hop:dev:2383",
+  "metaqa:3hop:dev:2412",
+  "metaqa:3hop:dev:2531",
+  "metaqa:3hop:dev:2550",
+  "metaqa:3hop:dev:2558",
+  "metaqa:3hop:dev:2563",
+  "metaqa:3hop:dev:2571",
+  "metaqa:3hop:dev:2588",
+  "metaqa:3hop:dev:2594",
+  "metaqa:3hop:dev:2611",
+  "metaqa:3hop:dev:2673",
+  "metaqa:3hop:dev:2677",
+  "metaqa:3hop:dev:2681",
+  "metaqa:3hop:dev:2706",
+  "metaqa:3hop:dev:2749",
+  "metaqa:3hop:dev:2758",
+  "metaqa:3hop:dev:2785",
+  "metaqa:3hop:dev:2788",
+  "metaqa:3hop:dev:2797",
+  "metaqa:3hop:dev:2808",
+  "metaqa:3hop:dev:2813",
+  "metaqa:3hop:dev:2884",
+  "metaqa:3hop:dev:2906",
+  "metaqa:3hop:dev:2940",
+  "metaqa:3hop:dev:2947",
+  "metaqa:3hop:dev:3060",
+  "metaqa:3hop:dev:3066",
+  "metaqa:3hop:dev:3068",
+  "metaqa:3hop:dev:3075",
+  "metaqa:3hop:dev:3077",
+  "metaqa:3hop:dev:3098",
+  "metaqa:3hop:dev:3193",
+  "metaqa:3hop:dev:3273",
+  "metaqa:3hop:dev:3297",
+  "metaqa:3hop:dev:3320",
+  "metaqa:3hop:dev:3333",
+  "metaqa:3hop:dev:3337",
+  "metaqa:3hop:dev:3348",
+  "metaqa:3hop:dev:3356",
+  "metaqa:3hop:dev:3440",
+  "metaqa:3hop:dev:3441",
+  "metaqa:3hop:dev:3532",
+  "metaqa:3hop:dev:3544",
+  "metaqa:3hop:dev:3552",
+  "metaqa:3hop:dev:3599",
+  "metaqa:3hop:dev:3603",
+  "metaqa:3hop:dev:3624",
+  "metaqa:3hop:dev:3647",
+  "metaqa:3hop:dev:3652",
+  "metaqa:3hop:dev:3778",
+  "metaqa:3hop:dev:3805",
+  "metaqa:3hop:dev:3821",
+  "metaqa:3hop:dev:3831",
+  "metaqa:3hop:dev:3855",
+  "metaqa:3hop:dev:3883",
+  "metaqa:3hop:dev:3884",
+  "metaqa:3hop:dev:3889",
+  "metaqa:3hop:dev:3896",
+  "metaqa:3hop:dev:3928",
+  "metaqa:3hop:dev:3981",
+  "metaqa:3hop:dev:3983",
+  "metaqa:3hop:dev:4006",
+  "metaqa:3hop:dev:4007",
+  "metaqa:3hop:dev:4046",
+  "metaqa:3hop:dev:4076",
+  "metaqa:3hop:dev:4158",
+  "metaqa:3hop:dev:4162",
+  "metaqa:3hop:dev:4171",
+  "metaqa:3hop:dev:4192",
+  "metaqa:3hop:dev:4194",
+  "metaqa:3hop:dev:4197",
+  "metaqa:3hop:dev:4258",
+  "metaqa:3hop:dev:4273",
+  "metaqa:3hop:dev:4283",
+  "metaqa:3hop:dev:4301",
+  "metaqa:3hop:dev:4304",
+  "metaqa:3hop:dev:4305",
+  "metaqa:3hop:dev:4320",
+  "metaqa:3hop:dev:4341",
+  "metaqa:3hop:dev:4347",
+  "metaqa:3hop:dev:4390",
+  "metaqa:3hop:dev:4406",
+  "metaqa:3hop:dev:4424",
+  "metaqa:3hop:dev:4452",
+  "metaqa:3hop:dev:4456",
+  "metaqa:3hop:dev:4458",
+  "metaqa:3hop:dev:4485",
+  "metaqa:3hop:dev:4491",
+  "metaqa:3hop:dev:4498",
+  "metaqa:3hop:dev:4516",
+  "metaqa:3hop:dev:4526",
+  "metaqa:3hop:dev:4579",
+  "metaqa:3hop:dev:4582",
+  "metaqa:3hop:dev:4590",
+  "metaqa:3hop:dev:4625",
+  "metaqa:3hop:dev:4657",
+  "metaqa:3hop:dev:4659",
+  "metaqa:3hop:dev:4663",
+  "metaqa:3hop:dev:4673",
+  "metaqa:3hop:dev:4719",
+  "metaqa:3hop:dev:4728",
+  "metaqa:3hop:dev:4738",
+  "metaqa:3hop:dev:4761",
+  "metaqa:3hop:dev:4772",
+  "metaqa:3hop:dev:4774",
+  "metaqa:3hop:dev:4783",
+  "metaqa:3hop:dev:4788",
+  "metaqa:3hop:dev:4802",
+  "metaqa:3hop:dev:4807",
+  "metaqa:3hop:dev:4808",
+  "metaqa:3hop:dev:4848",
+  "metaqa:3hop:dev:4871",
+  "metaqa:3hop:dev:4879",
+  "metaqa:3hop:dev:4907",
+  "metaqa:3hop:dev:4927",
+  "metaqa:3hop:dev:4940",
+  "metaqa:3hop:dev:4950",
+  "metaqa:3hop:dev:4957",
+  "metaqa:3hop:dev:4982",
+  "metaqa:3hop:dev:5009",
+  "metaqa:3hop:dev:5046",
+  "metaqa:3hop:dev:5053",
+  "metaqa:3hop:dev:5073",
+  "metaqa:3hop:dev:5076",
+  "metaqa:3hop:dev:5105",
+  "metaqa:3hop:dev:5115",
+  "metaqa:3hop:dev:5120",
+  "metaqa:3hop:dev:5134",
+  "metaqa:3hop:dev:5165",
+  "metaqa:3hop:dev:5198",
+  "metaqa:3hop:dev:5247",
+  "metaqa:3hop:dev:5251",
+  "metaqa:3hop:dev:5257",
+  "metaqa:3hop:dev:5293",
+  "metaqa:3hop:dev:5314",
+  "metaqa:3hop:dev:5344",
+  "metaqa:3hop:dev:5345",
+  "metaqa:3hop:dev:5361",
+  "metaqa:3hop:dev:5363",
+  "metaqa:3hop:dev:5387",
+  "metaqa:3hop:dev:5392",
+  "metaqa:3hop:dev:5416",
+  "metaqa:3hop:dev:5444",
+  "metaqa:3hop:dev:5447",
+  "metaqa:3hop:dev:5453",
+  "metaqa:3hop:dev:5455",
+  "metaqa:3hop:dev:5494",
+  "metaqa:3hop:dev:5496",
+  "metaqa:3hop:dev:5513",
+  "metaqa:3hop:dev:5520",
+  "metaqa:3hop:dev:5521",
+  "metaqa:3hop:dev:5573",
+  "metaqa:3hop:dev:5578",
+  "metaqa:3hop:dev:5591",
+  "metaqa:3hop:dev:5648",
+  "metaqa:3hop:dev:5652",
+  "metaqa:3hop:dev:5680",
+  "metaqa:3hop:dev:5702",
+  "metaqa:3hop:dev:5704",
+  "metaqa:3hop:dev:5722",
+  "metaqa:3hop:dev:5729",
+  "metaqa:3hop:dev:5732",
+  "metaqa:3hop:dev:5735",
+  "metaqa:3hop:dev:5796",
+  "metaqa:3hop:dev:5800",
+  "metaqa:3hop:dev:5820",
+  "metaqa:3hop:dev:5831",
+  "metaqa:3hop:dev:5864",
+  "metaqa:3hop:dev:5871",
+  "metaqa:3hop:dev:5873",
+  "metaqa:3hop:dev:5875",
+  "metaqa:3hop:dev:5881",
+  "metaqa:3hop:dev:5904",
+  "metaqa:3hop:dev:5918",
+  "metaqa:3hop:dev:5973",
+  "metaqa:3hop:dev:5984",
+  "metaqa:3hop:dev:5996",
+  "metaqa:3hop:dev:6009",
+  "metaqa:3hop:dev:6010",
+  "metaqa:3hop:dev:6029",
+  "metaqa:3hop:dev:6058",
+  "metaqa:3hop:dev:6115",
+  "metaqa:3hop:dev:6126",
+  "metaqa:3hop:dev:6134",
+  "metaqa:3hop:dev:6158",
+  "metaqa:3hop:dev:6188",
+  "metaqa:3hop:dev:6221",
+  "metaqa:3hop:dev:6238",
+  "metaqa:3hop:dev:6245",
+  "metaqa:3hop:dev:6261",
+  "metaqa:3hop:dev:6298",
+  "metaqa:3hop:dev:6352",
+  "metaqa:3hop:dev:6380",
+  "metaqa:3hop:dev:6406",
+  "metaqa:3hop:dev:6443",
+  "metaqa:3hop:dev:6452",
+  "metaqa:3hop:dev:6483",
+  "metaqa:3hop:dev:6489",
+  "metaqa:3hop:dev:6508",
+  "metaqa:3hop:dev:6526",
+  "metaqa:3hop:dev:6535",
+  "metaqa:3hop:dev:6547",
+  "metaqa:3hop:dev:6561",
+  "metaqa:3hop:dev:6600",
+  "metaqa:3hop:dev:6606",
+  "metaqa:3hop:dev:6610",
+  "metaqa:3hop:dev:6640",
+  "metaqa:3hop:dev:6644",
+  "metaqa:3hop:dev:6652",
+  "metaqa:3hop:dev:6654",
+  "metaqa:3hop:dev:6679",
+  "metaqa:3hop:dev:6732",
+  "metaqa:3hop:dev:6739",
+  "metaqa:3hop:dev:6747",
+  "metaqa:3hop:dev:6776",
+  "metaqa:3hop:dev:6798",
+  "metaqa:3hop:dev:6801",
+  "metaqa:3hop:dev:6802",
+  "metaqa:3hop:dev:6831",
+  "metaqa:3hop:dev:6847",
+  "metaqa:3hop:dev:6911",
+  "metaqa:3hop:dev:6937",
+  "metaqa:3hop:dev:6947",
+  "metaqa:3hop:dev:6954",
+  "metaqa:3hop:dev:6958",
+  "metaqa:3hop:dev:6993",
+  "metaqa:3hop:dev:7003",
+  "metaqa:3hop:dev:7080",
+  "metaqa:3hop:dev:7089",
+  "metaqa:3hop:dev:7096",
+  "metaqa:3hop:dev:7107",
+  "metaqa:3hop:dev:7132",
+  "metaqa:3hop:dev:7138",
+  "metaqa:3hop:dev:7141",
+  "metaqa:3hop:dev:7166",
+  "metaqa:3hop:dev:7183",
+  "metaqa:3hop:dev:7248",
+  "metaqa:3hop:dev:7263",
+  "metaqa:3hop:dev:7265",
+  "metaqa:3hop:dev:7334",
+  "metaqa:3hop:dev:7364",
+  "metaqa:3hop:dev:7377",
+  "metaqa:3hop:dev:7414",
+  "metaqa:3hop:dev:7424",
+  "metaqa:3hop:dev:7429",
+  "metaqa:3hop:dev:7470",
+  "metaqa:3hop:dev:7479",
+  "metaqa:3hop:dev:7521",
+  "metaqa:3hop:dev:7540",
+  "metaqa:3hop:dev:7544",
+  "metaqa:3hop:dev:7553",
+  "metaqa:3hop:dev:7607",
+  "metaqa:3hop:dev:7639",
+  "metaqa:3hop:dev:7753",
+  "metaqa:3hop:dev:7767",
+  "metaqa:3hop:dev:7778",
+  "metaqa:3hop:dev:7804",
+  "metaqa:3hop:dev:7828",
+  "metaqa:3hop:dev:7841",
+  "metaqa:3hop:dev:7882",
+  "metaqa:3hop:dev:7900",
+  "metaqa:3hop:dev:7908",
+  "metaqa:3hop:dev:7912",
+  "metaqa:3hop:dev:7926",
+  "metaqa:3hop:dev:7942",
+  "metaqa:3hop:dev:7948",
+  "metaqa:3hop:dev:7951",
+  "metaqa:3hop:dev:7963",
+  "metaqa:3hop:dev:7965",
+  "metaqa:3hop:dev:7967",
+  "metaqa:3hop:dev:7983",
+  "metaqa:3hop:dev:7997",
+  "metaqa:3hop:dev:8010",
+  "metaqa:3hop:dev:8017",
+  "metaqa:3hop:dev:8024",
+  "metaqa:3hop:dev:8035",
+  "metaqa:3hop:dev:8053",
+  "metaqa:3hop:dev:8058",
+  "metaqa:3hop:dev:8118",
+  "metaqa:3hop:dev:8130",
+  "metaqa:3hop:dev:8172",
+  "metaqa:3hop:dev:8179",
+  "metaqa:3hop:dev:8224",
+  "metaqa:3hop:dev:8225",
+  "metaqa:3hop:dev:8308",
+  "metaqa:3hop:dev:8328",
+  "metaqa:3hop:dev:8342",
+  "metaqa:3hop:dev:8347",
+  "metaqa:3hop:dev:8360",
+  "metaqa:3hop:dev:8401",
+  "metaqa:3hop:dev:8418",
+  "metaqa:3hop:dev:8487",
+  "metaqa:3hop:dev:8495",
+  "metaqa:3hop:dev:8503",
+  "metaqa:3hop:dev:8572",
+  "metaqa:3hop:dev:8580",
+  "metaqa:3hop:dev:8614",
+  "metaqa:3hop:dev:8629",
+  "metaqa:3hop:dev:8636",
+  "metaqa:3hop:dev:8637",
+  "metaqa:3hop:dev:8639",
+  "metaqa:3hop:dev:8670",
+  "metaqa:3hop:dev:8686",
+  "metaqa:3hop:dev:8691",
+  "metaqa:3hop:dev:8696",
+  "metaqa:3hop:dev:8712",
+  "metaqa:3hop:dev:8715",
+  "metaqa:3hop:dev:8720",
+  "metaqa:3hop:dev:8721",
+  "metaqa:3hop:dev:8745",
+  "metaqa:3hop:dev:8770",
+  "metaqa:3hop:dev:8795",
+  "metaqa:3hop:dev:8818",
+  "metaqa:3hop:dev:8842",
+  "metaqa:3hop:dev:8849",
+  "metaqa:3hop:dev:8862",
+  "metaqa:3hop:dev:8876",
+  "metaqa:3hop:dev:8887",
+  "metaqa:3hop:dev:8890",
+  "metaqa:3hop:dev:8898",
+  "metaqa:3hop:dev:8917",
+  "metaqa:3hop:dev:8918",
+  "metaqa:3hop:dev:8922",
+  "metaqa:3hop:dev:8946",
+  "metaqa:3hop:dev:8964",
+  "metaqa:3hop:dev:8991",
+  "metaqa:3hop:dev:8993",
+  "metaqa:3hop:dev:9010",
+  "metaqa:3hop:dev:9075",
+  "metaqa:3hop:dev:9089",
+  "metaqa:3hop:dev:9116",
+  "metaqa:3hop:dev:9139",
+  "metaqa:3hop:dev:9168",
+  "metaqa:3hop:dev:9215",
+  "metaqa:3hop:dev:9280",
+  "metaqa:3hop:dev:9353",
+  "metaqa:3hop:dev:9354",
+  "metaqa:3hop:dev:9364",
+  "metaqa:3hop:dev:9408",
+  "metaqa:3hop:dev:9451",
+  "metaqa:3hop:dev:9463",
+  "metaqa:3hop:dev:9520",
+  "metaqa:3hop:dev:9564",
+  "metaqa:3hop:dev:9597",
+  "metaqa:3hop:dev:9618",
+  "metaqa:3hop:dev:9637",
+  "metaqa:3hop:dev:9698",
+  "metaqa:3hop:dev:9757",
+  "metaqa:3hop:dev:9825",
+  "metaqa:3hop:dev:9871",
+  "metaqa:3hop:dev:9923",
+  "metaqa:3hop:dev:9924",
+  "metaqa:3hop:dev:9939",
+  "metaqa:3hop:dev:9971",
+  "metaqa:3hop:dev:9975",
+  "metaqa:3hop:dev:9982",
+  "metaqa:3hop:dev:10000",
+  "metaqa:3hop:dev:10002",
+  "metaqa:3hop:dev:10035",
+  "metaqa:3hop:dev:10049",
+  "metaqa:3hop:dev:10061",
+  "metaqa:3hop:dev:10078",
+  "metaqa:3hop:dev:10100",
+  "metaqa:3hop:dev:10120",
+  "metaqa:3hop:dev:10132",
+  "metaqa:3hop:dev:10151",
+  "metaqa:3hop:dev:10182",
+  "metaqa:3hop:dev:10183",
+  "metaqa:3hop:dev:10189",
+  "metaqa:3hop:dev:10191",
+  "metaqa:3hop:dev:10193",
+  "metaqa:3hop:dev:10226",
+  "metaqa:3hop:dev:10258",
+  "metaqa:3hop:dev:10264",
+  "metaqa:3hop:dev:10296",
+  "metaqa:3hop:dev:10302",
+  "metaqa:3hop:dev:10309",
+  "metaqa:3hop:dev:10310",
+  "metaqa:3hop:dev:10362",
+  "metaqa:3hop:dev:10368",
+  "metaqa:3hop:dev:10385",
+  "metaqa:3hop:dev:10391",
+  "metaqa:3hop:dev:10395",
+  "metaqa:3hop:dev:10415",
+  "metaqa:3hop:dev:10454",
+  "metaqa:3hop:dev:10464",
+  "metaqa:3hop:dev:10479",
+  "metaqa:3hop:dev:10482",
+  "metaqa:3hop:dev:10526",
+  "metaqa:3hop:dev:10546",
+  "metaqa:3hop:dev:10554",
+  "metaqa:3hop:dev:10572",
+  "metaqa:3hop:dev:10654",
+  "metaqa:3hop:dev:10668",
+  "metaqa:3hop:dev:10670",
+  "metaqa:3hop:dev:10700",
+  "metaqa:3hop:dev:10727",
+  "metaqa:3hop:dev:10736",
+  "metaqa:3hop:dev:10745",
+  "metaqa:3hop:dev:10756",
+  "metaqa:3hop:dev:10799",
+  "metaqa:3hop:dev:10811",
+  "metaqa:3hop:dev:10830",
+  "metaqa:3hop:dev:10859",
+  "metaqa:3hop:dev:10865",
+  "metaqa:3hop:dev:10874",
+  "metaqa:3hop:dev:10898",
+  "metaqa:3hop:dev:10926",
+  "metaqa:3hop:dev:10940",
+  "metaqa:3hop:dev:10955",
+  "metaqa:3hop:dev:11007",
+  "metaqa:3hop:dev:11012",
+  "metaqa:3hop:dev:11027",
+  "metaqa:3hop:dev:11028",
+  "metaqa:3hop:dev:11043",
+  "metaqa:3hop:dev:11067",
+  "metaqa:3hop:dev:11116",
+  "metaqa:3hop:dev:11119",
+  "metaqa:3hop:dev:11126",
+  "metaqa:3hop:dev:11127",
+  "metaqa:3hop:dev:11154",
+  "metaqa:3hop:dev:11158",
+  "metaqa:3hop:dev:11161",
+  "metaqa:3hop:dev:11171",
+  "metaqa:3hop:dev:11193",
+  "metaqa:3hop:dev:11249",
+  "metaqa:3hop:dev:11252",
+  "metaqa:3hop:dev:11342",
+  "metaqa:3hop:dev:11346",
+  "metaqa:3hop:dev:11365",
+  "metaqa:3hop:dev:11387",
+  "metaqa:3hop:dev:11388",
+  "metaqa:3hop:dev:11430",
+  "metaqa:3hop:dev:11435",
+  "metaqa:3hop:dev:11445",
+  "metaqa:3hop:dev:11447",
+  "metaqa:3hop:dev:11461",
+  "metaqa:3hop:dev:11467",
+  "metaqa:3hop:dev:11473",
+  "metaqa:3hop:dev:11487",
+  "metaqa:3hop:dev:11508",
+  "metaqa:3hop:dev:11544",
+  "metaqa:3hop:dev:11560",
+  "metaqa:3hop:dev:11637",
+  "metaqa:3hop:dev:11646",
+  "metaqa:3hop:dev:11707",
+  "metaqa:3hop:dev:11719",
+  "metaqa:3hop:dev:11748",
+  "metaqa:3hop:dev:11792",
+  "metaqa:3hop:dev:11808",
+  "metaqa:3hop:dev:11826",
+  "metaqa:3hop:dev:11835",
+  "metaqa:3hop:dev:11863",
+  "metaqa:3hop:dev:11869",
+  "metaqa:3hop:dev:11875",
+  "metaqa:3hop:dev:11887",
+  "metaqa:3hop:dev:11892",
+  "metaqa:3hop:dev:11934",
+  "metaqa:3hop:dev:12010",
+  "metaqa:3hop:dev:12019",
+  "metaqa:3hop:dev:12061",
+  "metaqa:3hop:dev:12081",
+  "metaqa:3hop:dev:12112",
+  "metaqa:3hop:dev:12171",
+  "metaqa:3hop:dev:12176",
+  "metaqa:3hop:dev:12195",
+  "metaqa:3hop:dev:12197",
+  "metaqa:3hop:dev:12198",
+  "metaqa:3hop:dev:12219",
+  "metaqa:3hop:dev:12254",
+  "metaqa:3hop:dev:12369",
+  "metaqa:3hop:dev:12391",
+  "metaqa:3hop:dev:12394",
+  "metaqa:3hop:dev:12404",
+  "metaqa:3hop:dev:12448",
+  "metaqa:3hop:dev:12457",
+  "metaqa:3hop:dev:12468",
+  "metaqa:3hop:dev:12479",
+  "metaqa:3hop:dev:12480",
+  "metaqa:3hop:dev:12483",
+  "metaqa:3hop:dev:12519",
+  "metaqa:3hop:dev:12530",
+  "metaqa:3hop:dev:12540",
+  "metaqa:3hop:dev:12544",
+  "metaqa:3hop:dev:12564",
+  "metaqa:3hop:dev:12579",
+  "metaqa:3hop:dev:12583",
+  "metaqa:3hop:dev:12617",
+  "metaqa:3hop:dev:12665",
+  "metaqa:3hop:dev:12669",
+  "metaqa:3hop:dev:12687",
+  "metaqa:3hop:dev:12693",
+  "metaqa:3hop:dev:12701",
+  "metaqa:3hop:dev:12710",
+  "metaqa:3hop:dev:12715",
+  "metaqa:3hop:dev:12761",
+  "metaqa:3hop:dev:12791",
+  "metaqa:3hop:dev:12802",
+  "metaqa:3hop:dev:12845",
+  "metaqa:3hop:dev:12866",
+  "metaqa:3hop:dev:12872",
+  "metaqa:3hop:dev:12921",
+  "metaqa:3hop:dev:12922",
+  "metaqa:3hop:dev:12932",
+  "metaqa:3hop:dev:12949",
+  "metaqa:3hop:dev:12960",
+  "metaqa:3hop:dev:12961",
+  "metaqa:3hop:dev:12973",
+  "metaqa:3hop:dev:12976",
+  "metaqa:3hop:dev:13047",
+  "metaqa:3hop:dev:13051",
+  "metaqa:3hop:dev:13077",
+  "metaqa:3hop:dev:13101",
+  "metaqa:3hop:dev:13144",
+  "metaqa:3hop:dev:13212",
+  "metaqa:3hop:dev:13221",
+  "metaqa:3hop:dev:13230",
+  "metaqa:3hop:dev:13244",
+  "metaqa:3hop:dev:13290",
+  "metaqa:3hop:dev:13338",
+  "metaqa:3hop:dev:13347",
+  "metaqa:3hop:dev:13374",
+  "metaqa:3hop:dev:13381",
+  "metaqa:3hop:dev:13420",
+  "metaqa:3hop:dev:13422",
+  "metaqa:3hop:dev:13460",
+  "metaqa:3hop:dev:13503",
+  "metaqa:3hop:dev:13531",
+  "metaqa:3hop:dev:13548",
+  "metaqa:3hop:dev:13587",
+  "metaqa:3hop:dev:13606",
+  "metaqa:3hop:dev:13681",
+  "metaqa:3hop:dev:13687",
+  "metaqa:3hop:dev:13715",
+  "metaqa:3hop:dev:13785",
+  "metaqa:3hop:dev:13799",
+  "metaqa:3hop:dev:13801",
+  "metaqa:3hop:dev:13805",
+  "metaqa:3hop:dev:13806",
+  "metaqa:3hop:dev:13840",
+  "metaqa:3hop:dev:13867",
+  "metaqa:3hop:dev:13877",
+  "metaqa:3hop:dev:13966",
+  "metaqa:3hop:dev:13973",
+  "metaqa:3hop:dev:14016",
+  "metaqa:3hop:dev:14040",
+  "metaqa:3hop:dev:14043",
+  "metaqa:3hop:dev:14086",
+  "metaqa:3hop:dev:14106",
+  "metaqa:3hop:dev:14134",
+  "metaqa:3hop:dev:14138",
+  "metaqa:3hop:dev:14195",
+  "metaqa:3hop:dev:14198",
+  "metaqa:3hop:dev:14200",
+  "metaqa:3hop:dev:14202",
+  "metaqa:3hop:dev:14238",
+  "metaqa:3hop:dev:14249"
+ ],
+ "code": {
+  "path": "scratchpad/_l1d_loc.py",
+  "sha256": "d4570b9e47efba89060c29c0c1a9c1ddc18dec54677581fe7f111677174f29b4"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "pinned_repo": {
+  "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+  "data/final_canonical/canonical.py": "c657830b304afe861893b516726af419d35142334f866517b83221427a9016f5"
+ },
+ "function_sources_sha256": {
+  "_rss_mb": "2c3e43322b5a56521fed823adb726c83b9862f3a6c7a19d48f78a82e8a9d39b1",
+  "arm_row": "14f3033d8a908aa6649a0fe6fe09fb9544ff09f4a8fe4dce5f737d9ff921bea1",
+  "chunk_iter": "94bfbd1a813c81d4d67e33efcc8db50f23a62303602c97683588d6a9a42587aa",
+  "dense_products": "2a716b838a718f232527894ee5c71e3377ac4b3c065dfecf40618eeca45b2e7f",
+  "host_state": "55565e5fd4468275b3a78f9e4ac25c5e7a7c473a1acfe01e4632948729c88022",
+  "paired": "7e42b14bd8e8b03e3eb0520844fecd2b4fafa6616fd65d4847b876a5c7c59663",
+  "q4": "5e4c5c37ce41f12a4a49d2668ad442eaed8e6ed78b857818f5ac00887320fbd6",
+  "rel": "7626ad2edd0f032c44f98a670813d9cc943a4a86dfb704fc2351cfed2f96d48f",
+  "rrf_full": "bd8a47ecc947692764dd5843d3f7bf40c070edf508e87429237ff31816e3bcbf",
+  "sha_file": "569c20faed3500dfbbe6a1ca0772b29530287f2c5d974ca5134840eb410d0703",
+  "sha_text": "0832377654b2ab990cba3e774dc7550bd8ddea701f9d195bcd8c27b7e5d1df14",
+  "splade_products": "6bd25a097bca8415411157f6609268542d05c702385148ebb2ec205a33d2ef02",
+  "stats": "ce04ef4175f96b72950d5d0c3526f82504ff5bf50226c8cac81ea291c534e56d",
+  "strata_masks": "9b7db775f8978260f0821e8ad26978aea5b9ce16bc99bba8e35652bb6dfd54e9",
+  "unit_queries": "af57a02de2ef1ca96ff909bc5bd4fbdb1771e2fc27f75cb1e7940d4e4c03f612"
+ },
+ "constants": {
+  "K0": 60,
+  "ACT": 200,
+  "CQ": 200,
+  "BLOCK": 40000,
+  "M_CURVE": [
+   100,
+   250,
+   500,
+   1000,
+   2000,
+   5000
+  ],
+  "C_CURVE": [
+   25,
+   50,
+   100,
+   200,
+   500
+  ],
+  "N_POP": 2000,
+  "PER_HOP": 666,
+  "SEED": 20260926,
+  "N_AGREE": 100,
+  "AGREE_MIN": 0.9,
+  "NG_BUCKETS": [
+   [
+    "1",
+    1,
+    1
+   ],
+   [
+    "2",
+    2,
+    2
+   ],
+   [
+    "3",
+    3,
+    3
+   ],
+   [
+    "4",
+    4,
+    4
+   ],
+   [
+    "5-10",
+    5,
+    10
+   ],
+   [
+    "11+",
+    11,
+    1099511627776
+   ]
+  ]
+ },
+ "platform": {
+  "python": "3.13.5",
+  "numpy": "2.3.2"
+ },
+ "host_at_start": {
+  "utc": "2026-09-26T17:03:49Z",
+  "host_total_gib": 15.69,
+  "host_available_gib": 1.07,
+  "swap_used_gib": 12.39,
+  "other_python_processes_over_500_MB (untouched)": [
+   {
+    "pid": 12096,
+    "rss_mb": 7183
+   }
+  ]
+ },
+ "workflow": "L1 DEVELOPMENT (user ruling 2026-09-26): development -> mechanism selection -> one final held-out evaluation; MetaQA / MuSiQue / SQuAD are development datasets; no p-value here is a verdict",
+ "seconds_by_stage": {
+  "flat_loc_fusion": 426.9
+ },
+ "seconds": 436.0,
+ "process_peak_rss_mb": 753.1,
+ "npz": {
+  "path": "loc_metaqa__v1.npz",
+  "sha256": "200ee1cc3a7e5db267e8358420451ddc85c4566a2e714c1f8eaa875ffa658d62",
+  "arrays": [
+   "A__metaqa",
+   "A__metaqa_phg",
+   "bfirst__metaqa",
+   "bfirst__metaqa_phg",
+   "brank__metaqa",
+   "brank__metaqa_phg",
+   "gold_nodes",
+   "gptr",
+   "loc_len__metaqa",
+   "loc_len__metaqa_phg",
+   "lpos__metaqa",
+   "lpos__metaqa_phg",
+   "n_blocks__metaqa",
+   "n_blocks__metaqa_phg",
+   "npos",
+   "pos_FLAT",
+   "pos_FLATLOC__metaqa",
+   "pos_FLATLOC__metaqa_phg",
+   "pos_LOC__metaqa",
+   "pos_LOC__metaqa_phg",
+   "rows",
+   "slot_served__metaqa",
+   "slot_served__metaqa_phg"
+  ]
+ }
+}

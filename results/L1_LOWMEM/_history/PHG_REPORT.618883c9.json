@@ -1,0 +1,832 @@
+{
+ "RECORD": "PHG_REPORT",
+ "arm": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4",
+ "utc": "2026-09-13T17:59:28Z",
+ "preregistration": {
+  "path": "results/L1_LOWMEM/PHG_PREREG.json",
+  "bytes": 12650,
+  "sha256": "a290ad99b3ef3394859e4653acc66d4120abd8924e7aec25568b8dd269291404"
+ },
+ "STATUS": "STOP_FOR_REVIEW",
+ "decisions": {
+  "squad": "PHG_L1_NONINFERIOR",
+  "metaqa": "PHG_PARTITION_INVALID"
+ },
+ "l1_primary_SAFE": {
+  "squad": {
+   "delta_phg_minus_mtk": -0.003,
+   "p": 0.23788,
+   "sig": false,
+   "phg_only": 6,
+   "mtk_only": 12,
+   "verdict": "NONINFERIOR"
+  },
+  "metaqa": null
+ },
+ "l1_secondary_BASE": {
+  "squad": {
+   "delta_phg_minus_mtk": -0.004,
+   "p": 0.20049,
+   "sig": false,
+   "phg_only": 11,
+   "mtk_only": 19,
+   "verdict": "NONINFERIOR"
+  },
+  "metaqa": null
+ },
+ "gates": {
+  "1_structure": "EXACT: the union of what the Zoltan query functions returned on all ranks (dumped by the query functions themselves at their first invocation) must reconstruct N, M, pin count, unit vertex weights, hyperedge weights, the global node positions 0..N-1 (each exactly once), the global hyperedge ids 0..M-1 (each with >= 1 pin), the incidence multiset and the canonical H4_SK_STRUCTURE_V1 digest == ORIGINAL_STRUCTURE_SHA256 of the frozen H4_SK_STREAM_V1 manifest; weight reception: Zoltan_LB_Eval_HG's connectivity of the rank-ownership assignment (gate mode) == Python weighted KM1 of the same assignment within 1e-4 relative (float accumulation); the dumps of the partition run must be byte-identical to the gate run's.  Any mismatch = STRUCTURE_MISMATCH and STOP (no partition is used).",
+  "2_partition_validity": "length N, block ids in [0, k), no empty block, max block <= ceil(1.03 N/k) (the canonical contract bound).  Failure = PARTITION_INVALID (no downstream evaluation).  Partition ids are NOT compared with Mt-KaHyPar's.",
+  "3_L1_primary": "the PHG partition goes through the unchanged canonical L1 (replay cache -> l1_eval numerics) on the identical dev query ids as the frozen Mt-KaHyPar replay; PRIMARY = final SAFE_ALL_P50 paired exact two-sided McNemar: SIG_LOSS iff delta(PHG - MtK) < 0 and p < 0.05, otherwise NONINFERIOR.  SECONDARY (reported, same rule, not the decision): BASE_ALL_P50.  DIAGNOSTICS (no rule): hop-wise paired results, candidate coverage (ANY), SAFE additions, scope nodes, balance.",
+  "4_partition_metrics": "KM1 / connectivity, imbalance, STRUCT cut, KNN cut, block-size min/p50/p95/max, empty blocks, memory, runtime = diagnostics; no numeric acceptance threshold exists or will be added after seeing the numbers."
+ },
+ "decision_rule": "per dataset: PHG_STRUCTURE_MISMATCH | PHG_PARTITION_INVALID | PHG_L1_NONINFERIOR | PHG_L1_SIG_LOSS (from gates 1-3 in that order).  SQuAD runs first; MetaQA runs only if SQuAD is structurally valid (gate 1 PASS) -- with the identical contract.  After both: STOP_FOR_REVIEW.  No tuning, no second configuration, no other rank count, no other dataset.",
+ "integrity": {
+  "frozen_records_changed_since_prereg": [],
+  "canonical_H4_SK_partition": {
+   "squad": {
+    "sha256_now": "a45195b825fa2f2fed58a64b08aa5471a20ad946f2b47831db3689b1348f54ce",
+    "pinned_by_frozen_report": "a45195b825fa2f2fed58a64b08aa5471a20ad946f2b47831db3689b1348f54ce",
+    "unchanged": true
+   },
+   "metaqa": {
+    "sha256_now": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062",
+    "pinned_by_frozen_report": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062",
+    "unchanged": true
+   }
+  }
+ },
+ "datasets": {
+  "squad": {
+   "DECISION": "PHG_L1_NONINFERIOR",
+   "metrics": {
+    "km1_weighted": 7538754,
+    "cut_weighted": 2636391,
+    "cut_nets": 29506,
+    "nets": 39146,
+    "cut_net_fraction": 0.753742,
+    "lambda_mean": 9.964,
+    "lambda_max": 75,
+    "blocks": {
+     "k": 202,
+     "used": 202,
+     "empty": 0,
+     "min": 60,
+     "p50": 102.0,
+     "p95": 103.0,
+     "max": 103,
+     "mean": 100.163,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0283,
+     "eps_actual(max/ceil(N/k)-1)": 0.0198,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "per_family_note": {
+     "STRUCT": {
+      "hyperedges_precap": 13884,
+      "pins_precap": 1503352,
+      "anchors_over_cap": 4900,
+      "hyperedges_out": 22271,
+      "pins_written": 1511739,
+      "anchor_duplication_pins": 8387,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 100
+     },
+     "KNN": {
+      "hyperedges_precap": 16875,
+      "pins_precap": 78093,
+      "anchors_over_cap": 0,
+      "hyperedges_out": 16875,
+      "pins_written": 78093,
+      "anchor_duplication_pins": 0,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 24
+     }
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 744734,
+      "cut": 691276,
+      "edge_cut_fraction": 0.9282
+     },
+     "KNN": {
+      "edges": 30609,
+      "cut": 6649,
+      "edge_cut_fraction": 0.2172
+     },
+     "NERX": {
+      "edges": 135287,
+      "cut": 111137,
+      "edge_cut_fraction": 0.8215
+     }
+    }
+   },
+   "mtkahypar_baseline": {
+    "status": "OK",
+    "km1_weighted": 6525934,
+    "cut_weighted": 2521407,
+    "blocks": {
+     "k": 202,
+     "used": 202,
+     "empty": 0,
+     "min": 49,
+     "p50": 102.0,
+     "p95": 104.0,
+     "max": 104,
+     "mean": 100.163,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0383,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 744734,
+      "cut": 671052,
+      "edge_cut_fraction": 0.9011
+     },
+     "KNN": {
+      "edges": 30609,
+      "cut": 5948,
+      "edge_cut_fraction": 0.1943
+     },
+     "NERX": {
+      "edges": 135287,
+      "cut": 107962,
+      "edge_cut_fraction": 0.798
+     }
+    },
+    "manifest": {
+     "worker_stats": {
+      "hyperedges": 39146,
+      "pins": 1589832,
+      "N": 20233,
+      "k": 202,
+      "threads": 8,
+      "ran_on": "local_wsl",
+      "edge_weighted": true,
+      "ew_min": 10,
+      "ew_max": 1000,
+      "ew_readback_exact": true,
+      "objective_km1": 6525934.0,
+      "objective_cut": 2521407.0,
+      "peak_rss_mb": 539.5,
+      "wall_seconds": 81.0
+     },
+     "guard": {
+      "rss_cap_gb": 2.333709824,
+      "host_available_gb_at_start": 3.333709824,
+      "margin_gb": 1.0,
+      "peak_rss_kb": 519692,
+      "killed": 0,
+      "rc": 0,
+      "wall_seconds": 83.9,
+      "returncode": 0
+     },
+     "post_checks": {
+      "length_ok": true,
+      "min_block": 0,
+      "max_block": 201,
+      "blocks_used": 202,
+      "k": 202,
+      "every_block_used": true,
+      "size_min": 49,
+      "size_max": 104,
+      "size_mean": 100.163,
+      "ceil_N_over_k": 101,
+      "balance_max_over_mean": 1.0383,
+      "max_over_allowed_eps003": 0.9997,
+      "balance_within_eps": true
+     },
+     "contract": {
+      "partitioner": "mtkahypar",
+      "preset": "DETERMINISTIC_QUALITY",
+      "objective": "KM1",
+      "epsilon": 0.03,
+      "seed": 0,
+      "vertex_weights": "unit",
+      "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+      "k": 202,
+      "k_rule": "max(1, N // 100)",
+      "hypergraph_rule": "H4_SPLIT_PRESERVE",
+      "families": [
+       "STRUCT",
+       "KNN"
+      ],
+      "worker": "scratchpad/_l1hu_local_worker.py",
+      "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+      "threads": 8,
+      "deterministic_preset_note": "DETERMINISTIC_QUALITY is thread-count independent; LOCAL_COMPUTE.json verified local == Modal bit-identical"
+     },
+     "output_sha256": "a45195b825fa2f2fed58a64b08aa5471a20ad946f2b47831db3689b1348f54ce"
+    }
+   },
+   "freight_one_pass_frozen": {
+    "km1_weighted": 18062025,
+    "cut_weighted": 5978555,
+    "blocks": {
+     "k": 202,
+     "used": 202,
+     "empty": 0,
+     "min": 72,
+     "p50": 104.0,
+     "p95": 104.0,
+     "max": 104,
+     "mean": 100.163,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0383,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 744734,
+      "cut": 705231,
+      "edge_cut_fraction": 0.947
+     },
+     "KNN": {
+      "edges": 30609,
+      "cut": 19868,
+      "edge_cut_fraction": 0.6491
+     },
+     "NERX": {
+      "edges": 135287,
+      "cut": 127003,
+      "edge_cut_fraction": 0.9388
+     }
+    }
+   },
+   "diagnostic_vs_mtkahypar": {
+    "km1_ratio": 1.1552,
+    "struct_cut_delta": 0.0271,
+    "knn_cut_delta": 0.0229,
+    "mtkahypar_peak_rss_mb": 539.5,
+    "mtkahypar_wall_seconds": 81.0
+   },
+   "repeat": {
+    "identical_partition": true,
+    "n_diff": 0,
+    "km1_repeat": 7538754,
+    "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+   },
+   "downstream": {
+    "status": "PAIRED",
+    "record": {
+     "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad__phg.json",
+     "bytes": 3513,
+     "sha256": "f2a2704b746400557658cbe597d682f4856d298e6c2f1b426c56e7326f7507d8"
+    },
+    "paired": {
+     "SAFE_ALL_P50": {
+      "A_only_covered": 12,
+      "B_only_covered": 6,
+      "net_B_minus_A": -6,
+      "mcnemar_p": 0.23788,
+      "sig": false,
+      "A": 0.993,
+      "B": 0.99,
+      "delta_B_minus_A": -0.003,
+      "relative_change": -0.003
+     },
+     "BASE_ALL_P50": {
+      "A_only_covered": 19,
+      "B_only_covered": 11,
+      "net_B_minus_A": -8,
+      "mcnemar_p": 0.20049,
+      "sig": false,
+      "A": 0.9885,
+      "B": 0.9845,
+      "delta_B_minus_A": -0.004,
+      "relative_change": -0.004
+     },
+     "nq": 2000
+    },
+    "B_phg": {
+     "BASE_ALL_P50": 0.9845,
+     "BASE_ANY_P50": 0.9845,
+     "BASE_SCOPE_NODES": 5089.7,
+     "SAFE_ALL_P50": 0.99,
+     "SAFE_ANY_P50": 0.99,
+     "SAFE_SCOPE_NODES": 5085.5,
+     "BND_ALL_P50": 0.9845,
+     "CORR": {
+      "dALL": 0.0055,
+      "gained": 12,
+      "lost": 1,
+      "net": 11,
+      "mcnemar_p": 0.00342,
+      "sig": true,
+      "gold_admitted": 12,
+      "gold_evicted": 1,
+      "churn_per_query": 3.826,
+      "churn_max": 6,
+      "queries_with_zero_churn": 191
+     },
+     "BALANCE": {
+      "npart": 202,
+      "blocks_used": 202,
+      "size_min": 60,
+      "size_max": 103,
+      "size_median": 102.0,
+      "size_mean": 100.16,
+      "size_p90": 103.0,
+      "size_p99": 103.0,
+      "size_cv": 0.0584,
+      "max_over_mean": 1.0283,
+      "ELIGIBLE": true
+     },
+     "CUT": {
+      "STRUCT": {
+       "edges": 744734,
+       "cut": 691276,
+       "edge_cut_fraction": 0.9282
+      },
+      "KNN": {
+       "edges": 30609,
+       "cut": 6649,
+       "edge_cut_fraction": 0.2172
+      },
+      "NERX": {
+       "edges": 135287,
+       "cut": 111137,
+       "edge_cut_fraction": 0.8215
+      }
+     }
+    },
+    "A_mtkahypar": {
+     "BASE_ALL_P50": 0.9885,
+     "BASE_ANY_P50": 0.9885,
+     "BASE_SCOPE_NODES": 5089.2,
+     "SAFE_ALL_P50": 0.993,
+     "SAFE_ANY_P50": 0.993,
+     "SAFE_SCOPE_NODES": 5085.8,
+     "BND_ALL_P50": 0.9885,
+     "CORR": {
+      "dALL": 0.0045,
+      "gained": 9,
+      "lost": 0,
+      "net": 9,
+      "mcnemar_p": 0.00391,
+      "sig": true,
+      "gold_admitted": 9,
+      "gold_evicted": 0,
+      "churn_per_query": 3.725,
+      "churn_max": 6,
+      "queries_with_zero_churn": 229
+     },
+     "BALANCE": {
+      "npart": 202,
+      "blocks_used": 202,
+      "size_min": 49,
+      "size_max": 104,
+      "size_median": 102.0,
+      "size_mean": 100.16,
+      "size_p90": 104.0,
+      "size_p99": 104.0,
+      "size_cv": 0.0648,
+      "max_over_mean": 1.0383,
+      "ELIGIBLE": true
+     },
+     "CUT": {
+      "STRUCT": {
+       "edges": 744734,
+       "cut": 671052,
+       "edge_cut_fraction": 0.9011
+      },
+      "KNN": {
+       "edges": 30609,
+       "cut": 5948,
+       "edge_cut_fraction": 0.1943
+      },
+      "NERX": {
+       "edges": 135287,
+       "cut": 107962,
+       "edge_cut_fraction": 0.798
+      }
+     }
+    },
+    "by_hop_paired": null,
+    "coverage": {
+     "BASE_ANY": {
+      "A": 0.9885,
+      "B": 0.9845
+     },
+     "SAFE_ANY": {
+      "A": 0.993,
+      "B": 0.99
+     },
+     "BASE_SCOPE_NODES": {
+      "A": 5089.2,
+      "B": 5089.7
+     },
+     "SAFE_SCOPE_NODES": {
+      "A": 5085.8,
+      "B": 5085.5
+     }
+    },
+    "safe_additions": {
+     "A": {
+      "gained": 9,
+      "lost": 0,
+      "net": 9
+     },
+     "B": {
+      "gained": 12,
+      "lost": 1,
+      "net": 11
+     }
+    },
+    "population": {
+     "eval_split": "dev",
+     "sample_rule": "EVAL_SPLITS dev",
+     "nq": 2000,
+     "row_query_ids_sha256": "9b5fe782597fd485a94793c2cdb7d2fd6c7e890ea053f123b0e415b32fadff12"
+    }
+   },
+   "l1_primary_SAFE": {
+    "delta_phg_minus_mtk": -0.003,
+    "p": 0.23788,
+    "sig": false,
+    "phg_only": 6,
+    "mtk_only": 12,
+    "verdict": "NONINFERIOR"
+   },
+   "l1_secondary_BASE": {
+    "delta_phg_minus_mtk": -0.004,
+    "p": 0.20049,
+    "sig": false,
+    "phg_only": 11,
+    "mtk_only": 19,
+    "verdict": "NONINFERIOR"
+   },
+   "problems": null
+  },
+  "metaqa": {
+   "DECISION": "PHG_PARTITION_INVALID",
+   "metrics": {
+    "km1_weighted": 45623771,
+    "cut_weighted": 17156207,
+    "cut_nets": 69650,
+    "nets": 86796,
+    "cut_net_fraction": 0.802456,
+    "lambda_mean": 4.2867,
+    "lambda_max": 97,
+    "blocks": {
+     "k": 432,
+     "used": 430,
+     "empty": 2,
+     "min": 0,
+     "p50": 103.0,
+     "p95": 103.0,
+     "max": 104,
+     "mean": 100.079,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0392,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "per_family_note": {
+     "STRUCT": {
+      "hyperedges_precap": 43234,
+      "pins_precap": 292572,
+      "anchors_over_cap": 104,
+      "hyperedges_out": 43564,
+      "pins_written": 292902,
+      "anchor_duplication_pins": 330,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 100
+     },
+     "KNN": {
+      "hyperedges_precap": 43232,
+      "pins_precap": 238104,
+      "anchors_over_cap": 0,
+      "hyperedges_out": 43232,
+      "pins_written": 238104,
+      "anchor_duplication_pins": 0,
+      "pins_discarded": 0,
+      "pin_retention": 1.0,
+      "size_max_out": 96
+     }
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 103694,
+      "edge_cut_fraction": 0.8318
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 71327,
+      "edge_cut_fraction": 0.732
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 3802,
+      "edge_cut_fraction": 0.6534
+     }
+    }
+   },
+   "mtkahypar_baseline": {
+    "status": "OK",
+    "km1_weighted": 41244100,
+    "cut_weighted": 16213783,
+    "blocks": {
+     "k": 432,
+     "used": 432,
+     "empty": 0,
+     "min": 14,
+     "p50": 102.0,
+     "p95": 104.0,
+     "max": 104,
+     "mean": 100.079,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0392,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 102098,
+      "edge_cut_fraction": 0.819
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 61467,
+      "edge_cut_fraction": 0.6308
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 3160,
+      "edge_cut_fraction": 0.543
+     }
+    },
+    "manifest": {
+     "worker_stats": {
+      "hyperedges": 86796,
+      "pins": 531006,
+      "N": 43234,
+      "k": 432,
+      "threads": 8,
+      "ran_on": "local_wsl",
+      "edge_weighted": true,
+      "ew_min": 10,
+      "ew_max": 1000,
+      "ew_readback_exact": true,
+      "objective_km1": 41244100.0,
+      "objective_cut": 16213783.0,
+      "peak_rss_mb": 966.4,
+      "wall_seconds": 185.7
+     },
+     "guard": {
+      "rss_cap_gb": 2.267723264,
+      "host_available_gb_at_start": 3.267723264,
+      "margin_gb": 1.0,
+      "peak_rss_kb": 989584,
+      "killed": 0,
+      "rc": 0,
+      "wall_seconds": 190.8,
+      "returncode": 0
+     },
+     "post_checks": {
+      "length_ok": true,
+      "min_block": 0,
+      "max_block": 431,
+      "blocks_used": 432,
+      "k": 432,
+      "every_block_used": true,
+      "size_min": 14,
+      "size_max": 104,
+      "size_mean": 100.079,
+      "ceil_N_over_k": 101,
+      "balance_max_over_mean": 1.0392,
+      "max_over_allowed_eps003": 0.9997,
+      "balance_within_eps": true
+     },
+     "contract": {
+      "partitioner": "mtkahypar",
+      "preset": "DETERMINISTIC_QUALITY",
+      "objective": "KM1",
+      "epsilon": 0.03,
+      "seed": 0,
+      "vertex_weights": "unit",
+      "hyperedge_weights": "H4 build (max(1, rint(1000/(|e|-1))))",
+      "k": 432,
+      "k_rule": "max(1, N // 100)",
+      "hypergraph_rule": "H4_SPLIT_PRESERVE",
+      "families": [
+       "STRUCT",
+       "KNN"
+      ],
+      "worker": "scratchpad/_l1hu_local_worker.py",
+      "worker_sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+      "threads": 8,
+      "deterministic_preset_note": "DETERMINISTIC_QUALITY is thread-count independent; LOCAL_COMPUTE.json verified local == Modal bit-identical"
+     },
+     "output_sha256": "454875e83d467f1c33d0a99add91d1edd81dd96e640bc597dfe6e658543a8062"
+    }
+   },
+   "freight_one_pass_frozen": {
+    "km1_weighted": 57790340,
+    "cut_weighted": 18394999,
+    "blocks": {
+     "k": 432,
+     "used": 432,
+     "empty": 0,
+     "min": 29,
+     "p50": 104.0,
+     "p95": 104.0,
+     "max": 104,
+     "mean": 100.079,
+     "ceil_N_over_k": 101,
+     "max_over_mean": 1.0392,
+     "eps_actual(max/ceil(N/k)-1)": 0.0297,
+     "freight_upper_bound": 104,
+     "within_eps_0.03": true
+    },
+    "family_cuts": {
+     "STRUCT": {
+      "edges": 124669,
+      "cut": 100118,
+      "edge_cut_fraction": 0.8031
+     },
+     "KNN": {
+      "edges": 97436,
+      "cut": 91329,
+      "edge_cut_fraction": 0.9373
+     },
+     "NERX": {
+      "edges": 5819,
+      "cut": 4705,
+      "edge_cut_fraction": 0.8086
+     }
+    }
+   },
+   "diagnostic_vs_mtkahypar": {
+    "km1_ratio": 1.1062,
+    "struct_cut_delta": 0.0128,
+    "knn_cut_delta": 0.1012,
+    "mtkahypar_peak_rss_mb": 966.4,
+    "mtkahypar_wall_seconds": 185.7
+   },
+   "repeat": {
+    "identical_partition": true,
+    "n_diff": 0,
+    "km1_repeat": 45623771,
+    "note": "same NP, same input, same parameters; diagnostic only -- R1 is the arm's partition"
+   },
+   "downstream": null,
+   "l1_primary_SAFE": null,
+   "l1_secondary_BASE": null,
+   "problems": null
+  }
+ },
+ "stage3_summaries": {
+  "squad": {
+   "validity": {
+    "length_ok": true,
+    "ids_in_range": true,
+    "empty_blocks": 0,
+    "max_block": 103,
+    "contract_bound_ceil_1.03_N_over_k": 104,
+    "zoltan_tolerance_bound_1.03_x_mean": 103.168,
+    "gate": "PASS"
+   },
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     54324,
+     53568,
+     54232,
+     54248
+    ],
+    "ru_maxrss_kb_per_rank": [
+     54324,
+     53568,
+     54232,
+     54248
+    ],
+    "max_rank_peak_kb": 54324,
+    "sum_of_rank_peaks_kb": 216372,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 4.239,
+    "driver_total_seconds_rank0": 11.142,
+    "load_seconds_per_rank": [
+     6.117,
+     6.099,
+     6.197,
+     6.474
+    ],
+    "job_wall_seconds": 11.76
+   },
+   "python_km1_vs_zoltan_cutl": {
+    "python_km1": 7538754,
+    "zoltan_cutl_float": 7538754.0,
+    "relative_diff": 0.0,
+    "consistent_within_float32": true
+   }
+  },
+  "metaqa": {
+   "validity": {
+    "length_ok": true,
+    "ids_in_range": true,
+    "empty_blocks": 2,
+    "max_block": 104,
+    "contract_bound_ceil_1.03_N_over_k": 104,
+    "zoltan_tolerance_bound_1.03_x_mean": 103.081,
+    "gate": "PARTITION_INVALID"
+   },
+   "memory": {
+    "peak_rss_kb_per_rank_time_v": [
+     35036,
+     34072,
+     34776,
+     36228
+    ],
+    "ru_maxrss_kb_per_rank": [
+     35036,
+     34072,
+     34776,
+     36228
+    ],
+    "max_rank_peak_kb": 36228,
+    "sum_of_rank_peaks_kb": 140112,
+    "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+   },
+   "timing": {
+    "partition_wall_seconds": 2.615,
+    "driver_total_seconds_rank0": 5.951,
+    "load_seconds_per_rank": [
+     2.681,
+     1.728,
+     1.674,
+     2.08
+    ],
+    "job_wall_seconds": 6.52
+   },
+   "python_km1_vs_zoltan_cutl": {
+    "python_km1": 45623771,
+    "zoltan_cutl_float": 45623772.0,
+    "relative_diff": 2e-08,
+    "consistent_within_float32": true
+   }
+  }
+ },
+ "structure_gates": {
+  "squad": {
+   "gate": "PASS",
+   "N_returned": 20233,
+   "M_with_pins": 39146,
+   "P_returned": 1589832,
+   "weight_sum": 6879755,
+   "digest_from_queries": "4fd825932a3ae75800c0e736a751367d728daac5457b7daaa479ee29f08e56f3",
+   "ORIGINAL_STRUCTURE_SHA256": "4fd825932a3ae75800c0e736a751367d728daac5457b7daaa479ee29f08e56f3",
+   "partition_run_dumps_identical": true,
+   "zoltan_removed_or_warning_lines": [],
+   "problems": []
+  },
+  "metaqa": {
+   "gate": "PASS",
+   "N_returned": 43234,
+   "M_with_pins": 86796,
+   "P_returned": 531006,
+   "weight_sum": 32317710,
+   "digest_from_queries": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "ORIGINAL_STRUCTURE_SHA256": "fc7c4f0fc158c22089126329ba994b018319ea03ffd9390ac36f6caa8896ce35",
+   "partition_run_dumps_identical": true,
+   "zoltan_removed_or_warning_lines": [],
+   "problems": []
+  }
+ },
+ "table_markdown": "| Dataset | Arm | Ranks | Partition wall | Peak RSS max rank / sum | KM1 | KM1 ratio vs MtK | STRUCT cut | KNN cut | blocks min/p50/p95/max (bound) | empty | repeat identical | SAFE (paired) | BASE (paired) |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|---|\n| squad | PHG (PHG_L1_NONINFERIOR) | 4 | 4.24 s | 53 / 211 MB | 7538754 | 1.1552 | 0.9282 | 0.2172 | 60/102/103/103 (104) | 0 | True | 0.9930 -> 0.9900 (-0.0030, p=0.23788, +6/-12) | 0.9885 -> 0.9845 (-0.0040, p=0.20049, +11/-19) |\n| squad | Mt-KaHyPar (canonical, frozen) | - | 81.0 s | 539.5 MB | 6525934 | 1.0 | 0.9011 | 0.1943 | 49/102/104/104 | 0 | - | (reference) | (reference) |\n| squad | FREIGHT 1-pass (frozen, CLOSED) | 1 | - | - | 18062025 | 2.7677 | 0.9470 | 0.6491 | 72/104/104/104 | 0 | - | (frozen record) | (frozen record) |\n| metaqa | PHG (PHG_PARTITION_INVALID) | 4 | 2.62 s | 35 / 137 MB | 45623771 | 1.1062 | 0.8318 | 0.7320 | 0/103/103/104 (104) | 2 | True | - | - |\n| metaqa | Mt-KaHyPar (canonical, frozen) | - | 185.7 s | 966.4 MB | 41244100 | 1.0 | 0.8190 | 0.6308 | 14/102/104/104 | 0 | - | (reference) | (reference) |\n| metaqa | FREIGHT 1-pass (frozen, CLOSED) | 1 | - | - | 57790340 | 1.4012 | 0.8031 | 0.9373 | 29/104/104/104 | 0 | - | (frozen record) | (frozen record) |",
+ "hop_table_markdown": "| Dataset | hop | n | SAFE MtK -> PHG | BASE MtK -> PHG |\n|---|---|---|---|---|",
+ "coverage_table_markdown": "| Dataset | SAFE_ANY MtK / PHG | BASE_ANY MtK / PHG | SAFE scope nodes | SAFE additions MtK / PHG | BND_ALL MtK / PHG | balance max/mean MtK / PHG |\n|---|---|---|---|---|---|---|\n| squad | 0.9930 / 0.9900 | 0.9885 / 0.9845 | 5085.8 / 5085.5 | {'gained': 9, 'lost': 0, 'net': 9} / {'gained': 12, 'lost': 1, 'net': 11} | 0.9885 / 0.9845 | 1.0383 / 1.0283 |",
+ "not_done": "MuSiQue / WebQSP / HotpotQA / 2Wiki not run; no promotion; no tuning; FREIGHT stays FREIGHT_CLOSED",
+ "post_hoc_observation_not_a_gate": {
+  "metaqa": {
+   "empty_block_ids": [
+    215,
+    430
+   ],
+   "blocks_below_half_mean": {
+    "212": 47,
+    "215": 0,
+    "429": 25,
+    "430": 0,
+    "431": 4
+   },
+   "mtkahypar_min_block": 14,
+   "mechanism_note": "Zoltan's balance constraint is one-sided (max part weight <= IMBALANCE_TOL x average); an empty or tiny part violates nothing PHG enforces, and PHG_OUTPUT_LEVEL=1 shows recursive bisection (p=2) of k=432 with that upper-only bound at every split.  The canonical partition.py marks a vector with unused blocks BUILT_WITH_WARNINGS, not OK, so the preregistered 'no empty block' gate is the canonical contract, not a new threshold.",
+   "not_acted_on": "no re-run, no parameter change, no downstream evaluation of this partition (preregistered gate 2)"
+  }
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "record": "PREREGISTRATION_MICROL3_DEV_A",
+ "written_utc": "2026-09-15T03:54:56Z",
+ "written_before_any_run": true,
+ "ruling": "user, 2026-09-14/15 (sixth of the day): stop treating the boundary as 'pure L1 vs full L3'; add uL3 (micro-L3), a tiny bounded dynamic graph expansion whose only job is to repair P50 (scientifically dynamic, architecturally an L1 booster before full L3). One arm first: MICRO_L3_H2. The hop2/hop3 result is the gate: 'We already know almost anything can improve MetaQA hop1. If hop2+hop3 move strongly, then we have finally found the missing mechanism. If they do not, stop.' Latent global beam = ablation inside the experiment, not the main mechanism.",
+ "module": {
+  "path": "scratchpad/_l1c_microl3.py",
+  "sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+  "usage": "python -u _l1c_microl3.py <cache> [--latent]"
+ },
+ "population": "DEV_A only (split A by sha1(qid)); DEV_B remains untouched (read twice already); no query subsetting; corpus never subset",
+ "caches": [
+  "metaqa (MTKAHYPAR)",
+  "metaqa_phg (PHG)",
+  "squad (MTKAHYPAR)",
+  "squad_phg (PHG)",
+  "musique (PHG)"
+ ],
+ "design": {
+  "seeds": "B0 = the frozen SEED_K = 5 replay-cache seeds (frozen RRF top-5 entity hits of Dense+SPLADE); seeds are marked visited and do not vote in the repair channel (they already vote in the served channels)",
+  "graph": "ACTUAL directed STRUCT adjacency of the canonical corpus (D.cd.struct_csr(directed=True)); no KNN, no NER, no generated edges",
+  "admissibility": "frozen non-hub / degree-cap policy: cap = round(N / npart); hub(v) := deg_undirected(v) + 1 > cap; transitions from v = all directed out-neighbours, plus in-neighbours only when v is a non-hub; targets already visited are excluded",
+  "depth": "exactly 2 hops (anchor -> intermediate m -> answer-like a)",
+  "beam": "BEAM = K_LOCK = 100 distinct targets per hop (frozen router width); visited nodes per query <= 5 + 200",
+  "transition_scoring": "frozen node embeddings only (fp16 memmap rows, unit-normalised), per candidate transition v->u: S_dst = cos(q, e_u); S_dir = cos(q - e_v, e_u - e_v) (closed form (a_u - a_v - c + 1)/(sqrt(2-2a_v) sqrt(2-2c)), degenerate 2-2c < 1e-6 -> -1); S_mid = cos(q, norm(e_v + e_u)) = (a_v + a_u)/sqrt(2+2c); the three rank lists fused by the frozen RRF 1/(K0 + rank), K0 = 60; beam = the first BEAM distinct unvisited u in fused order; every parameter is a frozen contract constant (K0, K_LOCK, P50, cap) -- nothing chosen for this experiment",
+  "repair_channel": "visited nodes in order (hop-1 beam then hop-2 beam) vote through the served static membership table (own block + directed out-neighbour blocks, the frozen builder's mem(v)) exactly like L1 hits: w_r = 1/(K0 + r) into float32 S (sum) and M (max), votes = rr(S) + rr(M); blocks with no vote stay unranked (-1)",
+  "fusion": "repaired P50 = _l1x90_core.fuse(C, base_rank, repair_order, 'RRF'): the frozen symmetric two-way RRF between the served fused block order and the repair order (unranked -> weight 0, stable argsort, top-50); chosen over a three-channel F0 so the repair can displace weak base blocks; output exactly P50",
+  "same_algorithm_everywhere": "no training, no modified embeddings, no relation lists, no MetaQA templates, no dataset switch, no per-relation parameters, no thresholds; identical code path on KB and text caches",
+  "latent_ablation": "--latent: identical scoring, beam width, depth, repair and fusion, but the candidate targets of a transition are EVERY non-visited node (latent global beam over the full unit node matrix) instead of the actual admissible neighbours; run on the two metaqa caches only (diagnostic: does the actual topology matter, or would latent offsets do the same?)"
+ },
+ "arms": {
+  "L1": "served canonical P50 (base_rank[:50]); asserted identical to the frozen BASE of the replay cache",
+  "MICRO_L3_H2": "PRIMARY: the real-edge beam, depth 2, repair with hop-1 + hop-2 visited nodes",
+  "MICRO_L3_H1": "breakdown only (same run truncated after hop 1: repair with the hop-1 beam) -- not a separate mechanism, not a selectable arm",
+  "LATENT_H2 / LATENT_H1": "diagnostic ablation, metaqa + metaqa_phg only"
+ },
+ "metrics": [
+  "ALL-gold@P50 (BASE_ALL) and ANY on DEV_A, overall and per hop (hop1/hop2/hop3 on metaqa)",
+  "reach (all gold blocks received a vote from some channel), UNREACHED pts, reached-failed pts",
+  "initial UNREACHED (under L1) -> now reached -> now ALL-gold@P50, after hop 1 and after hop 2, overall and per hop",
+  "exact two-sided McNemar vs L1: overall BASE_ALL, reach, per hop, and hop2+hop3 pooled",
+  "cost per query: transitions (edges) scored per hop and total (mean, p95), nodes visited, beam wall-clock ms (mean/p50/p95), repair+fusion ms, queries whose seeds are all hubs",
+  "blocks voted per query, scope nodes in P50"
+ ],
+ "decision_rule": {
+  "gate": "hop2 + hop3 pooled ALL-gold@P50, MICRO_L3_H2 vs L1, on BOTH metaqa caches (metaqa MTKAHYPAR and metaqa_phg): McNemar gained > lost with p < 0.01 AND pooled gain >= +5.0 points on each cache",
+  "STRONG": "gate passes AND pooled hop2+hop3 gain >= +10.0 points on each metaqa cache -> MICRO_L3 = CANDIDATE_STRONG (the missing mechanism is a small amount of dynamic state propagation); next step = DEV_B is NOT read; transfer test on a genuinely untouched population needs a ruling",
+  "CANDIDATE": "gate passes with pooled gain in [+5.0, +10.0) on either cache -> MICRO_L3 = CANDIDATE (moves, not strongly); report and ask for a ruling before any variant",
+  "else": "MICRO_L3_H2 = NOT_CONFIRMED on DEV_A -> STOP (per the ruling: 'If they do not, stop'); no beam/depth/scoring/fusion variants without a new pre-registration",
+  "text_constraint": "squad, squad_phg, musique: a significant regression (lost > gained, p < 0.05) on any text cache is reported as a universality violation and blocks promotion regardless of the metaqa gate (same algorithm everywhere); an improvement on text is welcome but not required",
+  "hop1": "hop-1 gains are expected and carry no weight in the gate",
+  "latent_ablation": "no gate; reported as information (real-edge beam vs latent global beam on hop2+hop3)"
+ },
+ "secondary_expectations_pre_registered": [
+  "hop 1 improves on both metaqa caches (as every prior channel did)",
+  "if the mechanism is right, initial UNREACHED queries in hop2/hop3 become reached after hop 2 in large numbers (the intermediate node m is instantiated on the actual graph)",
+  "the latent global beam is weaker than the real-edge beam on hop2+hop3 (topology carries the information offsets could not)",
+  "text caches: little movement either way (their golds are already reached; the repair channel adds neighbours of top hits which are mostly already voted)"
+ ],
+ "forbidden_after_seeing_numbers": [
+  "changing BEAM, DEPTH, SEED_K, the scoring, the fusion rule or the admissibility policy",
+  "adding thresholds or dataset switches",
+  "reading DEV_B",
+  "tuning on the results"
+ ],
+ "frozen_constants": {
+  "K0": 60,
+  "K_LOCK": 100,
+  "P50": 50,
+  "SEED_K": 5,
+  "cap": "round(N / npart) = 100 on every cache"
+ },
+ "records": {
+  "results": "results/L1_COVPART/microl3_A_<cache>.json (+ .log); latent: microl3_A_<cache>__latent.json",
+  "report": "results/L1_COVPART/REPORT.md section 14"
+ }
+}

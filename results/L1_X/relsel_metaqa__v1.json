@@ -1,0 +1,50 @@
+{
+ "mode": "L1X_RELATION_CONDITIONED_FEATURES (development; descriptive; nothing chosen)",
+ "definitions": "L1X -- SELECT lane, step 5: one-hop RELATION-CONDITIONED selection features of the carried-forward L1 (development only).\n(User ruling 2026-10-01: L1 = parameter-free routing and SELECTION only -- no traversal, no fitted or learned rule.  Every feature below uses the SINGLE edge\nfrom a hit to a candidate, or the static relation profile of the candidate itself: one application of A^T, nothing is walked, no second hop.)\n\nThe only new ingredient is a question-to-relation score: the cosine of the (unit, instruction-prefixed) dense query vector of the row with the dense encoding\nof each relation label (results/L3_DEV/relenc_<ds>__v1.npz: the canonical dense encoder, labels verbalised with '_' and '.' -> ' ', encoded as DOCUMENTS; the\nencodings of the earlier L3 lane, reused unchanged).  rr(q, r) = the 0-based rank of relation r among ALL relations of the graph by that cosine, and the\nrelation weight is w(q, r) = 1 / (1 + rr(q, r))  -- the same 1 / (rank + 1) convention as the hit weights; no constant is fitted, no threshold.\n\nPer pool node u of a row (the pool P_q = O[:5000] of the shipped order, unchanged):\n    Sro   sum over STRUCT_out edges hit -> u (relation r) of x_hit * w(q, r)              x_hit = 1 / (hit rank + 1) * g(hit), the shipped hit weight\n    Sri   the same over STRUCT_in edges (the stored edge u -> hit carries relation r)\n    Tin   max over the relations r of the edges INTO u of w(q, r)     (the static in-relation profile of u: what u is the object of)\n    Tout  max over the relations r of the edges OUT of u of w(q, r)    (what u is the subject of)\nand, as in _l1x_relorc.py, frank / Ssum / S_out / S_in / the gold flag, so the offline search needs no other file.  Diagnostics per row: the number of\noracle relations R*_q (relations of edges hit -> gold or gold -> hit) and the best rr(q, .) among them (how high the matcher puts a right relation).\n\nUsage: python -u scratchpad/_l1x_relsel.py RUN <dataset> <tag> [--rows=K]  -> results/L1_X/relsel_<ds>__<tag>.{json,npz} (write-once)\n",
+ "dataset": "metaqa",
+ "tag": "v1",
+ "N": 43234,
+ "n_rows": 1998,
+ "n_relations": 9,
+ "pool": 5000,
+ "columns": [
+  "frank",
+  "Ssum",
+  "S_out",
+  "S_in",
+  "Sro",
+  "Sri",
+  "Tin",
+  "Tout",
+  "gold"
+ ],
+ "identity_check": "gold positions in the pool == results/L1_DEV/kscale_metaqa__v1.npz (clipped at 5000) on every row",
+ "relation_encodings": {
+  "path": "results/L3_DEV/relenc_metaqa__v1.npz",
+  "sha256": "17231a29d8b8fd0d379a654257e21a3758b1635a170db38f924245527ae7d78e"
+ },
+ "oracle_relation_rank": {
+  "rows_with_oracle_relations": 1526,
+  "share_best_oracle_relation_in_top1": 0.6566186107470511,
+  "share_in_top3": 0.9685452162516383,
+  "share_in_top10": 1.0,
+  "median_best_rank": 0.0
+ },
+ "seconds": 53.6,
+ "code": {
+  "path": "scratchpad/_l1x_relsel.py",
+  "sha256": "f03f7401eec5cca5398b73278d0113633dbee6c495713163a7290de23a608eb5"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "npz": {
+  "path": "relsel_metaqa__v1.npz",
+  "sha256": "45fef06d531f1b4878a1b95c927273e8fc0d1670bb5b35d7941c34df36582f95"
+ }
+}

@@ -1,0 +1,195 @@
+{
+ "RECORD": "METAQA_ENCODING_DIAGNOSIS",
+ "utc": "2026-09-13T12:00:23Z",
+ "question": "why does canonical-layout L1 NOT reproduce legacy L1 on metaqa (paired overlap 1370: BASE ALL@P50 legacy 0.6898 vs canonical 0.5168, McNemar p ~ 0)?",
+ "finding": "the retrieval channel changed regime. Legacy metaqa nodes were encoded as name + verbalised KB triples (display name + up to 10 kb.txt triples, src/pipeline/loaders.py load_metaqa), so dense/SPLADE could match an answer movie from an actor question. The canonical corpus stores text == the exact entity name (SOURCE_CONTRACT NORMALIZATION_RULE: 'Triple verbalization ... is a downstream ENCODING choice, not corpus identity') and the served encodings (gte-Qwen2-1.5B dense, SPLADE) were computed on that bare name, so the top-200 caches retrieve name-similar entities only (actor question -> other actors named Tom). Gold answers enter the P50 scope only through the structural/partition hop from the topic entity.",
+ "canonical_retrieval_channel_on_cache_rows": {
+  "hop1": {
+   "n": 666,
+   "ANY_gold_in_dense200": 0.1471,
+   "ANY_gold_in_splade200": 0.0886,
+   "ANY_gold_in_either200": 0.2147,
+   "ALL_golds_in_either200": 0.1231,
+   "mean_frac_golds_in_dense200": 0.0993,
+   "BASE_ALL_P50": 0.8979
+  },
+  "hop2": {
+   "n": 666,
+   "ANY_gold_in_dense200": 0.1547,
+   "ANY_gold_in_splade200": 0.1126,
+   "ANY_gold_in_either200": 0.2342,
+   "ALL_golds_in_either200": 0.0631,
+   "mean_frac_golds_in_dense200": 0.0606,
+   "BASE_ALL_P50": 0.488
+  },
+  "hop3": {
+   "n": 666,
+   "ANY_gold_in_dense200": 0.2192,
+   "ANY_gold_in_splade200": 0.1652,
+   "ANY_gold_in_either200": 0.3694,
+   "ALL_golds_in_either200": 0.0571,
+   "mean_frac_golds_in_dense200": 0.0411,
+   "BASE_ALL_P50": 0.527
+  }
+ },
+ "legacy_retrieval_channel_on_cache_rows": {
+  "hop1": {
+   "n": 666,
+   "ANY_gold_in_dense200": 0.7162,
+   "ANY_gold_in_splade200": 0.7237,
+   "ANY_gold_in_either200": 0.8468,
+   "ALL_golds_in_either200": 0.7267,
+   "mean_frac_golds_in_dense200": 0.6327,
+   "BASE_ALL_P50": 0.9955
+  },
+  "hop2": {
+   "n": 666,
+   "ANY_gold_in_dense200": 0.2763,
+   "ANY_gold_in_splade200": 0.0646,
+   "ANY_gold_in_either200": 0.3003,
+   "ALL_golds_in_either200": 0.1051,
+   "mean_frac_golds_in_dense200": 0.1651,
+   "BASE_ALL_P50": 0.7748
+  },
+  "hop3": {
+   "n": 666,
+   "ANY_gold_in_dense200": 0.4505,
+   "ANY_gold_in_splade200": 0.1997,
+   "ANY_gold_in_either200": 0.476,
+   "ALL_golds_in_either200": 0.0676,
+   "mean_frac_golds_in_dense200": 0.1505,
+   "BASE_ALL_P50": 0.5886
+  }
+ },
+ "examples_canonical_hop1_failures": [
+  {
+   "query_id": "metaqa:1hop:dev:9",
+   "question": "what movies did [Tom Tryon] act in",
+   "golds": [
+    "In Harm's Way",
+    "I Married a Monster from Outer Space",
+    "The Cardinal",
+    "The Story of Ruth",
+    "The Unholy Wife"
+   ],
+   "canonical_dense_top10": [
+    "Tom Tryon",
+    "Glenn Tryon",
+    "Tom Berenger",
+    "Tom Burlinson",
+    "Tom Bosley",
+    "Tom Laughlin",
+    "Tom Skerritt",
+    "Tom Ewell",
+    "Tom Tyler",
+    "Tom Cavanagh"
+   ]
+  },
+  {
+   "query_id": "metaqa:1hop:dev:119",
+   "question": "what does [Steven Waddington] star in",
+   "golds": [
+    "Edward II",
+    "Tarzan and the Lost City"
+   ],
+   "canonical_dense_top10": [
+    "Steven Waddington",
+    "Steven Moffat",
+    "Tom Welling",
+    "Steven Weber",
+    "Stephen Dillane",
+    "Steven Bagatourian",
+    "Steven Strait",
+    "Steven Mackintosh",
+    "Steven Williford",
+    "Steven Keats"
+   ]
+  },
+  {
+   "query_id": "metaqa:1hop:dev:121",
+   "question": "what movies did [Hope Davis] star in",
+   "golds": [
+    "Arlington Road",
+    "The Weather Man",
+    "Disconnect",
+    "The Nines",
+    "Mumford",
+    "The Lodger"
+   ],
+   "canonical_dense_top10": [
+    "Hope Davis",
+    "hope davis",
+    "Kristin Davis",
+    "Judy Davis",
+    "Julie Davis",
+    "Geena Davis",
+    "Hope Springs",
+    "Olympia Dukakis",
+    "Happy Gilmore",
+    "Hope Lange"
+   ]
+  },
+  {
+   "query_id": "metaqa:1hop:dev:159",
+   "question": "what films does [Charlie Stratton] appear in",
+   "golds": [
+    "Munchies"
+   ],
+   "canonical_dense_top10": [
+    "Charlie Stratton",
+    "Charlie Schlatter",
+    "Charlie Countryman",
+    "Richard Stratton",
+    "Charlie Hardwick",
+    "Charlie Bartlett",
+    "Charlie Tahan",
+    "Charlie Cox",
+    "The Stratton Story",
+    "charlie sheen"
+   ]
+  },
+  {
+   "query_id": "metaqa:1hop:dev:167",
+   "question": "what movies did [Larry the Cable Guy] act in",
+   "golds": [
+    "Cars",
+    "Cars 2",
+    "Delta Farce",
+    "Witless Protection",
+    "Tooth Fairy 2"
+   ],
+   "canonical_dense_top10": [
+    "Larry the Cable Guy",
+    "Larry Crowne",
+    "The People vs. Larry Flynt",
+    "The Kentucky Fried Movie",
+    "The Harry Hill Movie",
+    "City Slickers",
+    "Larry Charles",
+    "Carl Weathers",
+    "The Boondock Saints",
+    "Crocodile Dundee in Los Angeles"
+   ]
+  }
+ ],
+ "legacy_node_content_example": {
+  "node_id": "metaqa_ent_kismet",
+  "content": "Kismet. Kismet directed by William Dieterle | Kismet written by Edward Knoblock | Kismet starred actors Marlene Dietrich | ... | Kismet release year 1944 | Kismet in language English | Kismet has tags bd-r"
+ },
+ "canonical_node_text_example": {
+  "node_id": "metaqa:e00000",
+  "text": "Kismet"
+ },
+ "canonical_text_rule": "Stored text = the EXACT official entity name. No NFC/NFKC, no casefolding, no whitespace collapsing, no stripping, no '_'->' '. text == title == entity name. The legacy lossy collapse (strip().lower().replace('_',' '), which merged 3,083 distinct-case entities down to 40,151) is NOT reproduced; it is quantified only, in identity_normalization_diagnostics. Triple verbalization (display name + up to 10 kb.txt triples) is a downstream ENCODING choice, not corpus identity.",
+ "webqsp_same_axis": "webqsp canonical entity nodes are NAME_ONLY too (ALL_NODE__entity_NAME_ONLY default arm; CVT records carry the facts); V1_RETRIEVAL_ROLE_DECISION.json OPEN_AXIS_NOT_DECIDED_HERE: 'entity text = NAME_ONLY vs NAME_PLUS_FACTS -- NOT settled'. The legacy 781k webqsp substrate was verbalised name + <=15 relations. So the legacy KB-corpus L1 numbers (metaqa, webqsp) are not reproducible on the canonical encodings by construction; text corpora (squad, musique, hotpotqa, 2wiki) encode passages on both sides.",
+ "not_an_L1_bug": "hypergraph builder parity 6/6 IDENTICAL, replay-cache builder parity 4/4 IDENTICAL on the legacy inputs; the difference is in the served encodings' text, i.e. a substrate encoding ruling, not L1 code.",
+ "ruling_needed": [
+  "KEEP NAME_ONLY: canonical KB-corpus L1 is a different regime (retrieval finds topic entities, structure must reach answers); legacy metaqa/webqsp L1 cells become historical comparison points on a different encoding, not baselines to match",
+  "NAME_PLUS_FACTS for KB corpora: re-encode metaqa (43,234 short texts -- small) and webqsp entities (925,761 READABLE + 62,375 MID-named) with the frozen encoders, rebuild the two retrieval caches, supersede CANONICAL_FREEZE for those channels; needs a GPU (Modal dead)"
+ ],
+ "pins": {
+  "canonical_cache_sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b",
+  "legacy_cache_sha256": "1ea997d23e6f64cc925c8b32041d91253a314ac23e77b49ee0d268594d435d3c",
+  "DATASET_json_RECORD_SHA256": "8ab4506933d0df8f9b8443848b9da80e49e698cf9cb40ef32523fdb4e31e2c87"
+ }
+}

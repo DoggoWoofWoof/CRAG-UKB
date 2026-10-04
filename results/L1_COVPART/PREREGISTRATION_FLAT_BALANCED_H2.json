@@ -1,0 +1,651 @@
+{
+ "record": "PREREGISTRATION_FLAT_BALANCED_H2",
+ "utc": "2026-09-26T06:20:48Z",
+ "status": "FROZEN v2 (supersedes v1 after a harness incident; see incident). Unchanged from v1: design, constants, predictions, decision rules, populations, pins of every imported module, cache and derived file. Already observed before v2: the webqsp D1 (produced under v1 by the pinned v1 code; kept, not re-run). No other FLAT_BALANCED_H2 number exists on real gold. v1 status, verbatim: FROZEN BEFORE ANY RUN: no FLAT_BALANCED_H2 number exists on real gold (dry runs used stand-in gold; the DEV_A dry runs only asserted identities against numbers already recorded in section 29, printing none; the fresh G smokes and the served-list probe are gold-free).",
+ "ruling": {
+  "verbatim": "Yes. This result changes the priority of the project.\nThe key finding is not merely that centroids/prototypes failed. It is that on text, the partition abstraction itself is spending the retrieval budget badly. MuSiQue goes from 0.660 with 50 blocks to 0.882 with a matched-size flat list, and even the frozen composite is only 0.760; SQuAD shows the same direction. MetaQA reverses dramatically: partitions get ~0.64\u20130.80 while flat is only ~0.39.\nAnd the budget curve makes this much harder to dismiss as just bad block ranking: on MuSiQue, flat reaches ~0.66 ALL-gold with only ~500 nodes, while the partition route needs ~5,100 nodes to reach ~0.66. On SQuAD, flat top-100 is already ~0.99. MetaQA is exactly the opposite.\nSo I would make a narrow reopening of the L1 freeze.\nNot \u201creopen L1 and start trying ideas again.\u201d Only one falsifiable question:\nAre partitions actually necessary, or is the KB gain just graph expansion/co-location?\\boxed{ \\text{Are partitions actually necessary, or is the KB gain just graph expansion/co-location?} }\nYour own report already identifies this confound correctly: MetaQA's partition system gets STRUCT-aware blocks, structural vote propagation, and the H2 beam, whereas the flat comparator is text-only. Therefore the present experiment does not isolate the contribution of partitioning.\nThe next experiment I would preregister\nCall it something like:\nFLAT_BALANCED_H2\\texttt{FLAT\\_BALANCED\\_H2}\nwith no partitions anywhere.\nStart from the frozen Dense + SPLADE flat node ranking. Then reserve exactly one block-equivalent of the total context for the same frozen BALANCED_H2 graph expansion already used by the composite.\nFor a total budget MM and patch capacity C\u2248100C\\approx100:\ncontext=top (M\u2212C) flat semantic nodes\u23dfsemantic base+up to C novel BALANCED-H2 nodes\u23dfgraph patch.\\text{context} = \\underbrace{\\text{top }(M-C)\\text{ flat semantic nodes}}_{\\text{semantic base}} + \\underbrace{\\text{up to }C\\text{ novel BALANCED-H2 nodes}}_{\\text{graph patch}}.\nIf H2 produces fewer than CC novel nodes, fill the remainder using the next flat-ranked nodes.\nSo conceptually:\n\n```text\nQUERY\n \u2502\n \u251c\u2500\u2500 Dense\n \u2502\n \u2514\u2500\u2500 SPLADE\n       \u2502\n   flat node RRF\n       \u2502\n top M\u2212C nodes\n       \u2502\n       \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n       \u2502               \u2502\n       \u2502        same frozen seeds\n       \u2502               \u2502\n       \u2502       real STRUCT edges\n       \u2502               \u2502\n       \u2502       BALANCED H2 beam\n       \u2502               \u2502\n       \u2514\u2500\u2500\u2500\u2500\u2500\u2500 + C novel nodes\n                    \u2502\n               exactly M nodes\n```\n\nNo PHG.\nNo H4_SK.\nNo block ownership.\nNo node\u2192block voting.\nNo SAFE.\nNo QMAX block aggregation.\nAnd critically, no new scoring mechanism.\nThat makes it a clean ablation of the thing we actually care about.\nWhy this is the decisive comparison\nSuppose MetaQA does:\nflat=0.39\\text{flat}=0.39flat+H2\u22480.78\\text{flat+H2}\\approx0.78partition+H2\u22480.80.\\text{partition+H2}\\approx0.80.\nThen most of what we have been attributing to partitions was actually:\nsemantic seeds + real graph traversal\\boxed{\\text{semantic seeds + real graph traversal}}\nand we should seriously consider deleting partitioning from the universal retrieval architecture.\nOn the other hand, suppose:\nflat+H2=0.60\\text{flat+H2}=0.60\nwhile\npartition+H2=0.80.\\text{partition+H2}=0.80.\nThen partitions are doing something genuinely important: co-locating related answer sets so one retrieval unit exposes many graph-connected answers efficiently.\nEither result is scientifically valuable.\nThis also resolves your IVF question\nI would stop pursuing centroid/prototype routing for now.\nYour \u00a728 result already says fixed representatives do not solve the problem: up to 32 representatives per block still lose on text, and only scoring all nodes recovers node-voting-like behavior.\nThat tells us something deeper:\nthe issue isn't \u201cwe need a better approximation of node voting.\u201d\nIt may be:\non text datasets we shouldn't route through blocks at all.\nThat's much more important.\nQMAX itself supports this interpretation. Even if you perform the strongest possible semantic block score,\nS(B,q)=max\u2061v\u2208Bq\u22a4ev,S(B,q)=\\max_{v\\in B}q^\\top e_v,\nMuSiQue still reaches only about 0.70, whereas flat Dense alone reaches about 0.87. So the relevant node is being found; the damage happens when we pay for its entire block.\nThat's granularity waste, not routing failure.\nWhich is interesting because PATCH1 already taught us the same lesson from the other direction:\nwhen H2 finds useful nodes spread over many blocks, packing the nodes directly is vastly better than buying all their owner blocks.\nNow flat-vs-partition says the same phenomenon may apply to the entire text retrieval stage.\nWhere I would validate it\nI agree completely that DEV_A is finished for mechanism selection, and DEV_B should not become DEV_C-by-repetition. Your report explicitly records that constraint.\nThe nice consequence of removing partitions is that the infrastructure blockage becomes much less important.\n2Wiki and HotpotQA are suddenly especially attractive. Their missing PHG partitions no longer matter. If their frozen node embeddings, Dense/SPLADE retrieval and STRUCT adjacency already exist, then we can test `FLAT_BALANCED_H2` without building PHG at all.\nI would preregister:\n\n* HotpotQA split A: untouched text transfer.\n* 2Wiki split A: untouched multi-hop text transfer.\n* WebQSP train_holdout: untouched KB transfer, if the existing RoG STRUCT graph and node retrieval assets are enough to execute the beam without PHG.\n\nThat gives us precisely what we need:\n\n```text\nHotpot / 2Wiki\n    Does flat + graph preserve the enormous flat advantage on text?\n\nWebQSP\n    Does graph expansion rescue NAME_ONLY flat retrieval on a KB\n    without graph partitions?\n```\n\nAnd WebQSP becomes particularly valuable because the damned PHG resource contention no longer blocks this question.\nI would freeze the hypothesis before any run\nMy ruling would be:\nReopen the frozen L1 design for one isolated architectural ablation only: `FLAT_BALANCED_H2`, testing whether fixed graph partitions are necessary once flat semantic retrieval receives the same bounded real-edge expansion privilege. No other mechanism classes are reopened. DEV_A and DEV_B remain unavailable for selection.\nPrimary comparison on fresh populations:\nFLATvsFLAT_BALANCED_H2\\texttt{FLAT} \\quad\\text{vs}\\quad \\texttt{FLAT\\_BALANCED\\_H2}\nwith a fixed total node budget.\nWhere a canonical partition result eventually exists, also compare against:\nQMAX_BALANCED_H2_PATCH1.\\texttt{QMAX\\_BALANCED\\_H2\\_PATCH1}.\nBut partition availability should no longer be required to run the new hypothesis.\nAnd there is a genuinely attractive possible endpoint here.\nWe may end up with something much simpler than the current architecture:\nflat semantic retrieval\u2192bounded graph expansion\u2192direct node-level context\\boxed{ \\text{flat semantic retrieval} \\rightarrow \\text{bounded graph expansion} \\rightarrow \\text{direct node-level context} }\ninstead of:\nsemantic retrieval\u2192node voting\u2192partitions\u2192SAFE\u2192graph beam\u2192virtual patch.\\text{semantic retrieval} \\rightarrow \\text{node voting} \\rightarrow \\text{partitions} \\rightarrow \\text{SAFE} \\rightarrow \\text{graph beam} \\rightarrow \\text{virtual patch}.\nIf the simple version transfers, that is not a disappointing result. It would be a stronger paper result because we experimentally discovered that coarse graph partitioning was unnecessary once the right node-level semantic + structural composition was used.\nAnd if it fails on WebQSP while remaining superior on text, then we have isolated something equally useful: hard graph regions are beneficial specifically when semantic node identity is insufficient and answers are structurally related but semantically opaque.\nThat is now the experiment I would run before spending another minute optimizing partition centroids.",
+  "sha256": "0a19432d5f83faf379cd52b973b8e89810f777fb6c3b5cedb2e34da8d2d17846",
+  "provenance": "user message 2026-09-25T22:00:40Z (session 06e10691, transcript uuid 49ba80b8-e94b-48b4-bfaa-d66f2544cf45)",
+  "operative_text": "Reopen the frozen L1 design for one isolated architectural ablation only: FLAT_BALANCED_H2, testing whether fixed graph partitions are necessary once flat semantic retrieval receives the same bounded real-edge expansion privilege. No other mechanism classes are reopened. DEV_A and DEV_B remain unavailable for selection. Primary comparison on fresh populations: FLAT vs FLAT_BALANCED_H2 with a fixed total node budget. Where a canonical partition result eventually exists, also compare against: QMAX_BALANCED_H2_PATCH1. But partition availability should no longer be required to run the new hypothesis."
+ },
+ "question": "Are partitions actually necessary, or is the KB gain just graph expansion/co-location?",
+ "design": {
+  "FLAT_RRF": "the frozen Dense + SPLADE node RRF extended to full depth (section 29): exhaustive fp32 dense products (unit queries x fp16->fp32 node rows) and fp32 SPLADE products; fv = 1/(K0 + p_dense) + 1/(K0 + p_splade), 0-based positions over all N nodes, float64; a node without a positive SPLADE score takes the SPLADE list depth; descending, ties -> dense order",
+  "FLAT@M": "FLAT_RRF[:M]",
+  "FLAT_BALANCED_H2@M": "FLAT_RRF[:M - C] (semantic base) + the first C nodes of the frozen BALANCED_H2 beam (bal1 then bal2, first-visit order) that are not in the base (graph patch) + FLAT_RRF[M - C:] minus the patch, in order, until exactly M nodes (fill)",
+  "C": "100 = one block-equivalent (npart = N // 100 blocks of mean size 100; cap = round(N / npart) = 100 on every corpus)",
+  "BALANCED_H2": "the frozen section-21 beam of the composite, unchanged: seeds = node_rrf(served dense top-200, served SPLADE top-200)[:5] (the replay-cache rule), depth 2 over the directed STRUCT family, out-edges always and in-edges only at a non-hub (deg_u + 1 > cap), dst / dir / mid transition geometry fused by RRF (K0 = 60), per-parent round-robin compression to BEAM = 100 per hop; the function source text of _l1c_microl3.py and _l1c_transfer_composite.py is exec'd verbatim (sha256 per function below)",
+  "no_partition_anywhere": "no PHG, no H4_SK, no block ownership, no node->block voting, no SAFE, no QMAX block aggregation, no new scoring mechanism",
+  "gold_metric": "ALL-gold coverage (every gold node of the query inside the served context) is primary; ANY is descriptive"
+ },
+ "comparisons": {
+  "D1 (PRIMARY, fresh, one-shot)": "per fresh dataset, split A: FLAT@5000 (reference) vs FLAT_BALANCED_H2@5000 (arm); exact two-sided McNemar on the ALL-gold indicators; GAIN if gained > lost and p < 0.01, LOSS if lost > gained and p < 0.01, else NEUTRAL",
+  "D2 (DEV_A, non-selecting)": "PRIMARY = QMAX_BALANCED_H2_PATCH1 (its per-row ALL indicator from the section-29 record) vs FLAT_BALANCED_H2 at PRIMARY's per-query exposure B_q; same test and labels",
+  "D3 (DEV_A, non-selecting)": "FLAT@B_q vs FLAT_BALANCED_H2@B_q; same test and labels",
+  "descriptive": "fixed M in (500, 1000, 2000, 5000); strata by hop and by gold count; patch statistics (novel nodes, hop-1 share, fill); gold accounting (rescued by the patch, displaced from the FLAT tail); ANY"
+ },
+ "decision_rules": {
+  "FRESH_VERDICT": {
+   "NOT_UNIVERSAL": "any fresh D1 = LOSS",
+   "FLAT_BALANCED_H2_UNIVERSAL": "no fresh D1 = LOSS and webqsp D1 = GAIN",
+   "NO_KB_GAIN": "no fresh D1 = LOSS and webqsp D1 != GAIN"
+  },
+  "DEV_A_KB_READING (diagnostic)": {
+   "PARTITIONS_BEAT_FLAT_H2_ON_THE_DEV_A_KB (the user's second scenario)": "metaqa and metaqa_phg D2 both LOSS",
+   "PARTITIONS_NOT_SHOWN_NECESSARY_ON_THE_DEV_A_KB (the user's first scenario)": "metaqa and metaqa_phg D2 both NEUTRAL or GAIN",
+   "MIXED_BETWEEN_PARTITIONINGS": "otherwise"
+  },
+  "adoption": "none by this record: any change to the frozen L1 (FREEZE f81ebb84) is the user's ruling"
+ },
+ "predictions (written before any run)": {
+  "webqsp D1 (FLAT@5000 vs FLAT_BALANCED_H2@5000)": "GAIN (+3 to +15 points): NAME_ONLY KB, the flat list finds the topic entity but not its neighbours; the patch adds them",
+  "hotpotqa D1": "NEUTRAL: text, 2 golds per query, the flat list already holds most gold pairs well inside 4900 nodes",
+  "2wiki D1": "NEUTRAL or a small GAIN: text multi-hop; bridge entities reachable by title edges may enter through the patch",
+  "metaqa D2 (PRIMARY vs FLAT_BALANCED_H2 at B_q)": "LOSS -- the user's second scenario: FLAT_H2 about 0.45-0.60 vs PRIMARY 0.78 / 0.80; one 100-node patch is exhausted by hop-1 nodes, while a block co-locates answer sets",
+  "metaqa_phg D2": "LOSS (as metaqa)",
+  "metaqa / metaqa_phg D3 (FLAT vs FLAT_BALANCED_H2 at B_q)": "GAIN (+8 to +20 points), mostly on hop-1 queries",
+  "squad D2 / D3": "NEUTRAL / NEUTRAL (flat is already about 0.999)",
+  "squad_phg D2 / D3": "NEUTRAL / NEUTRAL",
+  "musique D2": "GAIN (FLAT_H2 about 0.88 vs PRIMARY 0.76, i.e. the section-29 flat advantage survives the 100-node patch)",
+  "musique D3": "NEUTRAL"
+ },
+ "flags": [
+  "POPULATION REUSE: hotpotqa / 2wiki split A were reserved one-shot by PREREGISTRATION_TRANSFER_2WIKI_HOTPOTQA.json (3af9ad9b) for the frozen composite's transfer, which remains blocked (no canonical partition). The user's ruling designates these populations for this ablation; it computes no composite number there and selects nothing, but after it those golds have been read by a flat-arm comparison.",
+  "WEBQSP: train_holdout split A (786 rows) only; split B (717 rows) stays sealed for a later confirmation.",
+  "2WIKI N: 3af9ad9b states N = 11,539,902; the served canonical corpus has N = 5,989,847 (DATASET.json record ddb083a8...). This run uses the served whole corpus; the discrepancy is recorded, not resolved.",
+  "SERVED LISTS: the retrieval caches (seeds) were computed with TF32 products on H100s; the flat arms here are exhaustive fp32 products. The served-list agreement bound AGREE_MIN = 0.90 (top-100 set overlap) is a wiring check (vectors / row mapping), not a float-noise test; a gold-free probe before freezing (first 40 split-A rows, whole corpus) measured 1.00 dense and SPLADE top-100 overlap on all three fresh datasets (served_list_agreement_probe below).",
+  "DEV_A: split-B rows enter the reproduced section-29 pass only as sgemm batch companions (so the pass is byte-identical to section 29); no DEV_B gold is used and no DEV_B number is computed.",
+  "BOUNDED EXACT TOP-M: on the fresh corpora FLAT_RRF[:5000] is computed by a two-sweep bounded algorithm (K_TOP = 12000 > K0 + 2M - 2), validated on every DEV_A split-A row against a full materialisation of the same products; it is an exact implementation of FLAT_RRF, not a new scoring mechanism.",
+  "DRY RUNS: the full 11-step dry chain and the summary dry ran on module sha 713379b1a62f6abafe6339463fe5bf16c493ae7c6841b49a8211e1f4d79a17e1 (stand-in gold on every H2 path; the DEV_A steps asserted real-gold identities against section 29 and printed no number; the fresh G smokes are gold-free on the first 200 split-A rows and the first 3 node chunks). The frozen module adds only NS.clear() before the STRUCT arrays are released (memory hygiene: the exec'd beam functions hold their namespace in a reference cycle), re-dried on 2wiki G / E and metaqa DEV_A with identical gold-free outputs (STRUCT, beam statistics, served-list agreement, patch statistics). Earlier smokes ran on pre-final versions (before the sweep-2 score prefilter and --check-prereg were added).",
+  "HOST: foreign process pid 20560 (universal_v2_six.py --stage fit; about 19 GB private, 5-7 GB working set) and other sessions' jobs (pytest runs, a pymetis memory probe) load the host: 0.4-2.4 GiB physical available, 13-14 GiB swap, 2-8 GB free commit during the dry runs; none is touched. Wall-clock times are host-contended. The runs keep their own memory low (streamed products, int32 adjacency, one SPLADE shard at a time).",
+  "V2 SUPERSESSION: v1 (b35f954a) is in _history/ with byte-identical copies of the v1 module, summary and chain. The v1 non-dry finish() did not exit, so the G_webqsp process also computed and wrote stage E (see incident); the webqsp records are kept under the v1 shas and pinned here; the remaining nine steps and the summary run under v2. The webqsp D1 was seen before v2 was written; v2 changes no design, constant, prediction or rule."
+ ],
+ "code": {
+  "new_modules": {
+   "_l1c_flath2.py": {
+    "path": "scratchpad/_l1c_flath2.py",
+    "sha256": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b"
+   },
+   "_l1c_flath2_summary.py": {
+    "path": "scratchpad/_l1c_flath2_summary.py",
+    "sha256": "aa9b611f10263e1f5ef78f8937c85dd7cd7a3c00b91d319b3ee04d00e150022b"
+   },
+   "_l1c_flath2_chain.sh": {
+    "path": "scratchpad/_l1c_flath2_chain.sh",
+    "sha256": "de851ac292dc8e987708bf458a9512a9c53cc6ac3e7ee935fa3fce5eb6a94b29"
+   }
+  },
+  "imports_unchanged": {
+   "_l1c_microl3.py": {
+    "path": "scratchpad/_l1c_microl3.py",
+    "sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5"
+   },
+   "_l1c_transfer_composite.py": {
+    "path": "scratchpad/_l1c_transfer_composite.py",
+    "sha256": "1241ec58e759ab99e77ff17936b6edc6b072344ea1d47a76a79f940a1047cc5b"
+   },
+   "_l1c_transfer_blockmax.py": {
+    "path": "scratchpad/_l1c_transfer_blockmax.py",
+    "sha256": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9"
+   },
+   "_l1c_flat.py": {
+    "path": "scratchpad/_l1c_flat.py",
+    "sha256": "27aafbfc9d24e39e92154cd6d3ebe8364c07e32af5a8ced51a88e766bc6b3c95"
+   },
+   "_l1c_flat_summary.py": {
+    "path": "scratchpad/_l1c_flat_summary.py",
+    "sha256": "a21db51b8c60258d876de94b4631739ec2789b6b9998bd045f1aed4ac3e86890"
+   },
+   "_l1c_h2patch.py": {
+    "path": "scratchpad/_l1c_h2patch.py",
+    "sha256": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d"
+   },
+   "_l1c_h2balanced.py": {
+    "path": "scratchpad/_l1c_h2balanced.py",
+    "sha256": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe"
+   },
+   "_l1c_qmaxbal.py": {
+    "path": "scratchpad/_l1c_qmaxbal.py",
+    "sha256": "cae88fa64a0516a4f55c99a4a3b464afd39e467dca42e4380a546ebbd545b1c8"
+   },
+   "_l1g_candidate.py": {
+    "path": "scratchpad/_l1g_candidate.py",
+    "sha256": "b01c27a6e64b18756db1ca1d8910e8db4bb54fa019d9809698cb1369206169e0"
+   },
+   "_l1g_core.py": {
+    "path": "scratchpad/_l1g_core.py",
+    "sha256": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327"
+   },
+   "_l1s_core.py": {
+    "path": "scratchpad/_l1s_core.py",
+    "sha256": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861"
+   },
+   "_l1x90_core.py": {
+    "path": "scratchpad/_l1x90_core.py",
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068"
+   },
+   "_ta_prepartition.py": {
+    "path": "scratchpad/_ta_prepartition.py",
+    "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+   },
+   "adapter.py": {
+    "path": "src/l1_canonical/adapter.py",
+    "sha256": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01"
+   },
+   "replay_cache.py": {
+    "path": "src/l1_canonical/replay_cache.py",
+    "sha256": "1fc5411c9f12f25d81586aabdb1af0da371752f20be5d4d09d8d17529a89f0d1"
+   },
+   "canonical.py": {
+    "path": "data/final_canonical/canonical.py",
+    "sha256": "c657830b304afe861893b516726af419d35142334f866517b83221427a9016f5"
+   }
+  },
+  "function_sources_sha256": {
+   "admissible": "9ef196212452f0d97ecf091afc331d27e2f04f61b334e26de8684e1a0a0c0763",
+   "beam_balanced": "90c1fff3c69362feb5010b58998a44e6771f597d2ba09d839da7b3417788ee6d",
+   "expand_real": "c366e8e8cad9bb5091df83aa5fe8353929386837dab7a688362bcbcc136e8cf0",
+   "fused_order": "6491f4b6898d7936639b2282e0b4b1511066cfa550da3bf4987fb6d8f71e5e01",
+   "rows": "27daec3e884016d80382bf57c81917c443751093047022933b4b6ad4b3d7cafa",
+   "rr_compress": "3c30f62cb306e6bdfa581f7e12f29d23d0169058eea16e0a4d595da1bc13d418",
+   "rr_rank": "8dc7793aec7cdd08ebc97841bcfcaa14eb6e7021c3fa74559e70386da2f66d04",
+   "transition_scores": "ebbd13d2b7e5f5cd8df7278c715c196e10f29f3fd0c3f178c0d6193b957437c1"
+  }
+ },
+ "constants": {
+  "K0": 60,
+  "C_PATCH": 100,
+  "BEAM": 100,
+  "DEPTH": 2,
+  "M_MAIN": 5000,
+  "M_CURVE": [
+   500,
+   1000,
+   2000,
+   5000
+  ],
+  "K_TOP": 12000,
+  "CQ": 200,
+  "BLOCK": 40000,
+  "ALPHA": 0.01,
+  "EVAL_CAP": 2000,
+  "SEED_K": 5,
+  "TOP200": 200,
+  "N_AGREE": 100,
+  "AGREE_MIN": 0.9,
+  "NG_BUCKETS": [
+   [
+    "1",
+    1,
+    1
+   ],
+   [
+    "2",
+    2,
+    2
+   ],
+   [
+    "3",
+    3,
+    3
+   ],
+   [
+    "4",
+    4,
+    4
+   ],
+   [
+    "5-10",
+    5,
+    10
+   ],
+   [
+    "11+",
+    11,
+    1099511627776
+   ]
+  ]
+ },
+ "records_read_only": {
+  "flat_A_metaqa.json": {
+   "path": "results/L1_COVPART/flat_A_metaqa.json",
+   "sha256": "10769e0ca8c2171155e5b885f67403d40741ff1c0792f1701c60eaa9b5727ce8"
+  },
+  "flat_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/flat_A_metaqa_phg.json",
+   "sha256": "f4fc7a2e6469097bf9e6357160e76ec56a5995a773eb4e1724041005af6a4ad9"
+  },
+  "flat_A_squad.json": {
+   "path": "results/L1_COVPART/flat_A_squad.json",
+   "sha256": "2552d3aff4d4847a19244352a685fbb9f52d5d5b5bd961efe52986700a10689d"
+  },
+  "flat_A_squad_phg.json": {
+   "path": "results/L1_COVPART/flat_A_squad_phg.json",
+   "sha256": "7a459c4df4ab984d743f5ffe16b3d0378e8cedca547c1a64f417b3ab83ef7098"
+  },
+  "flat_A_musique.json": {
+   "path": "results/L1_COVPART/flat_A_musique.json",
+   "sha256": "bc22960ddcd787b1b23f78d5a250d4e37116c3ad80bed50810f308f119879507"
+  },
+  "flat_SUMMARY.json": {
+   "path": "results/L1_COVPART/flat_SUMMARY.json",
+   "sha256": "3fedf574e510a371af637c94bab065b86efd9ddeaab59c783aa01a5525b7d954"
+  },
+  "PREREGISTRATION_FLAT_VS_PARTITION.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_FLAT_VS_PARTITION.json",
+   "sha256": "8ef5134be6cee9bcddd499c7b64ebee62035d187a580b20ac7d746c8828d89d2"
+  },
+  "PREREGISTRATION_TRANSFER_2WIKI_HOTPOTQA.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_TRANSFER_2WIKI_HOTPOTQA.json",
+   "sha256": "3af9ad9b23a02c60708a0b395a99a76f660dc78084a8606c8bcca8de58f7882e"
+  },
+  "FREEZE_QMAX_BALANCED_H2_PATCH1.json": {
+   "path": "results/L1_COVPART/FREEZE_QMAX_BALANCED_H2_PATCH1.json",
+   "sha256": "f81ebb84b3c4a98c8c0b16337fb0febabc360ee51dd8eedbc9a99410c1f3b152"
+  },
+  "CANONICAL_FREEZE.json": {
+   "path": "data/final_canonical/CANONICAL_FREEZE.json",
+   "sha256": "039dcf327aa71e39994cdeedc731033279d81d854d74efc29c86f197546f3dc8"
+  },
+  "PREREGISTRATION_FLAT_BALANCED_H2__v1": {
+   "path": "results/L1_COVPART/_history/PREREGISTRATION_FLAT_BALANCED_H2__v1_2026-09-26T04-05-14Z.json",
+   "sha256": "b35f954a190ebc5fc84a9dbf0a467a82ca0890bcee1a289d673429896fa53572"
+  },
+  "_l1c_flath2.py__v1": {
+   "path": "results/L1_COVPART/_history/_l1c_flath2__v1_2ce6116b.py",
+   "sha256": "2ce6116bdb5613c5621a554689a06873a683ecd10db2b201c71b0bc56035c9d0"
+  },
+  "_l1c_flath2_summary.py__v1": {
+   "path": "results/L1_COVPART/_history/_l1c_flath2_summary__v1_d2ef56b5.py",
+   "sha256": "d2ef56b587a1f9a91c7171b9e3047044d253f4383d7897ece120a2253cac4289"
+  },
+  "_l1c_flath2_chain.sh__v1": {
+   "path": "results/L1_COVPART/_history/_l1c_flath2_chain__v1_1f94709f.sh",
+   "sha256": "1f94709f2163e1ce51e591165ee42f04433aef1d380c238444b6259b3985f8d3"
+  },
+  "flath2_G_webqsp.json": {
+   "path": "results/L1_COVPART/flath2_G_webqsp.json",
+   "sha256": "e72022d9fdf041e17b63f2fffd617c243c055e2a126bddbd2de77aa27d78bbc1"
+  },
+  "flath2_G_webqsp.npz": {
+   "path": "results/L1_COVPART/flath2_G_webqsp.npz",
+   "sha256": "b942b6106f07b784135b388f6892e80bdc0cb25eacf02f5a3e519f6fb3d01eda"
+  },
+  "flath2_G_webqsp.log": {
+   "path": "results/L1_COVPART/flath2_G_webqsp.log",
+   "sha256": "6c206a0c5382fb85ea3e2ed3930daf96f77f207be44d65d614f9453b4c2d2751"
+  },
+  "flath2_E_webqsp.json": {
+   "path": "results/L1_COVPART/flath2_E_webqsp.json",
+   "sha256": "43fd1d7666b1a3d8478949d2076988cc83412c8b514553f75712a10e2424de00"
+  }
+ },
+ "caches_read_only": {
+  "metaqa": {
+   "path": "data/l1_canonical/metaqa/replay_cache.npz",
+   "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b"
+  },
+  "squad": {
+   "path": "data/l1_canonical/squad/replay_cache.npz",
+   "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6"
+  },
+  "musique": {
+   "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+   "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5"
+  },
+  "metaqa_phg": {
+   "path": "data/l1_lowmem/metaqa/replay_cache__LOWMEM__PHG_REPAIR1_con.npz",
+   "sha256": "584e17dec26d0408d5253a3f79e471bc7ec128f6dde744581bb6e502da5b4e5b"
+  },
+  "squad_phg": {
+   "path": "data/l1_lowmem/squad/replay_cache__LOWMEM__PHG_con.npz",
+   "sha256": "edd9b36bb4ba45ff0579c0591f19dc263ae84296f7f9299684974530845f20ab"
+  }
+ },
+ "population": {
+  "webqsp": {
+   "eval_split": "train_holdout",
+   "n_eval_rows": 1549,
+   "n": 1503,
+   "dropped_without_gold": 46,
+   "row_query_ids_sha256": "faa1d372294cc62f116549bdce087bb0d3f8ce533dce8bfd814c56e1c42e7a2e",
+   "rows_sha256": "4704cc3dc43abe90ae4e2610c87aab7fd683f36d80e142cb6990c837c66526a6",
+   "n_A": 786,
+   "n_B": 717,
+   "rows_A_sha256": "d87569a881137c2558669ebb0958db2fb912836dc2249e6a8a24e9025fa4bfeb",
+   "gold_nodes_per_split_A_query (counts only)": {
+    "mean": 7.13,
+    "median": 1.0,
+    "max": 376,
+    "n_rows_by_bucket": {
+     "1": 401,
+     "2": 100,
+     "3": 70,
+     "4": 38,
+     "5-10": 89,
+     "11+": 88
+    }
+   },
+   "N (whole served corpus; no subsetting)": 2592894,
+   "directed_STRUCT_edges": 8309195,
+   "undirected_STRUCT_keys": 5882501,
+   "npart_equivalent (N // 100)": 25928,
+   "cap = round(N / npart_equivalent)": 100,
+   "dataset_pins": {
+    "DATASET_json_RECORD_SHA256": "56c8ed2352c5f0ecdebf1a103dc0aa9913ec5067f10664f70a4b1b26412b525d"
+   }
+  },
+  "hotpotqa": {
+   "eval_split": "validation",
+   "n_eval_rows": 7405,
+   "n": 2000,
+   "dropped_without_gold": 0,
+   "row_query_ids_sha256": "e68f50610d35992806ae13359634770c98fe9b2c99fd1073156f70787e7d8e33",
+   "rows_sha256": "8f4bea60cd622414f7cdd85d7e5780c87ffbd834ff7f134159876f1f7b0c4175",
+   "n_A": 1031,
+   "n_B": 969,
+   "rows_A_sha256": "035d38a55fd9bd50d1f0dd02b88df9efe6d97a3b199c80d1a93b9c52ea30de81",
+   "gold_nodes_per_split_A_query (counts only)": {
+    "mean": 2.0,
+    "median": 2.0,
+    "max": 2,
+    "n_rows_by_bucket": {
+     "1": 0,
+     "2": 1031,
+     "3": 0,
+     "4": 0,
+     "5-10": 0,
+     "11+": 0
+    }
+   },
+   "N (whole served corpus; no subsetting)": 5233329,
+   "directed_STRUCT_edges": 15367541,
+   "undirected_STRUCT_keys": 15095287,
+   "npart_equivalent (N // 100)": 52333,
+   "cap = round(N / npart_equivalent)": 100,
+   "dataset_pins": {
+    "DATASET_json_RECORD_SHA256": "2f778679a52f75c045615f32095c27d8217dfce0d7600319180d985e45793c6f"
+   }
+  },
+  "2wiki": {
+   "eval_split": "dev",
+   "n_eval_rows": 12576,
+   "n": 2000,
+   "dropped_without_gold": 0,
+   "row_query_ids_sha256": "1781c90d0c2cdd3ee40988081791575f3426cc3b2541cff8470e6dcc0eb7282c",
+   "rows_sha256": "9c29d7f6c978e005f6c823284b0fb28d2fb8301bc25dfe59cc27fe5b0db8d6f5",
+   "n_A": 1004,
+   "n_B": 996,
+   "rows_A_sha256": "91146bcb18b0e83cbe926613cf283db7bdd4897411fd9aa6f6e71d38f0e18f0d",
+   "gold_nodes_per_split_A_query (counts only)": {
+    "mean": 2.43,
+    "median": 2.0,
+    "max": 4,
+    "n_rows_by_bucket": {
+     "1": 0,
+     "2": 790,
+     "3": 0,
+     "4": 214,
+     "5-10": 0,
+     "11+": 0
+    }
+   },
+   "N (whole served corpus; no subsetting)": 5989847,
+   "directed_STRUCT_edges": 28963600,
+   "undirected_STRUCT_keys": 28208857,
+   "npart_equivalent (N // 100)": 59898,
+   "cap = round(N / npart_equivalent)": 100,
+   "dataset_pins": {
+    "DATASET_json_RECORD_SHA256": "ddb083a8f8cc0a1e5626d17ebd834c25c7b571d72c2bea58223276da8ff26a8a"
+   }
+  }
+ },
+ "derived_read_only": {
+  "webqsp": {
+   "keys.npz": {
+    "path": "data/l1_canonical/webqsp/keys.npz",
+    "sha256": "081c3fa4b27f56de9a91a3b5ece10f77182c6a072caf35aa3691adcb41043c5e"
+   },
+   "query_index.npz": {
+    "path": "data/l1_canonical/webqsp/query_index.npz",
+    "sha256": "f85da51063db7173c8298ba9a34582da8aaa76b6fbe3ac2c5bc6bef011f196fb"
+   }
+  },
+  "hotpotqa": {
+   "keys.npz": {
+    "path": "data/l1_canonical/hotpotqa/keys.npz",
+    "sha256": "dea82ccfde91516dea77986a519efd9931d014b3806a4ce07b46829cbd9d5998"
+   },
+   "query_index.npz": {
+    "path": "data/l1_canonical/hotpotqa/query_index.npz",
+    "sha256": "007f94047bd12804f3adfbf5864f38a24e2eb76885fe196de1c0a80159d18995"
+   }
+  },
+  "2wiki": {
+   "keys.npz": {
+    "path": "data/l1_canonical/2wiki/keys.npz",
+    "sha256": "ef9e12706a196d1d4d6580fdcd0849e8d3530e751d49332e20b0d206f19c9677"
+   },
+   "query_index.npz": {
+    "path": "data/l1_canonical/2wiki/query_index.npz",
+    "sha256": "cfa6f9bdecd43da2affb1118035c39cee60c628707c22dff43900213ba29d1af"
+   }
+  }
+ },
+ "served_list_agreement_probe (gold-free, before freezing)": {
+  "script": {
+   "path": "scratchpad/_l1c_flath2_agree_probe.py",
+   "sha256": "92121281f790261c2bd8edb0cf27643ce872c88d554cef9cdab97ba005e50207"
+  },
+  "what": "first 40 split-A rows of each fresh dataset (gold COUNTS only, the population rule): exhaustive fp32 dense / SPLADE top-100 over the whole served corpus vs the served retrieval caches (TF32 top-200); run to check that AGREE_MIN is a wiring bound, not a float-noise trap",
+  "results": {
+   "webqsp": {
+    "dataset": "webqsp",
+    "N": 2592894,
+    "rows_probed": 40,
+    "seconds": 133.6,
+    "dense_ov100": {
+     "mean": 1.0,
+     "min": 1.0,
+     "p10": 1.0
+    },
+    "splade_ov100": {
+     "mean": 1.0,
+     "min": 1.0,
+     "p10": 1.0
+    },
+    "rank1_equal_dense": 40,
+    "served_below_fp32_100th_max_gap": {
+     "max": 0.0
+    },
+    "served_top100_worst_fp32_rank": {
+     "max": 99,
+     "median": 99.0
+    }
+   },
+   "hotpotqa": {
+    "dataset": "hotpotqa",
+    "N": 5233329,
+    "rows_probed": 40,
+    "seconds": 224.8,
+    "dense_ov100": {
+     "mean": 1.0,
+     "min": 1.0,
+     "p10": 1.0
+    },
+    "splade_ov100": {
+     "mean": 1.0,
+     "min": 1.0,
+     "p10": 1.0
+    },
+    "rank1_equal_dense": 40,
+    "served_below_fp32_100th_max_gap": {
+     "max": 0.0
+    },
+    "served_top100_worst_fp32_rank": {
+     "max": 99,
+     "median": 99.0
+    }
+   },
+   "2wiki": {
+    "dataset": "2wiki",
+    "N": 5989847,
+    "rows_probed": 40,
+    "seconds": 258.5,
+    "dense_ov100": {
+     "mean": 1.0,
+     "min": 1.0,
+     "p10": 1.0
+    },
+    "splade_ov100": {
+     "mean": 1.0,
+     "min": 1.0,
+     "p10": 1.0
+    },
+    "rank1_equal_dense": 40,
+    "served_below_fp32_100th_max_gap": {
+     "max": 0.0
+    },
+    "served_top100_worst_fp32_rank": {
+     "max": 99,
+     "median": 99.0
+    }
+   }
+  },
+  "consequence": "AGREE_MIN = 0.90 kept unchanged: every probed row agrees at 1.00 (dense and SPLADE), rank 1 identical on every row"
+ },
+ "outputs": [
+  "results/L1_COVPART/flath2_G_<webqsp|hotpotqa|2wiki>.json + .npz (gold-free stage)",
+  "results/L1_COVPART/flath2_E_<dataset>.json",
+  "results/L1_COVPART/flath2_A_<metaqa|metaqa_phg|squad|squad_phg|musique>.json",
+  "results/L1_COVPART/flath2_SUMMARY.json",
+  "results/L1_COVPART/flath2_<tag>.log (write-once)"
+ ],
+ "forbidden": [
+  "any partition in the arm",
+  "tuning C, M, K0, BEAM, DEPTH, SEED_K, K_TOP or the budget after seeing a number",
+  "reading DEV_B, fresh split B or TEST",
+  "writing anything under data/",
+  "editing caches, partitions, canonical manifests or frozen records",
+  "re-running a population after its record exists (write-once)",
+  "selecting a mechanism on DEV_A"
+ ],
+ "platform": {
+  "python": "3.13.5",
+  "numpy": "2.3.2"
+ },
+ "host_at_preregistration": {
+  "host_total_gib": 15.69,
+  "host_available_gib": 1.05
+ },
+ "version": 2,
+ "supersedes": {
+  "path": "results/L1_COVPART/_history/PREREGISTRATION_FLAT_BALANCED_H2__v1_2026-09-26T04-05-14Z.json",
+  "sha256": "b35f954a190ebc5fc84a9dbf0a467a82ca0890bcee1a289d673429896fa53572",
+  "utc_v1": "2026-09-26T04:05:14Z",
+  "v1_code (copies, byte-identical, sha-verified)": {
+   "_l1c_flath2.py": {
+    "path": "results/L1_COVPART/_history/_l1c_flath2__v1_2ce6116b.py",
+    "sha256": "2ce6116bdb5613c5621a554689a06873a683ecd10db2b201c71b0bc56035c9d0"
+   },
+   "_l1c_flath2_summary.py": {
+    "path": "results/L1_COVPART/_history/_l1c_flath2_summary__v1_d2ef56b5.py",
+    "sha256": "d2ef56b587a1f9a91c7171b9e3047044d253f4383d7897ece120a2253cac4289"
+   },
+   "_l1c_flath2_chain.sh": {
+    "path": "results/L1_COVPART/_history/_l1c_flath2_chain__v1_1f94709f.sh",
+    "sha256": "1f94709f2163e1ce51e591165ee42f04433aef1d380c238444b6259b3985f8d3"
+   }
+  },
+  "precedent": "results/L1_COVPART/PREREGISTRATION_BALANCED_H2_PATCH1_DEV_A.json (v2; v1 in _history/)",
+  "host_at_v1_preregistration": {
+   "host_total_gib": 15.69,
+   "host_available_gib": 0.47
+  }
+ },
+ "incident": {
+  "what": "In the non-dry path, finish() wrote the record and returned instead of exiting (the --dry path exits inside finish(), so the 11-step dry chain could not show it). The G_webqsp process therefore fell through into the stage-E code: it passed the E write-once guard (no E record yet), re-read its own just-written G record and arrays under the same sha asserts a separate E process makes (dry flag, code sha, population, constants, npz sha), computed stage E with the pinned v1 code, and wrote flath2_E_webqsp.json. The chain's next step (E_webqsp) then stopped at its write-once guard (exit 1). No other step ran.",
+  "consequences": [
+   "flath2_E_webqsp.json is computed exactly as a separate v1 E process would compute it (same code, same G record and arrays, same gold file, same population); its host_at_start, seconds, seconds_by_stage and process_rss_mb_at_end describe the G process (they include the stage-G times)",
+   "the E output lines are in flath2_G_webqsp.log; no flath2_E_webqsp.log exists",
+   "under v1 every DEV_A step would have written its record and then crashed in the fresh-dataset section (no record is affected: none ran)"
+  ],
+  "fix (v2)": {
+   "_l1c_flath2.py": "one added line: sys.exit(0) at the end of finish() after the non-dry write (the dry path is unchanged: it already exits inside finish(), so the v1 dry runs stand for v2)",
+   "_l1c_flath2_summary.py": "accepts the v1-produced webqsp E record (and its stage-G files) under the v1 pre-registration / code shas pinned below, every other record under v2's; adds --check-prereg (pins and the v1-produced records only)",
+   "_l1c_flath2_chain.sh": "runs the nine remaining steps (A_metaqa, A_metaqa_phg, G/E hotpotqa, G/E 2wiki, A_squad, A_squad_phg, A_musique) and the summary; the webqsp steps are removed"
+  },
+  "not_changed": "design, constants, predictions, decision rules, populations, every imported module, cache and derived-file pin"
+ },
+ "records_produced_under_v1 (kept, not re-run)": {
+  "datasets": [
+   "webqsp"
+  ],
+  "produced_under": {
+   "preregistration": {
+    "path": "results/L1_COVPART/_history/PREREGISTRATION_FLAT_BALANCED_H2__v1_2026-09-26T04-05-14Z.json",
+    "sha256": "b35f954a190ebc5fc84a9dbf0a467a82ca0890bcee1a289d673429896fa53572"
+   },
+   "code": {
+    "path": "results/L1_COVPART/_history/_l1c_flath2__v1_2ce6116b.py",
+    "sha256": "2ce6116bdb5613c5621a554689a06873a683ecd10db2b201c71b0bc56035c9d0"
+   }
+  },
+  "files": {
+   "flath2_G_webqsp.json": {
+    "path": "results/L1_COVPART/flath2_G_webqsp.json",
+    "sha256": "e72022d9fdf041e17b63f2fffd617c243c055e2a126bddbd2de77aa27d78bbc1"
+   },
+   "flath2_G_webqsp.npz": {
+    "path": "results/L1_COVPART/flath2_G_webqsp.npz",
+    "sha256": "b942b6106f07b784135b388f6892e80bdc0cb25eacf02f5a3e519f6fb3d01eda"
+   },
+   "flath2_G_webqsp.log": {
+    "path": "results/L1_COVPART/flath2_G_webqsp.log",
+    "sha256": "6c206a0c5382fb85ea3e2ed3930daf96f77f207be44d65d614f9453b4c2d2751"
+   },
+   "flath2_E_webqsp.json": {
+    "path": "results/L1_COVPART/flath2_E_webqsp.json",
+    "sha256": "43fd1d7666b1a3d8478949d2076988cc83412c8b514553f75712a10e2424de00"
+   }
+  },
+  "why kept, not re-run": "the webqsp population is write-once and its gold has been read; a re-run would be a second look at the same split-A gold. The v1 computation is the pre-registered one (the code is pinned and byte-identical to the v1 copy above)"
+ },
+ "already_observed_before_v2 (copied from flath2_E_webqsp.json)": {
+  "D1 webqsp": {
+   "reference": "FLAT@5000",
+   "arm": "FLAT_BALANCED_H2@5000",
+   "ALL_reference": 0.4962,
+   "ALL_arm": 0.7595,
+   "points_arm_minus_reference": 26.34,
+   "label": "GAIN",
+   "verdict": "GRAPH_PATCH_HELPS"
+  },
+  "D1 webqsp paired": {
+   "gained": 207,
+   "lost": 0,
+   "p": 9.723461371658034e-63
+  },
+  "curve webqsp (FLAT_ALL / FLAT_H2_ALL by M)": {
+   "500": [
+    0.3117,
+    0.6641
+   ],
+   "1000": [
+    0.369,
+    0.6947
+   ],
+   "2000": [
+    0.4275,
+    0.7239
+   ],
+   "5000": [
+    0.4962,
+    0.7595
+   ]
+  },
+  "prediction (v1, verbatim)": "GAIN (+3 to +15 points): NAME_ONLY KB, the flat list finds the topic entity but not its neighbours; the patch adds them",
+  "prediction vs outcome": "GAIN predicted and observed; the size (+26.34) is above the predicted +3 to +15 range",
+  "note": "nothing else was observed: no DEV_A, hotpotqa or 2wiki number exists; the v2 edits touch no computation"
+ }
+}

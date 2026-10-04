@@ -1,0 +1,43 @@
+{
+ "stage": "FBX_SCALE / addendum 3: rung 3b (closed-neighbourhood-connectivity label propagation) declared and built before it is scored",
+ "declared": "2026-09-30T13:54:27+05:30",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459"
+ },
+ "status": "DEVELOPMENT (calibration of a systems substrate); nothing here selects a retrieval mechanism",
+ "disclosure_of_what_was_read_first": {
+  "the_full_verdict": "the full-population EVAL results/FREEBASE_SCALE/CALIB_EVAL_WEBQSP__v1.json (sha256 5e037a1ca012b41033a7d865ccddee7acdc1cf04153e5f97ad8f57785cd1225e) was READ before this addendum was written: R1 hash, R2 LDG on S and R3 LP on S all FAIL the addendum-1 gate (max loss vs PHG at matched B_P: 411, 181 and 156 rows of 786); diagnostics LDG_SK 155 and LP_SK 138.",
+  "the_finding_that_motivates_R3b": "in that record, recall at matched fan-out orders with the mean number of distinct blocks in an anchor's closed neighbourhood e(u) = {u} U N(u) (the objective the frozen H4 hypergraph partitioner minimises), not with the edge cut: at K >= 500 the R3 map has the LOWER cut than PHG and still the worse recall (K 1000: ALL@5000 598 vs 672), while closed-neighbourhood blocks order PHG 2.42 < LP 2.71 < LDG 2.92 < hash 4.77.",
+  "the_R3b_map_structure": "the R3b maps were built (record results/FREEBASE_SCALE/CALIB_MAPS_WEBQSP__cn_v1.json, sha256 7f4f52422d020810da68bc539121581668a7247a2747d82587757a1a003f8e14) BEFORE this addendum and BEFORE any recall was computed for them; their STRUCTURE (KM1, cut, closed-neighbourhood blocks, sizes, seconds, RSS) was read.  Recall was not.",
+  "variant_count": "R3b is a variant of rung 3 designed AFTER the v1 verdict from the finding above, so it is the fourth partitioner scored on the same 786 split-A rows (hash, LDG, LP, R3b); it is counted, not hidden.  The rows are a development population, no held-out row is read (split B stays sealed, TEST unread).",
+  "consequence": "R3b's parameters (below) were fixed before any R3b recall existed and are not tuned afterwards; a failed R3b goes to the user (rung 4 or accept-with-disclosure), it is not re-parameterised."
+ },
+ "R3b_definition": {
+  "name": "balanced label propagation whose move gain is the change of the closed-neighbourhood connectivity KM1 = sum_u (lambda(e(u)) - 1), a REFINEMENT of the R3 LP map (CN_S from LP_S on graph S; CN_SK from LP_SK on graph SK); same graph, same adjacency streams; cost class stated below",
+  "balance": "cap = ceil(1.03 N / K) and floor lo = floor(0.97 N / K), as R3",
+  "sweep": "vertices in position order 0 .. N-1, asynchronous, single thread, deterministic; at most 10 sweeps, or stop after a sweep that moves fewer than N / 1000 vertices",
+  "move": "for vertex v (skipped if it has no neighbour, or more than DMAX = 5,000 adjacency entries) in block c: candidates = the first T = 4 blocks p != c ordered by (neighbour count descending, id ascending) with a positive count and load < cap; v may leave only if load_c > lo; delta(b) = sum over the anchors u in {v} U adj(v) of ([hist_u[b] == 0] - [hist_u[c] == 1]), hist_u = exact per-anchor block histogram (pins with multiplicity); target = the candidate with the smallest delta, ties -> larger neighbour count, smaller load, smaller id; move iff delta < 0 (a strict KM1 gain)",
+  "fixed_parameters": {
+   "T": 4,
+   "DMAX": 5000,
+   "sweeps_max": 10
+  },
+  "verification": "scratchpad/_fbx_cn.py cn_reference is the executable statement of the rule; TESTCN compares the C program with it bit for bit on six random graphs, with one and with two adjacency streams, with hub skipping and with multi-edges (PASS on the host, C source sha12 4c8aaa6dd4be), and checks on multi-edge-free graphs that the reported KM1 equals the set-based definition and that the summed chosen deltas explain its change",
+  "cost_class": "exact per-anchor histograms: a pool of 2 int32 per pin (WebQSP 0.14 GB; Freebase estimated 4.4 G pins -> about 35 GB) plus 12 N bytes of offsets/counts and the 4 N byte label table; the CSRs stay memory-mapped; one extra pass over both CSR streams per sweep with random reads of the histograms.  Measured, not assumed, at stage 3b."
+ },
+ "maps_built_before_scoring": {
+  "results/FREEBASE_SCALE/CALIB_MAPS_WEBQSP__cn_v1.json": "7f4f52422d020810da68bc539121581668a7247a2747d82587757a1a003f8e14",
+  "note": "K grid 100 250 500 1000, both graphs; structure and cost only; no recall"
+ },
+ "gate (unchanged from addendum 1)": "gate cells K in {100, 250, 500}, graph S only (CN_S; the deployable arm), every B_N in {100, 250, 500, 1000, 2000, 5000}; PASS = matched-B_P ALL count at most 7 rows (of 786) under PHG at every gate cell; FAIL = 24 or more rows under at any gate cell or B_P = K on more than half the rows; else BORDERLINE (reported to the user).  Graph SK (CN_SK) is diagnostic only.  K = 1000 is scored as a diagnostic and does not enter the verdict.",
+ "scoring_run": "ONE restricted EVAL (scratchpad/_fbx_calib_cn.py) over the 786 rows on the v1 bundle, methods PHG, LP_S (control), CN_S, CN_SK at K in {100, 250, 500, 1000}.  The full-population regression of _fbx_calib.py (PHG_k25928 vs the l3w record) is not re-run (K 25,928 is outside this grid); in its place EVERY PHG and LP_S cell (SV and BP arrays, own and matched, all rows, all four K) must equal the v1 EVAL npz bit for bit, or the run aborts before it writes anything.",
+ "if_R3b_passes": "R3b is the first passing rung: the choice by (peak RAM, wall time) is among passers; stage 3b runs it on Freebase at K = 1000, 2000, 5000, 10000, 20000 (K = 100 as the calibration anchor) plus hash as the structural control, under its own dated addendum; its RAM (about 35 GB pool + 5 GB) is measured there",
+ "if_R3b_is_borderline_or_fails": "borderline -> the user; fail -> the user chooses between rung 4 (a two-level structural / hierarchical PHG; an estimated days of host compute per K) and accepting the best cheap rung as the systems-scale partitioner with its recall loss stated; no further variant is tried without a ruling",
+ "code_pinned": {
+  "_fbx_cn.c": "4c8aaa6dd4beba6020d616e170d979d3abdf95a5d6822426a09311bdda047477",
+  "_fbx_cn.py": "055c1fecbe0b8ab2a06e94ae885cd7b282818f217172c7038daac7695077300e",
+  "_fbx_cn_maps.py": "b772b85e20f1b4ff09b62dedcfa82131118d2bdca783d3e0f8e0f948c72e8c45",
+  "_fbx_calib_cn.py": "4ed46fc3a0ac9ff3768856cf009eab2ef1ff96aee0faf57da60b4bf21127946b"
+ }
+}

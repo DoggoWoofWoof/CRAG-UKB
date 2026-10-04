@@ -1,0 +1,19 @@
+{
+  "record": "FBX_SCALE addendum 17 -- laptop SYNTHETIC stress of the whole out-of-core chain (scaling hazards only; no regression target, no recall claim)",
+  "date": "2026-10-03",
+  "driver": "scratchpad/_ooc_stress.py N threads  (FBX_WSL_DISTRO=Ubuntu; laptop WSL 7 GB RAM, files on /mnt/c)",
+  "graph": "Freebase-shaped: 55 % degree-1 leaves, power-law hub targets (max in-degree 13.9 % of N at 300k, 7.8 % at 3M); stages csr -> twins W512 -> ladder L2-L4 -> split-top level quotients + cap-4 surrogate -> LPT level-4 start (Zoltan skipped) -> FM2 levels 4..0 (implicit level 0) -> blocks validity",
+  "runs": {
+    "N_300000": {"twins_ratio": 1.45, "V": [207506, 84466, 24375, 7704], "surrogate": {"V": 7704, "M": 1211, "P": 2509}, "km1_level4_to_0": [77004480, 64840667], "final_blocks": "9126..12120 (bound 12360) PASS", "wall_s": 272, "engine_rss_gb_max": 0.08},
+    "N_3000000": {"twins_ratio": 1.445, "V": [2075950, 846285, 245237, 82950], "P": [18339550, 15130220, 13826850, 13383041], "km1_level4_to_0": [762240948, 643432292],
+                  "fm_seconds_levels_4_3_2_1_0": [96.1, 21.4, 46.3, 19.4, 10.3], "heap_peak_entries_levels_4_3_2_1_0": [21648071, 9856485, 9184822, 4264352, 3226663],
+                  "fm_peak_rss_gb_levels_4_3_2_1_0": [0.79, 0.41, 0.44, 0.53, 0.59], "final_blocks": "91202..121200 (bound 123600) PASS", "wall_s": 919}
+  },
+  "observations": [
+    "no crash, overflow, or resume bug at 3M nodes / 9M edges / ~9 M-pin ladder levels; every step passes its own checks",
+    "FM2 heap peak per vertex is ~1.1x V at level 0 but ~260x V at level 4 (few vertices, large nets); level 4 dominates heap memory -> size the Freebase VCYCLE reservation from the level-4 pushes (read heap_peak_entries at level 4 first; 16 B/entry)",
+    "FM2 RSS per level is ~0.2 x (heap + phi); level-0 implicit source keeps RSS flat",
+    "level-1 twin ratio 1.45x on the synthetic vs 1.69x measured on Freebase: the synthetic is not a calibration of the Freebase census"
+  ],
+  "not_claimed": "synthetic KM1 values do not transfer; this record establishes only that the chain runs end to end at 10x the regression scale"
+}

@@ -1,0 +1,280 @@
+{
+ "RECORD": "BOUNDED_VERTEXCUT_R2_ASSIGNMENT",
+ "dataset": "squad",
+ "utc": "2026-09-15T18:11:32Z",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_BOUNDED_VERTEXCUT_R2.json",
+  "sha256": "10dbcfcd2585067232b37bfaf0c06e90494a82416e2dfc6b0b9ad1e601dbaeec",
+  "bytes": 29945
+ },
+ "code": {
+  "path": "scratchpad/_l1c_br2_assign.py",
+  "sha256": "c473c8b07d25d35e6646f08f6e97f397eee61a191a581080b3303d4b098a865c",
+  "bytes": 10231
+ },
+ "lib": {
+  "path": "scratchpad/_l1c_br2_lib.py",
+  "sha256": "909b7109d233a894516cc1c1620272bb395bbff6e53629600e993838484b426d",
+  "bytes": 11101
+ },
+ "graph": {
+  "N": 20233,
+  "struct_edges": 744734,
+  "k_f": 202,
+  "C": 100,
+  "hubs": 4900,
+  "degree_0": 6349,
+  "struct_keys_sha256": "a1ac0cd372a31a249dd7c86bf23729a003341882dc88b05eb51c0bc82c5f92cc"
+ },
+ "owner_hypergraph": {
+  "path": "results/L1_COVPART/parts/squad__BR2_OWNERS_k404.npz",
+  "sha256": "3b59a9aaa0f32089f6abc9f6017ec70ae7f3715d4efd5d6783576960d7389f96",
+  "bytes": 2680860
+ },
+ "owner_partition": {
+  "path": "results/L1_COVPART/parts/squad__BR2_OWNERS_k404__PHG_con.npy",
+  "sha256": "3029aa1e222a429f9d1d7cb50efd229e063fe271f01de89bc30130569d252bc5",
+  "bytes": 111200
+ },
+ "owner_run_record": {
+  "path": "results/L1_COVPART/parts/squad__BR2_OWNERS_k404__PHG_con.RUN.json",
+  "sha256": "84be2a41a7144e833b32f7bafac45fc6d8f974a4229323bbf29cd55189bf01fe",
+  "bytes": 5305
+ },
+ "knn": {
+  "path": "data/final_canonical/squad/graph/knn.npz",
+  "sha256": "fee9cca5435668378d2a139614cec141d0b4977991801a004c8ca43ee8ad796f",
+  "bytes": 516370
+ },
+ "owners": {
+  "tag": "BR2_OWNERS_k404",
+  "k": 404,
+  "objects": 13884,
+  "nets_struct_edges": 744734,
+  "cut_edges_km1": 610801,
+  "cut_fraction": 0.8202,
+  "contained_fraction_owners_only": 0.1798,
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 36,
+   "contract_bound_ceil_1.03_N_over_k": 36,
+   "zoltan_tolerance_bound_1.03_x_mean": 35.397,
+   "gate": "PASS"
+  },
+  "repair": {
+   "rule": "PHG_NONEMPTY_REPAIR_V1",
+   "empty_blocks": [
+    398,
+    403
+   ],
+   "moves": 2,
+   "km1_before": 610801,
+   "km1_after": 610801
+  },
+  "block_size_owners": {
+   "mean": 34.37,
+   "min": 1,
+   "max": 36,
+   "bound_ceil_1.03_N_over_k": 36
+  },
+  "phg_run": {
+   "name": "R1_BR2_OWNERS_k404",
+   "np": 4,
+   "rc": 0,
+   "wall_seconds_outer": 31.33
+  },
+  "peak_rss_mb_per_rank": [
+   64,
+   78,
+   74,
+   73
+  ]
+ },
+ "degree_0_placement": {
+  "degree_0": 6349,
+  "anchored": 5294,
+  "fallback": 1055,
+  "degree_0_without_any_knn_row": 0,
+  "fallback_with_a_placed_degree_0_neighbour (chaining reading would anchor)": 960,
+  "anchored_ties_broken_by_node_id": 0,
+  "anchor_weight": {
+   "mean": 0.5964,
+   "min": 0.412
+  },
+  "knn_rows": 42969,
+  "seconds": 0.0
+ },
+ "alternates": {
+  "nodes": 20233,
+  "nodes_with_a_foreign_neighbour (gain >= 1)": 13881,
+  "alternates_assigned": 12338,
+  "refused_for_capacity": 1543,
+  "RF": 1.6098,
+  "alternates_hubs": 4899,
+  "hubs": 4900,
+  "alternates_nonhub": 7439,
+  "alternates_first_choice": 8935,
+  "alternates_later_choice": 3403,
+  "chosen_gain": {
+   "mean": 21.28,
+   "p50": 22.0,
+   "min": 1,
+   "max": 36
+  },
+  "alternates_with_gain_ge_home_count (boundary nodes)": 8186,
+  "alternates_with_gain_1": 480,
+  "gain_max_distribution": {
+   "50": 21,
+   "90": 35,
+   "99": 36,
+   "100": 36
+  },
+  "block_size_before_alternates": {
+   "mean": 50.08,
+   "min": 44,
+   "max": 93,
+   "gt_C": 0
+  },
+  "block_size_after": {
+   "mean": 80.62,
+   "min": 44,
+   "max": 100,
+   "at_C": 129,
+   "gt_C": 0
+  },
+  "seconds": 0.3
+ },
+ "representation": {
+  "R": 2,
+  "k": 404,
+  "C": 100,
+  "N": 20233,
+  "RF": 1.6098,
+  "memberships": 32571,
+  "replication_beyond_one": 12338,
+  "lambda": {
+   "max": 2,
+   "share_lambda_2_all_nodes": 0.6098,
+   "share_lambda_2_struct_nodes": 0.8886,
+   "share_lambda_2_nonhub_struct": 0.828,
+   "share_lambda_2_hubs": 0.9998,
+   "share_lambda_2_nonhub_deg_ge2": 0.828
+  },
+  "block_size": {
+   "mean": 80.62,
+   "min": 44,
+   "p50": 82.0,
+   "p90": 100.0,
+   "max": 100,
+   "at_C": 129,
+   "gt_C": 0,
+   "owners_only_mean": 50.08,
+   "owners_only_max": 93,
+   "after_degree_0_mean": 50.08,
+   "after_degree_0_max": 93
+  },
+  "hubs": 4900,
+  "hub_share_of_struct_nodes": 0.3529,
+  "degree_0": 6349,
+  "nodes_with_a_foreign_neighbour": 13881,
+  "home_neighbour_count": {
+   "mean_struct_nodes": 19.29
+  },
+  "contained_edges_R2_over_owners_only": 2.931,
+  "containment_1hop_R2": 0.5271,
+  "containment_1hop_owners_only": 0.1798
+ },
+ "containment": {
+  "R2": {
+   "edges": 744734,
+   "contained": 392524,
+   "containment_1hop": 0.5271,
+   "contained_home_home": 133933,
+   "contained_via_alternate": 258591,
+   "cut": 352210,
+   "edges_nonhub_both": 77985,
+   "containment_1hop_nonhub_both": 0.9689,
+   "edges_touching_a_hub": 666749,
+   "containment_1hop_touching_a_hub": 0.4754
+  },
+  "owners_only_R1": {
+   "edges": 744734,
+   "contained": 133933,
+   "containment_1hop": 0.1798,
+   "contained_home_home": 133933,
+   "contained_via_alternate": 0,
+   "cut": 610801,
+   "edges_nonhub_both": 77985,
+   "containment_1hop_nonhub_both": 0.5401,
+   "edges_touching_a_hub": 666749,
+   "containment_1hop_touching_a_hub": 0.1377
+  }
+ },
+ "structure": {
+  "R2": {
+   "label": "BR2_k404",
+   "k": 404,
+   "blocks_used": 404,
+   "RF": 1.6098,
+   "memberships_total": 32571,
+   "replication_beyond_one": 12338,
+   "nodes_in_no_block": 0,
+   "lambda_max": 2,
+   "lambda_mean_hub": 2.0,
+   "lambda_mean_nonhub": 1.4852,
+   "lambda_mean_nonhub_deg_ge2": 1.828,
+   "nonhub_deg_ge2_with_lambda_1": 0.172,
+   "block_size": {
+    "min": 44,
+    "mean": 80.62,
+    "p50": 82,
+    "p90": 100,
+    "max": 100,
+    "blocks_gt_C": 0,
+    "blocks_gt_1.5C": 0,
+    "C": 100
+   },
+   "edge_containment_1hop": 0.5271,
+   "edges_cut": 352210,
+   "seconds": 0.2
+  },
+  "owners_only_R1": {
+   "label": "OWNERS_ONLY_k404",
+   "k": 404,
+   "blocks_used": 404,
+   "RF": 1.0,
+   "memberships_total": 20233,
+   "replication_beyond_one": 0,
+   "nodes_in_no_block": 0,
+   "lambda_max": 1,
+   "lambda_mean_hub": 1.0,
+   "lambda_mean_nonhub": 1.0,
+   "lambda_mean_nonhub_deg_ge2": 1.0,
+   "nonhub_deg_ge2_with_lambda_1": 1.0,
+   "block_size": {
+    "min": 44,
+    "mean": 50.08,
+    "p50": 44,
+    "p90": 64,
+    "max": 93,
+    "blocks_gt_C": 0,
+    "blocks_gt_1.5C": 0,
+    "C": 100
+   },
+   "edge_containment_1hop": 0.1798,
+   "edges_cut": 610801,
+   "seconds": 0.1
+  },
+  "full_metrics": false,
+  "path3_stride": 1
+ },
+ "output": {
+  "path": "results/L1_COVPART/parts/squad__BR2_k404__R2.npz",
+  "sha256": "ee1531416212fc6ecf99588c6b87f3093994966644443e4d96032399055c355b",
+  "bytes": 63317,
+  "arrays": "home (N), alt (N; -1 = none), k, N, C, R"
+ },
+ "seconds": 1.6
+}

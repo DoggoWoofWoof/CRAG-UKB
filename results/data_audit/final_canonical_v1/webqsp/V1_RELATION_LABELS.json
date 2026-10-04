@@ -1,0 +1,141 @@
+{
+  "schema": "V1_RELATION_LABELS/v1",
+  "generated_utc": "2026-09-06T06:24:22Z",
+  "rule_version": "relation_label/v2_adaptive_minimal_qualification",
+  "decision": "user, 2026-09-06 -- minimum qualification necessary for uniqueness",
+  "relations": 7058,
+  "LADDER": {
+    "rung_1_TYPE_PROPERTY": {
+      "unique_labels": 7009,
+      "colliding_relations": 96
+    },
+    "rung_2_DOMAIN_TYPE_PROPERTY": {
+      "applied_to": 96,
+      "still_colliding_after": 6
+    },
+    "rung_3_FULL_KEY": {
+      "applied_to": 6,
+      "note": "unique by construction -- the naturalized canonical key"
+    }
+  },
+  "qualification_level_counts": {
+    "TYPE_PROPERTY": 6959,
+    "DOMAIN_TYPE_PROPERTY": 93,
+    "FULL_KEY": 6
+  },
+  "QUALIFIED_LABEL_COLLISIONS": 0,
+  "QUALIFIED_LABELS_UNIQUE": true,
+  "SHORT_LABEL_COLLISIONS": 893,
+  "short_label_note": "relation_label_short is deliberately NOT unique. It is for human inspection and GRAPH_SAMPLES only and is never consumed by retrieval text. 34% of the schema collides there, which is exactly why the qualified column exists.",
+  "RELATION_IDENTITY_PRESERVED": true,
+  "identity_note": "relation_uid -> relation_key is byte-identical to the pre-rewrite table, so every edges.parquet reference still resolves to the same relation. Directive section 7: never change edge semantics.",
+  "naturalization_rule": "'_' and '#' -> space; whitespace collapsed; case NOT folded. Derived view only -- graph identity is never normalized.",
+  "escalated_relations": [
+    {
+      "relation_key": "american_football.football_player.position_s",
+      "collided_as": "football player position s",
+      "resolved_as": "american football football player position s"
+    },
+    {
+      "relation_key": "automotive.make.model_s",
+      "collided_as": "make model s",
+      "resolved_as": "automotive make model s"
+    },
+    {
+      "relation_key": "automotive.make.parent_company",
+      "collided_as": "make parent company",
+      "resolved_as": "automotive make parent company"
+    },
+    {
+      "relation_key": "automotive.model.make",
+      "collided_as": "model make",
+      "resolved_as": "automotive model make"
+    },
+    {
+      "relation_key": "award.ranked_item.appears_in_ranked_lists",
+      "collided_as": "ranked item appears in ranked lists",
+      "resolved_as": "award ranked item appears in ranked lists"
+    },
+    {
+      "relation_key": "award.ranked_list.ranked_list_items",
+      "collided_as": "ranked list ranked list items",
+      "resolved_as": "award ranked list ranked list items"
+    },
+    {
+      "relation_key": "award.ranking.item",
+      "collided_as": "ranking item",
+      "resolved_as": "award ranking item"
+    },
+    {
+      "relation_key": "award.ranking.list",
+      "collided_as": "ranking list",
+      "resolved_as": "award ranking list"
+    },
+    {
+      "relation_key": "base.americancomedy.comedy_group.members",
+      "collided_as": "comedy group members",
+      "resolved_as": "base americancomedy comedy group members"
+    },
+    {
+      "relation_key": "base.americancomedy.comedy_group_membership.group",
+      "collided_as": "comedy group membership group",
+      "resolved_as": "base americancomedy comedy group membership group"
+    },
+    {
+      "relation_key": "base.americancomedy.comedy_group_membership.member",
+      "collided_as": "comedy group membership member",
+      "resolved_as": "base americancomedy comedy group membership member"
+    },
+    {
+      "relation_key": "base.aubreymaturin.book.characters",
+      "collided_as": "book characters",
+      "resolved_as": "base aubreymaturin book characters"
+    },
+    {
+      "relation_key": "base.aubreymaturin.ship.ship_class",
+      "collided_as": "ship ship class",
+      "resolved_as": "base aubreymaturin ship ship class"
+    },
+    {
+      "relation_key": "base.berlinrestaurants.restaurant.cuisine",
+      "collided_as": "restaurant cuisine",
+      "resolved_as": "base berlinrestaurants restaurant cuisine"
+    },
+    {
+      "relation_key": "base.cars_refactor.make.model_s",
+      "collided_as": "make model s",
+      "resolved_as": "base cars refactor make model s"
+    },
+    {
+      "relation_key": "base.cars_refactor.make.parent_company",
+      "collided_as": "make parent company",
+      "resolved_as": "base cars refactor make parent company"
+    },
+    {
+      "relation_key": "base.cars_refactor.model.make",
+      "collided_as": "model make",
+      "resolved_as": "base cars refactor model make"
+    },
+    {
+      "relation_key": "base.celeb.lived_with.participant",
+      "collided_as": "lived with participant",
+      "resolved_as": "base celeb lived with participant"
+    },
+    {
+      "relation_key": "base.digitalcameras.digital_camera.image_stabilization",
+      "collided_as": "digital camera image stabilization",
+      "resolved_as": "base digitalcameras digital camera image stabilization"
+    },
+    {
+      "relation_key": "base.farmfed.producer.produces",
+      "collided_as": "producer produces",
+      "resolved_as": "base farmfed producer produces"
+    }
+  ],
+  "consumers": {
+    "SPLADE_and_CVT_rendering": "relation_label_qualified",
+    "GRAPH_SAMPLES_and_UI": "relation_label_short",
+    "identity": "relation_key"
+  },
+  "elapsed_s": 0.8
+}

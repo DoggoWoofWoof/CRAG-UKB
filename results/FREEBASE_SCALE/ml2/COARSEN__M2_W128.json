@@ -1,0 +1,270 @@
+{
+ "RECORD": "ML2_COARSEN",
+ "dataset": "webqsp",
+ "method": "M2",
+ "rating": "span",
+ "schedule": "flat",
+ "Wmax": 128,
+ "params": {
+  "Lmax": 200,
+  "R": 1000000000.0,
+  "MAXLEVELS": 12,
+  "MIN_GAIN": 0.05,
+  "twins": "open, both families"
+ },
+ "utc": "2026-09-30T11:22:49Z",
+ "N": 2592894,
+ "pairs": {
+  "STRUCT": 5882501,
+  "KNN": 6313874
+ },
+ "fine_unsplit": {
+  "M": 5181598,
+  "P": 29574348
+ },
+ "levels": [
+  {
+   "level": 0,
+   "kind": "fine",
+   "V": 2592894,
+   "M": 5181598,
+   "P": 29574348
+  },
+  {
+   "level": 1,
+   "kind": "T_open_twins",
+   "seconds": 50.8,
+   "twin_classes": 1926179,
+   "vertices_in_nontrivial_classes": 742239,
+   "clusters": 1926266,
+   "max_cluster": 128,
+   "V": 1926266,
+   "M_in": 5181598,
+   "P_in": 29574348,
+   "nets_dropped_singleton": 0,
+   "nets_merged_identical": 1377646,
+   "M": 3803952,
+   "P": 22456630,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 2,
+   "kind": "A_span_cap128",
+   "seconds": 40.0,
+   "agg": {
+    "mode": 1,
+    "V": 1926266,
+    "clusters": 456746,
+    "joined": 1469520,
+    "max_cluster_weight": 128,
+    "scanned_pins": 156115366,
+    "seconds": 4.356,
+    "c_source_sha12": "e1196a2dfd7c"
+   },
+   "V": 456746,
+   "M_in": 3803952,
+   "P_in": 22456630,
+   "nets_dropped_singleton": 871230,
+   "nets_merged_identical": 207600,
+   "M": 2725122,
+   "P": 15382243,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 3,
+   "kind": "A_span_cap128",
+   "seconds": 24.8,
+   "agg": {
+    "mode": 1,
+    "V": 456746,
+    "clusters": 135591,
+    "joined": 321155,
+    "max_cluster_weight": 128,
+    "scanned_pins": 84961305,
+    "seconds": 1.745,
+    "c_source_sha12": "e1196a2dfd7c"
+   },
+   "V": 135591,
+   "M_in": 2725122,
+   "P_in": 15382243,
+   "nets_dropped_singleton": 192033,
+   "nets_merged_identical": 237006,
+   "M": 2296083,
+   "P": 12263002,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 4,
+   "kind": "A_span_cap128",
+   "seconds": 17.7,
+   "agg": {
+    "mode": 1,
+    "V": 135591,
+    "clusters": 44153,
+    "joined": 91438,
+    "max_cluster_weight": 128,
+    "scanned_pins": 75650264,
+    "seconds": 1.098,
+    "c_source_sha12": "e1196a2dfd7c"
+   },
+   "V": 44153,
+   "M_in": 2296083,
+   "P_in": 12263002,
+   "nets_dropped_singleton": 80849,
+   "nets_merged_identical": 151699,
+   "M": 2063535,
+   "P": 10805091,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 5,
+   "kind": "A_span_cap128",
+   "seconds": 16.0,
+   "agg": {
+    "mode": 1,
+    "V": 44153,
+    "clusters": 23702,
+    "joined": 20451,
+    "max_cluster_weight": 128,
+    "scanned_pins": 92720827,
+    "seconds": 1.214,
+    "c_source_sha12": "e1196a2dfd7c"
+   },
+   "V": 23702,
+   "M_in": 2063535,
+   "P_in": 10805091,
+   "nets_dropped_singleton": 16025,
+   "nets_merged_identical": 53091,
+   "M": 1994419,
+   "P": 10368715,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 6,
+   "kind": "A_span_cap128",
+   "skipped": "gain 0.014 < 0.05",
+   "mode": 1,
+   "V": 23702,
+   "clusters": 23371,
+   "joined": 331,
+   "max_cluster_weight": 128,
+   "scanned_pins": 125794665,
+   "seconds": 1.463,
+   "c_source_sha12": "e1196a2dfd7c"
+  }
+ ],
+ "maps": [
+  {
+   "level": 1,
+   "kind": "T_open_twins",
+   "clusters": 1926266,
+   "cluster_size": {
+    "max": 128,
+    "mean": 1.346,
+    "p50": 1.0,
+    "singletons": 1850656
+   },
+   "unsplit_pins": 22456630,
+   "unsplit_nets": 3803952,
+   "pin_reduction": 1.317,
+   "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W128_L1.npy",
+   "sha256": "f80a18c71c2cf8fd7ad0e77bd3adfaf475072d5e5d1a3ba16c4fd90f629afe38"
+  },
+  {
+   "level": 2,
+   "kind": "A_span_cap128",
+   "clusters": 456746,
+   "cluster_size": {
+    "max": 128,
+    "mean": 5.677,
+    "p50": 3.0,
+    "singletons": 0
+   },
+   "unsplit_pins": 15382243,
+   "unsplit_nets": 2725122,
+   "pin_reduction": 1.923,
+   "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W128_L2.npy",
+   "sha256": "78b0de19e4f84d62590febd8da6a788e02fd330cdcada081f11e555d15b11fba"
+  },
+  {
+   "level": 3,
+   "kind": "A_span_cap128",
+   "clusters": 135591,
+   "cluster_size": {
+    "max": 128,
+    "mean": 19.123,
+    "p50": 10.0,
+    "singletons": 0
+   },
+   "unsplit_pins": 12263002,
+   "unsplit_nets": 2296083,
+   "pin_reduction": 2.412,
+   "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W128_L3.npy",
+   "sha256": "295a01bd537f233e51f7bbe20018f3b4ff6fca798382c99d8399a659ca741ecc"
+  },
+  {
+   "level": 4,
+   "kind": "A_span_cap128",
+   "clusters": 44153,
+   "cluster_size": {
+    "max": 128,
+    "mean": 58.725,
+    "p50": 45.0,
+    "singletons": 0
+   },
+   "unsplit_pins": 10805091,
+   "unsplit_nets": 2063535,
+   "pin_reduction": 2.737,
+   "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W128_L4.npy",
+   "sha256": "21bf5612dc3727f0bb3dd65bc5c3bcf3a94c7dd90007fd0310d108f1d5ae60c7"
+  },
+  {
+   "level": 5,
+   "kind": "A_span_cap128",
+   "clusters": 23702,
+   "cluster_size": {
+    "max": 128,
+    "mean": 109.396,
+    "p50": 115.0,
+    "singletons": 0
+   },
+   "unsplit_pins": 10368715,
+   "unsplit_nets": 1994419,
+   "pin_reduction": 2.852,
+   "file": "results/FREEBASE_SCALE/ml2/clusters__M2_W128_L5.npy",
+   "sha256": "f4465b8546a10ea96fdbada314bb8c0fa35b3578514be6408215f7787fd61b3c"
+  }
+ ],
+ "final": {
+  "V": 23702,
+  "M": 1994419,
+  "P": 10368715,
+  "pin_reduction": 2.852,
+  "max_vertex_weight": 128
+ },
+ "seconds": 155.5,
+ "peak_rss_mb": 2782.5,
+ "placement": {
+  "machine": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "cpu_count_os": 32,
+  "python": "3.13.5",
+  "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+  "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+  "numpy": "2.3.2",
+  "wsl_distro": "Ubuntu-24.04",
+  "rx_job": "260930-164708-fbx-ml2-co-M2-073a",
+  "rx_cpus": "3",
+  "PYTHONHASHSEED": "0"
+ },
+ "code": {
+  "scratchpad/_ml2_run.py": "6c06034cb0d055c43b35b5c0774ef056da7240502190033d8849ae720169dfea",
+  "scratchpad/_ml2_coarsen.py": "33561ca386667bb3053389ba902d87e067aac08985b6839dd17a243ff05b7b05",
+  "scratchpad/_ml2_agg.c": "e1196a2dfd7c965000da844bcf2fe17f64f33389d87b3469c824eb9ec7a8deb7",
+  "scratchpad/_ml_coarsen.py": "19ad42f5ac74dcfe6384c1d34d2d9821fec6b75cc1202c8d5fd9723f31ee3978",
+  "scratchpad/_fbx_part.py": "6e3113645af5de676f9221a0b0591e898ca373c29a25d4ef2cf676b5aff85d61",
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262"
+ }
+}

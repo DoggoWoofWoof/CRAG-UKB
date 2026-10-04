@@ -1,0 +1,384 @@
+{
+ "RECORD": "ML2_CELL",
+ "dataset": "webqsp",
+ "candidate": "M4_W128_L8",
+ "method": "M4",
+ "rating": "span",
+ "schedule": "geom",
+ "Wmax": 128,
+ "level": 8,
+ "K": 250,
+ "utc": "2026-09-30T14:49:53Z",
+ "refine_params": {
+  "sweeps": 10,
+  "T": 4,
+  "dmax": 5000,
+  "layers": [
+   "STRUCT",
+   "KNN"
+  ],
+  "anchor_weights": "max(1, rint(1000 / deg_family(u))) = the frozen H4 net weight of the anchor's closed neighbourhood",
+  "repair": "cheapest-first out of every block above ceil(1.03 N / K) before the sweeps"
+ },
+ "clusters": {
+  "file": "results/FREEBASE_SCALE/ml2/clusters__M4_W128_L8.npy",
+  "sha256": "fe6e89a93142cb97bc69900b1b536f22e57d0c571b069b34f48f3f23918e28ff",
+  "n_clusters": 22163,
+  "cluster_size": {
+   "max": 128,
+   "mean": 116.992,
+   "p50": 122.0,
+   "singletons": 0
+  },
+  "coarsen_record_sha256": "14f9aa8dc8402af65a55177bb881b4a9388e247a2b8efae9a9d7e2c6ce35a161"
+ },
+ "fine_hypergraph": {
+  "file": "results/L1_HOST/parts/webqsp__H4_SK_k250.npz",
+  "npz_sha256": "7f4461e692f2f6cf749d389f11eaedadd7466403afce8a290fcc743fd876707f",
+  "content_digest": "76f787cbff572d899311d904c62ef9b380f2754e7adee94397e26d0e61c4f40d",
+  "N": 2592894,
+  "M": 5181679,
+  "P": 29574429
+ },
+ "coarse_hypergraph": {
+  "V": 22163,
+  "M_in": 5181679,
+  "P_in": 29574429,
+  "nets_dropped_singleton": 1458596,
+  "nets_merged_identical": 1414269,
+  "M": 2308814,
+  "P": 11596222,
+  "weight_conserved_vertex": true,
+  "pin_reduction": 2.5504,
+  "vertex_weight_max": 128
+ },
+ "driver": {
+  "binary": {
+   "path": "/home/student2/phg_build_crag/phg_driver_vw",
+   "sha256": "9c1046e1539a7a392a897201d03d477bb3eb2e60bd331bdc34c6113fbc63421e"
+  },
+  "source_sha256": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4",
+  "parameters": [
+   [
+    "DEBUG_LEVEL",
+    "0"
+   ],
+   [
+    "NUM_GID_ENTRIES",
+    "1"
+   ],
+   [
+    "NUM_LID_ENTRIES",
+    "1"
+   ],
+   [
+    "OBJ_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "EDGE_WEIGHT_DIM",
+    "1"
+   ],
+   [
+    "DETERMINISTIC",
+    "1"
+   ],
+   [
+    "RETURN_LISTS",
+    "PARTS"
+   ],
+   [
+    "REMAP",
+    "0"
+   ],
+   [
+    "LB_METHOD",
+    "HYPERGRAPH"
+   ],
+   [
+    "HYPERGRAPH_PACKAGE",
+    "PHG"
+   ],
+   [
+    "LB_APPROACH",
+    "PARTITION"
+   ],
+   [
+    "IMBALANCE_TOL",
+    "1.03"
+   ],
+   [
+    "PHG_CUT_OBJECTIVE",
+    "CONNECTIVITY"
+   ],
+   [
+    "PHG_EDGE_SIZE_THRESHOLD",
+    "1.0"
+   ],
+   [
+    "PHG_RANDOMIZE_INPUT",
+    "0"
+   ],
+   [
+    "PHG_MULTILEVEL",
+    "1"
+   ],
+   [
+    "PHG_COARSENING_METHOD",
+    "AGG"
+   ],
+   [
+    "PHG_COARSEPARTITION_METHOD",
+    "AUTO"
+   ],
+   [
+    "PHG_REFINEMENT_METHOD",
+    "FM"
+   ],
+   [
+    "PHG_REFINEMENT_QUALITY",
+    "1"
+   ],
+   [
+    "PHG_EDGE_WEIGHT_OPERATION",
+    "ERROR"
+   ],
+   [
+    "PHG_PROCESSOR_REDUCTION_LIMIT",
+    "0.5"
+   ],
+   [
+    "PHG_REPART_MULTIPLIER",
+    "100"
+   ],
+   [
+    "CHECK_HYPERGRAPH",
+    "1"
+   ],
+   [
+    "PHG_OUTPUT_LEVEL",
+    "1"
+   ]
+  ],
+  "NP": 4
+ },
+ "phg_coarse": {
+  "name": "R1_ML2_M4_W128_L8_k250",
+  "mode": "partition",
+  "np": 4,
+  "rc": 0,
+  "wall_seconds_outer": 452.28,
+  "memory": {
+   "peak_rss_kb_per_rank_time_v": [
+    314116,
+    414376,
+    363960,
+    421052
+   ],
+   "ru_maxrss_kb_per_rank": [
+    314116,
+    414376,
+    363960,
+    421052
+   ],
+   "max_rank_peak_kb": 421052,
+   "sum_of_rank_peaks_kb": 1513504,
+   "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+  },
+  "timing": {
+   "partition_wall_seconds": 150.037,
+   "driver_total_seconds_rank0": 314.273,
+   "load_seconds_per_rank": [
+    7.679,
+    16.716,
+    18.502,
+    30.535
+   ],
+   "job_wall_seconds": 452.18
+  },
+  "zoltan_eval": {
+   "cutl_global": 1701922944.0,
+   "cutn_global": 1138798848.0,
+   "imbalance": 1.02993,
+   "obj_imbalance": 1.240807,
+   "nobj_min": 0.0,
+   "nobj_max": 110.0,
+   "nobj_sum": 22163.0
+  },
+  "zoltan_removed_or_warning_lines": []
+ },
+ "coarse_km1": 1701922934,
+ "empty_block_repair": {
+  "empty_blocks": [
+   31
+  ],
+  "moves": 1
+ },
+ "projection": {
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 10682,
+   "contract_bound_ceil_1.03_N_over_k": 10683,
+   "zoltan_tolerance_bound_1.03_x_mean": 10682.723,
+   "gate": "PASS"
+  },
+  "km1_weighted": 1701922935,
+  "lambda_mean": 2.4338,
+  "blocks": {
+   "k": 250,
+   "used": 250,
+   "empty": 0,
+   "min": 1,
+   "p50": 10650.0,
+   "p95": 10681.55,
+   "max": 10682,
+   "mean": 10371.576,
+   "ceil_N_over_k": 10372,
+   "max_over_mean": 1.0299,
+   "eps_actual(max/ceil(N/k)-1)": 0.0299,
+   "freight_upper_bound": 10683,
+   "within_eps_0.03": true
+  },
+  "blocks_per_net_unweighted": 2.4338
+ },
+ "refinement": {
+  "cn_info": {
+   "mode": "ml2_cn",
+   "layers": 2,
+   "weighted": 1,
+   "N": 2592894,
+   "K": 250,
+   "cap": 10683,
+   "lo": 10060,
+   "T": 4,
+   "dmax": 5000,
+   "hubs_skipped": 86,
+   "sweeps_run": 6,
+   "seconds": 21.158,
+   "size_min": 1,
+   "size_max": 10683,
+   "km1_before": 1701903964,
+   "km1_after_repair": 1701903964,
+   "km1_after": 1400609991,
+   "km1_bookkeeping_consistent": 1,
+   "repair": {
+    "overfull_blocks_before": 0,
+    "max_load_before": 10682,
+    "moves": 0,
+    "km1_delta": 0,
+    "passes": 0,
+    "overfull_blocks_after": 0,
+    "stuck": 0,
+    "seconds": 0.0
+   },
+   "moved_per_sweep": [
+    406657,
+    87797,
+    25075,
+    8751,
+    3931,
+    2137
+   ],
+   "km1_delta_per_sweep": [
+    -240539293,
+    -44183060,
+    -10986307,
+    -3399552,
+    -1425487,
+    -760274
+   ],
+   "seconds_per_sweep": [
+    4.162,
+    3.76,
+    3.595,
+    3.399,
+    3.162,
+    3.077
+   ],
+   "pool_bytes": 213504256,
+   "peak_rss_kb": 446760,
+   "c_source_sha12": "dcdc99a5ea14"
+  },
+  "seconds": 33.0,
+  "validity": {
+   "length_ok": true,
+   "ids_in_range": true,
+   "empty_blocks": 0,
+   "max_block": 10683,
+   "contract_bound_ceil_1.03_N_over_k": 10683,
+   "zoltan_tolerance_bound_1.03_x_mean": 10682.723,
+   "gate": "PASS"
+  },
+  "km1_weighted": 1400628962,
+  "lambda_mean": 2.311,
+  "blocks": {
+   "k": 250,
+   "used": 250,
+   "empty": 0,
+   "min": 1,
+   "p50": 10682.0,
+   "p95": 10683.0,
+   "max": 10683,
+   "mean": 10371.576,
+   "ceil_N_over_k": 10372,
+   "max_over_mean": 1.03,
+   "eps_actual(max/ceil(N/k)-1)": 0.03,
+   "freight_upper_bound": 10683,
+   "within_eps_0.03": true
+  },
+  "blocks_per_net_unweighted": 2.311
+ },
+ "STATUS": "OK",
+ "balance": {
+  "length_ok": true,
+  "ids_in_range": true,
+  "blocks_used": 250,
+  "every_block_used": true,
+  "size_min": 1,
+  "size_max": 10683,
+  "size_mean": 10371.576,
+  "ceil_N_over_K": 10372,
+  "within_ceil_1.03_N_over_K": true
+ },
+ "wall_seconds": 605.2,
+ "peak_rss_mb_python": 3333.4,
+ "output": {
+  "file": "results/FREEBASE_SCALE/ml2/webqsp__M4_W128_L8_k250.npy",
+  "sha256": "69953fe39479148ed370957ae75e10987077cd6b9123b7489304b123db7b91f0",
+  "n": 2592894
+ },
+ "projection_map": {
+  "file": "results/FREEBASE_SCALE/ml2/webqsp__M4_W128_L8_k250_proj.npy",
+  "sha256": "b1ce114e8f7c907bfebbc3caaf4990fff9893e8e4aafc0f72dfa2c431f5e362e"
+ },
+ "placement": {
+  "machine": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "cpu_count_os": 32,
+  "python": "3.13.5",
+  "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+  "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+  "numpy": "2.3.2",
+  "wsl_distro": "Ubuntu-24.04",
+  "rx_job": "260930-184012-fbx-ml2-cell-M4-W128-L8-436a",
+  "rx_cpus": "4",
+  "PYTHONHASHSEED": "0"
+ },
+ "code": {
+  "scratchpad/_ml2_cell.py": "f63d5ed5b29f9c9b3a9247ac56ef7100ef5cd5d902b36237e843f59d2f331521",
+  "scratchpad/_ml2_cn.py": "3421e6ad69f263a8e935389ef588dd0436b28f2538187564deb154b5cece8206",
+  "scratchpad/_ml2_cn.c": "dcdc99a5ea140410393edcf5a8904565582e36a3bb4c60a910b0bb7f9b99d1a1",
+  "scratchpad/_ml2_run.py": "6c06034cb0d055c43b35b5c0774ef056da7240502190033d8849ae720169dfea",
+  "scratchpad/_ml2_coarsen.py": "33561ca386667bb3053389ba902d87e067aac08985b6839dd17a243ff05b7b05",
+  "scratchpad/_ml_run.py": "7f98670670d437712d1f6c81863752d3eef841ac02aa576441ff490372766e26",
+  "scratchpad/_ml_coarsen.py": "19ad42f5ac74dcfe6384c1d34d2d9821fec6b75cc1202c8d5fd9723f31ee3978",
+  "scratchpad/_fbx_part.py": "6e3113645af5de676f9221a0b0591e898ca373c29a25d4ef2cf676b5aff85d61",
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_lowmem/phg_driver/phg_driver_vw.c": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262"
+ }
+}

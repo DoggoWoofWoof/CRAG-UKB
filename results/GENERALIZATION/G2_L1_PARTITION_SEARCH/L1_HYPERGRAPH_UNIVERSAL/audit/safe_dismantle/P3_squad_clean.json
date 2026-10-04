@@ -1,0 +1,69 @@
+{
+ "ds": "squad_clean",
+ "CELLS": {
+  "S0_BASE": {
+   "ALL": 0.9805
+  },
+  "S1_F6_BOTH": {
+   "ALL": 0.9875,
+   "delta_vs_BASE": 0.007,
+   "gained_vs_BASE": 17,
+   "lost_vs_BASE": 3,
+   "p_vs_BASE": 0.00258,
+   "sig_vs_BASE": true,
+   "churn_per_query": 3.974,
+   "decisive_channel_for_newly_covered": {
+    "struct_only": 1,
+    "ret_only": 9,
+    "both": 7,
+    "boundary_reorder": 0
+   }
+  },
+  "S2_STRUCT_ONLY": {
+   "ALL": 0.98,
+   "delta_vs_BASE": -0.0005,
+   "gained_vs_BASE": 8,
+   "lost_vs_BASE": 9,
+   "p_vs_BASE": 1.0,
+   "sig_vs_BASE": false,
+   "churn_per_query": 3.544,
+   "decisive_channel_for_newly_covered": {
+    "struct_only": 2,
+    "ret_only": 0,
+    "both": 6,
+    "boundary_reorder": 0
+   }
+  },
+  "S3_RET_ONLY": {
+   "ALL": 0.9905,
+   "delta_vs_BASE": 0.01,
+   "gained_vs_BASE": 22,
+   "lost_vs_BASE": 2,
+   "p_vs_BASE": 4e-05,
+   "sig_vs_BASE": true,
+   "churn_per_query": 2.607,
+   "decisive_channel_for_newly_covered": {
+    "struct_only": 0,
+    "ret_only": 15,
+    "both": 7,
+    "boundary_reorder": 0
+   }
+  },
+  "STRUCT_vs_RET": {
+   "F7_minus_F8": -0.0105,
+   "p": 2e-05,
+   "sig": true
+  },
+  "STRUCT_vs_F6": {
+   "F7_minus_F6": -0.0075,
+   "p": 0.00027,
+   "sig": true
+  },
+  "RET_vs_F6": {
+   "F8_minus_F6": 0.003,
+   "p": 0.07031,
+   "sig": false
+  }
+ },
+ "SCOPE_NOTE": "Finer sub-decomposition (s_dir / max-collapse / S4-vs-simpler-agg / M_struct-truncation / M_ret / B6 / F6-boundary) is deprioritized relative to Phases 4-11 (the audit's actual EDGE-FAMILY question) -- would require new aggregation-mode code and the spec explicitly rules out B/M parameter sweeps. Not run; flagged here rather than silently dropped."
+}

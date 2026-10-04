@@ -1,0 +1,24 @@
+{
+ "stage": "FBX_SCALE / addendum 6A: correction of addendum 6's distinct-row definition (Track C), before any PQ arm is searched or scored",
+ "declared": "2026-10-01T00:19:31+0530",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_6.json": "5ca94fa0ca8b07dd94fe69236a8f902ef269ee8a4d7fc66463a01ce8487eea10"
+ },
+ "status": "DEVELOPMENT (calibration of a systems substrate); a definition fix, no result exists",
+ "what_happened": {
+  "first_prep": "WEBQSP_DISTINCT_ROWS__v1.json (kept, not edited): rows = classes of bitwise-identical fp16 vectors -> 1791525 rows; the frozen KNN manifest says 1791533; the count assertion failed and PREP stopped; no search, PQ training or scoring had run",
+  "reading": "the frozen family's source rows are the pointer-index classes (data/final_canonical/webqsp/embeddings/dense/docs/manifest.json 'materialised': pointer_index, distinct_source_rows 1,791,533); 8 of them carry vectors that are bitwise equal to another row's and were nevertheless searched as separate rows",
+  "first_attempt_arrays": "data/freebase_scale/pq/pos2u.npy and first_pos.npy of the first attempt were moved (host) to data/freebase_scale/pq/_attempt1_bitwise/, not used"
+ },
+ "supersedes_in_addendum_6": {
+  "distinct_rows": "rows = the classes of the frozen materialisation pointer index data/final_canonical/_history/materialize/webqsp__pointer_index__dense.npz (sha256 34300695707b20edff239c9269e87f14e1aaab65f1395d157680933a022f650e; src all 0), numbered by ascending first position; their count must equal the frozen KNN's n_distinct_source_rows (1,791,533); every position's vector must be bitwise equal to its row representative's (rechecked); the number of bitwise classes of the same vectors (1,791,525) is recorded alongside",
+  "consequence": "the exact recompute (EXACT) is the frozen search on the frozen rows; the PQ arms search the same rows; everything else in addendum 6 (arms, search regime, partition path, gates, decision table, not_done) stands unchanged",
+  "new_record": "results/FREEBASE_SCALE/pq/WEBQSP_DISTINCT_ROWS__v2.json"
+ },
+ "code_pinned": {
+  "scratchpad/_pq_knn.py": "c9c035bc3e8c0559820ed642e2876fa6195fa4acfeb87816b65c74e3c5e677f2",
+  "scratchpad/_pq_phg.py": "01daaa80ccce10cfdff18fd940c0ab802ec63e5da662afd20b01f34e29c2dea7",
+  "scratchpad/_pq_eval.py": "f65b7edeec680ab7259cea1e3c5b998b20eafeda2659591d6e915f8eb3e7a1ca",
+  "scratchpad/_pq_addendum6.py": "aff8b455b0a656ff1763c97e1ee2874967bcdae59b0c37956433134f1e0a8a3d"
+ }
+}

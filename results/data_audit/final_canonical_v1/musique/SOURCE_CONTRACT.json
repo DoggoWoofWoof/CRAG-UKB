@@ -1,0 +1,48 @@
+{
+  "DATASET": "musique",
+  "CANONICAL_CORPUS_SOURCE": "Official MuSiQue-Ans v1.0 candidate paragraphs: the union of ALL 20 candidate paragraphs (supporting AND distractor) of every question in train + dev + test.",
+  "SOURCE_VERSION": "MuSiQue-Ans v1.0 (Trivedi et al., TACL 2022), github.com/StonyBrookNLP/musique; data/original/musique/v1.0.",
+  "SOURCE_PATHS": [
+    "data/original/musique/v1.0/musique_ans_v1.0_train.jsonl",
+    "data/original/musique/v1.0/musique_ans_v1.0_dev.jsonl",
+    "data/original/musique/v1.0/musique_ans_v1.0_test.jsonl",
+    "data/original/musique/v1.0/dev_test_singlehop_questions_v1.0.json"
+  ],
+  "SOURCE_HASHES": {
+    "data/original/musique/v1.0/musique_ans_v1.0_train.jsonl": {
+      "sha256": "83a75b1e11e4e9bb8f8308e72ac40ca617ae4431b3a0d955b61cab259248490a",
+      "bytes": 241046755,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    },
+    "data/original/musique/v1.0/musique_ans_v1.0_dev.jsonl": {
+      "sha256": "15fa63794d18a94ce12411aca6e2327e65b6e83b0b1490efab3f1962e48abf3b",
+      "bytes": 30439728,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    },
+    "data/original/musique/v1.0/musique_ans_v1.0_test.jsonl": {
+      "sha256": "92ee3067957b8ebce885baa71156a7c0c29f3bc72cca04510aef506911dd768f",
+      "bytes": 28366572,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    },
+    "data/original/musique/v1.0/dev_test_singlehop_questions_v1.0.json": {
+      "sha256": "013be00ab914799891e5ae40de6cdc1baf03aaffd1f3ce4bf0de796020069613",
+      "bytes": 915921,
+      "hash_source": "results/data_audit/dataset_manifest.json",
+      "exists": true
+    }
+  },
+  "WHY_THIS_IS_THE_FULL_RETRIEVAL_UNIVERSE": "MuSiQue ships NO corpus file: the release is question records only, and the ONLY paragraph text the authors distribute is the 20-paragraph candidate pool attached to each question (results/data_audit/dataset_manifest.json: native_graph='none (question-specific paragraph sets; decomposition provided)'). The union of those pools over all 24,814 questions of all three splits is therefore the maximal retrieval universe that exists for this benchmark, and it is a pure function of the three official files (496,194 raw paragraph entries -> 117,534 nodes). Two independence properties are enforced and verified: (a) the corpus is built from the 'paragraphs' field ONLY -- 'is_supporting' is never read at corpus time, so the gold/distractor distinction cannot shrink it (this is exactly the defect of the legacy 13,672-node substrate, which was the GOLD paragraphs of the train pool alone); (b) all three splits are always included, so no evaluated subset can change it. The corpus is 8.6x the legacy one and 82.5k of its nodes are pure distractors that no question's gold set ever names.",
+  "RAW_SOURCE_RECORDS": 496194,
+  "CANONICAL_NODE_IDENTITY_RULE": "(article title, paragraph_text) exact pair; node_id = 'musique:<sha256(title+U+001F+text)[:24]>'.",
+  "NORMALIZATION_RULE": "Stored text = the EXACT official paragraph_text; title = the EXACT official title. No NFC/NFKC, no casefold, no whitespace collapse, no strip.",
+  "DEDUP_RULE": "identity = (title, paragraph_text) exact; 378,660 repeats collapse. Text-hash-only identity would give 117,533 (one paragraph text is shared by the articles 'Adei Ad' and 'Etz Efraim'); the (title,text) rule keeps them distinct so a gold reference cannot point at two articles at once.",
+  "EXPECTED_NODE_COUNT": 117534,
+  "DERIVED_NODE_COUNT": 117534,
+  "QUERY_DEPENDENT_CORPUS": false,
+  "QUALITY_LOCKED_QUERY_SOURCE": "official MuSiQue-Ans DEV split, 2,417 questions. Official TEST labels are HIDDEN (is_supporting/answer withheld; verified: 0/2,459 test questions carry gold refs).",
+  "SCALE_ALL_QUERY_SOURCE": "every official question in all splits = 24,814 (train 19,938 + dev 2,417 + test 2,459); test carries no gold, usable for scale/latency only.",
+  "SOURCE_CONTRACT_STATUS": "BUILT_AND_ACCEPTED (derived retroactively from the accepted canonical_v1 build)"
+}

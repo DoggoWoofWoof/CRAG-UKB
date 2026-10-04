@@ -1,0 +1,182 @@
+{
+ "RECORD": "PHG_PACKAGES",
+ "authorized_by_user": [
+  "apt update",
+  "apt install -y libtrilinos-zoltan-dev libopenmpi-dev openmpi-bin"
+ ],
+ "authorization_note": "the user authorized exactly these Ubuntu downloads (2026-09-13); nothing else is fetched",
+ "before": {
+  "utc": "2026-09-13T17:19:38Z",
+  "distro": "Ubuntu-22.04",
+  "commands": [
+   {
+    "command": "apt-cache policy libtrilinos-zoltan-dev libopenmpi-dev openmpi-bin",
+    "user": "default",
+    "rc": 0,
+    "stdout": "libtrilinos-zoltan-dev:\n  Installed: (none)\n  Candidate: 13.2.0-1ubuntu1\n  Version table:\n     13.2.0-1ubuntu1 500\n        500 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages\nlibopenmpi-dev:\n  Installed: (none)\n  Candidate: 4.1.2-2ubuntu1\n  Version table:\n     4.1.2-2ubuntu1 500\n        500 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages\nopenmpi-bin:\n  Installed: (none)\n  Candidate: 4.1.2-2ubuntu1\n  Version table:\n     4.1.2-2ubuntu1 500\n        500 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages",
+    "stderr": "",
+    "seconds": 14.8
+   },
+   {
+    "command": "mpirun --version",
+    "user": "default",
+    "rc": 127,
+    "stdout": "",
+    "stderr": "bash: line 1: mpirun: command not found",
+    "seconds": 0.8
+   },
+   {
+    "command": "mpicxx --version",
+    "user": "default",
+    "rc": 127,
+    "stdout": "",
+    "stderr": "bash: line 1: mpicxx: command not found",
+    "seconds": 1.2
+   },
+   {
+    "command": "dpkg-query -W libtrilinos-zoltan-dev libtrilinos-zoltan-13.2 libopenmpi-dev openmpi-bin",
+    "user": "default",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "dpkg-query: no packages found matching libtrilinos-zoltan-dev\ndpkg-query: no packages found matching libtrilinos-zoltan-13.2\ndpkg-query: no packages found matching libopenmpi-dev\ndpkg-query: no packages found matching openmpi-bin",
+    "seconds": 0.4
+   }
+  ],
+  "os_release": "NAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.3 LTS (Jammy Jellyfish)\"\n5.15.153.1-microsoft-standard-WSL2\n12\n               total        used        free      shared  buff/cache   available\nMem:            7789         400        6965           3         422        7160",
+  "dpkg_versions": {}
+ },
+ "install": {
+  "utc": "2026-09-13T17:20:03Z",
+  "how": "wsl -d Ubuntu-22.04 -u root -e bash -lc '<command>' (the WSL distro's root user; no password is typed by the assistant)",
+  "commands": [
+   {
+    "command": "DEBIAN_FRONTEND=noninteractive apt update",
+    "user": "root",
+    "rc": 0,
+    "stderr": "WARNING: apt does not have a stable CLI interface. Use with caution in scripts.",
+    "seconds": 8.3,
+    "stdout_tail": [
+     "Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease",
+     "Hit:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease",
+     "Hit:3 http://security.ubuntu.com/ubuntu jammy-security InRelease",
+     "Hit:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease",
+     "Reading package lists...",
+     "Building dependency tree...",
+     "Reading state information...",
+     "201 packages can be upgraded. Run 'apt list --upgradable' to see them."
+    ]
+   },
+   {
+    "command": "DEBIAN_FRONTEND=noninteractive apt install -y libtrilinos-zoltan-dev libopenmpi-dev openmpi-bin",
+    "user": "root",
+    "rc": 0,
+    "stderr": "WARNING: apt does not have a stable CLI interface. Use with caution in scripts.",
+    "seconds": 36.5,
+    "stdout_tail": [
+     "update-alternatives: using /usr/bin/automake-1.16 to provide /usr/bin/automake (automake) in auto mode",
+     "Setting up libibverbs1:amd64 (39.0-1) ...",
+     "Setting up libevent-extra-2.1-7:amd64 (2.1.12-stable-1ubuntu0.1) ...",
+     "Setting up ibverbs-providers:amd64 (39.0-1) ...",
+     "Setting up libtool (2.4.6-15build2) ...",
+     "Setting up libgfortran-11-dev:amd64 (11.4.0-1ubuntu1~22.04.3) ...",
+     "Setting up libevent-openssl-2.1-7:amd64 (2.1.12-stable-1ubuntu0.1) ...",
+     "Setting up libhwloc-plugins:amd64 (2.7.0-2ubuntu1) ...",
+     "Setting up libnl-route-3-dev:amd64 (3.5.0-0.1) ...",
+     "Setting up libltdl-dev:amd64 (2.4.6-15build2) ...",
+     "Setting up libjs-jquery-ui (1.13.1+dfsg-1) ...",
+     "Setting up libevent-dev (2.1.12-stable-1ubuntu0.1) ...",
+     "Setting up gfortran-11 (11.4.0-1ubuntu1~22.04.3) ...",
+     "Setting up libhwloc-dev:amd64 (2.7.0-2ubuntu1) ...",
+     "Setting up librdmacm1:amd64 (39.0-1) ...",
+     "Setting up libucx0:amd64 (1.12.1~rc2-1) ...",
+     "Setting up libpmix2:amd64 (4.1.2-2ubuntu1) ...",
+     "Setting up libibverbs-dev:amd64 (39.0-1) ...",
+     "Setting up gfortran (4:11.2.0-1ubuntu1) ...",
+     "update-alternatives: using /usr/bin/gfortran to provide /usr/bin/f95 (f95) in auto mode",
+     "update-alternatives: using /usr/bin/gfortran to provide /usr/bin/f77 (f77) in auto mode",
+     "Setting up libpmix-dev:amd64 (4.1.2-2ubuntu1) ...",
+     "Setting up libfabric1:amd64 (1.11.0-3) ...",
+     "Setting up libcoarrays-dev:amd64 (2.9.2-3) ...",
+     "Setting up libopenmpi3:amd64 (4.1.2-2ubuntu1) ...",
+     "Setting up libptscotch-6.1:amd64 (6.1.3-1) ...",
+     "Setting up libtrilinos-zoltan-13.2:amd64 (13.2.0-1ubuntu1) ...",
+     "Setting up libcaf-openmpi-3:amd64 (2.9.2-3) ...",
+     "Setting up libtrilinos-zoltan-dev:amd64 (13.2.0-1ubuntu1) ...",
+     "Setting up openmpi-bin (4.1.2-2ubuntu1) ...",
+     "update-alternatives: using /usr/bin/mpirun.openmpi to provide /usr/bin/mpirun (mpirun) in auto mode",
+     "update-alternatives: using /usr/bin/mpicc.openmpi to provide /usr/bin/mpicc (mpi) in auto mode",
+     "Setting up libcoarrays-openmpi-dev:amd64 (2.9.2-3) ...",
+     "update-alternatives: using /usr/lib/x86_64-linux-gnu/open-coarrays/openmpi/bin/caf to provide /usr/bin/caf.openmpi (caf-openmpi) in auto mode",
+     "update-alternatives: using /usr/bin/caf.openmpi to provide /usr/bin/caf (caf) in auto mode",
+     "Setting up libopenmpi-dev:amd64 (4.1.2-2ubuntu1) ...",
+     "update-alternatives: using /usr/lib/x86_64-linux-gnu/openmpi/include to provide /usr/include/x86_64-linux-gnu/mpi (mpi-x86_64-linux-gnu) in auto mode",
+     "Processing triggers for libc-bin (2.35-0ubuntu3.4) ...",
+     "Processing triggers for man-db (2.10.2-1) ...",
+     "Processing triggers for install-info (6.8-4build1) ..."
+    ]
+   }
+  ]
+ },
+ "after": {
+  "utc": "2026-09-13T17:20:55Z",
+  "distro": "Ubuntu-22.04",
+  "commands": [
+   {
+    "command": "apt-cache policy libtrilinos-zoltan-dev libopenmpi-dev openmpi-bin",
+    "user": "default",
+    "rc": 0,
+    "stdout": "libtrilinos-zoltan-dev:\n  Installed: 13.2.0-1ubuntu1\n  Candidate: 13.2.0-1ubuntu1\n  Version table:\n *** 13.2.0-1ubuntu1 500\n        500 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages\n        100 /var/lib/dpkg/status\nlibopenmpi-dev:\n  Installed: 4.1.2-2ubuntu1\n  Candidate: 4.1.2-2ubuntu1\n  Version table:\n *** 4.1.2-2ubuntu1 500\n        500 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages\n        100 /var/lib/dpkg/status\nopenmpi-bin:\n  Installed: 4.1.2-2ubuntu1\n  Candidate: 4.1.2-2ubuntu1\n  Version table:\n *** 4.1.2-2ubuntu1 500\n        500 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages\n        100 /var/lib/dpkg/status",
+    "stderr": "",
+    "seconds": 0.3
+   },
+   {
+    "command": "mpirun --version",
+    "user": "default",
+    "rc": 0,
+    "stdout": "mpirun (Open MPI) 4.1.2\n\nReport bugs to http://www.open-mpi.org/community/help/",
+    "stderr": "",
+    "seconds": 0.2
+   },
+   {
+    "command": "mpicxx --version",
+    "user": "default",
+    "rc": 0,
+    "stdout": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "stderr": "",
+    "seconds": 0.4
+   },
+   {
+    "command": "dpkg-query -W libtrilinos-zoltan-dev libtrilinos-zoltan-13.2 libopenmpi-dev openmpi-bin",
+    "user": "default",
+    "rc": 0,
+    "stdout": "libopenmpi-dev:amd64\t4.1.2-2ubuntu1\nlibtrilinos-zoltan-13.2:amd64\t13.2.0-1ubuntu1\nlibtrilinos-zoltan-dev:amd64\t13.2.0-1ubuntu1\nopenmpi-bin\t4.1.2-2ubuntu1",
+    "stderr": "",
+    "seconds": 0.3
+   }
+  ],
+  "os_release": "NAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.3 LTS (Jammy Jellyfish)\"\n5.15.153.1-microsoft-standard-WSL2\n12\n               total        used        free      shared  buff/cache   available\nMem:            7789         484        6249           3        1055        7065",
+  "dpkg_versions": {
+   "libopenmpi-dev:amd64": "4.1.2-2ubuntu1",
+   "libtrilinos-zoltan-13.2:amd64": "13.2.0-1ubuntu1",
+   "libtrilinos-zoltan-dev:amd64": "13.2.0-1ubuntu1",
+   "openmpi-bin": "4.1.2-2ubuntu1"
+  },
+  "discovery": [
+   "/usr/include/trilinos/zoltan.h",
+   "/usr/include/trilinos/zoltan_types.h",
+   "/usr/lib/x86_64-linux-gnu/libtrilinos_zoltan.so",
+   "/usr/lib/x86_64-linux-gnu/libtrilinos_zoltan.so.13.2",
+   "/usr/include/trilinos/zoltan.h",
+   "/usr/include/trilinos/zoltan_align.h",
+   "/usr/include/trilinos/zoltan_comm.h",
+   "/usr/include/trilinos/zoltan_types.h",
+   "/usr/lib/x86_64-linux-gnu/libtrilinos_zoltan.so",
+   "87:/* The default ZOLTAN_ID_TYPE is \"unsigned int\" but this can be over-ridden on the compile command line.",
+   "89: * The type of a Zoltan object global ID is ZOLTAN_ID_TYPE.  A pointer to it is ZOLTAN_ID_PTR.",
+   "93: * A constant of the same type:   ZOLTAN_ID_TYPE global_id = ZOLTAN_ID_CONSTANT(0);  (Do we need this?)",
+   "95: * The MPI_Datatype for a ZOLTAN_ID_TYPE is a ZOLTAN_ID_MPI_TYPE.",
+   "150:#warning Instead ZOLTAN_ID_TYPE will be \"unsigned long\".",
+   "69:#define ZOLTAN_VERSION_NUMBER   3.90"
+  ]
+ }
+}

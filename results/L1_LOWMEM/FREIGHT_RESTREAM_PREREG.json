@@ -1,0 +1,115 @@
+{
+ "RECORD": "FREIGHT_RESTREAM_PREREG",
+ "utc": "2026-09-13T16:58:57Z",
+ "arm": "H4_SK_FREIGHT_RESTREAM_VCYCLE_2PASS",
+ "reason": "single-pass streaming produced substantially worse partition objective/cut quality; this follow-up tests FREIGHT's documented restreaming refinement mechanism",
+ "not_the_reason": "not chosen because SQuAD lost accuracy; the configuration is the smallest documented quality-enhancing step beyond the one that failed",
+ "config": {
+  "families": "STRUCT + KNN (frozen H4_SK, unchanged)",
+  "objective": "connectivity / KM1 (freight_con, unchanged)",
+  "k": "max(1, N//100) (unchanged)",
+  "imbalance": "3 % = eps 0.03 (unchanged)",
+  "node_order": "canonical node-position order, H4_SK_STREAM_V1 shards (unchanged)",
+  "seed": 0,
+  "num_streams_passes": 2,
+  "restream_vcycle": true,
+  "flags": "--num_streams_passes=2 --restream_vcycle"
+ },
+ "datasets": [
+  "squad",
+  "metaqa"
+ ],
+ "runs": [
+  "A (stock, monolithic)",
+  "A_forklib",
+  "B (sharded, no checkpoints)",
+  "B0 (checkpoint every shard)",
+  "C_kill (SIGKILL in pass 1 at the middle shard, resume)",
+  "C_abort (mid-shard abort in pass 1, resume)"
+ ],
+ "no_sweep": "no 2/3/4/8-pass sweep, no seed sweep, no order sweep; exactly this one arm on exactly these two datasets",
+ "stop_rule": "FREIGHT_CLOSED if, on squad or metaqa, (a) the restream partition is byte-identical to the frozen 1-pass FREIGHT partition (the frozen paired result then stands unchanged), or (b) the canonical paired downstream evaluation shows a SIGNIFICANT (exact two-sided McNemar p<0.05) SAFE_ALL_P50 or BASE_ALL_P50 loss vs Mt-KaHyPar, or (c) the output violates the imbalance contract (max block > ceil(1.03 N/k)).  FREIGHT_RESTREAM_QUALITY_PASS if both datasets are paired with no significant loss.  EXACTNESS_FAIL (engineering, separate from quality) if A != A_forklib or the sharded / checkpointed / killed / aborted runs differ from A.  Objective and cut ratios vs Mt-KaHyPar are reported as diagnostics; no numeric objective threshold is preregistered (whether the gap is 'materially closed' is the reviewer's call).  No pass-count, seed or order sweep follows a failure.",
+ "binaries": {
+  "freight_con": {
+   "path": "/home/swastik/FREIGHT/build/freight_con",
+   "sha256": "38db10f36123f23ee4b3f032f347d31a861c1f4aa83c551029a6930da2f33561",
+   "bytes": 952904
+  },
+  "freight_con_ckpt": {
+   "path": "/home/swastik/FREIGHT_ckpt/build/freight_con_ckpt",
+   "sha256": "421159f896a7ceaf8eee052e83dc264a93141c034769aa1fddaf07cdabbffde4",
+   "bytes": 1058896
+  },
+  "fork_freight_con_unpatched_driver": {
+   "path": "/home/swastik/FREIGHT_ckpt/build/freight_con",
+   "sha256": "2687b7329eb283d67c4e49aa8c2878571958660fc4e782b66413e5e8e86503cd",
+   "bytes": 953032
+  }
+ },
+ "upstream_commit": "6a35c647b8e9b254e4c5c42c043457b5316369f0",
+ "source_facts_at_pinned_commit": {
+  "num_streams_passes_implies_restream_vcycle": "code_for_hypergraphs/app/parse_parameters.h:1695-1698 -- `if (num_streams_passes->count > 0) { partition_config.restream_vcycle = true; partition_config.num_streams_passes = ...; }`",
+  "restream_vcycle_flag": "parse_parameters.h:1704-1711 sets the same flag (refused with --full_stream_mode); README lines 92-93 document both",
+  "flag_use_in_hypergraph_code": "`restream_vcycle` is not referenced in code_for_hypergraphs/app/freight.cpp or lib/ (only parse/config); restreaming is driven by restream_number: pass p>0 removes each node from its previous block before re-scoring (freight.cpp:196-206), keeps the per-net last-pin block carry-over in connectivity mode (graph_io_stream.h:531-534), evaluates each pass and RESTORES THE BEST PASS (freight.cpp:272-331); non-final passes use a relaxed upper bound ceil((1+1.5*imb) N/k) (graph_io_stream.h:552-558), the final pass ceil((1+imb) N/k)",
+  "consequence": "the arm is exactly --num_streams_passes=2 (+ the explicit, implied flag); the imbalance contract must be checked on the OUTPUT because a restored pass-0 partition was built under the relaxed bound"
+ },
+ "known_prior": {
+  "note": "the frozen experiment's 2-pass smoke test on squad (P2_A: stock, --num_streams_passes=2, same seed/k/imbalance) already exists",
+  "P2_A_partition_sha256": "b8d22306c290809a680fd8672503fc7c8e6eceb61f3a7ee4c0ce4f9a9cdfe701",
+  "one_pass_A_partition_sha256": "b8d22306c290809a680fd8672503fc7c8e6eceb61f3a7ee4c0ce4f9a9cdfe701",
+  "read_before_running": "the two files hash equal -> on squad the 2-pass output is expected to be byte-identical to the 1-pass output; the arm is still run as specified (and the explicit flag added); metaqa is new"
+ },
+ "frozen_records": {
+  "H4_SK_LOW_MEMORY_PARTITIONING_REPORT.json": {
+   "path": "results/L1_LOWMEM/H4_SK_LOW_MEMORY_PARTITIONING_REPORT.json",
+   "bytes": 50578,
+   "sha256": "5a07e478952fdc8d46949b94cdb159f1b7eae34eb8b35e859ee981df5b2dd678"
+  },
+  "H4_SK_LOW_MEMORY_PARTITIONING_REPORT.md": {
+   "path": "results/L1_LOWMEM/H4_SK_LOW_MEMORY_PARTITIONING_REPORT.md",
+   "bytes": 11366,
+   "sha256": "89831695ce7085932222729fd0f33a32be4409887565491328b89365e6df36ec"
+  },
+  "FREIGHT_RUNS_squad.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_squad.json",
+   "bytes": 45452,
+   "sha256": "f252ff8dbcf82875330eee67d5f7af9b44e0ecc7e5f7a900fb7b2c3c415683db"
+  },
+  "FREIGHT_RUNS_metaqa.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_metaqa.json",
+   "bytes": 38282,
+   "sha256": "aaf4d3a7ad6f5a9b88448f28c5b5fc89462cf0d9d7f767f3393a7cbb0c39c0d0"
+  },
+  "FREIGHT_RUNS_musique.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_musique.json",
+   "bytes": 50727,
+   "sha256": "f23b6c85302ab7e19dfe8fc14d67b85b9e58dd4087e86c29707365d1d70230b6"
+  },
+  "L1_DOWNSTREAM_squad.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad.json",
+   "bytes": 3507,
+   "sha256": "1aace62a2a3cb6da1c96050b0472bea334f68d57ff95d1f9ac2bbb151180ecf9"
+  },
+  "L1_DOWNSTREAM_metaqa.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa.json",
+   "bytes": 5667,
+   "sha256": "784f3fe75abb979b7e2d2eacc84ac57335ff8373356d6c2627fbb0866f8a5bd6"
+  },
+  "L1_DOWNSTREAM_musique.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_musique.json",
+   "bytes": 1599,
+   "sha256": "4888f4aae9e713a4842721a9a9ca46c19fa68de7b40e5124515a1676827ed3f3"
+  },
+  "FREIGHT_BUILD.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_BUILD.json",
+   "bytes": 6406,
+   "sha256": "e01faeded3c5272b6ea5ebce7e4a03d89ed662c4970fea5321c938c051b9fafb"
+  },
+  "MUSIQUE_MTKAHYPAR_RETRY.json": {
+   "path": "results/L1_LOWMEM/MUSIQUE_MTKAHYPAR_RETRY.json",
+   "bytes": 2515,
+   "sha256": "1ef89da11257675f86fde39bf8e75a3ddb3f6b909e79373b1a640701e011b7d6"
+  }
+ },
+ "frozen_rule": "the frozen classification LOW_MEMORY_BUT_QUALITY_FAIL is permanent; none of the frozen records is rewritten or reinterpreted by this arm"
+}

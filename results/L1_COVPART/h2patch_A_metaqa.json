@@ -1,0 +1,318 @@
+{
+ "cache": "metaqa",
+ "partition": "MTKAHYPAR",
+ "n_DEV_A": 1002,
+ "status": "POSTHOC_MECHANISM_TEST",
+ "arm": "H2_PATCH1",
+ "beam_module_sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+ "selector": {
+  "cfg": {
+   "B": 6,
+   "M_struct": 64,
+   "M_ret": 32,
+   "agg": "S4",
+   "fusion": "F6",
+   "T": 1,
+   "tag": "F6"
+  },
+  "code": "_l1ps_router.build_cache + _l1kb_core.contexts / f6_select (unchanged)"
+ },
+ "SAFE_record": "results/L1_CANONICAL/L1_REPLAY_metaqa.json",
+ "identical_beam_check": {
+  "MICRO_L3_H2_rebuilt": 0.6886,
+  "gained": 51,
+  "lost": 2
+ },
+ "definition": {
+  "weakest": "sixth block of the frozen F6 competition order (SAFE's weakest admission)",
+  "novel": "pinned-beam visited nodes (hop-1 then hop-2 beam, frozen fused order, seeds excluded) whose block is not among the 49 kept blocks",
+  "patch": "first min(k, n_b) novel nodes; remaining positions = removed block's own nodes in frozen fused node order (ret_rrf position, then node id)",
+  "metric": "ALL-gold under matched unique-node exposure (every gold node served); node-level == block-level for L1/SAFE (asserted)"
+ },
+ "arms": {
+  "L1": {
+   "arm": "L1",
+   "ALL": 0.6397,
+   "ANY": 0.9132,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9172,
+     "ANY": 0.9663
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.4855,
+     "ANY": 0.811
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5271,
+     "ANY": 0.9669
+    }
+   }
+  },
+  "SAFE": {
+   "arm": "SAFE",
+   "ALL": 0.6407,
+   "ANY": 0.9152,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9172,
+     "ANY": 0.9663,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.4942,
+     "ANY": 0.811,
+     "vs_L1": {
+      "gained": 3,
+      "lost": 0,
+      "p": 0.25
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5211,
+     "ANY": 0.9729,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 2,
+      "p": 0.5
+     }
+    }
+   },
+   "ALL_vs_L1": {
+    "gained": 3,
+    "lost": 2,
+    "p": 1.0
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 3,
+    "lost": 2,
+    "p": 1.0,
+    "pooled_L1": 0.5059,
+    "pooled": 0.5074
+   }
+  },
+  "H2_PATCH1": {
+   "arm": "H2_PATCH1",
+   "ALL": 0.7515,
+   "ANY": 0.983,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9939,
+     "ANY": 0.9969,
+     "vs_L1": {
+      "gained": 25,
+      "lost": 0,
+      "p": 5.960464477539063e-08
+     },
+     "vs_SAFE": {
+      "gained": 25,
+      "lost": 0,
+      "p": 5.960464477539063e-08
+     },
+     "gold_nodes_gained": 94,
+     "gold_nodes_lost_with_removed_block": 0
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.7413,
+     "ANY": 0.9797,
+     "vs_L1": {
+      "gained": 88,
+      "lost": 0,
+      "p": 6.462348535570529e-27
+     },
+     "vs_SAFE": {
+      "gained": 85,
+      "lost": 0,
+      "p": 5.169878828456423e-26
+     },
+     "gold_nodes_gained": 533,
+     "gold_nodes_lost_with_removed_block": 1
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5241,
+     "ANY": 0.9729,
+     "vs_L1": {
+      "gained": 1,
+      "lost": 2,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 1,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 7,
+     "gold_nodes_lost_with_removed_block": 9
+    }
+   },
+   "exposure": "matched: |served nodes| equal to canonical SAFE per query (asserted)",
+   "novel_nodes_per_query_mean": 79.2,
+   "novel_hop1_per_query_mean": 8.3,
+   "novel_hop2_per_query_mean": 70.8,
+   "patch_size_mean": 100.1,
+   "patch_composition_mean (hop-1 novel / hop-2 novel / fill from removed block)": [
+    8.3,
+    70.1,
+    21.7
+   ],
+   "queries_truncated": 79,
+   "queries_with_no_novel_node (patch == removed block)": 0,
+   "gold_nodes_gained_vs_SAFE": 634,
+   "gold_nodes_gained_vs_SAFE_from_hop1_novel": 95,
+   "queries_with_gold_node_gained_vs_SAFE": 185,
+   "gold_nodes_lost_with_removed_block": 10,
+   "queries_with_gold_node_lost_with_removed_block": 7,
+   "ALL_vs_L1": {
+    "gained": 114,
+    "lost": 2,
+    "p": 1.6339108165695212e-31
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 89,
+    "lost": 2,
+    "p": 3.3822316648042255e-24,
+    "pooled_L1": 0.5059,
+    "pooled": 0.6346
+   },
+   "ALL_vs_SAFE": {
+    "gained": 111,
+    "lost": 0,
+    "p": 7.703719777548943e-34
+   },
+   "ANY_vs_SAFE": {
+    "gained": 68,
+    "lost": 0,
+    "p": 6.776263578034403e-21
+   },
+   "significant_loss_vs_SAFE": false,
+   "hop2_hop3_pooled_vs_SAFE": {
+    "n": 676,
+    "gained": 86,
+    "lost": 0,
+    "p": 2.5849394142282115e-26,
+    "pooled_SAFE": 0.5074,
+    "pooled": 0.6346
+   },
+   "recovery_of_section14_gain": {
+    "overall": {
+     "H2_RRF_minus_L1_pts": 4.9,
+     "PATCH_minus_SAFE_pts": 11.1,
+     "fraction": 2.265
+    },
+    "hop1": {
+     "H2_RRF_minus_L1_pts": 2.8,
+     "PATCH_minus_SAFE_pts": 7.7,
+     "fraction": 2.778
+    },
+    "hop2": {
+     "H2_RRF_minus_L1_pts": 10.2,
+     "PATCH_minus_SAFE_pts": 24.7,
+     "fraction": 2.429
+    },
+    "hop3": {
+     "H2_RRF_minus_L1_pts": 1.5,
+     "PATCH_minus_SAFE_pts": 0.3,
+     "fraction": 0.2
+    },
+    "hop2_hop3_pooled": {
+     "H2_RRF_minus_L1_pts": 5.9,
+     "PATCH_minus_SAFE_pts": 12.7,
+     "fraction": 2.15
+    }
+   }
+  }
+ },
+ "attribution_flips": {
+  "newly_covered_vs_SAFE": {
+   "n": 111,
+   "gold_nodes_entering_via_patch": 290,
+   "of_which_hop1_novel": 94,
+   "queries_needing_more_than_one_patch_node": 58
+  },
+  "newly_lost_vs_SAFE": {
+   "n": 0,
+   "gold_nodes_dropped_with_removed_block": 0,
+   "queries_also_gaining_a_gold_node": 0
+  }
+ },
+ "diagnostic_block_level_pool_repairs": {
+  "hop1": {
+   "L1_failures (gold block outside served P50)": 27,
+   "repairable_by_any_six_slot_rule (missing blocks <= 6)": 23,
+   "all_missing_blocks_in_SAFE_H2_pool (section 15)": 22,
+   "of_which_covered_by_SAFE": 0,
+   "of_which_covered_by_H2_PATCH1": 21,
+   "of_which_all_missing_gold_NODES_visited_by_beam": 21,
+   "of_which_all_missing_gold_NODES_visited_and_covered_by_H2_PATCH1": 21
+  },
+  "hop2": {
+   "L1_failures (gold block outside served P50)": 177,
+   "repairable_by_any_six_slot_rule (missing blocks <= 6)": 131,
+   "all_missing_blocks_in_SAFE_H2_pool (section 15)": 98,
+   "of_which_covered_by_SAFE": 3,
+   "of_which_covered_by_H2_PATCH1": 85,
+   "of_which_all_missing_gold_NODES_visited_by_beam": 85,
+   "of_which_all_missing_gold_NODES_visited_and_covered_by_H2_PATCH1": 85
+  },
+  "hop3": {
+   "L1_failures (gold block outside served P50)": 157,
+   "repairable_by_any_six_slot_rule (missing blocks <= 6)": 74,
+   "all_missing_blocks_in_SAFE_H2_pool (section 15)": 15,
+   "of_which_covered_by_SAFE": 0,
+   "of_which_covered_by_H2_PATCH1": 1,
+   "of_which_all_missing_gold_NODES_visited_by_beam": 1,
+   "of_which_all_missing_gold_NODES_visited_and_covered_by_H2_PATCH1": 1
+  }
+ },
+ "diagnostic_node_level_availability": {
+  "hop1": {
+   "SAFE_failures (a gold node not served by SAFE)": 27,
+   "all_missing_gold_nodes_visited_by_beam (node-level repair available)": 25,
+   "of_which_covered_by_H2_PATCH1": 25,
+   "not_covered__truncated (a missing gold node beyond the patch capacity)": 0,
+   "not_covered__gold_node_dropped_with_removed_block": 0,
+   "not_covered__other": 0,
+   "missing_gold_nodes_per_SAFE_failure_mean": 3.59,
+   "missing_gold_nodes_visited_fraction_per_SAFE_failure_mean": 0.926,
+   "SAFE_failures_with_no_missing_gold_node_visited": 2
+  },
+  "hop2": {
+   "SAFE_failures (a gold node not served by SAFE)": 174,
+   "all_missing_gold_nodes_visited_by_beam (node-level repair available)": 85,
+   "of_which_covered_by_H2_PATCH1": 85,
+   "not_covered__truncated (a missing gold node beyond the patch capacity)": 0,
+   "not_covered__gold_node_dropped_with_removed_block": 0,
+   "not_covered__other": 0,
+   "missing_gold_nodes_per_SAFE_failure_mean": 6.72,
+   "missing_gold_nodes_visited_fraction_per_SAFE_failure_mean": 0.669,
+   "SAFE_failures_with_no_missing_gold_node_visited": 20
+  },
+  "hop3": {
+   "SAFE_failures (a gold node not served by SAFE)": 159,
+   "all_missing_gold_nodes_visited_by_beam (node-level repair available)": 1,
+   "of_which_covered_by_H2_PATCH1": 1,
+   "not_covered__truncated (a missing gold node beyond the patch capacity)": 0,
+   "not_covered__gold_node_dropped_with_removed_block": 0,
+   "not_covered__other": 0,
+   "missing_gold_nodes_per_SAFE_failure_mean": 16.33,
+   "missing_gold_nodes_visited_fraction_per_SAFE_failure_mean": 0.008,
+   "SAFE_failures_with_no_missing_gold_node_visited": 153
+  }
+ },
+ "ceiling_record_crosscheck": "section 15 pool counts reproduced"
+}

@@ -1,0 +1,455 @@
+{
+  "dataset": "2wiki",
+  "dataset_version": "canonical_v1",
+  "built_at": "2026-09-06T00:37:59",
+  "unique_node_ids": true,
+  "canonical_node_count": 5989847,
+  "raw_source_records": 5989847,
+  "duplicates_collapsed": 0,
+  "dropped_records": 0,
+  "drop_reasons": {},
+  "accounting_identity": "RAW_SOURCE_RECORDS == CANONICAL_NODES + DUPLICATES_COLLAPSED + DROPPED_RECORDS (asserted)",
+  "empty_text_nodes": 0,
+  "empty_title_nodes": 0,
+  "corpus_accounting_detail": {
+    "raw_source_records": 5989847,
+    "dropped_records": [],
+    "duplicates_collapsed": 0,
+    "identity": "official Wikipedia curid (record 'id'), exact string; node_id = 2wiki:c<curid>",
+    "raw_source_record_unit": "one json article record (one line of para_with_hyperlink.jsonl)",
+    "external_sort_runs": 50,
+    "duplicate_curid_examples": [],
+    "total_sentences": 23245689,
+    "total_hyperlink_mentions": 35724975,
+    "text_construction": "text = ' '.join(official 'sentences' list) -- identical to build.py::build_corpus_2wiki's rule (build.py:137), applied to the full article universe instead of the context union; if that join is empty the source-native 'title' of the SAME record is used instead (TEXTUALIZATION_REV 2, fallback only -- no title is prepended to any record that already has text, and a record with an empty title stays empty)",
+    "textualization_fallback": {
+      "TEXTUALIZATION_REV": 2,
+      "rule": "if ' '.join(official 'sentences' list) is empty -> canonical_text = record['title'] (unchanged otherwise)",
+      "empty_before_fallback": 87765,
+      "title_fallback_applied": 87765,
+      "still_empty_after_fallback": 0,
+      "field_source": "record['title'] -- same JSON line as 'sentences'; the para_with_hyperlink schema is exactly {id, title, sentences, mentions} and carries no question/answer/supporting_facts field",
+      "query_independent": true,
+      "same_rule_as": "hotpotqa (TEXTUALIZATION_REV 2, 2026-09-05) -- one general source-level rule, applied wherever a source record yields an empty body but carries a non-empty title",
+      "why": "the previous empty encoder input tokenizes to the ZERO-LENGTH sequence [] under gte-Qwen2, collapsing every such node onto one degenerate forward pass; 20,524 of these nodes are hyperlink targets, so the degenerate points would propagate into every KNN/H4 structure built over this corpus (results/data_audit/final_canonical_v1/2wiki/EMPTY_TEXT_AUDIT.md)",
+      "alternatives_rejected": "ALT_TEXT_NONEMPTY = 0 -- the schema has no other text field, so the title is the only source-native candidate; TRULY_TEXTLESS = 0, so no record needs to stay empty",
+      "membership_impact": "NONE -- no node added, removed or reordered; identity remains the curid"
+    },
+    "phase_c_divergence": {
+      "n_records_where_strip_changes_text": 0,
+      "strip_examples": [],
+      "n_records_retextualized_from_title": 87765,
+      "n_records_with_a_different_phase_c_encoder_input": 87765,
+      "phase_c_reference": "data/canonical/2wiki_universe/documents.jsonl (5,989,847 rows, dense+SPLADE COMPLETE)",
+      "meaning": "canonical_v1's text differs from the already-encoded 2wiki_universe text in exactly two situations and no others: (a) scratchpad/build_2wiki_universe.py:42 applied .strip() to the same ' '.join(sentences) and canonical_v1 does not; (b) TEXTUALIZATION_REV 2 retextualizes an empty body as the record's own title, where the stored row holds \"\".  Every other record's encoder input is byte-identical -- hence token-identical -- to the stored row.  This sum is therefore the exact upper bound on dense/SPLADE rows needing a re-encode: measured, not assumed.  It is an UPPER bound because a retextualized title may still collide with an already-encoded input (the forensic scan found exactly 1 such case, 2wiki:c320778 \"Kagawa\"); reuse_map_kb.py decides that by frozen-tokenizer token-ID equality, not by this count."
+    },
+    "empty_text_nodes": {
+      "n": 87765,
+      "policy": "KEPT -- dropping them would make corpus membership depend on a text-quality filter (the 2wiki_universe manifest observed 87,765)",
+      "note": "counts records whose SOURCE body is empty. Since TEXTUALIZATION_REV 2 these are no longer empty in the node table: they carry the source-native title. The count of nodes with empty final text is integrity_report.empty_text_nodes.",
+      "n_still_empty_after_title_fallback": 0
+    },
+    "identity_normalization_diagnostics": {
+      "exact_identities": 200000,
+      "extra_collapses_if_NFC": 0,
+      "extra_collapses_if_whitespace_collapse": 0,
+      "extra_collapses_if_NFC+ws+casefold": 0,
+      "sampled_first_n_identities": 200000
+    },
+    "REPLACES": {
+      "superseded_corpus": "pooled question-context union of train/dev/test 'context' fields",
+      "superseded_n": 398354,
+      "superseded_corpus_hash_16": "ec7fbbe8cd783040",
+      "superseded_artifacts": "data/final_canonical/2wiki/_superseded_context_union_398354/"
+    },
+    "note": "This is the benchmark's own distributed article universe, not a question by-product: the record schema carries no question/answer/supporting_facts field, and the 398,354 context titles are 6.7% of it."
+  },
+  "query_stats": {
+    "train": {
+      "n": 167454,
+      "n_with_gold_refs": 167454,
+      "n_all_gold_resolved": 167454,
+      "n_any_gold_resolved": 167454,
+      "gold_refs_total": 404170,
+      "gold_nodes_total": 404170,
+      "GOLD_REFS_TOTAL": 404170,
+      "GOLD_REFS_RESOLVED": 404170,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    },
+    "dev": {
+      "n": 12576,
+      "n_with_gold_refs": 12576,
+      "n_all_gold_resolved": 12576,
+      "n_any_gold_resolved": 12576,
+      "gold_refs_total": 30654,
+      "gold_nodes_total": 30654,
+      "GOLD_REFS_TOTAL": 30654,
+      "GOLD_REFS_RESOLVED": 30654,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    },
+    "test": {
+      "n": 12576,
+      "n_with_gold_refs": 0,
+      "n_all_gold_resolved": 0,
+      "n_any_gold_resolved": 0,
+      "gold_refs_total": 0,
+      "gold_nodes_total": 0,
+      "GOLD_REFS_TOTAL": 0,
+      "GOLD_REFS_RESOLVED": 0,
+      "MISSING_GOLD_REFS": 0,
+      "AMBIGUOUS_GOLD_REFS": 0,
+      "ALL_GOLD_REFS_RESOLVE": true
+    },
+    "_gold_policy": "gold_refs = official supporting_facts TITLES (deduplicated, order preserved); resolution is exact title -> curid node via a single scan of the frozen corpus. PER-REFERENCE semantics: each ref must map to >=1 canonical node. A title matching several curids is first disambiguated against the question's OWN official context paragraph and, when that identifies one uniquely, exactly that node is stored; only a genuinely ambiguous ref keeps its alternatives, and it is then satisfied DISJUNCTIVELY (retrieved & {alts} != {}), never conjunctively. Unresolvable titles are REPORTED, never rescued by adding the article to the corpus.",
+    "_title_resolution": {
+      "titles_needed": 398354,
+      "titles_matched": 398354,
+      "titles_unmatched": 0,
+      "ambiguous_titles": 1,
+      "ambiguous_examples": {
+        "Unconquered": [
+          "2wiki:c62717110",
+          "2wiki:c8073502"
+        ]
+      }
+    },
+    "_source_disambiguation": {
+      "ambiguous_titles": 1,
+      "candidate_nodes": 2,
+      "question_title_pairs": 8,
+      "resolved": 8,
+      "unresolved": 0,
+      "min_common_prefix_chars": 40,
+      "decisions": [
+        {
+          "query_id": "82d5688a0bda11eba7f7acde48001122",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "dc5aebc8086511ebbd5eac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "1f5c6112088f11ebbd72ac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "0a25708e085511ebbd59ac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "0bf46a46085511ebbd59ac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "90fd9b300bda11eba7f7acde48001122",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "1d70c2e4088f11ebbd72ac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "ddcf14f2086511ebbd5eac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        }
+      ]
+    }
+  },
+  "splits_with_gold": [
+    "train",
+    "dev"
+  ],
+  "ALL_EVAL_GOLDS_PRESENT": true,
+  "GOLD_SEMANTICS": {
+    "_semantics": "gold ref -> {canonical node,...}; a ref resolves iff it maps to >=1 node; ALL_GOLD_REFS_RESOLVE = every ref in every gold-bearing split resolves; ambiguous refs are DISJUNCTIVE (retrieved & {alternatives} != {}), never conjunctive.",
+    "_supersedes": "the cardinality test len(gold_node_ids)==len(set(gold_refs)), which failed a question merely because one of its refs legitimately expanded to >1 canonical node.",
+    "ALL_GOLD_REFS_RESOLVE": true,
+    "GOLD_REFS_TOTAL": 434824,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "per_split": {
+      "train": {
+        "GOLD_REFS_TOTAL": 404170,
+        "GOLD_REFS_RESOLVED": 404170,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "dev": {
+        "GOLD_REFS_TOTAL": 30654,
+        "GOLD_REFS_RESOLVED": 30654,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      }
+    },
+    "source_disambiguation": {
+      "ambiguous_titles": 1,
+      "candidate_nodes": 2,
+      "question_title_pairs": 8,
+      "resolved": 8,
+      "unresolved": 0,
+      "min_common_prefix_chars": 40,
+      "decisions": [
+        {
+          "query_id": "82d5688a0bda11eba7f7acde48001122",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "dc5aebc8086511ebbd5eac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "1f5c6112088f11ebbd72ac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "0a25708e085511ebbd59ac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "0bf46a46085511ebbd59ac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "90fd9b300bda11eba7f7acde48001122",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "1d70c2e4088f11ebbd72ac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        },
+        {
+          "query_id": "ddcf14f2086511ebbd5eac1f6bf848b6",
+          "title": "Unconquered",
+          "scores": [
+            {
+              "node_id": "2wiki:c8073502",
+              "common_prefix_chars": 578
+            },
+            {
+              "node_id": "2wiki:c62717110",
+              "common_prefix_chars": 15
+            }
+          ],
+          "picked": "2wiki:c8073502",
+          "source_context_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette God"
+        }
+      ]
+    }
+  },
+  "ALL_GOLD_REFS_RESOLVE": true,
+  "MISSING_GOLD_REFS": 0,
+  "AMBIGUOUS_GOLD_REFS": 0,
+  "gold_coverage_note": "A value of false here is a RESULT, not a failure of the build: canonical_v1 refuses to inject answer entities into the corpus to guarantee its own gold coverage. Per-split numbers are in query_stats.",
+  "unresolved_gold_refs": {
+    "counts": {},
+    "examples": []
+  },
+  "eval_subset": {
+    "method": "legacy 2wiki_clean questions came from the FlashRAG 15k train sample (raw file no longer present); matched to official train/dev/test by EXACT question text; ambiguities resolved by supporting-fact title set == legacy gold title set (identical to build.py::legacy_subset's 2wiki branch)",
+    "n_legacy": 2000,
+    "n_recovered": 2000,
+    "n_missed": 0,
+    "misses": [],
+    "official_split_distribution": {
+      "train": 2000
+    },
+    "file": "data/final_canonical/_stage_2wiki_rev2/eval_2000.jsonl",
+    "n": 2000,
+    "n_all_gold_resolved": 2000,
+    "n_with_gold_refs": 2000,
+    "GOLD_REFS_TOTAL": 4834,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "ALL_GOLD_REFS_RESOLVE": true
+  },
+  "CORPUS_HASH": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+  "NODE_ORDER_HASH": "57dd809af573b6b531256b2a65e4b4efd1e26794c4fea81e0b43311fdcb24c86",
+  "nodes_jsonl_sha256": "73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a"
+}

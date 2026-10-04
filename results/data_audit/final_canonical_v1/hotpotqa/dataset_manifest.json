@@ -1,0 +1,306 @@
+{
+  "dataset_name": "hotpotqa",
+  "dataset_version": "canonical_v1",
+  "legacy_substrate_name": "hotpotqa_clean",
+  "canonical_corpus_definition": "CANONICAL_CORPUS_DEFINITION: the official HotpotQA FULLWIKI retrieval corpus -- every English Wikipedia article abstract of the 2017-10-01 snapshot (enwiki-20171001-pages-meta-current-withlinks-abstracts.tar.bz2), one node per article curid. A Wikipedia snapshot, not a benchmark by-product: ~90.3% of its articles are never referenced by any HotpotQA question. Independent of which questions are evaluated and of the distractor/fullwiki setting.",
+  "source_files": [
+    "data/original/hotpotqa/fullwiki_corpus/enwiki-20171001-pages-meta-current-withlinks-abstracts.tar.bz2",
+    "data/original/hotpotqa/hf_distractor/train-00000-of-00002.parquet",
+    "data/original/hotpotqa/hf_distractor/train-00001-of-00002.parquet",
+    "data/original/hotpotqa/hf_fullwiki/test-00000-of-00001.parquet",
+    "data/original/hotpotqa/hf_fullwiki/validation-00000-of-00001.parquet"
+  ],
+  "source_hashes": {
+    "data/original/hotpotqa/fullwiki_corpus/enwiki-20171001-pages-meta-current-withlinks-abstracts.tar.bz2": {
+      "sha256": "1acca1c5cc93c4890ea51091d2bad7c3ef6987aead127ab88728dc9e26555729",
+      "bytes": 1553565403
+    },
+    "data/original/hotpotqa/hf_distractor/train-00000-of-00002.parquet": {
+      "sha256": "76d3bb3048a7cc73c1958107c0c5872a00d7e7d00c105b81e92f6769e7822e68",
+      "bytes": 165624177
+    },
+    "data/original/hotpotqa/hf_distractor/train-00001-of-00002.parquet": {
+      "sha256": "713661628434fbb19fff7392e2e321e4ed107e3c7c7784d0690946e5f722763f",
+      "bytes": 166162479
+    },
+    "data/original/hotpotqa/hf_fullwiki/validation-00000-of-00001.parquet": {
+      "sha256": "78933c0a31a5f7b420d4effdf4cd4eed573b28c6a3da6179dcf7a02b39e51d03",
+      "bytes": 28041820
+    },
+    "data/original/hotpotqa/hf_fullwiki/test-00000-of-00001.parquet": {
+      "sha256": "f6b522fed6748b33c0eaad972d53bc89c10b8afefb329629f779bfb967442cd8",
+      "bytes": 27558644
+    }
+  },
+  "raw_node_count": 5233329,
+  "deduplicated_node_count": 5233329,
+  "canonical_node_count": 5233329,
+  "duplicates_removed": 0,
+  "dropped_records": 0,
+  "drop_reasons": {},
+  "query_counts": {
+    "test": 7405,
+    "train": 90447,
+    "validation": 7405,
+    "eval_subset": 2000
+  },
+  "eval_subset": {
+    "file": "eval_2000.jsonl",
+    "n": 2000,
+    "recovery_method": "legacy id 'hotpot_q_<official_question_id>' -> official query id by exact prefix strip; question text verified against data/final_canonical/_work/legacy/hotpotqa_clean/questions.jsonl for 2000/2000 ids (0 mismatches)",
+    "n_legacy": 2000,
+    "n_recovered": 2000,
+    "n_missed": 0,
+    "official_split_distribution": {
+      "train": 1842,
+      "validation": 158
+    }
+  },
+  "corpus_depends_on_eval_subset": false,
+  "node_id_scheme": "hotpotqa:c<official Wikipedia curid> (readable, not hashed -- identical rationale and scheme to 2wiki); file order = lexicographic node_id",
+  "node_id_stable": true,
+  "normalization_rules": {
+    "stored_text": "EXACT official string; no NFC/NFKC, no case-folding, no whitespace collapsing, no stripping",
+    "identity_keys": "EXACT strings (see dedup_policy); lossy alternatives are only quantified in integrity_report.corpus_accounting_detail.identity_normalization_diagnostics, never applied",
+    "construction_steps": {
+      "2wiki": "text = ' '.join(official 'sentences' list) -- the official file stores a sentence list; no .strip() (the pre-existing full-universe encode applied one; the divergence is COUNTED, not assumed -- see corpus_accounting_detail.phase_c_divergence)",
+      "hotpotqa": "text = ' '.join(non-empty elements of the official 'text' sentence list); plain 'text', never the 'text_with_links' fallback; no .strip(); empty abstracts kept as nodes",
+      "metaqa": "text = entity name (no verbalization at corpus level)"
+    },
+    "encoding": "UTF-8, JSON with ensure_ascii=False, sort_keys=True, LF line endings"
+  },
+  "dedup_policy": "identity = official wiki curid (exact string). Titles are NOT the identity: several curids can share a title, so gold resolution is title -> curid via the corpus and an ambiguous title contributes ALL matching nodes (recorded per query in gold_title_ambiguous) rather than being silently resolved last-wins as in the Phase-C reference.",
+  "identity_normalization_diagnostics": {
+    "exact_identities": 200000,
+    "extra_collapses_if_NFC": 0,
+    "extra_collapses_if_whitespace_collapse": 0,
+    "extra_collapses_if_NFC+ws+casefold": 0,
+    "sampled_first_n_identities": 200000
+  },
+  "all_eval_gold_nodes_present": true,
+  "gold_shortfall_diagnostic": null,
+  "missing_eval_gold_nodes": {
+    "counts": {},
+    "examples": []
+  },
+  "gold_resolution_per_split": {
+    "test": {
+      "n": 7405,
+      "n_with_gold_refs": 0,
+      "n_all_gold_resolved": 0,
+      "gold_refs_total": 0,
+      "gold_nodes_total": 0
+    },
+    "train": {
+      "n": 90447,
+      "n_with_gold_refs": 90447,
+      "n_all_gold_resolved": 90447,
+      "gold_refs_total": 180894,
+      "gold_nodes_total": 180894
+    },
+    "validation": {
+      "n": 7405,
+      "n_with_gold_refs": 7405,
+      "n_all_gold_resolved": 7405,
+      "gold_refs_total": 14810,
+      "gold_nodes_total": 14810
+    }
+  },
+  "corpus_hash": "1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f",
+  "ordered_node_id_hash": "8f043c35cbf629a23e6acf2c2708b33124e3aa1a0044a7a9c179de18da3a823a",
+  "nodes_jsonl_sha256": "c777ab4b7a64eaaa5af852265daf6ba9f9debb4658a67f0c96595662e43f182a",
+  "CORPUS_QUERY_INDEPENDENT": true,
+  "DETERMINISTIC_REBUILD": true,
+  "query_independence_test": {
+    "runs": {
+      "FINAL": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH": "1b7eeac2bfbd7100",
+        "n": 5233329
+      },
+      "A": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH": "1b7eeac2bfbd7100",
+        "n": 5233329
+      },
+      "B": {
+        "eval_subset": "random_held:7",
+        "CORPUS_HASH": "1b7eeac2bfbd7100",
+        "n": 5233329
+      },
+      "none": {
+        "eval_subset": "none",
+        "CORPUS_HASH": "1b7eeac2bfbd7100",
+        "n": 5233329
+      }
+    },
+    "eval_subsets_A_vs_B": {
+      "n_A": 2000,
+      "n_B": 2000,
+      "overlap": 33,
+      "differ": true,
+      "B_executed": true
+    }
+  },
+  "legacy_comparison": {
+    "classification": "SETTING_CONDITIONED (distractor contexts, not fullwiki) + SAMPLE_CONDITIONED",
+    "evidence": "legacy corpus = the union of the 10 context paragraphs of every official DISTRACTOR train (90,447) + dev (7,405) question, deduplicated by (title, md5) (src/pipeline/rebuild_dataset.py:70-84 -> loaders.load_hotpotqa title-keyed article_cache -> build_clean): 507,494 nodes, i.e. exactly the paragraphs shown to the model. The locked setting for this project is FULLWIKI, whose universe is the 5,233,329-article snapshot; 90.3% of it is absent from the legacy substrate. The evaluated 2,000 are a seeded cut of that same question pool.",
+    "legacy_count": 507494,
+    "canonical_count": 5233329,
+    "legacy_nodes_mapped": 507494,
+    "missing_in_canonical": 0,
+    "ambiguous_legacy_nodes": 0,
+    "extra_canonical_nodes": 4725835,
+    "extra_by_split_provenance": {
+      "fullwiki_corpus": 4725835
+    },
+    "changed_text": {
+      "exact_equal": 503084,
+      "whitespace_only_diff": 4410
+    },
+    "id_mapping_coverage": 1.0,
+    "eval_subset_gold_consistency": {
+      "file": "eval_2000.jsonl",
+      "n": 2000,
+      "legacy_golds_equal_canonical": 2000,
+      "legacy_golds_strict_subset_of_canonical": 0,
+      "differ": 0,
+      "queries_with_unmapped_legacy_gold": 0,
+      "examples": []
+    },
+    "files": [
+      "legacy_comparison.json",
+      "node_id_map_legacy.json"
+    ]
+  },
+  "builder": {
+    "path": "scratchpad/final_canonical_build/build_kb.py",
+    "builder_sha256": "a46d745af5e77331d424ae06cd73fc721b046d59c66332d331c4b1794237ec72",
+    "jsonstream_sha256": "c3d170107f99e6fdd33eee2278c192447a7b1a460a958d189bf76ece2adfde58",
+    "command": "python scratchpad/final_canonical_build/build_kb.py hotpotqa --eval-subset legacy --out data/final_canonical/_work/hotpot_rev2",
+    "git_commit": "ba6bd71bcc9f367dc28d3e4cde777a3931501406",
+    "build_started": "2026-09-05T22:09:03",
+    "build_finished": "2026-09-05T22:30:14",
+    "seconds": 1270.8,
+    "peak_rss_mb": 757.4
+  },
+  "files": {
+    "nodes": "nodes.jsonl",
+    "queries": [
+      "lanes",
+      "test.jsonl",
+      "train.jsonl",
+      "validation.jsonl"
+    ],
+    "eval_subset": "eval_2000.jsonl",
+    "reports": [
+      "EMPTY_TEXT_94_SUMMARY.json",
+      "REV2_DIFF_AUDIT.json",
+      "REV2_VERIFY.json",
+      "SOURCE_CONTRACT.json",
+      "build_info.json",
+      "dataset_manifest.json",
+      "integrity_report.json",
+      "legacy_comparison.json",
+      "node_id_map_legacy.json",
+      "query_independence_test.json"
+    ]
+  },
+  "downstream_artifacts_built": "NONE (no embeddings / SPLADE / graphs / partitions / indexes) -- by design of this track",
+  "READY_FOR_INDEX_BUILD": true,
+  "manifest_written": "2026-09-06T03:13:53",
+  "query_lanes": {
+    "LEGACY_CONTINUITY": {
+      "n": 2000,
+      "file": "queries/lanes/LEGACY_CONTINUITY.jsonl",
+      "official_split_distribution": {
+        "train": 1842,
+        "validation": 158
+      },
+      "provenance": "the frozen legacy evaluation subset of substrate 'hotpotqa_clean', recovered onto canonical query ids. Rows = data/ukb_storage/hotpotqa_clean/gte_qwen/query_ids_all.json indexed by split_indices['val'] (scratchpad/_ta_comb.py:75-92, _ta_resid.py:63-76); the 'val' cut itself comes from src/experiments/overlap_retrain.py:171-206 _splits(). Recovery method: legacy id 'hotpot_q_<official_question_id>' -> official query id by exact prefix strip; question text verified against data/final_canonical/_work/legacy/hotpotqa_clean/questions.jsonl for 2000/2000 ids (0 mismatches). Recovered 2000/2000, missed 0.",
+      "VALID_HELD_OUT_EVAL_SET": true,
+      "labelling": "REAL HELD-OUT DEV SPLIT -- these questions carry official split metadata, so _splits() used the official train/dev/test partition and this lane is a genuine official dev sample (hop-balanced 666/666/666). Still intended for continuity analysis; QUALITY_LOCKED is the accuracy lane."
+    },
+    "QUALITY_LOCKED": {
+      "n": 7405,
+      "file": "queries/lanes/QUALITY_LOCKED.jsonl",
+      "official_split_distribution": {
+        "validation": 7405
+      },
+      "provenance": "the complete official hotpotqa VALIDATION split, taken verbatim from the official source files; official HotpotQA FULLWIKI DEV (7,405) is the only held-out split with public labels -- the fullwiki TEST split's answers and supporting_facts are empty in the official parquet.",
+      "VALID_HELD_OUT_EVAL_SET": true,
+      "n_with_gold_node_ids": 7405,
+      "n_with_gold_refs": 7405,
+      "n_all_gold_resolved": 7405,
+      "labelling": "OFFICIAL HELD-OUT LABELLED -- the lane for final accuracy and significance testing. Disjoint from LEGACY_CONTINUITY unless noted."
+    },
+    "SCALE_ALL": {
+      "n": 105257,
+      "file": "queries/lanes/SCALE_ALL.ids.jsonl",
+      "record_source": "queries/<split>.jsonl (already materialized in full; the lane file is the ordered id+split index, so no query record is duplicated on disk)",
+      "official_split_distribution": {
+        "test": 7405,
+        "train": 90447,
+        "validation": 7405
+      },
+      "n_with_gold_node_ids_per_split": {
+        "train": 90447,
+        "validation": 7405
+      },
+      "provenance": "every official query of every released split of the dataset, as parsed by scratchpad/final_canonical_build/build_kb.py's query stage from the official source files.",
+      "VALID_HELD_OUT_EVAL_SET": false,
+      "labelling": "MIXED SPLITS -- scale / latency / robustness only. Contains train questions and (where the official test labels are hidden) unlabelled questions; never quote as accuracy."
+    }
+  },
+  "query_lane_overlaps": {
+    "LEGACY_CONTINUITY_n_in_QUALITY_LOCKED": 158
+  },
+  "corpus_hash_equality_assertion": {
+    "statement": "corpus_hash(LEGACY_CONTINUITY) == corpus_hash(QUALITY_LOCKED) == corpus_hash(SCALE_ALL)",
+    "per_lane_corpus_hash": {
+      "LEGACY_CONTINUITY": "1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f",
+      "QUALITY_LOCKED": "1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f",
+      "SCALE_ALL": "1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f"
+    },
+    "RESULT": "PASS",
+    "how_bookkeeping": "one nodes.jsonl serves every lane; CORPUS_HASH recomputed from nodes.jsonl in this script and compared against dataset_manifest / integrity_report / build_info",
+    "recomputed_from_nodes_jsonl": {
+      "n": 5233329,
+      "CORPUS_HASH": "1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f",
+      "ordered_node_id_hash": "8f043c35cbf629a23e6acf2c2708b33124e3aa1a0044a7a9c179de18da3a823a",
+      "file_order_is_lexicographic_node_id": true
+    },
+    "stored_corpus_hashes": {
+      "manifest": "1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f",
+      "integrity": "1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f",
+      "build_info": "1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f"
+    },
+    "how_constructive": "the corpus was rebuilt from the official sources under three DIFFERENT --eval-subset arguments (legacy / random_dev:7 / none) and produced an identical CORPUS_HASH each time",
+    "constructive_evidence": {
+      "FINAL": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH_prefix": "1b7eeac2bfbd7100",
+        "n": 5233329
+      },
+      "A": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH_prefix": "1b7eeac2bfbd7100",
+        "n": 5233329
+      },
+      "B": {
+        "eval_subset": "random_held:7",
+        "CORPUS_HASH_prefix": "1b7eeac2bfbd7100",
+        "n": 5233329
+      },
+      "none": {
+        "eval_subset": "none",
+        "CORPUS_HASH_prefix": "1b7eeac2bfbd7100",
+        "n": 5233329
+      }
+    }
+  },
+  "legacy_substrate_aliases": [
+    "hotpotqa",
+    "hotpotqa_clean"
+  ]
+}

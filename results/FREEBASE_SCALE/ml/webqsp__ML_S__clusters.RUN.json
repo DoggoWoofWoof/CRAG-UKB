@@ -1,0 +1,166 @@
+{
+ "RECORD": "ML_S_CLUSTERS",
+ "dataset": "webqsp",
+ "utc": "2026-09-30T09:30:55Z",
+ "params": {
+  "Wmax": 32,
+  "Lmax": 200,
+  "R": 10.0,
+  "MAXLEVELS": 8,
+  "MIN_GAIN": 0.05,
+  "twins": "open"
+ },
+ "N": 2592894,
+ "pairs": 5882501,
+ "clusters": 115105,
+ "cluster_size": {
+  "max": 32,
+  "mean": 22.526,
+  "p50": 29.0,
+  "singletons": 139
+ },
+ "levels": [
+  {
+   "level": 0,
+   "kind": "fine",
+   "V": 2592894,
+   "M": 2592894,
+   "P": 14357896
+  },
+  {
+   "level": 1,
+   "kind": "T_open_twins",
+   "seconds": 21.8,
+   "twin_classes": 1116796,
+   "vertices_in_nontrivial_classes": 1665197,
+   "clusters": 1136091,
+   "max_cluster": 32,
+   "V": 1136091,
+   "M_in": 2592894,
+   "P_in": 14357896,
+   "nets_dropped_singleton": 0,
+   "nets_merged_identical": 1460871,
+   "M": 1132023,
+   "P": 9347505,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 2,
+   "kind": "A_agglomerate",
+   "seconds": 11.9,
+   "agg": {
+    "V": 1136091,
+    "clusters": 357363,
+    "joined": 778728,
+    "max_cluster_weight": 32,
+    "scanned_pins": 71166275,
+    "seconds": 1.286,
+    "c_source_sha12": "69b74ce2aecf"
+   },
+   "V": 357363,
+   "M_in": 1132023,
+   "P_in": 9347505,
+   "nets_dropped_singleton": 246386,
+   "nets_merged_identical": 12229,
+   "M": 873408,
+   "P": 6781049,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 3,
+   "kind": "A_agglomerate",
+   "seconds": 7.7,
+   "agg": {
+    "V": 357363,
+    "clusters": 133650,
+    "joined": 223713,
+    "max_cluster_weight": 32,
+    "scanned_pins": 67261288,
+    "seconds": 0.763,
+    "c_source_sha12": "69b74ce2aecf"
+   },
+   "V": 133650,
+   "M_in": 873408,
+   "P_in": 6781049,
+   "nets_dropped_singleton": 39709,
+   "nets_merged_identical": 92962,
+   "M": 740737,
+   "P": 5543602,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 4,
+   "kind": "A_agglomerate",
+   "seconds": 6.0,
+   "agg": {
+    "V": 133650,
+    "clusters": 115105,
+    "joined": 18545,
+    "max_cluster_weight": 32,
+    "scanned_pins": 79785275,
+    "seconds": 0.723,
+    "c_source_sha12": "69b74ce2aecf"
+   },
+   "V": 115105,
+   "M_in": 740737,
+   "P_in": 5543602,
+   "nets_dropped_singleton": 639,
+   "nets_merged_identical": 10643,
+   "M": 729455,
+   "P": 5438199,
+   "weight_conserved_vertex": true
+  },
+  {
+   "level": 5,
+   "kind": "A_agglomerate",
+   "stopped": "gain 0.009 < 0.05",
+   "V": 115105,
+   "clusters": 114076,
+   "joined": 1029,
+   "max_cluster_weight": 32,
+   "scanned_pins": 83969651,
+   "seconds": 0.753,
+   "c_source_sha12": "69b74ce2aecf"
+  }
+ ],
+ "final_unsplit_hypergraph": {
+  "V": 115105,
+  "M": 729455,
+  "P": 5438199,
+  "fine_P": 14357896,
+  "pin_reduction": 2.64
+ },
+ "output": {
+  "file": "results/FREEBASE_SCALE/ml/webqsp__ML_S__clusters.npy",
+  "sha256": "618b464a3348bb9b6a84f01d1e1bda91d0b2c862e31debc1e4d9c656f78f203b"
+ },
+ "seconds": 57.4,
+ "peak_rss_mb": 1434.0,
+ "placement": {
+  "machine": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "cpu_count_os": 32,
+  "python": "3.13.5",
+  "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+  "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+  "numpy": "2.3.2",
+  "wsl_distro": "Ubuntu-24.04",
+  "rx_job": "260930-145922-fbx-ml-coarsen-08d7",
+  "rx_cpus": "4",
+  "PYTHONHASHSEED": "0"
+ },
+ "code": {
+  "scratchpad/_ml_run.py": "7f98670670d437712d1f6c81863752d3eef841ac02aa576441ff490372766e26",
+  "scratchpad/_ml_coarsen.py": "19ad42f5ac74dcfe6384c1d34d2d9821fec6b75cc1202c8d5fd9723f31ee3978",
+  "scratchpad/_ml_agg.c": "69b74ce2aecfc1e6e9a3449b6f8ca63d906dc75fae199733070b53c8fda247ef",
+  "scratchpad/_fbx_cn.py": "055c1fecbe0b8ab2a06e94ae885cd7b282818f217172c7038daac7695077300e",
+  "scratchpad/_fbx_cn.c": "4c8aaa6dd4beba6020d616e170d979d3abdf95a5d6822426a09311bdda047477",
+  "scratchpad/_fbx_part.py": "6e3113645af5de676f9221a0b0591e898ca373c29a25d4ef2cf676b5aff85d61",
+  "scratchpad/_fbx_lp.py": "5541a6597ec669f21826e500144ca27dbdfe02d80418ef6c816c579bf97a5bef",
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_lowmem/phg_driver/phg_driver_vw.c": "a7535a3fb9bc491abf924630bd044a60ca319adf01d59ef56ec1c2ebdc0d66f4",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262"
+ }
+}

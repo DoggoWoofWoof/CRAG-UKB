@@ -1,0 +1,1007 @@
+{
+ "RECORD": "FREEZE_QMAX_BALANCED_H2_PATCH1",
+ "STATUS": "FROZEN_LEADING_UNIVERSAL_CANDIDATE",
+ "status_semantics": {
+  "FROZEN": "the composite's definition, constants, code path, populations and evidence are fixed by this record; any change of any element is a different arm that needs its own ruling and pre-registration; nothing in it is tuned, gated or re-weighted from here on",
+  "MECHANISM_CONFIRMED_ON_DEV_A": "section 24 PASS_STACKS by the pre-registered rule (the only DEV_A verdict the composite carries)",
+  "NOT_PROMOTED": "the served L1 (BASE / SAFE, the canonical replay caches, every frozen L1 record) is unchanged",
+  "NOT_TRANSFER_CONFIRMED": "no untouched population has seen it; the fifteenth ruling makes that the first priority (below)",
+  "LEADING_UNIVERSAL_CANDIDATE": "the arm the transfer matrix is built for; it is the candidate, not the claim"
+ },
+ "utc": "2026-09-15T22:26:15Z",
+ "written_once": true,
+ "ruling": {
+  "which": "fifteenth ruling (the user's message of 2026-09-15T22:10:10Z, the fourteenth ruling's three frontiers all answered: section 24 PASS_STACKS, section 25 FAIL_WORSE, section 26 FAIL_NOT_BETTER)",
+  "verbatim": "At this point I would freeze the architecture around the §24 composite and stop opening new structural arms on DEV_A.\n\nThe current best universal candidate is now:\n\n```text\nQMAX_F0 / strong node→block aggregation\n        ↓\ncanonical SAFE\n        ↓\nBALANCED_H2_PATCH1\n        ↓\nfinal P50-equivalent context\n```\n\nThat is the first design we have that attacks both major regimes at once:\n\n* **MetaQA:** balanced real-edge H2 preserves multi-branch relational evidence.\n* **MuSiQue:** QMAX fixes ranking/aggregation of evidence already present.\n* **SQuAD:** acts as the near-ceiling non-regression guard.\n\nAnd §26 tells us not to chase depth anymore. `BALANCED_H3` moved MetaQA by only +0.3–0.4 points overall; the residual hop-3 failures need **much more frontier/patch capacity**, not simply another hop. That becomes increasingly close to full L3 and is not where I would spend L1 effort.\n\n### What is genuinely left\n\n**First priority: independent transfer.** DEV_A is exhausted for mechanism selection.\n\nFor KB transfer, keep the already-frozen WebQSP primary exactly as previously ruled:\n\n```text\nWebQSP primary:\nH2_PATCH1 §16\n```\n\nThat preserves the clean historical hypothesis test. Once that one-shot transfer is recorded, `BALANCED_H2_PATCH1` / the §24 composite can be evaluated as successor evidence, but not retroactively called the original confirmation.\n\nFor text transfer, I would authorize **2Wiki and HotpotQA** next. These are especially valuable because the §24 composite is claiming universality across multi-hop text and KB graphs. Freeze the exact composite before building their replay infrastructure.\n\nThe transfer matrix we eventually want is roughly:\n\n| Population | Main question                                            |\n| ---------- | -------------------------------------------------------- |\n| WebQSP     | Does real-edge H2 patching generalize to another KB?     |\n| 2Wiki      | Does QMAX + BALANCED patch generalize to multi-hop text? |\n| HotpotQA   | Same, under a second text topology                       |\n| SQuAD      | Easy/near-ceiling safety                                 |\n\n### Second priority: MuSiQue ranking, but not on DEV_A\n\nThere is still a legitimate scoring frontier, because MuSiQue has consistently told us that its failures are **ranking-limited**, unlike MetaQA.\n\nBut I would not invent and select an iterative scoring rule using MuSiQue DEV_A anymore.\n\nUse the transfer datasets first. If QMAX still gives consistent improvements on 2Wiki/Hotpot, then we know the phenomenon is genuinely text-general:\n\n> relevant nodes are present, but block aggregation is throwing away useful evidence.\n\nOnly then open a new universal scoring mechanism.\n\nThe promising form would be **iterative query-conditioned rescoring of the already retrieved candidate set**, not additional graph traversal:\n\n```text\nquery\n ↓\ntop node candidates\n ↓\nblock/node aggregate\n ↓\nderive query-conditioned evidence centroid\n ↓\nrescore SAME candidates\n ↓\nblock aggregation\n```\n\nNo new nodes, no graph walk, no learned weights.\n\nThat could improve text ranking without creating MetaQA-style structural spray.\n\nBut this is future work until transfer says the QMAX effect generalizes.\n\n### Third priority: efficiency/gating\n\nIf the composite transfers, then we should stop trying to improve recall by brute force and make it cheap.\n\nMost queries do not need the balanced H2 beam. So eventually:\n\n```text\nQMAX + SAFE\n      ↓\ncheap confidence\n  ↙          ↘\nstop       BALANCED H2 PATCH\n```\n\nThe existing Dense/SPLADE agreement signal is a natural candidate because we've already observed strong performance stratification from it.\n\nBut again: calibrate this after the final retrieval candidate is frozen. Otherwise we optimize cost around a moving target.\n\n### What I would close permanently for now\n\nDo not spend more time on:\n\n* PATH3/PATH4 partitions;\n* more vertex-cut variants;\n* R3/R4 overlap;\n* different halo voting;\n* mass-normalized voting;\n* relation-signature variants;\n* latent offsets;\n* global triplet geometry;\n* pure H3 depth;\n* coverage-then-score frontier compression.\n\nThose hypotheses have enough negative evidence.\n\nThe remaining MetaQA hop-3 problem is also now quantitatively clear: a failed query misses ~16–17 gold nodes, only a handful have all missing nodes visited even with balanced H3, and a 100-node patch cannot simultaneously solve reach, width and capacity. Fixing that within the current L1+ budget is no longer a small refinement.\n\nSo my ruling would be:\n\n> **Freeze `QMAX_BALANCED_H2_PATCH1` as the leading universal candidate. Stop selecting mechanisms on DEV_A. Finish the frozen WebQSP transfer, authorize 2Wiki + Hotpot replay/transfer for the composite, and use those results to decide whether any further scoring refinement is justified.**\n\nIf that composite transfers across WebQSP + 2Wiki + Hotpot, I would consider the retrieval architecture essentially settled and move the research effort to L2 and selective full-L3 rather than trying to push MetaQA from ~80% to ~90% with increasingly expensive pseudo-L3.",
+  "verbatim_sha256": "ae5eabd0acbacc859a8eb04b0e5e48a8fdfaada33f362a30ea9250156bb16187",
+  "verbatim_chars": 5076,
+  "operative_sentence": "Freeze `QMAX_BALANCED_H2_PATCH1` as the leading universal candidate. Stop selecting mechanisms on DEV_A. Finish the frozen WebQSP transfer, authorize 2Wiki + Hotpot replay/transfer for the composite, and use those results to decide whether any further scoring refinement is justified."
+ },
+ "what_is_frozen": {
+  "name": "QMAX_BALANCED_H2_PATCH1",
+  "one_line": "QMAX_F0 block ranking (served dense / SPLADE block channels + exhaustive dense block max, frozen RRF)  ->  canonical SAFE (frozen six-slot F6 swap over that ranking)  ->  BALANCED_H2_PATCH1 (the pinned depth-2 real-edge beam with the section-21 per-parent round-robin compression, the section-16 one-block patch in first-visit order, matched exposure)  ->  the final P50-equivalent context (50 blocks: 44 protected + 5 admitted + 1 patch)",
+  "definition_verbatim_from_the_preregistration (section 24)": {
+   "ranking": "QMAX_F0 = _l1g_core.F0 (the frozen RRF, K0 = 60, dense tie-break) over [Cd, Cs, Cmax]; Cd / Cs = _l1g_core.block_channel of the served dense / SPLADE top-100 ids through the legacy own + directed-out-neighbour table (= the served BASE's two channels); Cmax = _l1g_candidate.dense_blockmax_rank: score(B) = max_{v in B} q . e_v over all actual nodes (canonical fp16 embeddings -> fp32, unit query), stable descending order; pinned code path, asserted to reproduce the recorded DEV_A numbers",
+   "entry_into_SAFE": "the first TOPP = 200 blocks of the QMAX_F0 ranking replace base_rank in the replay-cache view read by _l1ps_router.build_cache and _l1kb_core.contexts: protected = its first 44 blocks, boundary = its blocks 45-50, canonical position cpos = its positions; the structural challengers (s_node = the frozen seed-based directional expansion, seeds = the frozen top-5 RRF nodes; independent of the block ranking -- asserted identical under both rankings) and the retrieval challengers (ret_rrf) are unchanged; F6 admission (RRF over cpos / spos / rpos, B = 6, ties by cpos then block id) unchanged; QMAX_SAFE = protected + the six admitted; weakest = the sixth admitted",
+   "patch": "section 16 verbatim on QMAX_SAFE: minus the weakest admitted block, plus one query-local block of the same size filled with the balanced beam's visited nodes that the 49 kept blocks do not expose (first-visit order: hop 1 then hop 2), topped up from the removed block (ret_rrf position, then node id); matched unique-node exposure to QMAX_SAFE",
+   "beam": "the pinned uL3 beam (frozen admissibility, transition geometry, RRF fused order, BEAM = 100, DEPTH = 2, seeds = frozen top-5 RRF nodes) with the section-21 balanced compression (per-parent rank round-robin over the frozen fused order); identical for the reference and the composed chain (the beam never reads the block ranking); the section-21 beam figures are asserted reproduced",
+   "constants": "K0 = 60, K_LOCK = 100, P_MAIN = 50, TOPP = 200, B = 6, M_struct = 64, M_ret = 32, S4, F6, BEAM = 100, DEPTH = 2 -- all frozen before; nothing new, nothing fitted, no dataset branch, no weight; the same algorithm on every cache",
+   "cost_note": "Cmax needs one exhaustive query x node similarity pass (nq x N fp32: 1,998 x 43,234 on metaqa, 2,000 x 117,534 on musique); the L1_GEOM lane showed the pooled variant (dense u SPLADE top-1000) indistinguishable from the exact one -- the exact form is used here because it is the recorded, pinned arm"
+  },
+  "stages_and_code_path": [
+   {
+    "stage": 1,
+    "name": "channels",
+    "what": "served dense top-100 and SPLADE top-100 node ids -> block channels Cd / Cs through the legacy own + directed-out-neighbour membership table",
+    "code": "scratchpad/_l1g_core.block_channel over _l1s_core.Data.legacy_mem (frozen numerics of _ta_prepartition.partition_ranking)"
+   },
+   {
+    "stage": 2,
+    "name": "Cmax",
+    "what": "exhaustive dense block max: score(B) = max_{v in B} q . e_v over ALL nodes (canonical fp16 -> fp32, unit query), stable descending block order",
+    "code": "scratchpad/_l1g_candidate.dense_blockmax_rank (chunk of cq = 200 query rows x all N nodes)"
+   },
+   {
+    "stage": 3,
+    "name": "QMAX_F0",
+    "what": "the frozen RRF (K0 = 60, dense tie-break) over [Cd, Cs, Cmax]; its first TOPP = 200 blocks replace base_rank",
+    "code": "scratchpad/_l1g_core.F0"
+   },
+   {
+    "stage": 4,
+    "name": "SAFE over QMAX_F0",
+    "what": "protected = first 44 blocks, boundary = blocks 45-50; structural challengers s_node (frozen seed-based directional expansion, seeds = frozen top-5 RRF nodes) and retrieval challengers ret_rrf unchanged; F6 admission (RRF over cpos / spos / rpos, B = 6, ties by cpos then block id); QMAX_SAFE = protected + the six admitted; weakest = the sixth",
+    "code": "scratchpad/_l1ps_router.build_cache([64], [32], ['S4']) + scratchpad/_l1kb_core.contexts / f6_select (BASE_CFG)"
+   },
+   {
+    "stage": 5,
+    "name": "beam",
+    "what": "the pinned uL3 real-edge beam: seeds = frozen top-5 RRF nodes; hop 1, 2 candidates over the actual STRUCT adjacency under the frozen admissibility (out-edges always, in-edges only for non-hub v, hub := deg_u + 1 > N / k); transition geometry S_dst / S_dir / S_mid on unit fp32 rows of the fp16 node embeddings; RRF K0 = 60 fused order; BEAM = 100; DEPTH = 2; the section-21 balanced compression at every hop = per-parent rank round-robin over the frozen fused order (rr_compress / beam_with)",
+    "code": "scratchpad/_l1c_microl3.py head (exec'd verbatim) + rr_compress / beam_with copied verbatim from scratchpad/_l1c_h2balanced.py"
+   },
+   {
+    "stage": 6,
+    "name": "patch",
+    "what": "section 16 verbatim on QMAX_SAFE: minus the weakest admitted block, plus one query-local block of the same size filled with the balanced beam's visited nodes the 49 kept blocks do not expose (first-visit order hop 1 then hop 2), topped up from the removed block (ret_rrf position, then node id); matched unique-node exposure to QMAX_SAFE",
+    "code": "build_patches copied verbatim from scratchpad/_l1c_h2balanced.py (origin scratchpad/_l1c_h2patch.py)"
+   },
+   {
+    "stage": 7,
+    "name": "evaluation",
+    "what": "ALL-gold coverage of the final 50 blocks per query; exact two-sided McNemar on paired 0/1 vectors",
+    "code": "scratchpad/_l1x90_core.evaluate / mcnemar"
+   }
+  ],
+  "constants": {
+   "K0": 60,
+   "K_LOCK": 100,
+   "P_MAIN": 50,
+   "TOPP": 200,
+   "SEED_K": 5,
+   "B": 6,
+   "M_struct": 64,
+   "M_ret": 32,
+   "agg": "S4",
+   "fusion": "F6",
+   "BEAM": 100,
+   "DEPTH": 2,
+   "cq_blockmax_chunk": 200,
+   "hub_rule": "deg_undirected + 1 > cap = round(N / k)",
+   "k_rule": "max(1, N // 100)",
+   "partition": "H4_SK (STRUCT + KNN, H4_SPLIT_PRESERVE) hard partition; Mt-KaHyPar where it exists, the validated PHG substitute (NP = 4, PHG_NONEMPTY_REPAIR_V1) where it does not",
+   "note": "all frozen before section 24; nothing new, nothing fitted, no dataset branch, no weight; the same algorithm on every corpus"
+  },
+  "not_part_of_the_freeze": [
+   "any other composition (D2d / directional, interleave fusions, QMAX_H2_PATCH1, re-weighted RRF)",
+   "any change of the compression rule, the patch rule, the beam, the F6 admission, TOPP, K0 / K_LOCK / P_MAIN, B, M_struct, M_ret, the RRF or the hub definition",
+   "the query-conditioned rescoring line (second priority) -- future work, not defined here, not pre-registered",
+   "the confidence gate (third priority) -- calibrated only after the transfer, over this frozen candidate"
+  ],
+  "implementation_note_for_large_corpora": "the freeze is the arithmetic above, not one memory layout: the section-24 runner materialises the fp32 node matrix for stage 2 (fits up to musique, 117,534 x 1536); a corpus of 5-6 M nodes (hotpotqa / 2wiki) needs stage 2 streamed over the fp16 shards. Any such implementation must reproduce the pinned functions' outputs EXACTLY (bit-identical block orders and coverage vectors) on the five DEV_A caches before it is used on a transfer population; that identity test is recorded in the transfer pre-registration, and a failed identity is an implementation bug, never a reason to change the arithmetic"
+ },
+ "evidence_DEV_A (section 24, copied from qmaxbal_SUMMARY.json)": {
+  "OUTCOME": "PASS_STACKS",
+  "cells": {
+   "metaqa": "CARRIES",
+   "metaqa_phg": "CARRIES",
+   "squad": "NEUTRAL",
+   "squad_phg": "NEUTRAL",
+   "musique": "STACKS"
+  },
+  "labels": {
+   "PRIMARY_vs_BALANCED_H2_PATCH1": {
+    "metaqa": "NEUTRAL",
+    "metaqa_phg": "NEUTRAL",
+    "squad": "NEUTRAL",
+    "squad_phg": "NEUTRAL",
+    "musique": "GAIN"
+   },
+   "PRIMARY_vs_QMAX_F0": {
+    "metaqa": "GAIN",
+    "metaqa_phg": "GAIN",
+    "squad": "NEUTRAL",
+    "squad_phg": "NEUTRAL",
+    "musique": "GAIN"
+   }
+  },
+  "secondary_flags": {
+   "ADDITIVE_ON_MUSIQUE (PRIMARY vs QMAX_F0 = GAIN on musique: SAFE + patch add on top of the aggregation)": true,
+   "ADDITIVE_ON_METAQA (PRIMARY vs BALANCED = GAIN on both metaqa caches: the aggregation adds on top of the structural chain)": false,
+   "SQUAD_NON_REGRESSION (no LOSS vs either parent on squad / squad_phg)": true
+  },
+  "per_cache": {
+   "metaqa": {
+    "ALL": {
+     "L1": 0.6397,
+     "SAFE": 0.6407,
+     "H2_PATCH1": 0.7515,
+     "BALANCED_H2_PATCH1": 0.7764,
+     "QMAX_F0": 0.6327,
+     "QMAX_SAFE": 0.6377,
+     "QMAX_BALANCED_H2_PATCH1": 0.7754
+    },
+    "cell": "CARRIES",
+    "exposure_nodes_mean": {
+     "L1": 5023.0,
+     "SAFE": 5023.1,
+     "H2_PATCH1": 5023.1,
+     "BALANCED_H2_PATCH1": 5023.1,
+     "QMAX_F0": 5028.3,
+     "QMAX_SAFE": 5027.3,
+     "QMAX_BALANCED_H2_PATCH1": 5027.3
+    },
+    "PRIMARY_vs_BALANCED_H2_PATCH1": {
+     "gained": 2,
+     "lost": 3,
+     "p": 1.0,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_QMAX_F0": {
+     "gained": 143,
+     "lost": 0,
+     "p": 1.793662034335766e-43,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_H2_PATCH1": {
+     "gained": 31,
+     "lost": 7,
+     "p": 0.00011616700794547796,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_SAFE": {
+     "gained": 137,
+     "lost": 2,
+     "p": 2.792660040979414e-38,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_L1": {
+     "gained": 138,
+     "lost": 2,
+     "p": 1.4164190352742676e-38,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_QMAX_SAFE": {
+     "gained": 138,
+     "lost": 0,
+     "p": 5.739718509874451e-42,
+     "label": "GAIN"
+    },
+    "per_hop": {
+     "hop1": {
+      "n": 326,
+      "PRIMARY": 0.9939,
+      "BALANCED_H2_PATCH1": 0.9939,
+      "QMAX_F0": 0.911,
+      "H2_PATCH1": 0.9939,
+      "SAFE": 0.9172,
+      "L1": 0.9172
+     },
+     "hop2": {
+      "n": 344,
+      "PRIMARY": 0.8081,
+      "BALANCED_H2_PATCH1": 0.814,
+      "QMAX_F0": 0.4797,
+      "H2_PATCH1": 0.7413,
+      "SAFE": 0.4942,
+      "L1": 0.4855
+     },
+     "hop3": {
+      "n": 332,
+      "PRIMARY": 0.5271,
+      "BALANCED_H2_PATCH1": 0.5241,
+      "QMAX_F0": 0.5181,
+      "H2_PATCH1": 0.5241,
+      "SAFE": 0.5211,
+      "L1": 0.5271
+     }
+    }
+   },
+   "metaqa_phg": {
+    "ALL": {
+     "L1": 0.6727,
+     "SAFE": 0.6747,
+     "H2_PATCH1": 0.7735,
+     "BALANCED_H2_PATCH1": 0.7984,
+     "QMAX_F0": 0.6747,
+     "QMAX_SAFE": 0.6687,
+     "QMAX_BALANCED_H2_PATCH1": 0.7964
+    },
+    "cell": "CARRIES",
+    "exposure_nodes_mean": {
+     "L1": 5088.7,
+     "SAFE": 5088.1,
+     "H2_PATCH1": 5088.1,
+     "BALANCED_H2_PATCH1": 5088.1,
+     "QMAX_F0": 5084.2,
+     "QMAX_SAFE": 5085.8,
+     "QMAX_BALANCED_H2_PATCH1": 5085.8
+    },
+    "PRIMARY_vs_BALANCED_H2_PATCH1": {
+     "gained": 2,
+     "lost": 4,
+     "p": 0.6875,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_QMAX_F0": {
+     "gained": 122,
+     "lost": 0,
+     "p": 3.76158192263132e-37,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_H2_PATCH1": {
+     "gained": 33,
+     "lost": 10,
+     "p": 0.0006061066312668117,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_SAFE": {
+     "gained": 127,
+     "lost": 5,
+     "p": 1.1820533154262882e-31,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_L1": {
+     "gained": 127,
+     "lost": 3,
+     "p": 5.381942110522302e-34,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_QMAX_SAFE": {
+     "gained": 128,
+     "lost": 0,
+     "p": 5.877471754111438e-39,
+     "label": "GAIN"
+    },
+    "per_hop": {
+     "hop1": {
+      "n": 326,
+      "PRIMARY": 0.9969,
+      "BALANCED_H2_PATCH1": 0.9969,
+      "QMAX_F0": 0.9172,
+      "H2_PATCH1": 0.9969,
+      "SAFE": 0.9172,
+      "L1": 0.9172
+     },
+     "hop2": {
+      "n": 344,
+      "PRIMARY": 0.8198,
+      "BALANCED_H2_PATCH1": 0.8169,
+      "QMAX_F0": 0.5494,
+      "H2_PATCH1": 0.7442,
+      "SAFE": 0.5291,
+      "L1": 0.5291
+     },
+     "hop3": {
+      "n": 332,
+      "PRIMARY": 0.5753,
+      "BALANCED_H2_PATCH1": 0.5843,
+      "QMAX_F0": 0.5663,
+      "H2_PATCH1": 0.5843,
+      "SAFE": 0.5873,
+      "L1": 0.5813
+     }
+    }
+   },
+   "squad": {
+    "ALL": {
+     "L1": 0.9859,
+     "SAFE": 0.9919,
+     "H2_PATCH1": 0.9919,
+     "BALANCED_H2_PATCH1": 0.9919,
+     "QMAX_F0": 0.9919,
+     "QMAX_SAFE": 0.995,
+     "QMAX_BALANCED_H2_PATCH1": 0.995
+    },
+    "cell": "NEUTRAL",
+    "exposure_nodes_mean": {
+     "L1": 5089.3,
+     "SAFE": 5086.0,
+     "H2_PATCH1": 5086.0,
+     "BALANCED_H2_PATCH1": 5086.0,
+     "QMAX_F0": 5075.9,
+     "QMAX_SAFE": 5074.3,
+     "QMAX_BALANCED_H2_PATCH1": 5074.3
+    },
+    "PRIMARY_vs_BALANCED_H2_PATCH1": {
+     "gained": 3,
+     "lost": 0,
+     "p": 0.25,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_QMAX_F0": {
+     "gained": 3,
+     "lost": 0,
+     "p": 0.25,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_H2_PATCH1": {
+     "gained": 3,
+     "lost": 0,
+     "p": 0.25,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_SAFE": {
+     "gained": 3,
+     "lost": 0,
+     "p": 0.25,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_L1": {
+     "gained": 9,
+     "lost": 0,
+     "p": 0.00390625,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_QMAX_SAFE": {
+     "gained": 0,
+     "lost": 0,
+     "p": 1.0,
+     "label": "NEUTRAL"
+    }
+   },
+   "squad_phg": {
+    "ALL": {
+     "L1": 0.9829,
+     "SAFE": 0.9889,
+     "H2_PATCH1": 0.9909,
+     "BALANCED_H2_PATCH1": 0.9889,
+     "QMAX_F0": 0.9889,
+     "QMAX_SAFE": 0.9899,
+     "QMAX_BALANCED_H2_PATCH1": 0.9899
+    },
+    "cell": "NEUTRAL",
+    "exposure_nodes_mean": {
+     "L1": 5089.2,
+     "SAFE": 5085.1,
+     "H2_PATCH1": 5085.1,
+     "BALANCED_H2_PATCH1": 5085.1,
+     "QMAX_F0": 5073.5,
+     "QMAX_SAFE": 5071.8,
+     "QMAX_BALANCED_H2_PATCH1": 5071.8
+    },
+    "PRIMARY_vs_BALANCED_H2_PATCH1": {
+     "gained": 1,
+     "lost": 0,
+     "p": 1.0,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_QMAX_F0": {
+     "gained": 1,
+     "lost": 0,
+     "p": 1.0,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_H2_PATCH1": {
+     "gained": 1,
+     "lost": 2,
+     "p": 1.0,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_SAFE": {
+     "gained": 1,
+     "lost": 0,
+     "p": 1.0,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_L1": {
+     "gained": 7,
+     "lost": 0,
+     "p": 0.015625,
+     "label": "NEUTRAL"
+    },
+    "PRIMARY_vs_QMAX_SAFE": {
+     "gained": 0,
+     "lost": 0,
+     "p": 1.0,
+     "label": "NEUTRAL"
+    }
+   },
+   "musique": {
+    "ALL": {
+     "L1": 0.6596,
+     "SAFE": 0.7118,
+     "H2_PATCH1": 0.7329,
+     "BALANCED_H2_PATCH1": 0.7269,
+     "QMAX_F0": 0.7319,
+     "QMAX_SAFE": 0.748,
+     "QMAX_BALANCED_H2_PATCH1": 0.76
+    },
+    "cell": "STACKS",
+    "exposure_nodes_mean": {
+     "L1": 5116.8,
+     "SAFE": 5113.9,
+     "H2_PATCH1": 5113.9,
+     "BALANCED_H2_PATCH1": 5113.9,
+     "QMAX_F0": 5106.0,
+     "QMAX_SAFE": 5104.2,
+     "QMAX_BALANCED_H2_PATCH1": 5104.2
+    },
+    "PRIMARY_vs_BALANCED_H2_PATCH1": {
+     "gained": 34,
+     "lost": 1,
+     "p": 2.0954757928848267e-09,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_QMAX_F0": {
+     "gained": 36,
+     "lost": 8,
+     "p": 2.5448598648836196e-05,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_H2_PATCH1": {
+     "gained": 36,
+     "lost": 9,
+     "p": 6.57466324582856e-05,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_SAFE": {
+     "gained": 49,
+     "lost": 1,
+     "p": 9.059419880941277e-14,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_L1": {
+     "gained": 101,
+     "lost": 1,
+     "p": 4.062633661888211e-29,
+     "label": "GAIN"
+    },
+    "PRIMARY_vs_QMAX_SAFE": {
+     "gained": 16,
+     "lost": 4,
+     "p": 0.01181793212890625,
+     "label": "NEUTRAL"
+    }
+   }
+  },
+  "reading": "musique STACKS (0.760 vs BALANCED 0.727: +34 / -1; vs QMAX_F0 0.732: +36 / -8); metaqa / metaqa_phg CARRIES (0.775 / 0.796 = BALANCED within noise, +143 / 0 and +122 / 0 over QMAX_F0); squad / squad_phg NEUTRAL at the ceiling (0.995 / 0.990; no loss vs either parent)"
+ },
+ "roles_frozen": {
+  "H2_PATCH1 (section 16)": "the WebQSP PRIMARY transfer reference, exactly as pre-registered and ruled (eighth / tenth / thirteenth rulings): one shot, no change; the clean historical hypothesis test 'does real-edge H2 patching generalize to another KB?'",
+  "BALANCED_H2_PATCH1 (section 21) and the composite": "successor evidence on WebQSP only AFTER the H2_PATCH1 one-shot is recorded; never retroactively the original confirmation",
+  "QMAX_BALANCED_H2_PATCH1 (section 24)": "the leading universal candidate; the arm carried to 2Wiki and HotpotQA (multi-hop text, two topologies); SQuAD = the near-ceiling safety guard already inside the DEV_A evidence",
+  "served L1 (BASE / SAFE)": "unchanged; every transfer compares the candidate against the canonical BASE / SAFE of the transfer population"
+ },
+ "populations": {
+  "DEV_A": "EXHAUSTED for mechanism selection (fifteenth ruling); may still be read to assert a reproduction (identity of a re-implementation with the pinned records) or for a descriptive diagnostic, never to choose between mechanisms or to set any constant",
+  "DEV_B": "sealed (read twice by the L1_STATIC / L1_GEOM confirmations; never again)",
+  "TEST": "never read",
+  "WebQSP": "the KB transfer population (canonical WEBQSP_ROG_RESOLVED, NAME_ONLY; PHG lane preflight-gated, watcher armed until 2026-09-16T11:38:18Z); primary arm H2_PATCH1",
+  "2wiki / hotpotqa": "the text transfer populations, authorized by this ruling; one shot each; pre-registered (population rule, arms, decision rule, identity test, resource gate) before any partition, cache or replay number exists; the corpus is never subset by query, queries may be sampled"
+ },
+ "priorities_from_the_ruling": {
+  "1_transfer": {
+   "WebQSP": "Does real-edge H2 patching generalize to another KB?  (H2_PATCH1 primary; composite as successor evidence afterwards)",
+   "2Wiki": "Does QMAX + BALANCED patch generalize to multi-hop text?",
+   "HotpotQA": "Same, under a second text topology",
+   "SQuAD": "Easy / near-ceiling safety (already in the DEV_A evidence; re-read only as a guard)"
+  },
+  "2_musique_ranking_not_on_DEV_A": "only if QMAX still gives consistent improvements on 2Wiki / Hotpot: iterative query-conditioned rescoring of the already retrieved candidate set (query -> top node candidates -> block/node aggregate -> query-conditioned evidence centroid -> rescore the SAME candidates -> block aggregation; no new nodes, no graph walk, no learned weights) -- future work until the transfer says the QMAX effect generalizes; needs its own ruling and pre-registration; never selected on DEV_A",
+  "3_efficiency_gating": "after the transfer: QMAX + SAFE -> cheap confidence -> stop | BALANCED H2 PATCH; the Dense / SPLADE agreement signal is the natural candidate; calibrated only over the frozen candidate",
+  "if_it_transfers": "the retrieval architecture is considered essentially settled; research effort moves to L2 and selective full L3"
+ },
+ "closed_permanently_for_now": [
+  "PATH3/PATH4 partitions",
+  "more vertex-cut variants",
+  "R3/R4 overlap",
+  "different halo voting",
+  "mass-normalized voting",
+  "relation-signature variants",
+  "latent offsets",
+  "global triplet geometry",
+  "pure H3 depth",
+  "coverage-then-score frontier compression"
+ ],
+ "closed_evidence": {
+  "PATH3/PATH4 partitions": "section 5-6 (PATH2 NOT_CONFIRMED, MtK cell NOT_RUN) -- no PATH3/PATH4 was ever opened",
+  "more vertex-cut variants": "sections 18-20, 22 (V1 NOT_MATERIAL by the letter; replay MECHANISM_POSITIVE_AT_LOWER_EXPOSURE on MetaQA only; transfer NOT_SUPPORTED; R2 NOT_SUPPORTED)",
+  "R3/R4 overlap": "section 23 (R2_LEGACY_ROUTER FAIL) + the thirteenth ruling: no R3/R4 or alternate routing",
+  "different halo voting": "sections 7, 11 (ONE_HOP_STRUCTURAL_VOTE CLOSED; halo variants refuted in L1_STATIC / L1_GEOM)",
+  "mass-normalized voting": "section 8 (massvote records: NOT_CONFIRMED)",
+  "relation-signature variants": "section 12 (RELSIG NOT_CONFIRMED)",
+  "latent offsets": "L1_GEOM (point geometry killed; offsets closed for MetaQA) + section 14.2 (latent beam strictly worse)",
+  "global triplet geometry": "section 13 (EDGE_GEOMETRY_VOTE NOT_CONFIRMED) + L1_GEOM D2d (musique-only, never composed)",
+  "pure H3 depth": "sections 17 and 26 (H3_PATCH1 FAIL; BALANCED_H3_PATCH1 FAIL_NOT_BETTER: 57 % reach / 31 % width / one-block capacity)",
+  "coverage-then-score frontier compression": "section 25 (COVSCORE_H2_PATCH1 FAIL_WORSE)"
+ },
+ "host_at_freeze": {
+  "utc": "2026-09-15T22:25:56Z",
+  "host": {
+   "host_total_gb": 15.69,
+   "host_available_gb": 1.56
+  },
+  "python_processes": [
+   {
+    "pid": 18392,
+    "ws_mb": 6.2,
+    "private_mb": 14.6,
+    "cmd": "\"C:\\Users\\Swastik\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" -u C:\\Users\\Swastik\\AppData\\Local\\Temp\\claude\\C--U",
+    "role": "session tooling"
+   },
+   {
+    "pid": 23252,
+    "ws_mb": 5.1,
+    "private_mb": 8.6,
+    "cmd": "C:\\Users\\Swastik\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -u scratchpad/_phg_webqsp_watch.py",
+    "role": "WebQSP watcher (untouched)"
+   },
+   {
+    "pid": 22760,
+    "ws_mb": 5729.1,
+    "private_mb": 7527.2,
+    "cmd": "\"C:\\Users\\Swastik\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" -u scripts/m3b_run.py --stage screen --threads 8",
+    "role": "foreign m3b_run.py (never signalled)"
+   },
+   {
+    "pid": 21348,
+    "ws_mb": 10.1,
+    "private_mb": 13.1,
+    "cmd": "C:\\Users\\Swastik\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -u C:/Users/Swastik/AppData/Local/Temp/claude/C--Use",
+    "role": "session tooling"
+   },
+   {
+    "pid": 9364,
+    "ws_mb": 13.9,
+    "private_mb": 8.9,
+    "cmd": "C:\\Users\\Swastik\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -",
+    "role": "session tooling"
+   }
+  ],
+  "webqsp_watcher": {
+   "pid": 23252,
+   "last_preflight_line": "PREFLIGHT #1274 2026-09-15T22:25:06Z CONTENDED  host avail 0.73/15.69 GB  pages_in/s 16829.8  swap 5.89 GB (+0.02)  wsl avail 7181/7789 MB  disk 21.9 GB  foreign pid gone rss None MB  ranks 4  streak 0/3",
+   "armed_utc": "2026-09-15T11:38:18Z",
+   "deadline_utc": "2026-09-16T11:38:18Z",
+   "note": "the watcher's foreign-pid probe tracks pid 13828 (gone); the same command line runs as pid 22760 -- the host-level checks (available, paging, swap) still hold every sample CONTENDED; nothing launched"
+  }
+ },
+ "pins": {
+  "code": {
+   "scratchpad/_l1c_qmaxbal.py": {
+    "path": "scratchpad/_l1c_qmaxbal.py",
+    "sha256": "cae88fa64a0516a4f55c99a4a3b464afd39e467dca42e4380a546ebbd545b1c8",
+    "bytes": 38926
+   },
+   "scratchpad/_l1c_qmaxbal_summary.py": {
+    "path": "scratchpad/_l1c_qmaxbal_summary.py",
+    "sha256": "666f65b16550de5842e08b932f382bf987f30d1f1bdccd9fce70e8506d659e1e",
+    "bytes": 6258
+   },
+   "scratchpad/_l1g_candidate.py": {
+    "path": "scratchpad/_l1g_candidate.py",
+    "sha256": "b01c27a6e64b18756db1ca1d8910e8db4bb54fa019d9809698cb1369206169e0",
+    "bytes": 5630
+   },
+   "scratchpad/_l1g_core.py": {
+    "path": "scratchpad/_l1g_core.py",
+    "sha256": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+    "bytes": 11419
+   },
+   "scratchpad/_l1s_core.py": {
+    "path": "scratchpad/_l1s_core.py",
+    "sha256": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+    "bytes": 15099
+   },
+   "scratchpad/_l1x90_core.py": {
+    "path": "scratchpad/_l1x90_core.py",
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+    "bytes": 12081
+   },
+   "scratchpad/_ta_prepartition.py": {
+    "path": "scratchpad/_ta_prepartition.py",
+    "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+    "bytes": 11737
+   },
+   "scratchpad/_l1ps_router.py": {
+    "path": "scratchpad/_l1ps_router.py",
+    "sha256": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9",
+    "bytes": 19503
+   },
+   "scratchpad/_l1kb_core.py": {
+    "path": "scratchpad/_l1kb_core.py",
+    "sha256": "f804f92d3ddead9ffdfd2a69981a3470f49346f9163f6f4a5ee3c546275cf8da",
+    "bytes": 5770
+   },
+   "scratchpad/_l1c_microl3.py": {
+    "path": "scratchpad/_l1c_microl3.py",
+    "sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+    "bytes": 15145
+   },
+   "scratchpad/_l1c_h2patch.py": {
+    "path": "scratchpad/_l1c_h2patch.py",
+    "sha256": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d",
+    "bytes": 21581
+   },
+   "scratchpad/_l1c_h2balanced.py": {
+    "path": "scratchpad/_l1c_h2balanced.py",
+    "sha256": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe",
+    "bytes": 36015
+   },
+   "src/l1_canonical/adapter.py": {
+    "path": "src/l1_canonical/adapter.py",
+    "sha256": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+    "bytes": 26015
+   },
+   "src/l1_canonical/hypergraph.py": {
+    "path": "src/l1_canonical/hypergraph.py",
+    "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+    "bytes": 12200
+   },
+   "scratchpad/_l1ps_cache.py": {
+    "path": "scratchpad/_l1ps_cache.py",
+    "sha256": "ab81e214def8eb8e56bf04543475971e7cbdf4dfcf026111922817e38bfa176e",
+    "bytes": 10322
+   },
+   "src/l1_canonical/partition.py": {
+    "path": "src/l1_canonical/partition.py",
+    "sha256": "45be47b5dd5d432af6b7339133e9cb4d5acf38d9ee5661368af0db3e5f175257",
+    "bytes": 10611
+   },
+   "src/l1_canonical/replay_cache.py": {
+    "path": "src/l1_canonical/replay_cache.py",
+    "sha256": "1fc5411c9f12f25d81586aabdb1af0da371752f20be5d4d09d8d17529a89f0d1",
+    "bytes": 22928
+   },
+   "src/l1_canonical/l1_eval.py": {
+    "path": "src/l1_canonical/l1_eval.py",
+    "sha256": "01266b0609bceb7a0aa33f0d73d35939e3a1abf54983b6efa9c8dce15de06ee7",
+    "bytes": 7190
+   }
+  },
+  "contract": {
+   "L1_CONTRACT_SHA256": "35fdbcdef033893765fbc34d82be024f9477c52baffb9a179971c00d38c4e824",
+   "files": {
+    "scratchpad/_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+    "scratchpad/_l1ps_cache.py": "ab81e214def8eb8e56bf04543475971e7cbdf4dfcf026111922817e38bfa176e",
+    "scratchpad/_l1ps_router.py": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9",
+    "scratchpad/_l1hu_build.py": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79",
+    "scratchpad/_l1hu_local_worker.py": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+    "scratchpad/_l1ep_part.py": "a7adda6a85f55ad2d740a495002dac1bbaa5758b0758ec5a3e48db48ef8d7706",
+    "scratchpad/_l1ep_c.py": "6a34073181944baba5b8d5d0fdc683299fbb42eb6c15a33fb406047eaa46d848",
+    "scratchpad/_l1ep_pu.py": "8dd1e0a6818f1ce99733fd6b6c7e513cdf3bfbfafe0340bec09828e60bd215f7",
+    "scratchpad/_l1kn_sub.py": "3cb85dfd6698bc01fe52ae8a75c5b0629558204204ab2a60eba1a386e10046f3",
+    "scratchpad/_l1ov_core.py": "b689c1983bf4d920990e7610369b151f9aead97d39c39a1e5807b5595b8d750d",
+    "scratchpad/_l1ov_eval.py": "0fee96e0106f9b886b759b337cfcea1ff3a8fd75cb4a8f1f92b1c3bcacf08b28",
+    "scratchpad/_l1hu_s.py": "66a86494beb4fefca9d772a88e224e0f91a470f50abb8ecc761c625cdbf13649",
+    "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+    "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+    "src/l1_canonical/partition.py": "45be47b5dd5d432af6b7339133e9cb4d5acf38d9ee5661368af0db3e5f175257",
+    "src/l1_canonical/replay_cache.py": "1fc5411c9f12f25d81586aabdb1af0da371752f20be5d4d09d8d17529a89f0d1",
+    "src/l1_canonical/l1_eval.py": "01266b0609bceb7a0aa33f0d73d35939e3a1abf54983b6efa9c8dce15de06ee7"
+   },
+   "constants": {
+    "K0": 60,
+    "K": 100,
+    "P_MAIN": 50,
+    "SEED_K": 5,
+    "BEAM": 64,
+    "MAX_HOPS": 3,
+    "DEG_CAP": 300,
+    "SMAX": 256,
+    "TOPP": 200,
+    "EVAL_CAP": 2000,
+    "MIN_VAL": 1000,
+    "PARTITION": {
+     "rule": "H4_SPLIT_PRESERVE",
+     "families": [
+      "STRUCT",
+      "KNN"
+     ],
+     "target_block_size": 100,
+     "partitioner": "mtkahypar",
+     "preset": "DETERMINISTIC_QUALITY",
+     "objective": "KM1",
+     "epsilon": 0.03,
+     "seed": 0
+    }
+   },
+   "CONTRACT_FILES": [
+    "scratchpad/_ta_prepartition.py",
+    "scratchpad/_l1ps_cache.py",
+    "scratchpad/_l1ps_router.py",
+    "scratchpad/_l1hu_build.py",
+    "scratchpad/_l1hu_local_worker.py",
+    "scratchpad/_l1ep_part.py",
+    "scratchpad/_l1ep_c.py",
+    "scratchpad/_l1ep_pu.py",
+    "scratchpad/_l1kn_sub.py",
+    "scratchpad/_l1ov_core.py",
+    "scratchpad/_l1ov_eval.py",
+    "scratchpad/_l1hu_s.py",
+    "src/l1_canonical/adapter.py",
+    "src/l1_canonical/hypergraph.py",
+    "src/l1_canonical/partition.py",
+    "src/l1_canonical/replay_cache.py",
+    "src/l1_canonical/l1_eval.py"
+   ],
+   "note": "sha256 over (file, digest) of the 17 frozen L1 files plus the adapter CONTRACT constants (src/l1_canonical/adapter.contract_hash); the served replay caches carry this hash; it must be unchanged when any cache of the composite is built or replayed"
+  },
+  "records": {
+   "PREREGISTRATION_QMAX_BALANCED_H2_PATCH1.json": {
+    "path": "results/L1_COVPART/PREREGISTRATION_QMAX_BALANCED_H2_PATCH1.json",
+    "sha256": "4230b2610f680381e4ec4dcedfb5454909d33a7ee526cad0b566866598a20209",
+    "bytes": 28065
+   },
+   "qmaxbal_SUMMARY.json": {
+    "path": "results/L1_COVPART/qmaxbal_SUMMARY.json",
+    "sha256": "b8c1544fc3dd2f9ff263d7c4fa57157d9c4651463dcad081434f1333ce4b045b",
+    "bytes": 26782
+   },
+   "qmaxbal_A_metaqa.json": {
+    "path": "results/L1_COVPART/qmaxbal_A_metaqa.json",
+    "sha256": "10dbb5c59ee3a795a974234d5bcbc935c31c4246be39e1683f2e516feefb7cf3",
+    "bytes": 24792
+   },
+   "qmaxbal_A_metaqa.log": {
+    "path": "results/L1_COVPART/qmaxbal_A_metaqa.log",
+    "sha256": "b5dcd19caa0e160f1d12f207d07c0a8defecdf396ffd815f9b3f36b1099c4f35",
+    "bytes": 16627
+   },
+   "qmaxbal_A_metaqa_phg.json": {
+    "path": "results/L1_COVPART/qmaxbal_A_metaqa_phg.json",
+    "sha256": "5bb55780ee212bf88883d3805672a4a8d610dd97eac2ac769c1c802ca3265235",
+    "bytes": 24902
+   },
+   "qmaxbal_A_metaqa_phg.log": {
+    "path": "results/L1_COVPART/qmaxbal_A_metaqa_phg.log",
+    "sha256": "cea2484a343c44ed326283d8e41f99dfe5013e15d447f2902fde9aad3daad85d",
+    "bytes": 16723
+   },
+   "qmaxbal_A_squad.json": {
+    "path": "results/L1_COVPART/qmaxbal_A_squad.json",
+    "sha256": "6c4b54b7f6b37f0558cece43ddba9a9842f419a4e71e24912f81b279ac3f073c",
+    "bytes": 14799
+   },
+   "qmaxbal_A_squad.log": {
+    "path": "results/L1_COVPART/qmaxbal_A_squad.log",
+    "sha256": "bd00830707061ee3f347e6d571a98784bb8d9a41e812a7efc4ad3a93f4cf5f75",
+    "bytes": 9421
+   },
+   "qmaxbal_A_squad_phg.json": {
+    "path": "results/L1_COVPART/qmaxbal_A_squad_phg.json",
+    "sha256": "09877f5461a18abffcc63f2e84da4ae2b6f0a1f997d515a9c05859ede97f82b7",
+    "bytes": 14807
+   },
+   "qmaxbal_A_squad_phg.log": {
+    "path": "results/L1_COVPART/qmaxbal_A_squad_phg.log",
+    "sha256": "2de59cedacf915cca450462d4e2f260fa7c906acee45071d686858cec0faa12c",
+    "bytes": 9438
+   },
+   "qmaxbal_A_musique.json": {
+    "path": "results/L1_COVPART/qmaxbal_A_musique.json",
+    "sha256": "50590f7ebbb10f5e554ec7451154a8456f034245bc61a17b6257e0bd6ef4e103",
+    "bytes": 15085
+   },
+   "qmaxbal_A_musique.log": {
+    "path": "results/L1_COVPART/qmaxbal_A_musique.log",
+    "sha256": "b05c148f193fe8ce87d140035c10aa5f651007dfe64cddfe0b2f3c352e0ad1ae",
+    "bytes": 9677
+   },
+   "qmaxbal_SUMMARY.log": {
+    "path": "results/L1_COVPART/qmaxbal_SUMMARY.log",
+    "sha256": "17eb67f7df828461c3145548bf35e9ff2bd5faf1fa85f97f17f09419a2761a69",
+    "bytes": 2165
+   },
+   "h2patch_A_metaqa.json": {
+    "path": "results/L1_COVPART/h2patch_A_metaqa.json",
+    "sha256": "f5b5a91cba8d906b4189e4caf023cbab445ae3dbab15786a9abee236f3297438",
+    "bytes": 8845
+   },
+   "h2patch_A_metaqa_phg.json": {
+    "path": "results/L1_COVPART/h2patch_A_metaqa_phg.json",
+    "sha256": "b2e2b57f16a3e724644e44f329b3fc0181bac4ccd6b787d444c003987e0d2cef",
+    "bytes": 8876
+   },
+   "h2patch_A_squad.json": {
+    "path": "results/L1_COVPART/h2patch_A_squad.json",
+    "sha256": "cfb66bc7aa2ca53c4c0447b03d7b272e69c45e73589e50812ee099d7b886fe7b",
+    "bytes": 3944
+   },
+   "h2patch_A_squad_phg.json": {
+    "path": "results/L1_COVPART/h2patch_A_squad_phg.json",
+    "sha256": "e745473a47cb5552bf5d1559c0d1153f8dcaf49a2a7c30e704e5dee964844c45",
+    "bytes": 3894
+   },
+   "h2patch_A_musique.json": {
+    "path": "results/L1_COVPART/h2patch_A_musique.json",
+    "sha256": "8cdc85482ada7e131cec09ac38377365822180ab7b044f9d3f0124f33e2c197d",
+    "bytes": 4021
+   },
+   "h2balanced_A_metaqa.json": {
+    "path": "results/L1_COVPART/h2balanced_A_metaqa.json",
+    "sha256": "761f4b952aae04441b99708bfa9ca6400038975542d3f957f35f758c1778a557",
+    "bytes": 15085
+   },
+   "h2balanced_A_metaqa_phg.json": {
+    "path": "results/L1_COVPART/h2balanced_A_metaqa_phg.json",
+    "sha256": "b34469047f0ba0c2e8855ed220d2b0b64b289d5386509cb51405ab24877498a6",
+    "bytes": 15123
+   },
+   "h2balanced_A_squad.json": {
+    "path": "results/L1_COVPART/h2balanced_A_squad.json",
+    "sha256": "512e21083734265f5bbb57190f94271b87f1e93add24cca98aa6574ed864180e",
+    "bytes": 8110
+   },
+   "h2balanced_A_squad_phg.json": {
+    "path": "results/L1_COVPART/h2balanced_A_squad_phg.json",
+    "sha256": "178887d12488c278320d062244012dbdb9ce3c90b5c819b9d94b296e633a9511",
+    "bytes": 8131
+   },
+   "h2balanced_A_musique.json": {
+    "path": "results/L1_COVPART/h2balanced_A_musique.json",
+    "sha256": "a092cb28e68de1fc0de1f5ce6a6e6f85fa8dbd0674bf7db37a52c35cd15c20d1",
+    "bytes": 8226
+   },
+   "L1_REPLAY_metaqa.json": {
+    "path": "results/L1_CANONICAL/L1_REPLAY_metaqa.json",
+    "sha256": "7e5ef35b549791d9b6e790615a80ad7558f4626a07e0aaccca987f1834bc0972",
+    "bytes": 23067
+   },
+   "L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json": {
+    "path": "results/L1_LOWMEM/L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json",
+    "sha256": "d4ff6870236303c4b88fbcdd4c421d33719eb19dba2829d87a53cc09f5032c17",
+    "bytes": 33356
+   },
+   "L1_REPLAY_squad.json": {
+    "path": "results/L1_CANONICAL/L1_REPLAY_squad.json",
+    "sha256": "c39aa79836c0296fafa957c01f5004f81968df3e7f5baee873687d1061e09d58",
+    "bytes": 22709
+   },
+   "L1_REPLAY_squad__LOWMEM__PHG_con.json": {
+    "path": "results/L1_LOWMEM/L1_REPLAY_squad__LOWMEM__PHG_con.json",
+    "sha256": "dc14ab54ea656f2f4f495c59365b84836b70cd3c27a22c646a210e4d9d5d8846",
+    "bytes": 34987
+   },
+   "L1_REPLAY_musique__LOWMEM__PHG_C1_con.json": {
+    "path": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json",
+    "sha256": "207ad4bb3b292f7930bafba94551881896d54e80edc89974bc28c6bad71dac76",
+    "bytes": 35090
+   },
+   "h2balanced_A_SUMMARY.json": {
+    "path": "results/L1_COVPART/h2balanced_A_SUMMARY.json",
+    "sha256": "0873799f9da43c9e6b5ed7c4d41c8de60a8f8208196dcb97d837942d09578df8",
+    "bytes": 25594
+   },
+   "h2patch_A_SUMMARY.json": {
+    "path": "results/L1_COVPART/h2patch_A_SUMMARY.json",
+    "sha256": "39192834cfbd3ec5396c8b8de79519263e6e600b5af902d1a57a3257d175209b",
+    "bytes": 3145
+   },
+   "PREREGISTRATION_BALANCED_H2_PATCH1_DEV_A.json": {
+    "path": "results/L1_COVPART/PREREGISTRATION_BALANCED_H2_PATCH1_DEV_A.json",
+    "sha256": "a88c9e4e23f699ebe071df1cf5cecff855e02f174f1d3f6e3d09284e0a15395a",
+    "bytes": 21150
+   },
+   "PREREGISTRATION_H2_PATCH1_DEV_A.json": {
+    "path": "results/L1_COVPART/PREREGISTRATION_H2_PATCH1_DEV_A.json",
+    "sha256": "c092a56b955784424f9e9050cc9777e3c57e0fd0b30ec5f61d1596d5fcb11f3e",
+    "bytes": 9367
+   },
+   "L1_GEOM/PREREGISTRATION_DEV_B.json": {
+    "path": "results/L1_GEOM/PREREGISTRATION_DEV_B.json",
+    "sha256": "61a6d5059d6645bf972fb2e3ca875c50a23a292d25ecabb884135c3c00e1ea76",
+    "bytes": 14611
+   },
+   "L1_GEOM/DEV_B_CONFIRMATION.json": {
+    "path": "results/L1_GEOM/DEV_B_CONFIRMATION.json",
+    "sha256": "de6eb0e383d070c27bb92632d04714088dc7a690decc95b31c94116c70fb8fed",
+    "bytes": 19350
+   },
+   "PREREGISTRATION_COVSCORE_H2_PATCH1.json": {
+    "path": "results/L1_COVPART/PREREGISTRATION_COVSCORE_H2_PATCH1.json",
+    "sha256": "fdac27a89f3b39386c185d1c819533c79eef0535fd482cea2024e45ceb5c503d",
+    "bytes": 30461
+   },
+   "covscore_SUMMARY.json": {
+    "path": "results/L1_COVPART/covscore_SUMMARY.json",
+    "sha256": "3650d7a7955f88dd747378638ccea58009848744b413f85b550f4ca081fe84ae",
+    "bytes": 39185
+   },
+   "PREREGISTRATION_BALANCED_H3_PATCH1.json": {
+    "path": "results/L1_COVPART/PREREGISTRATION_BALANCED_H3_PATCH1.json",
+    "sha256": "471e6918808520d47dc11695400c32df8096e9fbcc95f48d28a355bd65e962eb",
+    "bytes": 44188
+   },
+   "h3bal_SUMMARY.json": {
+    "path": "results/L1_COVPART/h3bal_SUMMARY.json",
+    "sha256": "bc19d7cbcf29ea1331a239e38fb50f8cd8254abb62ad596ad2352dcf2f7dbace",
+    "bytes": 69761
+   },
+   "PREREGISTRATION_H3_PATCH1_DEV_A.json": {
+    "path": "results/L1_COVPART/PREREGISTRATION_H3_PATCH1_DEV_A.json",
+    "sha256": "3eec36ecc72e8f48ec61977539aa492a5fa0a500e1e94687bb7898a2147b62e2",
+    "bytes": 10955
+   },
+   "h3patch_A_SUMMARY.json": {
+    "path": "results/L1_COVPART/h3patch_A_SUMMARY.json",
+    "sha256": "bc29d8e6d6bc195f272647d07678f32eb7cb3830e348199c536f4688f105fdb8",
+    "bytes": 3795
+   },
+   "PREREGISTRATION_R2_LEGACY_ROUTER.json": {
+    "path": "results/L1_COVPART/PREREGISTRATION_R2_LEGACY_ROUTER.json",
+    "sha256": "3f18a7fc24b61611f8d19d5ea6c9fc8cd4084118137833b0fbb0efb91d67dc8f",
+    "bytes": 26236
+   },
+   "r2router_SUMMARY.json": {
+    "path": "results/L1_COVPART/r2router_SUMMARY.json",
+    "sha256": "fb624699f8d35ba598201c96dbf6c995c4d23d86bdb73d3c594ca123faee9a57",
+    "bytes": 14845
+   },
+   "PREREGISTRATION_STRUCT_VERTEXCUT_V1_TRANSFER.json": {
+    "path": "results/L1_COVPART/PREREGISTRATION_STRUCT_VERTEXCUT_V1_TRANSFER.json",
+    "sha256": "61845f7b17fa0632b10d1c9459f8c6da60f9f499c6a27a5662093daed7c8b3af",
+    "bytes": 20011
+   },
+   "vcut_transfer_SUMMARY.json": {
+    "path": "results/L1_COVPART/vcut_transfer_SUMMARY.json",
+    "sha256": "5b9e5fa025d47ec5f15bdc9fa1d5bb63e45ac4fe0525b6c3c6c0d21409e6da69",
+    "bytes": 4899
+   },
+   "PREREGISTRATION_BOUNDED_VERTEXCUT_R2.json": {
+    "path": "results/L1_COVPART/PREREGISTRATION_BOUNDED_VERTEXCUT_R2.json",
+    "sha256": "10dbcfcd2585067232b37bfaf0c06e90494a82416e2dfc6b0b9ad1e601dbaeec",
+    "bytes": 29945
+   },
+   "br2_SUMMARY.json": {
+    "path": "results/L1_COVPART/br2_SUMMARY.json",
+    "sha256": "e62b2ebf1806d11fa7fdeafcf49b311efa475bf444558f94a540d710f3f3164a",
+    "bytes": 7027
+   }
+  },
+  "caches_read_only": {
+   "metaqa": {
+    "path": "data/l1_canonical/metaqa/replay_cache.npz",
+    "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b",
+    "bytes": 5390599
+   },
+   "metaqa_phg": {
+    "path": "data/l1_lowmem/metaqa/replay_cache__LOWMEM__PHG_REPAIR1_con.npz",
+    "sha256": "584e17dec26d0408d5253a3f79e471bc7ec128f6dde744581bb6e502da5b4e5b",
+    "bytes": 5386215
+   },
+   "squad": {
+    "path": "data/l1_canonical/squad/replay_cache.npz",
+    "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6",
+    "bytes": 5320148
+   },
+   "squad_phg": {
+    "path": "data/l1_lowmem/squad/replay_cache__LOWMEM__PHG_con.npz",
+    "sha256": "edd9b36bb4ba45ff0579c0591f19dc263ae84296f7f9299684974530845f20ab",
+    "bytes": 5312713
+   },
+   "musique": {
+    "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+    "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5",
+    "bytes": 6183023
+   }
+  }
+ },
+ "integrity": {
+  "nothing_under_data_written": true,
+  "no_pinned_module_edited": "every code pin above equals its pre-registration pin (asserted)",
+  "served_L1_unchanged": true,
+  "foreign_process_untouched": true,
+  "webqsp_watcher_untouched": true,
+  "written_by": "session scratchpad _write_freeze15.py (not part of the lane's code; the record is self-describing)"
+ }
+}

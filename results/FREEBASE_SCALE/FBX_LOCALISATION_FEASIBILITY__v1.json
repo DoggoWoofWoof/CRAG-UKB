@@ -1,0 +1,35 @@
+{
+ "stage": "FBX_SCALE / stage 2b (cost of the frozen node localisation on 302M nodes; a calculation, nothing run)",
+ "utc": "2026-09-30T04:41:59Z",
+ "status": "DEVELOPMENT (systems)",
+ "inputs": {
+  "results/L3_HOST/ENC_REPRO__v1.json": "7bb60d8f19d6cd00428d214b0007728204493cd186673492a10647f1d21bc79d",
+  "results/FREEBASE_SCALE/FBX_GRAPH_STATS__v1.json": "09dbfc116e0e4d827fc7477792b990451a8dc511508012943dccc096ffcbaab5"
+ },
+ "measured_on_host_gpu": {
+  "device": "NVIDIA RTX 4500 Ada Generation",
+  "priority": "BELOW_NORMAL",
+  "dense_docs": 43234,
+  "dense_seconds": 89.7,
+  "dense_docs_per_s": 482.0,
+  "splade_seconds": 23.8,
+  "splade_docs_per_s": 1816.6,
+  "note": "MetaQA documents (names); the GPU was shared and the job ran at BELOW_NORMAL; a Freebase name is of similar length but this is not verified"
+ },
+ "freebase_nodes": 301977131,
+ "dense_encode_hours": 174.0,
+ "dense_encode_days": 7.3,
+ "splade_encode_hours": 46.2,
+ "dense_store_gb_fp16_1536d": 927.7,
+ "splade_nonzeros_per_doc_measured": 40.81,
+ "splade_nonzeros_total_billion": 12.32,
+ "splade_store_gb_at_6_bytes_per_nonzero": 73.9,
+ "host_c_drive_free_gb": 386.8,
+ "dense_store_over_free_disk": 2.4,
+ "verdict": "FBX_IRL1_FULL_REPLAY_INFEASIBLE_ON_HOST",
+ "basis": "the dense vectors alone need 928 GB against 387 GB free (2.4x), and the dense encode is about 7.3 days of a shared GPU; the frozen encoder, dimension and precision are part of the frozen substrate and were not changed",
+ "consequence": "the frozen IR_L1 cannot localise on the 302M-node graph; a query workload can only be replayed with the localisation the WebQSP corpus already has (its own frozen retrieval cache), mapped to Freebase positions through bridge/webqsp_positions.npy",
+ "code": {
+  "scratchpad/_fbx_encode_feasibility.py": "aa59433fd83c0085607f3db8239e8da718ca2772268b2eea7afb8a165cc4f634"
+ }
+}

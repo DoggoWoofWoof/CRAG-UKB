@@ -1,0 +1,54 @@
+{
+ "stage": "FBX_SCALE / addendum 18: level-0 V-cycle (E6, level 0) reservation re-sized from the measured pass-0 failure of job 261004-041235-ooc-fb-vc0-a7f9",
+ "declared": "2026-10-04T04:40:47+0530",
+ "extends": {
+  "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_17.json": "d4ba0a54f217d01c4b3c72d2ea3b095af8db06c7943a4439d1a3f3cab0bc00a0"
+ },
+ "measured": {
+  "job": "261004-041235-ooc-fb-vc0-a7f9 (python scratchpad/_ooc_vc.py VCYCLE ... 4 levels=0-0 anon_gb=40; rx 4 cpu 41 GB), runtime 13m36s, rc 1 (engine exit 134)",
+  "phases_with_peak_rss": {
+   "implicit level 0 / split built (V 301,977,131, M 301,926,716, S 25)": "16.36 GB at 32.8 s",
+   "phi built (7.55 GB phi8, 109,833 big nets)": "30.16 GB at 132.3 s",
+   "uint16 gain cache built (k 25: V x 25 x 2 B = 15.1 GB)": "46.53 GB at 497.8 s",
+   "pass 0 candidate build (parallel eval of every vertex with a cut net)": "std::bad_alloc under RLIMIT_DATA 40 GB"
+  },
+  "what_it_shows": "most likely the engine's own anonymous-memory cap tripped (RLIMIT_DATA 40 GB counts anonymous memory only; the 46.53 GB peak RSS includes file-backed pages): the 41 GB reservation was an estimate made before level 0 had ever been run.  NOT excluded: a host-level allocation failure (host RAM was 92 % used at 04:21 while the job ran); the rerun logs peak RSS per phase and the engine cap differs, which discriminates the two",
+  "nothing_written": "no lab0.i32 and no E6 record: the failed job produced no result; the stage is simply to be rerun with the reservation below"
+ },
+ "model_for_the_remaining_allocation": {
+  "measured_at_level_1": "PROGRESS #5 of the state file: level 1 (job 261003-200055-ooc-fb-vc1-60a7, V 178,333,613) held anon_gb=26 with a 27 GB reservation; fm_peak_rss 40.5 GB of which ~20 GB file-backed mmap; anon ~20.6 GB = V*63 B + phi 4.41 GB + heap*16 B (heap peak 311.7M entries = 1.75 V)",
+  "level0_at_the_gain_cache": "V*63 = 19.03 GB + phi 7.55 GB = 26.6 GB anon; peak RSS 46.53 GB at that point = 26.6 anon + ~20 GB file-backed, the same file-backed share as level 1",
+  "level0_pass0_candidate_build": "per-thread candidate vectors (capacity up to 2x their size by push_back doubling) + the heap copy: 26.6 + 4.8 (heap, <= V entries x 16 B) + <= 9.7 (vector capacities) = <= 41.1 GB: ABOVE the 40 GB cap, which is where the job died",
+  "level0_move_loop": "heap grows to 1.75 x 302M x 16 B = 8.5 GB; the doubling from the 4.8 GB reserved keeps old + new alive: 26.6 + 14.4 = 41.0 GB",
+  "predicted_peak": "anon ~41-42 GB; peak RSS ~ 42 + 20 = ~62 GB, below the 70 GB stage budget of addendum 17"
+ },
+ "new_reservation": {
+  "engine_anonymous_cap": "anon_gb=46 (RLIMIT_DATA; ~4 GB margin over the predicted 41-42 GB; still a hard safeguard against a runaway)",
+  "rx": "4 cpu, 47 GB (= anon cap + 1 GB, the level-1 precedent: 26 cap / 27 GB reserved with file-backed pages not charged to the reservation), under scratchpad/_host_yield.py, resumable at level granularity",
+  "budget_check": "predicted peak RSS ~62 GB <= 70 GB (addendum 17); the reservation is the measured need plus margin, not a push-through of a failing stage",
+  "host_fit": "the rx scheduler had 119 / 119.7 GB reserved at 2026-10-04 04:40 (mpr 102 GB): the job is launched only when 47 GB is admitted; no waiting job is queued without the user's say-so"
+ },
+ "withdrawn_draft": "a first draft of this addendum (66 GB reservation / anon_gb=54, sized from RSS instead of anonymous memory) was withdrawn before any use and is kept under results/FREEBASE_SCALE/_history/",
+ "stop_rules": [
+  "if the rerun's measured peak RSS exceeds 70 GB the stage stops and reports (user's call); no further enlargement is made without a new addendum",
+  "a stage that fails its WebQSP regression blocks the next stage (addendum 17, unchanged)",
+  "no gate is relaxed; no gold label is read; no earlier record is edited (supersession only)"
+ ],
+ "not_done_here": [
+  "any change to the engine code (hash pinned below), the heap representation or the move sequence",
+  "any claim of recall at Freebase scale",
+  "the SK arm"
+ ],
+ "records_read": {
+  "results/FREEBASE_SCALE/E6_VCYCLE_L1-1__fbx.json": "8e2cdee828d5e7de7bc998a4d5cb80b24360290d4a03d1aeb1e85350b6b2158f",
+  "results/FREEBASE_SCALE/E6_VCYCLE_L4-2__fbx.json": "5e8379201a7f54b8298e7f63d86dbe4d5f1e06a5e1d435a3201d9e2913b32623",
+  "results/FREEBASE_SCALE/E_STRESS__fbx_ooc.json": "681a59a066365673a0438a78e566b77555514c5e923fab9a8ff960378a054057"
+ },
+ "code_pinned": {
+  "scratchpad/_ooc.cpp": "f17815560900d1bc19730b9efdc719180e099efca327d2dd33d44966690aaf98",
+  "scratchpad/_ooc2.cpp": "3ce63decc451299ef5fed329849057dc3c9e10a903f951c2b918b6f7b43f638f",
+  "scratchpad/_ooc_lib.py": "4d11ba3272b2ec841cbfec686572e402ca2c78122a26e855f60959b04d046ab9",
+  "scratchpad/_ooc_vc.py": "bc2442e61644f193d513600f24710dc4fc0852c0a9693e0e801dbfea840e6f79",
+  "scratchpad/_host_yield.py": "b96c2bb8eaea5fd5a5bf5f54e9812d5eb2012c3d1f546544028855bec795fa81"
+ }
+}

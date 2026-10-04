@@ -1,0 +1,85 @@
+{
+  "test_set": "HippoRAG-standard _hpr candidate corpora; 100-query test split each. Recall@5 unless noted. OURS: gte-Qwen2-1.5B encoder, NO LLM. Metric = mean over queries of |top-k \u2229 gold|/|gold|.",
+  "dense_gteQwen_1p5B_R5": {
+    "musique": 56.7,
+    "2wiki": 70.2,
+    "hotpot": 88.5,
+    "mean": 71.8
+  },
+  "ours_multitask_head": {
+    "R5": {
+      "musique": 68.17,
+      "2wiki": 79.25,
+      "hotpot": 91.0
+    },
+    "R5_plus_L3": {
+      "musique": 68.17,
+      "2wiki": 79.25,
+      "hotpot": 91.0
+    },
+    "R50": {
+      "musique": 92.25,
+      "2wiki": 91.75,
+      "hotpot": 98.0
+    },
+    "R50_plus_L3": {
+      "musique": 93.58,
+      "2wiki": 95.5,
+      "hotpot": 98.5
+    },
+    "mean_R5": 79.5
+  },
+  "ours_zeroshot_transfer_head": {
+    "R5": {
+      "musique": 55.17,
+      "2wiki": 77.0,
+      "hotpot": 90.0
+    },
+    "hotpot_is_zeroshot": true,
+    "mean_R5": 74.1,
+    "finding": "Transfer is unreliable: MuSiQue 55.2 falls BELOW dense 56.7 \u2014 min-rank fusion is not robust to a weak OOD signal (the transferred head injects non-golds that displace dense's golds at k=5). 2Wiki +6.8 over dense, HotpotQA zero-shot 90.0 (+1.5). Head helps in-suite; robust transfer is open."
+  },
+  "hipporag2_published_R5": {
+    "musique": 74.7,
+    "2wiki": 90.4,
+    "hotpot": 96.3,
+    "mean": 87.1,
+    "compute": "NV-Embed-v2 (7B) retriever + Llama-3.3-70B for OpenIE & triple-filter + PPR graph"
+  },
+  "nvembed_v2_dense_R5": {
+    "musique": 69.7,
+    "2wiki": 76.5,
+    "hotpot": 94.5,
+    "mean": 80.2,
+    "compute": "7B embedder, no LLM, no graph \u2014 HippoRAG 2's own dense baseline (fair no-LLM comparator)"
+  },
+  "contriever_R5": {
+    "musique": 46.6,
+    "2wiki": 57.5,
+    "hotpot": 75.3,
+    "mean": 55.4
+  },
+  "honest_summary": [
+    "We do NOT beat HippoRAG 2 (87.1) \u2014 it uses a 7B embedder + a 70B-LLM knowledge graph.",
+    "Most of the deficit is the ENCODER: our 1.5B dense (71.8) vs NV-Embed-v2 7B dense (80.2), an 8.4pt encoder gap.",
+    "Our multi-task fusion on a 1.5B encoder (79.5) ~matches NV-Embed-v2 7B dense (80.2) and BEATS it on 2Wiki (79.2 vs 76.5).",
+    "Positioning is efficiency/no-LLM: competitive recall at ~1/5 encoder size and zero LLM indexing cost, ~8pt below full HippoRAG 2.",
+    "L3 traversal: neutral at R@5 on text (dense-reachable golds), adds at R@50 (mean 94.0->95.9; 2Wiki +4.25) and is decisive on KB (WebQSP +62).",
+    "Caveat: 100-query test split (small); zero-shot head transfer is an open limitation."
+  ],
+  "UPDATE_ner_edges": {
+    "what": "L3 now uses struct + weighted-NER edges (spaCy, no LLM), kNN dropped; NER-blend composition (w=0.2). This is the first time L3 moves final Recall@5.",
+    "ours_R5": {
+      "musique": 72.2,
+      "2wiki": 82.5,
+      "hotpot": 92.5,
+      "mean": 82.4
+    },
+    "vs": {
+      "prev_L2_only_mean": 80.0,
+      "NV_Embed_v2_7B_dense_mean": 80.2,
+      "HippoRAG2_full_mean": 87.1
+    },
+    "reading": "NER edges add +2.4 mean (2Wiki +4.0, MuSiQue +1.6, Hotpot +1.5), uniformly positive. Our 1.5B/no-LLM system now BEATS NV-Embed-v2 7B dense (82.4 vs 80.2), winning MuSiQue (72.2 vs 69.7) and 2Wiki (82.5 vs 76.5). Gap to full HippoRAG 2 cut from 7.1 to 4.7 (the rest is their 70B-LLM entity graph)."
+  }
+}

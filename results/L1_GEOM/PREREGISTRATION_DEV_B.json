@@ -1,0 +1,416 @@
+{
+ "record": "PREREGISTRATION_DEV_B",
+ "lane": "L1_GEOM",
+ "utc": "2026-09-14T11:40:33Z",
+ "research_question": "Under the fixed P50 budget and the frozen H4_SK / PHG partitions, does a parameter-free query-time signal derived from q and its frozen SEED_K=5 seeds (PRIMARY: the directional block signal max_{v in B} cos(q - e_s, e_v - e_s) over actual nodes, RRF over seeds, fused with the Dense/SPLADE block ranks by the frozen RRF; SECONDARY: one extra retrieval point 2q - mu under a parameter-free interleave) raise P(all gold evidence inside L1's 50 blocks) on a held-out population, without a significant loss on any corpus / partition?",
+ "candidate": {
+  "module": "_l1g_candidate.py",
+  "definition": "L1_GEOM candidate arms, fixed after the DEV_A factorial (results/L1_GEOM/ladder_A_*.json, dir_A_*.json) and BEFORE any\nDEV_B look.\n\nChannels (block rankings; the first three go through the frozen legacy node -> blocks table and the frozen\npartition_ranking with K_LOCK = 100 hits):\n    Cd    Dense(q)   served top-100 (replay cache)\n    Cs    SPLADE(q)  served top-100 (replay cache)\n    Cg    Dense(2q - mu)  exact top-100 over the canonical dense index; mu = mean of the frozen SEED_K = 5 seed embeddings\n                          (unit-normalised); seeds = the cache's frozen RRF top-5 nodes.  One extra query point, no traversal.\n    Cdir  directional block signal over ACTUAL nodes: for each seed s_i, D_i(v) = cos(q - e_{s_i}, e_v - e_{s_i}) for every\n          node v != s_i (exact, all nodes); block score_i(B) = max_{v in B} D_i(v); the 5 per-seed block rankings are fused\n          by the frozen RRF (K0 = 60) -> one block ranking.  No centroid, no table, no relation labels, no traversal.\n    Cmax  exhaustive dense block max: score(B) = max_{v in B} q . e_v over all actual nodes (no seeds, no direction) -- the\n          aggregation control of the directional signal (results/L1_GEOM/dircontrol_A_*.json), carried as a decomposition arm.\nFusions (parameter-free; P50 = the first 50 blocks of the fused ranking):\n    F0   the frozen RRF (K0 = 60)                              -- the reference selector's fusion\n    IL   round-robin interleave: block key = min_c (pos_c * C + c), ascending (C = number of channels)\nArms:\n    PRIMARY    D2d    = F0(Cd, Cs, Cdir)   the directional cell D2 exactly as specified (per-seed block max -> RRF over seeds\n                                           -> the same RRF with the Dense and SPLADE block ranks -> P50)\n    SECONDARY  G2_IL  = IL(Cd, Cs, Cg)     the point-geometry cell G2 with the best parameter-free fusion of the DEV_A ladder\n    FUSION     IL     = IL(Cd, Cs)         fusion lever alone (decomposition, reported, never decided on)\n    GEOMETRY   G2_F0  = F0(Cd, Cs, Cg)     point-geometry lever alone through the frozen RRF (decomposition, reported)\n    AGGREGATION QMAX_F0 = F0(Cd, Cs, Cmax) exhaustive dense block max as the third channel (decomposition: how much of the\n                                           PRIMARY's gain is the orientation, how much the exhaustive block-max aggregation)\nReference: BASE = F0(Cd, Cs) = the frozen selector.  Zero fitted parameters anywhere; nothing is walked; no dataset rule.",
+  "arms": {
+   "PRIMARY": "D2d",
+   "SECONDARY": "G2_IL",
+   "FUSION": "IL",
+   "GEOMETRY": "G2_F0",
+   "AGGREGATION": "QMAX_F0"
+  },
+  "point": "G2 extrapolated 2q - mu",
+  "frozen_numerics": {
+   "K0": 60,
+   "K_LOCK": 100,
+   "P_MAIN": 50,
+   "SEED_K": 5,
+   "partition_ranking": "_ta_prepartition.partition_ranking (imported, unchanged)",
+   "rrf": "_ta_prepartition.rrf_partitions (imported, unchanged)",
+   "pinv_rcond": "not used by any candidate arm (2q - mu and the directional cosines need no pseudo-inverse)"
+  },
+  "inputs": "served dense top-100 and served SPLADE top-100 node hits and the frozen top-5 seeds (replay caches), the canonical dense embeddings (exact scoring of all nodes for the directional signal; exact retrieval of one extra point), the frozen partition of each cache, the legacy node -> blocks table; nothing is walked at query time, no parameter is fitted, no dataset rule"
+ },
+ "populations": {
+  "exploration": "DEV_A = replay-cache dev rows with sha1(query_id)[:8] & 1 == 0 (the whole L1_GEOM factorial read DEV_A only)",
+  "confirmation": "DEV_B = the complementary rows (sha1(query_id)[:8] & 1 == 1)",
+  "DEV_B_reuse_disclosure": "DEV_B was read ONCE before, by results/L1_STATIC/DEV_B_CONFIRMATION.json (2026-09-14) for a different candidate family (multi-radius static tables, shelved). No L1_GEOM arm has read DEV_B. Because this is the second look at the same held-out rows, the gain threshold is tightened to p < 0.005.",
+  "caches": {
+   "metaqa": {
+    "path": "data\\l1_canonical\\metaqa\\replay_cache.npz",
+    "partition": "MTKAHYPAR",
+    "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b"
+   },
+   "metaqa_phg": {
+    "path": "data\\l1_lowmem\\metaqa\\replay_cache__LOWMEM__PHG_REPAIR1_con.npz",
+    "partition": "PHG",
+    "sha256": "584e17dec26d0408d5253a3f79e471bc7ec128f6dde744581bb6e502da5b4e5b"
+   },
+   "squad": {
+    "path": "data\\l1_canonical\\squad\\replay_cache.npz",
+    "partition": "MTKAHYPAR",
+    "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6"
+   },
+   "squad_phg": {
+    "path": "data\\l1_lowmem\\squad\\replay_cache__LOWMEM__PHG_con.npz",
+    "partition": "PHG",
+    "sha256": "edd9b36bb4ba45ff0579c0591f19dc263ae84296f7f9299684974530845f20ab"
+   },
+   "musique": {
+    "path": "data\\l1_lowmem\\musique\\replay_cache__LOWMEM__PHG_C1_con.npz",
+    "partition": "PHG",
+    "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5"
+   }
+  },
+  "test_split": "never read"
+ },
+ "recorded_DEV_A": {
+  "metaqa": {
+   "BASE": 0.6397,
+   "n_A": 1002,
+   "geometry_diag": {
+    "norm_r_mean": 0.8019,
+    "norm_delta_mean": 0.2407,
+    "cos_q_mu_mean": 0.6256,
+    "delta_over_r_mean": 0.3011
+   },
+   "PRIMARY": {
+    "key": "D2d",
+    "ALL": 0.6337,
+    "gained": 4,
+    "lost": 10,
+    "p": 0.1795654296875,
+    "per_hop": {
+     "hop1": 0.911,
+     "hop2": 0.4797,
+     "hop3": 0.5211
+    }
+   },
+   "SECONDARY": {
+    "key": "G2_IL",
+    "ALL": 0.6417,
+    "gained": 7,
+    "lost": 5,
+    "p": 0.7744140625,
+    "per_hop": {
+     "hop1": 0.9172,
+     "hop2": 0.4884,
+     "hop3": 0.5301
+    }
+   },
+   "FUSION": {
+    "key": "IL",
+    "ALL": 0.6427,
+    "gained": 6,
+    "lost": 3,
+    "p": 0.5078125,
+    "per_hop": {
+     "hop1": 0.9172,
+     "hop2": 0.4913,
+     "hop3": 0.5301
+    }
+   },
+   "GEOMETRY": {
+    "key": "G2_F0",
+    "ALL": 0.6437,
+    "gained": 7,
+    "lost": 3,
+    "p": 0.34375,
+    "per_hop": {
+     "hop1": 0.9202,
+     "hop2": 0.4942,
+     "hop3": 0.5271
+    }
+   },
+   "AGGREGATION": {
+    "key": "QMAX_F0",
+    "ALL": 0.6327,
+    "gained": 3,
+    "lost": 10,
+    "p": 0.09228515625,
+    "per_hop": {
+     "hop1": 0.911,
+     "hop2": 0.4797,
+     "hop3": 0.5181
+    }
+   }
+  },
+  "metaqa_phg": {
+   "BASE": 0.6727,
+   "n_A": 1002,
+   "geometry_diag": {
+    "norm_r_mean": 0.8019,
+    "norm_delta_mean": 0.2407,
+    "cos_q_mu_mean": 0.6256,
+    "delta_over_r_mean": 0.3011
+   },
+   "PRIMARY": {
+    "key": "D2d",
+    "ALL": 0.6737,
+    "gained": 7,
+    "lost": 6,
+    "p": 1.0,
+    "per_hop": {
+     "hop1": 0.9172,
+     "hop2": 0.5407,
+     "hop3": 0.5723
+    }
+   },
+   "SECONDARY": {
+    "key": "G2_IL",
+    "ALL": 0.6747,
+    "gained": 10,
+    "lost": 8,
+    "p": 0.8145294189453125,
+    "per_hop": {
+     "hop1": 0.9202,
+     "hop2": 0.5407,
+     "hop3": 0.5723
+    }
+   },
+   "FUSION": {
+    "key": "IL",
+    "ALL": 0.6697,
+    "gained": 4,
+    "lost": 7,
+    "p": 0.548828125,
+    "per_hop": {
+     "hop1": 0.9172,
+     "hop2": 0.5291,
+     "hop3": 0.5723
+    }
+   },
+   "GEOMETRY": {
+    "key": "G2_F0",
+    "ALL": 0.6766,
+    "gained": 8,
+    "lost": 4,
+    "p": 0.3876953125,
+    "per_hop": {
+     "hop1": 0.9172,
+     "hop2": 0.5407,
+     "hop3": 0.5813
+    }
+   },
+   "AGGREGATION": {
+    "key": "QMAX_F0",
+    "ALL": 0.6747,
+    "gained": 8,
+    "lost": 6,
+    "p": 0.79052734375,
+    "per_hop": {
+     "hop1": 0.9172,
+     "hop2": 0.5494,
+     "hop3": 0.5663
+    }
+   }
+  },
+  "squad": {
+   "BASE": 0.9859,
+   "n_A": 992,
+   "geometry_diag": {
+    "norm_r_mean": 0.7313,
+    "norm_delta_mean": 0.1562,
+    "cos_q_mu_mean": 0.6859,
+    "delta_over_r_mean": 0.2151
+   },
+   "PRIMARY": {
+    "key": "D2d",
+    "ALL": 0.9919,
+    "gained": 8,
+    "lost": 2,
+    "p": 0.109375,
+    "per_hop": {}
+   },
+   "SECONDARY": {
+    "key": "G2_IL",
+    "ALL": 0.9849,
+    "gained": 4,
+    "lost": 5,
+    "p": 1.0,
+    "per_hop": {}
+   },
+   "FUSION": {
+    "key": "IL",
+    "ALL": 0.9889,
+    "gained": 4,
+    "lost": 1,
+    "p": 0.375,
+    "per_hop": {}
+   },
+   "GEOMETRY": {
+    "key": "G2_F0",
+    "ALL": 0.9808,
+    "gained": 3,
+    "lost": 8,
+    "p": 0.2265625,
+    "per_hop": {}
+   },
+   "AGGREGATION": {
+    "key": "QMAX_F0",
+    "ALL": 0.9919,
+    "gained": 7,
+    "lost": 1,
+    "p": 0.0703125,
+    "per_hop": {}
+   }
+  },
+  "squad_phg": {
+   "BASE": 0.9829,
+   "n_A": 992,
+   "geometry_diag": {
+    "norm_r_mean": 0.7313,
+    "norm_delta_mean": 0.1562,
+    "cos_q_mu_mean": 0.6859,
+    "delta_over_r_mean": 0.2151
+   },
+   "PRIMARY": {
+    "key": "D2d",
+    "ALL": 0.9879,
+    "gained": 6,
+    "lost": 1,
+    "p": 0.125,
+    "per_hop": {}
+   },
+   "SECONDARY": {
+    "key": "G2_IL",
+    "ALL": 0.9849,
+    "gained": 5,
+    "lost": 3,
+    "p": 0.7265625,
+    "per_hop": {}
+   },
+   "FUSION": {
+    "key": "IL",
+    "ALL": 0.9849,
+    "gained": 4,
+    "lost": 2,
+    "p": 0.6875,
+    "per_hop": {}
+   },
+   "GEOMETRY": {
+    "key": "G2_F0",
+    "ALL": 0.9829,
+    "gained": 4,
+    "lost": 4,
+    "p": 1.0,
+    "per_hop": {}
+   },
+   "AGGREGATION": {
+    "key": "QMAX_F0",
+    "ALL": 0.9889,
+    "gained": 6,
+    "lost": 0,
+    "p": 0.03125,
+    "per_hop": {}
+   }
+  },
+  "musique": {
+   "BASE": 0.6596,
+   "n_A": 996,
+   "geometry_diag": {
+    "norm_r_mean": 0.705,
+    "norm_delta_mean": 0.1589,
+    "cos_q_mu_mean": 0.7108,
+    "delta_over_r_mean": 0.2268
+   },
+   "PRIMARY": {
+    "key": "D2d",
+    "ALL": 0.746,
+    "gained": 92,
+    "lost": 6,
+    "p": 7.09532095861481e-21,
+    "per_hop": {}
+   },
+   "SECONDARY": {
+    "key": "G2_IL",
+    "ALL": 0.7018,
+    "gained": 66,
+    "lost": 24,
+    "p": 1.0902049191089246e-05,
+    "per_hop": {}
+   },
+   "FUSION": {
+    "key": "IL",
+    "ALL": 0.6777,
+    "gained": 40,
+    "lost": 22,
+    "p": 0.030015864349067285,
+    "per_hop": {}
+   },
+   "GEOMETRY": {
+    "key": "G2_F0",
+    "ALL": 0.6777,
+    "gained": 44,
+    "lost": 26,
+    "p": 0.04139142867391546,
+    "per_hop": {}
+   },
+   "AGGREGATION": {
+    "key": "QMAX_F0",
+    "ALL": 0.7319,
+    "gained": 77,
+    "lost": 5,
+    "p": 1.2046380153120002e-17,
+    "per_hop": {}
+   }
+  }
+ },
+ "ladder_reproduced": {
+  "metaqa": {
+   "PRIMARY": true,
+   "SECONDARY": true,
+   "FUSION": true,
+   "GEOMETRY": true,
+   "AGGREGATION": "no prior DEV_A record (first computed here)"
+  },
+  "metaqa_phg": {
+   "PRIMARY": true,
+   "SECONDARY": true,
+   "FUSION": true,
+   "GEOMETRY": true,
+   "AGGREGATION": true
+  },
+  "squad": {
+   "PRIMARY": true,
+   "SECONDARY": true,
+   "FUSION": true,
+   "GEOMETRY": true,
+   "AGGREGATION": "no prior DEV_A record (first computed here)"
+  },
+  "squad_phg": {
+   "PRIMARY": true,
+   "SECONDARY": true,
+   "FUSION": true,
+   "GEOMETRY": true,
+   "AGGREGATION": "no prior DEV_A record (first computed here)"
+  },
+  "musique": {
+   "PRIMARY": true,
+   "SECONDARY": true,
+   "FUSION": true,
+   "GEOMETRY": true,
+   "AGGREGATION": true
+  }
+ },
+ "decision_rule": {
+  "primary_passes_iff": [
+   "on EACH of the five DEV_B populations (metaqa MtK, metaqa PHG, squad MtK, squad PHG, musique PHG): NOT (lost > gained and exact McNemar p < 0.05)   [no significant loss anywhere]",
+   "on AT LEAST ONE of the five DEV_B populations: gained > lost and exact McNemar p < 0.005    [a significant gain; stricter than L1_STATIC's 0.01 because DEV_B is re-used]"
+  ],
+  "prediction_from_DEV_A": "PRIMARY: large gain on musique (PHG), neutral on metaqa (both partitions) and squad (both partitions); SECONDARY: gain on musique, neutral elsewhere",
+  "secondary": "evaluated in the same run under the same rule; adopted only if the PRIMARY fails; reported regardless",
+  "decomposition_arms": "FUSION and GEOMETRY are reported on DEV_B for the factorial (how much from fusion, how much from the point); never decided on",
+  "controls": "results/L1_GEOM/dircontrol_A_*.json (reversed / random direction, exhaustive dense block max, size ranking, pooled variant) were read on DEV_A only, before this record",
+  "reproduction_guard": "the confirmation run must reproduce the recorded DEV_A ALL / gained / lost of every arm exactly, else it aborts",
+  "per_hop": "reported, never used for the decision",
+  "full_dev": "A u B numbers reported after the DEV_B decision, for the record only",
+  "no_other_arm": "no other point, fusion, channel count or partition variant is evaluated on DEV_B",
+  "one_shot": "the confirmation script refuses to run if DEV_B_CONFIRMATION.json exists"
+ },
+ "code_sha256": {
+  "_l1g_candidate.py": "b01c27a6e64b18756db1ca1d8910e8db4bb54fa019d9809698cb1369206169e0",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1g_devB_confirm.py": "4e35a2b8312d29228cfd555b8bb9e4b9e5330e2925e5490c49d1061137a92089",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "code_snapshot_dir": "results\\L1_GEOM\\code_snapshot",
+ "canonical_freeze_sha256": "039dcf327aa71e39994cdeedc731033279d81d854d74efc29c86f197546f3dc8",
+ "adoption_note": "a PASS is a lane result on the canonical replay caches; adopting the candidate as the served L1 selector changes the L1 contract (PRIMARY: 5 exact directional scorings of the node matrix per query, i.e. the cost of 5 extra exact dense retrievals, plus a third RRF channel; SECONDARY: one extra exact dense retrieval + the interleave) and needs a ruling -- no cache is rebuilt"
+}

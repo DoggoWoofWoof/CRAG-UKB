@@ -1,0 +1,301 @@
+{
+  "dataset_name": "2wiki",
+  "dataset_version": "canonical_v1",
+  "legacy_substrate_name": "2wiki_clean",
+  "canonical_corpus_definition": "CANONICAL_CORPUS_DEFINITION: the complete official 2WikiMultiHopQA v1.0 (ids_april2021) ARTICLE UNIVERSE -- every record of para_with_hyperlink.jsonl inside para_with_hyperlink.zip, one node per Wikipedia article curid; text = ' '.join(sentences). The official release describes this file as all articles/paragraphs with hyperlink information except error paragraphs, i.e. the complete retrieval corpus. A Wikipedia-snapshot derivative, not a benchmark by-product: ~93.3% of its articles are never referenced by any 2Wiki question. Independent of which queries are evaluated. SUPERSEDES the previously accepted 398,354-node pooled question-context union (preserved, not deleted, at data/final_canonical/2wiki/_superseded_context_union_398354/).",
+  "source_files": [
+    "data/original/2wiki/v1.0_ids_april2021/dev.json",
+    "data/original/2wiki/v1.0_ids_april2021/para_with_hyperlink.zip",
+    "data/original/2wiki/v1.0_ids_april2021/test.json",
+    "data/original/2wiki/v1.0_ids_april2021/train.json"
+  ],
+  "source_hashes": {
+    "data/original/2wiki/v1.0_ids_april2021/para_with_hyperlink.zip": {
+      "sha256": "a585bdc3c39425446e4b2701a5f7f30051cb6c100d179322055d53dc0a71a723",
+      "bytes": 1900740270
+    },
+    "data/original/2wiki/v1.0_ids_april2021/train.json": {
+      "sha256": "b318dbafbfed51a8029718fa59be8b616600cbff675a3b587694b28c5eedfc13",
+      "bytes": 707810660
+    },
+    "data/original/2wiki/v1.0_ids_april2021/dev.json": {
+      "sha256": "79f77ae104088ea8e25b1a65dbece768d45771194663bc5660ec9a98070dadf5",
+      "bytes": 57614142
+    },
+    "data/original/2wiki/v1.0_ids_april2021/test.json": {
+      "sha256": "48b196d4ba8557343abb9bd1ad03566bc02762ecd734617ff910027c33821b04",
+      "bytes": 53838398
+    }
+  },
+  "raw_node_count": 5989847,
+  "deduplicated_node_count": 5989847,
+  "canonical_node_count": 5989847,
+  "duplicates_removed": 0,
+  "dropped_records": 0,
+  "drop_reasons": {},
+  "query_counts": {
+    "train": 167454,
+    "dev": 12576,
+    "test": 12576,
+    "eval_subset": 2000
+  },
+  "eval_subset": {
+    "file": "eval_2000.jsonl",
+    "n": 2000,
+    "recovery_method": "legacy 2wiki_clean questions came from the FlashRAG 15k train sample (raw file no longer present); matched to official train/dev/test by EXACT question text; ambiguities resolved by supporting-fact title set == legacy gold title set (identical to build.py::legacy_subset's 2wiki branch)",
+    "n_legacy": 2000,
+    "n_recovered": 2000,
+    "n_missed": 0,
+    "official_split_distribution": {
+      "train": 2000
+    }
+  },
+  "corpus_depends_on_eval_subset": false,
+  "node_id_scheme": "2wiki:c<official Wikipedia curid> (readable, not hashed: the curid is already source-stable and unique, so hashing buys no collision safety and costs debuggability/remapping); file order = lexicographic node_id",
+  "node_id_stable": true,
+  "normalization_rules": {
+    "stored_text": "EXACT official string; no NFC/NFKC, no case-folding, no whitespace collapsing, no stripping",
+    "identity_keys": "EXACT strings (see dedup_policy); lossy alternatives are only quantified in integrity_report.corpus_accounting_detail.identity_normalization_diagnostics, never applied",
+    "construction_steps": {
+      "2wiki": "text = ' '.join(official 'sentences' list) -- the official file stores a sentence list; no .strip() (the pre-existing full-universe encode applied one; the divergence is COUNTED, not assumed -- see corpus_accounting_detail.phase_c_divergence)",
+      "hotpotqa": "text = ' '.join(non-empty elements of the official 'text' sentence list); plain 'text', never the 'text_with_links' fallback; no .strip(); empty abstracts kept as nodes",
+      "metaqa": "text = entity name (no verbalization at corpus level)"
+    },
+    "encoding": "UTF-8, JSON with ensure_ascii=False, sort_keys=True, LF line endings"
+  },
+  "dedup_policy": "identity = official Wikipedia curid (exact string); a repeated curid would collapse onto its first occurrence (observed 0 duplicates in 5,989,847 records). Titles are NOT the identity: several curids can share a title, so gold/context resolution is title -> curid via the corpus and an ambiguous title contributes ALL matching nodes (recorded per query in gold_title_ambiguous) rather than being resolved last-wins. Text-hash identity is not used: distinct articles with identical intro text must stay distinct nodes.",
+  "identity_normalization_diagnostics": {
+    "exact_identities": 200000,
+    "extra_collapses_if_NFC": 0,
+    "extra_collapses_if_whitespace_collapse": 0,
+    "extra_collapses_if_NFC+ws+casefold": 0,
+    "sampled_first_n_identities": 200000
+  },
+  "all_eval_gold_nodes_present": true,
+  "gold_shortfall_diagnostic": null,
+  "missing_eval_gold_nodes": {
+    "counts": {},
+    "examples": []
+  },
+  "gold_resolution_per_split": {
+    "train": {
+      "n": 167454,
+      "n_with_gold_refs": 167454,
+      "n_all_gold_resolved": 167454,
+      "gold_refs_total": 404170,
+      "gold_nodes_total": 404170
+    },
+    "dev": {
+      "n": 12576,
+      "n_with_gold_refs": 12576,
+      "n_all_gold_resolved": 12576,
+      "gold_refs_total": 30654,
+      "gold_nodes_total": 30654
+    },
+    "test": {
+      "n": 12576,
+      "n_with_gold_refs": 0,
+      "n_all_gold_resolved": 0,
+      "gold_refs_total": 0,
+      "gold_nodes_total": 0
+    }
+  },
+  "corpus_hash": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+  "ordered_node_id_hash": "57dd809af573b6b531256b2a65e4b4efd1e26794c4fea81e0b43311fdcb24c86",
+  "nodes_jsonl_sha256": "73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a",
+  "CORPUS_QUERY_INDEPENDENT": true,
+  "DETERMINISTIC_REBUILD": true,
+  "query_independence_test": {
+    "runs": {
+      "FINAL": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH": "94fe68b8d5f291f1",
+        "n": 5989847
+      },
+      "A": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH": "94fe68b8d5f291f1",
+        "n": 5989847
+      },
+      "B": {
+        "eval_subset": "random_held:7",
+        "CORPUS_HASH": "94fe68b8d5f291f1",
+        "n": 5989847
+      },
+      "none": {
+        "eval_subset": "none",
+        "CORPUS_HASH": "94fe68b8d5f291f1",
+        "n": 5989847
+      }
+    },
+    "eval_subsets_A_vs_B": {
+      "n_A": 2000,
+      "n_B": 2000,
+      "overlap": 0,
+      "differ": true,
+      "B_executed": true
+    }
+  },
+  "legacy_comparison": {
+    "classification": "SAMPLE_CONDITIONED",
+    "evidence": "legacy corpus = union of the 10 context paragraphs of the 15,000 FlashRAG-sampled official TRAIN questions (data/raw/2wiki.jsonl -> loaders.load_2wiki -> build_clean), 150,000 records -> 65,865 (title, md5) nodes. The eval subset (2,000) is a random 20% 'val' cut of those same 15,000 questions, so the corpus is a function of the query sample. Against the canonical full article universe, 5,989,847 - 65,865 = 5,923,982 official articles are absent from the legacy substrate (98.9%). All sampled-query golds being present does NOT make this benign: distractor mass, partition structure and reachability all depend on the sample. SECOND SUPERSESSION, 2026-09-05: the FIRST canonical_v1 2wiki table (398,354 nodes = the pooled question-context union over all three official splits, corpus_hash ec7fbbe8cd783040...) was itself REJECTED and replaced by the full para_with_hyperlink article universe, because although invariant to the EVALUATED subset its membership was still a function of the question set -- the same defect for which HotpotQA's 507,494-node distractor-context union was rejected. The superseded artifacts are preserved (not deleted) at data/final_canonical/2wiki/_superseded_context_union_398354/.",
+    "legacy_count": 65865,
+    "canonical_count": 5989847,
+    "legacy_nodes_mapped": 65865,
+    "missing_in_canonical": 0,
+    "ambiguous_legacy_nodes": 2,
+    "extra_canonical_nodes": 5925732,
+    "extra_by_split_provenance": {
+      "full_hyperlink_universe": 5925731,
+      "title_present_but_not_the_mapped_curid": 1
+    },
+    "changed_text": {
+      "real_text_diff": 3576,
+      "exact_equal": 62136,
+      "whitespace_only_diff": 153
+    },
+    "id_mapping_coverage": 1.0,
+    "eval_subset_gold_consistency": {
+      "file": "eval_2000.jsonl",
+      "n": 2000,
+      "legacy_golds_equal_canonical": 2000,
+      "legacy_golds_strict_subset_of_canonical": 0,
+      "differ": 0,
+      "queries_with_unmapped_legacy_gold": 0,
+      "examples": []
+    },
+    "files": [
+      "legacy_comparison.json",
+      "node_id_map_legacy.json"
+    ]
+  },
+  "builder": {
+    "path": "scratchpad/final_canonical_build/build_kb.py",
+    "builder_sha256": "e723192e739de38880f04d92fdfc788604d4cfd95c17529c5bd4a52633e326f6",
+    "jsonstream_sha256": "c3d170107f99e6fdd33eee2278c192447a7b1a460a958d189bf76ece2adfde58",
+    "command": "python scratchpad/final_canonical_build/build_kb.py 2wiki --eval-subset legacy --out data/final_canonical/_stage_2wiki_rev2",
+    "git_commit": "ba6bd71bcc9f367dc28d3e4cde777a3931501406",
+    "build_started": "2026-09-06T00:37:59",
+    "build_finished": "2026-09-06T01:01:12",
+    "seconds": 1393.5,
+    "peak_rss_mb": 1043.8
+  },
+  "files": {
+    "nodes": "nodes.jsonl",
+    "queries": [
+      "dev.jsonl",
+      "lanes",
+      "test.jsonl",
+      "train.jsonl"
+    ],
+    "eval_subset": "eval_2000.jsonl",
+    "reports": [
+      "EMPTY_TEXT_SUMMARY.json",
+      "REV2_DIFF_AUDIT.json",
+      "REV2_REUSE_ATTRIBUTION.json",
+      "REV2_VERIFY.json",
+      "SOURCE_CONTRACT.json",
+      "build_info.json",
+      "integrity_report.json",
+      "legacy_comparison.json",
+      "node_id_map_legacy.json",
+      "query_independence_test.json"
+    ]
+  },
+  "downstream_artifacts_built": "NONE (no embeddings / SPLADE / graphs / partitions / indexes) -- by design of this track",
+  "READY_FOR_INDEX_BUILD": true,
+  "manifest_written": "2026-09-06T03:15:32",
+  "query_lanes": {
+    "LEGACY_CONTINUITY": {
+      "n": 2000,
+      "file": "queries/lanes/LEGACY_CONTINUITY.jsonl",
+      "official_split_distribution": {
+        "train": 2000
+      },
+      "provenance": "the frozen legacy evaluation subset of substrate '2wiki_clean', recovered onto canonical query ids. Rows = data/ukb_storage/2wiki_clean/gte_qwen/query_ids_all.json indexed by split_indices['val'] (scratchpad/_ta_comb.py:75-92, _ta_resid.py:63-76); the 'val' cut itself comes from src/experiments/overlap_retrain.py:171-206 _splits(). Recovery method: legacy 2wiki_clean questions came from the FlashRAG 15k train sample (raw file no longer present); matched to official train/dev/test by EXACT question text; ambiguities resolved by supporting-fact title set == legacy gold title set (identical to build.py::legacy_subset's 2wiki branch). Recovered 2000/2000, missed 0.",
+      "VALID_HELD_OUT_EVAL_SET": false,
+      "labelling": "TRAIN-DERIVED -- NOT A VALID HELD-OUT EVAL SET. These are a seeded 20% cut of OFFICIAL TRAIN (random.Random(42), 70/20/10 split in src/experiments/overlap_retrain.py::_splits, used because these questions carry no official split metadata). Use ONLY for paired legacy->canonical continuity analysis; never quote as accuracy."
+    },
+    "QUALITY_LOCKED": {
+      "n": 12576,
+      "file": "queries/lanes/QUALITY_LOCKED.jsonl",
+      "official_split_distribution": {
+        "dev": 12576
+      },
+      "provenance": "the complete official 2wiki DEV split, taken verbatim from the official source files; official 2wiki TEST answers are HIDDEN, so dev (12,576) is the only proper held-out labelled split.",
+      "VALID_HELD_OUT_EVAL_SET": true,
+      "n_with_gold_node_ids": 12576,
+      "n_with_gold_refs": 12576,
+      "n_all_gold_resolved": 12576,
+      "labelling": "OFFICIAL HELD-OUT LABELLED -- the lane for final accuracy and significance testing. Disjoint from LEGACY_CONTINUITY unless noted."
+    },
+    "SCALE_ALL": {
+      "n": 192606,
+      "file": "queries/lanes/SCALE_ALL.ids.jsonl",
+      "record_source": "queries/<split>.jsonl (already materialized in full; the lane file is the ordered id+split index, so no query record is duplicated on disk)",
+      "official_split_distribution": {
+        "dev": 12576,
+        "test": 12576,
+        "train": 167454
+      },
+      "n_with_gold_node_ids_per_split": {
+        "dev": 12576,
+        "train": 167454
+      },
+      "provenance": "every official query of every released split of the dataset, as parsed by scratchpad/final_canonical_build/build_kb.py's query stage from the official source files.",
+      "VALID_HELD_OUT_EVAL_SET": false,
+      "labelling": "MIXED SPLITS -- scale / latency / robustness only. Contains train questions and (where the official test labels are hidden) unlabelled questions; never quote as accuracy."
+    }
+  },
+  "query_lane_overlaps": {
+    "LEGACY_CONTINUITY_n_in_QUALITY_LOCKED": 0
+  },
+  "corpus_hash_equality_assertion": {
+    "statement": "corpus_hash(LEGACY_CONTINUITY) == corpus_hash(QUALITY_LOCKED) == corpus_hash(SCALE_ALL)",
+    "per_lane_corpus_hash": {
+      "LEGACY_CONTINUITY": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+      "QUALITY_LOCKED": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+      "SCALE_ALL": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185"
+    },
+    "RESULT": "PASS",
+    "how_bookkeeping": "one nodes.jsonl serves every lane; CORPUS_HASH recomputed from nodes.jsonl in this script and compared against dataset_manifest / integrity_report / build_info",
+    "recomputed_from_nodes_jsonl": {
+      "n": 5989847,
+      "CORPUS_HASH": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+      "ordered_node_id_hash": "57dd809af573b6b531256b2a65e4b4efd1e26794c4fea81e0b43311fdcb24c86",
+      "file_order_is_lexicographic_node_id": true
+    },
+    "stored_corpus_hashes": {
+      "manifest": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+      "integrity": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185",
+      "build_info": "94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185"
+    },
+    "how_constructive": "the corpus was rebuilt from the official sources under three DIFFERENT --eval-subset arguments (legacy / random_dev:7 / none) and produced an identical CORPUS_HASH each time",
+    "constructive_evidence": {
+      "FINAL": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH_prefix": "94fe68b8d5f291f1",
+        "n": 5989847
+      },
+      "A": {
+        "eval_subset": "legacy",
+        "CORPUS_HASH_prefix": "94fe68b8d5f291f1",
+        "n": 5989847
+      },
+      "B": {
+        "eval_subset": "random_held:7",
+        "CORPUS_HASH_prefix": "94fe68b8d5f291f1",
+        "n": 5989847
+      },
+      "none": {
+        "eval_subset": "none",
+        "CORPUS_HASH_prefix": "94fe68b8d5f291f1",
+        "n": 5989847
+      }
+    }
+  },
+  "legacy_substrate_aliases": [
+    "2wiki",
+    "2wiki_clean"
+  ]
+}

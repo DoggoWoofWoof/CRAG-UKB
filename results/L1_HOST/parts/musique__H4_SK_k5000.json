@@ -1,0 +1,98 @@
+{
+ "rule": "H4_SPLIT_PRESERVE",
+ "famset": "SK",
+ "families": [
+  "STRUCT",
+  "KNN"
+ ],
+ "N": 117534,
+ "k": 5000,
+ "k_rule": "max(1, N // 100)",
+ "target_block_size": 24,
+ "cap": 24,
+ "cap_rule": [
+  "blk",
+  1.0
+ ],
+ "mode": "split",
+ "weighted": true,
+ "weight_scale": 1000,
+ "hyperedges": 410385,
+ "pins": 6174591,
+ "pins_precap_total": 5986489,
+ "anchor_duplication_pins": 188102,
+ "pin_retention_total": 1.0,
+ "size_min": 2,
+ "size_max": 24,
+ "size_mean": 15.05,
+ "weight_min": 43,
+ "weight_max": 1000,
+ "weight_sum": 71198351,
+ "per_family": {
+  "STRUCT": {
+   "hyperedges_precap": 107676,
+   "pins_precap": 5410236,
+   "anchors_over_cap": 39292,
+   "hyperedges_out": 295746,
+   "pins_written": 5598306,
+   "anchor_duplication_pins": 188070,
+   "pins_discarded": 0,
+   "pin_retention": 1.0,
+   "size_max_out": 24
+  },
+  "KNN": {
+   "hyperedges_precap": 114607,
+   "pins_precap": 576253,
+   "anchors_over_cap": 32,
+   "hyperedges_out": 114639,
+   "pins_written": 576285,
+   "anchor_duplication_pins": 32,
+   "pins_discarded": 0,
+   "pin_retention": 1.0,
+   "size_max_out": 24
+  }
+ },
+ "dataset": "musique",
+ "file": "results/L1_HOST/parts/musique__H4_SK_k5000.npz",
+ "bytes": 14848327,
+ "file_sha256": "7cbc9e72643f78a93da28cba61ca30a4893fd498f35ab7ac982dbdc1202b2a1a",
+ "content_digest": "e74e733716a32a8479add5248f8edda29ebcc17d0164e92d40b0955b06933023",
+ "built_utc": "2026-09-29T10:11:06Z",
+ "seconds": 41.2,
+ "inputs": {
+  "DATASET_json_RECORD_SHA256": "67fa637183fb02c4762fc80f6f4d2e21e14e2c665977e89adfcd6d32ed6d683f",
+  "keys_npz_sha256": "c44c3cd4326555b46fbb9aa990c4eaaf14e33b18721848befa421f3b024f55b2",
+  "STRUCT": 2651280,
+  "KNN": 230823
+ },
+ "scale": {
+  "K": 5000,
+  "native_K": 1175,
+  "block_size_round_N_over_K": 24,
+  "rule": "the frozen H4_SK rule with k = K (cap = round(N / K)); nothing else changed (as _l1d_scale_parts.py HG)"
+ },
+ "placement": {
+  "machine": "DESKTOP-SLQMEQH",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "cpu_count_os": 32,
+  "python": "3.13.5",
+  "executable": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab\\python.exe",
+  "prefix": "C:\\Users\\Student2\\rx\\envs\\mpr-cpu@31803e6457ab",
+  "numpy": "2.3.2",
+  "wsl_distro": "Ubuntu-24.04",
+  "rx_job": "260929-153820-crag-hg-musique-f98f",
+  "rx_cpus": "2",
+  "PYTHONHASHSEED": "0"
+ },
+ "code": {
+  "scratchpad/_l1h_host.py": "ae4a5f45beacea47e486edfd02cad366271d1848b57bbb24e609506b741ea22e",
+  "src/l1_canonical/hypergraph.py": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+  "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+  "scratchpad/_l1hu_build.py": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79",
+  "src/l1_lowmem/common.py": "18edea394b402ee1b6f5e8dac7b7cb7c474647145988ee60f18d3f947db98ff2",
+  "src/l1_lowmem/phg.py": "70b87dd56bc1c6c4a8202d4bf934d0f0885d0f7633b2a33a5036440f731802e4",
+  "src/l1_lowmem/phg_repair.py": "4c051e7a139abc19fd1b8433948a0d288858ac6a9c67dae40d7ef001839472b0",
+  "src/l1_lowmem/freight.py": "7adbe2a06146e9c60b99250cc1ac84beb1ef7115a23d96ea6930f87d298d0971"
+ }
+}

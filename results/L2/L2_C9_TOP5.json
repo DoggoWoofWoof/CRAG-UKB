@@ -1,0 +1,358 @@
+{
+ "phase": "C9 \u2014 top-5 boundary + expert-consensus reranking (C9_DEV selection; DEV_INNER confirm; NO VAL/TEST)",
+ "split": {
+  "2wiki_clean": {
+   "c9train": 8031,
+   "c9dev": 1418,
+   "dev_inner": 1048
+  },
+  "musique_clean": {
+   "c9train": 10669,
+   "c9dev": 1885,
+   "dev_inner": 1394
+  }
+ },
+ "n_features": 63,
+ "c9a_config": {
+  "max_depth": 6,
+  "num_pair": 16
+ },
+ "c9a_grid": {
+  "d4_p8": {
+   "ndcg5": 0.9658,
+   "recall5": 0.976,
+   "all5_feas": 0.9325,
+   "best_iter": 57
+  },
+  "d4_p16": {
+   "ndcg5": 0.9657,
+   "recall5": 0.976,
+   "all5_feas": 0.9325,
+   "best_iter": 7
+  },
+  "d6_p8": {
+   "ndcg5": 0.966,
+   "recall5": 0.9761,
+   "all5_feas": 0.9325,
+   "best_iter": 17
+  },
+  "d6_p16": {
+   "ndcg5": 0.966,
+   "recall5": 0.9763,
+   "all5_feas": 0.9331,
+   "best_iter": 17
+  }
+ },
+ "boundary_hard_kept_frac": 0.6034,
+ "AUDIT": {
+  "fn_gold_c8c_rank_bins": {
+   "5-9": 155,
+   "10-14": 31,
+   "15-19": 8,
+   "20-29": 5,
+   "30-49": 8
+  },
+  "n_false_negative_golds": 207,
+  "n_false_positive_nongold": 9128,
+  "support_feature_means_by_group": {
+   "top5_gold": {
+    "max_contrib": 0.0166,
+    "n_top5": 3.7056,
+    "votes_top10": 3.9705,
+    "best_rank5": 0.4178,
+    "second_min_rank5": 2.4535,
+    "best_minus_second_contrib": 0.0003,
+    "max_second_ratio": 1.0338,
+    "contrib_entropy": 1.3505,
+    "trusted_max_contrib": 0.0192,
+    "regime_support_max": 0.0216,
+    "regime_support_second": 0.019,
+    "rank_std5": 95.96,
+    "n_top3": 3.382
+   },
+   "fn_gold": {
+    "max_contrib": 0.0155,
+    "n_top5": 0.9903,
+    "votes_top10": 1.5556,
+    "best_rank5": 4.7874,
+    "second_min_rank5": 33.4203,
+    "best_minus_second_contrib": 0.0033,
+    "max_second_ratio": 1.4692,
+    "contrib_entropy": 1.1447,
+    "trusted_max_contrib": 0.0171,
+    "regime_support_max": 0.0179,
+    "regime_support_second": 0.0131,
+    "rank_std5": 426.5853,
+    "n_top3": 0.4928
+   },
+   "fp_nongold": {
+    "max_contrib": 0.0161,
+    "n_top5": 1.9947,
+    "votes_top10": 2.6442,
+    "best_rank5": 2.0181,
+    "second_min_rank5": 10.6083,
+    "best_minus_second_contrib": 0.0013,
+    "max_second_ratio": 1.1543,
+    "contrib_entropy": 1.2632,
+    "trusted_max_contrib": 0.0186,
+    "regime_support_max": 0.0198,
+    "regime_support_second": 0.0169,
+    "rank_std5": 212.5887,
+    "n_top3": 1.2507
+   },
+   "other_nongold": {
+    "max_contrib": 0.0135,
+    "n_top5": 0.1905,
+    "votes_top10": 0.5558,
+    "best_rank5": 15.9402,
+    "second_min_rank5": 38.9101,
+    "best_minus_second_contrib": 0.003,
+    "max_second_ratio": 1.4236,
+    "contrib_entropy": 1.1467,
+    "trusted_max_contrib": 0.0153,
+    "regime_support_max": 0.0155,
+    "regime_support_second": 0.0118,
+    "rank_std5": 388.2663,
+    "n_top3": 0.0656
+   }
+  },
+  "interpretation_keys": "compare fp_nongold (spikes?) vs fn_gold (specialist-strong?) vs top5_gold (consensus)"
+ },
+ "C9_DEV": {
+  "C8c": {
+   "any5": 1.0,
+   "recall5_micro": 0.9684,
+   "recall5_macro": 0.9762,
+   "ndcg5": 0.9658,
+   "ndcg50": 0.9748,
+   "mrr": 0.9893,
+   "all5": 0.9331,
+   "all10": 0.9749,
+   "all50": 0.9897,
+   "all5_feas": 0.9331
+  },
+  "C9a": {
+   "any5": 1.0,
+   "recall5_micro": 0.9685,
+   "recall5_macro": 0.9763,
+   "ndcg5": 0.966,
+   "ndcg50": 0.9749,
+   "mrr": 0.9898,
+   "all5": 0.9331,
+   "all10": 0.9758,
+   "all50": 0.9897,
+   "all5_feas": 0.9331
+  },
+  "C9b": {
+   "any5": 1.0,
+   "recall5_micro": 0.9681,
+   "recall5_macro": 0.9762,
+   "ndcg5": 0.966,
+   "ndcg50": 0.975,
+   "mrr": 0.9898,
+   "all5": 0.9331,
+   "all10": 0.9755,
+   "all50": 0.9897,
+   "all5_feas": 0.9331
+  },
+  "C9_classifier": {
+   "any5": 1.0,
+   "recall5_micro": 0.9676,
+   "recall5_macro": 0.9756,
+   "ndcg5": 0.9657,
+   "ndcg50": 0.975,
+   "mrr": 0.9898,
+   "all5": 0.9316,
+   "all10": 0.9746,
+   "all50": 0.9897,
+   "all5_feas": 0.9316
+  }
+ },
+ "SELECTED_ON_C9DEV": "C9b",
+ "DEV_INNER_CONFIRM": {
+  "C8c": {
+   "any5": 0.9992,
+   "recall5_micro": 0.9666,
+   "recall5_macro": 0.9748,
+   "ndcg5": 0.9637,
+   "ndcg50": 0.9725,
+   "mrr": 0.9884,
+   "all5": 0.9312,
+   "all10": 0.9717,
+   "all50": 0.9836,
+   "all5_feas": 0.9312
+  },
+  "C9a": {
+   "any5": 0.9992,
+   "recall5_micro": 0.9668,
+   "recall5_macro": 0.9752,
+   "ndcg5": 0.9639,
+   "ndcg50": 0.9725,
+   "mrr": 0.9884,
+   "all5": 0.9304,
+   "all10": 0.9717,
+   "all50": 0.9836,
+   "all5_feas": 0.9304
+  },
+  "C9b": {
+   "any5": 0.9992,
+   "recall5_micro": 0.9671,
+   "recall5_macro": 0.9752,
+   "ndcg5": 0.9642,
+   "ndcg50": 0.9728,
+   "mrr": 0.9886,
+   "all5": 0.9312,
+   "all10": 0.9717,
+   "all50": 0.9836,
+   "all5_feas": 0.9312
+  }
+ },
+ "bootstrap_selected_vs_C8c_on_C9DEV": {
+  "ndcg5": {
+   "delta": 0.0002,
+   "ci95": [
+    -0.0004,
+    0.0008
+   ],
+   "significant": false
+  },
+  "recall5": {
+   "delta": 0.0,
+   "ci95": [
+    -0.001,
+    0.001
+   ],
+   "significant": false
+  },
+  "ndcg50": {
+   "delta": 0.0002,
+   "ci95": [
+    -0.0001,
+    0.0005
+   ],
+   "significant": false
+  },
+  "all50": {
+   "delta": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ],
+   "significant": false
+  }
+ },
+ "TOP5_RESCUE": {
+  "rescued_by_bin": {
+   "5-9": 8,
+   "10-19": 0,
+   "20-49": 0
+  },
+  "TOP5_RESCUE": 8,
+  "TOP5_HURT": 11,
+  "NET_TOP5_GAIN": -3
+ },
+ "SPECIALIST_RESCUE": {
+  "mixture": 3,
+  "splade": 2,
+  "relation": 3
+ },
+ "MULTI_GOLD": {
+  "C8c": {
+   "1": {
+    "n": 79,
+    "recall5": 1.0,
+    "all5": 1.0,
+    "ndcg5": 0.9656
+   },
+   "2": {
+    "n": 2448,
+    "recall5": 0.9867,
+    "all5": 0.9734,
+    "ndcg5": 0.9728
+   },
+   "3+": {
+    "n": 776,
+    "recall5": 0.9404,
+    "all5": 0.799,
+    "ndcg5": 0.944
+   }
+  },
+  "C9b": {
+   "1": {
+    "n": 79,
+    "recall5": 1.0,
+    "all5": 1.0,
+    "ndcg5": 0.9656
+   },
+   "2": {
+    "n": 2448,
+    "recall5": 0.9871,
+    "all5": 0.9743,
+    "ndcg5": 0.9731
+   },
+   "3+": {
+    "n": 776,
+    "recall5": 0.9391,
+    "all5": 0.7964,
+    "ndcg5": 0.9437
+   }
+  }
+ },
+ "ORACLE_GAP": {
+  "selected_recall5": 0.9762,
+  "perfect_rerank_top50_recall5": 0.9969,
+  "ORACLE_GAP_REMAINING_recall5": 0.0208
+ },
+ "C9a_feature_importance_top": {
+  "c8c_oof_score": 0.468,
+  "c8c_oof_rank": 0.3079,
+  "c8c_score_minus_rank1": 0.111,
+  "c8c_rank_percentile": 0.026,
+  "c8c_rank_minus5": 0.0235,
+  "c_relation": 0.006,
+  "c8c_score_minus_rank5": 0.0043,
+  "max_mean_ratio": 0.0022,
+  "regime_support_max": 0.0018,
+  "c_dense": 0.0016,
+  "q_relany": 0.0015,
+  "contrib_entropy": 0.0015,
+  "mean_rk4": 0.0014,
+  "mean_contrib": 0.0014,
+  "w_splade": 0.0013
+ },
+ "classifier_diagnostic": {
+  "dev": {
+   "any5": 1.0,
+   "recall5_micro": 0.9676,
+   "recall5_macro": 0.9756,
+   "ndcg5": 0.9657,
+   "ndcg50": 0.975,
+   "mrr": 0.9898,
+   "all5": 0.9316,
+   "all10": 0.9746,
+   "all50": 0.9897,
+   "all5_feas": 0.9316
+  },
+  "note": "pointwise P(gold) on top20; rows outside top20 pinned below in C8c order; diagnostic only"
+ },
+ "c9b": {
+  "dev_ndcg5": 0.966,
+  "dev_recall5": 0.9762
+ },
+ "GATES": {
+  "C9_NDCG5_ABOVE_090": "YES (but on in-distribution C9_DEV, not VAL; C8c already 0.9658 here)",
+  "C9_RECALL5_ABOVE_093": "YES (in-distribution C9_DEV; C8c baseline already 0.9762)",
+  "C9_RECALL5_ABOVE_095": "YES (in-distribution C9_DEV; C8c baseline already 0.9762)",
+  "EXPERT_CONSENSUS_FEATURES_HELP": "NO (all 29 EXTRA consensus features sum to <0.02 gain-importance; top single = max_mean_ratio 0.0022)",
+  "QUERY_REGIME_INTERACTIONS_HELP": "NO (regime_support_max 0.0018, w_splade 0.0013, trusted_max_contrib ~0 importance; negligible)",
+  "BOUNDARY_HARD_TRAINING_HELPS": "NO (kept 60% of rows; C9a = C8c within noise, so hard-mining did not move top-5)",
+  "OOF_STACKING_HELPS": "DOMINANT_BUT_CIRCULAR (c8c_oof_score+rank+score_minus_rank1 = 0.89 importance, i.e. C9 just reconstructs C8c; carries all signal but yields no net gain over C8c)",
+  "SECOND_STAGE_RERANKER_HELPS": "NO",
+  "C9_BEATS_C8C": "NO (C9b vs C8c on C9_DEV: NDCG@5 +0.0002 CI95[-0.0004,+0.0008] NOT significant; net top-5 rescue -3)",
+  "DEEP_RECALL_PRESERVED": "YES (ALL@50 identical 0.9897 across C8c/C9a/C9b; rerank within top-50 only)",
+  "TOP5_ORACLE_GAP_REMAINING": 0.0208,
+  "SAFE_TO_CONTINUE_TOP5_OPTIMIZATION": "NO_WITHIN_CURRENT_POOL (consensus/regime axis exhausted; remaining 0.0208 gap is 3+-gold tail unreachable without richer candidate signal or larger pool)",
+  "SAFE_TO_FREEZE_L2": "NO (held per instruction; C8c remains the standing top-5 policy — C9 adds no significant lift)"
+ },
+ "CONCLUSION": "C9 is NEUTRAL. The expert-consensus + query-regime x candidate interaction features, boundary-hard training, and OOF C8c stacking do NOT push top-5 beyond C8c: on the held-out C9_DEV the selected C9b ties C8c (NDCG@5 0.9660 vs 0.9658, not significant; net top-5 rescue -3), and DEV_INNER confirms (0.9642 vs 0.9637, +0.0005). Feature importance shows C9 simply reconstructs C8c (OOF stack = 0.89). STANDING TOP-5 POLICY REMAINS C8c. The remaining top-50 oracle gap (0.0208) lives in the 3+-gold hard tail, which needs signal outside this feature family (or a larger pool) rather than more consensus features. Returned BEFORE official VAL per instruction."
+}

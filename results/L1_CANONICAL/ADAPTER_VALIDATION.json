@@ -1,0 +1,2276 @@
+{
+ "RECORD": "L1_CANONICAL_ADAPTER_VALIDATION",
+ "datasets": {
+  "metaqa": {
+   "dataset": "metaqa",
+   "checks": [
+    {
+     "check": "DATASET.json self-hash",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "DATASET.json file digest == CANONICAL_FREEZE pin",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "n_nodes/n_queries == freeze",
+     "ok": true,
+     "detail": [
+      43234,
+      407513
+     ]
+    },
+    {
+     "check": "eval split declared and served",
+     "ok": true,
+     "detail": "dev"
+    },
+    {
+     "check": "query index rows == n_queries",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold positions in range",
+     "ok": true,
+     "detail": [
+      0,
+      43233
+     ]
+    },
+    {
+     "check": "gold refs train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 2446161,
+      "audit": 2446161
+     }
+    },
+    {
+     "check": "zero-gold rows train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes train",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold refs dev == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 300980,
+      "audit": 300980
+     }
+    },
+    {
+     "check": "zero-gold rows dev == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes dev",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold refs test == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 302779,
+      "audit": 302779
+     }
+    },
+    {
+     "check": "zero-gold rows test == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes test",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "eval rows == expected",
+     "ok": true,
+     "detail": {
+      "n": 39138,
+      "expected": 39138,
+      "first": 329282,
+      "last": 368419
+     }
+    },
+    {
+     "check": "metaqa dev has hops 1/2/3",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "eval rows never in a test split",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "node_embeddings shape",
+     "ok": true,
+     "detail": [
+      43234,
+      1536
+     ]
+    },
+    {
+     "check": "query_embeddings shape",
+     "ok": true,
+     "detail": [
+      407513,
+      1536
+     ]
+    },
+    {
+     "check": "ShardedRows gather == canonical.Embeddings.read (cross-shard probe)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "ShardedRows slice across a shard boundary",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "doc vectors unit norm (|norm-1| <= 0.01, sample 2000)",
+     "ok": true,
+     "detail": 0.00048
+    },
+    {
+     "check": "query vectors unit norm (sample 500)",
+     "ok": true,
+     "detail": 0.00047
+    },
+    {
+     "check": "dense cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      407513,
+      1000
+     ]
+    },
+    {
+     "check": "dense cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "dense cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      407513,
+      1000
+     ]
+    },
+    {
+     "check": "splade cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "splade cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "zero-copy: RSS growth from opening embeddings+caches < 256 MB",
+     "ok": true,
+     "detail": 38.6
+    },
+    {
+     "check": "dense top-10 of 50 eval queries re-derived from served vectors (fp16 tolerance 2e-3)",
+     "ok": true,
+     "detail": {
+      "bad": 0,
+      "worst_gap": 0.0
+     }
+    },
+    {
+     "check": "families present == {structural, ner, knn}",
+     "ok": true,
+     "detail": [
+      "knn",
+      "ner",
+      "structural"
+     ]
+    },
+    {
+     "check": "STRUCT keys == structural distinct unordered pairs (census counts loop pairs) - loop pairs",
+     "ok": true,
+     "detail": {
+      "keys": 124669,
+      "census_pairs": 124680,
+      "loop_pairs": 11,
+      "self_loop_rows": 11
+     }
+    },
+    {
+     "check": "NER_RAW keys == ner distinct unordered pairs",
+     "ok": true,
+     "detail": {
+      "keys": 5949,
+      "census": 5949
+     }
+    },
+    {
+     "check": "KNN keys <= knn distinct pairs and KNN disjoint from STRUCT",
+     "ok": true,
+     "detail": {
+      "keys": 97436,
+      "census": 97920,
+      "knn_pairs_also_structural": 484
+     }
+    },
+    {
+     "check": "NERX disjoint from STRUCT",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "STRUCT keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "KNN keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "NERX keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "directed structural CSR: nnz == n_edges",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "undirected structural CSR: nnz == 2*|STRUCT|",
+     "ok": true,
+     "detail": null
+    }
+   ],
+   "timings_s": {
+    "records": 0.0,
+    "query_index": 12.8,
+    "embeddings_caches": 2.1,
+    "exact_topk": 1.9,
+    "graph": 0.5
+   },
+   "rss_mb": {
+    "start": 35.8,
+    "after_query_index": 68.8,
+    "after_embeddings_and_caches": 107.4,
+    "after_graph": 362.3
+   },
+   "eval_population": {
+    "split": "dev",
+    "n": 39138,
+    "with_gold": 39138,
+    "zero_gold": 0,
+    "mean_golds": 7.69,
+    "hop_hist": {
+     "1": 9992,
+     "2": 14872,
+     "3": 14274
+    }
+   },
+   "keysets": {
+    "N": 43234,
+    "STRUCT": 124669,
+    "KNN": 97436,
+    "NERX": 5819,
+    "NER_RAW": 5949
+   },
+   "undirected_struct_degree": {
+    "deg0": 0,
+    "max": 4176,
+    "mean": 5.767,
+    "audit_directed_deg0": 0
+   },
+   "pins": {
+    "dataset": "metaqa",
+    "DATASET_json_RECORD_SHA256": "8ab4506933d0df8f9b8443848b9da80e49e698cf9cb40ef32523fdb4e31e2c87",
+    "CANONICAL_FREEZE_RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+    "nodes_jsonl_sha256": "a2441a83961a3426be2650a05513fd5b85862c4e98ea13755ede1bced951f3eb",
+    "query_ids_sha256": "c0d328208563d295cf3e702605f8d8a2bb930160f1be6978666d85465bc2bfbe",
+    "split_files_sha256": {
+     "train": "cfc4ec8314501c9ad743f450d741f91b58cd5af425bfb245d7530e7df4f29dbc",
+     "dev": "d60ece410a392cc08ee8782a99969054847f6a82b7f649dc73e805710567f63d",
+     "test": "4a73fe0267599787095c6d80af4b9da66bee62ff3300c987d182c9c0033a8949"
+    },
+    "graph_files_sha256": {
+     "structural": "1b2027c64b2e62b5cf122f09a246ed4cb485841bf0823fcee246e8bf45bf8570",
+     "ner": "93065a2311c2b445cc14ce6458457c9e14ec0d3c641a4bc573ef4b175a374cb8",
+     "knn": "f7c59640e816951148fee791bc8790e026461ee52a5b6741c63859244b5a4a16"
+    },
+    "embedding_manifests_sha256": {
+     "dense": {
+      "docs": "6ed812224adc5b43035c44eb9dc8f6fa27c3ef2d0d7cc540ea1b00f0937c43e1",
+      "queries": "b387ec54edebf6dd3d9a4b211dc586065dc670213660dfee97dde87756663b0b"
+     },
+     "splade": {
+      "docs": "103ab07f3262345e12553c9cf892e51cecdbb1258975bc6e9e8ee88c7086e248",
+      "queries": "4387fa9d70c84cca571af0f4f0a7033e6aa1570cfe307b85acfee38a1f80fa12"
+     }
+    },
+    "retrieval_cache_sha256": {
+     "dense": "1424fb93f34ad2b34d2eb4d7858f91a82d8425c43276131ae19104f2ab61e2bf",
+     "splade": "04c2e321f1151d5cf79e83abb8654eb38641893104fa8de0479734613ec0233c"
+    },
+    "eval_split": "dev"
+   },
+   "derived_files": {
+    "data\\l1_canonical\\metaqa\\query_index.npz": {
+     "bytes": 17907964,
+     "sha256": "5ce0070a60530e2ce633a528294cec90789c02357dffe76db9620100e2f58b83"
+    },
+    "data\\l1_canonical\\metaqa\\keys.npz": {
+     "bytes": 1873830,
+     "sha256": "7b65508cb14e8cd4c66e1d926fd678c204e13c249348c6c02e8ce2f5157cfc4f"
+    }
+   },
+   "n_checks": 48,
+   "n_failed": 0,
+   "PASS": true,
+   "seconds": 18.1
+  },
+  "squad": {
+   "dataset": "squad",
+   "checks": [
+    {
+     "check": "DATASET.json self-hash",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "DATASET.json file digest == CANONICAL_FREEZE pin",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "n_nodes/n_queries == freeze",
+     "ok": true,
+     "detail": [
+      20233,
+      142192
+     ]
+    },
+    {
+     "check": "eval split declared and served",
+     "ok": true,
+     "detail": "dev"
+    },
+    {
+     "check": "query index rows == n_queries",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold positions in range",
+     "ok": true,
+     "detail": [
+      0,
+      20232
+     ]
+    },
+    {
+     "check": "gold refs train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 130319,
+      "audit": 130319
+     }
+    },
+    {
+     "check": "zero-gold rows train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes train",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold refs dev == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 11873,
+      "audit": 11873
+     }
+    },
+    {
+     "check": "zero-gold rows dev == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes dev",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "eval rows == expected",
+     "ok": true,
+     "detail": {
+      "n": 11873,
+      "expected": 11873,
+      "first": 130319,
+      "last": 142191
+     }
+    },
+    {
+     "check": "eval rows never in a test split",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "node_embeddings shape",
+     "ok": true,
+     "detail": [
+      20233,
+      1536
+     ]
+    },
+    {
+     "check": "query_embeddings shape",
+     "ok": true,
+     "detail": [
+      142192,
+      1536
+     ]
+    },
+    {
+     "check": "ShardedRows gather == canonical.Embeddings.read (cross-shard probe)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "ShardedRows slice across a shard boundary",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "doc vectors unit norm (|norm-1| <= 0.01, sample 2000)",
+     "ok": true,
+     "detail": 0.00048
+    },
+    {
+     "check": "query vectors unit norm (sample 500)",
+     "ok": true,
+     "detail": 0.00047
+    },
+    {
+     "check": "dense cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      142192,
+      1000
+     ]
+    },
+    {
+     "check": "dense cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "dense cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      142192,
+      1000
+     ]
+    },
+    {
+     "check": "splade cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "splade cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "zero-copy: RSS growth from opening embeddings+caches < 256 MB",
+     "ok": true,
+     "detail": 38.5
+    },
+    {
+     "check": "dense top-10 of 50 eval queries re-derived from served vectors (fp16 tolerance 2e-3)",
+     "ok": true,
+     "detail": {
+      "bad": 0,
+      "worst_gap": 0.0
+     }
+    },
+    {
+     "check": "families present == {structural, ner, knn}",
+     "ok": true,
+     "detail": [
+      "knn",
+      "ner",
+      "structural"
+     ]
+    },
+    {
+     "check": "STRUCT keys == structural distinct unordered pairs (census counts loop pairs) - loop pairs",
+     "ok": true,
+     "detail": {
+      "keys": 744734,
+      "census_pairs": 744734,
+      "loop_pairs": 0,
+      "self_loop_rows": 0
+     }
+    },
+    {
+     "check": "NER_RAW keys == ner distinct unordered pairs",
+     "ok": true,
+     "detail": {
+      "keys": 156130,
+      "census": 156130
+     }
+    },
+    {
+     "check": "KNN keys <= knn distinct pairs and KNN disjoint from STRUCT",
+     "ok": true,
+     "detail": {
+      "keys": 30609,
+      "census": 42969,
+      "knn_pairs_also_structural": 12360
+     }
+    },
+    {
+     "check": "NERX disjoint from STRUCT",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "STRUCT keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "KNN keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "NERX keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "directed structural CSR: nnz == n_edges",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "undirected structural CSR: nnz == 2*|STRUCT|",
+     "ok": true,
+     "detail": null
+    }
+   ],
+   "timings_s": {
+    "records": 0.0,
+    "query_index": 1.9,
+    "embeddings_caches": 1.5,
+    "exact_topk": 0.7,
+    "graph": 1.3
+   },
+   "rss_mb": {
+    "start": 35.9,
+    "after_query_index": 45.9,
+    "after_embeddings_and_caches": 84.4,
+    "after_graph": 144.4
+   },
+   "eval_population": {
+    "split": "dev",
+    "n": 11873,
+    "with_gold": 11873,
+    "zero_gold": 0,
+    "mean_golds": 1.0
+   },
+   "keysets": {
+    "N": 20233,
+    "STRUCT": 744734,
+    "KNN": 30609,
+    "NERX": 135287,
+    "NER_RAW": 156130
+   },
+   "undirected_struct_degree": {
+    "deg0": 6349,
+    "max": 2499,
+    "mean": 73.616,
+    "audit_directed_deg0": 6349
+   },
+   "pins": {
+    "dataset": "squad",
+    "DATASET_json_RECORD_SHA256": "29976120cf085d2f776c9eea28da6363bc6c6d0be679cca550db7f714a151a23",
+    "CANONICAL_FREEZE_RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+    "nodes_jsonl_sha256": "34ac47757e0080f0e2eb6c679009a6090ca97be39d576307ba7281db730c1a8b",
+    "query_ids_sha256": "219f76d7bedd7073d8232701a5d891e9ecaebf7583e04e108642a35431d182e9",
+    "split_files_sha256": {
+     "train": "5edd6aef0a41adee4b172d9f5ed79a239c9eea5118a1107ffc59153c11b37f07",
+     "dev": "4e55af21d22314f9e549aed4b01c4b9383526558c9f9bbdbd6173f3f480f1f98"
+    },
+    "graph_files_sha256": {
+     "structural": "4ed2985819db203f9874dbec4a25f187a12226ff6430c8778da95e9e2bd10746",
+     "ner": "e8b061c3dc417d7c481e57d9f360dd98c825049d62c61958ca0fed655fa57a22",
+     "knn": "fee9cca5435668378d2a139614cec141d0b4977991801a004c8ca43ee8ad796f"
+    },
+    "embedding_manifests_sha256": {
+     "dense": {
+      "docs": "204bc1a3c65f41fe78c17b43096070a063a3b74165be1159e85e22bce552c647",
+      "queries": "3c228887a489b4a4744db69ac25ba6231dd7f4e2ac5d5edebfdf207734acd51c"
+     },
+     "splade": {
+      "docs": "b4ce3417db0c6189883e014e4bdbcdb676063dbbbcbe9108e24eb061c5c3c0f6",
+      "queries": "5e568ff1eac4391c39a2513fd37b620e0c9bd4cf96d040d7630e0dd66a61d3c8"
+     }
+    },
+    "retrieval_cache_sha256": {
+     "dense": "cbba968d2d472909e885fce978c48738740eaed3c086e5a49f1cd065f9b21509",
+     "splade": "965061812110f4bf9c61575566e4dd0cc59778f4c65ae35f922e4837f5bea775"
+    },
+    "eval_split": "dev"
+   },
+   "derived_files": {
+    "data\\l1_canonical\\squad\\query_index.npz": {
+     "bytes": 2562518,
+     "sha256": "e9791217a5e901af9ad599b2cea2a4cf44c13b9f30f15532a554b1073d7479eb"
+    },
+    "data\\l1_canonical\\squad\\keys.npz": {
+     "bytes": 8536942,
+     "sha256": "1a92c96f38341966f6430facf2d28e8d77e077e40f77a206c5171771b6566491"
+    }
+   },
+   "n_checks": 44,
+   "n_failed": 0,
+   "PASS": true,
+   "seconds": 6.7
+  },
+  "musique": {
+   "dataset": "musique",
+   "checks": [
+    {
+     "check": "DATASET.json self-hash",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "DATASET.json file digest == CANONICAL_FREEZE pin",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "n_nodes/n_queries == freeze",
+     "ok": true,
+     "detail": [
+      117534,
+      24814
+     ]
+    },
+    {
+     "check": "eval split declared and served",
+     "ok": true,
+     "detail": "dev"
+    },
+    {
+     "check": "query index rows == n_queries",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold positions in range",
+     "ok": true,
+     "detail": [
+      11,
+      117527
+     ]
+    },
+    {
+     "check": "gold refs train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 46613,
+      "audit": 46613
+     }
+    },
+    {
+     "check": "zero-gold rows train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes train",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold refs dev == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 6404,
+      "audit": 6404
+     }
+    },
+    {
+     "check": "zero-gold rows dev == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes dev",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold refs test == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "zero-gold rows test == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 2459,
+      "audit": 2459
+     }
+    },
+    {
+     "check": "split codes test",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "eval rows == expected",
+     "ok": true,
+     "detail": {
+      "n": 2417,
+      "expected": 2417,
+      "first": 19938,
+      "last": 22354
+     }
+    },
+    {
+     "check": "eval rows never in a test split",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "node_embeddings shape",
+     "ok": true,
+     "detail": [
+      117534,
+      1536
+     ]
+    },
+    {
+     "check": "query_embeddings shape",
+     "ok": true,
+     "detail": [
+      24814,
+      1536
+     ]
+    },
+    {
+     "check": "ShardedRows gather == canonical.Embeddings.read (cross-shard probe)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "ShardedRows slice across a shard boundary",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "doc vectors unit norm (|norm-1| <= 0.01, sample 2000)",
+     "ok": true,
+     "detail": 0.00048
+    },
+    {
+     "check": "query vectors unit norm (sample 500)",
+     "ok": true,
+     "detail": 0.00048
+    },
+    {
+     "check": "dense cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      24814,
+      1000
+     ]
+    },
+    {
+     "check": "dense cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "dense cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      24814,
+      1000
+     ]
+    },
+    {
+     "check": "splade cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "splade cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "zero-copy: RSS growth from opening embeddings+caches < 256 MB",
+     "ok": true,
+     "detail": 36.0
+    },
+    {
+     "check": "dense top-10 of 50 eval queries re-derived from served vectors (fp16 tolerance 2e-3)",
+     "ok": true,
+     "detail": {
+      "bad": 0,
+      "worst_gap": 0.0
+     }
+    },
+    {
+     "check": "families present == {structural, ner, knn}",
+     "ok": true,
+     "detail": [
+      "knn",
+      "ner",
+      "structural"
+     ]
+    },
+    {
+     "check": "STRUCT keys == structural distinct unordered pairs (census counts loop pairs) - loop pairs",
+     "ok": true,
+     "detail": {
+      "keys": 2651280,
+      "census_pairs": 2651280,
+      "loop_pairs": 0,
+      "self_loop_rows": 0
+     }
+    },
+    {
+     "check": "NER_RAW keys == ner distinct unordered pairs",
+     "ok": true,
+     "detail": {
+      "keys": 800278,
+      "census": 800278
+     }
+    },
+    {
+     "check": "KNN keys <= knn distinct pairs and KNN disjoint from STRUCT",
+     "ok": true,
+     "detail": {
+      "keys": 230823,
+      "census": 265366,
+      "knn_pairs_also_structural": 34543
+     }
+    },
+    {
+     "check": "NERX disjoint from STRUCT",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "STRUCT keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "KNN keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "NERX keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "directed structural CSR: nnz == n_edges",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "undirected structural CSR: nnz == 2*|STRUCT|",
+     "ok": true,
+     "detail": null
+    }
+   ],
+   "timings_s": {
+    "records": 0.0,
+    "query_index": 1.8,
+    "embeddings_caches": 1.1,
+    "exact_topk": 4.9,
+    "graph": 11.1
+   },
+   "rss_mb": {
+    "start": 46.6,
+    "after_query_index": 51.8,
+    "after_embeddings_and_caches": 87.8,
+    "after_graph": 470.9
+   },
+   "eval_population": {
+    "split": "dev",
+    "n": 2417,
+    "with_gold": 2417,
+    "zero_gold": 0,
+    "mean_golds": 2.65
+   },
+   "keysets": {
+    "N": 117534,
+    "STRUCT": 2651280,
+    "KNN": 230823,
+    "NERX": 733541,
+    "NER_RAW": 800278
+   },
+   "undirected_struct_degree": {
+    "deg0": 9858,
+    "max": 14294,
+    "mean": 45.115,
+    "audit_directed_deg0": 9858
+   },
+   "pins": {
+    "dataset": "musique",
+    "DATASET_json_RECORD_SHA256": "67fa637183fb02c4762fc80f6f4d2e21e14e2c665977e89adfcd6d32ed6d683f",
+    "CANONICAL_FREEZE_RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+    "nodes_jsonl_sha256": "b8fc63ce6071609312de01045b0ea0f381fe9d643b977281d7132693faebfbdf",
+    "query_ids_sha256": "09138429dc204e4a99e2a9259e775b256597d4e33eecc5ef30b9378b5c6d4c08",
+    "split_files_sha256": {
+     "train": "4131542a61d5b171a4140b2898b0ed26d6f1acac4de081e8ebe879a52f092d57",
+     "dev": "7312bcb1eaf256453fada5cf4fd20bc73e987879343d6eec5e6dd597a3d784ca",
+     "test": "7a262dc240bf1297ece1b0413dd751d486a19bcaba5598557a2a31e0a8d31191"
+    },
+    "graph_files_sha256": {
+     "structural": "ad2f6dd4cd5adbbf9eaa5f68cb977920725e8bc5a317121cbbbe5f4e4bf881bc",
+     "ner": "f294708600750c48eae9e32d0895d517ac3a8b5d048c736a70e9a566af2fe9c6",
+     "knn": "6020ac7e0b6773e64866b5e942dc0e02c3b704615ced8de4d557aa543221ef5b"
+    },
+    "embedding_manifests_sha256": {
+     "dense": {
+      "docs": "9fa5b3951c7a849a6aed62ebd29420402a1cbafbde672feceacaa57c8dec2d36",
+      "queries": "fdbf2f69ee3ae8f5c62101ba5ec5f7344b2dc983b32b31d792b3ad523c1a75db"
+     },
+     "splade": {
+      "docs": "722c8047776180a0fbb6b1f236f1fe20eb5add9d65aac40bf92308bbe3d4f492",
+      "queries": "0a7b05d08c2f961242ae423859c299d2ef07e35b0834c9c474c2b3f865d2623a"
+     }
+    },
+    "retrieval_cache_sha256": {
+     "dense": "cef63899b9dd96e33e4a4e4a1c829bcf23d3c0b116efafa4fe70e75873893ca7",
+     "splade": "1f3c8e290b8c2a642efef3c15858dd1d76771810050aa0e2a8081e5099355200"
+    },
+    "eval_split": "dev"
+   },
+   "derived_files": {
+    "data\\l1_canonical\\musique\\query_index.npz": {
+     "bytes": 562550,
+     "sha256": "81bb1961c95c830c48dd6b96cb96c7015d273f585e65a120918042bd392e4036"
+    },
+    "data\\l1_canonical\\musique\\keys.npz": {
+     "bytes": 35330250,
+     "sha256": "c44c3cd4326555b46fbb9aa990c4eaaf14e33b18721848befa421f3b024f55b2"
+    }
+   },
+   "n_checks": 47,
+   "n_failed": 0,
+   "PASS": true,
+   "seconds": 25.9
+  },
+  "webqsp": {
+   "dataset": "webqsp",
+   "checks": [
+    {
+     "check": "DATASET.json self-hash",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "DATASET.json file digest == CANONICAL_FREEZE pin",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "n_nodes/n_queries == freeze",
+     "ok": true,
+     "detail": [
+      2592894,
+      4737
+     ]
+    },
+    {
+     "check": "eval split declared and served",
+     "ok": true,
+     "detail": "train_holdout"
+    },
+    {
+     "check": "query index rows == n_queries",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold positions in range",
+     "ok": true,
+     "detail": [
+      219,
+      2592234
+     ]
+    },
+    {
+     "check": "gold refs train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 21343,
+      "audit": 21343
+     }
+    },
+    {
+     "check": "zero-gold rows train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 88,
+      "audit": 88
+     }
+    },
+    {
+     "check": "split codes train",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold refs test == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 10763,
+      "audit": 10763
+     }
+    },
+    {
+     "check": "zero-gold rows test == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 55,
+      "audit": 55
+     }
+    },
+    {
+     "check": "split codes test",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "eval rows == expected",
+     "ok": true,
+     "detail": {
+      "n": 1549,
+      "expected": 1549,
+      "first": 0,
+      "last": 3096
+     }
+    },
+    {
+     "check": "eval rows never in a test split",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "node_embeddings shape",
+     "ok": true,
+     "detail": [
+      2592894,
+      1536
+     ]
+    },
+    {
+     "check": "query_embeddings shape",
+     "ok": true,
+     "detail": [
+      4737,
+      1536
+     ]
+    },
+    {
+     "check": "ShardedRows gather == canonical.Embeddings.read (cross-shard probe)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "ShardedRows slice across a shard boundary",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "doc vectors unit norm (|norm-1| <= 0.01, sample 2000)",
+     "ok": true,
+     "detail": 0.00048
+    },
+    {
+     "check": "query vectors unit norm (sample 500)",
+     "ok": true,
+     "detail": 0.00047
+    },
+    {
+     "check": "dense cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      4737,
+      1000
+     ]
+    },
+    {
+     "check": "dense cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "dense cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      4737,
+      1000
+     ]
+    },
+    {
+     "check": "splade cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "splade cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "zero-copy: RSS growth from opening embeddings+caches < 256 MB",
+     "ok": true,
+     "detail": 35.2
+    },
+    {
+     "check": "dense top-k re-derivation",
+     "ok": null,
+     "detail": "skipped: corpus too large to hold in RAM here (2592894 rows)"
+    },
+    {
+     "check": "families present == {structural, ner, knn}",
+     "ok": true,
+     "detail": [
+      "knn",
+      "ner",
+      "structural"
+     ]
+    },
+    {
+     "check": "STRUCT keys == structural distinct unordered pairs (census counts loop pairs) - loop pairs",
+     "ok": true,
+     "detail": {
+      "keys": 5882501,
+      "census_pairs": 5934075,
+      "loop_pairs": 51574,
+      "self_loop_rows": 93692
+     }
+    },
+    {
+     "check": "NER_RAW keys == ner distinct unordered pairs",
+     "ok": true,
+     "detail": {
+      "keys": 2994802,
+      "census": 2994802
+     }
+    },
+    {
+     "check": "KNN keys <= knn distinct pairs and KNN disjoint from STRUCT",
+     "ok": true,
+     "detail": {
+      "keys": 6313874,
+      "census": 6470520,
+      "knn_pairs_also_structural": 156646
+     }
+    },
+    {
+     "check": "NERX disjoint from STRUCT",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "STRUCT keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "KNN keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "NERX keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "directed structural CSR: nnz == n_edges",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "undirected structural CSR: nnz == 2*|STRUCT|",
+     "ok": true,
+     "detail": null
+    }
+   ],
+   "timings_s": {
+    "records": 0.0,
+    "query_index": 0.8,
+    "embeddings_caches": 3.3,
+    "exact_topk": 0.0,
+    "graph": 36.6
+   },
+   "rss_mb": {
+    "start": 51.6,
+    "after_query_index": 52.3,
+    "after_embeddings_and_caches": 87.5,
+    "after_graph": 229.4
+   },
+   "eval_population": {
+    "split": "train_holdout",
+    "n": 1549,
+    "with_gold": 1503,
+    "zero_gold": 46,
+    "mean_golds": 7.592
+   },
+   "keysets": {
+    "N": 2592894,
+    "STRUCT": 5882501,
+    "KNN": 6313874,
+    "NERX": 2473809,
+    "NER_RAW": 2994802
+   },
+   "undirected_struct_degree": {
+    "deg0": 0,
+    "max": 130075,
+    "mean": 4.537,
+    "audit_directed_deg0": 0
+   },
+   "pins": {
+    "dataset": "webqsp",
+    "DATASET_json_RECORD_SHA256": "56c8ed2352c5f0ecdebf1a103dc0aa9913ec5067f10664f70a4b1b26412b525d",
+    "CANONICAL_FREEZE_RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+    "nodes_jsonl_sha256": "b39c615122ad55f587eaea0c3fc5c7eff4190e6236fa258006e957dcfda948fe",
+    "query_ids_sha256": "0bc6b5e5e9e3cc7fbe01814d7c12e8b6df65a37dce6a645dc64aa5c70bee64b2",
+    "split_files_sha256": {
+     "train": "7da6d1962982400f376924c43ec8bdaed4990fd48bfb301176abdcd2b3f5797d",
+     "test": "aaf607e3848d9bcd81f4bfc79116aeec3cc6a6e19f08d0ec85758e6b367f2771"
+    },
+    "graph_files_sha256": {
+     "structural": "b7c2c435fc0b9dbab3a238c7db31cd61da9a8bd435864c0eba6990ae12756b95",
+     "ner": "8ed08f05db3da877f02d212b2c8ac5b495d12bf15c91c329b33652fdc2e9fb10",
+     "knn": "75a03f25dfa8c6339773059bffbd8322c2f9bf13e7b48cad0105c2ee189519cd"
+    },
+    "embedding_manifests_sha256": {
+     "dense": {
+      "docs": "7fcf5e2d91b2b0dd5de1755a5496512595c4b721b02a006a305d95915245dafe",
+      "queries": "22f89e103e436cf0c04f4e1f1be061c3eefeb9a539cd4f86a607f5c13c8936f3"
+     },
+     "splade": {
+      "docs": "e3f2e5319aa556cc044f6fa04a32a2f01212222ee8d924a5dadc13de9955920a",
+      "queries": "c79b6c6ac1f8e446a7dd41e4f2682a183e825b58e45c4ef768fe1fa482335d81"
+     }
+    },
+    "retrieval_cache_sha256": {
+     "dense": "adbbbe14ccfd45bfa9ee18abdae9e2d1033341f7a6035e8bfb7a6d3f05ed8391",
+     "splade": "0df9cf6a7dac5d976ba2c5b3fae946514250229f67505b5f6ee7a87864a61277"
+    },
+    "eval_split": "train_holdout"
+   },
+   "derived_files": {
+    "data\\l1_canonical\\webqsp\\query_index.npz": {
+     "bytes": 197796,
+     "sha256": "f85da51063db7173c8298ba9a34582da8aaa76b6fbe3ac2c5bc6bef011f196fb"
+    },
+    "data\\l1_canonical\\webqsp\\keys.npz": {
+     "bytes": 141322782,
+     "sha256": "081c3fa4b27f56de9a91a3b5ece10f77182c6a072caf35aa3691adcb41043c5e"
+    }
+   },
+   "n_checks": 43,
+   "n_failed": 0,
+   "PASS": true,
+   "seconds": 67.0
+  },
+  "hotpotqa": {
+   "dataset": "hotpotqa",
+   "checks": [
+    {
+     "check": "DATASET.json self-hash",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "DATASET.json file digest == CANONICAL_FREEZE pin",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "n_nodes/n_queries == freeze",
+     "ok": true,
+     "detail": [
+      5233329,
+      105257
+     ]
+    },
+    {
+     "check": "eval split declared and served",
+     "ok": true,
+     "detail": "validation"
+    },
+    {
+     "check": "query index rows == n_queries",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold positions in range",
+     "ok": true,
+     "detail": [
+      0,
+      5233295
+     ]
+    },
+    {
+     "check": "gold refs train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 180894,
+      "audit": 180894
+     }
+    },
+    {
+     "check": "zero-gold rows train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes train",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold refs validation == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 14810,
+      "audit": 14810
+     }
+    },
+    {
+     "check": "zero-gold rows validation == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes validation",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold refs test == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "zero-gold rows test == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 7405,
+      "audit": 7405
+     }
+    },
+    {
+     "check": "split codes test",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "eval rows == expected",
+     "ok": true,
+     "detail": {
+      "n": 7405,
+      "expected": 7405,
+      "first": 90447,
+      "last": 97851
+     }
+    },
+    {
+     "check": "eval rows never in a test split",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "node_embeddings shape",
+     "ok": true,
+     "detail": [
+      5233329,
+      1536
+     ]
+    },
+    {
+     "check": "query_embeddings shape",
+     "ok": true,
+     "detail": [
+      105257,
+      1536
+     ]
+    },
+    {
+     "check": "ShardedRows gather == canonical.Embeddings.read (cross-shard probe)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "ShardedRows slice across a shard boundary",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "doc vectors unit norm (|norm-1| <= 0.01, sample 2000)",
+     "ok": true,
+     "detail": 0.00047
+    },
+    {
+     "check": "query vectors unit norm (sample 500)",
+     "ok": true,
+     "detail": 0.00048
+    },
+    {
+     "check": "dense cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      105257,
+      1000
+     ]
+    },
+    {
+     "check": "dense cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "dense cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      105257,
+      1000
+     ]
+    },
+    {
+     "check": "splade cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "splade cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "zero-copy: RSS growth from opening embeddings+caches < 256 MB",
+     "ok": true,
+     "detail": 40.0
+    },
+    {
+     "check": "dense top-k re-derivation",
+     "ok": null,
+     "detail": "skipped: corpus too large to hold in RAM here (5233329 rows)"
+    },
+    {
+     "check": "families present == {structural, ner, knn}",
+     "ok": true,
+     "detail": [
+      "knn",
+      "ner",
+      "structural"
+     ]
+    },
+    {
+     "check": "STRUCT keys == structural distinct unordered pairs (census counts loop pairs) - loop pairs",
+     "ok": true,
+     "detail": {
+      "keys": 15095287,
+      "census_pairs": 15095287,
+      "loop_pairs": 0,
+      "self_loop_rows": 0
+     }
+    },
+    {
+     "check": "NER_RAW keys == ner distinct unordered pairs",
+     "ok": true,
+     "detail": {
+      "keys": 20369074,
+      "census": 20369074
+     }
+    },
+    {
+     "check": "KNN keys <= knn distinct pairs and KNN disjoint from STRUCT",
+     "ok": true,
+     "detail": {
+      "keys": 10646884,
+      "census": 11946289,
+      "knn_pairs_also_structural": 1299405
+     }
+    },
+    {
+     "check": "NERX disjoint from STRUCT",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "STRUCT keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "KNN keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "NERX keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "directed structural CSR: nnz == n_edges",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "undirected structural CSR: nnz == 2*|STRUCT|",
+     "ok": true,
+     "detail": null
+    }
+   ],
+   "timings_s": {
+    "records": 0.0,
+    "query_index": 47.1,
+    "embeddings_caches": 6.3,
+    "exact_topk": 0.0,
+    "graph": 137.6
+   },
+   "rss_mb": {
+    "start": 36.0,
+    "after_query_index": 47.0,
+    "after_embeddings_and_caches": 87.0,
+    "after_graph": 609.2
+   },
+   "eval_population": {
+    "split": "validation",
+    "n": 7405,
+    "with_gold": 7405,
+    "zero_gold": 0,
+    "mean_golds": 2.0
+   },
+   "keysets": {
+    "N": 5233329,
+    "STRUCT": 15095287,
+    "KNN": 10646884,
+    "NERX": 18326674,
+    "NER_RAW": 20369074
+   },
+   "undirected_struct_degree": {
+    "deg0": 551848,
+    "max": 189402,
+    "mean": 5.769,
+    "audit_directed_deg0": 551848
+   },
+   "pins": {
+    "dataset": "hotpotqa",
+    "DATASET_json_RECORD_SHA256": "2f778679a52f75c045615f32095c27d8217dfce0d7600319180d985e45793c6f",
+    "CANONICAL_FREEZE_RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+    "nodes_jsonl_sha256": "c777ab4b7a64eaaa5af852265daf6ba9f9debb4658a67f0c96595662e43f182a",
+    "query_ids_sha256": "de95c4165f68dd9bfbc576fd3a464edeb775bb515bced05e45fe94a7cc5db2f2",
+    "split_files_sha256": {
+     "train": "a89d7718e117f23693e3ddbfa18f69bfe392c0445d2959f0afeef12524102932",
+     "validation": "0ca770fa9794bb60a7cc7a057bd0797cbfe4f497fcf08cdcea22b41fef624a1d",
+     "test": "cad3e111f55201dab8b80d53f92e81f729b8de433dd559fec462fbff62113592"
+    },
+    "graph_files_sha256": {
+     "structural": "bc27173133e69cc821a14733a2f3dfe9d56442aeb867cf2cdcdcc4fff9c17608",
+     "ner": "744da64a5f356b89241b2539085c9a0bf673750abd0b1822891c26f069a37137",
+     "knn": "a82ee3d96ff6943678444f12279fe666ff5e03465b818bc229844597488222ae"
+    },
+    "embedding_manifests_sha256": {
+     "dense": {
+      "docs": "8ddcda493b3fb448ff2ba225e6e4d8edb934d7ecb5a4b5185d7d670f49468c3d",
+      "queries": "879b29f957aba06cc933d352389287c552e1a3b1dcf3bd98cbb685821fa8ab64"
+     },
+     "splade": {
+      "docs": "242787448a0f411e44a3257d51b78967d98fe0c6fd2db2c3b6dbc1e86e1c81a3",
+      "queries": "c34c34dee3372efd17c0ad403402af54a04caebb60aae3723bc117dd5eb9193a"
+     }
+    },
+    "retrieval_cache_sha256": {
+     "dense": "cc48b94aa079460247b1d9f770df642f27287286335131e4e449ec6505f88b90",
+     "splade": "c6b4fe40d853593d81feaf5c8ca0a0cc1e5fc14d97d8503050cfea260f912e12"
+    },
+    "eval_split": "validation"
+   },
+   "derived_files": {
+    "data\\l1_canonical\\hotpotqa\\query_index.npz": {
+     "bytes": 2259544,
+     "sha256": "007f94047bd12804f3adfbf5864f38a24e2eb76885fe196de1c0a80159d18995"
+    },
+    "data\\l1_canonical\\hotpotqa\\keys.npz": {
+     "bytes": 515506262,
+     "sha256": "dea82ccfde91516dea77986a519efd9931d014b3806a4ce07b46829cbd9d5998"
+    }
+   },
+   "n_checks": 46,
+   "n_failed": 0,
+   "PASS": true,
+   "seconds": 193.1
+  },
+  "2wiki": {
+   "dataset": "2wiki",
+   "checks": [
+    {
+     "check": "DATASET.json self-hash",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "DATASET.json file digest == CANONICAL_FREEZE pin",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "n_nodes/n_queries == freeze",
+     "ok": true,
+     "detail": [
+      5989847,
+      192606
+     ]
+    },
+    {
+     "check": "eval split declared and served",
+     "ok": true,
+     "detail": "dev"
+    },
+    {
+     "check": "query index rows == n_queries",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold positions in range",
+     "ok": true,
+     "detail": [
+      3,
+      5989846
+     ]
+    },
+    {
+     "check": "gold refs train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 404170,
+      "audit": 404170
+     }
+    },
+    {
+     "check": "zero-gold rows train == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes train",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold refs dev == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 30654,
+      "audit": 30654
+     }
+    },
+    {
+     "check": "zero-gold rows dev == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "split codes dev",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "gold refs test == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 0,
+      "audit": 0
+     }
+    },
+    {
+     "check": "zero-gold rows test == inventory audit",
+     "ok": true,
+     "detail": {
+      "adapter": 12576,
+      "audit": 12576
+     }
+    },
+    {
+     "check": "split codes test",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "eval rows == expected",
+     "ok": true,
+     "detail": {
+      "n": 12576,
+      "expected": 12576,
+      "first": 167454,
+      "last": 180029
+     }
+    },
+    {
+     "check": "eval rows never in a test split",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "node_embeddings shape",
+     "ok": true,
+     "detail": [
+      5989847,
+      1536
+     ]
+    },
+    {
+     "check": "query_embeddings shape",
+     "ok": true,
+     "detail": [
+      192606,
+      1536
+     ]
+    },
+    {
+     "check": "ShardedRows gather == canonical.Embeddings.read (cross-shard probe)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "ShardedRows slice across a shard boundary",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "doc vectors unit norm (|norm-1| <= 0.01, sample 2000)",
+     "ok": true,
+     "detail": 0.00046
+    },
+    {
+     "check": "query vectors unit norm (sample 500)",
+     "ok": true,
+     "detail": 0.00048
+    },
+    {
+     "check": "dense cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      192606,
+      1000
+     ]
+    },
+    {
+     "check": "dense cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "dense cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "dense topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache ids memmap [n_queries, 1000]",
+     "ok": true,
+     "detail": [
+      192606,
+      1000
+     ]
+    },
+    {
+     "check": "splade cache scores memmap",
+     "ok": true,
+     "detail": "float16"
+    },
+    {
+     "check": "splade cache ids in range (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache 1000 distinct per row (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade cache scores non-increasing (sample)",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "splade topk(200) is a view of the cache",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "zero-copy: RSS growth from opening embeddings+caches < 256 MB",
+     "ok": true,
+     "detail": 39.8
+    },
+    {
+     "check": "dense top-k re-derivation",
+     "ok": null,
+     "detail": "skipped: corpus too large to hold in RAM here (5989847 rows)"
+    },
+    {
+     "check": "families present == {structural, ner, knn}",
+     "ok": true,
+     "detail": [
+      "knn",
+      "ner",
+      "structural"
+     ]
+    },
+    {
+     "check": "STRUCT keys == structural distinct unordered pairs (census counts loop pairs) - loop pairs",
+     "ok": true,
+     "detail": {
+      "keys": 28208857,
+      "census_pairs": 28208857,
+      "loop_pairs": 0,
+      "self_loop_rows": 0
+     }
+    },
+    {
+     "check": "NER_RAW keys == ner distinct unordered pairs",
+     "ok": true,
+     "detail": {
+      "keys": 34067241,
+      "census": 34067241
+     }
+    },
+    {
+     "check": "KNN keys <= knn distinct pairs and KNN disjoint from STRUCT",
+     "ok": true,
+     "detail": {
+      "keys": 11698178,
+      "census": 13643063,
+      "knn_pairs_also_structural": 1944885
+     }
+    },
+    {
+     "check": "NERX disjoint from STRUCT",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "STRUCT keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "KNN keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "NERX keys sorted, unique, in range",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "directed structural CSR: nnz == n_edges",
+     "ok": true,
+     "detail": null
+    },
+    {
+     "check": "undirected structural CSR",
+     "ok": null,
+     "detail": "skipped: needs ~2.3 GB, 2.7 GB available"
+    }
+   ],
+   "timings_s": {
+    "records": 0.1,
+    "query_index": 95.8,
+    "embeddings_caches": 7.1,
+    "exact_topk": 0.0,
+    "graph": 201.8
+   },
+   "rss_mb": {
+    "start": 36.0,
+    "after_query_index": 48.2,
+    "after_embeddings_and_caches": 88.0,
+    "after_graph": 852.1
+   },
+   "eval_population": {
+    "split": "dev",
+    "n": 12576,
+    "with_gold": 12576,
+    "zero_gold": 0,
+    "mean_golds": 2.438
+   },
+   "keysets": {
+    "N": 5989847,
+    "STRUCT": 28208857,
+    "KNN": 11698178,
+    "NERX": 30562985,
+    "NER_RAW": 34067241
+   },
+   "pins": {
+    "dataset": "2wiki",
+    "DATASET_json_RECORD_SHA256": "ddb083a8f8cc0a1e5626d17ebd834c25c7b571d72c2bea58223276da8ff26a8a",
+    "CANONICAL_FREEZE_RECORD_SHA256": "58958f33a3af74c21fa625ffd79da16c573cb5d2ba7e9745da0056b568591ab0",
+    "nodes_jsonl_sha256": "73fb822f3e4dd255c2555af717f4664c78a01fec4b5dce892fdec25d5de2426a",
+    "query_ids_sha256": "a350511621e260b6d7e115c8439d5cbeddf1171d42678478955096688f1793f4",
+    "split_files_sha256": {
+     "train": "fb0806780206d2ca0b35160f41883d82cb79b91c1113cb39009f1b19224be339",
+     "dev": "cf9bedff1050679157712d87f2e1b79ce424fdf34d659ff1326426deb5abb5a0",
+     "test": "18e2d1606e4f73485c9b108c94b3b2e23a03260c735cf595232e71b0d98a68f3"
+    },
+    "graph_files_sha256": {
+     "structural": "1e380eaaa62b21eaf24f6dec8302d81482bf35695bfa6cdda2421fa90cfe9c85",
+     "ner": "fd462a9c08740d57af79855efe37c1d77f30dc593ca6ad6242681c99b51a008a",
+     "knn": "a7151f6bbebdb13d7e817abcc199fd5feae17585a955f781b0690d7ee1897f99"
+    },
+    "embedding_manifests_sha256": {
+     "dense": {
+      "docs": "83f9da7acd0327744ffef30faff8c363b0f13ebc375f7af825a5142f702ad1b9",
+      "queries": "61380003e5dc6f2b45dd93cd21e6c44c4415c55661a0d551a9dd27b4c2ae3884"
+     },
+     "splade": {
+      "docs": "555100438ba7c01b7c21adfb0a73945d3be5ed976f637b15b7c6990572d7f1d4",
+      "queries": "8b78b73b50f4a73b2d3abd57f54ad044c85242bcd2dfc823f54493e7aedd37a4"
+     }
+    },
+    "retrieval_cache_sha256": {
+     "dense": "78aa39a3138cbb1d5949d6d087b6a680a53469f016581aac6a07ebed010499e1",
+     "splade": "69044b478b52c2e10cb41ee6ba44ff412b6bb826b182c43dd5fd8a0637859aeb"
+    },
+    "eval_split": "dev"
+   },
+   "derived_files": {
+    "data\\l1_canonical\\2wiki\\query_index.npz": {
+     "bytes": 4438882,
+     "sha256": "cfa6f9bdecd43da2affb1118035c39cee60c628707c22dff43900213ba29d1af"
+    },
+    "data\\l1_canonical\\2wiki\\keys.npz": {
+     "bytes": 836301002,
+     "sha256": "ef9e12706a196d1d4d6580fdcd0849e8d3530e751d49332e20b0d206f19c9677"
+    }
+   },
+   "n_checks": 45,
+   "n_failed": 0,
+   "PASS": true,
+   "seconds": 307.3
+  }
+ },
+ "contract": {
+  "L1_CONTRACT_SHA256": "84baaf6e532437ff4be6d7c4d32ef2359aa4a78e8379ba2fa948dafac5fb36a8",
+  "files": {
+   "scratchpad/_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+   "scratchpad/_l1ps_cache.py": "ab81e214def8eb8e56bf04543475971e7cbdf4dfcf026111922817e38bfa176e",
+   "scratchpad/_l1ps_router.py": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9",
+   "scratchpad/_l1hu_build.py": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79",
+   "scratchpad/_l1hu_local_worker.py": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb",
+   "scratchpad/_l1ep_part.py": "a7adda6a85f55ad2d740a495002dac1bbaa5758b0758ec5a3e48db48ef8d7706",
+   "scratchpad/_l1ep_c.py": "6a34073181944baba5b8d5d0fdc683299fbb42eb6c15a33fb406047eaa46d848",
+   "scratchpad/_l1ep_pu.py": "8dd1e0a6818f1ce99733fd6b6c7e513cdf3bfbfafe0340bec09828e60bd215f7",
+   "scratchpad/_l1kn_sub.py": "3cb85dfd6698bc01fe52ae8a75c5b0629558204204ab2a60eba1a386e10046f3",
+   "scratchpad/_l1ov_core.py": "b689c1983bf4d920990e7610369b151f9aead97d39c39a1e5807b5595b8d750d",
+   "scratchpad/_l1ov_eval.py": "0fee96e0106f9b886b759b337cfcea1ff3a8fd75cb4a8f1f92b1c3bcacf08b28",
+   "scratchpad/_l1hu_s.py": "66a86494beb4fefca9d772a88e224e0f91a470f50abb8ecc761c625cdbf13649",
+   "src/l1_canonical/adapter.py": "341dedc1645769aa501879d79915ce400d6dd4cd104767a9708741eb7167daa2"
+  },
+  "constants": {
+   "K0": 60,
+   "K": 100,
+   "P_MAIN": 50,
+   "SEED_K": 5,
+   "BEAM": 64,
+   "MAX_HOPS": 3,
+   "DEG_CAP": 300,
+   "SMAX": 256,
+   "TOPP": 200,
+   "EVAL_CAP": 2000,
+   "MIN_VAL": 1000,
+   "PARTITION": {
+    "rule": "H4_SPLIT_PRESERVE",
+    "families": [
+     "STRUCT",
+     "KNN"
+    ],
+    "target_block_size": 100,
+    "partitioner": "mtkahypar",
+    "preset": "DETERMINISTIC_QUALITY",
+    "objective": "KM1",
+    "epsilon": 0.03,
+    "seed": 0
+   }
+  }
+ },
+ "utc": "2026-09-13T10:45:32Z",
+ "ALL_PASS": true
+}

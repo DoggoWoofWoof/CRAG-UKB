@@ -1,0 +1,26 @@
+{
+  "record": "FBX_SCALE addendum 17 -- WebQSP regression of the out-of-core streaming V-cycle engine (stages E1..E6), host runs",
+  "addendum": "HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_17.json (sha d4ba0a54...)",
+  "date": "2026-10-03",
+  "engine": {
+    "binary_hash_12": "6b0022d1eeca",
+    "source_parts": {"_ooc.cpp": "f17815560900", "_ooc2.cpp": "3ce63decc451"},
+    "drivers": {"_ooc_vc.py": "8c9e2fa25f25", "_ooc_e1.py": "0f08f0236f3c", "_ooc_fb.py": "df67f5d8864a", "_ooc_lib.py": "b474eaffcbe9", "_ooc_wq_chain.py": "a5cb68445f0a", "_ooc_fmtest.py": "a85f60411f7a"},
+    "compiler": "g++ -O2 -std=c++17 -fopenmp (host WSL Ubuntu-24.04)"
+  },
+  "host_jobs": {
+    "261003-153349-ooc-wq-chain-9f5e": "E1 + TOP + VC on the new binary: E1..E6 all PASS; FAILED only at the final validity() call (a Windows path was passed to the engine 'blocks' command -- a driver bug, not an engine result)",
+    "261003-162150-ooc-wq-vc-0ff3": "VC only, validity path fixed (L.wp): E4 + E6 PASS, validity PASS, 'WQ_CHAIN PASS: VC' (rc 0)"
+  },
+  "tests": {
+    "E1": "open-twin map of the SK pair bit-identical to ml2/clusters__M2_W512_L1.npy; info row == COARSEN record",
+    "E2/E3": "levels 1-4 quotients (implicit then explicit) == _ml_coarsen.quotient bit for bit == the record rows (V 1926185/455513/131547/37560); SPAN passes (Lmax 200, Wmax 512) reproduce the stored cluster maps bit for bit",
+    "E7-pre": "implicit split-preserve source (S 25) == stored top hypergraph (M 5,181,600, P 29,574,350, sha 0a6a4540c570); split-top level quotients (V 1926185/455513/131547/37560, P 22455825/15352968/12103395/10310061) == _ml_coarsen.quotient under the cumulative maps",
+    "E4": "cap-4 level-4 surrogate (V 37560, M 917077, P 2431731) == cap_nets + _ml_coarsen.quotient; engine shards byte-identical to _ml_run.write_shards_vw; frozen vw Zoltan driver (NP 4, IMBALANCE_TOL 1.01) reproduces the stored top (sha d9c3c4aab8b9...)",
+    "E5": "FM2 engine bit-identical to _vc_ref2.c mode 1 (laptop, _ooc_fmtest.py: explicit incl. 256-700-pin nets, u16/u32 cache, heavy-vertex side table; implicit split / no-split)",
+    "E6": "V-cycle reproduces the stored top map byte for byte (sha 4c043f0cd704) and the D1 trajectory (final KM1 796,782,889), V/P of levels 1..4",
+    "validity": "25 blocks 87,660..104,752, bound 106,828 (ceil 1.03 N/k): PASS"
+  },
+  "synthetic_stress_laptop": "see E_STRESS record when written (scratchpad/_ooc_stress.py; Freebase-shaped synthetic graph, no regression target, scaling hazards only)",
+  "not_claimed": "no Freebase-scale recall; no replicate of the Zoltan top; KM1 does not track recall (WebQSP gate decides)"
+}

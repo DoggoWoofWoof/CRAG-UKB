@@ -1,0 +1,1814 @@
+{
+ "stage": "FBX_SCALE Track C step 2: IVF search over PQ64 codes on WebQSP (IVF-KNN arms vs the frozen PHG_SK)",
+ "tag": "ivf_v1",
+ "status": "DEVELOPMENT (calibration of a systems substrate)",
+ "definitions": "FBX_SCALE Track C step 2 (addendum 10) -- score the IVF-KNN arms against the frozen PHG_SK under the addendum-1 gate, K in {100, 250, 500}.\n\n_pq_eval.py with the maps of the IVF arms (results/FREEBASE_SCALE/ivf/parts/) and addendum 10 as the declaration; the per-row arithmetic, the population (786 rows), the matched-B_P comparison and\nthe verdict rule are _ml2_eval.py's, unchanged.  Arm names are the tags of `_ivf_knn.py FULL`.\n\n  python scratchpad/_ivf_eval.py EVAL <tag> <bundle_tag> <control_tag> <arm>[,<arm>...]     # control_tag = an earlier EVAL whose PHG cells must be reproduced bit for bit\n",
+ "N": 2592894,
+ "n_rows": 786,
+ "M_curve": [
+  100,
+  250,
+  500,
+  1000,
+  2000,
+  5000
+ ],
+ "K_grid": [
+  100,
+  250,
+  500
+ ],
+ "gate_K": [
+  100,
+  250,
+  500
+ ],
+ "loss_pass_rows": 7,
+ "loss_fail_rows": 24,
+ "block_rule": 0.1,
+ "candidates_declared": [
+  "IVF_T90",
+  "IVF_T95",
+  "IVF_T98"
+ ],
+ "candidates_scored": [
+  "IVF_T90",
+  "IVF_T95",
+  "IVF_T98"
+ ],
+ "candidates_without_K100_map": [],
+ "regression_vs_earlier_eval": {
+  "eval_npz_sha256": "3fdb91d83b98269eb3b4ed11a6d9c7d755af0ea9ef0517d81919878db5943703",
+  "cells": {
+   "PHG|K100|own": "equal",
+   "PHG|K100|matched": "equal",
+   "PHG|K250|own": "equal",
+   "PHG|K250|matched": "equal",
+   "PHG|K500|own": "equal",
+   "PHG|K500|matched": "equal"
+  }
+ },
+ "results": {
+  "PHG|K100|own": {
+   "ALL": [
+    368,
+    470,
+    524,
+    561,
+    575,
+    586
+   ],
+   "ANY": [
+    565,
+    665,
+    707,
+    727,
+    734,
+    735
+   ],
+   "gold_served": [
+    1379,
+    2462,
+    3250,
+    3727,
+    3941,
+    4195
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 570865.0,
+    "median": 527448.0
+   },
+   "contacted_mass_over_N_mean": 0.2202,
+   "lost_to_reach (B_P < LO)": 192,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "PHG|K100|matched": {
+   "ALL": [
+    368,
+    470,
+    524,
+    561,
+    575,
+    586
+   ],
+   "ANY": [
+    565,
+    665,
+    707,
+    727,
+    734,
+    735
+   ],
+   "gold_served": [
+    1379,
+    2462,
+    3250,
+    3727,
+    3941,
+    4195
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 570865.0,
+    "median": 527448.0
+   },
+   "contacted_mass_over_N_mean": 0.2202,
+   "lost_to_reach (B_P < LO)": 192,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "IVF_T90|K100|own": {
+   "ALL": [
+    366,
+    470,
+    529,
+    569,
+    583,
+    595
+   ],
+   "ANY": [
+    563,
+    662,
+    706,
+    725,
+    731,
+    736
+   ],
+   "gold_served": [
+    1377,
+    2426,
+    3220,
+    3677,
+    3890,
+    4124
+   ],
+   "B_P": {
+    "mean": 21.5,
+    "median": 20.0,
+    "min": 2,
+    "max": 63
+   },
+   "B_P_over_K_mean": 0.2147,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 560484.0,
+    "median": 521669.0
+   },
+   "contacted_mass_over_N_mean": 0.2162,
+   "lost_to_reach (B_P < LO)": 182,
+   "vs_PHG_gained": [
+    6,
+    21,
+    34,
+    40,
+    44,
+    48
+   ],
+   "vs_PHG_lost": [
+    8,
+    21,
+    29,
+    32,
+    36,
+    39
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.791,
+    1.0,
+    0.615,
+    0.41,
+    0.434,
+    0.391
+   ]
+  },
+  "IVF_T90|K100|matched": {
+   "ALL": [
+    366,
+    475,
+    534,
+    574,
+    588,
+    600
+   ],
+   "ANY": [
+    567,
+    671,
+    711,
+    730,
+    735,
+    740
+   ],
+   "gold_served": [
+    1382,
+    2453,
+    3283,
+    3764,
+    3969,
+    4208
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 568477.0,
+    "median": 526960.5
+   },
+   "contacted_mass_over_N_mean": 0.2192,
+   "lost_to_reach (B_P < LO)": 177,
+   "vs_PHG_gained": [
+    6,
+    23,
+    35,
+    40,
+    44,
+    48
+   ],
+   "vs_PHG_lost": [
+    8,
+    18,
+    25,
+    27,
+    31,
+    34
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.791,
+    0.533,
+    0.245,
+    0.142,
+    0.165,
+    0.151
+   ]
+  },
+  "IVF_T95|K100|own": {
+   "ALL": [
+    364,
+    461,
+    521,
+    565,
+    575,
+    584
+   ],
+   "ANY": [
+    565,
+    660,
+    709,
+    731,
+    736,
+    741
+   ],
+   "gold_served": [
+    1377,
+    2427,
+    3262,
+    3763,
+    3978,
+    4212
+   ],
+   "B_P": {
+    "mean": 21.4,
+    "median": 20.0,
+    "min": 2,
+    "max": 72
+   },
+   "B_P_over_K_mean": 0.2142,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 561399.0,
+    "median": 521192.0
+   },
+   "contacted_mass_over_N_mean": 0.2165,
+   "lost_to_reach (B_P < LO)": 192,
+   "vs_PHG_gained": [
+    4,
+    13,
+    27,
+    36,
+    40,
+    44
+   ],
+   "vs_PHG_lost": [
+    8,
+    22,
+    30,
+    32,
+    40,
+    46
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.388,
+    0.175,
+    0.791,
+    0.716,
+    1.0,
+    0.916
+   ]
+  },
+  "IVF_T95|K100|matched": {
+   "ALL": [
+    364,
+    466,
+    527,
+    573,
+    584,
+    594
+   ],
+   "ANY": [
+    568,
+    665,
+    709,
+    731,
+    734,
+    739
+   ],
+   "gold_served": [
+    1378,
+    2462,
+    3316,
+    3821,
+    4049,
+    4286
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 570236.0,
+    "median": 526962.0
+   },
+   "contacted_mass_over_N_mean": 0.2199,
+   "lost_to_reach (B_P < LO)": 181,
+   "vs_PHG_gained": [
+    4,
+    16,
+    31,
+    41,
+    45,
+    49
+   ],
+   "vs_PHG_lost": [
+    8,
+    20,
+    28,
+    29,
+    36,
+    41
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.388,
+    0.618,
+    0.795,
+    0.188,
+    0.374,
+    0.461
+   ]
+  },
+  "IVF_T98|K100|own": {
+   "ALL": [
+    365,
+    468,
+    532,
+    577,
+    590,
+    600
+   ],
+   "ANY": [
+    567,
+    667,
+    715,
+    736,
+    739,
+    745
+   ],
+   "gold_served": [
+    1376,
+    2442,
+    3277,
+    3768,
+    3987,
+    4225
+   ],
+   "B_P": {
+    "mean": 21.5,
+    "median": 20.0,
+    "min": 2,
+    "max": 67
+   },
+   "B_P_over_K_mean": 0.215,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 562954.0,
+    "median": 520721.5
+   },
+   "contacted_mass_over_N_mean": 0.2171,
+   "lost_to_reach (B_P < LO)": 176,
+   "vs_PHG_gained": [
+    4,
+    18,
+    33,
+    45,
+    50,
+    54
+   ],
+   "vs_PHG_lost": [
+    7,
+    20,
+    25,
+    29,
+    35,
+    40
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.549,
+    0.871,
+    0.358,
+    0.0805,
+    0.128,
+    0.18
+   ]
+  },
+  "IVF_T98|K100|matched": {
+   "ALL": [
+    363,
+    468,
+    532,
+    576,
+    588,
+    598
+   ],
+   "ANY": [
+    566,
+    667,
+    712,
+    735,
+    738,
+    744
+   ],
+   "gold_served": [
+    1369,
+    2440,
+    3276,
+    3788,
+    4006,
+    4244
+   ],
+   "B_P": {
+    "mean": 21.8,
+    "median": 20.0,
+    "min": 2,
+    "max": 68
+   },
+   "B_P_over_K_mean": 0.2177,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 569851.0,
+    "median": 526576.5
+   },
+   "contacted_mass_over_N_mean": 0.2198,
+   "lost_to_reach (B_P < LO)": 179,
+   "vs_PHG_gained": [
+    4,
+    18,
+    33,
+    44,
+    49,
+    53
+   ],
+   "vs_PHG_lost": [
+    9,
+    20,
+    25,
+    29,
+    36,
+    41
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.267,
+    0.871,
+    0.358,
+    0.101,
+    0.193,
+    0.256
+   ]
+  },
+  "PHG|K250|own": {
+   "ALL": [
+    370,
+    498,
+    573,
+    612,
+    628,
+    634
+   ],
+   "ANY": [
+    566,
+    674,
+    726,
+    745,
+    749,
+    753
+   ],
+   "gold_served": [
+    1376,
+    2558,
+    3449,
+    3924,
+    4101,
+    4352
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 456004.0,
+    "median": 421210.5
+   },
+   "contacted_mass_over_N_mean": 0.1759,
+   "lost_to_reach (B_P < LO)": 140,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "PHG|K250|matched": {
+   "ALL": [
+    370,
+    498,
+    573,
+    612,
+    628,
+    634
+   ],
+   "ANY": [
+    566,
+    674,
+    726,
+    745,
+    749,
+    753
+   ],
+   "gold_served": [
+    1376,
+    2558,
+    3449,
+    3924,
+    4101,
+    4352
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 456004.0,
+    "median": 421210.5
+   },
+   "contacted_mass_over_N_mean": 0.1759,
+   "lost_to_reach (B_P < LO)": 140,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "IVF_T90|K250|own": {
+   "ALL": [
+    370,
+    495,
+    570,
+    610,
+    624,
+    632
+   ],
+   "ANY": [
+    566,
+    675,
+    726,
+    747,
+    751,
+    754
+   ],
+   "gold_served": [
+    1380,
+    2541,
+    3367,
+    3788,
+    3985,
+    4202
+   ],
+   "B_P": {
+    "mean": 42.9,
+    "median": 40.0,
+    "min": 4,
+    "max": 126
+   },
+   "B_P_over_K_mean": 0.1717,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 449524.0,
+    "median": 419916.0
+   },
+   "contacted_mass_over_N_mean": 0.1734,
+   "lost_to_reach (B_P < LO)": 144,
+   "vs_PHG_gained": [
+    3,
+    8,
+    17,
+    25,
+    28,
+    32
+   ],
+   "vs_PHG_lost": [
+    3,
+    11,
+    20,
+    27,
+    32,
+    34
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.648,
+    0.743,
+    0.89,
+    0.699,
+    0.902
+   ]
+  },
+  "IVF_T90|K250|matched": {
+   "ALL": [
+    368,
+    496,
+    568,
+    612,
+    624,
+    632
+   ],
+   "ANY": [
+    566,
+    674,
+    726,
+    749,
+    753,
+    756
+   ],
+   "gold_served": [
+    1375,
+    2543,
+    3394,
+    3845,
+    4040,
+    4257
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 455844.0,
+    "median": 421979.0
+   },
+   "contacted_mass_over_N_mean": 0.1758,
+   "lost_to_reach (B_P < LO)": 144,
+   "vs_PHG_gained": [
+    0,
+    5,
+    10,
+    21,
+    23,
+    27
+   ],
+   "vs_PHG_lost": [
+    2,
+    7,
+    15,
+    21,
+    27,
+    29
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.5,
+    0.774,
+    0.424,
+    1.0,
+    0.672,
+    0.894
+   ]
+  },
+  "IVF_T95|K250|own": {
+   "ALL": [
+    369,
+    492,
+    566,
+    612,
+    625,
+    631
+   ],
+   "ANY": [
+    566,
+    672,
+    721,
+    745,
+    750,
+    753
+   ],
+   "gold_served": [
+    1376,
+    2528,
+    3388,
+    3872,
+    4078,
+    4303
+   ],
+   "B_P": {
+    "mean": 42.8,
+    "median": 40.0,
+    "min": 4,
+    "max": 144
+   },
+   "B_P_over_K_mean": 0.1714,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 448359.0,
+    "median": 417299.0
+   },
+   "contacted_mass_over_N_mean": 0.1729,
+   "lost_to_reach (B_P < LO)": 148,
+   "vs_PHG_gained": [
+    1,
+    5,
+    13,
+    25,
+    27,
+    31
+   ],
+   "vs_PHG_lost": [
+    2,
+    11,
+    20,
+    25,
+    30,
+    34
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.21,
+    0.296,
+    1.0,
+    0.791,
+    0.804
+   ]
+  },
+  "IVF_T95|K250|matched": {
+   "ALL": [
+    368,
+    497,
+    570,
+    616,
+    629,
+    635
+   ],
+   "ANY": [
+    566,
+    675,
+    725,
+    748,
+    753,
+    757
+   ],
+   "gold_served": [
+    1374,
+    2535,
+    3418,
+    3916,
+    4122,
+    4357
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 455505.0,
+    "median": 422352.0
+   },
+   "contacted_mass_over_N_mean": 0.1757,
+   "lost_to_reach (B_P < LO)": 144,
+   "vs_PHG_gained": [
+    0,
+    7,
+    12,
+    24,
+    26,
+    30
+   ],
+   "vs_PHG_lost": [
+    2,
+    8,
+    15,
+    20,
+    25,
+    29
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    0.5,
+    1.0,
+    0.701,
+    0.652,
+    1.0,
+    1.0
+   ]
+  },
+  "IVF_T98|K250|own": {
+   "ALL": [
+    369,
+    495,
+    576,
+    617,
+    627,
+    633
+   ],
+   "ANY": [
+    567,
+    677,
+    731,
+    751,
+    754,
+    758
+   ],
+   "gold_served": [
+    1375,
+    2560,
+    3410,
+    3867,
+    4053,
+    4310
+   ],
+   "B_P": {
+    "mean": 43.0,
+    "median": 40.0,
+    "min": 4,
+    "max": 134
+   },
+   "B_P_over_K_mean": 0.172,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 450875.0,
+    "median": 417767.0
+   },
+   "contacted_mass_over_N_mean": 0.1739,
+   "lost_to_reach (B_P < LO)": 144,
+   "vs_PHG_gained": [
+    1,
+    8,
+    18,
+    28,
+    29,
+    31
+   ],
+   "vs_PHG_lost": [
+    2,
+    11,
+    15,
+    23,
+    30,
+    32
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.648,
+    0.728,
+    0.576,
+    1.0,
+    1.0
+   ]
+  },
+  "IVF_T98|K250|matched": {
+   "ALL": [
+    369,
+    501,
+    576,
+    616,
+    626,
+    632
+   ],
+   "ANY": [
+    566,
+    677,
+    728,
+    751,
+    753,
+    757
+   ],
+   "gold_served": [
+    1375,
+    2560,
+    3421,
+    3895,
+    4087,
+    4349
+   ],
+   "B_P": {
+    "mean": 43.5,
+    "median": 40.0,
+    "min": 4,
+    "max": 136
+   },
+   "B_P_over_K_mean": 0.1741,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 456393.0,
+    "median": 423311.0
+   },
+   "contacted_mass_over_N_mean": 0.176,
+   "lost_to_reach (B_P < LO)": 145,
+   "vs_PHG_gained": [
+    0,
+    6,
+    12,
+    23,
+    23,
+    25
+   ],
+   "vs_PHG_lost": [
+    1,
+    3,
+    9,
+    19,
+    25,
+    27
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.508,
+    0.664,
+    0.644,
+    0.885,
+    0.89
+   ]
+  },
+  "PHG|K500|own": {
+   "ALL": [
+    370,
+    506,
+    593,
+    638,
+    652,
+    660
+   ],
+   "ANY": [
+    567,
+    678,
+    729,
+    755,
+    759,
+    762
+   ],
+   "gold_served": [
+    1376,
+    2575,
+    3541,
+    4022,
+    4191,
+    4449
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 384149.0,
+    "median": 352950.5
+   },
+   "contacted_mass_over_N_mean": 0.1482,
+   "lost_to_reach (B_P < LO)": 118,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "PHG|K500|matched": {
+   "ALL": [
+    370,
+    506,
+    593,
+    638,
+    652,
+    660
+   ],
+   "ANY": [
+    567,
+    678,
+    729,
+    755,
+    759,
+    762
+   ],
+   "gold_served": [
+    1376,
+    2575,
+    3541,
+    4022,
+    4191,
+    4449
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 384149.0,
+    "median": 352950.5
+   },
+   "contacted_mass_over_N_mean": 0.1482,
+   "lost_to_reach (B_P < LO)": 118,
+   "vs_PHG_gained": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "IVF_T90|K500|own": {
+   "ALL": [
+    370,
+    506,
+    593,
+    637,
+    652,
+    659
+   ],
+   "ANY": [
+    567,
+    680,
+    733,
+    755,
+    759,
+    762
+   ],
+   "gold_served": [
+    1376,
+    2570,
+    3510,
+    3994,
+    4202,
+    4422
+   ],
+   "B_P": {
+    "mean": 72.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 211
+   },
+   "B_P_over_K_mean": 0.1445,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 378361.0,
+    "median": 353324.5
+   },
+   "contacted_mass_over_N_mean": 0.1459,
+   "lost_to_reach (B_P < LO)": 115,
+   "vs_PHG_gained": [
+    0,
+    2,
+    6,
+    14,
+    19,
+    22
+   ],
+   "vs_PHG_lost": [
+    0,
+    2,
+    6,
+    15,
+    19,
+    23
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "IVF_T90|K500|matched": {
+   "ALL": [
+    370,
+    505,
+    592,
+    639,
+    652,
+    660
+   ],
+   "ANY": [
+    567,
+    678,
+    730,
+    753,
+    757,
+    760
+   ],
+   "gold_served": [
+    1376,
+    2571,
+    3527,
+    4052,
+    4256,
+    4490
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 383702.0,
+    "median": 353422.5
+   },
+   "contacted_mass_over_N_mean": 0.148,
+   "lost_to_reach (B_P < LO)": 114,
+   "vs_PHG_gained": [
+    0,
+    1,
+    4,
+    10,
+    14,
+    17
+   ],
+   "vs_PHG_lost": [
+    0,
+    2,
+    5,
+    9,
+    14,
+    17
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "IVF_T95|K500|own": {
+   "ALL": [
+    370,
+    507,
+    593,
+    631,
+    644,
+    653
+   ],
+   "ANY": [
+    567,
+    680,
+    732,
+    752,
+    756,
+    759
+   ],
+   "gold_served": [
+    1376,
+    2578,
+    3521,
+    3986,
+    4191,
+    4436
+   ],
+   "B_P": {
+    "mean": 72.1,
+    "median": 67.0,
+    "min": 7,
+    "max": 241
+   },
+   "B_P_over_K_mean": 0.1442,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 378804.0,
+    "median": 351158.0
+   },
+   "contacted_mass_over_N_mean": 0.1461,
+   "lost_to_reach (B_P < LO)": 129,
+   "vs_PHG_gained": [
+    0,
+    2,
+    6,
+    11,
+    14,
+    17
+   ],
+   "vs_PHG_lost": [
+    0,
+    1,
+    6,
+    18,
+    22,
+    24
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    0.265,
+    0.243,
+    0.349
+   ]
+  },
+  "IVF_T95|K500|matched": {
+   "ALL": [
+    370,
+    508,
+    595,
+    636,
+    649,
+    658
+   ],
+   "ANY": [
+    567,
+    680,
+    731,
+    753,
+    755,
+    758
+   ],
+   "gold_served": [
+    1376,
+    2575,
+    3524,
+    4009,
+    4208,
+    4460
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 384902.0,
+    "median": 353079.5
+   },
+   "contacted_mass_over_N_mean": 0.1484,
+   "lost_to_reach (B_P < LO)": 125,
+   "vs_PHG_gained": [
+    0,
+    2,
+    6,
+    9,
+    12,
+    15
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    4,
+    11,
+    15,
+    17
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    0.5,
+    0.754,
+    0.824,
+    0.701,
+    0.86
+   ]
+  },
+  "IVF_T98|K500|own": {
+   "ALL": [
+    370,
+    507,
+    600,
+    646,
+    658,
+    664
+   ],
+   "ANY": [
+    567,
+    681,
+    733,
+    753,
+    757,
+    760
+   ],
+   "gold_served": [
+    1376,
+    2578,
+    3559,
+    4066,
+    4252,
+    4486
+   ],
+   "B_P": {
+    "mean": 72.4,
+    "median": 67.0,
+    "min": 7,
+    "max": 225
+   },
+   "B_P_over_K_mean": 0.1448,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 379796.0,
+    "median": 350582.5
+   },
+   "contacted_mass_over_N_mean": 0.1465,
+   "lost_to_reach (B_P < LO)": 117,
+   "vs_PHG_gained": [
+    0,
+    2,
+    9,
+    19,
+    21,
+    23
+   ],
+   "vs_PHG_lost": [
+    0,
+    1,
+    2,
+    11,
+    15,
+    19
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    0.0654,
+    0.2,
+    0.405,
+    0.644
+   ]
+  },
+  "IVF_T98|K500|matched": {
+   "ALL": [
+    370,
+    506,
+    593,
+    638,
+    652,
+    658
+   ],
+   "ANY": [
+    567,
+    679,
+    730,
+    750,
+    753,
+    756
+   ],
+   "gold_served": [
+    1376,
+    2576,
+    3555,
+    4067,
+    4268,
+    4506
+   ],
+   "B_P": {
+    "mean": 73.3,
+    "median": 67.0,
+    "min": 7,
+    "max": 228
+   },
+   "B_P_over_K_mean": 0.1465,
+   "rows_with_B_P_eq_K": 0,
+   "contacted_mass": {
+    "mean": 384470.0,
+    "median": 353998.5
+   },
+   "contacted_mass_over_N_mean": 0.1483,
+   "lost_to_reach (B_P < LO)": 123,
+   "vs_PHG_gained": [
+    0,
+    0,
+    3,
+    11,
+    15,
+    17
+   ],
+   "vs_PHG_lost": [
+    0,
+    0,
+    3,
+    11,
+    15,
+    19
+   ],
+   "vs_PHG_p_sign_descriptive": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.868
+   ]
+  }
+ },
+ "verdicts": {
+  "IVF_T90": {
+   "verdict": "RECALL_PRESERVING",
+   "gate_cells_scored": [
+    100,
+    250,
+    500
+   ],
+   "gate_cells_not_scored": {},
+   "max_loss_rows_vs_PHG_matched_over_scored_gate_cells": 5,
+   "loss_rows_by_cell_and_B_N": {
+    "IVF_T90 K100": [
+     2,
+     -5,
+     -10,
+     -13,
+     -13,
+     -14
+    ],
+    "IVF_T90 K250": [
+     2,
+     2,
+     5,
+     0,
+     4,
+     2
+    ],
+    "IVF_T90 K500": [
+     0,
+     1,
+     1,
+     -1,
+     0,
+     0
+    ]
+   }
+  },
+  "IVF_T95": {
+   "verdict": "RECALL_PRESERVING",
+   "gate_cells_scored": [
+    100,
+    250,
+    500
+   ],
+   "gate_cells_not_scored": {},
+   "max_loss_rows_vs_PHG_matched_over_scored_gate_cells": 4,
+   "loss_rows_by_cell_and_B_N": {
+    "IVF_T95 K100": [
+     4,
+     4,
+     -3,
+     -12,
+     -9,
+     -8
+    ],
+    "IVF_T95 K250": [
+     2,
+     1,
+     3,
+     -4,
+     -1,
+     -1
+    ],
+    "IVF_T95 K500": [
+     0,
+     -2,
+     -2,
+     2,
+     3,
+     2
+    ]
+   }
+  },
+  "IVF_T98": {
+   "verdict": "RECALL_PRESERVING",
+   "gate_cells_scored": [
+    100,
+    250,
+    500
+   ],
+   "gate_cells_not_scored": {},
+   "max_loss_rows_vs_PHG_matched_over_scored_gate_cells": 5,
+   "loss_rows_by_cell_and_B_N": {
+    "IVF_T98 K100": [
+     5,
+     2,
+     -8,
+     -15,
+     -13,
+     -12
+    ],
+    "IVF_T98 K250": [
+     1,
+     -3,
+     -3,
+     -4,
+     2,
+     2
+    ],
+    "IVF_T98 K500": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     2
+    ]
+   }
+  }
+ },
+ "seconds_loop": 1017.7,
+ "inputs": {
+  "bundle_meta": {
+   "path": "work/FBX_CALIB/bundle_v1/meta.json",
+   "sha256": "2b33beff8441fc62fcacf377a49281b4475dc9d392816f925320ccba3e20d6d4"
+  },
+  "maps": {
+   "PHG|100": {
+    "STATUS": "OK",
+    "sha256": "36d69391735d13fee50cc6a605102f3fd60746568549e2e3b3faccb5eb94a7de",
+    "file": "results/L1_HOST/parts/webqsp__H4_SK_k100__PHG_con.npy"
+   },
+   "PHG|250": {
+    "STATUS": "OK",
+    "sha256": "fbe79aaf509943550fdc4ac562e2f5161158ccec3ead9dff3da0835f55e01ce3",
+    "file": "results/L1_HOST/parts/webqsp__H4_SK_k250__PHG_con.npy"
+   },
+   "PHG|500": {
+    "STATUS": "OK",
+    "sha256": "a6ae7e068134a8cb7139b1fe9911fde96a029fa4f2ca4beb649b4a972cc4e08f",
+    "file": "results/L1_HOST/parts/webqsp__H4_SK_k500__PHG_con.npy"
+   },
+   "IVF_T90|100": {
+    "STATUS": "OK",
+    "sha256": "79df8ff9dde8724adad451ff24b6107283c9ff6d6f118df7d2c4f71619869d43",
+    "file": "results/FREEBASE_SCALE/ivf/parts/webqsp__H4_IVF_T90_k100__PHG_con.npy",
+    "run_json_sha256": "1f25fa258e5bb52a823c55dc7b05dacb1f3d41f5c66531b0ab563621055eb4d0"
+   },
+   "IVF_T95|100": {
+    "STATUS": "OK",
+    "sha256": "75fe1d41b9d7662bae4f830f7003a1449dcc2bc1b16131ad99522f9db597c1e2",
+    "file": "results/FREEBASE_SCALE/ivf/parts/webqsp__H4_IVF_T95_k100__PHG_con.npy",
+    "run_json_sha256": "8a46c65e5a385c72fdf167ff55b464233ab592209dbf855930dd52c3558c465b"
+   },
+   "IVF_T98|100": {
+    "STATUS": "OK",
+    "sha256": "b6519d88bab605bb2c28cb349b64992819440f375b0bda84f524d9268e24fb61",
+    "file": "results/FREEBASE_SCALE/ivf/parts/webqsp__H4_IVF_T98_k100__PHG_con.npy",
+    "run_json_sha256": "06d072061e04ab917bb458619e161a74e21fb597d2276c7fd1cdbbf1b33c0d57"
+   },
+   "IVF_T90|250": {
+    "STATUS": "OK",
+    "sha256": "17bd4d1a3cbbda050a6dd41aaa41804bdb3d3b821c306e27296998cc9833b9ed",
+    "file": "results/FREEBASE_SCALE/ivf/parts/webqsp__H4_IVF_T90_k250__PHG_con.npy",
+    "run_json_sha256": "370c3e11e93e27c9ad6eb922629bc7eef6ac929b2b855d0afddbddeed0e56063"
+   },
+   "IVF_T95|250": {
+    "STATUS": "OK",
+    "sha256": "6dd4eb6ed36986bf90c25c2857ddefa2a1ac7b559c9566d1362744f03f62fb45",
+    "file": "results/FREEBASE_SCALE/ivf/parts/webqsp__H4_IVF_T95_k250__PHG_con.npy",
+    "run_json_sha256": "1e2be29746625cec176cc5e2c204b28a5f469dd8da347bf75fc63276e99137fe"
+   },
+   "IVF_T98|250": {
+    "STATUS": "OK",
+    "sha256": "f33a5611587618cfe391280b1b80cb95a0859ea89c5be1a2a42ffb2103f6454a",
+    "file": "results/FREEBASE_SCALE/ivf/parts/webqsp__H4_IVF_T98_k250__PHG_con.npy",
+    "run_json_sha256": "d04791180241eb95627eaf2788c177548711eefc1bb1cead2e25b5d2d1013b7c"
+   },
+   "IVF_T90|500": {
+    "STATUS": "OK",
+    "sha256": "35748cb67375c08773ebebc62a4ae4967da407ab1919489bf5fd83082624665d",
+    "file": "results/FREEBASE_SCALE/ivf/parts/webqsp__H4_IVF_T90_k500__PHG_con.npy",
+    "run_json_sha256": "617890a9feb048664471d220039a6e587c67d210c9132a5814a9e8afaa021759"
+   },
+   "IVF_T95|500": {
+    "STATUS": "OK",
+    "sha256": "b91cdb727f91801ec10c85e624a660dfa4505196724a76ddfabea51f906c5e5f",
+    "file": "results/FREEBASE_SCALE/ivf/parts/webqsp__H4_IVF_T95_k500__PHG_con.npy",
+    "run_json_sha256": "2cf776c03ed3c6e352d106fa83679f566390f14bb4573d92368c727ea329748d"
+   },
+   "IVF_T98|500": {
+    "STATUS": "OK",
+    "sha256": "63fb977ec639a14f9679d501ec3e82bbd06864d629f9a0ed37e042c139e207cd",
+    "file": "results/FREEBASE_SCALE/ivf/parts/webqsp__H4_IVF_T98_k500__PHG_con.npy",
+    "run_json_sha256": "97da92d91715c19df49a1e92396228f57d4054c3ae92618bd0a3dfdabae402d0"
+   }
+  },
+  "population": {
+   "path": "results/L3_DEV/l3w_population_webqsp__v1.json",
+   "sha256": "7e67c9b116b2921cc243e2e664951984d985127191a320a4bfe70594a9016009"
+  },
+  "addendum": {
+   "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_1.json": "1eaf5f6641f7b7ac5294b1309830ec0473d72cfe9c37d1c57dc3822d59079fce",
+   "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_2.json": "7b938de8f32d9bc8ba162df8eda37e48f7a700d7c1270b8e8f6a44d9025c6459",
+   "results/FREEBASE_SCALE/HOST_STAGE_DECLARATION__FBX_SCALE__v1__ADDENDUM_10.json": "decf737e177259d62521940d0d559dcd599129f7e583dd75e72ac13615199b0f"
+  }
+ },
+ "code": {
+  "scratchpad/_ml2_eval.py": "318c7b416985d1a301fda733186d735ca071f1499a727778b3554c0aeecfe263",
+  "scratchpad/_fbx_calib.py": "a46001f57ac56e725723a77c8eecaacc067aedf883a39ba29b1f236e9828ed7f",
+  "scratchpad/_ivf_eval.py": "7077654b7bd90a87ad6c2e7dd409f777a8d7f462518e65e13f389ee3e6a458f4"
+ },
+ "pinned": {
+  "_l1c_flath2.py": "5a54b2f906336d5ce97ba5c0c92353afc7b76dc04272ae2dd2851bb572e0758b",
+  "_l1c_transfer_blockmax.py": "f9232ef95b5f317bef85cb1f7304569ea4b00bf6d283a99fc8abe153ad239ee9",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+  "_l1s_core.py": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+  "_l1x90_core.py": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+  "_ta_prepartition.py": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07"
+ },
+ "pinned_repo": {
+  "src/l1_canonical/adapter.py": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+  "data/final_canonical/canonical.py": "c657830b304afe861893b516726af419d35142334f866517b83221427a9016f5"
+ },
+ "platform": {
+  "python": "3.13.5",
+  "numpy": "2.3.2"
+ },
+ "process_peak_rss_mb": 8190.8,
+ "utc": "2026-10-01T07:49:25Z",
+ "npz": {
+  "path": "CALIB_EVAL_WEBQSP__ivf_v1.npz",
+  "sha256": "77ec3f834122097d76406816254fb64c0dbd540cad8026020a59556bd7d64057"
+ },
+ "addendum_10_sha256": "decf737e177259d62521940d0d559dcd599129f7e583dd75e72ac13615199b0f"
+}

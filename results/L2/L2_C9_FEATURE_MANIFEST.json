@@ -1,0 +1,249 @@
+{
+ "C8c_existing_28": [
+  "base_rank",
+  "base_score",
+  "pool_pos",
+  "rk_dense",
+  "rk_splade",
+  "rk_offset",
+  "rk_mixture",
+  "rk_relation",
+  "c_dense",
+  "c_splade",
+  "c_offset",
+  "c_mixture",
+  "c_relation",
+  "rel_mask",
+  "rel_raw",
+  "min_rk4",
+  "mean_rk4",
+  "max_contrib",
+  "d_splade_diff",
+  "off_mix_diff",
+  "votes_top10",
+  "w_dense",
+  "w_splade",
+  "w_offset",
+  "w_mixture",
+  "w_relation",
+  "q_relany",
+  "q_disagree"
+ ],
+ "requested_features": {
+  "best_expert_rank": [
+   "NEW",
+   "best_rank5 (min over all 5 experts; min_rk4 was over 4)"
+  ],
+  "second_best_expert_rank": [
+   "NEW",
+   "second_min_rank5"
+  ],
+  "mean_expert_rank": [
+   "NEW",
+   "mean_rank5 (mean_rk4 was over 4)"
+  ],
+  "median_expert_rank": [
+   "NEW",
+   "median_rank5"
+  ],
+  "rank_std": [
+   "NEW",
+   "rank_std5"
+  ],
+  "best_RRF_contribution": [
+   "EXISTS",
+   "max_contrib"
+  ],
+  "second_best_contribution": [
+   "NEW",
+   "second_contrib"
+  ],
+  "mean_contribution": [
+   "NEW",
+   "mean_contrib"
+  ],
+  "std_contribution": [
+   "NEW",
+   "std_contrib"
+  ],
+  "best_minus_second_gap": [
+   "NEW",
+   "best_minus_second_contrib"
+  ],
+  "best_over_mean_ratio": [
+   "NEW",
+   "max_mean_ratio"
+  ],
+  "N_EXPERT_TOP3": [
+   "NEW",
+   "n_top3"
+  ],
+  "N_EXPERT_TOP5": [
+   "NEW",
+   "n_top5"
+  ],
+  "N_EXPERT_TOP10": [
+   "EXISTS",
+   "votes_top10"
+  ],
+  "N_EXPERT_TOP20": [
+   "NEW",
+   "n_top20"
+  ],
+  "ARGMAX_EXPERT_onehot": [
+   "NEW",
+   "argmax_is_{dense,splade,offset,mixture,relation}"
+  ],
+  "w_i*r_i (5)": [
+   "NEW",
+   "wr_{dense,splade,offset,mixture,relation}"
+  ],
+  "WEIGHT_OF_ARGMAX_EXPERT": [
+   "NEW",
+   "weight_of_argmax_expert"
+  ],
+  "TRUSTED_MAX_CONTRIB": [
+   "NEW",
+   "trusted_max_contrib = max_contrib * weight_of_argmax_expert"
+  ],
+  "REGIME_SUPPORT_SUM": [
+   "EXISTS",
+   "base_score == sum_i w_i*r_i (C7b fused score)"
+  ],
+  "REGIME_SUPPORT_MAX": [
+   "NEW",
+   "regime_support_max"
+  ],
+  "REGIME_SUPPORT_SECOND": [
+   "NEW",
+   "regime_support_second"
+  ],
+  "TOP5_VOTE_COUNT": [
+   "NEW",
+   "n_top5 (alias)"
+  ],
+  "TOP10_VOTE_COUNT": [
+   "EXISTS",
+   "votes_top10"
+  ],
+  "TOP20_VOTE_COUNT": [
+   "NEW",
+   "n_top20 (alias)"
+  ],
+  "MIN_EXPERT_RANK": [
+   "NEW",
+   "best_rank5 (alias)"
+  ],
+  "SECOND_MIN_EXPERT_RANK": [
+   "NEW",
+   "second_min_rank5 (alias)"
+  ],
+  "RANK_DISPERSION": [
+   "NEW",
+   "rank_std5 (alias)"
+  ],
+  "CONTRIB_ENTROPY": [
+   "NEW",
+   "contrib_entropy"
+  ],
+  "MAX_SECOND_RATIO": [
+   "NEW",
+   "max_second_ratio"
+  ],
+  "MAX_MEAN_RATIO": [
+   "NEW",
+   "max_mean_ratio (alias of best_over_mean_ratio)"
+  ],
+  "C8C_SCORE": [
+   "NEW",
+   "c8c_oof_score (OOF on C9_TRAIN)"
+  ],
+  "C8C_RANK": [
+   "NEW",
+   "c8c_oof_rank"
+  ],
+  "C8C_RANK_MINUS_5": [
+   "NEW",
+   "c8c_rank_minus5"
+  ],
+  "C8C_SCORE_MINUS_SCORE_AT_RANK5": [
+   "NEW",
+   "c8c_score_minus_rank5"
+  ],
+  "C8C_SCORE_MINUS_SCORE_AT_RANK1": [
+   "NEW",
+   "c8c_score_minus_rank1"
+  ],
+  "C8C_RANK_PERCENTILE_top50": [
+   "NEW",
+   "c8c_rank_percentile"
+  ]
+ },
+ "C9_final_feature_order": [
+  "base_rank",
+  "base_score",
+  "pool_pos",
+  "rk_dense",
+  "rk_splade",
+  "rk_offset",
+  "rk_mixture",
+  "rk_relation",
+  "c_dense",
+  "c_splade",
+  "c_offset",
+  "c_mixture",
+  "c_relation",
+  "rel_mask",
+  "rel_raw",
+  "min_rk4",
+  "mean_rk4",
+  "max_contrib",
+  "d_splade_diff",
+  "off_mix_diff",
+  "votes_top10",
+  "w_dense",
+  "w_splade",
+  "w_offset",
+  "w_mixture",
+  "w_relation",
+  "q_relany",
+  "q_disagree",
+  "best_rank5",
+  "second_min_rank5",
+  "mean_rank5",
+  "median_rank5",
+  "rank_std5",
+  "second_contrib",
+  "mean_contrib",
+  "std_contrib",
+  "best_minus_second_contrib",
+  "max_mean_ratio",
+  "max_second_ratio",
+  "n_top3",
+  "n_top5",
+  "n_top20",
+  "argmax_is_dense",
+  "argmax_is_splade",
+  "argmax_is_offset",
+  "argmax_is_mixture",
+  "argmax_is_relation",
+  "wr_dense",
+  "wr_splade",
+  "wr_offset",
+  "wr_mixture",
+  "wr_relation",
+  "weight_of_argmax_expert",
+  "trusted_max_contrib",
+  "regime_support_max",
+  "regime_support_second",
+  "contrib_entropy",
+  "c8c_oof_score",
+  "c8c_oof_rank",
+  "c8c_rank_minus5",
+  "c8c_score_minus_rank5",
+  "c8c_score_minus_rank1",
+  "c8c_rank_percentile"
+ ],
+ "n_features_total": 63,
+ "note": "EXISTS = already in the 28 C8c features (not duplicated). NEW = genuinely new information added. Aliases collapse duplicate requests to one column. OOF = out-of-fold C8c predictions used to avoid stacking leakage (Task 9)."
+}

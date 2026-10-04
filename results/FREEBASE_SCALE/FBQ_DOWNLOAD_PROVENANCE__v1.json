@@ -1,0 +1,291 @@
+{
+ "RECORD": "FBQ_DOWNLOAD_PROVENANCE",
+ "version": "v1",
+ "utc": "2026-10-03T22:04:39Z",
+ "approval": "user ruling 2026-10-04: only FreebaseQA train+dev, GrailQA archive (train+dev members), original ComplexWebQuestions train+dev if HEAD size <= 200 MB; nothing else; no test/eval split",
+ "not_downloaded_by_rule": [
+  "FreebaseQA-eval.json",
+  "FreebaseQA-partial.json",
+  "ComplexWebQuestions_test.json",
+  "GraphQuestions (any)",
+  "SimpleQuestions",
+  "anything else"
+ ],
+ "handling": "untrusted bytes: only json is parsed, nothing executed; zip members validated (no absolute path / '..' / drive colon) and only the train/dev JSON members extracted; test member bytes exist only inside the archive file and were not read or parsed",
+ "publisher_hashes": "none published for any of these files; sha256 values are our own",
+ "grailqa_extract_rule": "safe, non-directory .json member whose basename contains 'train' or 'dev' and not 'test'; __MACOSX/ and '._*' AppleDouble shadows excluded",
+ "grailqa_size_note": "the survey said '~120 MB' (homepage text); the orangedox page and HEAD report GrailQA_v1.0.zip = 17,636,773 B (17.64 MB); the zip members total 126,183,720 B uncompressed, so the survey's 120 MB is the unzipped size",
+ "download_hosts_contacted": [
+  "raw.githubusercontent.com",
+  "dl.orangedox.com -> www.dropbox.com -> dl.dropboxusercontent.com (redirect chain of the approved GrailQA link)",
+  "www.dropbox.com -> dl.dropboxusercontent.com (the Dropbox links named in the HF loader script for CWQ train/dev)",
+  "huggingface.co (read the small text loader script complex_web_questions.py once, to read the two Dropbox URLs; no data downloaded from it)"
+ ],
+ "files": {
+  "freebaseqa/FreebaseQA-train.json": {
+   "name": "freebaseqa",
+   "file": "FreebaseQA-train.json",
+   "source_url": "https://raw.githubusercontent.com/kelvin-jiang/FreebaseQA/master/FreebaseQA-train.json",
+   "download_endpoint": "https://raw.githubusercontent.com/kelvin-jiang/FreebaseQA/master/FreebaseQA-train.json",
+   "local_path": "data/original/freebaseqa/FreebaseQA-train.json",
+   "declared_size": "23,888,089 B (GitHub API, FBQ_EXTERNAL_SOURCES__v1)",
+   "declared_bytes": 23888089,
+   "head_content_length": 23888089,
+   "head_chain": [
+    {
+     "host": "raw.githubusercontent.com",
+     "path_prefix": "/kelvin-jiang/FreebaseQA/master/FreebaseQA-train.json",
+     "status": 200,
+     "headers": {
+      "content-length": "23888089",
+      "content-type": "text/plain; charset=utf-8",
+      "etag": "\"2a2b6fed008459ff8d26d1bf8c3e288e575d3c0c65a78339fbdd011b26c7da89\""
+     }
+    }
+   ],
+   "license_as_stated": "CC-BY-4.0 (GitHub README, per FBQ_EXTERNAL_SOURCES__v1)",
+   "publisher_hash": "none published (no checksum on the host page / repo); sha256 below is our own",
+   "status": "DOWNLOADED",
+   "measured_bytes": 23888089,
+   "sha256": "b9769a0040032e39a62bd4b0b99d7dfa1a3fe29c2108dbf6245f62874d0d4753",
+   "downloaded_utc": "2026-10-03T22:03:42Z",
+   "seconds": 6.64,
+   "free_bytes_after": 19884564480
+  },
+  "freebaseqa/FreebaseQA-dev.json": {
+   "name": "freebaseqa",
+   "file": "FreebaseQA-dev.json",
+   "source_url": "https://raw.githubusercontent.com/kelvin-jiang/FreebaseQA/master/FreebaseQA-dev.json",
+   "download_endpoint": "https://raw.githubusercontent.com/kelvin-jiang/FreebaseQA/master/FreebaseQA-dev.json",
+   "local_path": "data/original/freebaseqa/FreebaseQA-dev.json",
+   "declared_size": "4,656,349 B (GitHub API, FBQ_EXTERNAL_SOURCES__v1)",
+   "declared_bytes": 4656349,
+   "head_content_length": 4656349,
+   "head_chain": [
+    {
+     "host": "raw.githubusercontent.com",
+     "path_prefix": "/kelvin-jiang/FreebaseQA/master/FreebaseQA-dev.json",
+     "status": 200,
+     "headers": {
+      "content-length": "4656349",
+      "content-type": "text/plain; charset=utf-8",
+      "etag": "\"52a6006a264b0f96ea2d280d8be2d598212c412647f674e04e469e86ca42c4a1\""
+     }
+    }
+   ],
+   "license_as_stated": "CC-BY-4.0 (GitHub README, per FBQ_EXTERNAL_SOURCES__v1)",
+   "publisher_hash": "none published (no checksum on the host page / repo); sha256 below is our own",
+   "status": "DOWNLOADED",
+   "measured_bytes": 4656349,
+   "sha256": "ec08abf2b0d89eca6eac02f6f5ae72f46211c256aadb51760e252eafce14e961",
+   "downloaded_utc": "2026-10-03T22:03:43Z",
+   "seconds": 0.5,
+   "free_bytes_after": 19879424000
+  },
+  "grailqa/GrailQA_v1.0.zip": {
+   "name": "grailqa",
+   "file": "GrailQA_v1.0.zip",
+   "source_url": "https://dl.orangedox.com/WyaCpL/",
+   "download_endpoint": "https://dl.orangedox.com/WyaCpL?dl=1",
+   "local_path": "data/original/grailqa/GrailQA_v1.0.zip",
+   "declared_size": "'~120 MB' (GrailQA homepage text, exact bytes unverified, FBQ_EXTERNAL_SOURCES__v1)",
+   "declared_bytes": null,
+   "head_content_length": 17636773,
+   "head_chain": [
+    {
+     "host": "dl.orangedox.com",
+     "path_prefix": "/WyaCpL",
+     "status": 302,
+     "headers": {
+      "location": "www.dropbox.com/scl/fi/m5tfzy34r22fieoxjbuqq/GrailQA_v1..."
+     }
+    },
+    {
+     "host": "www.dropbox.com",
+     "path_prefix": "/scl/fi/m5tfzy34r22fieoxjbuqq/GrailQA_v1.0.zip",
+     "status": 302,
+     "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "location": "ucd7242be36af162fbbedd47e4ba.dl.dropboxusercontent.com/cd/0/get/DJVHxlDKYBnYkN3YM39x9dCQW1Z_2u...",
+      "content-length": "17"
+     }
+    },
+    {
+     "host": "ucd7242be36af162fbbedd47e4ba.dl.dropboxusercontent.com",
+     "path_prefix": "/cd/0/get/DJVHxlDKYBnYkN3YM39x9dCQW1Z_2u4YQ0_Qtk9JP4TWOpWhgR",
+     "status": 200,
+     "headers": {
+      "content-type": "application/json",
+      "content-disposition": "attachment; filename=\"GrailQA_v1.0.zip\"; filename*=UTF-8''GrailQA_v1.0.zip",
+      "etag": "1606760181381074d",
+      "content-length": "17636773"
+     }
+    }
+   ],
+   "license_as_stated": "CC BY-SA 4.0 (GrailQA homepage per FBQ_EXTERNAL_SOURCES__v1); Apache-2.0 for the code repo",
+   "publisher_hash": "none published (no checksum on the host page / repo); sha256 below is our own",
+   "status": "DOWNLOADED",
+   "measured_bytes": 17636773,
+   "sha256": "7717dbae47ba4f6aa8b9df0810db8211460116647c0c06bb26a6b198d0aaa992",
+   "downloaded_utc": "2026-10-03T22:03:55Z",
+   "seconds": 7.55,
+   "free_bytes_after": 19856945152
+  },
+  "cwq_original/ComplexWebQuestions_train.json": {
+   "name": "cwq_original",
+   "file": "ComplexWebQuestions_train.json",
+   "source_url": "https://www.dropbox.com/sh/7pkwkrfnwqhsnpo/AAAIHeWX0cPpbpwK6w06BCxva/ComplexWebQuestions_train.json?dl=1",
+   "download_endpoint": "https://www.dropbox.com/sh/7pkwkrfnwqhsnpo/AAAIHeWX0cPpbpwK6w06BCxva/ComplexWebQuestions_train.json?dl=1",
+   "local_path": "data/original/cwq_original/ComplexWebQuestions_train.json",
+   "declared_size": "unverified in the survey; gate = HEAD size <= 200 MB",
+   "declared_bytes": null,
+   "head_content_length": 43090803,
+   "head_chain": [
+    {
+     "host": "www.dropbox.com",
+     "path_prefix": "/sh/7pkwkrfnwqhsnpo/AAAIHeWX0cPpbpwK6w06BCxva/ComplexWebQues",
+     "status": 302,
+     "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "location": "www.dropbox.com/scl/fo/nqujvpg2gc4y0ozkw3wgr/AAhkYt2R5L..."
+     }
+    },
+    {
+     "host": "www.dropbox.com",
+     "path_prefix": "/scl/fo/nqujvpg2gc4y0ozkw3wgr/AAhkYt2R5L2ByUI8YQxmAFM/Comple",
+     "status": 302,
+     "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "location": "ucf5531f184c86b9f3232ee75e5a.dl.dropboxusercontent.com/cd/0/get/DJWD-45bg7r8lrYlLC4Sx5frY6qd7x...",
+      "content-length": "17"
+     }
+    },
+    {
+     "host": "ucf5531f184c86b9f3232ee75e5a.dl.dropboxusercontent.com",
+     "path_prefix": "/cd/0/get/DJWD-45bg7r8lrYlLC4Sx5frY6qd7xMAK5FU56kyxzhzqeDxaG",
+     "status": 200,
+     "headers": {
+      "content-type": "application/json",
+      "content-disposition": "attachment; filename=\"ComplexWebQuestions_train.json\"; filename*=UTF-8''ComplexWebQuestions_train.json",
+      "etag": "1940191d",
+      "content-length": "43090803"
+     }
+    }
+   ],
+   "license_as_stated": "Apache-2.0 on the HF loader card; data license 'Not specified' on the HF card (per FBQ_EXTERNAL_SOURCES__v1)",
+   "publisher_hash": "none published (no checksum on the host page / repo); sha256 below is our own",
+   "status": "DOWNLOADED",
+   "measured_bytes": 43090803,
+   "sha256": "5d88a0b20afadcff10b275113074068b086871fa6698a68022d2dc40ce75d10e",
+   "downloaded_utc": "2026-10-03T22:04:08Z",
+   "seconds": 11.26,
+   "free_bytes_after": 19809599488
+  },
+  "cwq_original/ComplexWebQuestions_dev.json": {
+   "name": "cwq_original",
+   "file": "ComplexWebQuestions_dev.json",
+   "source_url": "https://www.dropbox.com/sh/7pkwkrfnwqhsnpo/AADH8beLbOUWxwvY_K38E3ADa/ComplexWebQuestions_dev.json?dl=1",
+   "download_endpoint": "https://www.dropbox.com/sh/7pkwkrfnwqhsnpo/AADH8beLbOUWxwvY_K38E3ADa/ComplexWebQuestions_dev.json?dl=1",
+   "local_path": "data/original/cwq_original/ComplexWebQuestions_dev.json",
+   "declared_size": "unverified in the survey; gate = HEAD size <= 200 MB",
+   "declared_bytes": null,
+   "head_content_length": 5535812,
+   "head_chain": [
+    {
+     "host": "www.dropbox.com",
+     "path_prefix": "/sh/7pkwkrfnwqhsnpo/AADH8beLbOUWxwvY_K38E3ADa/ComplexWebQues",
+     "status": 302,
+     "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "location": "www.dropbox.com/scl/fo/nqujvpg2gc4y0ozkw3wgr/ACpUB76UPg..."
+     }
+    },
+    {
+     "host": "www.dropbox.com",
+     "path_prefix": "/scl/fo/nqujvpg2gc4y0ozkw3wgr/ACpUB76UPgjcR1LjHR0EKYw/Comple",
+     "status": 302,
+     "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "location": "uc6190e755d1facccf4f272fb89d.dl.dropboxusercontent.com/cd/0/get/DJUJq_VdQuFClEVXX3wDMF3kexzQZt...",
+      "content-length": "17"
+     }
+    },
+    {
+     "host": "uc6190e755d1facccf4f272fb89d.dl.dropboxusercontent.com",
+     "path_prefix": "/cd/0/get/DJUJq_VdQuFClEVXX3wDMF3kexzQZtjao0DmJ8aspcr6tHCncc",
+     "status": 200,
+     "headers": {
+      "content-type": "application/json",
+      "content-disposition": "attachment; filename=\"ComplexWebQuestions_dev.json\"; filename*=UTF-8''ComplexWebQuestions_dev.json",
+      "etag": "1940188d",
+      "content-length": "5535812"
+     }
+    }
+   ],
+   "license_as_stated": "Apache-2.0 on the HF loader card; data license 'Not specified' on the HF card (per FBQ_EXTERNAL_SOURCES__v1)",
+   "publisher_hash": "none published (no checksum on the host page / repo); sha256 below is our own",
+   "status": "DOWNLOADED",
+   "measured_bytes": 5535812,
+   "sha256": "9f57bb8744b8a646b2c16cf555e72b75e70b334b3dba7205e78baf69658f741d",
+   "downloaded_utc": "2026-10-03T22:04:15Z",
+   "seconds": 4.58,
+   "free_bytes_after": 19802341376
+  }
+ },
+ "grailqa_archive_members": {
+  "GrailQA_v1.0/": {
+   "extracted": false,
+   "bytes_listed": 0,
+   "reason": "directory"
+  },
+  "GrailQA_v1.0/grailqa_v1.0_test_public.json": {
+   "extracted": false,
+   "bytes_listed": 1334071,
+   "reason": "not matching the train/dev rule"
+  },
+  "GrailQA_v1.0/.DS_Store": {
+   "extracted": false,
+   "bytes_listed": 6148,
+   "reason": "not matching the train/dev rule"
+  },
+  "__MACOSX/GrailQA_v1.0/._.DS_Store": {
+   "extracted": false,
+   "bytes_listed": 120,
+   "reason": "not matching the train/dev rule"
+  },
+  "GrailQA_v1.0/grailqa_v1.0_dev.json": {
+   "extracted": true,
+   "local_path": "data/original/grailqa/grailqa_v1.0_dev.json",
+   "bytes": 15170257,
+   "bytes_listed": 15170257,
+   "crc32_listed": 2425443956,
+   "sha256": "55f3c2f937fee12bde3242247f5a06c6d595a898aa291b62fd3c2abf502f748c"
+  },
+  "__MACOSX/GrailQA_v1.0/._grailqa_v1.0_dev.json": {
+   "extracted": false,
+   "bytes_listed": 176,
+   "reason": "not matching the train/dev rule"
+  },
+  "GrailQA_v1.0/grailqa_v1.0_train.json": {
+   "extracted": true,
+   "local_path": "data/original/grailqa/grailqa_v1.0_train.json",
+   "bytes": 109669282,
+   "bytes_listed": 109669282,
+   "crc32_listed": 3092817651,
+   "sha256": "ee4a439b76d9146ed7841d0afada187e1a9f344153f519521dc73957b47e6fb1"
+  },
+  "GrailQA_v1.0/README.txt": {
+   "extracted": false,
+   "bytes_listed": 3166,
+   "reason": "not matching the train/dev rule"
+  },
+  "__MACOSX/GrailQA_v1.0/._README.txt": {
+   "extracted": false,
+   "bytes_listed": 500,
+   "reason": "not matching the train/dev rule"
+  }
+ },
+ "code": {
+  "scratchpad/_fbq_download_v2.py": "40171fd51407cd3abda4761cf54c829abd0f575d92340f9a85fe3dcf994ef156"
+ }
+}

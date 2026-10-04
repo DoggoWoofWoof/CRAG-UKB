@@ -1,0 +1,1053 @@
+{
+ "cache": "metaqa",
+ "partition": "MTKAHYPAR",
+ "n_DEV_A": 1002,
+ "status": "PREREGISTERED_COMPOSITION_TEST_DEV_A",
+ "arm": "QMAX_BALANCED_H2_PATCH1",
+ "preregistration": {
+  "path": "results/L1_COVPART/PREREGISTRATION_QMAX_BALANCED_H2_PATCH1.json",
+  "sha256": "4230b2610f680381e4ec4dcedfb5454909d33a7ee526cad0b566866598a20209"
+ },
+ "code": {
+  "path": "scratchpad/_l1c_qmaxbal.py",
+  "sha256": "cae88fa64a0516a4f55c99a4a3b464afd39e467dca42e4380a546ebbd545b1c8"
+ },
+ "pinned": {
+  "_l1c_microl3.py": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+  "_l1c_h2patch.py": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d",
+  "_l1c_h2balanced.py": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe",
+  "_l1g_candidate.py": "b01c27a6e64b18756db1ca1d8910e8db4bb54fa019d9809698cb1369206169e0",
+  "_l1g_core.py": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327"
+ },
+ "selector": {
+  "cfg": {
+   "B": 6,
+   "M_struct": 64,
+   "M_ret": 32,
+   "agg": "S4",
+   "fusion": "F6",
+   "T": 1,
+   "tag": "F6"
+  },
+  "code": "_l1ps_router.build_cache + _l1kb_core.contexts / f6_select (unchanged)"
+ },
+ "SAFE_record": "results/L1_CANONICAL/L1_REPLAY_metaqa.json",
+ "L1_GEOM_record": {
+  "path": "results/L1_GEOM/PREREGISTRATION_DEV_B.json",
+  "recorded_DEV_A_AGGREGATION": {
+   "key": "QMAX_F0",
+   "ALL": 0.6327,
+   "gained": 3,
+   "lost": 10,
+   "p": 0.09228515625,
+   "per_hop": {
+    "hop1": 0.911,
+    "hop2": 0.4797,
+    "hop3": 0.5181
+   }
+  }
+ },
+ "definition": {
+  "ranking_QMAX_F0": "_l1g_core.F0 (the frozen RRF, K0 = 60, dense tie-break) of [Cd, Cs, Cmax]: Cd / Cs = _l1g_core.block_channel of the served dense / SPLADE top-100 ids through the legacy own + directed-out-neighbour table; Cmax = _l1g_candidate.dense_blockmax_rank (score(B) = max_{v in B} q . e_v over all actual nodes, stable descending order); asserted to reproduce the L1_GEOM recorded DEV_A numbers; F0([Cd, Cs]) asserted == the served base_rank",
+  "composition": "the first TOPP = 200 blocks of the QMAX_F0 ranking replace base_rank in the replay-cache view read by _l1ps_router.build_cache / _l1kb_core.contexts (protected = first 44, boundary = 45-50, cpos = QMAX positions); challengers (structural s_node, retrieval ret_rrf), F6 admission, weakest = the sixth admitted, beam (seeds = frozen top-5 RRF nodes), balanced compression and patch unchanged",
+  "beam": "pinned uL3 beam (frozen admissibility, transition geometry, RRF fused order, BEAM = 100, DEPTH = 2, seeds = frozen top-5); identical for both chains",
+  "compression_balanced": "section 21 verbatim: within-parent rank = position of (parent, target) among the parent's pairs in the frozen fused order (first occurrence per pair); sequence sorted by (rank, frontier position of the parent) = A1 B1 C1 ... A2 B2 C2 ...; first 100 distinct unvisited targets; no other constant",
+  "patch": "section 16 verbatim: the chain's SAFE minus its weakest admitted block + one query-local block of the same size = the beam's visited nodes not exposed by the 49 kept blocks in first-visit order (hop 1 then hop 2, each in beam order), topped up from the removed block (ret_rrf position, then node id)",
+  "metric": "ALL-gold on DEV_A; patch arms at matched unique-node exposure to their chain's SAFE; node-level == block-level for the four block arms (asserted)"
+ },
+ "beam_diversity_DEV_A": {
+  "n_DEV_A": 1002,
+  "wall_clock_ms_per_query": {
+   "pinned": 14.3,
+   "balanced": 10.1
+  },
+  "transitions_scored_per_query_mean (hop1 / hop2)": {
+   "pinned": [
+    37.8,
+    334.9
+   ],
+   "balanced": [
+    37.8,
+    334.9
+   ]
+  },
+  "candidates_unique_per_query_mean (hop1 / hop2)": {
+   "pinned": [
+    32.5,
+    263.9
+   ],
+   "balanced": [
+    32.5,
+    263.9
+   ]
+  },
+  "beam_size_mean (hop1 / hop2)": {
+   "pinned": [
+    32.5,
+    95.6
+   ],
+   "balanced": [
+    32.5,
+    95.6
+   ]
+  },
+  "queries_truncated_at_hop (hop1 / hop2) balanced": [
+   1,
+   866
+  ],
+  "same_kept_set_as_pinned (queries; hop1 / hop2)": [
+   1001,
+   138
+  ],
+  "jaccard_kept_vs_pinned_mean (hop1 / hop2)": [
+   1.0,
+   0.595
+  ],
+  "distinct_parents_in_kept_beam_mean (hop1 / hop2)": {
+   "pinned": [
+    5.0,
+    19.1
+   ],
+   "balanced": [
+    5.0,
+    24.0
+   ]
+  },
+  "largest_single_parent_share_mean (hop1 / hop2)": {
+   "pinned": [
+    0.404,
+    0.234
+   ],
+   "balanced": [
+    0.397,
+    0.105
+   ]
+  },
+  "balanced_compression_stats_mean": {
+   "hop1": {
+    "parents": 5.0,
+    "parents_with_candidates": 4.99,
+    "candidates_unique": 32.49,
+    "pairs": 34.51,
+    "kept": 32.47,
+    "truncated": 0.0,
+    "rounds_used": 13.23,
+    "largest_parent_candidate_list": 13.33
+   },
+   "hop2": {
+    "parents": 32.47,
+    "parents_with_candidates": 24.77,
+    "candidates_unique": 263.87,
+    "pairs": 317.7,
+    "kept": 95.56,
+    "truncated": 0.86,
+    "rounds_used": 9.55,
+    "largest_parent_candidate_list": 53.6
+   }
+  }
+ },
+ "composed_chain_identities": {
+  "QMAX_P50 == BASE_P50 blocks per query (mean of 50)": 36.45,
+  "QMAX_SAFE == SAFE (queries)": 0,
+  "QMAX_SAFE & SAFE blocks per query (mean of 50)": 38.68,
+  "same weakest admitted block (queries)": 57,
+  "admitted six overlap (mean of 6)": 2.19,
+  "challengers admitted from outside the chain's own P50 (mean of 6): BASE / QMAX": [
+   4.59,
+   4.92
+  ],
+  "nominal exposure mean nodes: L1 / SAFE / QMAX_F0 / QMAX_SAFE": [
+   5023.0,
+   5023.1,
+   5028.3,
+   5027.3
+  ]
+ },
+ "arms": {
+  "L1": {
+   "arm": "L1",
+   "chain": "BASE",
+   "ALL": 0.6397,
+   "ANY": 0.9132,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9172,
+     "ANY": 0.9663
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.4855,
+     "ANY": 0.811
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5271,
+     "ANY": 0.9669
+    }
+   },
+   "exposure": "50 blocks; nominal node exposure = sum of the selected block sizes",
+   "exposure_nodes_mean": 5023.0
+  },
+  "SAFE": {
+   "arm": "SAFE",
+   "chain": "BASE",
+   "ALL": 0.6407,
+   "ANY": 0.9152,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9172,
+     "ANY": 0.9663,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.4942,
+     "ANY": 0.811,
+     "vs_L1": {
+      "gained": 3,
+      "lost": 0,
+      "p": 0.25
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5211,
+     "ANY": 0.9729,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 2,
+      "p": 0.5
+     }
+    }
+   },
+   "exposure": "50 blocks; nominal node exposure = sum of the selected block sizes",
+   "exposure_nodes_mean": 5023.1,
+   "ALL_vs_L1": {
+    "gained": 3,
+    "lost": 2,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_L1": {
+    "gained": 6,
+    "lost": 4,
+    "p": 0.75390625
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 3,
+    "lost": 2,
+    "p": 1.0,
+    "pooled_ref": 0.5059,
+    "pooled": 0.5074
+   }
+  },
+  "H2_PATCH1": {
+   "arm": "H2_PATCH1",
+   "chain": "BASE",
+   "ALL": 0.7515,
+   "ANY": 0.983,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9939,
+     "ANY": 0.9969,
+     "vs_L1": {
+      "gained": 25,
+      "lost": 0,
+      "p": 5.960464477539063e-08
+     },
+     "vs_SAFE": {
+      "gained": 25,
+      "lost": 0,
+      "p": 5.960464477539063e-08
+     },
+     "gold_nodes_gained": 94,
+     "gold_nodes_lost_with_removed_block": 0
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.7413,
+     "ANY": 0.9797,
+     "vs_L1": {
+      "gained": 88,
+      "lost": 0,
+      "p": 6.462348535570529e-27
+     },
+     "vs_SAFE": {
+      "gained": 85,
+      "lost": 0,
+      "p": 5.169878828456423e-26
+     },
+     "gold_nodes_gained": 533,
+     "gold_nodes_lost_with_removed_block": 1
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5241,
+     "ANY": 0.9729,
+     "vs_L1": {
+      "gained": 1,
+      "lost": 2,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 1,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 7,
+     "gold_nodes_lost_with_removed_block": 9
+    }
+   },
+   "exposure": "matched: |served nodes| equal to SAFE per query (asserted)",
+   "exposure_nodes_mean": 5023.1,
+   "novel_nodes_per_query_mean": 79.2,
+   "novel_hop1_per_query_mean": 8.3,
+   "novel_hop2_per_query_mean": 70.8,
+   "patch_size_mean": 100.1,
+   "patch_composition_mean (hop-1 novel / hop-2 novel / fill from removed block)": [
+    8.3,
+    70.1,
+    21.7
+   ],
+   "queries_truncated": 79,
+   "queries_with_no_novel_node (patch == removed block)": 0,
+   "gold_nodes_gained_vs_SAFE": 634,
+   "gold_nodes_gained_vs_SAFE_from_hop1_novel": 95,
+   "queries_with_gold_node_gained_vs_SAFE": 185,
+   "gold_nodes_lost_with_removed_block": 10,
+   "queries_with_gold_node_lost_with_removed_block": 7,
+   "ALL_vs_L1": {
+    "gained": 114,
+    "lost": 2,
+    "p": 1.6339108165695212e-31,
+    "label": "GAIN"
+   },
+   "ANY_vs_L1": {
+    "gained": 71,
+    "lost": 1,
+    "p": 3.091670257478196e-20
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 89,
+    "lost": 2,
+    "p": 3.3822316648042255e-24,
+    "pooled_ref": 0.5059,
+    "pooled": 0.6346
+   },
+   "ALL_vs_SAFE": {
+    "gained": 111,
+    "lost": 0,
+    "p": 7.703719777548943e-34,
+    "label": "GAIN"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 68,
+    "lost": 0,
+    "p": 6.776263578034403e-21
+   },
+   "hop2_hop3_pooled_vs_SAFE": {
+    "n": 676,
+    "gained": 86,
+    "lost": 0,
+    "p": 2.5849394142282115e-26,
+    "pooled_ref": 0.5074,
+    "pooled": 0.6346
+   },
+   "significant_loss_vs_SAFE": false
+  },
+  "BALANCED_H2_PATCH1": {
+   "arm": "BALANCED_H2_PATCH1",
+   "chain": "BASE",
+   "ALL": 0.7764,
+   "ANY": 0.99,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9939,
+     "ANY": 0.9969,
+     "vs_L1": {
+      "gained": 25,
+      "lost": 0,
+      "p": 5.960464477539063e-08
+     },
+     "vs_SAFE": {
+      "gained": 25,
+      "lost": 0,
+      "p": 5.960464477539063e-08
+     },
+     "vs_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 94,
+     "gold_nodes_lost_with_removed_block": 0
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.814,
+     "ANY": 1.0,
+     "vs_L1": {
+      "gained": 113,
+      "lost": 0,
+      "p": 1.925929944387236e-34
+     },
+     "vs_SAFE": {
+      "gained": 110,
+      "lost": 0,
+      "p": 1.5407439555097887e-33
+     },
+     "vs_H2_PATCH1": {
+      "gained": 30,
+      "lost": 5,
+      "p": 2.2361520677804947e-05
+     },
+     "gold_nodes_gained": 647,
+     "gold_nodes_lost_with_removed_block": 1
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5241,
+     "ANY": 0.9729,
+     "vs_L1": {
+      "gained": 1,
+      "lost": 2,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 1,
+      "lost": 0,
+      "p": 1.0
+     },
+     "vs_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "gold_nodes_gained": 7,
+     "gold_nodes_lost_with_removed_block": 7
+    }
+   },
+   "exposure": "matched: |served nodes| equal to SAFE per query (asserted)",
+   "exposure_nodes_mean": 5023.1,
+   "novel_nodes_per_query_mean": 76.5,
+   "novel_hop1_per_query_mean": 8.3,
+   "novel_hop2_per_query_mean": 68.2,
+   "patch_size_mean": 100.1,
+   "patch_composition_mean (hop-1 novel / hop-2 novel / fill from removed block)": [
+    8.3,
+    67.6,
+    24.1
+   ],
+   "queries_truncated": 56,
+   "queries_with_no_novel_node (patch == removed block)": 0,
+   "gold_nodes_gained_vs_SAFE": 748,
+   "gold_nodes_gained_vs_SAFE_from_hop1_novel": 95,
+   "queries_with_gold_node_gained_vs_SAFE": 204,
+   "gold_nodes_lost_with_removed_block": 8,
+   "queries_with_gold_node_lost_with_removed_block": 6,
+   "ALL_vs_L1": {
+    "gained": 139,
+    "lost": 2,
+    "p": 7.183257715107875e-39,
+    "label": "GAIN"
+   },
+   "ANY_vs_L1": {
+    "gained": 78,
+    "lost": 1,
+    "p": 2.6469779601696886e-22
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 114,
+    "lost": 2,
+    "p": 1.6339108165695212e-31,
+    "pooled_ref": 0.5059,
+    "pooled": 0.6716
+   },
+   "ALL_vs_SAFE": {
+    "gained": 136,
+    "lost": 0,
+    "p": 2.2958874039497803e-41,
+    "label": "GAIN"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 75,
+    "lost": 0,
+    "p": 5.293955920339377e-23
+   },
+   "hop2_hop3_pooled_vs_SAFE": {
+    "n": 676,
+    "gained": 111,
+    "lost": 0,
+    "p": 7.703719777548943e-34,
+    "pooled_ref": 0.5074,
+    "pooled": 0.6716
+   },
+   "ALL_vs_H2_PATCH1": {
+    "gained": 30,
+    "lost": 5,
+    "p": 2.2361520677804947e-05,
+    "label": "GAIN"
+   },
+   "ANY_vs_H2_PATCH1": {
+    "gained": 7,
+    "lost": 0,
+    "p": 0.015625
+   },
+   "hop2_hop3_pooled_vs_H2_PATCH1": {
+    "n": 676,
+    "gained": 30,
+    "lost": 5,
+    "p": 2.2361520677804947e-05,
+    "pooled_ref": 0.6346,
+    "pooled": 0.6716
+   },
+   "significant_loss_vs_SAFE": false,
+   "significant_loss_vs_H2_PATCH1": false
+  },
+  "QMAX_F0": {
+   "arm": "QMAX_F0",
+   "chain": "QMAX",
+   "ALL": 0.6327,
+   "ANY": 0.9102,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.911,
+     "ANY": 0.9693,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 2,
+      "p": 0.5
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.4797,
+     "ANY": 0.8081,
+     "vs_L1": {
+      "gained": 3,
+      "lost": 5,
+      "p": 0.7265625
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5181,
+     "ANY": 0.9578,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 3,
+      "p": 0.25
+     }
+    }
+   },
+   "exposure": "50 blocks; nominal node exposure = sum of the selected block sizes",
+   "exposure_nodes_mean": 5028.3,
+   "ALL_vs_L1": {
+    "gained": 3,
+    "lost": 10,
+    "p": 0.09228515625,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_L1": {
+    "gained": 14,
+    "lost": 17,
+    "p": 0.720100131817162
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 3,
+    "lost": 8,
+    "p": 0.2265625,
+    "pooled_ref": 0.5059,
+    "pooled": 0.4985
+   }
+  },
+  "QMAX_SAFE": {
+   "arm": "QMAX_SAFE",
+   "chain": "QMAX",
+   "ALL": 0.6377,
+   "ANY": 0.9162,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9141,
+     "ANY": 0.9693,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 1,
+      "p": 1.0
+     },
+     "vs_QMAX_F0": {
+      "gained": 1,
+      "lost": 0,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 0,
+      "lost": 1,
+      "p": 1.0
+     }
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.4884,
+     "ANY": 0.8169,
+     "vs_L1": {
+      "gained": 5,
+      "lost": 4,
+      "p": 1.0
+     },
+     "vs_QMAX_F0": {
+      "gained": 3,
+      "lost": 0,
+      "p": 0.25
+     },
+     "vs_SAFE": {
+      "gained": 3,
+      "lost": 5,
+      "p": 0.7265625
+     }
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5211,
+     "ANY": 0.9669,
+     "vs_L1": {
+      "gained": 0,
+      "lost": 2,
+      "p": 0.5
+     },
+     "vs_QMAX_F0": {
+      "gained": 1,
+      "lost": 0,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 2,
+      "lost": 2,
+      "p": 1.0
+     }
+    }
+   },
+   "exposure": "50 blocks; nominal node exposure = sum of the selected block sizes",
+   "exposure_nodes_mean": 5027.3,
+   "ALL_vs_L1": {
+    "gained": 5,
+    "lost": 7,
+    "p": 0.7744140625,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_L1": {
+    "gained": 16,
+    "lost": 13,
+    "p": 0.711071103811264
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 5,
+    "lost": 6,
+    "p": 1.0,
+    "pooled_ref": 0.5059,
+    "pooled": 0.5044
+   },
+   "ALL_vs_QMAX_F0": {
+    "gained": 5,
+    "lost": 0,
+    "p": 0.0625,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_QMAX_F0": {
+    "gained": 9,
+    "lost": 3,
+    "p": 0.14599609375
+   },
+   "hop2_hop3_pooled_vs_QMAX_F0": {
+    "n": 676,
+    "gained": 4,
+    "lost": 0,
+    "p": 0.125,
+    "pooled_ref": 0.4985,
+    "pooled": 0.5044
+   },
+   "ALL_vs_SAFE": {
+    "gained": 5,
+    "lost": 8,
+    "p": 0.5810546875,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 10,
+    "lost": 9,
+    "p": 1.0
+   },
+   "hop2_hop3_pooled_vs_SAFE": {
+    "n": 676,
+    "gained": 5,
+    "lost": 7,
+    "p": 0.7744140625,
+    "pooled_ref": 0.5074,
+    "pooled": 0.5044
+   }
+  },
+  "QMAX_BALANCED_H2_PATCH1": {
+   "arm": "QMAX_BALANCED_H2_PATCH1",
+   "chain": "QMAX",
+   "ALL": 0.7754,
+   "ANY": 0.988,
+   "per_hop": {
+    "hop1": {
+     "n": 326,
+     "ALL": 0.9939,
+     "ANY": 0.9969,
+     "vs_L1": {
+      "gained": 25,
+      "lost": 0,
+      "p": 5.960464477539063e-08
+     },
+     "vs_QMAX_SAFE": {
+      "gained": 26,
+      "lost": 0,
+      "p": 2.9802322387695312e-08
+     },
+     "vs_QMAX_F0": {
+      "gained": 27,
+      "lost": 0,
+      "p": 1.4901161193847656e-08
+     },
+     "vs_BALANCED_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "vs_H2_PATCH1": {
+      "gained": 0,
+      "lost": 0,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 25,
+      "lost": 0,
+      "p": 5.960464477539063e-08
+     },
+     "gold_nodes_gained": 94,
+     "gold_nodes_lost_with_removed_block": 0
+    },
+    "hop2": {
+     "n": 344,
+     "ALL": 0.8081,
+     "ANY": 0.9971,
+     "vs_L1": {
+      "gained": 112,
+      "lost": 1,
+      "p": 2.195560136601449e-32
+     },
+     "vs_QMAX_SAFE": {
+      "gained": 110,
+      "lost": 0,
+      "p": 1.5407439555097887e-33
+     },
+     "vs_QMAX_F0": {
+      "gained": 113,
+      "lost": 0,
+      "p": 1.925929944387236e-34
+     },
+     "vs_BALANCED_H2_PATCH1": {
+      "gained": 0,
+      "lost": 2,
+      "p": 0.5
+     },
+     "vs_H2_PATCH1": {
+      "gained": 29,
+      "lost": 6,
+      "p": 0.0001168418675661087
+     },
+     "vs_SAFE": {
+      "gained": 109,
+      "lost": 1,
+      "p": 1.7102257906158654e-31
+     },
+     "gold_nodes_gained": 624,
+     "gold_nodes_lost_with_removed_block": 2
+    },
+    "hop3": {
+     "n": 332,
+     "ALL": 0.5271,
+     "ANY": 0.9699,
+     "vs_L1": {
+      "gained": 1,
+      "lost": 1,
+      "p": 1.0
+     },
+     "vs_QMAX_SAFE": {
+      "gained": 2,
+      "lost": 0,
+      "p": 0.5
+     },
+     "vs_QMAX_F0": {
+      "gained": 3,
+      "lost": 0,
+      "p": 0.25
+     },
+     "vs_BALANCED_H2_PATCH1": {
+      "gained": 2,
+      "lost": 1,
+      "p": 1.0
+     },
+     "vs_H2_PATCH1": {
+      "gained": 2,
+      "lost": 1,
+      "p": 1.0
+     },
+     "vs_SAFE": {
+      "gained": 3,
+      "lost": 1,
+      "p": 0.625
+     },
+     "gold_nodes_gained": 13,
+     "gold_nodes_lost_with_removed_block": 12
+    }
+   },
+   "exposure": "matched: |served nodes| equal to QMAX_SAFE per query (asserted)",
+   "exposure_nodes_mean": 5027.3,
+   "novel_nodes_per_query_mean": 78.7,
+   "novel_hop1_per_query_mean": 10.5,
+   "novel_hop2_per_query_mean": 68.2,
+   "patch_size_mean": 100.1,
+   "patch_composition_mean (hop-1 novel / hop-2 novel / fill from removed block)": [
+    10.5,
+    67.5,
+    22.1
+   ],
+   "queries_truncated": 83,
+   "queries_with_no_novel_node (patch == removed block)": 0,
+   "gold_nodes_gained_vs_QMAX_SAFE": 731,
+   "gold_nodes_gained_vs_QMAX_SAFE_from_hop1_novel": 99,
+   "queries_with_gold_node_gained_vs_QMAX_SAFE": 211,
+   "gold_nodes_lost_with_removed_block": 14,
+   "queries_with_gold_node_lost_with_removed_block": 11,
+   "ALL_vs_L1": {
+    "gained": 138,
+    "lost": 2,
+    "p": 1.4164190352742676e-38,
+    "label": "GAIN"
+   },
+   "ANY_vs_L1": {
+    "gained": 79,
+    "lost": 4,
+    "p": 3.9973254947441296e-19
+   },
+   "hop2_hop3_pooled_vs_L1": {
+    "n": 676,
+    "gained": 113,
+    "lost": 2,
+    "p": 3.2119696647518126e-31,
+    "pooled_ref": 0.5059,
+    "pooled": 0.6701
+   },
+   "ALL_vs_QMAX_SAFE": {
+    "gained": 138,
+    "lost": 0,
+    "p": 5.739718509874451e-42,
+    "label": "GAIN"
+   },
+   "ANY_vs_QMAX_SAFE": {
+    "gained": 72,
+    "lost": 0,
+    "p": 4.235164736271502e-22
+   },
+   "hop2_hop3_pooled_vs_QMAX_SAFE": {
+    "n": 676,
+    "gained": 112,
+    "lost": 0,
+    "p": 3.851859888774472e-34,
+    "pooled_ref": 0.5044,
+    "pooled": 0.6701
+   },
+   "ALL_vs_QMAX_F0": {
+    "gained": 143,
+    "lost": 0,
+    "p": 1.793662034335766e-43,
+    "label": "GAIN"
+   },
+   "ANY_vs_QMAX_F0": {
+    "gained": 79,
+    "lost": 1,
+    "p": 1.3400325923359048e-22
+   },
+   "hop2_hop3_pooled_vs_QMAX_F0": {
+    "n": 676,
+    "gained": 116,
+    "lost": 0,
+    "p": 2.407412430484045e-35,
+    "pooled_ref": 0.4985,
+    "pooled": 0.6701
+   },
+   "ALL_vs_BALANCED_H2_PATCH1": {
+    "gained": 2,
+    "lost": 3,
+    "p": 1.0,
+    "label": "NEUTRAL"
+   },
+   "ANY_vs_BALANCED_H2_PATCH1": {
+    "gained": 1,
+    "lost": 3,
+    "p": 0.625
+   },
+   "hop2_hop3_pooled_vs_BALANCED_H2_PATCH1": {
+    "n": 676,
+    "gained": 2,
+    "lost": 3,
+    "p": 1.0,
+    "pooled_ref": 0.6716,
+    "pooled": 0.6701
+   },
+   "ALL_vs_H2_PATCH1": {
+    "gained": 31,
+    "lost": 7,
+    "p": 0.00011616700794547796,
+    "label": "GAIN"
+   },
+   "ANY_vs_H2_PATCH1": {
+    "gained": 8,
+    "lost": 3,
+    "p": 0.2265625
+   },
+   "hop2_hop3_pooled_vs_H2_PATCH1": {
+    "n": 676,
+    "gained": 31,
+    "lost": 7,
+    "p": 0.00011616700794547796,
+    "pooled_ref": 0.6346,
+    "pooled": 0.6701
+   },
+   "ALL_vs_SAFE": {
+    "gained": 137,
+    "lost": 2,
+    "p": 2.792660040979414e-38,
+    "label": "GAIN"
+   },
+   "ANY_vs_SAFE": {
+    "gained": 76,
+    "lost": 3,
+    "p": 2.72109334305444e-19
+   },
+   "hop2_hop3_pooled_vs_SAFE": {
+    "n": 676,
+    "gained": 112,
+    "lost": 2,
+    "p": 6.313198357701359e-31,
+    "pooled_ref": 0.5074,
+    "pooled": 0.6701
+   },
+   "significant_loss_vs_QMAX_SAFE": false
+  }
+ },
+ "reference_chain_reproduced": "L1 / SAFE / H2_PATCH1 == h2patch_A_metaqa.json and BALANCED_H2_PATCH1 == h2balanced_A_metaqa.json (ALL, ANY, vs SAFE / H2_PATCH1 / L1, per hop, novel counts, patch size)",
+ "stage_increments_DEV_A": {
+  "BASE": {
+   "L1 -> SAFE": {
+    "gained": 3,
+    "lost": 2,
+    "p": 1.0,
+    "label": "NEUTRAL",
+    "from": 0.6397,
+    "to": 0.6407
+   },
+   "SAFE -> BALANCED_H2_PATCH1": {
+    "gained": 136,
+    "lost": 0,
+    "p": 2.2958874039497803e-41,
+    "label": "GAIN",
+    "from": 0.6407,
+    "to": 0.7764
+   },
+   "L1 -> BALANCED_H2_PATCH1 (chain)": {
+    "gained": 139,
+    "lost": 2,
+    "p": 7.183257715107875e-39,
+    "label": "GAIN",
+    "from": 0.6397,
+    "to": 0.7764
+   }
+  },
+  "QMAX": {
+   "QMAX_F0 -> QMAX_SAFE": {
+    "gained": 5,
+    "lost": 0,
+    "p": 0.0625,
+    "label": "NEUTRAL",
+    "from": 0.6327,
+    "to": 0.6377
+   },
+   "QMAX_SAFE -> QMAX_BALANCED_H2_PATCH1": {
+    "gained": 138,
+    "lost": 0,
+    "p": 5.739718509874451e-42,
+    "label": "GAIN",
+    "from": 0.6377,
+    "to": 0.7754
+   },
+   "QMAX_F0 -> QMAX_BALANCED_H2_PATCH1 (chain)": {
+    "gained": 143,
+    "lost": 0,
+    "p": 1.793662034335766e-43,
+    "label": "GAIN",
+    "from": 0.6327,
+    "to": 0.7754
+   }
+  }
+ },
+ "attribution_flips": {
+  "PRIMARY_vs_BALANCED_H2_PATCH1": {
+   "newly_covered": {
+    "n": 2,
+    "gold_nodes_newly_served": 2,
+    "of_which_served_by_a_kept_block_of_QMAX_SAFE": 2,
+    "of_which_served_by_the_patch_nodes": 0
+   },
+   "newly_lost": {
+    "n": 3,
+    "gold_nodes_dropped": 5,
+    "of_which_block_no_longer_kept_(QMAX_SAFE_kept_49_differ)": 5,
+    "of_which_dropped_with_the_weakest_block": 0,
+    "of_which_visited_but_beyond_the_patch_capacity": 0,
+    "of_which_not_visited_by_the_balanced_beam": 5
+   }
+  },
+  "PRIMARY_vs_QMAX_F0": {
+   "newly_covered": {
+    "n": 143,
+    "gold_nodes_newly_served": 359,
+    "of_which_served_by_a_kept_block_of_QMAX_SAFE": 21,
+    "of_which_served_by_the_patch_nodes": 338
+   },
+   "newly_lost": {
+    "n": 0,
+    "gold_nodes_dropped": 0,
+    "of_which_block_no_longer_kept_(QMAX_SAFE_kept_49_differ)": 0,
+    "of_which_dropped_with_the_weakest_block": 0,
+    "of_which_visited_but_beyond_the_patch_capacity": 0,
+    "of_which_not_visited_by_the_balanced_beam": 0
+   }
+  }
+ },
+ "per_cache_outcome": {
+  "PRIMARY_vs_BALANCED_H2_PATCH1": "NEUTRAL",
+  "PRIMARY_vs_QMAX_F0": "GAIN",
+  "cell": "CARRIES",
+  "cell_rule": "CONFLICT if LOSS vs either parent; STACKS if GAIN vs both; CARRIES if GAIN vs one and NEUTRAL vs the other; NEUTRAL otherwise (alpha 0.01, exact McNemar)"
+ },
+ "seconds": 53.7
+}

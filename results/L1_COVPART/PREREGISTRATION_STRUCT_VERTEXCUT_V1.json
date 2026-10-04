@@ -1,0 +1,58 @@
+{
+ "RECORD": "PREREGISTRATION",
+ "name": "STRUCT_VERTEXCUT_V1",
+ "STATUS": "STRUCTURAL_DIAGNOSTIC_QUERY_FREE",
+ "written_before_any_run": true,
+ "utc": "2026-09-15T09:53:00Z",
+ "ruling_2026-09-15_ninth": "Change the partition representation itself from 'hard nodes + halo afterward' to 'overlap is part of the partition definition' ... vertex-cut / overlapping partitioning: edges are assigned to partitions and a vertex is replicated into every partition containing one of its edges (PowerGraph; DistDGL halo nodes) ... partition STRUCT edges, not nodes ... z: E -> {1..k}; B_p = {v : exists e containing v, z(e) = p}. Now nodes naturally overlap ... There is no special halo operation afterward. The overlap is the partition ... dual incidence hypergraph -- one hypergraph vertex for each STRUCT edge x_e; for every original graph node v, a hyperedge h_v = {x_e : e incident to v}. Then partition the x_e's. lambda(h_v) is exactly the number of partitions in which v has to appear; sum_v (lambda(h_v) - 1) is basically minimizing node replication ... We construct a query-independent overlapping representation that preserves local graph topology and short connected paths under a bounded replication budget. No queries. No gold answers. No workload statistics. No labels required ... one engineering issue: block capacity ... We need ~100 unique nodes per served block ... Standard PHG won't enforce that exact nonlinear quantity automatically. For the first diagnostic I would: partition edge-vertices with PHG; materialize endpoint sets; measure actual unique nodes/block; perform deterministic capacity repair if necessary; count replication factor. Do not silently compare a 170-node overlapping block against a 100-node hard block. Keep either: same unique-node exposure at P50, or a strict block capacity ... The metrics I would use before even running retrieval: Replication factor RF = sum_p |B_p| / |V|; 1-hop edge containment; 2-hop wedge containment: for every u-m-v, whether exists p: {u,m,v} subset B_p -- this is the really interesting one; 3-hop path containment similarly as a diagnostic. Then compare those against current PHG hard+halo. If the new scheme doesn't materially improve two-hop containment for a reasonable replication factor, we don't even need the expensive retrieval replay ... one new partition arm, not another factorial: STRUCT_VERTEXCUT_V1 ... No relation labels. No queries. No gold. No training. No embedding changes ... I would not immediately contaminate this first diagnostic with KNN.",
+ "what_this_is": "A query-free, gold-free, label-free structural diagnostic of ONE new partition representation for the STRUCT graph. It produces containment / replication numbers only. It does NOT touch any replay cache, any query, any embedding, any served partition, anything under data/, and it does NOT run a retrieval replay (that needs a ruling). H2_PATCH1 (section 16) and the H3_PATCH1 workstream are independent.",
+ "construction_frozen": {
+  "graph": "undirected, de-duplicated STRUCT edges of the canonical dataset exactly as CanonicalDataset(ds).keysets() returns them (keys u*N+v, u < v, self loops dropped); no KNN, no NERX, no relation labels, no direction",
+  "hypergraph_vertices": "one per STRUCT edge, in ascending key order (object id = position in the sorted key array); unit vertex weight",
+  "hyperedges_nets": "one per original node with STRUCT degree >= 2: h_v = {x_e : e incident to v}; unit net weight. Nodes of degree 0 or 1 form no net (a 0- or 1-pin net can never be cut and contributes 0 to every objective; the net -> node map is stored). Pins = 2|E| minus the pins of degree-1 nodes.",
+  "objective": "Zoltan-PHG CONNECTIVITY (km1) with unit net weights = sum over nets (lambda(h_v) - 1) = total node replication of the endpoint sets = (RF - 1) * N restricted to degree >= 2 nodes; this is the ruling's objective verbatim",
+  "partitioner": "the validated PHG substitute exactly as scratchpad/_l1c_phg.py runs it for every scratch hypergraph of this lane (src/l1_lowmem/phg.py mpirun; NP = 4; IMBALANCE_TOL 1.03 on hypergraph-vertex (edge) counts; driver binary/wrapper sha checked against PHG_BUILD.json; validity bound ceil(1.03 |E| / k) edges per part; empty parts repaired by the generic PHG_NONEMPTY_REPAIR_V1 rule). Balance is on EDGES per part, as the ruling anticipates; the unique-node block size is measured.",
+  "blocks": "B_p = endpoint set of the edges assigned to part p (materialised after partitioning). A node of degree 0 belongs to no block (counted and reported; metaqa has none, squad 6,349, musique 9,858 -- a served version would need a home rule for them; not decided here).",
+  "k_grid": {
+   "curve": "k in {k_f, 2 k_f, 3 k_f} with k_f = the frozen k of the dataset (metaqa 432, squad 202, musique 1,175) -- the replication / containment curve; blocks at k_f hold ~ |E|/k_f edges and are expected to be LARGER than the hard block (unmatched, reported for the curve only)",
+   "matched_k_star": "target = mean unique nodes per block equal to the hard block capacity C = round(N / k_f) (100 on all three). Fixed point from the 2 k_f run: k_1 = round(RF(2 k_f) * N / C); then k_{i+1} = round(RF(k_i) * N / C) until |mean |B_p| - C| <= 0.05 C or three k* runs; every run is recorded. RF = sum_p |B_p| / N over ALL N nodes.",
+   "strict_capacity_cell": "the deterministic capacity repair below with C = round(N / k_f) applied to the k* partition (the last k* run)"
+  },
+  "capacity_repair_rule_deterministic": "while some block has |B_p| > C: take the block with the largest |B_p| (ties: smallest id); its candidate nodes in the order (fewest edges assigned to p, then larger STRUCT degree, then smaller node id); for the first candidate v whose p-edges can ALL be moved, move each p-edge e = (v, w) (ascending edge id) to the target t != p of the lowest class -- class 0: t already contains both v and w (no size change, no new replica); class 1: t contains w, |B_t| < C (v joins t); class 2: t contains v, |B_t| < C (w joins t); class 3: t contains neither, |B_t| <= C - 2 -- ties within a class: smallest |B_t|, then smallest t; memberships and sizes are updated after each edge move (so v's later edges prefer the block v just joined). A node that cannot be fully evicted is skipped; a block with no evictable node is left over-full and reported as residual overflow. Each successful eviction lowers the total overflow by >= 1 and never pushes a target above C, so the loop terminates. Moves, evictions, the replication change and the residual are recorded."
+ },
+ "baselines_same_metrics": {
+  "hard_MtK": "the served metaqa Mt-KaHyPar H4_SK partition (replay_cache.npz 'hard'; k_f blocks; |B_p| <= 103) -- the canonical L1 substrate",
+  "hard_PHG": "the served metaqa PHG+repair partition (replay_cache__LOWMEM__PHG_REPAIR1_con.npz 'hard'); squad: replay_cache.npz and the LOWMEM__PHG_con cache; musique: the LOWMEM__PHG_C1_con cache (its only served partition)",
+  "hard_plus_legacy_membership": "the served VOTING unit: node r is a member of its own block and of the blocks of its directed STRUCT out-neighbours (_l1s_core.Data.legacy_mem); block-centric: B_p^mem = B_p + {r : some out-neighbour of r is in B_p}; sizes reported -- UNMATCHED (larger than the served block); this is the 'current PHG hard+halo' of the ruling",
+  "hard_plus_undirected_halo": "B_p + N(B_p) (all undirected STRUCT neighbours; the DistDGL-style halo); sizes reported -- UNMATCHED",
+  "H4_SK_PATH2_PHG": "the section 3/4 higher-order hard construction (parts/<ds>__H4_SK_PATH2__PHG_con.npy) where it exists (metaqa, squad)"
+ },
+ "metrics_all_query_free": {
+  "RF": "sum_p |B_p| / N (all N nodes; degree-0 nodes contribute 0)",
+  "block_sizes": "|B_p| min / mean / p50 / p90 / max, blocks > C, blocks > 1.5 C",
+  "replication": "sum_v max(lambda_v - 1, 0) = total replicas beyond one; hub (deg + 1 > C) vs non-hub lambda mean and max",
+  "edge_containment_1hop": "fraction of STRUCT edges (u, v) with some block containing both (vertex-cut: 1 by construction; hard: 1 - cut fraction)",
+  "wedge_containment_2hop_PRIMARY": "over all wedges u-m-v (unordered pairs of distinct neighbours of m, every m with degree >= 2): fraction with some block p containing u, m and v -- computed EXACTLY per middle node by the pair-union rule (pair contained iff the two neighbours share a block that also contains m); reported (a) over all wedges, (b) over wedges with a NON-HUB middle (deg(m) + 1 <= C; the primary number, because hub-centred wedges are >= 90 % of all wedges on every graph and cannot be kept together by any bounded block), (c) the per-node mean of the contained fraction over non-hub middles",
+  "path_containment_3hop": "over simple 3-paths u-m1-m2-v (u != v, u != m2, v != m1) with middle edge (m1, m2): fraction with some block containing all four; exact per middle edge by the same pair-union rule; (a) all middle edges, (b) both middles non-hub; exact on every middle edge when |E| <= 300,000 (metaqa), otherwise a deterministic stride sample of 200,000 middle edges in ascending key order (squad, musique; labelled as a sample)",
+  "ball2_intact_section2": "the section 2 metric: fraction of non-hub nodes whose closed 2-hop non-hub STRUCT ball (<= C nodes) lies inside ONE block (vertex-cut: some block contains the whole ball), plus the mean best-single-block coverage of the ball",
+  "matched_exposure_note": "cells are compared at equal mean unique nodes per block; a P50 selection of overlapping blocks exposes FEWER unique nodes than 50 disjoint blocks of the same size, so the matched cell is conservative for the vertex-cut"
+ },
+ "decision_rule_structural_only": {
+  "MATERIAL": "at the strict-capacity cell (k*, capacity-repaired; residual over-full blocks <= 1 % of blocks): non-hub-middle 2-hop wedge containment >= 2 x the served hard partition's value AND an absolute gain >= +20 pts AND RF <= 3.0; secondary: section-2 ball intact fraction >= 2 x the served value (metaqa: 8.4 % -> >= 16.8 %)",
+  "NOT_MATERIAL": "otherwise",
+  "what_follows": "MATERIAL means the ruling's precondition for a retrieval replay is met; the replay itself is NOT run without a further ruling (it needs the served-unit contract: how P50 selects overlapping blocks, exposure matching, homes for degree-0 nodes). NOT_MATERIAL closes STRUCT_VERTEXCUT_V1 at the structural level. Either way the full k-curve is reported.",
+  "primary_dataset": "metaqa (the structural-locality problem of sections 2-3 and 14-16); squad and musique are secondary curves"
+ },
+ "forbidden": [
+  "reading any query, seed, gold label or replay cache beyond the served 'hard' vectors used as baselines",
+  "KNN or NERX edges, relation labels, edge direction in the construction",
+  "any objective, imbalance, NP or driver parameter other than the validated PHG contract",
+  "any k outside the grid + fixed-point rule; any second capacity rule; any tuning on the containment numbers",
+  "a retrieval replay, an L1 evaluation, or a modification of any served partition / cache / record; anything under data/"
+ ],
+ "code": {
+  "build": "scratchpad/_l1c_vcut_build.py <ds> <k>  -> parts/<ds>__STRUCT_VCUT_V1_k<k>.{npz,json}",
+  "partition": "scratchpad/_l1c_phg.py <ds> STRUCT_VCUT_V1_k<k>  -> parts/<ds>__STRUCT_VCUT_V1_k<k>__PHG_con.{npy,RUN.json}",
+  "metrics_and_repair": "scratchpad/_l1c_vcut_metrics.py <ds>  -> vcut_struct_<ds>.json (+ parts/<ds>__STRUCT_VCUT_V1_k<k>__PHG_con__CAP.npy)"
+ }
+}

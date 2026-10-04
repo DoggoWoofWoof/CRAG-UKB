@@ -1,0 +1,103 @@
+{
+ "dataset": "metaqa",
+ "K": 2000,
+ "native_K": 432,
+ "partitioner": "Zoltan-PHG (validated substitute; scratchpad/_l1c_phg.py unchanged)",
+ "hypergraph": {
+  "file": "results/L1_COVPART/parts/metaqa__H4_SK_k2000.npz",
+  "sha256": "79e0dc71f1a96ce8107ebefdf658c709dca8ad04faa35c9967d4b97e918a9abb"
+ },
+ "output": {
+  "file": "results/L1_COVPART/parts/metaqa__H4_SK_k2000__PHG_con.npy",
+  "sha256": "870d909bdc7a1a812331725f0c1bf2b4510004ece9c3887ecce35ee0159116d4"
+ },
+ "phg_run_record": {
+  "file": "results/L1_COVPART/parts/metaqa__H4_SK_k2000__PHG_con.RUN.json",
+  "sha256": "2da22865cbb7e2f21cded20c565987454d41632065dbf5cbbb06d229370634f7"
+ },
+ "repair": {
+  "rule": "PHG_NONEMPTY_REPAIR_V1",
+  "empty_blocks": [
+   999,
+   1374,
+   1433,
+   1468,
+   1485,
+   1486,
+   1487,
+   1488,
+   1489,
+   1490,
+   1491,
+   1492,
+   1493,
+   1494,
+   1495,
+   1496,
+   1497,
+   1498,
+   1499,
+   1998
+  ],
+  "moves": 20,
+  "km1_before": 53058438,
+  "km1_after": 53058438
+ },
+ "balance": {
+  "length_ok": true,
+  "ids_in_range": true,
+  "blocks_used": 2000,
+  "every_block_used": true,
+  "size_min": 1,
+  "size_max": 23,
+  "size_mean": 21.617,
+  "ceil_N_over_K": 22,
+  "within_ceil_1.03_N_over_K": true
+ },
+ "equals_served_PHG": null,
+ "served_PHG": null,
+ "wall_seconds": 15.7,
+ "run_memory": {
+  "peak_rss_kb_per_rank_time_v": [
+   35052,
+   34260,
+   33512,
+   34444
+  ],
+  "ru_maxrss_kb_per_rank": [
+   35052,
+   34260,
+   33512,
+   34444
+  ],
+  "max_rank_peak_kb": 35052,
+  "sum_of_rank_peaks_kb": 137268,
+  "sum_note": "sum of per-rank peaks = upper bound on the simultaneous aggregate (peaks need not coincide)"
+ },
+ "code": {
+  "harness": {
+   "path": "scratchpad/_l1d_scale_parts.py",
+   "sha256": "2090b01eb29c9ad9e59f4778c89fc98752673fcd5fecb4480fd3c788b2f70e13"
+  },
+  "hypergraph_builder": {
+   "path": "src/l1_canonical/hypergraph.py",
+   "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262"
+  },
+  "frozen_rule_module": {
+   "path": "scratchpad/_l1hu_build.py",
+   "sha256": "f440c2e477d3802f62ca25fa6fe724131393533251bbdb041a4baacb2e3a5e79"
+  },
+  "partition_driver_reused": {
+   "path": "src/l1_canonical/partition.py",
+   "sha256": "45be47b5dd5d432af6b7339133e9cb4d5acf38d9ee5661368af0db3e5f175257"
+  },
+  "phg_script": {
+   "path": "scratchpad/_l1c_phg.py",
+   "sha256": "7f2a416c0a74bf79cd7a57a829b1f86b4c0997d4470e9be21333bc486f33bfe3"
+  },
+  "mtk_worker": {
+   "path": "scratchpad/_l1hu_local_worker.py",
+   "sha256": "a2dff223d63272e6a914213a311070fa3cc9651f861cafc4fbdcd370926e1feb"
+  }
+ }
+}

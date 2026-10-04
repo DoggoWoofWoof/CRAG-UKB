@@ -1,0 +1,52 @@
+{
+  "schema": "V3_WHY_CVTS_DROPPED/v1",
+  "generated_utc": "2026-09-06T13:09:26Z",
+  "extracted": [
+    {
+      "name": "idirlab-freebases/FB+CVT+REV/entity2id.txt",
+      "bytes": 2485754002,
+      "crc_match": true
+    },
+    {
+      "name": "idirlab-freebases/FB+CVT+REV/train.txt",
+      "bytes": 4781675728,
+      "crc_match": true
+    },
+    {
+      "name": "idirlab-freebases/FB+CVT+REV/test.txt",
+      "bytes": 289953152,
+      "crc_match": true
+    },
+    {
+      "name": "idirlab-freebases/FB+CVT+REV/valid.txt",
+      "bytes": 289947137,
+      "crc_match": true
+    }
+  ],
+  "discriminator": "FB+CVT+REV differs from FB+CVT-REV in exactly one pipeline step, the reverse anti-join. Both carry the same subject-and-object-must-be-an-MID literal filter.",
+  "decision_rule_fixed_before_measurement": "ANTI_JOIN if over 60% of the missing CVTs have edges in FB+CVT+REV; LITERAL_FILTER if over 60% are missing there too; otherwise MIXED.",
+  "v1_cvt_nodes": 1588085,
+  "cvt_in_FB+CVT-REV": 1099653,
+  "cvt_missing_from_FB+CVT-REV": 488432,
+  "of_those_present_in_FB+CVT+REV": 97,
+  "of_those_present_in_FB+CVT+REV_pct": 0.02,
+  "of_those_absent_from_both": 488335,
+  "of_those_absent_from_both_pct": 99.98,
+  "VERDICT": "LITERAL_FILTER",
+  "cvt_coverage_if_built_on_FB+CVT+REV": {
+    "cvt_present": 1099750,
+    "cvt_present_pct": 69.25,
+    "compare_backbone_pct": 69.244
+  },
+  "variant_stats": {
+    "FB+CVT-REV": {
+      "entity2id_ids": 101917083,
+      "triples": 134142730
+    },
+    "FB+CVT+REV": {
+      "entity2id_ids": 122423736,
+      "triples": 244183610
+    }
+  },
+  "elapsed_s": 304.4
+}

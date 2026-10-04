@@ -1,0 +1,148 @@
+{
+  "schema": "NSM_ACQUISITION_PREREGISTRATION/v1",
+  "written": "2026-09-06",
+  "written_before": "any payload byte of webqsp.tgz / CWQ.tgz / entities_names.json was fetched, and before any union measurement",
+  "why_this_file_exists": "The outcome semantics of the union test must be fixed BEFORE the number is known, otherwise the threshold can be tuned to whatever the measurement returns. WEBQSP_SOURCE_MATRIX.json (2026-09-05) already pre-committed the three-way verdict; this file reproduces it UNCHANGED, pins the numeric boundary that document left in prose, and adds the two gates agreed in discussion on 2026-09-06.",
+
+  "evidence_tags": {
+    "V": "VERIFIED by this project (payload fetched / file opened / count executed)",
+    "P": "PUBLISHER-STATED (README, dataset card, issue tracker; quoted not measured)",
+    "I": "INFERRED from V/P evidence; not a measurement",
+    "U": "UNKNOWN"
+  },
+
+  "hypothesis": {
+    "id": "ROUTE_A_NSM_UNION_IS_THE_MID_PREIMAGE",
+    "statement": "The union of NSM's released per-question subgraphs (webqsp.tgz + CWQ.tgz) is the MID-keyed preimage of the released RoG WebQSP+CWQ graph.",
+    "status_before_test": "CANDIDATE_UNPROVEN_CHEAPLY_FALSIFIABLE",
+    "prior_evidence_for": [
+      {"tag": "V", "item": "NSM preprocess_step1.py get_subgraph() emits {'kb_id': head, 'text': head} -- MIDs in both fields (prior audit, code read)"},
+      {"tag": "V", "item": "RoG README names RichardHGL/WSDM2021_NSM/preprocessing/Freebase as its extraction recipe"},
+      {"tag": "I", "item": "GNN-RAG ships a separate entities_names.json; a name lookup would be pointless if the graph already carried names"}
+    ],
+    "prior_evidence_against": [
+      {"tag": "V", "item": "RoG's verb is 'We extract' -- a re-run, not a re-use of NSM's tarballs"},
+      {"tag": "V", "item": "RoG-webqsp has 4,700 examples vs NSM's 4,737 -- a 37-question delta, direct evidence against exact equality"},
+      {"tag": "V", "item": "RoG's WebQSP seed population and its MID->name projection step are both unreleased"}
+    ],
+    "what_the_test_converts": "MID preservation in NSM's RELEASED artifact is currently [I], inferred from a code audit of the generator plus the existence of entities_names.json. The file has never been opened. Opening it converts [I] -> [V] regardless of what the union count says."
+  },
+
+  "targets": {
+    "source": "released RoG WebQSP+CWQ union, measured by prior audit",
+    "triples_strong": 8309195,
+    "relations_strong": 7058,
+    "endpoints_measured_for_reference": 2592894,
+    "endpoints_are_not_an_acceptance_criterion": "The paper's 2,566,291 and our measured 2,592,894 differ by +26,603 (+1.04%) and no counting convention explains the delta (strip / whitespace / NFC / casefold / drop-literals / head-only all tested and rejected). Endpoints are REPORTED, never used to accept or reject."
+  },
+
+  "outcome_semantics_PRECOMMITTED": {
+    "note": "The three verdicts are reproduced UNCHANGED from WEBQSP_SOURCE_MATRIX.json -> targets.WEBQSP_ROG_MID.routes.A_nsm_released_subgraph_union.falsifiable_test.outcome_semantics_precommitted. Only the numeric boundary between verdict 2 and verdict 3 is new; that document left it in prose ('close but not exact' vs 'far off').",
+    "measurement": "Union ALL triples across ALL questions in BOTH tarballs, MIDs as-is, no dedup by surface. Measure |E| distinct triples, |R| distinct relations, |V| distinct endpoints.",
+    "verdicts": [
+      {
+        "id": "EXACT_PREIMAGE",
+        "condition": "triples == 8309195 AND relations == 7058",
+        "verdict": "RESOLVED. Artifact is the MID preimage; RoG surfaces become a derived display field.",
+        "action": "Populate V1 source_mid from the mapping WHERE THE MAPPING IS VALID. The 37-question split delta must still be reported.",
+        "v1_corpus_changes": false
+      },
+      {
+        "id": "SIBLING_EXTRACTION",
+        "condition": "not EXACT, and abs(triples - 8309195)/8309195 <= 0.10 and abs(relations - 7058)/7058 <= 0.10",
+        "verdict": "NOT RESOLVED. It is a sibling extraction and must be named WEBQSP_NSM_MID, never presented as the RoG graph. Report the delta.",
+        "action": "Freeze as a MEASUREMENT INSTRUMENT. Do not index it. Do not report retrieval numbers on it.",
+        "v1_corpus_changes": false
+      },
+      {
+        "id": "REFUTED",
+        "condition": "outside the SIBLING band on either axis",
+        "verdict": "Route A refuted; only route B (Freebase backend re-extraction, = V3) remains.",
+        "action": "Record the refutation and stop this branch.",
+        "v1_corpus_changes": false
+      }
+    ],
+    "boundary_justification": "10% is set from the two nearest known reference points, both measured before this test: (a) the 37-question split delta is 0.79% of RoG's 4,700 examples, and triples scale roughly with questions, so ~1% is attributable to the split alone; (b) camazlucas/Freebase-WebQSP-CWQ-Subgraph, which is genuinely DOWNSTREAM of RoG rather than a sibling of it, lands 0.61% short on triples (8,258,891) and 0.23% short on relations (7,042). A sibling extraction with a different unpublished seed list should sit further out than a downstream reconstruction, but an artifact more than 10% away on either axis is not recognisably the same extraction. The band is set once, here, and is not adjusted after the measurement.",
+    "v1_is_never_hostage": "In ALL THREE verdicts v1_corpus_changes is false. V1 builds on the released RoG graph in parallel with this branch and does not wait for it. Head-to-head comparability against RoG / GNN-RAG / ReaRev requires the artifact those systems were evaluated on; a MID-split graph forfeits that even though it is the scientifically cleaner object."
+  },
+
+  "acquisition_targets": {
+    "authorised_by": "user, 2026-09-06, explicitly and for exactly these three files",
+    "declared_total": "~1.03 GB",
+    "declared_total_caveat": {
+      "tag": "P",
+      "note": "The user recorded that they accept the byte total from this project's measured source matrix and could NOT independently certify ~1.03 GB from public pages. The sizes below for the two tarballs are Google Drive download-interstitial figures ('136M', '872M') with NO published hash; only entities_names.json has a byte-exact figure, from a Content-Range probe. Post-download measured bytes are therefore the authority, and any mismatch against these declared sizes is REPORTED, not silently accepted."
+    },
+    "files": [
+      {"name": "webqsp.tgz", "drive_id": "1KcIVAi4nf2uyflMOz5OSr54FOL2s2tAi", "declared_size": "136M", "declared_tag": "V (interstitial only)", "hash_published": null},
+      {"name": "CWQ.tgz", "drive_id": "1ua7h88kJ6dECih6uumLeOIV9a3QNdP-g", "declared_size": "872M", "declared_tag": "V (interstitial only)", "hash_published": null},
+      {"name": "entities_names.json", "drive_id": "1H7BqbVsQXr0bGuBsLUphb_Cb0Jf0rSoN", "declared_bytes": 23377816, "declared_tag": "V (Content-Range: bytes 0-0/23377816)", "hash_published": null}
+    ],
+    "provenance_recorded_before_extraction": ["source_url", "drive_id", "measured_bytes", "sha256", "filename", "download_timestamp_utc", "declared_vs_measured_delta"],
+    "not_authorised_by_this_file": ["FastRDFStore-data.zip (63.84 GiB)", "virtuoso_db.zip (52.46 GiB)", "freebase-rdf-latest.gz (29.98 GiB)", "idirlab-freebases.zip (13.18 GiB)", "any other Drive payload"]
+  },
+
+  "entities_names_json_handling": {
+    "role": "SUPPLEMENTAL_NAMING_RESOURCE_ONLY",
+    "hard_rule": "Absence of a MID from entities_names.json is NEVER evidence that the MID has no Freebase name. It is evidence only that THIS FILE does not carry one.",
+    "reason": {
+      "tag": "P",
+      "source": "user-supplied 2026-09-06, citing an open issue on cmavro/GNN-RAG titled 'entities_names.json is incomplete'",
+      "verified_by_this_project": false,
+      "note": "Recorded as publisher-side / third-party-reported, not as a finding of this project. The hard rule above holds regardless of whether the issue is confirmed, because the file's coverage was already tagged UNKNOWN in WEBQSP_SOURCE_MATRIX.json before the issue was known."
+    },
+    "fields_that_must_be_recorded_separately": {
+      "NAME_MAPPING_PRESENT_N": "MIDs in our population that the file names",
+      "NAME_MAPPING_MISSING_N": "MIDs in our population the file does not name -- a statement about the FILE, not about Freebase",
+      "NAME_MAPPING_COVERAGE_OF_NAME_RESOLVABLE_BAND": "coverage measured against the honest band [19566 .. 62375], reported at both ends, never at one",
+      "NAME_MAPPING_COVERAGE_OF_ALL_BARE_MIDS": "coverage against 1,652,618",
+      "NAME_MAPPING_APPLIED_TO_CVT_N": "MUST BE 0 -- never let this file name a node classified CVT_MEDIATOR"
+    },
+    "forbidden_inference": "MID absent from entities_names.json => ORDINARY_ENTITY_UNRESOLVED. That inference would make the §13 target ORDINARY_ENTITY_UNRESOLVED_N = 0 true or false by accident of one third-party file's completeness."
+  },
+
+  "cvt_encoding_gate_PREREGISTERED": {
+    "id": "GOLD_ONLY_IN_CVT_TEXT_N",
+    "registered_before": "any CVT record text is rendered, and before any encoder is run",
+    "question": "Of all WebQSP/CWQ gold answer strings, how many appear in some CVT's rendered record text and in NO entity's rendered text?",
+    "why_this_and_not_a_heuristic": "The alternative -- a CVT eligibility heuristic over named_argument_count / distinct_relation_count / rendered_token_count -- has a free threshold, and a free threshold tuned after seeing retrieval numbers is not a measurement. This quantity has no free parameter and is computable from the frozen graph with ZERO encoder cost.",
+    "computation": {
+      "inputs": ["frozen V1 graph", "V1 entity text view", "V1 CVT record text view", "official WebQSP + CWQ gold answer strings"],
+      "matching": "exact normalised string containment, normalisation fixed in advance: NFC, casefold, collapse internal whitespace. No fuzzy matching, no partial credit.",
+      "denominator": "all gold answer strings across both benchmarks, reported with and without deduplication",
+      "cost": "minutes; no encoder, no ANN, no embeddings"
+    },
+    "decision_rule": {
+      "near_zero": "CVT encoding is dead weight for this benchmark. Entities-only. CVT text is still GENERATED and stored (it costs ~nothing and preserves the option), but gets retrieval_role = STRUCTURAL_ONLY.",
+      "materially_non_zero": "CVT records are a real retrieval lever. Proceed to cost the token-level Dense/SPLADE bill and only then decide E / E+C / E+ALLC.",
+      "threshold_deliberately_not_pinned_here": "Unlike the union test, this gate's boundary depends on a distribution nobody has measured. Pinning a number now would be false precision. What IS pinned: the quantity, its normalisation, its denominator, and the rule that it is computed BEFORE any encoding decision and reported whatever it says."
+    },
+    "standing_caution": {
+      "source": "g2-trackA-prepartition-audit (this project, measured)",
+      "finding": "54-78% of loss occurred on queries whose coverage was UNCHANGED -- pure pool-composition sensitivity",
+      "consequence": "Admitting 1,588,085 CVT nodes to the L1 pool is exactly that class of change. A recall gain from CVT admission is not established until pool-composition effects on UNCHANGED-coverage queries are separated out."
+    },
+    "cost_note": {
+      "correction": "local-cpu-encoding-ceiling recorded '2.57M bare is viable'. That was measured on BARE rows. A role-labelled CVT record is roughly 25-40 tokens against ~8 for entity core text, and the dense bill scales with TOKENS not ROWS.",
+      "consequence": "All-CVT is not '2.576M vs 988k rows'; it is close to an order of magnitude more compute than the row count suggests. Budget in tokens."
+    }
+  },
+
+  "measurements_to_make_REGARDLESS_of_verdict": [
+    {"id": "SURFACE_COLLAPSE_RATE_MEASURED", "replaces": "an extrapolation from a 34,972-name sample at 5.10%", "with": "a direct count, if the NSM graph is MID-keyed and its surfaces can be aligned to RoG's"},
+    {"id": "CVT_CLASSIFIER_VALIDATION", "against": "NSM-side CVT evidence", "baseline_to_beat": "the structural classifier's own numbers: 96.10% of bare MIDs, control FP 238/533758 = 0.045%, cross-signal agreement 95.75%, threshold sensitivity 0.45% over a 20x tau range", "note": "cvtnodes.bin itself is NOT acquired -- it ships only inside the 63.84 GiB FastRDFStore-data.zip, which this file does not authorise"},
+    {"id": "AMBIGUOUS_NAME_GROUPS_MEASURED", "current_state": "9,334 case/whitespace-variant groups (19,228 surfaces, max group 5); 1,782 of 34,972 sampled names map to >=2 distinct MIDs, max collision 46"},
+    {"id": "NAME_MAPPING_COVERAGE", "see": "entities_names_json_handling.fields_that_must_be_recorded_separately"}
+  ],
+
+  "constraints_in_force": {
+    "writes_confined_to": ["data/final_canonical/", "scratchpad/final_canonical_build/", "results/data_audit/final_canonical_v1/"],
+    "forbidden_paths": ["data/canonical/", "data/processed/", "data/ukb_storage/", "data/original/", "results/GENERALIZATION/", "scratchpad/ablation_qwen/"],
+    "deletions": "none -- supersede by moving into a clearly named subdirectory",
+    "commit": false,
+    "encoder_run": false,
+    "no_dense_splade_ann_knn_h4_safe_halo_sp1": true,
+    "corpus_subsetting_by_query": "FORBIDDEN (core Track B invariant). Query subsetting remains allowed.",
+    "note_on_conditioning": "Both the released RoG graph and the NSM union are BENCHMARK-CONDITIONED substrates (subgraphs seeded from question entities). Neither is query-independent, and neither may be labelled as such. Only V3 (Freebase-scale) would be."
+  }
+}

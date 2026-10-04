@@ -1,0 +1,467 @@
+{
+  "_semantics": "gold ref -> {canonical node,...}; a ref resolves iff it maps to >=1 node; ALL_GOLD_REFS_RESOLVE = every ref in every gold-bearing split resolves; ambiguous refs are DISJUNCTIVE (retrieved & {alternatives} != {}), never conjunctive.",
+  "_supersedes": "build.py:344,564,570,580 -- ALL_EVAL_GOLDS_PRESENT used len(gold_node_ids)==len(set(gold_refs)), which the directive forbids.",
+  "_note": "This audit does NOT rewrite integrity_report.json; the corrected fields live here.",
+  "CORPUS_HASH_BEFORE": {
+    "2wiki": "81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4",
+    "musique": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+    "metaqa": "5f55719a08c10e54593cf1420e04cd6a9b52b8ea13ac100cb0ee8fffb3e60f9a",
+    "squad": "f592d4ab61956c1b8f4b46a0eeabdc73d2369549dec6151b2c8e976b4bafbe29",
+    "hotpotqa": "fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac"
+  },
+  "2wiki": {
+    "_SPLITS_WITH_GOLD": [
+      "dev",
+      "train"
+    ],
+    "ALL_GOLD_REFS_RESOLVE": true,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 8,
+    "GOLD_REFS_TOTAL": 434824,
+    "per_split": {
+      "dev": {
+        "n_questions": 12576,
+        "n_with_gold_refs": 12576,
+        "GOLD_REFS_TOTAL": 30654,
+        "GOLD_REFS_RESOLVED": 30654,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 12576,
+        "questions_any_ref_resolves": 12576,
+        "questions_no_ref_resolves": 0,
+        "records_disagreeing_with_independent_rederivation": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "test": {
+        "n_questions": 12576,
+        "n_with_gold_refs": 0,
+        "GOLD_REFS_TOTAL": 0,
+        "GOLD_REFS_RESOLVED": 0,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 0,
+        "questions_any_ref_resolves": 0,
+        "questions_no_ref_resolves": 0,
+        "records_disagreeing_with_independent_rederivation": 0,
+        "ALL_GOLD_REFS_RESOLVE": false
+      },
+      "train": {
+        "n_questions": 167454,
+        "n_with_gold_refs": 167454,
+        "GOLD_REFS_TOTAL": 404170,
+        "GOLD_REFS_RESOLVED": 404170,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 8,
+        "questions_all_refs_resolve": 167454,
+        "questions_any_ref_resolves": 167454,
+        "questions_no_ref_resolves": 0,
+        "records_disagreeing_with_independent_rederivation": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      }
+    },
+    "_independent_rederivation": {
+      "titles_needed": 188350,
+      "titles_matched": 188350,
+      "titles_unmatched": 0,
+      "unmatched_examples": [],
+      "ambiguous_titles": 1,
+      "ambiguous_map": {
+        "Unconquered": [
+          "2wiki:c62717110",
+          "2wiki:c8073502"
+        ]
+      }
+    }
+  },
+  "2wiki_unconquered": {
+    "candidates": {
+      "2wiki:c62717110": {
+        "title": "Unconquered",
+        "text_head": "Unconquered is the title of several American films:"
+      },
+      "2wiki:c8073502": {
+        "title": "Unconquered",
+        "text_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette Goddard. The supporting cast features Boris Karloff, Cecil Kellaway, Ward Bond, Howard Da Silva, Virgin"
+      }
+    },
+    "n_affected_questions": 8,
+    "AMBIGUITY_RESOLVED_BY_SOURCE": 8,
+    "AMBIGUITY_UNRESOLVED_BY_SOURCE": 0,
+    "fallback_semantics": "disjunction over {2wiki:c62717110, 2wiki:c8073502} -- satisfied if retrieved & alternatives != {}; NEVER require both",
+    "per_question": {
+      "82d5688a0bda11eba7f7acde48001122": {
+        "question": "Where did the director of film Unconquered die?",
+        "matched_canonical_nodes": [
+          "2wiki:c8073502"
+        ],
+        "candidates": [
+          "2wiki:c62717110",
+          "2wiki:c8073502"
+        ],
+        "official_context_paragraph_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette Goddard. The supporting cast features Boris Karloff, Cecil Kellaway, Ward Bond, How",
+        "supporting_facts_for_title": [
+          [
+            "Unconquered",
+            0
+          ]
+        ]
+      },
+      "dc5aebc8086511ebbd5eac1f6bf848b6": {
+        "question": "Do both films Il Malato Immaginario and Unconquered have the directors from the same country?",
+        "matched_canonical_nodes": [
+          "2wiki:c8073502"
+        ],
+        "candidates": [
+          "2wiki:c62717110",
+          "2wiki:c8073502"
+        ],
+        "official_context_paragraph_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette Goddard. The supporting cast features Boris Karloff, Cecil Kellaway, Ward Bond, How",
+        "supporting_facts_for_title": [
+          [
+            "Unconquered",
+            0
+          ]
+        ]
+      },
+      "1f5c6112088f11ebbd72ac1f6bf848b6": {
+        "question": "Are director of film Unconquered and director of film Follow Your Heart (1996 film) from the same country?",
+        "matched_canonical_nodes": [
+          "2wiki:c8073502"
+        ],
+        "candidates": [
+          "2wiki:c62717110",
+          "2wiki:c8073502"
+        ],
+        "official_context_paragraph_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette Goddard. The supporting cast features Boris Karloff, Cecil Kellaway, Ward Bond, How",
+        "supporting_facts_for_title": [
+          [
+            "Unconquered",
+            0
+          ]
+        ]
+      },
+      "0a25708e085511ebbd59ac1f6bf848b6": {
+        "question": "Which film has the director who was born first, Unconquered or The Joke Thief?",
+        "matched_canonical_nodes": [
+          "2wiki:c8073502"
+        ],
+        "candidates": [
+          "2wiki:c62717110",
+          "2wiki:c8073502"
+        ],
+        "official_context_paragraph_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette Goddard. The supporting cast features Boris Karloff, Cecil Kellaway, Ward Bond, How",
+        "supporting_facts_for_title": [
+          [
+            "Unconquered",
+            0
+          ]
+        ]
+      },
+      "0bf46a46085511ebbd59ac1f6bf848b6": {
+        "question": "Do director of film The Joke Thief and director of film Unconquered have the same nationality?",
+        "matched_canonical_nodes": [
+          "2wiki:c8073502"
+        ],
+        "candidates": [
+          "2wiki:c62717110",
+          "2wiki:c8073502"
+        ],
+        "official_context_paragraph_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette Goddard. The supporting cast features Boris Karloff, Cecil Kellaway, Ward Bond, How",
+        "supporting_facts_for_title": [
+          [
+            "Unconquered",
+            0
+          ]
+        ]
+      },
+      "90fd9b300bda11eba7f7acde48001122": {
+        "question": "What is the date of death of the director of film Unconquered?",
+        "matched_canonical_nodes": [
+          "2wiki:c8073502"
+        ],
+        "candidates": [
+          "2wiki:c62717110",
+          "2wiki:c8073502"
+        ],
+        "official_context_paragraph_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette Goddard. The supporting cast features Boris Karloff, Cecil Kellaway, Ward Bond, How",
+        "supporting_facts_for_title": [
+          [
+            "Unconquered",
+            0
+          ]
+        ]
+      },
+      "1d70c2e4088f11ebbd72ac1f6bf848b6": {
+        "question": "Which film whose director was born first, Follow Your Heart (1996 Film) or Unconquered?",
+        "matched_canonical_nodes": [
+          "2wiki:c8073502"
+        ],
+        "candidates": [
+          "2wiki:c62717110",
+          "2wiki:c8073502"
+        ],
+        "official_context_paragraph_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette Goddard. The supporting cast features Boris Karloff, Cecil Kellaway, Ward Bond, How",
+        "supporting_facts_for_title": [
+          [
+            "Unconquered",
+            0
+          ]
+        ]
+      },
+      "ddcf14f2086511ebbd5eac1f6bf848b6": {
+        "question": "Which film has the director died first, Unconquered or Il malato immaginario?",
+        "matched_canonical_nodes": [
+          "2wiki:c8073502"
+        ],
+        "candidates": [
+          "2wiki:c62717110",
+          "2wiki:c8073502"
+        ],
+        "official_context_paragraph_head": "Unconquered is a 1947 adventure film produced and directed by Cecil B. DeMille and starring Gary Cooper and Paulette Goddard. The supporting cast features Boris Karloff, Cecil Kellaway, Ward Bond, How",
+        "supporting_facts_for_title": [
+          [
+            "Unconquered",
+            0
+          ]
+        ]
+      }
+    }
+  },
+  "musique": {
+    "_SPLITS_WITH_GOLD": [
+      "dev",
+      "train"
+    ],
+    "ALL_GOLD_REFS_RESOLVE": true,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "GOLD_REFS_TOTAL": 53017,
+    "per_split": {
+      "dev": {
+        "n_questions": 2417,
+        "n_with_gold_refs": 2417,
+        "GOLD_REFS_TOTAL": 6404,
+        "GOLD_REFS_RESOLVED": 6404,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 2417,
+        "questions_any_ref_resolves": 2417,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "test": {
+        "n_questions": 2459,
+        "n_with_gold_refs": 0,
+        "GOLD_REFS_TOTAL": 0,
+        "GOLD_REFS_RESOLVED": 0,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 0,
+        "questions_any_ref_resolves": 0,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": false
+      },
+      "train": {
+        "n_questions": 19938,
+        "n_with_gold_refs": 19938,
+        "GOLD_REFS_TOTAL": 46613,
+        "GOLD_REFS_RESOLVED": 46613,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 19938,
+        "questions_any_ref_resolves": 19938,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      }
+    },
+    "_cross_check_build_report": {
+      "unresolved_gold_refs": {
+        "counts": {},
+        "examples": []
+      },
+      "title_resolution": null,
+      "build_ALL_EVAL_GOLDS_PRESENT": true
+    }
+  },
+  "metaqa": {
+    "_SPLITS_WITH_GOLD": [
+      "dev",
+      "test",
+      "train"
+    ],
+    "ALL_GOLD_REFS_RESOLVE": true,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "GOLD_REFS_TOTAL": 3049920,
+    "per_split": {
+      "dev": {
+        "n_questions": 39138,
+        "n_with_gold_refs": 39138,
+        "GOLD_REFS_TOTAL": 300980,
+        "GOLD_REFS_RESOLVED": 300980,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 39138,
+        "questions_any_ref_resolves": 39138,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "test": {
+        "n_questions": 39093,
+        "n_with_gold_refs": 39093,
+        "GOLD_REFS_TOTAL": 302779,
+        "GOLD_REFS_RESOLVED": 302779,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 39093,
+        "questions_any_ref_resolves": 39093,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "train": {
+        "n_questions": 329282,
+        "n_with_gold_refs": 329282,
+        "GOLD_REFS_TOTAL": 2446161,
+        "GOLD_REFS_RESOLVED": 2446161,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 329282,
+        "questions_any_ref_resolves": 329282,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      }
+    },
+    "_cross_check_build_report": {
+      "unresolved_gold_refs": {
+        "counts": {},
+        "examples": []
+      },
+      "title_resolution": null,
+      "build_ALL_EVAL_GOLDS_PRESENT": true
+    }
+  },
+  "squad": {
+    "_SPLITS_WITH_GOLD": [
+      "dev",
+      "train"
+    ],
+    "ALL_GOLD_REFS_RESOLVE": true,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "GOLD_REFS_TOTAL": 142192,
+    "per_split": {
+      "dev": {
+        "n_questions": 11873,
+        "n_with_gold_refs": 11873,
+        "GOLD_REFS_TOTAL": 11873,
+        "GOLD_REFS_RESOLVED": 11873,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 11873,
+        "questions_any_ref_resolves": 11873,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "train": {
+        "n_questions": 130319,
+        "n_with_gold_refs": 130319,
+        "GOLD_REFS_TOTAL": 130319,
+        "GOLD_REFS_RESOLVED": 130319,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 130319,
+        "questions_any_ref_resolves": 130319,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      }
+    },
+    "_cross_check_build_report": {
+      "unresolved_gold_refs": {
+        "counts": {},
+        "examples": []
+      },
+      "title_resolution": null,
+      "build_ALL_EVAL_GOLDS_PRESENT": true
+    }
+  },
+  "hotpotqa": {
+    "_SPLITS_WITH_GOLD": [
+      "train",
+      "validation"
+    ],
+    "ALL_GOLD_REFS_RESOLVE": true,
+    "MISSING_GOLD_REFS": 0,
+    "AMBIGUOUS_GOLD_REFS": 0,
+    "GOLD_REFS_TOTAL": 195704,
+    "per_split": {
+      "test": {
+        "n_questions": 7405,
+        "n_with_gold_refs": 0,
+        "GOLD_REFS_TOTAL": 0,
+        "GOLD_REFS_RESOLVED": 0,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 0,
+        "questions_any_ref_resolves": 0,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": false
+      },
+      "train": {
+        "n_questions": 90447,
+        "n_with_gold_refs": 90447,
+        "GOLD_REFS_TOTAL": 180894,
+        "GOLD_REFS_RESOLVED": 180894,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 90447,
+        "questions_any_ref_resolves": 90447,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      },
+      "validation": {
+        "n_questions": 7405,
+        "n_with_gold_refs": 7405,
+        "GOLD_REFS_TOTAL": 14810,
+        "GOLD_REFS_RESOLVED": 14810,
+        "MISSING_GOLD_REFS": 0,
+        "AMBIGUOUS_GOLD_REFS": 0,
+        "questions_all_refs_resolve": 7405,
+        "questions_any_ref_resolves": 7405,
+        "questions_no_ref_resolves": 0,
+        "ALL_GOLD_REFS_RESOLVE": true
+      }
+    },
+    "_cross_check_build_report": {
+      "unresolved_gold_refs": {
+        "counts": {},
+        "examples": []
+      },
+      "title_resolution": {
+        "titles_needed": 535840,
+        "titles_matched": 535840,
+        "titles_unmatched": 0,
+        "ambiguous_titles": 0,
+        "ambiguous_examples": {}
+      },
+      "build_ALL_EVAL_GOLDS_PRESENT": true
+    }
+  },
+  "CORPUS_HASH_AFTER": {
+    "2wiki": "81fa7d1a5d4bbb24b0925e8ec65a4b59cb2416e87d6c5b7c20f74ac41a6d76d4",
+    "musique": "dc00da21ea8a0fd50449a6d21bef23b8a7dd098b3d76aa4641c46014dd32a73f",
+    "metaqa": "5f55719a08c10e54593cf1420e04cd6a9b52b8ea13ac100cb0ee8fffb3e60f9a",
+    "squad": "f592d4ab61956c1b8f4b46a0eeabdc73d2369549dec6151b2c8e976b4bafbe29",
+    "hotpotqa": "fe139de9c7c2a14f428ed98deb336269bff0cbb0befbb51bf8797ae8cce5ccac"
+  },
+  "CORPUS_HASH_UNCHANGED": true,
+  "_STATUS_2026_09_06": {
+    "scope_of_CORPUS_HASH_UNCHANGED": "true FOR THIS AUDIT ONLY. The gold-semantics fix ran --queries-only and did not touch any node table, which is what CORPUS_HASH_BEFORE == CORPUS_HASH_AFTER records. It is NOT a claim that those hashes are still the live corpus hashes.",
+    "hashes_since_moved_by_TEXTUALIZATION_REV_2": {
+      "hotpotqa": "fe139de9c7c2a14f... -> 1b7eeac2bfbd7100107f3eb252c947af333bf018c1dd9f7bdfbc3a5ea807653f (2026-09-05)",
+      "2wiki": "81fa7d1a5d4bbb24... -> 94fe68b8d5f291f1849d752fcc2349b024a1026a9e673d7f813ceae5fd9aa185 (2026-09-06)"
+    },
+    "unchanged_by_those_revisions": "NODE_ORDER_HASH, node count, node ids, node order, and every gold result recorded in this file (re-verified on both rev2 tables)",
+    "live_values": "data/final_canonical/<ds>/integrity_report.json -> CORPUS_HASH",
+    "metaqa_musique_squad": "unaffected; those hashes are still live"
+  }
+}

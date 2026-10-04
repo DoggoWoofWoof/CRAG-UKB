@@ -1,0 +1,70 @@
+{
+  "dataset": "musique",
+  "n_rows": 117534,
+  "shard_size": 250000,
+  "shards": [
+    {
+      "shard": 0,
+      "file": "reuse_map/shard_000.jsonl"
+    }
+  ],
+  "fields": [
+    "canonical_node_id",
+    "source_identity",
+    "canonical_text_hash",
+    "legacy_node_id",
+    "legacy_row_index",
+    "legacy_text_hash",
+    "status",
+    "dense_input_hash",
+    "splade_input_hash",
+    "dense_reusable",
+    "splade_reusable",
+    "ner_reusable"
+  ],
+  "extra_fields": [
+    "dense_reuse_source",
+    "splade_reuse_source",
+    "phase_c_row_index",
+    "legacy_dense_input_hash",
+    "legacy_splade_input_hash",
+    "ukb_row_token_identical",
+    "ner_reuse_state"
+  ],
+  "reuse_rule": "token-ID equality under the FROZEN tokenizers, not raw-text equality",
+  "frozen_dense": {
+    "model": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+    "input": "text field verbatim (no prefix/title for docs)",
+    "max_seq_length": 32768,
+    "source": "src/experiments/canonical_encode.py:176-189 + sentence_bert_config.json"
+  },
+  "frozen_splade": {
+    "model": "naver/splade-cocondenser-ensembledistil",
+    "truncation": true,
+    "max_length": 256,
+    "source": "src/experiments/canonical_encode.py:209 + encodings/splade/docs/status/shard_*.json"
+  },
+  "row_sources": {
+    "canonical_nodes": 117534,
+    "legacy_ukb_docs": 13672,
+    "phase_c_docs": 117533,
+    "phase_c_dense_complete": true,
+    "phase_c_splade_complete": true,
+    "legacy_ukb_embeddings": "data/ukb_storage/musique_clean/gte_qwen/nodes.npy",
+    "phase_c_embeddings": "data/canonical/musique/encodings/"
+  },
+  "ner": {
+    "state": "EDGES_ONLY",
+    "where": "only graph_ner.tsv persisted; per-doc entities must be re-run (cheap, spaCy sm)"
+  },
+  "counts": {
+    "NEW": 103862,
+    "dense_reusable": 117534,
+    "splade_reusable": 117534,
+    "dense_from_PHASE_C": 117534,
+    "EXACT": 13672,
+    "ukb_row_token_identical": 13672
+  },
+  "seconds": 28.2,
+  "n_distinct_texts_tokenized": 181512
+}

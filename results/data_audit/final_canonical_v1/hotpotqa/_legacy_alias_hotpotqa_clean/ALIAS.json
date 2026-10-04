@@ -1,0 +1,24 @@
+{
+  "record": "LEGACY SUBSTRATE ALIAS",
+  "canonical_dataset_directory": "data/final_canonical/hotpotqa/",
+  "legacy_substrate_name": "hotpotqa_clean",
+  "statement": "'hotpotqa_clean' is the name of the LEGACY experimental substrate (507,494 nodes, the HotpotQA DISTRACTOR-setting context union), not of a dataset. canonical_v1 uses the clean dataset name 'hotpotqa' for its directory, exactly as it does for 2wiki / musique / squad. There is now exactly ONE live directory for this dataset.",
+  "what_changed_on_2026-09-05": "data/final_canonical/hotpotqa_clean/ previously existed as a second directory holding only the deferral record status.json. Its content was MOVED here (nothing deleted) and the now-empty directory was removed, so no two live directories exist for one dataset. The migrated file is status.json in this directory.",
+  "migrated_file": "status.json",
+  "migrated_file_content_is": "the 2026-09-05T06:25:07 DEFERRED_FULLWIKI_CANONICALIZATION record, superseded by the build performed later the same day",
+  "superseded_by": {
+    "canonical_corpus": "the official HotpotQA FULLWIKI abstracts snapshot, one node per Wikipedia curid",
+    "artifacts": "data/final_canonical/hotpotqa/{nodes.jsonl,dataset_manifest.json,integrity_report.json,legacy_comparison.json,node_id_map_legacy.json,query_independence_test.json,build_info.json,queries/,reuse_map/}"
+  },
+  "aliases_recorded_in": [
+    "data/final_canonical/hotpotqa/dataset_manifest.json -> legacy_substrate_name, legacy_substrate_aliases",
+    "data/final_canonical/MANIFEST.json -> datasets.hotpotqa.legacy_substrate_name"
+  ],
+  "other_places_the_legacy_name_still_legitimately_appears": [
+    "data/processed/master_nodes_hotpotqa_clean.json (the legacy node table itself -- never written to by this track)",
+    "data/ukb_storage/hotpotqa_clean/ (legacy embeddings)",
+    "results/GENERALIZATION/G2_L1_PARTITION_SEARCH/runs/cache_hotpotqa_clean.npz (legacy router cache)",
+    "data/final_canonical/_work/legacy/hotpotqa_clean/ (the read-only dump used for legacy_comparison.json)"
+  ],
+  "written": "2026-09-05"
+}

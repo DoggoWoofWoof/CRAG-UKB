@@ -1,0 +1,302 @@
+{
+ "RECORD": "PHG_PREREG",
+ "utc": "2026-09-13T17:41:09Z",
+ "arm": "H4_SK_ZOLTAN_PHG_CONNECTIVITY_NP4",
+ "tag": "LOWMEM__PHG_con",
+ "question": "does canonical L1 using the PHG partition achieve at least Mt-KaHyPar-level final retrieval recall (SAFE) on the identical frozen H4_SK input and identical dev query ids?  NOT: does PHG reproduce Mt-KaHyPar's partition.",
+ "canonical_input": {
+  "hypergraph_rule": "H4_SPLIT_PRESERVE",
+  "families": "STRUCT + KNN",
+  "tag": "H4_SK",
+  "objective": "connectivity / KM1",
+  "k": "existing canonical rule max(1, N // 100)",
+  "imbalance": "1.03 (eps 0.03)",
+  "vertex_weights": "unit",
+  "hyperedge_weights": "H4 build weights as frozen",
+  "node_universe": "all canonical positions, canonical order",
+  "representation": "frozen H4_SK_STREAM_V1 shards (read-only), rank r owns a contiguous shard range; the mathematical hypergraph is never sharded, only its representation"
+ },
+ "phg_parameters_in_order": [
+  [
+   "DEBUG_LEVEL",
+   "0"
+  ],
+  [
+   "NUM_GID_ENTRIES",
+   "1"
+  ],
+  [
+   "NUM_LID_ENTRIES",
+   "1"
+  ],
+  [
+   "OBJ_WEIGHT_DIM",
+   "1"
+  ],
+  [
+   "EDGE_WEIGHT_DIM",
+   "1"
+  ],
+  [
+   "DETERMINISTIC",
+   "1"
+  ],
+  [
+   "RETURN_LISTS",
+   "PARTS"
+  ],
+  [
+   "REMAP",
+   "0"
+  ],
+  [
+   "LB_METHOD",
+   "HYPERGRAPH"
+  ],
+  [
+   "HYPERGRAPH_PACKAGE",
+   "PHG"
+  ],
+  [
+   "LB_APPROACH",
+   "PARTITION"
+  ],
+  [
+   "IMBALANCE_TOL",
+   "1.03"
+  ],
+  [
+   "PHG_CUT_OBJECTIVE",
+   "CONNECTIVITY"
+  ],
+  [
+   "PHG_EDGE_SIZE_THRESHOLD",
+   "1.0"
+  ],
+  [
+   "PHG_RANDOMIZE_INPUT",
+   "0"
+  ],
+  [
+   "PHG_MULTILEVEL",
+   "1"
+  ],
+  [
+   "PHG_COARSENING_METHOD",
+   "AGG"
+  ],
+  [
+   "PHG_COARSEPARTITION_METHOD",
+   "AUTO"
+  ],
+  [
+   "PHG_REFINEMENT_METHOD",
+   "FM"
+  ],
+  [
+   "PHG_REFINEMENT_QUALITY",
+   "1"
+  ],
+  [
+   "PHG_EDGE_WEIGHT_OPERATION",
+   "ERROR"
+  ],
+  [
+   "PHG_PROCESSOR_REDUCTION_LIMIT",
+   "0.5"
+  ],
+  [
+   "PHG_REPART_MULTIPLIER",
+   "100"
+  ],
+  [
+   "CHECK_HYPERGRAPH",
+   "1"
+  ],
+  [
+   "PHG_OUTPUT_LEVEL",
+   "1"
+  ]
+ ],
+ "parameter_notes": {
+  "IMBALANCE_TOL": "1.03 = the canonical eps 0.03; Zoltan bounds max part weight / average, the canonical contract bounds max block by ceil(1.03 N/k) -- the contract bound is the validity gate, Zoltan's own (never looser) tolerance is recorded",
+  "PHG_EDGE_SIZE_THRESHOLD": "1.0 mandatory: the documented default 0.25 omits hyperedges larger than 25 % of the vertices; no canonical hyperedge may be discarded (structure gate checks what the query functions returned; Zoltan output is grepped for removal messages)",
+  "PHG_EDGE_WEIGHT_OPERATION": "ERROR: every rank supplies the H4 weight of every net it holds a pin of; any cross-rank disagreement is a Zoltan error",
+  "REMAP": "0: raw PHG part labels (the documented default 1 only renumbers parts; labels are never compared)",
+  "DETERMINISTIC": "1: library parameter (present in the installed parameter table; the user guide pages fetched do not document it); same-rank-count repeatability is MEASURED by a repeat run, not assumed",
+  "PHG_RANDOMIZE_INPUT": "0 as specified",
+  "CHECK_HYPERGRAPH": "1: Zoltan validates the hypergraph it received",
+  "RETURN_LISTS": "PARTS: the new part of every local object is returned",
+  "PHG_REPART_MULTIPLIER": "documented default; inert under LB_APPROACH=PARTITION",
+  "coarsening/refinement": "AGG / FM / quality 1 / multilevel 1 / coarse-partition AUTO / processor reduction 0.5 = the quality-oriented documented defaults identified in AUDIT_ZOLTAN_PHG.json, set explicitly"
+ },
+ "NUM_GLOBAL_PARTS": "k (appended by the driver)",
+ "undocumented_parameters_left_at_library_default": [
+  "PHG_COARSENING_LIMIT",
+  "PHG_COARSENING_METHOD_FAST",
+  "PHG_COARSENING_NCANDIDATE",
+  "PHG_REFINEMENT_LOOP_LIMIT",
+  "PHG_REFINEMENT_MAX_NEG_MOVE",
+  "PHG_BAL_TOL_ADJUSTMENT",
+  "PHG_VERTEX_VISIT_ORDER",
+  "PHG_DIRECT_KWAY",
+  "PHG_EDGE_SCALING",
+  "PHG_VERTEX_SCALING",
+  "PHG_USE_TIMERS",
+  "PHG_NPROC_VERTEX",
+  "PHG_NPROC_EDGE",
+  "PHG_KEEP_TREE",
+  "PHG_MATCH_EDGE_SIZE_THRESHOLD"
+ ],
+ "mpi_ranks": 4,
+ "rank_count_caveat": "PHG's 2D layout and coarsening depend on the rank count; partitions are not assumed identical across rank counts; NP is part of the contract.  Multiple LOCAL ranks validate implementation and quality only -- no claim about lower aggregate host RAM at large scale is made from this run.",
+ "reproducibility": "no checkpoint/restart guarantee is claimed for PHG (FREIGHT's proven exact restart does not transfer); stage-boundary artifacts only: H4_SK input verified -> PHG input/callback manifest -> completed PHG partition -> P50 -> replay cache.  Same-rank-count repeatability is measured by one identical repeat run (diagnostic; the FIRST run is the arm's partition).",
+ "datasets_in_order": [
+  "squad",
+  "metaqa"
+ ],
+ "query_population": "dev (EVAL_SPLITS dev of the canonical replay, the frozen hop-balanced sample rule); the sealed test split is never read; identical query ids to the frozen Mt-KaHyPar replay",
+ "gates": {
+  "1_structure": "EXACT: the union of what the Zoltan query functions returned on all ranks (dumped by the query functions themselves at their first invocation) must reconstruct N, M, pin count, unit vertex weights, hyperedge weights, the global node positions 0..N-1 (each exactly once), the global hyperedge ids 0..M-1 (each with >= 1 pin), the incidence multiset and the canonical H4_SK_STRUCTURE_V1 digest == ORIGINAL_STRUCTURE_SHA256 of the frozen H4_SK_STREAM_V1 manifest; weight reception: Zoltan_LB_Eval_HG's connectivity of the rank-ownership assignment (gate mode) == Python weighted KM1 of the same assignment within 1e-4 relative (float accumulation); the dumps of the partition run must be byte-identical to the gate run's.  Any mismatch = STRUCTURE_MISMATCH and STOP (no partition is used).",
+  "2_partition_validity": "length N, block ids in [0, k), no empty block, max block <= ceil(1.03 N/k) (the canonical contract bound).  Failure = PARTITION_INVALID (no downstream evaluation).  Partition ids are NOT compared with Mt-KaHyPar's.",
+  "3_L1_primary": "the PHG partition goes through the unchanged canonical L1 (replay cache -> l1_eval numerics) on the identical dev query ids as the frozen Mt-KaHyPar replay; PRIMARY = final SAFE_ALL_P50 paired exact two-sided McNemar: SIG_LOSS iff delta(PHG - MtK) < 0 and p < 0.05, otherwise NONINFERIOR.  SECONDARY (reported, same rule, not the decision): BASE_ALL_P50.  DIAGNOSTICS (no rule): hop-wise paired results, candidate coverage (ANY), SAFE additions, scope nodes, balance.",
+  "4_partition_metrics": "KM1 / connectivity, imbalance, STRUCT cut, KNN cut, block-size min/p50/p95/max, empty blocks, memory, runtime = diagnostics; no numeric acceptance threshold exists or will be added after seeing the numbers."
+ },
+ "decision_rule": "per dataset: PHG_STRUCTURE_MISMATCH | PHG_PARTITION_INVALID | PHG_L1_NONINFERIOR | PHG_L1_SIG_LOSS (from gates 1-3 in that order).  SQuAD runs first; MetaQA runs only if SQuAD is structurally valid (gate 1 PASS) -- with the identical contract.  After both: STOP_FOR_REVIEW.  No tuning, no second configuration, no other rank count, no other dataset.",
+ "measurements": [
+  "MPI rank count",
+  "wall time (partition, total, per rank)",
+  "peak RSS per rank (/usr/bin/time -v + getrusage)",
+  "aggregate peak RSS = sum of per-rank peaks (upper bound, peaks need not coincide) and max per-rank peak",
+  "KM1 / connectivity (Python recomputation = authority; Zoltan_LB_Eval_HG cutl as cross-check)",
+  "imbalance",
+  "STRUCT cut",
+  "KNN cut",
+  "block sizes min/p50/p95/max, empty blocks",
+  "P50 statistics (BASE/SAFE ANY, scope nodes, BND, balance, by hop)",
+  "BASE, SAFE, candidate coverage, SAFE additions, hop-wise, exact paired McNemar vs frozen Mt-KaHyPar"
+ ],
+ "packages": {
+  "record": {
+   "path": "results/L1_LOWMEM/PHG_PACKAGES.json",
+   "bytes": 9677,
+   "sha256": "1c4a3d8107d8207066d20a1aadce15849ed23b5b8ebc63bd0276c52a9af17b23"
+  },
+  "dpkg_versions_after_install": {
+   "libopenmpi-dev:amd64": "4.1.2-2ubuntu1",
+   "libtrilinos-zoltan-13.2:amd64": "13.2.0-1ubuntu1",
+   "libtrilinos-zoltan-dev:amd64": "13.2.0-1ubuntu1",
+   "openmpi-bin": "4.1.2-2ubuntu1"
+  },
+  "mpirun": "mpirun (Open MPI) 4.1.2",
+  "mpicxx": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "zoltan_version_header": "ZOLTAN_VERSION_NUMBER 3.90",
+  "authorized_downloads": [
+   "apt update",
+   "apt install -y libtrilinos-zoltan-dev libopenmpi-dev openmpi-bin"
+  ]
+ },
+ "build": {
+  "record": {
+   "path": "results/L1_LOWMEM/PHG_BUILD.json",
+   "bytes": 1650,
+   "sha256": "65fa41e7141e7344f5360c35da1c30df83a6a6ac18a353db93935539fa899a1b"
+  },
+  "driver_source_sha256": "cf5099851282444d0b6c87b399210ae3dd6bc09f8fe2a5f7b49d315ce4b133b4",
+  "driver_binary_sha256": "a36e1b3dbcef2cf5f20c09cc6ab014ab13ce2dcfeb3ec7c1041aa00d14d7ccb9",
+  "wrapper_sha256": "6de130e4bde663ce5f12d8633c45b20573eaaf1dd0cd7f228c71877f7c8c4367"
+ },
+ "frozen_read_only": {
+  "H4_SK_LOW_MEMORY_PARTITIONING_REPORT.json": {
+   "path": "results/L1_LOWMEM/H4_SK_LOW_MEMORY_PARTITIONING_REPORT.json",
+   "bytes": 50578,
+   "sha256": "5a07e478952fdc8d46949b94cdb159f1b7eae34eb8b35e859ee981df5b2dd678"
+  },
+  "H4_SK_LOW_MEMORY_PARTITIONING_REPORT.md": {
+   "path": "results/L1_LOWMEM/H4_SK_LOW_MEMORY_PARTITIONING_REPORT.md",
+   "bytes": 11366,
+   "sha256": "89831695ce7085932222729fd0f33a32be4409887565491328b89365e6df36ec"
+  },
+  "FREIGHT_RUNS_squad.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_squad.json",
+   "bytes": 45452,
+   "sha256": "f252ff8dbcf82875330eee67d5f7af9b44e0ecc7e5f7a900fb7b2c3c415683db"
+  },
+  "FREIGHT_RUNS_metaqa.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_metaqa.json",
+   "bytes": 38282,
+   "sha256": "aaf4d3a7ad6f5a9b88448f28c5b5fc89462cf0d9d7f767f3393a7cbb0c39c0d0"
+  },
+  "FREIGHT_RUNS_musique.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RUNS_musique.json",
+   "bytes": 50727,
+   "sha256": "f23b6c85302ab7e19dfe8fc14d67b85b9e58dd4087e86c29707365d1d70230b6"
+  },
+  "FREIGHT_BUILD.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_BUILD.json",
+   "bytes": 6406,
+   "sha256": "e01faeded3c5272b6ea5ebce7e4a03d89ed662c4970fea5321c938c051b9fafb"
+  },
+  "L1_DOWNSTREAM_squad.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_squad.json",
+   "bytes": 3507,
+   "sha256": "1aace62a2a3cb6da1c96050b0472bea334f68d57ff95d1f9ac2bbb151180ecf9"
+  },
+  "L1_DOWNSTREAM_metaqa.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa.json",
+   "bytes": 5667,
+   "sha256": "784f3fe75abb979b7e2d2eacc84ac57335ff8373356d6c2627fbb0866f8a5bd6"
+  },
+  "L1_DOWNSTREAM_musique.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_musique.json",
+   "bytes": 1599,
+   "sha256": "4888f4aae9e713a4842721a9a9ca46c19fa68de7b40e5124515a1676827ed3f3"
+  },
+  "MUSIQUE_MTKAHYPAR_RETRY.json": {
+   "path": "results/L1_LOWMEM/MUSIQUE_MTKAHYPAR_RETRY.json",
+   "bytes": 2515,
+   "sha256": "1ef89da11257675f86fde39bf8e75a3ddb3f6b909e79373b1a640701e011b7d6"
+  },
+  "FREIGHT_RESTREAM_PREREG.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_PREREG.json",
+   "bytes": 6753,
+   "sha256": "3b0eb1fb82a0d94f65f24934c01ef73b313ca1cf5394cc140960e147dc77bfe2"
+  },
+  "FREIGHT_RESTREAM_RUNS_squad.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_RUNS_squad.json",
+   "bytes": 25172,
+   "sha256": "ac2c6b13cffef2ef4ac3023c615f9e5cc0d574d4641272219bbcad78e9909ed0"
+  },
+  "FREIGHT_RESTREAM_RUNS_metaqa.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_RUNS_metaqa.json",
+   "bytes": 39654,
+   "sha256": "a596c0a25750ab9ba3389f62d34cb75b512f0ea47879a0f8967231363fb7b6fb"
+  },
+  "FREIGHT_RESTREAM_REPORT.json": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_REPORT.json",
+   "bytes": 20553,
+   "sha256": "044aea86c05de815647ba444fec93cd83516e6d8e73967dfbf55accb28296ce7"
+  },
+  "FREIGHT_RESTREAM_REPORT.md": {
+   "path": "results/L1_LOWMEM/FREIGHT_RESTREAM_REPORT.md",
+   "bytes": 5328,
+   "sha256": "7dc1bbb67942e9de1337d8c3e05bbd7c6debab0eabe1a08e4fdaf2245d04672f"
+  },
+  "L1_DOWNSTREAM_metaqa__restream2.json": {
+   "path": "results/L1_LOWMEM/L1_DOWNSTREAM_metaqa__restream2.json",
+   "bytes": 5682,
+   "sha256": "2dd3ef227324157824ca7be476e5dee75d8825e243277cd0056d87bd3ae3075b"
+  },
+  "AUDIT_ZOLTAN_PHG.json": {
+   "path": "results/L1_LOWMEM/AUDIT_ZOLTAN_PHG.json",
+   "bytes": 5518,
+   "sha256": "1734ed9181df71c323768cb6065a856d28d1648888381312029a0e264453b24b"
+  },
+  "PHG_PACKAGES.json": {
+   "path": "results/L1_LOWMEM/PHG_PACKAGES.json",
+   "bytes": 9677,
+   "sha256": "1c4a3d8107d8207066d20a1aadce15849ed23b5b8ebc63bd0276c52a9af17b23"
+  }
+ },
+ "scope": "SQuAD + MetaQA only; MuSiQue / WebQSP / HotpotQA / 2Wiki are not run; FREIGHT stays FREIGHT_CLOSED (not reopened, tuned, swept or overwritten)"
+}

@@ -1,0 +1,465 @@
+{
+  "schema": "WEBQSP_SOURCE_MATRIX/v1",
+  "generated": "2026-09-05",
+  "task": "WEBQSP source lineage audit - report only, no build, no large download",
+  "companion_document": "data/final_canonical/webqsp/WEBQSP_SOURCE_LINEAGE_MATRIX.md",
+  "builds_on": [
+    "data/final_canonical/webqsp/WEBQSP_FREEBASE_PIPELINE_AUDIT.md",
+    "data/final_canonical/webqsp/FREEBASE_SOURCE_PROPOSAL.md"
+  ],
+  "evidence_tags": {
+    "V": "VERIFIED in this session (HTTP response received, listing retrieved, source/PDF page read)",
+    "P": "PUBLISHER-STATED (artifact README / dataset card / paper claim, quoted not measured)",
+    "I": "INFERRED from V/P evidence; not a measurement",
+    "U": "UNKNOWN / unverifiable without acquiring the artifact"
+  },
+
+  "headline": {
+    "WEBQSP_ROG_MID": {
+      "graph_source_status": "STILL_UNRESOLVED",
+      "new_this_session": "A ~1.008 GB falsifiable candidate identified: NSM's released webqsp.tgz + CWQ.tgz",
+      "reason": "NSM's released per-question subgraphs are MID-keyed output of the exact recipe RoG says it followed, but RoG states it re-ran extraction, and RoG's split is 37 questions smaller than NSM's."
+    },
+    "WEBQSP_KBQA_24M": {
+      "graph_source_status": "STILL_UNRESOLVED",
+      "stronger_claim": "UNRESOLVABLE_BY_DOWNLOAD_ON_PRESENT_EVIDENCE",
+      "reason": "The 24.9M/164.6M artifact is PullNet's intermediate KB. PullNet released no code and no data. GraftNet's nearest relative freebase_prepro.tgz is on a host that no longer answers TCP and was never archived."
+    }
+  },
+
+  "framing_corrections": [
+    {
+      "id": "ORIGIN_OF_24_9M_164_6M",
+      "tag": "V",
+      "finding": "The figures originate in PullNet (Sun, Bedrax-Weiss, Cohen, EMNLP-IJCNLP 2019), section 4.1 Datasets, not GraftNet.",
+      "verbatim_quote": "We use Freebase as our knowledge base but for ease of experimentation restrict it to a subset of Freebase which contains all facts that are within 2-hops of any entity mentioned in the questions of WebQuestionsSP. This smaller KB contains 164.6 million facts and 24.9 million entities.",
+      "source": "arXiv:1904.09537, PDF pages 5-7 read in session",
+      "refutes": "Attribution of 24.9M/164.6M to the GraftNet paper. GraftNet pages 5-7 were read; the figures are absent."
+    },
+    {
+      "id": "KBQA_24M_IS_QUESTION_SEEDED",
+      "tag": "V",
+      "finding": "WEBQSP_KBQA_24M is defined as the 2-hop union around WebQSP question entities. It is a filtered AND benchmark-conditioned Freebase substrate, not full Freebase, and it is NOT query-independent.",
+      "consequence": "Acquiring it would close a paper-comparability target, not the corpus-independence block in FREEBASE_SOURCE_PROPOSAL.md (it fails that document's S4 test)."
+    },
+    {
+      "id": "MODERN_FREEBASE_IS_NOT_KBQA_24M",
+      "tag": "V",
+      "finding": "idirlab/freebases publishes 46.07M-59.90M entities and 125.1M-244.1M triples across four variants. Nearest on triples (FB+CVT-REV, 134.2M) is 2.4x off on entities (59.9M vs 24.9M).",
+      "naming_rule": "A graph built from any idirlab variant MUST be named WEBQSP_FREEBASE_60M_SCALE (or _46M_SCALE), never KBQA_24M, and never compared head-to-head against PullNet/GraftNet/NSM/ReaRev numbers."
+    }
+  ],
+
+  "lineage": [
+    {
+      "order": 1,
+      "work": "GraftNet",
+      "citation": "Sun et al., EMNLP 2018 (D18-1455)",
+      "repo": "https://github.com/haitian-sun/GraftNet",
+      "alias_repo": "https://github.com/OceanskySun/GraftNet",
+      "alias_resolution": {"tag": "V", "note": "GitHub API returns full_name=haitian-sun/GraftNet, fork=false, parent=null. Same repository, renamed account. NOT a second source."},
+      "distributes": ["freebase_prepro.tgz (relations, all_entities, stagg.neighborhoods/<questionId>.nxhd)", "data_webqsp.zip", "data_wikimovie.zip", "model_webqsp.zip", "model_wikimovie.zip"],
+      "whole_kb_snapshot_distributed": false,
+      "tag": "V",
+      "note": "Per-question 2-hop neighborhoods, further pruned to relations appearing in at least one question's semantic parse. The step that BUILT freebase_prepro.tgz from Freebase is not in the repo; run_pipeline downloads it pre-made.",
+      "paper_stats_verified": {
+        "webqsp_questions": 4737,
+        "entities_per_subgraph": 500,
+        "answer_recall_in_subgraphs": 0.940,
+        "aggregate_entity_nodes": 528617,
+        "aggregate_edge_types": 513,
+        "aggregate_document_nodes": 235567
+      }
+    },
+    {
+      "order": 2,
+      "work": "PullNet",
+      "citation": "Sun, Bedrax-Weiss, Cohen, EMNLP-IJCNLP 2019 (arXiv:1904.09537)",
+      "repo": null,
+      "repo_status": {"tag": "V", "evidence": "GitHub repository search 'pullnet kbqa' -> total_count 0; 'PullNet' -> 5 results, all unrelated, all 0 stars", "confidence": "I (search-based negative), firm when combined with the paper's own footnote pointing readers at GraftNet's repo"},
+      "distributes": [],
+      "whole_kb_snapshot_distributed": false,
+      "note": "Origin of the 24.9M/164.6M target. Described in one sentence of prose; never shipped in any form."
+    },
+    {
+      "order": 3,
+      "work": "NSM",
+      "citation": "He et al., WSDM 2021",
+      "repo": "https://github.com/RichardHGL/WSDM2021_NSM",
+      "repo_commit_pinned_by_prior_audit": "2e20915956a69b6f832143ded9d54442ccbe698e",
+      "distributes": ["webqsp.tgz", "CWQ.tgz", "metaqa-1hop.tgz", "metaqa-2hop.tgz", "metaqa-3hop.tgz"],
+      "distribution_channel": "https://drive.google.com/drive/folders/1qRXeuoL-ArQY7pJFnMpNnBu0G-cOz6xv",
+      "whole_kb_snapshot_distributed": false,
+      "tag": "V",
+      "upstream_statement": {"tag": "V", "quote": "We follow [GraftNet](https://github.com/OceanskySun/GraftNet) to preprocess the datasets and construct question-specific graph."},
+      "layout": "*_simple.json (per-question graph, entity/relation mapped to global ids) + entities.txt + relations.txt + vocab_new.txt + word_emb_300d.npy",
+      "readme_stats_verified": {
+        "webqsp": {"train": 2848, "dev": 250, "test": 1639, "avg_entities": 1429.8, "coverage": "94.9%"},
+        "cwq": {"train": 27639, "dev": 3519, "test": 3531, "avg_entities": 1305.8, "coverage": "79.3%"}
+      },
+      "backend_requirement": {"tag": "V", "quote": "wget https://download.microsoft.com/download/A/E/4/AE428B7A-9EF9-446C-85CF-D8ED0C9B1F26/FastRDFStore-data.zip --no-check-certificate ; unzip and keep fb_en.txt and cvtnodes.bin in data/ folder"}
+    },
+    {
+      "order": 4,
+      "work": "ReaRev",
+      "citation": "Mavromatis & Karypis, Findings of EMNLP 2022",
+      "repo": "https://github.com/cmavro/ReaRev_KGQA",
+      "distributes": [],
+      "whole_kb_snapshot_distributed": false,
+      "tag": "V",
+      "note": "Pure consumer. README points at NSM's Drive folder, identical folder id 1qRXeuoL-ArQY7pJFnMpNnBu0G-cOz6xv. Acknowledges NSM (webqsp, CWQ, MetaQA datasets) and GraftNet (webqsp incomplete, MetaQA). Contributes NO new graph artifact."
+    },
+    {
+      "order": 5,
+      "work": "GNN-RAG",
+      "citation": "Mavromatis & Karypis",
+      "repo": "https://github.com/cmavro/GNN-RAG",
+      "distributes": ["data.zip", "entities_names.json", "pretrained_lms.zip"],
+      "distribution_channel": "https://drive.google.com/drive/folders/1ifgVHQDnvFEunP9hmVYT07Y3rvcpIfQp",
+      "whole_kb_snapshot_distributed": false,
+      "tag": "V",
+      "note": "llm/README.md: 'Please also download entities_names.json ... as GNNs use the dense graphs.' A name lookup would be pointless if the graph already carried names -> [I] the NSM/GNN-RAG graph is MID-keyed."
+    },
+    {
+      "order": 6,
+      "work": "RoG",
+      "citation": "Luo et al., ICLR 2024",
+      "repo": "https://github.com/RManLuo/reasoning-on-graphs",
+      "repo_commit_pinned_by_prior_audit": "ccf8ec847bf61005a1b27cc9e5aff5c8ead7a24b",
+      "distributes": ["rmanluo/RoG-webqsp (HF)", "rmanluo/RoG-cwq (HF)"],
+      "whole_kb_snapshot_distributed": false,
+      "tag": "V",
+      "upstream_statement": {"tag": "V", "quote": "We extract the subgraphs from the Freebase following previous studies. The code can be found [here](https://github.com/RichardHGL/WSDM2021_NSM/tree/main/preprocessing/Freebase).", "branch": "master", "note": "Verb is 'We extract' - a re-run, not a re-use of NSM's tarballs."},
+      "released_artifact_measurements": {
+        "RoG-webqsp": {"shards": 5, "bytes_total": 518205557, "splits": {"train": 2826, "validation": 246, "test": 1628}, "examples_total": 4700, "dataset_size_bytes": 1658338115, "tag": "V"},
+        "RoG-cwq": {"shards": 24, "bytes_total": 3504045643, "tag": "V"}
+      },
+      "split_delta_vs_nsm": {"nsm_webqsp_total": 4737, "rog_webqsp_total": 4700, "delta": -37, "tag": "V", "significance": "Direct evidence against exact equality of a NSM-union with the RoG graph."}
+    }
+  ],
+
+  "targets": {
+    "WEBQSP_ROG_MID": {
+      "description": "benchmark-conditioned RoG-scale graph, MIDs preserved",
+      "target_n_e_r": {"entities_weak": 2566291, "triples_strong": 8309195, "relations_strong": 7058},
+      "measured_released_union_for_reference": {"endpoints": 2592894, "relations": 7058, "triples": 8309195, "source": "prior audit"},
+      "graph_source_status": "STILL_UNRESOLVED",
+      "routes": {
+        "A_nsm_released_subgraph_union": {
+          "verdict": "CANDIDATE_UNPROVEN_CHEAPLY_FALSIFIABLE",
+          "artifacts": [
+            {"name": "webqsp.tgz", "drive_id": "1KcIVAi4nf2uyflMOz5OSr54FOL2s2tAi", "size_published": "136M", "tag": "V", "measured_by": "Google Drive download interstitial; no payload fetched"},
+            {"name": "CWQ.tgz", "drive_id": "1ua7h88kJ6dECih6uumLeOIV9a3QNdP-g", "size_published": "872M", "tag": "V", "measured_by": "Google Drive download interstitial; no payload fetched"}
+          ],
+          "total_download": "~1.008 GB",
+          "hash_published": null,
+          "supporting_evidence": [
+            "prior audit: preprocess_step1.py get_subgraph() emits {'kb_id': head, 'text': head} - MIDs in both fields [V]",
+            "GNN-RAG ships a separate entities_names.json, implying the graph is MID-keyed [I]",
+            "RoG's README names exactly this preprocessing directory as its recipe [V]"
+          ],
+          "blocking_uncertainties": [
+            "RoG says 'We extract' - it re-ran, did not state re-use [V]",
+            "RoG-webqsp has 4700 examples vs NSM's 4737 - 37 fewer [V]",
+            "NSM entities.txt content not opened; MID claim is [I] not [V]",
+            "RoG's WebQSP seed population unpublished; per-question PPR max_ent=2000 cap; RoG name-projection post-step unrecoverable [V, prior audit]"
+          ],
+          "falsifiable_test": {
+            "procedure": "Union all triples across all questions in both tarballs, MIDs as-is; measure |E| triples, |R| distinct relations, |V| distinct endpoints; compare against 8309195 / 7058 / ~2566291.",
+            "outcome_semantics_precommitted": {
+              "E_and_R_exact_match": "RESOLVED. Artifact is the MID preimage; RoG surfaces become a derived display field; the 37-question delta must still be reported.",
+              "close_but_not_exact": "NOT RESOLVED. It is a sibling extraction and must be named WEBQSP_NSM_MID, never presented as the RoG graph. Report the delta.",
+              "far_off": "Route A refuted; only route B remains."
+            }
+          }
+        },
+        "B_reextract_from_freebase_backend": {
+          "verdict": "WOULD_CLOSE_STRUCTURALLY_NOT_BYTE_IDENTICALLY",
+          "requires": "a Freebase backend (see candidate_backends) plus NSM preprocessing/Freebase Steps 0-3",
+          "note": "Never byte-identical: RoG's seed list and name-projection step are unreleased."
+        },
+        "C_camazlucas_reconstruction": {
+          "verdict": "REFUTED",
+          "reason": "Dataset card states it was reconstructed FROM RoG's serialized graph structures. Downstream of the MID collapse; cannot be a MID preimage.",
+          "tag": "V"
+        }
+      },
+      "matrix": {
+        "RAW_SOURCE": {"value": "Freebase final RDF export 2015-08-09, reached via NSM's fb_en.txt run", "tag": "P"},
+        "DOWNLOADABLE_ARTIFACT": {"route_A": "Google Drive folder 1qRXeuoL-ArQY7pJFnMpNnBu0G-cOz6xv -> webqsp.tgz, CWQ.tgz", "route_B": "https://download.microsoft.com/download/A/E/4/AE428B7A-9EF9-446C-85CF-D8ED0C9B1F26/FastRDFStore-data.zip", "tag": "V"},
+        "FILE_SIZE_HASH": {"route_A": "136M + 872M, no hash published", "route_B": "68549649154 bytes (63.84 GiB), Last-Modified Tue 16 Oct 2018 08:46:14 GMT, HTTP 200, no published checksum", "tag": "V for sizes, U for hashes"},
+        "MID_PRESERVATION": {"route_A": "YES (inferred from code audit + entities_names.json existence); file not opened", "route_B": "YES by construction - fb_en.txt is MID-keyed", "tag": "I / P"},
+        "CVT_SOURCE": {"authoritative": "cvtnodes.bin, only inside FastRDFStore-data.zip, not separately distributed", "alternatives": ["freebase.type_hints.mediator via dki-lab/Freebase-Setup Virtuoso", "idirlab/freebases +CVT vs -CVT variant set difference", "prior audit's structural classifier: 96.10% of bare MIDs, 0.045% control FP, 95.75% cross-signal agreement, 0.45% threshold sensitivity"], "tag": "V"},
+        "RELATION_FILTERING": {"value": "NSM Step 0 manual_filter_rel.py - 14 SUBSTRING drops: music.release, authority.musicbrainz, 22-rdf-syntax-ns#type, book.isbn, common.licensed_object, tv.tv_series_episode, type.namespace, type.content, type.permission, type.object.key, type.object.permission, type.type.instance, topic_equivalent_webpage, dataworld.freeq", "tag": "V (prior audit)"},
+        "REVERSE_EDGE_POLICY": {"value": "Extraction directed (get_2hop_subgraph.py matches subject side only). PPR symmetrises into a row-normalised matrix for SCORING only; the retained triple set stays directed.", "tag": "V (prior audit)"},
+        "EXTRACTION_FILTERING_CODE": {"released": "RichardHGL/WSDM2021_NSM/preprocessing/Freebase @ 2e20915", "not_released": "RoG's own extraction driver and its MID->name projection", "tag": "V"},
+        "TOPIC_SEED_SOURCE": {"value": "NSM preprocess_step0.py find_entity() scans ns:-prefixed tokens in each question's SPARQL parse, keeps m./g. The WebQSP analogue of that script is NOT in the repo (it is written for CWQ).", "tag": "V (prior audit)"},
+        "HOP_EXTRACTION_POLICY": {"value": "2 directed hops + explicit extra hop through CVT objects; then per-question PPR restart_prob=0.8, max_iter=20, max_ent=2000, re-induced with cvt_add_flag=False", "tag": "V (prior audit)"},
+        "EXPECTED_N_E_R": {"value": "UNKNOWN for route A - this is exactly what the test measures. Target 8309195 tri / 7058 rel / ~2566291 ent.", "tag": "U"},
+        "HUMAN_READABLE_METADATA": {"primary": {"name": "entities_names.json", "drive_id": "1H7BqbVsQXr0bGuBsLUphb_Cb0Jf0rSoN", "bytes": 23377816, "measured_by": "Content-Range: bytes 0-0/23377816", "tag": "V", "coverage": "UNKNOWN"}, "secondary": "idirlab/freebases object_names / entities_id_label"}
+      }
+    },
+
+    "WEBQSP_KBQA_24M": {
+      "description": "GraftNet/NSM/ReaRev filtered Freebase backend. NOT full Freebase. NEVER call it WEBQSP_FREEBASE_FULL.",
+      "target_n_e": {"entities": 24900000, "facts": 164600000, "relations": null},
+      "graph_source_status": "STILL_UNRESOLVED",
+      "stronger_claim": "No clean file of this artifact is distributed anywhere I could find. It exists only as preprocessing code plus a Freebase dump requirement.",
+      "who_distributes_it": {
+        "PullNet": {"distributes": false, "tag": "V", "note": "no repo exists"},
+        "GraftNet": {"distributes": false, "tag": "V", "note": "distributes freebase_prepro.tgz - per-question 2-hop .nxhd neighborhoods, relation-pruned to semantic-parse relations"},
+        "NSM": {"distributes": false, "tag": "V", "note": "per-question subgraphs; requires you to fetch FastRDFStore-data.zip yourself"},
+        "ReaRev": {"distributes": false, "tag": "V", "note": "nothing (consumes NSM)"},
+        "GNN-RAG": {"distributes": false, "tag": "V", "note": "per-question dense subgraphs + entities_names.json"},
+        "RoG": {"distributes": false, "tag": "V", "note": "per-question subgraphs with surfaces"}
+      },
+      "nearest_relative": {
+        "artifact": "freebase_prepro.tgz",
+        "published_url": "http://curtis.ml.cmu.edu/datasets/graftnet/freebase_prepro.tgz",
+        "source_of_url": "GraftNet preprocessing/run_pipeline, read verbatim",
+        "still_not_the_target": "relation-pruned by semantic parses and organised per question",
+        "host_reachability": {"dns": "curtis.ml.cmu.edu -> 128.2.204.193 (resolves)", "tcp_80": "Connection timed out after 20010 milliseconds", "tag": "V", "interpretation": "Unreachable from this machine. Wayback captured sibling files as recently as 2025-09-22, so [I] the host went down or began refusing within roughly the last year. Cannot distinguish dead host from network block from here."},
+        "archived_directory_index": {
+          "snapshot": "20190405080912",
+          "tag": "V",
+          "listing": [
+            {"file": "data_webqsp.zip", "last_modified": "2018-08-22 14:43", "size": "2.4G"},
+            {"file": "data_wikimovie.zip", "last_modified": "2018-08-22 14:43", "size": "370M"},
+            {"file": "freebase_prepro.tgz", "last_modified": "2018-11-29 10:28", "size": "2.8G"},
+            {"file": "model_webqsp.zip", "last_modified": "2018-08-22 14:44", "size": "1.2G"},
+            {"file": "model_wikimovie.zip", "last_modified": "2018-08-22 14:44", "size": "54M"}
+          ]
+        },
+        "payload_archived": {"freebase_prepro.tgz": false, "data_webqsp.zip": false, "data_wikimovie.zip": "yes, 388180105 B at 20250922203953", "model_wikimovie.zip": "yes, 56966180 B at 20250922203953", "tag": "V", "note": "The Freebase side of GraftNet's release is NOT recoverable from the Internet Archive."},
+        "second_cmu_artifact": {"path": "http://curtis.ml.cmu.edu/datasets/freebase/upto3.nt.tgz", "last_modified": "2018-04-30 19:08", "size": "1.0G", "tag": "V for the index listing", "inference": "[I] Name implies an N-Triples Freebase subset 'up to 3 hops'. At ~10:1 gzip on short MID-only N-Triples lines (~60 B/line), 1.0G compressed is the right order of magnitude for ~1e8 triples. This is arithmetic from a filename and a size, NOT evidence.", "payload_archived": false},
+        "mirrors_found": {"tag": "V", "result": "none", "searched": ["HF dataset search: graftnet, freebase webqsp, webqsp-subgraph, cwq-subgraph, NSM webqsp, ReaRev, GNN-RAG, fb_en"]}
+      },
+      "matrix": {
+        "RAW_SOURCE": {"value": "Freebase final RDF export 2015-08-09, reached through fb_en.txt (NSM) or an unspecified Google-internal load (PullNet)", "tag": "P"},
+        "DOWNLOADABLE_ARTIFACT": {"value": "NONE EXISTS", "tag": "V"},
+        "FILE_SIZE_HASH": {"value": "no file, therefore no size and no hash. freebase_prepro.tgz was 2.8G per the archived index; hash never published", "tag": "V / U"},
+        "MID_PRESERVATION": {"value": "YES if rebuilt - GraftNet .nxhd triples and NSM's fb_en.txt path are both MID-keyed", "tag": "I"},
+        "CVT_SOURCE": {"graftnet": "NONE - its filter drops the whole type and common domains, so no CVT flag is consulted", "nsm": "cvtnodes.bin, authoritative, only inside FastRDFStore-data.zip", "option_3": "freebase.type_hints.mediator, documented in dki-lab/Freebase-Setup README as 'true if a type is a CVT', queryable over its Virtuoso image, NOT gated behind the 63.84 GiB zip", "option_4": "idirlab/freebases ships +CVT and -CVT variants, so its CVT partition is recoverable by set difference", "tag": "V"},
+        "RELATION_FILTERING": {"warning": "Two different rules, do not conflate", "graftnet": "_filter_relation() drops <fb:common.topic.notable_types> and any relation whose leading domain segment is 'type' or 'common'; plus a corpus-level prune to relations appearing in >=1 question's semantic parse", "nsm": "manual_filter_rel.py 14-substring blacklist", "pullnet": "UNKNOWN - the paper states only the 2-hop condition", "tag": "V / U"},
+        "REVERSE_EDGE_POLICY": {"graftnet": "extraction directed; PPR adjacency explicitly symmetrised (all_row_ones.append(entity_map[e2]); all_col_ones.append(entity_map[e1])) - reverse edges exist for SCORING, not in the stored triple set", "nsm": "same shape", "pullnet": "UNKNOWN", "tag": "V / U"},
+        "EXTRACTION_FILTERING_CODE": {"graftnet_released": ["preprocessing/run_pipeline", "step0_preprocess_webqsp.py", "step1_process_entity_links.py", "step2_relation_embeddings.py", "step3_question_embeddings.py", "step4_extract_subgraphs.py (11437 B)"], "graftnet_missing": "the step that BUILT freebase_prepro.tgz from Freebase is NOT among them - run_pipeline downloads it pre-made", "pullnet": "NOT RELEASED", "tag": "V"},
+        "TOPIC_SEED_SOURCE": {"graftnet_pullnet": "S-MART / STAGG entity links: https://raw.githubusercontent.com/scottyih/STAGG/master/webquestions.examples.{train,test}.e2e.top10.filter.tsv", "nsm": "MIDs scanned out of each question's SPARQL parse", "warning": "These are DIFFERENT seed sets and will not produce the same graph.", "tag": "V"},
+        "HOP_EXTRACTION_POLICY": {"the_24_9m_snapshot": "2 hops from any WebQSP question entity, union over all questions", "graftnet_per_question": "2-hop .nxhd -> PPR RESTART=0.8, MAX_ITER=20, convergence delta<1e-5, MAX_ENT=500, MAX_FACTS=5000000, MAX_SEEDS=1, zero-score prune at 1e-6", "pullnet_retrieval_baseline": "PageRank-Nibble, epsilon=1e-6, top-m", "tag": "V"},
+        "EXPECTED_N_E_R": {"entities": 24900000, "facts": 164600000, "relations": "NEVER PUBLISHED - UNKNOWN", "downstream_checkpoints_for_a_rebuild": {"graftnet_webqsp_aggregate": "528617 entity nodes / 513 edge types", "pullnet_webqsp_retrieval": "recall 0.927 at 1876.9 avg entities (2000 PageRank-Nibble entities)", "nsm_webqsp": "avg 1429.8 entities, 94.9% coverage"}, "tag": "V / U"},
+        "HUMAN_READABLE_METADATA": {"value": "Not in any KBQA release. Available only from a Freebase backend (type.object.name), or idirlab/freebases object_names / entities_id_label, or GNN-RAG entities_names.json (KBQA-scoped, coverage UNKNOWN)", "tag": "V"}
+      }
+    }
+  },
+
+  "candidate_backends": [
+    {
+      "id": "FASTRDFSTORE",
+      "artifact": "FastRDFStore-data.zip",
+      "url": "https://download.microsoft.com/download/A/E/4/AE428B7A-9EF9-446C-85CF-D8ED0C9B1F26/FastRDFStore-data.zip",
+      "bytes": 68549649154,
+      "gib": 63.84,
+      "http_status": "200 OK",
+      "last_modified": "Tue, 16 Oct 2018 08:46:14 GMT",
+      "hash_published": null,
+      "tag": "V",
+      "contains": ["fb_en.txt", "cvtnodes.bin"],
+      "contains_tag": "P",
+      "verdict": "The only backend that closes the CVT question authoritatively. Infeasible on this machine (63.84 GiB vs 112.9 GiB free, before two full-size derived files). Now strictly dominated by FREEBASE_SETUP for everything except cvtnodes.bin itself."
+    },
+    {
+      "id": "FREEBASE_SETUP",
+      "artifact": "virtuoso_db.zip",
+      "url": "https://www.dropbox.com/s/q38g0fwx1a3lz8q/virtuoso_db.zip",
+      "repo": "https://github.com/dki-lab/Freebase-Setup",
+      "bytes": 56324228100,
+      "gib": 52.46,
+      "http_status": "200 OK (after 3 redirects)",
+      "hash_published": null,
+      "tag": "V",
+      "what_it_is": "full 2015 dump, N-Triples literal-format fixed, preloaded into Virtuoso",
+      "documents": ["freebase.type_hints.mediator (CVT flag)", "type.object.name", "common.topic.alias", "common.topic.description", "type.object.type", "type.property.master_property", "type.property.reverse_property"],
+      "verdict": "Best backend for a rebuild if disk is arranged. Gives CVT flags AND names AND the reverse-property twin map from one artifact. Needs a deterministic dump-out step and >=100 GB RAM (publisher-stated). NOT the KBQA-24M graph - it is unfiltered."
+    },
+    {
+      "id": "RAW_DUMP_HASHED_MIRROR",
+      "artifact": "freebase-rdf-latest.gz",
+      "url": "https://huggingface.co/datasets/alex999819/freebase",
+      "bytes": 32191685487,
+      "gib": 29.98,
+      "sha256": "b3d21c80dc512c8ed3c37279516340ef7a77027d593932c7c3fb22d40dfd47f4",
+      "hash_source": "SHA256SUMS file in the repo (88 bytes), fetched",
+      "tag": "V",
+      "publisher_claim": "byte-for-byte identical to freebase-rdf-2015-08-09-00-01.gz, which the card says was extracted from Microsoft's FastRDFStore-data.zip",
+      "publisher_claim_tag": "P",
+      "verdict": "Cheapest hashed raw dump, roughly half the size of the alternatives. But raw RDF only: no cvtnodes.bin, no fb_en.txt. Choose over FREEBASE_SETUP only if you accept deriving CVT membership structurally."
+    },
+    {
+      "id": "CLEVERTHIS_PARQUET",
+      "artifact": "964 parquet shards",
+      "url": "https://huggingface.co/datasets/CleverThis/freebase",
+      "bytes": 32476443230,
+      "tag": "V",
+      "verdict": "Same dump, parquet-ised. No hash advantage. Prior audit already flagged the ~300 GB extracted footprint."
+    },
+    {
+      "id": "SHEPPP_STORE",
+      "artifact": "columnar MID/name/relation edge store (75 files: store/{mid,name,rel}.{idx,str}, edges.u32, ...)",
+      "url": "https://huggingface.co/datasets/Sheppp/freebase",
+      "bytes": 59674173045,
+      "tag": "V for the file listing",
+      "provenance": "UNVERIFIED - README and store/generic.txt were unreadable (HuggingFace rate limit: 'maximum queue size reached')",
+      "verdict": "DO NOT ADOPT until its README is readable and its build documented. Interesting shape, nothing established."
+    },
+    {
+      "id": "IDIRLAB_FREEBASES",
+      "artifact": "idirlab-freebases.zip",
+      "url": "https://zenodo.org/records/7909511",
+      "doi": "10.5281/zenodo.7909511",
+      "concept_doi": "10.5281/zenodo.7909510",
+      "repo": "https://github.com/idirlab/freebases",
+      "citation": "Shirvani-Mahdavi et al., ISWC 2023",
+      "bytes": 14148416296,
+      "gib": 13.18,
+      "md5": "170689b7aad9f029566a4deb36605b01",
+      "tag": "V",
+      "hf_listing_note": {"tag": "V", "detail": "https://huggingface.co/api/datasets/idirlab/freebases returns {\"error\":\"Invalid username or password.\"} - not publicly listable on HF. Zenodo is the authoritative channel."},
+      "variants": [
+        {"name": "FB-CVT-REV", "cvt": "removed", "reverse": "removed", "entities": 46069321, "properties": 3055, "triples": 125124274},
+        {"name": "FB-CVT+REV", "cvt": "removed", "reverse": "retained", "entities": 46077533, "properties": 5028, "triples": 238981274},
+        {"name": "FB+CVT-REV", "cvt": "retained", "reverse": "removed", "entities": 59894890, "properties": 2641, "triples": 134213735},
+        {"name": "FB+CVT+REV", "cvt": "retained", "reverse": "retained", "entities": 59896902, "properties": 4425, "triples": 244112599}
+      ],
+      "metadata_files": ["object_names", "object_types", "object_ids", "domains_id_label", "types_id_label", "entities_id_label", "properties_id_label", "freebase_endtypes", "uri_original2simplified", "uri_simplified2original"],
+      "role": "METADATA_CANDIDATE_ONLY",
+      "graph_substitution_verdict": "DO NOT SUBSTITUTE FOR THE KBQA-24M GRAPH",
+      "what_would_have_to_be_proven": [
+        {"n": 1, "claim": "Same underlying snapshot", "status": "plausible [I] but idirlab applied its own type-system repair and reverse-pair handling", "proof_required": "triple-set comparison against a fb_en.txt-derived graph"},
+        {"n": 2, "claim": "Same relation filter", "status": "REFUTED IN SHAPE - idirlab restricts to 'subject matter domains' (2641-5028 properties) vs 7058 relations in the RoG union; GraftNet drops type/common domains; NSM uses a 14-substring blacklist. Three different rules.", "proof_required": "exhibit the relation sets and their difference"},
+        {"n": 3, "claim": "Same CVT treatment", "status": "idirlab's +/-CVT is a whole-graph policy; NSM's is a traversal rule with per-node lookup and cvt_add_flag=False re-induction", "proof_required": "validate against cvtnodes.bin or freebase.type_hints.mediator"},
+        {"n": 4, "claim": "Same reverse-edge policy", "status": "idirlab's +/-REV is explicit and whole-graph; the KBQA line stores directed triples and symmetrises only inside PPR", "proof_required": "check twin-pair presence"}
+      ],
+      "metadata_use_needs_none_of_that": "A name lookup is keyed on MIDs and is topology-neutral."
+    },
+    {
+      "id": "CAMAZLUCAS_RECONSTRUCTION",
+      "url": "https://huggingface.co/datasets/camazlucas/Freebase-WebQSP-CWQ-Subgraph",
+      "files": [
+        {"path": "webqsp_subgraph.tsv", "bytes": 260208520},
+        {"path": "cwq_subgraph.tsv", "bytes": 471465645},
+        {"path": "unified_graph.tsv", "bytes": 542254271}
+      ],
+      "published_stats": {"webqsp": {"triples": 3791303, "entities": 1298313, "relations": 6094}, "cwq": {"triples": 7207791, "entities": 2237784, "relations": 6632}, "unified": {"triples": 8258891, "entities": 2574900, "relations": 7042}},
+      "card_quote": "The subgraphs were reconstructed from the serialized graph structures provided in the preprocessing pipeline of the RoG (Reasoning on Graphs) framework",
+      "tag": "V",
+      "verdict": "REFUTED FOR BOTH TARGETS. Built FROM the released RoG surfaces, so the MID collapse already happened upstream. 50304 triples and 16 relations short of the published graph. Diagnostic only, as the acceptance gate already says."
+    }
+  ],
+
+  "acquisition_plan": [
+    {
+      "rank": 1,
+      "action": "NSM webqsp.tgz + CWQ.tgz, union, count E/R/V",
+      "download": "~1.008 GB",
+      "closes": "GRAPH - WEBQSP_ROG_MID, conditionally",
+      "certainty": "UNPROVEN but cheaply falsifiable",
+      "verdict": "DO THIS FIRST. Highest value-per-byte in the matrix by three orders of magnitude. Pre-commit to the outcome semantics before measuring."
+    },
+    {
+      "rank": 2,
+      "action": "GNN-RAG entities_names.json",
+      "download": "23377816 B",
+      "closes": "METADATA (MID->name, KBQA-scoped)",
+      "certainty": "size verified; scope/coverage UNKNOWN",
+      "verdict": "Cheap, do alongside rank 1. Measure its coverage of the 62375-node name-resolvable band and the 1652618 bare MIDs. Never let it name a CVT."
+    },
+    {
+      "rank": 3,
+      "action": "idirlab-freebases.zip from Zenodo, metadata files only",
+      "download": "13.18 GiB (md5 published)",
+      "closes": "METADATA ONLY - names, types, relation labels",
+      "certainty": "high for metadata, ZERO for graph identity",
+      "verdict": "Standing recommendation from the prior audit, unchanged. If exactly one download beyond rank 1 is ever authorised, this is it. MUST NOT be used as a graph."
+    },
+    {
+      "rank": 4,
+      "action": "dki-lab/Freebase-Setup virtuoso_db.zip",
+      "download": "52.46 GiB",
+      "closes": "GRAPH (backend for a rebuild) + CVT flags + names + reverse-twin map",
+      "certainty": "high, but a rebuild - never byte-identical to RoG",
+      "verdict": "Best rebuild backend, 11.4 GiB smaller than FastRDFStore. Needs >=100 GB RAM (publisher-stated) and external storage. Blocked on capacity, not on evidence."
+    },
+    {
+      "rank": 5,
+      "action": "alex999819/freebase freebase-rdf-latest.gz",
+      "download": "29.98 GiB, SHA-256 published",
+      "closes": "GRAPH (raw backend only)",
+      "certainty": "dump identity high (hashed); no CVT, no fb_en.txt",
+      "verdict": "Cheapest hashed raw dump. Choose over rank 4 only if you accept deriving CVT membership structurally."
+    },
+    {
+      "rank": 6,
+      "action": "FastRDFStore-data.zip",
+      "download": "63.84 GiB",
+      "closes": "GRAPH + authoritative cvtnodes.bin",
+      "certainty": "highest fidelity to NSM/RoG",
+      "verdict": "Infeasible on this machine as configured. Strictly dominated by rank 4 for everything except cvtnodes.bin itself."
+    },
+    {
+      "rank": null,
+      "action": "camazlucas/Freebase-WebQSP-CWQ-Subgraph",
+      "verdict": "DO NOT ADOPT - downstream of RoG's MID collapse"
+    },
+    {
+      "rank": null,
+      "action": "Sheppp/freebase",
+      "verdict": "DO NOT ADOPT - provenance unverified"
+    },
+    {
+      "rank": null,
+      "action": "GraftNet freebase_prepro.tgz / upto3.nt.tgz",
+      "verdict": "CANNOT BE ACQUIRED - host times out, never archived. Only remaining route is to contact the authors or CMU LTI, which is a human action and out of scope."
+    }
+  ],
+
+  "resolution_conditions": {
+    "WEBQSP_ROG_MID": {
+      "path_1": "Rank-1 test returns triples=8309195 AND relations=7058 exactly -> RESOLVED, with the 37-question delta reported",
+      "path_2": "A Freebase backend (rank 4/5/6) plus a re-run of NSM Steps 0-3 -> RESOLVED_BY_RECONSTRUCTION, never byte-identical (RoG's seed list and name-projection step remain unreleased)"
+    },
+    "WEBQSP_KBQA_24M": {
+      "path_1": "Rebuild only. Freebase backend (rank 4/5/6) + S-MART/STAGG seed files (tiny, live on GitHub) + 2-hop union over all WebQSP question entities + PullNet's unpublished relation rule, which would have to be CHOSEN AND DOCUMENTED AS OURS, not recovered.",
+      "naming_requirement": "Report as WEBQSP_KBQA_24M_RECONSTRUCTED with measured N/E/R printed next to 24.9M/164.6M and every difference explained rather than tuned."
+    }
+  },
+
+  "could_not_establish": [
+    "Whether NSM's released webqsp.tgz actually contains MIDs (inferred from code audit + entities_names.json; file not opened). This is the assumption the rank-1 test is designed to check.",
+    "Whether the union of NSM's subgraphs equals RoG's graph. The 37-question split delta is direct evidence against exact equality.",
+    "What upto3.nt.tgz contains. A filename and a 1.0G size from a 2019 archived directory listing; the gzip-ratio argument is arithmetic, not evidence.",
+    "Whether curtis.ml.cmu.edu is dead or blocking. TCP timeout from this machine is all the evidence available.",
+    "PullNet's relation filter and its relation count. Never published.",
+    "Any hash for FastRDFStore-data.zip, virtuoso_db.zip, or the CMU files. None published.",
+    "Sheppp/freebase provenance. HuggingFace rate-limited both its README and store/generic.txt.",
+    "entities_names.json coverage. Size verified; contents not.",
+    "Byte-identity of alex999819/freebase with the FastRDFStore-embedded dump. Publisher's claim only."
+  ],
+
+  "constraints_honoured": {
+    "no_encoder_knn_h4_safe_halo_sp1_graph_build": true,
+    "build_kb_py_run_or_edited": false,
+    "test_build_kb_py_run_or_edited": false,
+    "corpus_builder_invoked": false,
+    "extsort_shared_workdir_touched": false,
+    "writes_confined_to": ["data/final_canonical/webqsp/", "results/data_audit/final_canonical_v1/webqsp/"],
+    "forbidden_paths_untouched": ["data/canonical/", "data/processed/", "data/ukb_storage/", "data/original/", "results/GENERALIZATION/", "scratchpad/ablation_qwen/"],
+    "deletions": 0,
+    "committed": false,
+    "downloads": {
+      "kind": "READMEs, GitHub tree listings, HuggingFace file listings, dataset cards, one SHA256SUMS (88 B), Zenodo record metadata, Wayback CDX/index responses, and two conference PDFs (D18-1455 718.6 KB; arXiv 1904.09537 475.3 KB) read solely for the KB-size statements",
+      "total_approx": "< 5 MB",
+      "cap": "100 MB",
+      "explicitly_not_downloaded": ["idirlab/freebases (13.18 GiB)", "FastRDFStore-data.zip (63.84 GiB)", "virtuoso_db.zip (52.46 GiB)", "freebase-rdf-latest.gz (29.98 GiB)", "all NSM and GNN-RAG Drive payloads"],
+      "large_artifact_method": "HTTP header, download interstitial page, or API listing only. No payload byte fetched."
+    }
+  }
+}

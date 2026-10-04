@@ -1,0 +1,571 @@
+{
+ "RECORD": "PREREGISTRATION",
+ "name": "QMAX_BALANCED_H2_PATCH1",
+ "STATUS": "PREREGISTERED_COMPOSITION_TEST_DEV_A",
+ "written_before_any_run": true,
+ "written_before": [
+  "any coverage (ALL / ANY) number of QMAX_SAFE or QMAX_BALANCED_H2_PATCH1 on any cache",
+  "any paired comparison of a composed arm",
+  "any per-hop number of a composed arm",
+  "any number of any kind for a composed arm on metaqa_phg, squad, squad_phg or musique"
+ ],
+ "what_was_run_before_this_record": {
+  "dry_run": "python -u scratchpad/_l1c_qmaxbal.py metaqa --dry (55 s): asserted F0(Cd, Cs) == the served base_rank (first 200 blocks, every row); QMAX_F0 on DEV_A == the L1_GEOM record (0.6327, +3/-10 vs BASE 0.6397; hops 0.911 / 0.4797 / 0.5181); canonical SAFE == the L1_REPLAY record (0.6407 / 0.6397); the pinned beam with candidate recording == the exec'd pinned beam; the balanced beam reproduces every deterministic figure of h2balanced_A_metaqa.json; |QMAX_SAFE| = 50 on every DEV_A row; challengers identical under both rankings. Gold-free identities printed: QMAX P50 shares 36.45 of 50 blocks with the BASE P50 (mean); QMAX_SAFE shares 38.68 of 50 with SAFE, is identical to SAFE for 0 of 1,002 queries, keeps the same weakest admitted block for 57, admitted-six overlap 2.19; challengers admitted from outside the chain's own P50: 4.59 (BASE) / 4.92 (QMAX) of 6; nominal exposure 5,023.0 / 5,023.1 / 5,028.3 / 5,027.3 nodes (L1 / SAFE / QMAX_F0 / QMAX_SAFE). No coverage number of any composed arm; no record.",
+  "coverage_of_the_composed_arms": "NEVER computed anywhere before this record"
+ },
+ "utc": "2026-09-15T20:02:27Z",
+ "ruling_2026-09-16_fourteenth_verbatim_essentials": "there are three real frontiers left. I would stop inventing new partitioners and focus on these. ... 1. Combine the two mechanisms that solve different problems ... the next universal candidate ... `QMAX_F0 ranking -> SAFE -> BALANCED_H2_PATCH1`. Same algorithm everywhere. No training. No relation dictionaries. No embedding modification. ... Do one composition, not a factorial of D2d/QMAX/interleave/etc. I'd use the cheaper `QMAX_F0` formulation because it retained most of D2d's MuSiQue gain and does not need the five directional matrix scores. The scientific question is simply: Does stronger semantic node->block aggregation and structurally balanced dynamic patching stack? If yes, that's probably your real universal L1+ candidate. ... 2. [coverage-then-score frontier: a separate pre-registration] ... 3. [H3 successor only after H2 compression is fixed] ... 4. [transfer: WebQSP KB, 2Wiki / Hotpot multi-hop text, SQuAD non-regression] ... MuSiQue specifically needs a different kind of help ... better scoring of evidence already present, not more structural reach ... We have over-read DEV_A. So don't use MetaQA/MuSiQue indefinitely to select every next rule. ... Everything else we've explored -- new hard partitions, PATH2/3, vertex-cut variants, relation offsets, mass-normalized voting, triplet geometry, latent beams -- is now lower priority or closed. Target: strong semantic aggregation + safe static compression + diversity-preserving tiny graph refinement + query-local node patch; no training, no dataset-specific logic, no embedding modification.",
+ "question": "Does stronger semantic node -> block aggregation (QMAX_F0: the exhaustive dense block max as a third channel of the frozen RRF; DEV_B-confirmed as the aggregation component of D2d on musique, neutral on metaqa / squad) and structurally balanced dynamic patching (BALANCED_H2_PATCH1: SAFE minus its weakest admitted block + one query-local block of the balanced beam's unexposed visited nodes; DEV_A post-hoc confirmed on metaqa, text-safe) STACK -- i.e. does ONE algorithm, QMAX_F0 ranking -> SAFE -> BALANCED_H2_PATCH1, carry both regime gains (musique's ranking gain and metaqa's hop-2 structural gain) without conflict?",
+ "the_one_composition": {
+  "ranking": "QMAX_F0 = _l1g_core.F0 (the frozen RRF, K0 = 60, dense tie-break) over [Cd, Cs, Cmax]; Cd / Cs = _l1g_core.block_channel of the served dense / SPLADE top-100 ids through the legacy own + directed-out-neighbour table (= the served BASE's two channels); Cmax = _l1g_candidate.dense_blockmax_rank: score(B) = max_{v in B} q . e_v over all actual nodes (canonical fp16 embeddings -> fp32, unit query), stable descending order; pinned code path, asserted to reproduce the recorded DEV_A numbers",
+  "entry_into_SAFE": "the first TOPP = 200 blocks of the QMAX_F0 ranking replace base_rank in the replay-cache view read by _l1ps_router.build_cache and _l1kb_core.contexts: protected = its first 44 blocks, boundary = its blocks 45-50, canonical position cpos = its positions; the structural challengers (s_node = the frozen seed-based directional expansion, seeds = the frozen top-5 RRF nodes; independent of the block ranking -- asserted identical under both rankings) and the retrieval challengers (ret_rrf) are unchanged; F6 admission (RRF over cpos / spos / rpos, B = 6, ties by cpos then block id) unchanged; QMAX_SAFE = protected + the six admitted; weakest = the sixth admitted",
+  "patch": "section 16 verbatim on QMAX_SAFE: minus the weakest admitted block, plus one query-local block of the same size filled with the balanced beam's visited nodes that the 49 kept blocks do not expose (first-visit order: hop 1 then hop 2), topped up from the removed block (ret_rrf position, then node id); matched unique-node exposure to QMAX_SAFE",
+  "beam": "the pinned uL3 beam (frozen admissibility, transition geometry, RRF fused order, BEAM = 100, DEPTH = 2, seeds = frozen top-5 RRF nodes) with the section-21 balanced compression (per-parent rank round-robin over the frozen fused order); identical for the reference and the composed chain (the beam never reads the block ranking); the section-21 beam figures are asserted reproduced",
+  "constants": "K0 = 60, K_LOCK = 100, P_MAIN = 50, TOPP = 200, B = 6, M_struct = 64, M_ret = 32, S4, F6, BEAM = 100, DEPTH = 2 -- all frozen before; nothing new, nothing fitted, no dataset branch, no weight; the same algorithm on every cache",
+  "cost_note": "Cmax needs one exhaustive query x node similarity pass (nq x N fp32: 1,998 x 43,234 on metaqa, 2,000 x 117,534 on musique); the L1_GEOM lane showed the pooled variant (dense u SPLADE top-1000) indistinguishable from the exact one -- the exact form is used here because it is the recorded, pinned arm"
+ },
+ "arms": {
+  "reference_chain (recomputed; asserted equal to the frozen section-16 / 21 records)": [
+   "L1",
+   "SAFE",
+   "H2_PATCH1",
+   "BALANCED_H2_PATCH1"
+  ],
+  "composed_chain": {
+   "QMAX_F0": "P50 of the QMAX_F0 ranking (the L1_GEOM AGGREGATION arm; asserted equal to its record); attribution stage, parent 1",
+   "QMAX_SAFE": "the frozen F6 swap over the QMAX_F0 ranking; attribution stage",
+   "QMAX_BALANCED_H2_PATCH1": "PRIMARY -- the composition; the ONLY decided-on arm"
+  },
+  "not_run": [
+   "QMAX_H2_PATCH1 (pinned-beam patch over QMAX_SAFE) -- would make the test a 2 x 2 factorial",
+   "D2d / directional compositions",
+   "interleave fusions",
+   "any re-weighting",
+   "any change of the compression rule inside this test (item 2 of the ruling is a separate pre-registration)"
+  ],
+  "parents": {
+   "parent 1": "QMAX_F0 (P50; the aggregation alone)",
+   "parent 2": "BALANCED_H2_PATCH1 (the structural chain alone, over the served BASE ranking)"
+  }
+ },
+ "seen_numbers_DEV_A": {
+  "metaqa": {
+   "n_DEV_A": 1002,
+   "reference_chain_DEV_A (h2balanced_A_metaqa.json)": {
+    "L1": 0.6397,
+    "SAFE": 0.6407,
+    "H2_PATCH1": 0.7515,
+    "BALANCED_H2_PATCH1": 0.7764,
+    "BALANCED_vs_SAFE": {
+     "gained": 136,
+     "lost": 0,
+     "p": 2.2958874039497803e-41
+    },
+    "BALANCED_vs_H2_PATCH1": {
+     "gained": 30,
+     "lost": 5,
+     "p": 2.2361520677804947e-05
+    },
+    "H2_PATCH1_vs_SAFE": {
+     "gained": 111,
+     "lost": 0,
+     "p": 7.703719777548943e-34
+    },
+    "per_hop_BALANCED": {
+     "hop1": 0.9939,
+     "hop2": 0.814,
+     "hop3": 0.5241
+    },
+    "per_hop_L1": {
+     "hop1": 0.9172,
+     "hop2": 0.4855,
+     "hop3": 0.5271
+    }
+   },
+   "QMAX_F0_DEV_A (results/L1_GEOM/PREREGISTRATION_DEV_B.json recorded_DEV_A AGGREGATION; vs BASE)": {
+    "key": "QMAX_F0",
+    "ALL": 0.6327,
+    "gained": 3,
+    "lost": 10,
+    "p": 0.09228515625,
+    "per_hop": {
+     "hop1": 0.911,
+     "hop2": 0.4797,
+     "hop3": 0.5181
+    }
+   },
+   "QMAX_F0_DEV_B_and_full_dev_CONTEXT_ONLY (results/L1_GEOM/DEV_B_CONFIRMATION.json; DEV_B read twice already; NOT used here)": {
+    "B": 0.6345,
+    "B_gained_lost": [
+     7,
+     8
+    ],
+    "full": 0.6336
+   }
+  },
+  "metaqa_phg": {
+   "n_DEV_A": 1002,
+   "reference_chain_DEV_A (h2balanced_A_metaqa_phg.json)": {
+    "L1": 0.6727,
+    "SAFE": 0.6747,
+    "H2_PATCH1": 0.7735,
+    "BALANCED_H2_PATCH1": 0.7984,
+    "BALANCED_vs_SAFE": {
+     "gained": 125,
+     "lost": 1,
+     "p": 2.9857556510886103e-36
+    },
+    "BALANCED_vs_H2_PATCH1": {
+     "gained": 31,
+     "lost": 6,
+     "p": 4.12575900554657e-05
+    },
+    "H2_PATCH1_vs_SAFE": {
+     "gained": 100,
+     "lost": 1,
+     "p": 8.04638123325432e-29
+    },
+    "per_hop_BALANCED": {
+     "hop1": 0.9969,
+     "hop2": 0.8169,
+     "hop3": 0.5843
+    },
+    "per_hop_L1": {
+     "hop1": 0.9172,
+     "hop2": 0.5291,
+     "hop3": 0.5813
+    }
+   },
+   "QMAX_F0_DEV_A (results/L1_GEOM/PREREGISTRATION_DEV_B.json recorded_DEV_A AGGREGATION; vs BASE)": {
+    "key": "QMAX_F0",
+    "ALL": 0.6747,
+    "gained": 8,
+    "lost": 6,
+    "p": 0.79052734375,
+    "per_hop": {
+     "hop1": 0.9172,
+     "hop2": 0.5494,
+     "hop3": 0.5663
+    }
+   },
+   "QMAX_F0_DEV_B_and_full_dev_CONTEXT_ONLY (results/L1_GEOM/DEV_B_CONFIRMATION.json; DEV_B read twice already; NOT used here)": {
+    "B": 0.6707,
+    "B_gained_lost": [
+     5,
+     3
+    ],
+    "full": 0.6727
+   }
+  },
+  "squad": {
+   "n_DEV_A": 992,
+   "reference_chain_DEV_A (h2balanced_A_squad.json)": {
+    "L1": 0.9859,
+    "SAFE": 0.9919,
+    "H2_PATCH1": 0.9919,
+    "BALANCED_H2_PATCH1": 0.9919,
+    "BALANCED_vs_SAFE": {
+     "gained": 0,
+     "lost": 0,
+     "p": 1.0
+    },
+    "BALANCED_vs_H2_PATCH1": {
+     "gained": 0,
+     "lost": 0,
+     "p": 1.0
+    },
+    "H2_PATCH1_vs_SAFE": {
+     "gained": 0,
+     "lost": 0,
+     "p": 1.0
+    },
+    "per_hop_BALANCED": {},
+    "per_hop_L1": {}
+   },
+   "QMAX_F0_DEV_A (results/L1_GEOM/PREREGISTRATION_DEV_B.json recorded_DEV_A AGGREGATION; vs BASE)": {
+    "key": "QMAX_F0",
+    "ALL": 0.9919,
+    "gained": 7,
+    "lost": 1,
+    "p": 0.0703125,
+    "per_hop": {}
+   },
+   "QMAX_F0_DEV_B_and_full_dev_CONTEXT_ONLY (results/L1_GEOM/DEV_B_CONFIRMATION.json; DEV_B read twice already; NOT used here)": {
+    "B": 0.9931,
+    "B_gained_lost": [
+     2,
+     0
+    ],
+    "full": 0.9925
+   }
+  },
+  "squad_phg": {
+   "n_DEV_A": 992,
+   "reference_chain_DEV_A (h2balanced_A_squad_phg.json)": {
+    "L1": 0.9829,
+    "SAFE": 0.9889,
+    "H2_PATCH1": 0.9909,
+    "BALANCED_H2_PATCH1": 0.9889,
+    "BALANCED_vs_SAFE": {
+     "gained": 0,
+     "lost": 0,
+     "p": 1.0
+    },
+    "BALANCED_vs_H2_PATCH1": {
+     "gained": 0,
+     "lost": 2,
+     "p": 0.5
+    },
+    "H2_PATCH1_vs_SAFE": {
+     "gained": 2,
+     "lost": 0,
+     "p": 0.5
+    },
+    "per_hop_BALANCED": {},
+    "per_hop_L1": {}
+   },
+   "QMAX_F0_DEV_A (results/L1_GEOM/PREREGISTRATION_DEV_B.json recorded_DEV_A AGGREGATION; vs BASE)": {
+    "key": "QMAX_F0",
+    "ALL": 0.9889,
+    "gained": 6,
+    "lost": 0,
+    "p": 0.03125,
+    "per_hop": {}
+   },
+   "QMAX_F0_DEV_B_and_full_dev_CONTEXT_ONLY (results/L1_GEOM/DEV_B_CONFIRMATION.json; DEV_B read twice already; NOT used here)": {
+    "B": 0.9931,
+    "B_gained_lost": [
+     7,
+     0
+    ],
+    "full": 0.991
+   }
+  },
+  "musique": {
+   "n_DEV_A": 996,
+   "reference_chain_DEV_A (h2balanced_A_musique.json)": {
+    "L1": 0.6596,
+    "SAFE": 0.7118,
+    "H2_PATCH1": 0.7329,
+    "BALANCED_H2_PATCH1": 0.7269,
+    "BALANCED_vs_SAFE": {
+     "gained": 15,
+     "lost": 0,
+     "p": 6.103515625e-05
+    },
+    "BALANCED_vs_H2_PATCH1": {
+     "gained": 2,
+     "lost": 8,
+     "p": 0.109375
+    },
+    "H2_PATCH1_vs_SAFE": {
+     "gained": 21,
+     "lost": 0,
+     "p": 9.5367431640625e-07
+    },
+    "per_hop_BALANCED": {},
+    "per_hop_L1": {}
+   },
+   "QMAX_F0_DEV_A (results/L1_GEOM/PREREGISTRATION_DEV_B.json recorded_DEV_A AGGREGATION; vs BASE)": {
+    "key": "QMAX_F0",
+    "ALL": 0.7319,
+    "gained": 77,
+    "lost": 5,
+    "p": 1.2046380153120002e-17,
+    "per_hop": {}
+   },
+   "QMAX_F0_DEV_B_and_full_dev_CONTEXT_ONLY (results/L1_GEOM/DEV_B_CONFIRMATION.json; DEV_B read twice already; NOT used here)": {
+    "B": 0.7122,
+    "B_gained_lost": [
+     92,
+     3
+    ],
+    "full": 0.722
+   }
+  }
+ },
+ "section21_and_16_outcomes_read": {
+  "BALANCED_H2_PATCH1": {
+   "verdict": "PASS",
+   "label": "MECHANISM_CONFIRMED_ON_DEV_A (POSTHOC; not promoted)"
+  },
+  "H2_PATCH1": {
+   "verdict": "PASS",
+   "label": null
+  }
+ },
+ "predictions_stated_now": {
+  "musique": "QMAX_F0 0.7319 already exceeds BALANCED 0.7269 and H2_PATCH1 0.7329; the reference chain adds +5.2 (SAFE) + 1.5 (patch) on top of BASE 0.6596. If the SAFE swap and the patch recover queries other than the ones the block max already ranks, the composite lands above 0.75; if they recover the same second-hop paragraphs, it stays near 0.73-0.74 (NOT_STACKED on this cache). Prediction: partial redundancy -- composite 0.74-0.77, GAIN vs BALANCED, NEUTRAL-to-GAIN vs QMAX_F0",
+  "metaqa / metaqa_phg": "QMAX_F0 is neutral vs BASE (0.6327 / 0.6747 vs 0.6397 / 0.6727) and shares 36.5 of 50 P50 blocks with it; the patch mechanism does not read the ranking, so the composite should land within about +/-1 pt of BALANCED (0.7764 / 0.7984): GAIN vs QMAX_F0 (~ +140 / -5), NEUTRAL vs BALANCED. A LOSS vs BALANCED would mean the QMAX ranking's protected set drops hop-2 blocks that SAFE kept (a CONFLICT)",
+  "squad / squad_phg": "ceiling (0.99); composite NEUTRAL vs both parents"
+ },
+ "population": {
+  "metaqa": "served metaqa cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "metaqa_phg": "served metaqa_phg cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "squad": "served squad cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "squad_phg": "served squad_phg cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "musique": "served musique cache rows; DEV_A = sha1(query_id)[:8] & 1 == 0 exactly as _l1x90_core; hop labels as present in the cache",
+  "DEV_B": "never read (read twice by earlier lanes; the QMAX_F0 DEV_B numbers above are context only)",
+  "TEST": "never read",
+  "WebQSP / 2Wiki / HotpotQA": "not used"
+ },
+ "statistics": {
+  "test": "exact two-sided McNemar on paired DEV_A 0/1 ALL vectors (_l1x90_core.mcnemar): gained / lost / p",
+  "alpha": 0.01,
+  "labels": {
+   "GAIN": "gained > lost and p < 0.01",
+   "LOSS": "lost > gained and p < 0.01",
+   "NEUTRAL": "otherwise"
+  },
+  "decision_comparisons": "ten in total: PRIMARY vs BALANCED_H2_PATCH1 and PRIMARY vs QMAX_F0 on each of the five caches; everything else (vs H2_PATCH1 / SAFE / L1 / QMAX_SAFE, stage increments, per hop, flips, exposure) is descriptive"
+ },
+ "decision_rule_pre_registered": {
+  "per_cache_cell": "CONFLICT if PRIMARY is LOSS vs either parent; STACKS if GAIN vs both; CARRIES if GAIN vs one and NEUTRAL vs the other; NEUTRAL otherwise",
+  "(a) no_CONFLICT": "PRIMARY vs BALANCED_H2_PATCH1 != LOSS AND PRIMARY vs QMAX_F0 != LOSS on ALL five caches (the universal-candidate condition: one algorithm, never worse than either parent)",
+  "(b) musique_GAIN_over_BALANCED": "PRIMARY vs BALANCED_H2_PATCH1 = GAIN on musique (the aggregation's ranking gain shows through the structural chain)",
+  "(c) metaqa_GAIN_over_QMAX": "PRIMARY vs QMAX_F0 = GAIN on BOTH metaqa and metaqa_phg (the structural hop-2 gain shows through the aggregation ranking)",
+  "OUTCOME": {
+   "PASS_STACKS": "(a) AND (b) AND (c)",
+   "FAIL_CONFLICT": "not (a)",
+   "FAIL_NOT_STACKED": "(a) but not ((b) AND (c))"
+  },
+  "secondary_flags (reported, never decided on)": {
+   "ADDITIVE_ON_MUSIQUE": "PRIMARY vs QMAX_F0 = GAIN on musique (SAFE + patch add on top of the aggregation)",
+   "ADDITIVE_ON_METAQA": "PRIMARY vs BALANCED_H2_PATCH1 = GAIN on both metaqa caches (the aggregation adds on top of the structural chain)",
+   "SQUAD_NON_REGRESSION": "no LOSS vs either parent on squad / squad_phg (already inside (a); reported for the ceiling population)"
+  },
+  "what_follows": {
+   "PASS_STACKS": "QMAX_BALANCED_H2_PATCH1 = the universal L1+ candidate of the fourteenth ruling: status MECHANISM_CONFIRMED_ON_DEV_A (composition; not promoted; NOT transfer-confirmed). Roles: H2_PATCH1 stays the frozen WebQSP transfer reference (section 16, unchanged); the composite is the candidate for the multi-hop text transfer populations (2Wiki / HotpotQA) when their substrates exist and a resource ruling allows it. Item 2 (coverage-then-score frontier) is pre-registered separately as a successor of the compression component; the composite's compression stays the section-21 rule until item 2 earns its own verdict.",
+   "FAIL_CONFLICT": "the two mechanisms interfere (the QMAX ranking's protected set or admission drops blocks the structural chain needs, or the patch destroys the aggregation's ranking gain): the composition is recorded as NOT a candidate; the parents keep their frozen roles; the flip attribution says which stage conflicts; no re-weighting, no second composition without a new ruling; item 2 proceeds on the reference chain",
+   "FAIL_NOT_STACKED": "no conflict, but a required GAIN is missing (typically: the SAFE swap / patch recover the same musique queries the block max already ranks -- redundancy): the composite is recorded as 'carries at most one regime gain'; the parents keep their frozen roles; the ruling's MuSiQue diagnosis (ranking / aggregation, not reach) is then confirmed from the other side; item 2 proceeds on the reference chain"
+  },
+  "no_promotion": "nothing here changes the served L1 or any frozen record; sections 16-23 are unchanged; the WebQSP primary transfer remains frozen H2_PATCH1 exactly as section 16"
+ },
+ "forbidden": [
+  "reading DEV_B or TEST; using WebQSP, 2Wiki or HotpotQA",
+  "any second composition (D2d, interleave, re-weighted RRF, QMAX_H2_PATCH1, BALANCED over any other ranking) inside this test",
+  "changing the compression rule, the patch rule, the beam, the F6 admission, TOPP, K0 / K_LOCK / P_MAIN, B, M_struct, M_ret, the RRF or the hub definition",
+  "editing any CONTRACT_FILE or pinned module; editing the two new modules after this record (their shas are pinned below and asserted at run time)",
+  "signalling the foreign process; touching the WebQSP watcher; writing under data/",
+  "tuning after seeing numbers; changing a label, cell, clause or threshold after a number is seen; re-running a cache after seeing its number"
+ ],
+ "code": {
+  "new_modules": {
+   "_l1c_qmaxbal.py": {
+    "path": "scratchpad/_l1c_qmaxbal.py",
+    "sha256": "cae88fa64a0516a4f55c99a4a3b464afd39e467dca42e4380a546ebbd545b1c8",
+    "bytes": 38926
+   },
+   "_l1c_qmaxbal_summary.py": {
+    "path": "scratchpad/_l1c_qmaxbal_summary.py",
+    "sha256": "666f65b16550de5842e08b932f382bf987f30d1f1bdccd9fce70e8506d659e1e",
+    "bytes": 6258
+   }
+  },
+  "usage": [
+   "python -u scratchpad/_l1c_qmaxbal.py <cache> for metaqa, metaqa_phg, squad, squad_phg, musique (chain: scratchpad/_l1c_qmaxbal_chain.sh)",
+   "python -u scratchpad/_l1c_qmaxbal_summary.py"
+  ],
+  "imports_unchanged": {
+   "_l1g_candidate.py": {
+    "path": "scratchpad/_l1g_candidate.py",
+    "sha256": "b01c27a6e64b18756db1ca1d8910e8db4bb54fa019d9809698cb1369206169e0",
+    "bytes": 5630
+   },
+   "_l1g_core.py": {
+    "path": "scratchpad/_l1g_core.py",
+    "sha256": "05923d66d5754f1573414fff0d119b32d93e877e8014b26e970e7ff74dc61327",
+    "bytes": 11419
+   },
+   "_l1s_core.py": {
+    "path": "scratchpad/_l1s_core.py",
+    "sha256": "ae3f087d0a785dc4d5d1c10367fc4cc21db0a4bb353efbe0265172b199492861",
+    "bytes": 15099
+   },
+   "_l1x90_core.py": {
+    "path": "scratchpad/_l1x90_core.py",
+    "sha256": "6eba63051165588c53900d98ec5644782ad107206f05a32ba6500d16cda76068",
+    "bytes": 12081
+   },
+   "_ta_prepartition.py": {
+    "path": "scratchpad/_ta_prepartition.py",
+    "sha256": "271f8985f39c090a2bb996a8deeb056cc085a1010e28ba32231bb4f413bbfa07",
+    "bytes": 11737
+   },
+   "_l1ps_router.py": {
+    "path": "scratchpad/_l1ps_router.py",
+    "sha256": "6acb0d4d1b99cfe11c783cb465a98fe5f8871d753e24430607f41d8426752cd9",
+    "bytes": 19503
+   },
+   "_l1kb_core.py": {
+    "path": "scratchpad/_l1kb_core.py",
+    "sha256": "f804f92d3ddead9ffdfd2a69981a3470f49346f9163f6f4a5ee3c546275cf8da",
+    "bytes": 5770
+   },
+   "_l1c_microl3.py": {
+    "path": "scratchpad/_l1c_microl3.py",
+    "sha256": "19774617f5841fb02471498ad2af29ba9098f32e11aec06831724d569c99e6c5",
+    "bytes": 15145
+   },
+   "_l1c_h2patch.py": {
+    "path": "scratchpad/_l1c_h2patch.py",
+    "sha256": "a1ed9caa906fc50a1cee573e346bec1fde70e1947badd68c9b86cd2ab455fa9d",
+    "bytes": 21581
+   },
+   "_l1c_h2balanced.py": {
+    "path": "scratchpad/_l1c_h2balanced.py",
+    "sha256": "7aed6b1d4399a1b432d0e6be48013cf73c92d4e47d2e5d2dd7b669b508d84bbe",
+    "bytes": 36015
+   },
+   "src/l1_canonical/adapter.py": {
+    "path": "src/l1_canonical/adapter.py",
+    "sha256": "aaa3304dc8d7266fdbc59d3f58a77d6956b740efb842f8e90364dc39750f4c01",
+    "bytes": 26015
+   },
+   "src/l1_canonical/hypergraph.py": {
+    "path": "src/l1_canonical/hypergraph.py",
+    "sha256": "9c868b09039855c6b67e61134f7400b6a61331c70d5f131e0117dc7174a49262",
+    "bytes": 12200
+   }
+  },
+  "pins_asserted_at_run_time": "the runner asserts the pinned module shas, the L1_GEOM pre-registration's code and cache shas, this record's new-module / import / cache / record shas, and write-once outputs; the composed arms are computed only after the reference chain and QMAX_F0 are reproduced"
+ },
+ "records_read_only": {
+  "h2patch_A_metaqa.json": {
+   "path": "results/L1_COVPART/h2patch_A_metaqa.json",
+   "sha256": "f5b5a91cba8d906b4189e4caf023cbab445ae3dbab15786a9abee236f3297438",
+   "bytes": 8845
+  },
+  "h2patch_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/h2patch_A_metaqa_phg.json",
+   "sha256": "b2e2b57f16a3e724644e44f329b3fc0181bac4ccd6b787d444c003987e0d2cef",
+   "bytes": 8876
+  },
+  "h2patch_A_squad.json": {
+   "path": "results/L1_COVPART/h2patch_A_squad.json",
+   "sha256": "cfb66bc7aa2ca53c4c0447b03d7b272e69c45e73589e50812ee099d7b886fe7b",
+   "bytes": 3944
+  },
+  "h2patch_A_squad_phg.json": {
+   "path": "results/L1_COVPART/h2patch_A_squad_phg.json",
+   "sha256": "e745473a47cb5552bf5d1559c0d1153f8dcaf49a2a7c30e704e5dee964844c45",
+   "bytes": 3894
+  },
+  "h2patch_A_musique.json": {
+   "path": "results/L1_COVPART/h2patch_A_musique.json",
+   "sha256": "8cdc85482ada7e131cec09ac38377365822180ab7b044f9d3f0124f33e2c197d",
+   "bytes": 4021
+  },
+  "h2balanced_A_metaqa.json": {
+   "path": "results/L1_COVPART/h2balanced_A_metaqa.json",
+   "sha256": "761f4b952aae04441b99708bfa9ca6400038975542d3f957f35f758c1778a557",
+   "bytes": 15085
+  },
+  "h2balanced_A_metaqa_phg.json": {
+   "path": "results/L1_COVPART/h2balanced_A_metaqa_phg.json",
+   "sha256": "b34469047f0ba0c2e8855ed220d2b0b64b289d5386509cb51405ab24877498a6",
+   "bytes": 15123
+  },
+  "h2balanced_A_squad.json": {
+   "path": "results/L1_COVPART/h2balanced_A_squad.json",
+   "sha256": "512e21083734265f5bbb57190f94271b87f1e93add24cca98aa6574ed864180e",
+   "bytes": 8110
+  },
+  "h2balanced_A_squad_phg.json": {
+   "path": "results/L1_COVPART/h2balanced_A_squad_phg.json",
+   "sha256": "178887d12488c278320d062244012dbdb9ce3c90b5c819b9d94b296e633a9511",
+   "bytes": 8131
+  },
+  "h2balanced_A_musique.json": {
+   "path": "results/L1_COVPART/h2balanced_A_musique.json",
+   "sha256": "a092cb28e68de1fc0de1f5ce6a6e6f85fa8dbd0674bf7db37a52c35cd15c20d1",
+   "bytes": 8226
+  },
+  "L1_REPLAY_metaqa.json": {
+   "path": "results/L1_CANONICAL/L1_REPLAY_metaqa.json",
+   "sha256": "7e5ef35b549791d9b6e790615a80ad7558f4626a07e0aaccca987f1834bc0972",
+   "bytes": 23067
+  },
+  "L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_metaqa__LOWMEM__PHG_REPAIR1_con.json",
+   "sha256": "d4ff6870236303c4b88fbcdd4c421d33719eb19dba2829d87a53cc09f5032c17",
+   "bytes": 33356
+  },
+  "L1_REPLAY_squad.json": {
+   "path": "results/L1_CANONICAL/L1_REPLAY_squad.json",
+   "sha256": "c39aa79836c0296fafa957c01f5004f81968df3e7f5baee873687d1061e09d58",
+   "bytes": 22709
+  },
+  "L1_REPLAY_squad__LOWMEM__PHG_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_squad__LOWMEM__PHG_con.json",
+   "sha256": "dc14ab54ea656f2f4f495c59365b84836b70cd3c27a22c646a210e4d9d5d8846",
+   "bytes": 34987
+  },
+  "L1_REPLAY_musique__LOWMEM__PHG_C1_con.json": {
+   "path": "results/L1_LOWMEM/L1_REPLAY_musique__LOWMEM__PHG_C1_con.json",
+   "sha256": "207ad4bb3b292f7930bafba94551881896d54e80edc89974bc28c6bad71dac76",
+   "bytes": 35090
+  },
+  "h2balanced_A_SUMMARY.json": {
+   "path": "results/L1_COVPART/h2balanced_A_SUMMARY.json",
+   "sha256": "0873799f9da43c9e6b5ed7c4d41c8de60a8f8208196dcb97d837942d09578df8",
+   "bytes": 25594
+  },
+  "h2patch_A_SUMMARY.json": {
+   "path": "results/L1_COVPART/h2patch_A_SUMMARY.json",
+   "sha256": "39192834cfbd3ec5396c8b8de79519263e6e600b5af902d1a57a3257d175209b",
+   "bytes": 3145
+  },
+  "PREREGISTRATION_BALANCED_H2_PATCH1_DEV_A.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_BALANCED_H2_PATCH1_DEV_A.json",
+   "sha256": "a88c9e4e23f699ebe071df1cf5cecff855e02f174f1d3f6e3d09284e0a15395a",
+   "bytes": 21150
+  },
+  "PREREGISTRATION_H2_PATCH1_DEV_A.json": {
+   "path": "results/L1_COVPART/PREREGISTRATION_H2_PATCH1_DEV_A.json",
+   "sha256": "c092a56b955784424f9e9050cc9777e3c57e0fd0b30ec5f61d1596d5fcb11f3e",
+   "bytes": 9367
+  },
+  "L1_GEOM/PREREGISTRATION_DEV_B.json": {
+   "path": "results/L1_GEOM/PREREGISTRATION_DEV_B.json",
+   "sha256": "61a6d5059d6645bf972fb2e3ca875c50a23a292d25ecabb884135c3c00e1ea76",
+   "bytes": 14611
+  },
+  "L1_GEOM/DEV_B_CONFIRMATION.json": {
+   "path": "results/L1_GEOM/DEV_B_CONFIRMATION.json",
+   "sha256": "de6eb0e383d070c27bb92632d04714088dc7a690decc95b31c94116c70fb8fed",
+   "bytes": 19350
+  }
+ },
+ "caches_read_only": {
+  "metaqa": {
+   "path": "data/l1_canonical/metaqa/replay_cache.npz",
+   "sha256": "4cf64a81ff5a0d0fdcb4187daaf5771d8b69a477e995472e4b02fbc2f4a3520b",
+   "bytes": 5390599
+  },
+  "metaqa_phg": {
+   "path": "data/l1_lowmem/metaqa/replay_cache__LOWMEM__PHG_REPAIR1_con.npz",
+   "sha256": "584e17dec26d0408d5253a3f79e471bc7ec128f6dde744581bb6e502da5b4e5b",
+   "bytes": 5386215
+  },
+  "squad": {
+   "path": "data/l1_canonical/squad/replay_cache.npz",
+   "sha256": "530e0b2431fc242c15b887ed28d3c79d265a00036278f44cfec8e22d5fef20b6",
+   "bytes": 5320148
+  },
+  "squad_phg": {
+   "path": "data/l1_lowmem/squad/replay_cache__LOWMEM__PHG_con.npz",
+   "sha256": "edd9b36bb4ba45ff0579c0591f19dc263ae84296f7f9299684974530845f20ab",
+   "bytes": 5312713
+  },
+  "musique": {
+   "path": "data/l1_lowmem/musique/replay_cache__LOWMEM__PHG_C1_con.npz",
+   "sha256": "361eb631bfa5a275a73819b4a8dbeb9b33d007c446df35932aec8ede6269efc5",
+   "bytes": 6183023
+  }
+ },
+ "outputs": {
+  "per_cache": "results/L1_COVPART/qmaxbal_A_<cache>.{json,log} (write-once)",
+  "summary": "results/L1_COVPART/qmaxbal_SUMMARY.{json,log} (write-once)"
+ }
+}

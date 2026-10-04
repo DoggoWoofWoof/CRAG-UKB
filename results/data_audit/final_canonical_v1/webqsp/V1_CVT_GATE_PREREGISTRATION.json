@@ -1,0 +1,120 @@
+{
+  "schema": "V1_CVT_GATE_PREREGISTRATION/v1",
+  "frozen_utc": "2026-09-06T12:40:00Z",
+  "status": "FROZEN BEFORE ANY TEXT IS RENDERED AND BEFORE ANY NUMBER IS COMPUTED",
+  "decision_authority": "user, 2026-09-06",
+  "supersedes": [
+    "NSM_ACQUISITION_PREREGISTRATION.json -> cvt_encoding_gate_PREREGISTERED (single number)",
+    "V1_SECTION3_CLASSIFIER_FREEZE.json -> GOLD_ONLY_IN_CVT_TEXT_PREREGISTRATION (7-way, no primary/secondary hierarchy)"
+  ],
+  "why_a_hierarchy_is_required": "Four cells will be computed. Without a pre-declared primary, whichever cell favours the preferred architecture could be selected after the fact. Exactly one cell is the gate; the rest are audit and sensitivity.",
+  "THE_GATE": {
+    "cell": "ENTITY_TEXT = NAME_ONLY x MATCHING = NORMALIZED",
+    "statistic": "GOLD_ONLY_IN_CVT_TEXT_N",
+    "decides": "whether CVT_MEDIATOR nodes receive Dense/SPLADE encoding, i.e. whether retrieval_role flips off UNDECIDED_PENDING_CVT_GOLD_GATE",
+    "no_other_cell_may_be_used_to_decide_this": true
+  },
+  "PRIMARY": {
+    "ENTITY_TEXT": "NAME_ONLY",
+    "question": "Does CVT text expose gold evidence unavailable from entity identity text?",
+    "rationale": "Attribution. If a gold answer such as a marriage year lives only on a mediator, entity identity strings cannot surface it while the CVT record can. That is genuine retrieval-unit value from the CVT."
+  },
+  "SECONDARY": {
+    "ENTITY_TEXT": "NAME_PLUS_FACTS",
+    "question": "Does CVT text still add lexical coverage after entity representations are relationally enriched?",
+    "rationale": "Enriched entity text can copy a CVT's arguments into the adjacent entity. If CVT-only coverage vanishes there, that does NOT show CVTs are useless -- it shows relationally enriched entity text can SUBSTITUTE for CVT indexing. A different and useful question, and not the gate.",
+    "status": "SENSITIVITY ANALYSIS ONLY"
+  },
+  "MATCHING_HIERARCHY": {
+    "primary_decision_statistic": "GOLD_ONLY_IN_CVT_TEXT_NORMALIZED_N under ENTITY_TEXT = NAME_ONLY",
+    "audit_companion": "GOLD_ONLY_IN_CVT_TEXT_EXACT_N under ENTITY_TEXT = NAME_ONLY",
+    "sensitivity": "both EXACT and NORMALIZED under ENTITY_TEXT = NAME_PLUS_FACTS",
+    "why_normalized_is_primary": "Trailing whitespace or capitalization must not decide whether 1,588,085 nodes get embeddings. EXACT stays as the audit companion so a large EXACT/NORMALIZED gap is visible rather than hidden."
+  },
+  "NORMALIZATION_FROZEN_BEFORE_RENDERING": {
+    "steps_in_order": [
+      "unicodedata.normalize('NFC', s)",
+      "s.casefold()",
+      "s.strip()",
+      "collapse every run of whitespace to a single space"
+    ],
+    "applied_to": "both sides identically -- the gold string and the rendered text",
+    "forbidden_after_the_fact": [
+      "stemming",
+      "lemmatization",
+      "fuzzy or edit-distance matching",
+      "alias expansion",
+      "token-overlap thresholds",
+      "punctuation stripping",
+      "diacritic folding",
+      "any per-dataset tuning"
+    ],
+    "match_predicate": "plain substring containment of the normalized gold string in the normalized rendered text. Nothing else."
+  },
+  "GOLD_DEFINITION": {
+    "source": "the 29 released RoG parquet shards, field 'answer'",
+    "cross_check": "field 'a_entity' -- the distinct-string sets are IDENTICAL (33,655 each), so the choice of field cannot affect any result",
+    "GOLD_TOTAL_N_distinct": 33655,
+    "gold_occurrences": 127901,
+    "questions": 39389,
+    "unit_of_counting": "DISTINCT gold answer strings. Occurrence-weighted figures are reported alongside but are not the gate.",
+    "query_independence": "Gold strings are read ONLY to measure coverage. They never enter corpus membership, node identity, or rendered text. Standing rule: corpus <- source graph only; gold coverage <- measured afterward."
+  },
+  "DECOMPOSITION_EMITTED_FOR_ALL_FOUR_CELLS": [
+    "GOLD_TOTAL_N",
+    "GOLD_IN_ENTITY_TEXT_N",
+    "GOLD_IN_CVT_TEXT_N",
+    "GOLD_IN_BOTH_N",
+    "GOLD_ONLY_IN_ENTITY_TEXT_N",
+    "GOLD_ONLY_IN_CVT_TEXT_N",
+    "GOLD_IN_NEITHER_N"
+  ],
+  "INTERPRETATION_MATRIX_FIXED_IN_ADVANCE": [
+    {
+      "name_only_cvt_only": "low",
+      "name_plus_facts_cvt_only": "low",
+      "meaning": "CVT indexing probably unnecessary"
+    },
+    {
+      "name_only_cvt_only": "high",
+      "name_plus_facts_cvt_only": "high",
+      "meaning": "strong case for CVT retrieval units"
+    },
+    {
+      "name_only_cvt_only": "high",
+      "name_plus_facts_cvt_only": "low",
+      "meaning": "relational entity enrichment can substitute for CVT indexing; sets up a direct tradeoff between short entity text + CVT records and richer entity text + no CVT index, to be compared later on coverage + token cost + pool composition + P50 exposure"
+    },
+    {
+      "name_only_cvt_only": "low",
+      "name_plus_facts_cvt_only": "high",
+      "meaning": "counterintuitive -- inspect rendering and matching before believing it"
+    }
+  ],
+  "no_numeric_cut_for_low_vs_high": "Deliberately not pinned. The distribution is unmeasured and inventing a cut now would be a fabricated threshold. What is pinned is which single cell decides, which is where the knob would otherwise live.",
+  "RENDERING_RULES_FROZEN": {
+    "CVT_record_text": "structural header derived from the CVT asserted types, then one role-labelled argument line per incident edge. Role label = relation_label_qualified (user decision). Argument value = the neighbour display surface.",
+    "grammar": "'<Header>. <role>: <value>. <role>: <value>.'",
+    "why_not_a_bag_of_neighbour_names": "Neighbour text is an ARGUMENT, never node identity. 'Barack Obama Grammy Award 2008' loses the distinction the record exists to carry.",
+    "NAME_ONLY_entity_text": "the entity display surface alone",
+    "NAME_PLUS_FACTS_entity_text": "display surface, plus direct non-CVT facts, PLUS the arguments of every adjacent CVT in either direction with the entity itself removed. The CVT-flattening is deliberate: it is the strongest form of the substitution hypothesis, so a finding that it still fails to substitute is robust.",
+    "MID_never_visible": "No bare MID is ever emitted as a display surface (directive section 13, MID_VISIBLE_AS_DISPLAY_N = 0). MID_NAMED_ENTITY and UNRESOLVED_OTHER nodes render as a deterministic structural descriptor derived from incident schema, never a guessed name and never the MID.",
+    "consequence_accepted_in_advance": "A gold answer that is the true name of a bare-MID entity will therefore match NOTHING and land in GOLD_IN_NEITHER_N. That is the honest result -- the information is genuinely absent from the released artifact -- and must not be repaired by leaking the MID into text."
+  },
+  "CAPS": {
+    "policy": "No cap on arguments per CVT and no cap on facts per entity, so containment can never produce a false negative through truncation.",
+    "if_a_cap_ever_becomes_necessary": "it must be recorded here with the measured frequency at which it binds, before the affected numbers are read."
+  },
+  "what_this_gate_does_NOT_decide": [
+    "node_kind -- frozen at hash 5ea22695603972c00faa9cd5f1e36f1c6727bda495bc82b338a7b9b4b4f7ef04, independent of retrieval policy",
+    "any graph semantics, identity, or topology",
+    "retrieval_role for non-CVT kinds, which remains UNDECIDED_PENDING_RETRIEVAL_POLICY"
+  ],
+  "RETRIEVAL_ROLE_RESOLVED_2026_09_06": {
+    "resolved_utc": "2026-09-06T08:21:26Z",
+    "resolution": "ALL_NODE. Every canonical node is RETRIEVAL_ELIGIBLE.",
+    "decided_by": "user, 2026-09-06",
+    "record": "data/final_canonical/webqsp/V1_RETRIEVAL_ROLE_DECISION.json",
+    "supersedes_in_this_document": "the standing of the gate itself. This document registered NAME_ONLY x NORMALIZED as the cell that would DECIDE CVT encoding. That framing is superseded: the gate is retained as analysis and no longer functions as an on/off switch. The pre-registration did its job -- it prevented cell-shopping and the recorded value stands exactly as measured -- but the question it was built to answer (does CVT text expose unique answer vocabulary) turned out not to be the question that governs CVT retrieval in CRAG (does a CVT provide routing evidence for the partition containing it)."
+  }
+}

@@ -1,0 +1,80 @@
+{
+ "stage": "L3_HOST",
+ "addendum": 8,
+ "amends": {
+  "addendum_6": {
+   "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_6.json",
+   "sha256": "dbf7ea22bf6664bbe287c5275406c0c541d3d9ac099a6bed6ff65faceeb79c03"
+  },
+  "addendum_7": {
+   "path": "results/L3_HOST/HOST_STAGE_DECLARATION__L3_HOST__v1__ADDENDUM_7.json",
+   "sha256": "9cbbe6ef2f16d2f49712c943aac4cf659af4ce4f7eee4bdc45aedad536c06466"
+  }
+ },
+ "declared": "2026-09-29T20:19:22+05:30",
+ "before_any_repro_run": "no REPRO or RELENC job has run; nothing has been encoded from dataset data on the host",
+ "changes": {
+  "1_priority": {
+   "what": "every job of this stage runs under the crag host-yield wrapper (mpr > crag > jigsaw)",
+   "policy_record": {
+    "path": "results/HOST_YIELD/HOST_YIELD_POLICY__v1.json",
+    "sha256": "b468a0d53f515531e97b668f004dca54f88560ba1417dd1d4ec9cb41761846d8",
+    "bytes": 5975
+   },
+   "wrapper": {
+    "path": "scratchpad/_host_yield.py",
+    "sha256": "b96c2bb8eaea5fd5a5bf5f54e9812d5eb2012c3d1f546544028855bec795fa81",
+    "bytes": 29687
+   },
+   "yield_is_not_a_crash": "a job stopped by the wrapper exits 75 before its module writes anything (REPRO writes its record at the end; RELENC, after this addendum, writes its outputs only after both datasets are encoded); the waiter relaunches the same command with the same code (sha-checked), so a yield is neither a crash nor a rerun under addendum 6's rerun rule"
+  },
+  "2_repro_gate_item_reading": {
+   "item": "splade_weight_files_identical",
+   "addendum_6_reading": "the two splade weight files hold identical tensors",
+   "found_by": {
+    "record": "results/L3_HOST/ENC_PROBE__v1.json",
+    "sha256": "7d0f1d561bb2cda7537f11c98398c0538bf046a0bd0afbb396e8c30a5eb889b1",
+    "fact": "pytorch_model.bin (snapshot 49cf4c7b...) holds 205 keys, model.safetensors (83f6dbef...) 203; the 203 shared keys are identical; the 2 bin-only keys are cls.predictions.decoder.weight and cls.predictions.decoder.bias"
+   },
+   "why": "BertForMaskedLM ties cls.predictions.decoder.weight to bert.embeddings.word_embeddings.weight and cls.predictions.decoder.bias to cls.predictions.bias; the safetensors conversion stores tied tensors once",
+   "reading_now": "identical tensors for every key both files hold, no safetensors-only key, and every bin-only key an exact copy (dtype, shape, values) of its tie target, a key both files hold",
+   "checked_on_the_laptop": "the same blobs (results/L3_HOST/HF_DOWNLOAD__v1.json verified every file against the laptop cache): both bin-only keys equal their tie targets; tie targets in both files; only_bin_all_verified_ties true",
+   "gate_values": "unchanged (read from addendum 6 as before)"
+  },
+  "3_relenc_writes_last": "RELENC encodes both datasets before writing any output (a stopped run leaves nothing to refuse on)",
+  "module": {
+   "path": "scratchpad/_enc_host.py",
+   "sha256_before": "22367a4f6e839acf0ed41120ad7c7265bfac1e132308ff9116a5c875bb7c6065",
+   "sha256": "d26727ae0e5164992cfe8fba81db895f0d27680f2aba7fc81eaa8a1716b8dbef",
+   "bytes": 30122
+  }
+ },
+ "jobs": {
+  "reproduction_test": "rx run -n crag-encrepro --env mpr-cu128 --gpus 1 --cpus 4 --mem 16 --mem-hard 32 --timeout 7200 -- python -u scratchpad/_host_yield.py run -- python -u scratchpad/_enc_host.py REPRO",
+  "relenc": "rx run -n crag-relenc --env mpr-cu128 --gpus 1 --cpus 4 --mem 16 --mem-hard 32 --timeout 7200 -- python -u scratchpad/_host_yield.py run -- python -u scratchpad/_enc_host.py RELENC",
+  "guard": "rx run -n crag-guard --env mpr-cpu --cpus 1e-11 --mem 1e-11 -- python -u scratchpad/_host_yield.py guard"
+ },
+ "pushed_in_addition": [
+  {
+   "path": "scratchpad/_host_yield.py",
+   "sha256": "b96c2bb8eaea5fd5a5bf5f54e9812d5eb2012c3d1f546544028855bec795fa81",
+   "bytes": 29687
+  },
+  {
+   "path": "scratchpad/_host_yield_test_rule.py",
+   "sha256": "ee6e1776186807049b93147e64653a010dd845baae5f5e0cb258095317394ab5",
+   "bytes": 7932
+  },
+  {
+   "path": "scratchpad/_host_yield_test_e2e.py",
+   "sha256": "97657f75e2729197a8087a47052869bc755f6b385205cc05381278be738dfbde",
+   "bytes": 9668
+  },
+  {
+   "path": "results/HOST_YIELD/HOST_YIELD_POLICY__v1.json",
+   "sha256": "b468a0d53f515531e97b668f004dca54f88560ba1417dd1d4ec9cb41761846d8",
+   "bytes": 5975
+  }
+ ],
+ "unchanged": "every other term of addenda 6 and 7: the setup, the comparisons, the gate values, RELENC's strings and outputs"
+}
