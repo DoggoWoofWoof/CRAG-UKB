@@ -7,6 +7,7 @@ How:  every file is hashed (sha256 of the ORIGINAL bytes) and, if it compresses 
 
   python scratchpad/_hf_big.py PLAN                 sample compressibility -> data/_cache/hfbig_plan.json, print the estimated stored size per group
   python scratchpad/_hf_big.py UPLOAD [groups,csv]  stream compress+hash+commit (default: all groups in priority order, stops before the quota guard)
+  python scratchpad/_hf_big.py URLS <groups|all> [out.json] [only,csv]   signed ~1 h links for a token-free host pull (scratchpad/_fbx_hf_pull.py, then _hf_big_unpack.py / _hf_big_hostrestore.py)
   python scratchpad/_hf_big.py CHECK                repo tree (size + LFS sha256) vs the state file
   python scratchpad/_hf_big.py RESTORE <dest> [groups,csv]   download + decompress + verify into <dest>/final_canonical/...   (token from env HF_TOKEN or ~/hf_tokens.json account DarKnight9895)
 The token is never printed or written anywhere inside the repo."""
@@ -20,7 +21,7 @@ import threading
 import time
 
 os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
-os.environ.setdefault("HF_XET_HIGH_PERFORMANCE", "1")
+os.environ["HF_XET_HIGH_PERFORMANCE"] = "0"          # the laptop has 15.7 GB RAM / ~5 GB commit headroom: high-performance xet buffers panicked (alloc failed) 2026-10-05
 import zstandard as zstd  # noqa: E402
 from huggingface_hub import CommitOperationAdd, HfApi, hf_hub_download  # noqa: E402
 
@@ -33,7 +34,8 @@ STATE_P = CACHE + "/hfbig_state.json"
 REPO = "DarKnight9895/crag-large-backup"
 ACCOUNT = "DarKnight9895"
 QUOTA_GB = 95.0                    # free private quota is ~100 GB; keep a margin
-BATCH_GB = 8.0
+BATCH_GB = 3.0
+MAX_FILES = 100                    # files per commit: bounds the uploader's in-flight buffers (OOM at 160 files x 8 GB with the laptop's headroom)
 RAW_ABOVE = 0.88                   # sampled zstd ratio above this -> store raw
 LEVEL = 3
 # priority order = single-copy first (laptop is the only copy), then the two-copy data, then the tree
@@ -194,7 +196,7 @@ def cmd_upload(groups):
     private_repo(api)
     batches, cur, acc = [], [], 0
     for o in todo:
-        if cur and acc + o["est_stored"] > BATCH_GB * 1e9:
+        if cur and (acc + o["est_stored"] > BATCH_GB * 1e9 or len(cur) >= MAX_FILES):
             batches.append(cur)
             cur, acc = [], 0
         cur.append(o)
@@ -269,15 +271,17 @@ def cmd_check():
     for e in api.list_repo_tree(REPO, repo_type="dataset", recursive=True, expand=True):
         if hasattr(e, "size") and e.path.startswith("final_canonical/"):
             have[e.path] = (e.size, getattr(getattr(e, "lfs", None), "sha256", None) if getattr(e, "lfs", None) else None)
-    bad = miss = 0
+    bad = miss = shas = 0
     for rel, v in st["done"].items():
         h = have.get(v["stored_rel"])
         if h is None:
             miss += 1
             continue
+        if h[1]:
+            shas += 1
         if h[0] != v["stored_size"] or (h[1] and h[1] != v["stored_sha"]):
             bad += 1
-    log("CHECK: state %d objects, repo %d objects, missing %d, size/sha mismatch %d, stored %.2f GB" % (len(st["done"]), len(have), miss, bad, sum(v["stored_size"] for v in st["done"].values()) / 1e9))
+    log("CHECK: state %d objects, repo %d objects, missing %d, size/sha mismatch %d (sha256 compared on %d), stored %.2f GB" % (len(st["done"]), len(have), miss, bad, shas, sum(v["stored_size"] for v in st["done"].values()) / 1e9))
     return miss == 0 and bad == 0
 
 
@@ -315,7 +319,7 @@ def cmd_restore(dest, groups):
     log("RESTORE: %d files, %d sha mismatches" % (n, bad))
 
 
-def cmd_urls(groups, out):
+def cmd_urls(groups, out, only=()):
     """signed ~1 h CDN links of the stored objects of <groups> (+ the index) so a host with NO token can pull them with scratchpad/_fbx_hf_pull.py and unpack with _hf_big_unpack.py"""
     import base64
     import urllib.parse
@@ -347,7 +351,7 @@ def cmd_urls(groups, out):
 
     files, exp = [], None
     for rel, v in sorted(st["done"].items()):
-        if plan.get(rel) in groups or "all" in groups:
+        if (plan.get(rel) in groups or "all" in groups) and (not only or any(o in rel for o in only)):
             r = resolve(v["stored_rel"])
             files.append(dict(path=v["stored_rel"], size=v["stored_size"], **r))
             if "url" in r:
@@ -364,7 +368,7 @@ def cmd_urls(groups, out):
 if __name__ == "__main__":
     c = sys.argv[1]
     if c == "URLS":
-        cmd_urls(sys.argv[2].split(","), sys.argv[3] if len(sys.argv) > 3 else CACHE + "/hfbig_urls.json")
+        cmd_urls(sys.argv[2].split(","), sys.argv[3] if len(sys.argv) > 3 else CACHE + "/hfbig_urls.json", sys.argv[4].split(",") if len(sys.argv) > 4 else ())
     elif c == "PLAN":
         cmd_plan()
     elif c == "UPLOAD":
