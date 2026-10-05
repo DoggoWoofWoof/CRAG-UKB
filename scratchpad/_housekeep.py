@@ -69,7 +69,7 @@ def host_clean(apply):
 
 def wsl_state():
     """(vhdx GB, ext4 used GB or None, idle?) -- reading df starts the distro for a second, only done when no distribution is running"""
-    rc, out = ps("$f='%s'; 'VHDX ' + [math]::Round((Get-Item $f).Length/1GB,2); 'RUN ' + ((wsl.exe --list --running | Out-String).Replace([char]0,'').Trim() -replace '\\s+',' ')" % VHDX, 120)
+    rc, out = ps("$f='%s'; 'VHDX ' + [math]::Round((Get-Item $f).Length/1GB,2); 'RUN ' + ((wsl.exe --list --running | Out-String).Replace([string][char]0,'').Trim() -replace '\\s+',' ')" % VHDX, 120)
     vh = re.search(r"VHDX ([\d.]+)", out)
     run = re.search(r"RUN (.*)", out)
     idle = bool(run and "no running distributions" in run.group(1).lower())
@@ -82,7 +82,7 @@ def wsl_state():
 
 
 def wsl_compact():
-    body = ("$f='%s'; wsl.exe -d %s -u root --exec fstrim -v / | Out-String; wsl.exe --shutdown; Start-Sleep 10; "
+    body = ("$f='%s'; wsl.exe -d %s -u root -- fstrim -v / | Out-String; wsl.exe --shutdown; Start-Sleep 10; "
             "$s = \"select vdisk file=`\"$f`\"`r`nattach vdisk readonly`r`ncompact vdisk`r`ndetach vdisk`r`nexit`r`n\"; $p = Join-Path $env:TEMP 'crag_compact.txt'; Set-Content -Path $p -Value $s -Encoding ASCII; "
             "diskpart /s $p | Select-String 'successfully|error' | Out-String; Remove-Item $p; 'after ' + [math]::Round((Get-Item $f).Length/1GB,2)" % (VHDX, DISTRO))
     rc, out = ps(body, 3000)
