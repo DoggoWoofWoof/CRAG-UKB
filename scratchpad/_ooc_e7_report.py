@@ -65,9 +65,13 @@ def main():
                     traj.append(t)
     traj.sort(key=lambda t: -t["level"])
     for t in traj:
-        stages.append({"stage": "E5/E6 level %d: quotient + transpose + FM2 refine" % t["level"], "wall_s": round(t["quot_seconds"] + t["transpose_seconds"] + t["fm_seconds"], 1), "fm_peak_rss_gb": t["fm_peak_rss_gb"], "disk_bytes_work": t["disk_bytes_work"]})
+        if "quot_seconds" in t:
+            stages.append({"stage": "E5/E6 level %d: quotient + transpose + FM2 refine" % t["level"], "wall_s": round(t["quot_seconds"] + t["transpose_seconds"] + t["fm_seconds"], 1), "fm_peak_rss_gb": t["fm_peak_rss_gb"], "disk_bytes_work": t["disk_bytes_work"]})
+        else:  # level 0 is implicit (the original hypergraph): no quotient / transpose, and the stage recorded no work-dir size
+            stages.append({"stage": "E6 level %d: implicit FM2 refine (no quotient / transpose)" % t["level"], "wall_s": t["fm_seconds"], "fm_peak_rss_gb": t["fm_peak_rss_gb"], "disk_bytes_work": None})
     peak_rss = max([s.get("peak_rss_gb", 0) for s in stages] + [s.get("fm_peak_rss_gb", 0) for s in stages])
-    peak_disk = max([t["disk_bytes_work"] for t in traj] + [sb["disk_bytes_work"]]) / 1e9
+    peak_disk = max([t["disk_bytes_work"] for t in traj if t.get("disk_bytes_work") is not None] + [sb["disk_bytes_work"]]) / 1e9
+    no_disk_levels = [t["level"] for t in traj if t.get("disk_bytes_work") is None]
 
     # ---- KM1 trajectory
     km1 = [{"level": t["level"], "V": t["V"], "km1_in": t["km1_in"], "km1_out": t["km1_out"], "moves": t["moves"], "passes_run": t["passes_run"], "max_load_after": t["max_load_after"], "min_load_after": t["min_load_after"]} for t in traj]
@@ -78,7 +82,7 @@ def main():
 
     out = {"stage": "FBX_SCALE addendum 17 / E7: Freebase STRUCT-only V-cycle systems measurement (VCQ512L4N4FM2)", "status": "COMPLETE" if complete else "PARTIAL: levels %s done, level 0 pending (waiting for a 41 GB scheduler slot; mpr has priority)" % done_levels[::-1],
            "N": N, "S": 25, "cap_per_block": (vfull or v42)["cap"], "levels": {str(k): v for k, v in sorted(levels.items())}, "surrogate": surrogate, "stages": stages,
-           "peaks": {"max_stage_rss_gb": round(peak_rss, 2), "ram_budget_gb": RAM_GB, "ram_ok": peak_rss <= RAM_GB, "max_work_disk_gb": round(peak_disk, 2), "disk_budget_gb": DISK_GB, "disk_ok": peak_disk <= DISK_GB},
+           "peaks": {"max_stage_rss_gb": round(peak_rss, 2), "ram_budget_gb": RAM_GB, "ram_ok": peak_rss <= RAM_GB, "max_work_disk_gb": round(peak_disk, 2), "disk_budget_gb": DISK_GB, "disk_ok": peak_disk <= DISK_GB, "disk_levels_without_record": no_disk_levels},
            "km1_trajectory": km1, "km1_first_in": first_in, "km1_last_out": last_out, "km1_last_over_first": round(last_out / first_in, 4),
            "validity": (vfull or {}).get("validity"), "not_claimed": "no recall at Freebase scale (no Freebase gold; the WebQSP bridge proxy is a later addendum), no K-way sub-partition, no SK arm; the verdict transferred from WebQSP is ON the pass line (7 rows, F = 8), one Zoltan seed"}
     name = "E7_REPORT__fbx" + ("" if complete else "__PARTIAL_L4-1")
@@ -96,7 +100,7 @@ def main():
     for t in km1:
         L.append("| %d | %s | %s | %s | %s | %s / %s |" % (t["level"], "{:,}".format(t["V"]), "{:,}".format(t["km1_in"]), "{:,}".format(t["km1_out"]), "{:,}".format(t["moves"]), "{:,}".format(t["max_load_after"]), "{:,}".format(t["min_load_after"])))
     L += ["\nkm1 last out / first in = %.4f (%.2f%% reduction through %d refined levels).\n" % (out["km1_last_over_first"], 100 * (1 - out["km1_last_over_first"]), len(km1)),
-          "## Peaks\n", "max stage RSS %.1f GB (budget %.0f GB: %s); max crag work-dir disk %.1f GB (budget %.0f GB: %s).\n" % (peak_rss, RAM_GB, "ok" if out["peaks"]["ram_ok"] else "EXCEEDED", peak_disk, DISK_GB, "ok" if out["peaks"]["disk_ok"] else "EXCEEDED")]
+          "## Peaks\n", "max stage RSS %.1f GB (budget %.0f GB: %s); max recorded crag work-dir disk %.1f GB (budget %.0f GB: %s)%s.\n" % (peak_rss, RAM_GB, "ok" if out["peaks"]["ram_ok"] else "EXCEEDED", peak_disk, DISK_GB, "ok" if out["peaks"]["disk_ok"] else "EXCEEDED", ("; level(s) %s recorded no work-dir size (implicit level, label files only; the work dir measured 2.81 GB after the stage, the peak during the stage was not recorded)" % no_disk_levels) if no_disk_levels else "")]
     if complete:
         v = out["validity"]
         L += ["## Validity\n", "```\n%s\n```\n" % json.dumps(v, indent=1)]
