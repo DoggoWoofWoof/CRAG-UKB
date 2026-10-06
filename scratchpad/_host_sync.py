@@ -12,6 +12,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -141,6 +142,37 @@ def repo_gb(repo):
     return sum((s.size or 0) for s in info.siblings) / 1e9
 
 
+RELAY_MAX_GB = 4.0
+
+
+def relay_missing(tag):
+    """shards the host could not PUT (2026-10-06: the lab firewall inspects TLS with a root the host does not trust; verification is NOT switched off) are carried through the laptop:
+    host packs their members into a stored zip, rx (ssh) brings it here, the same deterministic shards (sha256 == plan) are PUT from the laptop's own network"""
+    plan = json.load(open(os.path.join(OUT, "hfx_plan_%s.json" % tag)))
+    urls = json.load(open(os.path.join(ROOT, "data", "_cache", "hfx_urls_%s.json" % tag)))["urls"]
+    state = json.load(open(os.path.join(OUT, "hfx_state_%s.json" % tag)))
+    miss = [o for o in plan["objects"] if not urls[o["sha256"]].get("done") and o["sha256"] not in state["done"]]
+    if not miss:
+        return
+    gb = sum(o["size"] for o in miss) / 1e9
+    if gb > RELAY_MAX_GB:
+        raise RuntimeError("RELAY: %.1f GB missing > %.0f GB relay cap (host cannot reach HF: %s)" % (gb, RELAY_MAX_GB, "; ".join(list(state["failed"].values())[:1])))
+    log("relay %s: %d objects, %.3f GB through the laptop (host upload failed: %s)" % (tag, len(miss), gb, "; ".join(list(state["failed"].values())[:1])[:160]))
+    jid, rc = job("hfx-pack-" + tag, [os.path.join("data", "_cache", "hfx_urls_%s.json" % tag), "scratchpad/_hfx_relay.py"], ["python", "-u", "scratchpad/_hfx_relay.py", "PACK", tag], mem=1, cpus=1, timeout_s=3600)
+    assert rc == 0, "relay pack job rc %s" % rc
+    zp = os.path.join(OUT, "relay_%s.zip" % tag)
+    fetch(jid, "work/HOST_HOUSEKEEPING/relay_%s.zip" % tag)
+    stage = os.path.join(OUT, "relay_stage", tag)
+    shutil.rmtree(stage, ignore_errors=True)
+    with zipfile.ZipFile(zp) as z:
+        z.extractall(stage)
+    os.remove(zp)
+    try:
+        py("UPLOAD", tag, "8", env_extra={"HFX_WS": stage, "HFX_STATE": ROOT}, timeout=4 * 3600)     # the shard sha256 must equal the plan, so a wrong / changed member fails here
+    finally:
+        shutil.rmtree(stage, ignore_errors=True)
+
+
 def backup(tag, groups, wsl, repo, max_gb):
     """plan new files of `groups` on the host, upload them via presigned urls, commit + verify; returns planned GB (0 when nothing is new)"""
     py("KNOWN", KNOWN_P, repo)
@@ -161,6 +193,8 @@ def backup(tag, groups, wsl, repo, max_gb):
     jid, rc = job("hfx-upload-" + tag, ["data/_cache/hfx_urls_%s.json" % tag, "scratchpad/_hfx.py", "scratchpad/_hfx_wsl.py"], ["python", "-u", runner, "UPLOAD", tag, "8"], mem=2, cpus=2, timeout_s=28800)
     assert rc == 0, "upload job rc %s" % rc
     fetch(jid, "work/HOST_HOUSEKEEPING/hfx_state_%s.json" % tag)
+    if not wsl:
+        relay_missing(tag)
     py("COMMIT", tag, repo)
     return gb
 
@@ -190,7 +224,7 @@ def cycle(a):
             rec["big_error"] = str(e)[:500]
     try:                                                       # CODE snapshot on HF every cycle (keeps the 3 newest), then the periodic disk housekeeping (laptop + host)
         r = subprocess.run([sys.executable, "-u", os.path.join(HERE, "_code_snapshot.py")], cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=1800)
-        rec["code_snapshot"] = (r.stdout.strip().splitlines() or [""])[-1][:160]
+        rec["code_snapshot"] = ((r.stdout or "").strip().splitlines() or ["rc %s, no output" % r.returncode])[-1][:160]
     except Exception as e:
         rec["code_snapshot_error"] = str(e)[:300]
     try:

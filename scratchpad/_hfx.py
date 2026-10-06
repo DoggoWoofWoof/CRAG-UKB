@@ -16,6 +16,7 @@ import base64
 import hashlib
 import json
 import os
+import ssl
 import sys
 import tarfile
 import time
@@ -268,6 +269,8 @@ def put(url, data):
             with urllib.request.urlopen(req, timeout=600) as r:
                 return r.headers.get("ETag") or r.headers.get("etag")
         except Exception as e:
+            if isinstance(getattr(e, "reason", None), ssl.SSLCertVerificationError):          # the network inspects TLS with a root this machine does not trust: retries cannot help, never disable verification (see _hfx_relay.py)
+                raise RuntimeError("TLS_VERIFY_FAILED: %s" % str(e.reason)[:120])
             log("  put retry %d: %s" % (k + 1, str(e)[:120]))
             time.sleep(min(60, 2 ** k))
     raise RuntimeError("part upload failed")
